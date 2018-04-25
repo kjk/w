@@ -141,10 +141,12 @@ type API struct {
 
 // Variable represents info parsed from:
 //  <Variable Name=AsyncIBackgroundCopyCallback Type=Interface/>
+// <Variable Name="wchar_t [1]" Type=Array Base=wchar_t Count=1/>
 type Variable struct {
-	Name string
-	Type string
-	Base string
+	Name  string
+	Type  string
+	Base  string
+	Count int // if Type is Array
 }
 
 // Interface describes info parsed from:
@@ -222,12 +224,18 @@ func (p *parser) parseInclude(n *XMLNode) {
 	panicIf(len(rest) > 0, "<Include> has unsupported attributes. Node: '%s'", n)
 }
 
+// <Success />
+// <Success Return="NotEqual" Value="-1" />
 func (p *parser) parseSuccess(n *XMLNode) *Success {
 	mustTag(n.XMLName.Local, "Success")
 	mustNoChildren(n)
 
 	var res Success
 	attrs := n.Attrs
+	// TODO: not sure what <Success /> means, but they do happen
+	if len(attrs) == 0 {
+		return &res
+	}
 	res.Return, attrs = mustExtractStringAttr(attrs, "Return", n)
 	res.Value, attrs = mustExtractStringAttr(attrs, "Value", n)
 	res.ErrorFunc, attrs = extractStringAttr(attrs, "ErrorFunc", "")
@@ -498,6 +506,7 @@ func (p *parser) parseAPIVariable(n *XMLNode) Variable {
 	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
 	res.Type, attrs = mustExtractStringAttr(attrs, "Type", n)
 	res.Base, attrs = extractStringAttr(attrs, "Base", "")
+	res.Count, attrs = extractIntAttr(attrs, "Count", 0)
 	mustNoAttrs(attrs, n)
 	return res
 }
@@ -723,8 +732,6 @@ func parseAPIZip() {
 	defer f.Close()
 	zr, err := zip.NewReader(f, st.Size())
 	must(err)
-	maxToProcess := 199
-	nProcessed := 0
 	for _, fi := range zr.File {
 		if fi.FileInfo().IsDir() {
 			//fmt.Printf("%s skipping because is dir\n", fi.Name)
@@ -733,9 +740,5 @@ func parseAPIZip() {
 		fmt.Printf("%s\n", fi.Name)
 		_, err := parseXML(fi)
 		must(err)
-		nProcessed++
-		if nProcessed >= maxToProcess {
-			break
-		}
 	}
 }

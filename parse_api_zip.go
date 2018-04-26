@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"reflect"
+	"time"
 )
 
 // extracts definifions from api.zip which comes from api monitor
@@ -209,8 +210,8 @@ type Module struct {
 	Aliases            []string
 }
 
-// ParsedXML represents information extracted from a single .xml file
-type ParsedXML struct {
+// ParsedApiXML represents information extracted from a single .xml file
+type ParsedApiXML struct {
 	// name of the .xml file from which we extracted the data
 	Path string
 	// info from <Include> tags
@@ -224,7 +225,7 @@ type ParsedXML struct {
 
 // parser holds state for parsing a current file
 type parser struct {
-	ParsedXML
+	ParsedApiXML
 	root   *XMLNode
 	indent int
 	dec    *xml.Decoder
@@ -887,7 +888,7 @@ func (p *parser) parseAPIMonitor(n *XMLNode) {
 	}
 }
 
-func parseXML(fi *zip.File) (*ParsedXML, error) {
+func parseXML(fi *zip.File) (*ParsedApiXML, error) {
 	p, err := newParser(fi)
 	if err != nil {
 		return nil, err
@@ -898,10 +899,11 @@ func parseXML(fi *zip.File) (*ParsedXML, error) {
 	p.root = &n
 	p.parseAPIMonitor(p.root)
 	//xmlPrint(parser.root)
-	return &p.ParsedXML, nil
+	return &p.ParsedApiXML, nil
 }
 
 func parseAPIZip() {
+	timeStart := time.Now()
 	fileName := "api.zip"
 	st, err := os.Stat(fileName)
 	must(err)
@@ -910,13 +912,16 @@ func parseAPIZip() {
 	defer f.Close()
 	zr, err := zip.NewReader(f, st.Size())
 	must(err)
+	var parsedFiles []*ParsedApiXML
 	for _, fi := range zr.File {
 		if fi.FileInfo().IsDir() {
 			//fmt.Printf("%s skipping because is dir\n", fi.Name)
 			continue
 		}
 		fmt.Printf("%s\n", fi.Name)
-		_, err := parseXML(fi)
+		parsed, err := parseXML(fi)
 		must(err)
+		parsedFiles = append(parsedFiles, parsed)
 	}
+	fmt.Printf("Parsed %d files in %s\n", len(parsedFiles), time.Since(timeStart))
 }

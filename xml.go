@@ -130,6 +130,66 @@ func mustTag(is string, wanted string) {
 	}
 }
 
+// Attrs combines attributes and their owner
+// Helper for extracting attributes
+type Attrs struct {
+	Attrs []xml.Attr
+	Owner XMLNode
+}
+
+func (a *Attrs) extractByName(attrName string) *xml.Attr {
+	var rest []xml.Attr
+	var res *xml.Attr
+	for i, attr := range a.Attrs {
+		if attr.Name.Local == attrName {
+			res = &a.Attrs[i]
+		} else {
+			rest = append(rest, attr)
+		}
+	}
+	a.Attrs = rest
+	return res
+}
+
+func (a *Attrs) mustExtractString(attrName string) string {
+	attr := a.extractByName(attrName)
+	panicIf(attr == nil, "missing attribute '%s' in node:\n%s", attrName, a.Owner)
+	return attr.Value
+}
+
+func (a *Attrs) mustExtractInt(attrName string) int {
+	s := a.mustExtractString(attrName)
+	i, err := strconv.Atoi(s)
+	must(err)
+	return i
+}
+
+func (a *Attrs) extractString(name string) string {
+	attr := a.extractByName(name)
+	if attr == nil {
+		return ""
+	}
+	return attr.Value
+}
+
+func (a *Attrs) extractInt(name string, defValue int) int {
+	attr := a.extractByName(name)
+	if attr == nil {
+		return defValue
+	}
+	n, err := strconv.Atoi(attr.Value)
+	must(err)
+	return n
+}
+
+func (a *Attrs) extractBool(name string) bool {
+	attr := a.extractByName(name)
+	if attr == nil {
+		return false
+	}
+	return mustParseBool(attr.Value)
+}
+
 func extractAttrByName(attrs []xml.Attr, attrName string) (*xml.Attr, []xml.Attr) {
 	var rest []xml.Attr
 	var res *xml.Attr
@@ -157,10 +217,10 @@ func mustExtractStringAttr(attrs []xml.Attr, attrName string, n *XMLNode) (strin
 	return attr.Value, rest
 }
 
-func extractStringAttr(attrs []xml.Attr, name string, defValue string) (string, []xml.Attr) {
+func extractStringAttr(attrs []xml.Attr, name string) (string, []xml.Attr) {
 	attr, attrs := extractAttrByName(attrs, name)
 	if attr == nil {
-		return defValue, attrs
+		return "", attrs
 	}
 	return attr.Value, attrs
 }
@@ -175,10 +235,10 @@ func extractIntAttr(attrs []xml.Attr, name string, defValue int) (int, []xml.Att
 	return n, attrs
 }
 
-func extractBoolAttr(attrs []xml.Attr, name string, defValue bool) (bool, []xml.Attr) {
+func extractBoolAttr(attrs []xml.Attr, name string) (bool, []xml.Attr) {
 	attr, attrs := extractAttrByName(attrs, name)
 	if attr == nil {
-		return defValue, attrs
+		return false, attrs
 	}
 	v := mustParseBool(attr.Value)
 	return v, attrs

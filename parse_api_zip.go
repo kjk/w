@@ -117,12 +117,18 @@ type Union struct {
 // Param represents info parsed from:
 // <Param Type="IBackgroundCopyJob*" Name="pJob" />
 type Param struct {
-	Name        string
-	Type        string
-	OutputOnly  bool
-	PostCount   string
-	Count       string
-	InterfaceId string
+	Name            string
+	Type            string
+	Display         string
+	OutputOnly      bool
+	PostCount       string // refers to Name of other param
+	PostLength      string // refers to Name of other param
+	Count           string
+	Length          string // might refer to Name of other param
+	InterfaceID     string
+	DerefPostCount  string
+	DerefCount      string
+	DerefPostLength string
 }
 
 // Return represents info parsed from:
@@ -133,10 +139,17 @@ type Return struct {
 
 // API describes info parsed from <Api>
 type API struct {
-	Name    string
-	Params  []Param
-	Return  Return
-	Success *Success
+	Name             string
+	Params           []Param
+	VarArgs          bool
+	Return           Return
+	Success          *Success
+	Ordinal          int
+	OrdinalA         int
+	OrdinalW         int
+	BothCharsets     bool
+	Discard          bool
+	Disabled_Discard bool
 }
 
 // Variable represents info parsed from:
@@ -147,6 +160,7 @@ type Variable struct {
 	Type  string
 	Base  string
 	Count int // if Type is Array
+	Pack  int // if Type is Struct
 }
 
 // Interface describes info parsed from:
@@ -154,7 +168,7 @@ type Variable struct {
 type Interface struct {
 	Name          string
 	BaseInterface string
-	Id            string
+	ID            string
 	OnlineHelp    string
 	ErrorFunc     string
 	Category      string
@@ -179,8 +193,9 @@ type Module struct {
 	CallingConvention string // e.g. STDCALL, CDECL
 	ErrorFunc         string // e.g. GetLastError
 	OnlineHelp        string // e.g. MSDN
-	Variables         Variables
-	Apis              []*API
+	Variables         *Variables
+	Apis              []API
+	Aliases           []string
 }
 
 // ParsedXML represents information extracted from a single .xml file
@@ -189,6 +204,7 @@ type ParsedXML struct {
 	Path string
 	// info from <Include> tags
 	Includes      []string
+	Modules       []*Module
 	Variables     *Variables
 	Arch32        *Variables
 	Arch64        *Variables
@@ -238,7 +254,7 @@ func (p *parser) parseSuccess(n *XMLNode) *Success {
 	}
 	res.Return, attrs = mustExtractStringAttr(attrs, "Return", n)
 	res.Value, attrs = mustExtractStringAttr(attrs, "Value", n)
-	res.ErrorFunc, attrs = extractStringAttr(attrs, "ErrorFunc", "")
+	res.ErrorFunc, attrs = extractStringAttr(attrs, "ErrorFunc")
 	mustNoAttrs(attrs, n)
 	return &res
 }
@@ -276,8 +292,8 @@ func (p *parser) parseEnum(n *XMLNode) *Enum {
 	mustTag(n.XMLName.Local, "Enum")
 
 	attrs := n.Attrs
-	reset, attrs := extractBoolAttr(attrs, "Reset", false)
-	defaultName, attrs := extractStringAttr(attrs, "DefaultName", "")
+	reset, attrs := extractBoolAttr(attrs, "Reset")
+	defaultName, attrs := extractStringAttr(attrs, "DefaultName")
 	mustNoAttrs(attrs, n)
 
 	set := p.parseSet(n)
@@ -317,7 +333,7 @@ func (p *parser) parseAlias(n *XMLNode, attrs []xml.Attr) Alias {
 		return res
 	}
 
-	res.DisplayHex, attrs = extractBoolAttr(attrs, "DisplayHex", false)
+	res.DisplayHex, attrs = extractBoolAttr(attrs, "DisplayHex")
 	mustNoAttrs(attrs, n)
 
 	for _, n := range n.Nodes {
@@ -364,8 +380,8 @@ func (p *parser) parseInteger(n *XMLNode, attrs []xml.Attr) Integer {
 	var res Integer
 	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
 	res.Size, attrs = mustExtractIntAttr(attrs, "Size", n)
-	res.Unsigned, attrs = extractBoolAttr(attrs, "Unsigned", false)
-	res.DisplayHex, attrs = extractBoolAttr(attrs, "DisplayHex", false)
+	res.Unsigned, attrs = extractBoolAttr(attrs, "Unsigned")
+	res.DisplayHex, attrs = extractBoolAttr(attrs, "DisplayHex")
 	mustNoAttrs(attrs, n)
 	return res
 }
@@ -385,12 +401,12 @@ func (p *parser) parseField(n *XMLNode) Field {
 	attrs := n.Attrs
 	typ, attrs := mustExtractStringAttr(attrs, "Type", n)
 	name, attrs := mustExtractStringAttr(attrs, "Name", n)
-	display, attrs := extractStringAttr(attrs, "Display", "")
-	length, attrs := extractStringAttr(attrs, "Length", "")
-	postLength, attrs := extractStringAttr(attrs, "PostLength", "")
-	count, attrs := extractStringAttr(attrs, "Count", "")
-	outputOnly, attrs := extractBoolAttr(attrs, "OutputOnly", false)
-	derefCount, attrs := extractStringAttr(attrs, "DerefCount", "")
+	display, attrs := extractStringAttr(attrs, "Display")
+	length, attrs := extractStringAttr(attrs, "Length")
+	postLength, attrs := extractStringAttr(attrs, "PostLength")
+	count, attrs := extractStringAttr(attrs, "Count")
+	outputOnly, attrs := extractBoolAttr(attrs, "OutputOnly")
+	derefCount, attrs := extractStringAttr(attrs, "DerefCount")
 	mustNoAttrs(attrs, n)
 
 	return Field{
@@ -482,10 +498,16 @@ func (p *parser) parseParam(n *XMLNode) Param {
 	var res Param
 	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
 	res.Type, attrs = mustExtractStringAttr(attrs, "Type", n)
-	res.OutputOnly, attrs = extractBoolAttr(attrs, "OutputOnly", false)
-	res.PostCount, attrs = extractStringAttr(attrs, "PostCount", "")
-	res.Count, attrs = extractStringAttr(attrs, "Count", "")
-	res.InterfaceId, attrs = extractStringAttr(attrs, "InterfaceId", "")
+	res.OutputOnly, attrs = extractBoolAttr(attrs, "OutputOnly")
+	res.PostCount, attrs = extractStringAttr(attrs, "PostCount")
+	res.PostLength, attrs = extractStringAttr(attrs, "PostLength")
+	res.Count, attrs = extractStringAttr(attrs, "Count")
+	res.Length, attrs = extractStringAttr(attrs, "Length")
+	res.InterfaceID, attrs = extractStringAttr(attrs, "InterfaceId")
+	res.Display, attrs = extractStringAttr(attrs, "Display")
+	res.DerefPostCount, attrs = extractStringAttr(attrs, "DerefPostCount")
+	res.DerefPostLength, attrs = extractStringAttr(attrs, "DerefPostLength")
+	res.DerefCount, attrs = extractStringAttr(attrs, "DerefCount")
 	mustNoAttrs(attrs, n)
 	return res
 }
@@ -505,17 +527,26 @@ func (p *parser) parseAPIVariable(n *XMLNode) Variable {
 	attrs := n.Attrs
 	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
 	res.Type, attrs = mustExtractStringAttr(attrs, "Type", n)
-	res.Base, attrs = extractStringAttr(attrs, "Base", "")
+	res.Base, attrs = extractStringAttr(attrs, "Base")
 	res.Count, attrs = extractIntAttr(attrs, "Count", 0)
+	res.Pack, attrs = extractIntAttr(attrs, "Pack", 0)
 	mustNoAttrs(attrs, n)
 	return res
 }
 
+// <Api Name=Output VarArgs=True>
 func (p *parser) parseAPI(n *XMLNode) API {
 	mustTag(n.XMLName.Local, "Api")
 	attrs := n.Attrs
 	var res API
 	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
+	res.VarArgs, attrs = extractBoolAttr(attrs, "VarArgs")
+	res.Ordinal, attrs = extractIntAttr(attrs, "Ordinal", -1)
+	res.OrdinalA, attrs = extractIntAttr(attrs, "OrdinalA", -1)
+	res.OrdinalW, attrs = extractIntAttr(attrs, "OrdinalW", -1)
+	res.BothCharsets, attrs = extractBoolAttr(attrs, "BothCharset")
+	res.Discard, attrs = extractBoolAttr(attrs, "Discard")
+	res.Disabled_Discard, attrs = extractBoolAttr(attrs, "Disabled_Discard")
 	mustNoAttrs(attrs, n)
 
 	for _, n := range n.Nodes {
@@ -542,11 +573,11 @@ func (p *parser) parseInterface(n *XMLNode) Interface {
 	attrs := n.Attrs
 
 	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.BaseInterface, attrs = mustExtractStringAttr(attrs, "BaseInterface", n)
-	res.Id, attrs = mustExtractStringAttr(attrs, "Id", n)
-	res.OnlineHelp, attrs = extractStringAttr(attrs, "OnlineHelp", "")
-	res.ErrorFunc, attrs = extractStringAttr(attrs, "ErrorFunc", "")
-	res.Category, attrs = extractStringAttr(attrs, "Category", "")
+	res.BaseInterface, attrs = extractStringAttr(attrs, "BaseInterface")
+	res.ID, attrs = extractStringAttr(attrs, "Id")
+	res.OnlineHelp, attrs = extractStringAttr(attrs, "OnlineHelp")
+	res.ErrorFunc, attrs = extractStringAttr(attrs, "ErrorFunc")
+	res.Category, attrs = extractStringAttr(attrs, "Category")
 
 	for _, n := range n.Nodes {
 		tag := n.XMLName.Local
@@ -635,6 +666,15 @@ func (p *parser) parseVariable(n *XMLNode) {
 	}
 }
 
+func (p *parser) parseModuleAlias(n *XMLNode) string {
+	mustTag(n.XMLName.Local, "ModuleAlias")
+	mustNoChildren(n)
+	attrs := n.Attrs
+	alias, attrs := mustExtractStringAttr(attrs, "Name", n)
+	mustNoAttrs(attrs, n)
+	return alias
+}
+
 func (p *parser) parseCondition(n *XMLNode) {
 	mustTag(n.XMLName.Local, "Condition")
 	attrs := n.Attrs
@@ -686,8 +726,50 @@ func (p *parser) parseHeaders(n *XMLNode) {
 	}
 }
 
+// <Module Name=DbgEng.dll CallingConvention=STDCALL ErrorFunc=HRESULT OnlineHelp=MSDN>
+func (p *parser) parseModule(n *XMLNode) *Module {
+	mustTag(n.XMLName.Local, "Module")
+	var res Module
+	attrs := n.Attrs
+	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
+	res.CallingConvention, attrs = mustExtractStringAttr(attrs, "CallingConvention", n)
+	res.ErrorFunc, attrs = mustExtractStringAttr(attrs, "ErrorFunc", n)
+	res.OnlineHelp, attrs = extractStringAttr(attrs, "OnlineHelp")
+	// discard Category
+	_, attrs = extractStringAttr(attrs, "Category")
+	res.Variables = &Variables{}
+
+	prevVariables := p.currVariables
+	p.currVariables = res.Variables
+	mustNoAttrs(attrs, n)
+
+	for _, n := range n.Nodes {
+		tag := n.XMLName.Local
+		switch tag {
+		case "Variable":
+			p.parseVariable(n)
+		case "Category":
+			mustNoChildren(n)
+			// ignore Category for now
+		case "Api":
+			api := p.parseAPI(n)
+			res.Apis = append(res.Apis, api)
+		case "ModuleAlias":
+			alias := p.parseModuleAlias(n)
+			res.Aliases = append(res.Aliases, alias)
+		default:
+			must(fmt.Errorf("unuspported node:\n%s", n))
+		}
+	}
+
+	p.currVariables = prevVariables
+	return &res
+}
+
 func (p *parser) parseAPIMonitor(n *XMLNode) {
 	mustTag(n.XMLName.Local, "ApiMonitor")
+	mustNoAttrs(n.Attrs, n)
+
 	for _, n := range n.Nodes {
 		tag := n.XMLName.Local
 		switch tag {
@@ -698,7 +780,17 @@ func (p *parser) parseAPIMonitor(n *XMLNode) {
 		case "Interface":
 			i := p.parseInterface(n)
 			p.currVariables.Interfaces = append(p.currVariables.Interfaces, i)
+		case "Module":
+			m := p.parseModule(n)
+			p.Modules = append(p.Modules, m)
 		case "HelpUrl":
+			// ignore
+		case "ErrorLookupModule":
+			// TODO: ignore for now. Don't know what that means
+			// used in IFilterGraph.xml
+		case "ApiSetSchema":
+			// ignore
+		case "UnsupportedModules":
 			// ignore
 		default:
 			must(fmt.Errorf("unuspported node:\n%s", n))

@@ -134,7 +134,22 @@ func mustTag(is string, wanted string) {
 // Helper for extracting attributes
 type Attrs struct {
 	Attrs []xml.Attr
-	Owner XMLNode
+	Owner *XMLNode
+}
+
+// NewAttrs creates Attrs from owner
+func NewAttrs(owner *XMLNode) *Attrs {
+	return &Attrs{
+		Attrs: owner.Attrs,
+		Owner: owner,
+	}
+}
+
+func (a *Attrs) mustEmpty() {
+	if len(a.Attrs) > 0 {
+		s := a.Attrs[0].Name
+		panicIf(true, "Unsupported attribute %s in node:\n%s", s, a.Owner)
+	}
 }
 
 func (a *Attrs) extractByName(attrName string) *xml.Attr {
@@ -190,6 +205,7 @@ func (a *Attrs) extractBool(name string) bool {
 	return mustParseBool(attr.Value)
 }
 
+/*
 func extractAttrByName(attrs []xml.Attr, attrName string) (*xml.Attr, []xml.Attr) {
 	var rest []xml.Attr
 	var res *xml.Attr
@@ -243,3 +259,4 @@ func extractBoolAttr(attrs []xml.Attr, name string) (bool, []xml.Attr) {
 	v := mustParseBool(attr.Value)
 	return v, attrs
 }
+*/

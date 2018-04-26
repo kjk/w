@@ -235,9 +235,10 @@ func newParser(fi *zip.File) (*parser, error) {
 
 func (p *parser) parseInclude(n *XMLNode) {
 	mustTag(n.XMLName.Local, "Include")
-	attr, rest := extractAttrByName(n.Attrs, "Filename")
-	p.Includes = append(p.Includes, attr.Value)
-	panicIf(len(rest) > 0, "<Include> has unsupported attributes. Node: '%s'", n)
+	attrs := NewAttrs(n)
+	fileName := attrs.mustExtractString("Filename")
+	p.Includes = append(p.Includes, fileName)
+	attrs.mustEmpty()
 }
 
 // <Success />
@@ -247,27 +248,26 @@ func (p *parser) parseSuccess(n *XMLNode) *Success {
 	mustNoChildren(n)
 
 	var res Success
-	attrs := n.Attrs
 	// TODO: not sure what <Success /> means, but they do happen
-	if len(attrs) == 0 {
+	if len(n.Attrs) == 0 {
 		return &res
 	}
-	res.Return, attrs = mustExtractStringAttr(attrs, "Return", n)
-	res.Value, attrs = mustExtractStringAttr(attrs, "Value", n)
-	res.ErrorFunc, attrs = extractStringAttr(attrs, "ErrorFunc")
-	mustNoAttrs(attrs, n)
+
+	attrs := NewAttrs(n)
+	res.Return = attrs.mustExtractString("Return")
+	res.Value = attrs.mustExtractString("Value")
+	res.ErrorFunc = attrs.extractString("ErrorFunc")
+	attrs.mustEmpty()
 	return &res
 }
 
 func (p *parser) parseSetValue(n *XMLNode) SetValue {
-	attrs := n.Attrs
-	name, attrs := mustExtractStringAttr(attrs, "Name", n)
-	value, attrs := mustExtractStringAttr(attrs, "Value", n)
-	mustNoAttrs(attrs, n)
-	return SetValue{
-		Name:  name,
-		Value: value,
-	}
+	var res SetValue
+	attrs := NewAttrs(n)
+	res.Name = attrs.mustExtractString("Name")
+	res.Value = attrs.mustExtractString("Value")
+	attrs.mustEmpty()
+	return res
 }
 
 func (p *parser) parseSet(n *XMLNode) []SetValue {
@@ -290,19 +290,14 @@ func (p *parser) parseSet(n *XMLNode) []SetValue {
 
 func (p *parser) parseEnum(n *XMLNode) *Enum {
 	mustTag(n.XMLName.Local, "Enum")
+	var res Enum
 
-	attrs := n.Attrs
-	reset, attrs := extractBoolAttr(attrs, "Reset")
-	defaultName, attrs := extractStringAttr(attrs, "DefaultName")
-	mustNoAttrs(attrs, n)
-
-	set := p.parseSet(n)
-	e := Enum{
-		Values:      set,
-		Reset:       reset,
-		DefaultName: defaultName,
-	}
-	return &e
+	attrs := NewAttrs(n)
+	res.Reset = attrs.extractBool("Reset")
+	res.DefaultName = attrs.extractString("DefaultName")
+	attrs.mustEmpty()
+	res.Values = p.parseSet(n)
+	return &res
 }
 
 func (p *parser) parseFlag(n *XMLNode) *Flag {
@@ -310,22 +305,21 @@ func (p *parser) parseFlag(n *XMLNode) *Flag {
 	mustNoAttrs(n.Attrs, n)
 
 	set := p.parseSet(n)
-
 	f := Flag{
 		Values: set,
 	}
 	return &f
 }
 
-func (p *parser) parseAlias(n *XMLNode, attrs []xml.Attr) Alias {
+func (p *parser) parseAlias(n *XMLNode, attrs *Attrs) Alias {
 	mustTag(n.XMLName.Local, "Variable")
 	var res Alias
-	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.Base, attrs = mustExtractStringAttr(attrs, "Base", n)
+	res.Name = attrs.mustExtractString("Name")
+	res.Base = attrs.mustExtractString("Base")
 
 	// must special-case this, should probably be wrapped inside Enum
 	if res.Name == "FOURCC" {
-		mustNoAttrs(attrs, n)
+		attrs.mustEmpty()
 		set := p.parseSet(n)
 		res.Enum = &Enum{
 			Values: set,
@@ -333,8 +327,8 @@ func (p *parser) parseAlias(n *XMLNode, attrs []xml.Attr) Alias {
 		return res
 	}
 
-	res.DisplayHex, attrs = extractBoolAttr(attrs, "DisplayHex")
-	mustNoAttrs(attrs, n)
+	res.DisplayHex = attrs.extractBool("DisplayHex")
+	attrs.mustEmpty()
 
 	for _, n := range n.Nodes {
 		tag := n.XMLName.Local
@@ -354,16 +348,16 @@ func (p *parser) parseAlias(n *XMLNode, attrs []xml.Attr) Alias {
 	return res
 }
 
-func (p *parser) parsePointer(n *XMLNode, attrs []xml.Attr) Pointer {
+func (p *parser) parsePointer(n *XMLNode, attrs *Attrs) Pointer {
 	mustTag(n.XMLName.Local, "Variable")
 	var res Pointer
-	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.Base, attrs = mustExtractStringAttr(attrs, "Base", n)
-	mustNoAttrs(attrs, n)
+	res.Name = attrs.mustExtractString("Name")
+	res.Base = attrs.mustExtractString("Base")
+	attrs.mustEmpty()
 	return res
 }
 
-func (p *parser) parseInteger(n *XMLNode, attrs []xml.Attr) Integer {
+func (p *parser) parseInteger(n *XMLNode, attrs *Attrs) Integer {
 	mustTag(n.XMLName.Local, "Variable")
 
 	/* Note: this doesn't fully parse
@@ -378,54 +372,46 @@ func (p *parser) parseInteger(n *XMLNode, attrs []xml.Attr) Integer {
 	//mustNoChildren(n)
 
 	var res Integer
-	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.Size, attrs = mustExtractIntAttr(attrs, "Size", n)
-	res.Unsigned, attrs = extractBoolAttr(attrs, "Unsigned")
-	res.DisplayHex, attrs = extractBoolAttr(attrs, "DisplayHex")
-	mustNoAttrs(attrs, n)
+	res.Name = attrs.mustExtractString("Name")
+	res.Size = attrs.mustExtractInt("Size")
+	res.Unsigned = attrs.extractBool("Unsigned")
+	res.DisplayHex = attrs.extractBool("DisplayHex")
+	attrs.mustEmpty()
 	return res
 }
 
-func (p *parser) parseArray(n *XMLNode, attrs []xml.Attr) Array {
+func (p *parser) parseArray(n *XMLNode, attrs *Attrs) Array {
 	mustTag(n.XMLName.Local, "Variable")
 	var res Array
-	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.Base, attrs = mustExtractStringAttr(attrs, "Base", n)
-	res.Count, attrs = mustExtractIntAttr(attrs, "Count", n)
-	mustNoAttrs(attrs, n)
+	res.Name = attrs.mustExtractString("Name")
+	res.Base = attrs.mustExtractString("Base")
+	res.Count = attrs.mustExtractInt("Count")
+	attrs.mustEmpty()
 	return res
 }
 
 func (p *parser) parseField(n *XMLNode) Field {
 	mustNoChildren(n)
-	attrs := n.Attrs
-	typ, attrs := mustExtractStringAttr(attrs, "Type", n)
-	name, attrs := mustExtractStringAttr(attrs, "Name", n)
-	display, attrs := extractStringAttr(attrs, "Display")
-	length, attrs := extractStringAttr(attrs, "Length")
-	postLength, attrs := extractStringAttr(attrs, "PostLength")
-	count, attrs := extractStringAttr(attrs, "Count")
-	outputOnly, attrs := extractBoolAttr(attrs, "OutputOnly")
-	derefCount, attrs := extractStringAttr(attrs, "DerefCount")
-	mustNoAttrs(attrs, n)
-
-	return Field{
-		Type:       typ,
-		Name:       name,
-		Display:    display,
-		Length:     length,
-		PostLength: postLength,
-		Count:      count,
-		OutputOnly: outputOnly,
-		DerefCount: derefCount,
-	}
+	var res Field
+	attrs := NewAttrs(n)
+	res.Type = attrs.mustExtractString("Type")
+	res.Name = attrs.mustExtractString("Name")
+	res.Display = attrs.extractString("Display")
+	res.Length = attrs.extractString("Length")
+	res.PostLength = attrs.extractString("PostLength")
+	res.Count = attrs.extractString("Count")
+	res.OutputOnly = attrs.extractBool("OutputOnly")
+	res.DerefCount = attrs.extractString("DerefCount")
+	attrs.mustEmpty()
+	return res
 }
 
 func (p *parser) parseDisplay(n *XMLNode) string {
 	mustTag(n.XMLName.Local, "Display")
 	mustNoChildren(n)
-	display, attrs := mustExtractStringAttr(n.Attrs, "Name", n)
-	mustNoAttrs(attrs, n)
+	attrs := NewAttrs(n)
+	display := attrs.mustExtractString("Name")
+	attrs.mustEmpty()
 	return display
 }
 
@@ -444,15 +430,15 @@ func validateFields(fields []Field) {
 	}
 }
 
-func (p *parser) parseStruct(n *XMLNode, attrs []xml.Attr) Struct {
+func (p *parser) parseStruct(n *XMLNode, attrs *Attrs) Struct {
 	mustTag(n.XMLName.Local, "Variable")
 	var res Struct
-	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.Pack, attrs = extractIntAttr(attrs, "Pack", -1)
-	res.Pack32, attrs = extractIntAttr(attrs, "Pack32", -1)
-	res.Pack64, attrs = extractIntAttr(attrs, "Pack64", -1)
+	res.Name = attrs.mustExtractString("Name")
+	res.Pack = attrs.extractInt("Pack", -1)
+	res.Pack32 = attrs.extractInt("Pack32", -1)
+	res.Pack64 = attrs.extractInt("Pack64", -1)
 
-	mustNoAttrs(attrs, n) // TODO: handle more attributes
+	attrs.mustEmpty()
 	for _, n := range n.Nodes {
 		tag := n.XMLName.Local
 		switch tag {
@@ -469,11 +455,11 @@ func (p *parser) parseStruct(n *XMLNode, attrs []xml.Attr) Struct {
 	return res
 }
 
-func (p *parser) parseUnion(n *XMLNode, attrs []xml.Attr) Union {
+func (p *parser) parseUnion(n *XMLNode, attrs *Attrs) Union {
 	mustTag(n.XMLName.Local, "Variable")
 	var res Union
-	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.Pack, attrs = extractIntAttr(attrs, "Pack", -1)
+	res.Name = attrs.mustExtractString("Name")
+	res.Pack = attrs.extractInt("Pack", -1)
 
 	for _, n := range n.Nodes {
 		tag := n.XMLName.Local
@@ -494,60 +480,60 @@ func (p *parser) parseUnion(n *XMLNode, attrs []xml.Attr) Union {
 func (p *parser) parseParam(n *XMLNode) Param {
 	mustTag(n.XMLName.Local, "Param")
 	mustNoChildren(n)
-	attrs := n.Attrs
+	attrs := NewAttrs(n)
 	var res Param
-	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.Type, attrs = mustExtractStringAttr(attrs, "Type", n)
-	res.OutputOnly, attrs = extractBoolAttr(attrs, "OutputOnly")
-	res.PostCount, attrs = extractStringAttr(attrs, "PostCount")
-	res.PostLength, attrs = extractStringAttr(attrs, "PostLength")
-	res.Count, attrs = extractStringAttr(attrs, "Count")
-	res.Length, attrs = extractStringAttr(attrs, "Length")
-	res.InterfaceID, attrs = extractStringAttr(attrs, "InterfaceId")
-	res.Display, attrs = extractStringAttr(attrs, "Display")
-	res.DerefPostCount, attrs = extractStringAttr(attrs, "DerefPostCount")
-	res.DerefPostLength, attrs = extractStringAttr(attrs, "DerefPostLength")
-	res.DerefCount, attrs = extractStringAttr(attrs, "DerefCount")
-	mustNoAttrs(attrs, n)
+	res.Name = attrs.mustExtractString("Name")
+	res.Type = attrs.mustExtractString("Type")
+	res.OutputOnly = attrs.extractBool("OutputOnly")
+	res.PostCount = attrs.extractString("PostCount")
+	res.PostLength = attrs.extractString("PostLength")
+	res.Count = attrs.extractString("Count")
+	res.Length = attrs.extractString("Length")
+	res.InterfaceID = attrs.extractString("InterfaceId")
+	res.Display = attrs.extractString("Display")
+	res.DerefPostCount = attrs.extractString("DerefPostCount")
+	res.DerefPostLength = attrs.extractString("DerefPostLength")
+	res.DerefCount = attrs.extractString("DerefCount")
+	attrs.mustEmpty()
 	return res
 }
 
 func (p *parser) parseReturn(n *XMLNode) Return {
 	mustTag(n.XMLName.Local, "Return")
 	mustNoChildren(n)
-	attrs := n.Attrs
+	attrs := NewAttrs(n)
 	var res Return
-	res.Type, attrs = mustExtractStringAttr(attrs, "Type", n)
-	mustNoAttrs(attrs, n)
+	res.Type = attrs.mustExtractString("Type")
+	attrs.mustEmpty()
 	return res
 }
 
 func (p *parser) parseAPIVariable(n *XMLNode) Variable {
 	var res Variable
-	attrs := n.Attrs
-	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.Type, attrs = mustExtractStringAttr(attrs, "Type", n)
-	res.Base, attrs = extractStringAttr(attrs, "Base")
-	res.Count, attrs = extractIntAttr(attrs, "Count", 0)
-	res.Pack, attrs = extractIntAttr(attrs, "Pack", 0)
-	mustNoAttrs(attrs, n)
+	attrs := NewAttrs(n)
+	res.Name = attrs.mustExtractString("Name")
+	res.Type = attrs.mustExtractString("Type")
+	res.Base = attrs.extractString("Base")
+	res.Count = attrs.extractInt("Count", 0)
+	res.Pack = attrs.extractInt("Pack", 0)
+	attrs.mustEmpty()
 	return res
 }
 
 // <Api Name=Output VarArgs=True>
 func (p *parser) parseAPI(n *XMLNode) API {
 	mustTag(n.XMLName.Local, "Api")
-	attrs := n.Attrs
+	attrs := NewAttrs(n)
 	var res API
-	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.VarArgs, attrs = extractBoolAttr(attrs, "VarArgs")
-	res.Ordinal, attrs = extractIntAttr(attrs, "Ordinal", -1)
-	res.OrdinalA, attrs = extractIntAttr(attrs, "OrdinalA", -1)
-	res.OrdinalW, attrs = extractIntAttr(attrs, "OrdinalW", -1)
-	res.BothCharsets, attrs = extractBoolAttr(attrs, "BothCharset")
-	res.Discard, attrs = extractBoolAttr(attrs, "Discard")
-	res.Disabled_Discard, attrs = extractBoolAttr(attrs, "Disabled_Discard")
-	mustNoAttrs(attrs, n)
+	res.Name = attrs.mustExtractString("Name")
+	res.VarArgs = attrs.extractBool("VarArgs")
+	res.Ordinal = attrs.extractInt("Ordinal", -1)
+	res.OrdinalA = attrs.extractInt("OrdinalA", -1)
+	res.OrdinalW = attrs.extractInt("OrdinalW", -1)
+	res.BothCharsets = attrs.extractBool("BothCharset")
+	res.Discard = attrs.extractBool("Discard")
+	res.Disabled_Discard = attrs.extractBool("Disabled_Discard")
+	attrs.mustEmpty()
 
 	for _, n := range n.Nodes {
 		tag := n.XMLName.Local
@@ -569,15 +555,15 @@ func (p *parser) parseAPI(n *XMLNode) API {
 
 func (p *parser) parseInterface(n *XMLNode) Interface {
 	mustTag(n.XMLName.Local, "Interface")
-	var res Interface
-	attrs := n.Attrs
+	attrs := NewAttrs(n)
 
-	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.BaseInterface, attrs = extractStringAttr(attrs, "BaseInterface")
-	res.ID, attrs = extractStringAttr(attrs, "Id")
-	res.OnlineHelp, attrs = extractStringAttr(attrs, "OnlineHelp")
-	res.ErrorFunc, attrs = extractStringAttr(attrs, "ErrorFunc")
-	res.Category, attrs = extractStringAttr(attrs, "Category")
+	var res Interface
+	res.Name = attrs.mustExtractString("Name")
+	res.BaseInterface = attrs.extractString("BaseInterface")
+	res.ID = attrs.extractString("Id")
+	res.OnlineHelp = attrs.extractString("OnlineHelp")
+	res.ErrorFunc = attrs.extractString("ErrorFunc")
+	res.Category = attrs.extractString("Category")
 
 	for _, n := range n.Nodes {
 		tag := n.XMLName.Local
@@ -598,9 +584,8 @@ func (p *parser) parseInterface(n *XMLNode) Interface {
 
 func (p *parser) parseVariable(n *XMLNode) {
 	mustTag(n.XMLName.Local, "Variable")
-	attrs := n.Attrs
-
-	typ, attrs := mustExtractStringAttr(attrs, "Type", n)
+	attrs := NewAttrs(n)
+	typ := attrs.mustExtractString("Type")
 
 	switch typ {
 	case "Alias":
@@ -625,29 +610,29 @@ func (p *parser) parseVariable(n *XMLNode) {
 	case "Interface":
 		// Note: don't understand why I need those if we have <Interface> definitions
 		mustNoChildren(n)
-		//mustNoAttrs(attrs, n)
+		//	attrs.mustEmpty()
 		// not doing anything with those
 
 	// some base types that don't need to exist
 	case "Guid":
 		// Note: not sure what to do
 		mustNoChildren(n)
-		//mustNoAttrs(attrs, n)
+		//	attrs.mustEmpty()
 		//panicIf(name != "GUID", "unexpected name: '%s'", name)
 	case "Void":
 		// Note: not sure what to do
 		mustNoChildren(n)
-		//mustNoAttrs(attrs, n)
+		//attrs.mustEmpty()
 		//panicIf(name != "void", "unexpected name: '%s'", name)
 	case "ModuleHandle":
 		// Note: not sure what to do
 		mustNoChildren(n)
-		//mustNoAttrs(attrs, n)
+		//attrs.mustEmpty()
 		//panicIf(name != "HMODULE", "unexpected name: '%s'", name)
 	case "Character":
 		// Note: not sure what to do
 		mustNoChildren(n)
-		//mustNoAttrs(attrs, n)
+		//attrs.mustEmpty()
 		//panicIf(name != "CHAR", "unexpected name: '%s'", name)
 	case "UnicodeCharacter":
 		// Note: not sure what to do
@@ -669,17 +654,17 @@ func (p *parser) parseVariable(n *XMLNode) {
 func (p *parser) parseModuleAlias(n *XMLNode) string {
 	mustTag(n.XMLName.Local, "ModuleAlias")
 	mustNoChildren(n)
-	attrs := n.Attrs
-	alias, attrs := mustExtractStringAttr(attrs, "Name", n)
-	mustNoAttrs(attrs, n)
+	attrs := NewAttrs(n)
+	alias := attrs.mustExtractString("Name")
+	attrs.mustEmpty()
 	return alias
 }
 
 func (p *parser) parseCondition(n *XMLNode) {
 	mustTag(n.XMLName.Local, "Condition")
-	attrs := n.Attrs
-	arch, attrs := mustExtractIntAttr(attrs, "Architecture", n)
-	mustNoAttrs(attrs, n)
+	attrs := NewAttrs(n)
+	arch := attrs.mustExtractInt("Architecture")
+	attrs.mustEmpty()
 
 	prevVariables := p.currVariables
 	switch arch {
@@ -730,18 +715,18 @@ func (p *parser) parseHeaders(n *XMLNode) {
 func (p *parser) parseModule(n *XMLNode) *Module {
 	mustTag(n.XMLName.Local, "Module")
 	var res Module
-	attrs := n.Attrs
-	res.Name, attrs = mustExtractStringAttr(attrs, "Name", n)
-	res.CallingConvention, attrs = mustExtractStringAttr(attrs, "CallingConvention", n)
-	res.ErrorFunc, attrs = mustExtractStringAttr(attrs, "ErrorFunc", n)
-	res.OnlineHelp, attrs = extractStringAttr(attrs, "OnlineHelp")
+	attrs := NewAttrs(n)
+	res.Name = attrs.mustExtractString("Name")
+	res.CallingConvention = attrs.mustExtractString("CallingConvention")
+	res.ErrorFunc = attrs.mustExtractString("ErrorFunc")
+	res.OnlineHelp = attrs.extractString("OnlineHelp")
 	// discard Category
-	_, attrs = extractStringAttr(attrs, "Category")
+	_ = attrs.extractString("Category")
 	res.Variables = &Variables{}
 
 	prevVariables := p.currVariables
 	p.currVariables = res.Variables
-	mustNoAttrs(attrs, n)
+	attrs.mustEmpty()
 
 	for _, n := range n.Nodes {
 		tag := n.XMLName.Local

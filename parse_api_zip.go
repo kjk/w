@@ -134,12 +134,14 @@ type Param struct {
 // Return represents info parsed from:
 // <Return Type="HRESULT" />
 type Return struct {
-	Type string
+	Type    string
+	Display string
 }
 
 // API describes info parsed from <Api>
 type API struct {
 	Name             string
+	Display          string // e.g. <Api Name=SystemFunction036 Display=RtlGenRandom>
 	Params           []Param
 	VarArgs          bool
 	Return           Return
@@ -150,6 +152,9 @@ type API struct {
 	BothCharsets     bool
 	Discard          bool
 	Disabled_Discard bool
+	// by default suffix for A variant of a function is A but
+	// some functions (GetHashFromAssemblyFile) have no suffix for A
+	NoSuffixA bool
 }
 
 // Variable represents info parsed from:
@@ -504,6 +509,7 @@ func (p *parser) parseReturn(n *XMLNode) Return {
 	attrs := NewAttrs(n)
 	var res Return
 	res.Type = attrs.mustExtractString("Type")
+	res.Display = attrs.extractString("Display")
 	attrs.mustEmpty()
 	return res
 }
@@ -533,6 +539,13 @@ func (p *parser) parseAPI(n *XMLNode) API {
 	res.BothCharsets = attrs.extractBool("BothCharset")
 	res.Discard = attrs.extractBool("Discard")
 	res.Disabled_Discard = attrs.extractBool("Disabled_Discard")
+	res.Display = attrs.extractString("Display")
+	// SuffixA only has value of empty string
+	attr := attrs.extractByName("SuffixA")
+	if attr != nil {
+		panicIf(attr.Value != "")
+		res.NoSuffixA = true
+	}
 	attrs.mustEmpty()
 
 	for _, n := range n.Nodes {
@@ -718,7 +731,7 @@ func (p *parser) parseModule(n *XMLNode) *Module {
 	attrs := NewAttrs(n)
 	res.Name = attrs.mustExtractString("Name")
 	res.CallingConvention = attrs.mustExtractString("CallingConvention")
-	res.ErrorFunc = attrs.mustExtractString("ErrorFunc")
+	res.ErrorFunc = attrs.extractString("ErrorFunc")
 	res.OnlineHelp = attrs.extractString("OnlineHelp")
 	// discard Category
 	_ = attrs.extractString("Category")
@@ -742,6 +755,12 @@ func (p *parser) parseModule(n *XMLNode) *Module {
 		case "ModuleAlias":
 			alias := p.parseModuleAlias(n)
 			res.Aliases = append(res.Aliases, alias)
+		case "ErrorDecode":
+			mustNoChildren(n)
+			// ignore
+		case "SourceModule":
+			// e.g. Combase.xml
+			// ignore, not sure what it does
 		default:
 			must(fmt.Errorf("unuspported node:\n%s", n))
 		}
@@ -781,9 +800,6 @@ func (p *parser) parseAPIMonitor(n *XMLNode) {
 			must(fmt.Errorf("unuspported node:\n%s", n))
 		}
 	}
-}
-
-func (p *parser) parse() {
 }
 
 func parseXML(fi *zip.File) (*ParsedXML, error) {

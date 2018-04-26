@@ -166,6 +166,20 @@ func (a *Attrs) extractByName(attrName string) *xml.Attr {
 	return res
 }
 
+func (a *Attrs) extractByNameI(attrName string) *xml.Attr {
+	var rest []xml.Attr
+	var res *xml.Attr
+	for i, attr := range a.Attrs {
+		if strings.EqualFold(attr.Name.Local, attrName) {
+			res = &a.Attrs[i]
+		} else {
+			rest = append(rest, attr)
+		}
+	}
+	a.Attrs = rest
+	return res
+}
+
 func (a *Attrs) mustExtractString(attrName string) string {
 	attr := a.extractByName(attrName)
 	panicIf(attr == nil, "missing attribute '%s' in node:\n%s", attrName, a.Owner)

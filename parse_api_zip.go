@@ -6,6 +6,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"os"
+	"reflect"
 )
 
 // extracts definifions from api.zip which comes from api monitor
@@ -236,6 +237,36 @@ func newParser(fi *zip.File) (*parser, error) {
 	r := bytes.NewBuffer(d)
 	res.dec = xml.NewDecoder(r)
 	return res, nil
+}
+
+func (p *parser) parseFromAttributes(n *XMLNode, v interface{}) {
+	rv := reflect.ValueOf(v)
+	panicIf(rv.Kind() != reflect.Ptr)
+	rv = rv.Elem()
+
+	attrs := NewAttrs(n)
+	structType := rv.Type()
+	for i := 0; i < rv.NumField(); i++ {
+		val := rv.Field(i)
+		structField := structType.Field(i)
+		name := structField.Name
+		typ := structField.Type
+		attr := attrs.extractByNameI(name)
+		// TODO: some fields should be mandatory
+		if attr == nil {
+			continue
+		}
+		//panicIf(attr == nil, "no attribute '%s' in node:\n%s", name, n)
+		switch typ.Kind() {
+		case reflect.Int:
+			val.SetInt(int64(mustParseInt(attr.Value)))
+		case reflect.String:
+			val.SetString(attr.Value)
+		case reflect.Bool:
+			val.SetBool(mustParseBool(attr.Value))
+		}
+	}
+	attrs.mustEmpty()
 }
 
 func (p *parser) parseInclude(n *XMLNode) {

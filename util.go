@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"strconv"
 	"strings"
 )
 
@@ -41,6 +42,12 @@ func panicIf(cond bool, args ...interface{}) {
 		return
 	}
 	panicWithMsg("PanicIf: condition failed", args...)
+}
+
+func mustParseInt(s string) int {
+	n, err := strconv.Atoi(s)
+	must(err)
+	return n
 }
 
 func mustParseBool(s string) bool {

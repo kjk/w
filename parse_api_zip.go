@@ -54,6 +54,7 @@ type SetValue struct {
 // 	<Display Name="BYTE" />
 // 	<Flag>
 type Flag struct {
+	Reset  bool
 	Values []SetValue
 }
 
@@ -89,6 +90,7 @@ type Field struct {
 	Type       string
 	Display    string
 	PostLength string
+	PostCount  string
 	Length     string // this might refer to a field name
 	Count      string // this might refer to a field name
 	OutputOnly bool
@@ -141,21 +143,21 @@ type Return struct {
 
 // API describes info parsed from <Api>
 type API struct {
-	Name             string
-	Display          string // e.g. <Api Name=SystemFunction036 Display=RtlGenRandom>
-	Params           []Param
-	VarArgs          bool
-	Return           Return
-	Success          *Success
-	Ordinal          int
-	OrdinalA         int
-	OrdinalW         int
-	BothCharsets     bool
-	Discard          bool
-	Disabled_Discard bool
+	Name         string
+	Display      string // e.g. <Api Name=SystemFunction036 Display=RtlGenRandom>
+	Params       []Param
+	VarArgs      bool
+	Return       Return
+	Success      *Success
+	Ordinal      int
+	OrdinalA     int
+	OrdinalW     int
+	BothCharsets bool
+	Discard      bool
 	// by default suffix for A variant of a function is A but
 	// some functions (GetHashFromAssemblyFile) have no suffix for A
 	NoSuffixA bool
+	ErrorFunc string
 }
 
 // Variable represents info parsed from:
@@ -195,13 +197,16 @@ type Variables struct {
 
 // Module is a result of parsing <Module>
 type Module struct {
-	Name              string // e.g. "kernel32.dll"
-	CallingConvention string // e.g. STDCALL, CDECL
-	ErrorFunc         string // e.g. GetLastError
-	OnlineHelp        string // e.g. MSDN
-	Variables         *Variables
-	Apis              []API
-	Aliases           []string
+	Name               string // e.g. "kernel32.dll"
+	CallingConvention  string // e.g. STDCALL, CDECL
+	ErrorFunc          string // e.g. GetLastError
+	OnlineHelp         string // e.g. MSDN
+	ErrorIsReturnValue bool
+	Variables          *Variables
+	Arch32             *Variables
+	Arch64             *Variables
+	Apis               []API
+	Aliases            []string
 }
 
 // ParsedXML represents information extracted from a single .xml file
@@ -338,13 +343,13 @@ func (p *parser) parseEnum(n *XMLNode) *Enum {
 
 func (p *parser) parseFlag(n *XMLNode) *Flag {
 	mustTag(n.XMLName.Local, "Flag")
-	mustNoAttrs(n.Attrs, n)
+	var res Flag
+	attrs := NewAttrs(n)
+	res.Reset = attrs.extractBool("Reset")
+	attrs.mustEmpty()
 
-	set := p.parseSet(n)
-	f := Flag{
-		Values: set,
-	}
-	return &f
+	res.Values = p.parseSet(n)
+	return &res
 }
 
 func (p *parser) parseAlias(n *XMLNode, attrs *Attrs) Alias {
@@ -434,6 +439,7 @@ func (p *parser) parseField(n *XMLNode) Field {
 	res.Name = attrs.mustExtractString("Name")
 	res.Display = attrs.extractString("Display")
 	res.Length = attrs.extractString("Length")
+	res.PostCount = attrs.extractString("PostCount")
 	res.PostLength = attrs.extractString("PostLength")
 	res.Count = attrs.extractString("Count")
 	res.OutputOnly = attrs.extractBool("OutputOnly")
@@ -470,9 +476,9 @@ func (p *parser) parseStruct(n *XMLNode, attrs *Attrs) Struct {
 	mustTag(n.XMLName.Local, "Variable")
 	var res Struct
 	res.Name = attrs.mustExtractString("Name")
-	res.Pack = attrs.extractInt("Pack", -1)
-	res.Pack32 = attrs.extractInt("Pack32", -1)
-	res.Pack64 = attrs.extractInt("Pack64", -1)
+	res.Pack = attrs.extractInt("Pack", 0)
+	res.Pack32 = attrs.extractInt("Pack32", 0)
+	res.Pack64 = attrs.extractInt("Pack64", 0)
 
 	attrs.mustEmpty()
 	for _, n := range n.Nodes {
@@ -495,7 +501,7 @@ func (p *parser) parseUnion(n *XMLNode, attrs *Attrs) Union {
 	mustTag(n.XMLName.Local, "Variable")
 	var res Union
 	res.Name = attrs.mustExtractString("Name")
-	res.Pack = attrs.extractInt("Pack", -1)
+	res.Pack = attrs.extractInt("Pack", 0)
 
 	for _, n := range n.Nodes {
 		tag := n.XMLName.Local
@@ -530,6 +536,10 @@ func (p *parser) parseParam(n *XMLNode) Param {
 	res.DerefPostCount = attrs.extractString("DerefPostCount")
 	res.DerefPostLength = attrs.extractString("DerefPostLength")
 	res.DerefCount = attrs.extractString("DerefCount")
+
+	// ignore this
+	attrs.extractString("DISABLED_InterfaceId")
+
 	attrs.mustEmpty()
 	return res
 }
@@ -564,19 +574,25 @@ func (p *parser) parseAPI(n *XMLNode) API {
 	var res API
 	res.Name = attrs.mustExtractString("Name")
 	res.VarArgs = attrs.extractBool("VarArgs")
-	res.Ordinal = attrs.extractInt("Ordinal", -1)
-	res.OrdinalA = attrs.extractInt("OrdinalA", -1)
-	res.OrdinalW = attrs.extractInt("OrdinalW", -1)
+	res.Ordinal = attrs.extractInt("Ordinal", 0)
+	res.OrdinalA = attrs.extractInt("OrdinalA", 0)
+	res.OrdinalW = attrs.extractInt("OrdinalW", 0)
 	res.BothCharsets = attrs.extractBool("BothCharset")
 	res.Discard = attrs.extractBool("Discard")
-	res.Disabled_Discard = attrs.extractBool("Disabled_Discard")
 	res.Display = attrs.extractString("Display")
+	res.ErrorFunc = attrs.extractString("ErrorFunc")
 	// SuffixA only has value of empty string
 	attr := attrs.extractByName("SuffixA")
 	if attr != nil {
 		panicIf(attr.Value != "")
 		res.NoSuffixA = true
 	}
+
+	// ignore this
+	attrs.extractBool("Disabled_Discard")
+	attrs.extractBool("ErrorIsReturnValue") // TODO: maybe support this
+	attrs.extractInt("MaxVarArgs", 0)       // TODO: maybe support this
+
 	attrs.mustEmpty()
 
 	for _, n := range n.Nodes {
@@ -739,6 +755,41 @@ func (p *parser) parseCondition(n *XMLNode) {
 	p.currVariables = prevVariables
 }
 
+func (p *parser) parseModuleCondition(n *XMLNode, m *Module) {
+	mustTag(n.XMLName.Local, "Condition")
+	attrs := NewAttrs(n)
+	arch := attrs.mustExtractInt("Architecture")
+	attrs.mustEmpty()
+
+	prevVariables := p.currVariables
+	switch arch {
+	case 32:
+		if m.Arch32 == nil {
+			m.Arch32 = &Variables{}
+		}
+		p.currVariables = m.Arch32
+	case 64:
+		if m.Arch64 == nil {
+			m.Arch64 = &Variables{}
+		}
+		p.currVariables = m.Arch64
+	default:
+		must(fmt.Errorf("unknown Architecture '%d'", arch))
+	}
+
+	for _, n := range n.Nodes {
+		tag := n.XMLName.Local
+		switch tag {
+		case "Variable":
+			p.parseVariable(n)
+		default:
+			must(fmt.Errorf("unuspported node:\n%s", n))
+		}
+	}
+
+	p.currVariables = prevVariables
+}
+
 func (p *parser) parseHeaders(n *XMLNode) {
 	mustTag(n.XMLName.Local, "Headers")
 	mustNoAttrs(n.Attrs, n)
@@ -761,9 +812,10 @@ func (p *parser) parseModule(n *XMLNode) *Module {
 	var res Module
 	attrs := NewAttrs(n)
 	res.Name = attrs.mustExtractString("Name")
-	res.CallingConvention = attrs.mustExtractString("CallingConvention")
+	res.CallingConvention = attrs.extractString("CallingConvention")
 	res.ErrorFunc = attrs.extractString("ErrorFunc")
 	res.OnlineHelp = attrs.extractString("OnlineHelp")
+	res.ErrorIsReturnValue = attrs.extractBool("ErrorIsReturnValue")
 	// discard Category
 	_ = attrs.extractString("Category")
 	res.Variables = &Variables{}
@@ -786,6 +838,8 @@ func (p *parser) parseModule(n *XMLNode) *Module {
 		case "ModuleAlias":
 			alias := p.parseModuleAlias(n)
 			res.Aliases = append(res.Aliases, alias)
+		case "Condition":
+			p.parseModuleCondition(n, &res)
 		case "ErrorDecode":
 			mustNoChildren(n)
 			// ignore

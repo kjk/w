@@ -111,11 +111,13 @@ func xmlWalk(nodes []*XMLNode, level int, f func(*XMLNode, int) bool) {
 }
 
 func mustNoAttrs(attrs []xml.Attr, n *XMLNode) {
-	if n != nil {
-		//panicIf(len(attrs) != 0, "unsupported attribute in node '%s'", xmlSerializeNode(n, 0))
-		panicIf(len(attrs) != 0, "unsupported attribute in node '%s'", n)
+	if len(attrs) == 0 {
+		return
+	}
+	if n == nil {
+		panicIf(len(attrs) != 0, "unsupported attribute '%s'", serAttributes(attrs))
 	} else {
-		panicIf(len(attrs) != 0, "unsupported attribute: '%s'", serAttributes(attrs))
+		panicIf(len(attrs) != 0, "unsupported attribute '%s' in node:\n%s", attrs[0].Name.Local, n)
 	}
 }
 
@@ -147,7 +149,7 @@ func NewAttrs(owner *XMLNode) *Attrs {
 
 func (a *Attrs) mustEmpty() {
 	if len(a.Attrs) > 0 {
-		s := a.Attrs[0].Name
+		s := a.Attrs[0].Name.Local
 		panicIf(true, "Unsupported attribute %s in node:\n%s", s, a.Owner)
 	}
 }

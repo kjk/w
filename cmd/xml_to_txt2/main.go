@@ -163,6 +163,15 @@ func serParam(p *xmldef.Param, indent int) {
 }
 
 func serVariable(v *xmldef.Variable, indent int) {
+	// fix what looks like a mistake in .xml definition
+	if v.Set != nil {
+		panicIf(v.Name != "FOURCC", "unsupported var with set for '%s'", v.Name)
+		v.Enum = &xmldef.Enum{
+			Set: v.Set,
+		}
+		v.Set = nil
+	}
+
 	tp := strings.ToLower(v.Type)
 	if tp == "alias" {
 		if v.Enum != nil {
@@ -201,18 +210,13 @@ func serVariable(v *xmldef.Variable, indent int) {
 	serSuccess(v.Success, indent+1)
 
 	if v.Enum != nil {
-		panicIf(v.Flag != nil || v.Set != nil, "both v.Enum and v.Flag set in %#v", v)
+		panicIf(v.Flag != nil, "both v.Enum and v.Flag set in %#v", v)
 		serSet(v.Enum.Set, indent+1)
 	}
 
 	if v.Flag != nil {
-		panicIf(v.Enum != nil || v.Set != nil, "both v.Enum and v.Flag set %#v", v)
+		panicIf(v.Enum != nil, "both v.Enum and v.Flag set %#v", v)
 		serSet(v.Flag.Set, indent+1)
-	}
-
-	if v.Set != nil {
-		panicIf(v.Enum != nil || v.Flag != nil, "v.Enum and v.Flag set %#v", v)
-		serSet(v.Set, indent+1)
 	}
 
 	switch tp {

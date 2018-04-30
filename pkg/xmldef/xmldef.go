@@ -124,9 +124,10 @@ type Enum struct {
 }
 
 type Set struct {
-	XMLName xml.Name `xml:"Set,omitempty" json:"Set,omitempty"`
-	Name    string   `xml:"Name,attr"  json:",omitempty"`
-	Value   string   `xml:"Value,attr"  json:",omitempty"`
+	XMLName  xml.Name `xml:"Set,omitempty" json:"Set,omitempty"`
+	Name     string   `xml:"Name,attr"  json:",omitempty"`
+	Value    string   `xml:"Value,attr"  json:",omitempty"`
+	ValueInt int
 }
 
 type Success struct {

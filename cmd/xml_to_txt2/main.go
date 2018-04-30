@@ -8,6 +8,8 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -229,7 +231,41 @@ func serFields(fields []*xmldef.Field) {
 	}
 }
 
+func toInt(s string) (int, bool) {
+	n, err := strconv.Atoi(s)
+	if err == nil {
+		return n, true
+	}
+	if !strings.HasPrefix(s, "0x") {
+		return 0, false
+	}
+	s = strings.TrimPrefix(s, "0x")
+	n2, err := strconv.ParseInt(s, 16, 64)
+	if err == nil {
+		return int(n2), true
+	}
+	return 0, false
+}
+
+func sortSet(set []*xmldef.Set) {
+	nFailed := 0
+	var ok bool
+	for _, st := range set {
+		st.ValueInt, ok = toInt(st.Value)
+		if !ok {
+			nFailed++
+		}
+	}
+	if nFailed > 1 {
+		return
+	}
+	sort.Slice(set, func(i, j int) bool {
+		return set[i].ValueInt < set[j].ValueInt
+	})
+}
+
 func serSet(set []*xmldef.Set, indent int) {
+	sortSet(set)
 	maxLen := 0
 	for _, s := range set {
 		if len(s.Name) > maxLen {

@@ -59,7 +59,7 @@ type Api struct {
 	Ordinal            string   `xml:"Ordinal,attr"  json:",omitempty"`
 	OrdinalA           string   `xml:"OrdinalA,attr"  json:",omitempty"`
 	OrdinalW           string   `xml:"OrdinalW,attr"  json:",omitempty"`
-	SuffixA            string   `xml:"SuffixA,attr"  json:",omitempty"`
+	SuffixA            *string  `xml:"SuffixA,attr"  json:",omitempty"`
 	VarArgs            string   `xml:"VarArgs,attr"  json:",omitempty"`
 	Param              []*Param `xml:"Param,omitempty" json:"Param,omitempty"`
 	Return             *Return  `xml:"Return,omitempty" json:"Return,omitempty"`

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -143,9 +144,23 @@ func serField(f *xmldef.Field) {
 	outf("  %s\n", args.String())
 }
 
-func serVariable(v *xmldef.Variable) {
-	panicIf(v.Success != nil, "Unexpected Sucess for %#v", v)
+func serParam(p *xmldef.Param, indent int) {
+	args := NewArgs(p.Name, escIfNeeded(p.Type))
+	args.AddNotEmpty("display", p.Display)
+	args.AddNotEmpty("interfaceId", p.InterfaceId)
+	args.AddNotEmpty("count", p.Count)
+	args.AddNotEmpty("length", p.Length)
+	args.AddNotEmpty("postCount", p.PostCount)
+	args.AddNotEmpty("postLength", p.PostLength)
+	args.AddNotEmpty("derefPostCount", p.DerefPostCount)
+	args.AddNotEmpty("derefPostLength", p.DerefPostLength)
+	args.AddNotEmpty("derefCount", p.DerefCount)
+	args.AddBool("outputOnly", p.OutputOnly)
+	indentStr := strings.Repeat("  ", indent)
+	outf("%s%s\n", indentStr, args.String())
+}
 
+func serVariable(v *xmldef.Variable, indent int) {
 	tp := strings.ToLower(v.Type)
 	if tp == "alias" {
 		if v.Enum != nil {
@@ -173,21 +188,29 @@ func serVariable(v *xmldef.Variable) {
 	args.AddNotEmpty("pack64", v.Pack64)
 	args.AddNotEmpty("size", v.Size)
 	args.AddBool("unsigned", v.Unsigned)
-	args.AddBool("displayhex", v.DisplayHex)
+	args.AddBool("displayHex", v.DisplayHex)
 	addDisplay(args, v.Display)
 	addFlag(args, v.Flag)
 	addEnum(args, v.Enum)
 
-	outf("%s\n", args.String())
+	indentStr := strings.Repeat("  ", indent)
+	outf("%s%s\n", indentStr, args.String())
+
+	serSuccess(v.Success, indent+1)
 
 	if v.Enum != nil {
-		panicIf(v.Flag != nil, "both v.Enum and v.Flag set in %#v", v)
-		serSet(v.Enum.Set)
+		panicIf(v.Flag != nil || v.Set != nil, "both v.Enum and v.Flag set in %#v", v)
+		serSet(v.Enum.Set, indent+1)
 	}
 
 	if v.Flag != nil {
-		panicIf(v.Enum != nil, "both v.Enum and v.Flag set %#v", v)
-		serSet(v.Flag.Set)
+		panicIf(v.Enum != nil || v.Set != nil, "both v.Enum and v.Flag set %#v", v)
+		serSet(v.Flag.Set, indent+1)
+	}
+
+	if v.Set != nil {
+		panicIf(v.Enum != nil || v.Flag != nil, "v.Enum and v.Flag set %#v", v)
+		serSet(v.Set, indent+1)
 	}
 
 	switch tp {
@@ -206,17 +229,19 @@ func serFields(fields []*xmldef.Field) {
 	}
 }
 
-func serSet(set []*xmldef.Set) {
+func serSet(set []*xmldef.Set, indent int) {
 	maxLen := 0
 	for _, s := range set {
 		if len(s.Name) > maxLen {
 			maxLen = len(s.Name)
 		}
 	}
+
 	for _, s := range set {
 		nSpaces := maxLen - len(s.Name)
 		spaces := strings.Repeat(" ", nSpaces)
-		fmt.Printf("  %s %s%s\n", s.Name, spaces, s.Value)
+		indentStr := strings.Repeat("  ", indent)
+		outf("%s%s %s%s\n", indentStr, s.Name, spaces, s.Value)
 	}
 }
 
@@ -224,7 +249,7 @@ func addEnum(args *Args, e *xmldef.Enum) {
 	if e == nil {
 		return
 	}
-	args.AddNotEmpty("defaultname", e.DefaultName)
+	args.AddNotEmpty("defaultName", e.DefaultName)
 	args.AddBool("reset", e.Reset)
 }
 
@@ -238,7 +263,7 @@ func addFlag(args *Args, f *xmldef.Flag) {
 func serCondition(c *xmldef.Condition) {
 	outf("arch %s\n", c.Architecture)
 	for _, v := range c.Variable {
-		serVariable(v)
+		serVariable(v, 0)
 	}
 	outf("arch off\n")
 }
@@ -255,12 +280,12 @@ func serHeaders(h *xmldef.Headers) {
 	}
 	outf("header\n")
 	serConditions(h.Condition)
-	serVariables(h.Variable)
+	serVariables(h.Variable, 0)
 }
 
-func serVariables(vars []*xmldef.Variable) {
+func serVariables(vars []*xmldef.Variable, indent int) {
 	for _, v := range vars {
-		serVariable(v)
+		serVariable(v, indent)
 	}
 }
 
@@ -274,41 +299,89 @@ func serIncludes(includes []*xmldef.Include) {
 	outf("\n")
 }
 
-/* TODO:
-Category           string          `xml:"Category,attr"  json:",omitempty"`
-ErrorFunc          string          `xml:"ErrorFunc,attr"  json:",omitempty"`
-OnlineHelp         string          `xml:"OnlineHelp,attr"  json:",omitempty"`
-
-Categories         []*Category     `xml:"Category,omitempty" json:"Category,omitempty"`
-ErrorDecode        []*ErrorDecode  `xml:"ErrorDecode,omitempty" json:"ErrorDecode,omitempty"`
-ModuleAlias        []*ModuleAlias  `xml:"ModuleAlias,omitempty" json:"ModuleAlias,omitempty"`
-SourceModule       []*SourceModule `xml:"SourceModule,omitempty" json:"SourceModule,omitempty"`
-*/
 func serModule(m *xmldef.Module) {
 	args := NewArgs("dll", escIfNeeded(m.Name))
 	args.AddNotEmpty("callingConvention", m.CallingConvention)
+	args.AddNotEmpty("errorFunc", m.ErrorFunc)
 	args.AddBool("errorIsReturnValue", m.ErrorIsReturnValue)
+	args.AddNotEmpty("onlineHelp", m.OnlineHelp)
+	args.AddNotEmpty("category", m.Category)
 	outf("%s\n", args.String())
+	serModuleAlias(m.ModuleAlias)
+	serSourceModules(m.SourceModule)
+	serCategories(m.Categories)
+	serErrorDeocde(m.ErrorDecode)
 	serConditions(m.Condition)
-	serVariables(m.Variable)
-	serApis(m.Api)
+	serVariables(m.Variable, 0)
+	serApis(m.Api, 0)
 }
 
-func serApis(apis []*xmldef.Api) {
-	for _, api := range apis {
-		serApi(api)
+func serSourceModule(sm *xmldef.SourceModule) {
+	panicIf(sm.Name == "", "sm.Name is empty string in %#v", sm)
+	args := NewArgs("sourceModule", escIfNeeded(sm.Name))
+	args.AddNotEmpty("copy", sm.Copy)
+	args.AddNotEmpty("include", sm.Include)
+	outf("%s\n", args.String())
+	serApis(sm.Api, 0)
+}
+
+func serSourceModules(a []*xmldef.SourceModule) {
+	for _, sm := range a {
+		serSourceModule(sm)
 	}
 }
 
-/*
-	ErrorFunc          string   `xml:"ErrorFunc,attr"  json:",omitempty"`
-	ErrorIsReturnValue string   `xml:"ErrorIsReturnValue,attr"  json:",omitempty"`
+func serModuleAlias(a []*xmldef.ModuleAlias) {
+	for _, ma := range a {
+		args := NewArgs("moduleAlias", escIfNeeded(ma.Name))
+		outf("%s\n", args.String())
+	}
+}
 
-	Param              []*Param `xml:"Param,omitempty" json:"Param,omitempty"`
-	Return             *Return  `xml:"Return,omitempty" json:"Return,omitempty"`
-	Success            *Success `xml:"Success,omitempty" json:"Success,omitempty"`
-*/
-func serApi(api *xmldef.Api) {
+func serErrorDeocde(a []*xmldef.ErrorDecode) {
+	for _, ed := range a {
+		args := NewArgs("errorDecode")
+		args.AddNotEmpty("errorFunc", ed.ErrorFunc)
+		args.AddBool("errorIsReturnValue", ed.ErrorIsReturnValue)
+		// skip empty errorDecode
+		if len(args.a) > 1 {
+			outf("%s\n", args.String())
+		}
+	}
+}
+
+func serCategories(categories []*xmldef.Category) {
+	for _, c := range categories {
+		args := NewArgs("category", escIfNeeded(c.Name))
+		args.AddNotEmpty("onlineHelp", c.OnlineHelp)
+		outf("%s\n", args.String())
+	}
+}
+
+func serApis(apis []*xmldef.Api, indent int) {
+	for _, api := range apis {
+		serApi(api, indent)
+	}
+}
+
+func serInterface(i *xmldef.Interface) {
+	if i == nil {
+		return
+	}
+	args := NewArgs("ingterface", escIfNeeded(i.Name))
+
+	args.AddNotEmpty("base", i.BaseInterface)
+	args.AddNotEmpty("id", i.Id)
+	args.AddNotEmpty("errorFunc", i.ErrorFunc)
+	args.AddNotEmpty("onlineHelp", i.OnlineHelp)
+	args.AddNotEmpty("category", i.Category)
+	outf("%s\n", args.String())
+	serApis(i.Api, 1)
+	serVariables(i.Variable, 1)
+	outf("\n")
+}
+
+func serApi(api *xmldef.Api, indent int) {
 	args := NewArgs("func", escIfNeeded(api.Name))
 	args.AddNotEmpty("display", api.Display)
 	args.AddBool("bothCharset", api.BothCharset)
@@ -326,15 +399,49 @@ func serApi(api *xmldef.Api) {
 	}
 
 	args.AddBool("discard", api.Discard)
+	args.AddNotEmpty("errorFunc", api.ErrorFunc)
+	args.AddBool("errorIsReturnValue", api.ErrorIsReturnValue)
 	args.AddBool("varArgs", api.VarArgs)
 	args.AddNotEmpty("maxVarArgs", api.MaxVarArgs)
-	outf("%s\n", args.String())
-	// TODO: Return, Param, Success
+	indentStr := strings.Repeat("  ", indent)
+	outf("%s%s\n", indentStr, args.String())
+	serSuccess(api.Success, indent+1)
+	serReturn(api.Return, indent+1)
+	serParams(api.Param, indent+1)
+	outf("\n")
+}
+
+func serParams(params []*xmldef.Param, indent int) {
+	for _, p := range params {
+		serParam(p, indent)
+	}
+}
+
+func serReturn(r *xmldef.Return, indent int) {
+	if r == nil {
+		return
+	}
+	args := NewArgs(escIfNeeded(r.Type))
+	args.AddNotEmpty("display", r.Display)
+	indentStr := strings.Repeat("  ", indent)
+	outf("%s%s\n", indentStr, args.String())
+}
+
+func serSuccess(s *xmldef.Success, indent int) {
+	if s == nil {
+		return
+	}
+	args := NewArgs("success")
+	args.AddNotEmpty(s.Return, s.Value)
+	args.AddNotEmpty("errorFunc", s.ErrorFunc)
+	if len(args.a) == 1 {
+		return // skip sucess with no value
+	}
+	indentStr := strings.Repeat("  ", indent)
+	outf("%s%s\n", indentStr, args.String())
 }
 
 func toTxt(f *ParsedXmlFile) {
-	outf("File: %s\n", f.Name)
-
 	d := f.Data
 	// goes first as it's logically needed first
 	serIncludes(d.Include)
@@ -344,54 +451,63 @@ func toTxt(f *ParsedXmlFile) {
 	serHeaders(d.Headers)
 	// ignore d.HelpUrl
 	// d.Include was serialized above
-	//serInterface(d.Interface)
+	serInterface(d.Interface)
 	for _, m := range d.Module {
 		serModule(m)
 	}
 	// TODO: ensure exclusivity i.e. if Module then no Interface or Headers
 }
 
+func skipFile(path string) bool {
+	if strings.Contains(path, "Internal") {
+		return true
+	}
+	if strings.Contains(path, "MAPI") {
+		return true
+	}
+	if strings.Contains(path, "MMF") {
+		return true
+	}
+	if strings.Contains(path, "Mozilla") {
+		return true
+	}
+	if strings.Contains(path, "SMI") {
+		return true
+	}
+	if strings.Contains(path, "VSS") {
+		return true
+	}
+	return false
+}
+
+//  API/WMI/IWbemShutdown.xml => defs/WMI/IWbemShutdown.txt
+func convertFileName(path string) string {
+	s := strings.Replace(path, ".xml", ".txt", -1)
+	parts := strings.Split(s, "/")
+	parts[0] = "defs"
+	return filepath.Join(parts...)
+}
+
+func createDirForPath(path string) {
+	dir := filepath.Dir(path)
+	err := os.MkdirAll(dir, 0755)
+	must(err)
+}
+
 func allToTxt() {
-	nShown := 0
 	for _, f := range parsedFiles {
-		if nShown >= 3 {
+		if skipFile(f.Name) {
 			continue
 		}
-		if strings.Contains(f.Name, "Headers") {
-			continue
-		}
-		if strings.Contains(f.Name, "Interfaces") {
-			continue
-		}
-		if strings.Contains(f.Name, "Internal") {
-			continue
-		}
-		if strings.Contains(f.Name, "MAPI") {
-			continue
-		}
-		if strings.Contains(f.Name, "Microsoft.NET") {
-			continue
-		}
-		if strings.Contains(f.Name, "MMF") {
-			continue
-		}
-		if strings.Contains(f.Name, "Mozilla") {
-			continue
-		}
-		if strings.Contains(f.Name, "SMI") {
-			continue
-		}
-		if strings.Contains(f.Name, "VSS") {
-			continue
-		}
-		if strings.Contains(f.Name, "WindowsFirewall") {
-			continue
-		}
-		if strings.Contains(f.Name, "WindowsStore") {
-			continue
-		}
+		txtPath := convertFileName(f.Name)
+		fmt.Printf("%s => %s\n", f.Name, txtPath)
+		createDirForPath(txtPath)
+		outFile, err := os.Create(txtPath)
+		must(err)
+		out = outFile
 		toTxt(f)
-		nShown++
+		err = outFile.Close()
+		must(err)
 	}
 }
 

@@ -1,0 +1,15 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\DirectX\10\ID3D10EffectVariable.txt
+
+ingterface ID3D10EffectStringVariable base=ID3D10EffectVariable id={71417501-8DF9-4e0a-A78A-255F9756BAFF} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func GetString
+    HRESULT
+    ppString LPCSTR*
+
+  func GetStringArray
+    HRESULT
+    ppStrings LPCSTR* count=Count
+    Offset UINT
+    Count UINT
+
+

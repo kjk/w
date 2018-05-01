@@ -1,0 +1,33 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IRowsetCopyRows base=IUnknown id={0c733a6b-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func CloseSource
+    [OLEDB_HRESULT]
+    hSourceID HSOURCE
+
+  func CopyByHROWS
+    [OLEDB_HRESULT]
+    hSourceID HSOURCE
+    hReserved HCHAPTER
+    cRows DBROWCOUNT
+    rghRows "const HROW []" count=cRows
+    bFlags ULONG
+
+  func CopyRows
+    [OLEDB_HRESULT]
+    hSourceID HSOURCE
+    hReserved HCHAPTER
+    cRows DBROWCOUNT
+    bFlags ULONG
+    pcRowsCopied DBCOUNTITEM*
+
+  func DefineSource
+    [OLEDB_HRESULT]
+    pRowsetSource "const IRowset*"
+    cColIds "const DBORDINAL"
+    rgSourceColumns "const DB_LORDINAL []" count=cColIds
+    rgTargetColumns "const DB_LORDINAL []" count=cColIds
+    phSourceID HSOURCE*
+
+

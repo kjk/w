@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+ingterface IDXGIObject base=IUnknown id={aec22fb8-76f3-4639-9be0-28eb43a67a2e} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func SetPrivateData
+    HRESULT
+    Name REFGUID
+    DataSize UINT
+    pData "const void*" length=DataSize
+
+  func SetPrivateDataInterface
+    HRESULT
+    Name REFGUID
+    pUnknown "const IUnknown*"
+
+  func GetPrivateData
+    HRESULT
+    Name REFGUID
+    pDataSize UINT*
+    pData void*
+
+  func GetParent
+    HRESULT
+    riid REFIID
+    ppParent void** interfaceId=riid
+
+

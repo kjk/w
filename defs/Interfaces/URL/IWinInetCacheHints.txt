@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IWinInetCacheHints base=IUnknown id={DD1EC3B3-8391-4fdb-A9E6-347C3CAAA7DD} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func SetCacheExtension
+    HRESULT
+    pwzExt LPCWSTR
+    pszCacheFile LPVOID
+    pcbCacheFile DWORD*
+    pdwWinInetError DWORD*
+    pdwReserved DWORD*
+
+

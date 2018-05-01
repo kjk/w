@@ -1,0 +1,33 @@
+include Interfaces\IDispatch.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ADOError base=IDispatch id={00000500-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_Number
+    [OLEDB_HRESULT]
+    pl long*
+
+  func get_Source
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func get_Description
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func get_HelpFile
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func get_HelpContext
+    [OLEDB_HRESULT]
+    pl long*
+
+  func get_SQLState
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func get_NativeError
+    [OLEDB_HRESULT]
+    pl long*
+
+

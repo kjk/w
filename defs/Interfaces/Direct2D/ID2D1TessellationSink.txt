@@ -1,0 +1,13 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1TessellationSink base=IUnknown id={2cd906c1-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func AddTriangles
+    void
+    triangles "CONST D2D1_TRIANGLE*" count=trianglesCount
+    trianglesCount UINT32
+
+  func Close
+    [D2D_HRESULT]
+
+

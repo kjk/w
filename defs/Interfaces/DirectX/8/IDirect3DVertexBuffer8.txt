@@ -1,0 +1,18 @@
+include Interfaces\DirectX\8\IDirect3DResource8.txt
+
+ingterface IDirect3DVertexBuffer8 base=IDirect3DResource8 id={8AEEEAC7-05F9-44d4-B591-000B0DF1CB95} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/8"
+  func Lock
+    HRESULT
+    OffsetToLock UINT
+    SizeToLock UINT
+    ppbData BYTE**
+    Flags DWORD
+
+  func Unlock
+    HRESULT
+
+  func GetDesc
+    HRESULT
+    pDesc D3DVERTEXBUFFER_DESC*
+
+

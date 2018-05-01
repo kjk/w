@@ -1,0 +1,30 @@
+include Headers\windows.h.txt
+
+dll Nlsdl.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Application UI Development/Internationalization for Windows Applications/Globalization Services/National Language Support"
+func DownlevelGetParentLocaleLCID
+  success NotEqual=0
+  LCID
+  Locale LCID
+
+func DownlevelGetParentLocaleName
+  success NotEqual=0
+  int
+  Locale LCID
+  lpName LPWSTR outputOnly
+  cchName int
+
+func DownlevelLCIDToLocaleName
+  success NotEqual=0
+  int
+  Locale LCID
+  lpName LPWSTR outputOnly
+  cchName int
+  dwFlags DWORD
+
+func DownlevelLocaleNameToLCID
+  success NotEqual=0
+  LCID
+  lpName LPWSTR
+  dwFlags DWORD
+

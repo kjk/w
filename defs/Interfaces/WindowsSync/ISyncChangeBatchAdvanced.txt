@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncChangeBatchAdvanced base=IUnknown id={0f1a4995-cbc8-421d-b550-5d0bebf3e9a5} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetFilterInfo
+    HRESULT
+    ppFilterInfo ISyncFilterInfo**
+
+  func ConvertFullEnumerationChangeBatchToRegularChangeBatch
+    HRESULT
+    ppChangeBatch ISyncChangeBatch**
+
+  func GetUpperBoundItemId
+    HRESULT
+    pbItemId BYTE*
+    pcbIdSize DWORD*
+
+  func GetBatchLevelKnowledgeShouldBeApplied
+    HRESULT
+    pfBatchKnowledgeShouldBeApplied BOOL*
+
+

@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAsyncOperation base=IUnknown id={3D8B0590-F691-11d2-8EA9-006097DF5BD4} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetAsyncMode
+    HRESULT
+    fDoOpAsync BOOL
+
+  func GetAsyncMode
+    HRESULT
+    pfIsOpAsync BOOL*
+
+  func StartOperation
+    HRESULT
+    pbcReserved IBindCtx*
+
+  func InOperation
+    HRESULT
+    pfInAsyncOp BOOL*
+
+  func EndOperation
+    HRESULT
+    hResult HRESULT
+    pbcReserved IBindCtx*
+    dwEffects DWORD
+
+

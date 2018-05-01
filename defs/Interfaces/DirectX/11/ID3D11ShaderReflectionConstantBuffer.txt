@@ -1,0 +1,18 @@
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11ShaderReflectionConstantBuffer id={EB62D63D-93DD-4318-8AE8-C6F83AD371B8} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Shader"
+  func GetDesc
+    HRESULT
+    pDesc D3D11_SHADER_BUFFER_DESC*
+
+  func GetVariableByIndex
+    success NotEqual=0
+    ID3D11ShaderReflectionVariable*
+    Index UINT
+
+  func GetVariableByName
+    success NotEqual=0
+    ID3D11ShaderReflectionVariable*
+    Name LPCSTR
+
+

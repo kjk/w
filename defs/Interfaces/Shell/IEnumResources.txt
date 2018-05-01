@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumResources base=IUnknown id={2dd81fe3-a83c-4da9-a330-47249d345ba1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Next
+    HRESULT
+    celt ULONG
+    psir SHELL_ITEM_RESOURCE* postCount=pceltFetched
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppenumr IEnumResources**
+
+

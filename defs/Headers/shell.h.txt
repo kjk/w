@@ -1,0 +1,2508 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+include Headers\registry.h.txt
+
+header
+interface DFConstraint
+
+interface DShellFolderViewEvents
+
+interface Folder
+
+interface Folder2
+
+interface Folder3
+
+interface FolderItem
+
+interface FolderItem2
+
+interface FolderItems
+
+interface FolderItems2
+
+interface FolderItems3
+
+interface FolderItemVerb
+
+interface FolderItemVerbs
+
+interface IAccessibilityDockingService
+
+interface IAccessibilityDockingServiceCallback
+
+interface IAccessibleObject
+
+interface IACList
+
+interface IACList2
+
+interface IActionProgress
+
+interface IActionProgressDialog
+
+interface IActiveDesktop
+
+interface IActiveDesktopP
+
+interface IADesktopP2
+
+interface IApplicationActivationManager
+
+interface IApplicationAssociationRegistration
+
+interface IApplicationAssociationRegistrationUI
+
+interface IApplicationDesignModeSettings
+
+interface IApplicationDestinations
+
+interface IApplicationDocumentLists
+
+interface IAppVisibility
+
+interface IAppVisibilityEvents
+
+interface IAssocHandler
+
+interface IAssocHandlerInvoker
+
+interface IAsyncOperation
+
+interface IAttachmentExecute
+
+interface IAutoComplete
+
+interface IAutoComplete2
+
+interface IAutoCompleteDropDown
+
+interface IBandHost
+
+interface IBandSite
+
+interface IBanneredBar
+
+interface IBrowserFrameOptions
+
+interface ICategorizer
+
+interface ICategoryProvider
+
+interface ICDBurn
+
+interface ICDBurnExt
+
+interface IColumnManager
+
+interface IColumnProvider
+
+interface ICommDlgBrowser
+
+interface ICommDlgBrowser2
+
+interface ICommDlgBrowser3
+
+interface IComputerInfoChangeNotify
+
+interface IContextMenu
+
+interface IContextMenu2
+
+interface IContextMenu3
+
+interface IContextMenuCB
+
+interface IContextMenuSite
+
+interface IControlMarkup
+
+interface ICopyHookA
+
+interface ICopyHookW
+
+interface ICreateObject
+
+interface ICurrentItem
+
+interface ICurrentWorkingDirectory
+
+interface ICustomDestinationList
+
+interface IDataObjectProvider
+
+interface IDataTransferManagerInterop
+
+interface IDefaultExtractIconInit
+
+interface IDefaultFolderMenuInitialize
+
+interface IDefViewFrame
+
+interface IDelayedPropertyStoreFactory
+
+interface IDelegateFolder
+
+interface IDelegateItem
+
+interface IDeskBand
+
+interface IDeskBand2
+
+interface IDeskBandInfo
+
+interface IDeskBar
+
+interface IDeskBarClient
+
+interface IDesktopGadget
+
+interface IDesktopWallpaper
+
+interface IDestinationStreamFactory
+
+interface IDisplayItem
+
+interface IDockingWindow
+
+interface IDockingWindowFrame
+
+interface IDockingWindowSite
+
+interface IDocViewSite
+
+interface IDragSourceHelper
+
+interface IDragSourceHelper2
+
+interface IDropTargetHelper
+
+interface IDynamicHWHandler
+
+interface IEmptyVolumeCache
+
+interface IEmptyVolumeCache2
+
+interface IEmptyVolumeCacheCallBack
+
+interface IEnumACString
+
+interface IEnumAssocHandlers
+
+interface IEnumerableView
+
+interface IEnumExplorerCommand
+
+interface IEnumExtraSearch
+
+interface IEnumFullIDList
+
+interface IEnumIDList
+
+interface IEnumObjects
+
+interface IEnumReadyCallback
+
+interface IEnumResources
+
+interface IEnumShellImageStore
+
+interface IEnumShellItems
+
+interface IExecuteCommand
+
+interface IExecuteCommandApplicationHostEnvironment
+
+interface IExecuteCommandHost
+
+interface IExplorerBrowser
+
+interface IExplorerBrowserEvents
+
+interface IExplorerCommand
+
+interface IExplorerCommandProvider
+
+interface IExplorerCommandState
+
+interface IExplorerPaneVisibility
+
+interface IExtractIconA
+
+interface IExtractIconW
+
+interface IExtractImage
+
+interface IExtractImage2
+
+interface IFileDialog
+
+interface IFileDialog2
+
+interface IFileDialogControlEvents
+
+interface IFileDialogCustomize
+
+interface IFileDialogEvents
+
+interface IFileIsInUse
+
+interface IFileOpenDialog
+
+interface IFileOperation
+
+interface IFileOperationProgressSink
+
+interface IFileSaveDialog
+
+interface IFileSearchBand
+
+interface IFileSystemBindData
+
+interface IFileSystemBindData2
+
+interface IFileViewerSite
+
+interface IFolderBandPriv
+
+interface IFolderFilter
+
+interface IFolderFilterSite
+
+interface IFolderView
+
+interface IFolderView2
+
+interface IFolderViewHost
+
+interface IFolderViewOC
+
+interface IFolderViewOptions
+
+interface IFolderViewSettings
+
+interface IFrameworkInputPane
+
+interface IFrameworkInputPaneHandler
+
+interface IHandlerActivationHost
+
+interface IHandlerInfo
+
+interface IHomeGroup
+
+interface IHWEventHandler
+
+interface IHWEventHandler2
+
+interface IIdentityName
+
+interface IImageRecompress
+
+interface IInitializeCommand
+
+interface IInitializeNetworkFolder
+
+interface IInitializeObject
+
+interface IInitializeWithBindCtx
+
+interface IInitializeWithFile
+
+interface IInitializeWithItem
+
+interface IInitializeWithPropertyStore
+
+interface IInitializeWithStream
+
+interface IInitializeWithWindow
+
+interface IInputObject
+
+interface IInputObject2
+
+interface IInputObjectSite
+
+interface IInputPanelConfiguration
+
+interface IInputPanelInvocationConfiguration
+
+interface IInsertItem
+
+interface IIOCancelInformation
+
+interface IItemNameLimits
+
+interface IKnownFolder
+
+interface IKnownFolderManager
+
+interface IMarkupCallback
+
+interface IMenuBand
+
+interface IMenuPopup
+
+interface IModalWindow
+
+interface INamedPropertyBag
+
+interface INamedPropertyStore
+
+interface INameSpaceTreeAccessible
+
+interface INameSpaceTreeControl
+
+interface INameSpaceTreeControl2
+
+interface INameSpaceTreeControlCustomDraw
+
+interface INameSpaceTreeControlDropHandler
+
+interface INameSpaceTreeControlEvents
+
+interface INameSpaceTreeControlFolderCapabilities
+
+interface INamespaceWalk
+
+interface INamespaceWalkCB
+
+interface INamespaceWalkCB2
+
+interface INewMenuClient
+
+interface INewShortcutHookA
+
+interface INewShortcutHookW
+
+interface INewWDEvents
+
+interface INewWindowManager
+
+interface IObjectArray
+
+interface IObjectCollection
+
+interface IObjectProvider
+
+interface IObjectWithAppUserModelID
+
+interface IObjectWithBackReferences
+
+interface IObjectWithCancelEvent
+
+interface IObjectWithFolderEnumMode
+
+interface IObjectWithProgID
+
+interface IObjectWithPropertyKey
+
+interface IObjectWithSelection
+
+interface IObjMgr
+
+interface IOpenControlPanel
+
+interface IOpenSearchSource
+
+interface IOperationsProgressDialog
+
+interface IPackageDebugSettings
+
+interface IPackageExecutionStateChangeNotification
+
+interface IParentAndItem
+
+interface IParseAndCreateItem
+
+interface IPersistFolder
+
+interface IPersistFolder2
+
+interface IPersistFolder3
+
+interface IPersistIDList
+
+interface IPersistSerializedPropStorage
+
+interface IPersistSerializedPropStorage2
+
+interface IPlaybackManager
+
+interface IPlaybackManagerEvents
+
+interface IPreviewHandler
+
+interface IPreviewHandlerFrame
+
+interface IPreviewHandlerVisuals
+
+interface IPreviewItem
+
+interface IPreviousVersionsInfo
+
+interface IProfferService
+
+interface IProgressDialog
+
+interface IPropertySystemChangeNotify
+
+interface IPublishingWizard
+
+interface IQueryAssociations
+
+interface IQueryCancelAutoPlay
+
+interface IQueryCodePage
+
+interface IQueryContinue
+
+interface IQueryInfo
+
+interface IRegTreeItem
+
+interface IRelatedItem
+
+interface IRemoteComputer
+
+interface IResolveShellLink
+
+interface IResultsFolder
+
+interface IRunnableTask
+
+interface ISearchableApplication
+
+interface ISearchBoxInfo
+
+interface ISearchContext
+
+interface ISearchFolderItemFactory
+
+interface ISharedBitmap
+
+interface ISharingConfigurationManager
+
+interface IShellBrowser
+
+interface IShellChangeNotify
+
+interface IShellDetails
+
+interface IShellDispatch
+
+interface IShellDispatch2
+
+interface IShellDispatch3
+
+interface IShellDispatch4
+
+interface IShellDispatch5
+
+interface IShellExecuteHookA
+
+interface IShellExecuteHookW
+
+interface IShellExtInit
+
+interface IShellFolder
+
+interface IShellFolder2
+
+interface IShellFolderBand
+
+interface IShellFolderView
+
+interface IShellFolderViewCB
+
+interface IShellFolderViewDual
+
+interface IShellFolderViewDual2
+
+interface IShellFolderViewDual3
+
+interface IShellIcon
+
+interface IShellIconOverlay
+
+interface IShellIconOverlayIdentifier
+
+interface IShellIconOverlayManager
+
+interface IShellImageData
+
+interface IShellImageDataAbort
+
+interface IShellImageDataFactory
+
+interface IShellImageStore
+
+interface IShellItem
+
+interface IShellItem2
+
+interface IShellItemArray
+
+interface IShellItemFilter
+
+interface IShellItemImageFactory
+
+interface IShellItemResources
+
+interface IShellLibrary
+
+interface IShellLinkA
+
+interface IShellLinkDataList
+
+interface IShellLinkDual
+
+interface IShellLinkDual2
+
+interface IShellLinkW
+
+interface IShellMenu
+
+interface IShellMenuCallback
+
+interface IShellPropSheetExt
+
+interface IShellRunDll
+
+interface IShellTaskScheduler
+
+interface IShellView
+
+interface IShellView2
+
+interface IShellView3
+
+interface IStartMenuPinnedList
+
+interface IStreamAsync
+
+interface IStreamUnbufferedInfo
+
+interface ITaskbarList
+
+interface ITaskbarList2
+
+interface ITaskbarList3
+
+interface ITaskbarList4
+
+interface IThumbnailCache
+
+interface IThumbnailCachePrimer
+
+interface IThumbnailCapture
+
+interface IThumbnailHandlerFactory
+
+interface IThumbnailProvider
+
+interface IThumbnailSettings
+
+interface ITranscodeImage
+
+interface ITransferAdviseSink
+
+interface ITransferDestination
+
+interface ITransferMediumItem
+
+interface ITransferSource
+
+interface ITrayDeskBand
+
+interface IUpdateIDList
+
+interface IURLSearchHook
+
+interface IURLSearchHook2
+
+interface IUserAccountChangeCallback
+
+interface IUserNotification
+
+interface IUserNotification2
+
+interface IUserNotificationCallback
+
+interface IUseToBrowseItem
+
+interface IViewStateIdentityItem
+
+interface IVisualProperties
+
+interface IWebWizardExtension
+
+interface IWebWizardHost
+
+interface IWizardExtension
+
+interface IWizardSite
+
+interface IObjectArray
+
+interface IEnumGUID
+
+interface IPropertyChangeArray
+
+interface IXMLDOMDocument
+
+interface ICondition
+
+interface IPropertyDescriptionList
+
+interface IPropertyStore
+
+alias HDWP HANDLE
+
+pointer HDWP* HDWP
+
+alias SHELLVIEWID GUID
+
+pointer SHELLVIEWID* SHELLVIEWID
+
+alias "const SHELLVIEWID*" SHELLVIEWID*
+
+alias KNOWNFOLDERID GUID
+
+pointer KNOWNFOLDERID* KNOWNFOLDERID
+
+pointer "const KNOWNFOLDERID*" KNOWNFOLDERID
+
+pointer KNOWNFOLDERID** KNOWNFOLDERID*
+
+pointer REFKNOWNFOLDERID KNOWNFOLDERID
+
+alias TASKOWNERID GUID
+
+pointer REFTASKOWNERID TASKOWNERID
+
+alias FOLDERTYPEID GUID
+
+pointer FOLDERTYPEID* FOLDERTYPEID
+
+pointer REFFOLDERTYPEID FOLDERTYPEID
+
+alias EXPLORERPANE GUID
+
+pointer REFEXPLORERPANE EXPLORERPANE
+
+alias DEPRECATED_HRESULT HRESULT
+
+alias LPFNSVADDPROPSHEETPAGE LPARAM
+
+alias LPTBBUTTONSB LPARAM
+
+alias HTHEME HANDLE
+
+pointer HTHEME* HTHEME
+
+alias SHCOLUMNID PROPERTYKEY
+
+pointer SHCOLUMNID* SHCOLUMNID
+
+pointer LPCSHCOLUMNID SHCOLUMNID
+
+pointer "const SHCOLUMNID*" SHCOLUMNID
+
+alias BFFCALLBACK LPVOID
+
+alias DATE double
+
+pointer DATE* DATE
+
+alias Image BYTE
+
+pointer Image* Image
+
+pointer Image** Image*
+
+array "WCHAR [80]" base=WCHAR count=80
+
+array "WCHAR [2084]" base=WCHAR count=2084
+
+struct PREVIEWHANDLERFRAMEINFO
+  haccel HACCEL
+  cAccelEntries UINT
+
+pointer PREVIEWHANDLERFRAMEINFO* PREVIEWHANDLERFRAMEINFO
+
+struct SHITEMID pack=1
+  cb USHORT
+  abID "BYTE [1]" count=cb
+
+pointer LPSHITEMID SHITEMID
+
+struct ITEMIDLIST pack=1
+  mkid SHITEMID
+
+pointer ITEMIDLIST* ITEMIDLIST
+
+pointer LPITEMIDLIST ITEMIDLIST
+
+pointer LPCITEMIDLIST ITEMIDLIST
+
+pointer PIDLIST_ABSOLUTE ITEMIDLIST
+
+pointer PIDLIST_ABSOLUTE* PIDLIST_ABSOLUTE
+
+pointer PIDLIST_ABSOLUTE** PIDLIST_ABSOLUTE*
+
+pointer PCIDLIST_ABSOLUTE ITEMIDLIST
+
+pointer PIDLIST_RELATIVE ITEMIDLIST
+
+pointer PUIDLIST_RELATIVE ITEMIDLIST
+
+pointer PIDLIST_RELATIVE* PIDLIST_RELATIVE
+
+pointer PCUIDLIST_RELATIVE ITEMIDLIST
+
+pointer PUITEMID_CHILD ITEMIDLIST
+
+pointer PITEMID_CHILD ITEMIDLIST
+
+pointer PITEMID_CHILD* PITEMID_CHILD
+
+pointer PCUITEMID_CHILD ITEMIDLIST
+
+pointer PCUITEMID_CHILD* PCUITEMID_CHILD
+
+pointer PCUITEMID_CHILD** PCUITEMID_CHILD*
+
+pointer PCUITEMID_CHILD_ARRAY PCUITEMID_CHILD
+
+pointer PCUITEMID_CHILD_ARRAY* PCUITEMID_CHILD_ARRAY
+
+pointer PCUIDLIST_RELATIVE_ARRAY PCUIDLIST_RELATIVE
+
+pointer PCIDLIST_ABSOLUTE_ARRAY PCIDLIST_ABSOLUTE
+
+flag STRRET_TYPE UINT display=UINT
+  STRRET_WSTR   0
+  STRRET_OFFSET 0x1
+  STRRET_CSTR   0x2
+
+union [STRRET_u] pack=8 display=union
+  pOleStr LPWSTR
+  uOffset UINT
+  cStr "char [260]"
+
+struct STRRET pack=8
+  uType STRRET_TYPE
+   [STRRET_u]
+
+pointer STRRET* STRRET
+
+pointer LPSTRRET STRRET
+
+flag [SHELLDETAILS_fmt] UINT display=int
+  LVCFMT_LEFT           0x0000
+  LVCFMT_RIGHT          0x0001
+  LVCFMT_CENTER         0x0002
+  LVCFMT_COL_HAS_IMAGES 0x8000
+
+struct SHELLDETAILS
+  fmt [SHELLDETAILS_fmt]
+  cxChar int
+  str STRRET
+
+pointer SHELLDETAILS* SHELLDETAILS
+
+flag [CSIDL] UINT display=int
+  CSIDL_COMMON_PROGRAMS         0X0017
+  CSIDL_DESKTOP                 0x0000
+  CSIDL_INTERNET                0x0001
+  CSIDL_PROGRAMS                0x0002
+  CSIDL_CONTROLS                0x0003
+  CSIDL_PRINTERS                0x0004
+  CSIDL_MYDOCUMENTS             0x0005
+  CSIDL_FAVORITES               0x0006
+  CSIDL_STARTUP                 0x0007
+  CSIDL_RECENT                  0x0008
+  CSIDL_SENDTO                  0x0009
+  CSIDL_BITBUCKET               0x000a
+  CSIDL_STARTMENU               0x000b
+  CSIDL_MYMUSIC                 0x000d
+  CSIDL_MYVIDEO                 0x000e
+  CSIDL_DESKTOPDIRECTORY        0x0010
+  CSIDL_DRIVES                  0x0011
+  CSIDL_NETWORK                 0x0012
+  CSIDL_NETHOOD                 0x0013
+  CSIDL_FONTS                   0x0014
+  CSIDL_TEMPLATES               0x0015
+  CSIDL_COMMON_STARTMENU        0x0016
+  CSIDL_COMMON_STARTUP          0x0018
+  CSIDL_COMMON_DESKTOPDIRECTORY 0x0019
+  CSIDL_APPDATA                 0x001a
+  CSIDL_PRINTHOOD               0x001b
+  CSIDL_LOCAL_APPDATA           0x001c
+  CSIDL_ALTSTARTUP              0x001d
+  CSIDL_COMMON_ALTSTARTUP       0x001e
+  CSIDL_COMMON_FAVORITES        0x001f
+  CSIDL_INTERNET_CACHE          0x0020
+  CSIDL_COOKIES                 0x0021
+  CSIDL_HISTORY                 0x0022
+  CSIDL_COMMON_APPDATA          0x0023
+  CSIDL_WINDOWS                 0x0024
+  CSIDL_SYSTEM                  0x0025
+  CSIDL_PROGRAM_FILES           0x0026
+  CSIDL_MYPICTURES              0x0027
+  CSIDL_PROFILE                 0x0028
+  CSIDL_SYSTEMX86               0x0029
+  CSIDL_PROGRAM_FILESX86        0x002a
+  CSIDL_PROGRAM_FILES_COMMON    0x002b
+  CSIDL_PROGRAM_FILES_COMMONX86 0x002c
+  CSIDL_COMMON_TEMPLATES        0x002d
+  CSIDL_COMMON_DOCUMENTS        0x002e
+  CSIDL_COMMON_ADMINTOOLS       0x002f
+  CSIDL_ADMINTOOLS              0x0030
+  CSIDL_CONNECTIONS             0x0031
+  CSIDL_COMMON_MUSIC            0x0035
+  CSIDL_COMMON_PICTURES         0x0036
+  CSIDL_COMMON_VIDEO            0x0037
+  CSIDL_RESOURCES               0x0038
+  CSIDL_RESOURCES_LOCALIZED     0x0039
+  CSIDL_COMMON_OEM_LINKS        0x003a
+  CSIDL_CDBURN_AREA             0x003b
+  CSIDL_COMPUTERSNEARME         0x003d
+  CSIDL_FLAG_PER_USER_INIT      0x0800
+  CSIDL_FLAG_NO_ALIAS           0x1000
+  CSIDL_FLAG_DONT_UNEXPAND      0x2000
+  CSIDL_FLAG_DONT_VERIFY        0x4000
+  CSIDL_FLAG_CREATE             0x8000
+
+struct PERSIST_FOLDER_TARGET_INFO pack=8
+  pidlTargetFolder PIDLIST_ABSOLUTE
+  szTargetParsingName "WCHAR [260]"
+  szNetworkProvider "WCHAR [260]"
+  dwAttributes [FileAttributes]
+  csidl [CSIDL]
+
+pointer PERSIST_FOLDER_TARGET_INFO* PERSIST_FOLDER_TARGET_INFO
+
+pointer "const PERSIST_FOLDER_TARGET_INFO*" PERSIST_FOLDER_TARGET_INFO
+
+struct SHELL_ITEM_RESOURCE
+  guidType GUID
+  szName "WCHAR [260]"
+
+pointer SHELL_ITEM_RESOURCE* SHELL_ITEM_RESOURCE
+
+pointer "const SHELL_ITEM_RESOURCE*" SHELL_ITEM_RESOURCE
+
+flag CM_MASK DWORD display=DWORD
+  CM_MASK_WIDTH        0x1
+  CM_MASK_DEFAULTWIDTH 0x2
+  CM_MASK_IDEALWIDTH   0x4
+  CM_MASK_NAME         0x8
+  CM_MASK_STATE        0x10
+
+flag CM_STATE DWORD display=DWORD
+  CM_STATE_NONE               0
+  CM_STATE_VISIBLE            0x1
+  CM_STATE_FIXEDWIDTH         0x2
+  CM_STATE_NOSORTBYFOLDERNESS 0x4
+  CM_STATE_ALWAYSVISIBLE      0x8
+
+enum CM_SET_WIDTH_VALUE UINT display=UINT
+  CM_WIDTH_AUTOSIZE   -2
+  CM_WIDTH_USEDEFAULT -1
+
+struct CM_COLUMNINFO
+  cbSize DWORD
+  dwMask CM_MASK
+  dwState CM_STATE
+  uWidth UINT
+  uDefaultWidth CM_SET_WIDTH_VALUE
+  uIdealWidth UINT
+  wszName "WCHAR [80]"
+
+pointer CM_COLUMNINFO* CM_COLUMNINFO
+
+pointer "const CM_COLUMNINFO*" CM_COLUMNINFO
+
+flag CATEGORYINFO_FLAGS UINT
+  CATINFO_NORMAL         0
+  CATINFO_COLLAPSED      0x1
+  CATINFO_HIDDEN         0x2
+  CATINFO_EXPANDED       0x4
+  CATINFO_NOHEADER       0x8
+  CATINFO_NOTCOLLAPSIBLE 0x10
+  CATINFO_NOHEADERCOUNT  0x20
+  CATINFO_SUBSETTED      0x40
+
+struct CATEGORY_INFO
+  cif CATEGORYINFO_FLAGS
+  wszName "WCHAR [260]"
+
+pointer CATEGORY_INFO* CATEGORY_INFO
+
+flag [DBIM] DWORD display=DWORD
+  DBIM_MINSIZE   0x0001
+  DBIM_MAXSIZE   0x0002
+  DBIM_INTEGRAL  0x0004
+  DBIM_ACTUAL    0x0008
+  DBIM_TITLE     0x0010
+  DBIM_MODEFLAGS 0x0020
+  DBIM_BKCOLOR   0x0040
+
+flag [DBIMF] DWORD display=DWORD
+  DBIMF_NORMAL         0x0000
+  DBIMF_FIXED          0x0001
+  DBIMF_FIXEDBMP       0x0004
+  DBIMF_VARIABLEHEIGHT 0x0008
+  DBIMF_UNDELETEABLE   0x0010
+  DBIMF_DEBOSSED       0x0020
+  DBIMF_BKCOLOR        0x0040
+  DBIMF_USECHEVRON     0x0080
+  DBIMF_BREAK          0x0100
+  DBIMF_ADDTOFRONT     0x0200
+  DBIMF_TOPALIGN       0x0400
+  DBIMF_NOGRIPPER      0x0800
+  DBIMF_ALWAYSGRIPPER  0x1000
+  DBIMF_NOMARGINS      0x2000
+
+struct DESKBANDINFO pack=8
+  dwMask [DBIM]
+  ptMinSize POINTL
+  ptMaxSize POINTL
+  ptIntegral POINTL
+  ptActual POINTL
+  wszTitle "WCHAR [256]"
+  dwModeFlags [DBIMF]
+  crBkgnd COLORREF
+
+pointer DESKBANDINFO* DESKBANDINFO
+
+struct EXTRASEARCH
+  guidSearch GUID
+  wszFriendlyName "WCHAR [80]"
+  wszUrl "WCHAR [2084]"
+
+pointer EXTRASEARCH* EXTRASEARCH
+
+flag THUMBBUTTONFLAGS DWORD display=DWORD
+  THBF_ENABLED        0
+  THBF_DISABLED       0x1
+  THBF_DISMISSONCLICK 0x2
+  THBF_NOBACKGROUND   0x4
+  THBF_HIDDEN         0x8
+  THBF_NONINTERACTIVE 0x10
+
+flag THUMBBUTTONMASK DWORD display=DWORD
+  THB_BITMAP  0x1
+  THB_ICON    0x2
+  THB_TOOLTIP 0x4
+  THB_FLAGS   0x8
+
+struct THUMBBUTTON pack=8
+  dwMask THUMBBUTTONMASK
+  iId UINT
+  iBitmap UINT
+  hIcon HICON
+  szTip "WCHAR [260]"
+  dwFlags THUMBBUTTONFLAGS
+
+pointer LPTHUMBBUTTON THUMBBUTTON
+
+flag NSTCITEMSTATE DWORD
+  NSTCIS_NONE             0
+  NSTCIS_SELECTED         0x1
+  NSTCIS_EXPANDED         0x2
+  NSTCIS_BOLD             0x4
+  NSTCIS_DISABLED         0x8
+  NSTCIS_SELECTEDNOEXPAND 0x10
+
+pointer NSTCITEMSTATE* NSTCITEMSTATE
+
+struct NSTCCUSTOMDRAW
+  psi IShellItem*
+  uItemState UINT
+  nstcis NSTCITEMSTATE
+  pszText LPCWSTR
+  iImage int
+  himl HIMAGELIST
+  iLevel int
+  iIndent int
+
+pointer NSTCCUSTOMDRAW* NSTCCUSTOMDRAW
+
+enum FOLDERVIEWMODE UINT
+  FVM_AUTO       -1
+  FVM_ICON       1
+  FVM_SMALLICON  2
+  FVM_LIST       3
+  FVM_DETAILS    4
+  FVM_THUMBNAIL  5
+  FVM_TILE       6
+  FVM_THUMBSTRIP 7
+  FVM_CONTENT    8
+
+pointer FOLDERVIEWMODE* FOLDERVIEWMODE
+
+flag FOLDERFLAGS UINT
+  FWF_NONE                0
+  FWF_AUTOARRANGE         0x1
+  FWF_ABBREVIATEDNAMES    0x2
+  FWF_SNAPTOGRID          0x4
+  FWF_OWNERDATA           0x8
+  FWF_BESTFITWINDOW       0x10
+  FWF_DESKTOP             0x20
+  FWF_SINGLESEL           0x40
+  FWF_NOSUBFOLDERS        0x80
+  FWF_TRANSPARENT         0x100
+  FWF_NOCLIENTEDGE        0x200
+  FWF_NOSCROLL            0x400
+  FWF_ALIGNLEFT           0x800
+  FWF_NOICONS             0x1000
+  FWF_SHOWSELALWAYS       0x2000
+  FWF_NOVISIBLE           0x4000
+  FWF_SINGLECLICKACTIVATE 0x8000
+  FWF_NOWEBVIEW           0x10000
+  FWF_HIDEFILENAMES       0x20000
+  FWF_CHECKSELECT         0x40000
+  FWF_NOENUMREFRESH       0x80000
+  FWF_NOGROUPING          0x100000
+  FWF_FULLROWSELECT       0x200000
+  FWF_NOFILTERS           0x400000
+  FWF_NOCOLUMNHEADER      0x800000
+  FWF_NOHEADERINALLVIEWS  0x1000000
+  FWF_EXTENDEDTILES       0x2000000
+  FWF_TRICHECKSELECT      0x4000000
+  FWF_AUTOCHECKSELECT     0x8000000
+  FWF_NOBROWSERVIEWSTATE  0x10000000
+  FWF_SUBSETGROUPS        0x20000000
+  FWF_USESEARCHFOLDER     0x40000000
+  FWF_ALLOWRTLREADING     0x80000000
+
+pointer FOLDERFLAGS* FOLDERFLAGS
+
+alias [FOLDERFLAGS_DWORD] FOLDERFLAGS display=DWORD
+
+pointer [FOLDERFLAGS_DWORD*] [FOLDERFLAGS_DWORD] display=DWORD*
+
+struct FOLDERSETTINGS
+  ViewMode FOLDERVIEWMODE display=UINT
+  fFlags FOLDERFLAGS display=UINT
+
+pointer LPFOLDERSETTINGS FOLDERSETTINGS
+
+pointer LPCFOLDERSETTINGS FOLDERSETTINGS
+
+pointer "const FOLDERSETTINGS*" FOLDERSETTINGS
+
+struct SV2CVW2_PARAMS
+  cbSize DWORD
+  psvPrev IShellView*
+  pfs LPCFOLDERSETTINGS
+  psbOwner IShellBrowser*
+  prcView RECT*
+  pvid "const SHELLVIEWID*"
+  hwndView HWND
+
+pointer LPSV2CVW2_PARAMS SV2CVW2_PARAMS
+
+enum KF_CATEGORY UINT
+  KF_CATEGORY_VIRTUAL 1
+  KF_CATEGORY_FIXED   2
+  KF_CATEGORY_COMMON  3
+  KF_CATEGORY_PERUSER 4
+
+pointer KF_CATEGORY* KF_CATEGORY
+
+flag KF_DEFINITION_FLAGS DWORD
+  KFDF_LOCAL_REDIRECT_ONLY 0x2
+  KFDF_ROAMABLE            0x4
+  KFDF_PRECREATE           0x8
+  KFDF_STREAM              0x10
+  KFDF_PUBLISHEXPANDEDPATH 0x20
+
+struct KNOWNFOLDER_DEFINITION
+  category KF_CATEGORY
+  pszName LPWSTR
+  pszDescription LPWSTR
+  fidParent KNOWNFOLDERID
+  pszRelativePath LPWSTR
+  pszParsingName LPWSTR
+  pszTooltip LPWSTR
+  pszLocalizedName LPWSTR
+  pszIcon LPWSTR
+  pszSecurity LPWSTR
+  dwAttributes DWORD
+  kfdFlags KF_DEFINITION_FLAGS
+  ftidType FOLDERTYPEID
+
+pointer KNOWNFOLDER_DEFINITION* KNOWNFOLDER_DEFINITION
+
+pointer "const KNOWNFOLDER_DEFINITION*" KNOWNFOLDER_DEFINITION
+
+enum SORTDIRECTION int
+  SORT_DESCENDING -1
+  SORT_ASCENDING  1
+
+struct SORTCOLUMN
+  propkey PROPERTYKEY
+  direction SORTDIRECTION
+
+pointer SORTCOLUMN* SORTCOLUMN
+
+pointer "const SORTCOLUMN*" SORTCOLUMN
+
+struct BANDSITEINFO pack=8
+  dwMask DWORD
+  dwState DWORD
+  dwStyle DWORD
+
+pointer BANDSITEINFO* BANDSITEINFO
+
+pointer "const BANDSITEINFO*" BANDSITEINFO
+
+flag [CMIC_Mask] DWORD display=DWORD
+  CMIC_MASK_ICON           0x00000010
+  CMIC_MASK_HOTKEY         0x00000020
+  CMIC_MASK_NOASYNC        0x00000100
+  CMIC_MASK_FLAG_NO_UI     0x00000400
+  CMIC_MASK_UNICODE        0x00004000
+  CMIC_MASK_NO_CONSOLE     0x00008000
+  CMIC_MASK_ASYNCOK        0x00100000
+  CMIC_MASK_NOZONECHECKS   0x00800000
+  CMIC_MASK_FLAG_LOG_USAGE 0x04000000
+  CMIC_MASK_SHIFT_DOWN     0x10000000
+  CMIC_MASK_PTINVOKE       0x20000000
+  CMIC_MASK_CONTROL_DOWN   0x40000000
+
+struct CMINVOKECOMMANDINFO pack=8
+  cbSize DWORD
+  fMask [CMIC_Mask]
+  hwnd HWND
+  lpVerb LPCSTR
+  lpParameters LPCSTR
+  lpDirectory LPCSTR
+  nShow [ShowWindowCmd]
+  dwHotKey DWORD
+  hIcon HANDLE
+
+pointer CMINVOKECOMMANDINFO* CMINVOKECOMMANDINFO
+
+struct SHDRAGIMAGE pack=8
+  sizeDragImage SIZE
+  ptOffset POINT
+  hbmpDragImage HBITMAP
+  crColorKey COLORREF
+
+pointer LPSHDRAGIMAGE SHDRAGIMAGE
+
+flag [SMDATA_Mask] DWORD display=DWORD
+  SMDM_SHELLFOLDER 0x00000001
+  SMDM_HMENU       0x00000002
+  SMDM_TOOLBAR     0x00000004
+
+struct SMDATA pack=8
+  dwMask [SMDATA_Mask]
+  dwFlags DWORD
+  hmenu HMENU
+  hwnd HWND
+  uId UINT
+  uIdParent UINT
+  uIdAncestor UINT
+  punk IUnknown*
+  pidlFolder PIDLIST_ABSOLUTE
+  pidlItem PUITEMID_CHILD
+  psf IShellFolder*
+  pvUserData void*
+
+pointer LPSMDATA SMDATA
+
+struct COMDLG_FILTERSPEC
+  pszName LPCWSTR
+  pszSpec LPCWSTR
+
+pointer "const COMDLG_FILTERSPEC*" COMDLG_FILTERSPEC
+
+enum FDAP UINT
+  FDAP_BOTTOM 0
+  FDAP_TOP    1
+
+flag SHCOLSTATEF DWORD
+  SHCOLSTATE_DEFAULT            0
+  SHCOLSTATE_TYPE_STR           0x1
+  SHCOLSTATE_TYPE_INT           0x2
+  SHCOLSTATE_TYPE_DATE          0x3
+  SHCOLSTATE_TYPEMASK           0xf
+  SHCOLSTATE_ONBYDEFAULT        0x10
+  SHCOLSTATE_SLOW               0x20
+  SHCOLSTATE_EXTENDED           0x40
+  SHCOLSTATE_SECONDARYUI        0x80
+  SHCOLSTATE_HIDDEN             0x100
+  SHCOLSTATE_PREFER_VARCMP      0x200
+  SHCOLSTATE_PREFER_FMTCMP      0x400
+  SHCOLSTATE_NOSORTBYFOLDERNESS 0x800
+  SHCOLSTATE_FIXED_WIDTH        0x1000
+  SHCOLSTATE_NODPISCALE         0x2000
+  SHCOLSTATE_FIXED_RATIO        0x4000
+  SHCOLSTATE_VIEWONLY           0x10000
+  SHCOLSTATE_BATCHREAD          0x20000
+  SHCOLSTATE_NO_GROUPBY         0x40000
+
+pointer SHCOLSTATEF* SHCOLSTATEF
+
+enum FVTEXTTYPE UINT
+  FVST_EMPTYTEXT 0
+
+enum SPACTION UINT
+  SPACTION_NONE               0
+  SPACTION_MOVING             1
+  SPACTION_COPYING            2
+  SPACTION_RECYCLING          3
+  SPACTION_APPLYINGATTRIBS    4
+  SPACTION_DOWNLOADING        5
+  SPACTION_SEARCHING_INTERNET 6
+  SPACTION_CALCULATING        7
+  SPACTION_UPLOADING          8
+  SPACTION_SEARCHING_FILES    9
+  SPACTION_DELETING           10
+  SPACTION_RENAMING           11
+  SPACTION_FORMATTING         12
+  SPACTION_COPY_MOVING        13
+
+flag SPBEGINF UINT
+  SPBEGINF_NORMAL          0
+  SPBEGINF_AUTOTIME        0x2
+  SPBEGINF_NOPROGRESSBAR   0x10
+  SPBEGINF_MARQUEEPROGRESS 0x20
+  SPBEGINF_NOCANCELBUTTON  0x40
+
+flag SPINITF UINT
+  SPINITF_NORMAL     0
+  SPINITF_MODAL      0x1
+  SPINITF_NOMINIMIZE 0x8
+
+enum ASSOCIATIONTYPE UINT
+  AT_FILEEXTENSION   0
+  AT_URLPROTOCOL     1
+  AT_STARTMENUCLIENT 2
+  AT_MIMETYPE        3
+
+enum APPDOCLISTTYPE UINT
+  ADLT_RECENT   0
+  ADLT_FREQUENT 1
+
+enum ATTACHMENT_PROMPT UINT
+  ATTACHMENT_PROMPT_NONE         0
+  ATTACHMENT_PROMPT_SAVE         0x1
+  ATTACHMENT_PROMPT_EXEC         0x2
+  ATTACHMENT_PROMPT_EXEC_OR_SAVE 0x3
+
+enum SPTEXT UINT
+  SPTEXT_ACTIONDESCRIPTION 1
+  SPTEXT_ACTIONDETAIL      2
+
+enum ASSOCIATIONLEVEL UINT
+  AL_MACHINE   0
+  AL_EFFECTIVE 1
+  AL_USER      2
+
+enum ATTACHMENT_ACTION UINT
+  ATTACHMENT_ACTION_CANCEL 0
+  ATTACHMENT_ACTION_SAVE   0x1
+  ATTACHMENT_ACTION_EXEC   0x2
+
+pointer ATTACHMENT_ACTION* ATTACHMENT_ACTION
+
+flag BROWSERFRAMEOPTIONS UINT
+  BFO_NONE                             0
+  BFO_BROWSER_PERSIST_SETTINGS         0x1
+  BFO_RENAME_FOLDER_OPTIONS_TOINTERNET 0x2
+  BFO_BOTH_OPTIONS                     0x4
+  BIF_PREFER_INTERNET_SHORTCUT         0x8
+  BFO_BROWSE_NO_IN_NEW_PROCESS         0x10
+  BFO_ENABLE_HYPERLINK_TRACKING        0x20
+  BFO_USE_IE_OFFLINE_SUPPORT           0x40
+  BFO_SUBSTITUE_INTERNET_START_PAGE    0x80
+  BFO_USE_IE_LOGOBANDING               0x100
+  BFO_ADD_IE_TOCAPTIONBAR              0x200
+  BFO_USE_DIALUP_REF                   0x400
+  BFO_USE_IE_TOOLBAR                   0x800
+  BFO_NO_PARENT_FOLDER_SUPPORT         0x1000
+  BFO_NO_REOPEN_NEXT_RESTART           0x2000
+  BFO_GO_HOME_PAGE                     0x4000
+  BFO_PREFER_IEPROCESS                 0x8000
+  BFO_SHOW_NAVIGATION_CANCELLED        0x10000
+  BFO_USE_IE_STATUSBAR                 0x20000
+  BFO_QUERY_ALL                        0xffffffff
+
+pointer BROWSERFRAMEOPTIONS* BROWSERFRAMEOPTIONS
+
+flag CDBE_ACTIONS UINT
+  CDBE_TYPE_MUSIC 0x1
+  CDBE_TYPE_DATA  0x2
+  CDBE_TYPE_ALL   0xffffffff
+
+pointer CDBE_ACTIONS* CDBE_ACTIONS
+
+flag CATSORT_FLAGS UINT
+  CATSORT_DEFAULT 0
+  CATSORT_NAME    0x1
+
+flag CM_ENUM_FLAGS UINT
+  CM_ENUM_ALL     0x1
+  CM_ENUM_VISIBLE 0x2
+
+enum KNOWNDESTCATEGORY UINT
+  KDC_FREQUENT 1
+  KDC_RECENT   2
+
+flag EXPCMDSTATE UINT
+  ECS_ENABLED    0
+  ECS_DISABLED   0x1
+  ECS_HIDDEN     0x2
+  ECS_CHECKBOX   0x4
+  ECS_CHECKED    0x8
+  ECS_RADIOCHECK 0x10
+
+pointer EXPCMDSTATE* EXPCMDSTATE
+
+flag FILEOPENDIALOGOPTIONS UINT
+  FOS_OVERWRITEPROMPT    0x2
+  FOS_STRICTFILETYPES    0x4
+  FOS_NOCHANGEDIR        0x8
+  FOS_PICKFOLDERS        0x20
+  FOS_FORCEFILESYSTEM    0x40
+  FOS_ALLNONSTORAGEITEMS 0x80
+  FOS_NOVALIDATE         0x100
+  FOS_ALLOWMULTISELECT   0x200
+  FOS_PATHMUSTEXIST      0x800
+  FOS_FILEMUSTEXIST      0x1000
+  FOS_CREATEPROMPT       0x2000
+  FOS_SHAREAWARE         0x4000
+  FOS_NOREADONLYRETURN   0x8000
+  FOS_NOTESTFILECREATE   0x10000
+  FOS_HIDEMRUPLACES      0x20000
+  FOS_HIDEPINNEDPLACES   0x40000
+  FOS_NODEREFERENCELINKS 0x100000
+  FOS_DONTADDTORECENT    0x2000000
+  FOS_FORCESHOWHIDDEN    0x10000000
+  FOS_DEFAULTNOMINIMODE  0x20000000
+  FOS_FORCEPREVIEWPANEON 0x40000000
+
+pointer FILEOPENDIALOGOPTIONS* FILEOPENDIALOGOPTIONS
+
+enum FDE_OVERWRITE_RESPONSE UINT
+  FDEOR_DEFAULT 0
+  FDEOR_ACCEPT  1
+  FDEOR_REFUSE  2
+
+pointer FDE_OVERWRITE_RESPONSE* FDE_OVERWRITE_RESPONSE
+
+flag CDCONTROLSTATEF UINT
+  CDCS_INACTIVE       0
+  CDCS_ENABLED        0x1
+  CDCS_VISIBLE        0x2
+  CDCS_ENABLEDVISIBLE 0x3
+
+pointer CDCONTROLSTATEF* CDCONTROLSTATEF
+
+enum FDE_SHAREVIOLATION_RESPONSE UINT
+  FDESVR_DEFAULT 0
+  FDESVR_ACCEPT  1
+  FDESVR_REFUSE  2
+
+pointer FDE_SHAREVIOLATION_RESPONSE* FDE_SHAREVIOLATION_RESPONSE
+
+enum FILE_USAGE_TYPE UINT
+  FUT_PLAYING 0
+  FUT_EDITING 1
+  FUT_GENERIC 2
+
+pointer FILE_USAGE_TYPE* FILE_USAGE_TYPE
+
+flag EXPLORERPANESTATE UINT
+  EPS_DONTCARE     0
+  EPS_DEFAULT_ON   0x1
+  EPS_DEFAULT_OFF  0x2
+  EPS_STATEMASK    0xffff
+  EPS_INITIALSTATE 0x10000
+  EPS_FORCE        0x20000
+
+pointer EXPLORERPANESTATE* EXPLORERPANESTATE
+
+flag FOLDERVIEWOPTIONS UINT
+  FVO_DEFAULT           0
+  FVO_VISTALAYOUT       0x1
+  FVO_CUSTOMPOSITION    0x2
+  FVO_CUSTOMORDERING    0x4
+  FVO_SUPPORTHYPERLINKS 0x8
+  FVO_NOANIMATIONS      0x10
+  FVO_NOSCROLLTIPS      0x20
+
+pointer FOLDERVIEWOPTIONS* FOLDERVIEWOPTIONS
+
+enum FOLDERLOGICALVIEWMODE UINT
+  FLVM_UNSPECIFIED -1
+  FLVM_DETAILS     1
+  FLVM_TILES       2
+  FLVM_ICONS       3
+  FLVM_LIST        4
+  FLVM_CONTENT     5
+
+pointer FOLDERLOGICALVIEWMODE* FOLDERLOGICALVIEWMODE
+
+flag NSTCSTYLE UINT
+  NSTCS_HASEXPANDOS         0x1
+  NSTCS_HASLINES            0x2
+  NSTCS_SINGLECLICKEXPAND   0x4
+  NSTCS_FULLROWSELECT       0x8
+  NSTCS_SPRINGEXPAND        0x10
+  NSTCS_HORIZONTALSCROLL    0x20
+  NSTCS_ROOTHASEXPANDO      0x40
+  NSTCS_SHOWSELECTIONALWAYS 0x80
+  NSTCS_NOINFOTIP           0x200
+  NSTCS_EVENHEIGHT          0x400
+  NSTCS_NOREPLACEOPEN       0x800
+  NSTCS_DISABLEDRAGDROP     0x1000
+  NSTCS_NOORDERSTREAM       0x2000
+  NSTCS_RICHTOOLTIP         0x4000
+  NSTCS_BORDER              0x8000
+  NSTCS_NOEDITLABELS        0x10000
+  NSTCS_TABSTOP             0x20000
+  NSTCS_FAVORITESMODE       0x80000
+  NSTCS_AUTOHSCROLL         0x100000
+  NSTCS_FADEINOUTEXPANDOS   0x200000
+  NSTCS_EMPTYTEXT           0x400000
+  NSTCS_CHECKBOXES          0x800000
+  NSTCS_PARTIALCHECKBOXES   0x1000000
+  NSTCS_EXCLUSIONCHECKBOXES 0x2000000
+  NSTCS_DIMMEDCHECKBOXES    0x4000000
+  NSTCS_NOINDENTCHECKS      0x8000000
+  NSTCS_ALLOWJUNCTIONS      0x10000000
+  NSTCS_SHOWTABSBUTTON      0x20000000
+  NSTCS_SHOWDELETEBUTTON    0x40000000
+  NSTCS_SHOWREFRESHBUTTON   0x80000000
+
+pointer NSTCSTYLE* NSTCSTYLE
+
+flag NSTCSTYLE2 UINT
+  NSTCS2_DEFAULT                  0
+  NSTCS2_INTERRUPTNOTIFICATIONS   0x1
+  NSTCS2_SHOWNULLSPACEMENU        0x2
+  NSTCS2_DISPLAYPADDING           0x4
+  NSTCS2_DISPLAYPINNEDONLY        0x8
+  NTSCS2_NOSINGLETONAUTOEXPAND    0x10
+  NTSCS2_NEVERINSERTNONENUMERATED 0x20
+
+pointer NSTCSTYLE2* NSTCSTYLE2
+
+enum PDOPSTATUS UINT
+  PDOPS_RUNNING   1
+  PDOPS_PAUSED    2
+  PDOPS_CANCELLED 3
+  PDOPS_STOPPED   4
+  PDOPS_ERRORS    5
+
+pointer PDOPSTATUS* PDOPSTATUS
+
+flag PDMODE DWORD
+  PDM_DEFAULT        0
+  PDM_RUN            0x1
+  PDM_PREFLIGHT      0x2
+  PDM_UNDOING        0x4
+  PDM_ERRORSBLOCKING 0x8
+  PDM_INDETERMINATE  0x10
+
+flag NSTCEHITTEST UINT
+  NSTCEHT_NOWHERE         0x1
+  NSTCEHT_ONITEMICON      0x2
+  NSTCEHT_ONITEMLABEL     0x4
+  NSTCEHT_ONITEMINDENT    0x8
+  NSTCEHT_ONITEMBUTTON    0x10
+  NSTCEHT_ONITEMRIGHT     0x20
+  NSTCEHT_ONITEMSTATEICON 0x40
+  NSTCEHT_ONITEM          0x46
+  NSTCEHT_ONITEMTABBUTTON 0x1000
+
+flag NSTCFOLDERCAPABILITIES UINT
+  NSTCFC_NONE                  0
+  NSTCFC_PINNEDITEMFILTERING   0x1
+  NSTCFC_DELAY_REGISTER_NOTIFY 0x2
+
+pointer NSTCFOLDERCAPABILITIES* NSTCFOLDERCAPABILITIES
+
+flag NMCII_FLAGS UINT
+  NMCII_ITEMS   0x1
+  NMCII_FOLDERS 0x2
+
+pointer NMCII_FLAGS* NMCII_FLAGS
+
+enum FOLDER_ENUM_MODE UINT
+  FEM_VIEWRESULT 0
+  FEM_NAVIGATION 1
+
+pointer FOLDER_ENUM_MODE* FOLDER_ENUM_MODE
+
+flag TRANSFER_ADVISE_STATE UINT
+  TS_NONE          0
+  TS_PERFORMING    0x1
+  TS_PREPARING     0x2
+  TS_INDETERMINATE 0x4
+
+enum NSTCECLICKTYPE UINT
+  NSTCECT_LBUTTON  0x1
+  NSTCECT_MBUTTON  0x2
+  NSTCECT_RBUTTON  0x3
+  NSTCECT_DBLCLICK 0x4
+
+flag TRANSFER_SOURCE_FLAGS UINT
+  TSF_NORMAL                     0
+  TSF_FAIL_EXIST                 0
+  TSF_RENAME_EXIST               0x1
+  TSF_OVERWRITE_EXIST            0x2
+  TSF_ALLOW_DECRYPTION           0x4
+  TSF_NO_SECURITY                0x8
+  TSF_COPY_CREATION_TIME         0x10
+  TSF_COPY_WRITE_TIME            0x20
+  TSF_USE_FULL_ACCESS            0x40
+  TSF_DELETE_RECYCLE_IF_POSSIBLE 0x80
+  TSF_COPY_HARD_LINK             0x100
+  TSF_COPY_LOCALIZED_NAME        0x200
+  TSF_MOVE_AS_COPY_DELETE        0x400
+  TSF_SUSPEND_SHELLEVENTS        0x800
+
+flag TBPFLAG UINT
+  TBPF_NOPROGRESS    0
+  TBPF_INDETERMINATE 0x1
+  TBPF_NORMAL        0x2
+  TBPF_ERROR         0x4
+  TBPF_PAUSED        0x8
+
+enum LIBRARYFOLDERFILTER UINT
+  LFF_FORCEFILESYSTEM 1
+  LFF_STORAGEITEMS    2
+  LFF_ALLITEMS        3
+
+flag SIATTRIBFLAGS UINT
+  SIATTRIBFLAGS_AND       0x1
+  SIATTRIBFLAGS_OR        0x2
+  SIATTRIBFLAGS_APPCOMPAT 0x3
+  SIATTRIBFLAGS_ALLITEMS  0x4000
+
+enum VPWATERMARKFLAGS UINT
+  VPWF_DEFAULT    0
+  VPWF_ALPHABLEND 0x1
+
+enum VPCOLORFLAGS UINT
+  VPCF_TEXT           1
+  VPCF_BACKGROUND     2
+  VPCF_SORTCOLUMN     3
+  VPCF_SUBTEXT        4
+  VPCF_TEXTBACKGROUND 5
+
+flag STPFLAG UINT
+  STPF_NONE                      0
+  STPF_USEAPPTHUMBNAILALWAYS     0x1
+  STPF_USEAPPTHUMBNAILWHENACTIVE 0x2
+  STPF_USEAPPPEEKALWAYS          0x4
+  STPF_USEAPPPEEKWHENACTIVE      0x8
+
+enum EXPPS UINT
+  EXPPS_FILETYPES 0x1
+
+enum DEFAULTSAVEFOLDERTYPE UINT
+  DSFT_DETECT  1
+  DSFT_PRIVATE 2
+  DSFT_PUBLIC  3
+
+enum LIBRARYOPTIONFLAGS UINT
+  LOF_DEFAULT         0
+  LOF_PINNEDTONAVPANE 0x1
+
+pointer LIBRARYOPTIONFLAGS* LIBRARYOPTIONFLAGS
+
+flag LIBRARYSAVEFLAGS UINT
+  LSF_FAILIFTHERE      0
+  LSF_OVERRIDEEXISTING 0x1
+  LSF_MAKEUNIQUENAME   0x2
+
+enum SIGDN UINT
+  SIGDN_NORMALDISPLAY               0
+  SIGDN_PARENTRELATIVEPARSING       0x80018001
+  SIGDN_DESKTOPABSOLUTEPARSING      0x80028000
+  SIGDN_PARENTRELATIVEEDITING       0x80031001
+  SIGDN_DESKTOPABSOLUTEEDITING      0x8004c000
+  SIGDN_FILESYSPATH                 0x80058000
+  SIGDN_URL                         0x80068000
+  SIGDN_PARENTRELATIVEFORADDRESSBAR 0x8007c001
+  SIGDN_PARENTRELATIVE              0x80080001
+
+flag SFGAOF DWORD
+  SFGAO_CANCOPY         0x00000001
+  SFGAO_CANMOVE         0x00000002
+  SFGAO_CANLINK         0x00000004
+  SFGAO_STORAGE         0x00000008
+  SFGAO_CANRENAME       0x00000010
+  SFGAO_CANDELETE       0x00000020
+  SFGAO_HASPROPSHEET    0x00000040
+  SFGAO_DROPTARGET      0x00000100
+  SFGAO_CAPABILITYMASK  0x00000177
+  SFGAO_ENCRYPTED       0x00002000
+  SFGAO_ISSLOW          0x00004000
+  SFGAO_GHOSTED         0x00008000
+  SFGAO_LINK            0x00010000
+  SFGAO_SHARE           0x00020000
+  SFGAO_READONLY        0x00040000
+  SFGAO_HIDDEN          0x00080000
+  SFGAO_DISPLAYATTRMASK 0x000FC000
+  SFGAO_NONENUMERATED   0x00100000
+  SFGAO_NEWCONTENT      0x00200000
+  SFGAO_STREAM          0x00400000
+  SFGAO_CANMONIKER      0x00400000
+  SFGAO_HASSTORAGE      0x00400000
+  SFGAO_STORAGEANCESTOR 0x00800000
+  SFGAO_VALIDATE        0x01000000
+  SFGAO_REMOVABLE       0x02000000
+  SFGAO_COMPRESSED      0x04000000
+  SFGAO_BROWSABLE       0x08000000
+  SFGAO_FILESYSANCESTOR 0x10000000
+  SFGAO_FOLDER          0x20000000
+  SFGAO_FILESYSTEM      0x40000000
+  SFGAO_STORAGECAPMASK  0x70C50008
+  SFGAO_CONTENTSMASK    0x80000000
+  SFGAO_HASSUBFOLDER    0x80000000
+  SFGAO_PKEYSFGAOMASK   0x81044010
+
+pointer SFGAOF* SFGAOF
+
+flag SICHINTF DWORD
+  SICHINT_DISPLAY                       0
+  SICHINT_CANONICAL                     0x10000000
+  SICHINT_TEST_FILESYSPATH_IF_NOT_EQUAL 0x20000000
+  SICHINT_ALLFIELDS                     0x80000000
+
+flag SHCONTF UINT
+  SHCONTF_CHECKING_FOR_CHILDREN 0x10
+  SHCONTF_FOLDERS               0x20
+  SHCONTF_NONFOLDERS            0x40
+  SHCONTF_INCLUDEHIDDEN         0x80
+  SHCONTF_INIT_ON_FIRST_NEXT    0x100
+  SHCONTF_NETPRINTERSRCH        0x200
+  SHCONTF_SHAREABLE             0x400
+  SHCONTF_STORAGE               0x800
+  SHCONTF_NAVIGATION_ENUM       0x1000
+  SHCONTF_FASTITEMS             0x2000
+  SHCONTF_FLATLIST              0x4000
+  SHCONTF_ENABLE_ASYNC          0x8000
+  SHCONTF_INCLUDESUPERHIDDEN    0x10000
+
+pointer SHCONTF* SHCONTF
+
+flag SHGDNF UINT
+  SHGDN_NORMAL        0
+  SHGDN_INFOLDER      0x1
+  SHGDN_FOREDITING    0x1000
+  SHGDN_FORADDRESSBAR 0x4000
+  SHGDN_FORPARSING    0x8000
+
+enum DEF_SHARE_ID UINT
+  DEFSHAREID_USERS  1
+  DEFSHAREID_PUBLIC 2
+
+enum SHARE_ROLE UINT
+  SHARE_ROLE_INVALID     -1
+  SHARE_ROLE_READER      0
+  SHARE_ROLE_CONTRIBUTOR 1
+  SHARE_ROLE_CO_OWNER    2
+  SHARE_ROLE_OWNER       3
+  SHARE_ROLE_CUSTOM      4
+  SHARE_ROLE_MIXED       5
+
+pointer SHARE_ROLE* SHARE_ROLE
+
+enum PROPERTYUI_NAME_FLAGS UINT
+  PUIFNF_DEFAULT  0
+  PUIFNF_MNEMONIC 0x1
+
+flag PROPERTYUI_FLAGS UINT
+  PUIF_DEFAULT          0
+  PUIF_RIGHTALIGN       0x1
+  PUIF_NOLABELININFOTIP 0x2
+
+pointer PROPERTYUI_FLAGS* PROPERTYUI_FLAGS
+
+flag PROPERTYUI_FORMAT_FLAGS UINT
+  PUIFFDF_DEFAULT      0
+  PUIFFDF_RIGHTTOLEFT  0x1
+  PUIFFDF_SHORTFORMAT  0x2
+  PUIFFDF_NOTIME       0x4
+  PUIFFDF_FRIENDLYDATE 0x8
+
+flag HOMEGROUPSHARINGCHOICES UINT
+  HGSC_NONE             0
+  HGSC_MUSICLIBRARY     0x1
+  HGSC_PICTURESLIBRARY  0x2
+  HGSC_VIDEOSLIBRARY    0x4
+  HGSC_DOCUMENTSLIBRARY 0x8
+  HGSC_PRINTERS         0x10
+
+pointer HOMEGROUPSHARINGCHOICES* HOMEGROUPSHARINGCHOICES
+
+flag EXPCMDFLAGS UINT
+  ECF_DEFAULT         0
+  ECF_HASSUBCOMMANDS  0x1
+  ECF_HASSPLITBUTTON  0x2
+  ECF_HIDELABEL       0x4
+  ECF_ISSEPARATOR     0x8
+  ECF_HASLUASHIELD    0x10
+  ECF_SEPARATORBEFORE 0x20
+  ECF_SEPARATORAFTER  0x40
+  ECF_ISDROPDOWN      0x80
+
+pointer EXPCMDFLAGS* EXPCMDFLAGS
+
+flag EXPLORER_BROWSER_FILL_FLAGS UINT
+  EBF_NONE                 0
+  EBF_SELECTFROMDATAOBJECT 0x100
+  EBF_NODROPTARGET         0x200
+
+flag KF_REDIRECTION_CAPABILITIES UINT
+  KF_REDIRECTION_CAPABILITIES_REDIRECTABLE           0x1
+  KF_REDIRECTION_CAPABILITIES_ALLOW_ALL              0xff
+  KF_REDIRECTION_CAPABILITIES_DENY_POLICY_REDIRECTED 0x100
+  KF_REDIRECTION_CAPABILITIES_DENY_POLICY            0x200
+  KF_REDIRECTION_CAPABILITIES_DENY_PERMISSIONS       0x400
+  KF_REDIRECTION_CAPABILITIES_DENY_ALL               0xfff00
+
+pointer KF_REDIRECTION_CAPABILITIES* KF_REDIRECTION_CAPABILITIES
+
+flag NSTCROOTSTYLE UINT
+  NSTCRS_VISIBLE  0
+  NSTCRS_HIDDEN   0x1
+  NSTCRS_EXPANDED 0x2
+
+enum CPVIEW UINT
+  CPVIEW_CLASSIC  0
+  CPVIEW_CATEGORY 1
+
+pointer CPVIEW* CPVIEW
+
+flag OPPROGDLGF UINT
+  OPPROGDLG_DEFAULT               0
+  OPPROGDLG_ENABLEPAUSE           0x80
+  OPPROGDLG_ALLOWUNDO             0x100
+  OPPROGDLG_DONTDISPLAYSOURCEPATH 0x200
+  OPPROGDLG_DONTDISPLAYDESTPATH   0x400
+  OPPROGDLG_NOMULTIDAYESTIMATES   0x800
+  OPPROGDLG_DONTDISPLAYLOCATIONS  0x1000
+
+enum FFFP_MODE UINT
+  FFFP_EXACTMATCH         0
+  FFFP_NEARESTPARENTMATCH 1
+
+enum NSTCGNI UINT
+  NSTCGNI_NEXT         0
+  NSTCGNI_NEXTVISIBLE  1
+  NSTCGNI_PREV         2
+  NSTCGNI_PREVVISIBLE  3
+  NSTCGNI_PARENT       4
+  NSTCGNI_CHILD        5
+  NSTCGNI_FIRSTVISIBLE 6
+  NSTCGNI_LASTVISIBLE  7
+
+flag KF_REDIRECT_FLAGS UINT
+  KF_REDIRECT_USER_EXCLUSIVE               0x1
+  KF_REDIRECT_COPY_SOURCE_DACL             0x2
+  KF_REDIRECT_OWNER_USER                   0x4
+  KF_REDIRECT_SET_OWNER_EXPLICIT           0x8
+  KF_REDIRECT_CHECK_ONLY                   0x10
+  KF_REDIRECT_WITH_UI                      0x20
+  KF_REDIRECT_UNPIN                        0x40
+  KF_REDIRECT_PIN                          0x80
+  KF_REDIRECT_COPY_CONTENTS                0x200
+  KF_REDIRECT_DEL_SOURCE_CONTENTS          0x400
+  KF_REDIRECT_EXCLUDE_ALL_KNOWN_SUBFOLDERS 0x800
+
+enum NMCSAEI_FLAGS UINT
+  NMCSAEI_SELECT 0
+  NMCSAEI_EDIT   0x1
+
+flag SIIGBF UINT
+  SIIGBF_RESIZETOFIT   0
+  SIIGBF_BIGGERSIZEOK  0x1
+  SIIGBF_MEMORYONLY    0x2
+  SIIGBF_ICONONLY      0x4
+  SIIGBF_THUMBNAILONLY 0x8
+  SIIGBF_INCACHEONLY   0x10
+
+flag MP_POPUPFLAGS UINT
+  MPPF_SETFOCUS      0x1
+  MPPF_INITIALSELECT 0x2
+  MPPF_NOANIMATE     0x4
+  MPPF_KEYBOARD      0x10
+  MPPF_REPOSITION    0x20
+  MPPF_FORCEZORDER   0x40
+  MPPF_FINALSELECT   0x80
+  MPPF_ALIGN_LEFT    0x2000000
+  MPPF_ALIGN_RIGHT   0x4000000
+  MPPF_TOP           0x20000000
+  MPPF_LEFT          0x40000000
+  MPPF_RIGHT         0x60000000
+  MPPF_BOTTOM        0x80000000
+  MPPF_POS_MASK      0xe0000000
+
+flag SVSIF UINT
+  SVSI_DESELECT       0
+  SVSI_SELECT         0x1
+  SVSI_EDIT           0x3
+  SVSI_DESELECTOTHERS 0x4
+  SVSI_ENSUREVISIBLE  0x8
+  SVSI_FOCUSED        0x10
+  SVSI_TRANSLATEPT    0x20
+  SVSI_SELECTIONMARK  0x40
+  SVSI_POSITIONITEM   0x80
+  SVSI_CHECK          0x100
+  SVSI_CHECK2         0x200
+  SVSI_KEYBOARDSELECT 0x401
+  SVSI_NOTAKEFOCUS    0x40000000
+
+flag SV3CVW3_FLAGS DWORD
+  SV3CVW3_DEFAULT        0
+  SV3CVW3_NONINTERACTIVE 0x1
+  SV3CVW3_FORCEVIEWMODE  0x2
+  SV3CVW3_FORCE`         0x4
+
+flag EXPLORER_BROWSER_OPTIONS UINT
+  EBO_NONE               0
+  EBO_NAVIGATEONCE       0x1
+  EBO_SHOWFRAMES         0x2
+  EBO_ALWAYSNAVIGATE     0x4
+  EBO_NOTRAVELLOG        0x8
+  EBO_NOWRAPPERWINDOW    0x10
+  EBO_HTMLSHAREPOINTVIEW 0x20
+
+pointer EXPLORER_BROWSER_OPTIONS* EXPLORER_BROWSER_OPTIONS
+
+enum PERCEIVED UINT
+  PERCEIVED_TYPE_CUSTOM      -3
+  PERCEIVED_TYPE_UNSPECIFIED -2
+  PERCEIVED_TYPE_FOLDER      -1
+  PERCEIVED_TYPE_UNKNOWN     0
+  PERCEIVED_TYPE_TEXT        1
+  PERCEIVED_TYPE_IMAGE       2
+  PERCEIVED_TYPE_AUDIO       3
+  PERCEIVED_TYPE_VIDEO       4
+  PERCEIVED_TYPE_COMPRESSED  5
+  PERCEIVED_TYPE_DOCUMENT    6
+  PERCEIVED_TYPE_SYSTEM      7
+  PERCEIVED_TYPE_APPLICATION 8
+  PERCEIVED_TYPE_GAMEMEDIA   9
+  PERCEIVED_TYPE_CONTACTS    10
+
+pointer PERCEIVED* PERCEIVED
+
+flag PERCEIVEDFLAG DWORD display=DWORD
+  PERCEIVEDFLAG_UNDEFINED     0x0000
+  PERCEIVEDFLAG_SOFTCODED     0x0001
+  PERCEIVEDFLAG_HARDCODED     0x0002
+  PERCEIVEDFLAG_NATIVESUPPORT 0x0004
+  PERCEIVEDFLAG_GDIPLUS       0x0010
+  PERCEIVEDFLAG_WMSDK         0x0020
+  PERCEIVEDFLAG_ZIPFOLDER     0x0040
+
+pointer PERCEIVEDFLAG* PERCEIVEDFLAG
+
+flag FILEOP_FLAGS WORD
+  FOF_MULTIDESTFILES        0x0001
+  FOF_CONFIRMMOUSE          0x0002
+  FOF_SILENT                0x0004
+  FOF_RENAMEONCOLLISION     0x0008
+  FOF_NOCONFIRMATION        0x0010
+  FOF_WANTMAPPINGHANDLE     0x0020
+  FOF_ALLOWUNDO             0x0040
+  FOF_FILESONLY             0x0080
+  FOF_SIMPLEPROGRESS        0x0100
+  FOF_NOCONFIRMMKDIR        0x0200
+  FOF_NOERRORUI             0x0400
+  FOF_NO_UI                 0x0614
+  FOF_NOCOPYSECURITYATTRIBS 0x0800
+  FOF_NORECURSION           0x1000
+  FOF_NO_CONNECTED_ELEMENTS 0x2000
+  FOF_WANTNUKEWARNING       0x4000
+  FOF_NORECURSEREPARSE      0x8000
+
+alias [FILEOP_FLAGS_DWORD] FILEOP_FLAGS display=DWORD
+
+flag [GIL_INPUT_FLAGS] UINT display=UINT
+  GIL_OPENICON    0x0001
+  GIL_FORSHELL    0x0002
+  GIL_ASYNC       0x0020
+  GIL_DEFAULTICON 0x0040
+  GIL_FORSHORTCUT 0x0080
+  GIL_CHECKSHIELD 0x0200
+
+flag [GIL_OUTPUT_FLAGS] UINT display=UINT
+  GIL_SIMULATEDOC   0x0001
+  GIL_PERINSTANCE   0x0002
+  GIL_PERCLASS      0x0004
+  GIL_NOTFILENAME   0x0008
+  GIL_DONTCACHE     0x0010
+  GIL_SHIELD        0x0200
+  GIL_FORCENOSHIELD 0x0400
+
+pointer [GIL_OUTPUT_FLAGS*] [GIL_OUTPUT_FLAGS] display=UINT*
+
+flag [MessageBoxType] UINT display=UINT
+  MB_OK                        0x00000000
+  MB_OKCANCEL                  0x00000001
+  MB_ABORTRETRYIGNORE          0x00000002
+  MB_YESNOCANCEL               0x00000003
+  MB_YESNO                     0x00000004
+  MB_RETRYCANCEL               0x00000005
+  MB_CANCELTRYCONTINUE         0x00000006
+  MB_ICONSTOP                  0x00000010
+  MB_ICONQUESTION              0x00000020
+  MB_ICONEXCLAMATION           0x00000030
+  MB_ICONINFORMATION           0x00000040
+  MB_DEFBUTTON2                0x00000100
+  MB_DEFBUTTON3                0x00000200
+  MB_DEFBUTTON4                0x00000300
+  MB_SYSTEMMODAL               0x00001000
+  MB_TASKMODAL                 0x00002000
+  MB_HELP                      0x00004000
+  MB_SETFOREGROUND             0x00010000
+  MB_DEFAULT_DESKTOP_ONLY      0x00020000
+  MB_TOPMOST                   0x00040000
+  MB_SERVICE_NOTIFICATION_NT3X 0x00040000
+  MB_RIGHT                     0x00080000
+  MB_RTLREADING                0x00100000
+  MB_SERVICE_NOTIFICATION      0x00200000
+
+enum [MessageBoxResult] int display=int
+  IDOK       1
+  IDCANCEL   2
+  IDABORT    3
+  IDRETRY    4
+  IDIGNORE   5
+  IDYES      6
+  IDNO       7
+  IDTRYAGAIN 10
+  IDCONTINUE 11
+
+union [SHELLEXECUTEINFO_u] display=union
+  hIcon HANDLE
+  hMonitor HANDLE
+
+flag [SEE_MASK] ULONG display=ULONG
+  SEE_MASK_DEFAULT            0x00000000
+  SEE_MASK_CLASSNAME          0x00000001
+  SEE_MASK_CLASSKEY           0x00000003
+  SEE_MASK_IDLIST             0x00000004
+  SEE_MASK_INVOKEIDLIST       0x0000000c
+  SEE_MASK_ICON               0x00000010
+  SEE_MASK_HOTKEY             0x00000020
+  SEE_MASK_NOCLOSEPROCESS     0x00000040
+  SEE_MASK_CONNECTNETDRV      0x00000080
+  SEE_MASK_NOASYNC            0x00000100
+  SEE_MASK_DOENVSUBST         0x00000200
+  SEE_MASK_FLAG_NO_UI         0x00000400
+  SEE_MASK_UNICODE            0x00004000
+  SEE_MASK_NO_CONSOLE         0x00008000
+  SEE_MASK_ASYNCOK            0x00100000
+  SEE_MASK_HMONITOR           0x00200000
+  SEE_MASK_NOZONECHECKS       0x00800000
+  SEE_MASK_NOQUERYCLASSSTORE  0x01000000
+  SEE_MASK_WAITFORINPUTIDLE   0x02000000
+  SEE_MASK_FLAG_LOG_USAGE     0x04000000
+  SEE_MASK_FLAG_HINST_IS_SITE 0x08000000
+
+enum [SEE_HINSTANCE] UINT_PTR display=HINSTANCE
+  SE_ERR_FNF             2
+  SE_ERR_PNF             3
+  SE_ERR_ACCESSDENIED    5
+  SE_ERR_OOM             8
+  SE_ERR_SHARE           26
+  SE_ERR_ASSOCINCOMPLETE 27
+  SE_ERR_DDETIMEOUT      28
+  SE_ERR_DDEFAIL         29
+  SE_ERR_DDEBUSY         30
+  SE_ERR_NOASSOC         31
+  SE_ERR_DLLNOTFOUND     32
+
+struct SHELLEXECUTEINFO
+  cbSize DWORD
+  fMask [SEE_MASK]
+  hwnd HWND
+  lpVerb LPCTSTR
+  lpFile LPCTSTR
+  lpParameters LPCTSTR
+  lpDirectory LPCTSTR
+  nShow [ShowWindowCmd]
+  hInstApp [SEE_HINSTANCE]
+  lpIDList void*
+  lpClass LPCTSTR
+  hkeyClass HKEY
+  dwHotKey DWORD
+   [SHELLEXECUTEINFO_u]
+  hProcess HANDLE
+
+pointer LPSHELLEXECUTEINFO SHELLEXECUTEINFO
+
+enum ASSOCF DWORD
+  ASSOCF_INIT_NOREMAPCLSID    0x00000001
+  ASSOCF_INIT_BYEXENAME       0x00000002
+  ASSOCF_INIT_DEFAULTTOSTAR   0x00000004
+  ASSOCF_INIT_DEFAULTTOFOLDER 0x00000008
+  ASSOCF_NOUSERSETTINGS       0x00000010
+  ASSOCF_NOTRUNCATE           0x00000020
+  ASSOCF_VERIFY               0x00000040
+  ASSOCF_REMAPRUNDLL          0x00000080
+  ASSOCF_NOFIXUPS             0x00000100
+  ASSOCF_IGNOREBASECLASS      0x00000200
+  ASSOCF_INIT_IGNOREUNKNOWN   0x00000400
+  ASSOCF_INIT_FIXED_PROGID    0x00000800
+  ASSOCF_IS_PROTOCOL          0x00001000
+
+enum ASSOCSTR UINT
+  ASSOCSTR_COMMAND         1
+  ASSOCSTR_EXECUTABLE      2
+  ASSOCSTR_FRIENDLYDOCNAME 3
+  ASSOCSTR_FRIENDLYAPPNAME 4
+  ASSOCSTR_NOOPEN          5
+  ASSOCSTR_SHELLNEWVALUE   6
+  ASSOCSTR_DDECOMMAND      7
+  ASSOCSTR_DDEIFEXEC       8
+  ASSOCSTR_DDEAPPLICATION  9
+  ASSOCSTR_DDETOPIC        10
+  ASSOCSTR_INFOTIP         11
+  ASSOCSTR_QUICKTIP        12
+  ASSOCSTR_TILEINFO        13
+  ASSOCSTR_CONTENTTYPE     14
+  ASSOCSTR_DEFAULTICON     15
+  ASSOCSTR_SHELLEXTENSION  16
+  ASSOCSTR_DROPTARGET      17
+  ASSOCSTR_DELEGATEEXECUTE 18
+
+enum ASSOCKEY UINT
+  ASSOCKEY_SHELLEXECCLASS 1
+  ASSOCKEY_APP            2
+  ASSOCKEY_CLASS          3
+  ASSOCKEY_BASECLASS      4
+
+enum ASSOCDATA UINT
+  ASSOCDATA_MSIDESCRIPTOR     1
+  ASSOCDATA_NOACTIVATEHANDLER 2
+  ASSOCDATA_QUERYCLASSSTORE   3
+  ASSOCDATA_HASPERUSERASSOC   4
+  ASSOCDATA_EDITFLAGS         5
+  ASSOCDATA_VALUE             6
+
+enum ASSOCENUM UINT
+  ASSOCENUM_NONE 0
+
+struct APPCATEGORYINFO
+  Locale LCID
+  pszDescription LPWSTR
+  AppCategoryId GUID
+
+pointer APPCATEGORYINFO* APPCATEGORYINFO
+
+struct APPCATEGORYINFOLIST
+  cCategory DWORD
+  pCategoryInfo APPCATEGORYINFO* count=cCategory
+
+pointer APPCATEGORYINFOLIST* APPCATEGORYINFOLIST
+
+enum WTS_ALPHATYPE UINT
+  WTSAT_UNKNOWN 0
+  WTSAT_RGB     1
+  WTSAT_ARGB    2
+
+pointer WTS_ALPHATYPE* WTS_ALPHATYPE
+
+flag WTS_FLAGS DWORD
+  WTS_EXTRACT              0
+  WTS_INCACHEONLY          0x1
+  WTS_FASTEXTRACT          0x2
+  WTS_FORCEEXTRACTION      0x4
+  WTS_SLOWRECLAIM          0x8
+  WTS_EXTRACTDONOTCACHE    0x20
+  WTS_SCALETOREQUESTEDSIZE 0x40
+  WTS_SKIPFASTEXTRACT      0x80
+  WTS_EXTRACTINPROC        0x100
+
+struct WTS_THUMBNAILID
+  rgbKey "BYTE [16]"
+
+pointer WTS_THUMBNAILID* WTS_THUMBNAILID
+
+flag WTS_CACHEFLAGS DWORD
+  WTS_DEFAULT    0
+  WTS_LOWQUALITY 0x1
+  WTS_CACHED     0x2
+
+pointer WTS_CACHEFLAGS* WTS_CACHEFLAGS
+
+enum [PROPSPEC_KIND] ULONG display=ULONG
+  PRSPEC_LPWSTR 0
+  PRSPEC_PROPID 1
+
+union [PROPSPEC_u] display=union
+  propid PROPID
+  lpwstr LPOLESTR
+
+struct PROPSPEC
+  ulKind [PROPSPEC_KIND]
+   [PROPSPEC_u]
+
+pointer "PROPSPEC const[]" PROPSPEC
+
+pointer "const PROPSPEC []" PROPSPEC
+
+enum [SystemParametersInfoEnum] UINT display=UINT
+  SPI_GETBEEP                     0x0001
+  SPI_SETBEEP                     0x0002
+  SPI_GETMOUSE                    0x0003
+  SPI_SETMOUSE                    0x0004
+  SPI_GETBORDER                   0x0005
+  SPI_SETBORDER                   0x0006
+  SPI_GETKEYBOARDSPEED            0x000A
+  SPI_SETKEYBOARDSPEED            0x000B
+  SPI_LANGDRIVER                  0x000C
+  SPI_ICONHORIZONTALSPACING       0x000D
+  SPI_GETSCREENSAVETIMEOUT        0x000E
+  SPI_SETSCREENSAVETIMEOUT        0x000F
+  SPI_GETSCREENSAVEACTIVE         0x0010
+  SPI_SETSCREENSAVEACTIVE         0x0011
+  SPI_GETGRIDGRANULARITY          0x0012
+  SPI_SETGRIDGRANULARITY          0x0013
+  SPI_SETDESKWALLPAPER            0x0014
+  SPI_SETDESKPATTERN              0x0015
+  SPI_GETKEYBOARDDELAY            0x0016
+  SPI_SETKEYBOARDDELAY            0x0017
+  SPI_ICONVERTICALSPACING         0x0018
+  SPI_GETICONTITLEWRAP            0x0019
+  SPI_SETICONTITLEWRAP            0x001A
+  SPI_GETMENUDROPALIGNMENT        0x001B
+  SPI_SETMENUDROPALIGNMENT        0x001C
+  SPI_SETDOUBLECLKWIDTH           0x001D
+  SPI_SETDOUBLECLKHEIGHT          0x001E
+  SPI_GETICONTITLELOGFONT         0x001F
+  SPI_SETDOUBLECLICKTIME          0x0020
+  SPI_SETMOUSEBUTTONSWAP          0x0021
+  SPI_SETICONTITLELOGFONT         0x0022
+  SPI_GETFASTTASKSWITCH           0x0023
+  SPI_SETFASTTASKSWITCH           0x0024
+  SPI_SETDRAGFULLWINDOWS          0x0025
+  SPI_GETDRAGFULLWINDOWS          0x0026
+  SPI_GETNONCLIENTMETRICS         0x0029
+  SPI_SETNONCLIENTMETRICS         0x002A
+  SPI_GETMINIMIZEDMETRICS         0x002B
+  SPI_SETMINIMIZEDMETRICS         0x002C
+  SPI_GETICONMETRICS              0x002D
+  SPI_SETICONMETRICS              0x002E
+  SPI_SETWORKAREA                 0x002F
+  SPI_GETWORKAREA                 0x0030
+  SPI_SETPENWINDOWS               0x0031
+  SPI_GETFILTERKEYS               0x0032
+  SPI_SETFILTERKEYS               0x0033
+  SPI_GETTOGGLEKEYS               0x0034
+  SPI_SETTOGGLEKEYS               0x0035
+  SPI_GETMOUSEKEYS                0x0036
+  SPI_SETMOUSEKEYS                0x0037
+  SPI_GETSHOWSOUNDS               0x0038
+  SPI_SETSHOWSOUNDS               0x0039
+  SPI_GETSTICKYKEYS               0x003A
+  SPI_SETSTICKYKEYS               0x003B
+  SPI_GETACCESSTIMEOUT            0x003C
+  SPI_SETACCESSTIMEOUT            0x003D
+  SPI_GETSERIALKEYS               0x003E
+  SPI_SETSERIALKEYS               0x003F
+  SPI_GETSOUNDSENTRY              0x0040
+  SPI_SETSOUNDSENTRY              0x0041
+  SPI_GETHIGHCONTRAST             0x0042
+  SPI_SETHIGHCONTRAST             0x0043
+  SPI_GETKEYBOARDPREF             0x0044
+  SPI_SETKEYBOARDPREF             0x0045
+  SPI_GETSCREENREADER             0x0046
+  SPI_SETSCREENREADER             0x0047
+  SPI_GETANIMATION                0x0048
+  SPI_SETANIMATION                0x0049
+  SPI_GETFONTSMOOTHING            0x004A
+  SPI_SETFONTSMOOTHING            0x004B
+  SPI_SETDRAGWIDTH                0x004C
+  SPI_SETDRAGHEIGHT               0x004D
+  SPI_SETHANDHELD                 0x004E
+  SPI_GETLOWPOWERTIMEOUT          0x004F
+  SPI_GETPOWEROFFTIMEOUT          0x0050
+  SPI_SETLOWPOWERTIMEOUT          0x0051
+  SPI_SETPOWEROFFTIMEOUT          0x0052
+  SPI_GETLOWPOWERACTIVE           0x0053
+  SPI_GETPOWEROFFACTIVE           0x0054
+  SPI_SETLOWPOWERACTIVE           0x0055
+  SPI_SETPOWEROFFACTIVE           0x0056
+  SPI_SETCURSORS                  0x0057
+  SPI_SETICONS                    0x0058
+  SPI_GETDEFAULTINPUTLANG         0x0059
+  SPI_SETDEFAULTINPUTLANG         0x005A
+  SPI_SETLANGTOGGLE               0x005B
+  SPI_GETWINDOWSEXTENSION         0x005C
+  SPI_SETMOUSETRAILS              0x005D
+  SPI_GETMOUSETRAILS              0x005E
+  SPI_GETSNAPTODEFBUTTON          0x005F
+  SPI_SETSNAPTODEFBUTTON          0x0060
+  SPI_SETSCREENSAVERRUNNING       0x0061
+  SPI_GETMOUSEHOVERWIDTH          0x0062
+  SPI_SETMOUSEHOVERWIDTH          0x0063
+  SPI_GETMOUSEHOVERHEIGHT         0x0064
+  SPI_SETMOUSEHOVERHEIGHT         0x0065
+  SPI_GETMOUSEHOVERTIME           0x0066
+  SPI_SETMOUSEHOVERTIME           0x0067
+  SPI_GETWHEELSCROLLLINES         0x0068
+  SPI_SETWHEELSCROLLLINES         0x0069
+  SPI_GETMENUSHOWDELAY            0x006A
+  SPI_SETMENUSHOWDELAY            0x006B
+  SPI_GETWHEELSCROLLCHARS         0x006C
+  SPI_SETWHEELSCROLLCHARS         0x006D
+  SPI_GETSHOWIMEUI                0x006E
+  SPI_SETSHOWIMEUI                0x006F
+  SPI_GETMOUSESPEED               0x0070
+  SPI_SETMOUSESPEED               0x0071
+  SPI_GETSCREENSAVERRUNNING       0x0072
+  SPI_GETDESKWALLPAPER            0x0073
+  SPI_GETAUDIODESCRIPTION         0x0074
+  SPI_SETAUDIODESCRIPTION         0x0075
+  SPI_GETSCREENSAVESECURE         0x0076
+  SPI_SETSCREENSAVESECURE         0x0077
+  SPI_GETACTIVEWINDOWTRACKING     0x1000
+  SPI_SETACTIVEWINDOWTRACKING     0x1001
+  SPI_GETMENUANIMATION            0x1002
+  SPI_SETMENUANIMATION            0x1003
+  SPI_GETCOMBOBOXANIMATION        0x1004
+  SPI_SETCOMBOBOXANIMATION        0x1005
+  SPI_GETLISTBOXSMOOTHSCROLLING   0x1006
+  SPI_SETLISTBOXSMOOTHSCROLLING   0x1007
+  SPI_GETGRADIENTCAPTIONS         0x1008
+  SPI_SETGRADIENTCAPTIONS         0x1009
+  SPI_GETKEYBOARDCUES             0x100A
+  SPI_SETKEYBOARDCUES             0x100B
+  SPI_GETACTIVEWNDTRKZORDER       0x100C
+  SPI_SETACTIVEWNDTRKZORDER       0x100D
+  SPI_GETHOTTRACKING              0x100E
+  SPI_SETHOTTRACKING              0x100F
+  SPI_GETMENUFADE                 0x1012
+  SPI_SETMENUFADE                 0x1013
+  SPI_GETSELECTIONFADE            0x1014
+  SPI_SETSELECTIONFADE            0x1015
+  SPI_GETTOOLTIPANIMATION         0x1016
+  SPI_SETTOOLTIPANIMATION         0x1017
+  SPI_GETTOOLTIPFADE              0x1018
+  SPI_SETTOOLTIPFADE              0x1019
+  SPI_GETCURSORSHADOW             0x101A
+  SPI_SETCURSORSHADOW             0x101B
+  SPI_GETMOUSESONAR               0x101C
+  SPI_SETMOUSESONAR               0x101D
+  SPI_GETMOUSECLICKLOCK           0x101E
+  SPI_SETMOUSECLICKLOCK           0x101F
+  SPI_GETMOUSEVANISH              0x1020
+  SPI_SETMOUSEVANISH              0x1021
+  SPI_GETFLATMENU                 0x1022
+  SPI_SETFLATMENU                 0x1023
+  SPI_GETDROPSHADOW               0x1024
+  SPI_SETDROPSHADOW               0x1025
+  SPI_GETBLOCKSENDINPUTRESETS     0x1026
+  SPI_SETBLOCKSENDINPUTRESETS     0x1027
+  SPI_GETUIEFFECTS                0x103E
+  SPI_SETUIEFFECTS                0x103F
+  SPI_GETDISABLEOVERLAPPEDCONTENT 0x1040
+  SPI_SETDISABLEOVERLAPPEDCONTENT 0x1041
+  SPI_GETCLIENTAREAANIMATION      0x1042
+  SPI_SETCLIENTAREAANIMATION      0x1043
+  SPI_GETCLEARTYPE                0x1048
+  SPI_SETCLEARTYPE                0x1049
+  SPI_GETSPEECHRECOGNITION        0x104A
+  SPI_SETSPEECHRECOGNITION        0x104B
+  SPI_GETFOREGROUNDLOCKTIMEOUT    0x2000
+  SPI_SETFOREGROUNDLOCKTIMEOUT    0x2001
+  SPI_GETACTIVEWNDTRKTIMEOUT      0x2002
+  SPI_SETACTIVEWNDTRKTIMEOUT      0x2003
+  SPI_GETFOREGROUNDFLASHCOUNT     0x2004
+  SPI_SETFOREGROUNDFLASHCOUNT     0x2005
+  SPI_GETCARETWIDTH               0x2006
+  SPI_SETCARETWIDTH               0x2007
+  SPI_GETMOUSECLICKLOCKTIME       0x2008
+  SPI_SETMOUSECLICKLOCKTIME       0x2009
+  SPI_GETFONTSMOOTHINGTYPE        0x200A
+  SPI_SETFONTSMOOTHINGTYPE        0x200B
+  SPI_GETFONTSMOOTHINGCONTRAST    0x200C
+  SPI_SETFONTSMOOTHINGCONTRAST    0x200D
+  SPI_GETFOCUSBORDERWIDTH         0x200E
+  SPI_SETFOCUSBORDERWIDTH         0x200F
+  SPI_GETFOCUSBORDERHEIGHT        0x2010
+  SPI_SETFOCUSBORDERHEIGHT        0x2011
+  SPI_GETFONTSMOOTHINGORIENTATION 0x2012
+  SPI_SETFONTSMOOTHINGORIENTATION 0x2013
+  SPI_GETMINIMUMHITRADIUS         0x2014
+  SPI_SETMINIMUMHITRADIUS         0x2015
+  SPI_GETMESSAGEDURATION          0x2016
+  SPI_SETMESSAGEDURATION          0x2017
+
+flag [SystemParametersInfoFlags] UINT display=UINT
+  SPIF_UPDATEINIFILE    0x0001
+  SPIF_SENDWININICHANGE 0x0002
+
+flag KNOWN_FOLDER_FLAG DWORD
+  KF_FLAG_DEFAULT                     0x00000000
+  KF_FLAG_SIMPLE_IDLIST               0x00000100
+  KF_FLAG_NOT_PARENT_RELATIVE         0x00000200
+  KF_FLAG_DEFAULT_PATH                0x00000400
+  KF_FLAG_INIT                        0x00000800
+  KF_FLAG_NO_ALIAS                    0x00001000
+  KF_FLAG_DONT_UNEXPAND               0x00002000
+  KF_FLAG_DONT_VERIFY                 0x00004000
+  KF_FLAG_CREATE                      0x00008000
+  KF_FLAG_NO_APPCONTAINER_REDIRECTION 0x00010000
+  KF_FLAG_ALIAS_ONLY                  0x80000000
+
+alias [KNOWN_FOLDER_FLAG|DWORD] KNOWN_FOLDER_FLAG display=DWORD
+
+flag SLR_FLAGS DWORD display=DWORD
+  SLR_NO_UI                     0x1
+  SLR_ANY_MATCH                 0x2
+  SLR_UPDATE                    0x4
+  SLR_NOUPDATE                  0x8
+  SLR_NOSEARCH                  0x10
+  SLR_NOTRACK                   0x20
+  SLR_NOLINKINFO                0x40
+  SLR_INVOKE_MSI                0x80
+  SLR_NO_UI_WITH_MSG_PUMP       0x101
+  SLR_OFFER_DELETE_WITHOUT_FILE 0x200
+  SLR_KNOWNFOLDER               0x400
+  SLR_MACHINE_IN_LOCAL_TARGET   0x800
+  SLR_UPDATE_MACHINE_AND_SID    0x1000
+
+flag SLGP_FLAGS DWORD display=DWORD
+  SLGP_SHORTPATH        0x1
+  SLGP_UNCPRIORITY      0x2
+  SLGP_RAWPATH          0x4
+  SLGP_RELATIVEPRIORITY 0x8
+
+flag WTS_CONTEXTFLAGS UINT
+  WTSCF_DEFAULT  0
+  WTSCF_APPSTYLE 0x1
+  WTSCF_SQUARE   0x2
+  WTSCF_WIDE     0x4
+  WTSCF_FAST     0x8
+
+enum UNDOCK_REASON UINT
+  UR_RESOLUTION_CHANGE  0
+  UR_MONITOR_DISCONNECT 1
+
+flag ACTIVATEOPTIONS UINT
+  AO_NONE           0
+  AO_DESIGNMODE     0x1
+  AO_NOERRORUI      0x2
+  AO_NOSPLASHSCREEN 0x4
+
+enum DEVICE_SCALE_FACTOR UINT
+  SCALE_100_PERCENT 100
+  SCALE_140_PERCENT 140
+  SCALE_180_PERCENT 180
+
+enum APPLICATION_VIEW_STATE UINT
+  AVS_FULLSCREEN_LANDSCAPE 0
+  AVS_FILLED               1
+  AVS_SNAPPED              2
+  AVS_FULLSCREEN_PORTRAIT  3
+
+enum EDGE_GESTURE_KIND UINT
+  EGK_TOUCH    0
+  EGK_KEYBOARD 1
+  EGK_MOUSE    2
+
+enum MONITOR_APP_VISIBILITY UINT
+  MAV_UNKNOWN        0
+  MAV_NO_APP_VISIBLE 1
+  MAV_APP_VISIBLE    2
+
+pointer MONITOR_APP_VISIBILITY* MONITOR_APP_VISIBILITY
+
+flag DEFAULT_FOLDER_MENU_RESTRICTIONS UINT
+  DFMR_DEFAULT                        0
+  DFMR_NO_STATIC_VERBS                0x8
+  DFMR_STATIC_VERBS_ONLY              0x10
+  DFMR_NO_RESOURCE_VERBS              0x20
+  DFMR_OPTIN_HANDLERS_ONLY            0x40
+  DFMR_RESOURCE_AND_FOLDER_VERBS_ONLY 0x80
+  DFMR_USE_SPECIFIED_HANDLERS         0x100
+  DFMR_USE_SPECIFIED_VERBS            0x200
+  DFMR_NO_ASYNC_VERBS                 0x400
+
+pointer DEFAULT_FOLDER_MENU_RESTRICTIONS* DEFAULT_FOLDER_MENU_RESTRICTIONS
+
+enum DESKTOP_WALLPAPER_POSITION UINT
+  DWPOS_CENTER  0
+  DWPOS_TILE    1
+  DWPOS_STRETCH 2
+  DWPOS_FIT     3
+  DWPOS_FILL    4
+  DWPOS_SPAN    5
+
+pointer DESKTOP_WALLPAPER_POSITION* DESKTOP_WALLPAPER_POSITION
+
+flag DESKTOP_SLIDESHOW_OPTIONS UINT
+  DSO_SHUFFLEIMAGES 0x1
+
+pointer DESKTOP_SLIDESHOW_OPTIONS* DESKTOP_SLIDESHOW_OPTIONS
+
+enum DESKTOP_SLIDESHOW_DIRECTION UINT
+  DSD_FORWARD  0
+  DSD_BACKWARD 1
+
+flag DESKTOP_SLIDESHOW_STATE UINT
+  DSS_ENABLED                    0x1
+  DSS_SLIDESHOW                  0x2
+  DSS_DISABLED_BY_REMOTE_SESSION 0x4
+
+pointer DESKTOP_SLIDESHOW_STATE* DESKTOP_SLIDESHOW_STATE
+
+enum AHE_TYPE UINT
+  AHE_DESKTOP   0
+  AHE_IMMERSIVE 1
+
+pointer AHE_TYPE* AHE_TYPE
+
+enum EC_HOST_UI_MODE UINT
+  ECHUIM_DESKTOP         0
+  ECHUIM_IMMERSIVE       1
+  ECHUIM_SYSTEM_LAUNCHER 2
+
+pointer EC_HOST_UI_MODE* EC_HOST_UI_MODE
+
+enum PACKAGE_EXECUTION_STATE UINT
+  PES_UNKNOWN    0
+  PES_RUNNING    1
+  PES_SUSPENDING 2
+  PES_SUSPENDED  3
+  PES_TERMINATED 4
+
+pointer PACKAGE_EXECUTION_STATE* PACKAGE_EXECUTION_STATE
+
+enum PBM_SESSION_TYPE UINT
+  ST_COMMUNICATION 1
+  ST_MEDIA         2
+
+enum PBM_PLAY_STATE UINT
+  PS_PLAYING 1
+  PS_PAUSED  2
+  PS_STOPPED 3
+
+enum PBM_MUTE_STATE UINT
+  MS_MUTED   1
+  MS_UNMUTED 2
+
+enum PBM_EVENT UINT
+  PE_DUCKSESSION   1
+  PE_UNDUCKSESSION 2
+

@@ -1,0 +1,33 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IDataFilter base=IUnknown id={69d14c80-c18e-11d0-a9ce-006097942311} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func DoEncode
+    HRESULT
+    dwFlags DWORD
+    lInBufferSize LONG
+    pbInBuffer BYTE* length=lInBufferSize
+    lOutBufferSize LONG
+    pbOutBuffer BYTE* length=lOutBufferSize
+    lInBytesAvailable LONG
+    plInBytesRead LONG*
+    plOutBytesWritten LONG*
+    dwReserved DWORD
+
+  func DoDecode
+    HRESULT
+    dwFlags DWORD
+    lInBufferSize LONG
+    pbInBuffer BYTE* length=lInBufferSize
+    lOutBufferSize LONG
+    pbOutBuffer BYTE* length=lOutBufferSize
+    lInBytesAvailable LONG
+    plInBytesRead LONG*
+    plOutBytesWritten LONG*
+    dwReserved DWORD
+
+  func SetEncodingLevel
+    HRESULT
+    dwEncLevel DWORD
+
+

@@ -1,0 +1,59 @@
+include Headers\windows.h.txt
+include Headers\registry.h.txt
+include Windows\SrClient.txt
+
+dll sfc.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+moduleAlias sfc_os.dll
+category "System Administration/Windows Resource Protection (WRP)"
+category "System Administration/System Restore"
+struct PROTECTED_FILE_DATA
+  FileName "WCHAR [MAX_PATH]"
+  FileNumber DWORD
+
+pointer PPROTECTED_FILE_DATA PROTECTED_FILE_DATA
+
+func SfcIsFileProtected
+  BOOL
+  RpcHandle HANDLE
+  ProtFileName LPCWSTR
+
+func SfcIsKeyProtected
+  BOOL
+  hKey HKEY
+  lpSubKey LPCWSTR
+  samDesired REGSAM
+
+func SfcGetNextProtectedFile
+  BOOL
+  RpcHandle HANDLE
+  ProtFileData PPROTECTED_FILE_DATA
+
+func SfcTerminateWatcherThread
+  [ERROR_CODE]
+
+func SfcFileException
+  [ERROR_CODE]
+  dwUnknown0 DWORD
+  lpwszFile LPCSTR
+  dwUnknown1 DWORD
+
+func SfpVerifyFile
+  BOOL
+  lpszFileName LPCSTR
+  lpszError LPSTR
+  dwErrSize DWORD
+
+func SRRemoveRestorePoint
+  [ERROR_CODE]
+  dwRPNum DWORD
+
+func SRSetRestorePointA
+  BOOL
+  pRestorePtSpec PRESTOREPOINTINFOA
+  pSMgrStatus PSTATEMGRSTATUS
+
+func SRSetRestorePointW
+  BOOL
+  pRestorePtSpec PRESTOREPOINTINFOW
+  pSMgrStatus PSTATEMGRSTATUS
+

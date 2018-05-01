@@ -1,0 +1,107 @@
+include Headers\windows.h.txt
+
+header
+alias LPSNMP_MGR_SESSION PVOID
+
+alias AsnInteger LONG
+
+pointer AsnInteger* AsnInteger
+
+alias AsnTimeticks ULONG
+
+pointer AsnTimeticks* AsnTimeticks
+
+alias AsnInteger32 LONG
+
+alias AsnUnsigned32 ULONG
+
+alias AsnCounter64 ULARGE_INTEGER
+
+alias AsnCounter32 AsnUnsigned32
+
+alias AsnGauge32 AsnUnsigned32
+
+enum SNMPAPI INT defaultName=SNMPAPI_NOERROR
+  success NotEqual=0
+  SNMPAPI_ERROR   0
+  SNMPAPI_NOERROR 1
+
+struct AsnObjectIdentifier pack=4
+  idLength UINT
+  ids UINT*
+
+pointer AsnObjectIdentifier* AsnObjectIdentifier
+
+alias AsnObjectName AsnObjectIdentifier
+
+struct AsnOctetString pack=4
+  stream BYTE*
+  length UINT
+  dynamic BOOL
+
+pointer AsnOctetString* AsnOctetString
+
+alias AsnNetworkAddress AsnOctetString
+
+pointer AsnNetworkAddress* AsnNetworkAddress
+
+alias AsnBits AsnOctetString
+
+alias AsnSequence AsnOctetString
+
+alias AsnIPAddress AsnOctetString
+
+alias AsnOpaque AsnOctetString
+
+enum [ASN_TYPE] BYTE display=BYTE
+  ASN_INTEGER                   0x02
+  ASN_BITS                      0x03
+  ASN_OCTETSTRING               0x04
+  ASN_NULL                      0x05
+  ASN_OBJECTIDENTIFIER          0x06
+  ASN_SEQUENCE                  0x30
+  ASN_IPADDRESS                 0x40
+  ASN_COUNTER32                 0x41
+  ASN_GAUGE32                   0x42
+  ASN_TIMETICKS                 0x43
+  ASN_OPAQUE                    0x44
+  ASN_COUNTER64                 0x46
+  ASN_UINTEGER32                0x47
+  SNMP_EXCEPTION_NOSUCHOBJECT   0x80
+  SNMP_EXCEPTION_NOSUCHINSTANCE 0x81
+  SNMP_EXCEPTION_ENDOFMIBVIEW   0x82
+
+union [AsnAny_u] pack=4 display=union
+  number AsnInteger32
+  unsigned32 AsnUnsigned32
+  counter64 AsnCounter64
+  string AsnOctetString
+  bits AsnBits
+  object AsnObjectIdentifier
+  sequence AsnSequence
+  address AsnIPAddress
+  counter AsnCounter32
+  gauge AsnGauge32
+  ticks AsnTimeticks
+  arbitrary AsnOpaque
+
+struct AsnAny pack=4
+  asnType [ASN_TYPE]
+  asnValue [AsnAny_u]
+
+pointer AsnAny* AsnAny
+
+alias AsnObjectSyntax AsnAny
+
+struct SnmpVarBind pack=4
+  name AsnObjectName
+  value AsnObjectSyntax
+
+pointer SnmpVarBind* SnmpVarBind
+
+struct SnmpVarBindList pack=4
+  list SnmpVarBind*
+  len UINT
+
+pointer SnmpVarBindList* SnmpVarBindList
+

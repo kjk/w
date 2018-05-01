@@ -1,0 +1,37 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFolderViewSettings base=IUnknown id={ae8c987d-8797-4ed3-be72-2a47dd938db0} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetColumnPropertyList
+    HRESULT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetGroupByProperty
+    HRESULT
+    pkey PROPERTYKEY*
+    pfGroupAscending BOOL*
+
+  func GetViewMode
+    HRESULT
+    plvm FOLDERLOGICALVIEWMODE*
+
+  func GetIconSize
+    HRESULT
+    puIconSize UINT*
+
+  func GetFolderFlags
+    HRESULT
+    pfolderMask FOLDERFLAGS*
+    pfolderFlags FOLDERFLAGS*
+
+  func GetSortColumns
+    HRESULT
+    rgSortColumns SORTCOLUMN* postCount=pcColumnsOut
+    cColumnsIn UINT
+    pcColumnsOut UINT*
+
+  func GetGroupSubsetCount
+    HRESULT
+    pcVisibleRows UINT*
+
+

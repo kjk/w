@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+include Interfaces\NLM\NLMDefs.h.txt
+
+ingterface INetworkEvents base=IUnknown id={DCB00004-570F-4A9B-8D69-199FDBA5723B} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Network List Manager"
+  func NetworkAdded
+    HRESULT
+    networkId GUID
+
+  func NetworkDeleted
+    HRESULT
+    networkId GUID
+
+  func NetworkConnectivityChanged
+    HRESULT
+    networkId GUID
+    newConnectivity NLM_CONNECTIVITY
+
+  func NetworkPropertyChanged
+    HRESULT
+    networkId GUID
+    flags NLM_NETWORK_PROPERTY_CHANGE
+
+

@@ -1,0 +1,59 @@
+include Interfaces\IUnknown.txt
+
+ingterface IKnownFolderManager base=IUnknown id={8BE2D872-86AA-4d47-B776-32CCA40C7018} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func FolderIdFromCsidl
+    HRESULT
+    nCsidl int
+    pfid KNOWNFOLDERID*
+
+  func FolderIdToCsidl
+    HRESULT
+    rfid REFKNOWNFOLDERID
+    pnCsidl int*
+
+  func GetFolderIds
+    HRESULT
+    ppKFId KNOWNFOLDERID** derefPostCount=pCount
+    pCount UINT*
+
+  func GetFolder
+    HRESULT
+    rfid REFKNOWNFOLDERID
+    ppkf IKnownFolder**
+
+  func GetFolderByName
+    HRESULT
+    pszCanonicalName LPCWSTR
+    ppkf IKnownFolder**
+
+  func RegisterFolder
+    HRESULT
+    rfid REFKNOWNFOLDERID
+    pKFD "const KNOWNFOLDER_DEFINITION*"
+
+  func UnregisterFolder
+    HRESULT
+    rfid REFKNOWNFOLDERID
+
+  func FindFolderFromPath
+    HRESULT
+    pszPath LPCWSTR
+    mode FFFP_MODE
+    ppkf IKnownFolder**
+
+  func FindFolderFromIDList
+    HRESULT
+    pidl PCIDLIST_ABSOLUTE
+    ppkf IKnownFolder**
+
+  func Redirect
+    HRESULT
+    rfid REFKNOWNFOLDERID
+    hwnd HWND
+    flags KF_REDIRECT_FLAGS
+    pszTargetPath LPCWSTR
+    cFolders UINT
+    pExclusion "const KNOWNFOLDERID*" count=cFolders
+    ppszError LPWSTR* outputOnly
+
+

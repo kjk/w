@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumOLEVERB base=IUnknown id={00000104-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func Next
+    HRESULT
+    celt ULONG
+    rgelt LPOLEVERB postCount=celt
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppenum IEnumOLEVERB**
+
+

@@ -1,0 +1,72 @@
+include Interfaces\IDispatch.txt
+
+ingterface FolderItem base=IDispatch id={FAC32C80-CBE4-11CE-8350-444553540000} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func get_Application
+    HRESULT
+    ppid IDispatch**
+
+  func get_Parent
+    HRESULT
+    ppid IDispatch**
+
+  func get_Name
+    HRESULT
+    pbs BSTR*
+
+  func put_Name
+    HRESULT
+    bs BSTR
+
+  func get_Path
+    HRESULT
+    pbs BSTR*
+
+  func get_GetLink
+    HRESULT
+    ppid IDispatch**
+
+  func get_GetFolder
+    HRESULT
+    ppid IDispatch**
+
+  func get_IsLink
+    HRESULT
+    pb VARIANT_BOOL*
+
+  func get_IsFolder
+    HRESULT
+    pb VARIANT_BOOL*
+
+  func get_IsFileSystem
+    HRESULT
+    pb VARIANT_BOOL*
+
+  func get_IsBrowsable
+    HRESULT
+    pb VARIANT_BOOL*
+
+  func get_ModifyDate
+    HRESULT
+    pdt DATE*
+
+  func put_ModifyDate
+    HRESULT
+    dt DATE
+
+  func get_Size
+    HRESULT
+    pul LONG*
+
+  func get_Type
+    HRESULT
+    pbs BSTR*
+
+  func Verbs
+    HRESULT
+    ppfic FolderItemVerbs**
+
+  func InvokeVerb
+    HRESULT
+    vVerb VARIANT
+
+

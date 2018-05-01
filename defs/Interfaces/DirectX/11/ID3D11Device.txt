@@ -1,0 +1,236 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11Device base=IUnknown id={db6f6ddb-ac77-4e88-8253-819df9bbf140} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func CreateBuffer
+    HRESULT
+    pDesc "const D3D11_BUFFER_DESC*"
+    pInitialData "const D3D11_SUBRESOURCE_DATA*"
+    ppBuffer ID3D11Buffer**
+
+  func CreateTexture1D
+    HRESULT
+    pDesc "const D3D11_TEXTURE1D_DESC*"
+    pInitialData "const D3D11_SUBRESOURCE_DATA*"
+    ppTexture1D ID3D11Texture1D**
+
+  func CreateTexture2D
+    HRESULT
+    pDesc "const D3D11_TEXTURE2D_DESC*"
+    pInitialData "const D3D11_SUBRESOURCE_DATA*"
+    ppTexture2D ID3D11Texture2D**
+
+  func CreateTexture3D
+    HRESULT
+    pDesc "const D3D11_TEXTURE3D_DESC*"
+    pInitialData "const D3D11_SUBRESOURCE_DATA*"
+    ppTexture3D ID3D11Texture3D**
+
+  func CreateShaderResourceView
+    HRESULT
+    pResource ID3D11Resource*
+    pDesc "const D3D11_SHADER_RESOURCE_VIEW_DESC*"
+    ppSRView ID3D11ShaderResourceView**
+
+  func CreateUnorderedAccessView
+    HRESULT
+    pResource ID3D11Resource*
+    pDesc "const D3D11_UNORDERED_ACCESS_VIEW_DESC*"
+    ppUAView ID3D11UnorderedAccessView**
+
+  func CreateRenderTargetView
+    HRESULT
+    pResource ID3D11Resource*
+    pDesc "const D3D11_RENDER_TARGET_VIEW_DESC*"
+    ppRTView ID3D11RenderTargetView**
+
+  func CreateDepthStencilView
+    HRESULT
+    pResource ID3D11Resource*
+    pDesc "const D3D11_DEPTH_STENCIL_VIEW_DESC*"
+    ppDepthStencilView ID3D11DepthStencilView**
+
+  func CreateInputLayout
+    HRESULT
+    pInputElementDescs "const D3D11_INPUT_ELEMENT_DESC*" count=NumElements
+    NumElements UINT
+    pShaderBytecodeWithInputSignature "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    ppInputLayout ID3D11InputLayout**
+
+  func CreateVertexShader
+    HRESULT
+    pShaderBytecode "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    pClassLinkage ID3D11ClassLinkage*
+    ppVertexShader ID3D11VertexShader**
+
+  func CreateGeometryShader
+    HRESULT
+    pShaderBytecode "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    pClassLinkage ID3D11ClassLinkage*
+    ppGeometryShader ID3D11GeometryShader**
+
+  func CreateGeometryShaderWithStreamOutput
+    HRESULT
+    pShaderBytecode "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    pSODeclaration "const D3D11_SO_DECLARATION_ENTRY*" count=NumEntries
+    NumEntries UINT
+    pBufferStrides "const UINT*" count=NumStrides
+    NumStrides UINT
+    RasterizedStream UINT
+    pClassLinkage ID3D11ClassLinkage*
+    ppGeometryShader ID3D11GeometryShader**
+
+  func CreatePixelShader
+    HRESULT
+    pShaderBytecode "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    pClassLinkage ID3D11ClassLinkage*
+    ppPixelShader ID3D11PixelShader**
+
+  func CreateHullShader
+    HRESULT
+    pShaderBytecode "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    pClassLinkage ID3D11ClassLinkage*
+    ppHullShader ID3D11HullShader**
+
+  func CreateDomainShader
+    HRESULT
+    pShaderBytecode "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    pClassLinkage ID3D11ClassLinkage*
+    ppDomainShader ID3D11DomainShader**
+
+  func CreateComputeShader
+    HRESULT
+    pShaderBytecode "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    pClassLinkage ID3D11ClassLinkage*
+    ppComputeShader ID3D11ComputeShader**
+
+  func CreateClassLinkage
+    HRESULT
+    ppLinkage ID3D11ClassLinkage**
+
+  func CreateBlendState
+    HRESULT
+    pBlendStateDesc "const D3D11_BLEND_DESC*"
+    ppBlendState ID3D11BlendState**
+
+  func CreateDepthStencilState
+    HRESULT
+    pDepthStencilDesc "const D3D11_DEPTH_STENCIL_DESC*"
+    ppDepthStencilState ID3D11DepthStencilState**
+
+  func CreateRasterizerState
+    HRESULT
+    pRasterizerDesc "const D3D11_RASTERIZER_DESC*"
+    ppRasterizerState ID3D11RasterizerState**
+
+  func CreateSamplerState
+    HRESULT
+    pSamplerDesc "const D3D11_SAMPLER_DESC*"
+    ppSamplerState ID3D11SamplerState**
+
+  func CreateQuery
+    HRESULT
+    pQueryDesc "const D3D11_QUERY_DESC*"
+    ppQuery ID3D11Query**
+
+  func CreatePredicate
+    HRESULT
+    pPredicateDesc "const D3D11_QUERY_DESC*"
+    ppPredicate ID3D11Predicate**
+
+  func CreateCounter
+    HRESULT
+    pCounterDesc "const D3D11_COUNTER_DESC*"
+    ppCounter ID3D11Counter**
+
+  func CreateDeferredContext
+    HRESULT
+    ContextFlags UINT
+    ppDeferredContext ID3D11DeviceContext**
+
+  func OpenSharedResource
+    HRESULT
+    hResource HANDLE
+    ReturnedInterface REFIID
+    ppResource void** interfaceId=ReturnedInterface
+
+  func CheckFormatSupport
+    HRESULT
+    Format DXGI_FORMAT
+    pFormatSupport D3D11_FORMAT_SUPPORT*
+
+  func CheckMultisampleQualityLevels
+    HRESULT
+    Format DXGI_FORMAT
+    SampleCount UINT
+    pNumQualityLevels UINT*
+
+  func CheckCounterInfo
+    void
+    pCounterInfo D3D11_COUNTER_INFO*
+
+  func CheckCounter
+    HRESULT
+    pDesc "const D3D11_COUNTER_DESC*"
+    pType D3D11_COUNTER_TYPE*
+    pActiveCounters UINT*
+    szName LPSTR
+    pNameLength UINT*
+    szUnits LPSTR
+    pUnitsLength UINT*
+    szDescription LPSTR
+    pDescriptionLength UINT*
+
+  func CheckFeatureSupport
+    HRESULT
+    Feature D3D11_FEATURE
+    pFeatureSupportData void* postLength=FeatureSupportDataSize
+    FeatureSupportDataSize UINT
+
+  func GetPrivateData
+    HRESULT
+    guid REFGUID
+    pDataSize UINT*
+    pData void*
+
+  func SetPrivateData
+    HRESULT
+    guid REFGUID
+    DataSize UINT
+    pData "const void*" length=DataSize
+
+  func SetPrivateDataInterface
+    HRESULT
+    guid REFGUID
+    pData "const IUnknown*"
+
+  func GetFeatureLevel
+    success NotEqual=0
+    D3D_FEATURE_LEVEL
+
+  func GetCreationFlags
+    D3D11_CREATE_DEVICE_FLAG
+
+  func GetDeviceRemovedReason
+    HRESULT
+
+  func GetImmediateContext
+    void
+    ppImmediateContext ID3D11DeviceContext**
+
+  func SetExceptionMode
+    HRESULT
+    RaiseFlags D3D11_RAISE_FLAG
+
+  func GetExceptionMode
+    D3D11_RAISE_FLAG
+
+

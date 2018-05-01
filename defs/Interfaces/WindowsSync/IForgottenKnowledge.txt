@@ -1,0 +1,10 @@
+include Interfaces\WindowsSync\ISyncKnowledge.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IForgottenKnowledge base=ISyncKnowledge id={456e0f96-6036-452b-9f9d-bcc4b4a85db2} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func ForgetToVersion
+    HRESULT
+    pKnowledge ISyncKnowledge*
+    pVersion "const SYNC_VERSION*"
+
+

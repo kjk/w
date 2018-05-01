@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDefViewFrame base=IUnknown id={710EB7A0-45ED-11D0-924A-0020AFC7AC4D} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetWindowLV
+    HRESULT
+    phwnd HWND*
+
+  func ReleaseWindowLV
+    HRESULT
+
+  func GetShellFolder
+    HRESULT
+    ppsf IShellFolder**
+
+

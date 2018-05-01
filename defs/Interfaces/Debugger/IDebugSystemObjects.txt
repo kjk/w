@@ -1,0 +1,138 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDebugSystemObjects base=IUnknown id={6b86fe2c-2c4f-4f0c-9da2-174311acc327} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetEventThread
+    HRESULT
+    Id PULONG
+
+  func GetEventProcess
+    HRESULT
+    Id PULONG
+
+  func GetCurrentThreadId
+    HRESULT
+    Id PULONG
+
+  func SetCurrentThreadId
+    HRESULT
+    Id ULONG
+
+  func GetCurrentProcessId
+    HRESULT
+    Id PULONG
+
+  func SetCurrentProcessId
+    HRESULT
+    Id ULONG
+
+  func GetNumberThreads
+    HRESULT
+    Number PULONG
+
+  func GetTotalNumberThreads
+    HRESULT
+    Total PULONG
+    LargestProcess PULONG
+
+  func GetThreadIdsByIndex
+    HRESULT
+    Start ULONG
+    Count ULONG
+    Ids PULONG postCount=Count
+    SysIds PULONG postCount=Count
+
+  func GetThreadIdByProcessor
+    HRESULT
+    Processor ULONG
+    Id PULONG
+
+  func GetCurrentThreadDataOffset
+    HRESULT
+    Offset PULONG64
+
+  func GetThreadIdByDataOffset
+    HRESULT
+    Offset ULONG64
+    Id PULONG
+
+  func GetCurrentThreadTeb
+    HRESULT
+    Offset PULONG64
+
+  func GetThreadIdByTeb
+    HRESULT
+    Offset ULONG64
+    Id PULONG
+
+  func GetCurrentThreadSystemId
+    HRESULT
+    SysId PULONG
+
+  func GetThreadIdBySystemId
+    HRESULT
+    SysId ULONG
+    Id PULONG
+
+  func GetCurrentThreadHandle
+    HRESULT
+    Handle PULONG64
+
+  func GetThreadIdByHandle
+    HRESULT
+    Handle ULONG64
+    Id PULONG
+
+  func GetNumberProcesses
+    HRESULT
+    Number PULONG
+
+  func GetProcessIdsByIndex
+    HRESULT
+    Start ULONG
+    Count ULONG
+    Ids PULONG postCount=Count
+    SysIds PULONG postCount=Count
+
+  func GetCurrentProcessDataOffset
+    HRESULT
+    Offset PULONG64
+
+  func GetProcessIdByDataOffset
+    HRESULT
+    Offset ULONG64
+    Id PULONG
+
+  func GetCurrentProcessPeb
+    HRESULT
+    Offset PULONG64
+
+  func GetProcessIdByPeb
+    HRESULT
+    Offset ULONG64
+    Id PULONG
+
+  func GetCurrentProcessSystemId
+    HRESULT
+    SysId PULONG
+
+  func GetProcessIdBySystemId
+    HRESULT
+    SysId ULONG
+    Id PULONG
+
+  func GetCurrentProcessHandle
+    HRESULT
+    Handle PULONG64
+
+  func GetProcessIdByHandle
+    HRESULT
+    Handle ULONG64
+    Id PULONG
+
+  func GetCurrentProcessExecutableName
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    ExeSize PULONG
+
+

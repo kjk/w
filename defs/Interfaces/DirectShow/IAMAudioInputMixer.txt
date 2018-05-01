@@ -1,0 +1,68 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMAudioInputMixer base=IUnknown id={54C39221-8380-11d0-B3F0-00AA003761C5} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func put_Enable
+    HRESULT
+    fEnable BOOL
+
+  func get_Enable
+    HRESULT
+    pfEnable BOOL*
+
+  func put_Mono
+    HRESULT
+    fMono BOOL
+
+  func get_Mono
+    HRESULT
+    pfMono BOOL*
+
+  func put_MixLevel
+    HRESULT
+    Level double
+
+  func get_MixLevel
+    HRESULT
+    pLevel double*
+
+  func put_Pan
+    HRESULT
+    Pan double
+
+  func get_Pan
+    HRESULT
+    pPan double*
+
+  func put_Loudness
+    HRESULT
+    fLoudness BOOL
+
+  func get_Loudness
+    HRESULT
+    pfLoudness BOOL*
+
+  func put_Treble
+    HRESULT
+    Treble double
+
+  func get_Treble
+    HRESULT
+    pTreble double*
+
+  func get_TrebleRange
+    HRESULT
+    pRange double*
+
+  func put_Bass
+    HRESULT
+    Bass double
+
+  func get_Bass
+    HRESULT
+    pBass double*
+
+  func get_BassRange
+    HRESULT
+    pRange double*
+
+

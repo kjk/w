@@ -1,0 +1,47 @@
+include Interfaces\DirectX\11\ID3D11Device.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11Device1 base=ID3D11Device id={a04bfb29-08ef-43d6-a49c-a9bdbdcbe686} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func GetImmediateContext1
+    void
+    ppImmediateContext ID3D11DeviceContext1**
+
+  func CreateDeferredContext1
+    HRESULT
+    ContextFlags UINT
+    ppDeferredContext ID3D11DeviceContext1**
+
+  func CreateBlendState1
+    HRESULT
+    pBlendStateDesc "const D3D11_BLEND_DESC1*"
+    ppBlendState ID3D11BlendState1**
+
+  func CreateRasterizerState1
+    HRESULT
+    pRasterizerDesc "const D3D11_RASTERIZER_DESC1*"
+    ppRasterizerState ID3D11RasterizerState1**
+
+  func CreateDeviceContextState
+    HRESULT
+    Flags UINT
+    pFeatureLevels "const D3D_FEATURE_LEVEL*"
+    FeatureLevels UINT
+    SDKVersion UINT
+    EmulatedInterface REFIID
+    pChosenFeatureLevel D3D_FEATURE_LEVEL*
+    ppContextState ID3DDeviceContextState**
+
+  func OpenSharedResource1
+    HRESULT
+    hResource HANDLE
+    returnedInterface REFIID
+    ppResource void** interfaceId=returnedInterface
+
+  func OpenSharedResourceByName
+    HRESULT
+    lpName LPCWSTR
+    dwDesiredAccess DWORD
+    returnedInterface REFIID
+    ppResource void** interfaceId=returnedInterface
+
+

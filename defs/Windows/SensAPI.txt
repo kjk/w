@@ -1,0 +1,28 @@
+include Headers\windows.h.txt
+
+dll SensAPI.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Diagnostics/System Event Notification Service (SENS)"
+struct QOCINFO
+  dwSize DWORD
+  dwFlags DWORD
+  dwInSpeed DWORD
+  dwOutSpeed DWORD
+
+pointer LPQOCINFO QOCINFO
+
+flag [NetworkAliveFlags] DWORD display=DWORD
+  NETWORK_ALIVE_LAN 0x00000001
+  NETWORK_ALIVE_WAN 0x00000002
+  NETWORK_ALIVE_AOL 0x00000004
+
+pointer [NetworkAliveFlags*] [NetworkAliveFlags] display=LPDWORD
+
+func IsDestinationReachable bothCharset
+  BOOL
+  lpszDestination LPCSTR
+  lpQOCInfo LPQOCINFO
+
+func IsNetworkAlive
+  BOOL
+  lpdwFlags [NetworkAliveFlags*]
+

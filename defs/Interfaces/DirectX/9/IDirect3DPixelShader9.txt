@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3DPixelShader9 base=IUnknown id={6D3BDBDC-5B02-4415-B852-CE5E8BCCB289} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func GetDevice
+    HRESULT
+    ppDevice IDirect3DDevice9**
+
+  func GetFunction
+    HRESULT
+    pData void*
+    pSizeOfData UINT*
+
+

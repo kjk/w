@@ -1,0 +1,8 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemSink base=IDispatch id={75718C9F-F029-11d1-A1AC-00C04FB6C223} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func Cancel
+    WBEMSTATUS
+
+

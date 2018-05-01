@@ -1,0 +1,9 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDCompositionTarget base=IUnknown id={eacdd04c-117e-4e17-88f4-d1b12b0e3d89} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func SetRoot
+    HRESULT
+    visual IDCompositionVisual*
+
+

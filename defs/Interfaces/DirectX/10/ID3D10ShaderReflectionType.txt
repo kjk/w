@@ -1,0 +1,23 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10ShaderReflectionType id={C530AD7D-9B16-4395-A979-BA2ECFF83ADD} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Shader"
+  func GetDesc
+    HRESULT
+    pDesc D3D10_SHADER_TYPE_DESC*
+
+  func GetMemberTypeByIndex
+    success NotEqual=0
+    ID3D10ShaderReflectionType*
+    Index UINT
+
+  func GetMemberTypeByName
+    success NotEqual=0
+    ID3D10ShaderReflectionType*
+    Name LPCSTR
+
+  func GetMemberTypeName
+    success NotEqual=0
+    LPCSTR
+    Index UINT
+
+

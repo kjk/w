@@ -1,0 +1,29 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDropTargetHelper base=IUnknown id={4657278B-411B-11D2-839A-00C04FD918D0} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func DragEnter
+    HRESULT
+    hwndTarget HWND
+    pDataObject IDataObject*
+    ppt POINT*
+    dwEffect DWORD
+
+  func DragLeave
+    HRESULT
+
+  func DragOver
+    HRESULT
+    ppt POINT*
+    dwEffect DWORD
+
+  func Drop
+    HRESULT
+    pDataObject IDataObject*
+    ppt POINT*
+    dwEffect DWORD
+
+  func Show
+    HRESULT
+    fShow BOOL
+
+

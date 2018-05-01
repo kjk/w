@@ -1,0 +1,446 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+include Headers\multimedia.h.txt
+
+dll msvfw32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Video for Windows/DrawDib/Library"
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Video for Windows/DrawDib/Image Rendering"
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Video for Windows/DrawDib/Sequences of Images"
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Video for Windows/DrawDib/Palettes"
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Video for Windows/DrawDib/Timing"
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Video for Windows/AVIFile"
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/MCIWnd Window Class"
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Video for Windows/Video Compression Manager"
+alias HIC HANDLE
+
+alias HDRAWDIB HANDLE
+
+array "WCHAR [16]" base=WCHAR count=16
+
+struct DRAWDIBTIME
+  timeCount LONG
+  timeDraw LONG
+  timeDecompress LONG
+  timeDither LONG
+  timeStretch LONG
+  timeBlt LONG
+  timeSetDIBits LONG
+
+pointer LPDRAWDIBTIME DRAWDIBTIME
+
+struct COMPVARS
+  cbSize LONG
+  dwFlags DWORD
+  hic HIC
+  fccType DWORD
+  fccHandler DWORD
+  lpbiIn LPBITMAPINFO
+  lpbiOut LPBITMAPINFO
+  lpBitsOut LPVOID
+  lpBitsPrev LPVOID
+  lFrame LONG
+  lKey LONG
+  lDataRate LONG
+  lQ LONG
+  lKeyCount LONG
+  lpState LPVOID
+  cbState LONG
+
+pointer PCOMPVARS COMPVARS
+
+flag [VIDCF] DWORD display=DWORD
+  VIDCF_QUALITY        0x0001
+  VIDCF_CRUNCH         0x0002
+  VIDCF_TEMPORAL       0x0004
+  VIDCF_COMPRESSFRAMES 0x0008
+  VIDCF_DRAW           0x0010
+  VIDCF_FASTTEMPORALC  0x0020
+  VIDCF_QUALITYTIME    0x0040
+  VIDCF_FASTTEMPORALD  0x0080
+
+struct ICINFO
+  dwSize DWORD
+  fccType FOURCC display=DWORD
+  fccHandler DWORD
+  dwFlags [VIDCF]
+  dwVersion DWORD
+  dwVersionICM DWORD
+  szName "WCHAR [16]"
+  szDescription "WCHAR [128]"
+  szDriver "WCHAR [128]"
+
+pointer ICINFO* ICINFO
+
+flag [ICOpenFlags] UINT display=UINT
+  ICMODE_COMPRESS       1
+  ICMODE_DECOMPRESS     2
+  ICMODE_FASTDECOMPRESS 3
+  ICMODE_QUERY          4
+  ICMODE_FASTCOMPRESS   5
+  ICMODE_DRAW           8
+
+enum [ICMessage] UINT display=UINT
+  ICM_COMPRESS_GET_FORMAT    0x00004004
+  ICM_COMPRESS_GET_SIZE      0x00004005
+  ICM_COMPRESS_QUERY         0x00004006
+  ICM_COMPRESS_BEGIN         0x00004007
+  ICM_COMPRESS               0x00004008
+  ICM_COMPRESS_END           0x00004009
+  ICM_DECOMPRESS_GET_FORMAT  0x0000400a
+  ICM_DECOMPRESS_QUERY       0x0000400b
+  ICM_DECOMPRESS_BEGIN       0x0000400c
+  ICM_DECOMPRESS             0x0000400d
+  ICM_DECOMPRESS_END         0x0000400e
+  ICM_DRAW_BEGIN             0x0000400f
+  ICM_DRAW_GET_PALETTE       0x00004010
+  ICM_DRAW_UPDATE            0x00004011
+  ICM_DRAW_START             0x00004012
+  ICM_DRAW_STOP              0x00004013
+  ICM_DRAW_BITS              0x00004014
+  ICM_DRAW_END               0x00004015
+  ICM_DECOMPRESS_SET_PALETTE 0x0000401d
+  ICM_DECOMPRESS_GET_PALETTE 0x0000401e
+  ICM_DRAW_QUERY             0x0000401f
+  ICM_DRAW_GETTIME           0x00004020
+  ICM_DRAW                   0x00004021
+  ICM_DRAW_WINDOW            0x00004022
+  ICM_DRAW_SETTIME           0x00004023
+  ICM_DRAW_REALIZE           0x00004024
+  ICM_DRAW_FLUSH             0x00004025
+  ICM_DRAW_RENDERBUFFER      0x00004026
+  ICM_DRAW_START_PLAY        0x00004027
+  ICM_DRAW_STOP_PLAY         0x00004028
+  ICM_GETBUFFERSWANTED       0x00004029
+  ICM_GETDEFAULTKEYFRAMERATE 0x0000402a
+  ICM_DRAW_SUGGESTFORMAT     0x00004032
+  ICM_DRAW_CHANGEPALETTE     0x00004033
+  ICM_DRAW_IDLE              0x00004034
+  ICM_DECOMPRESSEX_BEGIN     0x0000403c
+  ICM_DECOMPRESSEX_QUERY     0x0000403d
+  ICM_DECOMPRESSEX           0x0000403e
+  ICM_DECOMPRESSEX_END       0x0000403f
+  ICM_COMPRESS_FRAMES_INFO   0x00004046
+  ICM_COMPRESS_FRAMES        0x00004047
+  ICM_SET_STATUS_PROC        0x00004048
+
+enum [ICERR] DWORD display=DWORD
+  success Equal=0
+  ICERR_BADIMAGESIZE -201
+  ICERR_BADBITDEPTH  -200
+  ICERR_ERROR        -100
+  ICERR_ABORT        -10
+  ICERR_CANTUPDATE   -9
+  ICERR_BADHANDLE    -8
+  ICERR_BADSIZE      -7
+  ICERR_BADPARAM     -6
+  ICERR_BADFLAGS     -5
+  ICERR_INTERNAL     -4
+  ICERR_MEMORY       -3
+  ICERR_BADFORMAT    -2
+  ICERR_UNSUPPORTED  -1
+  ICERR_OK           0
+  ICERR_DONTDRAW     1
+  ICERR_NEWPALETTE   2
+  ICERR_GOTOKEYFRAME 3
+  ICERR_STOPDRAWING  4
+
+func DrawDibOpen
+  success NotEqual=0
+  HDRAWDIB
+
+func DrawDibClose
+  BOOL
+  hdd HDRAWDIB
+
+func DrawDibProfileDisplay
+  BOOL
+  lpbi LPBITMAPINFOHEADER
+
+func DrawDibDraw
+  BOOL
+  hdd HDRAWDIB
+  hdc HDC
+  xDst int
+  yDst int
+  dxDst int
+  dyDst int
+  lpbi LPBITMAPINFOHEADER
+  lpBits LPVOID
+  xSrc int
+  ySrc int
+  dxSrc int
+  dySrc int
+  wFlags UINT
+
+func DrawDibGetBuffer
+  success NotEqual=0
+  LPVOID
+  hdd HDRAWDIB
+  lpbi LPBITMAPINFOHEADER
+  dwSize DWORD
+  dwFlags DWORD
+
+func StretchDIB
+  void
+  biDst LPBITMAPINFOHEADER
+  lpvDst LPVOID
+  DstX int
+  DstY int
+  DstXE int
+  DstYE int
+  biSrc LPBITMAPINFOHEADER
+  lpvSrc LPVOID
+  SrcX int
+  SrcY int
+  SrcXE int
+  SrcYE int
+
+func DrawDibBegin
+  BOOL
+  hdd HDRAWDIB
+  hdc HDC
+  dxDest int
+  dyDest int
+  lpbi LPBITMAPINFOHEADER
+  dxSrc int
+  dySrc int
+  wFlags UINT
+
+func DrawDibEnd
+  BOOL
+  hdd HDRAWDIB
+
+func DrawDibStart
+  BOOL
+  hdd HDRAWDIB
+  rate LONG
+
+func DrawDibStop
+  BOOL
+  hdd HDRAWDIB
+
+func DrawDibRealize
+  success NotEqual=0
+  UINT
+  hdd HDRAWDIB
+  hdc HDC
+  fBackground BOOL
+
+func DrawDibSetPalette
+  BOOL
+  hdd HDRAWDIB
+  hpal HPALETTE
+
+func DrawDibGetPalette
+  success NotEqual=0
+  HPALETTE
+  hdd HDRAWDIB
+
+func DrawDibChangePalette
+  BOOL
+  hdd HDRAWDIB
+  iStart int
+  iLen int
+  lppe LPPALETTEENTRY
+
+func DrawDibTime
+  BOOL
+  hdd HDRAWDIB
+  lpddtime LPDRAWDIBTIME
+
+func GetOpenFileNamePreview bothCharset
+  BOOL
+  lpofn LPOPENFILENAME
+
+func GetSaveFileNamePreview bothCharset
+  BOOL
+  lpofn LPOPENFILENAME
+
+func MCIWndCreate bothCharset
+  success NotEqual=0
+  HWND
+  hwndParent HWND
+  hInstance HINSTANCE
+  dwStyle DWORD
+  szFile LPCTSTR
+
+func MCIWndRegisterClass
+  BOOL
+  hInstance HINSTANCE
+
+func ICClose
+  [ICERR] display=LRESULT
+  hic HIC
+
+func ICCompress
+  [ICERR]
+  hic HIC
+  dwFlags DWORD
+  lpbiOutput LPBITMAPINFOHEADER
+  lpData LPVOID
+  lpbiInput LPBITMAPINFOHEADER
+  lpBits LPVOID
+  lpckid LPDWORD
+  lpdwFlags LPDWORD
+  lFrameNum LONG
+  dwFrameSize DWORD
+  dwQuality DWORD
+  lpbiPrev LPBITMAPINFOHEADER
+  lpPrev LPVOID
+
+func ICCompressorChoose
+  BOOL
+  hwnd HWND
+  uiFlags UINT
+  pvIn LPVOID
+  lpData LPVOID
+  pc PCOMPVARS
+  lpszTitle LPSTR
+
+func ICCompressorFree
+  void
+  pc PCOMPVARS
+
+func ICDecompress
+  [ICERR]
+  hic HIC
+  dwFlags DWORD
+  lpbiFormat LPBITMAPINFOHEADER
+  lpData LPVOID
+  lpbi LPBITMAPINFOHEADER
+  lpBits LPVOID
+
+func ICDraw
+  [ICERR]
+  hic HIC
+  dwFlags DWORD
+  lpFormat LPVOID
+  lpData LPVOID
+  cbData DWORD
+  lTime LONG
+
+func ICDrawBegin
+  [ICERR]
+  hic HIC
+  dwFlags DWORD
+  hpal HPALETTE
+  hwnd HWND
+  hdc HDC
+  xDst int
+  yDst int
+  dxDst int
+  dyDst int
+  lpbi LPBITMAPINFOHEADER
+  xSrc int
+  ySrc int
+  dxSrc int
+  dySrc int
+  dwRate DWORD
+  dwScale DWORD
+
+func ICGetDisplayFormat
+  success NotEqual=0
+  HIC
+  hic HIC
+  lpbiIn LPBITMAPINFOHEADER
+  lpbiOut LPBITMAPINFOHEADER
+  BitDepth int
+  dx int
+  dy int
+
+func ICGetInfo
+  success NotEqual=0
+  LRESULT
+  hic HIC
+  lpicinfo ICINFO* length=cb
+  cb DWORD
+
+func ICImageCompress
+  success NotEqual=0
+  HANDLE
+  hic HIC
+  uiFlags UINT
+  lpbiIn LPBITMAPINFO
+  lpBits LPVOID
+  lpbiOut LPBITMAPINFO
+  lQuality LONG
+  plSize LONG*
+
+func ICImageDecompress
+  success NotEqual=0
+  HANDLE
+  hic HIC
+  uiFlags UINT
+  lpbiIn LPBITMAPINFO
+  lpBits LPVOID
+  lpbiOut LPBITMAPINFO
+
+func ICInfo
+  BOOL
+  fccType DWORD
+  fccHandler DWORD
+  lpicinfo ICINFO*
+
+func ICInstall
+  BOOL
+  fccType DWORD
+  fccHandler DWORD
+  lParam LPARAM
+  szDesc LPSTR
+  wFlags UINT
+
+func ICLocate
+  success NotEqual=0
+  HIC
+  fccType DWORD
+  fccHandler DWORD
+  lpbiIn LPBITMAPINFOHEADER
+  lpbiOut LPBITMAPINFOHEADER
+  wFlags [ICOpenFlags] display=WORD
+
+func ICOpen
+  success NotEqual=0
+  HIC
+  fccType DWORD
+  fccHandler DWORD
+  wMode [ICOpenFlags]
+
+func ICOpenFunction
+  success NotEqual=0
+  HIC
+  fccType DWORD
+  fccHandler DWORD
+  wMode [ICOpenFlags]
+  lpfnHandler FARPROC
+
+func ICRemove
+  BOOL
+  fccType DWORD
+  fccHandler DWORD
+  wFlags UINT
+
+func ICSendMessage
+  LRESULT
+  hic HIC
+  wMsg [ICMessage]
+  dw1 DWORD
+  dw2 DWORD
+
+func ICSeqCompressFrame
+  success NotEqual=0
+  LPVOID
+  pc PCOMPVARS
+  uiFlags UINT
+  lpBits LPVOID
+  pfKey BOOL*
+  plSize LONG*
+
+func ICSeqCompressFrameEnd
+  void
+  pc PCOMPVARS
+
+func ICSeqCompressFrameStart
+  BOOL
+  pc PCOMPVARS
+  lpbiIn LPBITMAPINFO
+

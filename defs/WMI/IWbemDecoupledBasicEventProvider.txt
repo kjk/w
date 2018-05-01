@@ -1,0 +1,17 @@
+include WMI\IWbemDecoupledRegistrar.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemDecoupledBasicEventProvider base=IWbemDecoupledRegistrar id={86336d20-ca11-4786-9ef1-bc8a946b42fc} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func GetSink
+    WBEMSTATUS
+    a_Flags long
+    a_Context IWbemContext*
+    a_Sink IWbemObjectSink**
+
+  func GetService
+    WBEMSTATUS
+    a_Flags long
+    a_Context IWbemContext*
+    a_Service IWbemServices**
+
+

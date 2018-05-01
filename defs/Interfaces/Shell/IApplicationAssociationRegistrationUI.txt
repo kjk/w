@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IApplicationAssociationRegistrationUI base=IUnknown id={1f76a169-f994-40ac-8fc8-0959e8874710} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func LaunchAdvancedAssociationUI
+    HRESULT
+    pszAppRegistryName LPCWSTR
+
+

@@ -1,0 +1,37 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Image.txt
+
+ingterface ID2D1Bitmap base=ID2D1Image id={a2296057-ea42-4099-983b-539fb6505426} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetSize
+    D2D1_SIZE_F
+
+  func GetPixelSize
+    D2D1_SIZE_U
+
+  func GetPixelFormat
+    D2D1_PIXEL_FORMAT
+
+  func GetDpi
+    void
+    dpiX FLOAT*
+    dpiY FLOAT*
+
+  func CopyFromBitmap
+    [D2D_HRESULT]
+    destPoint "CONST D2D1_POINT_2U*"
+    bitmap ID2D1Bitmap*
+    srcRect "CONST D2D1_RECT_U*"
+
+  func CopyFromRenderTarget
+    [D2D_HRESULT]
+    destPoint "CONST D2D1_POINT_2U*"
+    renderTarget ID2D1RenderTarget*
+    srcRect "CONST D2D1_RECT_U*"
+
+  func CopyFromMemory
+    [D2D_HRESULT]
+    dstRect "CONST D2D1_RECT_U*"
+    srcData "CONST void*"
+    pitch UINT32
+
+

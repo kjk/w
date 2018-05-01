@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11View.txt
+
+ingterface ID3D11RenderTargetView base=ID3D11View id={dfdba067-0b8d-4865-875b-d7b4516cc164} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Resource"
+  func GetDesc
+    void
+    pDesc D3D11_RENDER_TARGET_VIEW_DESC*
+
+

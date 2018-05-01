@@ -1,0 +1,59 @@
+include Interfaces\IUnknown.txt
+include Headers\registry.h.txt
+
+ingterface IShellMenu base=IUnknown id={EE1F7637-E138-11d1-8379-00C04FD918D0} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    psmc IShellMenuCallback*
+    uId UINT
+    uIdAncestor UINT
+    dwFlags DWORD
+
+  func GetMenuInfo
+    HRESULT
+    ppsmc IShellMenuCallback**
+    puId UINT*
+    puIdAncestor UINT*
+    pdwFlags DWORD*
+
+  func SetShellFolder
+    HRESULT
+    psf IShellFolder*
+    pidlFolder PCIDLIST_ABSOLUTE
+    hKey HKEY
+    dwFlags DWORD
+
+  func GetShellFolder
+    HRESULT
+    pdwFlags DWORD*
+    ppidl PIDLIST_ABSOLUTE*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func SetMenu
+    HRESULT
+    hmenu HMENU
+    hwnd HWND
+    dwFlags DWORD
+
+  func GetMenu
+    HRESULT
+    phmenu HMENU*
+    phwnd HWND*
+    pdwFlags DWORD*
+
+  func InvalidateItem
+    HRESULT
+    psmd LPSMDATA
+    dwFlags DWORD
+
+  func GetState
+    HRESULT
+    psmd LPSMDATA
+
+  func SetMenuToolbar
+    HRESULT
+    punk IUnknown*
+    dwFlags DWORD
+
+

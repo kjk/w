@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioClockAdjustment base=IUnknown id={f6e4c0a0-46d9-4fb8-be21-57a3ef2b626c} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func SetSampleRate
+    [AUDCLNT_HRESULT]
+    flSampleRate float
+
+

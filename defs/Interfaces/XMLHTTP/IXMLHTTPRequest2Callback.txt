@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+include Interfaces\XMLHTTP\XMLHTTP.h.txt
+
+ingterface IXMLHTTPRequest2Callback base=IUnknown id={A44A9299-E321-40DE-8866-341B41669162} errorFunc=HRESULT onlineHelp=MSDN category="Internet/XML HTTP Request"
+  func OnRedirect
+    HRESULT
+    pXHR IXMLHTTPRequest2*
+    pwszRedirectUrl "const WCHAR*"
+
+  func OnHeadersAvailable
+    HRESULT
+    pXHR IXMLHTTPRequest2*
+    dwStatus [HTTP_STATUS]
+    pwszStatus "const WCHAR*"
+
+  func OnDataAvailable
+    HRESULT
+    pXHR IXMLHTTPRequest2*
+    pResponseStream ISequentialStream*
+
+  func OnResponseReceived
+    HRESULT
+    pXHR IXMLHTTPRequest2*
+    pResponseStream ISequentialStream*
+
+  func OnError
+    HRESULT
+    pXHR IXMLHTTPRequest2*
+    hrError HRESULT
+
+

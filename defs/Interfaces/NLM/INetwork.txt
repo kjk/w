@@ -1,0 +1,60 @@
+include Interfaces\IDispatch.txt
+include Interfaces\NLM\NLMDefs.h.txt
+
+ingterface INetwork base=IDispatch id={DCB00002-570F-4A9B-8D69-199FDBA5723B} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Network List Manager"
+  func GetName
+    HRESULT
+    pszNetworkName BSTR*
+
+  func SetName
+    HRESULT
+    szNetworkNewName BSTR
+
+  func GetDescription
+    HRESULT
+    pszDescription BSTR*
+
+  func SetDescription
+    HRESULT
+    szDescription BSTR
+
+  func GetNetworkId
+    HRESULT
+    pgdGuidNetworkId GUID*
+
+  func GetDomainType
+    HRESULT
+    pNetworkType NLM_DOMAIN_TYPE*
+
+  func GetNetworkConnections
+    HRESULT
+    ppEnumNetworkConnection IEnumNetworkConnections**
+
+  func GetTimeCreatedAndConnected
+    HRESULT
+    pdwLowDateTimeCreated DWORD*
+    pdwHighDateTimeCreated DWORD*
+    pdwLowDateTimeConnected DWORD*
+    pdwHighDateTimeConnected DWORD*
+
+  func get_IsConnectedToInternet
+    HRESULT
+    pbIsConnected VARIANT_BOOL*
+
+  func get_IsConnected
+    HRESULT
+    pbIsConnected VARIANT_BOOL*
+
+  func GetConnectivity
+    HRESULT
+    pConnectivity NLM_CONNECTIVITY*
+
+  func GetCategory
+    HRESULT
+    pCategory NLM_NETWORK_CATEGORY*
+
+  func SetCategory
+    HRESULT
+    NewCategory NLM_NETWORK_CATEGORY
+
+

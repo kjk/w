@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\DeviceAccess\DeviceAccess.h.txt
+
+ingterface IDeviceRequestCompletionCallback base=IUnknown id={999BAD24-9ACD-45BB-8669-2A2FC0288B04} errorFunc=HRESULT onlineHelp=MSDN category="Devices/Device Access"
+  func RequestCompletion
+    HRESULT
+    requestResult HRESULT
+    bytesReturned DWORD
+
+

@@ -1,0 +1,43 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1TransformGraph base=IUnknown id={13d29038-c3e6-4034-9081-13b53a417992} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetInputCount
+    UINT32
+
+  func SetSingleTransformNode
+    [D2D_HRESULT]
+    node ID2D1TransformNode*
+
+  func AddNode
+    [D2D_HRESULT]
+    node ID2D1TransformNode*
+
+  func RemoveNode
+    [D2D_HRESULT]
+    node ID2D1TransformNode*
+
+  func SetOutputNode
+    [D2D_HRESULT]
+    node ID2D1TransformNode*
+
+  func ConnectNode
+    [D2D_HRESULT]
+    fromNode ID2D1TransformNode*
+    toNode ID2D1TransformNode*
+    toNodeInputIndex UINT32
+
+  func ConnectToEffectInput
+    [D2D_HRESULT]
+    toEffectInputIndex UINT32
+    node ID2D1TransformNode*
+    toNodeInputIndex UINT32
+
+  func Clear
+    void
+
+  func SetPassthroughGraph
+    [D2D_HRESULT]
+    effectInputIndex UINT32
+
+

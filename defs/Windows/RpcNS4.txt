@@ -1,0 +1,213 @@
+include Headers\windows.h.txt
+include Headers\rpc.h.txt
+
+dll RpcNS4.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Networking/Remote Procedure Call (RPC)/Name Service"
+func RpcNsBindingExport bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+  IfSpec RPC_IF_HANDLE
+  BindingVec RPC_BINDING_VECTOR*
+  ObjectUuidVec UUID_VECTOR*
+
+func RpcNsBindingExportPnP bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+  IfSpec RPC_IF_HANDLE
+  ObjectUuidVec UUID_VECTOR*
+
+func RpcNsBindingImportBegin bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+  IfSpec RPC_IF_HANDLE
+  ObjUuid UUID*
+  ImportContext RPC_NS_HANDLE*
+
+func RpcNsBindingImportDone
+  RPC_STATUS
+  ImportContext RPC_NS_HANDLE*
+
+func RpcNsBindingImportNext
+  RPC_STATUS
+  ImportContext RPC_NS_HANDLE
+  Binding RPC_BINDING_HANDLE*
+
+func RpcNsBindingLookupBegin bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+  IfSpec RPC_IF_HANDLE
+  ObjUuid UUID*
+  BindingMaxCount "unsigned long"
+  LookupContext RPC_NS_HANDLE*
+
+func RpcNsBindingLookupDone
+  RPC_STATUS
+  LookupContext RPC_NS_HANDLE*
+
+func RpcNsBindingLookupNext
+  RPC_STATUS
+  LookupContext RPC_NS_HANDLE
+  BindingVec RPC_BINDING_VECTOR**
+
+func RpcNsBindingSelect
+  RPC_STATUS
+  BindingVec RPC_BINDING_VECTOR*
+  Binding RPC_BINDING_HANDLE*
+
+func RpcNsBindingUnexport bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+  IfSpec RPC_IF_HANDLE
+  ObjectUuidVec UUID_VECTOR*
+
+func RpcNsBindingUnexportPnP bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+  IfSpec RPC_IF_HANDLE
+  ObjectUuidVec UUID_VECTOR*
+
+func RpcNsEntryExpandName bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+  ExpandedName "unsigned char**"
+
+func RpcNsEntryObjectInqBegin bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+  InquiryContext RPC_NS_HANDLE*
+
+func RpcNsEntryObjectInqDone
+  RPC_STATUS
+  InquiryContext RPC_NS_HANDLE*
+
+func RpcNsEntryObjectInqNext
+  RPC_STATUS
+  InquiryContext RPC_NS_HANDLE
+  ObjUuid UUID*
+
+func RpcNsGroupDelete bothCharset
+  RPC_STATUS
+  GroupNameSyntax "unsigned long"
+  GroupName "unsigned char*"
+
+func RpcNsGroupMbrAdd bothCharset
+  RPC_STATUS
+  GroupNameSyntax "unsigned long"
+  GroupName "unsigned char*"
+  MemberNameSyntax "unsigned long"
+  MemberName "unsigned char*"
+
+func RpcNsGroupMbrInqBegin bothCharset
+  RPC_STATUS
+  GroupNameSyntax "unsigned long"
+  GroupName "unsigned char*"
+  MemberNameSyntax "unsigned long"
+  InquiryContext RPC_NS_HANDLE*
+
+func RpcNsGroupMbrInqDone
+  RPC_STATUS
+  InquiryContext RPC_NS_HANDLE*
+
+func RpcNsGroupMbrInqNext bothCharset
+  RPC_STATUS
+  InquiryContext RPC_NS_HANDLE
+  MemberName "unsigned char**"
+
+func RpcNsGroupMbrRemove bothCharset
+  RPC_STATUS
+  GroupNameSyntax "unsigned long"
+  GroupName "unsigned char*"
+  MemberNameSyntax "unsigned long"
+  MemberName "unsigned char*"
+
+func RpcNsMgmtBindingUnexport bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+  IfId RPC_IF_ID*
+  VersOption "unsigned long"
+  ObjectUuidVec UUID_VECTOR*
+
+func RpcNsMgmtEntryCreate bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+
+func RpcNsMgmtEntryDelete bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+
+func RpcNsMgmtEntryInqIfIds bothCharset
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned char*"
+  IfIdVec RPC_IF_ID_VECTOR**
+
+func RpcNsMgmtHandleSetExpAge
+  RPC_STATUS
+  NsHandle RPC_NS_HANDLE
+  ExpirationAge "unsigned long"
+
+func RpcNsMgmtInqExpAge
+  RPC_STATUS
+  ExpirationAge "unsigned long*"
+
+func RpcNsMgmtSetExpAge
+  RPC_STATUS
+  ExpirationAge "unsigned long"
+
+func RpcNsProfileDelete bothCharset
+  RPC_STATUS
+  ProfileNameSyntax "unsigned long"
+  ProfileName "unsigned char*"
+
+func RpcNsProfileEltAdd bothCharset
+  RPC_STATUS
+  ProfileNameSyntax "unsigned long"
+  ProfileName "unsigned char*"
+  IfId RPC_IF_ID*
+  MemberNameSyntax "unsigned long"
+  MemberName "unsigned char*"
+  Priority "unsigned long"
+  Annotation "unsigned char*"
+
+func RpcNsProfileEltInqBegin bothCharset
+  RPC_STATUS
+  ProfileNameSyntax "unsigned long"
+  ProfileName "unsigned char*"
+  InquiryType "unsigned long"
+  IfId RPC_IF_ID*
+  VersOption "unsigned long"
+  MemberNameSyntax "unsigned long"
+  MemberName "unsigned char*"
+  InquiryContext RPC_NS_HANDLE*
+
+func RpcNsProfileEltInqDone
+  RPC_STATUS
+  InquiryContext RPC_NS_HANDLE*
+
+func RpcNsProfileEltInqNext bothCharset
+  RPC_STATUS
+  InquiryContext RPC_NS_HANDLE
+  IfId RPC_IF_ID*
+  MemberName "unsigned char**"
+  Priority "unsigned long*"
+  Annotation "unsigned char**"
+
+func RpcNsProfileEltRemove bothCharset
+  RPC_STATUS
+  ProfileNameSyntax "unsigned long"
+  ProfileName "unsigned char*"
+  IfId RPC_IF_ID*
+  MemberNameSyntax "unsigned long"
+  MemberName "unsigned char*"
+

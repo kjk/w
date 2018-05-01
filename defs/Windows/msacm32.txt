@@ -1,0 +1,426 @@
+include Headers\windows.h.txt
+include Headers\multimedia.h.txt
+
+dll msacm32.dll callingConvention=STDCALL onlineHelp=MSDN
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Multimedia Audio/Audio Compression Manager/Drivers"
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Multimedia Audio/Audio Compression Manager/Filters"
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Multimedia Audio/Audio Compression Manager/Formats"
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Multimedia Audio/Audio Compression Manager/Miscellaneous"
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Multimedia Audio/Audio Compression Manager/Streams"
+arch 32
+array "DWORD [_DRVRESERVED]" base=DWORD count=10
+
+arch off
+arch 64
+array "DWORD [_DRVRESERVED]" base=DWORD count=15
+
+arch off
+alias HACMSTREAM HANDLE
+
+pointer LPHACMSTREAM HACMSTREAM
+
+alias HACMOBJ HANDLE
+
+alias HACMDRIVER HANDLE
+
+pointer LPHACMDRIVER HACMDRIVER
+
+alias HACMDRIVERID HANDLE
+
+pointer LPHACMDRIVERID HACMDRIVERID
+
+alias ACMDRIVERENUMCB LPVOID
+
+alias ACMFILTERENUMCB LPVOID
+
+alias ACMFILTERTAGENUMCB LPVOID
+
+alias ACMFORMATENUMCB LPVOID
+
+alias ACMFORMATTAGENUMCB LPVOID
+
+alias ACMFORMATCHOOSEHOOKPROC LPVOID
+
+alias ACMFILTERCHOOSEHOOKPROC LPVOID
+
+array "TCHAR [ACMFORMATTAGDETAILS_FORMATTAG_CHARS]" base=TCHAR count=48
+
+array "TCHAR [ACMFILTERTAGDETAILS_FILTERTAG_CHARS]" base=TCHAR count=48
+
+array "TCHAR [ACMFORMATDETAILS_FORMAT_CHARS]" base=TCHAR count=128
+
+array "TCHAR [ACMFILTERDETAILS_FILTER_CHARS]" base=TCHAR count=128
+
+array "TCHAR [ACMDRIVERDETAILS_SHORTNAME_CHARS]" base=TCHAR count=32
+
+array "TCHAR [ACMDRIVERDETAILS_LONGNAME_CHARS]" base=TCHAR count=128
+
+array "TCHAR [ACMDRIVERDETAILS_COPYRIGHT_CHARS]" base=TCHAR count=80
+
+array "TCHAR [ACMDRIVERDETAILS_LICENSING_CHARS]" base=TCHAR count=128
+
+array "TCHAR [ACMDRIVERDETAILS_FEATURES_CHARS]" base=TCHAR count=512
+
+struct WAVEFILTER pack=1
+  cbStruct DWORD
+  dwFilterTag DWORD
+  fdwFilter DWORD
+  dwReserved "DWORD [5]"
+
+pointer LPWAVEFILTER WAVEFILTER
+
+flag [ACMDRIVERDETAILS_SUPPORTF] DWORD display=DWORD
+  ACMDRIVERDETAILS_SUPPORTF_CODEC     0x00000001
+  ACMDRIVERDETAILS_SUPPORTF_CONVERTER 0x00000002
+  ACMDRIVERDETAILS_SUPPORTF_FILTER    0x00000004
+  ACMDRIVERDETAILS_SUPPORTF_HARDWARE  0x00000008
+  ACMDRIVERDETAILS_SUPPORTF_ASYNC     0x00000010
+  ACMDRIVERDETAILS_SUPPORTF_LOCAL     0x40000000
+  ACMDRIVERDETAILS_SUPPORTF_DISABLED  0x80000000
+
+struct ACMDRIVERDETAILS pack=1
+  cbStruct DWORD
+  fccType FOURCC
+  fccComp FOURCC
+  wMid WORD
+  wPid WORD
+  vdwACM DWORD
+  vdwDriver DWORD
+  fdwSupport [ACMDRIVERDETAILS_SUPPORTF]
+  cFormatTags DWORD
+  cFilterTags DWORD
+  hicon HICON
+  szShortName "TCHAR [ACMDRIVERDETAILS_SHORTNAME_CHARS]"
+  szLongName "TCHAR [ACMDRIVERDETAILS_LONGNAME_CHARS]"
+  szCopyright "TCHAR [ACMDRIVERDETAILS_COPYRIGHT_CHARS]"
+  szLicensing "TCHAR [ACMDRIVERDETAILS_LICENSING_CHARS]"
+  szFeatures "TCHAR [ACMDRIVERDETAILS_FEATURES_CHARS]"
+
+pointer LPACMDRIVERDETAILS ACMDRIVERDETAILS
+
+struct ACMFILTERDETAILS pack=1
+  cbStruct DWORD
+  dwFilterIndex DWORD
+  dwFilterTag DWORD
+  fdwSupport [ACMDRIVERDETAILS_SUPPORTF]
+  pwfltr LPWAVEFILTER
+  cbwfltr DWORD
+  szFilter "TCHAR [ACMFILTERDETAILS_FILTER_CHARS]"
+
+pointer LPACMFILTERDETAILS ACMFILTERDETAILS
+
+flag [ACMFILTERCHOOSE_STYLEF] DWORD display=DWORD
+  ACMFILTERCHOOSE_STYLEF_SHOWHELP             0x00000004
+  ACMFILTERCHOOSE_STYLEF_ENABLEHOOK           0x00000008
+  ACMFILTERCHOOSE_STYLEF_ENABLETEMPLATE       0x00000010
+  ACMFILTERCHOOSE_STYLEF_ENABLETEMPLATEHANDLE 0x00000020
+  ACMFILTERCHOOSE_STYLEF_INITTOFILTERSTRUCT   0x00000040
+  ACMFILTERCHOOSE_STYLEF_CONTEXTHELP          0x00000080
+
+flag [ACM_FILTERENUMF] DWORD display=DWORD
+  ACM_FILTERENUMF_DWFILTERTAG 0x00010000
+
+struct ACMFILTERCHOOSE pack=1
+  cbStruct DWORD
+  fdwStyle [ACMFILTERCHOOSE_STYLEF]
+  hwndOwner HWND
+  pwfltr LPWAVEFILTER
+  cbwfltr DWORD
+  pszTitle LPCTSTR
+  szFilterTag "TCHAR [ACMFILTERTAGDETAILS_FILTERTAG_CHARS]"
+  szFilter "TCHAR [ACMFILTERDETAILS_FILTER_CHARS]"
+  pszName LPTSTR
+  cchName DWORD
+  fdwEnum [ACM_FILTERENUMF]
+  pwfltrEnum LPWAVEFILTER
+  hInstance HINSTANCE
+  pszTemplateName LPCTSTR
+  lCustData LPARAM
+  pfnHook ACMFILTERCHOOSEHOOKPROC
+
+pointer LPACMFILTERCHOOSE ACMFILTERCHOOSE
+
+struct ACMFILTERTAGDETAILS pack=1
+  cbStruct DWORD
+  dwFilterTagIndex DWORD
+  dwFilterTag DWORD
+  cbFilterSize DWORD
+  fdwSupport [ACMDRIVERDETAILS_SUPPORTF]
+  cStandardFilters DWORD
+  szFilterTag "TCHAR [ACMFILTERTAGDETAILS_FILTERTAG_CHARS]"
+
+pointer LPACMFILTERTAGDETAILS ACMFILTERTAGDETAILS
+
+flag [ACMFORMATCHOOSE_STYLEF] DWORD display=DWORD
+  ACMFORMATCHOOSE_STYLEF_SHOWHELP             0x00000004
+  ACMFORMATCHOOSE_STYLEF_ENABLEHOOK           0x00000008
+  ACMFORMATCHOOSE_STYLEF_ENABLETEMPLATE       0x00000010
+  ACMFORMATCHOOSE_STYLEF_ENABLETEMPLATEHANDLE 0x00000020
+  ACMFORMATCHOOSE_STYLEF_INITTOWFXSTRUCT      0x00000040
+  ACMFORMATCHOOSE_STYLEF_CONTEXTHELP          0x00000080
+
+flag [ACM_FORMATENUMF] DWORD display=DWORD
+  ACM_FORMATENUMF_WFORMATTAG     0x00010000
+  ACM_FORMATENUMF_NCHANNELS      0x00020000
+  ACM_FORMATENUMF_NSAMPLESPERSEC 0x00040000
+  ACM_FORMATENUMF_WBITSPERSAMPLE 0x00080000
+  ACM_FORMATENUMF_CONVERT        0x00100000
+  ACM_FORMATENUMF_SUGGEST        0x00200000
+  ACM_FORMATENUMF_HARDWARE       0x00400000
+  ACM_FORMATENUMF_INPUT          0x00800000
+  ACM_FORMATENUMF_OUTPUT         0x01000000
+
+struct ACMFORMATCHOOSE pack=1
+  cbStruct DWORD
+  fdwStyle [ACMFORMATCHOOSE_STYLEF]
+  hwndOwner HWND
+  pwfx LPWAVEFORMATEX
+  cbwfx DWORD
+  pszTitle LPCWSTR
+  szFormatTag "TCHAR [ACMFORMATTAGDETAILS_FORMATTAG_CHARS]"
+  szFormat "TCHAR [ACMFORMATDETAILS_FORMAT_CHARS]"
+  pszName LPTSTR
+  cchName DWORD
+  fdwEnum [ACM_FORMATENUMF]
+  pwfxEnum LPWAVEFORMATEX
+  hInstance HINSTANCE
+  pszTemplateName LPCTSTR
+  lCustData LPARAM
+  pfnHook ACMFORMATCHOOSEHOOKPROC
+
+pointer LPACMFORMATCHOOSE ACMFORMATCHOOSE
+
+struct ACMFORMATDETAILS pack=1
+  cbStruct DWORD
+  dwFormatIndex DWORD
+  dwFormatTag DWORD
+  fdwSupport [ACMDRIVERDETAILS_SUPPORTF]
+  pwfx LPWAVEFORMATEX
+  cbwfx DWORD
+  szFormat "TCHAR [ACMFORMATDETAILS_FORMAT_CHARS]"
+
+pointer LPACMFORMATDETAILS ACMFORMATDETAILS
+
+struct ACMFORMATTAGDETAILS pack=1
+  cbStruct DWORD
+  dwFormatTagIndex DWORD
+  dwFormatTag DWORD
+  cbFormatSize DWORD
+  fdwSupport [ACMDRIVERDETAILS_SUPPORTF]
+  cStandardFormats DWORD
+  szFormatTag "TCHAR [ACMFORMATTAGDETAILS_FORMATTAG_CHARS]"
+
+pointer LPACMFORMATTAGDETAILS ACMFORMATTAGDETAILS
+
+flag [ACMSTREAMHEADER_STATUSF] DWORD display=DWORD
+  ACMSTREAMHEADER_STATUSF_DONE     0x00010000
+  ACMSTREAMHEADER_STATUSF_PREPARED 0x00020000
+  ACMSTREAMHEADER_STATUSF_INQUEUE  0x00100000
+
+struct ACMSTREAMHEADER pack=1
+  cbStruct DWORD
+  fdwStatus [ACMSTREAMHEADER_STATUSF]
+  dwUser DWORD_PTR
+  pbSrc LPBYTE
+  cbSrcLength DWORD
+  cbSrcLengthUsed DWORD
+  dwSrcUser DWORD_PTR
+  pbDst LPBYTE
+  cbDstLength DWORD
+  cbDstLengthUsed DWORD
+  dwDstUser DWORD_PTR
+  dwReservedDriver "DWORD [_DRVRESERVED]"
+
+pointer LPACMSTREAMHEADER ACMSTREAMHEADER
+
+func acmDriverAdd bothCharset
+  MMRESULT
+  phadid LPHACMDRIVERID
+  hinstModule HINSTANCE
+  lParam LPARAM
+  dwPriority DWORD
+  fdwAdd DWORD
+
+func acmDriverClose
+  MMRESULT
+  had HACMDRIVER
+  fdwClose DWORD
+
+func acmDriverDetails bothCharset
+  MMRESULT
+  hadid HACMDRIVERID
+  padd LPACMDRIVERDETAILS
+  fdwDetails DWORD
+
+func acmDriverEnum
+  MMRESULT
+  fnCallback ACMDRIVERENUMCB
+  dwInstance DWORD_PTR
+  fdwEnum DWORD
+
+func acmDriverID
+  MMRESULT
+  hao HACMOBJ
+  phadid LPHACMDRIVERID
+  fdwDriverID DWORD
+
+func acmDriverMessage
+  success NotEqual=0
+  LRESULT
+  had HACMDRIVER
+  uMsg UINT
+  lParam1 LPARAM
+  lParam2 LPARAM
+
+func acmDriverOpen
+  MMRESULT
+  phad LPHACMDRIVER
+  hadid HACMDRIVERID
+  fdwOpen DWORD
+
+func acmDriverPriority
+  MMRESULT
+  hadid HACMDRIVERID
+  dwPriority DWORD
+  fdwPriority DWORD
+
+func acmDriverRemove
+  MMRESULT
+  hadid HACMDRIVERID
+  fdwRemove DWORD
+
+func acmFilterChoose bothCharset
+  MMRESULT
+  pafltrc LPACMFILTERCHOOSE
+
+func acmFilterDetails bothCharset
+  MMRESULT
+  had HACMDRIVER
+  pafd LPACMFILTERDETAILS
+  fdwDetails DWORD
+
+func acmFilterEnum bothCharset
+  MMRESULT
+  had HACMDRIVER
+  pafd LPACMFILTERDETAILS
+  fnCallback ACMFILTERENUMCB
+  dwInstance DWORD_PTR
+  fdwEnum [ACM_FILTERENUMF]
+
+func acmFilterTagDetails bothCharset
+  MMRESULT
+  had HACMDRIVER
+  paftd LPACMFILTERTAGDETAILS
+  fdwDetails DWORD_PTR
+
+func acmFilterTagEnum bothCharset
+  MMRESULT
+  had HACMDRIVER
+  paftd LPACMFILTERTAGDETAILS
+  fnCallback ACMFILTERTAGENUMCB
+  dwInstance DWORD_PTR
+  fdwEnum DWORD
+
+func acmFormatChoose bothCharset
+  MMRESULT
+  pfmtc LPACMFORMATCHOOSE
+
+func acmFormatDetails bothCharset
+  MMRESULT
+  had HACMDRIVER
+  pafd LPACMFORMATDETAILS
+  fdwDetails DWORD
+
+func acmFormatEnum bothCharset
+  MMRESULT
+  had HACMDRIVER
+  pafd LPACMFORMATDETAILS
+  fnCallback ACMFORMATENUMCB
+  dwInstance DWORD_PTR
+  fdwEnum DWORD
+
+func acmFormatSuggest
+  MMRESULT
+  had HACMDRIVER
+  pwfxSrc LPWAVEFORMATEX
+  pwfxDst LPWAVEFORMATEX
+  cbwfxDst DWORD
+  fdwSuggest DWORD
+
+func acmFormatTagDetails bothCharset
+  MMRESULT
+  had HACMDRIVER
+  paftd LPACMFORMATTAGDETAILS
+  fdwDetails DWORD
+
+func acmFormatTagEnum bothCharset
+  MMRESULT
+  had HACMDRIVER
+  paftd LPACMFORMATTAGDETAILS
+  fnCallback ACMFORMATTAGENUMCB
+  dwInstance DWORD_PTR
+  fdwEnum DWORD
+
+func acmGetVersion
+  success NotEqual=0
+  DWORD
+
+func acmMetrics
+  MMRESULT
+  hao HACMOBJ
+  uMetric UINT
+  pMetric LPVOID
+
+func acmStreamClose
+  MMRESULT
+  has HACMSTREAM
+  fdwClose DWORD
+
+func acmStreamConvert
+  MMRESULT
+  has HACMSTREAM
+  pash LPACMSTREAMHEADER
+  fdwConvert DWORD
+
+func acmStreamMessage
+  MMRESULT
+  has HACMSTREAM
+  uMsg UINT
+  lParam1 LPARAM
+  lParam2 LPARAM
+
+func acmStreamOpen
+  MMRESULT
+  phas LPHACMSTREAM
+  had HACMDRIVER
+  pwfxSrc LPWAVEFORMATEX
+  pwfxDst LPWAVEFORMATEX
+  pwfltr LPWAVEFILTER
+  dwCallback DWORD_PTR
+  dwInstance DWORD_PTR
+  fdwOpen DWORD
+
+func acmStreamPrepareHeader
+  MMRESULT
+  has HACMSTREAM
+  pash LPACMSTREAMHEADER
+  fdwPrepare DWORD
+
+func acmStreamReset
+  MMRESULT
+  has HACMSTREAM
+  fdwReset DWORD
+
+func acmStreamSize
+  MMRESULT
+  has HACMSTREAM
+  cbInput DWORD
+  pdwOutputBytes LPDWORD
+  fdwSize DWORD
+
+func acmStreamUnprepareHeader
+  MMRESULT
+  has HACMSTREAM
+  pash LPACMSTREAMHEADER
+  fdwUnprepare DWORD
+

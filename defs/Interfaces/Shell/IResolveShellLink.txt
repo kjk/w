@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IResolveShellLink base=IUnknown id={5cd52983-9449-11d2-963a-00c04f79adf0} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func ResolveShellLink
+    HRESULT
+    punkLink IUnknown*
+    hwnd HWND
+    fFlags DWORD
+
+

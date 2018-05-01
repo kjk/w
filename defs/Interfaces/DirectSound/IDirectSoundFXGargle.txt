@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundFXGargle base=IUnknown id={d616f352-d622-11ce-aac5-0020af0b99a3} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func SetAllParameters
+    [DS_HRESULT]
+    pcDsFxGargle LPCDSFXGargle
+
+  func GetAllParameters
+    [DS_HRESULT]
+    pDsFxGargle LPDSFXGargle
+
+

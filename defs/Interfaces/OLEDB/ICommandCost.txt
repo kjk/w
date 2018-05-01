@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ICommandCost base=IUnknown id={0c733a4e-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func GetAccumulatedCost
+    [OLEDB_HRESULT]
+    pwszRowsetName LPCOLESTR
+    pcCostLimits ULONG*
+    prgCostLimits DBCOST** derefPostCount=pcCostLimits
+
+  func GetCostEstimate
+    [OLEDB_HRESULT]
+    pwszRowsetName LPCOLESTR
+    pcCostEstimates ULONG*
+    prgCostEstimates DBCOST* postCount=pcCostEstimates
+
+  func GetCostGoals
+    [OLEDB_HRESULT]
+    pwszRowsetName LPCOLESTR
+    pcCostGoals ULONG*
+    prgCostGoals DBCOST* postCount=pcCostGoals
+
+  func GetCostLimits
+    [OLEDB_HRESULT]
+    pwszRowsetName LPCOLESTR
+    pcCostLimits ULONG*
+    prgCostLimits DBCOST* postCount=pcCostLimits
+
+  func SetCostGoals
+    [OLEDB_HRESULT]
+    pwszRowsetName LPCOLESTR
+    cCostGoals ULONG
+    rgCostGoals "const DBCOST []" count=cCostGoals
+
+  func SetCostLimits
+    [OLEDB_HRESULT]
+    pwszRowsetName LPCOLESTR
+    cCostLimits ULONG
+    prgCostLimits DBCOST* count=cCostLimits
+    dwExecutionFlags DBEXECLIMITS
+
+

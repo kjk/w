@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface ICopyHookA base=IUnknown id={000214EF-0000-0000-c000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func CopyCallback
+    success NotEqual=0
+    UINT
+    hwnd HWND
+    wFunc UINT
+    wFlags UINT
+    pszSrcFile LPCSTR
+    dwSrcAttribs DWORD
+    pszDestFile LPCSTR
+    dwDestAttribs DWORD
+
+

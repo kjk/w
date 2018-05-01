@@ -1,0 +1,28 @@
+include Interfaces\IUnknown.txt
+include Interfaces\BITS\IBitsPeer.txt
+
+ingterface AsyncIBackgroundCopyCallback base=IUnknown id={ca29d251-b4bb-4679-a3d9-ae8006119d54} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func Begin_JobTransferred
+    HRESULT
+    pJob IBackgroundCopyJob*
+
+  func Finish_JobTransferred
+    HRESULT
+
+  func Begin_JobError
+    HRESULT
+    pJob IBackgroundCopyJob*
+    pError IBackgroundCopyError*
+
+  func Finish_JobError
+    HRESULT
+
+  func Begin_JobModification
+    HRESULT
+    pJob IBackgroundCopyJob*
+    dwReserved DWORD
+
+  func Finish_JobModification
+    HRESULT
+
+

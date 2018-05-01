@@ -1,0 +1,34 @@
+include Interfaces\IUnknown.txt
+
+ingterface ICategoryProvider base=IUnknown id={9af64809-5864-4c26-a720-c1f78c086ee3} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func CanCategorizeOnSCID
+    HRESULT
+    pscid "const SHCOLUMNID*"
+
+  func GetDefaultCategory
+    HRESULT
+    pguid GUID*
+    pscid SHCOLUMNID*
+
+  func GetCategoryForSCID
+    HRESULT
+    pscid "const SHCOLUMNID*"
+    pguid GUID*
+
+  func EnumCategories
+    HRESULT
+    penum IEnumGUID**
+
+  func GetCategoryName
+    HRESULT
+    pguid "const GUID*"
+    pszName LPWSTR
+    cch UINT
+
+  func CreateCategory
+    HRESULT
+    pguid "const GUID*"
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

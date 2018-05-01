@@ -1,0 +1,4 @@
+include Interfaces\Shell\IRelatedItem.txt
+
+ingterface IIdentityName base=IRelatedItem id={7d903fca-d6f9-4810-8332-946c0177e247} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+

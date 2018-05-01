@@ -1,0 +1,45 @@
+include Interfaces\Debugger\IDebugClient3.txt
+
+ingterface IDebugClient4 base=IDebugClient3 id={ca83c3de-5089-4cf8-93c8-d892387f2a5e} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func OpenDumpFileWide
+    HRESULT
+    FileName PCWSTR
+    FileHandle ULONG64
+
+  func WriteDumpFileWide
+    HRESULT
+    FileName PCWSTR
+    FileHandle ULONG64
+    Qualifier ULONG
+    FormatFlags [DEBUG_FORMAT_FLAGS]
+    Comment PCWSTR
+
+  func AddDumpInformationFileWide
+    HRESULT
+    FileName PCWSTR
+    FileHandle ULONG64
+    Type ULONG
+
+  func GetNumberDumpFiles
+    HRESULT
+    Number PULONG
+
+  func GetDumpFile
+    HRESULT
+    Index [DEBUG_DUMP_FILE_INDEX]
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+    Handle PULONG64
+    Type PULONG
+
+  func GetDumpFileWide
+    HRESULT
+    Index [DEBUG_DUMP_FILE_INDEX]
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+    Handle PULONG64
+    Type PULONG
+
+

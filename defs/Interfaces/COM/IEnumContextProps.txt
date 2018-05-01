@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumContextProps base=IUnknown id={000001c1-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Next
+    HRESULT
+    celt ULONG
+    pContextProperties ContextProperty* postCount=pceltFetched
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppEnumContextProps IEnumContextProps**
+
+  func Count
+    HRESULT
+    pcelt ULONG*
+
+

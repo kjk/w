@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFileSystemBindData base=IUnknown id={01E18D10-4D8B-11d2-855D-006008059367} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetFindData
+    HRESULT
+    pfd "const WIN32_FIND_DATAW*"
+
+  func GetFindData
+    HRESULT
+    pfd WIN32_FIND_DATAW*
+
+

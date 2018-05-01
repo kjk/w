@@ -1,0 +1,44 @@
+include Interfaces\OLEDB\IRowsetChange.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IRowsetUpdate base=IRowsetChange id={0c733a6d-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func GetOriginalData
+    [OLEDB_HRESULT]
+    hRow HROW
+    hAccessor HACCESSOR
+    pData void*
+
+  func GetPendingRows
+    [OLEDB_HRESULT]
+    hReserved HCHAPTER
+    dwRowStatus DBPENDINGSTATUS
+    pcPendingRows DBCOUNTITEM*
+    prgPendingRows HROW** derefPostCount=pcPendingRows
+    prgPendingStatus DBPENDINGSTATUS** derefPostCount=pcPendingRows
+
+  func GetRowStatus
+    [OLEDB_HRESULT]
+    hReserved HCHAPTER
+    cRows DBCOUNTITEM
+    rghRows "const HROW []" count=cRows
+    rgPendingStatus "DBPENDINGSTATUS []" postCount=cRows
+
+  func Undo
+    [OLEDB_HRESULT]
+    hReserved HCHAPTER
+    cRows DBCOUNTITEM
+    rghRows "const HROW []" count=cRows
+    pcRowsUndone DBCOUNTITEM*
+    prgRowsUndone HROW** derefPostCount=pcRowsUndone
+    prgRowStatus DBROWSTATUS** derefPostCount=pcRowsUndone
+
+  func Update
+    [OLEDB_HRESULT]
+    hReserved HCHAPTER
+    cRows DBCOUNTITEM
+    rghRows "const HROW []" count=cRows
+    pcRows DBCOUNTITEM*
+    prgRows HROW** derefPostCount=pcRows
+    prgRowStatus DBROWSTATUS** derefPostCount=pcRows
+
+

@@ -1,0 +1,69 @@
+include Interfaces\IUnknown.txt
+
+ingterface IMallocSpy base=IUnknown id={0000001d-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func PreAlloc
+    success NotEqual=0
+    SIZE_T
+    cbRequest SIZE_T
+
+  func PostAlloc
+    success NotEqual=0
+    void*
+    pActual void*
+
+  func PreFree
+    success NotEqual=0
+    void*
+    pRequest void*
+    fSpyed BOOL
+
+  func PostFree
+    void
+    fSpyed BOOL
+
+  func PreRealloc
+    success NotEqual=0
+    SIZE_T
+    pRequest void*
+    cbRequest SIZE_T
+    ppNewRequest void**
+    fSpyed BOOL
+
+  func PostRealloc
+    success NotEqual=0
+    void*
+    pActual void*
+    fSpyed BOOL
+
+  func PreGetSize
+    success NotEqual=0
+    void*
+    pRequest void*
+    fSpyed BOOL
+
+  func PostGetSize
+    success NotEqual=0
+    SIZE_T
+    cbActual SIZE_T
+    fSpyed BOOL
+
+  func PreDidAlloc
+    success NotEqual=0
+    void*
+    pRequest void*
+    fSpyed BOOL
+
+  func PostDidAlloc
+    success NotEqual=0
+    int
+    pRequest void*
+    fSpyed BOOL
+    fActual int
+
+  func PreHeapMinimize
+    void
+
+  func PostHeapMinimize
+    void
+
+

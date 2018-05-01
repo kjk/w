@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyStoreFactory base=IUnknown id={bc110b6d-57e8-4148-a9c6-91015ab2f3a5} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func GetPropertyStore
+    HRESULT
+    flags GETPROPERTYSTOREFLAGS
+    pUnkFactory IUnknown*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetPropertyStoreForKeys
+    HRESULT
+    rgKeys "const PROPERTYKEY*" count=cKeys
+    cKeys UINT
+    flags GETPROPERTYSTOREFLAGS
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

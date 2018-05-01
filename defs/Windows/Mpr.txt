@@ -1,0 +1,269 @@
+include Headers\windows.h.txt
+
+dll Mpr.dll callingConvention=STDCALL errorFunc=GetLastError errorIsReturnValue onlineHelp=MSDN
+category "Networking/Windows Networking (WNet)"
+struct NETCONNECTINFOSTRUCT
+  cbStructure DWORD
+  dwFlags DWORD
+  dwSpeed DWORD
+  dwDelay DWORD
+  dwOptDataSize DWORD
+
+pointer LPNETCONNECTINFOSTRUCT NETCONNECTINFOSTRUCT
+
+struct DISCDLGSTRUCT
+  cbStructure DWORD
+  hwndOwner HWND
+  lpLocalName LPTSTR
+  lpRemoteName LPTSTR
+  dwFlags DWORD
+
+pointer LPDISCDLGSTRUCT DISCDLGSTRUCT
+
+struct NETINFOSTRUCT
+  cbStructure DWORD
+  dwProviderVersion DWORD
+  dwStatus DWORD
+  dwCharacteristics DWORD
+  dwHandle ULONG_PTR
+  wNetType WORD
+  dwPrinters DWORD
+  dwDrives DWORD
+
+pointer LPNETINFOSTRUCT NETINFOSTRUCT
+
+enum [ResourceScope] DWORD display=DWORD
+  RESOURCE_CONNECTED  0x00000001
+  RESOURCE_GLOBALNET  0x00000002
+  RESOURCE_REMEMBERED 0x00000003
+  RESOURCE_RECENT     0x00000004
+  RESOURCE_CONTEXT    0x00000005
+
+flag [RESOURCETYPE] DWORD display=DWORD
+  RESOURCETYPE_ANY      0x00000000
+  RESOURCETYPE_DISK     0x00000001
+  RESOURCETYPE_PRINT    0x00000002
+  RESOURCETYPE_RESERVED 0x00000008
+  RESOURCETYPE_UNKNOWN  0xFFFFFFFF
+
+flag [RESOURCEUSAGE] DWORD display=DWORD
+  RESOURCEUSAGE_CONNECTABLE   0x00000001
+  RESOURCEUSAGE_CONTAINER     0x00000002
+  RESOURCEUSAGE_NOLOCALDEVICE 0x00000004
+  RESOURCEUSAGE_SIBLING       0x00000008
+  RESOURCEUSAGE_ATTACHED      0x00000010
+  RESOURCEUSAGE_ALL           0x00000013
+  RESOURCEUSAGE_RESERVED      0x80000000
+
+enum [UniversalInfoLevel] DWORD display=DWORD
+  UNIVERSAL_NAME_INFO_LEVEL 0x00000001
+  REMOTE_NAME_INFO_LEVEL    0x00000002
+
+flag [ConnectFlags] DWORD display=DWORD
+  CONNECT_UPDATE_PROFILE 0x00000001
+  CONNECT_UPDATE_RECENT  0x00000002
+  CONNECT_TEMPORARY      0x00000004
+  CONNECT_INTERACTIVE    0x00000008
+  CONNECT_PROMPT         0x00000010
+  CONNECT_NEED_DRIVE     0x00000020
+  CONNECT_REFCOUNT       0x00000040
+  CONNECT_REDIRECT       0x00000080
+  CONNECT_LOCALDRIVE     0x00000100
+  CONNECT_CURRENT_MEDIA  0x00000200
+  CONNECT_DEFERRED       0x00000400
+  CONNECT_COMMANDLINE    0x00000800
+  CONNECT_CMD_SAVECRED   0x00001000
+  CONNECT_CRED_RESET     0x00002000
+  CONNECT_RESERVED       0xFF000000
+
+enum [RESOURCEDISPLAYTYPE] DWORD display=DWORD
+  RESOURCEDISPLAYTYPE_GENERIC      0x00000000
+  RESOURCEDISPLAYTYPE_DOMAIN       0x00000001
+  RESOURCEDISPLAYTYPE_SERVER       0x00000002
+  RESOURCEDISPLAYTYPE_SHARE        0x00000003
+  RESOURCEDISPLAYTYPE_FILE         0x00000004
+  RESOURCEDISPLAYTYPE_GROUP        0x00000005
+  RESOURCEDISPLAYTYPE_NETWORK      0x00000006
+  RESOURCEDISPLAYTYPE_ROOT         0x00000007
+  RESOURCEDISPLAYTYPE_SHAREADMIN   0x00000008
+  RESOURCEDISPLAYTYPE_DIRECTORY    0x00000009
+  RESOURCEDISPLAYTYPE_TREE         0x0000000A
+  RESOURCEDISPLAYTYPE_NDSCONTAINER 0x0000000B
+
+struct NETRESOURCE
+  dwScope [ResourceScope]
+  dwType [RESOURCETYPE]
+  dwDisplayType [RESOURCEDISPLAYTYPE]
+  dwUsage [RESOURCEUSAGE]
+  lpLocalName LPTSTR
+  lpRemoteName LPTSTR
+  lpComment LPTSTR
+  lpProvider LPTSTR
+
+pointer LPNETRESOURCE NETRESOURCE
+
+flag [CONNDLG] DWORD display=DWORD
+  CONNDLG_RO_PATH     0x00000001
+  CONNDLG_CONN_POINT  0x00000002
+  CONNDLG_USE_MRU     0x00000004
+  CONNDLG_HIDE_BOX    0x00000008
+  CONNDLG_PERSIST     0x00000010
+  CONNDLG_NOT_PERSIST 0x00000020
+
+struct CONNECTDLGSTRUCT
+  cbStructure DWORD
+  hwndOwner HWND
+  lpConnRes LPNETRESOURCE
+  dwFlags [CONNDLG]
+  dwDevNum DWORD
+
+pointer LPCONNECTDLGSTRUCT CONNECTDLGSTRUCT
+
+func WNetSetLastError bothCharset
+  void
+  err DWORD
+  lpError LPTSTR
+  lpProvider LPTSTR
+
+func MultinetGetConnectionPerformance bothCharset
+  [ERROR_CODE]
+  lpNetResource LPNETRESOURCE
+  lpNetConnectInfoStruct LPNETCONNECTINFOSTRUCT
+
+func WNetAddConnection2 bothCharset
+  [ERROR_CODE]
+  lpNetResource LPNETRESOURCE
+  lpPassword LPCTSTR
+  lpUsername LPCTSTR
+  dwFlags [ConnectFlags]
+
+func WNetAddConnection3 bothCharset
+  [ERROR_CODE]
+  hwndOwner HWND
+  lpNetResource LPNETRESOURCE
+  lpPassword LPTSTR
+  lpUserName LPTSTR
+  dwFlags [ConnectFlags]
+
+func WNetCancelConnection bothCharset
+  [ERROR_CODE]
+  lpName LPCTSTR
+  fForce BOOL
+
+func WNetCancelConnection2 bothCharset
+  [ERROR_CODE]
+  lpName LPCTSTR
+  dwFlags [ConnectFlags]
+  fForce BOOL
+
+func WNetCloseEnum
+  [ERROR_CODE]
+  hEnum HANDLE
+
+func WNetConnectionDialog
+  [ERROR_CODE]
+  hwnd HWND
+  dwType [RESOURCETYPE]
+
+func WNetConnectionDialog1 bothCharset
+  [ERROR_CODE]
+  lpConnDlgStruct LPCONNECTDLGSTRUCT
+
+func WNetDisconnectDialog
+  [ERROR_CODE]
+  hwnd HWND
+  dwType [RESOURCETYPE]
+
+func WNetDisconnectDialog1 bothCharset
+  [ERROR_CODE]
+  lpConnDlgStruct LPDISCDLGSTRUCT
+
+func WNetEnumResource bothCharset
+  [ERROR_CODE]
+  hEnum HANDLE
+  lpcCount LPDWORD
+  lpBuffer LPNETRESOURCE display=LPVOID postCount=lpcCount
+  lpBufferSize LPDWORD
+
+func WNetGetConnection bothCharset
+  [ERROR_CODE]
+  lpLocalName LPCTSTR
+  lpRemoteName LPTSTR
+  lpnLength LPDWORD
+
+func WNetGetLastError bothCharset
+  [ERROR_CODE]
+  lpError LPDWORD
+  lpErrorBuf LPTSTR
+  nErrorBufSize DWORD
+  lpNameBuf LPTSTR
+  nNameBufSize DWORD
+
+func WNetGetNetworkInformation bothCharset
+  [ERROR_CODE]
+  lpProvider LPCTSTR
+  lpNetInfoStruct LPNETINFOSTRUCT
+
+func WNetGetProviderName bothCharset
+  [ERROR_CODE]
+  dwNetType DWORD
+  lpProviderName LPTSTR outputOnly
+  lpBufferSize LPDWORD
+
+func WNetGetResourceInformation bothCharset
+  [ERROR_CODE]
+  lpNetResource LPNETRESOURCE
+  lpBuffer LPVOID postLength=lpcbBuffer
+  lpcbBuffer LPDWORD
+  lplpSystem LPTSTR*
+
+func WNetGetResourceParent bothCharset
+  [ERROR_CODE]
+  lpNetResource LPNETRESOURCE
+  lpBuffer LPNETRESOURCE display=LPVOID
+  lpcbBuffer LPDWORD
+
+func WNetGetUniversalName bothCharset
+  [ERROR_CODE]
+  lpLocalPath LPCTSTR
+  dwInfoLevel [UniversalInfoLevel]
+  lpBuffer LPVOID postLength=lpBufferSize
+  lpBufferSize LPDWORD
+
+func WNetGetUser bothCharset
+  [ERROR_CODE]
+  lpName LPCTSTR
+  lpUserName LPTSTR
+  lpnLength LPDWORD
+
+func WNetOpenEnum bothCharset
+  [ERROR_CODE]
+  dwScope [ResourceScope]
+  dwType [RESOURCETYPE]
+  dwUsage [RESOURCEUSAGE]
+  lpNetResource LPNETRESOURCE
+  lphEnum LPHANDLE
+
+func WNetRestoreConnectionW
+  [ERROR_CODE]
+  hwndParent HWND
+  lpDevice LPCWSTR
+  fUseUI BOOL
+
+func WNetUseConnection bothCharset
+  [ERROR_CODE]
+  hwndOwner HWND
+  lpNetResource LPNETRESOURCE
+  lpPassword LPCTSTR
+  lpUserID LPCTSTR
+  dwFlags [ConnectFlags]
+  lpAccessName LPTSTR
+  lpBufferSize LPDWORD
+  lpResult LPDWORD
+
+func WNetAddConnection bothCharset
+  [ERROR_CODE]
+  lpRemoteName LPCTSTR
+  lpPassword LPCTSTR
+  lpLocalName LPCTSTR
+

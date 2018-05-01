@@ -1,0 +1,88 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellLibrary base=IUnknown id={11a66efa-382e-451a-9234-1e0e12ef3085} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func LoadLibraryFromItem
+    HRESULT
+    psiLibrary IShellItem*
+    grfMode [STGM_FLAGS]
+
+  func LoadLibraryFromKnownFolder
+    HRESULT
+    kfidLibrary REFKNOWNFOLDERID
+    grfMode [STGM_FLAGS]
+
+  func AddFolder
+    HRESULT
+    psiLocation IShellItem*
+
+  func RemoveFolder
+    HRESULT
+    psiLocation IShellItem*
+
+  func GetFolders
+    HRESULT
+    lff LIBRARYFOLDERFILTER
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func ResolveFolder
+    HRESULT
+    psiFolderToResolve IShellItem*
+    dwTimeout DWORD
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetDefaultSaveFolder
+    HRESULT
+    dsft DEFAULTSAVEFOLDERTYPE
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func SetDefaultSaveFolder
+    HRESULT
+    dsft DEFAULTSAVEFOLDERTYPE
+    psi IShellItem*
+
+  func GetOptions
+    HRESULT
+    plofOptions LIBRARYOPTIONFLAGS*
+
+  func SetOptions
+    HRESULT
+    lofMask LIBRARYOPTIONFLAGS
+    lofOptions LIBRARYOPTIONFLAGS
+
+  func GetFolderType
+    HRESULT
+    pftid FOLDERTYPEID*
+
+  func SetFolderType
+    HRESULT
+    ftid REFFOLDERTYPEID
+
+  func GetIcon
+    HRESULT
+    ppszIcon LPWSTR*
+
+  func SetIcon
+    HRESULT
+    pszIcon LPCWSTR
+
+  func Commit
+    HRESULT
+
+  func Save
+    HRESULT
+    psiFolderToSaveIn IShellItem*
+    pszLibraryName LPCWSTR
+    lsf LIBRARYSAVEFLAGS
+    ppsiSavedTo IShellItem**
+
+  func SaveInKnownFolder
+    HRESULT
+    kfidToSaveIn REFKNOWNFOLDERID
+    pszLibraryName LPCWSTR
+    lsf LIBRARYSAVEFLAGS
+    ppsiSavedTo IShellItem**
+
+

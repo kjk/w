@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+
+ingterface ILockBytes base=IUnknown id={0000000a-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func ReadAt
+    HRESULT
+    ulOffset ULARGE_INTEGER
+    pv void*
+    cb ULONG
+    pcbRead ULONG*
+
+  func WriteAt
+    HRESULT
+    ulOffset ULARGE_INTEGER
+    pv "const void*"
+    cb ULONG
+    pcbWritten ULONG*
+
+  func Flush
+    HRESULT
+
+  func SetSize
+    HRESULT
+    cb ULARGE_INTEGER
+
+  func LockRegion
+    HRESULT
+    libOffset ULARGE_INTEGER
+    cb ULARGE_INTEGER
+    dwLockType LOCKTYPE
+
+  func UnlockRegion
+    HRESULT
+    libOffset ULARGE_INTEGER
+    cb ULARGE_INTEGER
+    dwLockType LOCKTYPE
+
+  func Stat
+    HRESULT
+    pstatstg STATSTG*
+    grfStatFlag STATFLAG
+
+

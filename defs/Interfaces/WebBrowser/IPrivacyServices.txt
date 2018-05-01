@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPrivacyServices base=IUnknown id={3050f84b-98b5-11cf-bb82-00aa00bdce0b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+  func AddPrivacyInfoToList
+    HRESULT
+    pstrUrl LPOLESTR
+    pstrPolicyRef LPOLESTR
+    pstrP3PHeader LPOLESTR
+    dwReserved LONG
+    privacyFlags DWORD
+
+

@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+
+ingterface IExtractImage base=IUnknown id={BB2E617C-0920-11d1-9A0B-00C04FC2D6C1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetLocation
+    HRESULT
+    pszPathBuffer LPWSTR
+    cch DWORD
+    pdwPriority DWORD*
+    prgSize "const SIZE*"
+    dwRecClrDepth DWORD
+    pdwFlags DWORD*
+
+  func Extract
+    HRESULT
+    phBmpThumbnail HBITMAP*
+
+

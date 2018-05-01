@@ -1,0 +1,8 @@
+include Interfaces\Shell\IShellLinkDual.txt
+
+ingterface IShellLinkDual2 base=IShellLinkDual id={317EE249-F12E-11d2-B1E4-00C04F8EEB3E} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func get_Target
+    HRESULT
+    ppfi FolderItem**
+
+

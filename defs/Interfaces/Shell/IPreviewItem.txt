@@ -1,0 +1,4 @@
+include Interfaces\Shell\IRelatedItem.txt
+
+ingterface IPreviewItem base=IRelatedItem id={36149969-0A8F-49c8-8B00-4AECB20222FB} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+

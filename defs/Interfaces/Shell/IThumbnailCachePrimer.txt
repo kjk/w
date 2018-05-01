@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IThumbnailCachePrimer base=IUnknown id={0f03f8fe-2b26-46f0-965a-212aa8d66b76} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func PageInThumbnail
+    HRESULT
+    psi IShellItem*
+    wtsFlags WTS_FLAGS
+    cxyRequestedThumbSize UINT
+
+

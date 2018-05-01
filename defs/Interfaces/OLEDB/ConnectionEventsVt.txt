@@ -1,0 +1,70 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ConnectionEventsVt base=IUnknown id={00001402-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func InfoMessage
+    [OLEDB_HRESULT]
+    pError ADOError*
+    adStatus EventStatusEnum*
+    pConnection _ADOConnection*
+
+  func BeginTransComplete
+    [OLEDB_HRESULT]
+    TransactionLevel LONG
+    pError ADOError*
+    adStatus EventStatusEnum*
+    pConnection _ADOConnection*
+
+  func CommitTransComplete
+    [OLEDB_HRESULT]
+    pError ADOError*
+    adStatus EventStatusEnum*
+    pConnection _ADOConnection*
+
+  func RollbackTransComplete
+    [OLEDB_HRESULT]
+    pError ADOError*
+    adStatus EventStatusEnum*
+    pConnection _ADOConnection*
+
+  func WillExecute
+    [OLEDB_HRESULT]
+    Source BSTR*
+    CursorType CursorTypeEnum*
+    LockType LockTypeEnum*
+    Options long*
+    adStatus EventStatusEnum*
+    pCommand _ADOCommand*
+    pRecordset _ADORecordset*
+    pConnection _ADOConnection*
+
+  func ExecuteComplete
+    [OLEDB_HRESULT]
+    RecordsAffected LONG
+    pError ADOError*
+    adStatus EventStatusEnum*
+    pCommand _ADOCommand*
+    pRecordset _ADORecordset*
+    pConnection _ADOConnection*
+
+  func WillConnect
+    [OLEDB_HRESULT]
+    ConnectionString BSTR*
+    UserID BSTR*
+    Password BSTR*
+    Options long*
+    adStatus EventStatusEnum*
+    pConnection _ADOConnection*
+
+  func ConnectComplete
+    [OLEDB_HRESULT]
+    pError ADOError*
+    adStatus EventStatusEnum*
+    pConnection _ADOConnection*
+
+  func Disconnect
+    [OLEDB_HRESULT]
+    adStatus EventStatusEnum*
+    pConnection _ADOConnection*
+
+

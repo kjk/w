@@ -1,0 +1,13 @@
+include Interfaces\IDispatch.txt
+include Interfaces\FileSystemObject\FileSystemObject.h.txt
+
+ingterface IScriptEncoder base=IDispatch id={AADC65F6-CFF1-11D1-B747-00C04FC2B085} errorFunc=HRESULT onlineHelp=MSDN category="Scripting Runtime Library/FileSystemObject"
+  func EncodeScriptFile
+    HRESULT
+    szExt BSTR
+    bstrStreamIn BSTR
+    cFlags long
+    bstrDefaultLang BSTR
+    pbstrStreamOut BSTR*
+
+

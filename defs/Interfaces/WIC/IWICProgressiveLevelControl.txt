@@ -1,0 +1,17 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICProgressiveLevelControl base=IUnknown id={DAAC296F-7AA5-4dbf-8D15-225C5976F891} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetLevelCount
+    [WIC_HRESULT]
+    pcLevels UINT*
+
+  func GetCurrentLevel
+    [WIC_HRESULT]
+    pnLevel UINT*
+
+  func SetCurrentLevel
+    [WIC_HRESULT]
+    nLevel UINT
+
+

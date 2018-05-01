@@ -1,0 +1,377 @@
+include Headers\sockets.h.txt
+
+dll Dnsapi.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Networking/Domain Name System (DNS)"
+alias PDNS_MESSAGE_BUFFER LPVOID
+
+alias PDNS_RECORD PVOID
+
+pointer PDNS_RECORD* PDNS_RECORD
+
+alias DNS_STATUS [ERROR_CODE]
+
+alias DNS_PROXY_COMPLETION_ROUTINE LPVOID
+
+alias PDNS_QUERY_COMPLETION_ROUTINE LPVOID
+
+array "DWORD [8]" base=DWORD count=8
+
+array "CHAR [DNS_ADDR_MAX_SOCKADDR_LENGTH]" base=CHAR count=32
+
+alias [ADDRESS_FAMILY_WORD] ADDRESS_FAMILY display=WORD
+
+enum DNS_PROXY_INFORMATION_TYPE UINT
+  DNS_PROXY_INFORMATION_DIRECT           0
+  DNS_PROXY_INFORMATION_DEFAULT_SETTINGS 1
+  DNS_PROXY_INFORMATION_PROXY_NAME       2
+  DNS_PROXY_INFORMATION_DOES_NOT_EXIST   3
+
+struct DNS_PROXY_INFORMATION
+  version ULONG
+  proxyInformationType DNS_PROXY_INFORMATION_TYPE
+  proxyName PWSTR
+
+pointer DNS_PROXY_INFORMATION* DNS_PROXY_INFORMATION
+
+enum DNS_FREE_TYPE UINT
+  DnsFreeFlat                0
+  DnsFreeRecordList          1
+  DnsFreeParsedMessageFields 2
+
+enum [DnsRecordType] WORD display=WORD
+  DNS_TYPE_A       0x0001
+  DNS_TYPE_NS      0x0002
+  DNS_TYPE_MD      0x0003
+  DNS_TYPE_MF      0x0004
+  DNS_TYPE_CNAME   0x0005
+  DNS_TYPE_SOA     0x0006
+  DNS_TYPE_MB      0x0007
+  DNS_TYPE_MG      0x0008
+  DNS_TYPE_MR      0x0009
+  DNS_TYPE_NULL    0x000a
+  DNS_TYPE_WKS     0x000b
+  DNS_TYPE_PTR     0x000c
+  DNS_TYPE_HINFO   0x000d
+  DNS_TYPE_MINFO   0x000e
+  DNS_TYPE_MX      0x000f
+  DNS_TYPE_TEXT    0x0010
+  DNS_TYPE_RP      0x0011
+  DNS_TYPE_AFSDB   0x0012
+  DNS_TYPE_X25     0x0013
+  DNS_TYPE_ISDN    0x0014
+  DNS_TYPE_RT      0x0015
+  DNS_TYPE_NSAP    0x0016
+  DNS_TYPE_NSAPPTR 0x0017
+  DNS_TYPE_SIG     0x0018
+  DNS_TYPE_KEY     0x0019
+  DNS_TYPE_PX      0x001a
+  DNS_TYPE_GPOS    0x001b
+  DNS_TYPE_AAAA    0x001c
+  DNS_TYPE_LOC     0x001d
+  DNS_TYPE_NXT     0x001e
+  DNS_TYPE_EID     0x001f
+  DNS_TYPE_NIMLOC  0x0020
+  DNS_TYPE_SRV     0x0021
+  DNS_TYPE_ATMA    0x0022
+  DNS_TYPE_NAPTR   0x0023
+  DNS_TYPE_KX      0x0024
+  DNS_TYPE_CERT    0x0025
+  DNS_TYPE_A6      0x0026
+  DNS_TYPE_DNAME   0x0027
+  DNS_TYPE_SINK    0x0028
+  DNS_TYPE_OPT     0x0029
+  DNS_TYPE_UINFO   0x0064
+  DNS_TYPE_UID     0x0065
+  DNS_TYPE_GID     0x0066
+  DNS_TYPE_UNSPEC  0x0067
+  DNS_TYPE_ADDRS   0x00f8
+  DNS_TYPE_TKEY    0x00f9
+  DNS_TYPE_TSIG    0x00fa
+  DNS_TYPE_IXFR    0x00fb
+  DNS_TYPE_AXFR    0x00fc
+  DNS_TYPE_MAILB   0x00fd
+  DNS_TYPE_MAILA   0x00fe
+  DNS_TYPE_ALL     0x00ff
+  DNS_TYPE_ANY     0x00ff
+  DNS_TYPE_WINS    0xff01
+  DNS_TYPE_WINSR   0xff02
+  DNS_TYPE_NBSTAT  0xff02
+
+flag [DnsQueryOptions] DWORD display=DWORD
+  DNS_QUERY_STANDARD                  0x00000000
+  DNS_QUERY_ACCEPT_TRUNCATED_RESPONSE 0x00000001
+  DNS_QUERY_USE_TCP_ONLY              0x00000002
+  DNS_QUERY_NO_RECURSION              0x00000004
+  DNS_QUERY_BYPASS_CACHE              0x00000008
+  DNS_QUERY_NO_WIRE_QUERY             0x00000010
+  DNS_QUERY_NO_LOCAL_NAME             0x00000020
+  DNS_QUERY_NO_HOSTS_FILE             0x00000040
+  DNS_QUERY_NO_NETBT                  0x00000080
+  DNS_QUERY_WIRE_ONLY                 0x00000100
+  DNS_QUERY_RETURN_MESSAGE            0x00000200
+  DNS_QUERY_MULTICAST_ONLY            0x00000400
+  DNS_QUERY_NO_MULTICAST              0x00000800
+  DNS_QUERY_TREAT_AS_FQDN             0x00001000
+  DNS_QUERY_ADDRCONFIG                0x00002000
+  DNS_QUERY_DUAL_ADDR                 0x00004000
+  DNS_QUERY_DONT_RESET_TTL_VALUES     0x00100000
+  DNS_QUERY_DISABLE_IDN_ENCODING      0x00200000
+  DNS_QUERY_APPEND_MULTILABEL         0x00800000
+  DNS_QUERY_DNSSEC_OK                 0x01000000
+  DNS_QUERY_DNSSEC_CHECKING_DISABLED  0x02000000
+  DNS_QUERY_RESERVED                  0xf0000000
+
+flag [DNS_QUERY_OPTIONS_64] ULONG64 display=ULONG64
+  DNS_QUERY_STANDARD                  0x00000000
+  DNS_QUERY_ACCEPT_TRUNCATED_RESPONSE 0x00000001
+  DNS_QUERY_USE_TCP_ONLY              0x00000002
+  DNS_QUERY_NO_RECURSION              0x00000004
+  DNS_QUERY_BYPASS_CACHE              0x00000008
+  DNS_QUERY_NO_WIRE_QUERY             0x00000010
+  DNS_QUERY_NO_LOCAL_NAME             0x00000020
+  DNS_QUERY_NO_HOSTS_FILE             0x00000040
+  DNS_QUERY_NO_NETBT                  0x00000080
+  DNS_QUERY_WIRE_ONLY                 0x00000100
+  DNS_QUERY_RETURN_MESSAGE            0x00000200
+  DNS_QUERY_MULTICAST_ONLY            0x00000400
+  DNS_QUERY_NO_MULTICAST              0x00000800
+  DNS_QUERY_TREAT_AS_FQDN             0x00001000
+  DNS_QUERY_ADDRCONFIG                0x00002000
+  DNS_QUERY_DUAL_ADDR                 0x00004000
+  DNS_QUERY_DONT_RESET_TTL_VALUES     0x00100000
+  DNS_QUERY_DISABLE_IDN_ENCODING      0x00200000
+  DNS_QUERY_APPEND_MULTILABEL         0x00800000
+  DNS_QUERY_DNSSEC_OK                 0x01000000
+  DNS_QUERY_DNSSEC_CHECKING_DISABLED  0x02000000
+  DNS_QUERY_RESERVED                  0xf0000000
+
+enum DNS_NAME_FORMAT UINT
+  DnsNameDomain        0
+  DnsNameDomainLabel   1
+  DnsNameHostnameFull  2
+  DnsNameHostnameLabel 3
+  DnsNameWildcard      4
+  DnsNameSrvRecord     5
+  DnsNameValidateTld   6
+
+enum DNS_CONFIG_TYPE UINT
+  DnsConfigPrimaryDomainName_W                0
+  DnsConfigPrimaryDomainName_A                1
+  DnsConfigPrimaryDomainName_UTF8             2
+  DnsConfigAdapterDomainName_W                3
+  DnsConfigAdapterDomainName_A                4
+  DnsConfigAdapterDomainName_UTF8             5
+  DnsConfigDnsServerList                      6
+  DnsConfigSearchList                         7
+  DnsConfigAdapterInfo                        8
+  DnsConfigPrimaryHostNameRegistrationEnabled 9
+  DnsConfigAdapterHostNameRegistrationEnabled 10
+  DnsConfigAddressRegistrationMaxCount        11
+  DnsConfigHostName_W                         12
+  DnsConfigHostName_A                         13
+  DnsConfigHostName_UTF8                      14
+  DnsConfigFullHostName_W                     15
+  DnsConfigFullHostName_A                     16
+  DnsConfigFullHostName_UTF8                  17
+
+flag [DnsConfigFlags] DWORD display=DWORD
+  DNS_CONFIG_FLAG_ALLOC 0x00000001
+
+flag [DnsUpdateFlags] DWORD display=DWORD
+  DNS_UPDATE_SECURITY_USE_DEFAULT    0x00000000
+  DNS_UPDATE_SECURITY_OFF            0x00000010
+  DNS_UPDATE_SECURITY_ON             0x00000020
+  DNS_UPDATE_SECURITY_ONLY           0x00000100
+  DNS_UPDATE_CACHE_SECURITY_CONTEXT  0x00000200
+  DNS_UPDATE_TEST_USE_LOCAL_SYS_ACCT 0x00000400
+  DNS_UPDATE_FORCE_SECURITY_NEGO     0x00000800
+  DNS_UPDATE_TRY_ALL_MASTER_SERVERS  0x00001000
+  DNS_UPDATE_SKIP_NO_UPDATE_ADAPTERS 0x00002000
+  DNS_UPDATE_REMOTE_SERVER           0x00004000
+  DNS_UPDATE_RESERVED                0xffff0000
+
+enum DNS_CHARSET UINT
+  DnsCharSetUnknown 0
+  DnsCharSetUnicode 1
+  DnsCharSetUtf8    2
+  DnsCharSetAnsi    3
+
+struct DNS_ADDR pack=1
+  MaxSa "CHAR [DNS_ADDR_MAX_SOCKADDR_LENGTH]"
+  DnsAddrUserDword "DWORD [8]"
+
+array "DNS_ADDR []" base=DNS_ADDR count=1
+
+struct DNS_ADDR_ARRAY pack=1
+  MaxCount DWORD
+  AddrCount DWORD
+  Tag DWORD
+  Family [ADDRESS_FAMILY_WORD]
+  WordReserved WORD
+  Flags DWORD
+  MatchFlag DWORD
+  Reserved1 DWORD
+  Reserved2 DWORD
+  AddrArray "DNS_ADDR []" count=AddrCount
+
+pointer PDNS_ADDR_ARRAY DNS_ADDR_ARRAY
+
+struct DNS_QUERY_REQUEST
+  Version ULONG
+  QueryName PCWSTR
+  QueryType [DnsRecordType]
+  QueryOptions [DNS_QUERY_OPTIONS_64]
+  pDnsServerList PDNS_ADDR_ARRAY
+  InterfaceIndex ULONG
+  pQueryCompletionCallback PDNS_QUERY_COMPLETION_ROUTINE
+  pQueryContext PVOID
+
+pointer PDNS_QUERY_REQUEST DNS_QUERY_REQUEST
+
+struct DNS_QUERY_RESULT
+  Version ULONG
+  QueryStatus DNS_STATUS
+  QueryOptions [DNS_QUERY_OPTIONS_64]
+  pQueryRecords PDNS_RECORD
+  Reserved PVOID
+
+pointer PDNS_QUERY_RESULT DNS_QUERY_RESULT
+
+struct DNS_QUERY_CANCEL
+  Reserved "CHAR [32]"
+
+pointer PDNS_QUERY_CANCEL DNS_QUERY_CANCEL
+
+func DnsAcquireContextHandle_ bothCharset
+  DNS_STATUS
+  CredentialFlags BOOL display=DWORD
+  Credentials PVOID
+  pContext PHANDLE
+
+func DnsExtractRecordsFromMessage_W
+  DNS_STATUS
+  pDnsBuffer PDNS_MESSAGE_BUFFER length=wMessageLength
+  wMessageLength WORD
+  ppRecord PDNS_RECORD*
+
+func DnsFree
+  void
+  pData PVOID
+  FreeType DNS_FREE_TYPE
+
+func DnsFreeProxyName
+  void
+  proxyName PWSTR
+
+func DnsGetProxyInformation
+  DNS_STATUS
+  hostName PCWSTR
+  proxyInformation DNS_PROXY_INFORMATION*
+  defaultProxyInformation DNS_PROXY_INFORMATION*
+  completionRoutine DNS_PROXY_COMPLETION_ROUTINE
+  completionContext void*
+
+func DnsModifyRecordsInSet_ bothCharset
+  DNS_STATUS
+  pAddRecords PDNS_RECORD
+  pDeleteRecords PDNS_RECORD
+  Options DWORD
+  hContext HANDLE
+  pExtraList PVOID
+  pReserved PVOID
+
+func DnsNameCompare_ bothCharset
+  BOOL
+  pName1 PCTSTR
+  pName2 PCTSTR
+
+func DnsQuery_ bothCharset
+  DNS_STATUS
+  lpstrName PCTSTR
+  wType [DnsRecordType]
+  Options [DnsQueryOptions]
+  pExtra PVOID
+  ppQueryResultsSet PDNS_RECORD*
+  pReserved PVOID*
+
+func DnsQueryConfig
+  DNS_STATUS
+  Config DNS_CONFIG_TYPE
+  Flag [DnsConfigFlags]
+  pwsAdapterName PCWSTR
+  pReserved PVOID
+  pBuffer PVOID postLength=pBufferLength
+  pBufferLength PDWORD
+
+func DnsRecordCompare
+  BOOL
+  pRecord1 PDNS_RECORD
+  pRecord2 PDNS_RECORD
+
+func DnsRecordCopyEx
+  success NotEqual=0
+  PDNS_RECORD
+  pRecord PDNS_RECORD
+  CharSetIn DNS_CHARSET
+  CharSetOut DNS_CHARSET
+
+func DnsRecordListFree
+  void
+  pRecordList PDNS_RECORD
+  FreeType DNS_FREE_TYPE
+
+func DnsRecordSetCompare
+  BOOL
+  pRR1 PDNS_RECORD
+  pRR2 PDNS_RECORD
+  ppDiff1 PDNS_RECORD*
+  ppDiff2 PDNS_RECORD*
+
+func DnsRecordSetCopyEx
+  success NotEqual=0
+  PDNS_RECORD
+  pRecordSet PDNS_RECORD
+  CharSetIn DNS_CHARSET
+  CharSetOut DNS_CHARSET
+
+func DnsRecordSetDetach
+  success NotEqual=0
+  PDNS_RECORD
+  pRR PDNS_RECORD
+
+func DnsReleaseContextHandle
+  void
+  ContextHandle HANDLE
+
+func DnsReplaceRecordSet bothCharset
+  DNS_STATUS
+  pNewSet PDNS_RECORD
+  Options [DnsUpdateFlags]
+  hContext HANDLE
+  pExtraInfo PVOID
+  pReserved PVOID
+
+func DnsValidateName_ bothCharset
+  DNS_STATUS
+  pszName PCTSTR
+  Format DNS_NAME_FORMAT
+
+func DnsWriteQuestionToBuffer_W
+  BOOL
+  pDnsBuffer PDNS_MESSAGE_BUFFER postLength=pdwBufferSize
+  pdwBufferSize PDWORD
+  pszName PCWSTR
+  wType [DnsRecordType]
+  Xid WORD
+  fRecursionDesired BOOL
+
+func DnsCancelQuery
+  DNS_STATUS
+  pCancelHandle PDNS_QUERY_CANCEL
+
+func DnsQueryEx
+  DNS_STATUS
+  pQueryRequest PDNS_QUERY_REQUEST
+  pQueryResults PDNS_QUERY_RESULT
+  pCancelHandle PDNS_QUERY_CANCEL
+

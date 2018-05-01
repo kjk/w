@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioSessionManager base=IUnknown id={BFA971F1-4D5E-40BB-935E-967039BFBEE4} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func GetAudioSessionControl
+    [AUDCLNT_HRESULT]
+    AudioSessionGuid LPCGUID
+    StreamFlags DWORD
+    SessionControl IAudioSessionControl**
+
+  func GetSimpleAudioVolume
+    [AUDCLNT_HRESULT]
+    AudioSessionGuid LPCGUID
+    StreamFlags DWORD
+    AudioVolume ISimpleAudioVolume**
+
+

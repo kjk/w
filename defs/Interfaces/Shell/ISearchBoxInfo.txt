@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISearchBoxInfo base=IUnknown id={6af6e03f-d664-4ef4-9626-f7e0ed36755e} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetCondition
+    HRESULT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetText
+    HRESULT
+    ppsz LPWSTR*
+
+

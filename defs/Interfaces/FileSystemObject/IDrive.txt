@@ -1,0 +1,57 @@
+include Interfaces\IDispatch.txt
+include Interfaces\FileSystemObject\FileSystemObject.h.txt
+
+ingterface IDrive base=IDispatch id={C7C3F5A0-88A3-11D0-ABCB-00A0C90FFFC0} errorFunc=HRESULT onlineHelp=MSDN category="Scripting Runtime Library/FileSystemObject"
+  func get_Path
+    HRESULT
+    pbstrPath BSTR*
+
+  func get_DriveLetter
+    HRESULT
+    pbstrLetter BSTR*
+
+  func get_ShareName
+    HRESULT
+    pbstrShareName BSTR*
+
+  func get_DriveType
+    HRESULT
+    pdt DriveTypeConst*
+
+  func get_RootFolder
+    HRESULT
+    ppfolder IFolder**
+
+  func get_AvailableSpace
+    HRESULT
+    pvarAvail VARIANT*
+
+  func get_FreeSpace
+    HRESULT
+    pvarFree VARIANT*
+
+  func get_TotalSize
+    HRESULT
+    pvarTotal VARIANT*
+
+  func get_VolumeName
+    HRESULT
+    pbstrName BSTR*
+
+  func put_VolumeName
+    HRESULT
+    pbstrName BSTR
+
+  func get_FileSystem
+    HRESULT
+    pbstrFileSystem BSTR*
+
+  func get_SerialNumber
+    HRESULT
+    pulSerialNumber long*
+
+  func get_IsReady
+    HRESULT
+    pfReady VARIANT_BOOL*
+
+

@@ -1,0 +1,53 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDataObject base=IUnknown id={0000010e-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func GetData
+    HRESULT
+    pformatetcIn FORMATETC*
+    pmedium STGMEDIUM*
+
+  func GetDataHere
+    HRESULT
+    pformatetc FORMATETC*
+    pmedium STGMEDIUM*
+
+  func QueryGetData
+    HRESULT
+    pformatetc FORMATETC*
+
+  func GetCanonicalFormatEtc
+    HRESULT
+    pformatectIn FORMATETC*
+    pformatetcOut FORMATETC*
+
+  func SetData
+    HRESULT
+    pformatetc FORMATETC*
+    pmedium STGMEDIUM*
+    fRelease BOOL
+
+  func EnumFormatEtc
+    HRESULT
+    dwDirection DATADIR
+    ppenumFormatEtc IEnumFORMATETC**
+
+  func DAdvise
+    HRESULT
+    pformatetc FORMATETC*
+    advf ADVF
+    pAdvSink IAdviseSink*
+    pdwConnection DWORD*
+
+  func DUnadvise
+    HRESULT
+    dwConnection DWORD
+
+  func EnumDAdvise
+    HRESULT
+    ppenumAdvise IEnumSTATDATA**
+
+  enum DATADIR UINT display=DWORD
+    DATADIR_GET 1
+    DATADIR_SET 2
+
+

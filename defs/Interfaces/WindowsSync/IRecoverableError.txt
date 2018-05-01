@@ -1,0 +1,28 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IRecoverableError base=IUnknown id={0f5625e8-0a7b-45ee-9637-1ce13645909e} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetStage
+    HRESULT
+    pStage SYNC_PROGRESS_STAGE*
+
+  func GetProvider
+    HRESULT
+    pProviderRole SYNC_PROVIDER_ROLE*
+
+  func GetChangeWithRecoverableError
+    HRESULT
+    ppChangeWithRecoverableError ISyncChange**
+
+  func GetRecoverableErrorDataForChange
+    HRESULT
+    phrError HRESULT*
+    ppErrorData IRecoverableErrorData**
+
+  func GetRecoverableErrorDataForChangeUnit
+    HRESULT
+    pChangeUnit ISyncChangeUnit*
+    phrError HRESULT*
+    ppErrorData IRecoverableErrorData**
+
+

@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemEventProviderQuerySink base=IUnknown id={580acaf8-fa1c-11d0-ad72-00c04fd8fdff} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func NewQuery
+    WBEMSTATUS
+    dwId "unsigned long"
+    wszQueryLanguage WBEM_WSTR
+    wszQuery WBEM_WSTR
+
+  func CancelQuery
+    WBEMSTATUS
+    dwId "unsigned long"
+
+

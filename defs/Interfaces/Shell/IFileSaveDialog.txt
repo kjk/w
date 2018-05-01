@@ -1,0 +1,28 @@
+include Interfaces\Shell\IFileDialog.txt
+
+ingterface IFileSaveDialog base=IFileDialog id={84bccd23-5fde-4cdb-aea4-af64b83d78ab} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetSaveAsItem
+    HRESULT
+    psi IShellItem*
+
+  func SetProperties
+    HRESULT
+    pStore IPropertyStore*
+
+  func SetCollectedProperties
+    HRESULT
+    pList IPropertyDescriptionList*
+    fAppendDefault BOOL
+
+  func GetProperties
+    HRESULT
+    ppStore IPropertyStore**
+
+  func ApplyProperties
+    HRESULT
+    psi IShellItem*
+    pStore IPropertyStore*
+    hwnd HWND
+    pSink IFileOperationProgressSink*
+
+

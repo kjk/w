@@ -1,0 +1,23 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Brush.txt
+
+ingterface ID2D1LinearGradientBrush base=ID2D1Brush id={2cd906ab-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetStartPoint
+    void
+    startPoint D2D1_POINT_2F
+
+  func SetEndPoint
+    void
+    endPoint D2D1_POINT_2F
+
+  func GetStartPoint
+    D2D1_POINT_2F
+
+  func GetEndPoint
+    D2D1_POINT_2F
+
+  func GetGradientStopCollection
+    void
+    gradientStopCollection ID2D1GradientStopCollection**
+
+

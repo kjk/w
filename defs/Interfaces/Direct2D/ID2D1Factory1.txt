@@ -1,0 +1,64 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Factory.txt
+
+ingterface ID2D1Factory1 base=ID2D1Factory id={bb12d362-daee-4b9a-aa1d-14ba401cfa1f} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func CreateDevice
+    [D2D_HRESULT]
+    dxgiDevice IDXGIDevice*
+    d2dDevice ID2D1Device**
+
+  func "CreateStrokeStyle "
+    [D2D_HRESULT]
+    strokeStyleProperties "CONST D2D1_STROKE_STYLE_PROPERTIES1*"
+    dashes "CONST FLOAT*" count=dashesCount
+    dashesCount UINT32
+    strokeStyle ID2D1StrokeStyle1**
+
+  func "CreatePathGeometry "
+    [D2D_HRESULT]
+    pathGeometry ID2D1PathGeometry1**
+
+  func "CreateDrawingStateBlock "
+    [D2D_HRESULT]
+    drawingStateDescription "CONST D2D1_DRAWING_STATE_DESCRIPTION1*"
+    textRenderingParams IDWriteRenderingParams*
+    drawingStateBlock ID2D1DrawingStateBlock1**
+
+  func CreateGdiMetafile
+    [D2D_HRESULT]
+    metafileStream IStream*
+    metafile ID2D1GdiMetafile**
+
+  func RegisterEffectFromStream
+    [D2D_HRESULT]
+    classId REFCLSID
+    propertyXml IStream*
+    bindings "CONST D2D1_PROPERTY_BINDING*" count=bindingsCount
+    bindingsCount UINT32
+    effectFactory "CONST PD2D1_EFFECT_FACTORY"
+
+  func RegisterEffectFromString
+    [D2D_HRESULT]
+    classId REFCLSID
+    propertyXml PCWSTR
+    bindings "CONST D2D1_PROPERTY_BINDING*" count=bindingsCount
+    bindingsCount UINT32
+    effectFactory "CONST PD2D1_EFFECT_FACTORY"
+
+  func UnregisterEffect
+    [D2D_HRESULT]
+    classId REFCLSID
+
+  func GetRegisteredEffects
+    [D2D_HRESULT]
+    effects CLSID* postCount=effectsReturned
+    effectsCount UINT32
+    effectsReturned UINT32*
+    effectsRegistered UINT32*
+
+  func GetEffectProperties
+    [D2D_HRESULT]
+    effectId REFCLSID
+    properties ID2D1Properties**
+
+

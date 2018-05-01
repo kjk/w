@@ -1,0 +1,20 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWritePixelSnapping base=IUnknown id={eaf3a2da-ecf4-4d24-b644-b34f6842024b} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func IsPixelSnappingDisabled
+    HRESULT
+    clientDrawingContext void*
+    isDisabled BOOL*
+
+  func GetCurrentTransform
+    HRESULT
+    clientDrawingContext void*
+    transform DWRITE_MATRIX*
+
+  func GetPixelsPerDip
+    HRESULT
+    clientDrawingContext void*
+    pixelsPerDip FLOAT*
+
+

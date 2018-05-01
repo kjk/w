@@ -1,0 +1,15 @@
+include Interfaces\FileSystemObject\IFileSystem.txt
+
+ingterface IFileSystem3 base=IFileSystem id={2A0B9D10-4B87-11D3-A97A-00104B365C9F} errorFunc=HRESULT onlineHelp=MSDN category="Scripting Runtime Library/FileSystemObject"
+  func GetStandardStream
+    HRESULT
+    StandardStreamType StandardStreamTypes
+    Unicode VARIANT_BOOL
+    ppts ITextStream**
+
+  func GetFileVersion
+    HRESULT
+    FileName BSTR
+    FileVersion BSTR*
+
+

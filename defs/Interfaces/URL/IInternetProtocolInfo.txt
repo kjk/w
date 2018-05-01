@@ -1,0 +1,41 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IInternetProtocolInfo base=IUnknown id={79eac9ec-baf9-11ce-8c82-00aa004ba90b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func ParseUrl
+    HRESULT
+    pwzUrl LPCWSTR
+    ParseAction PARSEACTION
+    dwParseFlags DWORD
+    pwzResult LPWSTR
+    cchResult DWORD
+    pcchResult DWORD*
+    dwReserved DWORD
+
+  func CombineUrl
+    HRESULT
+    pwzBaseUrl LPCWSTR
+    pwzRelativeUrl LPCWSTR
+    dwCombineFlags [InternetCanonicalizeUrlFlags]
+    pwzResult LPWSTR
+    cchResult DWORD
+    pcchResult DWORD*
+    dwReserved DWORD
+
+  func CompareUrl
+    HRESULT
+    pwzUrl1 LPCWSTR
+    pwzUrl2 LPCWSTR
+    dwCompareFlags DWORD
+
+  func QueryInfo
+    HRESULT
+    pwzUrl LPCWSTR
+    OueryOption QUERYOPTION
+    dwQueryFlags DWORD
+    pBuffer LPVOID postLength=pcbBuf
+    cbBuffer DWORD
+    pcbBuf DWORD*
+    dwReserved DWORD
+
+

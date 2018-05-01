@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IWinInetFileStream base=IUnknown id={F134C4B7-B1F8-4e75-B886-74B90943BECB} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func SetHandleForUnlock
+    HRESULT
+    hWinInetLockHandle DWORD_PTR
+    dwReserved DWORD_PTR
+
+  func SetDeleteFile
+    HRESULT
+    dwReserved DWORD_PTR
+
+

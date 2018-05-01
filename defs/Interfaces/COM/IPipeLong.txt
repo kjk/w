@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPipeLong base=IUnknown id={DB2F3ACC-2F86-11d1-8E04-00C04FB9989A} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Pull
+    HRESULT
+    buf LONG*
+    cRequest ULONG
+    pcReturned ULONG*
+
+  func Push
+    HRESULT
+    buf LONG*
+    cSent ULONG
+
+

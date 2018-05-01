@@ -1,0 +1,68 @@
+include Headers\windows.h.txt
+
+header
+alias DEVPROPGUID GUID
+
+alias DEVPROPID ULONG
+
+array "TCHAR [LINE_LEN]" base=TCHAR count=256
+
+array "TCHAR [MAX_PROFILE_LEN]" base=TCHAR count=80
+
+struct DEVPROPKEY
+  fmtid DEVPROPGUID
+  pid DEVPROPID
+
+pointer DEVPROPKEY* DEVPROPKEY
+
+pointer "CONST DEVPROPKEY*" DEVPROPKEY
+
+flag [DiDriverType] DWORD display=DWORD
+  SPDIT_NODRIVER     0x00000000
+  SPDIT_CLASSDRIVER  0x00000001
+  SPDIT_COMPATDRIVER 0x00000002
+
+struct SP_DRVINFO_DATA pack32=1 pack64=8
+  cbSize DWORD
+  DriverType [DiDriverType]
+  Reserved ULONG_PTR
+  Description "TCHAR [LINE_LEN]"
+  MfgName "TCHAR [LINE_LEN]"
+  ProviderName "TCHAR [LINE_LEN]"
+  DriverDate FILETIME
+  DriverVersion DWORDLONG
+
+pointer PSP_DRVINFO_DATA SP_DRVINFO_DATA
+
+enum DEVPROPTYPE ULONG
+  DEVPROP_TYPE_EMPTY                      0x00000000
+  DEVPROP_TYPE_NULL                       0x00000001
+  DEVPROP_TYPE_SBYTE                      0x00000002
+  DEVPROP_TYPE_BYTE                       0x00000003
+  DEVPROP_TYPE_INT16                      0x00000004
+  DEVPROP_TYPE_UINT16                     0x00000005
+  DEVPROP_TYPE_INT32                      0x00000006
+  DEVPROP_TYPE_UINT32                     0x00000007
+  DEVPROP_TYPE_INT64                      0x00000008
+  DEVPROP_TYPE_UINT64                     0x00000009
+  DEVPROP_TYPE_FLOAT                      0x0000000A
+  DEVPROP_TYPE_DOUBLE                     0x0000000B
+  DEVPROP_TYPE_DECIMAL                    0x0000000C
+  DEVPROP_TYPE_GUID                       0x0000000D
+  DEVPROP_TYPE_CURRENCY                   0x0000000E
+  DEVPROP_TYPE_DATE                       0x0000000F
+  DEVPROP_TYPE_FILETIME                   0x00000010
+  DEVPROP_TYPE_BOOLEAN                    0x00000011
+  DEVPROP_TYPE_STRING                     0x00000012
+  DEVPROP_TYPE_SECURITY_DESCRIPTOR        0x00000013
+  DEVPROP_TYPE_SECURITY_DESCRIPTOR_STRING 0x00000014
+  DEVPROP_TYPE_DEVPROPKEY                 0x00000015
+  DEVPROP_TYPE_DEVPROPTYPE                0x00000016
+  DEVPROP_TYPE_ERROR                      0x00000017
+  DEVPROP_TYPE_NTSTATUS                   0x00000018
+  DEVPROP_TYPE_STRING_INDIRECT            0x00000019
+  DEVPROP_TYPE_BINARY                     0x00001003
+  DEVPROP_TYPE_STRING_LIST                0x00002012
+
+pointer DEVPROPTYPE* DEVPROPTYPE
+

@@ -1,0 +1,301 @@
+include Interfaces\IDispatch.txt
+include Headers\internet.h.txt
+
+ingterface IWebBrowser base=IDispatch id={EAB22AC1-30C1-11CF-A7EB-0000C05BAE0B} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+  func GoBack
+    HRESULT
+
+  func GoForward
+    HRESULT
+
+  func GoHome
+    HRESULT
+
+  func GoSearch
+    HRESULT
+
+  func Navigate
+    HRESULT
+    URL BSTR
+    Flags VARIANT*
+    TargetFrameName VARIANT*
+    PostData VARIANT*
+    Headers VARIANT*
+
+  func Refresh
+    HRESULT
+
+  func Refresh2
+    HRESULT
+    Level VARIANT*
+
+  func Stop
+    HRESULT
+
+  func get_Application
+    HRESULT
+    ppDisp IDispatch**
+
+  func get_Parent
+    HRESULT
+    ppDisp IDispatch**
+
+  func get_Container
+    HRESULT
+    ppDisp IDispatch**
+
+  func get_Document
+    HRESULT
+    ppDisp IDispatch**
+
+  func get_TopLevelContainer
+    HRESULT
+    pBool VARIANT_BOOL*
+
+  func get_Type
+    HRESULT
+    Type BSTR*
+
+  func get_Left
+    HRESULT
+    pl long*
+
+  func put_Left
+    HRESULT
+    Left long
+
+  func get_Top
+    HRESULT
+    pl long*
+
+  func put_Top
+    HRESULT
+    Top long
+
+  func get_Width
+    HRESULT
+    pl long*
+
+  func put_Width
+    HRESULT
+    Width long
+
+  func get_Height
+    HRESULT
+    pl long*
+
+  func put_Height
+    HRESULT
+    Height long
+
+  func get_LocationName
+    HRESULT
+    LocationName BSTR*
+
+  func get_LocationURL
+    HRESULT
+    LocationURL BSTR*
+
+  func get_Busy
+    HRESULT
+    pBool VARIANT_BOOL*
+
+  interface DShellWindowsEvents
+
+  interface DWebBrowserEvents
+
+  interface DWebBrowserEvents2
+
+  interface IClassFactoryEx
+
+  interface ICustomDoc
+
+  interface IDocHostShowUI
+
+  interface IDocHostUIHandler
+
+  interface IDocHostUIHandler2
+
+  interface IDocObjectService
+
+  interface IEnumSTATURL
+
+  interface IHostDialogHelper
+
+  interface IHTMLOMWindowServices
+
+  interface IScriptErrorList
+
+  interface IShellFavoritesNameSpace
+
+  interface IShellNameSpace
+
+  interface IShellUIHelper
+
+  interface IShellUIHelper2
+
+  interface IShellUIHelper3
+
+  interface IShellWindows
+
+  interface IUrlHistoryNotify
+
+  interface IUrlHistoryStg
+
+  interface IUrlHistoryStg2
+
+  interface IWebBrowser2
+
+  interface IWebBrowserApp
+
+  interface IWebBrowserEventsService
+
+  interface IWebBrowserEventsUrlService
+
+  interface IPrivacyServices
+
+  interface IHTMLWindow2
+
+  interface IHTMLElement
+
+  alias SHANDLE_PTR INT64
+
+  pointer SHANDLE_PTR* SHANDLE_PTR
+
+  enum OLECMDID UINT
+    OLECMDID_OPEN                           1
+    OLECMDID_NEW                            2
+    OLECMDID_SAVE                           3
+    OLECMDID_SAVEAS                         4
+    OLECMDID_SAVECOPYAS                     5
+    OLECMDID_PRINT                          6
+    OLECMDID_PRINTPREVIEW                   7
+    OLECMDID_PAGESETUP                      8
+    OLECMDID_SPELL                          9
+    OLECMDID_PROPERTIES                     10
+    OLECMDID_CUT                            11
+    OLECMDID_COPY                           12
+    OLECMDID_PASTE                          13
+    OLECMDID_PASTESPECIAL                   14
+    OLECMDID_UNDO                           15
+    OLECMDID_REDO                           16
+    OLECMDID_SELECTALL                      17
+    OLECMDID_CLEARSELECTION                 18
+    OLECMDID_ZOOM                           19
+    OLECMDID_GETZOOMRANGE                   20
+    OLECMDID_UPDATECOMMANDS                 21
+    OLECMDID_REFRESH                        22
+    OLECMDID_STOP                           23
+    OLECMDID_HIDETOOLBARS                   24
+    OLECMDID_SETPROGRESSMAX                 25
+    OLECMDID_SETPROGRESSPOS                 26
+    OLECMDID_SETPROGRESSTEXT                27
+    OLECMDID_SETTITLE                       28
+    OLECMDID_SETDOWNLOADSTATE               29
+    OLECMDID_STOPDOWNLOAD                   30
+    OLECMDID_ONTOOLBARACTIVATED             31
+    OLECMDID_FIND                           32
+    OLECMDID_DELETE                         33
+    OLECMDID_HTTPEQUIV                      34
+    OLECMDID_HTTPEQUIV_DONE                 35
+    OLECMDID_ENABLE_INTERACTION             36
+    OLECMDID_ONUNLOAD                       37
+    OLECMDID_PROPERTYBAG2                   38
+    OLECMDID_PREREFRESH                     39
+    OLECMDID_SHOWSCRIPTERROR                40
+    OLECMDID_SHOWMESSAGE                    41
+    OLECMDID_SHOWFIND                       42
+    OLECMDID_SHOWPAGESETUP                  43
+    OLECMDID_SHOWPRINT                      44
+    OLECMDID_CLOSE                          45
+    OLECMDID_ALLOWUILESSSAVEAS              46
+    OLECMDID_DONTDOWNLOADCSS                47
+    OLECMDID_UPDATEPAGESTATUS               48
+    OLECMDID_PRINT2                         49
+    OLECMDID_PRINTPREVIEW2                  50
+    OLECMDID_SETPRINTTEMPLATE               51
+    OLECMDID_GETPRINTTEMPLATE               52
+    OLECMDID_PAGEACTIONBLOCKED              55
+    OLECMDID_PAGEACTIONUIQUERY              56
+    OLECMDID_FOCUSVIEWCONTROLS              57
+    OLECMDID_FOCUSVIEWCONTROLSQUERY         58
+    OLECMDID_SHOWPAGEACTIONMENU             59
+    OLECMDID_ADDTRAVELENTRY                 60
+    OLECMDID_UPDATETRAVELENTRY              61
+    OLECMDID_UPDATEBACKFORWARDSTATE         62
+    OLECMDID_OPTICAL_ZOOM                   63
+    OLECMDID_OPTICAL_GETZOOMRANGE           64
+    OLECMDID_WINDOWSTATECHANGED             65
+    OLECMDID_ACTIVEXINSTALLSCOPE            66
+    OLECMDID_UPDATETRAVELENTRY_DATARECOVERY 67
+
+  enum OLECMDEXECOPT UINT
+    OLECMDEXECOPT_DODEFAULT      0
+    OLECMDEXECOPT_PROMPTUSER     1
+    OLECMDEXECOPT_DONTPROMPTUSER 2
+    OLECMDEXECOPT_SHOWHELP       3
+
+  flag DOCHOSTUIDBLCLK DWORD display=DWORD
+    DOCHOSTUIDBLCLK_DEFAULT        0
+    DOCHOSTUIDBLCLK_SHOWPROPERTIES 1
+    DOCHOSTUIDBLCLK_SHOWCODE       2
+
+  flag DOCHOSTUIFLAG DWORD display=DWORD
+    DOCHOSTUIFLAG_DIALOG                         0x1
+    DOCHOSTUIFLAG_DISABLE_HELP_MENU              0x2
+    DOCHOSTUIFLAG_NO3DBORDER                     0x4
+    DOCHOSTUIFLAG_SCROLL_NO                      0x8
+    DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE        0x10
+    DOCHOSTUIFLAG_OPENNEWWIN                     0x20
+    DOCHOSTUIFLAG_DISABLE_OFFSCREEN              0x40
+    DOCHOSTUIFLAG_FLAT_SCROLLBAR                 0x80
+    DOCHOSTUIFLAG_DIV_BLOCKDEFAULT               0x100
+    DOCHOSTUIFLAG_ACTIVATE_CLIENTHIT_ONLY        0x200
+    DOCHOSTUIFLAG_OVERRIDEBEHAVIORFACTORY        0x400
+    DOCHOSTUIFLAG_CODEPAGELINKEDFONTS            0x800
+    DOCHOSTUIFLAG_URL_ENCODING_DISABLE_UTF8      0x1000
+    DOCHOSTUIFLAG_URL_ENCODING_ENABLE_UTF8       0x2000
+    DOCHOSTUIFLAG_ENABLE_FORMS_AUTOCOMPLETE      0x4000
+    DOCHOSTUIFLAG_ENABLE_INPLACE_NAVIGATION      0x10000
+    DOCHOSTUIFLAG_IME_ENABLE_RECONVERSION        0x20000
+    DOCHOSTUIFLAG_THEME                          0x40000
+    DOCHOSTUIFLAG_NOTHEME                        0x80000
+    DOCHOSTUIFLAG_NOPICS                         0x100000
+    DOCHOSTUIFLAG_NO3DOUTERBORDER                0x200000
+    DOCHOSTUIFLAG_DISABLE_EDIT_NS_FIXUP          0x400000
+    DOCHOSTUIFLAG_LOCAL_MACHINE_ACCESS_CHECK     0x800000
+    DOCHOSTUIFLAG_DISABLE_UNTRUSTEDPROTOCOL      0x1000000
+    DOCHOSTUIFLAG_HOST_NAVIGATES                 0x2000000
+    DOCHOSTUIFLAG_ENABLE_REDIRECT_NOTIFICATION   0x4000000
+    DOCHOSTUIFLAG_USE_WINDOWLESS_SELECTCONTROL   0x8000000
+    DOCHOSTUIFLAG_USE_WINDOWED_SELECTCONTROL     0x10000000
+    DOCHOSTUIFLAG_ENABLE_ACTIVEX_INACTIVATE_MODE 0x20000000
+    DOCHOSTUIFLAG_DPI_AWARE                      0x40000000
+
+  struct DOCHOSTUIINFO
+  cbSize ULONG
+  dwFlags DOCHOSTUIFLAG
+  dwDoubleClick DOCHOSTUIDBLCLK
+  pchHostCss OLECHAR*
+  pchHostNS OLECHAR*
+
+  pointer DOCHOSTUIINFO* DOCHOSTUIINFO
+
+  flag [STATURL_QUERYFLAG] DWORD display=DWORD
+    STATURL_QUERYFLAG_ISCACHED 0x00010000
+    STATURL_QUERYFLAG_NOURL    0x00020000
+    STATURL_QUERYFLAG_NOTITLE  0x00040000
+    STATURL_QUERYFLAG_TOPLEVEL 0x00080000
+
+  struct STATURL
+  cbSize DWORD
+  pwcsUrl LPWSTR
+  pwcsTitle LPWSTR
+  ftLastVisited FILETIME
+  ftLastUpdated FILETIME
+  ftExpires FILETIME
+  dwFlags [STATURL_QUERYFLAG]
+
+  pointer LPSTATURL STATURL
+
+

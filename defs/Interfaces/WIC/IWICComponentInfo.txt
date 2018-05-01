@@ -1,0 +1,45 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICComponentInfo base=IUnknown id={23BC3F0A-698B-4357-886B-F24D50671334} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetComponentType
+    [WIC_HRESULT]
+    pType WICComponentType*
+
+  func GetCLSID
+    [WIC_HRESULT]
+    pclsid CLSID*
+
+  func GetSigningStatus
+    [WIC_HRESULT]
+    pStatus DWORD*
+
+  func GetAuthor
+    [WIC_HRESULT]
+    cchAuthor UINT
+    wzAuthor WCHAR*
+    pcchActual UINT*
+
+  func GetVendorGUID
+    [WIC_HRESULT]
+    pguidVendor GUID*
+
+  func GetVersion
+    [WIC_HRESULT]
+    cchVersion UINT
+    wzVersion WCHAR*
+    pcchActual UINT*
+
+  func GetSpecVersion
+    [WIC_HRESULT]
+    cchSpecVersion UINT
+    wzSpecVersion WCHAR*
+    pcchActual UINT*
+
+  func GetFriendlyName
+    [WIC_HRESULT]
+    cchFriendlyName UINT
+    wzFriendlyName WCHAR*
+    pcchActual UINT*
+
+

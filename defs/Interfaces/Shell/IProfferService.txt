@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IProfferService base=IUnknown id={cb728b20-f786-11ce-92ad-00aa00a74cd0} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func ProfferService
+    HRESULT
+    guidService REFGUID
+    psp IServiceProvider*
+    pdwCookie DWORD*
+
+  func RevokeService
+    HRESULT
+    dwCookie DWORD
+
+

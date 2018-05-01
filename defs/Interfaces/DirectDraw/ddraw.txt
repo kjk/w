@@ -1,0 +1,33 @@
+include Headers\ddraw.h.txt
+
+dll ddraw.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+func DirectDrawCreate
+  [DD_HRESULT]
+  lpGUID GUID*
+  lplpDD LPDIRECTDRAW*
+  pUnkOuter IUnknown*
+
+func DirectDrawCreateClipper
+  [DD_HRESULT]
+  dwFlags DWORD
+  lplpDDClipper LPDIRECTDRAWCLIPPER*
+  pUnkOuter IUnknown*
+
+func DirectDrawCreateEx
+  [DD_HRESULT]
+  lpGUID GUID*
+  lplpDD LPVOID* interfaceId=iid
+  iid REFIID
+  pUnkOuter IUnknown*
+
+func DirectDrawEnumerate bothCharset
+  [DD_HRESULT]
+  lpCallback LPDDENUMCALLBACK
+  lpContext LPVOID
+
+func DirectDrawEnumerateEx bothCharset
+  [DD_HRESULT]
+  lpCallback LPDDENUMCALLBACKEX
+  lpContext LPVOID
+  dwFlags [DDENUM_FLAGS]
+

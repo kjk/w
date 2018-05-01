@@ -1,0 +1,507 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\8\d3d8.txt
+
+ingterface IDirect3DDevice8 base=IUnknown id={7385E5DF-8FE8-41D5-86B6-D7B48547B6CF} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/8"
+  func TestCooperativeLevel
+    HRESULT
+
+  func GetAvailableTextureMem
+    success NotEqual=0
+    UINT
+
+  func ResourceManagerDiscardBytes
+    HRESULT
+    Bytes DWORD
+
+  func GetDirect3D
+    HRESULT
+    ppD3D8 IDirect3D8**
+
+  func GetDeviceCaps
+    HRESULT
+    pCaps D3DCAPS8*
+
+  func GetDisplayMode
+    HRESULT
+    pMode D3DDISPLAYMODE*
+
+  func GetCreationParameters
+    HRESULT
+    pParameters D3DDEVICE_CREATION_PARAMETERS*
+
+  func SetCursorProperties
+    HRESULT
+    XHotSpot UINT
+    YHotSpot UINT
+    pCursorBitmap IDirect3DSurface8*
+
+  func SetCursorPosition
+    void
+    XScreenSpace UINT
+    YScreenSpace UINT
+    Flags DWORD
+
+  func ShowCursor
+    BOOL
+    bShow BOOL
+
+  func CreateAdditionalSwapChain
+    HRESULT
+    pPresentationParameters D3DPRESENT_PARAMETERS*
+    pSwapChain IDirect3DSwapChain8**
+
+  func Reset
+    HRESULT
+    pPresentationParameters D3DPRESENT_PARAMETERS*
+
+  func Present
+    HRESULT
+    pSourceRect "CONST RECT*"
+    pDestRect "CONST RECT*"
+    hDestWindowOverride HWND
+    pDirtyRegion "CONST RGNDATA*"
+
+  func GetBackBuffer
+    HRESULT
+    BackBuffer UINT
+    Type D3DBACKBUFFER_TYPE
+    ppBackBuffer IDirect3DSurface8**
+
+  func GetRasterStatus
+    HRESULT
+    pRasterStatus D3DRASTER_STATUS*
+
+  func SetGammaRamp
+    void
+    Flags DWORD
+    pRamp "CONST D3DGAMMARAMP*"
+
+  func GetGammaRamp
+    void
+    pRamp D3DGAMMARAMP*
+
+  func CreateTexture
+    HRESULT
+    Width UINT
+    Height UINT
+    Levels UINT
+    Usage DWORD
+    Format D3DFORMAT
+    Pool D3DPOOL
+    ppTexture IDirect3DTexture8**
+
+  func CreateVolumeTexture
+    HRESULT
+    Width UINT
+    Height UINT
+    Depth UINT
+    Levels UINT
+    Usage DWORD
+    Format D3DFORMAT
+    Pool D3DPOOL
+    ppVolumeTexture IDirect3DVolumeTexture8**
+
+  func CreateCubeTexture
+    HRESULT
+    EdgeLength UINT
+    Levels UINT
+    Usage DWORD
+    Format D3DFORMAT
+    Pool D3DPOOL
+    ppCubeTexture IDirect3DCubeTexture8**
+
+  func CreateVertexBuffer
+    HRESULT
+    Length UINT
+    Usage DWORD
+    FVF DWORD
+    Pool D3DPOOL
+    ppVertexBuffer IDirect3DVertexBuffer8**
+
+  func CreateIndexBuffer
+    HRESULT
+    Length UINT
+    Usage DWORD
+    Format D3DFORMAT
+    Pool D3DPOOL
+    ppIndexBuffer IDirect3DIndexBuffer8**
+
+  func CreateRenderTarget
+    HRESULT
+    Width UINT
+    Height UINT
+    Format D3DFORMAT
+    MultiSample D3DMULTISAMPLE_TYPE
+    Lockable BOOL
+    ppSurface IDirect3DSurface8**
+
+  func CreateDepthStencilSurface
+    HRESULT
+    Width UINT
+    Height UINT
+    Format D3DFORMAT
+    MultiSample D3DMULTISAMPLE_TYPE
+    ppSurface IDirect3DSurface8**
+
+  func CreateImageSurface
+    HRESULT
+    Width UINT
+    Height UINT
+    Format D3DFORMAT
+    ppSurface IDirect3DSurface8**
+
+  func CopyRects
+    HRESULT
+    pSourceSurface IDirect3DSurface8*
+    pSourceRectsArray "CONST RECT*" count=cRects
+    cRects UINT
+    pDestinationSurface IDirect3DSurface8*
+    pDestPointsArray "CONST POINT*"
+
+  func UpdateTexture
+    HRESULT
+    pSourceTexture IDirect3DBaseTexture8*
+    pDestinationTexture IDirect3DBaseTexture8*
+
+  func GetFrontBuffer
+    HRESULT
+    pDestSurface IDirect3DSurface8*
+
+  func SetRenderTarget
+    HRESULT
+    pRenderTarget IDirect3DSurface8*
+    pNewZStencil IDirect3DSurface8*
+
+  func GetRenderTarget
+    HRESULT
+    ppRenderTarget IDirect3DSurface8**
+
+  func GetDepthStencilSurface
+    HRESULT
+    ppZStencilSurface IDirect3DSurface8**
+
+  func BeginScene
+    HRESULT
+
+  func EndScene
+    HRESULT
+
+  func Clear
+    HRESULT
+    Count DWORD
+    pRects "CONST D3DRECT*"
+    Flags DWORD
+    Color D3DCOLOR
+    Z float
+    Stencil DWORD
+
+  func SetTransform
+    HRESULT
+    State D3DTRANSFORMSTATETYPE
+    pMatrix "CONST D3DMATRIX*"
+
+  func GetTransform
+    HRESULT
+    State D3DTRANSFORMSTATETYPE
+    pMatrix D3DMATRIX*
+
+  func MultiplyTransform
+    HRESULT
+    State D3DTRANSFORMSTATETYPE
+    pMatrix "CONST D3DMATRIX*"
+
+  func SetViewport
+    HRESULT
+    pViewport "CONST D3DVIEWPORT8*"
+
+  func GetViewport
+    HRESULT
+    pViewport D3DVIEWPORT8*
+
+  func SetMaterial
+    HRESULT
+    pMaterial "CONST D3DMATERIAL8*"
+
+  func GetMaterial
+    HRESULT
+    pMaterial D3DMATERIAL8*
+
+  func SetLight
+    HRESULT
+    Index DWORD
+    pLight "CONST D3DLIGHT8*"
+
+  func GetLight
+    HRESULT
+    Index DWORD
+    pLight D3DLIGHT8*
+
+  func LightEnable
+    HRESULT
+    Index DWORD
+    Enable BOOL
+
+  func GetLightEnable
+    HRESULT
+    Index DWORD
+    pEnable BOOL*
+
+  func SetClipPlane
+    HRESULT
+    Index DWORD
+    pPlane "CONST float*"
+
+  func GetClipPlane
+    HRESULT
+    Index DWORD
+    pPlane float*
+
+  func SetRenderState
+    HRESULT
+    State D3DRENDERSTATETYPE
+    Value DWORD
+
+  func GetRenderState
+    HRESULT
+    State D3DRENDERSTATETYPE
+    pValue DWORD*
+
+  func BeginStateBlock
+    HRESULT
+
+  func EndStateBlock
+    HRESULT
+    pToken DWORD*
+
+  func ApplyStateBlock
+    HRESULT
+    Token DWORD
+
+  func CaptureStateBlock
+    HRESULT
+    Token DWORD
+
+  func DeleteStateBlock
+    HRESULT
+    Token DWORD
+
+  func CreateStateBlock
+    HRESULT
+    Type D3DSTATEBLOCKTYPE
+    pToken DWORD*
+
+  func SetClipStatus
+    HRESULT
+    pClipStatus "CONST D3DCLIPSTATUS8*"
+
+  func GetClipStatus
+    HRESULT
+    pClipStatus D3DCLIPSTATUS8*
+
+  func GetTexture
+    HRESULT
+    Stage DWORD
+    ppTexture IDirect3DBaseTexture8**
+
+  func SetTexture
+    HRESULT
+    Stage DWORD
+    pTexture IDirect3DBaseTexture8*
+
+  func GetTextureStageState
+    HRESULT
+    Stage DWORD
+    Type D3DTEXTURESTAGESTATETYPE
+    pValue DWORD*
+
+  func SetTextureStageState
+    HRESULT
+    Stage DWORD
+    Type D3DTEXTURESTAGESTATETYPE
+    Value DWORD
+
+  func ValidateDevice
+    HRESULT
+    pNumPasses DWORD*
+
+  func GetInfo
+    HRESULT
+    DevInfoID DWORD
+    pDevInfoStruct void*
+    DevInfoStructSize DWORD
+
+  func SetPaletteEntries
+    HRESULT
+    PaletteNumber UINT
+    pEntries "CONST PALETTEENTRY*"
+
+  func GetPaletteEntries
+    HRESULT
+    PaletteNumber UINT
+    pEntries PALETTEENTRY*
+
+  func SetCurrentTexturePalette
+    HRESULT
+    PaletteNumber UINT
+
+  func GetCurrentTexturePalette
+    HRESULT
+    PaletteNumber UINT*
+
+  func DrawPrimitive
+    HRESULT
+    PrimitiveType D3DPRIMITIVETYPE
+    StartVertex UINT
+    PrimitiveCount UINT
+
+  func DrawIndexedPrimitive
+    HRESULT
+    Type D3DPRIMITIVETYPE
+    minIndex UINT
+    NumVertices UINT
+    startIndex UINT
+    primCount UINT
+
+  func DrawPrimitiveUP
+    HRESULT
+    PrimitiveType D3DPRIMITIVETYPE
+    PrimitiveCount UINT
+    pVertexStreamZeroData "CONST void*"
+    VertexStreamZeroStride UINT
+
+  func DrawIndexedPrimitiveUP
+    HRESULT
+    PrimitiveType D3DPRIMITIVETYPE
+    MinVertexIndex UINT
+    NumVertexIndices UINT
+    PrimitiveCount UINT
+    pIndexData "CONST void*"
+    IndexDataFormat D3DFORMAT
+    pVertexStreamZeroData "CONST void*"
+    VertexStreamZeroStride UINT
+
+  func ProcessVertices
+    HRESULT
+    SrcStartIndex UINT
+    DestIndex UINT
+    VertexCount UINT
+    pDestBuffer IDirect3DVertexBuffer8*
+    Flags DWORD
+
+  func CreateVertexShader
+    HRESULT
+    pDeclaration "CONST DWORD*"
+    pFunction "CONST DWORD*"
+    pHandle DWORD*
+    Usage DWORD
+
+  func SetVertexShader
+    HRESULT
+    Handle DWORD
+
+  func GetVertexShader
+    HRESULT
+    pHandle DWORD*
+
+  func DeleteVertexShader
+    HRESULT
+    Handle DWORD
+
+  func SetVertexShaderConstant
+    HRESULT
+    Register DWORD
+    pConstantData "CONST void*"
+    ConstantCount DWORD
+
+  func GetVertexShaderConstant
+    HRESULT
+    Register DWORD
+    pConstantData void*
+    ConstantCount DWORD
+
+  func GetVertexShaderDeclaration
+    HRESULT
+    Handle DWORD
+    pData void*
+    pSizeOfData DWORD*
+
+  func GetVertexShaderFunction
+    HRESULT
+    Handle DWORD
+    pData void*
+    pSizeOfData DWORD*
+
+  func SetStreamSource
+    HRESULT
+    StreamNumber UINT
+    pStreamData IDirect3DVertexBuffer8*
+    Stride UINT
+
+  func GetStreamSource
+    HRESULT
+    StreamNumber UINT
+    ppStreamData IDirect3DVertexBuffer8**
+    pStride UINT*
+
+  func SetIndices
+    HRESULT
+    pIndexData IDirect3DIndexBuffer8*
+    BaseVertexIndex UINT
+
+  func GetIndices
+    HRESULT
+    ppIndexData IDirect3DIndexBuffer8**
+    pBaseVertexIndex UINT*
+
+  func CreatePixelShader
+    HRESULT
+    pFunction "CONST DWORD*"
+    pHandle DWORD*
+
+  func SetPixelShader
+    HRESULT
+    Handle DWORD
+
+  func GetPixelShader
+    HRESULT
+    pHandle DWORD*
+
+  func DeletePixelShader
+    HRESULT
+    Handle DWORD
+
+  func SetPixelShaderConstant
+    HRESULT
+    Register DWORD
+    pConstantData "CONST void*"
+    ConstantCount DWORD
+
+  func GetPixelShaderConstant
+    HRESULT
+    Register DWORD
+    pConstantData void*
+    ConstantCount DWORD
+
+  func GetPixelShaderFunction
+    HRESULT
+    Handle DWORD
+    pData void*
+    pSizeOfData DWORD*
+
+  func DrawRectPatch
+    HRESULT
+    Handle UINT
+    pNumSegs "CONST float*"
+    pRectPatchInfo "CONST D3DRECTPATCH_INFO*"
+
+  func DrawTriPatch
+    HRESULT
+    Handle UINT
+    pNumSegs "CONST float*"
+    pTriPatchInfo "CONST D3DTRIPATCH_INFO*"
+
+  func DeletePatch
+    HRESULT
+    Handle UINT
+
+

@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3DDevice9Video base=IUnknown id={26DC4561-A1EE-4ae7-96DA-118A36C0EC95} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func GetContentProtectionCaps
+    HRESULT
+    pCryptoType "CONST GUID*"
+    pDecodeProfile "CONST GUID*"
+    pCaps D3DCONTENTPROTECTIONCAPS*
+
+  func CreateAuthenticatedChannel
+    HRESULT
+    ChannelType D3DAUTHENTICATEDCHANNELTYPE
+    ppAuthenticatedChannel IDirect3DAuthenticatedChannel9**
+    pChannelHandle HANDLE*
+
+  func CreateCryptoSession
+    HRESULT
+    pCryptoType "CONST GUID*"
+    pDecodeProfile "CONST GUID*"
+    ppCryptoSession IDirect3DCryptoSession9**
+    pCryptoHandle HANDLE*
+
+

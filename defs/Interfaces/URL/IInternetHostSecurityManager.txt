@@ -1,0 +1,30 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IInternetHostSecurityManager base=IUnknown id={3af280b6-cb3f-11d0-891e-00c04fb6bfc4} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetSecurityId
+    HRESULT
+    pbSecurityId BYTE* postLength=pcbSecurityId
+    pcbSecurityId DWORD*
+    dwReserved DWORD_PTR
+
+  func ProcessUrlAction
+    HRESULT
+    dwAction [URLACTION_FLAGS]
+    pPolicy BYTE* postLength=cbPolicy
+    cbPolicy DWORD
+    pContext BYTE* length=cbContext
+    cbContext DWORD
+    dwFlags PUAF
+    dwReserved DWORD
+
+  func QueryCustomPolicy
+    HRESULT
+    guidKey REFGUID
+    ppPolicy BYTE** derefPostLength=pcbPolicy
+    pcbPolicy DWORD*
+    pContext BYTE* length=cbContext
+    cbContext DWORD
+    dwReserved DWORD
+
+

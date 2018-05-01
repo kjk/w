@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IExplorerBrowserEvents base=IUnknown id={361bbdc7-e6ee-4e13-be58-58e2240c810f} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnNavigationPending
+    HRESULT
+    pidlFolder PCIDLIST_ABSOLUTE
+
+  func OnViewCreated
+    HRESULT
+    psv IShellView*
+
+  func OnNavigationComplete
+    HRESULT
+    pidlFolder PCIDLIST_ABSOLUTE
+
+  func OnNavigationFailed
+    HRESULT
+    pidlFolder PCIDLIST_ABSOLUTE
+
+

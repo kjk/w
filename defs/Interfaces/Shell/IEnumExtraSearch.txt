@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumExtraSearch base=IUnknown id={0E700BE1-9DB6-11d1-A1CE-00C04FD75D13} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Next
+    HRESULT
+    celt ULONG
+    rgelt EXTRASEARCH* postCount=celt
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppenum IEnumExtraSearch**
+
+

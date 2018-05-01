@@ -1,0 +1,65 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\DirectX\10\ID3D10EffectVariable.txt
+
+ingterface ID3D10EffectScalarVariable base=ID3D10EffectVariable id={00E48F7B-D2C8-49e8-A86C-022DEE53431F} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func SetFloat
+    HRESULT
+    Value float
+
+  func GetFloat
+    HRESULT
+    pValue float*
+
+  func SetFloatArray
+    HRESULT
+    pData float* count=Count
+    Offset UINT
+    Count UINT
+
+  func GetFloatArray
+    HRESULT
+    pData float* count=Count
+    Offset UINT
+    Count UINT
+
+  func SetInt
+    HRESULT
+    Value int
+
+  func GetInt
+    HRESULT
+    pValue int*
+
+  func SetIntArray
+    HRESULT
+    pData int* count=Count
+    Offset UINT
+    Count UINT
+
+  func GetIntArray
+    HRESULT
+    pData int* count=Count
+    Offset UINT
+    Count UINT
+
+  func SetBool
+    HRESULT
+    Value BOOL
+
+  func GetBool
+    HRESULT
+    pValue BOOL*
+
+  func SetBoolArray
+    HRESULT
+    pData BOOL* count=Count
+    Offset UINT
+    Count UINT
+
+  func GetBoolArray
+    HRESULT
+    pData BOOL* count=Count
+    Offset UINT
+    Count UINT
+
+

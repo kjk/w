@@ -1,0 +1,35 @@
+include Interfaces\IUnknown.txt
+
+ingterface ID3DX11FFT base=IUnknown id={b3f7a938-4c93-4310-a675-b30d6de50553} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/D3DCSX"
+  func SetForwardScale
+    HRESULT
+    ForwardScale FLOAT
+
+  func GetForwardScale
+    FLOAT
+
+  func SetInverseScale
+    HRESULT
+    InverseScale FLOAT
+
+  func GetInverseScale
+    FLOAT
+
+  func AttachBuffersAndPrecompute
+    HRESULT
+    NumTempBuffers UINT
+    ppTempBuffers ID3D11UnorderedAccessView*const* count=NumTempBuffers
+    NumPrecomputeBuffers UINT
+    ppPrecomputeBufferSizes ID3D11UnorderedAccessView*const* count=NumPrecomputeBuffers
+
+  func ForwardTransform
+    HRESULT
+    pInputBuffer "const ID3D11UnorderedAccessView*"
+    ppOutputBuffer ID3D11UnorderedAccessView**
+
+  func InverseTransform
+    HRESULT
+    pInputBuffer "const ID3D11UnorderedAccessView*"
+    ppOutputBuffer ID3D11UnorderedAccessView**
+
+

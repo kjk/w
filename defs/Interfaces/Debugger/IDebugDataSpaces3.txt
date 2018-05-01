@@ -1,0 +1,31 @@
+include Interfaces\Debugger\IDebugDataSpaces2.txt
+
+ingterface IDebugDataSpaces3 base=IDebugDataSpaces2 id={23f79d6c-8aaf-4f7c-a607-9995f5407e63} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func ReadImageNtHeaders
+    HRESULT
+    ImageBase ULONG64
+    Headers PIMAGE_NT_HEADERS64
+
+  func ReadTagged
+    HRESULT
+    Tag LPGUID
+    Offset ULONG
+    Buffer PVOID
+    BufferSize ULONG
+    TotalSize PULONG
+
+  func StartEnumTagged
+    HRESULT
+    Handle PULONG64
+
+  func GetNextTagged
+    HRESULT
+    Handle ULONG64
+    Tag LPGUID
+    Size PULONG
+
+  func EndEnumTagged
+    HRESULT
+    Handle ULONG64
+
+

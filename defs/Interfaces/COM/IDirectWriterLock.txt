@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectWriterLock base=IUnknown id={0e6d4d92-6738-11cf-9608-00aa00680db4} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Structured Storage/Interfaces"
+  func WaitForWriteAccess
+    HRESULT
+    dwTimeout DWORD
+
+  func ReleaseWriteAccess
+    HRESULT
+
+  func HaveWriteAccess
+    HRESULT
+
+

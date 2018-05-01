@@ -1,0 +1,33 @@
+include Interfaces\IUnknown.txt
+
+ingterface INewShortcutHookA base=IUnknown id={000214e1-0000-0000-c000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetReferent
+    HRESULT
+    pcszReferent LPCSTR
+    hwnd HWND
+
+  func GetReferent
+    HRESULT
+    pszReferent LPSTR
+    cchReferent int
+
+  func SetFolder
+    HRESULT
+    pcszFolder LPCSTR
+
+  func GetFolder
+    HRESULT
+    pszFolder LPSTR
+    cchFolder int
+
+  func GetName
+    HRESULT
+    pszName LPSTR
+    cchName int
+
+  func GetExtension
+    HRESULT
+    pszExtension LPSTR
+    cchExtension int
+
+

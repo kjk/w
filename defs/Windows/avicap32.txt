@@ -1,0 +1,24 @@
+include Headers\windows.h.txt
+
+dll avicap32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Video for Windows/Video Capture"
+func capCreateCaptureWindow bothCharset
+  success NotEqual=0
+  HWND
+  lpszWindowName LPCTSTR
+  dwStyle DWORD
+  x int
+  y int
+  nWidth int
+  nHeight int
+  hWnd HWND
+  nID int
+
+func capGetDriverDescription bothCharset
+  BOOL
+  wDriverIndex WORD
+  lpszName LPTSTR outputOnly
+  cbName INT
+  lpszVer LPTSTR outputOnly
+  cbVer INT
+

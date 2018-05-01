@@ -1,0 +1,77 @@
+include Interfaces\WindowsSync\ISyncKnowledge.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncKnowledge2 base=ISyncKnowledge id={ed0addc0-3b4b-46a1-9a45-45661d2114c8} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetIdParameters
+    HRESULT
+    pIdParameters ID_PARAMETERS*
+
+  func ProjectOntoColumnSet
+    HRESULT
+    ppColumns "const BYTE**" count=count
+    count DWORD
+    ppiKnowledgeOut ISyncKnowledge2**
+
+  func SerializeWithOptions
+    HRESULT
+    targetFormatVersion SYNC_SERIALIZATION_VERSION
+    dwFlags DWORD
+    pbBuffer BYTE*
+    pdwSerializedSize DWORD*
+
+  func GetLowestUncontainedId
+    HRESULT
+    piSyncKnowledge ISyncKnowledge2*
+    pbItemId BYTE*
+    pcbItemIdSize DWORD*
+
+  func GetInspector
+    HRESULT
+    riid REFIID
+    ppiInspector void** interfaceId=riid
+
+  func GetMinimumSupportedVersion
+    HRESULT
+    pVersion SYNC_SERIALIZATION_VERSION*
+
+  func GetStatistics
+    HRESULT
+    which SYNC_STATISTICS
+    pValue DWORD*
+
+  func ContainsKnowledgeForItem
+    HRESULT
+    pKnowledge ISyncKnowledge*
+    pbItemId "const BYTE*"
+
+  func ContainsKnowledgeForChangeUnit
+    HRESULT
+    pKnowledge ISyncKnowledge*
+    pbItemId "const BYTE*"
+    pbChangeUnitId "const BYTE*"
+
+  func ProjectOntoKnowledgeWithPrerequisite
+    HRESULT
+    pPrerequisiteKnowledge ISyncKnowledge*
+    pTemplateKnowledge ISyncKnowledge*
+    ppProjectedKnowledge ISyncKnowledge**
+
+  func Complement
+    HRESULT
+    pSyncKnowledge ISyncKnowledge*
+    ppComplementedKnowledge ISyncKnowledge**
+
+  func IntersectsWithKnowledge
+    HRESULT
+    pSyncKnowledge ISyncKnowledge*
+
+  func GetKnowledgeCookie
+    HRESULT
+    ppKnowledgeCookie IUnknown**
+
+  func CompareToKnowledgeCookie
+    HRESULT
+    pKnowledgeCookie IUnknown*
+    pResult KNOWLEDGE_COOKIE_COMPARISON_RESULT*
+
+

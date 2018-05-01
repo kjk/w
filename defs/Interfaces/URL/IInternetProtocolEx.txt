@@ -1,0 +1,13 @@
+include Interfaces\URL\IInternetProtocol.txt
+include Headers\URL.h.txt
+
+ingterface IInternetProtocolEx base=IInternetProtocol id={C7A98E66-1010-492c-A1C8-C809E1F75905} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func StartEx
+    HRESULT
+    pUri IUri*
+    pOIProtSink IInternetProtocolSink*
+    pOIBindInfo IInternetBindInfo*
+    grfPI PI_FLAGS
+    dwReserved HANDLE_PTR
+
+

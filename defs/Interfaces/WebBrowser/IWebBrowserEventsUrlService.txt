@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IWebBrowserEventsUrlService base=IUnknown id={87CC5D04-EAFA-4833-9820-8F986530CC00} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+  func GetUrlForEvents
+    HRESULT
+    pUrl BSTR*
+
+

@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumObjects base=IUnknown id={2c1c7e2e-2d0e-4059-831e-1e6f82335c2e} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Next
+    HRESULT
+    celt ULONG
+    riid REFIID
+    rgelt void** postCount=pceltFetched
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppenum IEnumObjects**
+
+

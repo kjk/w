@@ -1,0 +1,52 @@
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11ShaderReflectionType id={6E6FFA6A-9BAE-4613-A51E-91652D508C21} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Shader"
+  func GetDesc
+    HRESULT
+    pDesc D3D11_SHADER_TYPE_DESC*
+
+  func GetMemberTypeByIndex
+    success NotEqual=0
+    ID3D11ShaderReflectionType*
+    Index UINT
+
+  func GetMemberTypeByName
+    success NotEqual=0
+    ID3D11ShaderReflectionType*
+    Name LPCSTR
+
+  func GetMemberTypeName
+    success NotEqual=0
+    LPCSTR
+    Index UINT
+
+  func IsEqual
+    HRESULT
+    pType ID3D11ShaderReflectionType*
+
+  func GetSubType
+    success NotEqual=0
+    ID3D11ShaderReflectionType*
+
+  func GetBaseClass
+    success NotEqual=0
+    ID3D11ShaderReflectionType*
+
+  func GetNumInterfaces
+    success NotEqual=0
+    UINT
+
+  func GetInterfaceByIndex
+    success NotEqual=0
+    ID3D11ShaderReflectionType*
+    uIndex UINT
+
+  func IsOfType
+    HRESULT
+    pType ID3D11ShaderReflectionType*
+
+  func ImplementsInterface
+    HRESULT
+    pBase ID3D11ShaderReflectionType*
+
+

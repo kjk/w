@@ -1,0 +1,334 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+include Headers\gdi.h.txt
+
+dll OleDlg.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Component Object Model (COM)/OLE and Data Transfer"
+alias LPFNOLEUIHOOK LPVOID
+
+alias LPOLEUILINKCONTAINER LPVOID
+
+alias LPOLEUIOBJINFO LPVOID
+
+alias LPOLEUILINKINFO LPVOID
+
+flag [ChangeIconFlag] DWORD display=DWORD
+  CIF_SHOWHELP       0x00000001
+  CIF_SELECTCURRENT  0x00000002
+  CIF_SELECTDEFAULT  0x00000004
+  CIF_SELECTFROMFILE 0x00000008
+  CIF_USEICONEXE     0x00000010
+
+struct OLEUICHANGEICON
+  cbStruct DWORD
+  dwFlags [ChangeIconFlag]
+  hWndOwner HWND
+  lpszCaption LPCTSTR
+  lpfnHook LPFNOLEUIHOOK
+  lCustData LPARAM
+  hInstance HINSTANCE
+  lpszTemplate LPCTSTR
+  hResource HRSRC
+  hMetaPict HGLOBAL
+  clsid CLSID
+  szIconExe "TCHAR [MAX_PATH]"
+  cchIconExe int
+
+pointer LPOLEUICHANGEICON OLEUICHANGEICON
+
+flag [PasteSpecialFlag] DWORD display=DWORD
+  PSF_SHOWHELP              0x00000001
+  PSF_SELECTPASTE           0x00000002
+  PSF_SELECTPASTELINK       0x00000004
+  PSF_CHECKDISPLAYASICON    0x00000008
+  PSF_DISABLEDISPLAYASICON  0x00000010
+  PSF_HIDECHANGEICON        0x00000020
+  PSF_STAYONCLIPBOARDCHANGE 0x00000040
+  PSF_NOREFRESHDATAOBJECT   0x00000080
+
+flag OLEUIPASTEFLAG DWORD display=DWORD
+  OLEUIPASTE_PASTEONLY   0
+  OLEUIPASTE_LINKTYPE1   1
+  OLEUIPASTE_LINKTYPE2   2
+  OLEUIPASTE_LINKTYPE3   4
+  OLEUIPASTE_LINKTYPE4   8
+  OLEUIPASTE_LINKTYPE5   16
+  OLEUIPASTE_LINKTYPE6   32
+  OLEUIPASTE_LINKTYPE7   64
+  OLEUIPASTE_LINKTYPE8   128
+  OLEUIPASTE_PASTE       512
+  OLEUIPASTE_LINKANYTYPE 1024
+  OLEUIPASTE_ENABLEICON  2048
+
+struct OLEUIPASTEENTRY
+  fmtetc FORMATETC
+  lpstrFormatName LPCTSTR
+  lpstrResultText LPCTSTR
+  dwFlags OLEUIPASTEFLAG
+  dwScratchSpace DWORD
+
+pointer LPOLEUIPASTEENTRY OLEUIPASTEENTRY
+
+struct OLEUIPASTESPECIAL
+  cbStruct DWORD
+  dwFlags [PasteSpecialFlag]
+  hWndOwner HWND
+  lpszCaption LPCTSTR
+  lpfnHook LPFNOLEUIHOOK
+  lCustData LPARAM
+  hInstance HINSTANCE
+  lpszTemplate LPCTSTR
+  hResource HRSRC
+  lpSrcDataObj LPDATAOBJECT
+  arrPasteEntries LPOLEUIPASTEENTRY count=cPasteEntries
+  cPasteEntries int
+  arrLinkTypes UINT* count=cLinkTypes
+  cLinkTypes int
+  cClsidExclude UINT
+  lpClsidExclude LPCLSID
+  nSelectedIndex int
+  fLink BOOL
+  hMetaPict HGLOBAL
+  sizel SIZEL
+
+pointer LPOLEUIPASTESPECIAL OLEUIPASTESPECIAL
+
+flag [ObjectPropFlags] DWORD display=DWORD
+  OPF_OBJECTISLINK   0x00000001
+  OPF_NOFILLDEFAULT  0x00000002
+  OPF_SHOWHELP       0x00000004
+  OPF_DISABLECONVERT 0x00000008
+
+struct OLEUIGNRLPROPS
+  cbStruct DWORD
+  dwFlags DWORD
+  dwReserved1 "DWORD [2]"
+  lpfnHook LPFNOLEUIHOOK
+  lCustData LPARAM
+  dwReserved2 "DWORD [3]"
+  lpOP LPVOID display=OLEUIOBJECTPROPS*
+
+pointer LPOLEUIGNRLPROPS OLEUIGNRLPROPS
+
+flag [ViewPropsFlags] DWORD display=DWORD
+  VPF_SELECTRELATIVE  0x00000001
+  VPF_DISABLERELATIVE 0x00000002
+  VPF_DISABLESCALE    0x00000004
+
+struct OLEUIVIEWPROPS
+  cbStruct DWORD
+  dwFlags [ViewPropsFlags]
+  dwReserved1 "DWORD [2]"
+  lpfnHook LPFNOLEUIHOOK
+  lCustData LPARAM
+  dwReserved2 "DWORD [3]"
+  lpOP LPVOID display=OLEUIOBJECTPROPS*
+  nScaleMin int
+  nScaleMax int
+
+pointer LPOLEUIVIEWPROPS OLEUIVIEWPROPS
+
+struct OLEUILINKPROPS
+  cbStruct DWORD
+  dwFlags DWORD
+  dwReserved1 "DWORD [2]"
+  lpfnHook LPFNOLEUIHOOK
+  lCustData LPARAM
+  dwReserved2 "DWORD [3]"
+  lpOP LPVOID display=OLEUIOBJECTPROPS*
+
+pointer LPOLEUILINKPROPS OLEUILINKPROPS
+
+struct OLEUIOBJECTPROPS
+  cbStruct DWORD
+  dwFlags [ObjectPropFlags]
+  lpPS LPPROPSHEETHEADER
+  dwObject DWORD
+  lpObjInfo LPOLEUIOBJINFO
+  dwLink DWORD
+  lpLinkInfo LPOLEUILINKINFO
+  lpGP LPOLEUIGNRLPROPS
+  lpVP LPOLEUIVIEWPROPS
+  lpLP LPOLEUILINKPROPS
+
+pointer LPOLEUIOBJECTPROPS OLEUIOBJECTPROPS
+
+flag [ChangeSourceFlags] DWORD display=DWORD
+  CSF_SHOWHELP      0x00000001
+  CSF_VALIDSOURCE   0x00000002
+  CSF_ONLYGETSOURCE 0x00000004
+  CSF_EXPLORER      0x00000008
+
+struct OLEUICHANGESOURCE
+  cbStruct DWORD
+  dwFlags [ChangeSourceFlags]
+  hWndOwner HWND
+  lpszCaption LPCTSTR
+  lpfnHook LPFNOLEUIHOOK
+  lCustData LPARAM
+  hInstance HINSTANCE
+  lpszTemplate LPCTSTR
+  hResource HRSRC
+  lpOFN OPENFILENAME*
+  dwReserved1 "DWORD [4]"
+  lpOleUILinkContainer LPOLEUILINKCONTAINER
+  dwLink DWORD
+  lpszDisplayName LPTSTR
+  nFileLength ULONG
+  lpszFrom LPTSTR
+  lpszTo LPSTR
+
+pointer LPOLEUICHANGESOURCE OLEUICHANGESOURCE
+
+struct OLEUIBUSY
+  cbStruct DWORD
+  dwFlags DWORD
+  hWndOwner HWND
+  lpszCaption LPCTSTR
+  lpfnHook LPFNOLEUIHOOK
+  lCustData LPARAM
+  hInstance HINSTANCE
+  lpszTemplate LPCTSTR
+  hResource HRSRC
+  hTask HTASK
+  lphWndDialog HWND*
+
+pointer LPOLEUIBUSY OLEUIBUSY
+
+struct OLEUICONVERT
+  cbStruct DWORD
+  dwFlags DWORD
+  hWndOwner HWND
+  lpszCaption LPCTSTR
+  lpfnHook LPFNOLEUIHOOK
+  lCustData LPARAM
+  hInstance HINSTANCE
+  lpszTemplate LPCTSTR
+  hResource HRSRC
+  clsid CLSID
+  clsidConvertDefault CLSID
+  clsidActivateDefault CLSID
+  clsidNew CLSID
+  dvAspect DWORD
+  wFormat WORD
+  fIsLinkedObject BOOL
+  hMetaPict HGLOBAL
+  lpszUserType LPTSTR
+  fObjectsIconChanged BOOL
+  lpszDefLabel LPTSTR
+  cClsidExclude UINT
+  lpClsidExclude LPCLSID
+
+pointer LPOLEUICONVERT OLEUICONVERT
+
+struct OLEUIEDITLINKS
+  cbStruct DWORD
+  dwFlags DWORD
+  hWndOwner HWND
+  lpszCaption LPCTSTR
+  lpfnHook LPFNOLEUIHOOK
+  lCustData LPARAM
+  hInstance HINSTANCE
+  lpszTemplate LPCTSTR
+  hResource HRSRC
+  lpOleUILinkContainer LPOLEUILINKCONTAINER
+
+pointer LPOLEUIEDITLINKS OLEUIEDITLINKS
+
+struct OLEUIINSERTOBJECT
+  cbStruct DWORD
+  dwFlags DWORD
+  hWndOwner HWND
+  lpszCaption LPCTSTR
+  lpfnHook LPFNOLEUIHOOK
+  lCustData LPARAM
+  hInstance HINSTANCE
+  lpszTemplate LPCTSTR
+  hResource HRSRC
+  clsid CLSID
+  lpszFile LPTSTR
+  cchFile UINT
+  cClsidExclude UINT
+  lpClsidExclude LPCLSID
+  iid IID
+  oleRender DWORD
+  lpFormatEtc LPFORMATETC
+  lpIOleClientSite LPOLECLIENTSITE
+  lpIStorage LPSTORAGE
+  ppvObj LPVOID*
+  sc SCODE
+  hMetaPict HGLOBAL
+
+pointer LPOLEUIINSERTOBJECT OLEUIINSERTOBJECT
+
+func OleUIAddVerbMenu bothCharset ordinalA=1
+  BOOL
+  lpOleObj LPOLEOBJECT
+  lpszShortType LPCTSTR
+  hMenu HMENU
+  uPos UINT
+  uIDVerbMin UINT
+  uIDVerbMax UINT
+  bAddConvert BOOL
+  idConvert UINT
+  lphMenu HMENU*
+
+func OleUIBusy bothCharset ordinalA=8
+  success NotEqual=0
+  UINT
+  lpBZ LPOLEUIBUSY
+
+func OleUICanConvertOrActivateAs ordinal=2
+  BOOL
+  rClsid REFCLSID
+  fIsLinkedObject BOOL
+  wFormat WORD
+
+func OleUIChangeIcon bothCharset ordinalA=6
+  success NotEqual=0
+  UINT
+  lpCI LPOLEUICHANGEICON
+
+func OleUIChangeSource bothCharset ordinalA=12
+  success NotEqual=0
+  UINT
+  lpCS LPOLEUICHANGESOURCE
+
+func OleUIConvert bothCharset ordinalA=7
+  success NotEqual=0
+  UINT
+  lpCV LPOLEUICONVERT
+
+func OleUIEditLinks bothCharset ordinalA=5
+  success NotEqual=0
+  UINT
+  lpEL LPOLEUIEDITLINKS
+
+func OleUIInsertObject bothCharset ordinalA=3
+  success NotEqual=0
+  UINT
+  lpIO LPOLEUIINSERTOBJECT
+
+func OleUIObjectProperties bothCharset ordinalA=11
+  success NotEqual=0
+  UINT
+  lpOF LPOLEUIOBJECTPROPS
+
+func OleUIPasteSpecial bothCharset ordinalA=4
+  success NotEqual=0
+  UINT
+  lpPS LPOLEUIPASTESPECIAL
+
+func OleUIPromptUser bothCharset ordinalA=10 varArgs
+  success NotEqual=0
+  int
+  nTemplate int
+  hwndParent HWND
+
+func OleUIUpdateLinks bothCharset ordinalA=9
+  BOOL
+  lpOleUILinkCntr LPOLEUILINKCONTAINER
+  hwndParent HWND
+  lpszTitle LPTSTR
+  cLinks int
+

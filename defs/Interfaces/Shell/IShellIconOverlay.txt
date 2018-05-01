@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellIconOverlay base=IUnknown id={7d688a70-c613-11d0-999b-00c04fd655e1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetOverlayIndex
+    HRESULT
+    pidl PCUITEMID_CHILD
+    pIndex int*
+
+  func GetOverlayIconIndex
+    HRESULT
+    pidl PCUITEMID_CHILD
+    pIconIndex int*
+
+

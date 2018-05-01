@@ -1,0 +1,68 @@
+include Headers\windows.h.txt
+include Headers\setup.h.txt
+
+dll Newdev.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Devices/Device Management"
+category "Windows Driver Kit/Device and Driver Installation/SetupAPI/Device Installation"
+func InstallNewDevice
+  BOOL
+  hwndParent HWND
+  ClassGuid LPGUID
+  pReboot PDWORD
+
+func DiInstallDevice
+  BOOL
+  hwndParent HWND
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DriverInfoData PSP_DRVINFO_DATA
+  Flags DWORD
+  NeedReboot PBOOL
+
+func DiInstallDriver bothCharset
+  BOOL
+  hwndParent HWND
+  FullInfPath LPCTSTR
+  Flags DWORD
+  NeedReboot PBOOL
+
+func DiRollbackDriver
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  hwndParent HWND
+  Flags DWORD
+  NeedReboot PBOOL
+
+func DiShowUpdateDevice
+  BOOL
+  hwndParent HWND
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  Flags DWORD
+  NeedReboot PBOOL
+
+func DiUninstallDevice
+  BOOL
+  hwndParent HWND
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  Flags DWORD
+  NeedReboot PBOOL
+
+func UpdateDriverForPlugAndPlayDevices bothCharset
+  BOOL
+  hwndParent HWND
+  HardwareId LPCTSTR
+  FullInfPath LPCTSTR
+  InstallFlags DWORD
+  bRebootRequired PBOOL
+
+func InstallSelectedDriver bothCharset
+  BOOL
+  hwndParent HWND
+  DeviceInfoSet HDEVINFO
+  Reserved LPCTSTR
+  Backup BOOL
+  bReboot PDWORD
+

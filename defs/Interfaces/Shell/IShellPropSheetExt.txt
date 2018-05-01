@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellPropSheetExt base=IUnknown id={000214E9-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func AddPages
+    HRESULT
+    pfnAddPage LPFNSVADDPROPSHEETPAGE
+    lParam LPARAM
+
+  func ReplacePage
+    HRESULT
+    uPageID EXPPS
+    pfnReplaceWith LPFNSVADDPROPSHEETPAGE
+    lParam LPARAM
+
+

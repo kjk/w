@@ -1,0 +1,43 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3DVolume9 base=IUnknown id={24F416E6-1F67-4aa7-B88E-D33F6F3128A1} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func GetDevice
+    HRESULT
+    ppDevice IDirect3DDevice9**
+
+  func SetPrivateData
+    HRESULT
+    refguid REFGUID
+    pData "CONST void*"
+    SizeOfData DWORD
+    Flags DWORD
+
+  func GetPrivateData
+    HRESULT
+    refguid REFGUID
+    pData void*
+    pSizeOfData DWORD*
+
+  func FreePrivateData
+    HRESULT
+    refguid REFGUID
+
+  func GetContainer
+    HRESULT
+    riid REFIID
+    ppContainer void** interfaceId=riid
+
+  func GetDesc
+    HRESULT
+    pDesc D3DVOLUME_DESC*
+
+  func LockBox
+    HRESULT
+    pLockedVolume D3DLOCKED_BOX*
+    pBox "CONST D3DBOX*"
+    Flags DWORD
+
+  func UnlockBox
+    HRESULT
+
+

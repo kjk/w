@@ -1,0 +1,37 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\DirectX\10\ID3D10EffectVariable.txt
+
+ingterface ID3D10EffectShaderVariable base=ID3D10EffectVariable id={80849279-C799-4797-8C33-0407A07D9E06} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func GetShaderDesc
+    HRESULT
+    ShaderIndex UINT
+    pDesc D3D10_EFFECT_SHADER_DESC*
+
+  func GetVertexShader
+    HRESULT
+    ShaderIndex UINT
+    ppVS ID3D10VertexShader**
+
+  func GetGeometryShader
+    HRESULT
+    ShaderIndex UINT
+    ppGS ID3D10GeometryShader**
+
+  func GetPixelShader
+    HRESULT
+    ShaderIndex UINT
+    ppPS ID3D10PixelShader**
+
+  func GetInputSignatureElementDesc
+    HRESULT
+    ShaderIndex UINT
+    Element UINT
+    pDesc D3D10_SIGNATURE_PARAMETER_DESC*
+
+  func GetOutputSignatureElementDesc
+    HRESULT
+    ShaderIndex UINT
+    Element UINT
+    pDesc D3D10_SIGNATURE_PARAMETER_DESC*
+
+

@@ -1,0 +1,7 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInputPanelInvocationConfiguration base=IUnknown id={A213F136-3B45-4362-A332-EFB6547CD432} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func RequireTouchInEditControl
+    HRESULT
+
+

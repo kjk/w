@@ -1,0 +1,19 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioEndpointRT base=IUnknown id={DFD2005F-A6E5-4d39-A265-939ADA9FBB4D} errorFunc=HRESULT onlineHelp=MSDN category="System Services/Remote Desktop Services/AudioEndpoint"
+  func GetCurrentPadding
+    void
+    pPadding HNSTIME*
+    pAeCurrentPosition AE_CURRENT_POSITION*
+
+  func ProcessingComplete
+    void
+
+  func SetPinInactive
+    [AUDCLNT_HRESULT]
+
+  func SetPinActive
+    [AUDCLNT_HRESULT]
+
+

@@ -1,0 +1,22 @@
+include Interfaces\DirectSound\IDirectSoundBuffer.txt
+
+ingterface IDirectSoundBuffer8 base=IDirectSoundBuffer id={6825a449-7524-4d82-920f-50e36ab3ab1e} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func SetFX
+    [DS_HRESULT]
+    dwEffectsCount DWORD
+    pdwResultCodes LPDWORD
+
+  func AcquireResources
+    [DS_HRESULT]
+    dwFlags DWORD
+    dwEffectsCount DWORD
+    pdwResultCodes LPDWORD
+
+  func GetObjectInPath
+    [DS_HRESULT]
+    rguidObject REFGUID
+    dwIndex DWORD
+    rguidInterface REFGUID
+    ppObject LPVOID*
+
+

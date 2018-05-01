@@ -1,0 +1,80 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSound3DListener base=IUnknown id={279afa84-4981-11ce-a521-0020af0be560} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func GetAllParameters
+    [DS_HRESULT]
+    pListener LPDS3DLISTENER
+
+  func GetDistanceFactor
+    [DS_HRESULT]
+    pflDistanceFactor D3DVALUE*
+
+  func GetDopplerFactor
+    [DS_HRESULT]
+    pflDopplerFactor D3DVALUE*
+
+  func GetOrientation
+    [DS_HRESULT]
+    pvOrientFront D3DVECTOR*
+    pvOrientTop D3DVECTOR*
+
+  func GetPosition
+    [DS_HRESULT]
+    pvPosition D3DVECTOR*
+
+  func GetRolloffFactor
+    [DS_HRESULT]
+    pflRolloffFactor D3DVALUE*
+
+  func GetVelocity
+    [DS_HRESULT]
+    pvVelocity D3DVECTOR*
+
+  func SetAllParameters
+    [DS_HRESULT]
+    pcListener LPCDS3DLISTENER
+    dwApply DWORD
+
+  func SetDistanceFactor
+    [DS_HRESULT]
+    flDistanceFactor D3DVALUE
+    dwApply DWORD
+
+  func SetDopplerFactor
+    [DS_HRESULT]
+    flDopplerFactor D3DVALUE
+    dwApply DWORD
+
+  func SetOrientation
+    [DS_HRESULT]
+    xFront D3DVALUE
+    yFront D3DVALUE
+    zFront D3DVALUE
+    xTop D3DVALUE
+    yTop D3DVALUE
+    zTop D3DVALUE
+    dwApply DWORD
+
+  func SetPosition
+    [DS_HRESULT]
+    x D3DVALUE
+    y D3DVALUE
+    z D3DVALUE
+    dwApply DWORD
+
+  func SetRolloffFactor
+    [DS_HRESULT]
+    flRolloffFactor D3DVALUE
+    dwApply DWORD
+
+  func SetVelocity
+    [DS_HRESULT]
+    x D3DVALUE
+    y D3DVALUE
+    z D3DVALUE
+    dwApply DWORD
+
+  func CommitDeferredSettings
+    [DS_HRESULT]
+
+

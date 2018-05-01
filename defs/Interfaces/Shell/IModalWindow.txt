@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IModalWindow base=IUnknown id={b4db1657-70d7-485e-8e3e-6fcb5a5c1802} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Show
+    HRESULT
+    hwndOwner HWND
+
+

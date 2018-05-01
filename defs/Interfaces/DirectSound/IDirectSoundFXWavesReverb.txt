@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundFXWavesReverb base=IUnknown id={46858c3a-0dc6-45e3-b760-d4eef16cb325} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func SetAllParameters
+    [DS_HRESULT]
+    pcDsFxWavesReverb LPCDSFXWavesReverb
+
+  func GetAllParameters
+    [DS_HRESULT]
+    pDsFxWavesReverb LPDSFXWavesReverb
+
+

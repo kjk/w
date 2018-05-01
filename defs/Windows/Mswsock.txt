@@ -1,0 +1,294 @@
+include Headers\windows.h.txt
+include Headers\sockets.h.txt
+
+dll Mswsock.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Windows Sockets 2"
+category "Networking/Windows Sockets 2/Registered //IO"
+alias LPSERVICE_CALLBACK_PROC LPVOID
+
+flag [SERVICE_ADDRESS_FLAG] DWORD display=DWORD
+  SERVICE_ADDRESS_FLAG_RPC_CN 0x00000001
+  SERVICE_ADDRESS_FLAG_RPC_DG 0x00000002
+  SERVICE_ADDRESS_FLAG_RPC_NB 0x00000004
+
+struct SERVICE_ADDRESS
+  dwAddressType [AddressFamily] display=DWORD
+  dwAddressFlags [SERVICE_ADDRESS_FLAG]
+  dwAddressLength DWORD
+  dwPrincipalLength DWORD
+  lpAddress BYTE* length=dwAddressLength
+  lpPrincipal BYTE* length=dwPrincipalLength
+
+array "SERVICE_ADDRESS [1]" base=SERVICE_ADDRESS count=1
+
+struct SERVICE_ADDRESSES
+  dwAddressCount DWORD
+  Addresses "SERVICE_ADDRESS [1]" count=dwAddressCount
+
+pointer LPSERVICE_ADDRESSES SERVICE_ADDRESSES
+
+struct SERVICE_ASYNC_INFO
+  lpServiceCallbackProc LPSERVICE_CALLBACK_PROC
+  lParam LPARAM
+  hAsyncTaskHandle HANDLE
+
+pointer LPSERVICE_ASYNC_INFO SERVICE_ASYNC_INFO
+
+struct SERVICE_INFO
+  lpServiceType LPGUID
+  lpServiceName LPTSTR
+  lpComment LPTSTR
+  lpLocale LPTSTR
+  dwDisplayHint DWORD
+  dwVersion DWORD
+  dwTime DWORD
+  lpMachineName LPTSTR
+  lpServiceAddress LPSERVICE_ADDRESSES
+  ServiceSpecificInfo BLOB
+
+pointer LPSERVICE_INFO SERVICE_INFO
+
+struct TRANSMIT_FILE_BUFFERS
+  Head LPVOID
+  HeadLength DWORD
+  Tail LPVOID
+  TailLength DWORD
+
+pointer LPTRANSMIT_FILE_BUFFERS TRANSMIT_FILE_BUFFERS
+
+enum RIO_CQ LPVOID
+  success NotEqual=0
+  RIO_INVALID_CQ 0
+
+enum RIO_RQ LPVOID
+  success NotEqual=0
+  RIO_INVALID_RQ 0
+
+enum RIO_BUFFERID LPVOID
+  success NotEqual=0xFFFFFFFF
+  RIO_INVALID_BUFFERID 0
+
+struct RIORESULT
+  Status LONG
+  BytesTransferred ULONG
+  SocketContext ULONGLONG
+  RequestContext ULONGLONG
+
+pointer PRIORESULT RIORESULT
+
+struct RIO_BUF
+  BufferId RIO_BUFFERID
+  Offset ULONG
+  Length ULONG
+
+pointer PRIO_BUF RIO_BUF
+
+enum RIO_NOTIFICATION_COMPLETION_TYPE UINT
+  RIO_EVENT_COMPLETION 1
+  RIO_IOCP_COMPLETION  2
+
+struct [RIO_NOTIFICATION_COMPLETION_s1] display=struct
+  EventHandle HANDLE
+  NotifyReset BOOL
+
+struct [RIO_NOTIFICATION_COMPLETION_s2] display=struct
+  IocpHandle HANDLE
+  CompletionKey PVOID
+  Overlapped PVOID
+
+union [RIO_NOTIFICATION_COMPLETION_u] display=union
+  Event [RIO_NOTIFICATION_COMPLETION_s1]
+  Iocp [RIO_NOTIFICATION_COMPLETION_s2]
+
+struct RIO_NOTIFICATION_COMPLETION
+  Type RIO_NOTIFICATION_COMPLETION_TYPE
+   [RIO_NOTIFICATION_COMPLETION_u]
+
+pointer RIO_NOTIFICATION_COMPLETION* RIO_NOTIFICATION_COMPLETION
+
+func EnumProtocols bothCharset
+  success NotEqual=-1
+  [SocketCode-INT]
+  lpiProtocols LPINT
+  lpProtocolBuffer LPVOID
+  lpdwBufferLength LPDWORD
+
+func GetAcceptExSockaddrs
+  void
+  lpOutputBuffer PVOID
+  dwReceiveDataLength DWORD
+  dwLocalAddressLength DWORD
+  dwRemoteAddressLength DWORD
+  LocalSockaddr LPSOCKADDR*
+  LocalSockaddrLength LPINT
+  RemoteSockaddr LPSOCKADDR*
+  RemoteSockaddrLength LPINT
+
+func AcceptEx
+  BOOL
+  sListenSocket SOCKET
+  sAcceptSocket SOCKET
+  lpOutputBuffer PVOID
+  dwReceiveDataLength DWORD
+  dwLocalAddressLength DWORD
+  dwRemoteAddressLength DWORD
+  lpdwBytesReceived LPDWORD
+  lpOverlapped LPOVERLAPPED
+
+func GetAddressByName bothCharset
+  success NotEqual=-1
+  INT
+  dwNameSpace [NameSpaceFlags]
+  lpServiceType LPGUID
+  lpServiceName LPTSTR
+  lpiProtocols LPINT
+  dwResolution [ResolutionFlags]
+  lpServiceAsyncInfo LPSERVICE_ASYNC_INFO
+  lpCsaddrBuffer LPVOID
+  lpdwBufferLength LPDWORD
+  lpAliasBuffer LPTSTR
+  lpdwAliasBufferLength LPDWORD
+
+func GetNameByType bothCharset
+  success NotEqual=-1
+  [SocketCode-INT]
+  lpServiceType LPGUID
+  lpServiceName LPTSTR
+  dwNameLength DWORD
+
+func GetService bothCharset
+  success NotEqual=-1
+  [SocketCode-INT]
+  dwNameSpace [NameSpaceFlags]
+  lpGuid PGUID
+  lpServiceName LPTSTR
+  dwProperties [GetService_Props]
+  lpBuffer LPVOID
+  lpdwBufferSize LPDWORD
+  lpServiceAsyncInfo LPSERVICE_ASYNC_INFO
+
+func GetTypeByName bothCharset
+  success NotEqual=-1
+  [SocketCode-INT]
+  lpServiceName LPTSTR
+  lpServiceType PGUID
+
+func SetService bothCharset
+  success NotEqual=-1
+  [SocketCode-INT]
+  dwNameSpace [NameSpaceFlags]
+  dwOperation [SetService_Operation]
+  dwFlags [SetService_Flags]
+  lpServiceInfo LPSERVICE_INFO
+  lpServiceAsyncInfo LPSERVICE_ASYNC_INFO
+  lpdwStatusFlags [SetService_FlagsOut*]
+
+func TransmitFile
+  BOOL
+  hSocket SOCKET
+  hFile HANDLE
+  nNumberOfBytesToWrite DWORD
+  nNumberOfBytesPerSend DWORD
+  lpOverlapped LPOVERLAPPED
+  lpTransmitBuffers LPTRANSMIT_FILE_BUFFERS
+  dwFlags [TransmitFile_Flags]
+
+func WSARecvEx
+  success NotEqual=-1
+  [SocketCode-int]
+  s SOCKET
+  buf char*
+  len int
+  flags int*
+
+func RIOCloseCompletionQueue
+  VOID
+  CQ RIO_CQ
+
+func RIOCreateCompletionQueue
+  RIO_CQ
+  QueueSize DWORD
+  NotificationCompletion RIO_NOTIFICATION_COMPLETION*
+
+func RIOCreateRequestQueue
+  RIO_RQ
+  Socket SOCKET
+  MaxOutstandingReceive ULONG
+  MaxReceiveDataBuffers ULONG
+  MaxOutstandingSend ULONG
+  MaxSendDataBuffers ULONG
+  ReceiveCQ RIO_CQ
+  SendCQ RIO_CQ
+  SocketContext PVOID
+
+func RIODequeueCompletion
+  success NotEqual=0xFFFFFFFF
+  ULONG
+  CQ RIO_CQ
+  Array PRIORESULT postLength=ArraySize
+  ArraySize ULONG
+
+func RIODeregisterBuffer
+  VOID
+  BufferId RIO_BUFFERID
+
+func RIONotify
+  [ERROR_CODE] display=INT
+  CQ RIO_CQ
+
+func RIOReceive
+  BOOL
+  SocketQueue RIO_RQ
+  pData PRIO_BUF
+  DataBufferCount ULONG
+  Flags DWORD
+  RequestContext PVOID
+
+func RIOReceiveEx
+  BOOL
+  SocketQueue RIO_RQ
+  pData PRIO_BUF
+  DataBufferCount ULONG
+  pLocalAddress PRIO_BUF
+  pRemoteAddress PRIO_BUF
+  pControlContext PRIO_BUF
+  pFlags PRIO_BUF
+  Flags DWORD
+  RequestContext PVOID
+
+func RIORegisterBuffer
+  RIO_BUFFERID
+  DataBuffer LPVOID display=PCHAR length=DataLength
+  DataLength DWORD
+
+func RIOResizeCompletionQueue
+  BOOL
+  CQ RIO_CQ
+  QueueSize DWORD
+
+func RIOResizeRequestQueue
+  BOOL
+  RQ RIO_RQ
+  MaxOutstandingReceive DWORD
+  MaxOutstandingSend DWORD
+
+func RIOSend
+  BOOL
+  SocketQueue RIO_RQ
+  pData PRIO_BUF
+  DataBufferCount ULONG
+  Flags DWORD
+  RequestContext PVOID
+
+func RIOSendEx
+  BOOL
+  SocketQueue RIO_RQ
+  pData PRIO_BUF
+  DataBufferCount ULONG
+  pLocalAddress PRIO_BUF
+  pRemoteAddress PRIO_BUF
+  pControlContext PRIO_BUF
+  pFlags PRIO_BUF
+  Flags DWORD
+  RequestContext PVOID
+

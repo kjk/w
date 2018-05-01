@@ -1,0 +1,44 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioSessionControl base=IUnknown id={F4B1A599-7266-4319-A8CA-E70ACB11E8CD} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func GetState
+    [AUDCLNT_HRESULT]
+    pRetVal AudioSessionState*
+
+  func GetDisplayName
+    [AUDCLNT_HRESULT]
+    pRetVal LPWSTR*
+
+  func SetDisplayName
+    [AUDCLNT_HRESULT]
+    Value LPCWSTR
+    EventContext LPCGUID
+
+  func GetIconPath
+    [AUDCLNT_HRESULT]
+    pRetVal LPWSTR*
+
+  func SetIconPath
+    [AUDCLNT_HRESULT]
+    Value LPCWSTR
+    EventContext LPCGUID
+
+  func GetGroupingParam
+    [AUDCLNT_HRESULT]
+    pRetVal GUID*
+
+  func SetGroupingParam
+    [AUDCLNT_HRESULT]
+    Override LPCGUID
+    EventContext LPCGUID
+
+  func RegisterAudioSessionNotification
+    [AUDCLNT_HRESULT]
+    NewNotifications IAudioSessionEvents*
+
+  func UnregisterAudioSessionNotification
+    [AUDCLNT_HRESULT]
+    NewNotifications IAudioSessionEvents*
+
+

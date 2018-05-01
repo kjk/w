@@ -1,0 +1,12 @@
+include Interfaces\Shell\IAutoComplete.txt
+
+ingterface IAutoComplete2 base=IAutoComplete id={EAC04BC0-3791-11d2-BB95-0060977B464C} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetOptions
+    HRESULT
+    dwFlag DWORD
+
+  func GetOptions
+    HRESULT
+    pdwFlag DWORD*
+
+

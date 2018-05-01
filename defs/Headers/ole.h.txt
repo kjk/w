@@ -1,0 +1,1154 @@
+include Headers\windows.h.txt
+
+header
+alias LPCPROPSHEETPAGE LPVOID
+
+alias PROPSHEETHEADER* LPVOID
+
+alias LPCPROPSHEETHEADER LPVOID
+
+alias LPPROPSHEETHEADER LPVOID
+
+interface IUnknown
+
+interface IStream
+
+interface IPropertySetStorage
+
+interface AsyncIAdviseSink
+
+interface AsyncIAdviseSink2
+
+interface AsyncIMultiQI
+
+interface AsyncIPipeByte
+
+interface AsyncIPipeDouble
+
+interface AsyncIPipeLong
+
+interface IAddrExclusionControl
+
+interface IAddrTrackingControl
+
+interface IAdviseSink
+
+interface IAdviseSink2
+
+interface IAsyncManager
+
+interface IAsyncRpcChannelBuffer
+
+interface IBindCtx
+
+interface IBlockingLock
+
+interface ICallFactory
+
+interface ICancelMethodCalls
+
+interface IChannelHook
+
+interface IClassActivator
+
+interface IClientSecurity
+
+interface IComThreadingInfo
+
+interface IContext
+
+interface IContinue
+
+interface IDataAdviseHolder
+
+interface IDataObject
+
+interface IDirectWriterLock
+
+interface IDropSource
+
+interface IDropSourceNotify
+
+interface IDropTarget
+
+interface IDummyHICONIncluder
+
+interface IEnumContextProps
+
+interface IEnumFORMATETC
+
+interface IEnumMoniker
+
+interface IEnumOLEVERB
+
+interface IEnumSTATDATA
+
+interface IEnumSTATSTG
+
+interface IEnumString
+
+interface IEnumUnknown
+
+interface IExternalConnection
+
+interface IFillLockBytes
+
+interface IForegroundTransfer
+
+interface IGlobalInterfaceTable
+
+interface IGlobalOptions
+
+interface IInitializeSpy
+
+interface IInternalUnknown
+
+interface ILayoutStorage
+
+interface ILockBytes
+
+interface IMalloc
+
+interface IMallocSpy
+
+interface IMarshal
+
+interface IMarshal2
+
+interface IMessageFilter
+
+interface IMoniker
+
+interface IMultiQI
+
+interface IObjContext
+
+interface IOleAdviseHolder
+
+interface IOleCache
+
+interface IOleCache2
+
+interface IOleCacheControl
+
+interface IOleClientSite
+
+interface IOleContainer
+
+interface IOleInPlaceActiveObject
+
+interface IOleInPlaceFrame
+
+interface IOleInPlaceObject
+
+interface IOleInPlaceSite
+
+interface IOleInPlaceUIWindow
+
+interface IOleItemContainer
+
+interface IOleLink
+
+interface IOleObject
+
+interface IOleWindow
+
+interface IOplockStorage
+
+interface IParseDisplayName
+
+interface IPersist
+
+interface IPersistFile
+
+interface IPersistStorage
+
+interface IPersistStream
+
+interface IPipeByte
+
+interface IPipeDouble
+
+interface IPipeLong
+
+interface IProcessInitControl
+
+interface IProcessLock
+
+interface IProgressNotify
+
+interface IPSFactoryBuffer
+
+interface IReleaseMarshalBuffers
+
+interface IRootStorage
+
+interface IROTData
+
+interface IRpcChannelBuffer
+
+interface IRpcChannelBuffer2
+
+interface IRpcChannelBuffer3
+
+interface IRpcHelper
+
+interface IRpcOptions
+
+interface IRpcProxyBuffer
+
+interface IRpcStubBuffer
+
+interface IRpcSyntaxNegotiate
+
+interface IRunnableObject
+
+interface IRunningObjectTable
+
+interface ISequentialStream
+
+interface IServerSecurity
+
+interface IStdMarshalInfo
+
+interface IStorage
+
+interface IStream
+
+interface ISurrogate
+
+interface ISurrogateService
+
+interface ISynchronize
+
+interface ISynchronizeContainer
+
+interface ISynchronizeEvent
+
+interface ISynchronizeHandle
+
+interface ISynchronizeMutex
+
+interface IThumbnailExtractor
+
+interface ITimeAndNoticeControl
+
+interface IUrlMon
+
+interface IViewObject
+
+interface IViewObject2
+
+interface IWaitMultiple
+
+interface IContinueCallback
+
+interface IEnumOleDocumentViews
+
+interface IOleCommandTarget
+
+interface IOleDocument
+
+interface IOleDocumentSite
+
+interface IOleDocumentView
+
+interface IPrint
+
+interface IProtectedModeMenuServices
+
+interface IProtectFocus
+
+interface IZoomEvents
+
+interface IPropertyStorage
+
+interface IClassFactory
+
+interface IRecordInfo
+
+interface IEnumSTATPROPSTG
+
+interface IEnumSTATPROPSETSTG
+
+interface IDispatch
+
+alias LPDISPATCH IDispatch*
+
+pointer LPDISPATCH* LPDISPATCH
+
+alias WINOLEAPI STDAPI
+
+alias HPROPSHEETPAGE LPVOID
+
+pointer HPROPSHEETPAGE* HPROPSHEETPAGE
+
+alias LPCOLESTR LPCWSTR
+
+alias LPOLESTR LPCWSTR
+
+pointer LPOLESTR* LPOLESTR
+
+pointer LPOLESTR** LPOLESTR*
+
+alias "const LPOLESTR" LPOLESTR
+
+pointer "LPOLESTR []" LPOLESTR
+
+pointer "const LPOLESTR []" LPOLESTR
+
+alias OLECHAR WCHAR
+
+pointer OLECHAR* OLECHAR
+
+alias "const OLECHAR*" OLECHAR*
+
+pointer OLECHAR** OLECHAR*
+
+alias PROPID ULONG
+
+pointer PROPID* PROPID
+
+pointer "const PROPID []" PROPID
+
+alias LPOLEOBJECT IOleObject*
+
+alias LPMALLOC IMalloc*
+
+pointer LPMALLOC* LPMALLOC
+
+alias FMTID GUID
+
+pointer FMTID* FMTID
+
+pointer "const FMTID*" FMTID
+
+pointer REFFMTID FMTID
+
+alias CLIPFORMAT WORD
+
+pointer CLIPFORMAT* CLIPFORMAT
+
+alias LPBC IBindCtx*
+
+pointer LPBC* LPBC
+
+alias LPBINDCTX IBindCtx*
+
+alias LPCLASSFACTORY IClassFactory*
+
+pointer LPCLASSFACTORY* LPCLASSFACTORY
+
+alias LPSTORAGE IStorage*
+
+alias LPOLECLIENTSITE IOleClientSite*
+
+alias LPMONIKER IMoniker*
+
+pointer LPMONIKER* LPMONIKER
+
+alias LPSTREAM IStream*
+
+pointer LPSTREAM* LPSTREAM
+
+alias LPDATAOBJECT IDataObject*
+
+pointer LPDATAOBJECT* LPDATAOBJECT
+
+alias "struct IStorage*" IStorage*
+
+alias CPFLAGS DWORD
+
+pointer CPFLAGS* CPFLAGS
+
+alias SNB LPOLESTR*
+
+alias ALLOCATEMORE* LPVOID
+
+alias HTASK HANDLE
+
+alias LPCBORDERWIDTHS LPCRECT
+
+alias HOLEMENU HGLOBAL
+
+alias RPCOLEDATAREP "unsigned long"
+
+alias HMETAFILEPICT HANDLE
+
+array "void* [5]" base=void* count=5
+
+array "LONG [6]" base=LONG count=6
+
+enum VARIANT_BOOL short
+  VARIANT_TRUE  -1
+  VARIANT_FALSE 0
+
+pointer VARIANT_BOOL* VARIANT_BOOL
+
+enum MSHLFLAGS DWORD display=DWORD
+  MSHLFLAGS_NORMAL      0
+  MSHLFLAGS_TABLESTRONG 1
+  MSHLFLAGS_TABLEWEAK   2
+  MSHLFLAGS_NOPING      4
+  MSHLFLAGS_RESERVED1   8
+  MSHLFLAGS_RESERVED2   16
+  MSHLFLAGS_RESERVED3   32
+  MSHLFLAGS_RESERVED4   64
+
+struct DVTARGETDEVICE
+  tdSize DWORD
+  tdDriverNameOffset WORD
+  tdDeviceNameOffset WORD
+  tdPortNameOffset WORD
+  tdExtDevmodeOffset WORD
+  tdData "BYTE [1]"
+
+pointer DVTARGETDEVICE* DVTARGETDEVICE
+
+pointer DVTARGETDEVICE** DVTARGETDEVICE*
+
+pointer "const DVTARGETDEVICE*" DVTARGETDEVICE
+
+struct SERIALIZEDPROPERTYVALUE
+  dwType DWORD
+  rgb "BYTE [1]"
+
+pointer SERIALIZEDPROPERTYVALUE* SERIALIZEDPROPERTYVALUE
+
+pointer SERIALIZEDPROPERTYVALUE** SERIALIZEDPROPERTYVALUE*
+
+struct RPCOLEMESSAGE
+  reserved1 void*
+  dataRepresentation RPCOLEDATAREP
+  Buffer void* length=cbBuffer
+  cbBuffer ULONG
+  iMethod ULONG
+  reserved2 "void* [5]"
+  rpcFlags ULONG
+
+pointer RPCOLEMESSAGE* RPCOLEMESSAGE
+
+struct OLEMENUGROUPWIDTHS
+  width "LONG [6]"
+
+pointer LPOLEMENUGROUPWIDTHS OLEMENUGROUPWIDTHS
+
+flag [PALETTEENTRY_Flags] BYTE display=BYTE
+  PC_RESERVED   0x01
+  PC_EXPLICIT   0x02
+  PC_NOCOLLAPSE 0x04
+
+struct PALETTEENTRY
+  peRed BYTE
+  peGreen BYTE
+  peBlue BYTE
+  peFlags [PALETTEENTRY_Flags]
+
+pointer PALETTEENTRY* PALETTEENTRY
+
+pointer LPPALETTEENTRY PALETTEENTRY
+
+pointer "CONST PALETTEENTRY*" PALETTEENTRY
+
+pointer "const PALETTEENTRY*" PALETTEENTRY
+
+array "PALETTEENTRY [1]" base=PALETTEENTRY count=1
+
+struct LOGPALETTE
+  palVersion WORD
+  palNumEntries WORD
+  palPalEntry "PALETTEENTRY [1]" count=palNumEntries
+
+pointer LOGPALETTE* LOGPALETTE
+
+pointer LOGPALETTE** LOGPALETTE*
+
+pointer "const LOGPALETTE*" LOGPALETTE*
+
+flag VARTYPE "unsigned short"
+  VT_EMPTY            0
+  VT_NULL             1
+  VT_I2               2
+  VT_I4               3
+  VT_R4               4
+  VT_R8               5
+  VT_CY               6
+  VT_DATE             7
+  VT_BSTR             8
+  VT_DISPATCH         9
+  VT_ERROR            10
+  VT_BOOL             11
+  VT_VARIANT          12
+  VT_UNKNOWN          13
+  VT_DECIMAL          14
+  VT_I1               16
+  VT_UI1              17
+  VT_UI2              18
+  VT_UI4              19
+  VT_I8               20
+  VT_UI8              21
+  VT_INT              22
+  VT_UINT             23
+  VT_VOID             24
+  VT_HRESULT          25
+  VT_PTR              26
+  VT_SAFEARRAY        27
+  VT_CARRAY           28
+  VT_USERDEFINED      29
+  VT_LPSTR            30
+  VT_LPWSTR           31
+  VT_RECORD           36
+  VT_INT_PTR          37
+  VT_UINT_PTR         38
+  VT_FILETIME         64
+  VT_BLOB             65
+  VT_STREAM           66
+  VT_STORAGE          67
+  VT_STREAMED_OBJECT  68
+  VT_STORED_OBJECT    69
+  VT_BLOB_OBJECT      70
+  VT_CF               71
+  VT_CLSID            72
+  VT_VERSIONED_STREAM 73
+  VT_BSTR_BLOB        0xfff
+  VT_VECTOR           0x1000
+  VT_ARRAY            0x2000
+  VT_BYREF            0x4000
+  VT_RESERVED         0x8000
+
+pointer VARTYPE* VARTYPE
+
+struct [BRECORD] display=struct
+  pvRecord PVOID*
+  pRecInfo IRecordInfo*
+
+union [VARIANT_s_u] display=union
+  lVal LONG
+   [BRECORD]
+
+struct [VARIANT_s] display=struct
+  vt VARTYPE
+  wReserved1 WORD
+  wReserved2 WORD
+  wReserved3 WORD
+   [VARIANT_s_u]
+
+union VARIANT
+   [VARIANT_s]
+  [Other values are currently unsupported] ULONGLONG
+
+pointer VARIANT* VARIANT
+
+pointer VARIANT** VARIANT*
+
+pointer "const VARIANT*" VARIANT
+
+pointer LPVARIANT VARIANT
+
+alias VARIANTARG VARIANT
+
+pointer VARIANTARG* VARIANTARG
+
+pointer VARIANTARG** VARIANTARG*
+
+pointer "const VARIANTARG*" VARIANTARG
+
+alias PROPVARIANT VARIANT
+
+pointer PROPVARIANT* PROPVARIANT
+
+pointer PROPVARIANT** PROPVARIANT*
+
+alias "const PROPVARIANT*" PROPVARIANT*
+
+alias REFPROPVARIANT PROPVARIANT*
+
+pointer "PROPVARIANT []" PROPVARIANT
+
+pointer "const PROPVARIANT []" PROPVARIANT
+
+enum TYMED DWORD display=DWORD
+  TYMED_NULL     0
+  TYMED_HGLOBAL  1
+  TYMED_FILE     2
+  TYMED_ISTREAM  4
+  TYMED_ISTORAGE 8
+  TYMED_GDI      16
+  TYMED_MFPICT   32
+  TYMED_ENHMF    64
+
+flag DVASPECT DWORD display=DWORD
+  DVASPECT_CONTENT   1
+  DVASPECT_THUMBNAIL 2
+  DVASPECT_ICON      4
+  DVASPECT_DOCPRINT  8
+
+struct FORMATETC
+  cfFormat CLIPFORMAT
+  ptd DVTARGETDEVICE*
+  dwAspect DVASPECT
+  lindex LONG
+  tymed TYMED
+
+pointer FORMATETC* FORMATETC
+
+pointer LPFORMATETC FORMATETC
+
+pointer "const FORMATETC []" FORMATETC
+
+flag GETPROPERTYSTOREFLAGS UINT
+  GPS_DEFAULT               0
+  GPS_HANDLERPROPERTIESONLY 0x1
+  GPS_READWRITE             0x2
+  GPS_TEMPORARY             0x4
+  GPS_FASTPROPERTIESONLY    0x8
+  GPS_OPENSLOWITEM          0x10
+  GPS_DELAYCREATION         0x20
+  GPS_BESTEFFORT            0x40
+  GPS_NO_OPLOCK             0x80
+  GPS_MASK_VALID            0xff
+
+struct PROPERTYKEY
+  fmtid GUID
+  pid DWORD
+
+pointer PROPERTYKEY* PROPERTYKEY
+
+pointer REFPROPERTYKEY PROPERTYKEY
+
+alias "const PROPERTYKEY" PROPERTYKEY
+
+pointer "const PROPERTYKEY*" "const PROPERTYKEY"
+
+struct CSPLATFORM
+  dwPlatformId DWORD
+  dwVersionHi DWORD
+  dwVersionLo DWORD
+  dwProcessorArch DWORD
+
+struct QUERYCONTEXT
+  dwContext DWORD
+  Platform CSPLATFORM
+  Locale LCID
+  dwVersionHi DWORD
+  dwVersionLo DWORD
+
+pointer QUERYCONTEXT* QUERYCONTEXT
+
+struct MULTI_QI
+  pIID "const IID*"
+  pItf IUnknown*
+  hr HRESULT
+
+pointer MULTI_QI* MULTI_QI
+
+flag [STGM_FLAGS] DWORD display=DWORD
+  STGM_FAILIFTHERE      0x00000000
+  STGM_DIRECT           0x00000000
+  STGM_READ             0x00000000
+  STGM_WRITE            0x00000001
+  STGM_READWRITE        0x00000002
+  STGM_SHARE_EXCLUSIVE  0x00000010
+  STGM_SHARE_DENY_WRITE 0x00000020
+  STGM_SHARE_DENY_READ  0x00000030
+  STGM_SHARE_DENY_NONE  0x00000040
+  STGM_CREATE           0x00001000
+  STGM_TRANSACTED       0x00010000
+  STGM_CONVERT          0x00020000
+  STGM_PRIORITY         0x00040000
+  STGM_NOSCRATCH        0x00100000
+  STGM_NOSNAPSHOT       0x00200000
+  STGM_DIRECT_SWMR      0x00400000
+  STGM_DELETEONRELEASE  0x04000000
+  STGM_SIMPLE           0x08000000
+
+enum THDTYPE UINT
+  THDTYPE_BLOCKMESSAGES   0
+  THDTYPE_PROCESSMESSAGES 1
+
+pointer THDTYPE* THDTYPE
+
+enum GLOBALOPT_PROPERTIES UINT
+  COMGLB_EXCEPTION_HANDLING     1
+  COMGLB_APPID                  2
+  COMGLB_RPC_THREADPOOL_SETTING 3
+
+enum RPCOPT_PROPERTIES UINT
+  COMBND_RPCTIMEOUT      0x1
+  COMBND_SERVER_LOCALITY 0x2
+
+enum ApplicationType UINT
+  ServerApplication  0
+  LibraryApplication 1
+
+enum ShutdownType UINT
+  IdleShutdown   0
+  ForcedShutdown 1
+
+flag LOCKTYPE DWORD display=DWORD
+  LOCK_WRITE     1
+  LOCK_EXCLUSIVE 2
+  LOCK_ONLYONCE  4
+
+flag ADVF DWORD display=DWORD
+  ADVF_NODATA            1
+  ADVF_PRIMEFIRST        2
+  ADVF_ONLYONCE          4
+  ADVFCACHE_NOHANDLER    8
+  ADVFCACHE_FORCEBUILTIN 16
+  ADVFCACHE_ONSAVE       32
+  ADVF_DATAONSTOP        64
+
+pointer ADVF* ADVF display=DWORD*
+
+enum APTTYPE UINT
+  APTTYPE_CURRENT -1
+  APTTYPE_STA     0
+  APTTYPE_MTA     1
+  APTTYPE_NA      2
+  APTTYPE_MAINSTA 3
+
+pointer APTTYPE* APTTYPE
+
+enum APTTYPEQUALIFIER UINT
+  APTTYPEQUALIFIER_NONE               0
+  APTTYPEQUALIFIER_IMPLICIT_MTA       1
+  APTTYPEQUALIFIER_NA_ON_MTA          2
+  APTTYPEQUALIFIER_NA_ON_STA          3
+  APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA 4
+  APTTYPEQUALIFIER_NA_ON_MAINSTA      5
+
+pointer APTTYPEQUALIFIER* APTTYPEQUALIFIER
+
+enum DISPID LONG
+  DISPID_Parent                    -803
+  DISPID_Object                    -802
+  DISPID_Delete                    -801
+  DISPID_Name                      -800
+  DISPID_AMBIENT_TOPTOBOTTOM       -733
+  DISPID_AMBIENT_RIGHTTOLEFT       -732
+  DISPID_AMBIENT_TRANSFERPRIORITY  -728
+  DISPID_AMBIENT_CHARSET           -727
+  DISPID_AMBIENT_PALETTE           -726
+  DISPID_AMBIENT_CODEPAGE          -725
+  DISPID_AMBIENT_APPEARANCE        -716
+  DISPID_AMBIENT_AUTOCLIP          -715
+  DISPID_AMBIENT_SUPPORTSMNEMONICS -714
+  DISPID_AMBIENT_DISPLAYASDEFAULT  -713
+  DISPID_AMBIENT_SHOWHATCHING      -712
+  DISPID_AMBIENT_SHOWGRABHANDLES   -711
+  DISPID_AMBIENT_UIDEAD            -710
+  DISPID_AMBIENT_USERMODE          -709
+  DISPID_AMBIENT_TEXTALIGN         -708
+  DISPID_AMBIENT_SCALEUNITS        -707
+  DISPID_AMBIENT_MESSAGEREFLECT    -706
+  DISPID_AMBIENT_LOCALEID          -705
+  DISPID_AMBIENT_FORECOLOR         -704
+  DISPID_AMBIENT_FONT              -703
+  DISPID_AMBIENT_DISPLAYNAME       -702
+  DISPID_AMBIENT_BACKCOLOR         -701
+  DISPID_THIS                      -613
+  DISPID_TOPTOBOTTOM               -612
+  DISPID_RIGHTTOLEFT               -611
+  DISPID_CLICK_VALUE               -610
+  DISPID_READYSTATECHANGE          -609
+  DISPID_ERROREVENT                -608
+  DISPID_MOUSEUP                   -607
+  DISPID_MOUSEMOVE                 -606
+  DISPID_MOUSEDOWN                 -605
+  DISPID_KEYUP                     -604
+  DISPID_KEYPRESS                  -603
+  DISPID_KEYDOWN                   -602
+  DISPID_DBLCLICK                  -601
+  DISPID_CLICK                     -600
+  DISPID_REMOVEITEM                -555
+  DISPID_CLEAR                     -554
+  DISPID_ADDITEM                   -553
+  DISPID_ABOUTBOX                  -552
+  DISPID_DOCLICK                   -551
+  DISPID_REFRESH                   -550
+  DISPID_SELLENGTH                 -548
+  DISPID_SELSTART                  -547
+  DISPID_SELTEXT                   -546
+  DISPID_TABKEYBEHAVIOR            -545
+  DISPID_ENTERKEYBEHAVIOR          -544
+  DISPID_ACCELERATOR               -543
+  DISPID_IMEMODE                   -542
+  DISPID_GROUPNAME                 -541
+  DISPID_DISPLAYSTYLE              -540
+  DISPID_NUMBEROFCOLUMNS           -539
+  DISPID_NUMBEROFROWS              -538
+  DISPID_MULTILINE                 -537
+  DISPID_WORDWRAP                  -536
+  DISPID_SCROLLBARS                -535
+  DISPID_PASSWORDCHAR              -534
+  DISPID_MAXLENGTH                 -533
+  DISPID_MULTISELECT               -532
+  DISPID_LISTCOUNT                 -531
+  DISPID_COLUMN                    -529
+  DISPID_LIST                      -528
+  DISPID_SELECTED                  -527
+  DISPID_LISTINDEX                 -526
+  DISPID_READYSTATE                -525
+  DISPID_VALID                     -524
+  DISPID_PICTURE                   -523
+  DISPID_MOUSEICON                 -522
+  DISPID_MOUSEPOINTER              -521
+  DISPID_APPEARANCE                -520
+  DISPID_BORDERVISIBLE             -519
+  DISPID_CAPTION                   -518
+  DISPID_TEXT                      -517
+  DISPID_TABSTOP                   -516
+  DISPID_HWND                      -515
+  DISPID_ENABLED                   -514
+  DISPID_FORECOLOR                 -513
+  DISPID_FONT                      -512
+  DISPID_FILLSTYLE                 -511
+  DISPID_FILLCOLOR                 -510
+  DISPID_DRAWWIDTH                 -509
+  DISPID_DRAWSTYLE                 -508
+  DISPID_DRAWMODE                  -507
+  DISPID_BORDERWIDTH               -505
+  DISPID_BORDERSTYLE               -504
+  DISPID_BORDERCOLOR               -503
+  DISPID_BACKSTYLE                 -502
+  DISPID_BACKCOLOR                 -501
+  DISPID_AUTOSIZE                  -500
+  DISPID_COLLECT                   -8
+  DISPID_DESTRUCTOR                -7
+  DISPID_CONSTRUCTOR               -6
+  DISPID_EVALUATE                  -5
+  DISPID_NEWENUM                   -4
+  DISPID_PROPERTYPUT               -3
+  DISPID_UNKNOWN                   -1
+  DISPID_VALUE                     0
+
+pointer DISPID* DISPID
+
+flag BIND_FLAGS DWORD display=DWORD
+  BIND_MAYBOTHERUSER     1
+  BIND_JUSTTESTEXISTENCE 2
+
+struct BIND_OPTS
+  cbStruct DWORD
+  grfFlags BIND_FLAGS
+  grfMode [STGM_FLAGS]
+  dwTickCountDeadline DWORD
+
+pointer BIND_OPTS* BIND_OPTS
+
+struct STATSTG
+  pwcsName LPOLESTR
+  type DWORD
+  cbSize ULARGE_INTEGER
+  mtime FILETIME
+  ctime FILETIME
+  atime FILETIME
+  grfMode [STGM_FLAGS]
+  grfLocksSupported LOCKTYPE
+  clsid CLSID
+  grfStateBits DWORD
+  reserved DWORD
+
+pointer STATSTG* STATSTG
+
+struct INTERFACEINFO
+  pUnk IUnknown*
+  iid IID
+  wMethod WORD
+
+pointer LPINTERFACEINFO INTERFACEINFO
+
+struct OLEINPLACEFRAMEINFO
+  cb UINT
+  fMDIApp BOOL
+  hwndFrame HWND
+  haccel HACCEL
+  cAccelEntries UINT
+
+pointer LPOLEINPLACEFRAMEINFO OLEINPLACEFRAMEINFO
+
+struct OLEVERB
+  lVerb LONG
+  lpszVerbName LPOLESTR
+  fuFlags DWORD
+  grfAttribs DWORD
+
+pointer LPOLEVERB OLEVERB
+
+struct STATDATA
+  formatetc FORMATETC
+  advf DWORD
+  pAdvSink IAdviseSink*
+  dwConnection DWORD
+
+pointer STATDATA* STATDATA
+
+struct ContextProperty
+  policyId GUID
+  flags CPFLAGS
+  pUnk IUnknown*
+
+pointer ContextProperty* ContextProperty
+
+struct StorageLayout
+  LayoutType DWORD
+  pwcsElementName OLECHAR*
+  cOffset LARGE_INTEGER
+  cBytes LARGE_INTEGER
+
+pointer StorageLayout* StorageLayout
+
+flag OLECMDF DWORD display=DWORD
+  OLECMDF_SUPPORTED         0x1
+  OLECMDF_ENABLED           0x2
+  OLECMDF_LATCHED           0x4
+  OLECMDF_NINCHED           0x8
+  OLECMDF_INVISIBLE         0x10
+  OLECMDF_DEFHIDEONCTXTMENU 0x20
+
+pointer OLECMDF* OLECMDF
+
+enum PROPBAG2_TYPE UINT display=DWORD
+  PROPBAG2_TYPE_UNDEFINED 0
+  PROPBAG2_TYPE_DATA      1
+  PROPBAG2_TYPE_URL       2
+  PROPBAG2_TYPE_OBJECT    3
+  PROPBAG2_TYPE_STREAM    4
+  PROPBAG2_TYPE_STORAGE   5
+  PROPBAG2_TYPE_MONIKER   6
+
+struct PROPBAG2
+  dwType PROPBAG2_TYPE
+  vt VARTYPE
+  cfType CLIPFORMAT
+  dwHint DWORD
+  pstrName LPOLESTR
+  clsid CLSID
+
+pointer PROPBAG2* PROPBAG2
+
+flag [CLSCTX] DWORD display=DWORD
+  CLSCTX_INPROC_SERVER          0x1
+  CLSCTX_INPROC_HANDLER         0x2
+  CLSCTX_LOCAL_SERVER           0x4
+  CLSCTX_INPROC_SERVER16        0x8
+  CLSCTX_REMOTE_SERVER          0x10
+  CLSCTX_INPROC_HANDLER16       0x20
+  CLSCTX_RESERVED1              0x40
+  CLSCTX_RESERVED2              0x80
+  CLSCTX_RESERVED3              0x100
+  CLSCTX_RESERVED4              0x200
+  CLSCTX_NO_CODE_DOWNLOAD       0x400
+  CLSCTX_RESERVED5              0x800
+  CLSCTX_NO_CUSTOM_MARSHAL      0x1000
+  CLSCTX_ENABLE_CODE_DOWNLOAD   0x2000
+  CLSCTX_NO_FAILURE_LOG         0x4000
+  CLSCTX_DISABLE_AAA            0x8000
+  CLSCTX_ENABLE_AAA             0x10000
+  CLSCTX_FROM_DEFAULT_CONTEXT   0x20000
+  CLSCTX_ACTIVATE_32_BIT_SERVER 0x40000
+  CLSCTX_ACTIVATE_64_BIT_SERVER 0x80000
+  CLSCTX_ENABLE_CLOAKING        0x100000
+  CLSCTX_PS_DLL                 0x80000000
+
+struct [uCLSSPEC_u_s1] display=struct
+  pPackageName LPOLESTR
+  PolicyId GUID
+
+struct [uCLSSPEC_u_s2] display=struct
+  ObjectId GUID
+  PolicyId GUID
+
+union [uCLSSPEC_u] display=union
+  clsid CLSID
+  pFileExt LPOLESTR
+  pMimeType LPOLESTR
+  pProgId LPOLESTR
+  pFileName LPOLESTR
+  ByName [uCLSSPEC_u_s1]
+  ByObjectId [uCLSSPEC_u_s2]
+
+enum TYSPEC DWORD display=DWORD
+  TYSPEC_CLSID       0
+  TYSPEC_FILEEXT     1
+  TYSPEC_MIMETYPE    2
+  TYSPEC_FILENAME    3
+  TYSPEC_PROGID      4
+  TYSPEC_PACKAGENAME 5
+  TYSPEC_OBJECTID    6
+
+struct uCLSSPEC
+  tyspec TYSPEC
+  tagged_union [uCLSSPEC_u]
+
+pointer uCLSSPEC* uCLSSPEC
+
+union [STGMEDIUM_u] display=union
+  hBitmap HBITMAP
+  hMetaFilePict HMETAFILEPICT
+  hEnhMetaFile HENHMETAFILE
+  hGlobal HGLOBAL
+  lpszFileName LPOLESTR
+  pstm IStream*
+  pstg IStorage*
+
+struct STGMEDIUM
+  tymed TYMED
+  u [STGMEDIUM_u]
+  pUnkForRelease IUnknown*
+
+pointer STGMEDIUM* STGMEDIUM
+
+pointer "const STGMEDIUM*" STGMEDIUM
+
+pointer LPSTGMEDIUM STGMEDIUM
+
+flag [COINIT_FLAG] DWORD display=DWORD
+  COINIT_MULTITHREADED     0x0
+  COINIT_APARTMENTTHREADED 0x2
+  COINIT_DISABLE_OLE1DDE   0x4
+  COINIT_SPEED_OVER_MEMORY 0x8
+
+flag [FADF_FLAGS] USHORT display=USHORT
+  FADF_AUTO        0x1
+  FADF_STATIC      0x2
+  FADF_EMBEDDED    0x4
+  FADF_FIXEDSIZE   0x10
+  FADF_RECORD      0x20
+  FADF_HAVEIID     0x40
+  FADF_HAVEVARTYPE 0x80
+  FADF_BSTR        0x100
+  FADF_UNKNOWN     0x200
+  FADF_DISPATCH    0x400
+  FADF_VARIANT     0x800
+  FADF_RESERVED    0xf008
+
+struct SAFEARRAYBOUND
+  cElements ULONG
+  lLbound LONG
+
+pointer SAFEARRAYBOUND* SAFEARRAYBOUND
+
+array "SAFEARRAYBOUND [1]" base=SAFEARRAYBOUND count=1
+
+struct SAFEARRAY
+  cDims USHORT
+  fFeatures [FADF_FLAGS]
+  cbElements ULONG
+  cLocks ULONG
+  pvData PVOID
+  rgsabound "SAFEARRAYBOUND [1]" count=cDims
+
+pointer SAFEARRAY* SAFEARRAY
+
+pointer SAFEARRAY** SAFEARRAY*
+
+pointer LPSAFEARRAY SAFEARRAY
+
+pointer LPSAFEARRAY* LPSAFEARRAY
+
+struct CUSTDATAITEM
+  guid GUID
+  varValue VARIANTARG
+
+pointer LPCUSTDATAITEM CUSTDATAITEM
+
+struct CUSTDATA
+  cCustData DWORD
+  prgCustData LPCUSTDATAITEM
+
+pointer CUSTDATA* CUSTDATA
+
+pointer LPCUSTDATA CUSTDATA
+
+flag [InvokeFlags] WORD display=WORD
+  DISPATCH_METHOD         0x1
+  DISPATCH_PROPERTYGET    0x2
+  DISPATCH_PROPERTYPUT    0x4
+  DISPATCH_PROPERTYPUTREF 0x8
+
+enum CALLCONV UINT
+  CC_FASTCALL   0
+  CC_CDECL      1
+  CC_PASCAL     2
+  CC_MACPASCAL  3
+  CC_STDCALL    4
+  CC_FPFASTCALL 5
+  CC_SYSCALL    6
+  CC_MPWCDECL   7
+  CC_MPWPASCAL  8
+
+enum STATFLAG DWORD display=DWORD
+  STATFLAG_DEFAULT 0
+  STATFLAG_NONAME  1
+  STATFLAG_NOOPEN  2
+
+flag STGC DWORD display=DWORD
+  STGC_DEFAULT                            0
+  STGC_OVERWRITE                          1
+  STGC_ONLYIFCURRENT                      2
+  STGC_DANGEROUSLYCOMMITMERELYTODISKCACHE 4
+  STGC_CONSOLIDATE                        8
+
+enum DBKIND DWORD
+  DBKIND_GUID_NAME    0
+  DBKIND_GUID_PROPID  1
+  DBKIND_NAME         2
+  DBKIND_PGUID_NAME   3
+  DBKIND_PGUID_PROPID 4
+  DBKIND_PROPID       5
+  DBKIND_GUID         6
+
+union [DBID_u1] display=union
+  guid GUID
+  pguid GUID*
+
+union [DBID_u2] display=union
+  pwszName LPOLESTR
+  ulPropid ULONG
+
+struct DBID pack32=2
+  uGuid [DBID_u1]
+  eKind DBKIND
+  uName [DBID_u2]
+
+pointer DBID* DBID
+
+pointer DBID** DBID*
+
+pointer "const DBID []" DBID
+
+flag [PROPSETFLAG] DWORD display=DWORD
+  PROPSETFLAG_DEFAULT        0
+  PROPSETFLAG_NONSIMPLE      1
+  PROPSETFLAG_ANSI           2
+  PROPSETFLAG_UNBUFFERED     4
+  PROPSETFLAG_CASE_SENSITIVE 8
+
+struct STATPROPSETSTG
+  fmtid FMTID
+  clsid CLSID
+  grfFlags [PROPSETFLAG]
+  mtime FILETIME
+  ctime FILETIME
+  atime FILETIME
+  dwOSVersion DWORD
+
+pointer STATPROPSETSTG* STATPROPSETSTG
+
+struct STATPROPSTG
+  lpwstrName LPOLESTR
+  propid PROPID
+  vt VARTYPE
+
+pointer STATPROPSTG* STATPROPSTG
+
+flag IMPLTYPEFLAGS UINT display=INT
+  IMPLTYPEFLAG_FDEFAULT       0x1
+  IMPLTYPEFLAG_FSOURCE        0x2
+  IMPLTYPEFLAG_FRESTRICTED    0x4
+  IMPLTYPEFLAG_FDEFAULTVTABLE 0x8
+
+pointer IMPLTYPEFLAGS* IMPLTYPEFLAGS display=INT*
+

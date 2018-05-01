@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+
+ingterface IApplicationDesignModeSettings base=IUnknown id={2A3DEE9A-E31D-46D6-8508-BCC597DB3557} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetNativeDisplaySize
+    HRESULT
+    sizeNativeDisplay SIZE
+
+  func SetScaleFactor
+    HRESULT
+    scaleFactor DEVICE_SCALE_FACTOR
+
+  func SetApplicationViewState
+    HRESULT
+    viewState APPLICATION_VIEW_STATE
+
+  func ComputeApplicationSize
+    HRESULT
+    psizeApplication SIZE*
+
+  func IsApplicationViewStateSupported
+    HRESULT
+    viewState APPLICATION_VIEW_STATE
+    sizeNativeDisplay SIZE
+    scaleFactor DEVICE_SCALE_FACTOR
+    pfSupported BOOL*
+
+  func TriggerEdgeGesture
+    HRESULT
+    edgeGestureKind EDGE_GESTURE_KIND
+
+

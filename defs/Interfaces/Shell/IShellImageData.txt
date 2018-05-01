@@ -1,0 +1,124 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellImageData base=IUnknown id={bfdeec12-8040-4403-a5ea-9e07dafcf530} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Decode
+    HRESULT
+    dwFlags DWORD
+    cxDesired ULONG
+    cyDesired ULONG
+
+  func Draw
+    HRESULT
+    hdc HDC
+    prcDest LPRECT
+    prcSrc LPRECT
+
+  func NextFrame
+    HRESULT
+
+  func NextPage
+    HRESULT
+
+  func PrevPage
+    HRESULT
+
+  func IsTransparent
+    HRESULT
+
+  func IsAnimated
+    HRESULT
+
+  func IsVector
+    HRESULT
+
+  func IsMultipage
+    HRESULT
+
+  func IsEditable
+    HRESULT
+
+  func IsPrintable
+    HRESULT
+
+  func IsDecoded
+    HRESULT
+
+  func GetCurrentPage
+    HRESULT
+    pnPage ULONG*
+
+  func GetPageCount
+    HRESULT
+    pcPages ULONG*
+
+  func SelectPage
+    HRESULT
+    iPage ULONG
+
+  func GetSize
+    HRESULT
+    pSize SIZE*
+
+  func GetRawDataFormat
+    HRESULT
+    pDataFormat GUID*
+
+  func GetPixelFormat
+    HRESULT
+    pFormat PixelFormat*
+
+  func GetDelay
+    HRESULT
+    pdwDelay DWORD*
+
+  func GetProperties
+    HRESULT
+    dwMode DWORD
+    ppPropSet IPropertySetStorage**
+
+  func Rotate
+    HRESULT
+    dwAngle DWORD
+
+  func Scale
+    HRESULT
+    cx ULONG
+    cy ULONG
+    hints InterpolationMode
+
+  func DiscardEdit
+    HRESULT
+
+  func SetEncoderParams
+    HRESULT
+    pbagEnc IPropertyBag*
+
+  func DisplayName
+    HRESULT
+    wszName LPWSTR
+    cch UINT
+
+  func GetResolution
+    HRESULT
+    puResolutionX ULONG*
+    puResolutionY ULONG*
+
+  func GetEncoderParams
+    HRESULT
+    pguidFmt GUID*
+    ppEncParams EncoderParameters**
+
+  func RegisterAbort
+    HRESULT
+    pAbort IShellImageDataAbort*
+    ppAbortPrev IShellImageDataAbort**
+
+  func CloneFrame
+    HRESULT
+    ppImg Image**
+
+  func ReplaceFrame
+    HRESULT
+    pImg Image*
+
+

@@ -1,0 +1,28 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncCallback base=IUnknown id={0599797f-5ed9-485c-ae36-0c5d1bf2e7a5} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func OnProgress
+    HRESULT
+    provider SYNC_PROVIDER_ROLE
+    syncStage SYNC_PROGRESS_STAGE
+    dwCompletedWork DWORD
+    dwTotalWork DWORD
+
+  func OnChange
+    HRESULT
+    pSyncChange ISyncChange*
+
+  func OnConflict
+    HRESULT
+    pConflict IChangeConflict*
+
+  func OnFullEnumerationNeeded
+    HRESULT
+    pFullEnumerationAction SYNC_FULL_ENUMERATION_ACTION*
+
+  func OnRecoverableError
+    HRESULT
+    pRecoverableError IRecoverableError*
+
+

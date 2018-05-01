@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DTC\DTC.h.txt
+
+ingterface IKernelTransaction base=IUnknown id={79427A2B-F895-40e0-BE79-B57DC82ED231} errorFunc=HRESULT onlineHelp=MSDN category="System Services/Distributed Transaction Coordinator (DTC)"
+  func GetHandle
+    HRESULT
+    pHandle HANDLE*
+
+

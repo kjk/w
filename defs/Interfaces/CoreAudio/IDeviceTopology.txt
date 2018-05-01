@@ -1,0 +1,39 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IDeviceTopology base=IUnknown id={2A07407E-6497-4A18-9787-32F79BD0D98F} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetConnectorCount
+    [AUDCLNT_HRESULT]
+    pCount UINT*
+
+  func GetConnector
+    [AUDCLNT_HRESULT]
+    nIndex UINT
+    ppConnector IConnector**
+
+  func GetSubunitCount
+    [AUDCLNT_HRESULT]
+    pCount UINT*
+
+  func GetSubunit
+    [AUDCLNT_HRESULT]
+    nIndex UINT
+    ppSubunit ISubunit**
+
+  func GetPartById
+    [AUDCLNT_HRESULT]
+    nId UINT
+    ppPart IPart**
+
+  func GetDeviceId
+    [AUDCLNT_HRESULT]
+    ppwstrDeviceId LPWSTR*
+
+  func GetSignalPath
+    [AUDCLNT_HRESULT]
+    pIPartFrom IPart*
+    pIPartTo IPart*
+    bRejectMixedPaths BOOL
+    ppParts IPartsList**
+
+

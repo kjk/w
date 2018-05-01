@@ -1,0 +1,139 @@
+include Interfaces\IUnknown.txt
+
+ingterface IControlMarkup base=IUnknown id={D6D2FBAE-F116-458c-8C34-03569877A2D2} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetCallback
+    HRESULT
+    punk IUnknown*
+
+  func GetCallback
+    HRESULT
+    riid REFIID
+    ppvUnk void** interfaceId=riid
+
+  func SetId
+    HRESULT
+    dwId DWORD
+
+  func GetId
+    HRESULT
+    pdwId DWORD*
+
+  func SetFonts
+    HRESULT
+    hFont HFONT
+    hFontUnderline HFONT
+
+  func GetFonts
+    HRESULT
+    phFont HFONT*
+    phFontUnderline HFONT*
+
+  func SetText
+    HRESULT
+    pwszText LPCWSTR
+
+  func GetText
+    HRESULT
+    bRaw BOOL
+    pwszText LPWSTR
+    pdwCch DWORD*
+
+  func SetLinkText
+    HRESULT
+    iLink int
+    uMarkupLinkText UINT
+    pwszText LPCWSTR
+
+  func GetLinkText
+    HRESULT
+    iLink int
+    uMarkupLinkText UINT
+    pwszText LPWSTR
+    pdwCch DWORD*
+
+  func SetRenderFlags
+    HRESULT
+    uDT UINT
+
+  func GetRenderFlags
+    HRESULT
+    puDT UINT*
+    phTheme HTHEME*
+    piPartId int*
+    piStateIdNormal int*
+    piStateIdLink int*
+
+  func SetThemeRenderFlags
+    HRESULT
+    uDT UINT
+    hTheme HTHEME
+    iPartId int
+    iStateIdNormal int
+    iStateIdLink int
+
+  func GetState
+    HRESULT
+    iLink int
+    uStateMask UINT
+    puState UINT*
+
+  func SetState
+    HRESULT
+    iLink int
+    uStateMask UINT
+    uState UINT
+
+  func DrawText
+    HRESULT
+    hdcClient HDC
+    prcClient LPCRECT
+
+  func SetLinkCursor
+    HRESULT
+
+  func CalcIdealSize
+    HRESULT
+    hdc HDC
+    uMarkUpCalc UINT
+    prc RECT*
+
+  func SetFocus
+    HRESULT
+
+  func KillFocus
+    HRESULT
+
+  func IsTabbable
+    HRESULT
+
+  func OnButtonDown
+    HRESULT
+    pt POINT
+
+  func OnButtonUp
+    HRESULT
+    pt POINT
+
+  func OnKeyDown
+    HRESULT
+    uVirtKey UINT
+
+  func HitTest
+    HRESULT
+    pt POINT
+    piLink int*
+
+  func GetLinkRect
+    HRESULT
+    iLink int
+    prc RECT*
+
+  func GetControlRect
+    HRESULT
+    prcControl RECT*
+
+  func GetLinkCount
+    HRESULT
+    pcLinks UINT*
+
+

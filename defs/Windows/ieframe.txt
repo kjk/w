@@ -1,0 +1,155 @@
+include Headers\windows.h.txt
+include Headers\registry.h.txt
+
+dll ieframe.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Web Development/Internet Explorer Development/Security and Privacy/Protected Mode"
+struct IELAUNCHURLINFO
+  cbSize DWORD
+  dwCreationFlags DWORD
+  dwLaunchOptionFlags DWORD
+
+pointer LPIELAUNCHURLINFO IELAUNCHURLINFO
+
+func IECancelSaveFile
+  HRESULT
+  hState HANDLE
+
+func IECreateDirectory
+  BOOL
+  lpPathName LPCWSTR
+  lpSecurityAttributes LPSECURITY_ATTRIBUTES
+
+func IECreateFile
+  success NotEqual=0
+  HANDLE
+  lpFileName LPCWSTR
+  dwDesiredAccess DWORD
+  dwShareMode DWORD
+  lpSecurityAttributes LPSECURITY_ATTRIBUTES
+  dwCreationDisposition DWORD
+  dwFlagsAndAttributes DWORD
+  hTemplateFile HANDLE
+
+func IEDeleteFile
+  BOOL
+  lpFileName LPCWSTR
+
+func IEFindFirstFile
+  success NotEqual=0
+  HANDLE
+  lpFileName LPCWSTR
+  lpFindFileData LPWIN32_FIND_DATA
+
+func IEGetFileAttributesEx
+  BOOL
+  lpFileName LPCWSTR
+  fInfoLevelId GET_FILEEX_INFO_LEVELS
+  lpFileInformation LPVOID
+
+func IEGetProtectedModeCookie
+  HRESULT
+  lpszURL LPCWSTR
+  lpszCookieName LPCWSTR
+  pszCookieData LPWSTR
+  pcchCookieData DWORD*
+  dwFlags DWORD
+
+func IEGetWriteableFolderPath
+  HRESULT
+  clsidFolderID GUID
+  lppwstrPath LPWSTR*
+
+func IEGetWriteableHKCU
+  HRESULT
+  phKey HKEY*
+
+func IEIsProtectedModeProcess
+  HRESULT
+  pbResult BOOL*
+
+func IEIsProtectedModeURL
+  HRESULT
+  pszUrl LPCWSTR
+
+func IELaunchURL
+  HRESULT
+  pszUrl LPCWSTR
+  pProcInfo LPPROCESS_INFORMATION
+  lpInfo LPIELAUNCHURLINFO
+
+func IEMoveFileEx
+  BOOL
+  lpExistingFileName LPCWSTR
+  lpNewFileName LPCWSTR
+  dwFlags DWORD
+
+func IERefreshElevationPolicy
+  HRESULT
+
+func IERegCreateKeyEx
+  HRESULT
+  lpSubKey LPCWSTR
+  reserved DWORD
+  lpClass LPWSTR
+  dwOptions DWORD
+  samDesired REGSAM
+  lpSecurityAttributes LPSECURITY_ATTRIBUTES
+  phkResult PHKEY
+  lpdwDisposition LPDWORD
+
+func IERegisterWritableRegistryKey
+  HRESULT
+  guid GUID
+  lpSubkey LPCWSTR
+  fSubkeyAllowed BOOL
+
+func IERegisterWritableRegistryValue
+  HRESULT
+  guid GUID
+  lpPath LPCWSTR
+  lpValueName LPCWSTR
+  dwType DWORD
+  lpData "const BYTE*"
+  cbMaxData DWORD
+
+func IERegSetValueEx
+  HRESULT
+  lpSubKey LPCWSTR
+  lpValueName LPCWSTR
+  Reserved DWORD
+  dwType DWORD
+  lpData "const BYTE*"
+  cbData DWORD
+
+func IERemoveDirectory
+  BOOL
+  lpPathName LPCWSTR
+
+func IESaveFile
+  HRESULT
+  hState HANDLE
+  lpwstrSourceFile LPWSTR
+
+func IESetProtectedModeCookie
+  HRESULT
+  lpszURL LPCWSTR
+  lpszCookieName LPCWSTR
+  pszCookieData LPWSTR
+  dwFlags DWORD
+
+func IEShowSaveFileDialog
+  HRESULT
+  hwnd HWND
+  lpwstrInitialFileName LPWSTR
+  lpwstrInitialDir LPWSTR
+  lpwstrFilter LPCWSTR
+  lpwstrDefExt LPCWSTR
+  dwFilterIndex DWORD
+  dwFlags DWORD
+  lppwstrDestinationFilePath LPWSTR*
+  phState HANDLE*
+
+func IEUnregisterWritableRegistry
+  HRESULT
+  guid GUID
+

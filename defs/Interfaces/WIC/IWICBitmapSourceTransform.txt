@@ -1,0 +1,30 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICBitmapSourceTransform base=IUnknown id={3B16811B-6A43-4ec9-B713-3D5A0C13B940} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func CopyPixels
+    [WIC_HRESULT]
+    prc "const WICRect*"
+    uiWidth UINT
+    uiHeight UINT
+    pguidDstFormat WICPixelFormatGUID*
+    dstTransform WICBitmapTransformOptions
+    nStride UINT
+    cbBufferSize UINT
+    pbBuffer BYTE*
+
+  func GetClosestSize
+    [WIC_HRESULT]
+    puiWidth UINT*
+    puiHeight UINT*
+
+  func GetClosestPixelFormat
+    [WIC_HRESULT]
+    pguidDstFormat WICPixelFormatGUID*
+
+  func DoesSupportTransform
+    [WIC_HRESULT]
+    dstTransform WICBitmapTransformOptions
+    pfIsSupported BOOL*
+
+

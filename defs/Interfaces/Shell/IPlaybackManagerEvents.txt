@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPlaybackManagerEvents base=IUnknown id={385CFB7D-4E0C-4106-912E-8CFB4C191F45} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnPlaybackManagerEvent
+    HRESULT
+    dwSessionId DWORD
+    mediaEvent PBM_EVENT
+
+

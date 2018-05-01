@@ -1,0 +1,9 @@
+include Interfaces\Shell\ITaskbarList3.txt
+
+ingterface ITaskbarList4 base=ITaskbarList3 id={c43dc798-95d1-4bea-9030-bb99e2983a1a} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetTabProperties
+    HRESULT
+    hwndTab HWND
+    stpFlags STPFLAG
+
+

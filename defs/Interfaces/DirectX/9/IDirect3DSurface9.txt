@@ -1,0 +1,30 @@
+include Interfaces\DirectX\9\IDirect3DResource9.txt
+
+ingterface IDirect3DSurface9 base=IDirect3DResource9 id={0CFBAF3A-9FF6-429a-99B3-A2796AF8B89B} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func GetContainer
+    HRESULT
+    riid REFIID
+    ppContainer void** interfaceId=riid
+
+  func GetDesc
+    HRESULT
+    pDesc D3DSURFACE_DESC*
+
+  func LockRect
+    HRESULT
+    pLockedRect D3DLOCKED_RECT*
+    pRect "CONST RECT*"
+    Flags DWORD
+
+  func UnlockRect
+    HRESULT
+
+  func GetDC
+    HRESULT
+    phdc HDC*
+
+  func ReleaseDC
+    HRESULT
+    hdc HDC
+
+

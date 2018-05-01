@@ -1,0 +1,63 @@
+include Headers\windows.h.txt
+
+dll Wdsmc.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Administration/Windows Deployment Services (WDS)/Transport Server"
+enum TRANSPORTPROVIDER_CALLBACK_ID UINT
+  WDS_TRANSPORTPROVIDER_CREATE_INSTANCE      0
+  WDS_TRANSPORTPROVIDER_COMPARE_CONTENT      1
+  WDS_TRANSPORTPROVIDER_OPEN_CONTENT         2
+  WDS_TRANSPORTPROVIDER_USER_ACCESS_CHECK    3
+  WDS_TRANSPORTPROVIDER_GET_CONTENT_SIZE     4
+  WDS_TRANSPORTPROVIDER_READ_CONTENT         5
+  WDS_TRANSPORTPROVIDER_CLOSE_CONTENT        6
+  WDS_TRANSPORTPROVIDER_CLOSE_INSTANCE       7
+  WDS_TRANSPORTPROVIDER_SHUTDOWN             8
+  WDS_TRANSPORTPROVIDER_DUMP_STATE           9
+  WDS_TRANSPORTPROVIDER_REFRESH_SETTINGS     10
+  WDS_TRANSPORTPROVIDER_GET_CONTENT_METADATA 11
+  WDS_TRANSPORTPROVIDER_MAX_CALLBACKS        12
+
+enum WDS_MC_SEVERITY UINT
+  WDS_MC_TRACE_VERBOSE 0x00010000
+  WDS_MC_TRACE_INFO    0x00020000
+  WDS_MC_TRACE_WARNING 0x00040000
+  WDS_MC_TRACE_ERROR   0x00080000
+  WDS_MC_TRACE_FATAL   0x00100000
+
+func WdsTransportServerAllocateBuffer
+  success NotEqual=0
+  PVOID
+  hProvider HANDLE
+  ulBufferSize ULONG
+
+func WdsTransportServerCompleteRead
+  HRESULT
+  hProvider HANDLE
+  ulBytesRead ULONG
+  pvUserData PVOID
+  hReadResult HRESULT
+
+func WdsTransportServerFreeBuffer
+  HRESULT
+  hProvider HANDLE
+  pvBuffer PVOID
+
+func WdsTransportServerRegisterCallback
+  HRESULT
+  hProvider HANDLE
+  CallbackId TRANSPORTPROVIDER_CALLBACK_ID
+  pfnCallback PVOID
+
+func WdsTransportServerTrace
+  HRESULT
+  hProvider HANDLE
+  Severity WDS_MC_SEVERITY
+  pwszFormat LPCWSTR
+
+func WdsTransportServerTraceV
+  HRESULT
+  hProvider HANDLE
+  Severity WDS_MC_SEVERITY
+  pwszFormat LPCWSTR
+  Params va_list
+

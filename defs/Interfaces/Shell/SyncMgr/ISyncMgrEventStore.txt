@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrEventStore base=IUnknown id={37e412f9-016e-44c2-81ff-db3add774266} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func GetEventEnumerator
+    HRESULT
+    ppenum IEnumSyncMgrEvents**
+
+  func GetEventCount
+    HRESULT
+    pcEvents ULONG*
+
+  func GetEvent
+    HRESULT
+    rguidEventID REFGUID
+    ppEvent ISyncMgrEvent**
+
+  func RemoveEvent
+    HRESULT
+    pguidEventIDs GUID*
+    cEvents ULONG
+
+

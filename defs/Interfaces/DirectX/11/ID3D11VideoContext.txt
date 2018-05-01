@@ -1,0 +1,399 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11VideoContext base=ID3D11DeviceChild id={61F21C45-3C0E-4a74-9CEA-67100D9AD5E4} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Microsoft Media Foundation/Direct3D 11 Video"
+  func GetDecoderBuffer
+    HRESULT
+    pDecoder ID3D11VideoDecoder*
+    Type D3D11_VIDEO_DECODER_BUFFER_TYPE
+    pBufferSize UINT*
+    ppBuffer void**
+
+  func ReleaseDecoderBuffer
+    HRESULT
+    pDecoder ID3D11VideoDecoder*
+    Type D3D11_VIDEO_DECODER_BUFFER_TYPE
+
+  func DecoderBeginFrame
+    HRESULT
+    pDecoder ID3D11VideoDecoder*
+    pView ID3D11VideoDecoderOutputView*
+    ContentKeySize UINT
+    pContentKey "const void*"
+
+  func DecoderEndFrame
+    HRESULT
+    pDecoder ID3D11VideoDecoder*
+
+  func SubmitDecoderBuffers
+    HRESULT
+    pDecoder ID3D11VideoDecoder* count=NumBuffers
+    NumBuffers UINT
+    pBufferDesc "const D3D11_VIDEO_DECODER_BUFFER_DESC*" count=NumBuffers
+
+  func DecoderExtension
+    HRESULT
+    pDecoder ID3D11VideoDecoder*
+    pExtensionData "const D3D11_VIDEO_DECODER_EXTENSION*"
+
+  func VideoProcessorSetOutputTargetRect
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    Enable BOOL
+    pRect "const RECT*"
+
+  func VideoProcessorSetOutputBackgroundColor
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    YCbCr BOOL
+    pColor "const D3D11_VIDEO_COLOR*"
+
+  func VideoProcessorSetOutputColorSpace
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    pColorSpace "const D3D11_VIDEO_PROCESSOR_COLOR_SPACE*"
+
+  func VideoProcessorSetOutputAlphaFillMode
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    AlphaFillMode D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE
+    StreamIndex UINT
+
+  func VideoProcessorSetOutputConstriction
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    Enable BOOL
+    Size SIZE
+
+  func VideoProcessorSetOutputStereoMode
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    Enable BOOL
+
+  func VideoProcessorSetOutputExtension
+    HRESULT
+    pVideoProcessor ID3D11VideoProcessor*
+    pExtensionGuid "const GUID*"
+    DataSize UINT
+    pData void* length=DataSize
+
+  func VideoProcessorGetOutputTargetRect
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    Enabled BOOL*
+    pRect RECT*
+
+  func VideoProcessorGetOutputBackgroundColor
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    pYCbCr BOOL*
+    pColor D3D11_VIDEO_COLOR*
+
+  func VideoProcessorGetOutputColorSpace
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    pColorSpace D3D11_VIDEO_PROCESSOR_COLOR_SPACE*
+
+  func VideoProcessorGetOutputAlphaFillMode
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    pAlphaFillMode D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*
+    pStreamIndex UINT*
+
+  func VideoProcessorGetOutputConstriction
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    pEnabled BOOL*
+    pSize SIZE*
+
+  func VideoProcessorGetOutputStereoMode
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    pEnabled BOOL*
+
+  func VideoProcessorGetOutputExtension
+    HRESULT
+    pVideoProcessor ID3D11VideoProcessor*
+    pExtensionGuid "const GUID*"
+    DataSize UINT
+    pData void* length=DataSize
+
+  func VideoProcessorSetStreamFrameFormat
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    FrameFormat D3D11_VIDEO_FRAME_FORMAT
+
+  func VideoProcessorSetStreamColorSpace
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pColorSpace "const D3D11_VIDEO_PROCESSOR_COLOR_SPACE*"
+
+  func VideoProcessorSetStreamOutputRate
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    OutputRate D3D11_VIDEO_PROCESSOR_OUTPUT_RATE
+    RepeatFrame BOOL
+    pCustomRate "const DXGI_RATIONAL*"
+
+  func VideoProcessorSetStreamSourceRect
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Enable BOOL
+    pRect "const RECT*"
+
+  func VideoProcessorSetStreamDestRect
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Enable BOOL
+    pRect "const RECT*"
+
+  func VideoProcessorSetStreamAlpha
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Enable BOOL
+    Alpha FLOAT
+
+  func VideoProcessorSetStreamPalette
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Count UINT
+    pEntries "const UINT*" count=Count
+
+  func VideoProcessorSetStreamPixelAspectRatio
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Enable BOOL
+    pSourceAspectRatio "const DXGI_RATIONAL*"
+    pDestinationAspectRatio "const DXGI_RATIONAL*"
+
+  func VideoProcessorSetStreamLumaKey
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Enable BOOL
+    Lower FLOAT
+    Upper FLOAT
+
+  func VideoProcessorSetStreamStereoFormat
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Enable BOOL
+    Format D3D11_VIDEO_PROCESSOR_STEREO_FORMAT
+    LeftViewFrame0 BOOL
+    BaseViewFrame0 BOOL
+    FlipMode D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE
+    MonoOffset int
+
+  func VideoProcessorSetStreamAutoProcessingMode
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Enable BOOL
+
+  func VideoProcessorSetStreamFilter
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Filter D3D11_VIDEO_PROCESSOR_FILTER
+    Enable BOOL
+    Level int
+
+  func VideoProcessorSetStreamExtension
+    HRESULT
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pExtensionGuid "const GUID*"
+    DataSize UINT
+    pData void* length=DataSize
+
+  func VideoProcessorGetStreamFrameFormat
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pFrameFormat D3D11_VIDEO_FRAME_FORMAT*
+
+  func VideoProcessorGetStreamColorSpace
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pColorSpace D3D11_VIDEO_PROCESSOR_COLOR_SPACE*
+
+  func VideoProcessorGetStreamOutputRate
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pOutputRate D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*
+    pRepeatFrame BOOL*
+    pCustomRate DXGI_RATIONAL*
+
+  func VideoProcessorGetStreamSourceRect
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pEnabled BOOL*
+    pRect RECT*
+
+  func VideoProcessorGetStreamDestRect
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pEnabled BOOL*
+    pRect RECT*
+
+  func VideoProcessorGetStreamAlpha
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pEnabled BOOL*
+    pAlpha FLOAT*
+
+  func VideoProcessorGetStreamPalette
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Count UINT
+    pEntries UINT* postCount=Count
+
+  func VideoProcessorGetStreamPixelAspectRatio
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pEnabled BOOL*
+    pSourceAspectRatio DXGI_RATIONAL*
+    pDestinationAspectRatio DXGI_RATIONAL*
+
+  func VideoProcessorGetStreamLumaKey
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pEnabled BOOL*
+    pLower FLOAT*
+    pUpper FLOAT*
+
+  func VideoProcessorGetStreamStereoFormat
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pEnable BOOL*
+    pFormat D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*
+    pLeftViewFrame0 BOOL*
+    pBaseViewFrame0 BOOL*
+    pFlipMode D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*
+    MonoOffset int*
+
+  func VideoProcessorGetStreamAutoProcessingMode
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pEnabled BOOL*
+
+  func VideoProcessorGetStreamFilter
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Filter D3D11_VIDEO_PROCESSOR_FILTER
+    pEnabled BOOL*
+    pLevel int*
+
+  func VideoProcessorGetStreamExtension
+    HRESULT
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pExtensionGuid "const GUID*"
+    DataSize UINT
+    pData void* length=DataSize
+
+  func VideoProcessorBlt
+    HRESULT
+    pVideoProcessor ID3D11VideoProcessor*
+    pView ID3D11VideoProcessorOutputView*
+    OutputFrame UINT
+    StreamCount UINT
+    pStreams "const D3D11_VIDEO_PROCESSOR_STREAM*" count=StreamCount
+
+  func NegotiateCryptoSessionKeyExchange
+    HRESULT
+    pCryptoSession ID3D11CryptoSession*
+    DataSize UINT
+    pData void* length=DataSize
+
+  func EncryptionBlt
+    void
+    pCryptoSession ID3D11CryptoSession*
+    pSrcSurface ID3D11Texture2D*
+    pDstSurface ID3D11Texture2D*
+    IVSize UINT
+    pIV void*
+
+  func DecryptionBlt
+    void
+    pCryptoSession ID3D11CryptoSession*
+    pSrcSurface ID3D11Texture2D*
+    pDstSurface ID3D11Texture2D*
+    pEncryptedBlockInfo D3D11_ENCRYPTED_BLOCK_INFO*
+    ContentKeySize UINT
+    pContentKey "const void*"
+    IVSize UINT
+    pIV void*
+
+  func StartSessionKeyRefresh
+    void
+    pCryptoSession ID3D11CryptoSession*
+    RandomNumberSize UINT
+    pRandomNumber void*
+
+  func FinishSessionKeyRefresh
+    void
+    pCryptoSession ID3D11CryptoSession*
+
+  func GetEncryptionBltKey
+    HRESULT
+    pCryptoSession ID3D11CryptoSession*
+    KeySize UINT
+    pReadbackKey void*
+
+  func NegotiateAuthenticatedChannelKeyExchange
+    HRESULT
+    pChannel ID3D11AuthenticatedChannel*
+    DataSize UINT
+    pData void* length=DataSize
+
+  func QueryAuthenticatedChannel
+    HRESULT
+    pChannel ID3D11AuthenticatedChannel*
+    InputSize UINT
+    pInput "const void*"
+    OutputSize UINT
+    pOutput void*
+
+  func ConfigureAuthenticatedChannel
+    HRESULT
+    pChannel ID3D11AuthenticatedChannel*
+    InputSize UINT
+    pInput "const void*"
+    pOutput D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*
+
+  func VideoProcessorSetStreamRotation
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    Enable BOOL
+    Rotation D3D11_VIDEO_PROCESSOR_ROTATION
+
+  func VideoProcessorGetStreamRotation
+    void
+    pVideoProcessor ID3D11VideoProcessor*
+    StreamIndex UINT
+    pEnable BOOL*
+    pRotation D3D11_VIDEO_PROCESSOR_ROTATION*
+
+

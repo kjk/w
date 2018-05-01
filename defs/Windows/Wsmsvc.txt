@@ -1,0 +1,367 @@
+include Headers\windows.h.txt
+
+dll Wsmsvc.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Administration/Windows Remote Management/WinRM Client Shell/Core"
+category "System Administration/Windows Remote Management/WinRM Client Shell/Additional"
+alias WSMAN_SHELL_COMPLETION_FUNCTION LPVOID
+
+alias WSMAN_SESSION_HANDLE LPVOID
+
+pointer WSMAN_SESSION_HANDLE* WSMAN_SESSION_HANDLE
+
+alias WSMAN_SHELL_HANDLE LPVOID
+
+pointer WSMAN_SHELL_HANDLE* WSMAN_SHELL_HANDLE
+
+alias WSMAN_COMMAND_HANDLE LPVOID
+
+pointer WSMAN_COMMAND_HANDLE* WSMAN_COMMAND_HANDLE
+
+alias WSMAN_OPERATION_HANDLE LPVOID
+
+pointer WSMAN_OPERATION_HANDLE* WSMAN_OPERATION_HANDLE
+
+alias WSMAN_API_HANDLE LPVOID
+
+pointer WSMAN_API_HANDLE* WSMAN_API_HANDLE
+
+enum WSManShellFlag DWORD display=DWORD
+  WSMAN_FLAG_RECEIVE_DELAY_OUTPUT_STREAM 0X10
+  WSMAN_FLAG_NO_COMPRESSION              0x1
+  WSMAN_FLAG_DELETE_SERVER_SESSION       0x2
+  WSMAN_FLAG_SERVER_BUFFERING_MODE_DROP  0x4
+  WSMAN_FLAG_SERVER_BUFFERING_MODE_BLOCK 0x8
+
+enum [WSMAN_FLAG_REQUESTED_API_VERSION] DWORD display=DWORD
+  WSMAN_FLAG_REQUESTED_API_VERSION_1_0 0x0
+  WSMAN_FLAG_REQUESTED_API_VERSION_1_1 0x1
+
+struct WSMAN_SHELL_ASYNC
+  operationContext PVOID
+  completionFunction WSMAN_SHELL_COMPLETION_FUNCTION
+
+pointer WSMAN_SHELL_ASYNC* WSMAN_SHELL_ASYNC
+
+struct WSMAN_USERNAME_PASSWORD_CREDS
+  username PCWSTR
+  password PCWSTR
+
+enum WSManAuthenticationFlags DWORD display=DWORD
+  WSMAN_FLAG_DEFAULT_AUTHENTICATION  0x0
+  WSMAN_FLAG_NO_AUTHENTICATION       0x1
+  WSMAN_FLAG_AUTH_DIGEST             0x2
+  WSMAN_FLAG_AUTH_NEGOTIATE          0x4
+  WSMAN_FLAG_AUTH_BASIC              0x8
+  WSMAN_FLAG_AUTH_KERBEROS           0x10
+  WSMAN_FLAG_AUTH_CLIENT_CERTIFICATE 0x20
+  WSMAN_FLAG_AUTH_CREDSSP            0x80
+
+union [WSMAN_AUTHENTICATION_CREDENTIALS_u] display=union
+  userAccount WSMAN_USERNAME_PASSWORD_CREDS
+  certificateThumbprint PCWSTR
+
+struct WSMAN_AUTHENTICATION_CREDENTIALS
+  authenticationMechanism WSManAuthenticationFlags
+   [WSMAN_AUTHENTICATION_CREDENTIALS_u]
+
+pointer WSMAN_AUTHENTICATION_CREDENTIALS* WSMAN_AUTHENTICATION_CREDENTIALS
+
+enum WSManSessionOption UINT
+  WSMAN_OPTION_DEFAULT_OPERATION_TIMEOUTMS          1
+  WSMAN_OPTION_MAX_RETRY_TIME                       11
+  WSMAN_OPTION_TIMEOUTMS_CREATE_SHELL               12
+  WSMAN_OPTION_TIMEOUTMS_RUN_SHELL_COMMAND          13
+  WSMAN_OPTION_TIMEOUTMS_RECEIVE_SHELL_OUTPUT       14
+  WSMAN_OPTION_TIMEOUTMS_SEND_SHELL_INPUT           15
+  WSMAN_OPTION_TIMEOUTMS_SIGNAL_SHELL               16
+  WSMAN_OPTION_TIMEOUTMS_CLOSE_SHELL                17
+  WSMAN_OPTION_SKIP_CA_CHECK                        18
+  WSMAN_OPTION_SKIP_CN_CHECK                        19
+  WSMAN_OPTION_UNENCRYPTED_MESSAGES                 20
+  WSMAN_OPTION_UTF16                                21
+  WSMAN_OPTION_ENABLE_SPN_SERVER_PORT               22
+  WSMAN_OPTION_MACHINE_ID                           23
+  WSMAN_OPTION_LOCALE                               25
+  WSMAN_OPTION_UI_LANGUAGE                          26
+  WSMAN_OPTION_MAX_ENVELOPE_SIZE_KB                 28
+  WSMAN_OPTION_SHELL_MAX_DATA_SIZE_PER_MESSAGE_KB   29
+  WSMAN_OPTION_REDIRECT_LOCATION                    30
+  WSMAN_OPTION_SKIP_REVOCATION_CHECK                31
+  WSMAN_OPTION_ALLOW_NEGOTIATE_IMPLICIT_CREDENTIALS 32
+  WSMAN_OPTION_USE_SSL                              33
+  WSMAN_OPTION_USE_INTEARACTIVE_TOKEN               34
+
+struct WSMAN_STREAM_ID_SET
+  streamIDsCount DWORD
+  streamIDs PCWSTR* count=streamIDsCount
+
+pointer WSMAN_STREAM_ID_SET* WSMAN_STREAM_ID_SET
+
+struct WSMAN_COMMAND_ARG_SET
+  argsCount DWORD
+  args PCWSTR* count=argsCount
+
+pointer WSMAN_COMMAND_ARG_SET* WSMAN_COMMAND_ARG_SET
+
+enum WSManDataType UINT
+  WSMAN_DATA_NONE        0
+  WSMAN_DATA_TYPE_TEXT   1
+  WSMAN_DATA_TYPE_BINARY 2
+  WSMAN_DATA_TYPE_DWORD  4
+
+struct WSMAN_DATA_TEXT
+  bufferLength DWORD
+  buffer PCWSTR
+
+struct WSMAN_DATA_BINARY
+  dataLength DWORD
+  data BYTE* length=dataLength
+
+union [WSMAN_DATA_u] display=union
+  text WSMAN_DATA_TEXT
+  binaryData WSMAN_DATA_BINARY
+  number DWORD
+
+struct WSMAN_DATA
+  type WSManDataType
+   [WSMAN_DATA_u]
+
+pointer WSMAN_DATA* WSMAN_DATA
+
+struct WSMAN_ENVIRONMENT_VARIABLE
+  name PCWSTR
+  value PCWSTR
+
+pointer WSMAN_ENVIRONMENT_VARIABLE* WSMAN_ENVIRONMENT_VARIABLE
+
+struct WSMAN_ENVIRONMENT_VARIABLE_SET
+  varsCount DWORD
+  vars WSMAN_ENVIRONMENT_VARIABLE* count=varsCount
+
+pointer WSMAN_ENVIRONMENT_VARIABLE_SET* WSMAN_ENVIRONMENT_VARIABLE_SET
+
+struct WSMAN_SHELL_STARTUP_INFO
+  inputStreamSet WSMAN_STREAM_ID_SET*
+  outputStreamSet WSMAN_STREAM_ID_SET*
+  idleTimeoutMs DWORD
+  workingDirectory PCWSTR
+  variableSet WSMAN_ENVIRONMENT_VARIABLE_SET*
+  name PCWSTR
+
+pointer WSMAN_SHELL_STARTUP_INFO* WSMAN_SHELL_STARTUP_INFO
+
+struct WSMAN_OPTION
+  name PCWSTR
+  value PCWSTR
+  mustComply BOOL
+
+pointer WSMAN_OPTION* WSMAN_OPTION
+
+struct WSMAN_OPTION_SET
+  optionsCount DWORD
+  options WSMAN_OPTION* count=optionsCount
+  optionsMustUnderstand BOOL
+
+pointer WSMAN_OPTION_SET* WSMAN_OPTION_SET
+
+enum WSManProxyAccessType DWORD display=DWORD
+  WSMAN_OPTION_PROXY_IE_PROXY_CONFIG      1
+  WSMAN_OPTION_PROXY_WINHTTP_PROXY_CONFIG 2
+  WSMAN_OPTION_PROXY_AUTO_DETECT          4
+  WSMAN_OPTION_PROXY_NO_PROXY_SERVER      8
+
+struct WSMAN_PROXY_INFO
+  accessType WSManProxyAccessType
+  authenticationCredentials WSMAN_AUTHENTICATION_CREDENTIALS
+
+pointer WSMAN_PROXY_INFO* WSMAN_PROXY_INFO
+
+struct WSMAN_SHELL_DISCONNECT_INFO
+  idleTimeoutMs DWORD
+
+pointer WSMAN_SHELL_DISCONNECT_INFO* WSMAN_SHELL_DISCONNECT_INFO
+
+func WSManCloseCommand
+  void
+  commandHandle WSMAN_COMMAND_HANDLE
+  flags DWORD
+  async WSMAN_SHELL_ASYNC*
+
+func WSManCloseOperation
+  [ERROR_CODE]
+  operationHandle WSMAN_OPERATION_HANDLE
+  flags DWORD
+
+func WSManCloseSession
+  [ERROR_CODE]
+  session WSMAN_SESSION_HANDLE
+  flags DWORD
+
+func WSManCloseShell
+  void
+  shellHandle WSMAN_SHELL_HANDLE
+  flags DWORD
+  async WSMAN_SHELL_ASYNC*
+
+func WSManConnectShell
+  void
+  session WSMAN_SESSION_HANDLE
+  flags DWORD
+  resourceUri PCWSTR
+  shellID PCWSTR
+  options WSMAN_OPTION_SET*
+  connectXml WSMAN_DATA*
+  async WSMAN_SHELL_ASYNC*
+  shell WSMAN_SHELL_HANDLE*
+
+func WSManConnectShellCommand
+  void
+  shell WSMAN_SHELL_HANDLE
+  flags DWORD
+  commandID PCWSTR
+  options WSMAN_OPTION_SET*
+  connectXml WSMAN_DATA*
+  async WSMAN_SHELL_ASYNC*
+  command WSMAN_SHELL_HANDLE*
+
+func WSManCreateSession
+  [ERROR_CODE]
+  apiHandle WSMAN_API_HANDLE
+  connection PCWSTR
+  flags DWORD
+  serverAuthenticationCredentials WSMAN_AUTHENTICATION_CREDENTIALS*
+  proxyInfo WSMAN_PROXY_INFO*
+  session WSMAN_SESSION_HANDLE*
+
+func WSManCreateShell
+  void
+  session WSMAN_SESSION_HANDLE
+  flags DWORD
+  resourceUri PCWSTR
+  startupInfo WSMAN_SHELL_STARTUP_INFO*
+  options WSMAN_OPTION_SET*
+  createXml WSMAN_DATA*
+  async WSMAN_SHELL_ASYNC*
+  shell WSMAN_SHELL_HANDLE*
+
+func WSManCreateShellEx
+  void
+  session WSMAN_SESSION_HANDLE
+  flags DWORD
+  resourceUri PCWSTR
+  ShellID PCWSTR
+  startupInfo WSMAN_SHELL_STARTUP_INFO*
+  options WSMAN_OPTION_SET*
+  createXml WSMAN_DATA*
+  async WSMAN_SHELL_ASYNC*
+  shell WSMAN_SHELL_HANDLE*
+
+func WSManDeinitialize
+  [ERROR_CODE]
+  apiHandle WSMAN_API_HANDLE
+  flags DWORD
+
+func WSManDisconnectShell
+  void
+  shell WSMAN_SHELL_HANDLE
+  flags WSManShellFlag
+  disconnectInfo WSMAN_SHELL_DISCONNECT_INFO*
+  async WSMAN_SHELL_ASYNC*
+
+func WSManInitialize
+  [ERROR_CODE]
+  flags [WSMAN_FLAG_REQUESTED_API_VERSION]
+  apiHandle WSMAN_API_HANDLE*
+
+func WSManReceiveShellOutput
+  void
+  shell WSMAN_SHELL_HANDLE
+  command WSMAN_COMMAND_HANDLE
+  flags DWORD
+  desiredStreamSet WSMAN_STREAM_ID_SET*
+  async WSMAN_SHELL_ASYNC*
+  receiveOperation WSMAN_OPERATION_HANDLE*
+
+func WSManReconnectShell
+  void
+  shell WSMAN_SHELL_HANDLE
+  flags DWORD
+  async WSMAN_SHELL_ASYNC*
+
+func WSManReconnectShellCommand
+  void
+  commandHandle WSMAN_COMMAND_HANDLE
+  flags DWORD
+  async WSMAN_SHELL_ASYNC*
+
+func WSManRunShellCommand
+  void
+  shell WSMAN_SHELL_HANDLE
+  flags DWORD
+  commandLine PCWSTR
+  args WSMAN_COMMAND_ARG_SET*
+  options WSMAN_OPTION_SET*
+  async WSMAN_SHELL_ASYNC*
+  command WSMAN_COMMAND_HANDLE*
+
+func WSManRunShellCommandEx
+  void
+  shell WSMAN_SHELL_HANDLE
+  flags DWORD
+  commandID PCWSTR
+  commandLine PCWSTR
+  args WSMAN_COMMAND_ARG_SET*
+  options WSMAN_OPTION_SET*
+  async WSMAN_SHELL_ASYNC*
+  command WSMAN_COMMAND_HANDLE*
+
+func WSManSendShellInput
+  void
+  shell WSMAN_SHELL_HANDLE
+  command WSMAN_COMMAND_HANDLE
+  flags DWORD
+  streamId PCWSTR
+  streamData WSMAN_DATA*
+  endOfStream BOOL
+  async WSMAN_SHELL_ASYNC*
+  sendOperation WSMAN_OPERATION_HANDLE*
+
+func WSManSignalShell
+  void
+  shell WSMAN_SHELL_HANDLE
+  command WSMAN_COMMAND_HANDLE
+  flags DWORD
+  code PCWSTR
+  async WSMAN_SHELL_ASYNC*
+  signalOperation WSMAN_OPERATION_HANDLE*
+
+func WSManGetErrorMessage
+  [ERROR_CODE]
+  apiHandle WSMAN_API_HANDLE
+  flags DWORD
+  languageCode PCWSTR
+  errorCode DWORD
+  messageLength DWORD
+  message PWSTR
+  messageLengthUsed DWORD*
+
+func WSManGetSessionOptionAsDword
+  [ERROR_CODE]
+  session WSMAN_SESSION_HANDLE
+  option WSManSessionOption
+  value DWORD*
+
+func WSManGetSessionOptionAsString
+  [ERROR_CODE]
+  session WSMAN_SESSION_HANDLE
+  option WSManSessionOption
+  stringLength DWORD
+  string PWSTR
+  stringLengthUsed DWORD*
+
+func WSManSetSessionOption
+  [ERROR_CODE]
+  session WSMAN_SESSION_HANDLE
+  option WSManSessionOption
+  data WSMAN_DATA*
+

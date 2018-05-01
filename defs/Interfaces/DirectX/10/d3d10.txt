@@ -1,0 +1,245 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+
+dll d3d10.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+moduleAlias d3d10_1.dll
+category "Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Core"
+category "Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Resource"
+category "Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Shader"
+category "Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+interface ID3DBlob
+
+interface ID3DInclude
+
+alias ID3D10Blob* ID3DBlob*
+
+pointer ID3D10Blob** ID3D10Blob*
+
+alias ID3D10Include* ID3DInclude*
+
+pointer ID3D10Include** ID3D10Include*
+
+alias LPD3D10BLOB ID3D10Blob*
+
+pointer LPD3D10BLOB* LPD3D10BLOB
+
+alias LPD3D10INCLUDE ID3D10Include*
+
+pointer LPD3D10INCLUDE* LPD3D10INCLUDE
+
+func D3D10CreateBlob
+  HRESULT
+  NumBytes SIZE_T
+  ppBuffer LPD3D10BLOB*
+
+func D3D10CreateDevice
+  HRESULT
+  pAdapter IDXGIAdapter*
+  DriverType D3D10_DRIVER_TYPE
+  Software HMODULE
+  Flags D3D10_CREATE_DEVICE_FLAG
+  SDKVersion UINT
+  ppDevice ID3D10Device**
+
+func D3D10CreateDevice1
+  HRESULT
+  pAdapter IDXGIAdapter*
+  DriverType D3D10_DRIVER_TYPE
+  Software HMODULE
+  Flags D3D10_CREATE_DEVICE_FLAG
+  HardwareLevel D3D10_FEATURE_LEVEL1
+  SDKVersion UINT
+  ppDevice ID3D10Device1**
+
+func D3D10CreateDeviceAndSwapChain
+  HRESULT
+  pAdapter IDXGIAdapter*
+  DriverType D3D10_DRIVER_TYPE
+  Software HMODULE
+  Flags D3D10_CREATE_DEVICE_FLAG
+  SDKVersion UINT
+  pSwapChainDesc DXGI_SWAP_CHAIN_DESC*
+  ppSwapChain IDXGISwapChain**
+  ppDevice ID3D10Device**
+
+func D3D10CreateDeviceAndSwapChain1
+  HRESULT
+  pAdapter IDXGIAdapter*
+  DriverType D3D10_DRIVER_TYPE
+  Software HMODULE
+  Flags D3D10_CREATE_DEVICE_FLAG
+  HardwareLevel D3D10_FEATURE_LEVEL1
+  SDKVersion UINT
+  pSwapChainDesc DXGI_SWAP_CHAIN_DESC*
+  ppSwapChain IDXGISwapChain**
+  ppDevice ID3D10Device1**
+
+func D3D10CalcSubresource
+  success NotEqual=0
+  UINT
+  MipSlice UINT
+  ArraySlice UINT
+  MipLevels UINT
+
+func D3D10CompileShader
+  HRESULT
+  pSrcData LPCSTR
+  SrcDataLen SIZE_T
+  pFileName LPCSTR
+  pDefines "const D3D10_SHADER_MACRO*"
+  pInclude LPD3D10INCLUDE*
+  pFunctionName LPCSTR
+  pProfile LPCSTR
+  Flags UINT
+  ppShader ID3D10Blob**
+  ppErrorMsgs ID3D10Blob**
+
+func D3D10DisassembleShader
+  HRESULT
+  pShader "const void*"
+  BytecodeLength SIZE_T
+  EnableColorCode BOOL
+  pComments LPCSTR
+  ppDisassembly ID3D10Blob**
+
+func D3D10GetGeometryShaderProfile
+  success NotEqual=0
+  LPCSTR
+  pDevice ID3D10Device*
+
+func D3D10GetInputAndOutputSignatureBlob
+  HRESULT
+  pShaderBytecode "const void*" length=BytecodeLength
+  BytecodeLength SIZE_T
+  ppSignatureBlob ID3D10Blob**
+
+func D3D10GetInputSignatureBlob
+  HRESULT
+  pShaderBytecode "const void*" length=BytecodeLength
+  BytecodeLength SIZE_T
+  ppSignatureBlob ID3D10Blob**
+
+func D3D10GetOutputSignatureBlob
+  HRESULT
+  pShaderBytecode "const void*" length=BytecodeLength
+  BytecodeLength SIZE_T
+  ppSignatureBlob ID3D10Blob**
+
+func D3D10GetPixelShaderProfile
+  success NotEqual=0
+  LPCSTR
+  pDevice ID3D10Device*
+
+func D3D10GetShaderDebugInfo
+  HRESULT
+  pShaderBytecode "const void*" length=BytecodeLength
+  BytecodeLength SIZE_T
+  ppDebugInfo ID3D10Blob**
+
+func D3D10GetVertexShaderProfile
+  success NotEqual=0
+  LPCSTR
+  pDevice ID3D10Device*
+
+func D3D10PreprocessShader
+  HRESULT
+  pSrcData LPCSTR
+  SrcDataSize SIZE_T
+  pFileName LPCSTR
+  pDefines "const D3D10_SHADER_MACRO*"
+  pInclude LPD3D10INCLUDE
+  ppShaderText ID3D10Blob**
+  ppErrorMsgs ID3D10Blob**
+
+func D3D10ReflectShader
+  HRESULT
+  pShaderBytecode "const void*" length=BytecodeLength
+  BytecodeLength SIZE_T
+  ppReflector ID3D10ShaderReflection**
+
+func D3D10CompileEffectFromMemory
+  HRESULT
+  pData void* length=DataLength
+  DataLength SIZE_T
+  pSrcFileName LPCSTR
+  pDefines "const D3D10_SHADER_MACRO*"
+  pInclude ID3D10Include*
+  HLSLFlags UINT
+  FXFlags UINT
+  ppCompiledEffect ID3D10Blob**
+  ppErrors ID3D10Blob**
+
+func D3D10CreateEffectFromMemory
+  HRESULT
+  pData void* length=DataLength
+  DataLength SIZE_T
+  FXFlags UINT
+  pDevice ID3D10Device*
+  pEffectPool ID3D10EffectPool*
+  ppEffect ID3D10Effect**
+
+func D3D10CreateEffectPoolFromMemory
+  HRESULT
+  pData void* length=DataLength
+  DataLength SIZE_T
+  FXFlags UINT
+  pDevice ID3D10Device*
+  ppEffectPool ID3D10EffectPool**
+
+func D3D10CreateStateBlock
+  HRESULT
+  pDevice ID3D10Device*
+  pStateBlockMask D3D10_STATE_BLOCK_MASK*
+  ppStateBlock ID3D10StateBlock**
+
+func D3D10DisassembleEffect
+  HRESULT
+  pEffect ID3D10Effect*
+  EnableColorCode BOOL
+  ppDisassembly ID3D10Blob**
+
+func D3D10StateBlockMaskDifference
+  HRESULT
+  pA D3D10_STATE_BLOCK_MASK*
+  pB D3D10_STATE_BLOCK_MASK*
+  pResult D3D10_STATE_BLOCK_MASK*
+
+func D3D10StateBlockMaskDisableAll
+  HRESULT
+  pMask D3D10_STATE_BLOCK_MASK*
+
+func D3D10StateBlockMaskDisableCapture
+  HRESULT
+  pMask D3D10_STATE_BLOCK_MASK*
+  StateType D3D10_DEVICE_STATE_TYPES
+  RangeStart UINT
+  RangeLength UINT
+
+func D3D10StateBlockMaskEnableAll
+  HRESULT
+  pMask D3D10_STATE_BLOCK_MASK*
+
+func D3D10StateBlockMaskEnableCapture
+  HRESULT
+  pMask D3D10_STATE_BLOCK_MASK*
+  StateType D3D10_DEVICE_STATE_TYPES
+  RangeStart UINT
+  RangeLength UINT
+
+func D3D10StateBlockMaskGetSetting
+  BOOL
+  pMask D3D10_STATE_BLOCK_MASK*
+  StateType D3D10_DEVICE_STATE_TYPES
+  Entry UINT
+
+func D3D10StateBlockMaskIntersect
+  HRESULT
+  pA D3D10_STATE_BLOCK_MASK*
+  pB D3D10_STATE_BLOCK_MASK*
+  pResult D3D10_STATE_BLOCK_MASK*
+
+func D3D10StateBlockMaskUnion
+  HRESULT
+  pA D3D10_STATE_BLOCK_MASK*
+  pB D3D10_STATE_BLOCK_MASK*
+  pResult D3D10_STATE_BLOCK_MASK*
+

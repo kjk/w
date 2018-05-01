@@ -1,0 +1,29 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IEnumWbemClassObject base=IUnknown id={027947e1-d731-11ce-a357-000000000001} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func Reset
+    WBEMSTATUS
+
+  func Next
+    WBEMSTATUS
+    lTimeout long
+    uCount ULONG
+    apObjects IWbemClassObject** postCount=puReturned
+    puReturned ULONG*
+
+  func NextAsync
+    WBEMSTATUS
+    uCount ULONG
+    pSink IWbemObjectSink*
+
+  func Clone
+    WBEMSTATUS
+    ppEnum IEnumWbemClassObject**
+
+  func Skip
+    WBEMSTATUS
+    lTimeout long
+    nCount ULONG
+
+

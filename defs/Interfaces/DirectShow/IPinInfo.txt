@@ -1,0 +1,55 @@
+include Interfaces\IDispatch.txt
+
+ingterface IPinInfo base=IDispatch id={56a868bd-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func get_Pin
+    HRESULT
+    ppUnk IUnknown**
+
+  func get_ConnectedTo
+    HRESULT
+    ppUnk IDispatch**
+
+  func get_ConnectionMediaType
+    HRESULT
+    ppUnk IDispatch**
+
+  func get_FilterInfo
+    HRESULT
+    ppUnk IDispatch**
+
+  func get_Name
+    HRESULT
+    ppUnk BSTR*
+
+  func get_Direction
+    HRESULT
+    ppDirection LONG*
+
+  func get_PinID
+    HRESULT
+    strPinID BSTR*
+
+  func get_MediaTypes
+    HRESULT
+    ppUnk IDispatch**
+
+  func Connect
+    HRESULT
+    pPin IUnknown*
+
+  func ConnectDirect
+    HRESULT
+    pPin IUnknown*
+
+  func ConnectWithType
+    HRESULT
+    pPin IUnknown*
+    pMediaType IDispatch*
+
+  func Disconnect
+    HRESULT
+
+  func Render
+    HRESULT
+
+

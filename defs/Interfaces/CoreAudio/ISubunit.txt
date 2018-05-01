@@ -1,0 +1,5 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface ISubunit base=IUnknown id={82149A85-DBA6-4487-86BB-EA8F7FEFCC71} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+

@@ -1,0 +1,12 @@
+include Interfaces\WIC\IWICPixelFormatInfo.txt
+
+ingterface IWICPixelFormatInfo2 base=IWICPixelFormatInfo id={A9DB33A2-AF5F-43C7-B679-74F5984B5AA4} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func SupportsTransparency
+    [WIC_HRESULT]
+    pfSupportsTransparency BOOL*
+
+  func GetNumericRepresentation
+    [WIC_HRESULT]
+    pNumericRepresentation WICPixelFormatNumericRepresentation*
+
+

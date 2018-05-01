@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Headers\gdi.h.txt
+
+ingterface IDummyHICONIncluder base=IUnknown id={947990de-cc28-11d2-a0f7-00805f858fb1} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func Dummy
+    HRESULT
+    h1 HICON
+    h2 HDC
+
+

@@ -1,0 +1,2402 @@
+include Headers\windows.h.txt
+include Headers\setup.h.txt
+include Headers\gdi.h.txt
+include Headers\registry.h.txt
+
+dll SetupAPI.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+sourceModule CfgMgr32.dll include=Windows\CfgMgr32.xml
+func CM_Add_Empty_Log_Conf
+
+func CM_Add_Empty_Log_Conf_Ex
+
+func CM_Add_ID_ExA
+
+func CM_Add_ID_ExW
+
+func CM_Add_IDA
+
+func CM_Add_IDW
+
+func CM_Add_Range
+
+func CM_Add_Res_Des
+
+func CM_Add_Res_Des_Ex
+
+func CM_Apply_PowerScheme
+
+func CM_Connect_MachineA
+
+func CM_Connect_MachineW
+
+func CM_Create_DevNode_ExA
+
+func CM_Create_DevNode_ExW
+
+func CM_Create_DevNodeA
+
+func CM_Create_DevNodeW
+
+func CM_Create_Range_List
+
+func CM_Delete_Class_Key
+
+func CM_Delete_Class_Key_Ex
+
+func CM_Delete_Device_Interface_Key_ExA
+
+func CM_Delete_Device_Interface_Key_ExW
+
+func CM_Delete_Device_Interface_KeyA
+
+func CM_Delete_Device_Interface_KeyW
+
+func CM_Delete_DevNode_Key
+
+func CM_Delete_DevNode_Key_Ex
+
+func CM_Delete_PowerScheme
+
+func CM_Delete_Range
+
+func CM_Detect_Resource_Conflict
+
+func CM_Detect_Resource_Conflict_Ex
+
+func CM_Disable_DevNode
+
+func CM_Disable_DevNode_Ex
+
+func CM_Disconnect_Machine
+
+func CM_Dup_Range_List
+
+func CM_Duplicate_PowerScheme
+
+func CM_Enable_DevNode
+
+func CM_Enable_DevNode_Ex
+
+func CM_Enumerate_Classes
+
+func CM_Enumerate_Classes_Ex
+
+func CM_Enumerate_Enumerators_ExA
+
+func CM_Enumerate_Enumerators_ExW
+
+func CM_Enumerate_EnumeratorsA
+
+func CM_Enumerate_EnumeratorsW
+
+func CM_Find_Range
+
+func CM_First_Range
+
+func CM_Free_Log_Conf
+
+func CM_Free_Log_Conf_Ex
+
+func CM_Free_Log_Conf_Handle
+
+func CM_Free_Range_List
+
+func CM_Free_Res_Des
+
+func CM_Free_Res_Des_Ex
+
+func CM_Free_Res_Des_Handle
+
+func CM_Free_Resource_Conflict_Handle
+
+func CM_Get_Child
+
+func CM_Get_Child_Ex
+
+func CM_Get_Class_Key_Name_ExA
+
+func CM_Get_Class_Key_Name_ExW
+
+func CM_Get_Class_Key_NameA
+
+func CM_Get_Class_Key_NameW
+
+func CM_Get_Class_Name_ExA
+
+func CM_Get_Class_Name_ExW
+
+func CM_Get_Class_NameA
+
+func CM_Get_Class_NameW
+
+func CM_Get_Class_Registry_PropertyA
+
+func CM_Get_Class_Registry_PropertyW
+
+func CM_Get_Depth
+
+func CM_Get_Depth_Ex
+
+func CM_Get_Device_ID_ExA
+
+func CM_Get_Device_ID_ExW
+
+func CM_Get_Device_ID_List_ExA
+
+func CM_Get_Device_ID_List_ExW
+
+func CM_Get_Device_ID_List_Size_ExA
+
+func CM_Get_Device_ID_List_Size_ExW
+
+func CM_Get_Device_ID_List_SizeA
+
+func CM_Get_Device_ID_List_SizeW
+
+func CM_Get_Device_ID_ListA
+
+func CM_Get_Device_ID_ListW
+
+func CM_Get_Device_ID_Size
+
+func CM_Get_Device_ID_Size_Ex
+
+func CM_Get_Device_IDA
+
+func CM_Get_Device_IDW
+
+func CM_Get_Device_Interface_Alias_ExA
+
+func CM_Get_Device_Interface_Alias_ExW
+
+func CM_Get_Device_Interface_AliasA
+
+func CM_Get_Device_Interface_AliasW
+
+func CM_Get_Device_Interface_List_ExA
+
+func CM_Get_Device_Interface_List_ExW
+
+func CM_Get_Device_Interface_List_Size_ExA
+
+func CM_Get_Device_Interface_List_Size_ExW
+
+func CM_Get_Device_Interface_List_SizeA
+
+func CM_Get_Device_Interface_List_SizeW
+
+func CM_Get_Device_Interface_ListA
+
+func CM_Get_Device_Interface_ListW
+
+func CM_Get_DevNode_Custom_Property_ExW
+
+func CM_Get_DevNode_Custom_PropertyA
+
+func CM_Get_DevNode_Custom_PropertyW
+
+func CM_Get_DevNode_Registry_Property_ExA
+
+func CM_Get_DevNode_Registry_Property_ExW
+
+func CM_Get_DevNode_Registry_PropertyA
+
+func CM_Get_DevNode_Registry_PropertyW
+
+func CM_Get_DevNode_Status
+
+func CM_Get_DevNode_Status_Ex
+
+func CM_Get_First_Log_Conf
+
+func CM_Get_First_Log_Conf_Ex
+
+func CM_Get_Global_State
+
+func CM_Get_Global_State_Ex
+
+func CM_Get_Hardware_Profile_Info_ExA
+
+func CM_Get_Hardware_Profile_Info_ExW
+
+func CM_Get_Hardware_Profile_InfoA
+
+func CM_Get_Hardware_Profile_InfoW
+
+func CM_Get_HW_Prof_Flags_ExA
+
+func CM_Get_HW_Prof_Flags_ExW
+
+func CM_Get_HW_Prof_FlagsA
+
+func CM_Get_HW_Prof_FlagsW
+
+func CM_Get_Log_Conf_Priority
+
+func CM_Get_Log_Conf_Priority_Ex
+
+func CM_Get_Next_Log_Conf
+
+func CM_Get_Next_Log_Conf_Ex
+
+func CM_Get_Next_Res_Des
+
+func CM_Get_Next_Res_Des_Ex
+
+func CM_Get_Parent
+
+func CM_Get_Parent_Ex
+
+func CM_Get_Res_Des_Data
+
+func CM_Get_Res_Des_Data_Ex
+
+func CM_Get_Res_Des_Data_Size
+
+func CM_Get_Res_Des_Data_Size_Ex
+
+func CM_Get_Resource_Conflict_Count
+
+func CM_Get_Resource_Conflict_DetailsA
+
+func CM_Get_Resource_Conflict_DetailsW
+
+func CM_Get_Sibling
+
+func CM_Get_Sibling_Ex
+
+func CM_Get_Version
+
+func CM_Get_Version_Ex
+
+func CM_Import_PowerScheme
+
+func CM_Intersect_Range_List
+
+func CM_Invert_Range_List
+
+func CM_Is_Dock_Station_Present
+
+func CM_Is_Dock_Station_Present_Ex
+
+func CM_Is_Version_Available
+
+func CM_Is_Version_Available_Ex
+
+func CM_Locate_DevNode_ExA
+
+func CM_Locate_DevNode_ExW
+
+func CM_Locate_DevNodeA
+
+func CM_Locate_DevNodeW
+
+func CM_Merge_Range_List
+
+func CM_Modify_Res_Des
+
+func CM_Modify_Res_Des_Ex
+
+func CM_Move_DevNode
+
+func CM_Move_DevNode_Ex
+
+func CM_Next_Range
+
+func CM_Open_Class_Key_ExA
+
+func CM_Open_Class_Key_ExW
+
+func CM_Open_Class_KeyA
+
+func CM_Open_Class_KeyW
+
+func CM_Open_Device_Interface_Key_ExA
+
+func CM_Open_Device_Interface_Key_ExW
+
+func CM_Open_Device_Interface_KeyA
+
+func CM_Open_Device_Interface_KeyW
+
+func CM_Open_DevNode_Key
+
+func CM_Open_DevNode_Key_Ex
+
+func CM_Query_And_Remove_SubTree_ExA
+
+func CM_Query_And_Remove_SubTree_ExW
+
+func CM_Query_And_Remove_SubTreeA
+
+func CM_Query_And_Remove_SubTreeW
+
+func CM_Query_Arbitrator_Free_Data
+
+func CM_Query_Arbitrator_Free_Data_Ex
+
+func CM_Query_Arbitrator_Free_Size
+
+func CM_Query_Arbitrator_Free_Size_Ex
+
+func CM_Query_Remove_SubTree
+
+func CM_Query_Remove_SubTree_Ex
+
+func CM_Query_Resource_Conflict_List
+
+func CM_Reenumerate_DevNode
+
+func CM_Reenumerate_DevNode_Ex
+
+func CM_Register_Device_Driver
+
+func CM_Register_Device_Driver_Ex
+
+func CM_Register_Device_Interface_ExA
+
+func CM_Register_Device_Interface_ExW
+
+func CM_Register_Device_InterfaceA
+
+func CM_Register_Device_InterfaceW
+
+func CM_Remove_SubTree
+
+func CM_Remove_SubTree_Ex
+
+func CM_Request_Device_Eject_ExA
+
+func CM_Request_Device_Eject_ExW
+
+func CM_Request_Device_EjectA
+
+func CM_Request_Device_EjectW
+
+func CM_Request_Eject_PC
+
+func CM_Request_Eject_PC_Ex
+
+func CM_Restore_DefaultPowerScheme
+
+func CM_RestoreAll_DefaultPowerSchemes
+
+func CM_Run_Detection
+
+func CM_Run_Detection_Ex
+
+func CM_Set_ActiveScheme
+
+func CM_Set_Class_Registry_PropertyA
+
+func CM_Set_Class_Registry_PropertyW
+
+func CM_Set_DevNode_Problem
+
+func CM_Set_DevNode_Problem_Ex
+
+func CM_Set_DevNode_Registry_Property_ExA
+
+func CM_Set_DevNode_Registry_Property_ExW
+
+func CM_Set_DevNode_Registry_PropertyA
+
+func CM_Set_DevNode_Registry_PropertyW
+
+func CM_Set_HW_Prof
+
+func CM_Set_HW_Prof_Ex
+
+func CM_Set_HW_Prof_Flags_ExA
+
+func CM_Set_HW_Prof_Flags_ExW
+
+func CM_Set_HW_Prof_FlagsA
+
+func CM_Set_HW_Prof_FlagsW
+
+func CM_Setup_DevNode
+
+func CM_Setup_DevNode_Ex
+
+func CM_Test_Range_Available
+
+func CM_Uninstall_DevNode
+
+func CM_Uninstall_DevNode_Ex
+
+func CM_Unregister_Device_Interface_ExA
+
+func CM_Unregister_Device_Interface_ExW
+
+func CM_Unregister_Device_InterfaceA
+
+func CM_Unregister_Device_InterfaceW
+
+func CM_Write_UserPowerKey
+
+func CMP_WaitNoPendingInstallEvents
+
+category "Application Installation and Servicing/Setup"
+category "Windows Driver Kit/Device and Driver Installation/SetupAPI/General Setup"
+category "Windows Driver Kit/Device and Driver Installation/SetupAPI/Device Installation"
+category "Windows Driver Kit/Device and Driver Installation/SetupAPI/Logging"
+alias HDSKSPC PVOID
+
+alias HINF PVOID
+
+alias HSPFILEQ PVOID
+
+alias PSP_FILE_CALLBACK LPVOID
+
+alias HSPFILELOG PVOID
+
+alias PSP_DETSIG_CMPPROC LPVOID
+
+alias SP_LOG_TOKEN DWORDLONG
+
+array "TCHAR [SP_MAX_MACHINENAME_LENGTH]" base=TCHAR count=263
+
+array "HPROPSHEETPAGE [MAX_INSTALLWIZARD_DYNAPAGES]" base=HPROPSHEETPAGE count=20
+
+flag [InfStyle] DWORD display=DWORD
+  INF_STYLE_NONE  0x00000000
+  INF_STYLE_OLDNT 0x00000001
+  INF_STYLE_WIN4  0x00000002
+
+struct SP_INF_INFORMATION pack32=1 pack64=8
+  InfStyle [InfStyle]
+  InfCount DWORD
+  VersionData "BYTE [ANYSIZE_ARRAY]" count=InfCount
+
+pointer PSP_INF_INFORMATION SP_INF_INFORMATION
+
+struct SP_ALTPLATFORM_INFO pack32=1 pack64=8
+  cbSize DWORD
+  Platform [VER_PLATFORM]
+  MajorVersion DWORD
+  MinorVersion DWORD
+  ProcessorArchitecture [PROCESSOR_ARCHITECTURE]
+  Flags WORD
+  FirstValidatedMajorVersion DWORD
+  FirstValidatedMinorVersion DWORD
+
+pointer PSP_ALTPLATFORM_INFO SP_ALTPLATFORM_INFO
+
+struct SP_ORIGINAL_FILE_INFO pack32=1 pack64=8
+  cbSize DWORD
+  OriginalInfName "TCHAR [MAX_PATH]"
+  OriginalCatalogName "TCHAR [MAX_PATH]"
+
+pointer PSP_ORIGINAL_FILE_INFO SP_ORIGINAL_FILE_INFO
+
+struct SP_INF_SIGNER_INFO pack32=1 pack64=8
+  cbSize DWORD
+  CatalogFile "TCHAR [MAX_PATH]"
+  DigitalSigner "TCHAR [MAX_PATH]"
+  DigitalSignerVersion "TCHAR [MAX_PATH]"
+  SignerScore DWORD
+
+pointer PSP_INF_SIGNER_INFO SP_INF_SIGNER_INFO
+
+struct SP_DEVINFO_LIST_DETAIL_DATA pack32=1 pack64=8
+  cbSize DWORD
+  ClassGuid GUID
+  RemoteMachineHandle HANDLE
+  RemoteMachineName "TCHAR [SP_MAX_MACHINENAME_LENGTH]"
+
+pointer PSP_DEVINFO_LIST_DETAIL_DATA SP_DEVINFO_LIST_DETAIL_DATA
+
+flag [DI_FLAGS] DWORD display=DWORD
+  DI_SHOWOEM             0x00000001
+  DI_SHOWCOMPAT          0x00000002
+  DI_SHOWCLASS           0x00000004
+  DI_SHOWALL             0x00000007
+  DI_NOVCP               0x00000008
+  DI_DIDCOMPAT           0x00000010
+  DI_DIDCLASS            0x00000020
+  DI_AUTOASSIGNRES       0x00000040
+  DI_NEEDRESTART         0x00000080
+  DI_NEEDREBOOT          0x00000100
+  DI_NOBROWSE            0x00000200
+  DI_MULTMFGS            0x00000400
+  DI_DISABLED            0x00000800
+  DI_GENERALPAGE_ADDED   0x00001000
+  DI_RESOURCEPAGE_ADDED  0x00002000
+  DI_PROPERTIES_CHANGE   0x00004000
+  DI_INF_IS_SORTED       0x00008000
+  DI_ENUMSINGLEINF       0x00010000
+  DI_DONOTCALLCONFIGMG   0x00020000
+  DI_INSTALLDISABLED     0x00040000
+  DI_COMPAT_FROM_CLASS   0x00080000
+  DI_CLASSINSTALLPARAMS  0x00100000
+  DI_NODI_DEFAULTACTION  0x00200000
+  DI_QUIETINSTALL        0x00800000
+  DI_NOFILECOPY          0x01000000
+  DI_FORCECOPY           0x02000000
+  DI_DRIVERPAGE_ADDED    0x04000000
+  DI_USECI_SELECTSTRINGS 0x08000000
+  DI_OVERRIDE_INFFLAGS   0x10000000
+  DI_PROPS_NOCHANGEUSAGE 0x20000000
+  DI_NOSELECTICONS       0x40000000
+  DI_NOWRITE_IDS         0x80000000
+
+flag [DI_FLAGSEX] DWORD display=DWORD
+  DI_FLAGSEX_RESERVED2                0x00000001
+  DI_FLAGSEX_RESERVED3                0x00000002
+  DI_FLAGSEX_CI_FAILED                0x00000004
+  DI_FLAGSEX_FINISHINSTALL_ACTION     0x00000008
+  DI_FLAGSEX_DIDINFOLIST              0x00000010
+  DI_FLAGSEX_DIDCOMPATINFO            0x00000020
+  DI_FLAGSEX_FILTERCLASSES            0x00000040
+  DI_FLAGSEX_SETFAILEDINSTALL         0x00000080
+  DI_FLAGSEX_DEVICECHANGE             0x00000100
+  DI_FLAGSEX_ALWAYSWRITEIDS           0x00000200
+  DI_FLAGSEX_PROPCHANGE_PENDING       0x00000400
+  DI_FLAGSEX_ALLOWEXCLUDEDDRVS        0x00000800
+  DI_FLAGSEX_NOUIONQUERYREMOVE        0x00001000
+  DI_FLAGSEX_USECLASSFORCOMPAT        0x00002000
+  DI_FLAGSEX_RESERVED4                0x00004000
+  DI_FLAGSEX_NO_DRVREG_MODIFY         0x00008000
+  DI_FLAGSEX_IN_SYSTEM_SETUP          0x00010000
+  DI_FLAGSEX_INET_DRIVER              0x00020000
+  DI_FLAGSEX_APPENDDRIVERLIST         0x00040000
+  DI_FLAGSEX_PREINSTALLBACKUP         0x00080000
+  DI_FLAGSEX_BACKUPONREPLACE          0x00100000
+  DI_FLAGSEX_DRIVERLIST_FROM_URL      0x00200000
+  DI_FLAGSEX_RESERVED1                0x00400000
+  DI_FLAGSEX_EXCLUDE_OLD_INET_DRIVERS 0x00800000
+  DI_FLAGSEX_POWERPAGE_ADDED          0x01000000
+  DI_FLAGSEX_FILTERSIMILARDRIVERS     0x02000000
+  DI_FLAGSEX_INSTALLEDDRIVER          0x04000000
+  DI_FLAGSEX_NO_CLASSLIST_NODE_MERGE  0x08000000
+  DI_FLAGSEX_ALTPLATFORM_DRVSEARCH    0x10000000
+  DI_FLAGSEX_RESTART_DEVICE_ONLY      0x20000000
+  DI_FLAGSEX_RECURSIVESEARCH          0x40000000
+  DI_FLAGSEX_SEARCH_PUBLISHED_INFS    0x80000000
+
+struct SP_DEVINSTALL_PARAMS pack32=1 pack64=8
+  cbSize DWORD
+  Flags [DI_FLAGS]
+  FlagsEx [DI_FLAGSEX]
+  hwndParent HWND
+  InstallMsgHandler PSP_FILE_CALLBACK
+  InstallMsgHandlerContext PVOID
+  FileQueue HSPFILEQ
+  ClassInstallReserved ULONG_PTR
+  Reserved DWORD
+  DriverPath "TCHAR [MAX_PATH]"
+
+pointer PSP_DEVINSTALL_PARAMS SP_DEVINSTALL_PARAMS
+
+struct SP_DEVICE_INTERFACE_DETAIL_DATA pack32=1 pack64=8
+  cbSize DWORD
+  DevicePath "TCHAR [ANYSIZE_ARRAY]"
+
+pointer PSP_DEVICE_INTERFACE_DETAIL_DATA SP_DEVICE_INTERFACE_DETAIL_DATA
+
+struct SP_DRVINFO_DETAIL_DATA pack32=1 pack64=8
+  cbSize DWORD
+  InfDate FILETIME
+  CompatIDsOffset DWORD
+  CompatIDsLength DWORD
+  Reserved ULONG_PTR
+  SectionName "TCHAR [LINE_LEN]"
+  InfFileName "TCHAR [MAX_PATH]"
+  DrvDescription "TCHAR [LINE_LEN]"
+  HardwareID "TCHAR [ANYSIZE_ARRAY]"
+
+pointer PSP_DRVINFO_DETAIL_DATA SP_DRVINFO_DETAIL_DATA
+
+struct INFCONTEXT
+  Inf PVOID
+  CurrentInf PVOID
+  Section UINT
+  Line UINT
+
+pointer PINFCONTEXT INFCONTEXT
+
+struct SP_FILE_COPY_PARAMS pack32=1 pack64=8
+  cbSize DWORD
+  QueueHandle HSPFILEQ
+  SourceRootPath PCTSTR
+  SourcePath PCTSTR
+  SourceFilename PCTSTR
+  SourceDescription PCTSTR
+  SourceTagfile PCTSTR
+  TargetDirectory PCTSTR
+  TargetFilename PCTSTR
+  CopyStyle DWORD
+  LayoutInf HINF
+  SecurityDescriptor PCTSTR
+
+pointer PSP_FILE_COPY_PARAMS SP_FILE_COPY_PARAMS
+
+struct SP_DEVICE_INTERFACE_DATA pack32=1 pack64=8
+  cbSize DWORD
+  InterfaceClassGuid GUID
+  Flags DWORD
+  Reserved ULONG_PTR
+
+pointer PSP_DEVICE_INTERFACE_DATA SP_DEVICE_INTERFACE_DATA
+
+struct SP_CLASSIMAGELIST_DATA pack32=1 pack64=8
+  cbSize DWORD
+  ImageList HIMAGELIST
+  Reserved ULONG_PTR
+
+pointer PSP_CLASSIMAGELIST_DATA SP_CLASSIMAGELIST_DATA
+
+enum DI_FUNCTION UINT
+  DIF_SELECTDEVICE                   0x00000001
+  DIF_INSTALLDEVICE                  0x00000002
+  DIF_ASSIGNRESOURCES                0x00000003
+  DIF_PROPERTIES                     0x00000004
+  DIF_REMOVE                         0x00000005
+  DIF_FIRSTTIMESETUP                 0x00000006
+  DIF_FOUNDDEVICE                    0x00000007
+  DIF_SELECTCLASSDRIVERS             0x00000008
+  DIF_VALIDATECLASSDRIVERS           0x00000009
+  DIF_INSTALLCLASSDRIVERS            0x0000000A
+  DIF_CALCDISKSPACE                  0x0000000B
+  DIF_DESTROYPRIVATEDATA             0x0000000C
+  DIF_VALIDATEDRIVER                 0x0000000D
+  DIF_MOVEDEVICE                     0x0000000E
+  DIF_DETECT                         0x0000000F
+  DIF_INSTALLWIZARD                  0x00000010
+  DIF_DESTROYWIZARDDATA              0x00000011
+  DIF_PROPERTYCHANGE                 0x00000012
+  DIF_ENABLECLASS                    0x00000013
+  DIF_DETECTVERIFY                   0x00000014
+  DIF_INSTALLDEVICEFILES             0x00000015
+  DIF_UNREMOVE                       0x00000016
+  DIF_SELECTBESTCOMPATDRV            0x00000017
+  DIF_ALLOW_INSTALL                  0x00000018
+  DIF_REGISTERDEVICE                 0x00000019
+  DIF_NEWDEVICEWIZARD_PRESELECT      0x0000001A
+  DIF_NEWDEVICEWIZARD_SELECT         0x0000001B
+  DIF_NEWDEVICEWIZARD_PREANALYZE     0x0000001C
+  DIF_NEWDEVICEWIZARD_POSTANALYZE    0x0000001D
+  DIF_NEWDEVICEWIZARD_FINISHINSTALL  0x0000001E
+  DIF_UNUSED1                        0x0000001F
+  DIF_INSTALLINTERFACES              0x00000020
+  DIF_DETECTCANCEL                   0x00000021
+  DIF_REGISTER_COINSTALLERS          0x00000022
+  DIF_ADDPROPERTYPAGE_ADVANCED       0x00000023
+  DIF_ADDPROPERTYPAGE_BASIC          0x00000024
+  DIF_RESERVED1                      0x00000025
+  DIF_TROUBLESHOOTER                 0x00000026
+  DIF_POWERMESSAGEWAKE               0x00000027
+  DIF_ADDREMOTEPROPERTYPAGE_ADVANCED 0x00000028
+  DIF_UPDATEDRIVER_UI                0x00000029
+  DIF_FINISHINSTALL_ACTION           0x0000002A
+  DIF_RESERVED2                      0x00000030
+
+struct SP_CLASSINSTALL_HEADER pack32=1 pack64=8
+  cbSize DWORD
+  InstallFunction DI_FUNCTION
+
+pointer PSP_CLASSINSTALL_HEADER SP_CLASSINSTALL_HEADER
+
+struct SP_DRVINSTALL_PARAMS pack32=1 pack64=8
+  cbSize DWORD
+  Rank DWORD
+  Flags DWORD
+  PrivateData DWORD_PTR
+  Reserved DWORD
+
+pointer PSP_DRVINSTALL_PARAMS SP_DRVINSTALL_PARAMS
+
+flag [DeviceInfoGetFlags] DWORD display=DWORD
+  DIGCF_DEFAULT         0x00000001
+  DIGCF_PRESENT         0x00000002
+  DIGCF_ALLCLASSES      0x00000004
+  DIGCF_PROFILE         0x00000008
+  DIGCF_DEVICEINTERFACE 0x00000010
+
+flag [OpenDeviceInterfaceFlags] DWORD display=DWORD
+  DIODI_NO_ADD 0x00000001
+
+flag [OpenDeviceInfoFlags] DWORD display=DWORD
+  DIOD_INHERIT_CLASSDRVS 0x00000002
+  DIOD_CANCEL_REMOVE     0x00000004
+
+flag [GetCustomDevicePropertyFlags] DWORD display=DWORD
+  DICUSTOMDEVPROP_MERGE_MULTISZ 0x00000001
+
+flag [DeviceInfoScope] DWORD display=DWORD
+  DICS_FLAG_GLOBAL         0x00000001
+  DICS_FLAG_CONFIGSPECIFIC 0x00000002
+  DICS_FLAG_CONFIGGENERAL  0x00000004
+
+flag [DeviceInfoKeyType] DWORD display=DWORD
+  DIREG_DEV  0x00000001
+  DIREG_DRV  0x00000002
+  DIREG_BOTH 0x00000004
+
+flag [SetupDiBuildClassInfoListFlags] DWORD display=DWORD
+  DIBCI_NOINSTALLCLASS 0x00000001
+  DIBCI_NODISPLAYCLASS 0x00000002
+
+flag [DiClassPropertyFlags] DWORD display=DWORD
+  DICLASSPROP_INSTALLER 0x00000001
+  DICLASSPROP_INTERFACE 0x00000002
+
+enum [DiGetClassDevPropertySheetsType] DWORD display=DWORD
+  DIGCDP_FLAG_BASIC           0x00000001
+  DIGCDP_FLAG_ADVANCED        0x00000002
+  DIGCDP_FLAG_REMOTE_BASIC    0x00000003
+  DIGCDP_FLAG_REMOTE_ADVANCED 0x00000004
+
+flag [SetupDiCreateDeviceInfoFlags] DWORD display=DWORD
+  DICD_GENERATE_ID       0x00000001
+  DICD_INHERIT_CLASSDRVS 0x00000002
+
+enum [SetupDeviceRegistryProperty] DWORD display=DWORD
+  SPDRP_UI_NUMBER_DESC_FORMAT       0X0000001D
+  SPDRP_DEVICEDESC                  0x00000000
+  SPDRP_HARDWAREID                  0x00000001
+  SPDRP_COMPATIBLEIDS               0x00000002
+  SPDRP_UNUSED0                     0x00000003
+  SPDRP_SERVICE                     0x00000004
+  SPDRP_UNUSED1                     0x00000005
+  SPDRP_UNUSED2                     0x00000006
+  SPDRP_CLASS                       0x00000007
+  SPDRP_CLASSGUID                   0x00000008
+  SPDRP_DRIVER                      0x00000009
+  SPDRP_CONFIGFLAGS                 0x0000000A
+  SPDRP_MFG                         0x0000000B
+  SPDRP_FRIENDLYNAME                0x0000000C
+  SPDRP_LOCATION_INFORMATION        0x0000000D
+  SPDRP_PHYSICAL_DEVICE_OBJECT_NAME 0x0000000E
+  SPDRP_CAPABILITIES                0x0000000F
+  SPDRP_UI_NUMBER                   0x00000010
+  SPDRP_UPPERFILTERS                0x00000011
+  SPDRP_LOWERFILTERS                0x00000012
+  SPDRP_BUSTYPEGUID                 0x00000013
+  SPDRP_LEGACYBUSTYPE               0x00000014
+  SPDRP_BUSNUMBER                   0x00000015
+  SPDRP_ENUMERATOR_NAME             0x00000016
+  SPDRP_SECURITY                    0x00000017
+  SPDRP_SECURITY_SDS                0x00000018
+  SPDRP_DEVTYPE                     0x00000019
+  SPDRP_EXCLUSIVE                   0x0000001A
+  SPDRP_CHARACTERISTICS             0x0000001B
+  SPDRP_ADDRESS                     0x0000001C
+  SPDRP_DEVICE_POWER_DATA           0x0000001E
+  SPDRP_REMOVAL_POLICY              0x0000001F
+  SPDRP_REMOVAL_POLICY_HW_DEFAULT   0x00000020
+  SPDRP_REMOVAL_POLICY_OVERRIDE     0x00000021
+  SPDRP_INSTALL_STATE               0x00000022
+  SPDRP_LOCATION_PATHS              0x00000023
+
+enum LogSeverity DWORD
+  LogSevInformation 0x00000000
+  LogSevWarning     0x00000001
+  LogSevError       0x00000002
+  LogSevFatalError  0x00000003
+  LogSevMaximum     0x00000004
+
+enum SetupFileLogInfo UINT
+  SetupFileLogSourceFilename  0
+  SetupFileLogChecksum        1
+  SetupFileLogDiskTagfile     2
+  SetupFileLogDiskDescription 3
+  SetupFileLogOtherInfo       4
+
+flag [SPDSL_FLAGS] UINT display=UINT
+  SPDSL_IGNORE_DISK              0x00000001
+  SPDSL_DISALLOW_NEGATIVE_ADJUST 0x00000002
+
+flag [SPINST_FLAGS] UINT display=UINT
+  SPINST_LOGCONFIG    0x00000001
+  SPINST_INIFILES     0x00000002
+  SPINST_REGISTRY     0x00000004
+  SPINST_INI2REG      0x00000008
+  SPINST_FILES        0x00000010
+  SPINST_BITREG       0x00000020
+  SPINST_REGSVR       0x00000040
+  SPINST_UNREGSVR     0x00000080
+  SPINST_PROFILEITEMS 0x00000100
+  SPINST_COPYINF      0x00000200
+  SPINST_ALL          0x000003ff
+  SPINST_PROPERTIES   0x00000400
+  SPINST_ALL          0x000007ff
+
+flag [NDW_FLAGS] DWORD display=DWORD
+  NDW_INSTALLFLAG_DIDFACTDEFS        0x00000001
+  NDW_INSTALLFLAG_HARDWAREALLREADYIN 0x00000002
+  NDW_INSTALLFLAG_NEEDRESTART        0x00000080
+  NDW_INSTALLFLAG_NEEDREBOOT         0x00000100
+  NDW_INSTALLFLAG_NEEDSHUTDOWN       0x00000200
+  NDW_INSTALLFLAG_EXPRESSINTRO       0x00000400
+  NDW_INSTALLFLAG_SKIPISDEVINSTALLED 0x00000800
+  NDW_INSTALLFLAG_NODETECTEDDEVS     0x00001000
+  NDW_INSTALLFLAG_INSTALLSPECIFIC    0x00002000
+  NDW_INSTALLFLAG_SKIPCLASSLIST      0x00004000
+  NDW_INSTALLFLAG_CI_PICKED_OEM      0x00008000
+  NDW_INSTALLFLAG_PCMCIAMODE         0x00010000
+  NDW_INSTALLFLAG_PCMCIADEVICE       0x00020000
+  NDW_INSTALLFLAG_USERCANCEL         0x00040000
+  NDW_INSTALLFLAG_KNOWNCLASS         0x00080000
+
+flag [DYNAWIZ_FLAGS] DWORD display=DWORD
+  DYNAWIZ_FLAG_PAGESADDED             0x00000001
+  DYNAWIZ_FLAG_INSTALLDET_NEXT        0x00000002
+  DYNAWIZ_FLAG_INSTALLDET_PREV        0x00000004
+  DYNAWIZ_FLAG_ANALYZE_HANDLECONFLICT 0x00000008
+
+struct SP_INSTALLWIZARD_DATA
+  ClassInstallHeader SP_CLASSINSTALL_HEADER
+  Flags [NDW_FLAGS]
+  DynamicPages "HPROPSHEETPAGE [MAX_INSTALLWIZARD_DYNAPAGES]"
+  NumDynamicPages DWORD
+  DynamicPageFlags [DYNAWIZ_FLAGS]
+  PrivateFlags DWORD
+  PrivateData LPARAM
+  hwndWizardDlg HWND
+
+pointer PSP_INSTALLWIZARD_DATA SP_INSTALLWIZARD_DATA
+
+func InstallHinfSection bothCharset
+  VOID
+  hwnd HWND
+  ModuleHandle HINSTANCE
+  CmdLineBuffer PCTSTR
+  nCmdShow INT
+
+func SetupAddInstallSectionToDiskSpaceList bothCharset
+  BOOL
+  DiskSpace HDSKSPC
+  InfHandle HINF
+  LayoutInfHandle HINF
+  SectionName PCTSTR
+  Reserved1 PVOID
+  Reserved2 UINT
+
+func SetupAddSectionToDiskSpaceList bothCharset
+  BOOL
+  DiskSpace HDSKSPC
+  InfHandle HINF
+  ListInfHandle HINF
+  SectionName PCTSTR
+  Operation UINT
+  Reserved1 PVOID
+  Reserved2 UINT
+
+func SetupAddToDiskSpaceList bothCharset
+  BOOL
+  DiskSpace HDSKSPC
+  TargetFilespec PCTSTR
+  FileSize LONGLONG
+  Operation UINT
+  Reserved1 PVOID
+  Reserved2 UINT
+
+func SetupAddToSourceList bothCharset
+  BOOL
+  Flags DWORD
+  Source PCTSTR
+
+func SetupAdjustDiskSpaceList bothCharset
+  BOOL
+  DiskSpace HDSKSPC
+  DriveRoot LPCTSTR
+  Amount LONGLONG
+  Reserved1 PVOID
+  Reserved2 UINT
+
+func SetupBackupError bothCharset
+  success NotEqual=0
+  UINT
+  hwndParent HWND
+  DialogTitle PCTSTR
+  SourceFile PCTSTR
+  TargetFile PCTSTR
+  Win32ErrorCode UINT
+  Style DWORD
+
+func SetupCancelTemporarySourceList
+  BOOL
+
+func SetupCloseFileQueue
+  BOOL
+  QueueHandle HSPFILEQ
+
+func SetupCloseInfFile
+  VOID
+  InfHandle HINF
+
+func SetupCommitFileQueue bothCharset
+  BOOL
+  Owner HWND
+  QueueHandle HSPFILEQ
+  MsgHandler PSP_FILE_CALLBACK
+  Context PVOID
+
+func SetupConfigureWmiFromInfSection bothCharset
+  BOOL
+  InfHandle HINF
+  SectionName PCWSTR
+  Flags DWORD
+
+func SetupCopyError bothCharset
+  success NotEqual=0
+  UINT
+  hwndParent HWND
+  DialogTitle PCTSTR
+  DiskName PCTSTR
+  PathToSource PCTSTR
+  SourceFile PCTSTR
+  TargetPathFile PCTSTR
+  Win32ErrorCode UINT
+  Style DWORD
+  PathBuffer PTSTR
+  PathBufferSize DWORD
+  PathRequiredSize PDWORD
+
+func SetupCopyOEMInf bothCharset
+  BOOL
+  SourceInfFileName PCTSTR
+  OEMSourceMediaLocation PCTSTR
+  OEMSourceMediaType DWORD
+  CopyStyle DWORD
+  DestinationInfFileName PTSTR
+  DestinationInfFileNameSize DWORD
+  RequiredSize PDWORD
+  DestinationInfFileNameComponent PTSTR
+
+func SetupCreateDiskSpaceList bothCharset
+  success NotEqual=0
+  HDSKSPC
+  Reserved1 PVOID
+  Reserved2 DWORD
+  Flags [SPDSL_FLAGS]
+
+func SetupDecompressOrCopyFile bothCharset
+  [ERROR_CODE]
+  SourceFileName PCTSTR
+  TargetFileName PCTSTR
+  CompressionType PUINT
+
+func SetupDefaultQueueCallback bothCharset
+  success NotEqual=0
+  UINT
+  Context PVOID
+  Notification UINT
+  Param1 UINT
+  Param2 UINT
+
+func SetupDeleteError bothCharset
+  success NotEqual=0
+  UINT
+  hwndParent HWND
+  DialogTitle PCTSTR
+  File PCTSTR
+  Win32ErrorCode UINT
+  Style DWORD
+
+func SetupDestroyDiskSpaceList
+  BOOL
+  DiskSpace HDSKSPC
+
+func SetupDuplicateDiskSpaceList bothCharset
+  success NotEqual=0
+  HDSKSPC
+  DiskSpace HDSKSPC
+  Reserved1 PVOID
+  Reserved2 DWORD
+  Flags UINT
+
+func SetupEnumInfSections bothCharset
+  BOOL
+  InfHandle HINF
+  EnumerationIndex UINT
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupFindFirstLine bothCharset
+  BOOL
+  InfHandle HINF
+  Section PCTSTR
+  Key PCTSTR
+  Context PINFCONTEXT
+
+func SetupFindNextLine
+  BOOL
+  ContextIn PINFCONTEXT
+  ContextOut PINFCONTEXT
+
+func SetupFindNextMatchLine bothCharset
+  BOOL
+  ContextIn PINFCONTEXT
+  Key PCTSTR
+  ContextOut PINFCONTEXT
+
+func SetupFreeSourceList bothCharset
+  BOOL
+  List PCTSTR**
+  Count UINT
+
+func SetupGetBinaryField
+  BOOL
+  Context PINFCONTEXT
+  FieldIndex DWORD
+  ReturnBuffer BYTE*
+  ReturnBufferSize DWORD
+  RequiredSize LPDWORD
+
+func SetupGetFieldCount
+  success NotEqual=0
+  DWORD
+  Context PINFCONTEXT
+
+func SetupGetFileCompressionInfo bothCharset
+  [ERROR_CODE]
+  SourceFileName PCTSTR
+  ActualSourceFileName PTSTR*
+  SourceFileSize PDWORD
+  TargetFileSize PDWORD
+  CompressionType PUINT
+
+func SetupGetFileCompressionInfoEx bothCharset
+  BOOL
+  SourceFileName PCTSTR
+  ActualSourceFileNameBuffer PTSTR
+  ActualSourceFileNameLen DWORD
+  RequiredBufferLen PDWORD
+  SourceFileSize PDWORD
+  TargetFileSize PDWORD
+  CompressionType PUINT
+
+func SetupGetFileQueueCount
+  BOOL
+  FileQueue HSPFILEQ
+  SubQueueFileOp UINT
+  NumOperations PUINT
+
+func SetupGetFileQueueFlags
+  BOOL
+  FileQueue HSPFILEQ
+  Flags PDWORD
+
+func SetupGetInfFileList bothCharset
+  BOOL
+  DirectoryPath PCTSTR
+  InfStyle [InfStyle]
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupGetInfInformation bothCharset
+  BOOL
+  InfSpec LPCVOID
+  SearchControl DWORD
+  ReturnBuffer PSP_INF_INFORMATION
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupGetIntField
+  BOOL
+  Context PINFCONTEXT
+  FieldIndex DWORD
+  IntegerValue PINT
+
+func SetupGetLineByIndex bothCharset
+  BOOL
+  InfHandle HINF
+  Section PCTSTR
+  Index DWORD
+  Context PINFCONTEXT
+
+func SetupGetLineCount bothCharset
+  success NotEqual=0
+  LONG
+  InfHandle HINF
+  Section PCTSTR
+
+func SetupGetLineText bothCharset
+  BOOL
+  Context PINFCONTEXT
+  InfHandle HINF
+  Section PCTSTR
+  Key PCTSTR
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupGetMultiSzField bothCharset
+  BOOL
+  Context PINFCONTEXT
+  FieldIndex DWORD
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize LPDWORD
+
+func SetupGetSourceFileLocation bothCharset
+  BOOL
+  InfHandle HINF
+  InfContext PINFCONTEXT
+  FileName PCTSTR
+  SourceId PUINT
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupGetSourceFileSize bothCharset
+  BOOL
+  InfHandle HINF
+  InfContext PINFCONTEXT
+  FileName PCTSTR
+  Section PCTSTR
+  FileSize PDWORD
+  RoundingFactor UINT
+
+func SetupGetSourceInfo bothCharset
+  BOOL
+  InfHandle HINF
+  SourceId UINT
+  InfoDesired UINT
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize LPDWORD
+
+func SetupGetStringField bothCharset
+  BOOL
+  Context PINFCONTEXT
+  FieldIndex DWORD
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupGetTargetPath bothCharset
+  BOOL
+  InfHandle HINF
+  InfContext PINFCONTEXT
+  Section PCTSTR
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupInitDefaultQueueCallback
+  success NotEqual=0
+  PVOID
+  OwnerWindow HWND
+
+func SetupInitDefaultQueueCallbackEx
+  success NotEqual=0
+  PVOID
+  OwnerWindow HWND
+  AlternateProgressWindow HWND
+  ProgressMessage UINT
+  Reserved1 DWORD
+  Reserved2 PVOID
+
+func SetupInitializeFileLog bothCharset
+  success NotEqual=0
+  HSPFILELOG
+  LogFileName PCTSTR
+  Flags DWORD
+
+func SetupInstallFile bothCharset
+  BOOL
+  InfHandle HINF
+  InfContext PINFCONTEXT
+  SourceFile PCTSTR
+  SourcePathRoot PCTSTR
+  DestinationName PCTSTR
+  CopyStyle DWORD
+  CopyMsgHandler PSP_FILE_CALLBACK
+  Context PVOID
+
+func SetupInstallFileEx bothCharset
+  BOOL
+  InfHandle HINF
+  InfContext PINFCONTEXT
+  SourceFile PCTSTR
+  SourcePathRoot PCTSTR
+  DestinationName PCTSTR
+  CopyStyle DWORD
+  CopyMsgHandler PSP_FILE_CALLBACK
+  Context PVOID
+  FileWasInUse PBOOL
+
+func SetupInstallFilesFromInfSection bothCharset
+  BOOL
+  InfHandle HINF
+  LayoutInfHandle HINF
+  FileQueue HSPFILEQ
+  SectionName PCTSTR
+  SourceRootPath PCTSTR
+  CopyFlags UINT
+
+func SetupInstallFromInfSection bothCharset
+  BOOL
+  Owner HWND
+  InfHandle HINF
+  SectionName PCTSTR
+  Flags [SPINST_FLAGS]
+  RelativeKeyRoot HKEY
+  SourceRootPath PCTSTR
+  CopyFlags UINT
+  MsgHandler PSP_FILE_CALLBACK
+  Context PVOID
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupInstallServicesFromInfSection bothCharset
+  BOOL
+  InfHandle HINF
+  SectionName PCTSTR
+  Flags DWORD
+
+func SetupInstallServicesFromInfSectionEx bothCharset
+  BOOL
+  InfHandle HINF
+  SectionName PCTSTR
+  Flags DWORD
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  Reserved1 PVOID
+  Reserved2 PVOID
+
+func SetupIterateCabinet bothCharset
+  BOOL
+  CabinetFile PCTSTR
+  Reserved DWORD
+  MsgHandler PSP_FILE_CALLBACK
+  Context PVOID
+
+func SetupLogFile bothCharset
+  BOOL
+  FileLogHandle HSPFILELOG
+  LogSectionName PCTSTR
+  SourceFileName PCTSTR
+  TargetFileName PCTSTR
+  Checksum DWORD
+  DiskTagfile PCTSTR
+  DiskDescription PCTSTR
+  OtherInfo PCTSTR
+  Flags DWORD
+
+func SetupLogError bothCharset
+  BOOL
+  MessageString PCTSTR
+  Severity LogSeverity
+
+func SetupOpenAppendInfFile bothCharset
+  BOOL
+  FileName PCTSTR
+  InfHandle HINF
+  ErrorLine PUINT
+
+func SetupOpenFileQueue
+  success NotEqual=0
+  HSPFILEQ
+
+func SetupOpenInfFile bothCharset
+  success NotEqual=0
+  HINF
+  FileName PCTSTR
+  InfClass PCTSTR
+  InfStyle [InfStyle]
+  ErrorLine PUINT
+
+func SetupOpenLog
+  BOOL
+  Erase BOOL
+
+func SetupCloseLog
+  VOID
+
+func SetupOpenMasterInf
+  success NotEqual=0
+  HINF
+
+func SetupPromptForDisk bothCharset
+  success NotEqual=0
+  UINT
+  hwndParent HWND
+  DialogTitle PCTSTR
+  DiskName PCTSTR
+  PathToSource PCTSTR
+  FileSought PCTSTR
+  TagFile PCTSTR
+  DiskPromptStyle DWORD
+  PathBuffer PTSTR
+  PathBufferSize DWORD
+  PathRequiredSize PDWORD
+
+func SetupPromptReboot
+  success NotEqual=0
+  INT
+  FileQueue HSPFILEQ
+  Owner HWND
+  ScanOnly BOOL
+
+func SetupQueryDrivesInDiskSpaceList bothCharset
+  BOOL
+  DiskSpace HDSKSPC
+  ReturnBuffer PSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupQueryFileLog bothCharset
+  BOOL
+  FileLogHandle HSPFILELOG
+  LogSectionName PCTSTR
+  TargetFileName PCTSTR
+  DesiredInfo SetupFileLogInfo
+  DataOut PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupQueryInfFileInformation bothCharset
+  BOOL
+  InfInformation PSP_INF_INFORMATION
+  InfIndex UINT
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupQueryInfOriginalFileInformation bothCharset
+  BOOL
+  InfInformation PSP_INF_INFORMATION
+  InfIndex UINT
+  AlternatePlatformInfo PSP_ALTPLATFORM_INFO
+  OriginalFileInfo PSP_ORIGINAL_FILE_INFO
+
+func SetupQueryInfVersionInformation bothCharset
+  BOOL
+  InfInformation PSP_INF_INFORMATION
+  InfIndex UINT
+  Key PCTSTR
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupQuerySourceList bothCharset
+  BOOL
+  Flags DWORD
+  List PCTSTR**
+  Count PUINT
+
+func SetupQuerySpaceRequiredOnDrive bothCharset
+  BOOL
+  DiskSpace HDSKSPC
+  DriveSpec PCTSTR
+  SpaceRequired LONGLONG*
+  Reserved1 PVOID
+  Reserved2 UINT
+
+func SetupQueueCopy bothCharset
+  BOOL
+  QueueHandle HSPFILEQ
+  SourceRootPath PCTSTR
+  SourcePath PCTSTR
+  SourceFileName PCTSTR
+  SourceDescription PCTSTR
+  SourceTagFile PCTSTR
+  TargetDirectory PCTSTR
+  TargetFileName PCTSTR
+  CopyStyle DWORD
+
+func SetupQueueCopyIndirect bothCharset
+  BOOL
+  CopyParams PSP_FILE_COPY_PARAMS
+
+func SetupQueueCopySection bothCharset
+  BOOL
+  QueueHandle HSPFILEQ
+  SourceRootPath PCTSTR
+  InfHandle HINF
+  ListInfHandle HINF
+  Section PCTSTR
+  CopyStyle DWORD
+
+func SetupQueueDefaultCopy bothCharset
+  BOOL
+  QueueHandle HSPFILEQ
+  InfHandle HINF
+  SourceRootPath PCTSTR
+  SourceFileName PCTSTR
+  TargetFileName PCTSTR
+  CopyStyle DWORD
+
+func SetupQueueDelete bothCharset
+  BOOL
+  QueueHandle HSPFILEQ
+  PathPart1 PCTSTR
+  PathPart2 PCTSTR
+
+func SetupQueueDeleteSection bothCharset
+  BOOL
+  QueueHandle HSPFILEQ
+  InfHandle HINF
+  ListInfHandle HINF
+  Section PCTSTR
+
+func SetupQueueRename bothCharset
+  BOOL
+  QueueHandle HSPFILEQ
+  SourcePath PCTSTR
+  SourceFileName PCTSTR
+  TargetPath PCTSTR
+  TargetFileName PCTSTR
+
+func SetupQueueRenameSection bothCharset
+  BOOL
+  QueueHandle HSPFILEQ
+  InfHandle HINF
+  ListInfHandle HINF
+  Section PCTSTR
+
+func SetupRemoveFileLogEntry bothCharset
+  BOOL
+  FileLogHandle HSPFILELOG
+  LogSectionName PCTSTR
+  TargetFileName PCTSTR
+
+func SetupRemoveFromDiskSpaceList bothCharset
+  BOOL
+  DiskSpace HDSKSPC
+  TargetFilespec PCTSTR
+  Operation UINT
+  Reserved1 PVOID
+  Reserved2 UINT
+
+func SetupRemoveFromSourceList bothCharset
+  BOOL
+  Flags DWORD
+  Source PCTSTR
+
+func SetupRemoveInstallSectionFromDiskSpaceList bothCharset
+  BOOL
+  DiskSpace HDSKSPC
+  InfHandle HINF
+  LayoutInfHandle HINF
+  SectionName PCTSTR
+  Reserved1 PVOID
+  Reserved2 UINT
+
+func SetupRemoveSectionFromDiskSpaceList bothCharset
+  BOOL
+  DiskSpace HDSKSPC
+  InfHandle HINF
+  ListInfHandle HINF
+  SectionName PCTSTR
+  Operation UINT
+  Reserved1 PVOID
+  Reserved2 UINT
+
+func SetupRenameError bothCharset
+  success NotEqual=0
+  UINT
+  hwndParent HWND
+  DialogTitle PCTSTR
+  SourceFile PCTSTR
+  TargetFile PCTSTR
+  Win32ErrorCode UINT
+  Style DWORD
+
+func SetupScanFileQueue bothCharset
+  BOOL
+  FileQueue HSPFILEQ
+  Flags DWORD
+  Window HWND
+  CallbackRoutine PSP_FILE_CALLBACK
+  CallbackContext PVOID
+  Result PDWORD
+
+func SetupSetDirectoryId bothCharset
+  BOOL
+  InfHandle HINF
+  Id DWORD
+  Directory PCTSTR
+
+func SetupSetDirectoryIdEx bothCharset
+  BOOL
+  InfHandle HINF
+  Id DWORD
+  Directory PCTSTR
+  Flags DWORD
+  Reserved1 DWORD
+  Reserved2 PVOID
+
+func SetupSetFileQueueAlternatePlatform bothCharset
+  BOOL
+  QueueHandle HSPFILEQ
+  AlternatePlatformInfo PSP_ALTPLATFORM_INFO
+  AlternateDefaultCatalogFile PCWSTR
+
+func SetupSetFileQueueFlags
+  BOOL
+  FileQueue HSPFILEQ
+  FlagMask DWORD
+  Flags DWORD
+
+func SetupSetPlatformPathOverride bothCharset
+  BOOL
+  Override PCTSTR
+
+func SetupSetSourceList bothCharset
+  BOOL
+  Flags DWORD
+  SourceList PCTSTR* count=SourceCount
+  SourceCount UINT
+
+func SetupTermDefaultQueueCallback
+  VOID
+  Context PVOID
+
+func SetupTerminateFileLog
+  BOOL
+  FileLogHandle HSPFILELOG
+
+func SetupUninstallNewlyCopiedInfs
+  BOOL
+  QueueHandle HSPFILEQ
+  Flags DWORD
+  Reserved PVOID
+
+func SetupUninstallOEMInf bothCharset
+  BOOL
+  InfFileName PCWSTR
+  Flags DWORD
+  Reserved PVOID
+
+func SetupVerifyInfFile bothCharset
+  BOOL
+  InfName PCWSTR
+  AltPlatformInfo PSP_ALTPLATFORM_INFO
+  InfFileName PSP_INF_SIGNER_INFO
+
+func SetupGetInfDriverStoreLocation bothCharset
+  BOOL
+  FileName PCTSTR
+  AlternatePlatformInfo PSP_ALTPLATFORM_INFO
+  LocaleName PCTSTR
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupGetInfPublishedName bothCharset
+  BOOL
+  DriverStoreLocation PCTSTR
+  ReturnBuffer PTSTR
+  ReturnBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupGetNonInteractiveMode
+  BOOL
+
+func SetupSetNonInteractiveMode
+  BOOL
+  NonInteractiveFlag BOOL
+
+func SetupDiAskForOEMDisk
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiBuildClassInfoList
+  BOOL
+  Flags [SetupDiBuildClassInfoListFlags]
+  ClassGuidList LPGUID count=ClassGuidListSize outputOnly
+  ClassGuidListSize DWORD
+  RequiredSize PDWORD
+
+func SetupDiBuildClassInfoListEx bothCharset
+  BOOL
+  Flags [SetupDiBuildClassInfoListFlags]
+  ClassGuidList LPGUID count=ClassGuidListSize outputOnly
+  ClassGuidListSize DWORD
+  RequiredSize PDWORD
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiBuildDriverInfoList
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DriverType [DiDriverType]
+
+func SetupDiCallClassInstaller
+  BOOL
+  InstallFunction DI_FUNCTION
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiCancelDriverInfoSearch
+  BOOL
+  DeviceInfoSet HDEVINFO
+
+func SetupDiChangeState
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiClassGuidsFromName bothCharset
+  BOOL
+  ClassName PCTSTR
+  ClassGuidList LPGUID count=ClassGuidListSize outputOnly
+  ClassGuidListSize DWORD
+  RequiredSize PDWORD
+
+func SetupDiClassGuidsFromNameEx bothCharset
+  BOOL
+  ClassName PCTSTR
+  ClassGuidList LPGUID count=ClassGuidListSize outputOnly
+  ClassGuidListSize DWORD
+  RequiredSize PDWORD
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiClassNameFromGuid bothCharset
+  BOOL
+  ClassGuid LPGUID
+  ClassName PTSTR
+  ClassNameSize DWORD
+  RequiredSize PDWORD
+
+func SetupDiClassNameFromGuidEx bothCharset
+  BOOL
+  ClassGuid LPGUID
+  ClassName PTSTR
+  ClassNameSize DWORD
+  RequiredSize PDWORD
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiCreateDeviceInfo bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceName PCTSTR
+  ClassGuid LPGUID
+  DeviceDescription PCTSTR
+  hwndParent HWND
+  CreationFlags [SetupDiCreateDeviceInfoFlags]
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiCreateDeviceInfoList
+  success NotEqual=0
+  HDEVINFO
+  ClassGuid LPGUID
+  hwndParent HWND
+
+func SetupDiCreateDeviceInfoListEx bothCharset
+  success NotEqual=0
+  HDEVINFO
+  ClassGuid LPGUID
+  hwndParent HWND
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiCreateDeviceInterface bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  InterfaceClassGuid LPGUID
+  ReferenceString PCTSTR
+  CreationFlags DWORD
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+
+func SetupDiCreateDeviceInterfaceRegKey bothCharset
+  success NotEqual=0
+  HKEY
+  DeviceInfoSet HDEVINFO
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+  Reserved DWORD
+  samDesired REGSAM
+  InfHandle HINF
+  InfSectionName PCTSTR
+
+func SetupDiCreateDevRegKey bothCharset
+  success NotEqual=0
+  HKEY
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  Scope [DeviceInfoScope]
+  HwProfile DWORD
+  KeyType [DeviceInfoKeyType]
+  InfHandle HINF
+  InfSectionName PCTSTR
+
+func SetupDiDeleteDeviceInfo
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiDeleteDeviceInterfaceData
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+
+func SetupDiDeleteDeviceInterfaceRegKey
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+  Reserved DWORD
+
+func SetupDiDeleteDevRegKey
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  Scope [DeviceInfoScope]
+  HwProfile DWORD
+  KeyType [DeviceInfoKeyType]
+
+func SetupDiDestroyClassImageList
+  BOOL
+  ClassImageListData PSP_CLASSIMAGELIST_DATA
+
+func SetupDiDestroyDeviceInfoList
+  BOOL
+  DeviceInfoSet HDEVINFO
+
+func SetupDiDestroyDriverInfoList
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DriverType [DiDriverType]
+
+func SetupDiDrawMiniIcon
+  success NotEqual=0
+  INT
+  hdc HDC
+  rc RECT
+  MiniIconIndex INT
+  Flags DWORD
+
+func SetupDiEnumDeviceInfo
+  BOOL
+  DeviceInfoSet HDEVINFO
+  MemberIndex DWORD
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiEnumDeviceInterfaces
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  InterfaceClassGuid LPGUID
+  MemberIndex DWORD
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+
+func SetupDiEnumDriverInfo bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DriverType [DiDriverType]
+  MemberIndex DWORD
+  DriverInfoData PSP_DRVINFO_DATA
+
+func SetupDiFinishInstallAction
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiGetActualModelsSection bothCharset
+  BOOL
+  Context PINFCONTEXT
+  AlternatePlatformInfo PSP_ALTPLATFORM_INFO
+  DecoratedModelsSection PTSTR
+  DecoratedModelsSectionSize DWORD
+  RequiredSize PDWORD
+  Reserved PVOID
+
+func SetupDiGetActualSectionToInstall bothCharset
+  BOOL
+  InfHandle HINF
+  InfSectionName PCTSTR
+  InfSectionWithExt PTSTR
+  InfSectionWithExtSize DWORD
+  RequiredSize PDWORD
+  Extension PTSTR*
+
+func SetupDiGetActualSectionToInstallEx bothCharset
+  BOOL
+  InfHandle HINF
+  InfSectionName PCTSTR
+  AlternatePlatformInfo PSP_ALTPLATFORM_INFO
+  InfSectionWithExt PTSTR
+  InfSectionWithExtSize DWORD
+  RequiredSize PDWORD
+  Extension PTSTR*
+  Reserved PVOID
+
+func SetupDiGetClassBitmapIndex
+  BOOL
+  ClassGuid LPGUID
+  MiniIconIndex PINT
+
+func SetupDiGetClassDescription bothCharset
+  BOOL
+  ClassGuid LPGUID
+  ClassDescription PTSTR
+  ClassDescriptionSize DWORD
+  RequiredSize PDWORD
+
+func SetupDiGetClassDescriptionEx bothCharset
+  BOOL
+  ClassGuid LPGUID
+  ClassDescription PTSTR
+  ClassDescriptionSize DWORD
+  RequiredSize PDWORD
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiGetClassDevPropertySheets bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  PropertySheetHeader LPPROPSHEETHEADER
+  PropertySheetHeaderPageListSize DWORD
+  RequiredSize PDWORD
+  PropertySheetType [DiGetClassDevPropertySheetsType]
+
+func SetupDiGetClassDevs bothCharset
+  success NotEqual=0
+  HDEVINFO
+  ClassGuid LPGUID
+  Enumerator PCTSTR
+  hwndParent HWND
+  Flags [DeviceInfoGetFlags]
+
+func SetupDiGetClassDevsEx bothCharset
+  success NotEqual=0
+  HDEVINFO
+  ClassGuid LPGUID
+  Enumerator PCTSTR
+  hwndParent HWND
+  Flags [DeviceInfoGetFlags]
+  DeviceInfoSet HDEVINFO
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiGetClassImageIndex
+  BOOL
+  ClassImageListData PSP_CLASSIMAGELIST_DATA
+  ClassGuid LPGUID
+  ImageIndex PINT
+
+func SetupDiGetClassImageList
+  BOOL
+  ClassImageListData PSP_CLASSIMAGELIST_DATA
+
+func SetupDiGetClassImageListEx bothCharset
+  BOOL
+  ClassImageListData PSP_CLASSIMAGELIST_DATA
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiGetClassInstallParams bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  ClassInstallParams PSP_CLASSINSTALL_HEADER
+  ClassInstallParamsSize DWORD
+  RequiredSize PDWORD
+
+func SetupDiGetClassPropertyW
+  BOOL
+  ClassGuid "CONST GUID*"
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE*
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize DWORD
+  RequiredSize PDWORD
+  Flags [DiClassPropertyFlags]
+
+func SetupDiGetClassPropertyExW
+  BOOL
+  ClassGuid "CONST GUID*"
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE*
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize DWORD
+  RequiredSize PDWORD
+  Flags [DiClassPropertyFlags]
+  MachineName PCWSTR
+  Reserved PVOID
+
+func SetupDiGetClassPropertyKeys
+  BOOL
+  ClassGuid "CONST GUID*"
+  PropertyKeyArray DEVPROPKEY* postCount=PropertyKeyCount
+  PropertyKeyCount DWORD
+  RequiredPropertyKeyCount PDWORD
+  Flags [DiClassPropertyFlags]
+
+func SetupDiGetClassPropertyKeysExW
+  BOOL
+  ClassGuid "CONST GUID*"
+  PropertyKeyArray DEVPROPKEY* postCount=PropertyKeyCount
+  PropertyKeyCount DWORD
+  RequiredPropertyKeyCount PDWORD
+  Flags [DiClassPropertyFlags]
+  MachineName PCWSTR
+  Reserved PVOID
+
+func SetupDiGetClassRegistryProperty bothCharset
+  BOOL
+  ClassGuid LPGUID
+  Property DWORD
+  PropertyRegDataType [RegType*] display=PDWORD
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize DWORD
+  RequiredSize PDWORD
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiGetCustomDeviceProperty bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  CustomPropertyName PCTSTR
+  Flags [GetCustomDevicePropertyFlags]
+  PropertyRegDataType [RegType*] display=PDWORD
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupDiGetDeviceInfoListClass
+  BOOL
+  DeviceInfoSet HDEVINFO
+  ClassGuid LPGUID
+
+func SetupDiGetDeviceInfoListDetail bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoSetDetailData PSP_DEVINFO_LIST_DETAIL_DATA
+
+func SetupDiGetDeviceInstallParams bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DeviceInstallParams PSP_DEVINSTALL_PARAMS
+
+func SetupDiGetDeviceInstanceId bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DeviceInstanceId PTSTR
+  DeviceInstanceIdSize DWORD
+  RequiredSize PDWORD
+
+func SetupDiGetDeviceInterfaceAlias
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+  AliasInterfaceClassGuid LPGUID
+  AliasDeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+
+func SetupDiGetDeviceInterfaceDetail bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+  DeviceInterfaceDetailData PSP_DEVICE_INTERFACE_DETAIL_DATA
+  DeviceInterfaceDetailDataSize DWORD
+  RequiredSize PDWORD
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiGetDeviceInterfacePropertyW
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE*
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize DWORD
+  RequiredSize PDWORD
+  Flags DWORD
+
+func SetupDiGetDeviceInterfacePropertyKeys
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+  PropertyKeyArray DEVPROPKEY* postCount=PropertyKeyCount
+  PropertyKeyCount DWORD
+  RequiredPropertyKeyCount PDWORD
+  Flags DWORD
+
+func SetupDiGetDevicePropertyW
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE*
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize DWORD
+  RequiredSize PDWORD
+  Flags DWORD
+
+func SetupDiGetDevicePropertyKeys
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  PropertyKeyArray DEVPROPKEY* postCount=PropertyKeyCount
+  PropertyKeyCount DWORD
+  RequiredPropertyKeyCount PDWORD
+  Flags DWORD
+
+func SetupDiGetDeviceRegistryProperty bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  Property [SetupDeviceRegistryProperty]
+  PropertyRegDataType [RegType*] display=PDWORD
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize DWORD
+  RequiredSize PDWORD
+
+func SetupDiGetDriverInfoDetail bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DriverInfoData PSP_DRVINFO_DATA
+  DriverInfoDetailData PSP_DRVINFO_DETAIL_DATA
+  DriverInfoDetailDataSize DWORD
+  RequiredSize PDWORD
+
+func SetupDiGetDriverInstallParams bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DriverInfoData PSP_DRVINFO_DATA
+  DriverInstallParams PSP_DRVINSTALL_PARAMS
+
+func SetupDiGetHwProfileFriendlyName bothCharset
+  BOOL
+  HwProfile DWORD
+  FriendlyName PTSTR
+  FriendlyNameSize DWORD
+  RequiredSize PDWORD
+
+func SetupDiGetHwProfileFriendlyNameEx bothCharset
+  BOOL
+  HwProfile DWORD
+  FriendlyName PTSTR
+  FriendlyNameSize DWORD
+  RequiredSize PDWORD
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiGetHwProfileList
+  BOOL
+  HwProfileList PDWORD
+  HwProfileListSize DWORD
+  RequiredSize PDWORD
+  CurrentlyActiveIndex PDWORD
+
+func SetupDiGetHwProfileListEx bothCharset
+  BOOL
+  HwProfileList PDWORD
+  HwProfileListSize DWORD
+  RequiredSize PDWORD
+  CurrentlyActiveIndex PDWORD
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiGetINFClass bothCharset
+  BOOL
+  InfName PCTSTR
+  ClassGuid LPGUID
+  ClassName PTSTR
+  ClassNameSize DWORD
+  RequiredSize PDWORD
+
+func SetupDiGetSelectedDevice
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiGetSelectedDriver bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DriverInfoData PSP_DRVINFO_DATA
+
+func SetupDiGetWizardPage
+  success NotEqual=0
+  HPROPSHEETPAGE
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  InstallWizardData PSP_INSTALLWIZARD_DATA
+  PageType DWORD
+  Flags DWORD
+
+func SetupDiInstallClass bothCharset
+  BOOL
+  hwndParent HWND
+  InfFileName PCTSTR
+  Flags DWORD
+  FileQueue HSPFILEQ
+
+func SetupDiInstallClassEx bothCharset
+  BOOL
+  hwndParent HWND
+  InfFileName PCTSTR
+  Flags DWORD
+  FileQueue HSPFILEQ
+  InterfaceClassGuid LPGUID
+  Reserved1 PVOID
+  Reserved2 PVOID
+
+func SetupDiInstallDevice
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiInstallDeviceInterfaces
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiInstallDriverFiles
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiLoadClassIcon
+  BOOL
+  ClassGuid LPGUID
+  LargeIcon HICON*
+  MiniIconIndex LPINT
+
+func SetupDiLoadDeviceIcon
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  cxIcon UINT
+  cyIcon UINT
+  Flags DWORD
+  hIcon HICON*
+
+func SetupDiOpenClassRegKey
+  success NotEqual=0
+  HKEY
+  ClassGuid LPGUID
+  samDesired REGSAM
+
+func SetupDiOpenClassRegKeyEx bothCharset
+  success NotEqual=0
+  HKEY
+  ClassGuid LPGUID
+  samDesired REGSAM
+  Flags DWORD
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiOpenDeviceInfo bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInstanceId PCTSTR
+  hwndParent HWND
+  OpenFlags [OpenDeviceInfoFlags]
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiOpenDeviceInterface bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DevicePath PCTSTR
+  OpenFlags [OpenDeviceInterfaceFlags]
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+
+func SetupDiOpenDeviceInterfaceRegKey
+  success NotEqual=0
+  HKEY
+  DeviceInfoSet HDEVINFO
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+  Reserved DWORD
+  samDesired REGSAM
+
+func SetupDiOpenDevRegKey
+  success NotEqual=0
+  HKEY
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  Scope [DeviceInfoScope]
+  HwProfile DWORD
+  KeyType [DeviceInfoKeyType]
+  samDesired REGSAM
+
+func SetupDiRegisterCoDeviceInstallers
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiRegisterDeviceInfo
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  Flags DWORD
+  CompareProc PSP_DETSIG_CMPPROC
+  CompareContext PVOID
+  DupDeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiRemoveDevice
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiRemoveDeviceInterface
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+
+func SetupDiRestartDevices
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiSelectBestCompatDrv
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiSelectDevice
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiSelectOEMDrv
+  BOOL
+  hwndParent HWND
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiSetClassInstallParams bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  ClassInstallParams PSP_CLASSINSTALL_HEADER
+  ClassInstallParamsSize DWORD
+
+func SetupDiSetClassPropertyW
+  BOOL
+  ClassGuid "CONST GUID*"
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE
+  PropertyBuffer "CONST PBYTE" length=PropertyBufferSize
+  PropertyBufferSize DWORD
+  Flags [DiClassPropertyFlags]
+
+func SetupDiSetClassPropertyExW
+  BOOL
+  ClassGuid "CONST GUID*"
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE
+  PropertyBuffer "CONST PBYTE" length=PropertyBufferSize
+  PropertyBufferSize DWORD
+  Flags DWORD
+  Reserved PVOID
+
+func SetupDiSetClassRegistryProperty bothCharset
+  BOOL
+  ClassGuid LPGUID
+  Property DWORD
+  PropertyBuffer "CONST BYTE*" length=PropertyBufferSize
+  PropertyBufferSize DWORD
+  MachineName PCTSTR
+  Reserved PVOID
+
+func SetupDiSetDeviceInstallParams bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DeviceInstallParams PSP_DEVINSTALL_PARAMS
+
+func SetupDiSetDeviceInterfaceDefault
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+  Flags DWORD
+  Reserved PVOID
+
+func SetupDiSetDeviceInterfacePropertyW
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInterfaceData PSP_DEVICE_INTERFACE_DATA
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE
+  PropertyBuffer "CONST PBYTE" length=PropertyBufferSize
+  PropertyBufferSize DWORD
+  Flags DWORD
+
+func SetupDiSetDevicePropertyW
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE
+  PropertyBuffer "CONST PBYTE" length=PropertyBufferSize
+  PropertyBufferSize DWORD
+  Flags DWORD
+
+func SetupDiSetDeviceRegistryProperty bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  Property [SetupDeviceRegistryProperty]
+  PropertyBuffer "CONST BYTE*" length=PropertyBufferSize
+  PropertyBufferSize DWORD
+
+func SetupDiSetDriverInstallParams bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DriverInfoData PSP_DRVINFO_DATA
+  DriverInstallParams PSP_DRVINSTALL_PARAMS
+
+func SetupDiSetSelectedDevice
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiSetSelectedDriver bothCharset
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+  DriverInfoData PSP_DRVINFO_DATA
+
+func SetupDiUnremoveDevice
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupDiMoveDuplicateDevice
+  BOOL
+  DeviceInfoSet HDEVINFO
+  DeviceInfoData PSP_DEVINFO_DATA
+
+func SetupGetThreadLogToken
+  success NotEqual=0
+  SP_LOG_TOKEN
+
+func SetupSetThreadLogToken
+  VOID
+  LogToken SP_LOG_TOKEN
+
+func SetupWriteTextLog varArgs
+  VOID
+  LogToken SP_LOG_TOKEN
+  Category DWORD
+  Flags DWORD
+  MessageStr PCTSTR
+
+func SetupWriteTextLogError varArgs
+  VOID
+  LogToken SP_LOG_TOKEN
+  Category DWORD
+  LogFlags DWORD
+  Error DWORD
+  MessageStr PCSTR
+
+func SetupWriteTextLogInfLine
+  VOID
+  LogToken SP_LOG_TOKEN
+  Flags DWORD
+  InfHandle HINF
+  Context PINFCONTEXT
+

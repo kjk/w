@@ -1,0 +1,5 @@
+include Interfaces\DirectX\10\ID3D10DeviceChild.txt
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10PixelShader base=ID3D10DeviceChild id={4968B601-9D00-4cde-8346-8E7F675819B6} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Shader"
+

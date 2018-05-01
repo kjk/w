@@ -1,0 +1,1392 @@
+include Headers\windows.h.txt
+include Headers\cryptography.h.txt
+include Headers\registry.h.txt
+
+dll Msi.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Application Installation and Servicing/Windows Installer/User Interface and Logging"
+category "Application Installation and Servicing/Windows Installer/Handle Management"
+category "Application Installation and Servicing/Windows Installer/Installation and Configuration"
+category "Application Installation and Servicing/Windows Installer/Component-Specific"
+category "Application Installation and Servicing/Windows Installer/Application-Only"
+category "Application Installation and Servicing/Windows Installer/System Status"
+category "Application Installation and Servicing/Windows Installer/Product Query"
+category "Application Installation and Servicing/Windows Installer/Patching"
+category "Application Installation and Servicing/Windows Installer/File Query"
+category "Application Installation and Servicing/Windows Installer/Transaction Management"
+category "Application Installation and Servicing/Windows Installer/Installer Database/General Database Access"
+category "Application Installation and Servicing/Windows Installer/Installer Database/Database Management"
+category "Application Installation and Servicing/Windows Installer/Installer Database/Record Processing"
+category "Application Installation and Servicing/Windows Installer/Installer Database/Summary Information Property"
+category "Application Installation and Servicing/Windows Installer/Installer Database/Installer State Access"
+category "Application Installation and Servicing/Windows Installer/Installer Database/Installer Action"
+category "Application Installation and Servicing/Windows Installer/Installer Database/Installer Location"
+category "Application Installation and Servicing/Windows Installer/Installer Database/Installer Selection"
+category "Application Installation and Servicing/Windows Installer/Installer Database/User Interface"
+errorDecode errorFunc=GetLastError errorIsReturnValue
+alias MSIHANDLE "unsigned long"
+
+pointer MSIHANDLE* MSIHANDLE
+
+pointer MSIHANDLE** MSIHANDLE*
+
+alias INSTALLUI_HANDLER LPVOID
+
+alias PINSTALLUI_HANDLER_RECORD LPVOID
+
+array "TCHAR [39]" base=TCHAR count=39
+
+alias [MSI_ERROR] [ERROR_CODE] display=UINT
+
+enum MSIPATCHDATATYPE UINT
+  MSIPATCH_DATATYPE_PATCHFILE 0
+  MSIPATCH_DATATYPE_XMLPATH   1
+  MSIPATCH_DATATYPE_XMLBLOB   2
+
+struct MSIPATCHSEQUENCEINFO
+  szPatchData LPCTSTR
+  ePatchDataType MSIPATCHDATATYPE
+  dwOrder DWORD
+  uStatus UINT
+
+pointer PMSIPATCHSEQUENCEINFO MSIPATCHSEQUENCEINFO
+
+struct MSIFILEHASHINFO
+  dwFileHashInfoSize ULONG
+  dwData "ULONG [4]"
+
+pointer PMSIFILEHASHINFO MSIFILEHASHINFO
+
+enum USERINFOSTATE int
+  USERINFOSTATE_MOREDATA   -3
+  USERINFOSTATE_INVALIDARG -2
+  USERINFOSTATE_UNKNOWN    -1
+  USERINFOSTATE_ABSENT     0
+  USERINFOSTATE_PRESENT    1
+
+flag INSTALLUILEVEL UINT
+  INSTALLUILEVEL_NOCHANGE      0
+  INSTALLUILEVEL_DEFAULT       1
+  INSTALLUILEVEL_NONE          2
+  INSTALLUILEVEL_BASIC         3
+  INSTALLUILEVEL_REDUCED       4
+  INSTALLUILEVEL_FULL          5
+  INSTALLUILEVEL_HIDECANCEL    0x20
+  INSTALLUILEVEL_PROGRESSONLY  0x40
+  INSTALLUILEVEL_ENDDIALOG     0x80
+  INSTALLUILEVEL_SOURCERESONLY 0x100
+
+flag MSIINSTALLCONTEXT DWORD
+  MSIINSTALLCONTEXT_NONE           0
+  MSIINSTALLCONTEXT_USERMANAGED    1
+  MSIINSTALLCONTEXT_USERUNMANAGED  2
+  MSIINSTALLCONTEXT_MACHINE        4
+  MSIINSTALLCONTEXT_ALL            7
+  MSIINSTALLCONTEXT_ALLUSERMANAGED 8
+
+pointer MSIINSTALLCONTEXT* MSIINSTALLCONTEXT
+
+enum INSTALLSTATE UINT
+  INSTALLSTATE_NOTUSED      -7
+  INSTALLSTATE_BADCONFIG    -6
+  INSTALLSTATE_INCOMPLETE   -5
+  INSTALLSTATE_SOURCEABSENT -4
+  INSTALLSTATE_MOREDATA     -3
+  INSTALLSTATE_INVALIDARG   -2
+  INSTALLSTATE_UNKNOWN      -1
+  INSTALLSTATE_BROKEN       0
+  INSTALLSTATE_ADVERTISED   1
+  INSTALLSTATE_ABSENT       2
+  INSTALLSTATE_LOCAL        3
+  INSTALLSTATE_SOURCE       4
+  INSTALLSTATE_DEFAULT      5
+
+pointer INSTALLSTATE* INSTALLSTATE
+
+alias [INSTALLSTATE-DWORD] INSTALLSTATE display=DWORD
+
+pointer [INSTALLSTATE-DWORD*] [INSTALLSTATE-DWORD] display=DWORD*
+
+enum [MsiInstallLevel] int display=int
+  INSTALLLEVEL_DEFAULT 0
+  INSTALLLEVEL_MINIMUM 1
+  INSTALLLEVEL_MAXIMUM 0xFFFF
+
+flag [MsiReinstallMode] DWORD display=DWORD
+  REINSTALLMODE_REPAIR           0x00000001
+  REINSTALLMODE_FILEMISSING      0x00000002
+  REINSTALLMODE_FILEOLDERVERSION 0x00000004
+  REINSTALLMODE_FILEEQUALVERSION 0x00000008
+  REINSTALLMODE_FILEEXACT        0x00000010
+  REINSTALLMODE_FILEVERIFY       0x00000020
+  REINSTALLMODE_FILEREPLACE      0x00000040
+  REINSTALLMODE_MACHINEDATA      0x00000080
+  REINSTALLMODE_USERDATA         0x00000100
+  REINSTALLMODE_SHORTCUT         0x00000200
+  REINSTALLMODE_PACKAGE          0x00000400
+
+enum [MsiInstallMode] DWORD display=DWORD
+  INSTALLMODE_NODETECTION_ANY    -4
+  INSTALLMODE_NOSOURCERESOLUTION -3
+  INSTALLMODE_NODETECTION        -2
+  INSTALLMODE_EXISTING           -1
+  INSTALLMODE_DEFAULT            0
+
+flag INSTALLTYPE UINT
+  INSTALLTYPE_DEFAULT         0
+  INSTALLTYPE_NETWORK_IMAGE   1
+  INSTALLTYPE_SINGLE_INSTANCE 2
+
+flag [MsiInstallLogMode] DWORD display=DWORD
+  INSTALLLOGMODE_FATALEXIT      0x00000001
+  INSTALLLOGMODE_ERROR          0x00000002
+  INSTALLLOGMODE_WARNING        0x00000004
+  INSTALLLOGMODE_USER           0x00000008
+  INSTALLLOGMODE_INFO           0x00000010
+  INSTALLLOGMODE_FILESINUSE     0x00000020
+  INSTALLLOGMODE_RESOLVESOURCE  0x00000040
+  INSTALLLOGMODE_OUTOFDISKSPACE 0x00000080
+  INSTALLLOGMODE_ACTIONSTART    0x00000100
+  INSTALLLOGMODE_ACTIONDATA     0x00000200
+  INSTALLLOGMODE_PROGRESS       0x00000400
+  INSTALLLOGMODE_PROPERTYDUMP   0x00000400
+  INSTALLLOGMODE_COMMONDATA     0x00000800
+  INSTALLLOGMODE_VERBOSE        0x00001000
+  INSTALLLOGMODE_INITIALIZE     0x00001000
+  INSTALLLOGMODE_TERMINATE      0x00002000
+  INSTALLLOGMODE_EXTRADEBUG     0x00002000
+  INSTALLLOGMODE_LOGONLYONERROR 0x00004000
+  INSTALLLOGMODE_SHOWDIALOG     0x00004000
+  INSTALLLOGMODE_RMFILESINUSE   0x02000000
+
+flag [MsiInstallLogAttributes] DWORD display=DWORD
+  INSTALLLOGATTRIBUTES_APPEND        0x00000001
+  INSTALLLOGATTRIBUTES_FLUSHEACHLINE 0x00000002
+
+flag [MsiArchFlags] DWORD display=DWORD
+  MSIARCHITECTUREFLAGS_X86   0x00000001
+  MSIARCHITECTUREFLAGS_IA64  0x00000002
+  MSIARCHITECTUREFLAGS_AMD64 0x00000004
+
+flag [MsiAdOptions] DWORD display=DWORD
+  MSIADVERTISEOPTIONS_INSTANCE 1
+
+flag [MsiSourceType] DWORD display=DWORD
+  MSISOURCETYPE_UNKNOWN 0x00000000
+  MSISOURCETYPE_NETWORK 0x00000001
+  MSISOURCETYPE_URL     0x00000002
+  MSISOURCETYPE_MEDIA   0x00000004
+  MSICODE_PATCH         0x40000000
+
+flag [MsiCode] DWORD display=DWORD
+  MSICODE_PRODUCT 0x00000000
+  MSICODE_PATCH   0x40000000
+
+flag [MsiAssemblyInfo] DWORD display=DWORD
+  MSIASSEMBLYINFO_NETASSEMBLY   0
+  MSIASSEMBLYINFO_WIN32ASSEMBLY 1
+
+flag [MsiOpenPackageFlags] DWORD display=DWORD
+  MSIOPENPACKAGEFLAGS_IGNOREMACHINESTATE 0x00000001
+
+flag [MsiPatchState] DWORD display=DWORD
+  MSIPATCHSTATE_INVALID    0
+  MSIPATCHSTATE_APPLIED    1
+  MSIPATCHSTATE_SUPERSEDED 2
+  MSIPATCHSTATE_OBSOLETED  4
+  MSIPATCHSTATE_REGISTERED 8
+  MSIPATCHSTATE_ALL        0xF
+
+flag [MsiHashFlags] DWORD display=DWORD
+  MSI_INVALID_HASH_IS_FATAL 0x1
+
+flag [MsiTransactionAttributes] DWORD display=DWORD
+  MSITRANSACTION_CHAIN_EMBEDDEDUI         0x00000001
+  MSITRANSACTION_JOIN_EXISTING_EMBEDDEDUI 0x00000002
+
+flag [MsiScriptFlags] DWORD display=DWORD
+  SCRIPTFLAGS_CACHEINFO                0x00000001
+  SCRIPTFLAGS_SHORTCUTS                0x00000004
+  SCRIPTFLAGS_MACHINEASSIGN            0x00000008
+  SCRIPTFLAGS_REGDATA_APPINFO          0x00000010
+  SCRIPTFLAGS_REGDATA_CNFGINFO         0x00000020
+  SCRIPTFLAGS_VALIDATE_TRANSFORMS_LIST 0x00000040
+  SCRIPTFLAGS_REGDATA_CLASSINFO        0x00000080
+  SCRIPTFLAGS_REGDATA_EXTENSIONINFO    0x00000100
+  SCRIPTFLAGS_REGDATA_APPINFO          0x00000180
+  SCRIPTFLAGS_REGDATA                  0x000001A0
+
+flag [MsiInstallFeatureAttr] DWORD display=DWORD
+  INSTALLFEATUREATTRIBUTE_FAVORLOCAL             0x00000001
+  INSTALLFEATUREATTRIBUTE_FAVORSOURCE            0x00000002
+  INSTALLFEATUREATTRIBUTE_FOLLOWPARENT           0x00000004
+  INSTALLFEATUREATTRIBUTE_FAVORADVERTISE         0x00000008
+  INSTALLFEATUREATTRIBUTE_DISALLOWADVERTISE      0x00000010
+  INSTALLFEATUREATTRIBUTE_NOUNSUPPORTEDADVERTISE 0x00000020
+
+pointer [MsiInstallFeatureAttr*] [MsiInstallFeatureAttr] display=LPDWORD
+
+enum [MsiTransactionState] DWORD display=DWORD
+  MSITRANSACTIONSTATE_ROLLBACK 0
+  MSITRANSACTIONSTATE_COMMIT   1
+
+enum MSIMODIFY UINT
+  MSIMODIFY_SEEK             -1
+  MSIMODIFY_REFRESH          0
+  MSIMODIFY_INSERT           1
+  MSIMODIFY_UPDATE           2
+  MSIMODIFY_ASSIGN           3
+  MSIMODIFY_REPLACE          4
+  MSIMODIFY_MERGE            5
+  MSIMODIFY_DELETE           6
+  MSIMODIFY_INSERT_TEMPORARY 7
+  MSIMODIFY_VALIDATE         8
+  MSIMODIFY_VALIDATE_NEW     9
+  MSIMODIFY_VALIDATE_FIELD   10
+  MSIMODIFY_VALIDATE_DELETE  11
+
+enum MSICOLINFO UINT
+  MSICOLINFO_NAMES 0
+  MSICOLINFO_TYPES 1
+
+enum MSICONDITION UINT
+  success NotEqual=3
+  MSICONDITION_FALSE 0
+  MSICONDITION_TRUE  1
+  MSICONDITION_NONE  2
+  MSICONDITION_ERROR 3
+
+enum MSIDBERROR UINT
+  MSIDBERROR_INVALIDARG        -3
+  MSIDBERROR_MOREDATA          -2
+  MSIDBERROR_FUNCTIONERROR     -1
+  MSIDBERROR_NOERROR           0
+  MSIDBERROR_DUPLICATEKEY      1
+  MSIDBERROR_REQUIRED          2
+  MSIDBERROR_BADLINK           3
+  MSIDBERROR_OVERFLOW          4
+  MSIDBERROR_UNDERFLOW         5
+  MSIDBERROR_NOTINSET          6
+  MSIDBERROR_BADVERSION        7
+  MSIDBERROR_BADCASE           8
+  MSIDBERROR_BADGUID           9
+  MSIDBERROR_BADWILDCARD       10
+  MSIDBERROR_BADIDENTIFIER     11
+  MSIDBERROR_BADLANGUAGE       12
+  MSIDBERROR_BADFILENAME       13
+  MSIDBERROR_BADPATH           14
+  MSIDBERROR_BADCONDITION      15
+  MSIDBERROR_BADFORMATTED      16
+  MSIDBERROR_BADTEMPLATE       17
+  MSIDBERROR_BADDEFAULTDIR     18
+  MSIDBERROR_BADREGPATH        19
+  MSIDBERROR_BADCUSTOMSOURCE   20
+  MSIDBERROR_BADPROPERTY       21
+  MSIDBERROR_MISSINGDATA       22
+  MSIDBERROR_BADCATEGORY       23
+  MSIDBERROR_BADKEYTABLE       24
+  MSIDBERROR_BADMAXMINVALUES   25
+  MSIDBERROR_BADCABINET        26
+  MSIDBERROR_BADSHORTCUT       27
+  MSIDBERROR_STRINGOVERFLOW    28
+  MSIDBERROR_BADLOCALIZEATTRIB 29
+
+enum MSICOSTTREE UINT
+  MSICOSTTREE_SELFONLY 0
+  MSICOSTTREE_CHILDREN 1
+  MSICOSTTREE_PARENTS  2
+  MSICOSTTREE_RESERVED 3
+
+enum INSTALLMESSAGE UINT
+  INSTALLMESSAGE_FATALEXIT      0x00000000
+  INSTALLMESSAGE_ERROR          0x01000000
+  INSTALLMESSAGE_WARNING        0x02000000
+  INSTALLMESSAGE_USER           0x03000000
+  INSTALLMESSAGE_INFO           0x04000000
+  INSTALLMESSAGE_FILESINUSE     0x05000000
+  INSTALLMESSAGE_RESOLVESOURCE  0x06000000
+  INSTALLMESSAGE_OUTOFDISKSPACE 0x07000000
+  INSTALLMESSAGE_ACTIONSTART    0x08000000
+  INSTALLMESSAGE_ACTIONDATA     0x09000000
+  INSTALLMESSAGE_PROGRESS       0x0A000000
+  INSTALLMESSAGE_COMMONDATA     0x0B000000
+  INSTALLMESSAGE_INITIALIZE     0x0C000000
+  INSTALLMESSAGE_TERMINATE      0x0D000000
+  INSTALLMESSAGE_SHOWDIALOG     0x0E000000
+  INSTALLMESSAGE_PERFORMANCE    0x0F000000
+  INSTALLMESSAGE_RMFILESINUSE   0x19000000
+  INSTALLMESSAGE_INSTALLSTART   0x1A000000
+  INSTALLMESSAGE_INSTALLEND     0x1B000000
+
+enum MSIRUNMODE UINT
+  MSIRUNMODE_ADMIN            0
+  MSIRUNMODE_ADVERTISE        1
+  MSIRUNMODE_MAINTENANCE      2
+  MSIRUNMODE_ROLLBACKENABLED  3
+  MSIRUNMODE_LOGENABLED       4
+  MSIRUNMODE_OPERATIONS       5
+  MSIRUNMODE_REBOOTATEND      6
+  MSIRUNMODE_REBOOTNOW        7
+  MSIRUNMODE_CABINET          8
+  MSIRUNMODE_SOURCESHORTNAMES 9
+  MSIRUNMODE_TARGETSHORTNAMES 10
+  MSIRUNMODE_RESERVED11       11
+  MSIRUNMODE_WINDOWS9X        12
+  MSIRUNMODE_ZAWENABLED       13
+  MSIRUNMODE_RESERVED14       14
+  MSIRUNMODE_RESERVED15       15
+  MSIRUNMODE_SCHEDULED        16
+  MSIRUNMODE_ROLLBACK         17
+  MSIRUNMODE_COMMIT           18
+
+enum MSIDBSTATE UINT
+  MSIDBSTATE_ERROR -1
+  MSIDBSTATE_READ  0
+  MSIDBSTATE_WRITE 1
+
+flag MSITRANSFORM_ERROR UINT display=int
+  MSITRANSFORM_ERROR_ADDEXISTINGROW   0x00000001
+  MSITRANSFORM_ERROR_DELMISSINGROW    0x00000002
+  MSITRANSFORM_ERROR_ADDEXISTINGTABLE 0x00000004
+  MSITRANSFORM_ERROR_DELMISSINGTABLE  0x00000008
+  MSITRANSFORM_ERROR_UPDATEMISSINGROW 0x00000010
+  MSITRANSFORM_ERROR_CHANGECODEPAGE   0x00000020
+  MSITRANSFORM_ERROR_VIEWTRANSFORM    0x00000100
+
+flag MSITRANSFORM_VALIDATE UINT display=int
+  MSITRANSFORM_VALIDATE_LANGUAGE                   0x00000001
+  MSITRANSFORM_VALIDATE_PRODUCT                    0x00000002
+  MSITRANSFORM_VALIDATE_PLATFORM                   0x00000004
+  MSITRANSFORM_VALIDATE_MAJORVERSION               0x00000008
+  MSITRANSFORM_VALIDATE_MINORVERSION               0x00000010
+  MSITRANSFORM_VALIDATE_UPDATEVERSION              0x00000020
+  MSITRANSFORM_VALIDATE_NEWLESSBASEVERSION         0x00000040
+  MSITRANSFORM_VALIDATE_NEWLESSEQUALBASEVERSION    0x00000080
+  MSITRANSFORM_VALIDATE_NEWEQUALBASEVERSION        0x00000100
+  MSITRANSFORM_VALIDATE_NEWGREATEREQUALBASEVERSION 0x00000200
+  MSITRANSFORM_VALIDATE_NEWGREATERBASEVERSION      0x00000400
+  MSITRANSFORM_VALIDATE_UPGRADECODE                0x00000800
+
+enum [MSI_PID] UINT display=UINT
+  PID_DICTIONARY   0
+  PID_CODEPAGE     1
+  PID_TITLE        2
+  PID_SUBJECT      3
+  PID_AUTHOR       4
+  PID_KEYWORDS     5
+  PID_COMMENTS     6
+  PID_TEMPLATE     7
+  PID_LASTAUTHOR   8
+  PID_REVNUMBER    9
+  PID_EDITTIME     10
+  PID_LASTPRINTED  11
+  PID_CREATE_DTM   12
+  PID_LASTSAVE_DTM 13
+  PID_PAGECOUNT    14
+  PID_WORDCOUNT    15
+  PID_CHARCOUNT    16
+  PID_THUMBNAIL    17
+  PID_APPNAME      18
+  PID_SECURITY     19
+
+alias [MSI_DATA_TYPE] VARTYPE display=UINT
+
+pointer [MSI_DATA_TYPE*] [MSI_DATA_TYPE] display=UINT*
+
+func MsiSetInternalUI ordinal=141
+  success NotEqual=0
+  INSTALLUILEVEL
+  dwUILevel INSTALLUILEVEL
+  phWnd HWND*
+
+func MsiSetExternalUI bothCharset ordinalA=136 ordinalW=137
+  success NotEqual=0
+  INSTALLUI_HANDLER
+  puiHandler INSTALLUI_HANDLER
+  dwMessageFilter [MsiInstallLogMode]
+  pvContext LPVOID
+
+func MsiSetExternalUIRecord ordinal=281
+  [MSI_ERROR]
+  puiHandler PINSTALLUI_HANDLER_RECORD
+  dwMessageFilter [MsiInstallLogMode]
+  pvContext LPVOID
+  ppuiPrevHandler PINSTALLUI_HANDLER_RECORD
+
+func MsiEnableLog bothCharset ordinalA=168 ordinalW=169
+  [MSI_ERROR]
+  dwLogMode [MsiInstallLogMode]
+  szLogFile LPCTSTR
+  dwLogAttributes [MsiInstallLogAttributes]
+
+func MsiCloseHandle ordinal=8
+  [MSI_ERROR]
+  hAny MSIHANDLE
+
+func MsiCloseAllHandles ordinal=7
+  UINT
+
+func MsiAdvertiseProduct bothCharset ordinalA=5 ordinalW=6
+  [MSI_ERROR]
+  szPackagePath LPCTSTR
+  szScriptfilePath LPCTSTR
+  szTransforms LPCTSTR
+  lgidLanguage LANGID
+
+func MsiAdvertiseProductEx bothCharset ordinalA=227 ordinalW=228
+  [MSI_ERROR]
+  szPackagePath LPCTSTR
+  szScriptfilePath LPCTSTR
+  szTransforms LPCTSTR
+  lgidLanguage LANGID
+  dwPlatform [MsiArchFlags]
+  dwOptions [MsiAdOptions]
+
+func MsiAdvertiseScript bothCharset ordinalA=176 ordinalW=177
+  [MSI_ERROR]
+  szScriptFile LPCTSTR
+  dwFlags [MsiScriptFlags]
+  phRegData PHKEY
+  fRemoveItems BOOL
+
+func MsiInstallProduct bothCharset ordinalA=87 ordinalW=88
+  [MSI_ERROR]
+  szPackagePath LPCTSTR
+  szCommandLine LPCTSTR
+
+func MsiConfigureProduct bothCharset ordinalA=15 ordinalW=16
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  iInstallLevel [MsiInstallLevel]
+  eInstallState INSTALLSTATE
+
+func MsiConfigureProductEx bothCharset ordinalA=189 ordinalW=190
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  iInstallLevel [MsiInstallLevel]
+  eInstallState INSTALLSTATE
+  szCommandLine LPCTSTR
+
+func MsiReinstallProduct bothCharset ordinalA=130 ordinalW=131
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  dwReinstallMode [MsiReinstallMode]
+
+func MsiConfigureFeature bothCharset ordinalA=11 ordinalW=14
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  szFeature LPCTSTR
+  eInstallState INSTALLSTATE
+
+func MsiReinstallFeature bothCharset ordinalA=126 ordinalW=129
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  szFeature LPCTSTR
+  dwReinstallMode [MsiReinstallMode]
+
+func MsiInstallMissingComponent bothCharset ordinalA=83 ordinalW=84
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  szComponent LPCTSTR
+  eInstallState INSTALLSTATE
+
+func MsiInstallMissingFile bothCharset ordinalA=85 ordinalW=86
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  szFile LPCTSTR
+
+func MsiNotifySidChange bothCharset ordinalA=229 ordinalW=230
+  [MSI_ERROR]
+  szOldSid LPCTSTR
+  szNewSid LPCTSTR
+
+func MsiProcessAdvertiseScript bothCharset ordinalA=101 ordinalW=102
+  [MSI_ERROR]
+  szScriptFile LPCTSTR
+  szIconFolder LPCTSTR
+  hRegData HKEY
+  fShortcuts BOOL
+  fRemoveItems BOOL
+
+func MsiSourceListAddSource bothCharset ordinalA=210 ordinalW=211
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  szUserName LPCTSTR
+  dwReserved DWORD
+  szSource LPCTSTR
+
+func MsiSourceListAddSourceEx bothCharset ordinalA=255 ordinalW=256
+  [MSI_ERROR]
+  szProductCodeOrPatchCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  dwOptions [MsiSourceType]
+  szSource LPCTSTR
+  dwIndex DWORD
+
+func MsiSourceListClearSource bothCharset ordinalA=257 ordinalW=258
+  [MSI_ERROR]
+  szProductCodeOrPatchCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  dwOptions [MsiSourceType]
+  szSource LPCTSTR
+
+func MsiSourceListClearAll bothCharset ordinalA=208 ordinalW=209
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  szUserName LPCTSTR
+  dwReserved DWORD
+
+func MsiSourceListClearAllEx bothCharset ordinalA=259 ordinalW=260
+  [MSI_ERROR]
+  szProductCodeOrPatchCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  dwOptions [MsiSourceType]
+
+func MsiSourceListForceResolution bothCharset ordinalA=212 ordinalW=213
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  szUserName LPCTSTR
+  dwReserved DWORD
+
+func MsiSourceListForceResolutionEx bothCharset ordinalA=261 ordinalW=262
+  [MSI_ERROR]
+  szProductCodeOrPatchCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  dwOptions [MsiCode]
+
+func MsiSourceListGetInfo bothCharset ordinalA=265 ordinalW=266
+  [MSI_ERROR]
+  szProductCodeOrPatchCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  dwOptions [MsiCode]
+  szProperty LPCTSTR
+  szValue LPTSTR outputOnly
+  pcchValue LPDWORD
+
+func MsiSourceListSetInfo bothCharset ordinalA=267 ordinalW=268
+  [MSI_ERROR]
+  szProductCodeOrPatchCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  dwOptions [MsiSourceType]
+  szProperty LPCTSTR
+  szValue LPCTSTR
+
+func MsiSourceListEnumMediaDisks bothCharset ordinalA=271 ordinalW=272
+  [MSI_ERROR]
+  szProductCodeOrPatchCode LPCTSTR
+  szUserSID LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  dwOptions [MsiCode]
+  dwIndex DWORD
+  pdwDiskId LPWORD
+  szVolumeLabel LPTSTR outputOnly
+  pcchVolumeLabel LPDWORD
+  szDiskPrompt LPTSTR outputOnly
+  pcchDiskPrompt LPDWORD
+
+func MsiSourceListAddMediaDisk bothCharset ordinalA=273 ordinalW=274
+  [MSI_ERROR]
+  szProductCodeOrPatchCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  dwOptions [MsiCode]
+  dwDiskId DWORD
+  szVolumeLabel LPCTSTR
+  szDiskPrompt LPCTSTR
+
+func MsiSourceListClearMediaDisk bothCharset ordinalA=275 ordinalW=276
+  [MSI_ERROR]
+  szProductCodeOrPatchCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  dwOptions [MsiCode]
+  dwDiskID DWORD
+
+func MsiSourceListEnumSources bothCharset ordinalA=263 ordinalW=264
+  [MSI_ERROR]
+  szProductCodeOrPatchCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  dwOptions [MsiSourceType]
+  dwIndex DWORD
+  szSource LPTSTR outputOnly
+  pcchSource LPDWORD
+
+func MsiProvideAssembly bothCharset ordinalA=225 ordinalW=226
+  [MSI_ERROR]
+  szAssemblyName LPCTSTR
+  szAppContext LPCTSTR
+  dwInstallMode [MsiInstallMode]
+  dwAssemblyInfo [MsiAssemblyInfo]
+  lpPathBuf LPTSTR outputOnly
+  pcchPathBuf DWORD*
+
+func MsiProvideComponent bothCharset ordinalA=104 ordinalW=107
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  szFeature LPCTSTR
+  szComponent LPCTSTR
+  dwInstallMode [MsiInstallMode]
+  lpPathBuf LPTSTR outputOnly
+  pcchPathBuf DWORD*
+
+func MsiProvideQualifiedComponent bothCharset ordinalA=108 ordinalW=109
+  [MSI_ERROR]
+  szComponent LPCTSTR
+  szQualifier LPCTSTR
+  dwInstallMode [MsiInstallMode]
+  lpPathBuf LPTSTR outputOnly
+  pcchPathBuf DWORD*
+
+func MsiProvideQualifiedComponentEx bothCharset ordinalA=202 ordinalW=203
+  [MSI_ERROR]
+  szComponent LPCTSTR
+  szQualifier LPCTSTR
+  dwInstallMode [MsiInstallMode]
+  szProduct LPTSTR
+  dwUnused1 DWORD
+  dwUnused2 DWORD
+  lpPathBuf LPTSTR outputOnly
+  pcchPathBuf DWORD*
+
+func MsiGetComponentPath bothCharset ordinalA=172 ordinalW=173
+  success NotEqual=0
+  INSTALLSTATE
+  szProduct LPCTSTR
+  szComponent LPCTSTR
+  lpPathBuf LPTSTR outputOnly
+  pcchBuf DWORD*
+
+func MsiGetComponentPathEx bothCharset ordinalA=293 ordinalW=294
+  success NotEqual=0
+  INSTALLSTATE
+  szProductCode LPCTSTR
+  szComponentCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  szPathBuf LPTSTR outputOnly
+  pcchBuf LPDWORD
+
+func MsiLocateComponent bothCharset ordinalA=89 ordinalW=90
+  success NotEqual=0
+  INSTALLSTATE
+  szComponent LPCTSTR
+  lpPathBuf LPTSTR outputOnly
+  pcchBuf DWORD*
+
+func MsiQueryComponentState bothCharset ordinalA=249 ordinalW=250
+  [MSI_ERROR]
+  szProductCode LPTSTR
+  szUserSid LPTSTR
+  dwContext MSIINSTALLCONTEXT
+  szComponent LPCTSTR
+  pdwState INSTALLSTATE*
+
+func MsiCollectUserInfo bothCharset ordinalA=9 ordinalW=10
+  [MSI_ERROR]
+  szProduct LPCTSTR
+
+func MsiUseFeature bothCharset ordinalA=154 ordinalW=155
+  success NotEqual=0
+  INSTALLSTATE
+  szProduct LPCTSTR
+  szFeature LPCTSTR
+
+func MsiUseFeatureEx bothCharset ordinalA=192 ordinalW=193
+  success NotEqual=0
+  INSTALLSTATE
+  szProduct LPCTSTR
+  szFeature LPCTSTR
+  dwInstallMode [MsiInstallMode]
+  dwReserved DWORD
+
+func MsiGetProductCode bothCharset ordinalA=65 ordinalW=66
+  [MSI_ERROR]
+  szComponent LPCTSTR
+  lpProductBuf LPTSTR outputOnly
+
+func MsiEnumProducts bothCharset ordinalA=44 ordinalW=45
+  [MSI_ERROR]
+  iProductIndex DWORD
+  lpProductBuf LPTSTR outputOnly
+
+func MsiEnumProductsEx bothCharset ordinalA=245 ordinalW=246
+  [MSI_ERROR]
+  szProductCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT display=DWORD
+  dwIndex DWORD
+  szInstalledProductCode "TCHAR [39]" outputOnly
+  pdwInstalledContext MSIINSTALLCONTEXT*
+  szSid LPTSTR outputOnly
+  pcchSid LPDWORD
+
+func MsiEnumRelatedProducts bothCharset ordinalA=204 ordinalW=205
+  [MSI_ERROR]
+  lpUpgradeCode LPCTSTR
+  dwReserved DWORD
+  iProductIndex DWORD
+  lpProductBuf LPTSTR outputOnly
+
+func MsiEnumFeatures bothCharset ordinalA=42 ordinalW=43
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  iFeatureIndex DWORD
+  lpFeatureBuf LPTSTR outputOnly
+  lpParentBuf LPTSTR outputOnly
+
+func MsiEnumComponents bothCharset ordinalA=40 ordinalW=41
+  [MSI_ERROR]
+  iComponentIndex DWORD
+  lpComponentBuf LPTSTR outputOnly
+
+func MsiEnumComponentsEx bothCharset ordinalA=289 ordinalW=290
+  [MSI_ERROR]
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT display=DWORD
+  dwIndex DWORD
+  szInstalledComponentCode "TCHAR [39]" outputOnly
+  pdwInstalledContext MSIINSTALLCONTEXT*
+  szSid LPTSTR outputOnly
+  pcchSid LPDWORD
+
+func MsiEnumClients bothCharset ordinalA=36 ordinalW=37
+  [MSI_ERROR]
+  szComponent LPCTSTR
+  iProductIndex DWORD
+  lpProductBuf LPTSTR outputOnly
+
+func MsiEnumClientsEx bothCharset ordinalA=291 ordinalW=292
+  [MSI_ERROR]
+  szComponent LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT display=DWORD
+  dwProductIndex DWORD
+  szProductBuf "TCHAR [39]" outputOnly
+  pdwInstalledContext MSIINSTALLCONTEXT*
+  szSid LPTSTR outputOnly
+  pcchSid LPDWORD
+
+func MsiEnumComponentQualifiers bothCharset ordinalA=38 ordinalW=39
+  [MSI_ERROR]
+  szComponent LPTSTR
+  iIndex DWORD
+  lpQualifierBuf LPTSTR outputOnly
+  pcchQualifierBuf DWORD*
+  lpApplicationDataBuf LPTSTR outputOnly
+  pcchApplicationDataBuf DWORD*
+
+func MsiQueryFeatureState bothCharset ordinalA=110 ordinalW=111
+  success NotEqual=0
+  INSTALLSTATE
+  szProduct LPCTSTR
+  szFeature LPCTSTR
+
+func MsiQueryFeatureStateEx bothCharset ordinalA=251 ordinalW=252
+  [MSI_ERROR]
+  szProductCode LPTSTR
+  szUserSid LPTSTR
+  dwContext MSIINSTALLCONTEXT
+  szFeature LPCTSTR
+  pdwState INSTALLSTATE*
+
+func MsiQueryProductState bothCharset ordinalA=112 ordinalW=113
+  success NotEqual=0
+  INSTALLSTATE
+  szProduct LPCTSTR
+
+func MsiGetFeatureUsage bothCharset ordinalA=59 ordinalW=60
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  szFeature LPCTSTR
+  pdwUseCount DWORD*
+  pwDateUsed WORD*
+
+func MsiGetProductInfo bothCharset ordinalA=67 ordinalW=70
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  szProperty LPCTSTR
+  lpValueBuf LPTSTR outputOnly
+  pcchValueBuf DWORD*
+
+func MsiGetProductInfoEx bothCharset ordinalA=247 ordinalW=248
+  [MSI_ERROR]
+  szProductCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  szProperty LPCTSTR
+  lpValue LPTSTR outputOnly
+  pcchValue LPDWORD
+
+func MsiGetUserInfo bothCharset ordinalA=81 ordinalW=82
+  success NotEqual=0
+  USERINFOSTATE
+  szProduct LPCTSTR
+  lpUserNameBuf LPTSTR outputOnly
+  pcchUserNameBuf DWORD*
+  lpOrgNameBuf LPTSTR outputOnly
+  pcchOrgNameBuf DWORD*
+  lpSerialBuf LPTSTR outputOnly
+  pcchSerialBuf DWORD*
+
+func MsiOpenProduct bothCharset ordinalA=95 ordinalW=96
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  hProduct MSIHANDLE*
+
+func MsiOpenPackage bothCharset ordinalA=93 ordinalW=94
+  [MSI_ERROR]
+  szPackagePath LPCTSTR
+  hProduct MSIHANDLE*
+
+func MsiOpenPackageEx bothCharset ordinalA=231 ordinalW=232
+  [MSI_ERROR]
+  szPackagePath LPCTSTR
+  dwOptions [MsiOpenPackageFlags]
+  hProduct MSIHANDLE*
+
+func MsiIsProductElevated bothCharset ordinalA=214 ordinalW=215
+  [MSI_ERROR]
+  szProductCode LPCTSTR
+  pfElevated BOOL*
+
+func MsiGetProductInfoFromScript bothCharset ordinalA=68 ordinalW=69
+  [MSI_ERROR]
+  szScriptFile LPCTSTR
+  lpProductBuf39 LPTSTR outputOnly
+  plgidLanguage LANGID*
+  pdwVersion DWORD*
+  lpNameBuf LPTSTR outputOnly
+  pcchNameBuf DWORD*
+  lpPackageBuf LPTSTR outputOnly
+  pcchPackageBuf DWORD*
+
+func MsiGetProductProperty bothCharset ordinalA=71 ordinalW=72
+  [MSI_ERROR]
+  hProduct MSIHANDLE
+  szProperty LPCTSTR
+  lpValueBuf LPTSTR outputOnly
+  pcchValueBuf DWORD*
+
+func MsiGetShortcutTarget bothCharset ordinalA=216 ordinalW=217
+  [MSI_ERROR]
+  szShortcutTarget LPCTSTR
+  szProductCode LPTSTR
+  szFeatureId LPTSTR
+  szComponentCode LPTSTR
+
+func MsiGetFeatureInfo bothCharset ordinalA=55 ordinalW=56
+  [MSI_ERROR]
+  hProduct MSIHANDLE
+  szFeature LPCTSTR
+  lpAttributes [MsiInstallFeatureAttr*]
+  lpTitleBuf LPTSTR outputOnly
+  pcchTitleBuf LPDWORD
+  lpHelpBuf LPTSTR outputOnly
+  pcchHelpBuf LPDWORD
+
+func MsiVerifyPackage bothCharset ordinalA=156 ordinalW=157
+  [MSI_ERROR]
+  szPackagePath LPCTSTR
+
+func MsiApplyPatch bothCharset ordinalA=174 ordinalW=175
+  [MSI_ERROR]
+  szPatchPackage LPCTSTR
+  szInstallPackage LPCTSTR
+  eInstallType INSTALLTYPE
+  szCommandLine LPCTSTR
+
+func MsiEnumPatches bothCharset ordinalA=180 ordinalW=181
+  [MSI_ERROR]
+  szProduct LPCTSTR
+  iPatchIndex DWORD
+  lpPatchBuf LPTSTR outputOnly
+  lpTransformsBuf LPTSTR outputOnly
+  pcchTransformsBuf DWORD*
+
+func MsiGetPatchInfo bothCharset ordinalA=178 ordinalW=179
+  [MSI_ERROR]
+  szPatch LPCTSTR
+  szAttribute LPCTSTR
+  lpValueBuf LPTSTR outputOnly
+  pcchValueBuf DWORD*
+
+func MsiRemovePatches bothCharset ordinalA=237 ordinalW=238
+  [MSI_ERROR]
+  szPatchList LPCTSTR
+  szProductCode LPCTSTR
+  eUninstallType INSTALLTYPE
+  szPropertyList LPCTSTR
+
+func MsiDeterminePatchSequence bothCharset ordinalA=253 ordinalW=254
+  [MSI_ERROR]
+  szProductCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  cPatchInfo DWORD
+  pPatchInfo PMSIPATCHSEQUENCEINFO
+
+func MsiApplyMultiplePatches bothCharset ordinalA=239 ordinalW=240
+  [MSI_ERROR]
+  szPatchPackages LPCTSTR
+  szProductCode LPCTSTR
+  szPropertiesList LPCTSTR
+
+func MsiEnumPatchesEx bothCharset ordinalA=269 ordinalW=270
+  [MSI_ERROR]
+  szProductCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT display=DWORD
+  dwFilter [MsiPatchState]
+  dwIndex DWORD
+  szPatchCode "TCHAR [39]"
+  szTargetProductCode "TCHAR [39]"
+  pdwTargetProductContext MSIINSTALLCONTEXT*
+  szTargetUserSid LPTSTR outputOnly
+  pcchTargetUserSid LPDWORD
+
+func MsiGetPatchFileList bothCharset ordinalA=282 ordinalW=283
+  [MSI_ERROR]
+  szProductCode LPCTSTR
+  szPatchList LPCTSTR
+  pcFiles LPDWORD
+  pphFileRecords MSIHANDLE**
+
+func MsiGetPatchInfoEx bothCharset ordinalA=243 ordinalW=244
+  [MSI_ERROR]
+  szPatchCode LPCTSTR
+  szProductCode LPCTSTR
+  szUserSid LPCTSTR
+  dwContext MSIINSTALLCONTEXT
+  szProperty LPCTSTR
+  lpValue LPTSTR outputOnly
+  pcchValue DWORD*
+
+func MsiExtractPatchXMLData bothCharset ordinalA=241 ordinalW=242
+  [MSI_ERROR]
+  szPatchPath LPCTSTR
+  dwReserved DWORD
+  szXMLData LPTSTR outputOnly
+  pcchXMLData DWORD*
+
+func MsiDetermineApplicablePatches bothCharset ordinalA=277 ordinalW=278
+  [MSI_ERROR]
+  szProductPackagePath LPCTSTR
+  cPatchInfo DWORD
+  pPatchInfo PMSIPATCHSEQUENCEINFO
+
+func MsiGetFileHash bothCharset ordinalA=218 ordinalW=219
+  [MSI_ERROR]
+  szFilePath LPCTSTR
+  dwOptions DWORD
+  pHash PMSIFILEHASHINFO
+
+func MsiGetFileSignatureInformation bothCharset ordinalA=223 ordinalW=224
+  HRESULT
+  szSignedObjectPath LPCTSTR
+  dwFlags [MsiHashFlags]
+  ppcCertContext PCCERT_CONTEXT*
+  pbHashData BYTE* postLength=pcbHashData
+  pcbHashData DWORD*
+
+func MsiGetFileVersion bothCharset ordinalA=194 ordinalW=195
+  [MSI_ERROR]
+  szFilePath LPCTSTR
+  lpVersionBuf LPTSTR outputOnly
+  pcchVersionBuf DWORD*
+  lpLangBuf LPTSTR outputOnly
+  pcchLangBuf DWORD*
+
+func MsiBeginTransaction bothCharset ordinalA=284 ordinalW=285
+  [MSI_ERROR]
+  szTransactionName LPCWSTR
+  dwTransactionAttributes [MsiTransactionAttributes]
+  hTransactionID MSIHANDLE*
+  phChangeOfOwnerEvent HANDLE*
+
+func MsiJoinTransaction ordinal=287
+  [MSI_ERROR]
+  hTransactionID MSIHANDLE
+  dwTransactionAttributes [MsiTransactionAttributes]
+  phChangeOfOwnerEvent HANDLE*
+
+func MsiEndTransaction ordinal=286
+  [MSI_ERROR]
+  dwTransactionState [MsiTransactionState]
+
+func MsiDatabaseCommit ordinal=20
+  [MSI_ERROR]
+  hDatabase MSIHANDLE
+
+func MsiDatabaseGetPrimaryKeys bothCharset ordinalA=25 ordinalW=26
+  [MSI_ERROR]
+  hDatabase MSIHANDLE
+  szTableName LPCTSTR
+  phRecord MSIHANDLE*
+
+func MsiDatabaseIsTablePersistent bothCharset ordinalA=164 ordinalW=165
+  MSICONDITION
+  hDatabase MSIHANDLE
+  szTableName LPCTSTR
+
+func MsiDatabaseOpenView bothCharset ordinalA=31 ordinalW=32
+  [MSI_ERROR]
+  hDatabase MSIHANDLE
+  szQuery LPCTSTR
+  phView MSIHANDLE*
+
+func MsiGetActiveDatabase ordinal=49
+  success NotEqual=0
+  MSIHANDLE
+  hInstall MSIHANDLE
+
+func MsiViewGetColumnInfo ordinal=166
+  [MSI_ERROR]
+  hView MSIHANDLE
+  eColumnInfo MSICOLINFO
+  phRecord MSIHANDLE*
+
+func MsiOpenDatabase bothCharset ordinalA=91 ordinalW=92
+  [MSI_ERROR]
+  szDatabasePath LPCTSTR
+  szPersist LPCTSTR
+  phDatabase MSIHANDLE*
+
+func MsiViewClose ordinal=158
+  [MSI_ERROR]
+  hView MSIHANDLE
+
+func MsiViewExecute ordinal=159
+  [MSI_ERROR]
+  hView MSIHANDLE
+  hRecord MSIHANDLE
+
+func MsiViewFetch ordinal=160
+  [MSI_ERROR]
+  hView MSIHANDLE
+  phRecord MSIHANDLE*
+
+func MsiViewGetError bothCharset ordinalA=161 ordinalW=162
+  MSIDBERROR
+  hView MSIHANDLE
+  szColumnNameBuffer LPTSTR outputOnly
+  pcchBuf DWORD*
+
+func MsiViewModify ordinal=163
+  [MSI_ERROR]
+  hView MSIHANDLE
+  eModifyMode MSIMODIFY
+  hRecord MSIHANDLE
+
+func MsiCreateTransformSummaryInfo bothCharset ordinalA=185 ordinalW=186
+  [MSI_ERROR]
+  hDatabase MSIHANDLE
+  hDatabaseReference MSIHANDLE
+  szTransformFile LPCTSTR
+  iErrorConditions MSITRANSFORM_ERROR
+  iValidation MSITRANSFORM_VALIDATE
+
+func MsiDatabaseApplyTransform bothCharset ordinalA=18 ordinalW=19
+  [MSI_ERROR]
+  hDatabase MSIHANDLE
+  szTransformFile LPCTSTR
+  iErrorConditions MSITRANSFORM_ERROR
+
+func MsiDatabaseExport bothCharset ordinalA=21 ordinalW=22
+  [MSI_ERROR]
+  hDatabase MSIHANDLE
+  szTableName LPCTSTR
+  szFolderPath LPCTSTR
+  szFileName LPCTSTR
+
+func MsiDatabaseGenerateTransform bothCharset ordinalA=23 ordinalW=24
+  [MSI_ERROR]
+  hDatabase MSIHANDLE
+  hDatabaseReference MSIHANDLE
+  szTransformFile LPCTSTR
+  iReserved1 int
+  iReserved2 int
+
+func MsiDatabaseImport bothCharset ordinalA=27 ordinalW=28
+  [MSI_ERROR]
+  hDatabase MSIHANDLE
+  szFolderPath LPCTSTR
+  szFileName LPCTSTR
+
+func MsiDatabaseMerge bothCharset ordinalA=29 ordinalW=30
+  [MSI_ERROR]
+  hDatabase MSIHANDLE
+  hDatabaseMerge MSIHANDLE
+  szTableName LPCTSTR
+
+func MsiGetDatabaseState ordinal=52
+  success NotEqual=-1
+  MSIDBSTATE
+  hDatabase MSIHANDLE
+
+func MsiCreateRecord ordinal=17
+  success NotEqual=0
+  MSIHANDLE
+  cParams "unsigned int"
+
+func MsiFormatRecord bothCharset ordinalA=170 ordinalW=171
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  hRecord MSIHANDLE
+  szResultBuf LPTSTR outputOnly
+  pcchResultBuf DWORD*
+
+func MsiRecordClearData ordinal=167
+  [MSI_ERROR]
+  hRecord MSIHANDLE
+
+func MsiRecordDataSize ordinal=114
+  [MSI_ERROR]
+  hRecord MSIHANDLE
+  iField "unsigned int"
+
+func MsiRecordGetFieldCount ordinal=115
+  [MSI_ERROR]
+  hRecord MSIHANDLE
+
+func MsiRecordGetInteger ordinal=116
+  success NotEqual=0x80000000
+  int
+  hRecord MSIHANDLE
+  iField "unsigned int"
+
+func MsiRecordGetString bothCharset ordinalA=117 ordinalW=118
+  [MSI_ERROR]
+  hRecord MSIHANDLE
+  iField "unsigned int"
+  szValueBuf LPTSTR outputOnly
+  pcchValueBuf DWORD*
+
+func MsiRecordIsNull ordinal=119
+  BOOL
+  hRecord MSIHANDLE
+  iField "unsigned int"
+
+func MsiRecordReadStream ordinal=120
+  [MSI_ERROR]
+  hRecord MSIHANDLE
+  iField UINT
+  szDataBuf char* outputOnly
+  pcbDataBuf DWORD*
+
+func MsiRecordSetInteger ordinal=121
+  [MSI_ERROR]
+  hRecord MSIHANDLE
+  iField "unsigned int"
+  iValue int
+
+func MsiRecordSetStream bothCharset ordinalA=122 ordinalW=123
+  [MSI_ERROR]
+  hRecord MSIHANDLE
+  iField UINT
+  szFilePath LPCTSTR
+
+func MsiRecordSetString bothCharset ordinalA=124 ordinalW=125
+  [MSI_ERROR]
+  hRecord MSIHANDLE
+  iField "unsigned int"
+  szValue LPCTSTR
+
+func MsiGetSummaryInformation bothCharset ordinalA=77 ordinalW=78
+  [MSI_ERROR]
+  hDatabase MSIHANDLE
+  szDatabasePath LPCTSTR
+  uiUpdateCount UINT
+  phSummaryInfo MSIHANDLE*
+
+func MsiSummaryInfoGetProperty bothCharset ordinalA=148 ordinalW=150
+  [MSI_ERROR]
+  hSummaryInfo MSIHANDLE
+  uiProperty [MSI_PID]
+  puiDataType [MSI_DATA_TYPE*]
+  piValue INT*
+  pftValue FILETIME*
+  szValueBuf LPTSTR outputOnly
+  pcchValueBuf DWORD*
+
+func MsiSummaryInfoGetPropertyCount ordinal=149
+  [MSI_ERROR]
+  hSummaryInfo MSIHANDLE
+  puiPropertyCount UINT*
+
+func MsiSummaryInfoPersist ordinal=151
+  [MSI_ERROR]
+  hSummaryInfo MSIHANDLE
+
+func MsiSummaryInfoSetProperty bothCharset ordinalA=152 ordinalW=153
+  [MSI_ERROR]
+  hSummaryInfo MSIHANDLE
+  uiProperty [MSI_PID]
+  uiDataType [MSI_DATA_TYPE]
+  iValue INT
+  pftValue FILETIME*
+  szValue LPTSTR
+
+func MsiGetLanguage ordinal=63
+  success NotEqual=6
+  LANGID
+  hInstall MSIHANDLE
+
+func MsiGetLastErrorRecord ordinal=48
+  success NotEqual=0
+  MSIHANDLE
+
+func MsiGetMode ordinal=64
+  BOOL
+  hInstall MSIHANDLE
+  iRunMode MSIRUNMODE
+
+func MsiGetProperty bothCharset ordinalA=73 ordinalW=74
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szName LPCTSTR
+  szValueBuf LPTSTR outputOnly
+  pchValueBuf DWORD*
+
+func MsiSetProperty bothCharset ordinalA=144 ordinalW=145
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szName LPCTSTR
+  szValue LPCTSTR
+
+func MsiSetMode ordinal=143
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  iRunMode "unsigned int"
+  fState BOOL
+
+func MsiDoAction bothCharset ordinalA=33 ordinalW=34
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szAction LPCTSTR
+
+func MsiEvaluateCondition bothCharset ordinalA=46 ordinalW=47
+  MSICONDITION
+  hInstall MSIHANDLE
+  szCondition LPCTSTR
+
+func MsiProcessMessage ordinal=103
+  success NotEqual=-1
+  int
+  hInstall MSIHANDLE
+  eMessageType INSTALLMESSAGE
+  hRecord MSIHANDLE
+
+func MsiSequence bothCharset ordinalA=132 ordinalW=133
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szTable LPCTSTR
+  iSequenceMode INT
+
+func MsiGetSourcePath bothCharset ordinalA=75 ordinalW=76
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szFolder LPCTSTR
+  szPathBuf LPTSTR outputOnly
+  pcchPathBuf DWORD*
+
+func MsiGetTargetPath bothCharset ordinalA=79 ordinalW=80
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szFolder LPCTSTR
+  szPathBuf LPTSTR outputOnly
+  pcchPathBuf DWORD*
+
+func MsiSetTargetPath bothCharset ordinalA=146 ordinalW=147
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szFolder LPCTSTR
+  szFolderPath LPCTSTR
+
+func MsiEnumComponentCosts bothCharset ordinalA=220 ordinalW=221
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szComponent LPCTSTR
+  dwIndex DWORD
+  iState INSTALLSTATE
+  lpDriveBuf LPTSTR outputOnly
+  pcchDriveBuf DWORD*
+  piCost int*
+  pTempCost int*
+
+func MsiGetComponentState bothCharset ordinalA=50 ordinalW=51
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szComponent LPCTSTR
+  piInstalled INSTALLSTATE*
+  piAction INSTALLSTATE*
+
+func MsiGetFeatureCost bothCharset ordinalA=53 ordinalW=54
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szFeature LPCTSTR
+  iCostTree MSICOSTTREE
+  iState INSTALLSTATE
+  piCost INT*
+
+func MsiGetFeatureState bothCharset ordinalA=57 ordinalW=58
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szFeature LPCTSTR
+  piInstalled INSTALLSTATE*
+  piAction INSTALLSTATE*
+
+func MsiGetFeatureValidStates bothCharset ordinalA=61 ordinalW=62
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szFeature LPCTSTR
+  pInstallState [INSTALLSTATE-DWORD*]
+
+func MsiSetComponentState bothCharset ordinalA=134 ordinalW=135
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szComponent LPCTSTR
+  iState INSTALLSTATE
+
+func MsiSetFeatureAttributes bothCharset ordinalA=206 ordinalW=207
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szFeature LPCTSTR
+  dwAttributes [MsiInstallFeatureAttr]
+
+func MsiSetFeatureState bothCharset ordinalA=138 ordinalW=139
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  szFeature LPCTSTR
+  iState INSTALLSTATE
+
+func MsiSetInstallLevel ordinal=140
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+  iInstallLevel int
+
+func MsiVerifyDiskSpace ordinal=142
+  [MSI_ERROR]
+  hInstall MSIHANDLE
+
+func MsiEnableUIPreview ordinal=35
+  [MSI_ERROR]
+  hDatabase MSIHANDLE
+  phPreview MSIHANDLE*
+
+func MsiPreviewBillboard bothCharset ordinalA=97 ordinalW=98
+  [MSI_ERROR]
+  hPreview MSIHANDLE
+  szControlName LPCTSTR
+  szBillboard LPCTSTR
+
+func MsiPreviewDialog bothCharset ordinalA=99 ordinalW=100
+  [MSI_ERROR]
+  hPreview MSIHANDLE
+  szDialogName LPCTSTR
+

@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IApplicationDocumentLists base=IUnknown id={3c594f9f-9f30-47a1-979a-c9e83d3d0a06} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetAppID
+    HRESULT
+    pszAppID LPCWSTR
+
+  func GetList
+    HRESULT
+    listtype APPDOCLISTTYPE
+    cItemsDesired UINT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

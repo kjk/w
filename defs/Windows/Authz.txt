@@ -1,0 +1,478 @@
+include Headers\windows.h.txt
+include Headers\security.h.txt
+
+dll Authz.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Authorization/Basic Access Control"
+category "Security and Identity/Authorization"
+alias AUTHZ_CLIENT_CONTEXT_HANDLE HANDLE
+
+pointer PAUTHZ_CLIENT_CONTEXT_HANDLE AUTHZ_CLIENT_CONTEXT_HANDLE
+
+alias AUTHZ_AUDIT_EVENT_HANDLE HANDLE
+
+pointer PAUTHZ_AUDIT_EVENT_HANDLE AUTHZ_AUDIT_EVENT_HANDLE
+
+alias AUTHZ_ACCESS_CHECK_RESULTS_HANDLE HANDLE
+
+pointer PAUTHZ_ACCESS_CHECK_RESULTS_HANDLE AUTHZ_ACCESS_CHECK_RESULTS_HANDLE
+
+alias AUTHZ_RESOURCE_MANAGER_HANDLE HANDLE
+
+pointer PAUTHZ_RESOURCE_MANAGER_HANDLE AUTHZ_RESOURCE_MANAGER_HANDLE
+
+alias PFN_AUTHZ_DYNAMIC_ACCESS_CHECK LPVOID
+
+alias PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS LPVOID
+
+alias PFN_AUTHZ_FREE_DYNAMIC_GROUPS LPVOID
+
+alias AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE HANDLE
+
+pointer PAUTHZ_SECURITY_EVENT_PROVIDER_HANDLE AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE
+
+alias AUTHZ_AUDIT_EVENT_TYPE_HANDLE HANDLE
+
+alias AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE HANDLE
+
+pointer PAUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE
+
+array "BYTE [_AUTHZ_SS_MAXSIZE]" base=BYTE count=128
+
+enum AUDIT_PARAM_TYPE UINT
+  APT_None           1
+  APT_String         2
+  APT_Ulong          3
+  APT_Pointer        4
+  APT_Sid            5
+  APT_LogonId        6
+  APT_ObjectTypeList 7
+  APT_Luid           8
+  APT_Guid           9
+  APT_Time           10
+  APT_Int64          11
+  APT_IpAddress      12
+  APT_LogonIdWithSid 13
+
+struct AUDIT_OBJECT_TYPE
+  ObjectType GUID
+  Flags USHORT
+  Level USHORT
+  AccessMask ACCESS_MASK
+
+pointer AUDIT_OBJECT_TYPE* AUDIT_OBJECT_TYPE
+
+struct AUDIT_OBJECT_TYPES
+  Count USHORT
+  Flags USHORT
+  pObjectTypes AUDIT_OBJECT_TYPE* count=Count
+
+pointer AUDIT_OBJECT_TYPES* AUDIT_OBJECT_TYPES
+
+struct AUDIT_IP_ADDRESS
+  pIpAddress "BYTE [_AUTHZ_SS_MAXSIZE]"
+
+pointer AUDIT_IP_ADDRESS* AUDIT_IP_ADDRESS
+
+union [AUDIT_PARAM_u1] display=union
+  Data0 ULONG_PTR
+  String PWSTR
+  u ULONG_PTR
+  psid SID*
+  pguid GUID*
+  LogonId_LowPart ULONG
+  pObjectTypes AUDIT_OBJECT_TYPES*
+  pIpAddress AUDIT_IP_ADDRESS*
+
+union [AUDIT_PARAM_u2] display=union
+  Data1 ULONG_PTR
+  LogonId_HighPart LONG
+
+struct AUDIT_PARAM
+  Type AUDIT_PARAM_TYPE
+  Length ULONG
+  Flags DWORD
+   [AUDIT_PARAM_u1]
+   [AUDIT_PARAM_u2]
+
+pointer AUDIT_PARAM* AUDIT_PARAM
+
+enum [APF_TYPE] DWORD display=DWORD
+  APF_AuditFailure 0x00000000
+  APF_AuditSuccess 0x00000001
+
+struct AUDIT_PARAMS
+  Length ULONG
+  Flags [APF_TYPE]
+  Count USHORT
+  Parameters AUDIT_PARAM* count=Count
+
+pointer PAUDIT_PARAMS AUDIT_PARAMS
+
+struct AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE
+  Version ULONG64
+  pName PWSTR
+
+pointer PAUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE
+
+struct AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE
+  pValue PVOID
+  ValueLength ULONG
+
+pointer PAUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE
+
+union [AUTHZ_SECURITY_ATTRIBUTE_V1_u] display=union
+  pInt64 PLONG64
+  pUint64 PULONG64
+  ppString PWSTR*
+  pFqbn PAUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE
+  pOctetString PAUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE
+
+flag [AUTHZ_SECURITY_ATTRIBUTE] ULONG display=ULONG
+  AUTHZ_SECURITY_ATTRIBUTE_NON_INHERITABLE      0x0001
+  AUTHZ_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE 0x0002
+
+struct AUTHZ_SECURITY_ATTRIBUTE_V1
+  pName PWSTR
+  ValueType USHORT
+  Reserved USHORT
+  Flags [AUTHZ_SECURITY_ATTRIBUTE]
+  ValueCount ULONG
+  Values [AUTHZ_SECURITY_ATTRIBUTE_V1_u]
+
+pointer PAUTHZ_SECURITY_ATTRIBUTE_V1 AUTHZ_SECURITY_ATTRIBUTE_V1
+
+union [AUTHZ_SECURITY_ATTRIBUTES_INFORMATION_u] display=union
+  pAttributeV1 PAUTHZ_SECURITY_ATTRIBUTE_V1
+
+struct AUTHZ_SECURITY_ATTRIBUTES_INFORMATION
+  Version USHORT
+  Reserved USHORT
+  AttributeCount ULONG
+  Attribute [AUTHZ_SECURITY_ATTRIBUTES_INFORMATION_u]
+
+pointer PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION AUTHZ_SECURITY_ATTRIBUTES_INFORMATION
+
+struct AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET
+  szObjectTypeName PWSTR
+  dwOffset DWORD
+
+array "AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET [ANYSIZE_ARRAY]" base=AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET count=1
+
+flag [AuthzRegistrationFlags] DWORD display=DWORD
+  AUTHZ_ALLOW_MULTIPLE_SOURCE_INSTANCES 0x1
+  AUTHZ_MIGRATED_LEGACY_PUBLISHER       0x2
+
+struct AUTHZ_SOURCE_SCHEMA_REGISTRATION
+  dwFlags [AuthzRegistrationFlags]
+  szEventSourceName PWSTR
+  szEventMessageFile PWSTR
+  szEventSourceXmlSchemaFile PWSTR
+  szEventAccessStringsFile PWSTR
+  szExecutableImagePath PWSTR
+  pProviderGuid GUID*
+  dwObjectTypeNameCount DWORD
+  ObjectTypeNames "AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET [ANYSIZE_ARRAY]" count=dwObjectTypeNameCount
+
+pointer PAUTHZ_SOURCE_SCHEMA_REGISTRATION AUTHZ_SOURCE_SCHEMA_REGISTRATION
+
+struct AUTHZ_ACCESS_REQUEST
+  DesiredAccess ACCESS_MASK
+  PrincipalSelfSid PSID
+  ObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeListLength DWORD
+  OptionalArguments PVOID
+
+pointer PAUTHZ_ACCESS_REQUEST AUTHZ_ACCESS_REQUEST
+
+struct AUTHZ_ACCESS_REPLY
+  ResultListLength DWORD
+  GrantedAccessMask PACCESS_MASK
+  SaclEvaluationResults PDWORD
+  Error PDWORD
+
+pointer PAUTHZ_ACCESS_REPLY AUTHZ_ACCESS_REPLY
+
+enum AUTHZ_CONTEXT_INFORMATION_CLASS UINT
+  AuthzContextInfoAuthenticationId 0
+  AuthzContextInfoUserSid          1
+  AuthzContextInfoGroupsSids       2
+  AuthzContextInfoRestrictedSids   3
+  AuthzContextInfoPrivileges       4
+  AuthzContextInfoExpirationTime   5
+  AuthzContextInfoServerContext    6
+  AuthzContextInfoIdentifier       7
+  AuthzContextInfoSource           8
+  AuthzContextInfoAll              9
+
+flag [AuthzInitRMFlags] DWORD display=DWORD
+  AUTHZ_RM_FLAG_NO_AUDIT                       0x1
+  AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION 0x2
+
+flag [AuthzAccessCheckFlags] DWORD display=DWORD
+  AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD 0x00000001
+
+flag [AuthzInitContextFlags] DWORD display=DWORD
+  AUTHZ_SKIP_TOKEN_GROUPS  0x2
+  AUTHZ_REQUIRE_S4U_LOGON  0x4
+  AUTHZ_COMPUTE_PRIVILEGES 0x8
+
+enum AUTHZ_SECURITY_ATTRIBUTE_OPERATION UINT
+  AUTHZ_SECURITY_ATTRIBUTE_OPERATION_NONE        0
+  AUTHZ_SECURITY_ATTRIBUTE_OPERATION_REPLACE_ALL 1
+  AUTHZ_SECURITY_ATTRIBUTE_OPERATION_ADD         2
+  AUTHZ_SECURITY_ATTRIBUTE_OPERATION_DELETE      3
+  AUTHZ_SECURITY_ATTRIBUTE_OPERATION_REPLACE     4
+
+pointer PAUTHZ_SECURITY_ATTRIBUTE_OPERATION AUTHZ_SECURITY_ATTRIBUTE_OPERATION
+
+flag [AUTHZ_INITOBJAUDITEVENT_FLAGS] DWORD display=DWORD
+  AUTHZ_NO_SUCCESS_AUDIT 0x00000001
+  AUTHZ_NO_FAILURE_AUDIT 0x00000002
+  AUTHZ_NO_ALLOC_STRINGS 0x00000004
+
+struct AUTHZ_RPC_INIT_INFO_CLIENT
+  version USHORT
+  ObjectUuid PWSTR
+  ProtSeq PWSTR
+  NetworkAddr PWSTR
+  Endpoint PWSTR
+  Options PWSTR
+  ServerSpn PWSTR
+
+pointer PAUTHZ_RPC_INIT_INFO_CLIENT AUTHZ_RPC_INIT_INFO_CLIENT
+
+enum AUTHZ_SID_OPERATION UINT
+  AUTHZ_SID_OPERATION_NONE        0
+  AUTHZ_SID_OPERATION_REPLACE_ALL 1
+  AUTHZ_SID_OPERATION_ADD         2
+  AUTHZ_SID_OPERATION_DELETE      3
+  AUTHZ_SID_OPERATION_REPLACE     4
+
+pointer PAUTHZ_SID_OPERATION AUTHZ_SID_OPERATION
+
+func AuthzAccessCheck
+  BOOL
+  flags [AuthzAccessCheckFlags]
+  AuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE
+  pRequest PAUTHZ_ACCESS_REQUEST
+  AuditInfo AUTHZ_AUDIT_EVENT_HANDLE
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  OptionalSecurityDescriptorArray PSECURITY_DESCRIPTOR*
+  OptionalSecurityDescriptorCount DWORD
+  pReply PAUTHZ_ACCESS_REPLY
+  pAuthzHandle PAUTHZ_ACCESS_CHECK_RESULTS_HANDLE
+
+func AuthzAddSidsToContext
+  BOOL
+  OrigClientContext AUTHZ_CLIENT_CONTEXT_HANDLE
+  Sids PSID_AND_ATTRIBUTES
+  SidCount DWORD
+  RestrictedSids PSID_AND_ATTRIBUTES
+  RestrictedSidCount DWORD
+  pNewClientContext PAUTHZ_CLIENT_CONTEXT_HANDLE
+
+func AuthzCachedAccessCheck
+  BOOL
+  Flags DWORD
+  AuthzHandle AUTHZ_ACCESS_CHECK_RESULTS_HANDLE
+  pRequest PAUTHZ_ACCESS_REQUEST
+  AuditInfo AUTHZ_AUDIT_EVENT_HANDLE
+  pReply PAUTHZ_ACCESS_REPLY
+
+func AuthzEnumerateSecurityEventSources
+  BOOL
+  dwFlags DWORD
+  Buffer PAUTHZ_SOURCE_SCHEMA_REGISTRATION
+  pdwCount PDWORD
+  pdwLength PDWORD
+
+func AuthzFreeAuditEvent
+  BOOL
+  pAuditEventInfo AUTHZ_AUDIT_EVENT_HANDLE
+
+func AuthzFreeContext
+  BOOL
+  AuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE
+
+func AuthzFreeHandle
+  BOOL
+  AuthzHandle AUTHZ_ACCESS_CHECK_RESULTS_HANDLE
+
+func AuthzFreeResourceManager
+  BOOL
+  AuthzResourceManager AUTHZ_RESOURCE_MANAGER_HANDLE
+
+func AuthzGetInformationFromContext
+  BOOL
+  hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE
+  InfoClass AUTHZ_CONTEXT_INFORMATION_CLASS
+  BufferSize DWORD
+  pSizeRequired PDWORD
+  Buffer PVOID
+
+func AuthzInitializeContextFromAuthzContext
+  BOOL
+  flags DWORD
+  AuthzHandle AUTHZ_CLIENT_CONTEXT_HANDLE
+  ExpirationTime PLARGE_INTEGER
+  Identifier LUID
+  DynamicGroupArgs PVOID
+  phNewAuthzHandle PAUTHZ_CLIENT_CONTEXT_HANDLE
+
+func AuthzInitializeContextFromSid
+  BOOL
+  Flags [AuthzInitContextFlags]
+  UserSid PSID
+  hAuthzResourceManager AUTHZ_RESOURCE_MANAGER_HANDLE
+  pExpirationTime PLARGE_INTEGER
+  Identifier LUID
+  DynamicGroupArgs PVOID
+  pAuthzClientContext PAUTHZ_CLIENT_CONTEXT_HANDLE
+
+func AuthzInitializeContextFromToken
+  BOOL
+  Flags DWORD
+  TokenHandle HANDLE
+  AuthzResourceManager AUTHZ_RESOURCE_MANAGER_HANDLE
+  pExpirationTime PLARGE_INTEGER
+  Identifier LUID
+  DynamicGroupArgs PVOID
+  pAuthzClientContext PAUTHZ_CLIENT_CONTEXT_HANDLE
+
+func AuthzInitializeObjectAccessAuditEvent varArgs
+  BOOL
+  Flags DWORD
+  hAuditEventType AUTHZ_AUDIT_EVENT_TYPE_HANDLE
+  szOperationType PWSTR
+  szObjectType PWSTR
+  szObjectName PWSTR
+  szAdditionalInfo PWSTR
+  phAuditEvent PAUTHZ_AUDIT_EVENT_HANDLE
+  dwAdditionalParamCount DWORD
+
+func AuthzInitializeObjectAccessAuditEvent2 varArgs
+  BOOL
+  Flags [AUTHZ_INITOBJAUDITEVENT_FLAGS]
+  hAuditEventType AUTHZ_AUDIT_EVENT_TYPE_HANDLE
+  szOperationType PWSTR
+  szObjectType PWSTR
+  szObjectName PWSTR
+  szAdditionalInfo PWSTR
+  szAdditionalInfo2 PWSTR
+  phAuditEvent PAUTHZ_AUDIT_EVENT_HANDLE
+  dwAdditionalParameterCount DWORD
+
+func AuthzInitializeRemoteResourceManager
+  BOOL
+  pRpcInitInfo PAUTHZ_RPC_INIT_INFO_CLIENT
+  phAuthzResourceManager PAUTHZ_RESOURCE_MANAGER_HANDLE
+
+func AuthzInitializeResourceManager
+  BOOL
+  flags [AuthzInitRMFlags]
+  pfnAccessCheck PFN_AUTHZ_DYNAMIC_ACCESS_CHECK
+  pfnComputeDynamicGroups PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS
+  pfnFreeDynamicGroups PFN_AUTHZ_FREE_DYNAMIC_GROUPS
+  ResourceManagerName PCWSTR
+  pAuthzResourceManager PAUTHZ_RESOURCE_MANAGER_HANDLE
+
+func AuthzInitializeResourceManagerEx
+  BOOL
+  Flags DWORD
+  pAuthzInitInfo PVOID
+  phAuthzResourceManager PAUTHZ_RESOURCE_MANAGER_HANDLE
+
+func AuthzOpenObjectAudit
+  BOOL
+  Flags DWORD
+  hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE
+  pRequest PAUTHZ_ACCESS_REQUEST
+  hAuditEvent AUTHZ_AUDIT_EVENT_HANDLE
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  SecurityDescriptorArray PSECURITY_DESCRIPTOR*
+  SecurityDescriptorCount DWORD
+  pReply PAUTHZ_ACCESS_REPLY
+
+func AuthzRegisterSecurityEventSource
+  BOOL
+  dwFlags DWORD
+  szEventSourceName PCWSTR
+  phEventProvider PAUTHZ_SECURITY_EVENT_PROVIDER_HANDLE
+
+func AuthzReportSecurityEvent varArgs
+  BOOL
+  dwFlags [APF_TYPE]
+  hEventProvider AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE
+  dwAuditId DWORD
+  pUserSid PSID
+  dwCount DWORD
+
+func AuthzReportSecurityEventFromParams
+  BOOL
+  dwFlags DWORD
+  hEventProvider AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE
+  dwAuditId DWORD
+  pUserSid PSID
+  pParams PAUDIT_PARAMS
+
+func AuthzInstallSecurityEventSource
+  BOOL
+  dwFlags DWORD
+  pRegistration PAUTHZ_SOURCE_SCHEMA_REGISTRATION
+
+func AuthzUninstallSecurityEventSource
+  BOOL
+  dwFlags DWORD
+  szEventSourceName PCWSTR
+
+func AuthzUnregisterSecurityEventSource
+  BOOL
+  dwFlags DWORD
+  phEventProvider PAUTHZ_SECURITY_EVENT_PROVIDER_HANDLE
+
+func AuthzModifySecurityAttributes
+  BOOL
+  AuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE
+  pOperations PAUTHZ_SECURITY_ATTRIBUTE_OPERATION
+  pAttributes PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION
+
+func AuthzFreeCentralAccessPolicyCache
+  BOOL
+
+func AuthzInitializeCompoundContext
+  BOOL
+  UserContext AUTHZ_CLIENT_CONTEXT_HANDLE
+  DeviceContext AUTHZ_CLIENT_CONTEXT_HANDLE
+  phCompoundContext PAUTHZ_CLIENT_CONTEXT_HANDLE
+
+func AuthzModifyClaims
+  BOOL
+  hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE
+  ClaimClass AUTHZ_CONTEXT_INFORMATION_CLASS
+  pClaimOperations PAUTHZ_SECURITY_ATTRIBUTE_OPERATION
+  pClaims PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION
+
+func AuthzModifySids
+  BOOL
+  hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE
+  SidClass AUTHZ_CONTEXT_INFORMATION_CLASS
+  pSidOperations PAUTHZ_SID_OPERATION
+  pSids PTOKEN_GROUPS
+
+func AuthzRegisterCapChangeNotification
+  BOOL
+  phCapChangeSubscription PAUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE
+  pfnCapChangeCallback LPTHREAD_START_ROUTINE
+  pCallbackContext PVOID
+
+func AuthzSetAppContainerInformation
+  BOOL
+  hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE
+  pAppContainerSid PSID
+  CapabilityCount DWORD
+  pCapabilitySids PSID_AND_ATTRIBUTES count=CapabilityCount
+
+func AuthzUnregisterCapChangeNotification
+  BOOL
+  hCapChangeSubscription AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE
+

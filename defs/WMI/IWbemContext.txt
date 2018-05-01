@@ -1,0 +1,47 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemContext base=IUnknown id={44aca674-e8fc-11d0-a07c-00c04fb68820} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func Clone
+    WBEMSTATUS
+    ppNewCopy IWbemContext**
+
+  func GetNames
+    WBEMSTATUS
+    lFlags long
+    pNames SAFEARRAY**
+
+  func BeginEnumeration
+    WBEMSTATUS
+    lFlags long
+
+  func Next
+    WBEMSTATUS
+    lFlags long
+    pstrName BSTR*
+    pValue VARIANT*
+
+  func EndEnumeration
+    WBEMSTATUS
+
+  func SetValue
+    WBEMSTATUS
+    wszName LPCWSTR
+    lFlags long
+    pValue VARIANT*
+
+  func GetValue
+    WBEMSTATUS
+    wszName LPCWSTR
+    lFlags long
+    pValue VARIANT*
+
+  func DeleteValue
+    WBEMSTATUS
+    wszName LPCWSTR
+    lFlags long
+
+  func DeleteAll
+    WBEMSTATUS
+
+

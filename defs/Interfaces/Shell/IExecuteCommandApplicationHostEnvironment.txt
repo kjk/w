@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IExecuteCommandApplicationHostEnvironment base=IUnknown id={18B21AA9-E184-4FF0-9F5E-F882D03771B3} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetValue
+    HRESULT
+    pahe AHE_TYPE*
+
+

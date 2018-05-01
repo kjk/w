@@ -1,0 +1,8 @@
+include Interfaces\OLEDB\Connection15.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface _ADOConnection base=Connection15 id={00001550-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func Cancel
+    [OLEDB_HRESULT]
+
+

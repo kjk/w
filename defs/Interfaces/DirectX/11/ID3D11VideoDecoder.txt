@@ -1,0 +1,14 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11VideoDecoder base=ID3D11DeviceChild id={3C9C5B51-995D-48d1-9B8D-FA5CAEDED65C} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Microsoft Media Foundation/Direct3D 11 Video"
+  func GetCreationParameters
+    HRESULT
+    pVideoDesc D3D11_VIDEO_DECODER_DESC*
+    pConfig D3D11_VIDEO_DECODER_CONFIG*
+
+  func GetDriverHandle
+    HRESULT
+    pDriverHandle HANDLE*
+
+

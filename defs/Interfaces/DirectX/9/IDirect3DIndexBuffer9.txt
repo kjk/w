@@ -1,0 +1,18 @@
+include Interfaces\DirectX\9\IDirect3DResource9.txt
+
+ingterface IDirect3DIndexBuffer9 base=IDirect3DResource9 id={7C9DD65E-D3F7-4529-ACEE-785830ACDE35} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func Lock
+    HRESULT
+    OffsetToLock UINT
+    SizeToLock UINT
+    ppbData void**
+    Flags DWORD
+
+  func Unlock
+    HRESULT
+
+  func GetDesc
+    HRESULT
+    pDesc D3DINDEXBUFFER_DESC*
+
+

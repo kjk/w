@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+ingterface IDXGIDisplayControl base=IUnknown id={ea9dbf1a-c88e-4486-854a-98aa0138f30c} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func IsStereoEnabled
+    BOOL
+
+  func SetStereoEnabled
+    void
+    enabled BOOL
+
+

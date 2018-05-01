@@ -1,0 +1,166 @@
+include Headers\odbc.h.txt
+
+dll ODBCCP32.DLL callingConvention=STDCALL onlineHelp=MSDN
+category "Data Access and Storage/Windows Data Access Components/Microsoft Open Database Connectivity (ODBC)/Installer DLL"
+func SQLConfigDataSource bothCharset nameA=SQLConfigDataSource
+  BOOL
+  hwndParent HWND
+  fRequest [ODBC_DSN_REQUEST]
+  lpszDriver LPCTSTR
+  lpszAttributes LPCTSTR
+
+func SQLConfigDriver bothCharset nameA=SQLConfigDriver
+  BOOL
+  hwndParent HWND
+  fRequest [ODBC_DRIVER_REQUEST]
+  lpszDriver LPCTSTR
+  lpszArgs LPCTSTR
+  lpszMsg LPTSTR
+  cbMsgMax WORD
+  pcbMsgOut WORD*
+
+func SQLCreateDataSource bothCharset nameA=SQLCreateDataSource
+  BOOL
+  hwnd HWND
+  lpszDS LPTSTR
+
+func SQLGetConfigMode
+  BOOL
+  pwConfigMode [ODBC_CONFIG_MODE*]
+
+func SQLGetInstalledDrivers bothCharset nameA=SQLGetInstalledDrivers
+  BOOL
+  lpszBuf LPTSTR
+  cbBufMax WORD
+  pcbBufOut WORD*
+
+func SQLGetPrivateProfileString bothCharset nameA=SQLGetPrivateProfileString
+  success NotEqual=0
+  int
+  lpszSection LPCTSTR
+  lpszEntry LPCTSTR
+  lpszDefault LPCTSTR
+  RetBuffer LPCTSTR outputOnly
+  cbRetBuffer INT
+  lpszFilename LPCTSTR
+
+func SQLGetTranslator bothCharset nameA=SQLGetTranslator
+  BOOL
+  hwndParent HWND
+  lpszName LPTSTR
+  cbNameMax WORD
+  pcbNameOut WORD*
+  lpszPath LPTSTR outputOnly
+  cbPathMax WORD
+  pcbPathOut WORD*
+  pvOption DWORD*
+
+func SQLInstallDriverEx bothCharset nameA=SQLInstallDriverEx
+  BOOL
+  lpszDriver LPCTSTR
+  lpszPathIn LPCTSTR
+  lpszPathOut LPTSTR
+  cbPathOutMax WORD
+  pcbPathOut WORD*
+  fRequest [ODBC_INSTALL_REQUEST]
+  lpdwUsageCount LPDWORD
+
+func SQLInstallDriverManager bothCharset nameA=SQLInstallDriverManager
+  BOOL
+  lpszPath LPTSTR
+  cbPathMax WORD
+  pcbPathOut WORD*
+
+func SQLInstallerError bothCharset nameA=SQLInstallerError
+  SQLRETURN
+  iError WORD
+  pfErrorCode [ODBC_ERROR_CODE*]
+  lpszErrorMsg LPTSTR
+  cbErrorMsgMax WORD
+  pcbErrorMsg WORD*
+
+func SQLInstallTranslator bothCharset nameA=SQLInstallTranslator
+  BOOL
+  lpszInfFile LPCTSTR
+  lpszTranslator LPCTSTR
+  lpszPathIn LPCTSTR
+  lpszPathOut LPTSTR
+  cbPathOutMax WORD
+  pcbPathOut WORD*
+  fRequest WORD
+  lpdwUsageCount LPDWORD
+
+func SQLInstallTranslatorEx bothCharset nameA=SQLInstallTranslatorEx
+  BOOL
+  lpszTranslator LPCTSTR
+  lpszPathIn LPCTSTR
+  lpszPathOut LPTSTR
+  cbPathOutMax WORD
+  pcbPathOut WORD*
+  fRequest WORD
+  lpdwUsageCount LPDWORD
+
+func SQLManageDataSources
+  BOOL
+  hwnd HWND
+
+func SQLPostInstallerError bothCharset nameA=SQLPostInstallerError
+  SQLRETURN
+  fErrorCode [ODBC_ERROR_CODE]
+  szErrorMsg LPTSTR
+
+func SQLReadFileDSN bothCharset nameA=SQLReadFileDSN
+  BOOL
+  lpszFileName LPCTSTR
+  lpszAppName LPCTSTR
+  lpszKeyName LPCTSTR
+  lpszString LPTSTR
+  cbString WORD
+  pcbString WORD*
+
+func SQLRemoveDriver bothCharset nameA=SQLRemoveDriver
+  BOOL
+  lpszDriver LPCTSTR
+  fRemoveDSN BOOL
+  lpdwUsageCount LPDWORD
+
+func SQLRemoveDriverManager
+  BOOL
+  pdwUsageCount LPDWORD
+
+func SQLRemoveDSNFromIni bothCharset nameA=SQLRemoveDSNFromIni
+  BOOL
+  lpszDSN LPCTSTR
+
+func SQLRemoveTranslator bothCharset nameA=SQLRemoveTranslator
+  BOOL
+  lpszTranslator LPCTSTR
+  lpdwUsageCount LPDWORD
+
+func SQLSetConfigMode
+  BOOL
+  wConfigMode [ODBC_CONFIG_MODE]
+
+func SQLValidDSN bothCharset nameA=SQLValidDSN
+  BOOL
+  lpszDSN LPCTSTR
+
+func SQLWriteDSNToIni bothCharset nameA=SQLWriteDSNToIni
+  BOOL
+  lpszDSN LPCTSTR
+  lpszDriver LPCTSTR
+
+func SQLWriteFileDSN bothCharset nameA=SQLWriteFileDSN
+  BOOL
+  lpszFileName LPCTSTR
+  lpszAppName LPCTSTR
+  lpszKeyName LPCTSTR
+  lpszString LPCTSTR
+
+func SQLWritePrivateProfileString bothCharset nameA=SQLWritePrivateProfileString
+  BOOL
+  lpszSection LPCTSTR
+  lpszEntry LPCTSTR
+  lpszString LPCTSTR
+  lpszFilename LPCTSTR
+

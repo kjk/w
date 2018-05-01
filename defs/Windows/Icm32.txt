@@ -1,0 +1,191 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+
+dll Icm32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Graphics and Gaming/Legacy Graphics/Windows Color System/Color Management Modules (CMMs)"
+alias HCMTRANSFORM HANDLE
+
+alias LPDEVCHARACTER PVOID
+
+enum COLORTYPE UINT
+  COLOR_GRAY      1
+  COLOR_RGB       2
+  COLOR_XYZ       3
+  COLOR_Yxy       4
+  COLOR_Lab       5
+  COLOR_3_CHANNEL 6
+  COLOR_CMYK      7
+  COLOR_5_CHANNEL 8
+  COLOR_6_CHANNEL 9
+  COLOR_7_CHANNEL 10
+  COLOR_8_CHANNEL 11
+  COLOR_NAMED     12
+
+struct RGBTRIPLE pack=1
+  rgbtBlue BYTE
+  rgbtGreen BYTE
+  rgbtRed BYTE
+
+pointer RGBTRIPLE* RGBTRIPLE
+
+enum [CMS_DIRECTION] DWORD display=DWORD
+  CMS_FORWARD  0
+  CMS_BACKWARD 1
+
+func CMCheckColors
+  BOOL
+  hcmTransform HCMTRANSFORM
+  lpaInputColors LPCOLOR count=nColors
+  nColors DWORD
+  ctInput COLORTYPE
+  lpaResult LPBYTE
+
+func CMCheckColorsInGamut
+  BOOL
+  hcmTransform HCMTRANSFORM
+  lpaRGBTriple RGBTRIPLE* count=nCount
+  lpaResult LPBYTE count=nCount
+  nCount UINT
+
+func CMCheckRGBs
+  BOOL
+  hcmTransform HCMTRANSFORM
+  lpSrcBits LPVOID
+  bmInput BMFORMAT
+  dwWidth DWORD
+  dwHeight DWORD
+  dwStride DWORD
+  lpaResult LPBYTE
+  pfnCallback PBMCALLBACKFN
+  ulCallbackData ULONG
+
+func CMConvertColorNameToIndex
+  BOOL
+  hProfile HPROFILE
+  paColorName PCOLOR_NAME count=dwCount
+  paIndex PDWORD count=dwCount
+  dwCount DWORD
+
+func CMConvertIndexToColorName
+  BOOL
+  hProfile HPROFILE
+  paIndex PDWORD count=dwCount
+  paColorName PCOLOR_NAME count=dwCount
+  dwCount DWORD
+
+func CMCreateDeviceLinkProfile
+  BOOL
+  lpahProfiles PHPROFILE count=nProfiles
+  nProfiles DWORD
+  padwIntents [RENDERING_INTENT*] count=nIntents
+  nIntents DWORD
+  dwFlags [CCT_FLAGS]
+  lpProfileData LPBYTE*
+
+func CMCreateMultiProfileTransform
+  success Greater=255
+  HCMTRANSFORM
+  lpahProfiles PHPROFILE count=nProfiles
+  nProfiles DWORD
+  padwIntents [RENDERING_INTENT*] count=nIntents
+  nIntents DWORD
+  dwFlags [CCT_FLAGS]
+
+func CMCreateProfile bothCharset nameA=CMCreateProfile
+  BOOL
+  lpColorSpace LPLOGCOLORSPACE
+  lpProfileData LPBYTE*
+
+func CMCreateTransformExt bothCharset nameA=CMCreateTransformExt
+  success NotEqual=0
+  HCMTRANSFORM
+  lpColorSpace LPLOGCOLORSPACE
+  lpDevCharacter LPDEVCHARACTER
+  lpTargetDevCharacter LPDEVCHARACTER
+  dwFlags [CCT_FLAGS]
+
+func CMDeleteTransform
+  BOOL
+  hcmTransform HCMTRANSFORM
+
+func CMGetInfo
+  success NotEqual=0
+  DWORD
+  dwInfo [CMM_INFO]
+
+func CMGetNamedProfileInfo
+  BOOL
+  hProfile HPROFILE
+  pNamedProfileInfo PNAMED_PROFILE_INFO
+
+func CMGetPS2ColorRenderingDictionary
+  BOOL
+  hProfile HPROFILE
+  dwIntent [RENDERING_INTENT]
+  lpBuffer LPBYTE postLength=lpcbSize
+  lpcbSize LPDWORD
+  lpbBinary LPBOOL
+
+func CMGetPS2ColorRenderingIntent
+  BOOL
+  hProfile HPROFILE
+  dwIntent [RENDERING_INTENT]
+  lpBuffer LPBYTE postLength=lpcbSize
+  lpcbSize LPDWORD
+
+func CMGetPS2ColorSpaceArray
+  BOOL
+  hProfile HPROFILE
+  dwIntent [RENDERING_INTENT]
+  dwCSAType DWORD
+  lpBuffer LPBYTE postLength=lpcbSize
+  lpcbSize LPDWORD
+  lpbBinary LPBOOL
+
+func CMIsProfileValid
+  BOOL
+  hProfile HPROFILE
+  lpbValid LPBOOL
+
+func CMTranslateColors
+  BOOL
+  hcmTransform HCMTRANSFORM
+  lpaInputColors LPCOLOR count=nColors
+  nColors DWORD
+  ctInput COLORTYPE
+  lpaOutputColors LPCOLOR count=nColors
+  ctOutput COLORTYPE
+
+func CMTranslateRGB
+  BOOL
+  hcmTransform HCMTRANSFORM
+  ColorRef COLORREF
+  lpColorRef LPCOLORREF
+  dwFlags [CMS_DIRECTION]
+
+func CMTranslateRGBs
+  BOOL
+  hcmTransform HCMTRANSFORM
+  lpSrcBits LPVOID
+  bmInput BMFORMAT
+  dwWidth DWORD
+  dwHeight DWORD
+  dwStride DWORD
+  lpDestBits LPVOID
+  bmOutput BMFORMAT
+  dwTranslateDirection [CMS_DIRECTION]
+
+func CMTranslateRGBsExt
+  BOOL
+  hcmTransform HCMTRANSFORM
+  lpSrcBits LPVOID
+  bmInput BMFORMAT
+  dwWidth DWORD
+  dwHeight DWORD
+  dwInputStride DWORD
+  lpDestBits LPVOID
+  bmOutput BMFORMAT
+  dwOutputStride DWORD
+  lpfnCallback LPBMCALLBACKFN
+  ulCallbackData ULONG
+

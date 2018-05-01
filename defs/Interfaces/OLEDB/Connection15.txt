@@ -1,0 +1,123 @@
+include Interfaces\OLEDB\_ADO.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface Connection15 base=_ADO id={00001515-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_ConnectionString
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func put_ConnectionString
+    [OLEDB_HRESULT]
+    bstr BSTR
+
+  func get_CommandTimeout
+    [OLEDB_HRESULT]
+    plTimeout LONG*
+
+  func put_CommandTimeout
+    [OLEDB_HRESULT]
+    lTimeout LONG
+
+  func get_ConnectionTimeout
+    [OLEDB_HRESULT]
+    plTimeout LONG*
+
+  func put_ConnectionTimeout
+    [OLEDB_HRESULT]
+    lTimeout LONG
+
+  func get_Version
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func Close
+    [OLEDB_HRESULT]
+
+  func Execute
+    [OLEDB_HRESULT]
+    CommandText BSTR
+    RecordsAffected VARIANT*
+    Options [ExecuteOptionCommandTypeEnum]
+    ppiRset _ADORecordset**
+
+  func BeginTrans
+    [OLEDB_HRESULT]
+    TransactionLevel long*
+
+  func CommitTrans
+    [OLEDB_HRESULT]
+
+  func RollbackTrans
+    [OLEDB_HRESULT]
+
+  func Open
+    [OLEDB_HRESULT]
+    ConnectionString BSTR
+    UserID BSTR
+    Password BSTR
+    Options ConnectOptionEnum
+
+  func get_Errors
+    [OLEDB_HRESULT]
+    ppvObject ADOErrors**
+
+  func get_DefaultDatabase
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func put_DefaultDatabase
+    [OLEDB_HRESULT]
+    bstr BSTR
+
+  func get_IsolationLevel
+    [OLEDB_HRESULT]
+    Level IsolationLevelEnum*
+
+  func put_IsolationLevel
+    [OLEDB_HRESULT]
+    Level IsolationLevelEnum
+
+  func get_Attributes
+    [OLEDB_HRESULT]
+    plAttr XactAttributeEnum*
+
+  func put_Attributes
+    [OLEDB_HRESULT]
+    lAttr XactAttributeEnum
+
+  func get_CursorLocation
+    [OLEDB_HRESULT]
+    plCursorLoc CursorLocationEnum*
+
+  func put_CursorLocation
+    [OLEDB_HRESULT]
+    lCursorLoc CursorLocationEnum
+
+  func get_Mode
+    [OLEDB_HRESULT]
+    plMode ConnectModeEnum*
+
+  func put_Mode
+    [OLEDB_HRESULT]
+    lMode ConnectModeEnum
+
+  func get_Provider
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func put_Provider
+    [OLEDB_HRESULT]
+    Provider BSTR
+
+  func get_State
+    [OLEDB_HRESULT]
+    plObjState LONG*
+
+  func OpenSchema
+    [OLEDB_HRESULT]
+    Schema SchemaEnum
+    Restrictions VARIANT
+    SchemaID VARIANT
+    pprset _ADORecordset**
+
+

@@ -1,0 +1,34 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID3D10ShaderReflection base=IUnknown id={C530AD7D-9B16-4395-A979-BA2ECFF83ADD} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Shader"
+  func GetDesc
+    HRESULT
+    pDesc D3D10_SHADER_DESC*
+
+  func GetConstantBufferByIndex
+    success NotEqual=0
+    ID3D10ShaderReflectionConstantBuffer*
+    Index UINT
+
+  func GetConstantBufferByName
+    success NotEqual=0
+    ID3D10ShaderReflectionConstantBuffer*
+    Name LPCSTR
+
+  func GetResourceBindingDesc
+    HRESULT
+    ResourceIndex UINT
+    pDesc D3D10_SHADER_INPUT_BIND_DESC*
+
+  func GetInputParameterDesc
+    HRESULT
+    ParameterIndex UINT
+    pDesc D3D10_SIGNATURE_PARAMETER_DESC*
+
+  func GetOutputParameterDesc
+    HRESULT
+    ParameterIndex UINT
+    pDesc D3D10_SIGNATURE_PARAMETER_DESC*
+
+

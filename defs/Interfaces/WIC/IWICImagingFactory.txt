@@ -1,0 +1,149 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICImagingFactory base=IUnknown id={ec5ec8a9-c395-4314-9c77-54d7a935ff70} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func CreateDecoderFromFilename
+    [WIC_HRESULT]
+    wzFilename LPCWSTR
+    pguidVendor "const GUID*"
+    dwDesiredAccess DWORD
+    metadataOptions WICDecodeOptions
+    ppIDecoder IWICBitmapDecoder**
+
+  func CreateDecoderFromStream
+    [WIC_HRESULT]
+    pIStream IStream*
+    pguidVendor "const GUID*"
+    metadataOptions WICDecodeOptions
+    ppIDecoder IWICBitmapDecoder**
+
+  func CreateDecoderFromFileHandle
+    [WIC_HRESULT]
+    hFile ULONG_PTR
+    pguidVendor "const GUID*"
+    metadataOptions WICDecodeOptions
+    ppIDecoder IWICBitmapDecoder**
+
+  func CreateComponentInfo
+    [WIC_HRESULT]
+    clsidComponent REFCLSID
+    ppIInfo IWICComponentInfo**
+
+  func CreateDecoder
+    [WIC_HRESULT]
+    guidContainerFormat REFGUID
+    pguidVendor "const GUID*"
+    ppIDecoder IWICBitmapDecoder**
+
+  func CreateEncoder
+    [WIC_HRESULT]
+    guidContainerFormat REFGUID
+    pguidVendor "const GUID*"
+    ppIEncoder IWICBitmapEncoder**
+
+  func CreatePalette
+    [WIC_HRESULT]
+    ppIPalette IWICPalette**
+
+  func CreateFormatConverter
+    [WIC_HRESULT]
+    ppIFormatConverter IWICFormatConverter**
+
+  func CreateBitmapScaler
+    [WIC_HRESULT]
+    ppIBitmapScaler IWICBitmapScaler**
+
+  func CreateBitmapClipper
+    [WIC_HRESULT]
+    ppIBitmapClipper IWICBitmapClipper**
+
+  func CreateBitmapFlipRotator
+    [WIC_HRESULT]
+    ppIBitmapFlipRotator IWICBitmapFlipRotator**
+
+  func CreateStream
+    [WIC_HRESULT]
+    ppIWICStream IWICStream**
+
+  func CreateColorContext
+    [WIC_HRESULT]
+    ppIWICColorContext IWICColorContext**
+
+  func CreateColorTransformer
+    [WIC_HRESULT]
+    ppIWICColorTransform IWICColorTransform**
+
+  func CreateBitmap
+    [WIC_HRESULT]
+    uiWidth UINT
+    uiHeight UINT
+    pixelFormat REFWICPixelFormatGUID
+    option WICBitmapCreateCacheOption
+    ppIBitmap IWICBitmap**
+
+  func CreateBitmapFromSource
+    [WIC_HRESULT]
+    pIBitmapSource IWICBitmapSource*
+    option WICBitmapCreateCacheOption
+    ppIBitmap IWICBitmap**
+
+  func CreateBitmapFromSourceRect
+    [WIC_HRESULT]
+    pIBitmapSource IWICBitmapSource*
+    x UINT
+    y UINT
+    width UINT
+    height UINT
+    ppIBitmap IWICBitmap**
+
+  func CreateBitmapFromMemory
+    [WIC_HRESULT]
+    uiWidth UINT
+    uiHeight UINT
+    pixelFormat REFWICPixelFormatGUID
+    cbStride UINT
+    cbBufferSize UINT
+    pbBuffer BYTE*
+    ppIBitmap IWICBitmap**
+
+  func CreateBitmapFromHBITMAP
+    [WIC_HRESULT]
+    hBitmap HBITMAP
+    hPalette HPALETTE
+    options WICBitmapAlphaChannelOption
+    ppIBitmap IWICBitmap**
+
+  func CreateBitmapFromHICON
+    [WIC_HRESULT]
+    hIcon HICON
+    ppIBitmap IWICBitmap**
+
+  func CreateComponentEnumerator
+    [WIC_HRESULT]
+    componentTypes DWORD
+    options DWORD
+    ppIEnumUnknown IEnumUnknown**
+
+  func CreateFastMetadataEncoderFromDecoder
+    [WIC_HRESULT]
+    pIDecoder IWICBitmapDecoder*
+    ppIFastEncoder IWICFastMetadataEncoder**
+
+  func CreateFastMetadataEncoderFromFrameDecode
+    [WIC_HRESULT]
+    pIFrameDecoder IWICBitmapFrameDecode*
+    ppIFastEncoder IWICFastMetadataEncoder**
+
+  func CreateQueryWriter
+    [WIC_HRESULT]
+    guidMetadataFormat REFGUID
+    pguidVendor "const GUID*"
+    ppIQueryWriter IWICMetadataQueryWriter**
+
+  func CreateQueryWriterFromReader
+    [WIC_HRESULT]
+    pIQueryReader IWICMetadataQueryReader*
+    pguidVendor "const GUID*"
+    ppIQueryWriter IWICMetadataQueryWriter**
+
+

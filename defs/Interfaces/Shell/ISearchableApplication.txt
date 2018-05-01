@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISearchableApplication base=IUnknown id={08922F8D-243A-49E3-A495-BD4F9CF8AB9E} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetSearchWindow
+    HRESULT
+    hwnd HWND*
+
+

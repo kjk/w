@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3D9ExOverlayExtension base=IUnknown id={187aeb13-aaf5-4c59-876d-e059088c0df8} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func CheckDeviceOverlayType
+    HRESULT
+    Adapter UINT
+    DevType D3DDEVTYPE
+    OverlayWidth UINT
+    OverlayHeight UINT
+    OverlayFormat D3DFORMAT
+    pDisplayMode D3DDISPLAYMODEEX*
+    DisplayRotation D3DDISPLAYROTATION
+    pOverlayCaps D3DOVERLAYCAPS*
+
+

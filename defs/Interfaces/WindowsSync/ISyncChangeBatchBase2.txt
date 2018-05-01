@@ -1,0 +1,12 @@
+include Interfaces\WindowsSync\ISyncChangeBatchBase.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncChangeBatchBase2 base=ISyncChangeBatchBase id={6fdb596a-d755-4584-bd0c-c0c23a548fbf} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func SerializeWithOptions
+    HRESULT
+    targetFormatVersion SYNC_SERIALIZATION_VERSION
+    dwFlags DWORD
+    pbBuffer BYTE*
+    pdwSerializedSize DWORD*
+
+

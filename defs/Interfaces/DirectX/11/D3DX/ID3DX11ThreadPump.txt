@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+
+ingterface ID3DX11ThreadPump base=IUnknown id={C93FECFA-6967-478a-ABBC-402D90621FCB} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/D3DX"
+  func AddWorkItem
+    HRESULT
+    pDataLoader ID3DX11DataLoader*
+    pDataProcessor ID3DX11DataProcessor*
+    pHResult HRESULT*
+    ppDeviceObject void**
+
+  func GetWorkItemCount
+    success NotEqual=0
+    UINT
+
+  func WaitForAllItems
+    HRESULT
+
+  func ProcessDeviceWorkItems
+    HRESULT
+    iWorkItemCount UINT
+
+  func PurgeAllItems
+    HRESULT
+
+  func GetQueueStatus
+    HRESULT
+    pIoQueue UINT*
+    pProcessQueue UINT*
+    pDeviceQueue UINT*
+
+

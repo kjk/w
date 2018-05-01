@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRAspectRatioControl9 base=IUnknown id={00d96c29-bbde-4efc-9901-bb5036392146} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetAspectRatioMode
+    HRESULT
+    lpdwARMode LPDWORD
+
+  func SetAspectRatioMode
+    HRESULT
+    dwARMode DWORD
+
+

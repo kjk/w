@@ -1,0 +1,27 @@
+include Interfaces\WIC\IWICComponentInfo.txt
+
+ingterface IWICPixelFormatInfo base=IWICComponentInfo id={E8EDA601-3D48-431a-AB44-69059BE88BBE} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetFormatGUID
+    [WIC_HRESULT]
+    pFormat GUID*
+
+  func GetColorContext
+    [WIC_HRESULT]
+    ppIColorContext IWICColorContext**
+
+  func GetBitsPerPixel
+    [WIC_HRESULT]
+    puiBitsPerPixel UINT*
+
+  func GetChannelCount
+    [WIC_HRESULT]
+    puiChannelCount UINT*
+
+  func GetChannelMask
+    [WIC_HRESULT]
+    uiChannelIndex UINT
+    cbMaskBuffer UINT
+    pbMaskBuffer BYTE*
+    pcbActual UINT*
+
+

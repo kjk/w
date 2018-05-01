@@ -1,0 +1,23 @@
+include Interfaces\COM\IOleContainer.txt
+
+ingterface IOleItemContainer base=IOleContainer id={0000011c-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func GetObject
+    HRESULT
+    pszItem LPOLESTR
+    dwSpeedNeeded DWORD
+    pbc IBindCtx*
+    riid REFIID
+    ppvObject void** interfaceId=riid
+
+  func GetObjectStorage
+    HRESULT
+    pszItem LPOLESTR
+    pbc IBindCtx*
+    riid REFIID
+    ppvStorage void** interfaceId=riid
+
+  func IsRunning
+    HRESULT
+    pszItem LPOLESTR
+
+

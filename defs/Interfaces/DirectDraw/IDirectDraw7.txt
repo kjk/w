@@ -1,0 +1,15 @@
+include Interfaces\DirectDraw\IDirectDraw4.txt
+
+ingterface IDirectDraw7 base=IDirectDraw4 id={15e65ec0-3b9c-11d2-b92f-00609797ea5b} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+  func StartModeTest
+    [DD_HRESULT]
+    lpModesToTest LPSIZE count=dwNumEntries
+    dwNumEntries DWORD
+    dwFlags [DDSMT_FLAGS]
+
+  func EvaluateMode
+    [DD_HRESULT]
+    dwFlags [DDEM_FLAGS]
+    pSecondsUntilTimeout DWORD*
+
+

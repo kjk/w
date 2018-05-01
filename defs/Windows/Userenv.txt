@@ -1,0 +1,284 @@
+include Headers\windows.h.txt
+include Headers\security.h.txt
+
+dll Userenv.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Administration/Group Policy"
+category "Windows Environment Development/Windows Shell"
+interface IWbemServices
+
+interface IWbemClassObject
+
+alias REFGPEXTENSIONID GUID*
+
+alias ASYNCCOMPLETIONHANDLE UINT_PTR
+
+alias PRSOPTOKEN PVOID
+
+array "TCHAR [50]" base=TCHAR count=50
+
+enum GPO_LINK UINT
+  GPLinkUnknown            0
+  GPLinkMachine            1
+  GPLinkSite               2
+  GPLinkDomain             3
+  GPLinkOrganizationalUnit 4
+
+flag [GPO_FLAG] DWORD display=DWORD
+  GPO_FLAG_DISABLE 0x00000001
+  GPO_FLAG_FORCE   0x00000002
+
+struct GROUP_POLICY_OBJECT
+  dwOptions [GPO_FLAG]
+  dwVersion DWORD
+  lpDSPath LPTSTR
+  lpFileSysPath LPTSTR
+  lpDisplayName LPTSTR
+  szGPOName "TCHAR [50]"
+  GPOLink GPO_LINK
+  lParam LPARAM
+  pNext LPVOID display=GROUP_POLICY_OBJECT*
+  pPrev LPVOID display=GROUP_POLICY_OBJECT*
+  lpExtensions LPTSTR
+  lParam2 LPARAM
+  lpLink LPTSTR
+
+pointer PGROUP_POLICY_OBJECT GROUP_POLICY_OBJECT
+
+pointer PGROUP_POLICY_OBJECT* PGROUP_POLICY_OBJECT
+
+enum SETTINGSTATUS UINT
+  RSOPUnspecified      0
+  RSOPApplied          1
+  RSOPIgnored          2
+  RSOPFailed           3
+  RSOPSubsettingFailed 4
+
+struct POLICYSETTINGSTATUSINFO
+  szKey LPWSTR
+  szEventSource LPWSTR
+  szEventLogName LPWSTR
+  dwEventID DWORD
+  dwErrorCode DWORD
+  status SETTINGSTATUS
+  timeLogged SYSTEMTIME
+
+pointer POLICYSETTINGSTATUSINFO* POLICYSETTINGSTATUSINFO
+
+struct PROFILEINFO
+  dwSize DWORD
+  dwFlags DWORD
+  lpUserName LPTSTR
+  lpProfilePath LPTSTR
+  lpDefaultPath LPTSTR
+  lpServerName LPTSTR
+  lpPolicyPath LPTSTR
+  hProfile HANDLE
+
+pointer LPPROFILEINFO PROFILEINFO
+
+flag [ProfileType] DWORD
+  PT_TEMPORARY 0x00000001
+  PT_ROAMING   0x00000002
+  PT_MANDATORY 0x00000004
+
+pointer [ProfileType*] [ProfileType] display=DWORD*
+
+func EnterCriticalPolicySection
+  success NotEqual=0
+  HANDLE
+  bMachine BOOL
+
+func FreeGPOList bothCharset
+  BOOL
+  pGPOList PGROUP_POLICY_OBJECT
+
+func GetAppliedGPOList bothCharset
+  [ERROR_CODE]
+  dwFlags DWORD
+  pMachineName LPCTSTR
+  pSidUser PSID
+  pGuidExtension GUID*
+  ppGPOList PGROUP_POLICY_OBJECT*
+
+func GetGPOList bothCharset
+  BOOL
+  hToken HANDLE
+  lpName LPCTSTR
+  lpHostName LPCTSTR
+  lpComputerName LPCTSTR
+  dwFlags DWORD
+  pGPOList PGROUP_POLICY_OBJECT*
+
+func LeaveCriticalPolicySection
+  BOOL
+  hSection HANDLE
+
+func ProcessGroupPolicyCompleted
+  [ERROR_CODE]
+  extensionId REFGPEXTENSIONID
+  pAsyncHandle ASYNCCOMPLETIONHANDLE
+  dwStatus DWORD
+
+func ProcessGroupPolicyCompletedEx
+  [ERROR_CODE]
+  extensionId REFGPEXTENSIONID
+  pAsyncHandle ASYNCCOMPLETIONHANDLE
+  dwStatus DWORD
+  RsopStatus HRESULT
+
+func RefreshPolicy
+  BOOL
+  bMachine BOOL
+
+func RefreshPolicyEx
+  BOOL
+  bMachine BOOL
+  dwOptions DWORD
+
+func RegisterGPNotification
+  BOOL
+  hEvent HANDLE
+  bMachine BOOL
+
+func RsopAccessCheckByType
+  HRESULT
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  pPrincipalSelfSid PSID
+  pRsopToken PRSOPTOKEN
+  dwDesiredAccessMask [ACCESS_MASK_DWORD]
+  pObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeListLength DWORD
+  pGenericMapping PGENERIC_MAPPING
+  pPrivilegeSet PPRIVILEGE_SET
+  pdwPrivilegeSetLength LPDWORD
+  pdwGrantedAccessMask [ACCESS_MASK_LPDWORD]
+  pbAccessStatus LPBOOL
+
+func RsopFileAccessCheck
+  HRESULT
+  pszFileName LPWSTR
+  pRsopToken PRSOPTOKEN
+  dwDesiredAccessMask [ACCESS_MASK_DWORD]
+  pdwGrantedAccessMask [ACCESS_MASK_LPDWORD]
+  pbAccessStatus LPBOOL
+
+func RsopResetPolicySettingStatus
+  HRESULT
+  dwFlags DWORD
+  pServices IWbemServices*
+  pSettingInstance IWbemClassObject*
+
+func RsopSetPolicySettingStatus
+  HRESULT
+  dwFlags DWORD
+  pServices IWbemServices*
+  pSettingInstance IWbemClassObject*
+  nInfo DWORD
+  pStatus POLICYSETTINGSTATUSINFO*
+
+func UnregisterGPNotification
+  BOOL
+  hEvent HANDLE
+
+func CreateEnvironmentBlock
+  BOOL
+  lpEnvironment LPVOID*
+  hToken HANDLE
+  bInherit BOOL
+
+func CreateProfile
+  HRESULT
+  pszUserSid LPCWSTR
+  pszUserName LPCWSTR
+  pszProfilePath LPWSTR
+  cchProfilePath DWORD
+
+func CreateUserProfileEx bothCharset ordinalA=153 ordinalW=154
+  BOOL
+  pSid PSID
+  lpUserName LPCTSTR
+  lpUserHive LPCTSTR
+  lpProfileDir LPTSTR
+  dwDirSize DWORD
+  bWin9xUpg BOOL
+
+func DeleteProfile bothCharset
+  BOOL
+  lpSidString LPCTSTR
+  lpProfilePath LPCTSTR
+  lpComputerName LPCTSTR
+
+func DestroyEnvironmentBlock
+  BOOL
+  lpEnvironment LPVOID
+
+func ExpandEnvironmentStringsForUser bothCharset
+  BOOL
+  hToken HANDLE
+  lpSrc LPCTSTR
+  lpDest LPTSTR outputOnly
+  dwSize DWORD
+
+func GetAllUsersProfileDirectory bothCharset
+  BOOL
+  lpProfileDir LPTSTR
+  lpcchSize LPDWORD
+
+func GetDefaultUserProfileDirectory bothCharset
+  BOOL
+  lpProfileDir LPTSTR
+  lpcchSize LPDWORD
+
+func GetProfilesDirectory bothCharset
+  BOOL
+  lpProfilesDir LPTSTR outputOnly
+  lpcchSize LPDWORD
+
+func GetProfileType
+  BOOL
+  pdwFlags [ProfileType*]
+
+func GetUserProfileDirectory bothCharset
+  BOOL
+  hToken HANDLE
+  lpProfileDir LPTSTR
+  lpcchSize LPDWORD
+
+func LoadUserProfile bothCharset
+  BOOL
+  hToken HANDLE
+  lpProfileInfo LPPROFILEINFO
+
+func UnloadUserProfile
+  BOOL
+  hToken HANDLE
+  hProfile HANDLE
+
+func CreateAppContainerProfile
+  HRESULT
+  pszAppContainerName PCWSTR
+  pszDisplayName PCWSTR
+  pszDescription PCWSTR
+  pCapabilities PSID_AND_ATTRIBUTES
+  dwCapabilityCount DWORD
+  ppSidAppContainerSid PSID*
+
+func DeleteAppContainerProfile
+  HRESULT
+  pszAppContainerName PCWSTR
+
+func DeriveAppContainerSidFromAppContainerName
+  HRESULT
+  pszAppContainerName PCWSTR
+  ppsidAppContainerSid PSID*
+
+func GetAppContainerFolderPath
+  HRESULT
+  pszAppContainerSid PCWSTR
+  ppszPath PWSTR*
+
+func GetAppContainerRegistryLocation
+  HRESULT
+  desiredAccess REGSAM
+  phAppContainerKey PHKEY
+

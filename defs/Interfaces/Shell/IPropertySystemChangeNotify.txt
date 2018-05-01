@@ -1,0 +1,7 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPropertySystemChangeNotify base=IUnknown id={fa955fd9-38be-4879-a6ce-824cf52d609f} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SchemaRefreshed
+    HRESULT
+
+

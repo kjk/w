@@ -1,0 +1,44 @@
+include Interfaces\IDispatch.txt
+
+ingterface IShellFolderViewDual base=IDispatch id={E7A1AF80-4D96-11CF-960C-0080C7F4EE85} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func get_Application
+    HRESULT
+    ppid IDispatch**
+
+  func get_Parent
+    HRESULT
+    ppid IDispatch**
+
+  func get_Folder
+    HRESULT
+    ppid Folder**
+
+  func SelectedItems
+    HRESULT
+    ppid FolderItems**
+
+  func get_FocusedItem
+    HRESULT
+    ppid FolderItem**
+
+  func SelectItem
+    HRESULT
+    pvfi VARIANT*
+    dwFlags int
+
+  func PopupItemMenu
+    HRESULT
+    pfi FolderItem*
+    vx VARIANT
+    vy VARIANT
+    pbs BSTR*
+
+  func get_Script
+    HRESULT
+    ppDisp IDispatch**
+
+  func get_ViewOptions
+    HRESULT
+    plViewOptions long*
+
+

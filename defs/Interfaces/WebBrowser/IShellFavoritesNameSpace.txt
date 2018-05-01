@@ -1,0 +1,48 @@
+include Interfaces\IDispatch.txt
+
+ingterface IShellFavoritesNameSpace base=IDispatch id={55136804-B2DE-11D1-B9F2-00A0C98BC547} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func MoveSelectionUp
+    HRESULT
+
+  func MoveSelectionDown
+    HRESULT
+
+  func ResetSort
+    HRESULT
+
+  func NewFolder
+    HRESULT
+
+  func Synchronize
+    HRESULT
+
+  func Import
+    HRESULT
+
+  func Export
+    HRESULT
+
+  func InvokeContextMenuCommand
+    HRESULT
+    strCommand BSTR
+
+  func MoveSelectionTo
+    HRESULT
+
+  func get_SubscriptionsEnabled
+    HRESULT
+    pBool VARIANT_BOOL*
+
+  func CreateSubscriptionForSelection
+    HRESULT
+    pBool VARIANT_BOOL*
+
+  func DeleteSubscriptionForSelection
+    HRESULT
+    pBool VARIANT_BOOL*
+
+  func SetRoot
+    HRESULT
+    bstrFullPath BSTR
+
+

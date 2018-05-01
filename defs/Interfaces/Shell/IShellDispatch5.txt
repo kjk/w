@@ -1,0 +1,7 @@
+include Interfaces\Shell\IShellDispatch4.txt
+
+ingterface IShellDispatch5 base=IShellDispatch4 id={866738b9-6cf2-4de8-8767-f794ebe74f4e} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func WindowSwitcher
+    HRESULT
+
+

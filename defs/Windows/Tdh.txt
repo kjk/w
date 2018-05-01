@@ -1,0 +1,427 @@
+include Headers\windows.h.txt
+
+dll Tdh.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Diagnostics/Windows Events/Event Tracing"
+alias TDH_HANDLE HANDLE
+
+pointer PTDH_HANDLE TDH_HANDLE
+
+alias PEVENT_HEADER_EXTENDED_DATA_ITEM LPVOID
+
+struct TRACE_PROVIDER_INFO
+  ProviderGuid GUID
+  SchemaSource ULONG
+  ProviderNameOffset ULONG
+
+array "TRACE_PROVIDER_INFO [ANYSIZE_ARRAY]" base=TRACE_PROVIDER_INFO count=1
+
+struct PROVIDER_ENUMERATION_INFO
+  NumberOfProviders ULONG
+  Reserved ULONG
+  TraceProviderInfoArray "TRACE_PROVIDER_INFO [ANYSIZE_ARRAY]" count=NumberOfProviders
+
+pointer PPROVIDER_ENUMERATION_INFO PROVIDER_ENUMERATION_INFO
+
+enum DECODING_SOURCE UINT
+  DecodingSourceXMLFile 0
+  DecodingSourceWbem    1
+  DecodingSourceWPP     2
+
+flag TEMPLATE_FLAGS UINT
+  TEMPLATE_EVENT_DATA 1
+  TEMPLATE_USER_DATA  2
+
+enum TDH_IN_TYPE USHORT display=USHORT
+  TDH_INTYPE_NULL                        0
+  TDH_INTYPE_UNICODESTRING               1
+  TDH_INTYPE_ANSISTRING                  2
+  TDH_INTYPE_INT8                        3
+  TDH_INTYPE_UINT8                       4
+  TDH_INTYPE_INT16                       5
+  TDH_INTYPE_UINT16                      6
+  TDH_INTYPE_INT32                       7
+  TDH_INTYPE_UINT32                      8
+  TDH_INTYPE_INT64                       9
+  TDH_INTYPE_UINT64                      10
+  TDH_INTYPE_FLOAT                       11
+  TDH_INTYPE_DOUBLE                      12
+  TDH_INTYPE_BOOLEAN                     13
+  TDH_INTYPE_BINARY                      14
+  TDH_INTYPE_GUID                        15
+  TDH_INTYPE_POINTER                     16
+  TDH_INTYPE_FILETIME                    17
+  TDH_INTYPE_SYSTEMTIME                  18
+  TDH_INTYPE_SID                         19
+  TDH_INTYPE_HEXINT32                    20
+  TDH_INTYPE_HEXINT64                    21
+  TDH_INTYPE_COUNTEDSTRING               300
+  TDH_INTYPE_COUNTEDANSISTRING           301
+  TDH_INTYPE_REVERSEDCOUNTEDSTRING       302
+  TDH_INTYPE_REVERSEDCOUNTEDANSISTRING   303
+  TDH_INTYPE_NONNULLTERMINATEDSTRING     304
+  TDH_INTYPE_NONNULLTERMINATEDANSISTRING 305
+  TDH_INTYPE_UNICODECHAR                 306
+  TDH_INTYPE_ANSICHAR                    307
+  TDH_INTYPE_SIZET                       308
+  TDH_INTYPE_HEXDUMP                     309
+  TDH_INTYPE_WBEMSID                     310
+
+enum TDH_OUT_TYPE USHORT display=USHORT
+  TDH_OUTTYPE_NULL                         0
+  TDH_OUTTYPE_STRING                       1
+  TDH_OUTTYPE_DATETIME                     2
+  TDH_OUTTYPE_BYTE                         3
+  TDH_OUTTYPE_UNSIGNEDBYTE                 4
+  TDH_OUTTYPE_SHORT                        5
+  TDH_OUTTYPE_UNSIGNEDSHORT                6
+  TDH_OUTTYPE_INT                          7
+  TDH_OUTTYPE_UNSIGNEDINT                  8
+  TDH_OUTTYPE_LONG                         9
+  TDH_OUTTYPE_UNSIGNEDLONG                 10
+  TDH_OUTTYPE_FLOAT                        11
+  TDH_OUTTYPE_DOUBLE                       12
+  TDH_OUTTYPE_BOOLEAN                      13
+  TDH_OUTTYPE_GUID                         14
+  TDH_OUTTYPE_HEXBINARY                    15
+  TDH_OUTTYPE_HEXINT8                      16
+  TDH_OUTTYPE_HEXINT16                     17
+  TDH_OUTTYPE_HEXINT32                     18
+  TDH_OUTTYPE_HEXINT64                     19
+  TDH_OUTTYPE_PID                          20
+  TDH_OUTTYPE_TID                          21
+  TDH_OUTTYPE_PORT                         22
+  TDH_OUTTYPE_IPV4                         23
+  TDH_OUTTYPE_IPV6                         24
+  TDH_OUTTYPE_SOCKETADDRESS                25
+  TDH_OUTTYPE_CIMDATETIME                  26
+  TDH_OUTTYPE_ETWTIME                      27
+  TDH_OUTTYPE_XML                          28
+  TDH_OUTTYPE_ERRORCODE                    29
+  TDH_OUTTYPE_WIN32ERROR                   30
+  TDH_OUTTYPE_NTSTATUS                     31
+  TDH_OUTTYPE_HRESULT                      32
+  TDH_OUTTYPE_CULTURE_INSENSITIVE_DATETIME 33
+  TDH_OUTTYPE_REDUCEDSTRING                300
+  TDH_OUTTYPE_NOPRINT                      301
+
+flag PROPERTY_FLAGS UINT
+  PropertyStruct           0x1
+  PropertyParamLength      0x2
+  PropertyParamCount       0x4
+  PropertyWBEMXmlFragment  0x8
+  PropertyParamFixedLength 0x10
+
+struct [EVENT_PROPERTY_INFO_u1_s1] display=struct
+  InType TDH_IN_TYPE
+  OutType TDH_OUT_TYPE
+  MapNameOffset ULONG
+
+struct [EVENT_PROPERTY_INFO_u1_s2] display=struct
+  StructStartIndex USHORT
+  NumOfStructMembers USHORT
+  padding ULONG
+
+union [EVENT_PROPERTY_INFO_u1] display=union
+  nonStructType [EVENT_PROPERTY_INFO_u1_s1]
+  structType [EVENT_PROPERTY_INFO_u1_s2]
+
+union [EVENT_PROPERTY_INFO_u2] display=union
+  count USHORT
+  countPropertyIndex USHORT
+
+union [EVENT_PROPERTY_INFO_u3] display=union
+  length USHORT
+  lengthPropertyIndex USHORT
+
+struct EVENT_PROPERTY_INFO
+  Flags PROPERTY_FLAGS
+  NameOffset ULONG
+   [EVENT_PROPERTY_INFO_u1]
+   [EVENT_PROPERTY_INFO_u2]
+   [EVENT_PROPERTY_INFO_u3]
+  Reserved ULONG
+
+array "EVENT_PROPERTY_INFO [ANYSIZE_ARRAY]" base=EVENT_PROPERTY_INFO count=1
+
+struct PROVIDER_FILTER_INFO
+  Id UCHAR
+  Version UCHAR
+  MessageOffset ULONG
+  Reserved ULONG
+  PropertyCount ULONG
+  EventPropertyInfoArray "EVENT_PROPERTY_INFO [ANYSIZE_ARRAY]" count=PropertyCount
+
+pointer PPROVIDER_FILTER_INFO PROVIDER_FILTER_INFO
+
+pointer PPROVIDER_FILTER_INFO* PPROVIDER_FILTER_INFO
+
+struct TRACE_EVENT_INFO
+  ProviderGuid GUID
+  EventGuid GUID
+  EventDescriptor EVENT_DESCRIPTOR
+  DecodingSource DECODING_SOURCE
+  ProviderNameOffset ULONG
+  LevelNameOffset ULONG
+  ChannelNameOffset ULONG
+  KeywordsNameOffset ULONG
+  TaskNameOffset ULONG
+  OpcodeNameOffset ULONG
+  EventMessageOffset ULONG
+  ProviderMessageOffset ULONG
+  BinaryXMLOffset ULONG
+  BinaryXMLSize ULONG
+  ActivityIDNameOffset ULONG
+  RelatedActivityIDNameOffset ULONG
+  PropertyCount ULONG
+  TopLevelPropertyCount ULONG
+  Flags TEMPLATE_FLAGS
+  EventPropertyInfoArray "EVENT_PROPERTY_INFO [ANYSIZE_ARRAY]" count=PropertyCount
+
+pointer PTRACE_EVENT_INFO TRACE_EVENT_INFO
+
+enum MAP_VALUETYPE UINT
+  EVENTMAP_ENTRY_VALUETYPE_ULONG  0
+  EVENTMAP_ENTRY_VALUETYPE_STRING 1
+
+flag MAP_FLAGS UINT
+  EVENTMAP_INFO_FLAG_MANIFEST_VALUEMAP   0x1
+  EVENTMAP_INFO_FLAG_MANIFEST_BITMAP     0x2
+  EVENTMAP_INFO_FLAG_MANIFEST_PATTERNMAP 0x4
+  EVENTMAP_INFO_FLAG_WBEM_VALUEMAP       0x8
+  EVENTMAP_INFO_FLAG_WBEM_BITMAP         0x10
+  EVENTMAP_INFO_FLAG_WBEM_FLAG           0x20
+  EVENTMAP_INFO_FLAG_WBEM_NO_MAP         0x40
+
+union [EVENT_MAP_ENTRY_u] display=union
+  Value ULONG
+  InputOffset ULONG
+
+struct EVENT_MAP_ENTRY
+  OutputOffset ULONG
+   [EVENT_MAP_ENTRY_u]
+
+array "EVENT_MAP_ENTRY [ANYSIZE_ARRAY]" base=EVENT_MAP_ENTRY count=1
+
+union [EVENT_MAP_INFO_u] display=union
+  MapEntryValueType MAP_VALUETYPE
+  FormatStringOffset ULONG
+
+struct EVENT_MAP_INFO
+  NameOffset ULONG
+  Flag MAP_FLAGS
+  EntryCount ULONG
+   [EVENT_MAP_INFO_u]
+  MapEntryArray "EVENT_MAP_ENTRY [ANYSIZE_ARRAY]" count=EntryCount
+
+pointer PEVENT_MAP_INFO EVENT_MAP_INFO
+
+enum EVENT_FIELD_TYPE UINT
+  EventKeywordInformation 0
+  EventLevelInformation   1
+  EventChannelInformation 2
+  EventTaskInformation    3
+  EventOpcodeInformation  4
+
+struct PROVIDER_FIELD_INFO
+  NameOffset ULONG
+  DescriptionOffset ULONG
+  Value ULONGLONG
+
+array "PROVIDER_FIELD_INFO [ANYSIZE_ARRAY]" base=PROVIDER_FIELD_INFO count=1
+
+struct PROVIDER_FIELD_INFOARRAY
+  NumberOfElements ULONG
+  FieldType EVENT_FIELD_TYPE
+  FieldInfoArray "PROVIDER_FIELD_INFO [ANYSIZE_ARRAY]" count=NumberOfElements
+
+pointer PPROVIDER_FIELD_INFOARRAY PROVIDER_FIELD_INFOARRAY
+
+enum TDH_CONTEXT_TYPE UINT
+  TDH_CONTEXT_WPP_TMFFILE       0
+  TDH_CONTEXT_WPP_TMFSEARCHPATH 1
+  TDH_CONTEXT_WPP_GMT           2
+  TDH_CONTEXT_POINTERSIZE       3
+
+struct TDH_CONTEXT
+  ParameterValue ULONGLONG
+  ParameterType TDH_CONTEXT_TYPE
+  ParameterSize ULONG
+
+pointer PTDH_CONTEXT TDH_CONTEXT
+
+struct PROPERTY_DATA_DESCRIPTOR
+  PropertyName ULONGLONG
+  ArrayIndex ULONG
+  Reserved ULONG
+
+pointer PPROPERTY_DATA_DESCRIPTOR PROPERTY_DATA_DESCRIPTOR
+
+struct [EVENT_HEADER_u_s] display=struct
+  KernelTime ULONG
+  UserTime ULONG
+
+union [EVENT_HEADER_u] display=union
+   [EVENT_HEADER_u_s]
+  ProcessorTime ULONG64
+
+flag [EVENT_HEADER_FLAG] USHORT display=USHORT
+  EVENT_HEADER_FLAG_EXTENDED_INFO   0x0001
+  EVENT_HEADER_FLAG_PRIVATE_SESSION 0x0002
+  EVENT_HEADER_FLAG_STRING_ONLY     0x0004
+  EVENT_HEADER_FLAG_TRACE_MESSAGE   0x0008
+  EVENT_HEADER_FLAG_NO_CPUTIME      0x0010
+  EVENT_HEADER_FLAG_32_BIT_HEADER   0x0020
+  EVENT_HEADER_FLAG_64_BIT_HEADER   0x0040
+  EVENT_HEADER_FLAG_CLASSIC_HEADER  0x0100
+
+flag [EVENT_HEADER_PROPERTY] USHORT display=USHORT
+  EVENT_HEADER_PROPERTY_XML             0x0001
+  EVENT_HEADER_PROPERTY_FORWARDED_XML   0x0002
+  EVENT_HEADER_PROPERTY_LEGACY_EVENTLOG 0x0004
+
+struct EVENT_HEADER
+  Size USHORT
+  HeaderType USHORT
+  Flags [EVENT_HEADER_FLAG]
+  EventProperty [EVENT_HEADER_PROPERTY]
+  ThreadId ULONG
+  ProcessId ULONG
+  TimeStamp LARGE_INTEGER
+  ProviderId GUID
+  EventDescriptor EVENT_DESCRIPTOR
+   [EVENT_HEADER_u]
+  ActivityId GUID
+
+struct EVENT_RECORD
+  EventHeader EVENT_HEADER
+  BufferContext ETW_BUFFER_CONTEXT
+  ExtendedDataCount USHORT
+  UserDataLength USHORT
+  ExtendedData PEVENT_HEADER_EXTENDED_DATA_ITEM
+  UserData PVOID
+  UserContext PVOID
+
+pointer PEVENT_RECORD EVENT_RECORD
+
+func TdhCloseDecodingHandle
+  [ERROR_CODE_ULONG]
+  Handle TDH_HANDLE
+
+func TdhEnumerateProviderFieldInformation
+  [ERROR_CODE_ULONG]
+  pGuid LPGUID
+  EventFieldType EVENT_FIELD_TYPE
+  pBuffer PPROVIDER_FIELD_INFOARRAY postLength=pBufferSize
+  pBufferSize ULONG*
+
+func TdhEnumerateProviderFilters
+  [ERROR_CODE_ULONG]
+  pGuid LPGUID
+  TdhContextCount ULONG
+  pTdhContext PTDH_CONTEXT count=TdhContextCount
+  FilterCount ULONG*
+  pBuffer PPROVIDER_FILTER_INFO* postCount=FilterCount
+  pBufferSize ULONG*
+
+func TdhEnumerateProviders
+  [ERROR_CODE_ULONG]
+  pBuffer PPROVIDER_ENUMERATION_INFO postLength=pBufferSize
+  pBufferSize ULONG*
+
+func TdhFormatProperty
+  [ERROR_CODE_ULONG]
+  EventInfo PTRACE_EVENT_INFO
+  MapInfo PEVENT_MAP_INFO
+  PointerSize ULONG
+  PropertyInType USHORT
+  PropertyOutType USHORT
+  PropertyLength USHORT
+  UserDataLength USHORT
+  UserData PBYTE
+  BufferSize PULONG
+  Buffer PWCHAR
+  UserDataConsumed PUSHORT
+
+func TdhGetDecodingParameter
+  [ERROR_CODE_ULONG]
+  Handle TDH_HANDLE
+  TdhContext PTDH_CONTEXT
+
+func TdhGetEventInformation
+  [ERROR_CODE_ULONG]
+  pEvent PEVENT_RECORD
+  TdhContextCount ULONG
+  pTdhContext PTDH_CONTEXT count=TdhContextCount
+  pBuffer PTRACE_EVENT_INFO postLength=pBufferSize
+  pBufferSize ULONG*
+
+func TdhGetEventMapInformation
+  [ERROR_CODE_ULONG]
+  pEvent PEVENT_RECORD
+  pMapName LPWSTR
+  pBuffer PEVENT_MAP_INFO postLength=pBufferSize
+  pBufferSize ULONG*
+
+func TdhGetPropertySize
+  [ERROR_CODE_ULONG]
+  pEvent PEVENT_RECORD
+  TdhContextCount ULONG
+  pTdhContext PTDH_CONTEXT count=TdhContextCount
+  PropertyDataCount ULONG
+  pPropertyData PPROPERTY_DATA_DESCRIPTOR count=PropertyDataCount
+  pPropertySize ULONG*
+
+func TdhGetProperty
+  [ERROR_CODE_ULONG]
+  pEvent PEVENT_RECORD
+  TdhContextCount ULONG
+  pTdhContext PTDH_CONTEXT count=TdhContextCount
+  PropertyDataCount ULONG
+  pPropertyData PPROPERTY_DATA_DESCRIPTOR count=PropertyDataCount
+  BufferSize ULONG
+  pBuffer PBYTE
+
+func TdhGetWppMessage
+  [ERROR_CODE_ULONG]
+  Handle TDH_HANDLE
+  EventRecord PEVENT_RECORD
+  BufferSize PULONG
+  Buffer PBYTE
+
+func TdhGetWppProperty
+  [ERROR_CODE_ULONG]
+  Handle TDH_HANDLE
+  EventRecord PEVENT_RECORD
+  PropertyName PWSTR
+  BufferSize PULONG
+  Buffer PBYTE
+
+func TdhLoadManifest
+  [ERROR_CODE_ULONG]
+  Manifest PWSTR
+
+func TdhLoadManifestFromBinary
+  [ERROR_CODE_ULONG]
+  BinaryPath PWSTR
+
+func TdhOpenDecodingHandle
+  [ERROR_CODE_ULONG]
+  Handle PTDH_HANDLE
+
+func TdhQueryProviderFieldInformation
+  [ERROR_CODE_ULONG]
+  pGuid LPGUID
+  EventFieldValue ULONGLONG
+  EventFieldType EVENT_FIELD_TYPE
+  pBuffer PPROVIDER_FIELD_INFOARRAY postLength=pBufferSize
+  pBufferSize ULONG*
+
+func TdhSetDecodingParameter
+  [ERROR_CODE_ULONG]
+  Handle TDH_HANDLE
+  TdhContext PTDH_CONTEXT
+
+func TdhUnloadManifest
+  [ERROR_CODE_ULONG]
+  Manifest PWSTR
+

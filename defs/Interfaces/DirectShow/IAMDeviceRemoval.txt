@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMDeviceRemoval base=IUnknown id={f90a6130-b658-11d2-ae49-0000f8754b99} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func DeviceInfo
+    HRESULT
+    pclsidInterfaceClass CLSID*
+    pwszSymbolicLink LPWSTR*
+
+  func Reassociate
+    HRESULT
+
+  func Disassociate
+    HRESULT
+
+

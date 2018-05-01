@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11View.txt
+
+ingterface ID3D11ShaderResourceView base=ID3D11View id={b0e06fe0-8192-4e1a-b1ca-36d7414710b2} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Resource"
+  func GetDesc
+    void
+    pDesc D3D11_SHADER_RESOURCE_VIEW_DESC*
+
+

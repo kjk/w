@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IHandlerInfo base=IUnknown id={997706ef-f880-453b-8118-39e1a2d2655a} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetApplicationDisplayName
+    HRESULT
+    value LPWSTR*
+
+  func GetApplicationPublisher
+    HRESULT
+    value LPWSTR*
+
+  func GetApplicationIconReference
+    HRESULT
+    value LPWSTR*
+
+

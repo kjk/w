@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IURLSearchHook base=IUnknown id={ac60f6a0-0fd9-11d0-99cb-00c04fd64497} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Translate
+    HRESULT
+    lpwszSearchURL LPWSTR
+    cchBufferSize DWORD
+
+

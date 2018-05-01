@@ -1,0 +1,39 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSound base=IUnknown id={279afa83-4981-11ce-a521-0020af0be560} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func CreateSoundBuffer
+    [DS_HRESULT]
+    pcDSBufferDesc LPCDSBUFFERDESC
+    ppDSBuffer LPDIRECTSOUNDBUFFER*
+    pUnkOuter LPUNKNOWN
+
+  func GetCaps
+    [DS_HRESULT]
+    pDSCaps LPDSCAPS
+
+  func DuplicateSoundBuffer
+    [DS_HRESULT]
+    pDSBufferOriginal LPDIRECTSOUNDBUFFER
+    ppDSBufferDuplicate LPDIRECTSOUNDBUFFER*
+
+  func SetCooperativeLevel
+    [DS_HRESULT]
+    hwnd HWND
+    dwLevel [DSSCL_Flags]
+
+  func Compact
+    [DS_HRESULT]
+
+  func GetSpeakerConfig
+    [DS_HRESULT]
+    pdwSpeakerConfig [DSSPEAKER_Flags*]
+
+  func SetSpeakerConfig
+    [DS_HRESULT]
+    dwSpeakerConfig [DSSPEAKER_Flags]
+
+  func Initialize
+    [DS_HRESULT]
+    pcGuidDevice LPCGUID
+
+

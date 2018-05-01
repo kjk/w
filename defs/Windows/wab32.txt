@@ -1,0 +1,41 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+
+dll wab32.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Additional Resources/Legacy Collaboration Features/Windows Address Book"
+interface IAddrBook
+
+interface IWABObject
+
+alias LPWABOBJECT* IWABObject**
+
+flag [WAB_PARAM_Flags] ULONG display=ULONG
+  WAB_USE_OE_SENDMAIL 0x00000001
+  WAB_ENABLE_PROFILES 0x00400000
+
+struct WAB_PARAM
+  cbSize ULONG
+  hwnd HWND
+  szFileName LPSTR
+  ulFlags [WAB_PARAM_Flags]
+  guidPSExt GUID
+
+pointer LPWAB_PARAM WAB_PARAM
+
+func WABOpen
+  HRESULT
+  lppAdrBook LPADRBOOK*
+  lppWABObject LPWABOBJECT*
+  lpWABParam LPWAB_PARAM
+  Reserved2 DWORD
+
+func WABOpenEx
+  HRESULT
+  lppAdrBook LPADRBOOK*
+  lppWABObject LPWABOBJECT*
+  lpWABParam LPWAB_PARAM
+  Reserved2 DWORD
+  lpfnAllocateBuffer ALLOCATEBUFFER*
+  lpfnAllocateMore ALLOCATEMORE*
+  lpfnFreeBuffer FREEBUFFER*
+

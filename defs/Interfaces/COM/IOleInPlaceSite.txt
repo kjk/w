@@ -1,0 +1,42 @@
+include Interfaces\COM\IOleWindow.txt
+
+ingterface IOleInPlaceSite base=IOleWindow id={00000119-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func CanInPlaceActivate
+    HRESULT
+
+  func OnInPlaceActivate
+    HRESULT
+
+  func OnUIActivate
+    HRESULT
+
+  func GetWindowContext
+    HRESULT
+    ppFrame IOleInPlaceFrame**
+    ppDoc IOleInPlaceUIWindow**
+    lprcPosRect LPRECT
+    lprcClipRect LPRECT
+    lpFrameInfo LPOLEINPLACEFRAMEINFO
+
+  func Scroll
+    HRESULT
+    scrollExtant SIZE
+
+  func OnUIDeactivate
+    HRESULT
+    fUndoable BOOL
+
+  func OnInPlaceDeactivate
+    HRESULT
+
+  func DiscardUndoState
+    HRESULT
+
+  func DeactivateAndUndo
+    HRESULT
+
+  func OnPosRectChange
+    HRESULT
+    lprcPosRect LPCRECT
+
+

@@ -1,0 +1,58 @@
+include Interfaces\IDispatch.txt
+
+ingterface IScriptErrorList base=IDispatch id={F3470F24-15FD-11d2-BB2E-00805FF7EFCA} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+  func advanceError
+    HRESULT
+
+  func retreatError
+    HRESULT
+
+  func canAdvanceError
+    HRESULT
+    pfCanAdvance BOOL*
+
+  func canRetreatError
+    HRESULT
+    pfCanRetreat BOOL*
+
+  func getErrorLine
+    HRESULT
+    plLine LONG*
+
+  func getErrorChar
+    HRESULT
+    plChar LONG*
+
+  func getErrorCode
+    HRESULT
+    plCode LONG*
+
+  func getErrorMsg
+    HRESULT
+    pstr BSTR*
+
+  func getErrorUrl
+    HRESULT
+    pstr BSTR*
+
+  func getAlwaysShowLockState
+    HRESULT
+    pfAlwaysShowLocked BOOL*
+
+  func getDetailsPaneOpen
+    HRESULT
+    pfDetailsPaneOpen BOOL*
+
+  func setDetailsPaneOpen
+    HRESULT
+    fDetailsPaneOpen BOOL
+
+  func getPerErrorDisplay
+    HRESULT
+    pfPerErrorDisplay BOOL*
+
+  func setPerErrorDisplay
+    HRESULT
+    fPerErrorDisplay BOOL
+
+

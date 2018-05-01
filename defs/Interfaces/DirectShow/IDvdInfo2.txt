@@ -1,0 +1,204 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDvdInfo2 base=IUnknown id={34151510-EEC0-11D2-8201-00A0C9D74842} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetCurrentDomain
+    HRESULT
+    pDomain DVD_DOMAIN*
+
+  func GetCurrentLocation
+    HRESULT
+    pLocation DVD_PLAYBACK_LOCATION2*
+
+  func GetTotalTitleTime
+    HRESULT
+    pTotalTime DVD_HMSF_TIMECODE*
+    ulTimeCodeFlags ULONG*
+
+  func GetCurrentButton
+    HRESULT
+    pulButtonsAvailable ULONG*
+    pulCurrentButton ULONG*
+
+  func GetCurrentAngle
+    HRESULT
+    pulAnglesAvailable ULONG*
+    pulCurrentAngle ULONG*
+
+  func GetCurrentAudio
+    HRESULT
+    pulStreamsAvailable ULONG*
+    pulCurrentStream ULONG*
+
+  func GetCurrentSubpicture
+    HRESULT
+    pulStreamsAvailable ULONG*
+    pulCurrentStream ULONG*
+    pbIsDisabled BOOL*
+
+  func GetCurrentUOPS
+    HRESULT
+    pulUOPs ULONG*
+
+  func GetAllSPRMs
+    HRESULT
+    pRegisterArray SPRMARRAY*
+
+  func GetAllGPRMs
+    HRESULT
+    pRegisterArray GPRMARRAY*
+
+  func GetAudioLanguage
+    HRESULT
+    ulStream ULONG
+    pLanguage LCID*
+
+  func GetSubpictureLanguage
+    HRESULT
+    ulStream ULONG
+    pLanguage LCID*
+
+  func GetTitleAttributes
+    HRESULT
+    ulTitle ULONG
+    pMenu DVD_MenuAttributes*
+    pTitle DVD_TitleAttributes*
+
+  func GetVMGAttributes
+    HRESULT
+    pATR DVD_MenuAttributes*
+
+  func GetCurrentVideoAttributes
+    HRESULT
+    pATR DVD_VideoAttributes*
+
+  func GetAudioAttributes
+    HRESULT
+    ulStream ULONG
+    pATR DVD_AudioAttributes*
+
+  func GetKaraokeAttributes
+    HRESULT
+    ulStream ULONG
+    pAttributes DVD_KaraokeAttributes*
+
+  func GetSubpictureAttributes
+    HRESULT
+    ulStream ULONG
+    pATR DVD_SubpictureAttributes*
+
+  func GetDVDVolumeInfo
+    HRESULT
+    pulNumOfVolumes ULONG*
+    pulVolume ULONG*
+    pSide DVD_DISC_SIDE*
+    pulNumOfTitles ULONG*
+
+  func GetDVDTextNumberOfLanguages
+    HRESULT
+    pulNumOfLangs ULONG*
+
+  func GetDVDTextLanguageInfo
+    HRESULT
+    ulLangIndex ULONG
+    pulNumOfStrings ULONG*
+    pLangCode LCID*
+    pbCharacterSet "enum DVD_TextCharSet*"
+
+  func GetDVDTextStringAsNative
+    HRESULT
+    ulLangIndex ULONG
+    ulStringIndex ULONG
+    pbBuffer BYTE*
+    ulMaxBufferSize ULONG
+    pulActualSize ULONG*
+    pType "enum DVD_TextStringType*"
+
+  func GetDVDTextStringAsUnicode
+    HRESULT
+    ulLangIndex ULONG
+    ulStringIndex ULONG
+    pchwBuffer WCHAR*
+    ulMaxBufferSize ULONG
+    pulActualSize ULONG*
+    pType "enum DVD_TextStringType*"
+
+  func GetPlayerParentalLevel
+    HRESULT
+    pulParentalLevel ULONG*
+    pbCountryCode "BYTE [2]"
+
+  func GetNumberOfChapters
+    HRESULT
+    ulTitle ULONG
+    pulNumOfChapters ULONG*
+
+  func GetTitleParentalLevels
+    HRESULT
+    ulTitle ULONG
+    pulParentalLevels ULONG*
+
+  func GetDVDDirectory
+    HRESULT
+    pszwPath LPWSTR
+    ulMaxSize ULONG
+    pulActualSize ULONG*
+
+  func IsAudioStreamEnabled
+    HRESULT
+    ulStreamNum ULONG
+    pbEnabled BOOL*
+
+  func GetDiscID
+    HRESULT
+    pszwPath LPCWSTR
+    pullDiscID ULONGLONG*
+
+  func GetState
+    HRESULT
+    pStateData IDvdState**
+
+  func GetMenuLanguages
+    HRESULT
+    pLanguages LCID*
+    ulMaxLanguages ULONG
+    pulActualLanguages ULONG*
+
+  func GetButtonAtPosition
+    HRESULT
+    point POINT
+    pulButtonIndex ULONG*
+
+  func GetCmdFromEvent
+    HRESULT
+    lParam1 LONG_PTR
+    pCmdObj IDvdCmd**
+
+  func GetDefaultMenuLanguage
+    HRESULT
+    pLanguage LCID*
+
+  func GetDefaultAudioLanguage
+    HRESULT
+    pLanguage LCID*
+    pAudioExtension DVD_AUDIO_LANG_EXT*
+
+  func GetDefaultSubpictureLanguage
+    HRESULT
+    pLanguage LCID*
+    pSubpictureExtension DVD_SUBPICTURE_LANG_EXT*
+
+  func GetDecoderCaps
+    HRESULT
+    pCaps DVD_DECODER_CAPS*
+
+  func GetButtonRect
+    HRESULT
+    ulButton ULONG
+    pRect RECT*
+
+  func IsSubpictureStreamEnabled
+    HRESULT
+    ulStreamNum ULONG
+    pbEnabled BOOL*
+
+

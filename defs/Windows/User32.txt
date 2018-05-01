@@ -1,0 +1,5436 @@
+include Headers\windows.h.txt
+include Headers\shell.h.txt
+include Headers\gdi.h.txt
+include Headers\security.h.txt
+include Headers\power.h.txt
+
+dll User32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Application UI Development/Dialog Boxes"
+category "Windows Application UI Development/Windows and Messages/Messages and Message Queues"
+category "System Services/Processes and Threads/Process"
+category "System Services/Processes and Threads/Thread"
+category "System Services/Processes and Threads/WOW64"
+category "System Services/Processes and Threads/Job Object"
+category "Windows Application UI Development/Windows and Messages/Windows"
+category "System Services/Windows System Information/System Shutdown"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Bitmaps"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Brushes"
+category "Windows Application UI Development/Windows Controls/Control Library/Buttons"
+category "Windows Application UI Development/Menus and Other Resources/Carets"
+category "Windows Application UI Development/Data Exchange/Clipboard"
+category "Windows Application UI Development/Windows Controls/Control Library/ComboBox"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Coordinate Spaces and Transformations"
+category "Windows Application UI Development/Menus and Other Resources/Cursors"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Device Contexts"
+category "Devices/Device Management"
+category "Windows Application UI Development/Data Exchange/Dynamic Data Exchange"
+category "Windows Application UI Development/Data Exchange/Dynamic Data Exchange Management Library (DDEML)"
+category "Diagnostics/Debugging and Error Handling/Error Handling"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Filled Shapes"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Fonts and Text"
+category "Windows Application UI Development/Windows and Messages/Hooks"
+category "Windows Application UI Development/Menus and Other Resources/Icons"
+category "Windows Application UI Development/Menus and Other Resources/Keyboard Accelerators"
+category "Windows Application UI Development/User Interaction/Keyboard and Mouse Input/Keyboard Input"
+category "Windows Application UI Development/Windows Controls/Control Library/List Box"
+category "Windows Application UI Development/Menus and Other Resources/Menus"
+category "Windows Application UI Development/User Interaction/Keyboard and Mouse Input/Mouse Input"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Multiple Display Monitors"
+category "Windows Application UI Development/Windows and Messages/Multiple Document Interface"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Painting and Drawing"
+category "System Services/Power Management"
+category "Documents and Printing/Printing/GDI Print"
+category "Windows Application UI Development/User Interaction/Keyboard and Mouse Input/Raw Input"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Rectangles"
+category "Windows Application UI Development/Menus and Other Resources/Resources"
+category "Windows Application UI Development/Windows Controls/Control Library/Scroll Bars"
+category "Windows Application UI Development/Menus and Other Resources/Strings"
+category "System Services/Synchronization/Wait"
+category "System Services/Windows System Information/System Information"
+category "Windows Application UI Development/Windows and Messages/Timers"
+category "Windows Application UI Development/Windows and Messages/Window Classes"
+category "Windows Application UI Development/Windows and Messages/Window Procedures"
+category "Windows Application UI Development/Windows and Messages/Window Properties"
+category "Windows Environment Development/Window Stations and Desktops"
+category "Windows Environment Development/Windows Shell"
+category "Security and Identity/Authorization/Low-level Access Control"
+category "Windows Application UI Development/Accessibility/Windows Automation/Microsoft Active Accessibility/Active Accessibility User Interface Services/Client"
+category "Windows Application UI Development/Accessibility/Windows Automation/Microsoft Active Accessibility/Active Accessibility User Interface Services/Server"
+category "Windows Application UI Development/User Interaction/Windows Touch/Windows Touch Input"
+category "Windows Application UI Development/User Interaction/Windows Touch/Windows Touch Gestures"
+category "Undocumented (UnDoc'd)" onlineHelp=UnDoc'd-user32
+category "Windows Application UI Development/User Interaction/Touch Injection"
+category "Windows Application UI Development/User Interaction/Interaction Context"
+category "Windows Application UI Development/User Interaction/Pointer Input Messages and Notifications"
+category "Windows Application UI Development/User Interaction/Touch Hit Testing"
+category "Windows Application UI Development/User Interaction/Input Source Identification"
+category "Windows Application UI Development/User Interaction/Pointer Device Input Stack"
+category "System Services/Power Management"
+category "Windows Application UI Development/User Interaction/Input Feedback Configuration"
+alias PMENUBARINFO LPVOID
+
+alias WNDPROC LPVOID
+
+alias MSGBOXCALLBACK LPVOID
+
+alias HDESK HANDLE
+
+alias SENDASYNCPROC LPVOID
+
+alias WNDENUMPROC LPVOID
+
+alias HDEVNOTIFY PVOID
+
+alias HCONV HANDLE
+
+alias HDDEDATA HANDLE
+
+alias HSZ HANDLE
+
+alias HCONVLIST HANDLE
+
+alias PFNCALLBACK LPVOID
+
+alias HHOOK HANDLE
+
+alias HOOKPROC LPVOID
+
+alias "CONST MENUTEMPLATE*" LPVOID
+
+alias MONITORENUMPROC LPVOID
+
+alias DRAWSTATEPROC LPVOID
+
+alias GRAYSTRINGPROC LPVOID
+
+alias HRAWINPUT HANDLE
+
+alias TIMERPROC LPVOID
+
+alias PROPENUMPROC LPVOID
+
+alias PROPENUMPROCEX LPVOID
+
+alias WINSTAENUMPROC LPVOID
+
+alias DESKTOPENUMPROC LPVOID
+
+alias WINEVENTPROC LPVOID
+
+alias HWINSTA HANDLE
+
+alias HWINEVENTHOOK HANDLE
+
+alias HTOUCHINPUT HANDLE
+
+alias HGESTUREINFO HANDLE
+
+alias HINTERACTIONCONTEXT HANDLE
+
+pointer HINTERACTIONCONTEXT* HINTERACTIONCONTEXT
+
+alias INTERACTION_CONTEXT_OUTPUT_CALLBACK LPVOID
+
+alias PDEVICE_NOTIFY_CALLBACK_ROUTINE LPVOID
+
+array "DWORD [CCHILDREN_TITLEBAR + 1]" base=DWORD count=6
+
+array "DWORD [CCHILDREN_SCROLLBAR + 1]" base=DWORD count=6
+
+array "BYTE [32]" base=BYTE count=32
+
+array "WCHAR [POINTER_DEVICE_PRODUCT_STRING_MAX]" base=WCHAR count=520
+
+struct TITLEBARINFO
+  cbSize DWORD
+  rcTitleBar RECT
+  rgstate "DWORD [CCHILDREN_TITLEBAR + 1]"
+
+pointer PTITLEBARINFO TITLEBARINFO
+
+flag [DISPLAY_DEVICE_STATE] DWORD display=DWORD
+  DISPLAY_DEVICE_ACTIVE           0x00000001
+  DISPLAY_DEVICE_PRIMARY_DEVICE   0x00000004
+  DISPLAY_DEVICE_MIRRORING_DRIVER 0x00000008
+  DISPLAY_DEVICE_VGA_COMPATIBLE   0x00000010
+  DISPLAY_DEVICE_REMOVABLE        0x00000020
+  DISPLAY_DEVICE_MODESPRUNED      0x08000000
+
+struct DISPLAY_DEVICE
+  cb DWORD
+  DeviceName "TCHAR [32]"
+  DeviceString "TCHAR [128]"
+  StateFlags [DISPLAY_DEVICE_STATE]
+  DeviceID "TCHAR [128]"
+  DeviceKey "TCHAR [128]"
+
+pointer PDISPLAY_DEVICE DISPLAY_DEVICE
+
+struct ICONINFOEX
+  cbSize DWORD
+  fIcon BOOL
+  xHotspot DWORD
+  yHotspot DWORD
+  hbmMask HBITMAP
+  hbmColor HBITMAP
+  wResID WORD
+  szModName "TCHAR [MAX_PATH]"
+  szResName "TCHAR [MAX_PATH]"
+
+pointer PICONINFOEX ICONINFOEX
+
+struct PAINTSTRUCT
+  hdc HDC
+  fErase BOOL
+  rcPaint RECT
+  fRestore BOOL
+  fIncUpdate BOOL
+  rgbReserved "BYTE [32]"
+
+pointer LPPAINTSTRUCT PAINTSTRUCT
+
+pointer "const PAINTSTRUCT*" PAINTSTRUCT
+
+struct SCROLLBARINFO
+  cbSize DWORD
+  rcScrollBar RECT
+  dxyLineButton int
+  xyThumbTop int
+  xyThumbBottom int
+  reserved int
+  rgstate "DWORD [CCHILDREN_SCROLLBAR + 1]"
+
+pointer PSCROLLBARINFO SCROLLBARINFO
+
+flag [MOUSEINPUT_Data] DWORD display=DWORD
+  XBUTTON1 0x0001
+  XBUTTON2 0x0002
+
+flag [MOUSEEVENTF] DWORD display=DWORD
+  MOUSEEVENTF_MOVE            0x0001
+  MOUSEEVENTF_LEFTDOWN        0x0002
+  MOUSEEVENTF_LEFTUP          0x0004
+  MOUSEEVENTF_RIGHTDOWN       0x0008
+  MOUSEEVENTF_RIGHTUP         0x0010
+  MOUSEEVENTF_MIDDLEDOWN      0x0020
+  MOUSEEVENTF_MIDDLEUP        0x0040
+  MOUSEEVENTF_XDOWN           0x0080
+  MOUSEEVENTF_XUP             0x0100
+  MOUSEEVENTF_WHEEL           0x0800
+  MOUSEEVENTF_HWHEEL          0x01000
+  MOUSEEVENTF_MOVE_NOCOALESCE 0x2000
+  MOUSEEVENTF_VIRTUALDESK     0x4000
+  MOUSEEVENTF_ABSOLUTE        0x8000
+
+struct MOUSEINPUT
+  dx LONG
+  dy LONG
+  mouseData [MOUSEINPUT_Data]
+  dwFlags [MOUSEEVENTF]
+  time DWORD
+  dwExtraInfo ULONG_PTR
+
+flag [KEYEVENTF] DWORD display=DWORD
+  KEYEVENTF_EXTENDEDKEY 0x0001
+  KEYEVENTF_KEYUP       0x0002
+  KEYEVENTF_UNICODE     0x0004
+  KEYEVENTF_SCANCODE    0x0008
+
+struct KEYBDINPUT
+  wVk [VirtKeyCode]
+  wScan WORD
+  dwFlags [KEYEVENTF]
+  time DWORD
+  dwExtraInfo ULONG_PTR
+
+struct HARDWAREINPUT
+  uMsg DWORD
+  wParamL WORD
+  wParamH WORD
+
+union [INPUT_u] display=union
+  mi MOUSEINPUT
+  ki KEYBDINPUT
+  hi HARDWAREINPUT
+
+enum [INPUT_Type] DWORD display=DWORD
+  INPUT_MOUSE    0
+  INPUT_KEYBOARD 1
+  INPUT_HARDWARE 2
+
+struct INPUT
+  type [INPUT_Type]
+   [INPUT_u]
+
+pointer LPINPUT INPUT
+
+flag [WindowStyle] DWORD display=DWORD
+  WS_OVERLAPPED       0x00000000
+  WS_MAXIMIZEBOX      0x00010000
+  WS_TABSTOP          0x00010000
+  WS_GROUP            0x00020000
+  WS_MINIMIZEBOX      0x00020000
+  WS_THICKFRAME       0x00040000
+  WS_SYSMENU          0x00080000
+  WS_HSCROLL          0x00100000
+  WS_VSCROLL          0x00200000
+  WS_DLGFRAME         0x00400000
+  WS_BORDER           0x00800000
+  WS_CAPTION          0x00C00000
+  WS_OVERLAPPEDWINDOW 0x00cf0000
+  WS_MAXIMIZE         0x01000000
+  WS_CLIPCHILDREN     0x02000000
+  WS_CLIPSIBLINGS     0x04000000
+  WS_DISABLED         0x08000000
+  WS_VISIBLE          0x10000000
+  WS_MINIMIZE         0x20000000
+  WS_CHILD            0x40000000
+  WS_POPUP            0x80000000
+  WS_POPUPWINDOW      0x80880000
+
+flag [WindowExStyle] DWORD display=DWORD
+  WS_EX_DLGMODALFRAME    0x00000001
+  WS_EX_NOPARENTNOTIFY   0x00000004
+  WS_EX_TOPMOST          0x00000008
+  WS_EX_ACCEPTFILES      0x00000010
+  WS_EX_TRANSPARENT      0x00000020
+  WS_EX_MDICHILD         0x00000040
+  WS_EX_TOOLWINDOW       0x00000080
+  WS_EX_WINDOWEDGE       0x00000100
+  WS_EX_PALETTEWINDOW    0x00000188
+  WS_EX_CLIENTEDGE       0x00000200
+  WS_EX_OVERLAPPEDWINDOW 0x00000300
+  WS_EX_CONTEXTHELP      0x00000400
+  WS_EX_RIGHT            0x00001000
+  WS_EX_RTLREADING       0x00002000
+  WS_EX_LEFTSCROLLBAR    0x00004000
+  WS_EX_CONTROLPARENT    0x00010000
+  WS_EX_STATICEDGE       0x00020000
+  WS_EX_APPWINDOW        0x00040000
+  WS_EX_LAYERED          0x00080000
+  WS_EX_NOINHERITLAYOUT  0x00100000
+  WS_EX_LAYOUTRTL        0x00400000
+  WS_EX_COMPOSITED       0x02000000
+  WS_EX_NOACTIVATE       0x08000000
+
+flag [DialogStyle] DWORD display=DWORD
+  WS_OVERLAPPED       0x00000000
+  DS_ABSALIGN         0x01
+  DS_SYSMODAL         0x02
+  DS_3DLOOK           0x0004
+  DS_FIXEDSYS         0x0008
+  DS_NOFAILCREATE     0x0010
+  DS_LOCALEDIT        0x20
+  DS_SETFONT          0x40
+  DS_SHELLFONT        0x48
+  DS_MODALFRAME       0x80
+  DS_NOIDLEMSG        0x100
+  DS_SETFOREGROUND    0x200
+  DS_CONTROL          0x0400
+  DS_CENTER           0x0800
+  DS_CENTERMOUSE      0x1000
+  DS_CONTEXTHELP      0x2000
+  DS_USEPIXELS        0x8000
+  WS_MAXIMIZEBOX      0x00010000
+  WS_TABSTOP          0x00010000
+  WS_GROUP            0x00020000
+  WS_MINIMIZEBOX      0x00020000
+  WS_THICKFRAME       0x00040000
+  WS_SYSMENU          0x00080000
+  WS_HSCROLL          0x00100000
+  WS_VSCROLL          0x00200000
+  WS_DLGFRAME         0x00400000
+  WS_BORDER           0x00800000
+  WS_CAPTION          0x00C00000
+  WS_OVERLAPPEDWINDOW 0x00cf0000
+  WS_MAXIMIZE         0x01000000
+  WS_CLIPCHILDREN     0x02000000
+  WS_CLIPSIBLINGS     0x04000000
+  WS_DISABLED         0x08000000
+  WS_VISIBLE          0x10000000
+  WS_MINIMIZE         0x20000000
+  WS_CHILD            0x40000000
+  WS_POPUP            0x80000000
+  WS_POPUPWINDOW      0x80880000
+
+struct DLGTEMPLATE pack=2
+  style [DialogStyle]
+  dwExtendedStyle [WindowExStyle]
+  cdit WORD
+  x short
+  y short
+  cx short
+  cy short
+
+pointer LPCDLGTEMPLATE DLGTEMPLATE
+
+struct MSGBOXPARAMS
+  cbSize UINT
+  hwndOwner HWND
+  hInstance HINSTANCE
+  lpszText LPCTSTR
+  lpszCaption LPCTSTR
+  dwStyle DWORD
+  lpszIcon LPCTSTR
+  dwContextHelpId DWORD_PTR
+  lpfnMsgBoxCallback MSGBOXCALLBACK
+  dwLanguageId DWORD
+
+pointer "const LPMSGBOXPARAMS" MSGBOXPARAMS
+
+struct BSMINFO
+  cbSize UINT
+  hdesk HDESK
+  hwnd HWND
+  luid LUID
+
+pointer PBSMINFO BSMINFO
+
+enum [MSGFLTINFO] DWORD display=DWORD
+  MSGFLTINFO_NONE                     0
+  MSGFLTINFO_ALREADYALLOWED_FORWND    1
+  MSGFLTINFO_ALREADYDISALLOWED_FORWND 2
+  MSGFLTINFO_ALLOWED_HIGHER           3
+
+struct CHANGEFILTERSTRUCT
+  cbSize DWORD
+  ExtStatus [MSGFLTINFO]
+
+pointer PCHANGEFILTERSTRUCT CHANGEFILTERSTRUCT
+
+struct ALTTABINFO
+  cbSize DWORD
+  cItems int
+  cColumns int
+  cRows int
+  iColFocus int
+  iRowFocus int
+  cxItem int
+  cyItem int
+  ptStart POINT
+
+pointer PALTTABINFO ALTTABINFO
+
+flag [GUITHREADINFO_Flags] DWORD display=DWORD
+  GUI_CARETBLINKING  0x00000001
+  GUI_INMOVESIZE     0x00000002
+  GUI_INMENUMODE     0x00000004
+  GUI_SYSTEMMENUMODE 0x00000008
+  GUI_POPUPMENUMODE  0x00000010
+
+struct GUITHREADINFO
+  cbSize DWORD
+  flags [GUITHREADINFO_Flags]
+  hwndActive HWND
+  hwndFocus HWND
+  hwndCapture HWND
+  hwndMenuOwner HWND
+  hwndMoveSize HWND
+  hwndCaret HWND
+  rcCaret RECT
+
+pointer LPGUITHREADINFO GUITHREADINFO
+
+struct WINDOWINFO
+  cbSize DWORD
+  rcWindow RECT
+  rcClient RECT
+  dwStyle [WindowStyle]
+  dwExStyle [WindowExStyle]
+  dwWindowStatus DWORD
+  cxWindowBorders UINT
+  cyWindowBorders UINT
+  atomWindowType ATOM
+  wCreatorVersion WORD
+
+pointer PWINDOWINFO WINDOWINFO
+
+flag [WPF_Flags] UINT display=UINT
+  WPF_SETMINPOSITION       0x0001
+  WPF_RESTORETOMAXIMIZED   0x0002
+  WPF_ASYNCWINDOWPLACEMENT 0x0004
+
+struct WINDOWPLACEMENT
+  length UINT
+  flags [WPF_Flags]
+  showCmd UINT
+  ptMinPosition POINT
+  ptMaxPosition POINT
+  rcNormalPosition RECT
+
+pointer WINDOWPLACEMENT* WINDOWPLACEMENT
+
+struct UPDATELAYEREDWINDOWINFO
+  cbSize DWORD
+  hdcDst HDC
+  pptDst "const POINT*"
+  psize "const SIZE*"
+  hdcSrc HDC
+  pptSrc "const POINT*"
+  crKey COLORREF
+  pblend "const BLENDFUNCTION*"
+  dwFlags DWORD
+  prcDirty "const RECT*"
+
+pointer "const UPDATELAYEREDWINDOWINFO*" UPDATELAYEREDWINDOWINFO
+
+struct COMBOBOXINFO
+  cbSize DWORD
+  rcItem RECT
+  rcButton RECT
+  stateButton DWORD
+  hwndCombo HWND
+  hwndItem HWND
+  hwndList HWND
+
+pointer PCOMBOBOXINFO COMBOBOXINFO
+
+flag [CursorFlags] DWORD display=DWORD
+  CURSOR_SHOWING 0x00000001
+
+struct CURSORINFO
+  cbSize DWORD
+  flags [CursorFlags]
+  hCursor HCURSOR
+  ptScreenPos POINT
+
+pointer PCURSORINFO CURSORINFO
+
+struct CONVCONTEXT
+  cb UINT
+  wFlags UINT
+  wCountryID UINT
+  iCodePage [CODE_PAGE|int]
+  dwLangID DWORD
+  dwSecurity DWORD
+  qos SECURITY_QUALITY_OF_SERVICE
+
+pointer PCONVCONTEXT CONVCONTEXT
+
+enum [CONVINFO_XTYP] UINT
+  XTYP_ADVSTART        0x1030
+  XTYP_CONNECT         0x1062
+  XTYP_ADVREQ          0x2022
+  XTYP_REQUEST         0x20B0
+  XTYP_WILDCONNECT     0x20E2
+  XTYP_ADVDATA         0x4010
+  XTYP_EXECUTE         0x4050
+  XTYP_POKE            0x4090
+  XTYP_ERROR           0x8002
+  XTYP_ADVSTOP         0x8040
+  XTYP_CONNECT_CONFIRM 0x8072
+  XTYP_XACT_COMPLETE   0x8080
+  XTYP_REGISTER        0x80A2
+  XTYP_DISCONNECT      0x80C2
+  XTYP_UNREGISTER      0x80D2
+  XTYP_MONITOR         0x80F2
+
+enum [CONVINFO_STATUS] UINT
+  ST_CONNECTED  0x0001
+  ST_ADVISE     0x0002
+  ST_ISLOCAL    0x0004
+  ST_BLOCKED    0x0008
+  ST_CLIENT     0x0010
+  ST_TERMINATED 0x0020
+  ST_INLIST     0x0040
+  ST_BLOCKNEXT  0x0080
+  ST_ISSELF     0x0100
+
+enum [CONVINFO_STATE] UINT
+  XST_NULL           0
+  XST_INCOMPLETE     1
+  XST_CONNECTED      2
+  XST_INIT1          3
+  XST_INIT2          4
+  XST_REQSENT        5
+  XST_DATARCVD       6
+  XST_POKESENT       7
+  XST_POKEACKRCVD    8
+  XST_EXECSENT       9
+  XST_EXECACKRCVD    10
+  XST_ADVSENT        11
+  XST_UNADVSENT      12
+  XST_ADVACKRCVD     13
+  XST_UNADVACKRCVD   14
+  XST_ADVDATASENT    15
+  XST_ADVDATAACKRCVD 16
+
+struct CONVINFO
+  cb DWORD
+  hUser DWORD_PTR
+  hConvPartner HCONV
+  hszSvcPartner HSZ
+  hszServiceReq HSZ
+  hszTopic HSZ
+  hszItem HSZ
+  wFmt UINT
+  wType [CONVINFO_XTYP]
+  wStatus [CONVINFO_STATUS]
+  wConvst [CONVINFO_STATE]
+  wLastError UINT
+  hConvList HCONVLIST
+  ConvCtxt CONVCONTEXT
+  hwnd HWND
+  hwndPartner HWND
+
+pointer PCONVINFO CONVINFO
+
+flag [FLASHWINFO_Flags] DWORD display=DWORD
+  FLASHW_STOP      0
+  FLASHW_CAPTION   0x00000001
+  FLASHW_TRAY      0x00000002
+  FLASHW_ALL       0x00000003
+  FLASHW_TIMER     0x00000004
+  FLASHW_TIMERNOFG 0x0000000C
+
+struct FLASHWINFO
+  cbSize UINT
+  hwnd HWND
+  dwFlags [FLASHWINFO_Flags]
+  uCount UINT
+  dwTimeout DWORD
+
+pointer PFLASHWINFO FLASHWINFO
+
+struct ICONINFO
+  fIcon BOOL
+  xHotspot DWORD
+  yHotspot DWORD
+  hbmMask HBITMAP
+  hbmColor HBITMAP
+
+pointer PICONINFO ICONINFO
+
+flag [ACCEL_Flags] BYTE display=BYTE
+  FVIRTKEY  0x01
+  FNOINVERT 0x02
+  FSHIFT    0x04
+  FCONTROL  0x08
+  FALT      0x10
+
+struct ACCEL
+  fVirt [ACCEL_Flags]
+  key [VirtKeyCode]
+  cmd WORD
+
+pointer LPACCEL ACCEL
+
+struct LASTINPUTINFO
+  cbSize UINT
+  dwTime DWORD
+
+pointer PLASTINPUTINFO LASTINPUTINFO
+
+flag [MENUINFO_Mask] DWORD display=DWORD
+  MIM_MAXHEIGHT       0x00000001
+  MIM_BACKGROUND      0x00000002
+  MIM_HELPID          0x00000004
+  MIM_MENUDATA        0x00000008
+  MIM_STYLE           0x00000010
+  MIM_APPLYTOSUBMENUS 0x80000000
+
+flag [MENUINFO_Style] DWORD display=DWORD
+  MNS_CHECKORBMP  0x04000000
+  MNS_NOTIFYBYPOS 0x08000000
+  MNS_AUTODISMISS 0x10000000
+  MNS_DRAGDROP    0x20000000
+  MNS_MODELESS    0x40000000
+  MNS_NOCHECK     0x80000000
+
+struct MENUINFO
+  cbSize DWORD
+  fMask [MENUINFO_Mask]
+  dwStyle [MENUINFO_Style]
+  cyMax UINT
+  hbrBack HBRUSH
+  dwContextHelpID DWORD
+  dwMenuData ULONG_PTR
+
+pointer LPCMENUINFO MENUINFO
+
+flag [MENUITEMINFO_MASK] UINT display=UINT
+  MIIM_STATE      0x00000001
+  MIIM_ID         0x00000002
+  MIIM_SUBMENU    0x00000004
+  MIIM_CHECKMARKS 0x00000008
+  MIIM_TYPE       0x00000010
+  MIIM_DATA       0x00000020
+  MIIM_STRING     0x00000040
+  MIIM_BITMAP     0x00000080
+  MIIM_FTYPE      0x00000100
+
+flag [MENUITEM_TYPE] UINT display=UINT
+  MFT_STRING       0x00000000
+  MFT_BITMAP       0x00000004
+  MFT_MENUBARBREAK 0x00000020
+  MFT_MENUBREAK    0x00000040
+  MFT_OWNERDRAW    0x00000100
+  MFT_RADIOCHECK   0x00000200
+  MFT_SEPARATOR    0x00000800
+  MFT_RIGHTORDER   0x00002000
+  MFT_RIGHTJUSTIFY 0x00004000
+
+flag [MENUITEM_STATE] UINT display=UINT
+  MFS_ENABLED   0x00000000
+  MFS_UNCHECKED 0x00000000
+  MFS_UNHILITE  0x00000000
+  MFS_DISABLED  0x00000003
+  MFS_CHECKED   0x00000008
+  MFS_HILITE    0x00000080
+  MFS_DEFAULT   0x00001000
+
+flag [HBMMENU] HBITMAP display=HBITMAP
+  HBMMENU_CALLBACK        -1
+  HBMMENU_SYSTEM          1
+  HBMMENU_MBAR_RESTORE    2
+  HBMMENU_MBAR_MINIMIZE   3
+  HBMMENU_MBAR_CLOSE      5
+  HBMMENU_MBAR_CLOSE_D    6
+  HBMMENU_MBAR_MINIMIZE_D 7
+  HBMMENU_POPUP_CLOSE     8
+  HBMMENU_POPUP_RESTORE   9
+  HBMMENU_POPUP_MAXIMIZE  10
+  HBMMENU_POPUP_MINIMIZE  11
+
+struct MENUITEMINFO
+  cbSize UINT
+  fMask [MENUITEMINFO_MASK]
+  fType [MENUITEM_TYPE]
+  fState [MENUITEM_STATE]
+  wID UINT
+  hSubMenu HMENU
+  hbmpChecked HBITMAP
+  hbmpUnchecked HBITMAP
+  dwItemData ULONG_PTR
+  dwTypeData LPTSTR
+  cch UINT
+  hbmpItem [HBMMENU]
+
+pointer LPMENUITEMINFO MENUITEMINFO
+
+pointer LPCMENUITEMINFO MENUITEMINFO
+
+struct TPMPARAMS
+  cbSize UINT
+  rcExclude RECT
+
+pointer LPTPMPARAMS TPMPARAMS
+
+struct MOUSEMOVEPOINT
+  x int
+  y int
+  time DWORD
+  dwExtraInfo ULONG_PTR
+
+pointer LPMOUSEMOVEPOINT MOUSEMOVEPOINT
+
+struct MONITORINFO
+  cbSize DWORD
+  rcMonitor RECT
+  rcWork RECT
+  dwFlags [MONITORINFO_Flags]
+
+pointer LPMONITORINFO MONITORINFO
+
+flag [RAWINPUTDEVICE_Flags] DWORD display=DWORD
+  RIDEV_REMOVE       0x00000001
+  RIDEV_EXCLUDE      0x00000010
+  RIDEV_PAGEONLY     0x00000020
+  RIDEV_NOLEGACY     0x00000030
+  RIDEV_EXMODEMASK   0x000000F0
+  RIDEV_INPUTSINK    0x00000100
+  RIDEV_CAPTUREMOUSE 0x00000200
+  RIDEV_NOHOTKEYS    0x00000200
+  RIDEV_APPKEYS      0x00000400
+  RIDEV_EXINPUTSINK  0x00001000
+  RIDEV_DEVNOTIFY    0x00002000
+
+struct RAWINPUTDEVICE
+  usUsagePage USHORT
+  usUsage USHORT
+  dwFlags [RAWINPUTDEVICE_Flags]
+  hwndTarget HWND
+
+pointer PRAWINPUTDEVICE RAWINPUTDEVICE
+
+pointer PCRAWINPUTDEVICE RAWINPUTDEVICE
+
+enum [RIM_TYPE] DWORD display=DWORD
+  RIM_TYPEMOUSE    0
+  RIM_TYPEKEYBOARD 1
+  RIM_TYPEHID      2
+
+struct RAWINPUTDEVICELIST
+  hDevice HANDLE
+  dwType [RIM_TYPE]
+
+pointer PRAWINPUTDEVICELIST RAWINPUTDEVICELIST
+
+flag [ClassStyle] UINT display=UINT
+  CS_VREDRAW         0x0001
+  CS_HREDRAW         0x0002
+  CS_DBLCLKS         0x0008
+  CS_OWNDC           0x0020
+  CS_CLASSDC         0x0040
+  CS_PARENTDC        0x0080
+  CS_NOCLOSE         0x0200
+  CS_SAVEBITS        0x0800
+  CS_BYTEALIGNCLIENT 0x1000
+  CS_BYTEALIGNWINDOW 0x2000
+  CS_GLOBALCLASS     0x4000
+  CS_IME             0x00010000
+  CS_DROPSHADOW      0x00020000
+
+struct WNDCLASS
+  style [ClassStyle]
+  lpfnWndProc WNDPROC
+  cbClsExtra int
+  cbWndExtra int
+  hInstance HINSTANCE
+  hIcon HICON
+  hCursor HCURSOR
+  hbrBackground HBRUSH
+  lpszMenuName LPCTSTR
+  lpszClassName LPCTSTR
+
+pointer LPWNDCLASS WNDCLASS
+
+pointer "CONST WNDCLASS*" WNDCLASS
+
+struct WNDCLASSEX
+  cbSize UINT
+  style [ClassStyle]
+  lpfnWndProc WNDPROC
+  cbClsExtra int
+  cbWndExtra int
+  hInstance HINSTANCE
+  hIcon HICON
+  hCursor HCURSOR
+  hbrBackground HBRUSH
+  lpszMenuName LPCTSTR
+  lpszClassName LPCTSTR
+  hIconSm HICON
+
+pointer LPWNDCLASSEX WNDCLASSEX
+
+pointer "CONST WNDCLASSEX*" WNDCLASSEX
+
+enum [WindowLongIndex] int display=int
+  GWL_USERDATA   -21
+  GWL_EXSTYLE    -20
+  GWL_STYLE      -16
+  GWL_ID         -12
+  GWL_HWNDPARENT -8
+  GWL_HINSTANCE  -6
+  GWL_WNDPROC    -4
+  DWL_MSGRESULT  0
+  DWL_DLGPROC    4
+  DWL_USER       8
+
+enum [ClassLongIndex] int display=int
+  GCL_HICONSM       -34
+  GCW_ATOM          -32
+  GCL_STYLE         -26
+  GCL_WNDPROC       -24
+  GCL_CBCLSEXTRA    -20
+  GCL_CBWNDEXTRA    -18
+  GCL_HMODULE       -16
+  GCL_HICON         -14
+  GCL_HCURSOR       -12
+  GCL_HBRBACKGROUND -10
+  GCL_MENUNAME      -8
+
+enum [SystemMetricIndex] int display=int
+  SM_CXSCREEN                    0
+  SM_CYSCREEN                    1
+  SM_CXVSCROLL                   2
+  SM_CYHSCROLL                   3
+  SM_CYCAPTION                   4
+  SM_CXBORDER                    5
+  SM_CYBORDER                    6
+  SM_CXDLGFRAME                  7
+  SM_CYDLGFRAME                  8
+  SM_CYVTHUMB                    9
+  SM_CXHTHUMB                    10
+  SM_CXICON                      11
+  SM_CYICON                      12
+  SM_CXCURSOR                    13
+  SM_CYCURSOR                    14
+  SM_CYMENU                      15
+  SM_CXFULLSCREEN                16
+  SM_CYFULLSCREEN                17
+  SM_CYKANJIWINDOW               18
+  SM_MOUSEPRESENT                19
+  SM_CYVSCROLL                   20
+  SM_CXHSCROLL                   21
+  SM_DEBUG                       22
+  SM_SWAPBUTTON                  23
+  SM_RESERVED1                   24
+  SM_RESERVED2                   25
+  SM_RESERVED3                   26
+  SM_RESERVED4                   27
+  SM_CXMIN                       28
+  SM_CYMIN                       29
+  SM_CXSIZE                      30
+  SM_CYSIZE                      31
+  SM_CXFRAME                     32
+  SM_CYFRAME                     33
+  SM_CXMINTRACK                  34
+  SM_CYMINTRACK                  35
+  SM_CXDOUBLECLK                 36
+  SM_CYDOUBLECLK                 37
+  SM_CXICONSPACING               38
+  SM_CYICONSPACING               39
+  SM_MENUDROPALIGNMENT           40
+  SM_PENWINDOWS                  41
+  SM_DBCSENABLED                 42
+  SM_CMOUSEBUTTONS               43
+  SM_SECURE                      44
+  SM_CXEDGE                      45
+  SM_CYEDGE                      46
+  SM_CXMINSPACING                47
+  SM_CYMINSPACING                48
+  SM_CXSMICON                    49
+  SM_CYSMICON                    50
+  SM_CYSMCAPTION                 51
+  SM_CXSMSIZE                    52
+  SM_CYSMSIZE                    53
+  SM_CXMENUSIZE                  54
+  SM_CYMENUSIZE                  55
+  SM_ARRANGE                     56
+  SM_CXMINIMIZED                 57
+  SM_CYMINIMIZED                 58
+  SM_CXMAXTRACK                  59
+  SM_CYMAXTRACK                  60
+  SM_CXMAXIMIZED                 61
+  SM_CYMAXIMIZED                 62
+  SM_NETWORK                     63
+  SM_CLEANBOOT                   67
+  SM_CXDRAG                      68
+  SM_CYDRAG                      69
+  SM_SHOWSOUNDS                  70
+  SM_CXMENUCHECK                 71
+  SM_CYMENUCHECK                 72
+  SM_SLOWMACHINE                 73
+  SM_MIDEASTENABLED              74
+  SM_MOUSEWHEELPRESENT           75
+  SM_XVIRTUALSCREEN              76
+  SM_YVIRTUALSCREEN              77
+  SM_CXVIRTUALSCREEN             78
+  SM_CYVIRTUALSCREEN             79
+  SM_CMONITORS                   80
+  SM_SAMEDISPLAYFORMAT           81
+  SM_IMMENABLED                  82
+  SM_CXFOCUSBORDER               83
+  SM_CYFOCUSBORDER               84
+  SM_TABLETPC                    86
+  SM_MEDIACENTER                 87
+  SM_STARTER                     88
+  SM_SERVERR2                    89
+  SM_MOUSEHORIZONTALWHEELPRESENT 91
+  SM_CXPADDEDBORDER              92
+
+flag [PeekMessageFlag] UINT display=UINT
+  PM_NOREMOVE       0x0000
+  PM_REMOVE         0x0001
+  PM_NOYIELD        0x0002
+  PM_QS_PAINT       0x200000
+  PM_QS_SENDMESSAGE 0x400000
+  PM_QS_POSTMESSAGE 0x980000
+  PM_QS_INPUT       0x4070000
+
+flag [QueueStatusFlag] DWORD display=DWORD
+  QS_KEY            0x0001
+  QS_MOUSEMOVE      0x0002
+  QS_MOUSEBUTTON    0x0004
+  QS_MOUSE          0x0006
+  QS_POSTMESSAGE    0x0008
+  QS_TIMER          0x0010
+  QS_PAINT          0x0020
+  QS_SENDMESSAGE    0x0040
+  QS_HOTKEY         0x0080
+  QS_ALLPOSTMESSAGE 0x0100
+  QS_RAWINPUT       0x0400
+  QS_INPUT          0x0407
+  QS_ALLEVENTS      0x04bf
+  QS_ALLINPUT       0x04ff
+
+enum [WindowMessageFilterEnum] DWORD display=DWORD
+  MSGFLT_ADD    1
+  MSGFLT_REMOVE 2
+
+enum [UserObjectInformationEnum] int display=int
+  UOI_FLAGS    1
+  UOI_NAME     2
+  UOI_TYPE     3
+  UOI_USER_SID 4
+  UOI_HEAPSIZE 5
+  UOI_IO       6
+
+enum [GetAncestorEnum] UINT display=UINT
+  GA_PARENT    1
+  GA_ROOT      2
+  GA_ROOTOWNER 3
+
+enum [GetWindowEnum] UINT display=UINT
+  GW_HWNDFIRST    0
+  GW_HWNDLAST     1
+  GW_HWNDNEXT     2
+  GW_HWNDPREV     3
+  GW_OWNER        4
+  GW_CHILD        5
+  GW_ENABLEDPOPUP 6
+
+flag [DCExFlags] DWORD display=DWORD
+  DCX_WINDOW           0x00000001
+  DCX_CACHE            0x00000002
+  DCX_NORESETATTRS     0x00000004
+  DCX_CLIPCHILDREN     0x00000008
+  DCX_CLIPSIBLINGS     0x00000010
+  DCX_PARENTCLIP       0x00000020
+  DCX_EXCLUDERGN       0x00000040
+  DCX_INTERSECTRGN     0x00000080
+  DCX_EXCLUDEUPDATE    0x00000100
+  DCX_INTERSECTUPDATE  0x00000200
+  DCX_LOCKWINDOWUPDATE 0x00000400
+  DCX_VALIDATE         0x00200000
+
+flag [EnumDisplayDevicesFlags] DWORD display=DWORD
+  EDD_GET_DEVICE_INTERFACE_NAME 0x00000001
+
+flag [WinEventFlags] UINT display=UINT
+  WINEVENT_OUTOFCONTEXT   0x0000
+  WINEVENT_SKIPOWNTHREAD  0x0001
+  WINEVENT_SKIPOWNPROCESS 0x0002
+  WINEVENT_INCONTEXT      0x0004
+
+flag [RedrawWindowFlags] UINT display=UINT
+  RDW_INVALIDATE      0x0001
+  RDW_INTERNALPAINT   0x0002
+  RDW_ERASE           0x0004
+  RDW_VALIDATE        0x0008
+  RDW_NOINTERNALPAINT 0x0010
+  RDW_NOERASE         0x0020
+  RDW_NOCHILDREN      0x0040
+  RDW_ALLCHILDREN     0x0080
+  RDW_UPDATENOW       0x0100
+  RDW_ERASENOW        0x0200
+  RDW_FRAME           0x0400
+  RDW_NOFRAME         0x0800
+
+flag [AnimateWindowFlags] DWORD display=DWORD
+  AW_HOR_POSITIVE 0x00000001
+  AW_HOR_NEGATIVE 0x00000002
+  AW_VER_POSITIVE 0x00000004
+  AW_VER_NEGATIVE 0x00000008
+  AW_CENTER       0x00000010
+  AW_HIDE         0x00010000
+  AW_ACTIVATE     0x00020000
+  AW_SLIDE        0x00040000
+  AW_BLEND        0x00080000
+
+flag [SetWindowPosFlags] UINT display=UINT
+  SWP_NOSIZE         0x0001
+  SWP_NOMOVE         0x0002
+  SWP_NOZORDER       0x0004
+  SWP_NOREDRAW       0x0008
+  SWP_NOACTIVATE     0x0010
+  SWP_FRAMECHANGED   0x0020
+  SWP_SHOWWINDOW     0x0040
+  SWP_HIDEWINDOW     0x0080
+  SWP_NOCOPYBITS     0x0100
+  SWP_NOREPOSITION   0x0200
+  SWP_NOSENDCHANGING 0x0400
+  SWP_DEFERERASE     0x2000
+  SWP_ASYNCWINDOWPOS 0x4000
+
+flag [SendMessageTimeoutFlags] UINT display=UINT
+  SMTO_NORMAL             0x0000
+  SMTO_BLOCK              0x0001
+  SMTO_ABORTIFHUNG        0x0002
+  SMTO_NOTIMEOUTIFNOTHUNG 0x0008
+  SMTO_ERRORONEXIT        0x0020
+
+flag [DrawIconFlags] UINT display=UINT
+  DI_MASK        0x0001
+  DI_IMAGE       0x0002
+  DI_NORMAL      0x0003
+  DI_COMPAT      0x0004
+  DI_DEFAULTSIZE 0x0008
+  DI_NOMIRROR    0x0010
+
+enum [ObjectIdEnum] LONG display=LONG
+  OBJID_WINDOW            0x00000000
+  OBJID_NATIVEOM          0xFFFFFFF0
+  OBJID_QUERYCLASSNAMEIDX 0xFFFFFFF4
+  OBJID_SOUND             0xFFFFFFF5
+  OBJID_ALERT             0xFFFFFFF6
+  OBJID_CURSOR            0xFFFFFFF7
+  OBJID_CARET             0xFFFFFFF8
+  OBJID_SIZEGRIP          0xFFFFFFF9
+  OBJID_HSCROLL           0xFFFFFFFA
+  OBJID_VSCROLL           0xFFFFFFFB
+  OBJID_CLIENT            0xFFFFFFFC
+  OBJID_MENU              0xFFFFFFFD
+  OBJID_TITLEBAR          0xFFFFFFFE
+  OBJID_SYSMENU           0xFFFFFFFF
+
+flag [DrawStateFlags] UINT display=UINT
+  DST_COMPLEX    0x0000
+  DSS_NORMAL     0x0000
+  DST_TEXT       0x0001
+  DST_PREFIXTEXT 0x0002
+  DST_ICON       0x0003
+  DST_BITMAP     0x0004
+  DSS_UNION      0x0010
+  DSS_DISABLED   0x0020
+  DSS_MONO       0x0080
+  DSS_HIDEPREFIX 0x0200
+  DSS_PREFIXONLY 0x0400
+  DSS_RIGHT      0x8000
+
+enum [MenuCommandPosFlag] UINT display=UINT
+  MF_BYCOMMAND  0x00000000
+  MF_BYPOSITION 0x00000400
+
+flag [InsertMenuFlags] UINT display=UINT
+  MF_ENABLED      0x00000000
+  MF_STRING       0x00000000
+  MF_BYCOMMAND    0x00000000
+  MF_UNCHECKED    0x00000000
+  MF_GRAYED       0x00000001
+  MF_DISABLED     0x00000002
+  MF_BITMAP       0x00000004
+  MF_CHECKED      0x00000008
+  MF_POPUP        0x00000010
+  MF_MENUBARBREAK 0x00000020
+  MF_MENUBREAK    0x00000040
+  MF_OWNERDRAW    0x00000100
+  MF_BYPOSITION   0x00000400
+  MF_SEPARATOR    0x00000800
+
+flag [EnableMenuItemFlag] UINT display=UINT
+  MF_BYCOMMAND  0x00000000
+  MF_ENABLED    0x00000000
+  MF_GRAYED     0x00000001
+  MF_DISABLED   0x00000002
+  MF_BYPOSITION 0x00000400
+
+enum [EnableMenuItemResult] int display=BOOL
+  MF_ENABLED  0x00000000
+  MF_GRAYED   0x00000001
+  MF_DISABLED 0x00000002
+
+flag [CheckMenuItemFlag] UINT display=UINT
+  MF_BYCOMMAND  0x00000000
+  MF_UNCHECKED  0x00000000
+  MF_CHECKED    0x00000008
+  MF_BYPOSITION 0x00000400
+
+enum [ClipboardFormat] UINT display=UINT
+  CF_TEXT            1
+  CF_BITMAP          2
+  CF_METAFILEPICT    3
+  CF_SYLK            4
+  CF_DIF             5
+  CF_TIFF            6
+  CF_OEMTEXT         7
+  CF_DIB             8
+  CF_PALETTE         9
+  CF_PENDATA         10
+  CF_RIFF            11
+  CF_WAVE            12
+  CF_UNICODETEXT     13
+  CF_ENHMETAFILE     14
+  CF_HDROP           15
+  CF_LOCALE          16
+  CF_DIBV5           17
+  CF_OWNERDISPLAY    0x0080
+  CF_DSPTEXT         0x0081
+  CF_DSPBITMAP       0x0082
+  CF_DSPMETAFILEPICT 0x0083
+  CF_DSPENHMETAFILE  0x008E
+
+flag [HwndInsertAfterEnum] HWND display=HWND reset
+  HWND_NOTOPMOST -2
+  HWND_TOPMOST   -1
+  HWND_TOP       0
+  HWND_BOTTOM    1
+
+enum [WindowsHook] int display=int
+  WH_MSGFILTER       -1
+  WH_JOURNALRECORD   0
+  WH_JOURNALPLAYBACK 1
+  WH_KEYBOARD        2
+  WH_GETMESSAGE      3
+  WH_CALLWNDPROC     4
+  WH_CBT             5
+  WH_SYSMSGFILTER    6
+  WH_MOUSE           7
+  WH_HARDWARE        8
+  WH_DEBUG           9
+  WH_SHELL           10
+  WH_FOREGROUNDIDLE  11
+  WH_CALLWNDPROCRET  12
+  WH_KEYBOARD_LL     13
+  WH_MOUSE_LL        14
+
+flag [MsgWaitForMultipleObjectsFlags] DWORD display=DWORD
+  MWMO_WAITALL        0x0001
+  MWMO_ALERTABLE      0x0002
+  MWMO_INPUTAVAILABLE 0x0004
+
+enum [KeyboardLayoutHandle] HKL display=HKL reset
+  HKL_PREV 0
+  HKL_NEXT 1
+
+flag [KeyboardLayoutFlags] UINT display=UINT
+  KLF_ACTIVATE      0x00000001
+  KLF_SUBSTITUTE_OK 0x00000002
+  KLF_REORDER       0x00000008
+  KLF_REPLACELANG   0x00000010
+  KLF_NOTELLSHELL   0x00000080
+  KLF_SETFORPROCESS 0x00000100
+  KLF_SHIFTLOCK     0x00010000
+  KLF_RESET         0x40000000
+
+flag [MonitorFlags] DWORD display=DWORD
+  MONITOR_DEFAULTTONULL    0x00000000
+  MONITOR_DEFAULTTOPRIMARY 0x00000001
+  MONITOR_DEFAULTTONEAREST 0x00000002
+
+flag [ScrollWindowFlags] UINT display=UINT
+  SW_SCROLLCHILDREN 0x0001
+  SW_INVALIDATE     0x0002
+  SW_ERASE          0x0004
+  SW_SMOOTHSCROLL   0x0010
+
+enum [EnumDisplaySettingsEnum] DWORD display=DWORD
+  ENUM_REGISTRY_SETTINGS -2
+  ENUM_CURRENT_SETTINGS  -1
+
+enum [ButtonState] UINT display=UINT
+  BST_UNCHECKED     0x0000
+  BST_CHECKED       0x0001
+  BST_INDETERMINATE 0x0002
+  BST_PUSHED        0x0004
+  BST_FOCUS         0x0008
+
+flag [LayeredWindowAttribute] DWORD display=DWORD
+  LWA_COLORKEY 0x00000001
+  LWA_ALPHA    0x00000002
+
+pointer [LayeredWindowAttribute*] [LayeredWindowAttribute] display=DWORD*
+
+flag [UpdateLayeredWindowFlags] DWORD display=DWORD
+  ULW_COLORKEY 0x00000001
+  ULW_ALPHA    0x00000002
+  ULW_OPAQUE   0x00000004
+
+enum [MapVirtualKeyType] UINT display=UINT
+  MAPVK_VK_TO_VSC    0
+  MAPVK_VSC_TO_VK    1
+  MAPVK_VK_TO_CHAR   2
+  MAPVK_VSC_TO_VK_EX 3
+  MAPVK_VK_TO_VSC_EX 4
+
+enum [DesktopFlags] DWORD display=DWORD
+  DF_ALLOWOTHERACCOUNTHOOK 0x0001
+
+flag [DESKTOP_ACCESS_MASK] ACCESS_MASK display=ACCESS_MASK
+  DESKTOP_READOBJECTS     0x0001
+  DESKTOP_CREATEWINDOW    0x0002
+  DESKTOP_CREATEMENU      0x0004
+  DESKTOP_HOOKCONTROL     0x0008
+  DESKTOP_JOURNALRECORD   0x0010
+  DESKTOP_JOURNALPLAYBACK 0x0020
+  DESKTOP_ENUMERATE       0x0040
+  DESKTOP_WRITEOBJECTS    0x0080
+  DESKTOP_SWITCHDESKTOP   0x0100
+
+flag [WindowStationAccessRights] DWORD display=ACCESS_MASK
+  WINSTA_ENUMDESKTOPS      0x0001
+  WINSTA_READATTRIBUTES    0x0002
+  WINSTA_ACCESSCLIPBOARD   0x0004
+  WINSTA_CREATEDESKTOP     0x0008
+  WINSTA_WRITEATTRIBUTES   0x0010
+  WINSTA_ACCESSGLOBALATOMS 0x0020
+  WINSTA_EXITWINDOWS       0x0040
+  WINSTA_ENUMERATE         0x0100
+  WINSTA_READSCREEN        0x0200
+  WINSTA_ALL_ACCESS        0x37F
+  DELETE                   0x00010000
+  READ_CONTROL             0x00020000
+  WRITE_DAC                0x00040000
+  WRITE_OWNER              0x00080000
+  STANDARD_RIGHTS_REQUIRED 0x000F0000
+  SYNCHRONIZE              0x00100000
+  STANDARD_RIGHTS_ALL      0x001F0000
+  ACCESS_SYSTEM_SECURITY   0x01000000
+  MAXIMUM_ALLOWED          0x02000000
+
+enum [CreateWindowStationFlags] DWORD display=DWORD
+  CWF_CREATE_ONLY 0x00000001
+
+enum [LockSetForegroundWindowCode] UINT display=UINT
+  LSFW_LOCK   1
+  LSFW_UNLOCK 2
+
+flag [DeviceNotificationFlags] DWORD display=DWORD
+  DEVICE_NOTIFY_WINDOW_HANDLE         0x00000000
+  DEVICE_NOTIFY_SERVICE_HANDLE        0x00000001
+  DEVICE_NOTIFY_ALL_INTERFACE_CLASSES 0x00000004
+
+flag [TrackPopupMenuFlags] UINT display=UINT
+  TPM_LEFTALIGN       0x0000
+  TPM_LEFTBUTTON      0x0000
+  TPM_TOPALIGN        0x0000
+  TPM_HORIZONTAL      0x0000
+  TPM_RECURSE         0x0001
+  TPM_RIGHTBUTTON     0x0002
+  TPM_CENTERALIGN     0x0004
+  TPM_RIGHTALIGN      0x0008
+  TPM_VCENTERALIGN    0x0010
+  TPM_BOTTOMALIGN     0x0020
+  TPM_VERTICAL        0x0040
+  TPM_NONOTIFY        0x0080
+  TPM_RETURNCMD       0x0100
+  TPM_HORPOSANIMATION 0x0400
+  TPM_HORNEGANIMATION 0x0800
+  TPM_VERPOSANIMATION 0x1000
+  TPM_VERNEGANIMATION 0x2000
+  TPM_NOANIMATION     0x4000
+  TPM_LAYOUTRTL       0x8000
+  TPM_WORKAREA        0x10000
+
+flag [GetMenuDefaultItemFlags] UINT display=UINT
+  GMDI_USEDISABLED  0x0001
+  GMDI_GOINTOPOPUPS 0x0002
+
+enum [LoadImageString/LPCTSTR] LPCTSTR display=LPCTSTR
+  OIC_SAMPLE      32512
+  OCR_NORMAL      32512
+  OCR_IBEAM       32513
+  OIC_ERROR       32513
+  OIC_QUES        32514
+  OCR_WAIT        32514
+  OIC_WARNING     32515
+  OCR_CROSS       32515
+  OIC_INFORMATION 32516
+  OCR_UP          32516
+  OIC_WINLOGO     32517
+  OIC_SHIELD      32518
+  OCR_SIZE        32640
+  OCR_ICON        32641
+  OCR_SIZENWSE    32642
+  OCR_SIZENESW    32643
+  OCR_SIZEWE      32644
+  OCR_SIZENS      32645
+  OCR_SIZEALL     32646
+  OCR_ICOCUR      32647
+  OCR_NO          32648
+  OCR_HAND        32649
+  OCR_APPSTARTING 32650
+  OBM_LFARROWI    32734
+  OBM_RGARROWI    32735
+  OBM_DNARROWI    32736
+  OBM_UPARROWI    32737
+  OBM_COMBO       32738
+  OBM_MNARROW     32739
+  OBM_LFARROWD    32740
+  OBM_RGARROWD    32741
+  OBM_DNARROWD    32742
+  OBM_UPARROWD    32743
+  OBM_RESTORED    32744
+  OBM_ZOOMD       32745
+  OBM_REDUCED     32746
+  OBM_RESTORE     32747
+  OBM_ZOOM        32748
+  OBM_REDUCE      32749
+  OBM_LFARROW     32750
+  OBM_RGARROW     32751
+  OBM_DNARROW     32752
+  OBM_UPARROW     32753
+  OBM_CLOSE       32754
+  OBM_OLD_RESTORE 32755
+  OBM_OLD_ZOOM    32756
+  OBM_OLD_REDUCE  32757
+  OBM_BTNCORNERS  32758
+  OBM_CHECKBOXES  32759
+  OBM_CHECK       32760
+  OBM_BTSIZE      32761
+  OBM_OLD_LFARROW 32762
+  OBM_OLD_RGARROW 32763
+  OBM_OLD_DNARROW 32764
+  OBM_OLD_UPARROW 32765
+  OBM_SIZE        32766
+  OBM_OLD_CLOSE   32767
+
+enum [LoadBitmapString/LPCTSTR] LPCTSTR display=LPCTSTR
+  OBM_LFARROWI    32734
+  OBM_RGARROWI    32735
+  OBM_DNARROWI    32736
+  OBM_UPARROWI    32737
+  OBM_COMBO       32738
+  OBM_MNARROW     32739
+  OBM_LFARROWD    32740
+  OBM_RGARROWD    32741
+  OBM_DNARROWD    32742
+  OBM_UPARROWD    32743
+  OBM_RESTORED    32744
+  OBM_ZOOMD       32745
+  OBM_REDUCED     32746
+  OBM_RESTORE     32747
+  OBM_ZOOM        32748
+  OBM_REDUCE      32749
+  OBM_LFARROW     32750
+  OBM_RGARROW     32751
+  OBM_DNARROW     32752
+  OBM_UPARROW     32753
+  OBM_CLOSE       32754
+  OBM_OLD_RESTORE 32755
+  OBM_OLD_ZOOM    32756
+  OBM_OLD_REDUCE  32757
+  OBM_BTNCORNERS  32758
+  OBM_CHECKBOXES  32759
+  OBM_CHECK       32760
+  OBM_BTSIZE      32761
+  OBM_OLD_LFARROW 32762
+  OBM_OLD_RGARROW 32763
+  OBM_OLD_DNARROW 32764
+  OBM_OLD_UPARROW 32765
+  OBM_SIZE        32766
+  OBM_OLD_CLOSE   32767
+
+enum [LoadCursorString/LPCTSTR] LPCTSTR display=LPCTSTR
+  IDC_ARROW       32512
+  IDC_IBEAM       32513
+  IDC_WAIT        32514
+  IDC_CROSS       32515
+  IDC_UPARROW     32516
+  IDC_SIZE        32640
+  IDC_ICON        32641
+  IDC_SIZENWSE    32642
+  IDC_SIZENESW    32643
+  IDC_SIZEWE      32644
+  IDC_SIZENS      32645
+  IDC_SIZEALL     32646
+  IDC_NO          32648
+  IDC_HAND        32649
+  IDC_APPSTARTING 32650
+  IDC_HELP        32651
+
+enum [LoadIconString/LPCTSTR] LPCTSTR display=LPCTSTR
+  IDI_APPLICATION 32512
+  IDI_ERROR       32513
+  IDI_QUESTION    32514
+  IDI_WARNING     32515
+  IDI_INFORMATION 32516
+  IDI_WINLOGO     32517
+  IDI_SHIELD      32518
+
+enum [CursorId] DWORD display=DWORD
+  OCR_NORMAL      32512
+  OCR_IBEAM       32513
+  OCR_WAIT        32514
+  OCR_CROSS       32515
+  OCR_UP          32516
+  OCR_SIZE        32640
+  OCR_ICON        32641
+  OCR_SIZENWSE    32642
+  OCR_SIZENESW    32643
+  OCR_SIZEWE      32644
+  OCR_SIZENS      32645
+  OCR_SIZEALL     32646
+  OCR_ICOCUR      32647
+  OCR_NO          32648
+  OCR_HAND        32649
+  OCR_APPSTARTING 32650
+
+enum [WindowRegion] int display=int
+  ERROR         0
+  NULLREGION    1
+  SIMPLEREGION  2
+  COMPLEXREGION 3
+
+flag [TOUCHINPUT_Flags] DWORD display=DWORD
+  TOUCHEVENTF_MOVE       0x0001
+  TOUCHEVENTF_DOWN       0x0002
+  TOUCHEVENTF_UP         0x0004
+  TOUCHEVENTF_INRANGE    0x0008
+  TOUCHEVENTF_PRIMARY    0x0010
+  TOUCHEVENTF_NOCOALESCE 0x0020
+  TOUCHEVENTF_PEN        0x0040
+  TOUCHEVENTF_PALM       0x0080
+
+flag [TOUCHINPUT_Mask] DWORD display=DWORD
+  TOUCHINPUTMASKF_TIMEFROMSYSTEM 0x0001
+  TOUCHINPUTMASKF_EXTRAINFO      0x0002
+  TOUCHINPUTMASKF_CONTACTAREA    0x0004
+
+struct TOUCHINPUT
+  x LONG
+  y LONG
+  hSource HANDLE
+  dwID DWORD
+  dwFlags [TOUCHINPUT_Flags]
+  dwMask [TOUCHINPUT_Mask]
+  dwTime DWORD
+  dwExtraInfo ULONG_PTR
+  cxContact DWORD
+  cyContact DWORD
+
+pointer PTOUCHINPUT TOUCHINPUT
+
+flag [GestureId] DWORD display=DWORD
+  GID_ZOOM         3
+  GID_PAN          4
+  GID_ROTATE       5
+  GID_TWOFINGERTAP 6
+  GID_PRESSANDTAP  7
+
+struct GESTURECONFIG
+  dwID [GestureId]
+  dwWant DWORD
+  dwBlock DWORD
+
+pointer PGESTURECONFIG GESTURECONFIG
+
+struct POINTS
+  x SHORT
+  y SHORT
+
+flag [GESTUREINFO_Flags] DWORD display=DWORD
+  GF_BEGIN   0x00000001
+  GF_INERTIA 0x00000002
+  GF_END     0x00000004
+
+struct GESTUREINFO
+  cbSize UINT
+  dwFlags [GESTUREINFO_Flags]
+  dwID DWORD
+  hwndTarget HWND
+  ptsLocation POINTS
+  dwInstanceID DWORD
+  dwSequenceID DWORD
+  ullArguments ULONGLONG
+  cbExtraArgs UINT
+
+pointer PGESTUREINFO GESTUREINFO
+
+struct RAWINPUTHEADER
+  dwType [RIM_TYPE]
+  dwSize DWORD
+  hDevice HANDLE
+  wParam WPARAM
+
+flag [RAWMOUSE_STATE] USHORT display=USHORT
+  RI_MOUSE_LEFT_BUTTON_DOWN   0x0001
+  RI_MOUSE_LEFT_BUTTON_UP     0x0002
+  RI_MOUSE_RIGHT_BUTTON_DOWN  0x0004
+  RI_MOUSE_RIGHT_BUTTON_UP    0x0008
+  RI_MOUSE_MIDDLE_BUTTON_DOWN 0x0010
+  RI_MOUSE_MIDDLE_BUTTON_UP   0x0020
+  RI_MOUSE_BUTTON_4_DOWN      0x0040
+  RI_MOUSE_BUTTON_4_UP        0x0080
+  RI_MOUSE_BUTTON_5_DOWN      0x0100
+  RI_MOUSE_BUTTON_5_UP        0x0200
+  RI_MOUSE_WHEEL              0x0400
+
+struct [RAWMOUSE_u_s] display=struct
+  usButtonFlags [RAWMOUSE_STATE]
+  usButtonData USHORT
+
+union [RAWMOUSE_u] display=union
+  ulButtons ULONG
+   [RAWMOUSE_u_s]
+
+flag [RAWMOUSE_FLAGS] USHORT display=USHORT
+  MOUSE_MOVE_RELATIVE      0
+  MOUSE_MOVE_ABSOLUTE      1
+  MOUSE_VIRTUAL_DESKTOP    0x02
+  MOUSE_ATTRIBUTES_CHANGED 0x04
+  MOUSE_MOVE_NOCOALESCE    0x08
+
+struct RAWMOUSE
+  usFlags [RAWMOUSE_FLAGS]
+   [RAWMOUSE_u]
+  ulRawButtons ULONG
+  lLastX LONG
+  lLastY LONG
+  ulExtraInformation ULONG
+
+flag [RAWKEYBOARD_FLAGS] USHORT display=USHORT
+  RI_KEY_MAKE            0
+  RI_KEY_BREAK           1
+  RI_KEY_E0              2
+  RI_KEY_E1              4
+  RI_KEY_TERMSRV_SET_LED 8
+  RI_KEY_TERMSRV_SHADOW  0x10
+
+struct RAWKEYBOARD
+  MakeCode USHORT
+  Flags [RAWKEYBOARD_FLAGS]
+  Reserved USHORT
+  VKey [VirtKeyCode] display=USHORT
+  Message [WinMsg]
+  ExtraInformation ULONG
+
+struct RAWHID
+  dwSizeHid DWORD
+  dwCount DWORD
+  bRawData "BYTE [1]"
+
+union [RAWINPUT_u] display=union
+  mouse RAWMOUSE
+  keyboard RAWKEYBOARD
+  hid RAWHID
+
+struct RAWINPUT
+  header RAWINPUTHEADER
+  data [RAWINPUT_u]
+
+pointer PRAWINPUT RAWINPUT
+
+pointer PRAWINPUT* PRAWINPUT
+
+enum [CreateWindow_CW] int display=int
+  CW_USEDEFAULT 0x80000000
+
+struct WINCOMPATTRDATA
+  attribute [DwmWindowAttr]
+  pData PVOID length=dataSize
+  dataSize ULONG
+
+pointer WINCOMPATTRDATA* WINCOMPATTRDATA
+
+enum [TOUCH_FEEDBACK_MODE] UINT display=DWORD
+  TOUCH_FEEDBACK_DEFAULT  0x1
+  TOUCH_FEEDBACK_INDIRECT 0x2
+  TOUCH_FEEDBACK_NONE     0x3
+
+enum POINTER_INPUT_TYPE DWORD
+  PT_POINTER 0x00000001
+  PT_TOUCH   0x00000002
+  PT_PEN     0x00000003
+  PT_MOUSE   0x00000004
+
+pointer POINTER_INPUT_TYPE* POINTER_INPUT_TYPE
+
+flag POINTER_FLAGS UINT32
+  POINTER_FLAG_NONE           0x00000000
+  POINTER_FLAG_NEW            0x00000001
+  POINTER_FLAG_INRANGE        0x00000002
+  POINTER_FLAG_INCONTACT      0x00000004
+  POINTER_FLAG_FIRSTBUTTON    0x00000010
+  POINTER_FLAG_SECONDBUTTON   0x00000020
+  POINTER_FLAG_THIRDBUTTON    0x00000040
+  POINTER_FLAG_FOURTHBUTTON   0x00000080
+  POINTER_FLAG_FIFTHBUTTON    0x00000100
+  POINTER_FLAG_PRIMARY        0x00002000
+  POINTER_FLAG_CONFIDENCE     0x00004000
+  POINTER_FLAG_CANCELED       0x00008000
+  POINTER_FLAG_DOWN           0x00010000
+  POINTER_FLAG_UPDATE         0x00020000
+  POINTER_FLAG_UP             0x00040000
+  POINTER_FLAG_WHEEL          0x00080000
+  POINTER_FLAG_HWHEEL         0x00100000
+  POINTER_FLAG_CAPTURECHANGED 0x00200000
+
+flag [POINTER_MOD_FLAGS] DWORD display=DWORD
+  POINTER_MOD_SHIFT 0x0004
+  POINTER_MOD_CTRL  0x0008
+
+enum POINTER_BUTTON_CHANGE_TYPE UINT
+  POINTER_CHANGE_NONE              0
+  POINTER_CHANGE_FIRSTBUTTON_DOWN  1
+  POINTER_CHANGE_FIRSTBUTTON_UP    2
+  POINTER_CHANGE_SECONDBUTTON_DOWN 3
+  POINTER_CHANGE_SECONDBUTTON_UP   4
+  POINTER_CHANGE_THIRDBUTTON_DOWN  5
+  POINTER_CHANGE_THIRDBUTTON_UP    6
+  POINTER_CHANGE_FOURTHBUTTON_DOWN 7
+  POINTER_CHANGE_FOURTHBUTTON_UP   8
+  POINTER_CHANGE_FIFTHBUTTON_DOWN  9
+  POINTER_CHANGE_FIFTHBUTTON_UP    10
+
+struct POINTER_INFO
+  pointerType POINTER_INPUT_TYPE
+  pointerId UINT32
+  frameId UINT32
+  pointerFlags POINTER_FLAGS
+  sourceDevice HANDLE
+  hwndTarget HWND
+  ptPixelLocation POINT
+  ptHimetricLocation POINT
+  ptPixelLocationRaw POINT
+  ptHimetricLocationRaw POINT
+  dwTime DWORD
+  historyCount UINT32
+  InputData INT32
+  dwKeyStates DWORD
+  PerformanceCount UINT64
+  ButtonChangeType POINTER_BUTTON_CHANGE_TYPE
+
+pointer POINTER_INFO* POINTER_INFO
+
+pointer "const POINTER_INFO*" POINTER_INFO
+
+flag TOUCH_FLAGS UINT32
+  TOUCH_FLAG_NONE 0x00000000
+
+flag TOUCH_MASK UINT32
+  TOUCH_MASK_NONE        0x00000000
+  TOUCH_MASK_CONTACTAREA 0x00000001
+  TOUCH_MASK_ORIENTATION 0x00000002
+  TOUCH_MASK_PRESSURE    0x00000004
+
+struct POINTER_TOUCH_INFO
+  pointerInfo POINTER_INFO
+  touchFlags TOUCH_FLAGS
+  touchMask TOUCH_MASK
+  rcContact RECT
+  rcContactRaw RECT
+  orientation UINT32
+  pressure UINT32
+
+pointer POINTER_TOUCH_INFO* POINTER_TOUCH_INFO
+
+pointer "const POINTER_TOUCH_INFO*" POINTER_TOUCH_INFO
+
+enum CROSS_SLIDE_THRESHOLD UINT
+  CROSS_SLIDE_THRESHOLD_SELECT_START     0x00000000
+  CROSS_SLIDE_THRESHOLD_SPEED_BUMP_START 0x00000001
+  CROSS_SLIDE_THRESHOLD_SPEED_BUMP_END   0x00000002
+  CROSS_SLIDE_THRESHOLD_REARRANGE_START  0x00000003
+
+enum INERTIA_PARAMETER UINT
+  INERTIA_PARAMETER_TRANSLATION_DECELERATION 0x00000001
+  INERTIA_PARAMETER_TRANSLATION_DISPLACEMENT 0x00000002
+  INERTIA_PARAMETER_ROTATION_DECELERATION    0x00000003
+  INERTIA_PARAMETER_ROTATION_ANGLE           0x00000004
+  INERTIA_PARAMETER_EXPANSION_DECELERATION   0x00000005
+  INERTIA_PARAMETER_EXPANSION_EXPANSION      0x00000006
+
+enum INTERACTION_STATE UINT
+  INTERACTION_STATE_IDLE                0x00000000
+  INTERACTION_STATE_IN_INTERACTION      0x00000001
+  INTERACTION_STATE_POSSIBLE_DOUBLE_TAP 0x00000002
+
+pointer INTERACTION_STATE* INTERACTION_STATE
+
+enum INTERACTION_CONTEXT_PROPERTY UINT
+  INTERACTION_CONTEXT_PROPERTY_MEASUREMENT_UNITS       0x00000001
+  INTERACTION_CONTEXT_PROPERTY_INTERACTION_UI_FEEDBACK 0x00000002
+  INTERACTION_CONTEXT_PROPERTY_FILTER_POINTERS         0x00000003
+
+struct CROSS_SLIDE_PARAMETER
+  threshold CROSS_SLIDE_THRESHOLD
+  distance float
+
+pointer CROSS_SLIDE_PARAMETER* CROSS_SLIDE_PARAMETER
+
+enum MOUSE_WHEEL_PARAMETER UINT
+  MOUSE_WHEEL_PARAMETER_CHAR_TRANSLATION_X 0x00000001
+  MOUSE_WHEEL_PARAMETER_CHAR_TRANSLATION_Y 0x00000002
+  MOUSE_WHEEL_PARAMETER_DELTA_SCALE        0x00000003
+  MOUSE_WHEEL_PARAMETER_DELTA_ROTATION     0x00000004
+  MOUSE_WHEEL_PARAMETER_PAGE_TRANSLATION_X 0x00000005
+  MOUSE_WHEEL_PARAMETER_PAGE_TRANSLATION_Y 0x00000006
+
+enum INTERACTION_ID UINT
+  INTERACTION_ID_NONE          0x00000000
+  INTERACTION_ID_MANIPULATION  0x00000001
+  INTERACTION_ID_TAP           0x00000002
+  INTERACTION_ID_SECONDARY_TAP 0x00000003
+  INTERACTION_ID_HOLD          0x00000004
+  INTERACTION_ID_DRAG          0x00000005
+  INTERACTION_ID_CROSS_SLIDE   0x00000006
+
+flag INTERACTION_CONFIGURATION_FLAGS UINT
+  INTERACTION_CONFIGURATION_FLAG_NONE 0x00000000
+
+struct INTERACTION_CONTEXT_CONFIGURATION
+  interactionId INTERACTION_ID
+  enable INTERACTION_CONFIGURATION_FLAGS
+
+pointer INTERACTION_CONTEXT_CONFIGURATION* INTERACTION_CONTEXT_CONFIGURATION
+
+pointer "const INTERACTION_CONTEXT_CONFIGURATION*" INTERACTION_CONTEXT_CONFIGURATION
+
+flag PEN_FLAGS UINT32
+  PEN_FLAG_NONE     0x00000000
+  PEN_FLAG_BARREL   0x00000001
+  PEN_FLAG_INVERTED 0x00000002
+  PEN_FLAG_ERASER   0x00000004
+
+flag PEN_MASK UINT32
+  PEN_MASK_NONE     0x00000000
+  PEN_MASK_PRESSURE 0x00000001
+  PEN_MASK_ROTATION 0x00000002
+  PEN_MASK_TILT_X   0x00000004
+  PEN_MASK_TILT_Y   0x00000008
+
+struct POINTER_PEN_INFO
+  pointerInfo POINTER_INFO
+  penFlags PEN_FLAGS
+  penMask PEN_MASK
+  pressure UINT32
+  rotation UINT32
+  tiltX INT32
+  tiltY INT32
+
+pointer POINTER_PEN_INFO* POINTER_PEN_INFO
+
+struct TOUCH_HIT_TESTING_INPUT
+  pointerId UINT32
+  point POINT
+  boundingBox RECT
+  nonOccludedBoundingBox RECT
+  orientation UINT32
+
+pointer "const TOUCH_HIT_TESTING_INPUT*" TOUCH_HIT_TESTING_INPUT
+
+struct TOUCH_HIT_TESTING_PROXIMITY_EVALUATION
+  score UINT16
+  adjustedPoint POINT
+
+pointer TOUCH_HIT_TESTING_PROXIMITY_EVALUATION* TOUCH_HIT_TESTING_PROXIMITY_EVALUATION
+
+pointer "const TOUCH_HIT_TESTING_PROXIMITY_EVALUATION*" TOUCH_HIT_TESTING_PROXIMITY_EVALUATION
+
+enum INPUT_MESSAGE_DEVICE_TYPE UINT
+  IMDT_UNAVAILABLE 0x00000000
+  IMDT_KEYBOARD    0x00000001
+  IMDT_MOUSE       0x00000002
+  IMDT_TOUCH       0x00000004
+  IMDT_PEN         0x00000008
+
+enum INPUT_MESSAGE_ORIGIN_ID UINT
+  IMO_UNAVAILABLE 0x00000000
+  IMO_HARDWARE    0x00000001
+  IMO_INJECTED    0x00000002
+  IMO_SYSTEM      0x00000004
+
+struct INPUT_MESSAGE_SOURCE
+  deviceType INPUT_MESSAGE_DEVICE_TYPE
+  originId INPUT_MESSAGE_ORIGIN_ID
+
+pointer INPUT_MESSAGE_SOURCE* INPUT_MESSAGE_SOURCE
+
+enum POINTER_DEVICE_TYPE UINT
+  POINTER_DEVICE_TYPE_INTEGRATED_PEN 0x00000001
+  POINTER_DEVICE_TYPE_EXTERNAL_PEN   0x00000002
+  POINTER_DEVICE_TYPE_TOUCH          0x00000003
+
+struct POINTER_DEVICE_INFO
+  displayOrientation DWORD
+  device HANDLE
+  pointerDeviceType POINTER_DEVICE_TYPE
+  monitor HMONITOR
+  startingCursorId ULONG
+  maxActiveContacts USHORT
+  productString "WCHAR [POINTER_DEVICE_PRODUCT_STRING_MAX]"
+
+pointer POINTER_DEVICE_INFO* POINTER_DEVICE_INFO
+
+enum POINTER_DEVICE_CURSOR_TYPE UINT
+  POINTER_DEVICE_CURSOR_TYPE_UNKNOWN 0x00000000
+  POINTER_DEVICE_CURSOR_TYPE_TIP     0x00000001
+  POINTER_DEVICE_CURSOR_TYPE_ERASER  0x00000002
+
+struct POINTER_DEVICE_CURSOR_INFO
+  cursorId UINT32
+  cursor POINTER_DEVICE_CURSOR_TYPE
+
+pointer POINTER_DEVICE_CURSOR_INFO* POINTER_DEVICE_CURSOR_INFO
+
+struct POINTER_DEVICE_PROPERTY
+  logicalMin INT32
+  logicalMax INT32
+  physicalMin INT32
+  physicalMax INT32
+  unit UINT32
+  unitExponent UINT32
+  usagePageId USHORT
+  usageId USHORT
+
+pointer POINTER_DEVICE_PROPERTY* POINTER_DEVICE_PROPERTY
+
+enum [TIMERV_COALESCING] ULONG display=ULONG
+  TIMERV_DEFAULT_COALESCING 0
+  TIMERV_NO_COALESCING      0xFFFFFFFF
+
+enum FEEDBACK_TYPE UINT
+  FEEDBACK_TOUCH_CONTACTVISUALIZATION 1
+  FEEDBACK_PEN_BARRELVISUALIZATION    2
+  FEEDBACK_PEN_TAP                    3
+  FEEDBACK_PEN_DOUBLETAP              4
+  FEEDBACK_PEN_PRESSANDHOLD           5
+  FEEDBACK_PEN_RIGHTTAP               6
+  FEEDBACK_TOUCH_TAP                  7
+  FEEDBACK_TOUCH_DOUBLETAP            8
+  FEEDBACK_TOUCH_PRESSANDHOLD         9
+  FEEDBACK_TOUCH_RIGHTTAP             10
+  FEEDBACK_GESTURE_PRESSANDTAP        11
+
+struct DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS
+  Callback PDEVICE_NOTIFY_CALLBACK_ROUTINE
+  Context PVOID
+
+pointer PDEVICE_NOTIFY_SUBSCRIBE_PARAMETERS DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS
+
+flag [DDE_INITIALIZE_FLAGS] DWORD display=DWORD
+  APPCLASS_STANDARD         0x00000000
+  APPCLASS_MONITOR          0x00000001
+  APPCMD_CLIENTONLY         0x00000010
+  APPCMD_FILTERINITS        0x00000020
+  CBF_FAIL_SELFCONNECTIONS  0x00001000
+  CBF_FAIL_CONNECTIONS      0x00002000
+  CBF_FAIL_ADVISES          0x00004000
+  CBF_FAIL_EXECUTES         0x00008000
+  CBF_FAIL_POKES            0x00010000
+  CBF_FAIL_REQUESTS         0x00020000
+  CBF_FAIL_ALLSVRXACTIONS   0x0003f000
+  CBF_SKIP_CONNECT_CONFIRMS 0x00040000
+  CBF_SKIP_REGISTRATIONS    0x00080000
+  CBF_SKIP_UNREGISTRATIONS  0x00100000
+  CBF_SKIP_DISCONNECTS      0x00200000
+  CBF_SKIP_ALLNOTIFICATIONS 0x003c0000
+  MF_HSZ_INFO               0x01000000
+  MF_SENDMSGS               0x02000000
+  MF_POSTMSGS               0x04000000
+  MF_CALLBACKS              0x08000000
+  MF_ERRORS                 0x10000000
+  MF_LINKS                  0x20000000
+  MF_CONV                   0x40000000
+
+enum [MSGFLT_ACTION] DWORD display=DWORD
+  MSGFLT_RESET    0
+  MSGFLT_ALLOW    1
+  MSGFLT_DISALLOW 2
+
+flag [CWP_FLAGS] UINT display=UINT
+  CWP_ALL             0x0000
+  CWP_SKIPINVISIBLE   0x0001
+  CWP_SKIPDISABLED    0x0002
+  CWP_SKIPTRANSPARENT 0x0004
+
+flag [MDITILE_TILE] UINT display=UINT
+  MDITILE_VERTICAL     0x0000
+  MDITILE_HORIZONTAL   0x0001
+  MDITILE_SKIPDISABLED 0x0002
+
+flag [MDITILE_CASCADE] UINT display=UINT
+  MDITILE_SKIPDISABLED 0x0002
+  MDITILE_ZORDER       0x0004
+
+flag [GWFS_FLAGS] DWORD display=DWORD
+  GWFS_INCLUDE_ANCESTORS 0x00000001
+
+func CreateDialogIndirectParam bothCharset
+  success NotEqual=0
+  HWND
+  hInstance HINSTANCE
+  lpTemplate LPCDLGTEMPLATE
+  hWndParent HWND
+  lpDialogFunc DLGPROC
+  lParamInit LPARAM
+
+func CreateDialogParam bothCharset
+  success NotEqual=0
+  HWND
+  hInstance HINSTANCE
+  lpTemplateName LPCTSTR
+  hWndParent HWND
+  lpDialogFunc DLGPROC
+  lParamInit LPARAM
+
+func DefDlgProc bothCharset
+  LRESULT
+  hDlg HWND
+  Msg [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+
+func DialogBoxIndirectParam bothCharset
+  success NotEqual=-1
+  INT_PTR
+  hInstance HINSTANCE
+  hDialogTemplate LPCDLGTEMPLATE
+  hWndParent HWND
+  lpDialogFunc DLGPROC
+  dwInitParam LPARAM
+
+func DialogBoxParam bothCharset
+  success NotEqual=-1
+  INT_PTR
+  hInstance HINSTANCE
+  lpTemplateName LPCTSTR
+  hWndParent HWND
+  lpDialogFunc DLGPROC
+  dwInitParam LPARAM
+
+func EndDialog
+  BOOL
+  hDlg HWND
+  nResult INT_PTR
+
+func GetDialogBaseUnits
+  LONG
+
+func GetDlgCtrlID
+  success NotEqual=0
+  int
+  hwndCtl HWND
+
+func GetDlgItem
+  success NotEqual=0
+  HWND
+  hDlg HWND
+  nIDDlgItem int
+
+func GetDlgItemInt
+  UINT
+  hDlg HWND
+  nIDDlgItem int
+  lpTranslated BOOL*
+  bSigned BOOL
+
+func GetDlgItemText bothCharset
+  success NotEqual=0
+  UINT
+  hDlg HWND
+  nIDDlgItem int
+  lpString LPTSTR
+  nMaxCount int
+
+func GetNextDlgGroupItem
+  success NotEqual=0
+  HWND
+  hDlg HWND
+  hCtl HWND
+  bPrevious BOOL
+
+func GetNextDlgTabItem
+  success NotEqual=0
+  HWND
+  hDlg HWND
+  hCtl HWND
+  bPrevious BOOL
+
+func IsDialogMessage bothCharset
+  BOOL
+  hDlg HWND
+  lpMsg LPMSG
+
+func MapDialogRect
+  BOOL
+  hDlg HWND
+  lpRect LPRECT
+
+func MessageBox bothCharset
+  success NotEqual=0
+  [MessageBoxResult]
+  hWnd HWND
+  lpText LPCTSTR
+  lpCaption LPCTSTR
+  uType [MessageBoxType]
+
+func MessageBoxEx bothCharset
+  success NotEqual=0
+  [MessageBoxResult]
+  hWnd HWND
+  lpText LPCTSTR
+  lpCaption LPCTSTR
+  uType [MessageBoxType]
+  wLanguageId WORD
+
+func MessageBoxIndirect bothCharset
+  success NotEqual=0
+  int
+  lpMsgBoxParams "const LPMSGBOXPARAMS"
+
+func MessageBoxTimeout bothCharset
+  success NotEqual=0
+  [MessageBoxResult]
+  hWnd HWND
+  lpText LPCTSTR
+  lpCaption LPCTSTR
+  uType [MessageBoxType]
+  wLanguageId WORD
+  dwMilliseconds [WaitTimeout]
+
+func SendDlgItemMessage bothCharset
+  LRESULT
+  hDlg HWND
+  nIDDlgItem int
+  Msg [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+
+func SetDlgItemInt
+  BOOL
+  hDlg HWND
+  nIDDlgItem int
+  uValue UINT
+  bSigned BOOL
+
+func SetDlgItemText bothCharset
+  BOOL
+  hDlg HWND
+  nIDDlgItem int
+  lpString LPCTSTR
+
+func BroadcastSystemMessage
+  success Greater=0
+  long
+  dwFlags DWORD
+  lpdwRecipients LPDWORD
+  uiMessage UINT
+  wParam WPARAM
+  lParam LPARAM
+
+func BroadcastSystemMessageEx bothCharset
+  success Greater=0
+  long
+  dwFlags DWORD
+  lpdwRecipients LPDWORD
+  uiMessage UINT
+  wParam WPARAM
+  lParam LPARAM
+  pBSMInfo PBSMINFO
+
+func DispatchMessage bothCharset
+  LRESULT
+  lpmsg "const MSG*"
+
+func GetInputState
+  BOOL
+
+func GetMessage bothCharset
+  success NotEqual=-1
+  [BOOL_NUMBER]
+  lpMsg LPMSG
+  hWnd HWND
+  wMsgFilterMin UINT
+  wMsgFilterMax UINT
+
+func GetMessageExtraInfo
+  LPARAM
+
+func GetMessagePos
+  DWORD
+
+func GetMessageTime
+  LONG
+
+func GetQueueStatus
+  DWORD
+  flags [QueueStatusFlag] display=UINT
+
+func InSendMessage
+  BOOL
+
+func InSendMessageEx
+  DWORD
+  lpReserved LPVOID
+
+func PeekMessage bothCharset
+  BOOL
+  lpMsg LPMSG
+  hWnd HWND
+  wMsgFilterMin UINT
+  wMsgFilterMax UINT
+  wRemoveMsg [PeekMessageFlag]
+
+func PostMessage bothCharset
+  BOOL
+  hWnd HWND
+  Msg [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+
+func PostQuitMessage
+  VOID
+  nExitCode int
+
+func PostThreadMessage bothCharset
+  BOOL
+  idThread DWORD
+  Msg [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+
+func RegisterWindowMessage bothCharset
+  success NotEqual=0
+  UINT
+  lpString LPCTSTR
+
+func ReplyMessage
+  BOOL
+  lResult LRESULT
+
+func SendMessage bothCharset
+  LRESULT
+  hWnd HWND
+  Msg [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+
+func SendMessageCallback bothCharset
+  BOOL
+  hWnd HWND
+  Msg [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+  lpCallBack SENDASYNCPROC
+  dwData ULONG_PTR
+
+func SendMessageTimeout bothCharset
+  success NotEqual=0
+  LRESULT
+  hWnd HWND
+  Msg [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+  fuFlags [SendMessageTimeoutFlags]
+  uTimeout UINT
+  lpdwResult PDWORD_PTR
+
+func SendNotifyMessage bothCharset
+  BOOL
+  hWnd HWND
+  Msg [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+
+func SetMessageExtraInfo
+  LPARAM
+  lParam LPARAM
+
+func TranslateMessage
+  BOOL
+  lpMsg "const MSG*"
+
+func WaitMessage
+  BOOL
+
+func GetGuiResources
+  success NotEqual=0
+  DWORD
+  hProcess [ProcessHandle]
+  uiFlags DWORD
+
+func IsImmersiveProcess
+  BOOL
+  hProcess HANDLE
+
+func SetProcessRestrictionExemption
+  BOOL
+  fEnableExemption BOOL
+
+func AttachThreadInput
+  BOOL
+  idAttach DWORD
+  idAttachTo DWORD
+  fAttach BOOL
+
+func WaitForInputIdle
+  success NotEqual=0
+  DWORD
+  hProcess [ProcessHandle]
+  dwMilliseconds [WaitTimeout]
+
+func IsWow64Message
+  BOOL
+
+func UserHandleGrantAccess
+  BOOL
+  hUserHandle HANDLE
+  hJob HANDLE
+  bGrant BOOL
+
+func AdjustWindowRect
+  BOOL
+  lpRect LPRECT
+  dwStyle [WindowStyle]
+  bMenu BOOL
+
+func AdjustWindowRectEx
+  BOOL
+  lpRect LPRECT
+  dwStyle [WindowStyle]
+  bMenu BOOL
+  dwExStyle [WindowExStyle]
+
+func AllowActivateDetachQueuesSetFocus
+  VOID
+
+func AllowSetForegroundWindow
+  BOOL
+  dwProcessId DWORD
+
+func AnimateWindow
+  BOOL
+  hwnd HWND
+  dwTime DWORD
+  dwFlags [AnimateWindowFlags]
+
+func AnyPopup
+  BOOL
+
+func ArrangeIconicWindows
+  success NotEqual=0
+  UINT
+  hWnd HWND
+
+func BeginDeferWindowPos
+  success NotEqual=0
+  HDWP
+  nNumWindows int
+
+func BringWindowToTop
+  BOOL
+  hWnd HWND
+
+func CalculatePopupWindowPosition
+  BOOL
+  anchorPoint "const POINT*"
+  windowSize "const SIZE*"
+  flags [TrackPopupMenuFlags]
+  excludeRect RECT*
+  popupWindowPosition RECT*
+
+func CascadeWindows
+  success NotEqual=0
+  WORD
+  hwndParent HWND
+  wHow [MDITILE_CASCADE]
+  lpRect "const RECT*"
+  cKids UINT
+  lpKids "const HWND*" count=cKids
+
+func ChangeWindowMessageFilter
+  BOOL
+  message [WinMsg]
+  dwFlag [WindowMessageFilterEnum]
+
+func ChangeWindowMessageFilterEx
+  BOOL
+  hWnd HWND
+  message [WinMsg]
+  action [MSGFLT_ACTION]
+  pChangeFilterStruct PCHANGEFILTERSTRUCT
+
+func ChildWindowFromPoint
+  success NotEqual=0
+  HWND
+  hWndParent HWND
+  Point POINT
+
+func ChildWindowFromPointEx
+  success NotEqual=0
+  HWND
+  hwndParent HWND
+  pt POINT
+  uFlags [CWP_FLAGS]
+
+func CloseWindow
+  BOOL
+  hWnd HWND
+
+func CreateWindow bothCharset
+  success NotEqual=0
+  HWND
+  lpClassName LPCTSTR
+  lpWindowName LPCTSTR
+  dwStyle DWORD
+  x [CreateWindow_CW]
+  y [CreateWindow_CW]
+  nWidth [CreateWindow_CW]
+  nHeight [CreateWindow_CW]
+  hWndParent HWND
+  hMenu HMENU
+  hInstance HINSTANCE
+  lpParam LPVOID
+
+func CreateWindowEx bothCharset
+  success NotEqual=0
+  HWND
+  dwExStyle [WindowExStyle]
+  lpClassName LPCTSTR
+  lpWindowName LPCTSTR
+  dwStyle [WindowStyle]
+  x [CreateWindow_CW]
+  y [CreateWindow_CW]
+  nWidth [CreateWindow_CW]
+  nHeight [CreateWindow_CW]
+  hWndParent HWND
+  hMenu HMENU
+  hInstance HINSTANCE
+  lpParam LPVOID
+
+func DeferWindowPos
+  success NotEqual=0
+  HDWP
+  hWinPosInfo HDWP
+  hWnd HWND
+  hWndInsertAfter [HwndInsertAfterEnum]
+  x int
+  y int
+  cx int
+  cy int
+  uFlags [SetWindowPosFlags]
+
+func DeregisterShellHookWindow
+  BOOL
+  hWnd HWND
+
+func DestroyWindow
+  BOOL
+  hWnd HWND
+
+func EndDeferWindowPos
+  BOOL
+  hWinPosInfo HDWP
+
+func EndTask
+  BOOL
+  hWnd HWND
+  fShutDown BOOL
+  fForce BOOL
+
+func EnumChildWindows
+  BOOL
+  hWndParent HWND
+  lpEnumFunc WNDENUMPROC
+  lParam LPARAM
+
+func EnumThreadWindows
+  BOOL
+  dwThreadId DWORD
+  lpfn WNDENUMPROC
+  lParam LPARAM
+
+func EnumWindows
+  BOOL
+  lpEnumFunc WNDENUMPROC
+  lParam LPARAM
+
+func FindWindow bothCharset
+  success NotEqual=0
+  HWND
+  lpClassName LPCTSTR
+  lpWindowName LPCTSTR
+
+func FindWindowEx bothCharset
+  success NotEqual=0
+  HWND
+  hwndParent HWND
+  hwndChildAfter HWND
+  lpszClass LPCTSTR
+  lpszWindow LPCTSTR
+
+func GetAltTabInfo bothCharset
+  BOOL
+  hwnd HWND
+  iItem int
+  pati PALTTABINFO
+  pszItemText LPTSTR
+  cchItemText UINT
+
+func GetAncestor
+  HWND
+  hwnd HWND
+  gaFlags [GetAncestorEnum]
+
+func GetClientRect
+  BOOL
+  hWnd HWND
+  lpRect LPRECT
+
+func GetDesktopWindow
+  success NotEqual=0
+  HWND
+
+func GetForegroundWindow
+  success NotEqual=0
+  HWND
+
+func GetGUIThreadInfo
+  BOOL
+  idThread DWORD
+  lpgui LPGUITHREADINFO
+
+func GetLastActivePopup
+  success NotEqual=0
+  HWND
+  hWnd HWND
+
+func GetLayeredWindowAttributes
+  BOOL
+  hwnd HWND
+  pcrKey COLORREF*
+  pbAlpha BYTE*
+  pdwFlags [LayeredWindowAttribute*]
+
+func GetParent
+  success NotEqual=0
+  HWND
+  hWnd HWND
+
+func GetProcessDefaultLayout
+  BOOL
+  pdwDefaultLayout DWORD*
+
+func GetShellWindow
+  success NotEqual=0
+  HWND
+
+func GetTitleBarInfo
+  BOOL
+  hwnd HWND
+  pti PTITLEBARINFO
+
+func GetTopWindow
+  HWND
+  hWnd HWND
+
+func GetWindow
+  HWND
+  hWnd HWND
+  uCmd [GetWindowEnum]
+
+func GetWindowDisplayAffinity
+  BOOL
+  hWnd HWND
+  dwAffinity DWORD*
+
+func GetWindowInfo
+  BOOL
+  hwnd HWND
+  pwi PWINDOWINFO
+
+func GetWindowModuleFileName bothCharset
+  success NotEqual=0
+  UINT
+  hwnd HWND
+  lpszFileName LPTSTR
+  cchFileNameMax UINT
+
+func GetWindowPlacement
+  BOOL
+  hWnd HWND
+  lpwndpl WINDOWPLACEMENT*
+
+func GetWindowRect
+  BOOL
+  hWnd HWND
+  lpRect LPRECT
+
+func GetWindowText bothCharset
+  int
+  hWnd HWND
+  lpString LPTSTR outputOnly
+  nMaxCount int
+
+func GetWindowTextLength bothCharset
+  success NotEqual=0
+  int
+  hWnd HWND
+
+func GetWindowThreadProcessId
+  success NotEqual=0
+  DWORD
+  hWnd HWND
+  lpdwProcessId LPDWORD
+
+func InternalGetWindowText
+  success NotEqual=0
+  int
+  hWnd HWND
+  lpString LPWSTR outputOnly
+  nMaxCount int
+
+func IsChild
+  BOOL
+  hWndParent HWND
+  hWnd HWND
+
+func IsGUIThread
+  BOOL
+  bConvert BOOL
+
+func IsHungAppWindow
+  BOOL
+  hWnd HWND
+
+func IsIconic
+  BOOL
+  hWnd HWND
+
+func IsProcessDPIAware
+  BOOL
+
+func IsWindow
+  BOOL
+  hWnd HWND
+
+func IsWindowUnicode
+  BOOL
+  hWnd HWND
+
+func IsWindowVisible
+  BOOL
+  hWnd HWND
+
+func IsZoomed
+  BOOL
+  hWnd HWND
+
+func LockSetForegroundWindow
+  BOOL
+  uLockCode [LockSetForegroundWindowCode]
+
+func LogicalToPhysicalPoint
+  void
+  hWnd HWND
+  lpPoint LPPOINT
+
+func MoveWindow
+  BOOL
+  hWnd HWND
+  X int
+  Y int
+  nWidth int
+  nHeight int
+  bRepaint BOOL
+
+func OpenIcon
+  BOOL
+  hWnd HWND
+
+func PhysicalToLogicalPoint
+  void
+  hWnd HWND
+  lpPoint LPPOINT
+
+func RealChildWindowFromPoint
+  success NotEqual=0
+  HWND
+  hwndParent HWND
+  ptParentClientCoords POINT
+
+func RealGetWindowClass
+  success NotEqual=0
+  UINT
+  hwnd HWND
+  pszType LPTSTR
+  cchType UINT
+
+func RegisterShellHookWindow
+  BOOL
+  hWnd HWND
+
+func SetForegroundWindow
+  BOOL
+  hWnd HWND
+
+func SetLayeredWindowAttributes
+  BOOL
+  hwnd HWND
+  crKey COLORREF
+  bAlpha BYTE
+  dwFlags [LayeredWindowAttribute]
+
+func SetParent
+  success NotEqual=0
+  HWND
+  hWndChild HWND
+  hWndNewParent HWND
+
+func SetProcessDefaultLayout
+  BOOL
+  dwDefaultLayout DWORD
+
+func SetProcessDPIAware
+  BOOL
+
+func SetWindowDisplayAffinity
+  BOOL
+  hWnd HWND
+  dwAffinity DWORD
+
+func SetWindowPlacement
+  BOOL
+  hWnd HWND
+  lpwndpl WINDOWPLACEMENT*
+
+func SetWindowPos
+  BOOL
+  hWnd HWND
+  hWndInsertAfter [HwndInsertAfterEnum]
+  X int
+  Y int
+  cx int
+  cy int
+  uFlags [SetWindowPosFlags]
+
+func SetWindowText bothCharset
+  BOOL
+  hWnd HWND
+  lpString LPCTSTR
+
+func ShowOwnedPopups
+  BOOL
+  hWnd HWND
+  fShow BOOL
+
+func ShowWindow
+  BOOL
+  hWnd HWND
+  nCmdShow [ShowWindowCmd]
+
+func ShowWindowAsync
+  BOOL
+  hWnd HWND
+  nCmdShow int
+
+func SoundSentry
+  BOOL
+
+func SwitchToThisWindow
+  VOID
+  hWnd HWND
+  fAltTab BOOL
+
+func TileWindows
+  success NotEqual=0
+  WORD
+  hwndParent HWND
+  wHow [MDITILE_TILE]
+  lpRect RECT*
+  cKids UINT
+  lpKids "const HWND*" count=cKids
+
+func UpdateLayeredWindow
+  BOOL
+  hwnd HWND
+  hdcDst HDC
+  pptDst POINT*
+  psize SIZE*
+  hdcSrc HDC
+  pptSrc POINT*
+  crKey COLORREF
+  pblend BLENDFUNCTION*
+  dwFlags [UpdateLayeredWindowFlags]
+
+func UpdateLayeredWindowIndirect
+  BOOL
+  hwnd HWND
+  pULWInfo "const UPDATELAYEREDWINDOWINFO*"
+
+func WindowFromPhysicalPoint
+  success NotEqual=0
+  HWND
+  Point POINT
+
+func WindowFromPoint
+  success NotEqual=0
+  HWND
+  Point POINT
+
+func ExitWindowsEx
+  BOOL
+  uFlags [EWX_FLAGS]
+  dwReason [SHTDN_REASON]
+
+func LockWorkStation
+  BOOL
+
+func ShutdownBlockReasonCreate
+  BOOL
+  hWnd HWND
+  pwszReason LPCWSTR
+
+func ShutdownBlockReasonDestroy
+  BOOL
+  hWnd HWND
+
+func ShutdownBlockReasonQuery
+  BOOL
+  hWnd HWND
+  pwszBuff LPWSTR
+  pcchBuff DWORD*
+
+func LoadBitmap bothCharset
+  success NotEqual=0
+  HBITMAP
+  hInstance HINSTANCE
+  lpBitmapName [LoadBitmapString/LPCTSTR]
+
+func GetSysColorBrush
+  success NotEqual=0
+  HBRUSH
+  nIndex [SysColorIndex]
+
+func CheckDlgButton
+  BOOL
+  hDlg HWND
+  nIDButton int
+  uCheck [ButtonState]
+
+func CheckRadioButton
+  BOOL
+  hDlg HWND
+  nIDFirstButton int
+  nIDLastButton int
+  nIDCheckButton int
+
+func IsDlgButtonChecked
+  [ButtonState]
+  hDlg HWND
+  nIDButton int
+
+func CreateCaret
+  BOOL
+  hWnd HWND
+  hBitmap HBITMAP
+  nWidth int
+  nHeight int
+
+func DestroyCaret
+  BOOL
+
+func GetCaretBlinkTime
+  success NotEqual=0
+  UINT
+
+func GetCaretPos
+  BOOL
+  lpPoint LPPOINT
+
+func HideCaret
+  BOOL
+  hWnd HWND
+
+func SetCaretBlinkTime
+  BOOL
+  uMSeconds UINT
+
+func SetCaretPos
+  BOOL
+  X int
+  Y int
+
+func ShowCaret
+  BOOL
+  hWnd HWND
+
+func AddClipboardFormatListener
+  BOOL
+  hwnd HWND
+
+func ChangeClipboardChain
+  BOOL
+  hWndRemove HWND
+  hWndNewNext HWND
+
+func CloseClipboard
+  BOOL
+
+func CountClipboardFormats
+  success NotEqual=0
+  int
+
+func EmptyClipboard
+  BOOL
+
+func EnumClipboardFormats
+  success NotEqual=0
+  UINT
+  format UINT
+
+func GetClipboardData
+  success NotEqual=0
+  HANDLE
+  uFormat [ClipboardFormat]
+
+func GetClipboardFormatName bothCharset
+  success NotEqual=0
+  int
+  format UINT
+  lpszFormatName LPTSTR outputOnly
+  cchMaxCount int
+
+func GetClipboardOwner
+  HWND
+
+func GetClipboardSequenceNumber
+  success NotEqual=0
+  DWORD
+
+func GetClipboardViewer
+  success NotEqual=0
+  HWND
+
+func GetOpenClipboardWindow
+  success NotEqual=0
+  HWND
+
+func GetPriorityClipboardFormat
+  success NotEqual=0
+  int
+  paFormatPriorityList UINT*
+  cFormats int
+
+func GetUpdatedClipboardFormats
+  BOOL
+  lpuiFormats PUINT
+  cFormats UINT
+  pcFormatsOut PUINT
+
+func IsClipboardFormatAvailable
+  BOOL
+  format [ClipboardFormat]
+
+func OpenClipboard
+  BOOL
+  hWndNewOwner HWND
+
+func RegisterClipboardFormat bothCharset
+  success NotEqual=0
+  UINT
+  lpszFormat LPCTSTR
+
+func RemoveClipboardFormatListener
+  BOOL
+  hwnd HWND
+
+func SetClipboardData
+  success NotEqual=0
+  HANDLE
+  uFormat [ClipboardFormat]
+  hMem HANDLE
+
+func SetClipboardViewer
+  success NotEqual=0
+  HWND
+  hWndNewViewer HWND
+
+func DlgDirListComboBox bothCharset
+  success NotEqual=0
+  int
+  hDlg HWND
+  lpPathSpec LPTSTR
+  nIDComboBox int
+  nIDStaticPath int
+  uFiletype UINT
+
+func DlgDirSelectComboBoxEx bothCharset
+  BOOL
+  hDlg HWND
+  lpString LPTSTR
+  nCount int
+  nIDComboBox int
+
+func GetComboBoxInfo
+  BOOL
+  hwndCombo HWND
+  pcbi PCOMBOBOXINFO
+
+func ClientToScreen
+  BOOL
+  hWnd HWND
+  lpPoint LPPOINT
+
+func MapWindowPoints
+  success NotEqual=0
+  int
+  hWndFrom HWND
+  hWndTo HWND
+  lpPoints LPPOINT
+  cPoints UINT
+
+func ScreenToClient
+  BOOL
+  hWnd HWND
+  lpPoint LPPOINT
+
+func ClipCursor
+  BOOL
+  lpRect "const RECT*"
+
+func CopyCursor
+  success NotEqual=0
+  HCURSOR
+  pcur HCURSOR
+
+func CreateCursor
+  success NotEqual=0
+  HCURSOR
+  hInst HINSTANCE
+  xHotSpot int
+  yHotSpot int
+  nWidth int
+  nHeight int
+  pvANDPlane "const VOID*"
+  pvXORPlane "const VOID*"
+
+func DestroyCursor
+  BOOL
+  hCursor HCURSOR
+
+func GetClipCursor
+  BOOL
+  lpRect LPRECT
+
+func GetCursor
+  success NotEqual=0
+  HCURSOR
+
+func GetCursorInfo
+  BOOL
+  pci PCURSORINFO
+
+func GetCursorPos
+  BOOL
+  lpPoint LPPOINT
+
+func GetPhysicalCursorPos
+  BOOL
+  lpPoint LPPOINT
+
+func LoadCursor bothCharset
+  success NotEqual=0
+  HCURSOR
+  hInstance HINSTANCE
+  lpCursorName [LoadCursorString/LPCTSTR]
+
+func LoadCursorFromFile bothCharset
+  success NotEqual=0
+  HCURSOR
+  lpFileName LPCTSTR
+
+func SetCursor
+  success NotEqual=0
+  HCURSOR
+  hCursor HCURSOR
+
+func SetCursorPos
+  BOOL
+  X int
+  Y int
+
+func SetPhysicalCursorPos
+  BOOL
+  X int
+  Y int
+
+func SetSystemCursor
+  BOOL
+  hcur HCURSOR
+  id [CursorId]
+
+func ShowCursor
+  success NotEqual=0
+  int
+  bShow BOOL
+
+func ChangeDisplaySettings bothCharset
+  success NotEqual=0
+  LONG
+  lpDevMode DEVMODE*
+  dwflags DWORD
+
+func ChangeDisplaySettingsEx bothCharset
+  success NotEqual=0
+  LONG
+  lpszDeviceName LPCTSTR
+  lpDevMode DEVMODE*
+  hwnd HWND
+  dwflags DWORD
+  lParam LPVOID
+
+func EnumDisplayDevices bothCharset
+  BOOL
+  lpDevice LPCTSTR
+  iDevNum DWORD
+  lpDisplayDevice PDISPLAY_DEVICE
+  dwFlags [EnumDisplayDevicesFlags]
+
+func EnumDisplaySettings bothCharset
+  BOOL
+  lpszDeviceName LPCTSTR
+  iModeNum [EnumDisplaySettingsEnum]
+  lpDevMode DEVMODE*
+
+func EnumDisplaySettingsEx bothCharset
+  BOOL
+  lpszDeviceName LPCTSTR
+  iModeNum DWORD
+  lpDevMode DEVMODE*
+  dwFlags DWORD
+
+func GetDC
+  success NotEqual=0
+  HDC
+  hWnd HWND
+
+func GetDCEx
+  success NotEqual=0
+  HDC
+  hWnd HWND
+  hrgnClip HRGN
+  flags [DCExFlags]
+
+func ReleaseDC
+  success NotEqual=0
+  int
+  hWnd HWND
+  hDC HDC
+
+func RegisterDeviceNotification bothCharset
+  success NotEqual=0
+  HDEVNOTIFY
+  hRecipient HANDLE
+  NotificationFilter LPVOID
+  Flags [DeviceNotificationFlags]
+
+func UnregisterDeviceNotification
+  BOOL
+  Handle HDEVNOTIFY
+
+func DdeSetQualityOfService
+  BOOL
+  hwndClient HWND
+  pqosNew "const SECURITY_QUALITY_OF_SERVICE*"
+  pqosPrev PSECURITY_QUALITY_OF_SERVICE
+
+func FreeDDElParam
+  BOOL
+  msg UINT
+  lParam LPARAM
+
+func ImpersonateDdeClientWindow
+  BOOL
+  hWndClient HWND
+  hWndServer HWND
+
+func PackDDElParam
+  success NotEqual=0
+  LPARAM
+  msg UINT
+  uiLo UINT_PTR
+  uiHi UINT_PTR
+
+func ReuseDDElParam
+  success NotEqual=0
+  LPARAM
+  lParam LPARAM
+  msgIn UINT
+  msgOut UINT
+  uiLo UINT_PTR
+  uiHi UINT_PTR
+
+func UnpackDDElParam
+  BOOL
+  msg UINT
+  lParam LPARAM
+  puiLo PUINT_PTR
+  puiHi PUINT_PTR
+
+func DdeAbandonTransaction
+  BOOL
+  idInst DWORD
+  hConv HCONV
+  idTransaction DWORD
+
+func DdeAccessData
+  success NotEqual=0
+  LPBYTE
+  hData HDDEDATA
+  pcbDataSize LPDWORD
+
+func DdeAddData
+  success NotEqual=0
+  HDDEDATA
+  hData HDDEDATA
+  pSrc LPBYTE
+  cb DWORD
+  cbOff DWORD
+
+func DdeClientTransaction
+  success NotEqual=0
+  HDDEDATA
+  pData LPBYTE
+  cbData DWORD
+  hConv HCONV
+  hszItem HSZ
+  wFmt UINT
+  wType UINT
+  dwTimeout DWORD
+  pdwResult LPDWORD
+
+func DdeCmpStringHandles
+  success NotEqual=0
+  int
+  hsz1 HSZ
+  hsz2 HSZ
+
+func DdeConnect
+  success NotEqual=0
+  HCONV
+  idInst DWORD
+  hszService HSZ
+  hszTopic HSZ
+  pCC PCONVCONTEXT
+
+func DdeConnectList
+  success NotEqual=0
+  HCONVLIST
+  idInst DWORD
+  hszService HSZ
+  hszTopic HSZ
+  hConvList HCONVLIST
+  pCC PCONVCONTEXT
+
+func DdeCreateDataHandle
+  success NotEqual=0
+  HDDEDATA
+  idInst DWORD
+  pSrc LPBYTE
+  cb DWORD
+  cbOff DWORD
+  hszItem HSZ
+  wFmt UINT
+  afCmd UINT
+
+func DdeCreateStringHandle bothCharset
+  success NotEqual=0
+  HSZ
+  idInst DWORD
+  psz LPTSTR
+  iCodePage [CODE_PAGE|int]
+
+func DdeDisconnect
+  BOOL
+  hConv HCONV
+
+func DdeDisconnectList
+  BOOL
+  hConvList HCONVLIST
+
+func DdeEnableCallback
+  BOOL
+  idInst DWORD
+  hConv HCONV
+  wCmd UINT
+
+func DdeFreeDataHandle
+  BOOL
+  hData HDDEDATA
+
+func DdeFreeStringHandle
+  BOOL
+  idInst DWORD
+  hsz HSZ
+
+func DdeGetData
+  success NotEqual=0
+  DWORD
+  hData HDDEDATA
+  pDst LPBYTE
+  cbMax DWORD
+  cbOff DWORD
+
+func DdeGetLastError
+  success NotEqual=0
+  UINT
+  idInst DWORD
+
+func DdeImpersonateClient
+  BOOL
+  hConv HCONV
+
+func DdeInitialize bothCharset
+  success Equal=0
+  UINT
+  pidInst LPDWORD
+  pfnCallback PFNCALLBACK
+  afCmd [DDE_INITIALIZE_FLAGS]
+  ulRes DWORD
+
+func DdeKeepStringHandle
+  BOOL
+  idInst DWORD
+  hsz HSZ
+
+func DdeNameService
+  success NotEqual=0
+  HDDEDATA
+  idInst DWORD
+  hsz1 UINT
+  hsz2 UINT
+  afCmd UINT
+
+func DdePostAdvise
+  BOOL
+  idInst DWORD
+  hszTopic HSZ
+  hszItem HSZ
+
+func DdeQueryConvInfo
+  success NotEqual=0
+  UINT
+  hConv HCONV
+  idTransaction DWORD
+  pConvInfo PCONVINFO
+
+func DdeQueryNextServer
+  success NotEqual=0
+  HCONV
+  hConvList HCONVLIST
+  hConvPrev HCONV
+
+func DdeQueryString bothCharset
+  success NotEqual=0
+  DWORD
+  idInst DWORD
+  hsz HSZ
+  psz LPTSTR
+  cchMax DWORD
+  iCodePage [CODE_PAGE|int]
+
+func DdeReconnect
+  success NotEqual=0
+  HCONV
+  hConv HCONV
+
+func DdeSetUserHandle
+  BOOL
+  hConv HCONV
+  id DWORD
+  hUser DWORD_PTR
+
+func DdeUnaccessData
+  BOOL
+  hData HDDEDATA
+
+func DdeUninitialize
+  BOOL
+  idInst DWORD
+
+func FlashWindow
+  BOOL
+  hWnd HWND
+  bInvert BOOL
+
+func FlashWindowEx
+  BOOL
+  pfwi PFLASHWINFO
+
+func MessageBeep
+  BOOL
+  uType UINT
+
+func SetLastErrorEx
+  void
+  dwErrCode [ERROR_CODE]
+  dwType [SET_LAST_ERROR_EX_TYPE]
+
+func FillRect
+  success NotEqual=0
+  int
+  hDC HDC
+  lprc "const RECT*"
+  hbr HBRUSH
+
+func FrameRect
+  success NotEqual=0
+  int
+  hDC HDC
+  lprc "const RECT*"
+  hbr HBRUSH
+
+func InvertRect
+  BOOL
+  hDC HDC
+  lprc "const RECT*"
+
+func DrawText bothCharset
+  success NotEqual=0
+  int
+  hDC HDC
+  lpchText LPCTSTR
+  nCount int
+  lpRect LPRECT
+  uFormat [DrawTextFlags] display=UINT
+
+func DrawTextEx bothCharset
+  success NotEqual=0
+  int
+  hdc HDC
+  lpchText LPTSTR
+  cchText int
+  lprc LPRECT
+  dwDTFormat [DrawTextFlags] display=UINT
+  lpDTParams LPDRAWTEXTPARAMS
+
+func GetTabbedTextExtent bothCharset
+  success NotEqual=0
+  DWORD
+  hDC HDC
+  lpString LPCTSTR
+  nCount int
+  nTabPositions int
+  lpnTabStopPositions "const LPINT"
+
+func TabbedTextOut bothCharset
+  success NotEqual=0
+  LONG
+  hDC HDC
+  X int
+  Y int
+  lpString LPCTSTR
+  nCount int
+  nTabPositions int
+  lpnTabStopPositions "const LPINT"
+  nTabOrigin int
+
+func CallMsgFilter bothCharset
+  BOOL
+  lpMsg LPMSG
+  nCode int
+
+func CallNextHookEx
+  LRESULT
+  hhk HHOOK
+  nCode int
+  wParam WPARAM
+  lParam LPARAM
+
+func SetWindowsHookEx bothCharset
+  success NotEqual=0
+  HHOOK
+  idHook [WindowsHook]
+  lpfn HOOKPROC
+  hMod HINSTANCE
+  dwThreadId DWORD
+
+func UnhookWindowsHookEx
+  BOOL
+  hhk HHOOK
+
+func CopyIcon
+  success NotEqual=0
+  HICON
+  hIcon HICON
+
+func CreateIcon
+  success NotEqual=0
+  HICON
+  hInstance HINSTANCE
+  nWidth int
+  nHeight int
+  cPlanes BYTE
+  cBitsPixel BYTE
+  lpbANDbits "const BYTE*"
+  lpbXORbits "const BYTE*"
+
+func CreateIconFromResource
+  success NotEqual=0
+  HICON
+  presbits PBYTE
+  dwResSize DWORD
+  fIcon BOOL
+  dwVer DWORD
+
+func CreateIconFromResourceEx
+  success NotEqual=0
+  HICON
+  pbIconBits PBYTE
+  cbIconBits DWORD
+  fIcon BOOL
+  dwVersion DWORD
+  cxDesired int
+  cyDesired int
+  uFlags UINT
+
+func CreateIconIndirect
+  success NotEqual=0
+  HICON
+  piconinfo PICONINFO
+
+func DestroyIcon
+  BOOL
+  hIcon HICON
+
+func DrawIcon
+  BOOL
+  hDC HDC
+  X int
+  Y int
+  hIcon HICON
+
+func DrawIconEx
+  BOOL
+  hdc HDC
+  xLeft int
+  yTop int
+  hIcon HICON
+  cxWidth int
+  cyWidth int
+  istepIfAniCur UINT
+  hbrFlickerFreeDraw HBRUSH
+  diFlags [DrawIconFlags]
+
+func GetIconInfo
+  BOOL
+  hIcon HICON
+  piconinfo PICONINFO
+
+func GetIconInfoEx bothCharset
+  BOOL
+  hIcon HICON
+  piconinfoex PICONINFOEX
+
+func LoadIcon bothCharset
+  success NotEqual=0
+  HICON
+  hInstance HINSTANCE
+  lpIconName [LoadIconString/LPCTSTR]
+
+func LookupIconIdFromDirectory
+  success NotEqual=0
+  int
+  presbits PBYTE
+  fIcon BOOL
+
+func LookupIconIdFromDirectoryEx
+  success NotEqual=0
+  int
+  presbits PBYTE
+  fIcon BOOL
+  cxDesired int
+  cyDesired int
+  Flags [LRFlags]
+
+func PrivateExtractIcons bothCharset
+  success NotEqual=0
+  UINT
+  lpszFile LPCTSTR
+  nIconIndex int
+  cxIcon int
+  cyIcon int
+  phicon HICON*
+  piconid UINT*
+  nIcons UINT
+  flags [LRFlags]
+
+func CopyAcceleratorTable bothCharset
+  success NotEqual=0
+  int
+  hAccelSrc HACCEL
+  lpAccelDst LPACCEL
+  cAccelEntries int
+
+func CreateAcceleratorTable bothCharset
+  success NotEqual=0
+  HACCEL
+  lpaccl LPACCEL
+  cEntries int
+
+func DestroyAcceleratorTable
+  BOOL
+  hAccel HACCEL
+
+func LoadAccelerators bothCharset
+  success NotEqual=0
+  HACCEL
+  hInstance HINSTANCE
+  lpTableName LPCTSTR
+
+func TranslateAccelerator bothCharset
+  success NotEqual=0
+  int
+  hWnd HWND
+  hAccTable HACCEL
+  lpMsg LPMSG
+
+func ActivateKeyboardLayout
+  success NotEqual=0
+  HKL
+  hkl [KeyboardLayoutHandle]
+  Flags [KeyboardLayoutFlags]
+
+func BlockInput
+  BOOL
+  fBlockIt BOOL
+
+func EnableWindow
+  BOOL
+  hWnd HWND
+  bEnable BOOL
+
+func GetActiveWindow
+  HWND
+
+func GetAsyncKeyState
+  success NotEqual=0
+  SHORT
+  vKey [VirtKeyCode] display=int
+
+func GetFocus
+  HWND
+
+func GetKBCodePage
+  success NotEqual=0
+  UINT
+
+func GetKeyboardLayout
+  success NotEqual=0
+  HKL
+  idThread DWORD
+
+func GetKeyboardLayoutList
+  success NotEqual=0
+  UINT
+  nBuff int
+  lpList HKL*
+
+func GetKeyboardLayoutName bothCharset
+  BOOL
+  pwszKLID LPTSTR
+
+func GetKeyboardState
+  BOOL
+  lpKeyState PBYTE
+
+func GetKeyNameText bothCharset
+  success NotEqual=0
+  int
+  lParam LONG
+  lpString LPTSTR
+  nSize int
+
+func GetKeyState
+  SHORT
+  nVirtKey [VirtKeyCode] display=int
+
+func GetLastInputInfo
+  BOOL
+  plii PLASTINPUTINFO
+
+func IsWindowEnabled
+  BOOL
+  hWnd HWND
+
+func keybd_event
+  VOID
+  bVk BYTE
+  bScan BYTE
+  dwFlags DWORD
+  dwExtraInfo ULONG_PTR
+
+func LoadKeyboardLayout bothCharset
+  success NotEqual=0
+  HKL
+  pwszKLID LPCTSTR
+  Flags [KeyboardLayoutFlags]
+
+func MapVirtualKey bothCharset
+  UINT
+  uCode UINT
+  uMapType [MapVirtualKeyType]
+
+func MapVirtualKeyEx bothCharset
+  success NotEqual=0
+  UINT
+  uCode UINT
+  uMapType [MapVirtualKeyType]
+  dwhkl HKL
+
+func OemKeyScan
+  success NotEqual=0
+  DWORD
+  wOemChar WORD
+
+func RegisterHotKey
+  BOOL
+  hWnd HWND
+  id int
+  fsModifiers UINT
+  vk UINT
+
+func SendInput
+  success NotEqual=0
+  UINT
+  nInputs UINT
+  pInputs LPINPUT
+  cbSize int
+
+func SetActiveWindow
+  success NotEqual=0
+  HWND
+  hWnd HWND
+
+func SetFocus
+  success NotEqual=0
+  HWND
+  hWnd HWND
+
+func SetKeyboardState
+  BOOL
+  lpKeyState LPBYTE
+
+func ToAscii
+  success NotEqual=0
+  int
+  uVirtKey UINT
+  uScanCode UINT
+  lpKeyState PBYTE
+  lpChar LPWORD
+  uFlags UINT
+
+func ToAsciiEx
+  success NotEqual=0
+  int
+  uVirtKey UINT
+  uScanCode UINT
+  lpKeyState PBYTE
+  lpChar LPWORD
+  uFlags UINT
+  dwhkl HKL
+
+func ToUnicode
+  success NotEqual=0
+  int
+  wVirtKey UINT
+  wScanCode UINT
+  lpKeyState "const PBYTE"
+  pwszBuff LPWSTR
+  cchBuff int
+  wFlags UINT
+
+func ToUnicodeEx
+  success NotEqual=0
+  int
+  wVirtKey UINT
+  wScanCode UINT
+  lpKeyState "const PBYTE"
+  pwszBuff LPWSTR
+  cchBuff int
+  wFlags UINT
+  dwhkl HKL
+
+func UnloadKeyboardLayout
+  BOOL
+  hkl HKL
+
+func UnregisterHotKey
+  BOOL
+  hWnd HWND
+  id int
+
+func VkKeyScan bothCharset
+  success NotEqual=0
+  SHORT
+  ch TCHAR
+
+func VkKeyScanEx bothCharset
+  success NotEqual=0
+  SHORT
+  ch TCHAR
+  dwhkl HKL
+
+func DlgDirList bothCharset
+  success NotEqual=0
+  int
+  hDlg HWND
+  lpPathSpec LPTSTR
+  nIDListBox int
+  nIDStaticPath int
+  uFileType UINT
+
+func DlgDirSelectEx bothCharset
+  BOOL
+  hDlg HWND
+  lpString LPTSTR
+  nCount int
+  nIDListBox int
+
+func GetListBoxInfo
+  success NotEqual=0
+  DWORD
+  hwnd HWND
+
+func AppendMenu bothCharset
+  BOOL
+  hMenu HMENU
+  uFlags UINT
+  uIDNewItem UINT_PTR
+  lpNewItem LPCTSTR
+
+func CheckMenuItem
+  success NotEqual=-1
+  DWORD
+  hmenu HMENU
+  uIDCheckItem UINT
+  uCheck [CheckMenuItemFlag]
+
+func CheckMenuRadioItem
+  BOOL
+  hmenu HMENU
+  idFirst UINT
+  idLast UINT
+  idCheck UINT
+  uFlags [MenuCommandPosFlag]
+
+func CreateMenu
+  success NotEqual=0
+  HMENU
+
+func CreatePopupMenu
+  success NotEqual=0
+  HMENU
+
+func DeleteMenu
+  BOOL
+  hMenu HMENU
+  uPosition UINT
+  uFlags [MenuCommandPosFlag]
+
+func DestroyMenu
+  BOOL
+  hMenu HMENU
+
+func DrawMenuBar
+  BOOL
+  hWnd HWND
+
+func EnableMenuItem
+  success NotEqual=-1
+  [EnableMenuItemResult]
+  hMenu HMENU
+  uIDEnableItem UINT
+  uEnable [EnableMenuItemFlag]
+
+func EndMenu
+  BOOL
+
+func GetMenu
+  success NotEqual=0
+  HMENU
+  hWnd HWND
+
+func GetMenuBarInfo
+  BOOL
+  hwnd HWND
+  idObject [ObjectIdEnum]
+  idItem LONG
+  pmbi PMENUBARINFO
+
+func GetMenuCheckMarkDimensions
+  success NotEqual=0
+  LONG
+
+func GetMenuDefaultItem
+  success NotEqual=0
+  UINT
+  hMenu HMENU
+  fByPos UINT
+  gmdiFlags [GetMenuDefaultItemFlags]
+
+func GetMenuInfo
+  BOOL
+  hmenu HMENU
+  lpcmi LPCMENUINFO
+
+func GetMenuItemCount
+  success NotEqual=0
+  int
+  hMenu HMENU
+
+func GetMenuItemID
+  success NotEqual=0
+  UINT
+  hMenu HMENU
+  nPos int
+
+func GetMenuItemInfo bothCharset
+  BOOL
+  hMenu HMENU
+  uItem UINT
+  fByPosition BOOL
+  lpmii LPMENUITEMINFO
+
+func GetMenuItemRect
+  BOOL
+  hWnd HWND
+  hMenu HMENU
+  uItem UINT
+  lprcItem LPRECT
+
+func GetMenuState
+  success NotEqual=-1
+  UINT
+  hMenu HMENU
+  uId UINT
+  uFlags [MenuCommandPosFlag]
+
+func GetMenuString bothCharset
+  success NotEqual=0
+  int
+  hMenu HMENU
+  uIDItem UINT
+  lpString LPTSTR outputOnly
+  nMaxCount int
+  uFlag UINT
+
+func GetSubMenu
+  HMENU
+  hMenu HMENU
+  nPos int
+
+func GetSystemMenu
+  success NotEqual=0
+  HMENU
+  hWnd HWND
+  bRevert BOOL
+
+func HiliteMenuItem
+  BOOL
+  hwnd HWND
+  hmenu HMENU
+  uItemHilite UINT
+  uHilite UINT
+
+func InsertMenu bothCharset
+  BOOL
+  hMenu HMENU
+  uPosition UINT
+  uFlags [InsertMenuFlags]
+  uIDNewItem UINT_PTR
+  lpNewItem LPCTSTR
+
+func InsertMenuItem bothCharset
+  BOOL
+  hMenu HMENU
+  uItem UINT
+  fByPosition BOOL
+  lpmii LPCMENUITEMINFO
+
+func IsMenu
+  BOOL
+  hMenu HMENU
+
+func LoadMenu bothCharset
+  success NotEqual=0
+  HMENU
+  hInstance HINSTANCE
+  lpMenuName LPCTSTR
+
+func LoadMenuIndirect bothCharset
+  success NotEqual=0
+  HMENU
+  lpMenuTemplate "CONST MENUTEMPLATE*"
+
+func MenuItemFromPoint
+  success NotEqual=0
+  int
+  hWnd HWND
+  hMenu HMENU
+  ptScreen POINT
+
+func ModifyMenu bothCharset
+  BOOL
+  hMnu HMENU
+  uPosition UINT
+  uFlags UINT
+  uIDNewItem UINT_PTR
+  lpNewItem LPCTSTR
+
+func RemoveMenu
+  BOOL
+  hMenu HMENU
+  uPosition UINT
+  uFlags [MenuCommandPosFlag]
+
+func SetMenu
+  BOOL
+  hWnd HWND
+  hMenu HMENU
+
+func SetMenuDefaultItem
+  BOOL
+  hMenu HMENU
+  uItem UINT
+  fByPos UINT
+
+func SetMenuInfo
+  BOOL
+  hmenu HMENU
+  lpcmi LPCMENUINFO
+
+func SetMenuItemBitmaps
+  BOOL
+  hMenu HMENU
+  uPosition UINT
+  uFlags UINT
+  hBitmapUnchecked HBITMAP
+  hBitmapChecked HBITMAP
+
+func SetMenuItemInfo bothCharset
+  BOOL
+  hMenu HMENU
+  uItem UINT
+  fByPosition BOOL
+  lpmii LPMENUITEMINFO
+
+func TrackPopupMenu
+  BOOL
+  hMenu HMENU
+  uFlags [TrackPopupMenuFlags]
+  x int
+  y int
+  nReserved int
+  hWnd HWND
+  prcRect "CONST RECT*"
+
+func TrackPopupMenuEx
+  BOOL
+  hmenu HMENU
+  fuFlags [TrackPopupMenuFlags]
+  x int
+  y int
+  hwnd HWND
+  lptpm LPTPMPARAMS
+
+func DragDetect
+  BOOL
+  hwnd HWND
+  pt POINT
+
+func GetCapture
+  HWND
+
+func GetDoubleClickTime
+  success NotEqual=0
+  UINT
+
+func GetMouseMovePointsEx
+  success NotEqual=0
+  int
+  cbSize UINT
+  lppt LPMOUSEMOVEPOINT
+  lpptBuf LPMOUSEMOVEPOINT
+  nBufPoints int
+  resolution DWORD
+
+func mouse_event
+  VOID
+  dwFlags DWORD
+  dx DWORD
+  dy DWORD
+  dwData DWORD
+  dwExtraInfo ULONG_PTR
+
+func ReleaseCapture
+  BOOL
+
+func SetCapture
+  HWND
+  hWnd HWND
+
+func SetDoubleClickTime
+  BOOL
+  uInterval UINT
+
+func SwapMouseButton
+  BOOL
+  fSwap BOOL
+
+func TrackMouseEvent
+  BOOL
+  lpEventTrack LPTRACKMOUSEEVENT
+
+func EnumDisplayMonitors
+  BOOL
+  hdc HDC
+  lprcClip LPCRECT
+  lpfnEnum MONITORENUMPROC
+  dwData LPARAM
+
+func GetMonitorInfo bothCharset
+  BOOL
+  hMonitor HMONITOR
+  lpmi LPMONITORINFO
+
+func MonitorFromPoint
+  success NotEqual=0
+  HMONITOR
+  pt POINT
+  dwFlags [MonitorFlags]
+
+func MonitorFromRect
+  success NotEqual=0
+  HMONITOR
+  lprc LPCRECT
+  dwFlags [MonitorFlags]
+
+func MonitorFromWindow
+  success NotEqual=0
+  HMONITOR
+  hwnd HWND
+  dwFlags [MonitorFlags]
+
+func CreateMDIWindow bothCharset
+  success NotEqual=0
+  HWND
+  lpClassName LPCTSTR
+  lpWindowName LPCTSTR
+  dwStyle DWORD
+  X int
+  Y int
+  nWidth int
+  nHeight int
+  hWndParent HWND
+  hInstance HINSTANCE
+  lParam LPARAM
+
+func DefFrameProc bothCharset
+  success NotEqual=0
+  LRESULT
+  hWnd HWND
+  hWndMDIClient HWND
+  uMsg UINT
+  wParam WPARAM
+  lParam LPARAM
+
+func DefMDIChildProc bothCharset
+  success NotEqual=0
+  LRESULT
+  hWnd HWND
+  uMsg UINT
+  wParam WPARAM
+  lParam LPARAM
+
+func TranslateMDISysAccel
+  BOOL
+  hWndClient HWND
+  lpMsg LPMSG
+
+func BeginPaint
+  success NotEqual=0
+  HDC
+  hwnd HWND
+  lpPaint LPPAINTSTRUCT
+
+func DrawAnimatedRects
+  BOOL
+  hwnd HWND
+  idAni int
+  lprcFrom "const RECT*"
+  lprcTo "const RECT*"
+
+func DrawCaption
+  BOOL
+  hwnd HWND
+  hdc HDC
+  lprc LPCRECT
+  uFlags UINT
+
+func DrawEdge
+  BOOL
+  hdc HDC
+  qrc LPRECT
+  edge [BorderEdge]
+  grfFlags [BorderFlag]
+
+func DrawFocusRect
+  BOOL
+  hDC HDC
+  lprc "const RECT*"
+
+func DrawFrameControl
+  BOOL
+  hdc HDC
+  lprc LPRECT
+  uType UINT
+  uState UINT
+
+func DrawState bothCharset
+  BOOL
+  hdc HDC
+  hbr HBRUSH
+  lpOutputFunc DRAWSTATEPROC
+  lData LPARAM
+  wData WPARAM
+  x int
+  y int
+  cx int
+  cy int
+  fuFlags [DrawStateFlags]
+
+func EndPaint
+  BOOL
+  hWnd HWND
+  lpPaint "const PAINTSTRUCT*"
+
+func ExcludeUpdateRgn
+  [WindowRegion]
+  hDC HDC
+  hWnd HWND
+
+func GetUpdateRect
+  BOOL
+  hWnd HWND
+  lpRect LPRECT
+  bErase BOOL
+
+func GetUpdateRgn
+  [WindowRegion]
+  hWnd HWND
+  hRgn HRGN
+  bErase BOOL
+
+func GetWindowDC
+  success NotEqual=0
+  HDC
+  hWnd HWND
+
+func GetWindowRgn
+  [WindowRegion]
+  hWnd HWND
+  hRgn HRGN
+
+func GetWindowRgnBox
+  [WindowRegion]
+  hWnd HWND
+  lprc LPRECT
+
+func GrayString bothCharset
+  BOOL
+  hDC HDC
+  hBrush HBRUSH
+  lpOutputFunc GRAYSTRINGPROC
+  lpData LPARAM
+  nCount int
+  X int
+  Y int
+  nWidth int
+  nHeight int
+
+func InvalidateRect
+  BOOL
+  hWnd HWND
+  lpRect "const RECT*"
+  bErase BOOL
+
+func InvalidateRgn
+  BOOL
+  hWnd HWND
+  hRgn HRGN
+  bErase BOOL
+
+func LockWindowUpdate
+  BOOL
+  hWndLock HWND
+
+func PaintDesktop
+  BOOL
+  hdc HDC
+
+func RedrawWindow
+  BOOL
+  hWnd HWND
+  lprcUpdate "const RECT*"
+  hrgnUpdate HRGN
+  flags [RedrawWindowFlags]
+
+func SetWindowRgn
+  success NotEqual=0
+  int
+  hWnd HWND
+  hRgn HRGN
+  bRedraw BOOL
+
+func UpdateWindow
+  BOOL
+  hWnd HWND
+
+func ValidateRect
+  BOOL
+  hWnd HWND
+  lpRect "const RECT*"
+
+func ValidateRgn
+  BOOL
+  hWnd HWND
+  hRgn HRGN
+
+func WindowFromDC
+  success NotEqual=0
+  HWND
+  hDC HDC
+
+func RegisterPowerSettingNotification
+  success NotEqual=0
+  HPOWERNOTIFY
+  hRecipient HANDLE
+  PowerSettingGuid LPCGUID
+  Flags [DeviceNotificationFlags]
+
+func UnregisterPowerSettingNotification
+  BOOL
+  Handle HPOWERNOTIFY
+
+func PrintWindow
+  BOOL
+  hwnd HWND
+  hdcBlt HDC
+  nFlags UINT
+
+func DefRawInputProc
+  success NotEqual=0
+  LRESULT
+  paRawInput PRAWINPUT* count=nInput
+  nInput INT
+  cbSizeHeader UINT
+
+func GetRawInputBuffer
+  success NotEqual=0
+  UINT
+  pData PRAWINPUT
+  pcbSize PUINT
+  cbSizeHeader UINT
+
+func GetRawInputData
+  success NotEqual=0
+  UINT
+  hRawInput HRAWINPUT
+  uiCommand UINT
+  pData LPVOID
+  pcbSize PUINT
+  cbSizeHeader UINT
+
+func GetRawInputDeviceInfo bothCharset
+  success NotEqual=0
+  UINT
+  hDevice HANDLE
+  uiCommand UINT
+  pData LPVOID
+  pcbSize PUINT
+
+func GetRawInputDeviceList
+  success NotEqual=0
+  UINT
+  pRawInputDeviceList PRAWINPUTDEVICELIST
+  puiNumDevices PUINT
+  cbSize UINT
+
+func GetRegisteredRawInputDevices
+  success NotEqual=-1
+  UINT
+  pRawInputDevices PRAWINPUTDEVICE
+  puiNumDevices PUINT
+  cbSize UINT
+
+func RegisterRawInputDevices
+  BOOL
+  pRawInputDevices PCRAWINPUTDEVICE count=uiNumDevices
+  uiNumDevices UINT
+  cbSize UINT
+
+func CopyRect
+  BOOL
+  lprcDst LPRECT
+  lprcSrc "const RECT*"
+
+func EqualRect
+  BOOL
+  lprc1 "const RECT*"
+  lprc2 "const RECT*"
+
+func InflateRect
+  BOOL
+  lprc LPRECT
+  dx int
+  dy int
+
+func IntersectRect
+  BOOL
+  lprcDst LPRECT
+  lprcSrc1 "const RECT*"
+  lprcSrc2 "const RECT*"
+
+func IsRectEmpty
+  BOOL
+  lprc "const RECT*"
+
+func OffsetRect
+  BOOL
+  lprc LPRECT
+  dx int
+  dy int
+
+func PtInRect
+  BOOL
+  lprc "const RECT*"
+  pt POINT
+
+func SetRect
+  BOOL
+  lprc LPRECT
+  xLeft int
+  yTop int
+  xRight int
+  yBottom int
+
+func SetRectEmpty
+  BOOL
+  lprc LPRECT
+
+func SubtractRect
+  BOOL
+  lprcDst LPRECT
+  lprcSrc1 "const RECT*"
+  lprcSrc2 "const RECT*"
+
+func UnionRect
+  BOOL
+  lprcDst LPRECT
+  lprcSrc1 "const RECT*"
+  lprcSrc2 "const RECT*"
+
+func CopyImage
+  success NotEqual=0
+  HANDLE
+  hImage HANDLE
+  uType [ImageType]
+  cxDesired int
+  cyDesired int
+  fuFlags [LRFlags]
+
+func LoadImage bothCharset
+  success NotEqual=0
+  HANDLE
+  hinst HINSTANCE
+  lpszName [LoadImageString/LPCTSTR]
+  uType [ImageType]
+  cxDesired int
+  cyDesired int
+  fuLoad [LRFlags]
+
+func EnableScrollBar
+  BOOL
+  hWnd HWND
+  wSBflags UINT
+  wArrows UINT
+
+func GetScrollBarInfo
+  BOOL
+  hwnd HWND
+  idObject [ObjectIdEnum]
+  psbi PSCROLLBARINFO
+
+func GetScrollInfo
+  BOOL
+  hwnd HWND
+  fnBar [SBType]
+  lpsi LPSCROLLINFO
+
+func GetScrollPos
+  success NotEqual=0
+  int
+  hWnd HWND
+  nBar [SBType]
+
+func GetScrollRange
+  BOOL
+  hWnd HWND
+  nBar [SBType]
+  lpMinPos LPINT
+  lpMaxPos LPINT
+
+func ScrollDC
+  BOOL
+  hDC HDC
+  dx int
+  dy int
+  lprcScroll "const RECT*"
+  lprcClip "const RECT*"
+  hrgnUpdate HRGN
+  lprcUpdate LPRECT
+
+func ScrollWindow
+  BOOL
+  hWnd HWND
+  XAmount int
+  YAmount int
+  lpRect "const RECT*"
+  lpClipRect "const RECT*"
+
+func ScrollWindowEx
+  success NotEqual=0
+  int
+  hWnd HWND
+  dx int
+  dy int
+  prcScroll "const RECT*"
+  prcClip "const RECT*"
+  hrgnUpdate HRGN
+  prcUpdate LPRECT
+  flags [ScrollWindowFlags]
+
+func SetScrollInfo
+  int
+  hwnd HWND
+  fnBar [SBType]
+  lpsi LPCSCROLLINFO
+  fRedraw BOOL
+
+func SetScrollPos
+  success NotEqual=0
+  int
+  hWnd HWND
+  nBar [SBType]
+  nPos int
+  bRedraw BOOL
+
+func SetScrollRange
+  BOOL
+  hWnd HWND
+  nBar [SBType]
+  nMinPos int
+  nMaxPos int
+  bRedraw BOOL
+
+func ShowScrollBar
+  BOOL
+  hWnd HWND
+  wBar [SBType]
+  bShow BOOL
+
+func CharLower bothCharset
+  LPTSTR
+  lpsz LPTSTR
+
+func CharLowerBuff bothCharset
+  success NotEqual=0
+  DWORD
+  lpsz LPTSTR
+  cchLength DWORD
+
+func CharNext bothCharset
+  LPTSTR
+  lpsz LPCTSTR
+
+func CharNextExA
+  LPSTR
+  CodePage [CodePageEnum] display=WORD
+  lpCurrentChar LPCSTR
+  dwFlags DWORD
+
+func CharPrev bothCharset
+  LPTSTR
+  lpszStart LPCTSTR
+  lpszCurrent LPCTSTR
+
+func CharPrevExA
+  LPSTR
+  CodePage [CodePageEnum] display=WORD
+  lpStart LPCSTR
+  lpCurrentChar LPCSTR
+  dwFlags DWORD
+
+func CharToOem bothCharset
+  BOOL
+  lpszSrc LPCTSTR
+  lpszDst LPSTR
+
+func CharToOemBuff bothCharset
+  BOOL
+  lpszSrc LPCTSTR
+  lpszDst LPSTR
+  cchDstLength DWORD
+
+func CharUpper bothCharset
+  LPTSTR
+  lpsz LPTSTR
+
+func CharUpperBuff bothCharset
+  success NotEqual=0
+  DWORD
+  lpsz LPTSTR
+  cchLength DWORD
+
+func IsCharAlpha bothCharset
+  BOOL
+  ch TCHAR
+
+func IsCharAlphaNumeric bothCharset
+  BOOL
+  ch TCHAR
+
+func IsCharLower bothCharset
+  BOOL
+  ch TCHAR
+
+func IsCharUpper bothCharset
+  BOOL
+  ch TCHAR
+
+func LoadString bothCharset
+  success NotEqual=0
+  int
+  hInstance HINSTANCE
+  uID UINT
+  lpBuffer LPTSTR outputOnly
+  nBufferMax int
+
+func OemToChar bothCharset
+  BOOL
+  lpszSrc LPCSTR
+  lpszDst LPTSTR
+
+func OemToCharBuff bothCharset
+  BOOL
+  lpszSrc LPCTSTR
+  lpszDst LPTSTR
+  cchDstLength DWORD
+
+func wsprintf bothCharset varArgs
+  int
+  lpOut LPTSTR outputOnly
+  lpFmt LPCTSTR
+
+func wvsprintf bothCharset
+  success NotEqual=0
+  int
+  lpOutput LPTSTR
+  lpFmt LPCTSTR
+  arglist va_list
+
+func MsgWaitForMultipleObjects
+  [WAIT_RESULT]
+  nCount DWORD
+  pHandles "const HANDLE*" count=nCount
+  bWaitAll BOOL
+  dwMilliseconds [WaitTimeout]
+  dwWakeMask [QueueStatusFlag]
+
+func MsgWaitForMultipleObjectsEx
+  [WAIT_RESULT]
+  nCount DWORD
+  pHandles "const HANDLE*" count=nCount
+  dwMilliseconds [WaitTimeout]
+  dwWakeMask [QueueStatusFlag]
+  dwFlags [MsgWaitForMultipleObjectsFlags]
+
+func GetKeyboardType
+  success NotEqual=0
+  int
+  nTypeFlag int
+
+func GetSysColor
+  DWORD
+  nIndex [SysColorIndex]
+
+func GetSystemMetrics
+  success NotEqual=0
+  int
+  nIndex [SystemMetricIndex]
+
+func SetSysColors
+  BOOL
+  cElements int
+  lpaElements "const INT*"
+  lpaRgbValues "const COLORREF*"
+
+func SystemParametersInfo bothCharset
+  BOOL
+  uiAction [SystemParametersInfoEnum]
+  uiParam UINT
+  pvParam PVOID
+  fWinIni [SystemParametersInfoFlags]
+
+func KillTimer
+  BOOL
+  hWnd HWND
+  uIDEvent UINT_PTR
+
+func SetCoalescableTimer
+  success NotEqual=0
+  UINT_PTR
+  hwnd HWND
+  nIDEvent UINT_PTR
+  uElapse UINT
+  lpTimerFunc TIMERPROC
+  uToleranceDelay [TIMERV_COALESCING]
+
+func SetTimer
+  success NotEqual=0
+  UINT_PTR
+  hWnd HWND
+  nIDEvent UINT_PTR
+  uElapse UINT
+  lpTimerFunc TIMERPROC
+
+func GetClassInfo bothCharset
+  BOOL
+  hInstance HINSTANCE
+  lpClassName LPCTSTR
+  lpWndClass LPWNDCLASS
+
+func GetClassInfoEx bothCharset
+  BOOL
+  hinst HINSTANCE
+  lpszClass LPCTSTR
+  lpwcx LPWNDCLASSEX
+
+func GetClassLong bothCharset
+  success NotEqual=0
+  DWORD
+  hWnd HWND
+  nIndex [ClassLongIndex]
+
+func GetClassName bothCharset
+  success NotEqual=0
+  int
+  hWnd HWND
+  lpClassName LPTSTR outputOnly
+  nMaxCount int
+
+func GetClassWord
+  success NotEqual=0
+  WORD
+  hWnd HWND
+  nIndex [ClassLongIndex]
+
+func GetWindowLong bothCharset
+  LONG
+  hWnd HWND
+  nIndex [WindowLongIndex]
+
+func RegisterClass bothCharset
+  success NotEqual=0
+  ATOM
+  lpWndClass "CONST WNDCLASS*"
+
+func RegisterClassEx bothCharset
+  success NotEqual=0
+  ATOM
+  lpwcx "CONST WNDCLASSEX*"
+
+func SetClassLong bothCharset
+  success NotEqual=0
+  DWORD
+  hWnd HWND
+  nIndex [ClassLongIndex]
+  dwNewLong LONG
+
+func SetClassWord
+  success NotEqual=0
+  WORD
+  hWnd HWND
+  nIndex [ClassLongIndex]
+  wNewWord WORD
+
+func SetWindowLong bothCharset
+  LONG
+  hWnd HWND
+  nIndex [WindowLongIndex]
+  dwNewLong LONG
+
+func UnregisterClass bothCharset
+  BOOL
+  lpClassName LPCTSTR
+  hInstance HINSTANCE
+
+func CallWindowProc bothCharset
+  LRESULT
+  lpPrevWndFunc WNDPROC
+  hWnd HWND
+  Msg [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+
+func DefWindowProc bothCharset
+  LRESULT
+  hWnd HWND
+  Msg [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+
+func EnumProps bothCharset
+  success NotEqual=0
+  int
+  hWnd HWND
+  lpEnumFunc PROPENUMPROC
+
+func EnumPropsEx bothCharset
+  success NotEqual=0
+  int
+  hWnd HWND
+  lpEnumFunc PROPENUMPROCEX
+  lParam LPARAM
+
+func GetProp bothCharset
+  HANDLE
+  hWnd HWND
+  lpString LPCTSTR
+
+func RemoveProp bothCharset
+  HANDLE
+  hWnd HWND
+  lpString LPCTSTR
+
+func SetProp bothCharset
+  BOOL
+  hWnd HWND
+  lpString LPCTSTR
+  hData HANDLE
+
+func CloseWindowStation
+  BOOL
+  hWinSta HWINSTA
+
+func CreateWindowStation bothCharset
+  success NotEqual=0
+  HWINSTA
+  lpwinsta LPCTSTR
+  dwFlags [CreateWindowStationFlags]
+  dwDesiredAccess [WindowStationAccessRights]
+  lpsa LPSECURITY_ATTRIBUTES
+
+func EnumWindowStations bothCharset
+  BOOL
+  lpEnumFunc WINSTAENUMPROC
+  lParam LPARAM
+
+func GetProcessWindowStation
+  success NotEqual=0
+  HWINSTA
+
+func GetUserObjectInformation bothCharset
+  BOOL
+  hObj HANDLE
+  nIndex [UserObjectInformationEnum]
+  pvInfo PVOID postLength=lpnLengthNeeded
+  nLength DWORD
+  lpnLengthNeeded LPDWORD
+
+func OpenWindowStation bothCharset
+  success NotEqual=0
+  HWINSTA
+  lpszWinSta LPTSTR
+  fInherit BOOL
+  dwDesiredAccess [WindowStationAccessRights]
+
+func SetProcessWindowStation
+  BOOL
+  hWinSta HWINSTA
+
+func CloseDesktop
+  BOOL
+  hDesktop HDESK
+
+func CreateDesktop bothCharset
+  success NotEqual=0
+  HDESK
+  lpszDesktop LPCTSTR
+  lpszDevice LPCTSTR
+  pDevmode LPDEVMODE
+  dwFlags [DesktopFlags]
+  dwDesiredAccess [DESKTOP_ACCESS_MASK]
+  lpsa LPSECURITY_ATTRIBUTES
+
+func CreateDesktopEx bothCharset
+  success NotEqual=0
+  HDESK
+  lpszDesktop LPCTSTR
+  lpszDevice LPCTSTR
+  pDevmode LPDEVMODE
+  dwFlags [DesktopFlags]
+  dwDesiredAccess [DESKTOP_ACCESS_MASK]
+  lpsa LPSECURITY_ATTRIBUTES
+  ulHeapSize ULONG
+  pvoid PVOID
+
+func EnumDesktops bothCharset
+  BOOL
+  hwinsta HWINSTA
+  lpEnumFunc DESKTOPENUMPROC
+  lParam LPARAM
+
+func EnumDesktopWindows
+  BOOL
+  hDesktop HDESK
+  lpfn WNDENUMPROC
+  lParam LPARAM
+
+func GetThreadDesktop
+  success NotEqual=0
+  HDESK
+  dwThreadId DWORD
+
+func OpenDesktop bothCharset
+  success NotEqual=0
+  HDESK
+  lpszDesktop LPTSTR
+  dwFlags [DesktopFlags]
+  fInherit BOOL
+  dwDesiredAccess [DESKTOP_ACCESS_MASK]
+
+func OpenInputDesktop
+  success NotEqual=0
+  HDESK
+  dwFlags [DesktopFlags]
+  fInherit BOOL
+  dwDesiredAccess [DESKTOP_ACCESS_MASK]
+
+func SetThreadDesktop
+  BOOL
+  hDesktop HDESK
+
+func SetUserObjectInformation bothCharset
+  BOOL
+  hObj HANDLE
+  nIndex [UserObjectInformationEnum]
+  pvInfo PVOID
+  nLength DWORD
+
+func SwitchDesktop
+  BOOL
+  hDesktop HDESK
+
+func GetMenuContextHelpId
+  success NotEqual=0
+  DWORD
+  hmenu HMENU
+
+func GetWindowContextHelpId
+  success NotEqual=0
+  DWORD
+  hwnd HWND
+
+func SetMenuContextHelpId
+  BOOL
+  hmenu HMENU
+  dwContextHelpId DWORD
+
+func SetWindowContextHelpId
+  BOOL
+  hwnd HWND
+  dwContextHelpId DWORD
+
+func WinHelp bothCharset
+  BOOL
+  hWndMain HWND
+  lpszHelp LPCTSTR
+  uCommand UINT
+  dwData ULONG_PTR
+
+func GetUserObjectSecurity
+  BOOL
+  hObj HANDLE
+  pSIRequested PSECURITY_INFORMATION
+  pSD PSECURITY_DESCRIPTOR
+  nLength DWORD
+  lpnLengthNeeded LPDWORD
+
+func SetUserObjectSecurity
+  BOOL
+  hObj HANDLE
+  pSIRequested PSECURITY_INFORMATION
+  pSID PSECURITY_DESCRIPTOR
+
+func SetWinEventHook
+  success NotEqual=0
+  HWINEVENTHOOK
+  eventMin UINT
+  eventMax UINT
+  hmodWinEventProc HMODULE
+  lpfnWinEventProc WINEVENTPROC
+  idProcess DWORD
+  idThread DWORD
+  dwflags [WinEventFlags]
+
+func UnhookWinEvent
+  BOOL
+  hWinEventHook HWINEVENTHOOK
+
+func IsWinEventHookInstalled
+  BOOL
+  event DWORD
+
+func NotifyWinEvent
+  void
+  event DWORD
+  hwnd HWND
+  idObject [ObjectIdEnum]
+  idChild LONG
+
+func CloseTouchInputHandle
+  BOOL
+  hTouchInput HTOUCHINPUT
+
+func GetTouchInputInfo
+  BOOL
+  hTouchInput HTOUCHINPUT
+  cInputs UINT
+  pInputs PTOUCHINPUT
+  cbSize int
+
+func IsTouchWindow
+  BOOL
+  hWnd HWND
+  pulFlags PULONG
+
+func RegisterTouchWindow
+  BOOL
+  hWnd HWND
+  ulFlags ULONG
+
+func UnregisterTouchWindow
+  BOOL
+  hWnd HWND
+
+func CloseGestureInfoHandle
+  BOOL
+  hGestureInfo HGESTUREINFO
+
+func GetGestureExtraArgs
+  BOOL
+  hGestureInfo HGESTUREINFO
+  cbExtraArgs UINT
+  pExtraArgs PBYTE
+
+func GetGestureInfo
+  BOOL
+  hGestureInfo HGESTUREINFO
+  pGestureInfo PGESTUREINFO
+
+func GetGestureConfig
+  BOOL
+  hwnd HWND
+  dwReserved DWORD
+  dwFlags DWORD
+  pcIDs PUINT
+  pGestureConfig PGESTURECONFIG
+  cbSize UINT
+
+func SetGestureConfig
+  BOOL
+  hwnd HWND
+  dwReserved DWORD
+  cIDs UINT
+  pGestureConfig PGESTURECONFIG
+  cbSize UINT
+
+func DesktopHasWatermarkText ordinal=2000
+  BOOL
+
+func FrostCrashedWindow
+  success NotEqual=0
+  HWND
+  hwndToReplace HWND
+  hwndErrorReportOwnerWnd HWND
+
+func GetSendMessageReceiver
+  success NotEqual=0
+  HWND
+  threadId DWORD
+
+func GetWindowCompositionAttribute
+  BOOL
+  hwnd HWND
+  pAttrData WINCOMPATTRDATA*
+
+func GetWindowMinimizeRect
+  BOOL
+  hwndToQuery HWND
+  pRect RECT*
+
+func GhostWindowFromHungWindow
+  success NotEqual=0
+  HWND
+  hwndGhost HWND
+
+func HungWindowFromGhostWindow
+  success NotEqual=0
+  HWND
+  hwndGhost HWND
+
+func IsSETEnabled
+  BOOL
+
+func IsServerSideWindow
+  BOOL
+  hwnd HWND
+
+func IsThreadDesktopComposited
+  BOOL
+
+func IsWindowInDestroy
+  BOOL
+  hwnd HWND
+
+func MB_GetString
+  success NotEqual=0
+  LPCWSTR
+  strId int
+
+func NtUserSetChildWindowNoActivate ordinal=2005
+  BOOL
+  hwndChild HWND
+
+func QuerySendMessage
+  BOOL
+  pMsg MSG*
+
+func SetWindowCompositionAttribute
+  BOOL
+  hwnd HWND
+  pAttrData WINCOMPATTRDATA*
+
+func UpdateWindowTransform
+  BOOL
+  hwnd HWND
+  pMatrix D3DMATRIX*
+  unk DWORD
+
+func InitializeTouchInjection
+  BOOL
+  maxCount UINT32
+  dwMode [TOUCH_FEEDBACK_MODE]
+
+func InjectTouchInput
+  BOOL
+  count UINT32
+  contacts "const POINTER_TOUCH_INFO*"
+
+func AddPointerInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  pointerId UINT32
+
+func BufferPointerPacketsInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  entriesCount UINT32
+  pointerInfo "const POINTER_INFO*"
+
+func CreateInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT*
+
+func DestroyInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+
+func GetCrossSlideParameterInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  threshold CROSS_SLIDE_THRESHOLD
+  distance float*
+
+func GetInertiaParameterInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  inertiaParameter INERTIA_PARAMETER
+  value float*
+
+func GetInteractionConfigurationInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  configurationCount UINT32
+  configuration INTERACTION_CONTEXT_CONFIGURATION*
+
+func GetMouseWheelParameterInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  parameter MOUSE_WHEEL_PARAMETER
+  value float*
+
+func GetPropertyInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  contextProperty INTERACTION_CONTEXT_PROPERTY
+  value UINT32*
+
+func GetStateInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  pointerInfo "const POINTER_INFO*"
+  state INTERACTION_STATE*
+
+func ProcessBufferedPacketsInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+
+func ProcessInertiaInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+
+func ProcessPointerFramesInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  entriesCount UINT32
+  pointerCount UINT32
+  pointerInfo "const POINTER_INFO*" count=entriesCount
+
+func RegisterOutputCallbackInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  outputCallback INTERACTION_CONTEXT_OUTPUT_CALLBACK
+  clientData void*
+
+func RemovePointerInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  pointerId UINT32
+
+func ResetInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+
+func SetCrossSlideParametersInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  parameterCount UINT32
+  crossSlideParameters CROSS_SLIDE_PARAMETER*
+
+func SetInertiaParameterInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  inertiaParameter INERTIA_PARAMETER
+  value float
+
+func SetInteractionConfigurationInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  configurationCount UINT32
+  configuration "const INTERACTION_CONTEXT_CONFIGURATION*"
+
+func SetMouseWheelParameterInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  parameter MOUSE_WHEEL_PARAMETER
+  value float
+
+func SetPivotInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  x float
+  y float
+  radius float
+
+func SetPropertyInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+  contextProperty INTERACTION_CONTEXT_PROPERTY
+  value UINT32
+
+func StopInteractionContext
+  HRESULT
+  interactionContext HINTERACTIONCONTEXT
+
+func EnableMouseInPointer
+  BOOL
+  fEnable BOOL
+
+func GetPointerCursorId
+  BOOL
+  pointerId UINT32
+  cursorId UINT32*
+
+func GetPointerFrameInfo
+  BOOL
+  pointerId UINT32
+  pointerCount UINT32*
+  pointerInfo POINTER_INFO* postCount=pointerCount
+
+func GetPointerFrameInfoHistory
+  BOOL
+  pointerId UINT32
+  entriesCount UINT32*
+  pointerCount UINT32*
+  pointerInfo POINTER_INFO*
+
+func GetPointerFramePenInfo
+  BOOL
+  pointerId UINT32
+  pointerCount UINT32*
+  penInfo POINTER_PEN_INFO* postCount=pointerCount
+
+func GetPointerFramePenInfoHistory
+  BOOL
+  pointerId UINT32
+  entriesCount UINT32*
+  pointerCount UINT32*
+  penInfo POINTER_PEN_INFO*
+
+func GetPointerFrameTouchInfo
+  BOOL
+  pointerId UINT32
+  pointerCount UINT32*
+  touchInfo POINTER_TOUCH_INFO* postCount=pointerCount
+
+func GetPointerFrameTouchInfoHistory
+  BOOL
+  pointerId UINT32
+  entriesCount UINT32*
+  pointerCount UINT32*
+  touchInfo POINTER_TOUCH_INFO*
+
+func GetPointerInfo
+  BOOL
+  pointerId UINT32
+  pointerInfo POINTER_INFO*
+
+func GetPointerInfoHistory
+  BOOL
+  pointerId UINT32
+  entriesCount UINT32*
+  pointerInfo POINTER_INFO* postCount=entriesCount
+
+func GetPointerPenInfo
+  BOOL
+  pointerId UINT32
+  penInfo POINTER_PEN_INFO*
+
+func GetPointerPenInfoHistory
+  BOOL
+  pointerId UINT32
+  entriesCount UINT32*
+  penInfo POINTER_PEN_INFO* postCount=entriesCount
+
+func GetPointerTouchInfo
+  BOOL
+  pointerId UINT32
+  touchInfo POINTER_TOUCH_INFO*
+
+func GetPointerTouchInfoHistory
+  BOOL
+  pointerId UINT32
+  entriesCount UINT32*
+  touchInfo POINTER_TOUCH_INFO* postCount=entriesCount
+
+func GetPointerType
+  BOOL
+  pointerId UINT32
+  pointerType POINTER_INPUT_TYPE*
+
+func GetUnpredictedMessagePos
+  DWORD
+
+func IsMouseInPointerEnabled
+  BOOL
+
+func SkipPointerFrameMessages
+  BOOL
+  pointerId UINT32
+
+func EvaluateProximityToPolygon
+  BOOL
+  numVertices UINT32
+  controlPolygon "const POINT*"
+  pHitTestingInput "const TOUCH_HIT_TESTING_INPUT*"
+  pProximityEval TOUCH_HIT_TESTING_PROXIMITY_EVALUATION*
+
+func EvaluateProximityToRect
+  BOOL
+  controlBoundingBox "const RECT*"
+  pHitTestingInput "const TOUCH_HIT_TESTING_INPUT*"
+  pProximityEval TOUCH_HIT_TESTING_PROXIMITY_EVALUATION*
+
+func PackTouchHitTestingProximityEvaluation
+  success NotEqual=0
+  LRESULT
+  pHitTestingInput "const TOUCH_HIT_TESTING_INPUT*"
+  pProximityEval "const TOUCH_HIT_TESTING_PROXIMITY_EVALUATION*"
+
+func RegisterTouchHitTestingWindow
+  BOOL
+  hwnd HWND
+  value ULONG
+
+func GetCIMSSM
+  BOOL
+  inputMessageSource INPUT_MESSAGE_SOURCE*
+
+func GetCurrentInputMessageSource
+  BOOL
+  inputMessageSource INPUT_MESSAGE_SOURCE*
+
+func GetPointerDevice
+  BOOL
+  device HANDLE
+  pointerDevice POINTER_DEVICE_INFO*
+
+func GetPointerDeviceCursors
+  BOOL
+  device HANDLE
+  cursorCount UINT32*
+  deviceCursors POINTER_DEVICE_CURSOR_INFO* postCount=cursorCount
+
+func GetPointerDeviceProperties
+  BOOL
+  device HANDLE
+  propertyCount UINT32*
+  pointerProperties POINTER_DEVICE_PROPERTY* postCount=propertyCount
+
+func GetPointerDeviceRects
+  BOOL
+  device HANDLE
+  pointerDeviceRect RECT*
+  displayRect RECT*
+
+func GetPointerDevices
+  BOOL
+  deviceCount UINT32
+  pointerDevices POINTER_DEVICE_INFO* postCount=deviceCount
+
+func GetRawPointerDeviceData
+  BOOL
+  pointerId UINT32
+  historyCount UINT32
+  propertiesCount UINT32
+  pProperties POINTER_DEVICE_PROPERTY* postCount=propertiesCount
+  pValues LONG*
+
+func RegisterPointerDeviceNotifications
+  BOOL
+  window HWND
+  notifyRange BOOL
+
+func RegisterSuspendResumeNotification
+  success NotEqual=0
+  HPOWERNOTIFY
+  hRecipient PDEVICE_NOTIFY_SUBSCRIBE_PARAMETERS
+  Flags [POWER_NOTIFICATION_FLAGS]
+
+func UnregisterSuspendResumeNotification
+  BOOL
+  RegistrationHandle HPOWERNOTIFY
+
+func GetWindowFeedbackSetting
+  BOOL
+  hwnd HWND
+  feedback FEEDBACK_TYPE
+  dwFlags [GWFS_FLAGS]
+  pSize UINT32*
+  config VOID* length=pSize
+
+func SetWindowFeedbackSetting
+  BOOL
+  hwnd HWND
+  feedback FEEDBACK_TYPE
+  dwFlags DWORD
+  size UINT32
+  configuration "const VOID*" length=size
+

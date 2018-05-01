@@ -1,0 +1,4 @@
+include Interfaces\IClassFactory.txt
+
+ingterface WebBrowser base=IClassFactory id={8856F961-340A-11D0-A96B-00C04FD705A2} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+

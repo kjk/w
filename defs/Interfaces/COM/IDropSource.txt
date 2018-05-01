@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDropSource base=IUnknown id={00000121-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func QueryContinueDrag
+    HRESULT
+    fEscapePressed BOOL
+    grfKeyState DWORD
+
+  func GiveFeedback
+    HRESULT
+    dwEffect DWORD
+
+

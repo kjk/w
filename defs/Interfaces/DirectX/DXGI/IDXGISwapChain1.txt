@@ -1,0 +1,51 @@
+include Interfaces\DirectX\DXGI\IDXGISwapChain.txt
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+ingterface IDXGISwapChain1 base=IDXGISwapChain id={790a45f7-0d42-4876-983a-0a55cfe6f4aa} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func GetDesc1
+    HRESULT
+    pDesc DXGI_SWAP_CHAIN_DESC1*
+
+  func GetFullscreenDesc
+    HRESULT
+    pDesc DXGI_SWAP_CHAIN_FULLSCREEN_DESC*
+
+  func GetHwnd
+    HRESULT
+    pHwnd HWND*
+
+  func GetCoreWindow
+    HRESULT
+    refiid REFIID
+    ppUnk void** interfaceId=refiid
+
+  func Present1
+    HRESULT
+    SyncInterval UINT
+    PresentFlags UINT
+    pPresentParameters "const DXGI_PRESENT_PARAMETERS*"
+
+  func IsTemporaryMonoSupported
+    BOOL
+
+  func GetRestrictToOutput
+    HRESULT
+    ppRestrictToOutput IDXGIOutput**
+
+  func SetBackgroundColor
+    HRESULT
+    pColor "const DXGI_RGBA*"
+
+  func GetBackgroundColor
+    HRESULT
+    pColor DXGI_RGBA*
+
+  func SetRotation
+    HRESULT
+    Rotation DXGI_MODE_ROTATION
+
+  func GetRotation
+    HRESULT
+    pRotation DXGI_MODE_ROTATION*
+
+

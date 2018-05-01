@@ -1,0 +1,30 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPreviewHandler base=IUnknown id={8895b1c6-b41f-4c1c-a562-0d564250836f} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetWindow
+    HRESULT
+    hwnd HWND
+    prc "const RECT*"
+
+  func SetRect
+    HRESULT
+    prc "const RECT*"
+
+  func DoPreview
+    HRESULT
+
+  func Unload
+    HRESULT
+
+  func SetFocus
+    HRESULT
+
+  func QueryFocus
+    HRESULT
+    phwnd HWND*
+
+  func TranslateAccelerator
+    HRESULT
+    pmsg MSG*
+
+

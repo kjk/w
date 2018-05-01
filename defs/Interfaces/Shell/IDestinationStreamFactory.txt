@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDestinationStreamFactory base=IUnknown id={8a87781b-39a7-4a1f-aab3-a39b9c34a7d9} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetDestinationStream
+    HRESULT
+    ppstm IStream**
+
+

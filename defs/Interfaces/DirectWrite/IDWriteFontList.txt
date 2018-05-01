@@ -1,0 +1,18 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteFontList base=IUnknown id={1a0d8438-1d97-4ec1-aef9-a2fb86ed6acb} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func GetFontCollection
+    HRESULT
+    fontCollection IDWriteFontCollection**
+
+  func GetFontCount
+    success NotEqual=0
+    UINT32
+
+  func GetFont
+    HRESULT
+    index UINT32
+    font IDWriteFont**
+
+

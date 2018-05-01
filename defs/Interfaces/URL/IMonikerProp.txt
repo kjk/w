@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IMonikerProp base=IUnknown id={a5ca5f7f-1847-4d87-9c5b-918509f7511d} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func PutProperty
+    HRESULT
+    mkp MONIKERPROPERTY
+    val LPCWSTR
+
+

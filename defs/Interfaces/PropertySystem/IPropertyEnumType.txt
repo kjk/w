@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyEnumType base=IUnknown id={11e1fbf9-2d56-4a6b-8db3-7cd193a471f2} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func GetEnumType
+    HRESULT
+    penumtype PROPENUMTYPE*
+
+  func GetValue
+    HRESULT
+    ppropvar PROPVARIANT*
+
+  func GetRangeMinValue
+    HRESULT
+    ppropvarMin PROPVARIANT*
+
+  func GetRangeSetValue
+    HRESULT
+    ppropvarSet PROPVARIANT*
+
+  func GetDisplayText
+    HRESULT
+    ppszDisplay LPWSTR*
+
+

@@ -1,0 +1,9 @@
+include Interfaces\DirectX\10\ID3D10DeviceChild.txt
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10DepthStencilState base=ID3D10DeviceChild id={2B4B1CC8-A4AD-41f8-8322-CA86FC3EC675} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Core"
+  func GetDesc
+    void
+    pDesc D3D10_DEPTH_STENCIL_DESC*
+
+

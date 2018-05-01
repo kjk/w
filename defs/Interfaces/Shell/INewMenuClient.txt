@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface INewMenuClient base=IUnknown id={dcb07fdc-3bb5-451c-90be-966644fed7b0} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func IncludeItems
+    HRESULT
+    pflags NMCII_FLAGS*
+
+  func SelectAndEditItem
+    HRESULT
+    pidlItem PCIDLIST_ABSOLUTE
+    flags NMCSAEI_FLAGS
+
+

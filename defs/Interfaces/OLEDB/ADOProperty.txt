@@ -1,0 +1,29 @@
+include Interfaces\IDispatch.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ADOProperty base=IDispatch id={00000503-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_Value
+    [OLEDB_HRESULT]
+    pval VARIANT*
+
+  func put_Value
+    [OLEDB_HRESULT]
+    val VARIANT
+
+  func get_Name
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func get_Type
+    [OLEDB_HRESULT]
+    ptype DataTypeEnum*
+
+  func get_Attributes
+    [OLEDB_HRESULT]
+    plAttributes PropertyAttributesEnum*
+
+  func put_Attributes
+    [OLEDB_HRESULT]
+    lAttributes PropertyAttributesEnum
+
+

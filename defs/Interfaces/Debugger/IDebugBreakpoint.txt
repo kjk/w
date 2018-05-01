@@ -1,0 +1,95 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDebugBreakpoint base=IUnknown id={5bd9d474-5975-423a-b88b-65a8e7110e65} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Other COM Interfaces"
+  func GetId
+    HRESULT
+    Id PULONG
+
+  func GetType
+    HRESULT
+    BreakType [PDEBUG_BREAKPOINT_TYPE]
+    ProcType PULONG
+
+  func GetAdder
+    HRESULT
+    Adder PDEBUG_CLIENT*
+
+  func GetFlags
+    HRESULT
+    Flags [PDEBUG_BREAKPOINT_FLAGS]
+
+  func AddFlags
+    HRESULT
+    Flags [DEBUG_BREAKPOINT_FLAGS]
+
+  func RemoveFlags
+    HRESULT
+    Flags [DEBUG_BREAKPOINT_FLAGS]
+
+  func SetFlags
+    HRESULT
+    Flags [DEBUG_BREAKPOINT_FLAGS]
+
+  func GetOffset
+    HRESULT
+    Offset PULONG64
+
+  func SetOffset
+    HRESULT
+    Offset ULONG64
+
+  func GetDataParameters
+    HRESULT
+    Size PULONG
+    AccessType [PDEBUG_ACCESS_TYPE]
+
+  func SetDataParameters
+    HRESULT
+    Size ULONG
+    AccessType [DEBUG_ACCESS_TYPE]
+
+  func GetPassCount
+    HRESULT
+    Count PULONG
+
+  func SetPassCount
+    HRESULT
+    Count ULONG
+
+  func GetCurrentPassCount
+    HRESULT
+    Count PULONG
+
+  func GetMatchThreadId
+    HRESULT
+    Id PULONG
+
+  func SetMatchThreadId
+    HRESULT
+    Thread ULONG
+
+  func GetCommand
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    CommandSize PULONG
+
+  func SetCommand
+    HRESULT
+    Command PCSTR
+
+  func GetOffsetExpression
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    ExpressionSize PULONG
+
+  func SetOffsetExpression
+    HRESULT
+    Expression PCSTR
+
+  func GetParameters
+    HRESULT
+    Params PDEBUG_BREAKPOINT_PARAMETERS
+
+

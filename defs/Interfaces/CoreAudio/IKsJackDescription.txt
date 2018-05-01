@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IKsJackDescription base=IUnknown id={4509F757-2D46-4637-8E62-CE7DB944F57B} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetJackCount
+    [AUDCLNT_HRESULT]
+    pcJacks UINT*
+
+  func GetJackDescription
+    [AUDCLNT_HRESULT]
+    nJack UINT
+    pDescription KSJACK_DESCRIPTION*
+
+

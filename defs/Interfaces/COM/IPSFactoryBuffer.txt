@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPSFactoryBuffer base=IUnknown id={D5F569D0-593B-101A-B569-08002B2DBF7A} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func CreateProxy
+    HRESULT
+    pUnkOuter IUnknown*
+    riid REFIID
+    ppProxy IRpcProxyBuffer**
+    ppv void** interfaceId=riid
+
+  func CreateStub
+    HRESULT
+    riid REFIID
+    pUnkServer IUnknown*
+    ppStub IRpcStubBuffer**
+
+

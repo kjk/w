@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMVfwCaptureDialogs base=IUnknown id={D8D715A0-6E5E-11D0-B3F0-00AA003761C5} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func HasDialog
+    HRESULT
+    iDialog int
+
+  func ShowDialog
+    HRESULT
+    iDialog int
+    hwnd HWND
+
+  func SendDriverMessage
+    HRESULT
+    iDialog int
+    uMsg int
+    dw1 long
+    dw2 long
+
+

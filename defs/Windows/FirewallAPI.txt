@@ -1,0 +1,20 @@
+dll FirewallAPI.dll
+sourceModule api-ms-win-net-isolation-l1.dll include=Windows\api-ms-win-net-isolation-l1.xml
+func NetworkIsolationDiagnoseConnectFailureAndGetInfo
+
+func NetworkIsolationEnumAppContainers
+
+func NetworkIsolationEnumerateAppContainerRules
+
+func NetworkIsolationFreeAppContainers
+
+func NetworkIsolationGetAppContainerConfig
+
+func NetworkIsolationRegisterForAppContainerChanges
+
+func NetworkIsolationSetAppContainerConfig
+
+func NetworkIsolationSetupAppContainerBinaries
+
+func NetworkIsolationUnregisterForAppContainerChanges
+

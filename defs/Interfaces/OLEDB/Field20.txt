@@ -1,0 +1,86 @@
+include Interfaces\OLEDB\_ADO.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface Field20 base=_ADO id={0000154C-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_ActualSize
+    [OLEDB_HRESULT]
+    pl long*
+
+  func get_Attributes
+    [OLEDB_HRESULT]
+    pl long*
+
+  func get_DefinedSize
+    [OLEDB_HRESULT]
+    pl long*
+
+  func get_Name
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func get_Type
+    [OLEDB_HRESULT]
+    pDataType DataTypeEnum*
+
+  func get_Value
+    [OLEDB_HRESULT]
+    pvar VARIANT*
+
+  func put_Value
+    [OLEDB_HRESULT]
+    Val VARIANT
+
+  func get_Precision
+    [OLEDB_HRESULT]
+    pbPrecision BYTE*
+
+  func get_NumericScale
+    [OLEDB_HRESULT]
+    pbNumericScale BYTE*
+
+  func AppendChunk
+    [OLEDB_HRESULT]
+    Data VARIANT
+
+  func GetChunk
+    [OLEDB_HRESULT]
+    Length long
+    pvar VARIANT*
+
+  func get_OriginalValue
+    [OLEDB_HRESULT]
+    pvar VARIANT*
+
+  func get_UnderlyingValue
+    [OLEDB_HRESULT]
+    pvar VARIANT*
+
+  func get_DataFormat
+    [OLEDB_HRESULT]
+    ppiDF IUnknown**
+
+  func putref_DataFormat
+    [OLEDB_HRESULT]
+    piDF IUnknown*
+
+  func put_Precision
+    [OLEDB_HRESULT]
+    bPrecision BYTE
+
+  func put_NumericScale
+    [OLEDB_HRESULT]
+    bScale BYTE
+
+  func put_Type
+    [OLEDB_HRESULT]
+    DataType DataTypeEnum
+
+  func put_DefinedSize
+    [OLEDB_HRESULT]
+    lSize long
+
+  func put_Attributes
+    [OLEDB_HRESULT]
+    lAttributes long
+
+

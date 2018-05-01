@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface AsyncIPipeDouble base=IUnknown id={DB2F3ACF-2F86-11d1-8E04-00C04FB9989A} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func Begin_Pull
+    HRESULT
+    cRequest ULONG
+
+  func Finish_Pull
+    HRESULT
+    buf DOUBLE*
+    pcReturned ULONG*
+
+  func Begin_Push
+    HRESULT
+    buf DOUBLE*
+    cSent ULONG
+
+  func Finish_Push
+    HRESULT
+
+

@@ -1,0 +1,34 @@
+include Interfaces\DirectShow\IFilterGraph.txt
+
+ingterface IGraphBuilder base=IFilterGraph id={56a868a9-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Connect
+    HRESULT
+    ppinOut IPin*
+    ppinIn IPin*
+
+  func Render
+    HRESULT
+    ppinOut IPin*
+
+  func RenderFile
+    HRESULT
+    lpcwstrFile LPCWSTR
+    lpcwstrPlayList LPCWSTR
+
+  func AddSourceFilter
+    HRESULT
+    lpcwstrFileName LPCWSTR
+    lpcwstrFilterName LPCWSTR
+    ppFilter IBaseFilter**
+
+  func SetLogFile
+    HRESULT
+    hFile DWORD_PTR
+
+  func Abort
+    HRESULT
+
+  func ShouldOperationContinue
+    HRESULT
+
+

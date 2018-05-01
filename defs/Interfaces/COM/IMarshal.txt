@@ -1,0 +1,45 @@
+include Interfaces\IUnknown.txt
+
+ingterface IMarshal base=IUnknown id={00000003-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func GetUnmarshalClass
+    HRESULT
+    riid REFIID
+    pv void*
+    dwDestContext DWORD
+    pvDestContext void*
+    mshlflags MSHLFLAGS
+    pCid CLSID*
+
+  func GetMarshalSizeMax
+    HRESULT
+    riid REFIID
+    pv void*
+    dwDestContext DWORD
+    pvDestContext void*
+    mshlflags MSHLFLAGS
+    pSize DWORD*
+
+  func MarshalInterface
+    HRESULT
+    pStm IStream*
+    riid REFIID
+    pv void*
+    dwDestContext DWORD
+    pvDestContext void*
+    mshlflags MSHLFLAGS
+
+  func UnmarshalInterface
+    HRESULT
+    pStm IStream*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func ReleaseMarshalData
+    HRESULT
+    pStm IStream*
+
+  func DisconnectObject
+    HRESULT
+    dwReserved DWORD
+
+

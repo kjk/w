@@ -1,0 +1,9 @@
+include Interfaces\DTC\ITransactionCloner.txt
+include Interfaces\DTC\DTC.h.txt
+
+ingterface ITransaction2 base=ITransactionCloner id={34021548-0065-11d3-bac1-00c04f797be2} errorFunc=HRESULT onlineHelp=MSDN category="System Services/Distributed Transaction Coordinator (DTC)"
+  func GetTransactionInfo2
+    HRESULT
+    pinfo XACTTRANSINFO*
+
+

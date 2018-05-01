@@ -1,0 +1,11 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICBitmapCodecProgressNotification base=IUnknown id={64C1024E-C3CF-4462-8078-88C2B11C46D9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func RegisterProgressNotification
+    [WIC_HRESULT]
+    pfnProgressNotification PFNProgressNotification
+    pvData LPVOID
+    dwProgressFlags DWORD
+
+

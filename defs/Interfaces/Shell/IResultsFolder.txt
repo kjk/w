@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+
+ingterface IResultsFolder base=IUnknown id={96E5AE6D-6AE1-4b1c-900C-C6480EAA8828} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func AddItem
+    HRESULT
+    psi IShellItem*
+
+  func AddIDList
+    HRESULT
+    pidl PCIDLIST_ABSOLUTE
+    ppidlAdded PITEMID_CHILD*
+
+  func RemoveItem
+    HRESULT
+    psi IShellItem*
+
+  func RemoveIDList
+    HRESULT
+    pidl PCIDLIST_ABSOLUTE
+
+  func RemoveAll
+    HRESULT
+
+

@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMGraphBuilderCallback base=IUnknown id={4995f511-9ddb-4f12-bd3b-f04611807b79} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SelectedFilter
+    HRESULT
+    pMon IMoniker*
+
+  func CreatedFilter
+    HRESULT
+    pFil IBaseFilter*
+
+

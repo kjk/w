@@ -1,0 +1,21 @@
+include Interfaces\COM\IOleWindow.txt
+
+ingterface IDeskBarClient base=IOleWindow id={EB0FE175-1A3A-11D0-89B3-00A0C90A90AC} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetDeskBarSite
+    HRESULT
+    punkSite IUnknown*
+
+  func SetModeDBC
+    HRESULT
+    dwMode DWORD
+
+  func UIActivateDBC
+    HRESULT
+    dwState DWORD
+
+  func GetSize
+    HRESULT
+    dwWhich DWORD
+    prc LPRECT
+
+

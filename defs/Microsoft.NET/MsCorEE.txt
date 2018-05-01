@@ -1,0 +1,419 @@
+include Headers\Windows.h.txt
+
+dll mscoree.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Microsoft .NET/Unmanaged/Hosting"
+category "Microsoft .NET/Unmanaged/Strong Naming"
+category "Additional Resources/Windows Runtime C++"
+errorDecode errorFunc=HRESULT
+alias FLockClrVersionCallback LPVOID
+
+pointer FLockClrVersionCallback* LPVOID
+
+enum CLSID_RESOLUTION_FLAGS UINT
+  CLSID_RESOLUTION_DEFAULT    0
+  CLSID_RESOLUTION_REGISTERED 0x1
+
+flag STARTUP_FLAGS DWORD display=DWORD
+  STARTUP_CONCURRENT_GC                         0x1
+  STARTUP_LOADER_OPTIMIZATION_SINGLE_DOMAIN     0x2
+  STARTUP_LOADER_OPTIMIZATION_MULTI_DOMAIN      0x4
+  STARTUP_LOADER_OPTIMIZATION_MULTI_DOMAIN_HOST 0x6
+  STARTUP_LOADER_SAFEMODE                       0x10
+  STARTUP_LOADER_SETPREFERENCE                  0x100
+  STARTUP_SERVER_GC                             0x1000
+  STARTUP_HOARD_GC_VM                           0x2000
+  STARTUP_SINGLE_VERSION_HOSTING_INTERFACE      0x4000
+  STARTUP_LEGACY_IMPERSONATION                  0x10000
+  STARTUP_DISABLE_COMMITTHREADSTACK             0x20000
+  STARTUP_ALWAYSFLOW_IMPERSONATION              0x40000
+  STARTUP_TRIM_GC_COMMIT                        0x80000
+  STARTUP_ETW                                   0x100000
+  STARTUP_ARM                                   0x400000
+
+flag RUNTIME_INFO_FLAGS DWORD display=DWORD
+  RUNTIME_INFO_UPGRADE_VERSION        0x1
+  RUNTIME_INFO_REQUEST_IA64           0x2
+  RUNTIME_INFO_REQUEST_AMD64          0x4
+  RUNTIME_INFO_REQUEST_X86            0x8
+  RUNTIME_INFO_DONT_RETURN_DIRECTORY  0x10
+  RUNTIME_INFO_DONT_RETURN_VERSION    0x20
+  RUNTIME_INFO_DONT_SHOW_ERROR_DIALOG 0x40
+
+flag COINITIEE DWORD display=DWORD
+  COINITEE_DEFAULT 0x0
+  COINITEE_DLL     0x1
+  COINITEE_MAIN    0x2
+
+enum [SN_CMP_RESULT] DWORD display=DWORD
+  SN_CMP_DIFFERENT 0
+  SN_CMP_IDENTICAL 1
+  SN_CMP_SIGONLY   2
+
+pointer [SN_CMP_RESULT*] [SN_CMP_RESULT] display=DWORD*
+
+func CallFunctionShim
+  HRESULT
+  szDllName LPCWSTR
+  szFunctionName LPCSTR
+  lpvArgument1 LPVOID
+  lpvArgument2 LPVOID
+  szVersion LPCWSTR
+  pvReserved LPVOID
+
+func ClrCreateManagedInstance
+  STDAPI
+  pTypeName LPCWSTR
+  riid REFIID
+  ppObject void** interfaceId=riid
+
+func CoEEShutDownCOM
+  void
+
+func CoInitializeCor
+  STDAPI
+  fFlags DWORD
+
+func CoInitializeEE
+  HRESULT
+  fFlags COINITIEE
+
+func CorBindToCurrentRuntime
+  HRESULT
+  pwszFileName LPCWSTR
+  rclsid REFCLSID
+  riid REFIID
+  ppv LPVOID* interfaceId=riid
+
+func CorBindToRuntime
+  HRESULT
+  pwszVersion LPCWSTR
+  pwszBuildFlavor LPCWSTR
+  rclsid REFCLSID
+  riid REFIID
+  ppv LPVOID* interfaceId=riid
+
+func CorBindToRuntimeByCfg
+  HRESULT
+  pCfgStream IStream*
+  reserved DWORD
+  startupFlags STARTUP_FLAGS
+  rclsid REFCLSID
+  riid REFIID
+  ppv LPVOID* interfaceId=riid
+
+func CorBindToRuntimeEx
+  HRESULT
+  pwszVersion LPWSTR
+  pwszBuildFlavor LPWSTR
+  startupFlags STARTUP_FLAGS
+  rclsid REFCLSID
+  riid REFIID
+  ppv LPVOID* interfaceId=riid
+
+func CorBindToRuntimeHost
+  HRESULT
+  pwszVersion LPCWSTR
+  pwszBuildFlavor LPCWSTR
+  pwszHostConfigFile LPCWSTR
+  pReserved VOID*
+  startupFlags STARTUP_FLAGS
+  rclsid REFCLSID
+  riid REFIID
+  ppv LPVOID* interfaceId=riid
+
+func CorExitProcess
+  void
+  exitCode int
+
+func CorMarkThreadInThreadPool
+  void
+
+func CoUninitializeCor
+  STDAPI_(VOID)
+
+func CoUninitializeEE
+  void
+  fFlags BOOL
+
+func CreateDebuggingInterfaceFromVersion
+  HRESULT
+  iDebuggerVersion int
+  szDebuggeeVersion LPCWSTR
+  ppCordb IUnknown**
+
+func GetCORRequiredVersion
+  HRESULT
+  pbuffer LPWSTR outputOnly
+  cchBuffer DWORD
+  dwLength DWORD*
+
+func GetCORSystemDirectory
+  HRESULT
+  pbuffer LPWSTR outputOnly
+  cchBuffer DWORD
+  dwlength DWORD*
+
+func GetCORVersion
+  HRESULT
+  pbuffer LPWSTR outputOnly
+  cchBuffer DWORD
+  dwlength DWORD*
+
+func GetFileVersion
+  HRESULT
+  szFilename LPCWSTR
+  szBuffer LPWSTR outputOnly
+  cchBuffer DWORD
+  dwLength DWORD*
+
+func GetRealProcAddress
+  HRESULT
+  pwszProcName LPCSTR
+  ppv VOID**
+
+func GetRequestedRuntimeInfo
+  HRESULT
+  pExe LPCWSTR
+  pwszVersion LPCWSTR
+  pConfigurationFile LPCWSTR
+  startupFlags STARTUP_FLAGS
+  runtimeInfoFlags RUNTIME_INFO_FLAGS
+  pDirectory LPWSTR outputOnly
+  dwDirectory DWORD
+  dwDirectoryLength DWORD*
+  pVersion LPWSTR outputOnly
+  cchBuffer DWORD
+  dwlength DWORD*
+
+func GetRequestedRuntimeVersion
+  HRESULT
+  pExe LPWSTR
+  pVersion LPWSTR
+  cchBuffer DWORD
+  pdwLength DWORD*
+
+func GetRequestedRuntimeVersionForCLSID
+  HRESULT
+  rclsid REFCLSID
+  pVersion LPWSTR
+  cchBuffer DWORD
+  dwLength DWORD*
+  dwResolutionFlags CLSID_RESOLUTION_FLAGS
+
+func GetVersionFromProcess
+  HRESULT
+  hProcess HANDLE
+  pVersion LPWSTR
+  cchBuffer DWORD
+  dwLength DWORD*
+
+func LoadLibraryShim
+  HRESULT
+  szDllName LPCWSTR
+  szVersion LPCWSTR
+  pvReserved LPVOID
+  phModDll HMODULE*
+
+func LoadStringRC
+  HRESULT
+  iResourceID UINT
+  szBuffer LPWSTR
+  iMax int
+  bQuiet int
+
+func LoadStringRCEx
+  HRESULT
+  lcid LCID
+  iResouceID UINT
+  szBuffer LPWSTR
+  iMax int
+  bQuiet int
+  pcwchUsed int*
+
+func LockClrVersion
+  HRESULT
+  hostCallback FLockClrVersionCallback
+  pBeginHostSetup FLockClrVersionCallback*
+  pEndHostSetup FLockClrVersionCallback*
+
+func RunDll32ShimW
+  HRESULT
+  hwnd HWND
+  hinst HINSTANCE
+  lpszCmdLine LPCWSTR
+  nCmdShow int
+
+func CLRCreateInstance
+  HRESULT
+  clsid REFCLSID
+  riid REFIID
+  ppInterface LPVOID* interfaceId=riid
+
+func GetHashFromAssemblyFile bothCharset nameA=GetHashFromAssemblyFile
+  HRESULT
+  szFilePath LPCTSTR
+  piHashAlg "unsigned int*"
+  pbHash BYTE* postLength=pchHash
+  cchHash DWORD
+  pchHash DWORD*
+
+func GetHashFromBlob
+  HRESULT
+  pbBlob BYTE*
+  cchBlob DWORD
+  piHashAlg "unsigned int*"
+  pbHash BYTE* postLength=pchHash
+  cchHash DWORD
+  pchHash DWORD*
+
+func GetHashFromFile bothCharset nameA=GetHashFromFile
+  HRESULT
+  szFilePath LPCTSTR
+  piHashAlg "unsigned int*"
+  pbHash BYTE* postLength=pchHash
+  cchHash DWORD
+  pchHash DWORD*
+
+func GetHashFromHandle
+  HRESULT
+  hFile HANDLE
+  piHashAlg "unsigned int*"
+  pbHash BYTE* postLength=pchHash
+  cchHash DWORD
+  pchHash DWORD*
+
+func StrongNameErrorInfo
+  HRESULT
+
+func StrongNameCompareAssemblies
+  BOOLEAN
+  wszAssembly1 LPCWSTR
+  wszAssembly2 LPCWSTR
+  pdwResult [SN_CMP_RESULT*]
+
+func StrongNameFreeBuffer
+  VOID
+  pbMemory BYTE*
+
+func StrongNameGetBlob
+  BOOLEAN
+  wszFilePath LPCWSTR
+  pbBlob BYTE* postLength=pcbBlob
+  pcbBlob DWORD*
+
+func StrongNameGetBlobFromImage
+  BOOLEAN
+  pbBase BYTE*
+  dwLength DWORD
+  pbBlob BYTE* postLength=pcbBlob
+  pcbBlob DWORD*
+
+func StrongNameGetPublicKey
+  BOOLEAN
+  szKeyContainer LPCWSTR
+  pbKeyBlob BYTE* length=cbKeyBlob
+  cbKeyBlob ULONG
+  ppbPublicKeyBlob BYTE** postLength=pcbPublicKeyBlob
+  pcbPublicKeyBlob ULONG*
+
+func StrongNameHashSize
+  BOOLEAN
+  ulHashAlg ULONG
+  pcbSize DWORD*
+
+func StrongNameKeyDelete
+  BOOLEAN
+  wszKeyContainer LPCWSTR
+
+func StrongNameKeyGen
+  BOOLEAN
+  wszKeyContainer LPCWSTR
+  dwFlags DWORD
+  ppbKeyBlob BYTE** postLength=pcbKeyBlob
+  pcbKeyBlob ULONG*
+
+func StrongNameKeyGenEx
+  BOOLEAN
+  wszKeyContainer LPCWSTR
+  dwFlags DWORD
+  dwKeySize DWORD
+  ppbKeyBlob BYTE** postLength=pcbKeyBlob
+  pcbKeyBlob ULONG*
+
+func StrongNameKeyInstall
+  BOOLEAN
+  wszKeyContainer LPCWSTR
+  pbKeyBlob BYTE* length=cbKeyBlob
+  cbKeyBlob ULONG
+
+func StrongNameSignatureGeneration
+  BOOLEAN
+  wszFilePath LPCWSTR
+  wszKeyContainer LPCWSTR
+  pbKeyBlob BYTE* length=cbKeyBlob
+  cbKeyBlob ULONG
+  ppbSignatureBlob BYTE** postLength=pcbSignatureBlob
+  pcbSignatureBlob ULONG*
+
+func StrongNameSignatureGenerationEx
+  BOOLEAN
+  wszFilePath LPCWSTR
+  wszKeyContainer LPCWSTR
+  pbKeyBlob BYTE* length=cbKeyBlob
+  cbKeyBlob ULONG
+  ppbSignatureBlob BYTE** postLength=pcbSignatureBlob
+  pcbSignatureBlob ULONG*
+  dwFlags DWORD
+
+func StrongNameSignatureSize
+  BOOLEAN
+  pbPublicKeyBlob BYTE* length=cbPublicKeyBlob
+  cbPublicKeyBlob ULONG
+  pcbSize DWORD*
+
+func StrongNameSignatureVerification
+  BOOLEAN
+  wszFilePath LPCWSTR
+  dwInFlags DWORD
+  pdwOutFlags DWORD*
+
+func StrongNameSignatureVerificationEx
+  BOOLEAN
+  wszFilePath LPCWSTR
+  fForceVerification BOOLEAN
+  pfWasVerified BOOLEAN*
+
+func StrongNameSignatureVerificationFromImage
+  BOOLEAN
+  pbBase BYTE*
+  dwLength DWORD
+  dwInFlags DWORD
+  pdwOutFlags DWORD*
+
+func StrongNameTokenFromAssembly
+  BOOLEAN
+  wszFilePath LPCWSTR
+  ppbStrongNameToken BYTE** postLength=pcbStrongNameToken
+  pcbStrongNameToken ULONG*
+
+func StrongNameTokenFromAssemblyEx
+  BOOLEAN
+  wszFilePath LPCWSTR
+  ppbStrongNameToken BYTE** postLength=pcbStrongNameToken
+  pcbStrongNameToken ULONG*
+  ppbPublicKeyBlob BYTE** postLength=pcbPublicKeyBlob
+  pcbPublicKeyBlob ULONG*
+
+func StrongNameTokenFromPublicKey
+  BOOLEAN
+  pbPublicKeyBlob BYTE* length=cbPublicKeyBlob
+  cbPublicKeyBlob ULONG
+  ppbStrongNameToken BYTE** postLength=pcbStrongNameToken
+  pcbStrongNameToken ULONG*
+
+func MetaDataGetDispenser
+  HRESULT
+  rclsid REFCLSID
+  riid REFIID
+  ppv LPVOID* interfaceId=riid
+

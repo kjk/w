@@ -1,0 +1,54 @@
+include Interfaces\COM\IOleWindow.txt
+
+ingterface IShellView base=IOleWindow id={000214E3-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func TranslateAccelerator
+    HRESULT
+    pmsg MSG*
+
+  func EnableModeless
+    HRESULT
+    fEnable BOOL
+
+  func UIActivate
+    HRESULT
+    uState UINT
+
+  func Refresh
+    HRESULT
+
+  func CreateViewWindow
+    HRESULT
+    psvPrevious IShellView*
+    pfs LPCFOLDERSETTINGS
+    psb IShellBrowser*
+    prcView RECT*
+    phWnd HWND*
+
+  func DestroyViewWindow
+    HRESULT
+
+  func GetCurrentInfo
+    HRESULT
+    pfs LPFOLDERSETTINGS
+
+  func AddPropertySheetPages
+    HRESULT
+    dwReserved DWORD
+    pfn LPFNSVADDPROPSHEETPAGE
+    lparam LPARAM
+
+  func SaveViewState
+    HRESULT
+
+  func SelectItem
+    HRESULT
+    pidlItem PCUITEMID_CHILD
+    uFlags SVSIF
+
+  func GetItemObject
+    HRESULT
+    uItem UINT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

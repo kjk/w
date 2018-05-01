@@ -1,0 +1,10 @@
+include Interfaces\DirectShow\IFilterGraph2.txt
+
+ingterface IFilterGraph3 base=IFilterGraph2 id={aaf38154-b80b-422f-91e6-b66467509a07} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetSyncSourceEx
+    HRESULT
+    pClockForMostOfFilterGraph IReferenceClock*
+    pClockForFilter IReferenceClock*
+    pFilter IBaseFilter*
+
+

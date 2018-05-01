@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WebBrowser\IWebBrowser.txt
+
+ingterface ICustomDoc base=IUnknown id={3050f3f0-98b5-11cf-bb82-00aa00bdce0b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/Advanced Hosting Interfaces"
+  func SetUIHandler
+    HRESULT
+    pUIHandler IDocHostUIHandler*
+
+

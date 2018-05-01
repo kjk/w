@@ -1,0 +1,661 @@
+header
+arch 32
+integer INT_PTR size=4
+
+integer UINT_PTR size=4 unsigned
+
+arch off
+arch 64
+integer INT_PTR size=8
+
+integer UINT_PTR size=8 unsigned
+
+arch off
+modulehandle HMODULE
+
+pointer HMODULE* HMODULE
+
+alias [HMODULE-PVOID] HMODULE display=PVOID
+
+pointer [HMODULE-PVOID*] [HMODULE-PVOID] display=PVOID*
+
+void void
+
+alias VOID void
+
+pointer LPVOID VOID
+
+alias LPCVOID LPVOID
+
+pointer LPCVOID* LPCVOID
+
+alias PVOID LPVOID
+
+pointer PVOID* PVOID
+
+alias VOID* LPVOID
+
+pointer VOID** VOID*
+
+alias PCVOID LPVOID
+
+pointer LPVOID* LPVOID
+
+alias "const VOID*" VOID*
+
+alias "const PVOID" PVOID
+
+alias "CONST VOID*" VOID*
+
+pointer void* void
+
+alias "const void*" void*
+
+pointer "const void**" void*
+
+pointer void** void*
+
+alias "CONST void*" void*
+
+pointer "PVOID []" PVOID
+
+alias [LPVOID|char*] LPVOID display=char*
+
+integer PVOID64 size=8 unsigned displayHex
+
+integer BYTE size=1 unsigned
+
+pointer "CONST BYTE*" BYTE
+
+pointer LPBYTE BYTE
+
+pointer LPBYTE* LPBYTE
+
+alias BYTE* LPBYTE
+
+pointer BYTE** BYTE*
+
+alias PBYTE LPBYTE
+
+alias "const PBYTE" PBYTE
+
+alias "CONST PBYTE" PBYTE
+
+pointer PBYTE* PBYTE
+
+alias "const BYTE*" BYTE*
+
+pointer "const BYTE**" BYTE*
+
+pointer "const BYTE* []" BYTE*
+
+alias LPCBYTE LPBYTE
+
+alias "const LPBYTE" LPBYTE
+
+alias byte BYTE
+
+pointer byte* byte
+
+pointer "const byte*" byte
+
+pointer byte** byte*
+
+integer UCHAR size=1 unsigned
+
+pointer UCHAR* UCHAR
+
+pointer UCHAR** UCHAR*
+
+pointer PUCHAR UCHAR
+
+pointer PUCHAR* PUCHAR
+
+alias "unsigned char" UCHAR
+
+pointer "unsigned char*" "unsigned char"
+
+pointer "unsigned char**" "unsigned char*"
+
+integer UINT8 size=1 unsigned
+
+pointer PUINT8 UINT8
+
+integer INT8 size=1
+
+integer INT16 size=2
+
+integer UINT16 size=2 unsigned
+
+pointer UINT16* UINT16
+
+alias WORD UINT16
+
+pointer WORD* WORD
+
+pointer PWORD WORD
+
+alias "const WORD*" WORD*
+
+alias LPWORD WORD*
+
+alias USHORT UINT16
+
+pointer PUSHORT USHORT
+
+alias USHORT* PUSHORT
+
+alias "const USHORT*" PUSHORT
+
+alias "unsigned short" USHORT
+
+pointer "unsigned short*" "unsigned short"
+
+pointer "unsigned short**" "unsigned short*"
+
+alias u_short USHORT
+
+alias u_short* PUSHORT
+
+integer SHORT size=2
+
+alias short SHORT
+
+pointer short* short
+
+pointer UINT_PTR* UINT_PTR
+
+pointer PUINT_PTR UINT_PTR
+
+alias ULONG_PTR UINT_PTR
+
+pointer ULONG_PTR* ULONG_PTR
+
+alias PULONG_PTR ULONG_PTR*
+
+alias "const ULONG_PTR*" ULONG_PTR*
+
+alias DWORD_PTR ULONG_PTR
+
+pointer DWORD_PTR* DWORD_PTR
+
+alias PDWORD_PTR DWORD_PTR*
+
+alias LONG_PTR INT_PTR
+
+pointer LONG_PTR* LONG_PTR
+
+integer BOOL size=4 defaultName=TRUE
+  success NotEqual=0
+  FALSE 0
+  TRUE  1
+
+pointer PBOOL BOOL
+
+alias LPBOOL PBOOL
+
+alias bool BOOL
+
+pointer bool* bool
+
+pointer BOOL* BOOL
+
+alias "const BOOL" BOOL
+
+alias "CONST BOOL*" BOOL*
+
+alias BOOLAPI BOOL
+
+integer [BOOL_NUMBER] size=4
+  FALSE 0
+  TRUE  1
+
+integer BOOLEAN size=1 defaultName=TRUE
+  success NotEqual=0
+  FALSE 0
+  TRUE  1
+
+pointer BOOLEAN* BOOLEAN
+
+pointer PBOOLEAN BOOLEAN
+
+integer UINT32 size=4 unsigned
+
+pointer UINT32* UINT32
+
+pointer PUINT32 UINT32
+
+alias "unsigned long" UINT32
+
+pointer "unsigned long*" "unsigned long"
+
+alias "const unsigned long" "unsigned long"
+
+alias u_long UINT32
+
+pointer u_long* u_long
+
+alias ULONG UINT32
+
+pointer ULONG* ULONG
+
+pointer ULONG** ULONG*
+
+pointer PULONG ULONG
+
+pointer PULONG* PULONG
+
+alias Ulong UINT32
+
+alias UINT UINT32
+
+pointer PUINT UINT
+
+alias UINT* PUINT
+
+alias "const UINT*" UINT*
+
+alias "unsigned int" UINT
+
+alias "unsigned int*" PUINT
+
+alias LPUINT PUINT
+
+alias ULONG32 ULONG
+
+integer INT32 size=4
+
+pointer INT32* INT32
+
+alias long INT32
+
+pointer long* long
+
+alias LONG long
+
+pointer LONG* LONG
+
+alias PLONG LONG*
+
+alias LPLONG LONG*
+
+alias "LONG volatile*" LONG*
+
+alias int INT32
+
+alias INT int
+
+pointer int* int
+
+alias "CONST int*" int*
+
+alias "const int*" int*
+
+pointer INT* INT
+
+alias "const INT*" INT*
+
+pointer PINT INT
+
+alias LPINT PINT
+
+alias "const LPINT" LPINT
+
+alias "signed int" int
+
+alias __int32 INT32
+
+integer INT64 size=8
+
+alias LONGLONG INT64
+
+pointer LONGLONG* LONGLONG
+
+pointer LONGLONG** LONGLONG*
+
+alias "LONGLONG volatile*" LONGLONG*
+
+pointer PLONGLONG LONGLONG
+
+alias LONG64 INT64
+
+pointer LONG64* LONG64
+
+pointer PLONG64 LONG64
+
+alias __int64 INT64
+
+integer UINT64 size=8 unsigned
+
+pointer UINT64* UINT64
+
+pointer PUINT64 UINT64
+
+alias ULONGLONG UINT64
+
+pointer ULONGLONG* ULONGLONG
+
+pointer PULONGLONG ULONGLONG
+
+alias ULONGULONG UINT64
+
+alias ULONG64 UINT64
+
+pointer ULONG64* ULONG64
+
+pointer PULONG64 ULONG64
+
+alias DWORD64 UINT64
+
+pointer PDWORD64 DWORD64
+
+alias DWORDLONG ULONGLONG
+
+pointer DWORDLONG* DWORDLONG
+
+pointer PDWORDLONG DWORDLONG
+
+alias "unsigned __int64" UINT64
+
+pointer "unsigned __int64*" "unsigned __int64"
+
+integer DWORD size=4 unsigned
+
+pointer PDWORD DWORD
+
+alias DWORD* PDWORD
+
+alias LPDWORD PDWORD
+
+alias "const DWORD*" PDWORD
+
+pointer LPDWORD* LPDWORD
+
+alias "CONST DWORD*" DWORD*
+
+alias "DWORD const*" DWORD*
+
+pointer "DWORD []" DWORD
+
+character CHAR
+
+pointer LPSTR CHAR
+
+pointer LPSTR* LPSTR
+
+alias LPCSTR LPSTR
+
+pointer LPCSTR* LPCSTR
+
+alias PCSTR LPSTR
+
+pointer PCSTR* PCSTR
+
+alias PSTR LPSTR
+
+alias PCHAR LPSTR
+
+pointer PCHAR* PCHAR
+
+pointer PCHAR** PCHAR*
+
+pointer CHAR* CHAR
+
+alias char CHAR
+
+pointer char* char
+
+pointer char** char*
+
+pointer CHAR** CHAR*
+
+alias "const char*" char*
+
+pointer "const char**" "const char*"
+
+alias "const PCHAR" PCHAR
+
+alias LPCH LPSTR
+
+unicodecharacter WCHAR
+
+pointer LPWSTR WCHAR
+
+alias PWSTR LPWSTR
+
+alias PCWSTR PWSTR
+
+alias LPCWSTR PWSTR
+
+pointer LPCWSTR* LPCWSTR
+
+pointer LPCWSTR** LPCWSTR*
+
+pointer "const LPCWSTR*" LPCWSTR
+
+alias "const WCHAR*" PWSTR
+
+alias "CONST WCHAR*" PWSTR
+
+alias WCHAR* PWSTR
+
+alias "const PWSTR" PWSTR
+
+alias PWCHAR PWSTR
+
+pointer PWCHAR* PWCHAR
+
+pointer WCHAR** WCHAR*
+
+pointer PWCHAR** PWCHAR*
+
+pointer LPWSTR* LPWSTR
+
+pointer LPWSTR** LPWSTR*
+
+pointer PWSTR* PWSTR
+
+pointer PWSTR** PWSTR*
+
+alias PCWSTR* PWSTR*
+
+alias "WCHAR const*" WCHAR*
+
+alias wchar_t WCHAR
+
+pointer wchar_t* wchar_t
+
+pointer wchar_t** wchar_t*
+
+pointer "const wchar_t*" wchar_t
+
+pointer "const wchar_t**" "const wchar_t*"
+
+alias "WCHAR []" LPWSTR
+
+pointer "LPCWSTR []" LPCWSTR
+
+alias PZZWSTR LPWSTR
+
+alias PCZZWSTR PZZWSTR
+
+tcharacter TCHAR
+
+pointer LPTSTR TCHAR
+
+alias LPCTSTR LPTSTR
+
+alias PTSTR LPTSTR
+
+alias "const PCTSTR" LPTSTR
+
+alias tchar* LPTSTR
+
+alias PCTSTR LPTSTR
+
+alias TCHAR* LPTSTR
+
+alias PTCHAR LPTSTR
+
+pointer LPTSTR* LPTSTR
+
+pointer LPCTSTR* LPCTSTR
+
+pointer PTSTR* PTSTR
+
+pointer TCHAR** TCHAR*
+
+pointer PTSTR** PTSTR*
+
+pointer LPTSTR** LPTSTR*
+
+pointer PCTSTR* PCTSTR
+
+pointer PCTSTR** PCTSTR*
+
+alias LPTCH LPTSTR
+
+alias LPCTCH LPTSTR
+
+alias size_t INT_PTR
+
+pointer size_t* size_t
+
+alias SIZE_T size_t
+
+pointer SIZE_T* SIZE_T
+
+alias PSIZE_T SIZE_T*
+
+alias time_t INT64
+
+pointer time_t* time_t
+
+pointer "const time_t*" time_t
+
+floating float size=4
+
+pointer float* float
+
+alias FLOAT float
+
+pointer FLOAT* FLOAT
+
+pointer PFLOAT FLOAT
+
+alias "CONST float*" float*
+
+pointer "CONST FLOAT*" FLOAT
+
+alias "const float" float
+
+pointer "const float*" "const float"
+
+alias FLOAT32 FLOAT
+
+pointer FLOAT32* FLOAT32
+
+floating double size=8
+
+pointer double* double
+
+alias DOUBLE double
+
+pointer DOUBLE* DOUBLE
+
+alias va_list LPVOID
+
+pointer va_list* va_list
+
+array "CHAR [1]" base=CHAR count=1
+
+array "CHAR [14]" base=CHAR count=14
+
+array "CHAR [32]" base=CHAR count=32
+
+array "CHAR [256]" base=CHAR count=256
+
+array "CHAR [MAX_PATH]" base=CHAR count=260
+
+array "WCHAR [1]" base=WCHAR count=1
+
+array "WCHAR [14]" base=WCHAR count=14
+
+array "WCHAR [128]" base=WCHAR count=128
+
+array "WCHAR [256]" base=WCHAR count=256
+
+array "WCHAR [260]" base=WCHAR count=260
+
+array "WCHAR [MAX_PATH]" base=WCHAR count=260
+
+array "TCHAR [ANYSIZE_ARRAY]" base=TCHAR count=1
+
+array "TCHAR [14]" base=TCHAR count=14
+
+array "TCHAR [32]" base=TCHAR count=32
+
+array "TCHAR [64]" base=TCHAR count=64
+
+array "TCHAR [128]" base=TCHAR count=128
+
+array "TCHAR [256]" base=TCHAR count=256
+
+array "TCHAR [MAX_PATH]" base=TCHAR count=260
+
+array "TCHAR [MAX_PATH + 1]" base=TCHAR count=261
+
+array "UCHAR [1]" base=UCHAR count=1
+
+array "UCHAR [2]" base=UCHAR count=2
+
+array "UCHAR [3]" base=UCHAR count=3
+
+array "UCHAR [16]" base=UCHAR count=16
+
+array "UCHAR [24]" base=UCHAR count=24
+
+array "DWORD [1]" base=DWORD count=1
+
+array "DWORD [2]" base=DWORD count=2
+
+array "DWORD [3]" base=DWORD count=3
+
+array "DWORD [4]" base=DWORD count=4
+
+array "DWORD [5]" base=DWORD count=5
+
+array "BYTE [1]" base=BYTE count=1
+
+array "BYTE [ANYSIZE_ARRAY]" base=BYTE count=1
+
+array "BYTE [2]" base=BYTE count=2
+
+array "BYTE [6]" base=BYTE count=6
+
+array "BYTE [8]" base=BYTE count=8
+
+array "BYTE [16]" base=BYTE count=16
+
+array "ULONG [1]" base=ULONG count=1
+
+array "ULONG [2]" base=ULONG count=2
+
+array "ULONG [4]" base=ULONG count=4
+
+array "float [4]" base=float count=4
+
+array "FLOAT [4]" base=FLOAT count=4
+
+array "const FLOAT [4]" base=FLOAT count=4
+
+array "ULONG64 [2]" base=ULONG64 count=2
+
+array "ULONG64 [4]" base=ULONG64 count=4
+
+array "USHORT [8]" base=USHORT count=8
+
+array "WORD [256]" base=WORD count=256
+
+array "char [260]" base=char count=260
+

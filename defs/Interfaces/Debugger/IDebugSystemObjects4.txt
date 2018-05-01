@@ -1,0 +1,16 @@
+include Interfaces\Debugger\IDebugSystemObjects3.txt
+
+ingterface IDebugSystemObjects4 base=IDebugSystemObjects3 id={489468e6-7d0f-4af5-87ab-25207454d553} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetCurrentProcessExecutableNameWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    ExeSize PULONG
+
+  func GetCurrentSystemServerNameWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+
+

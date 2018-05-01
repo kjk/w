@@ -1,0 +1,17 @@
+include Headers\windows.h.txt
+
+dll WSClient.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Application Installation and Servicing/Developer License"
+func CheckDeveloperLicense
+  STDAPI
+  pExpiration FILETIME*
+
+func AcquireDeveloperLicense
+  STDAPI
+  hwndParent HWND
+  pExpiration FILETIME*
+
+func RemoveDeveloperLicense
+  STDAPI
+  hwndParent HWND
+

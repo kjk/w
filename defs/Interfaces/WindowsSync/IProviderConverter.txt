@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IProviderConverter base=IUnknown id={809b7276-98cf-4957-93a5-0ebdd3dddffd} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func Initialize
+    HRESULT
+    pISyncProvider ISyncProvider*
+
+

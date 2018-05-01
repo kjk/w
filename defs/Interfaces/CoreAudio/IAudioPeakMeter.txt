@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioPeakMeter base=IUnknown id={DD79923C-0599-45e0-B8B6-C8DF7DB6E796} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetChannelCount
+    [AUDCLNT_HRESULT]
+    pcChannels UINT*
+
+  func GetLevel
+    [AUDCLNT_HRESULT]
+    nChannel UINT
+    pfLevel float*
+
+

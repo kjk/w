@@ -1,0 +1,9 @@
+include Interfaces\DirectShow\IBasicVideo.txt
+
+ingterface IBasicVideo2 base=IBasicVideo id={329bb360-f6ea-11d1-9038-00a0c9697298} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetPreferredAspectRatio
+    HRESULT
+    plAspectX long*
+    plAspectY long*
+
+

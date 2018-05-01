@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDVEnc base=IUnknown id={d18e17a0-aacb-11d0-afb0-00aa00b67a42} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func get_IFormatResolution
+    HRESULT
+    VideoFormat int*
+    DVFormat int*
+    Resolution int*
+    fDVInfo BYTE
+    sDVInfo DVINFO*
+
+  func put_IFormatResolution
+    HRESULT
+    VideoFormat int
+    DVFormat int
+    Resolution int
+    fDVInfo BYTE
+    sDVInfo DVINFO*
+
+

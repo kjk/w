@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IConfigAviMux base=IUnknown id={5ACD6AA0-F482-11ce-8B67-00AA00A3F1A6} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetMasterStream
+    HRESULT
+    iStream LONG
+
+  func GetMasterStream
+    HRESULT
+    pStream LONG*
+
+  func SetOutputCompatibilityIndex
+    HRESULT
+    fOldIndex BOOL
+
+  func GetOutputCompatibilityIndex
+    HRESULT
+    pfOldIndex BOOL*
+
+

@@ -1,0 +1,21 @@
+include Interfaces\DirectX\10\ID3D10DeviceChild.txt
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10Asynchronous base=ID3D10DeviceChild id={9B7E4C0D-342C-4106-A19F-4F2704F689F0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Core"
+  func Begin
+    void
+
+  func End
+    void
+
+  func GetData
+    HRESULT
+    pData void* postLength=DataSize
+    DataSize UINT
+    GetDataFlags UINT
+
+  func GetDataSize
+    success NotEqual=0
+    UINT
+
+

@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDataObjectProvider base=IUnknown id={3D25F6D6-4B2A-433c-9184-7C33AD35D001} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetDataObject
+    HRESULT
+    dataObject IDataObject**
+
+  func SetDataObject
+    HRESULT
+    dataObject IDataObject*
+
+

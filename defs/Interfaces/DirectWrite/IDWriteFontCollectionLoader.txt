@@ -1,0 +1,12 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteFontCollectionLoader base=IUnknown id={cca920e4-52f0-492b-bfa8-29c72ee0a468} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func CreateEnumeratorFromKey
+    HRESULT
+    factory IDWriteFactory*
+    collectionKey "void const*"
+    collectionKeySize UINT32
+    fontFileEnumerator IDWriteFontFileEnumerator**
+
+

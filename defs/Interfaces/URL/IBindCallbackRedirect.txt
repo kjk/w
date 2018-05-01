@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IBindCallbackRedirect base=IUnknown id={11C81BC2-121E-4ed5-B9C4-B430BD54F2C0} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func Redirect
+    HRESULT
+    lpcUrl LPCWSTR
+    vbCancel VARIANT_BOOL*
+
+

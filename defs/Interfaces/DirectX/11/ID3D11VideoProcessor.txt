@@ -1,0 +1,13 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11VideoProcessor base=ID3D11DeviceChild id={1D7B0652-185F-41c6-85CE-0C5BE3D4AE6C} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Microsoft Media Foundation/Direct3D 11 Video"
+  func GetContentDesc
+    void
+    pDesc D3D11_VIDEO_PROCESSOR_CONTENT_DESC*
+
+  func GetRateConversionCaps
+    void
+    pCaps D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*
+
+

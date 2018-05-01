@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioDeviceEndpoint base=IUnknown id={D4952F5A-A0B2-4cc4-8B82-9358488DD8AC} errorFunc=HRESULT onlineHelp=MSDN category="System Services/Remote Desktop Services/AudioEndpoint"
+  func SetBuffer
+    [AUDCLNT_HRESULT]
+    MaxPeriod HNSTIME
+    u32LatencyCoefficient UINT32
+
+  func GetRTCaps
+    [AUDCLNT_HRESULT]
+    pbIsRTCapable BOOL*
+
+  func GetEventDrivenCapable
+    [AUDCLNT_HRESULT]
+    pbisEventCapable BOOL*
+
+  func WriteExclusiveModeParametersToSharedMemory
+    [AUDCLNT_HRESULT]
+    hTargetProcess UINT_PTR
+    hnsPeriod HNSTIME
+    hnsBufferDuration HNSTIME
+    u32LatencyCoefficient UINT32
+    pu32SharedMemorySize UINT32*
+    phSharedMemory UINT_PTR*
+
+

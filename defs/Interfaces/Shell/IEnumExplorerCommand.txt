@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumExplorerCommand base=IUnknown id={a88826f8-186f-4987-aade-ea0cef8fbfe8} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Next
+    HRESULT
+    celt ULONG
+    pUICommand IExplorerCommand** postCount=pceltFetched
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppenum IEnumExplorerCommand**
+
+

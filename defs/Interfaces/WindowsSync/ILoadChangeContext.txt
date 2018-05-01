@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ILoadChangeContext base=IUnknown id={44a4aaca-ec39-46d5-b5c9-d633c0ee67e2} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetSyncChange
+    HRESULT
+    ppSyncChange ISyncChange**
+
+  func SetRecoverableErrorOnChange
+    HRESULT
+    hrError HRESULT
+    pErrorData IRecoverableErrorData*
+
+  func SetRecoverableErrorOnChangeUnit
+    HRESULT
+    hrError HRESULT
+    pChangeUnit ISyncChangeUnit*
+    pErrorData IRecoverableErrorData*
+
+

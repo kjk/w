@@ -1,0 +1,38 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectComposition\DirectComposition.h.txt
+
+ingterface IDCompositionAnimation base=IUnknown id={CBFD91D9-51B2-45e4-B3DE-D19CCFB863C5} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func Reset
+    HRESULT
+
+  func SetAbsoluteBeginTime
+    HRESULT
+    beginTime LARGE_INTEGER
+
+  func AddCubic
+    HRESULT
+    beginOffset double
+    constantCoefficient float
+    linearCoefficient float
+    quadraticCoefficient float
+    cubicCoefficient float
+
+  func AddSinusoidal
+    HRESULT
+    beginOffset double
+    bias float
+    amplitude float
+    frequency float
+    phase float
+
+  func AddRepeat
+    HRESULT
+    beginOffset double
+    durationToRepeat double
+
+  func End
+    HRESULT
+    endOffset double
+    endValue float
+
+

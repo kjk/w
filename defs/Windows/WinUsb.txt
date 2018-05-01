@@ -1,0 +1,285 @@
+include Headers\windows.h.txt
+
+dll WinUsb.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Driver Kit/Device and Driver Technologies/Bus and Port Drivers/Universal Serial Bus (USB) Drivers"
+alias WINUSB_INTERFACE_HANDLE LPVOID
+
+pointer PWINUSB_INTERFACE_HANDLE WINUSB_INTERFACE_HANDLE
+
+enum [USB_DESCRIPTOR_TYPE] UCHAR display=UCHAR
+  USB_DEVICE_DESCRIPTOR_TYPE                        0x01
+  USB_CONFIGURATION_DESCRIPTOR_TYPE                 0x02
+  USB_STRING_DESCRIPTOR_TYPE                        0x03
+  USB_INTERFACE_DESCRIPTOR_TYPE                     0x04
+  USB_ENDPOINT_DESCRIPTOR_TYPE                      0x05
+  USB_DEVICE_QUALIFIER_DESCRIPTOR_TYPE              0x06
+  USB_OTHER_SPEED_CONFIGURATION_DESCRIPTOR_TYPE     0x07
+  USB_INTERFACE_POWER_DESCRIPTOR_TYPE               0x08
+  USB_OTG_DESCRIPTOR_TYPE                           0x09
+  USB_DEBUG_DESCRIPTOR_TYPE                         0x0A
+  USB_INTERFACE_ASSOCIATION_DESCRIPTOR_TYPE         0x0B
+  USB_BOS_DESCRIPTOR_TYPE                           0x0F
+  USB_DEVICE_CAPABILITY_DESCRIPTOR_TYPE             0x10
+  USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_TYPE 0x30
+
+enum [USB_PIPE_POLICY_TYPE] ULONG display=ULONG
+  SHORT_PACKET_TERMINATE 0x01
+  AUTO_CLEAR_STALL       0x02
+  PIPE_TRANSFER_TIMEOUT  0x03
+  IGNORE_SHORT_PACKETS   0x04
+  ALLOW_PARTIAL_READS    0x05
+  AUTO_FLUSH             0x06
+  RAW_IO                 0x07
+  MAXIMUM_TRANSFER_SIZE  0x08
+  RESET_PIPE_ON_RESUME   0x09
+
+enum [USB_POWER_POLICY_TYPE] ULONG display=ULONG
+  AUTO_SUSPEND  0x81
+  SUSPEND_DELAY 0x83
+
+enum [USB_INFORMATION_TYPE] ULONG display=ULONG
+  DEVICE_SPEED 0x01
+
+enum [USB_REQUEST] UCHAR display=UCHAR
+  USB_REQUEST_GET_STATUS        0x00
+  USB_REQUEST_CLEAR_FEATURE     0x01
+  USB_REQUEST_SET_FEATURE       0x03
+  USB_REQUEST_SET_ADDRESS       0x05
+  USB_REQUEST_GET_DESCRIPTOR    0x06
+  USB_REQUEST_SET_DESCRIPTOR    0x07
+  USB_REQUEST_GET_CONFIGURATION 0x08
+  USB_REQUEST_SET_CONFIGURATION 0x09
+  USB_REQUEST_GET_INTERFACE     0x0A
+  USB_REQUEST_SET_INTERFACE     0x0B
+  USB_REQUEST_SYNC_FRAME        0x0C
+  USB_REQUEST_SET_SEL           0x30
+  USB_REQUEST_ISOCH_DELAY       0x31
+
+struct WINUSB_SETUP_PACKET pack=1
+  RequestType UCHAR
+  Request [USB_REQUEST]
+  Value USHORT
+  Index USHORT
+  Length USHORT
+
+enum [USB_DEVICE_CLASS] UCHAR display=UCHAR
+  USB_DEVICE_CLASS_RESERVED             0x00
+  USB_DEVICE_CLASS_AUDIO                0x01
+  USB_DEVICE_CLASS_COMMUNICATIONS       0x02
+  USB_DEVICE_CLASS_HUMAN_INTERFACE      0x03
+  USB_DEVICE_CLASS_MONITOR              0x04
+  USB_DEVICE_CLASS_PHYSICAL_INTERFACE   0x05
+  USB_DEVICE_CLASS_POWER                0x06
+  USB_DEVICE_CLASS_IMAGE                0x06
+  USB_DEVICE_CLASS_PRINTER              0x07
+  USB_DEVICE_CLASS_STORAGE              0x08
+  USB_DEVICE_CLASS_HUB                  0x09
+  USB_DEVICE_CLASS_CDC_DATA             0x0A
+  USB_DEVICE_CLASS_SMART_CARD           0x0B
+  USB_DEVICE_CLASS_CONTENT_SECURITY     0x0D
+  USB_DEVICE_CLASS_VIDEO                0x0E
+  USB_DEVICE_CLASS_PERSONAL_HEALTHCARE  0x0F
+  USB_DEVICE_CLASS_DIAGNOSTIC_DEVICE    0xDC
+  USB_DEVICE_CLASS_WIRELESS_CONTROLLER  0xE0
+  USB_DEVICE_CLASS_MISCELLANEOUS        0xEF
+  USB_DEVICE_CLASS_APPLICATION_SPECIFIC 0xFE
+  USB_DEVICE_CLASS_VENDOR_SPECIFIC      0xFF
+
+struct USB_INTERFACE_DESCRIPTOR pack=1
+  bLength UCHAR
+  bDescriptorType [USB_DESCRIPTOR_TYPE]
+  bInterfaceNumber UCHAR
+  bAlternateSetting UCHAR
+  bNumEndpoints UCHAR
+  bInterfaceClass [USB_DEVICE_CLASS]
+  bInterfaceSubClass UCHAR
+  bInterfaceProtocol UCHAR
+  iInterface UCHAR
+
+pointer PUSB_INTERFACE_DESCRIPTOR USB_INTERFACE_DESCRIPTOR
+
+enum USBD_PIPE_TYPE UINT
+  UsbdPipeTypeControl     0
+  UsbdPipeTypeIsochronous 1
+  UsbdPipeTypeBulk        2
+  UsbdPipeTypeInterrupt   3
+
+struct WINUSB_PIPE_INFORMATION
+  PipeType USBD_PIPE_TYPE
+  PipeId UCHAR
+  MaximumPacketSize USHORT
+  Interval UCHAR
+
+pointer PWINUSB_PIPE_INFORMATION WINUSB_PIPE_INFORMATION
+
+struct USB_COMMON_DESCRIPTOR pack=1
+  bLength UCHAR
+  bDescriptorType [USB_DESCRIPTOR_TYPE]
+
+pointer PUSB_COMMON_DESCRIPTOR USB_COMMON_DESCRIPTOR
+
+struct USB_CONFIGURATION_DESCRIPTOR pack=1
+  bLength UCHAR
+  bDescriptorType [USB_DESCRIPTOR_TYPE]
+  wTotalLength USHORT
+  bNumInterfaces UCHAR
+  bConfigurationValue UCHAR
+  iConfiguration UCHAR
+  bmAttributes UCHAR
+  MaxPower UCHAR
+
+pointer PUSB_CONFIGURATION_DESCRIPTOR USB_CONFIGURATION_DESCRIPTOR
+
+func WinUsb_AbortPipe
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  PipeID UCHAR
+
+func WinUsb_ControlTransfer
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  SetupPacket WINUSB_SETUP_PACKET
+  Buffer PUCHAR postLength=LengthTransferred
+  BufferLength ULONG
+  LengthTransferred PULONG
+  Overlapped LPOVERLAPPED
+
+func WinUsb_FlushPipe
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  PipeID UCHAR
+
+func WinUsb_Free
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+
+func WinUsb_GetAssociatedInterface
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  AssociatedInterfaceIndex UCHAR
+  AssociatedInterfaceHandle PWINUSB_INTERFACE_HANDLE
+
+func WinUsb_GetCurrentAlternateSetting
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  AlternateSetting PUCHAR
+
+func WinUsb_GetDescriptor
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  DescriptorType [USB_DESCRIPTOR_TYPE]
+  Index UCHAR
+  LanguageID USHORT
+  Buffer PUCHAR postLength=LengthTransferred
+  BufferLength ULONG
+  LengthTransferred PULONG
+
+func WinUsb_GetOverlappedResult
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  lpOverlapped LPOVERLAPPED
+  lpNumberOfBytesTransferred LPDWORD
+  bWait BOOL
+
+func WinUsb_GetPipePolicy
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  PipeID UCHAR
+  PolicyType [USB_PIPE_POLICY_TYPE]
+  ValueLength PULONG
+  Value PVOID postLength=ValueLength
+
+func WinUsb_GetPowerPolicy
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  PolicyType [USB_POWER_POLICY_TYPE]
+  ValueLength PULONG
+  Value PVOID postLength=ValueLength
+
+func WinUsb_Initialize
+  BOOL
+  DeviceHandle HANDLE
+  InterfaceHandle PWINUSB_INTERFACE_HANDLE
+
+func WinUsb_QueryDeviceInformation
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  InformationType [USB_INFORMATION_TYPE]
+  BufferLength PULONG
+  Buffer PVOID postLength=BufferLength
+
+func WinUsb_QueryInterfaceSettings
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  AlternateSettingNumber UCHAR
+  UsbAltInterfaceDescriptor PUSB_INTERFACE_DESCRIPTOR
+
+func WinUsb_QueryPipe
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  AlternateInterfaceNumber UCHAR
+  PipeIndex UCHAR
+  PipeInformation PWINUSB_PIPE_INFORMATION
+
+func WinUsb_ReadPipe
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  PipeID UCHAR
+  Buffer PUCHAR postLength=LengthTransferred
+  BufferLength ULONG
+  LengthTransferred PULONG
+  Overlapped LPOVERLAPPED
+
+func WinUsb_ResetPipe
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  PipeID UCHAR
+
+func WinUsb_SetCurrentAlternateSetting
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  AlternateSetting UCHAR
+
+func WinUsb_SetPipePolicy
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  PipeID UCHAR
+  PolicyType [USB_PIPE_POLICY_TYPE]
+  ValueLength ULONG
+  Value PVOID length=ValueLength
+
+func WinUsb_SetPowerPolicy
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  PolicyType [USB_POWER_POLICY_TYPE]
+  ValueLength ULONG
+  Value PVOID length=ValueLength
+
+func WinUsb_WritePipe
+  BOOL
+  InterfaceHandle WINUSB_INTERFACE_HANDLE
+  PipeID UCHAR
+  Buffer PUCHAR length=BufferLength
+  BufferLength ULONG
+  LengthTransferred PULONG
+  Overlapped LPOVERLAPPED
+
+func WinUsb_ParseDescriptors
+  success NotEqual=0
+  PUSB_COMMON_DESCRIPTOR
+  DescriptorBuffer PVOID length=TotalLength
+  TotalLength ULONG
+  StartPosition PVOID
+  DescriptorType LONG
+
+func WinUsb_ParseConfigurationDescriptor
+  success NotEqual=0
+  PUSB_INTERFACE_DESCRIPTOR
+  ConfigurationDescriptor PUSB_CONFIGURATION_DESCRIPTOR
+  StartPosition PVOID
+  InterfaceNumber LONG
+  AlternateSetting LONG
+  InterfaceClass LONG
+  InterfaceSubClass LONG
+  InterfaceProtocol LONG
+

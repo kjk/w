@@ -1,0 +1,4 @@
+include Interfaces\IDispatch.txt
+
+ingterface DShellFolderViewEvents base=IDispatch id={62112AA2-EBE4-11cf-A5FB-0020AFE7292D} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+

@@ -1,0 +1,49 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrEvent base=IUnknown id={fee0ef8b-46bd-4db4-b7e6-ff2c687313bc} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func GetEventID
+    HRESULT
+    pguidEventID GUID*
+
+  func GetHandlerID
+    HRESULT
+    ppszHandlerID LPWSTR*
+
+  func GetItemID
+    HRESULT
+    ppszItemID LPWSTR*
+
+  func GetLevel
+    HRESULT
+    pnLevel SYNCMGR_EVENT_LEVEL*
+
+  func GetFlags
+    HRESULT
+    pnFlags SYNCMGR_EVENT_FLAGS*
+
+  func GetTime
+    HRESULT
+    pfCreationTime FILETIME*
+
+  func GetName
+    HRESULT
+    ppszName LPWSTR*
+
+  func GetDescription
+    HRESULT
+    ppszDescription LPWSTR*
+
+  func GetLinkText
+    HRESULT
+    ppszLinkText LPWSTR*
+
+  func GetLinkReference
+    HRESULT
+    ppszLinkReference LPWSTR*
+
+  func GetContext
+    HRESULT
+    ppszContext LPWSTR*
+
+

@@ -1,0 +1,11 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+
+dll Shsvcs.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Windows Environment Development/Windows Shell"
+func CreateHardwareEventMoniker
+  HRESULT
+  clsid REFCLSID
+  pszEventHandler LPCTSTR
+  ppmoniker IMoniker**
+

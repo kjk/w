@@ -1,0 +1,28 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface ISoftDistExt base=IUnknown id={B15B8DC1-C7E1-11d0-8680-00AA00BDCB71} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func ProcessSoftDist
+    HRESULT
+    szCDFURL LPCWSTR
+    pSoftDistElement IXMLElement*
+    lpsdi LPSOFTDISTINFO
+
+  func GetFirstCodeBase
+    HRESULT
+    szCodeBase LPWSTR*
+    dwMaxSize LPDWORD
+
+  func GetNextCodeBase
+    HRESULT
+    szCodeBase LPWSTR*
+    dwMaxSize LPDWORD
+
+  func AsyncInstallDistributionUnit
+    HRESULT
+    pbc IBindCtx*
+    pvReserved LPVOID
+    flags DWORD
+    lpcbh LPCODEBASEHOLD
+
+

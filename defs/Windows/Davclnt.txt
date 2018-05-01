@@ -1,0 +1,33 @@
+include Headers\windows.h.txt
+
+dll Davclnt.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category Internet/WebDAV
+alias PFNDAVAUTHCALLBACK LPVOID
+
+alias OPAQUE_HANDLE DWORD
+
+func DavCancelConnectionsToServer
+  [ERROR_CODE]
+  lpName LPWSTR
+  fForce BOOL
+
+func DavGetTheLockOwnerOfTheFile
+  [ERROR_CODE]
+  FileName LPCWSTR
+  LockOwnerName PWSTR
+  LockOwnerNameLengthInBytes PULONG
+
+func DavInvalidateCache
+  [ERROR_CODE]
+  URLName LPWSTR
+
+func DavRegisterAuthCallback
+  success NotEqual=0
+  OPAQUE_HANDLE
+  CallBack PFNDAVAUTHCALLBACK
+  Version ULONG
+
+func DavUnregisterAuthCallback
+  VOID
+  hCallback OPAQUE_HANDLE
+

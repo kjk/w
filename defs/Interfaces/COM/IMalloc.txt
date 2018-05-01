@@ -1,0 +1,32 @@
+include Interfaces\IUnknown.txt
+
+ingterface IMalloc base=IUnknown id={00000002-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Alloc
+    success NotEqual=0
+    void*
+    cb SIZE_T
+
+  func Realloc
+    success NotEqual=0
+    void*
+    pv void*
+    cb SIZE_T
+
+  func Free
+    void
+    pv void*
+
+  func GetSize
+    success NotEqual=0
+    SIZE_T
+    pv void*
+
+  func DidAlloc
+    success NotEqual=0
+    int
+    pv void*
+
+  func HeapMinimize
+    void
+
+

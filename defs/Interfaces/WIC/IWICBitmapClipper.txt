@@ -1,0 +1,9 @@
+include Interfaces\WIC\IWICBitmapSource.txt
+
+ingterface IWICBitmapClipper base=IWICBitmapSource id={E4FBCF03-223D-4e81-9333-D635556DD1B5} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func Initialize
+    [WIC_HRESULT]
+    pISource IWICBitmapSource*
+    prc "const WICRect*"
+
+

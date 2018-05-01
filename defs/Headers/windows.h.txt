@@ -1,0 +1,2923 @@
+include Headers\common.h.txt
+include Headers\ntstatus.h.txt
+include Headers\hresult.h.txt
+include Internal\internal.h.txt
+
+header
+arch 32
+struct IMAGE_OPTIONAL_HEADER
+  Magic [IMAGE_OPTIONAL_MAGIC]
+  MajorLinkerVersion BYTE
+  MinorLinkerVersion BYTE
+  SizeOfCode DWORD
+  SizeOfInitializedData DWORD
+  SizeOfUninitializedData DWORD
+  AddressOfEntryPoint DWORD
+  BaseOfCode DWORD
+  BaseOfData DWORD
+  ImageBase DWORD
+  SectionAlignment DWORD
+  FileAlignment DWORD
+  MajorOperatingSystemVersion WORD
+  MinorOperatingSystemVersion WORD
+  MajorImageVersion WORD
+  MinorImageVersion WORD
+  MajorSubsystemVersion WORD
+  MinorSubsystemVersion WORD
+  Win32VersionValue DWORD
+  SizeOfImage DWORD
+  SizeOfHeaders DWORD
+  CheckSum DWORD
+  Subsystem [IMAGE_SUBSYSTEM]
+  DllCharacteristics [IMAGE_DLLCHARACTERISTICS]
+  SizeOfStackReserve DWORD
+  SizeOfStackCommit DWORD
+  SizeOfHeapReserve DWORD
+  SizeOfHeapCommit DWORD
+  LoaderFlags DWORD
+  NumberOfRvaAndSizes DWORD
+  DataDirectory "IMAGE_DATA_DIRECTORY [IMAGE_NUMBEROF_DIRECTORY_ENTRIES]"
+
+arch off
+arch 64
+alias IMAGE_OPTIONAL_HEADER IMAGE_OPTIONAL_HEADER64
+
+arch off
+alias HINSTANCE HMODULE
+
+alias WPARAM UINT_PTR
+
+alias LPARAM LONG_PTR
+
+pointer LPARAM* LPARAM
+
+alias LRESULT LONG_PTR
+
+pointer LRESULT* LRESULT
+
+alias BSTR WCHAR*
+
+alias "const BSTR" BSTR
+
+pointer BSTR* BSTR
+
+alias HDEVINFO PVOID
+
+alias PIO_APC_ROUTINE LPVOID
+
+alias FARPROC LPVOID
+
+alias SID* LPVOID
+
+alias PSID PVOID
+
+pointer PSID* PSID
+
+pointer PSID** PSID*
+
+alias PVECTORED_EXCEPTION_HANDLER LPVOID
+
+alias ATOM WORD
+
+alias PSLIST_ENTRY LPVOID
+
+alias KAFFINITY ULONG_PTR
+
+alias STDAPI_(VOID) VOID
+
+alias LPTHREAD_START_ROUTINE LPVOID
+
+alias STDAPI HRESULT
+
+alias SCODE HRESULT
+
+pointer SCODE* SCODE
+
+array "WCHAR [32]" base=WCHAR count=32
+
+array "CHAR [OFS_MAXPATHNAME]" base=CHAR count=128
+
+array "TCHAR [CCHDEVICENAME]" base=TCHAR count=32
+
+array "TCHAR [CCHFORMNAME]" base=TCHAR count=32
+
+array "TCHAR [RAS_MaxEntryName + 1]" base=TCHAR count=257
+
+array "ULONG_PTR [EXCEPTION_MAXIMUM_PARAMETERS]" base=ULONG_PTR count=15
+
+interface IAddrBook
+
+alias LPADRBOOK IAddrBook*
+
+pointer LPADRBOOK* LPADRBOOK
+
+alias ALLOCATEBUFFER* LPVOID
+
+alias FREEBUFFER* LPVOID
+
+alias WLAN_REASON_CODE DWORD
+
+pointer PWLAN_REASON_CODE WLAN_REASON_CODE
+
+interface IUnknown
+
+alias LPUNKNOWN IUnknown*
+
+pointer LPUNKNOWN* LPUNKNOWN
+
+alias "const IUnknown*" IUnknown*
+
+enum LANGID WORD
+  LANG_USER_DEFAULT   0x0400
+  LANG_SYSTEM_DEFAULT 0x0800
+
+pointer LANGID* LANGID
+
+enum LCID DWORD
+  LOCALE_NEUTRAL            0x0000
+  LOCALE_INVARIANT          0x007f
+  LOCALE_USER_DEFAULT       0x0400
+  LOCALE_SYSTEM_DEFAULT     0x0800
+  LOCALE_CUSTOM_DEFAULT     0x0c00
+  LOCALE_CUSTOM_UNSPECIFIED 0x1000
+  LOCALE_CUSTOM_UI_DEFAULT  0x1400
+
+pointer LCID* LCID
+
+pointer PLCID LCID
+
+struct LIST_ENTRY
+  Flink LPVOID display=PSLIST_ENTRY
+  Blink LPVOID display=PSLIST_ENTRY
+
+pointer PLIST_ENTRY LIST_ENTRY
+
+alias PSLIST_HEADER LPVOID
+
+alias PCONTEXT LPVOID
+
+pointer PCONTEXT* PCONTEXT
+
+alias "const CONTEXT*" PCONTEXT
+
+struct POINT
+  x LONG
+  y LONG
+
+alias "const POINT" POINT
+
+pointer POINT* POINT
+
+alias "const POINT*" POINT*
+
+alias "CONST POINT*" POINT*
+
+alias LPPOINT POINT*
+
+alias POINTL POINT
+
+pointer POINTL* POINTL
+
+enum [DMORIENT] short display=short
+  DMORIENT_PORTRAIT  1
+  DMORIENT_LANDSCAPE 2
+
+enum [DMPAPER] short display=short
+  DMPAPER_LETTER                        1
+  DMPAPER_LETTERSMALL                   2
+  DMPAPER_TABLOID                       3
+  DMPAPER_LEDGER                        4
+  DMPAPER_LEGAL                         5
+  DMPAPER_STATEMENT                     6
+  DMPAPER_EXECUTIVE                     7
+  DMPAPER_A3                            8
+  DMPAPER_A4                            9
+  DMPAPER_A4SMALL                       10
+  DMPAPER_A5                            11
+  DMPAPER_B4                            12
+  DMPAPER_B5                            13
+  DMPAPER_FOLIO                         14
+  DMPAPER_QUARTO                        15
+  DMPAPER_10X14                         16
+  DMPAPER_11X17                         17
+  DMPAPER_NOTE                          18
+  DMPAPER_ENV_9                         19
+  DMPAPER_ENV_10                        20
+  DMPAPER_ENV_11                        21
+  DMPAPER_ENV_12                        22
+  DMPAPER_ENV_14                        23
+  DMPAPER_CSHEET                        24
+  DMPAPER_DSHEET                        25
+  DMPAPER_ESHEET                        26
+  DMPAPER_ENV_DL                        27
+  DMPAPER_ENV_C5                        28
+  DMPAPER_ENV_C3                        29
+  DMPAPER_ENV_C4                        30
+  DMPAPER_ENV_C6                        31
+  DMPAPER_ENV_C65                       32
+  DMPAPER_ENV_B4                        33
+  DMPAPER_ENV_B5                        34
+  DMPAPER_ENV_B6                        35
+  DMPAPER_ENV_ITALY                     36
+  DMPAPER_ENV_MONARCH                   37
+  DMPAPER_ENV_PERSONAL                  38
+  DMPAPER_FANFOLD_US                    39
+  DMPAPER_FANFOLD_STD_GERMAN            40
+  DMPAPER_FANFOLD_LGL_GERMAN            41
+  DMPAPER_ISO_B4                        42
+  DMPAPER_JAPANESE_POSTCARD             43
+  DMPAPER_9X11                          44
+  DMPAPER_10X11                         45
+  DMPAPER_15X11                         46
+  DMPAPER_ENV_INVITE                    47
+  DMPAPER_RESERVED_48                   48
+  DMPAPER_RESERVED_49                   49
+  DMPAPER_LETTER_EXTRA                  50
+  DMPAPER_LEGAL_EXTRA                   51
+  DMPAPER_TABLOID_EXTRA                 52
+  DMPAPER_A4_EXTRA                      53
+  DMPAPER_LETTER_TRANSVERSE             54
+  DMPAPER_A4_TRANSVERSE                 55
+  DMPAPER_LETTER_EXTRA_TRANSVERSE       56
+  DMPAPER_A_PLUS                        57
+  DMPAPER_B_PLUS                        58
+  DMPAPER_LETTER_PLUS                   59
+  DMPAPER_A4_PLUS                       60
+  DMPAPER_A5_TRANSVERSE                 61
+  DMPAPER_B5_TRANSVERSE                 62
+  DMPAPER_A3_EXTRA                      63
+  DMPAPER_A5_EXTRA                      64
+  DMPAPER_B5_EXTRA                      65
+  DMPAPER_A2                            66
+  DMPAPER_A3_TRANSVERSE                 67
+  DMPAPER_A3_EXTRA_TRANSVERSE           68
+  DMPAPER_DBL_JAPANESE_POSTCARD         69
+  DMPAPER_A6                            70
+  DMPAPER_JENV_KAKU2                    71
+  DMPAPER_JENV_KAKU3                    72
+  DMPAPER_JENV_CHOU3                    73
+  DMPAPER_JENV_CHOU4                    74
+  DMPAPER_LETTER_ROTATED                75
+  DMPAPER_A3_ROTATED                    76
+  DMPAPER_A4_ROTATED                    77
+  DMPAPER_A5_ROTATED                    78
+  DMPAPER_B4_JIS_ROTATED                79
+  DMPAPER_B5_JIS_ROTATED                80
+  DMPAPER_JAPANESE_POSTCARD_ROTATED     81
+  DMPAPER_DBL_JAPANESE_POSTCARD_ROTATED 82
+  DMPAPER_A6_ROTATED                    83
+  DMPAPER_JENV_KAKU2_ROTATED            84
+  DMPAPER_JENV_KAKU3_ROTATED            85
+  DMPAPER_JENV_CHOU3_ROTATED            86
+  DMPAPER_JENV_CHOU4_ROTATED            87
+  DMPAPER_B6_JIS                        88
+  DMPAPER_B6_JIS_ROTATED                89
+  DMPAPER_12X11                         90
+  DMPAPER_JENV_YOU4                     91
+  DMPAPER_JENV_YOU4_ROTATED             92
+  DMPAPER_P16K                          93
+  DMPAPER_P32K                          94
+  DMPAPER_P32KBIG                       95
+  DMPAPER_PENV_1                        96
+  DMPAPER_PENV_2                        97
+  DMPAPER_PENV_3                        98
+  DMPAPER_PENV_4                        99
+  DMPAPER_PENV_5                        100
+  DMPAPER_PENV_6                        101
+  DMPAPER_PENV_7                        102
+  DMPAPER_PENV_8                        103
+  DMPAPER_PENV_9                        104
+  DMPAPER_PENV_10                       105
+  DMPAPER_P16K_ROTATED                  106
+  DMPAPER_P32K_ROTATED                  107
+  DMPAPER_P32KBIG_ROTATED               108
+  DMPAPER_PENV_1_ROTATED                109
+  DMPAPER_PENV_2_ROTATED                110
+  DMPAPER_PENV_3_ROTATED                111
+  DMPAPER_PENV_4_ROTATED                112
+  DMPAPER_PENV_5_ROTATED                113
+  DMPAPER_PENV_6_ROTATED                114
+  DMPAPER_PENV_7_ROTATED                115
+  DMPAPER_PENV_8_ROTATED                116
+  DMPAPER_PENV_9_ROTATED                117
+  DMPAPER_PENV_10_ROTATED               118
+
+enum [DMBIN] short display=short
+  DMBIN_UPPER         1
+  DMBIN_LOWER         2
+  DMBIN_MIDDLE        3
+  DMBIN_MANUAL        4
+  DMBIN_ENVELOPE      5
+  DMBIN_ENVMANUAL     6
+  DMBIN_AUTO          7
+  DMBIN_TRACTOR       8
+  DMBIN_SMALLFMT      9
+  DMBIN_LARGEFMT      10
+  DMBIN_LARGECAPACITY 11
+  DMBIN_CASSETTE      14
+  DMBIN_FORMSOURCE    15
+
+enum [DMRES] short display=short
+  DMRES_HIGH   -4
+  DMRES_MEDIUM -3
+  DMRES_LOW    -2
+  DMRES_DRAFT  -1
+
+struct [DEVMODE_u1_s1] display=struct
+  dmOrientation [DMORIENT]
+  dmPaperSize [DMPAPER]
+  dmPaperLength short
+  dmPaperWidth short
+  dmScale short
+  dmCopies short
+  dmDefaultSource [DMBIN]
+  dmPrintQuality [DMRES]
+
+enum [DMDO] DWORD display=DWORD
+  DMDO_DEFAULT 0
+  DMDO_90      1
+  DMDO_180     2
+  DMDO_270     3
+
+enum [DMDFO] DWORD display=DWORD
+  DMDFO_DEFAULT 0
+  DMDFO_STRETCH 1
+  DMDFO_CENTER  2
+
+struct [DEVMODE_u1_s2] display=struct
+  dmPosition POINTL
+  dmDisplayOrientation [DMDO]
+  dmDisplayFixedOutput [DMDFO]
+
+union [DEVMODE_u1] display=union
+   [DEVMODE_u1_s1]
+   [DEVMODE_u1_s2]
+
+flag [DMDISPLAYFLAGS] DWORD display=DWORD
+  DM_GRAYSCALE            0x00000001
+  DM_INTERLACED           0x00000002
+  DMDISPLAYFLAGS_TEXTMODE 0x00000004
+
+enum [DMNUP] DWORD display=DWORD
+  DMNUP_SYSTEM 1
+  DMNUP_ONEUP  2
+
+union [DEVMODE_u2] display=union
+  dmDisplayFlags [DMDISPLAYFLAGS]
+  dmNup [DMNUP]
+
+flag [DM_Fields] DWORD display=DWORD
+  DM_ORIENTATION        0x00000001
+  DM_PAPERSIZE          0x00000002
+  DM_PAPERLENGTH        0x00000004
+  DM_PAPERWIDTH         0x00000008
+  DM_SCALE              0x00000010
+  DM_POSITION           0x00000020
+  DM_NUP                0x00000040
+  DM_DISPLAYORIENTATION 0x00000080
+  DM_COPIES             0x00000100
+  DM_DEFAULTSOURCE      0x00000200
+  DM_PRINTQUALITY       0x00000400
+  DM_COLOR              0x00000800
+  DM_DUPLEX             0x00001000
+  DM_YRESOLUTION        0x00002000
+  DM_TTOPTION           0x00004000
+  DM_COLLATE            0x00008000
+  DM_FORMNAME           0x00010000
+  DM_LOGPIXELS          0x00020000
+  DM_BITSPERPEL         0x00040000
+  DM_PELSWIDTH          0x00080000
+  DM_PELSHEIGHT         0x00100000
+  DM_DISPLAYFLAGS       0x00200000
+  DM_DISPLAYFREQUENCY   0x00400000
+  DM_ICMMETHOD          0x00800000
+  DM_ICMINTENT          0x01000000
+  DM_MEDIATYPE          0x02000000
+  DM_DITHERTYPE         0x04000000
+  DM_PANNINGWIDTH       0x08000000
+  DM_PANNINGHEIGHT      0x10000000
+  DM_DISPLAYFIXEDOUTPUT 0x20000000
+
+enum [DMCOLOR] short display=short
+  DMCOLOR_MONOCHROME 1
+  DMCOLOR_COLOR      2
+
+enum [DMDUP] short display=short
+  DMDUP_SIMPLEX    1
+  DMDUP_VERTICAL   2
+  DMDUP_HORIZONTAL 3
+
+enum [DMTT] short display=short
+  DMTT_BITMAP           1
+  DMTT_DOWNLOAD         2
+  DMTT_SUBDEV           3
+  DMTT_DOWNLOAD_OUTLINE 4
+
+enum [DMCOLLATE] short display=short
+  DMCOLLATE_FALSE 0
+  DMCOLLATE_TRUE  1
+
+enum [DMICMMETHOD] DWORD display=DWORD
+  DMICMMETHOD_NONE   1
+  DMICMMETHOD_SYSTEM 2
+  DMICMMETHOD_DRIVER 3
+  DMICMMETHOD_DEVICE 4
+
+enum [DMICM] DWORD display=DWORD
+  DMICM_SATURATE         1
+  DMICM_CONTRAST         2
+  DMICM_COLORIMETRIC     3
+  DMICM_ABS_COLORIMETRIC 4
+
+enum [DMMEDIA] DWORD display=DWORD
+  DMMEDIA_STANDARD     1
+  DMMEDIA_TRANSPARENCY 2
+  DMMEDIA_GLOSSY       3
+
+enum [DMDITHER] DWORD display=DWORD
+  DMDITHER_NONE           1
+  DMDITHER_COARSE         2
+  DMDITHER_FINE           3
+  DMDITHER_LINEART        4
+  DMDITHER_ERRORDIFFUSION 5
+  DMDITHER_RESERVED6      6
+  DMDITHER_RESERVED7      7
+  DMDITHER_RESERVED8      8
+  DMDITHER_RESERVED9      9
+  DMDITHER_GRAYSCALE      10
+
+struct DEVMODE
+  dmDeviceName "TCHAR [CCHDEVICENAME]"
+  dmSpecVersion WORD
+  dmDriverVersion WORD
+  dmSize WORD
+  dmDriverExtra WORD
+  dmFields [DM_Fields]
+   [DEVMODE_u1]
+  dmColor [DMCOLOR]
+  dmDuplex [DMDUP]
+  dmYResolution short
+  dmTTOption [DMTT]
+  dmCollate [DMCOLLATE]
+  dmFormName "TCHAR [CCHFORMNAME]"
+  dmLogPixels WORD
+  dmBitsPerPel DWORD
+  dmPelsWidth DWORD
+  dmPelsHeight DWORD
+   [DEVMODE_u2]
+  dmDisplayFrequency DWORD
+  dmICMMethod [DMICMMETHOD]
+  dmICMIntent [DMICM]
+  dmMediaType [DMMEDIA]
+  dmDitherType [DMDITHER]
+  dmReserved1 DWORD
+  dmReserved2 DWORD
+  dmPanningWidth DWORD
+  dmPanningHeight DWORD
+
+pointer DEVMODE* DEVMODE
+
+pointer "const DEVMODE*" DEVMODE
+
+pointer LPDEVMODE DEVMODE
+
+pointer PDEVMODE DEVMODE
+
+pointer PDEVMODE* PDEVMODE
+
+enum HANDLE UINT_PTR displayHex
+  NULL 0
+
+pointer PHANDLE HANDLE
+
+pointer LPHANDLE HANDLE
+
+pointer HANDLE* HANDLE
+
+pointer "const HANDLE*" HANDLE
+
+flag [FILE_HANDLE] HANDLE display=HANDLE
+  success NotEqual=-1
+  INVALID_HANDLE_VALUE -1
+
+alias HACCEL HANDLE
+
+alias HRSRC HANDLE
+
+alias HWND HANDLE
+
+pointer HWND* HWND
+
+pointer "const HWND*" HWND
+
+alias HGLOBAL HANDLE
+
+pointer HGLOBAL* HGLOBAL
+
+alias HKL HANDLE
+
+pointer HKL* HKL
+
+alias HBITMAP HANDLE
+
+pointer HBITMAP* HBITMAP
+
+alias HENHMETAFILE HANDLE
+
+pointer HENHMETAFILE* HENHMETAFILE
+
+enum [ProcessHandle] HANDLE display=HANDLE
+  GetCurrentProcess() -1
+
+enum [ThreadHandle] HANDLE display=HANDLE
+  GetCurrentThread() -2
+
+struct [LARGE_INTEGER_s] display=struct
+  LowPart DWORD
+  HighPart LONG
+
+union LARGE_INTEGER
+  u [LARGE_INTEGER_s]
+  QuadPart LONGLONG
+
+pointer PLARGE_INTEGER LARGE_INTEGER
+
+alias LARGE_INTEGER* PLARGE_INTEGER
+
+alias "const LARGE_INTEGER*" LARGE_INTEGER*
+
+struct [ULARGE_INTEGER_s] display=struct
+  LowPart DWORD
+  HighPart LONG
+
+union ULARGE_INTEGER
+  u [ULARGE_INTEGER_s]
+  QuadPart ULONGLONG
+
+pointer PULARGE_INTEGER ULARGE_INTEGER
+
+pointer ULARGE_INTEGER* ULARGE_INTEGER
+
+struct FILETIME
+  dwLowDateTime DWORD
+  dwHighDateTime DWORD
+
+pointer FILETIME* FILETIME
+
+alias PFILETIME FILETIME*
+
+alias LPFILETIME FILETIME*
+
+alias "const FILETIME*" FILETIME*
+
+alias "FILETIME const*" FILETIME*
+
+guid GUID
+
+pointer GUID* GUID
+
+alias PGUID GUID*
+
+pointer GUID** GUID*
+
+alias "const GUID*" GUID*
+
+alias LPCGUID GUID*
+
+pointer LPCGUID* LPCGUID
+
+alias "CONST GUID*" GUID*
+
+pointer LPGUID GUID
+
+alias "const LPGUID" LPGUID
+
+alias REFGUID GUID*
+
+alias CLSID GUID
+
+pointer CLSID* CLSID
+
+alias LPCLSID CLSID*
+
+alias "const CLSID*" CLSID*
+
+pointer REFCLSID CLSID
+
+alias UUID GUID
+
+pointer UUID* UUID
+
+alias "const UUID*" UUID*
+
+alias IID GUID
+
+pointer IID* IID
+
+alias "const IID*" IID*
+
+pointer IID** IID*
+
+pointer REFIID IID
+
+pointer LPIID IID
+
+struct LUID
+  LowPart DWORD
+  HighPart LONG
+
+pointer LUID* LUID
+
+alias PLUID LUID*
+
+pointer PLUID* PLUID
+
+alias SLID GUID
+
+pointer SLID* SLID
+
+pointer SLID** SLID*
+
+pointer "const SLID*" SLID
+
+pointer "CONST SLID*" SLID
+
+flag ACCESS_MASK DWORD
+  SPECIFIC_RIGHTS_ALL      0x0000FFFF
+  DELETE                   0x00010000
+  READ_CONTROL             0x00020000
+  WRITE_DAC                0x00040000
+  WRITE_OWNER              0x00080000
+  STANDARD_RIGHTS_REQUIRED 0x000F0000
+  SYNCHRONIZE              0x00100000
+  STANDARD_RIGHTS_ALL      0x001F0000
+  ACCESS_SYSTEM_SECURITY   0x01000000
+  MAXIMUM_ALLOWED          0x02000000
+  GENERIC_ALL              0x10000000
+  GENERIC_EXECUTE          0x20000000
+  GENERIC_WRITE            0x40000000
+  GENERIC_READ             0x80000000
+
+pointer ACCESS_MASK* ACCESS_MASK
+
+pointer PACCESS_MASK ACCESS_MASK
+
+alias [ACCESS_MASK_DWORD] ACCESS_MASK display=DWORD
+
+pointer [ACCESS_MASK_LPDWORD] [ACCESS_MASK_DWORD] display=LPDWORD
+
+flag [THREAD_ACCESS_MASK] ACCESS_MASK display=ACCESS_MASK
+  THREAD_TERMINATE                 0x0001
+  THREAD_SUSPEND_RESUME            0x0002
+  THREAD_GET_CONTEXT               0x0008
+  THREAD_SET_CONTEXT               0x0010
+  THREAD_SET_INFORMATION           0x0020
+  THREAD_QUERY_INFORMATION         0x0040
+  THREAD_SET_THREAD_TOKEN          0x0080
+  THREAD_IMPERSONATE               0x0100
+  THREAD_DIRECT_IMPERSONATION      0x0200
+  THREAD_SET_LIMITED_INFORMATION   0x0400
+  THREAD_QUERY_LIMITED_INFORMATION 0x0800
+  THREAD_ALL_ACCESS                0x1FFFFF
+
+flag [PROCESS_ACCESS_MASK] ACCESS_MASK display=ACCESS_MASK
+  PROCESS_TERMINATE                 0x0001
+  PROCESS_CREATE_THREAD             0x0002
+  PROCESS_SET_SESSIONID             0x0004
+  PROCESS_VM_OPERATION              0x0008
+  PROCESS_VM_READ                   0x0010
+  PROCESS_VM_WRITE                  0x0020
+  PROCESS_DUP_HANDLE                0x0040
+  PROCESS_CREATE_PROCESS            0x0080
+  PROCESS_SET_QUOTA                 0x0100
+  PROCESS_SET_INFORMATION           0x0200
+  PROCESS_QUERY_INFORMATION         0x0400
+  PROCESS_SUSPEND_RESUME            0x0800
+  PROCESS_QUERY_LIMITED_INFORMATION 0x1000
+  PROCESS_ALL_ACCESS                0x1fffff
+
+flag [FILE_ACCESS_MASK] ACCESS_MASK display=DWORD
+  FILE_READ_DATA/FILE_LIST_DIRECTORY                               0x0001
+  FILE_WRITE_DATA/FILE_ADD_FILE                                    0x0002
+  FILE_APPEND_DATA/FILE_ADD_SUBDIRECTORY/FILE_CREATE_PIPE_INSTANCE 0x0004
+  FILE_READ_EA                                                     0x0008
+  FILE_WRITE_EA                                                    0x0010
+  FILE_EXECUTE/FILE_TRAVERSE                                       0x0020
+  FILE_DELETE_CHILD                                                0x0040
+  FILE_READ_ATTRIBUTES                                             0x0080
+  FILE_WRITE_ATTRIBUTES                                            0x0100
+  FILE_GENERIC_READ                                                0x00120089
+  FILE_GENERIC_EXECUTE                                             0x001200A0
+  FILE_GENERIC_WRITE                                               0x00120116
+  FILE_ALL_ACCESS                                                  0x001f01ff
+
+flag SECURITY_INFORMATION UINT
+  OWNER_SECURITY_INFORMATION            0x00000001
+  GROUP_SECURITY_INFORMATION            0x00000002
+  DACL_SECURITY_INFORMATION             0x00000004
+  SACL_SECURITY_INFORMATION             0x00000008
+  LABEL_SECURITY_INFORMATION            0x00000010
+  UNPROTECTED_SACL_SECURITY_INFORMATION 0x10000000
+  UNPROTECTED_DACL_SECURITY_INFORMATION 0x20000000
+  PROTECTED_SACL_SECURITY_INFORMATION   0x40000000
+  PROTECTED_DACL_SECURITY_INFORMATION   0x80000000
+
+pointer PSECURITY_INFORMATION SECURITY_INFORMATION
+
+struct SYSTEMTIME
+  wYear WORD
+  wMonth WORD
+  wDayOfWeek WORD
+  wDay WORD
+  wHour WORD
+  wMinute WORD
+  wSecond WORD
+  wMilliseconds WORD
+
+alias "const SYSTEMTIME" SYSTEMTIME
+
+pointer SYSTEMTIME* SYSTEMTIME
+
+alias "const SYSTEMTIME*" SYSTEMTIME*
+
+alias PSYSTEMTIME SYSTEMTIME*
+
+alias LPSYSTEMTIME PSYSTEMTIME
+
+pointer PSYSTEMTIME* PSYSTEMTIME
+
+enum JOBOBJECTINFOCLASS UINT
+  JobObjectBasicAccountingInformation         1
+  JobObjectBasicLimitInformation              2
+  JobObjectBasicProcessIdList                 3
+  JobObjectBasicUIRestrictions                4
+  JobObjectSecurityLimitInformation           5
+  JobObjectEndOfJobTimeInformation            6
+  JobObjectAssociateCompletionPortInformation 7
+  JobObjectBasicAndIoAccountingInformation    8
+  JobObjectExtendedLimitInformation           9
+  JobObjectJobSetInformation                  10
+  JobObjectGroupInformation                   11
+  JobObjectNotificationLimitInformation       12
+  JobObjectLimitViolationInformation          13
+  JobObjectGroupInformationEx                 14
+  JobObjectCpuRateControlInformation          15
+  JobObjectCompletionFilter                   16
+  JobObjectCompletionCounter                  17
+  JobObjectFreezeInformation                  18
+  JobObjectExtendedAccountingInformation      19
+  JobObjectWakeInformation                    20
+  JobObjectIdleAwareInformation               21
+  JobObjectSchedulingRankBiasInformation      22
+  JobObjectTimerVirtualizationInformation     23
+  JobObjectCycleTimeNotification              24
+
+enum PROCESSINFOCLASS UINT
+  ProcessBasicInformation                0
+  ProcessQuotaLimits                     1
+  ProcessIoCounters                      2
+  ProcessVmCounters                      3
+  ProcessTimes                           4
+  ProcessBasePriority                    5
+  ProcessRaisePriority                   6
+  ProcessDebugPort                       7
+  ProcessExceptionPort                   8
+  ProcessAccessToken                     9
+  ProcessLdtInformation                  10
+  ProcessLdtSize                         11
+  ProcessDefaultHardErrorMode            12
+  ProcessIoPortHandlers                  13
+  ProcessPooledUsageAndLimits            14
+  ProcessWorkingSetWatch                 15
+  ProcessUserModeIOPL                    16
+  ProcessEnableAlignmentFaultFixup       17
+  ProcessPriorityClass                   18
+  ProcessWx86Information                 19
+  ProcessHandleCount                     20
+  ProcessAffinityMask                    21
+  ProcessPriorityBoost                   22
+  ProcessDeviceMap                       23
+  ProcessSessionInformation              24
+  ProcessForegroundInformation           25
+  ProcessWow64Information                26
+  ProcessImageFileName                   27
+  ProcessLUIDDeviceMapsEnabled           28
+  ProcessBreakOnTermination              29
+  ProcessDebugObjectHandle               30
+  ProcessDebugFlags                      31
+  ProcessHandleTracing                   32
+  ProcessIoPriority                      33
+  ProcessExecuteFlags                    34
+  ProcessTlsInformation                  35
+  ProcessCookie                          36
+  ProcessImageInformation                37
+  ProcessCycleTime                       38
+  ProcessPagePriority                    39
+  ProcessInstrumentationCallback         40
+  ProcessThreadStackAllocation           41
+  ProcessWorkingSetWatchEx               42
+  ProcessImageFileNameWin32              43
+  ProcessImageFileMapping                44
+  ProcessAffinityUpdateMode              45
+  ProcessMemoryAllocationMode            46
+  ProcessGroupInformation                47
+  ProcessTokenVirtualizationEnabled      48
+  ProcessConsoleHostProcess              49
+  ProcessWindowInformation               50
+  ProcessHandleInformation               51
+  ProcessMitigationPolicy                52
+  ProcessDynamicFunctionTableInformation 53
+  ProcessHandleCheckingMode              54
+  ProcessKeepAliveCount                  55
+  ProcessRevokeFileHandles               56
+
+enum THREADINFOCLASS UINT
+  ThreadBasicInformation          0
+  ThreadTimes                     1
+  ThreadPriority                  2
+  ThreadBasePriority              3
+  ThreadAffinityMask              4
+  ThreadImpersonationToken        5
+  ThreadDescriptorTableEntry      6
+  ThreadEnableAlignmentFaultFixup 7
+  ThreadEventPair_Reusable        8
+  ThreadQuerySetWin32StartAddress 9
+  ThreadZeroTlsCell               10
+  ThreadPerformanceCount          11
+  ThreadAmILastThread             12
+  ThreadIdealProcessor            13
+  ThreadPriorityBoost             14
+  ThreadSetTlsArrayAddress        15
+  ThreadIsIoPending               16
+  ThreadHideFromDebugger          17
+  ThreadBreakOnTermination        18
+  ThreadSwitchLegacyState         19
+  ThreadIsTerminated              20
+  ThreadLastSystemCall            21
+  ThreadIoPriority                22
+  ThreadCycleTime                 23
+  ThreadPagePriority              24
+  ThreadActualBasePriority        25
+  ThreadTebInformation            26
+  ThreadCSwitchMon                27
+  ThreadCSwitchPmu                28
+  ThreadWow64Context              29
+  ThreadGroupInformation          30
+  ThreadUmsInformation            31
+  ThreadCounterProfiling          32
+  ThreadIdealProcessorEx          33
+  ThreadCpuAccountingInformation  34
+  ThreadSwitchStackCheck          35
+
+enum GET_FILEEX_INFO_LEVELS UINT
+  GetFileExInfoStandard 0
+
+struct UNICODE_STRING
+  Length USHORT
+  MaximumLength USHORT
+  Buffer PWSTR
+
+pointer PUNICODE_STRING UNICODE_STRING
+
+pointer PUNICODE_STRING* PUNICODE_STRING
+
+pointer PCUNICODE_STRING UNICODE_STRING
+
+pointer PCUNICODE_STRING* PCUNICODE_STRING
+
+pointer "CONST UNICODE_STRING*" UNICODE_STRING
+
+struct STRING
+  Length USHORT
+  MaximumLength USHORT
+  Buffer PCHAR
+
+pointer PSTRING STRING
+
+pointer "const STRING*" STRING
+
+alias ANSI_STRING STRING
+
+pointer PANSI_STRING ANSI_STRING
+
+pointer PCANSI_STRING ANSI_STRING
+
+alias OEM_STRING STRING
+
+pointer POEM_STRING OEM_STRING
+
+pointer PCOEM_STRING OEM_STRING
+
+enum [WinMsg] UINT display=UINT
+  WM_NULL                            0x0000
+  WM_CREATE                          0x0001
+  WM_DESTROY                         0x0002
+  WM_MOVE                            0x0003
+  WM_SIZEWAIT                        0x0004
+  WM_SIZE                            0x0005
+  WM_ACTIVATE                        0x0006
+  WM_SETFOCUS                        0x0007
+  WM_KILLFOCUS                       0x0008
+  WM_SETVISIBLE                      0x0009
+  WM_ENABLE                          0x000A
+  WM_SETREDRAW                       0x000B
+  WM_SETTEXT                         0x000C
+  WM_GETTEXT                         0x000D
+  WM_GETTEXTLENGTH                   0x000E
+  WM_PAINT                           0x000F
+  WM_CLOSE                           0x0010
+  WM_QUERYENDSESSION                 0x0011
+  WM_QUIT                            0x0012
+  WM_QUERYOPEN                       0x0013
+  WM_ERASEBKGND                      0x0014
+  WM_SYSCOLORCHANGE                  0x0015
+  WM_ENDSESSION                      0x0016
+  WM_SYSTEMERROR                     0x0017
+  WM_SHOWWINDOW                      0x0018
+  WM_CTLCOLOR                        0x0019
+  WM_SETTINGCHANGE                   0x001A
+  WM_DEVMODECHANGE                   0x001B
+  WM_ACTIVATEAPP                     0x001C
+  WM_FONTCHANGE                      0x001D
+  WM_TIMECHANGE                      0x001E
+  WM_CANCELMODE                      0x001F
+  WM_SETCURSOR                       0x0020
+  WM_MOUSEACTIVATE                   0x0021
+  WM_CHILDACTIVATE                   0x0022
+  WM_QUEUESYNC                       0x0023
+  WM_GETMINMAXINFO                   0x0024
+  WM_PAINTICON                       0x0026
+  WM_ICONERASEBKGND                  0x0027
+  WM_NEXTDLGCTL                      0x0028
+  WM_ALTTABACTIVE                    0x0029
+  WM_SPOOLERSTATUS                   0x002A
+  WM_DRAWITEM                        0x002B
+  WM_MEASUREITEM                     0x002C
+  WM_DELETEITEM                      0x002D
+  WM_VKEYTOITEM                      0x002E
+  WM_CHARTOITEM                      0x002F
+  WM_SETFONT                         0x0030
+  WM_GETFONT                         0x0031
+  WM_SETHOTKEY                       0x0032
+  WM_GETHOTKEY                       0x0033
+  WM_FILESYSCHANGE                   0x0034
+  WM_ISACTIVEICON                    0x0035
+  WM_QUERYPARKICON                   0x0036
+  WM_QUERYDRAGICON                   0x0037
+  WM_QUERYSAVESTATE                  0x0038
+  WM_COMPAREITEM                     0x0039
+  WM_TESTING                         0x003A
+  WM_GETOBJECT                       0x003D
+  WM_ACTIVATESHELLWINDOW             0x003E
+  WM_COMPACTING                      0x0041
+  WM_COMMNOTIFY                      0x0044
+  WM_WINDOWPOSCHANGING               0x0046
+  WM_WINDOWPOSCHANGED                0x0047
+  WM_POWER                           0x0048
+  WM_COPYDATA                        0x004A
+  WM_CANCELJOURNAL                   0x004B
+  WM_NOTIFY                          0x004E
+  WM_INPUTLANGCHANGEREQUEST          0x0050
+  WM_INPUTLANGCHANGE                 0x0051
+  WM_TCARD                           0x0052
+  WM_HELP                            0x0053
+  WM_USERCHANGED                     0x0054
+  WM_NOTIFYFORMAT                    0x0055
+  WM_CONTEXTMENU                     0x007B
+  WM_STYLECHANGING                   0x007C
+  WM_STYLECHANGED                    0x007D
+  WM_DISPLAYCHANGE                   0x007E
+  WM_GETICON                         0x007F
+  WM_SETICON                         0x0080
+  WM_NCCREATE                        0x0081
+  WM_NCDESTROY                       0x0082
+  WM_NCCALCSIZE                      0x0083
+  WM_NCHITTEST                       0x0084
+  WM_NCPAINT                         0x0085
+  WM_NCACTIVATE                      0x0086
+  WM_GETDLGCODE                      0x0087
+  WM_SYNCPAINT                       0x0088
+  WM_SYNCTASK                        0x0089
+  WM_NCMOUSEMOVE                     0x00A0
+  WM_NCLBUTTONDOWN                   0x00A1
+  WM_NCLBUTTONUP                     0x00A2
+  WM_NCLBUTTONDBLCLK                 0x00A3
+  WM_NCRBUTTONDOWN                   0x00A4
+  WM_NCRBUTTONUP                     0x00A5
+  WM_NCRBUTTONDBLCLK                 0x00A6
+  WM_NCMBUTTONDOWN                   0x00A7
+  WM_NCMBUTTONUP                     0x00A8
+  WM_NCMBUTTONDBLCLK                 0x00A9
+  WM_NCXBUTTONDOWN                   0x00AB
+  WM_NCXBUTTONUP                     0x00AC
+  WM_NCXBUTTONDBLCLK                 0x00AD
+  EM_GETSEL                          0x00B0
+  EM_SETSEL                          0x00B1
+  EM_GETRECT                         0x00B2
+  EM_SETRECT                         0x00B3
+  EM_SETRECTNP                       0x00B4
+  EM_SCROLL                          0x00B5
+  EM_LINESCROLL                      0x00B6
+  EM_SCROLLCARET                     0x00B7
+  EM_GETMODIFY                       0x00B8
+  EM_SETMODIFY                       0x00B9
+  EM_GETLINECOUNT                    0x00BA
+  EM_LINEINDEX                       0x00BB
+  EM_SETHANDLE                       0x00BC
+  EM_GETHANDLE                       0x00BD
+  EM_GETTHUMB                        0x00BE
+  EM_LINELENGTH                      0x00C1
+  EM_REPLACESEL                      0x00C2
+  EM_GETLINE                         0x00C4
+  EM_SETLIMITTEXT                    0x00C5
+  EM_CANUNDO                         0x00C6
+  EM_UNDO                            0x00C7
+  EM_FMTLINES                        0x00C8
+  EM_LINEFROMCHAR                    0x00C9
+  EM_SETTABSTOPS                     0x00CB
+  EM_SETPASSWORDCHAR                 0x00CC
+  EM_EMPTYUNDOBUFFER                 0x00CD
+  EM_GETFIRSTVISIBLELINE             0x00CE
+  EM_SETREADONLY                     0x00CF
+  EM_SETWORDBREAKPROC                0x00D0
+  EM_GETWORDBREAKPROC                0x00D1
+  EM_GETPASSWORDCHAR                 0x00D2
+  EM_SETMARGINS                      0x00D3
+  EM_GETMARGINS                      0x00D4
+  EM_GETLIMITTEXT                    0x00D5
+  EM_POSFROMCHAR                     0x00D6
+  EM_CHARFROMPOS                     0x00D7
+  EM_SETIMESTATUS                    0x00D8
+  EM_GETIMESTATUS                    0x00D9
+  SBM_SETPOS                         0x00E0
+  SBM_GETPOS                         0x00E1
+  SBM_SETRANGE                       0x00E2
+  SBM_GETRANGE                       0x00E3
+  SBM_ENABLE_ARROWS                  0x00E4
+  SBM_SETRANGEREDRAW                 0x00E6
+  SBM_SETSCROLLINFO                  0x00E9
+  SBM_GETSCROLLINFO                  0x00EA
+  SBM_GETSCROLLBARINFO               0x00EB
+  BM_GETCHECK                        0x00F0
+  BM_SETCHECK                        0x00F1
+  BM_GETSTATE                        0x00F2
+  BM_SETSTATE                        0x00F3
+  BM_SETSTYLE                        0x00F4
+  BM_CLICK                           0x00F5
+  BM_GETIMAGE                        0x00F6
+  BM_SETIMAGE                        0x00F7
+  BM_SETDONTCLICK                    0x00F8
+  WM_INPUT_DEVICE_CHANGE             0x00FE
+  WM_INPUT                           0x00FF
+  WM_KEYDOWN                         0x0100
+  WM_KEYUP                           0x0101
+  WM_CHAR                            0x0102
+  WM_DEADCHAR                        0x0103
+  WM_SYSKEYDOWN                      0x0104
+  WM_SYSKEYUP                        0x0105
+  WM_SYSCHAR                         0x0106
+  WM_SYSDEADCHAR                     0x0107
+  WM_UNICHAR                         0x0109
+  WM_IME_STARTCOMPOSITION            0x010D
+  WM_IME_ENDCOMPOSITION              0x010E
+  WM_IME_COMPOSITION                 0x010F
+  WM_INITDIALOG                      0x0110
+  WM_COMMAND                         0x0111
+  WM_SYSCOMMAND                      0x0112
+  WM_TIMER                           0x0113
+  WM_HSCROLL                         0x0114
+  WM_VSCROLL                         0x0115
+  WM_INITMENU                        0x0116
+  WM_INITMENUPOPUP                   0x0117
+  WM_SYSTIMER                        0x0118
+  WM_GESTURE                         0x0119
+  WM_GESTURENOTIFY                   0x011A
+  WM_MENUSELECT                      0x011F
+  WM_MENUCHAR                        0x0120
+  WM_ENTERIDLE                       0x0121
+  WM_MENURBUTTONUP                   0x0122
+  WM_MENUDRAG                        0x0123
+  WM_MENUGETOBJECT                   0x0124
+  WM_UNINITMENUPOPUP                 0x0125
+  WM_MENUCOMMAND                     0x0126
+  WM_CHANGEUISTATE                   0x0127
+  WM_UPDATEUISTATE                   0x0128
+  WM_QUERYUISTATE                    0x0129
+  WM_LBTRACKPOINT                    0x0131
+  WM_CTLCOLORMSGBOX                  0x0132
+  WM_CTLCOLOREDIT                    0x0133
+  WM_CTLCOLORLISTBOX                 0x0134
+  WM_CTLCOLORBTN                     0x0135
+  WM_CTLCOLORDLG                     0x0136
+  WM_CTLCOLORSCROLLBAR               0x0137
+  WM_CTLCOLORSTATIC                  0x0138
+  CB_GETEDITSEL                      0x0140
+  CB_LIMITTEXT                       0x0141
+  CB_SETEDITSEL                      0x0142
+  CB_ADDSTRING                       0x0143
+  CB_DELETESTRING                    0x0144
+  CB_DIR                             0x0145
+  CB_GETCOUNT                        0x0146
+  CB_GETCURSEL                       0x0147
+  CB_GETLBTEXT                       0x0148
+  CB_GETLBTEXTLEN                    0x0149
+  CB_INSERTSTRING                    0x014A
+  CB_RESETCONTENT                    0x014B
+  CB_FINDSTRING                      0x014C
+  CB_SELECTSTRING                    0x014D
+  CB_SETCURSEL                       0x014E
+  CB_SHOWDROPDOWN                    0x014F
+  CB_GETITEMDATA                     0x0150
+  CB_SETITEMDATA                     0x0151
+  CB_GETDROPPEDCONTROLRECT           0x0152
+  CB_SETITEMHEIGHT                   0x0153
+  CB_GETITEMHEIGHT                   0x0154
+  CB_SETEXTENDEDUI                   0x0155
+  CB_GETEXTENDEDUI                   0x0156
+  CB_GETDROPPEDSTATE                 0x0157
+  CB_FINDSTRINGEXACT                 0x0158
+  CB_SETLOCALE                       0x0159
+  CB_GETLOCALE                       0x015A
+  CB_GETTOPINDEX                     0x015b
+  CB_SETTOPINDEX                     0x015c
+  CB_GETHORIZONTALEXTENT             0x015d
+  CB_SETHORIZONTALEXTENT             0x015e
+  CB_GETDROPPEDWIDTH                 0x015f
+  CB_SETDROPPEDWIDTH                 0x0160
+  CB_INITSTORAGE                     0x0161
+  CB_MULTIPLEADDSTRING               0x0163
+  CB_GETCOMBOBOXINFO                 0x0164
+  STM_SETICON                        0x0170
+  STM_GETICON                        0x0171
+  STM_SETIMAGE                       0x0172
+  STM_GETIMAGE                       0x0173
+  LB_ADDSTRING                       0x0180
+  LB_INSERTSTRING                    0x0181
+  LB_DELETESTRING                    0x0182
+  LB_SELITEMRANGEEX                  0x0183
+  LB_RESETCONTENT                    0x0184
+  LB_SETSEL                          0x0185
+  LB_SETCURSEL                       0x0186
+  LB_GETSEL                          0x0187
+  LB_GETCURSEL                       0x0188
+  LB_GETTEXT                         0x0189
+  LB_GETTEXTLEN                      0x018A
+  LB_GETCOUNT                        0x018B
+  LB_SELECTSTRING                    0x018C
+  LB_DIR                             0x018D
+  LB_GETTOPINDEX                     0x018E
+  LB_FINDSTRING                      0x018F
+  LB_GETSELCOUNT                     0x0190
+  LB_GETSELITEMS                     0x0191
+  LB_SETTABSTOPS                     0x0192
+  LB_GETHORIZONTALEXTENT             0x0193
+  LB_SETHORIZONTALEXTENT             0x0194
+  LB_SETCOLUMNWIDTH                  0x0195
+  LB_ADDFILE                         0x0196
+  LB_SETTOPINDEX                     0x0197
+  LB_GETITEMRECT                     0x0198
+  LB_GETITEMDATA                     0x0199
+  LB_SETITEMDATA                     0x019A
+  LB_SELITEMRANGE                    0x019B
+  LB_SETANCHORINDEX                  0x019C
+  LB_GETANCHORINDEX                  0x019D
+  LB_SETCARETINDEX                   0x019E
+  LB_GETCARETINDEX                   0x019F
+  LB_SETITEMHEIGHT                   0x01A0
+  LB_GETITEMHEIGHT                   0x01A1
+  LB_FINDSTRINGEXACT                 0x01A2
+  LB_CARETON                         0x01A3
+  LB_CARETOFF                        0x01A4
+  LB_SETLOCALE                       0x01A5
+  LB_GETLOCALE                       0x01A6
+  LB_SETCOUNT                        0x01A7
+  LB_INITSTORAGE                     0x01A8
+  LB_ITEMFROMPOINT                   0x01A9
+  LB_MULTIPLEADDSTRING               0x01B1
+  LB_GETLISTBOXINFO                  0x01B2
+  MN_GETHMENU                        0x01E1
+  WM_MOUSEMOVE                       0x0200
+  WM_LBUTTONDOWN                     0x0201
+  WM_LBUTTONUP                       0x0202
+  WM_LBUTTONDBLCLK                   0x0203
+  WM_RBUTTONDOWN                     0x0204
+  WM_RBUTTONUP                       0x0205
+  WM_RBUTTONDBLCLK                   0x0206
+  WM_MBUTTONDOWN                     0x0207
+  WM_MBUTTONUP                       0x0208
+  WM_MBUTTONDBLCLK                   0x0209
+  WM_MOUSEWHEEL                      0x020A
+  WM_XBUTTONDOWN                     0x020B
+  WM_XBUTTONUP                       0x020C
+  WM_XBUTTONDBLCLK                   0x020D
+  WM_MOUSEHWHEEL                     0x020E
+  WM_PARENTNOTIFY                    0x0210
+  WM_ENTERMENULOOP                   0x0211
+  WM_EXITMENULOOP                    0x0212
+  WM_NEXTMENU                        0x0213
+  WM_SIZING                          0x0214
+  WM_CAPTURECHANGED                  0x0215
+  WM_MOVING                          0x0216
+  WM_POWERBROADCAST                  0x0218
+  WM_DEVICECHANGE                    0x0219
+  WM_MDICREATE                       0x0220
+  WM_MDIDESTROY                      0x0221
+  WM_MDIACTIVATE                     0x0222
+  WM_MDIRESTORE                      0x0223
+  WM_MDINEXT                         0x0224
+  WM_MDIMAXIMIZE                     0x0225
+  WM_MDITILE                         0x0226
+  WM_MDICASCADE                      0x0227
+  WM_MDIICONARRANGE                  0x0228
+  WM_MDIGETACTIVE                    0x0229
+  WM_DROPOBJECT                      0x022A
+  WM_QUERYDROPOBJECT                 0x022B
+  WM_BEGINDRAG                       0x022C
+  WM_DRAGLOOP                        0x022D
+  WM_DRAGSELECT                      0x022E
+  WM_DRAGMOVE                        0x022F
+  WM_MDISETMENU                      0x0230
+  WM_ENTERSIZEMOVE                   0x0231
+  WM_EXITSIZEMOVE                    0x0232
+  WM_DROPFILES                       0x0233
+  WM_MDIREFRESHMENU                  0x0234
+  WM_POINTERDEVICECHANGE             0x0238
+  WM_POINTERDEVICEINRANGE            0x0239
+  WM_POINTERDEVICEOUTOFRANGE         0x023A
+  WM_TOUCH                           0x0240
+  WM_NCPOINTERUPDATE                 0x0241
+  WM_NCPOINTERDOWN                   0x0242
+  WM_NCPOINTERUP                     0x0243
+  WM_POINTERUPDATE                   0x0245
+  WM_POINTERDOWN                     0x0246
+  WM_POINTERUP                       0x0247
+  WM_POINTERENTER                    0x0249
+  WM_POINTERLEAVE                    0x024A
+  WM_POINTERACTIVATE                 0x024B
+  WM_POINTERCAPTURECHANGED           0x024C
+  WM_TOUCHHITTESTING                 0x024D
+  WM_POINTERWHEEL                    0x024E
+  WM_POINTERHWHEEL                   0x024F
+  WM_IME_REPORT                      0x0280
+  WM_IME_SETCONTEXT                  0x0281
+  WM_IME_NOTIFY                      0x0282
+  WM_IME_CONTROL                     0x0283
+  WM_IME_COMPOSITIONFULL             0x0284
+  WM_IME_SELECT                      0x0285
+  WM_IME_CHAR                        0x0286
+  WM_IME_REQUEST                     0x0288
+  WM_IME_KEYDOWN                     0x0290
+  WM_IME_KEYUP                       0x0291
+  WM_NCMOUSEHOVER                    0x02A0
+  WM_MOUSEHOVER                      0x02A1
+  WM_NCMOUSELEAVE                    0x02A2
+  WM_MOUSELEAVE                      0x02A3
+  WM_WTSSESSION_CHANGE               0x02B1
+  WM_TABLET_ADDED                    0x02c8
+  WM_TABLET_DELETED                  0x02c9
+  WM_TABLET_FLICK                    0x02cb
+  WM_TABLET_QUERYSYSTEMGESTURESTATUS 0x02cc
+  WM_CUT                             0x0300
+  WM_COPY                            0x0301
+  WM_PASTE                           0x0302
+  WM_CLEAR                           0x0303
+  WM_UNDO                            0x0304
+  WM_RENDERFORMAT                    0x0305
+  WM_RENDERALLFORMATS                0x0306
+  WM_DESTROYCLIPBOARD                0x0307
+  WM_DRAWCLIPBOARD                   0x0308
+  WM_PAINTCLIPBOARD                  0x0309
+  WM_VSCROLLCLIPBOARD                0x030A
+  WM_SIZECLIPBOARD                   0x030B
+  WM_ASKCBFORMATNAME                 0x030C
+  WM_CHANGECBCHAIN                   0x030D
+  WM_HSCROLLCLIPBOARD                0x030E
+  WM_QUERYNEWPALETTE                 0x030F
+  WM_PALETTEISCHANGING               0x0310
+  WM_PALETTECHANGED                  0x0311
+  WM_HOTKEY                          0x0312
+  WM_PRINT                           0x0317
+  WM_PRINTCLIENT                     0x0318
+  WM_APPCOMMAND                      0x0319
+  WM_THEMECHANGED                    0x031A
+  WM_CLIPBOARDUPDATE                 0x031D
+  WM_DWMCOMPOSITIONCHANGED           0x031E
+  WM_DWMNCRENDERINGCHANGED           0x031F
+  WM_DWMCOLORIZATIONCOLORCHANGED     0x0320
+  WM_DWMWINDOWMAXIMIZEDCHANGE        0x0321
+  WM_GETTITLEBARINFOEX               0x033F
+  WM_QUERYAFXWNDPROC                 0x0360
+  WM_SIZEPARENT                      0x0361
+  WM_SETMESSAGESTRING                0x0362
+  WM_IDLEUPDATECMDUI                 0x0363
+  WM_INITIALUPDATE                   0x0364
+  WM_COMMANDHELP                     0x0365
+  WM_HELPHITTEST                     0x0366
+  WM_EXITHELPMODE                    0x0367
+  WM_RECALCPARENT                    0x0368
+  WM_SIZECHILD                       0x0369
+  WM_KICKIDLE                        0x036A
+  WM_QUERYCENTERWND                  0x036B
+  WM_DISABLEMODAL                    0x036C
+  WM_FLOATSTATUS                     0x036D
+  WM_ACTIVATETOPLEVEL                0x036E
+  WM_QUERY3DCONTROLS                 0x036F
+  WM_SOCKET_NOTIFY                   0x0373
+  WM_SOCKET_DEAD                     0x0374
+  WM_POPMESSAGESTRING                0x0375
+  WM_HELPPROMPTADDR                  0x0376
+  WM_QUEUE_SENTINEL                  0x0379
+  WM_RESERVED_037C                   0x037C
+  WM_RESERVED_037D                   0x037D
+  WM_RESERVED_037E                   0x037E
+  WM_FORWARDMSG                      0x037F
+  WM_USER                            0x0400
+  WM_USER+1                          0x0401
+  WM_USER+2                          0x0402
+  WM_USER+3                          0x0403
+  WM_USER+4                          0x0404
+  WM_USER+5                          0x0405
+  WM_USER+6                          0x0406
+  WM_USER+7                          0x0407
+  WM_USER+8                          0x0408
+  WM_USER+9                          0x0409
+  WM_USER+10                         0x040a
+  WM_USER+11                         0x040b
+  WM_USER+12                         0x040c
+  WM_USER+13                         0x040d
+  WM_USER+14                         0x040e
+  WM_USER+15                         0x040f
+  WM_USER+16                         0x0410
+  WM_USER+17                         0x0411
+  WM_USER+18                         0x0412
+  WM_USER+19                         0x0413
+  WM_USER+20                         0x0414
+  WM_USER+21                         0x0415
+  WM_USER+22                         0x0416
+  WM_USER+23                         0x0417
+  WM_USER+24                         0x0418
+  WM_USER+25                         0x0419
+  WM_USER+26                         0x041a
+  WM_USER+27                         0x041b
+  WM_USER+28                         0x041c
+  WM_USER+29                         0x041d
+  WM_USER+30                         0x041e
+  WM_USER+31                         0x041f
+  WM_USER+32                         0x0420
+  WM_USER+33                         0x0421
+  WM_USER+34                         0x0422
+  WM_USER+35                         0x0423
+  WM_USER+36                         0x0424
+  WM_USER+37                         0x0425
+  WM_USER+38                         0x0426
+  WM_USER+39                         0x0427
+  WM_USER+40                         0x0428
+  WM_USER+41                         0x0429
+  WM_USER+42                         0x042a
+  WM_USER+43                         0x042b
+  WM_USER+44                         0x042c
+  WM_USER+45                         0x042d
+  WM_USER+46                         0x042e
+  WM_USER+47                         0x042f
+  WM_USER+48                         0x0430
+  WM_USER+49                         0x0431
+  WM_USER+50                         0x0432
+  WM_USER+51                         0x0433
+  WM_USER+52                         0x0434
+  WM_USER+53                         0x0435
+  WM_USER+54                         0x0436
+  WM_USER+55                         0x0437
+  WM_USER+56                         0x0438
+  WM_USER+57                         0x0439
+  WM_USER+58                         0x043a
+  WM_USER+59                         0x043b
+  WM_USER+60                         0x043c
+  WM_USER+61                         0x043d
+  WM_USER+62                         0x043e
+  WM_USER+63                         0x043f
+  WM_USER+64                         0x0440
+  WM_USER+65                         0x0441
+  WM_USER+66                         0x0442
+  WM_USER+67                         0x0443
+  WM_USER+68                         0x0444
+  WM_USER+69                         0x0445
+  WM_USER+70                         0x0446
+  WM_USER+71                         0x0447
+  WM_USER+72                         0x0448
+  WM_USER+73                         0x0449
+  WM_USER+74                         0x044a
+  WM_USER+75                         0x044b
+  WM_USER+76                         0x044c
+  WM_USER+77                         0x044d
+  WM_USER+78                         0x044e
+  WM_USER+79                         0x044f
+  WM_USER+80                         0x0450
+  WM_USER+81                         0x0451
+  WM_USER+82                         0x0452
+  WM_USER+83                         0x0453
+  WM_USER+84                         0x0454
+  WM_USER+85                         0x0455
+  WM_USER+86                         0x0456
+  WM_USER+87                         0x0457
+  WM_USER+88                         0x0458
+  WM_USER+89                         0x0459
+  WM_USER+90                         0x045a
+  WM_USER+91                         0x045b
+  WM_USER+92                         0x045c
+  WM_USER+93                         0x045d
+  WM_USER+94                         0x045e
+  WM_USER+95                         0x045f
+  WM_USER+96                         0x0460
+  WM_USER+97                         0x0461
+  WM_USER+98                         0x0462
+  WM_USER+99                         0x0463
+  WM_USER+100                        0x0464
+  LVM_GETBKCOLOR                     0x00001000
+  LVM_SETBKCOLOR                     0x00001001
+  LVM_GETIMAGELIST                   0x00001002
+  LVM_SETIMAGELIST                   0x00001003
+  LVM_GETITEMCOUNT                   0x00001004
+  LVM_GETITEMA                       0x00001005
+  LVM_SETITEMA                       0x00001006
+  LVM_INSERTITEMA                    0x00001007
+  LVM_DELETEITEM                     0x00001008
+  LVM_DELETEALLITEMS                 0x00001009
+  LVM_GETCALLBACKMASK                0x0000100a
+  LVM_SETCALLBACKMASK                0x0000100b
+  LVM_GETNEXTITEM                    0x0000100c
+  LVM_FINDITEMA                      0x0000100d
+  LVM_GETITEMRECT                    0x0000100e
+  LVM_SETITEMPOSITION                0x0000100f
+  LVM_GETITEMPOSITION                0x00001010
+  LVM_GETSTRINGWIDTHA                0x00001011
+  LVM_HITTEST                        0x00001012
+  LVM_ENSUREVISIBLE                  0x00001013
+  LVM_SCROLL                         0x00001014
+  LVM_REDRAWITEMS                    0x00001015
+  LVM_ARRANGE                        0x00001016
+  LVM_EDITLABELA                     0x00001017
+  LVM_GETEDITCONTROL                 0x00001018
+  LVM_GETCOLUMNA                     0x00001019
+  LVM_SETCOLUMNA                     0x0000101a
+  LVM_INSERTCOLUMNA                  0x0000101b
+  LVM_DELETECOLUMN                   0x0000101c
+  LVM_GETCOLUMNWIDTH                 0x0000101d
+  LVM_SETCOLUMNWIDTH                 0x0000101e
+  LVM_GETHEADER                      0x0000101f
+  LVM_CREATEDRAGIMAGE                0x00001021
+  LVM_GETVIEWRECT                    0x00001022
+  LVM_GETTEXTCOLOR                   0x00001023
+  LVM_SETTEXTCOLOR                   0x00001024
+  LVM_GETTEXTBKCOLOR                 0x00001025
+  LVM_SETTEXTBKCOLOR                 0x00001026
+  LVM_GETTOPINDEX                    0x00001027
+  LVM_GETCOUNTPERPAGE                0x00001028
+  LVM_GETORIGIN                      0x00001029
+  LVM_UPDATE                         0x0000102a
+  LVM_SETITEMSTATE                   0x0000102b
+  LVM_GETITEMSTATE                   0x0000102c
+  LVM_GETITEMTEXTA                   0x0000102d
+  LVM_SETITEMTEXTA                   0x0000102e
+  LVM_SETITEMCOUNT                   0x0000102f
+  LVM_SORTITEMS                      0x00001030
+  LVM_SETITEMPOSITION32              0x00001031
+  LVM_GETSELECTEDCOUNT               0x00001032
+  LVM_GETITEMSPACING                 0x00001033
+  LVM_GETISEARCHSTRINGA              0x00001034
+  LVM_SETICONSPACING                 0x00001035
+  LVM_SETEXTENDEDLISTVIEWSTYLE       0x00001036
+  LVM_GETEXTENDEDLISTVIEWSTYLE       0x00001037
+  LVM_GETSUBITEMRECT                 0x00001038
+  LVM_SUBITEMHITTEST                 0x00001039
+  LVM_SETCOLUMNORDERARRAY            0x0000103a
+  LVM_GETCOLUMNORDERARRAY            0x0000103b
+  LVM_SETHOTITEM                     0x0000103c
+  LVM_GETHOTITEM                     0x0000103d
+  LVM_SETHOTCURSOR                   0x0000103e
+  LVM_GETHOTCURSOR                   0x0000103f
+  LVM_APPROXIMATEVIEWRECT            0x00001040
+  LVM_SETWORKAREAS                   0x00001041
+  LVM_GETSELECTIONMARK               0x00001042
+  LVM_SETSELECTIONMARK               0x00001043
+  LVM_SETBKIMAGEA                    0x00001044
+  LVM_GETBKIMAGEA                    0x00001045
+  LVM_GETWORKAREAS                   0x00001046
+  LVM_SETHOVERTIME                   0x00001047
+  LVM_GETHOVERTIME                   0x00001048
+  LVM_GETNUMBEROFWORKAREAS           0x00001049
+  LVM_SETTOOLTIPS                    0x0000104a
+  LVM_GETITEMW                       0x0000104b
+  LVM_SETITEMW                       0x0000104c
+  LVM_INSERTITEMW                    0x0000104d
+  LVM_GETTOOLTIPS                    0x0000104e
+  LVM_SORTITEMSEX                    0x00001051
+  LVM_FINDITEMW                      0x00001053
+  LVM_GETSTRINGWIDTHW                0x00001057
+  LVM_GETGROUPSTATE                  0x0000105c
+  LVM_GETFOCUSEDGROUP                0x0000105d
+  LVM_GETCOLUMNW                     0x0000105f
+  LVM_SETCOLUMNW                     0x00001060
+  LVM_INSERTCOLUMNW                  0x00001061
+  LVM_GETGROUPRECT                   0x00001062
+  LVM_GETITEMTEXTW                   0x00001073
+  LVM_SETITEMTEXTW                   0x00001074
+  LVM_GETISEARCHSTRINGW              0x00001075
+  LVM_EDITLABELW                     0x00001076
+  LVM_SETBKIMAGEW                    0x0000108a
+  LVM_GETBKIMAGEW                    0x0000108b
+  LVM_SETSELECTEDCOLUMN              0x0000108c
+  LVM_SETVIEW                        0x0000108e
+  LVM_GETVIEW                        0x0000108f
+  LVM_INSERTGROUP                    0x00001091
+  LVM_SETGROUPINFO                   0x00001093
+  LVM_GETGROUPINFO                   0x00001095
+  LVM_REMOVEGROUP                    0x00001096
+  LVM_MOVEGROUP                      0x00001097
+  LVM_GETGROUPCOUNT                  0x00001098
+  LVM_GETGROUPINFOBYINDEX            0x00001099
+  LVM_MOVEITEMTOGROUP                0x0000109a
+  LVM_SETGROUPMETRICS                0x0000109b
+  LVM_GETGROUPMETRICS                0x0000109c
+  LVM_ENABLEGROUPVIEW                0x0000109d
+  LVM_SORTGROUPS                     0x0000109e
+  LVM_INSERTGROUPSORTED              0x0000109f
+  LVM_REMOVEALLGROUPS                0x000010a0
+  LVM_HASGROUP                       0x000010a1
+  LVM_SETTILEVIEWINFO                0x000010a2
+  LVM_GETTILEVIEWINFO                0x000010a3
+  LVM_SETTILEINFO                    0x000010a4
+  LVM_GETTILEINFO                    0x000010a5
+  LVM_SETINSERTMARK                  0x000010a6
+  LVM_GETINSERTMARK                  0x000010a7
+  LVM_INSERTMARKHITTEST              0x000010a8
+  LVM_GETINSERTMARKRECT              0x000010a9
+  LVM_SETINSERTMARKCOLOR             0x000010aa
+  LVM_GETINSERTMARKCOLOR             0x000010ab
+  LVM_SETINFOTIP                     0x000010ad
+  LVM_GETSELECTEDCOLUMN              0x000010ae
+  LVM_ISGROUPVIEWENABLED             0x000010af
+  LVM_GETOUTLINECOLOR                0x000010b0
+  LVM_SETOUTLINECOLOR                0x000010b1
+  LVM_CANCELEDITLABEL                0x000010b3
+  LVM_MAPINDEXTOID                   0x000010b4
+  LVM_MAPIDTOINDEX                   0x000010b5
+  LVM_ISITEMVISIBLE                  0x000010b6
+  LVM_GETEMPTYTEXT                   0x000010cc
+  LVM_GETFOOTERRECT                  0x000010cd
+  LVM_GETFOOTERINFO                  0x000010ce
+  LVM_GETFOOTERITEMRECT              0x000010cf
+  LVM_GETFOOTERITEM                  0x000010d0
+  LVM_GETITEMINDEXRECT               0x000010d1
+  LVM_SETITEMINDEXSTATE              0x000010d2
+  LVM_GETNEXTITEMINDEX               0x000010d3
+  TVM_INSERTITEMA                    0x00001100
+  TVM_DELETEITEM                     0x00001101
+  TVM_EXPAND                         0x00001102
+  TVM_GETITEMRECT                    0x00001104
+  TVM_GETCOUNT                       0x00001105
+  TVM_GETINDENT                      0x00001106
+  TVM_SETINDENT                      0x00001107
+  TVM_GETIMAGELIST                   0x00001108
+  TVM_SETIMAGELIST                   0x00001109
+  TVM_GETNEXTITEM                    0x0000110a
+  TVM_SELECTITEM                     0x0000110b
+  TVM_GETITEMA                       0x0000110c
+  TVM_SETITEMA                       0x0000110d
+  TVM_EDITLABELA                     0x0000110e
+  TVM_GETEDITCONTROL                 0x0000110f
+  TVM_GETVISIBLECOUNT                0x00001110
+  TVM_HITTEST                        0x00001111
+  TVM_CREATEDRAGIMAGE                0x00001112
+  TVM_SORTCHILDREN                   0x00001113
+  TVM_ENSUREVISIBLE                  0x00001114
+  TVM_SORTCHILDRENCB                 0x00001115
+  TVM_ENDEDITLABELNOW                0x00001116
+  TVM_GETISEARCHSTRINGA              0x00001117
+  TVM_SETTOOLTIPS                    0x00001118
+  TVM_GETTOOLTIPS                    0x00001119
+  TVM_SETINSERTMARK                  0x0000111a
+  TVM_SETITEMHEIGHT                  0x0000111b
+  TVM_GETITEMHEIGHT                  0x0000111c
+  TVM_SETBKCOLOR                     0x0000111d
+  TVM_SETTEXTCOLOR                   0x0000111e
+  TVM_GETBKCOLOR                     0x0000111f
+  TVM_GETTEXTCOLOR                   0x00001120
+  TVM_SETSCROLLTIME                  0x00001121
+  TVM_GETSCROLLTIME                  0x00001122
+  TVM_SETINSERTMARKCOLOR             0x00001125
+  TVM_GETINSERTMARKCOLOR             0x00001126
+  TVM_GETITEMSTATE                   0x00001127
+  TVM_SETLINECOLOR                   0x00001128
+  TVM_GETLINECOLOR                   0x00001129
+  TVM_MAPACCIDTOHTREEITEM            0x0000112a
+  TVM_MAPHTREEITEMTOACCID            0x0000112b
+  TVM_SETEXTENDEDSTYLE               0x0000112c
+  TVM_GETEXTENDEDSTYLE               0x0000112d
+  TVM_INSERTITEMW                    0x00001132
+  TVM_SETAUTOSCROLLINFO              0x0000113b
+  TVM_GETITEMW                       0x0000113e
+  TVM_SETITEMW                       0x0000113f
+  TVM_GETISEARCHSTRINGW              0x00001140
+  TVM_EDITLABELW                     0x00001141
+  TVM_GETSELECTEDCOUNT               0x00001146
+  TVM_SHOWINFOTIP                    0x00001147
+  TVM_GETITEMPARTRECT                0x00001148
+  HDM_GETITEMCOUNT                   0x00001200
+  HDM_INSERTITEMA                    0x00001201
+  HDM_DELETEITEM                     0x00001202
+  HDM_GETITEMA                       0x00001203
+  HDM_SETITEMA                       0x00001204
+  HDM_LAYOUT                         0x00001205
+  HDM_HITTEST                        0x00001206
+  HDM_GETITEMRECT                    0x00001207
+  HDM_SETIMAGELIST                   0x00001208
+  HDM_GETIMAGELIST                   0x00001209
+  HDM_INSERTITEMW                    0x0000120a
+  HDM_GETITEMW                       0x0000120b
+  HDM_SETITEMW                       0x0000120c
+  HDM_ORDERTOINDEX                   0x0000120f
+  HDM_CREATEDRAGIMAGE                0x00001210
+  HDM_GETORDERARRAY                  0x00001211
+  HDM_SETORDERARRAY                  0x00001212
+  HDM_SETHOTDIVIDER                  0x00001213
+  HDM_SETBITMAPMARGIN                0x00001214
+  HDM_GETBITMAPMARGIN                0x00001215
+  HDM_SETFILTERCHANGETIMEOUT         0x00001216
+  HDM_EDITFILTER                     0x00001217
+  HDM_CLEARFILTER                    0x00001218
+  HDM_GETITEMDROPDOWNRECT            0x00001219
+  HDM_GETOVERFLOWRECT                0x0000121a
+  HDM_GETFOCUSEDITEM                 0x0000121b
+  HDM_SETFOCUSEDITEM                 0x0000121c
+  TCM_GETIMAGELIST                   0x00001302
+  TCM_SETIMAGELIST                   0x00001303
+  TCM_GETITEMCOUNT                   0x00001304
+  TCM_GETITEMA                       0x00001305
+  TCM_SETITEMA                       0x00001306
+  TCM_INSERTITEMA                    0x00001307
+  TCM_DELETEITEM                     0x00001308
+  TCM_DELETEALLITEMS                 0x00001309
+  TCM_GETITEMRECT                    0x0000130a
+  TCM_GETCURSEL                      0x0000130b
+  TCM_SETCURSEL                      0x0000130c
+  TCM_HITTEST                        0x0000130d
+  TCM_SETITEMEXTRA                   0x0000130e
+  TCM_ADJUSTRECT                     0x00001328
+  TCM_SETITEMSIZE                    0x00001329
+  TCM_REMOVEIMAGE                    0x0000132a
+  TCM_SETPADDING                     0x0000132b
+  TCM_GETROWCOUNT                    0x0000132c
+  TCM_GETTOOLTIPS                    0x0000132d
+  TCM_SETTOOLTIPS                    0x0000132e
+  TCM_GETCURFOCUS                    0x0000132f
+  TCM_SETCURFOCUS                    0x00001330
+  TCM_SETMINTABWIDTH                 0x00001331
+  TCM_DESELECTALL                    0x00001332
+  TCM_HIGHLIGHTITEM                  0x00001333
+  TCM_SETEXTENDEDSTYLE               0x00001334
+  TCM_GETEXTENDEDSTYLE               0x00001335
+  TCM_GETITEMW                       0x0000133c
+  TCM_SETITEMW                       0x0000133d
+  TCM_INSERTITEMW                    0x0000133e
+  PGM_SETCHILD                       0x00001401
+  PGM_RECALCSIZE                     0x00001402
+  PGM_FORWARDMOUSE                   0x00001403
+  PGM_SETBKCOLOR                     0x00001404
+  PGM_GETBKCOLOR                     0x00001405
+  PGM_SETBORDER                      0x00001406
+  PGM_GETBORDER                      0x00001407
+  PGM_SETPOS                         0x00001408
+  PGM_GETPOS                         0x00001409
+  PGM_SETBUTTONSIZE                  0x0000140a
+  PGM_GETBUTTONSIZE                  0x0000140b
+  PGM_GETBUTTONSTATE                 0x0000140c
+  EM_SETCUEBANNER                    0x00001501
+  EM_GETCUEBANNER                    0x00001502
+  EM_SHOWBALLOONTIP                  0x00001503
+  EM_HIDEBALLOONTIP                  0x00001504
+  EM_SETHILITE                       0x00001505
+  EM_GETHILITE                       0x00001506
+  BCM_GETIDEALSIZE                   0x00001601
+  BCM_SETIMAGELIST                   0x00001602
+  BCM_GETIMAGELIST                   0x00001603
+  BCM_SETTEXTMARGIN                  0x00001604
+  BCM_GETTEXTMARGIN                  0x00001605
+  BCM_SETDROPDOWNSTATE               0x00001606
+  BCM_SETSPLITINFO                   0x00001607
+  BCM_GETSPLITINFO                   0x00001608
+  BCM_SETNOTE                        0x00001609
+  BCM_GETNOTE                        0x0000160a
+  BCM_GETNOTELENGTH                  0x0000160b
+  BCM_SETSHIELD                      0x0000160c
+  CB_SETMINVISIBLE                   0x00001701
+  CB_GETMINVISIBLE                   0x00001702
+  CB_SETCUEBANNER                    0x00001703
+  CB_GETCUEBANNER                    0x00001704
+  CCM_SETBKCOLOR                     0x00002001
+  CCM_SETCOLORSCHEME                 0x00002002
+  CCM_GETCOLORSCHEME                 0x00002003
+  CCM_GETDROPTARGET                  0x00002004
+  CCM_SETUNICODEFORMAT               0x00002005
+  CCM_GETUNICODEFORMAT               0x00002006
+  CCM_SETVERSION                     0x00002007
+  CCM_GETVERSION                     0x00002008
+  CCM_SETNOTIFYWINDOW                0x00002009
+  CCM_SETWINDOWTHEME                 0x0000200b
+  CCM_DPISCALE                       0x0000200c
+  WM_RASDIALEVENT                    0x0000cccd
+
+struct MSG
+  hwnd HWND
+  message [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+  time DWORD
+  pt POINT
+
+pointer MSG* MSG
+
+pointer "const MSG*" MSG
+
+pointer LPMSG MSG
+
+enum [ImageType] UINT display=UINT
+  IMAGE_BITMAP      0
+  IMAGE_ICON        1
+  IMAGE_CURSOR      2
+  IMAGE_ENHMETAFILE 3
+
+flag [LRFlags] UINT display=UINT
+  LR_DEFAULTCOLOR     0x00000000
+  LR_MONOCHROME       0x00000001
+  LR_COLOR            0x00000002
+  LR_COPYRETURNORG    0x00000004
+  LR_COPYDELETEORG    0x00000008
+  LR_LOADFROMFILE     0x00000010
+  LR_LOADTRANSPARENT  0x00000020
+  LR_DEFAULTSIZE      0x00000040
+  LR_VGACOLOR         0x00000080
+  LR_LOADMAP3DCOLORS  0x00001000
+  LR_CREATEDIBSECTION 0x00002000
+  LR_COPYFROMRESOURCE 0x00004000
+  LR_SHARED           0x00008000
+
+enum [SBType] int display=int
+  SB_HORZ 0
+  SB_VERT 1
+  SB_CTL  2
+  SB_BOTH 3
+
+flag [IsTextUnicodeFlags] UINT display=INT
+  IS_TEXT_UNICODE_ASCII16            0x0001
+  IS_TEXT_UNICODE_STATISTICS         0x0002
+  IS_TEXT_UNICODE_CONTROLS           0x0004
+  IS_TEXT_UNICODE_SIGNATURE          0x0008
+  IS_TEXT_UNICODE_UNICODE_MASK       0x000F
+  IS_TEXT_UNICODE_REVERSE_ASCII16    0x0010
+  IS_TEXT_UNICODE_REVERSE_STATISTICS 0x0020
+  IS_TEXT_UNICODE_REVERSE_CONTROLS   0x0040
+  IS_TEXT_UNICODE_REVERSE_SIGNATURE  0x0080
+  IS_TEXT_UNICODE_REVERSE_MASK       0x00F0
+  IS_TEXT_UNICODE_ILLEGAL_CHARS      0x0100
+  IS_TEXT_UNICODE_ODD_LENGTH         0x0200
+  IS_TEXT_UNICODE_DBCS_LEADBYTE      0x0400
+  IS_TEXT_UNICODE_NOT_UNICODE_MASK   0x0F00
+  IS_TEXT_UNICODE_NULL_BYTES         0x1000
+  IS_TEXT_UNICODE_NOT_ASCII_MASK     0xF000
+
+pointer [IsTextUnicodeFlags*] [IsTextUnicodeFlags] display=INT*
+
+enum [WaitTimeout] DWORD display=DWORD
+  INFINITE 0xFFFFFFFF
+
+flag [BorderFlag] UINT display=UINT
+  BF_LEFT                    0x0001
+  BF_TOP                     0x0002
+  BF_TOPLEFT                 0x0003
+  BF_RIGHT                   0x0004
+  BF_TOPRIGHT                0x0006
+  BF_BOTTOM                  0x0008
+  BF_BOTTOMLEFT              0x0009
+  BF_BOTTOMRIGHT             0x000c
+  BF_RECT                    0x000f
+  BF_DIAGONAL                0x0010
+  BF_DIAGONAL_ENDTOPLEFT     0x0013
+  BF_DIAGONAL_ENDTOPRIGHT    0x0016
+  BF_DIAGONAL_ENDBOTTOMLEFT  0x0019
+  BF_DIAGONAL_ENDBOTTOMRIGHT 0x001c
+  BF_MIDDLE                  0x0800
+  BF_SOFT                    0x1000
+  BF_ADJUST                  0x2000
+  BF_FLAT                    0x4000
+  BF_MONO                    0x8000
+
+enum [SysColorIndex] int display=int
+  COLOR_SCROLLBAR               0
+  COLOR_BACKGROUND              1
+  COLOR_ACTIVECAPTION           2
+  COLOR_INACTIVECAPTION         3
+  COLOR_MENU                    4
+  COLOR_WINDOW                  5
+  COLOR_WINDOWFRAME             6
+  COLOR_MENUTEXT                7
+  COLOR_WINDOWTEXT              8
+  COLOR_CAPTIONTEXT             9
+  COLOR_ACTIVEBORDER            10
+  COLOR_INACTIVEBORDER          11
+  COLOR_APPWORKSPACE            12
+  COLOR_HIGHLIGHT               13
+  COLOR_HIGHLIGHTTEXT           14
+  COLOR_BTNFACE                 15
+  COLOR_BTNSHADOW               16
+  COLOR_GRAYTEXT                17
+  COLOR_BTNTEXT                 18
+  COLOR_INACTIVECAPTIONTEXT     19
+  COLOR_BTNHIGHLIGHT            20
+  COLOR_3DDKSHADOW              21
+  COLOR_3DLIGHT                 22
+  COLOR_INFOTEXT                23
+  COLOR_INFOBK                  24
+  COLOR_HOTLIGHT                26
+  COLOR_GRADIENTACTIVECAPTION   27
+  COLOR_GRADIENTINACTIVECAPTION 28
+  COLOR_MENUHILIGHT             29
+  COLOR_MENUBAR                 30
+
+flag [BorderEdge] UINT display=UINT
+  BDR_RAISEDOUTER 0x0001
+  BDR_SUNKENOUTER 0x0002
+  BDR_RAISEDINNER 0x0004
+  EDGE_RAISED     0x0005
+  EDGE_ETCHED     0x0006
+  BDR_SUNKENINNER 0x0008
+  EDGE_BUMP       0x0009
+  EDGE_SUNKEN     0x000a
+
+flag [DrawTextFlags] DWORD display=DWORD
+  DT_TOP                  0x00000000
+  DT_LEFT                 0x00000000
+  DT_CENTER               0x00000001
+  DT_RIGHT                0x00000002
+  DT_VCENTER              0x00000004
+  DT_BOTTOM               0x00000008
+  DT_WORDBREAK            0x00000010
+  DT_SINGLELINE           0x00000020
+  DT_EXPANDTABS           0x00000040
+  DT_TABSTOP              0x00000080
+  DT_NOCLIP               0x00000100
+  DT_EXTERNALLEADING      0x00000200
+  DT_CALCRECT             0x00000400
+  DT_NOPREFIX             0x00000800
+  DT_INTERNAL             0x00001000
+  DT_EDITCONTROL          0x00002000
+  DT_PATH_ELLIPSIS        0x00004000
+  DT_END_ELLIPSIS         0x00008000
+  DT_MODIFYSTRING         0x00010000
+  DT_RTLREADING           0x00020000
+  DT_WORD_ELLIPSIS        0x00040000
+  DT_NOFULLWIDTHCHARBREAK 0x00080000
+  DT_HIDEPREFIX           0x00100000
+  DT_PREFIXONLY           0x00200000
+
+struct RECT
+  left LONG
+  top LONG
+  right LONG
+  bottom LONG
+
+pointer LPRECT RECT
+
+alias "const LPRECT" LPRECT
+
+alias RECT* LPRECT
+
+alias LPCRECT LPRECT
+
+alias "const RECT*" LPRECT
+
+alias "CONST RECT*" LPRECT
+
+alias RECTL RECT
+
+pointer RECTL* RECTL
+
+pointer LPCRECTL RECTL
+
+enum [CodePageEnum] UINT display=UINT
+  CP_ACP               0
+  CP_OEMCP             1
+  CP_MACCP             2
+  CP_THREAD_ACP        3
+  CP_SYMBOL            42
+  MS-DOS-Latin-US      437
+  Thai                 874
+  Japanese-(Shift-JIS) 932
+  Chinese-Simplified   936
+  Korean               949
+  Chinese-Traditional  950
+  Unicode UTF-16 LE    1200
+  Unicode UTF-16 BE    1201
+  Central-European     1250
+  Cyrillic             1251
+  Western-European     1252
+  Greek                1253
+  Turkish              1254
+  Hebrew               1255
+  Arabic               1256
+  Baltic               1257
+  Vietnamese           1258
+  CP_UTF7              65000
+  CP_UTF8              65001
+
+alias [CODE_PAGE|int] [CodePageEnum] display=int
+
+enum [EXCEPTION_FLAGS] DWORD display=DWORD
+  EXCEPTION_NONCONTINUABLE_EXCEPTION 0x1
+
+struct EXCEPTION_RECORD
+  ExceptionCode [ExceptionCode]
+  ExceptionFlags DWORD
+  ExceptionRecord LPVOID display=EXCEPTION_RECORD*
+  ExceptionAddress PVOID
+  NumberParameters DWORD
+  ExceptionInformation "ULONG_PTR [EXCEPTION_MAXIMUM_PARAMETERS]"
+
+pointer PEXCEPTION_RECORD EXCEPTION_RECORD
+
+struct EXCEPTION_POINTERS
+  ExceptionRecord PEXCEPTION_RECORD
+  ContextRecord PCONTEXT
+
+pointer PEXCEPTION_POINTERS EXCEPTION_POINTERS
+
+pointer LPEXCEPTION_POINTERS EXCEPTION_POINTERS
+
+pointer EXCEPTION_POINTERS* EXCEPTION_POINTERS
+
+struct SP_DEVINFO_DATA
+  cbSize DWORD
+  ClassGuid GUID
+  DevInst DWORD
+  Reserved ULONG_PTR
+
+pointer PSP_DEVINFO_DATA SP_DEVINFO_DATA
+
+struct PROCESS_INFORMATION
+  hProcess HANDLE
+  hThread HANDLE
+  dwProcessId DWORD
+  dwThreadId DWORD
+
+pointer LPPROCESS_INFORMATION PROCESS_INFORMATION
+
+enum [ShowWindowCmd] int display=int
+  SW_HIDE            0
+  SW_SHOWNORMAL      1
+  SW_NORMAL          1
+  SW_SHOWMINIMIZED   2
+  SW_SHOWMAXIMIZED   3
+  SW_MAXIMIZE        3
+  SW_SHOWNOACTIVATE  4
+  SW_SHOW            5
+  SW_MINIMIZE        6
+  SW_SHOWMINNOACTIVE 7
+  SW_SHOWNA          8
+  SW_RESTORE         9
+  SW_SHOWDEFAULT     10
+  SW_FORCEMINIMIZE   11
+
+enum [STARTUPINFO_ShowWindow] WORD display=WORD
+  SW_HIDE            0
+  SW_SHOWNORMAL      1
+  SW_NORMAL          1
+  SW_SHOWMINIMIZED   2
+  SW_SHOWMAXIMIZED   3
+  SW_MAXIMIZE        3
+  SW_SHOWNOACTIVATE  4
+  SW_SHOW            5
+  SW_MINIMIZE        6
+  SW_SHOWMINNOACTIVE 7
+  SW_SHOWNA          8
+  SW_RESTORE         9
+  SW_SHOWDEFAULT     10
+  SW_FORCEMINIMIZE   11
+
+flag [STARTUPINFO_Flags] DWORD display=DWORD
+  STARTF_USESHOWWINDOW    0x00000001
+  STARTF_USESIZE          0x00000002
+  STARTF_USEPOSITION      0x00000004
+  STARTF_USECOUNTCHARS    0x00000008
+  STARTF_USEFILLATTRIBUTE 0x00000010
+  STARTF_RUNFULLSCREEN    0x00000020
+  STARTF_FORCEONFEEDBACK  0x00000040
+  STARTF_FORCEOFFFEEDBACK 0x00000080
+  STARTF_USESTDHANDLES    0x00000100
+  STARTF_USEHOTKEY        0x00000200
+  STARTF_TITLEISLINKNAME  0x00000800
+  STARTF_TITLEISAPPID     0x00001000
+  STARTF_PREVENTPINNING   0x00002000
+
+struct STARTUPINFO
+  cb DWORD
+  lpReserved LPTSTR
+  lpDesktop LPTSTR
+  lpTitle LPTSTR
+  dwX DWORD
+  dwY DWORD
+  dwXSize DWORD
+  dwYSize DWORD
+  dwXCountChars DWORD
+  dwYCountChars DWORD
+  dwFillAttribute DWORD
+  dwFlags [STARTUPINFO_Flags]
+  wShowWindow [STARTUPINFO_ShowWindow]
+  cbReserved2 WORD
+  lpReserved2 LPBYTE
+  hStdInput HANDLE
+  hStdOutput HANDLE
+  hStdError HANDLE
+
+pointer LPSTARTUPINFO STARTUPINFO
+
+struct STARTUPINFOW
+  cb DWORD
+  lpReserved LPWSTR
+  lpDesktop LPWSTR
+  lpTitle LPWSTR
+  dwX DWORD
+  dwY DWORD
+  dwXSize DWORD
+  dwYSize DWORD
+  dwXCountChars DWORD
+  dwYCountChars DWORD
+  dwFillAttribute DWORD
+  dwFlags [STARTUPINFO_Flags]
+  wShowWindow [STARTUPINFO_ShowWindow]
+  cbReserved2 WORD
+  lpReserved2 LPBYTE
+  hStdInput HANDLE
+  hStdOutput HANDLE
+  hStdError HANDLE
+
+pointer LPSTARTUPINFOW STARTUPINFOW
+
+union FILE_SEGMENT_ELEMENT
+  Buffer PVOID64
+  Alignment ULONGLONG
+
+pointer FILE_SEGMENT_ELEMENT[] FILE_SEGMENT_ELEMENT
+
+struct [OVERLAPPED_u_s] display=struct
+  Offset DWORD
+  OffsetHigh DWORD
+
+union [OVERLAPPED_u] display=union
+   [OVERLAPPED_u_s]
+  Pointer PVOID
+
+struct OVERLAPPED
+  Internal ULONG_PTR
+  InternalHigh ULONG_PTR
+   [OVERLAPPED_u]
+  hEvent HANDLE
+
+pointer OVERLAPPED* OVERLAPPED
+
+pointer LPOVERLAPPED OVERLAPPED
+
+pointer LPOVERLAPPED* LPOVERLAPPED
+
+enum [ReparsePoint] DWORD display=DWORD
+  IO_REPARSE_TAG_HSM2        0x80000006
+  IO_REPARSE_TAG_SIS         0x80000007
+  IO_REPARSE_TAG_WIM         0x80000008
+  IO_REPARSE_TAG_CSV         0x80000009
+  IO_REPARSE_TAG_DFS         0x8000000A
+  IO_REPARSE_TAG_DFSR        0x80000012
+  IO_REPARSE_TAG_DEDUP       0x80000013
+  IO_REPARSE_TAG_NFS         0x80000014
+  IO_REPARSE_TAG_MOUNT_POINT 0xA0000003
+  IO_REPARSE_TAG_SYMLINK     0xA000000C
+  IO_REPARSE_TAG_HSM         0xC0000004
+
+flag [FileAttributes] DWORD display=DWORD
+  INVALID_FILE_ATTRIBUTES            -1
+  FILE_ATTRIBUTE_READONLY            0x00000001
+  FILE_ATTRIBUTE_HIDDEN              0x00000002
+  FILE_ATTRIBUTE_SYSTEM              0x00000004
+  FILE_ATTRIBUTE_DIRECTORY           0x00000010
+  FILE_ATTRIBUTE_ARCHIVE             0x00000020
+  FILE_ATTRIBUTE_DEVICE              0x00000040
+  FILE_ATTRIBUTE_NORMAL              0x00000080
+  FILE_ATTRIBUTE_TEMPORARY           0x00000100
+  FILE_ATTRIBUTE_SPARSE_FILE         0x00000200
+  FILE_ATTRIBUTE_REPARSE_POINT       0x00000400
+  FILE_ATTRIBUTE_COMPRESSED          0x00000800
+  FILE_ATTRIBUTE_OFFLINE             0x00001000
+  FILE_ATTRIBUTE_NOT_CONTENT_INDEXED 0x00002000
+  FILE_ATTRIBUTE_ENCRYPTED           0x00004000
+  FILE_ATTRIBUTE_VIRTUAL             0x00010000
+  FILE_ATTRIBUTE_NO_SCRUB_DATA       0x00020000
+
+struct WIN32_FIND_DATA
+  dwFileAttributes [FileAttributes]
+  ftCreationTime FILETIME
+  ftLastAccessTime FILETIME
+  ftLastWriteTime FILETIME
+  nFileSizeHigh DWORD
+  nFileSizeLow DWORD
+  dwReserved0 [ReparsePoint]
+  dwReserved1 DWORD
+  cFileName "TCHAR [MAX_PATH]" outputOnly
+  cAlternateFileName "TCHAR [14]" outputOnly
+
+pointer LPWIN32_FIND_DATA WIN32_FIND_DATA
+
+struct WIN32_FIND_DATAA
+  dwFileAttributes [FileAttributes]
+  ftCreationTime FILETIME
+  ftLastAccessTime FILETIME
+  ftLastWriteTime FILETIME
+  nFileSizeHigh DWORD
+  nFileSizeLow DWORD
+  dwReserved0 [ReparsePoint]
+  dwReserved1 DWORD
+  cFileName "CHAR [MAX_PATH]" outputOnly
+  cAlternateFileName "CHAR [14]" outputOnly
+
+pointer WIN32_FIND_DATAA* WIN32_FIND_DATAA
+
+struct WIN32_FIND_DATAW
+  dwFileAttributes [FileAttributes]
+  ftCreationTime FILETIME
+  ftLastAccessTime FILETIME
+  ftLastWriteTime FILETIME
+  nFileSizeHigh DWORD
+  nFileSizeLow DWORD
+  dwReserved0 [ReparsePoint]
+  dwReserved1 DWORD
+  cFileName "WCHAR [MAX_PATH]" outputOnly
+  cAlternateFileName "WCHAR [14]" outputOnly
+
+pointer WIN32_FIND_DATAW* WIN32_FIND_DATAW
+
+pointer "const WIN32_FIND_DATAW*" WIN32_FIND_DATAW
+
+struct TIME_ZONE_INFORMATION
+  Bias LONG
+  StandardName "WCHAR [32]"
+  StandardDate SYSTEMTIME
+  StandardBias LONG
+  DaylightName "WCHAR [32]"
+  DaylightDate SYSTEMTIME
+  DaylightBias LONG
+
+pointer LPTIME_ZONE_INFORMATION TIME_ZONE_INFORMATION
+
+pointer "const TIME_ZONE_INFORMATION*" TIME_ZONE_INFORMATION
+
+struct OFSTRUCT
+  cBytes BYTE
+  fFixedDisk BYTE
+  nErrCode WORD
+  Reserved1 WORD
+  Reserved2 WORD
+  szPathName "CHAR [OFS_MAXPATHNAME]"
+
+pointer LPOFSTRUCT OFSTRUCT
+
+enum [PROCESSOR_ARCHITECTURE] WORD display=WORD
+  PROCESSOR_ARCHITECTURE_INTEL   0
+  PROCESSOR_ARCHITECTURE_IA64    6
+  PROCESSOR_ARCHITECTURE_AMD64   9
+  PROCESSOR_ARCHITECTURE_UNKNOWN 0xFFFF
+
+flag MINIDUMP_TYPE DWORD
+  MiniDumpNormal                         0x00000000
+  MiniDumpWithDataSegs                   0x00000001
+  MiniDumpWithFullMemory                 0x00000002
+  MiniDumpWithHandleData                 0x00000004
+  MiniDumpFilterMemory                   0x00000008
+  MiniDumpScanMemory                     0x00000010
+  MiniDumpWithUnloadedModules            0x00000020
+  MiniDumpWithIndirectlyReferencedMemory 0x00000040
+  MiniDumpFilterModulePaths              0x00000080
+  MiniDumpWithProcessThreadData          0x00000100
+  MiniDumpWithPrivateReadWriteMemory     0x00000200
+  MiniDumpWithoutOptionalData            0x00000400
+  MiniDumpWithFullMemoryInfo             0x00000800
+  MiniDumpWithThreadInfo                 0x00001000
+  MiniDumpWithCodeSegs                   0x00002000
+  MiniDumpWithoutAuxiliaryState          0x00004000
+  MiniDumpWithFullAuxiliaryState         0x00008000
+  MiniDumpWithPrivateWriteCopyMemory     0x00010000
+  MiniDumpIgnoreInaccessibleMemory       0x00020000
+  MiniDumpWithTokenInformation           0x00040000
+  MiniDumpWithModuleHeaders              0x00080000
+  MiniDumpFilterTriage                   0x00100000
+
+flag THREAD_WRITE_FLAGS DWORD display=DWORD
+  ThreadWriteThread            0x0001
+  ThreadWriteStack             0x0002
+  ThreadWriteContext           0x0004
+  ThreadWriteBackingStore      0x0008
+  ThreadWriteInstructionWindow 0x0010
+  ThreadWriteThreadData        0x0020
+  ThreadWriteThreadInfo        0x0040
+
+flag MODULE_WRITE_FLAGS DWORD display=DWORD
+  ModuleWriteModule        0x0001
+  ModuleWriteDataSeg       0x0002
+  ModuleWriteMiscRecord    0x0004
+  ModuleWriteCvRecord      0x0008
+  ModuleReferencedByMemory 0x0010
+  ModuleWriteTlsData       0x0020
+  ModuleWriteCodeSegs      0x0040
+
+enum [VirtKeyCode] WORD display=WORD
+  VK_LBUTTON             0x01
+  VK_RBUTTON             0x02
+  VK_CANCEL              0x03
+  VK_MBUTTON             0x04
+  VK_XBUTTON1            0x05
+  VK_XBUTTON2            0x06
+  VK_BACK                0x08
+  VK_TAB                 0x09
+  VK_CLEAR               0x0C
+  VK_RETURN              0x0D
+  VK_SHIFT               0x10
+  VK_CONTROL             0x11
+  VK_MENU                0x12
+  VK_PAUSE               0x13
+  VK_CAPITAL             0x14
+  VK_KANA                0x15
+  VK_JUNJA               0x17
+  VK_FINAL               0x18
+  VK_KANJI               0x19
+  VK_ESCAPE              0x1B
+  VK_CONVERT             0x1C
+  VK_NONCONVERT          0x1D
+  VK_ACCEPT              0x1E
+  VK_MODECHANGE          0x1F
+  VK_SPACE               0x20
+  VK_PRIOR               0x21
+  VK_NEXT                0x22
+  VK_END                 0x23
+  VK_HOME                0x24
+  VK_LEFT                0x25
+  VK_UP                  0x26
+  VK_RIGHT               0x27
+  VK_DOWN                0x28
+  VK_SELECT              0x29
+  VK_PRINT               0x2A
+  VK_EXECUTE             0x2B
+  VK_SNAPSHOT            0x2C
+  VK_INSERT              0x2D
+  VK_DELETE              0x2E
+  VK_HELP                0x2F
+  VK_LWIN                0x5B
+  VK_RWIN                0x5C
+  VK_APPS                0x5D
+  VK_SLEEP               0x5F
+  VK_NUMPAD0             0x60
+  VK_NUMPAD1             0x61
+  VK_NUMPAD2             0x62
+  VK_NUMPAD3             0x63
+  VK_NUMPAD4             0x64
+  VK_NUMPAD5             0x65
+  VK_NUMPAD6             0x66
+  VK_NUMPAD7             0x67
+  VK_NUMPAD8             0x68
+  VK_NUMPAD9             0x69
+  VK_MULTIPLY            0x6A
+  VK_ADD                 0x6B
+  VK_SEPARATOR           0x6C
+  VK_SUBTRACT            0x6D
+  VK_DECIMAL             0x6E
+  VK_DIVIDE              0x6F
+  VK_F1                  0x70
+  VK_F2                  0x71
+  VK_F3                  0x72
+  VK_F4                  0x73
+  VK_F5                  0x74
+  VK_F6                  0x75
+  VK_F7                  0x76
+  VK_F8                  0x77
+  VK_F9                  0x78
+  VK_F10                 0x79
+  VK_F11                 0x7A
+  VK_F12                 0x7B
+  VK_F13                 0x7C
+  VK_F14                 0x7D
+  VK_F15                 0x7E
+  VK_F16                 0x7F
+  VK_F17                 0x80
+  VK_F18                 0x81
+  VK_F19                 0x82
+  VK_F20                 0x83
+  VK_F21                 0x84
+  VK_F22                 0x85
+  VK_F23                 0x86
+  VK_F24                 0x87
+  VK_NUMLOCK             0x90
+  VK_SCROLL              0x91
+  VK_OEM_NEC_EQUAL       0x92
+  VK_LSHIFT              0xA0
+  VK_RSHIFT              0xA1
+  VK_LCONTROL            0xA2
+  VK_RCONTROL            0xA3
+  VK_LMENU               0xA4
+  VK_RMENU               0xA5
+  VK_BROWSER_BACK        0xA6
+  VK_BROWSER_FORWARD     0xA7
+  VK_BROWSER_REFRESH     0xA8
+  VK_BROWSER_STOP        0xA9
+  VK_BROWSER_SEARCH      0xAA
+  VK_BROWSER_FAVORITES   0xAB
+  VK_BROWSER_HOME        0xAC
+  VK_VOLUME_MUTE         0xAD
+  VK_VOLUME_DOWN         0xAE
+  VK_VOLUME_UP           0xAF
+  VK_MEDIA_NEXT_TRACK    0xB0
+  VK_MEDIA_PREV_TRACK    0xB1
+  VK_MEDIA_STOP          0xB2
+  VK_MEDIA_PLAY_PAUSE    0xB3
+  VK_LAUNCH_MAIL         0xB4
+  VK_LAUNCH_MEDIA_SELECT 0xB5
+  VK_LAUNCH_APP1         0xB6
+  VK_LAUNCH_APP2         0xB7
+  VK_OEM_1               0xBA
+  VK_OEM_PLUS            0xBB
+  VK_OEM_COMMA           0xBC
+  VK_OEM_MINUS           0xBD
+  VK_OEM_PERIOD          0xBE
+  VK_OEM_2               0xBF
+  VK_OEM_3               0xC0
+  VK_OEM_4               0xDB
+  VK_OEM_5               0xDC
+  VK_OEM_6               0xDD
+  VK_OEM_7               0xDE
+  VK_OEM_8               0xDF
+  VK_OEM_AX              0xE1
+  VK_OEM_102             0xE2
+  VK_ICO_HELP            0xE3
+  VK_ICO_00              0xE4
+  VK_PROCESSKEY          0xE5
+  VK_ICO_CLEAR           0xE6
+  VK_PACKET              0xE7
+  VK_OEM_RESET           0xE9
+  VK_OEM_JUMP            0xEA
+  VK_OEM_PA1             0xEB
+  VK_OEM_PA2             0xEC
+  VK_OEM_PA3             0xED
+  VK_OEM_WSCTRL          0xEE
+  VK_OEM_CUSEL           0xEF
+  VK_OEM_ATTN            0xF0
+  VK_OEM_FINISH          0xF1
+  VK_OEM_COPY            0xF2
+  VK_OEM_AUTO            0xF3
+  VK_OEM_ENLW            0xF4
+  VK_OEM_BACKTAB         0xF5
+  VK_ATTN                0xF6
+  VK_CRSEL               0xF7
+  VK_EXSEL               0xF8
+  VK_EREOF               0xF9
+  VK_PLAY                0xFA
+  VK_ZOOM                0xFB
+  VK_NONAME              0xFC
+  VK_PA1                 0xFD
+  VK_OEM_CLEAR           0xFE
+
+enum [VER_PLATFORM] DWORD display=DWORD
+  VER_PLATFORM_WIN32s        0
+  VER_PLATFORM_WIN32_WINDOWS 1
+  VER_PLATFORM_WIN32_NT      2
+
+struct OSVERSIONINFO
+  dwOSVersionInfoSize DWORD
+  dwMajorVersion DWORD
+  dwMinorVersion DWORD
+  dwBuildNumber DWORD
+  dwPlatformId [VER_PLATFORM]
+  szCSDVersion "TCHAR [128]"
+
+pointer LPOSVERSIONINFO OSVERSIONINFO
+
+struct RTL_OSVERSIONINFOW
+  dwOSVersionInfoSize DWORD
+  dwMajorVersion DWORD
+  dwMinorVersion DWORD
+  dwBuildNumber DWORD
+  dwPlatformId [VER_PLATFORM]
+  szCSDVersion "WCHAR [128]"
+
+pointer PRTL_OSVERSIONINFOW RTL_OSVERSIONINFOW
+
+flag [VER_SUITE] WORD display=WORD
+  VER_SUITE_SMALLBUSINESS            0x00000001
+  VER_SUITE_ENTERPRISE               0x00000002
+  VER_SUITE_BACKOFFICE               0x00000004
+  VER_SUITE_COMMUNICATIONS           0x00000008
+  VER_SUITE_TERMINAL                 0x00000010
+  VER_SUITE_SMALLBUSINESS_RESTRICTED 0x00000020
+  VER_SUITE_EMBEDDEDNT               0x00000040
+  VER_SUITE_DATACENTER               0x00000080
+  VER_SUITE_SINGLEUSERTS             0x00000100
+  VER_SUITE_PERSONAL                 0x00000200
+  VER_SUITE_BLADE                    0x00000400
+  VER_SUITE_EMBEDDED_RESTRICTED      0x00000800
+  VER_SUITE_SECURITY_APPLIANCE       0x00001000
+  VER_SUITE_STORAGE_SERVER           0x00002000
+  VER_SUITE_COMPUTE_SERVER           0x00004000
+  VER_SUITE_WH_SERVER                0x00008000
+
+enum [VER_PRODUCT] BYTE display=BYTE
+  VER_NT_WORKSTATION       0x0000001
+  VER_NT_DOMAIN_CONTROLLER 0x0000002
+  VER_NT_SERVER            0x0000003
+
+struct OSVERSIONINFOEX
+  dwOSVersionInfoSize DWORD
+  dwMajorVersion DWORD
+  dwMinorVersion DWORD
+  dwBuildNumber DWORD
+  dwPlatformId DWORD
+  szCSDVersion "TCHAR [128]"
+  wServicePackMajor WORD
+  wServicePackMinor WORD
+  wSuiteMask [VER_SUITE]
+  wProductType [VER_PRODUCT]
+  wReserved BYTE
+
+pointer LPOSVERSIONINFOEX OSVERSIONINFOEX
+
+struct RTL_OSVERSIONINFOEXW
+  dwOSVersionInfoSize DWORD
+  dwMajorVersion DWORD
+  dwMinorVersion DWORD
+  dwBuildNumber DWORD
+  dwPlatformId DWORD
+  szCSDVersion "WCHAR [128]"
+  wServicePackMajor WORD
+  wServicePackMinor WORD
+  wSuiteMask [VER_SUITE]
+  wProductType [VER_PRODUCT]
+  wReserved BYTE
+
+pointer PRTL_OSVERSIONINFOEXW RTL_OSVERSIONINFOEXW
+
+enum SymTagEnum ULONG
+  SymTagNull             0
+  SymTagExe              1
+  SymTagCompiland        2
+  SymTagCompilandDetails 3
+  SymTagCompilandEnv     4
+  SymTagFunction         5
+  SymTagBlock            6
+  SymTagData             7
+  SymTagAnnotation       8
+  SymTagLabel            9
+  SymTagPublicSymbol     10
+  SymTagUDT              11
+  SymTagEnum             12
+  SymTagFunctionType     13
+  SymTagPointerType      14
+  SymTagArrayType        15
+  SymTagBaseType         16
+  SymTagTypedef          17
+  SymTagBaseClass        18
+  SymTagFriend           19
+  SymTagFunctionArgType  20
+  SymTagFuncDebugStart   21
+  SymTagFuncDebugEnd     22
+  SymTagUsingNamespace   23
+  SymTagVTableShape      24
+  SymTagVTable           25
+  SymTagCustom           26
+  SymTagThunk            27
+  SymTagCustomType       28
+  SymTagManagedType      29
+  SymTagDimension        30
+  SymTagCallSite         31
+
+alias [SymTagEnum_ULONG] SymTagEnum display=ULONG
+
+struct IMAGE_DATA_DIRECTORY
+  VirtualAddress DWORD
+  Size DWORD
+
+array "IMAGE_DATA_DIRECTORY [IMAGE_NUMBEROF_DIRECTORY_ENTRIES]" base=IMAGE_DATA_DIRECTORY count=16
+
+enum [IMAGE_OPTIONAL_MAGIC] WORD display=WORD
+  IMAGE_ROM_OPTIONAL_HDR_MAGIC  0x107
+  IMAGE_NT_OPTIONAL_HDR32_MAGIC 0x10b
+  IMAGE_NT_OPTIONAL_HDR64_MAGIC 0x20b
+
+enum [IMAGE_SUBSYSTEM] WORD display=WORD
+  IMAGE_SUBSYSTEM_UNKNOWN                  0
+  IMAGE_SUBSYSTEM_NATIVE                   1
+  IMAGE_SUBSYSTEM_WINDOWS_GUI              2
+  IMAGE_SUBSYSTEM_WINDOWS_CUI              3
+  IMAGE_SUBSYSTEM_OS2_CUI                  5
+  IMAGE_SUBSYSTEM_POSIX_CUI                7
+  IMAGE_SUBSYSTEM_NATIVE_WINDOWS           8
+  IMAGE_SUBSYSTEM_WINDOWS_CE_GUI           9
+  IMAGE_SUBSYSTEM_EFI_APPLICATION          10
+  IMAGE_SUBSYSTEM_EFI_BOOT_SERVICE_DRIVER  11
+  IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER       12
+  IMAGE_SUBSYSTEM_EFI_ROM                  13
+  IMAGE_SUBSYSTEM_XBOX                     14
+  IMAGE_SUBSYSTEM_WINDOWS_BOOT_APPLICATION 16
+
+enum [IMAGE_SUBSYSTEM_ULONG] ULONG display=ULONG
+  IMAGE_SUBSYSTEM_UNKNOWN                  0
+  IMAGE_SUBSYSTEM_NATIVE                   1
+  IMAGE_SUBSYSTEM_WINDOWS_GUI              2
+  IMAGE_SUBSYSTEM_WINDOWS_CUI              3
+  IMAGE_SUBSYSTEM_OS2_CUI                  5
+  IMAGE_SUBSYSTEM_POSIX_CUI                7
+  IMAGE_SUBSYSTEM_NATIVE_WINDOWS           8
+  IMAGE_SUBSYSTEM_WINDOWS_CE_GUI           9
+  IMAGE_SUBSYSTEM_EFI_APPLICATION          10
+  IMAGE_SUBSYSTEM_EFI_BOOT_SERVICE_DRIVER  11
+  IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER       12
+  IMAGE_SUBSYSTEM_EFI_ROM                  13
+  IMAGE_SUBSYSTEM_XBOX                     14
+  IMAGE_SUBSYSTEM_WINDOWS_BOOT_APPLICATION 16
+
+flag [IMAGE_DLLCHARACTERISTICS] WORD display=WORD
+  IMAGE_LIBRARY_PROCESS_INIT                     0x0001
+  IMAGE_LIBRARY_PROCESS_TERM                     0x0002
+  IMAGE_LIBRARY_THREAD_INIT                      0x0004
+  IMAGE_LIBRARY_THREAD_TERM                      0x0008
+  IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA       0x0020
+  IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE          0x0040
+  IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY       0x0080
+  IMAGE_DLLCHARACTERISTICS_NX_COMPAT             0x0100
+  IMAGE_DLLCHARACTERISTICS_NO_ISOLATION          0x0200
+  IMAGE_DLLCHARACTERISTICS_NO_SEH                0x0400
+  IMAGE_DLLCHARACTERISTICS_NO_BIND               0x0800
+  IMAGE_DLLCHARACTERISTICS_APPCONTAINER          0x1000
+  IMAGE_DLLCHARACTERISTICS_WDM_DRIVER            0x2000
+  IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE 0x8000
+
+enum [IMAGE_FILE_MACHINE] WORD display=WORD
+  IMAGE_FILE_MACHINE_UNKNOWN 0
+  IMAGE_FILE_MACHINE_I386    0x014c
+  IMAGE_FILE_MACHINE_IA64    0x0200
+  IMAGE_FILE_MACHINE_AMD64   0x8664
+
+flag [IMAGE_FILE_CHARACTERISTICS] WORD display=WORD
+  IMAGE_FILE_RELOCS_STRIPPED         0x0001
+  IMAGE_FILE_EXECUTABLE_IMAGE        0x0002
+  IMAGE_FILE_LINE_NUMS_STRIPPED      0x0004
+  IMAGE_FILE_LOCAL_SYMS_STRIPPED     0x0008
+  IMAGE_FILE_AGGRESIVE_WS_TRIM       0x0010
+  IMAGE_FILE_LARGE_ADDRESS_AWARE     0x0020
+  IMAGE_FILE_BYTES_REVERSED_LO       0x0080
+  IMAGE_FILE_32BIT_MACHINE           0x0100
+  IMAGE_FILE_DEBUG_STRIPPED          0x0200
+  IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP 0x0400
+  IMAGE_FILE_NET_RUN_FROM_SWAP       0x0800
+  IMAGE_FILE_SYSTEM                  0x1000
+  IMAGE_FILE_DLL                     0x2000
+  IMAGE_FILE_UP_SYSTEM_ONLY          0x4000
+  IMAGE_FILE_BYTES_REVERSED_HI       0x8000
+
+struct IMAGE_FILE_HEADER
+  Machine [IMAGE_FILE_MACHINE]
+  NumberOfSections WORD
+  TimeDateStamp DWORD
+  PointerToSymbolTable DWORD
+  NumberOfSymbols DWORD
+  SizeOfOptionalHeader WORD
+  Characteristics [IMAGE_FILE_CHARACTERISTICS]
+
+struct IMAGE_OPTIONAL_HEADER64
+  Magic [IMAGE_OPTIONAL_MAGIC]
+  MajorLinkerVersion BYTE
+  MinorLinkerVersion BYTE
+  SizeOfCode DWORD
+  SizeOfInitializedData DWORD
+  SizeOfUninitializedData DWORD
+  AddressOfEntryPoint DWORD
+  BaseOfCode DWORD
+  ImageBase ULONGLONG
+  SectionAlignment DWORD
+  FileAlignment DWORD
+  MajorOperatingSystemVersion WORD
+  MinorOperatingSystemVersion WORD
+  MajorImageVersion WORD
+  MinorImageVersion WORD
+  MajorSubsystemVersion WORD
+  MinorSubsystemVersion WORD
+  Win32VersionValue DWORD
+  SizeOfImage DWORD
+  SizeOfHeaders DWORD
+  CheckSum DWORD
+  Subsystem [IMAGE_SUBSYSTEM]
+  DllCharacteristics [IMAGE_DLLCHARACTERISTICS]
+  SizeOfStackReserve ULONGLONG
+  SizeOfStackCommit ULONGLONG
+  SizeOfHeapReserve ULONGLONG
+  SizeOfHeapCommit ULONGLONG
+  LoaderFlags DWORD
+  NumberOfRvaAndSizes DWORD
+  DataDirectory "IMAGE_DATA_DIRECTORY [IMAGE_NUMBEROF_DIRECTORY_ENTRIES]"
+
+struct IMAGE_NT_HEADERS
+  Signature DWORD
+  FileHeader IMAGE_FILE_HEADER
+  OptionalHeader IMAGE_OPTIONAL_HEADER
+
+pointer PIMAGE_NT_HEADERS IMAGE_NT_HEADERS
+
+pointer PIMAGE_NT_HEADERS* PIMAGE_NT_HEADERS
+
+struct NUMBERFMT
+  NumDigits UINT
+  LeadingZero UINT
+  Grouping UINT
+  lpDecimalSep LPTSTR
+  lpThousandSep LPTSTR
+  NegativeOrder UINT
+
+pointer NUMBERFMT* NUMBERFMT
+
+pointer "const NUMBERFMT*" NUMBERFMT
+
+enum [DwmWindowAttr] DWORD display=DWORD
+  DWMWA_NCRENDERING_ENABLED         1
+  DWMWA_NCRENDERING_POLICY          2
+  DWMWA_TRANSITIONS_FORCEDISABLED   3
+  DWMWA_ALLOW_NCPAINT               4
+  DWMWA_CAPTION_BUTTON_BOUNDS       5
+  DWMWA_NONCLIENT_RTL_LAYOUT        6
+  DWMWA_FORCE_ICONIC_REPRESENTATION 7
+  DWMWA_FLIP3D_POLICY               8
+  DWMWA_EXTENDED_FRAME_BOUNDS       9
+  DWMWA_HAS_ICONIC_BITMAP           10
+  DWMWA_DISALLOW_PEEK               11
+  DWMWA_EXCLUDED_FROM_PEEK          12
+  DWMWA_CLOAK                       13
+  DWMWA_CLOAKED                     14
+  DWMWA_FREEZE_REPRESENTATION       15
+
+flag [FILE_NOTIFY_CHANGE_FLAGS] DWORD display=DWORD
+  FILE_NOTIFY_CHANGE_FILE_NAME    0x00000001
+  FILE_NOTIFY_CHANGE_DIR_NAME     0x00000002
+  FILE_NOTIFY_CHANGE_NAME         0x00000003
+  FILE_NOTIFY_CHANGE_ATTRIBUTES   0x00000004
+  FILE_NOTIFY_CHANGE_SIZE         0x00000008
+  FILE_NOTIFY_CHANGE_LAST_WRITE   0x00000010
+  FILE_NOTIFY_CHANGE_LAST_ACCESS  0x00000020
+  FILE_NOTIFY_CHANGE_CREATION     0x00000040
+  FILE_NOTIFY_CHANGE_EA           0x00000080
+  FILE_NOTIFY_CHANGE_SECURITY     0x00000100
+  FILE_NOTIFY_CHANGE_STREAM_NAME  0x00000200
+  FILE_NOTIFY_CHANGE_STREAM_SIZE  0x00000400
+  FILE_NOTIFY_CHANGE_STREAM_WRITE 0x00000800
+
+enum [SEEK_TYPE] int display=int
+  SEEK_SET 0
+  SEEK_CUR 1
+  SEEK_END 2
+
+flag [LocaleMappingFlags] DWORD display=DWORD
+  NORM_IGNORECASE           0x00000001
+  NORM_IGNORENONSPACE       0x00000002
+  NORM_IGNORESYMBOLS        0x00000004
+  LCMAP_LOWERCASE           0x00000100
+  LCMAP_UPPERCASE           0x00000200
+  LCMAP_SORTKEY             0x00000400
+  LCMAP_BYTEREV             0x00000800
+  SORT_STRINGSORT           0x00001000
+  NORM_IGNOREKANATYPE       0x00010000
+  NORM_IGNOREWIDTH          0x00020000
+  LCMAP_HIRAGANA            0x00100000
+  LCMAP_KATAKANA            0x00200000
+  LCMAP_HALFWIDTH           0x00400000
+  LCMAP_FULLWIDTH           0x00800000
+  LCMAP_LINGUISTIC_CASING   0x01000000
+  LCMAP_SIMPLIFIED_CHINESE  0x02000000
+  LCMAP_TRADITIONAL_CHINESE 0x04000000
+  NORM_LINGUISTIC_CASING    0x08000000
+
+flag [ACTCTX_FLAG] DWORD display=DWORD
+  ACTCTX_FLAG_PROCESSOR_ARCHITECTURE_VALID 0x00000001
+  ACTCTX_FLAG_LANGID_VALID                 0x00000002
+  ACTCTX_FLAG_ASSEMBLY_DIRECTORY_VALID     0x00000004
+  ACTCTX_FLAG_RESOURCE_NAME_VALID          0x00000008
+  ACTCTX_FLAG_SET_PROCESS_DEFAULT          0x00000010
+  ACTCTX_FLAG_APPLICATION_NAME_VALID       0x00000020
+  ACTCTX_FLAG_SOURCE_IS_ASSEMBLYREF        0x00000040
+  ACTCTX_FLAG_HMODULE_VALID                0x00000080
+
+struct ACTCTX
+  cbSize ULONG
+  dwFlags [ACTCTX_FLAG]
+  lpSource LPCTSTR
+  wProcessorArchitecture [PROCESSOR_ARCHITECTURE] display=USHORT
+  wLangId LANGID
+  lpAssemblyDirectory LPCTSTR
+  lpResourceName LPCTSTR
+  lpApplicationName LPCTSTR
+  hModule HMODULE
+
+pointer PACTCTX ACTCTX
+
+flag [HEAP_FLAGS] DWORD display=DWORD
+  HEAP_NO_SERIALIZE             0x00000001
+  HEAP_GROWABLE                 0x00000002
+  HEAP_GENERATE_EXCEPTIONS      0x00000004
+  HEAP_ZERO_MEMORY              0x00000008
+  HEAP_REALLOC_IN_PLACE_ONLY    0x00000010
+  HEAP_TAIL_CHECKING_ENABLED    0x00000020
+  HEAP_FREE_CHECKING_ENABLED    0x00000040
+  HEAP_DISABLE_COALESCE_ON_FREE 0x00000080
+  HEAP_CREATE_ALIGN_16          0x00010000
+  HEAP_CREATE_ENABLE_TRACING    0x00020000
+  HEAP_CREATE_ENABLE_EXECUTE    0x00040000
+
+alias [HEAP_FLAGS_ULONG] [HEAP_FLAGS] display=ULONG
+
+flag [IMAGE_FILE_CHARACTERISTICS_ULONG] ULONG display=ULONG
+  IMAGE_FILE_RELOCS_STRIPPED         0x0001
+  IMAGE_FILE_EXECUTABLE_IMAGE        0x0002
+  IMAGE_FILE_LINE_NUMS_STRIPPED      0x0004
+  IMAGE_FILE_LOCAL_SYMS_STRIPPED     0x0008
+  IMAGE_FILE_AGGRESIVE_WS_TRIM       0x0010
+  IMAGE_FILE_LARGE_ADDRESS_AWARE     0x0020
+  IMAGE_FILE_BYTES_REVERSED_LO       0x0080
+  IMAGE_FILE_32BIT_MACHINE           0x0100
+  IMAGE_FILE_DEBUG_STRIPPED          0x0200
+  IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP 0x0400
+  IMAGE_FILE_NET_RUN_FROM_SWAP       0x0800
+  IMAGE_FILE_SYSTEM                  0x1000
+  IMAGE_FILE_DLL                     0x2000
+  IMAGE_FILE_UP_SYSTEM_ONLY          0x4000
+  IMAGE_FILE_BYTES_REVERSED_HI       0x8000
+
+pointer [IMAGE_FILE_CHARACTERISTICS_ULONG*] [IMAGE_FILE_CHARACTERISTICS_ULONG] display=PULONG
+
+flag [FIND_ACTCTX_SECTION_FLAGS] DWORD display=DWORD
+  FIND_ACTCTX_SECTION_KEY_RETURN_HACTCTX           0x00000001
+  FIND_ACTCTX_SECTION_KEY_RETURN_FLAGS             0x00000002
+  FIND_ACTCTX_SECTION_KEY_RETURN_ASSEMBLY_METADATA 0x00000004
+
+enum [ACTIVATION_CONTEXT_SECTION] ULONG display=ULONG
+  ACTIVATION_CONTEXT_SECTION_ASSEMBLY_INFORMATION         1
+  ACTIVATION_CONTEXT_SECTION_DLL_REDIRECTION              2
+  ACTIVATION_CONTEXT_SECTION_WINDOW_CLASS_REDIRECTION     3
+  ACTIVATION_CONTEXT_SECTION_COM_SERVER_REDIRECTION       4
+  ACTIVATION_CONTEXT_SECTION_COM_INTERFACE_REDIRECTION    5
+  ACTIVATION_CONTEXT_SECTION_COM_TYPE_LIBRARY_REDIRECTION 6
+  ACTIVATION_CONTEXT_SECTION_COM_PROGID_REDIRECTION       7
+  ACTIVATION_CONTEXT_SECTION_GLOBAL_OBJECT_RENAME_TABLE   8
+  ACTIVATION_CONTEXT_SECTION_CLR_SURROGATES               9
+  ACTIVATION_CONTEXT_SECTION_APPLICATION_SETTINGS         10
+  ACTIVATION_CONTEXT_SECTION_COMPATIBILITY_INFO           11
+
+enum [WAIT_RESULT] DWORD display=DWORD
+  success NotEqual=0xFFFFFFFF
+  WAIT_OBJECT_0      0x00000000
+  WAIT_OBJECT_1      0x00000001
+  WAIT_OBJECT_2      0x00000002
+  WAIT_OBJECT_3      0x00000003
+  WAIT_OBJECT_4      0x00000004
+  WAIT_OBJECT_5      0x00000005
+  WAIT_ABANDONED_0   0x00000080
+  WAIT_ABANDONED_1   0x00000081
+  WAIT_ABANDONED_2   0x00000082
+  WAIT_ABANDONED_3   0x00000083
+  WAIT_ABANDONED_4   0x00000084
+  WAIT_ABANDONED_5   0x00000085
+  WAIT_IO_COMPLETION 0x000000C0
+  WAIT_TIMEOUT       258
+  WAIT_FAILED        0xFFFFFFFF
+
+struct PROCESSOR_NUMBER
+  Group WORD
+  Number BYTE
+  Reserved BYTE
+
+pointer PPROCESSOR_NUMBER PROCESSOR_NUMBER
+
+flag ISOLEVEL ULONG
+  ISOLATIONLEVEL_CHAOS           0x10
+  ISOLATIONLEVEL_BROWSE          0x100
+  ISOLATIONLEVEL_CURSORSTABILITY 0x1000
+  ISOLATIONLEVEL_REPEATABLEREAD  0x10000
+  ISOLATIONLEVEL_ISOLATED        0x100000
+  ISOLATIONLEVEL_UNSPECIFIED     0xffffffff
+
+flag ISOFLAG ULONG display=ULONG
+  ISOFLAG_RETAIN_COMMIT_DC 1
+  ISOFLAG_RETAIN_COMMIT    2
+  ISOFLAG_RETAIN_COMMIT_NO 3
+  ISOFLAG_RETAIN_ABORT_DC  4
+  ISOFLAG_RETAIN_DONTCARE  5
+  ISOFLAG_RETAIN_ABORT     8
+  ISOFLAG_RETAIN_BOTH      10
+  ISOFLAG_RETAIN_ABORT_NO  12
+  ISOFLAG_RETAIN_NONE      15
+  ISOFLAG_OPTIMISTIC       16
+  ISOFLAG_READONLY         32
+
+flag [SHTDN_REASON] DWORD display=DWORD
+  SHTDN_REASON_MINOR_MAINTENANCE              0x00000001
+  SHTDN_REASON_MINOR_INSTALLATION             0x00000002
+  SHTDN_REASON_MINOR_UPGRADE                  0x00000003
+  SHTDN_REASON_MINOR_RECONFIG                 0x00000004
+  SHTDN_REASON_MINOR_HUNG                     0x00000005
+  SHTDN_REASON_MINOR_UNSTABLE                 0x00000006
+  SHTDN_REASON_MINOR_DISK                     0x00000007
+  SHTDN_REASON_MINOR_PROCESSOR                0x00000008
+  SHTDN_REASON_MINOR_NETWORKCARD              0x00000009
+  SHTDN_REASON_MINOR_POWER_SUPPLY             0x0000000a
+  SHTDN_REASON_MINOR_CORDUNPLUGGED            0x0000000b
+  SHTDN_REASON_MINOR_ENVIRONMENT              0x0000000c
+  SHTDN_REASON_MINOR_HARDWARE_DRIVER          0x0000000d
+  SHTDN_REASON_MINOR_OTHERDRIVER              0x0000000e
+  SHTDN_REASON_MINOR_BLUESCREEN               0x0000000F
+  SHTDN_REASON_MINOR_SERVICEPACK              0x00000010
+  SHTDN_REASON_MINOR_HOTFIX                   0x00000011
+  SHTDN_REASON_MINOR_SECURITYFIX              0x00000012
+  SHTDN_REASON_MINOR_SECURITY                 0x00000013
+  SHTDN_REASON_MINOR_NETWORK_CONNECTIVITY     0x00000014
+  SHTDN_REASON_MINOR_WMI                      0x00000015
+  SHTDN_REASON_MINOR_SERVICEPACK_UNINSTALL    0x00000016
+  SHTDN_REASON_MINOR_HOTFIX_UNINSTALL         0x00000017
+  SHTDN_REASON_MINOR_SECURITYFIX_UNINSTALL    0x00000018
+  SHTDN_REASON_MINOR_MMC                      0x00000019
+  SHTDN_REASON_MINOR_SYSTEMRESTORE            0x0000001a
+  SHTDN_REASON_MINOR_TERMSRV                  0x00000020
+  SHTDN_REASON_MINOR_DC_PROMOTION             0x00000021
+  SHTDN_REASON_MINOR_DC_DEMOTION              0x00000022
+  SHTDN_REASON_MINOR_NONE                     0x000000ff
+  SHTDN_REASON_MAJOR_HARDWARE                 0x00010000
+  SHTDN_REASON_MAJOR_OPERATINGSYSTEM          0x00020000
+  SHTDN_REASON_MAJOR_SOFTWARE                 0x00030000
+  SHTDN_REASON_MAJOR_APPLICATION              0x00040000
+  SHTDN_REASON_MAJOR_SYSTEM                   0x00050000
+  SHTDN_REASON_MAJOR_POWER                    0x00060000
+  SHTDN_REASON_MAJOR_LEGACY_API               0x00070000
+  SHTDN_REASON_FLAG_COMMENT_REQUIRED          0x01000000
+  SHTDN_REASON_FLAG_DIRTY_PROBLEM_ID_REQUIRED 0x02000000
+  SHTDN_REASON_FLAG_CLEAN_UI                  0x04000000
+  SHTDN_REASON_FLAG_DIRTY_UI                  0x08000000
+  SHTDN_REASON_FLAG_USER_DEFINED              0x40000000
+  SHTDN_REASON_FLAG_PLANNED                   0x80000000
+  SHTDN_REASON_LEGACY_API                     0x80070000
+
+enum [EWX_FLAGS] UINT display=UINT
+  EWX_LOGOFF          0x00000000
+  EWX_SHUTDOWN        0x00000001
+  EWX_REBOOT          0x00000002
+  EWX_FORCE           0x00000004
+  EWX_POWEROFF        0x00000008
+  EWX_FORCEIFHUNG     0x00000010
+  EWX_QUICKRESOLVE    0x00000020
+  EWX_RESTARTAPPS     0x00000040
+  EWX_HYBRID_SHUTDOWN 0x00400000
+  EWX_BOOTOPTIONS     0x01000000
+
+enum URLZONE DWORD display=DWORD
+  URLZONE_LOCAL_MACHINE 0
+  URLZONE_INTRANET      1
+  URLZONE_TRUSTED       2
+  URLZONE_INTERNET      3
+  URLZONE_UNTRUSTED     4
+
+enum [THREAD_PRIORITY] int display=int
+  THREAD_PRIORITY_IDLE          -15
+  THREAD_PRIORITY_LOWEST        -2
+  THREAD_PRIORITY_BELOW_NORMAL  -1
+  THREAD_PRIORITY_NORMAL        0
+  THREAD_PRIORITY_ABOVE_NORMAL  1
+  THREAD_PRIORITY_HIGHEST       2
+  THREAD_PRIORITY_TIME_CRITICAL 15
+  THREAD_PRIORITY_ERROR_RETURN  0x7FFFFFFF
+
+alias [THREAD_PRIORITY|LONG] [THREAD_PRIORITY] display=LONG
+
+pointer [THREAD_PRIORITY*|LONG*] [THREAD_PRIORITY|LONG] display=LONG*
+
+enum [MoveMethodEnum] DWORD display=DWORD
+  FILE_BEGIN   0
+  FILE_CURRENT 1
+  FILE_END     2
+
+flag [XSTATE_FEATURE_64] DWORD64 display=DWORD64
+  XSTATE_LEGACY_FLOATING_POINT 0
+  XSTATE_LEGACY_SSE            1
+  XSTATE_AVX                   2
+
+flag [XSTATE_MASK] DWORD64 display=DWORD64
+  XSTATE_MASK_LEGACY_FLOATING_POINT 0x1
+  XSTATE_MASK_LEGACY_SSE            0x2
+  XSTATE_MASK_LEGACY                0x3
+  XSTATE_MASK_AVX                   0x4
+
+pointer [XSTATE_MASK*] [XSTATE_MASK] display=PDWORD64
+

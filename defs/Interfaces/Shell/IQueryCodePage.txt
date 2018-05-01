@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IQueryCodePage base=IUnknown id={C7B236CE-EE80-11D0-985F-006008059382} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetCodePage
+    HRESULT
+    puiCodePage UINT*
+
+  func SetCodePage
+    HRESULT
+    uiCodePage UINT
+
+

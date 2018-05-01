@@ -1,0 +1,230 @@
+include Headers\windows.h.txt
+include Headers\shell.h.txt
+include Headers\ole.h.txt
+include Headers\propsys.h.txt
+
+dll propsys.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Component Object Model (COM)/Structured Storage"
+category "Windows Environment Development/Windows Property System"
+category "Windows Environment Development/Windows Property System/PROPVARIANT and VARIANT"
+func StgDeserializePropVariant
+  WINOLEAPI
+  pprop SERIALIZEDPROPERTYVALUE*
+  cbMax SERIALIZEDPROPERTYVALUE*
+  pvar PROPVARIANT*
+
+func StgSerializePropVariant
+  WINOLEAPI
+  pVar PROPVARIANT*
+  ppProp SERIALIZEDPROPERTYVALUE**
+  pcb SERIALIZEDPROPERTYVALUE*
+
+func PSCoerceToCanonicalValue
+  HRESULT
+  key REFPROPERTYKEY
+  ppropvar PROPVARIANT*
+
+func PSCreateAdapterFromPropertyStore
+  HRESULT
+  pps IPropertyStore*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSCreateDelayedMultiplexPropertyStore
+  HRESULT
+  flags GETPROPERTYSTOREFLAGS
+  pdpsf IDelayedPropertyStoreFactory*
+  rgStoreIds "const DWORD*" count=cStores
+  cStores DWORD
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSCreateMemoryPropertyStore
+  HRESULT
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSCreateMultiplexPropertyStore
+  HRESULT
+  prgpunkStores IUnknown** count=cStores
+  cStores DWORD
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSCreatePropertyChangeArray
+  HRESULT
+  rgpropkey "const PROPERTYKEY*" count=cChanges
+  rgflags "const PKA_FLAGS*" count=cChanges
+  rgpropvar "const PROPVARIANT*" count=cChanges
+  cChanges UINT
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSCreatePropertyStoreFromObject
+  HRESULT
+  punk IUnknown*
+  grfMode [STGM_FLAGS]
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSCreatePropertyStoreFromPropertySetStorage
+  HRESULT
+  ppss IPropertySetStorage*
+  grfMode [STGM_FLAGS]
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSCreateSimplePropertyChange
+  HRESULT
+  flags PKA_FLAGS
+  key REFPROPERTYKEY
+  propvar REFPROPVARIANT
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSEnumeratePropertyDescriptions
+  PSSTDAPI
+  filterOn PROPDESC_ENUMFILTER
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSFormatForDisplay
+  HRESULT
+  propkey REFPROPERTYKEY
+  propvar REFPROPVARIANT
+  pdfFlags PROPDESC_FORMAT_FLAGS
+  pwszText LPWSTR outputOnly
+  cchText DWORD
+
+func PSFormatForDisplayAlloc
+  HRESULT
+  key REFPROPERTYKEY
+  propvar REFPROPVARIANT
+  pdfFlags PROPDESC_FORMAT_FLAGS
+  ppszDisplay PWSTR*
+
+func PSFormatPropertyValue
+  HRESULT
+  pps IPropertyStore*
+  ppd IPropertyDescription*
+  pdff PROPDESC_FORMAT_FLAGS
+  ppszDisplay LPWSTR*
+
+func PSGetItemPropertyHandler
+  PSSTDAPI
+  punkItem IUnknown*
+  fReadWrite BOOL
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSGetItemPropertyHandlerWithCreateObject
+  PSSTDAPI
+  punkItem IUnknown*
+  fReadWrite BOOL
+  punkCreateObject IUnknown*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSGetNamedPropertyFromPropertyStorage
+  PSSTDAPI
+  psps PCUSERIALIZEDPROPSTORAGE
+  cb DWORD
+  pszName LPCWSTR
+  ppropvar PROPVARIANT*
+
+func PSGetNameFromPropertyKey
+  HRESULT
+  propkey REFPROPERTYKEY
+  ppszCanonicalName PWSTR*
+
+func PSGetPropertyDescription
+  PSSTDAPI
+  propkey REFPROPERTYKEY
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSGetPropertyDescriptionByName
+  PSSTDAPI
+  pszCanonicalName LPCWSTR
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSGetPropertyDescriptionListFromString
+  PSSTDAPI
+  pszPropList LPCWSTR
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSGetPropertyFromPropertyStorage
+  PSSTDAPI
+  psps PCUSERIALIZEDPROPSTORAGE
+  cb DWORD
+  rpkey REFPROPERTYKEY
+  ppropvar PROPVARIANT**
+
+func PSGetPropertyKeyFromName
+  HRESULT
+  pszName PCWSTR
+  ppropkey PROPERTYKEY*
+
+func PSGetPropertySystem
+  PSSTDAPI
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func PSGetPropertyValue
+  HRESULT
+  pps IPropertyStore*
+  ppd IPropertyDescription*
+  ppropvar PROPVARIANT*
+
+func PSLookupPropertyHandlerCLSID
+  PSSTDAPI
+  pszFilePath PCWSTR
+  pclsid CLSID*
+
+func PSPropertyKeyFromString
+  HRESULT
+  pszString LPCWSTR
+  pkey PROPERTYKEY*
+
+func PSRegisterPropertySchema
+  HRESULT
+  pszPath PCWSTR
+
+func PSSetPropertyValue
+  HRESULT
+  pps IPropertyStore*
+  ppd IPropertyDescription*
+  propvar REFPROPVARIANT
+
+func PSStringFromPropertyKey
+  HRESULT
+  pkey REFPROPERTYKEY
+  psz LPWSTR outputOnly
+  cch UINT
+
+func PSUnregisterPropertySchema
+  HRESULT
+  pszPath PCWSTR
+
+func InitPropVariantFromGUIDAsBuffer
+  HRESULT
+  guid REFGUID
+  ppropvar PROPVARIANT*
+
+func InitPropVariantFromGUIDAsString
+  HRESULT
+  guid REFGUID
+  ppropvar PROPVARIANT*
+
+func InitVariantFromGUIDAsBuffer
+  HRESULT
+  guid REFGUID
+  pvar VARIANT*
+
+func InitVariantFromGUIDAsString
+  HRESULT
+  guid REFGUID
+  pvar VARIANT*
+

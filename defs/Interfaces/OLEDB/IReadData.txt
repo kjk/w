@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IReadData base=IUnknown id={0c733a6a-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func ReadData
+    [OLEDB_HRESULT]
+    hChapter HCHAPTER
+    cbBookmark DBBKMARK
+    pBookmark "const BYTE*" length=cbBookmark
+    lRowsOffset DBROWOFFSET
+    hAccessor HACCESSOR
+    cRows DBROWCOUNT
+    pcRowsObtained DBCOUNTITEM*
+    ppFixedData BYTE**
+    pcbVariableTotal DBLENGTH*
+    ppVariableData BYTE** postLength=pcbVariableTotal
+
+  func ReleaseChapter
+    [OLEDB_HRESULT]
+    hChapter HCHAPTER
+
+

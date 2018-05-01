@@ -1,0 +1,16 @@
+include Interfaces\DirectDraw\IDirectDrawSurface.txt
+
+ingterface IDirectDrawSurface2 base=IDirectDrawSurface id={57805885-6eec-11cf-9441-a82303c10e27} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+  func GetDDInterface
+    [DD_HRESULT]
+    lplpDD LPVOID*
+
+  func PageLock
+    [DD_HRESULT]
+    dwFlags DWORD
+
+  func PageUnlock
+    [DD_HRESULT]
+    dwFlags DWORD
+
+

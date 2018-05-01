@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRpcProxyBuffer base=IUnknown id={D5F56A34-593B-101A-B569-08002B2DBF7A} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Connect
+    HRESULT
+    pRpcChannelBuffer IRpcChannelBuffer*
+
+  func Disconnect
+    void
+
+

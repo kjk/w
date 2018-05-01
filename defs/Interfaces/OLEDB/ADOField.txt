@@ -1,0 +1,9 @@
+include Interfaces\OLEDB\Field20.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ADOField base=Field20 id={00001569-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_Status
+    [OLEDB_HRESULT]
+    pFStatus FieldStatusEnum*
+
+

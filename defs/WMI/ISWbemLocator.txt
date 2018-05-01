@@ -1,0 +1,21 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemLocator base=IDispatch id={76A6415B-CB41-11d1-8B02-00600806D9B6} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func ConnectServer
+    WBEMSTATUS
+    strServer BSTR
+    strNamespace BSTR
+    strUser BSTR
+    strPassword BSTR
+    strLocale BSTR
+    strAuthority BSTR
+    iSecurityFlags WbemConnectOptionsEnum
+    objWbemNamedValueSet IDispatch*
+    objWbemServices ISWbemServices**
+
+  func get_Security_
+    WBEMSTATUS
+    objWbemSecurity ISWbemSecurity**
+
+

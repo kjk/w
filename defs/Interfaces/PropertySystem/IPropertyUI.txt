@@ -1,0 +1,63 @@
+include Interfaces\IUnknown.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyUI base=IUnknown id={757a7d9f-919a-4118-99d7-dbb208c8cc66} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func ParsePropertyName
+    HRESULT
+    pszName LPCWSTR
+    pfmtid FMTID*
+    ppid PROPID*
+    pchEaten ULONG*
+
+  func GetCannonicalName
+    HRESULT
+    fmtid REFFMTID
+    pid PROPID
+    pwszText LPWSTR
+    cchText DWORD
+
+  func GetDisplayName
+    HRESULT
+    fmtid REFFMTID
+    pid PROPID
+    flags PROPERTYUI_NAME_FLAGS
+    pwszText LPWSTR
+    cchText DWORD
+
+  func GetPropertyDescription
+    HRESULT
+    fmtid REFFMTID
+    pid PROPID
+    pwszText LPWSTR
+    cchText DWORD
+
+  func GetDefaultWidth
+    HRESULT
+    fmtid REFFMTID
+    pid PROPID
+    pcxChars ULONG*
+
+  func GetFlags
+    HRESULT
+    fmtid REFFMTID
+    pid PROPID
+    pflags PROPERTYUI_FLAGS*
+
+  func FormatForDisplay
+    HRESULT
+    fmtid REFFMTID
+    pid PROPID
+    ppropvar "const PROPVARIANT*"
+    puiff PROPERTYUI_FORMAT_FLAGS
+    pwszText LPWSTR
+    cchText DWORD
+
+  func GetHelpInfo
+    HRESULT
+    fmtid REFFMTID
+    pid PROPID
+    pwszHelpFile LPWSTR
+    cch DWORD
+    puHelpID UINT*
+
+

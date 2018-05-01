@@ -1,0 +1,80 @@
+include Interfaces\IUnknown.txt
+
+ingterface IMediaSeeking base=IUnknown id={36b73880-c2c8-11cf-8b46-00805f6cef60} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetCapabilities
+    HRESULT
+    pCapabilities DWORD*
+
+  func CheckCapabilities
+    HRESULT
+    pCapabilities DWORD*
+
+  func IsFormatSupported
+    HRESULT
+    pFormat "const GUID*"
+
+  func QueryPreferredFormat
+    HRESULT
+    pFormat GUID*
+
+  func GetTimeFormat
+    HRESULT
+    pFormat GUID*
+
+  func IsUsingTimeFormat
+    HRESULT
+    pFormat "const GUID*"
+
+  func SetTimeFormat
+    HRESULT
+    pFormat "const GUID*"
+
+  func GetDuration
+    HRESULT
+    pDuration LONGLONG*
+
+  func GetStopPosition
+    HRESULT
+    pStop LONGLONG*
+
+  func GetCurrentPosition
+    HRESULT
+    pCurrent LONGLONG*
+
+  func ConvertTimeFormat
+    HRESULT
+    pTarget LONGLONG*
+    pTargetFormat "const GUID*"
+    Source LONGLONG
+    pSourceFormat "const GUID*"
+
+  func SetPositions
+    HRESULT
+    pCurrent LONGLONG*
+    dwCurrentFlags DWORD
+    pStop LONGLONG*
+    dwStopFlags DWORD
+
+  func GetPositions
+    HRESULT
+    pCurrent LONGLONG*
+    pStop LONGLONG*
+
+  func GetAvailable
+    HRESULT
+    pEarliest LONGLONG*
+    pLatest LONGLONG*
+
+  func SetRate
+    HRESULT
+    dRate double
+
+  func GetRate
+    HRESULT
+    pdRate double*
+
+  func GetPreroll
+    HRESULT
+    pllPreroll LONGLONG*
+
+

@@ -1,0 +1,100 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFileOperation base=IUnknown id={947aab5f-0a5c-4c13-b4d6-4bf7836fc9f8} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Advise
+    HRESULT
+    pfops IFileOperationProgressSink*
+    pdwCookie DWORD*
+
+  func Unadvise
+    HRESULT
+    dwCookie DWORD
+
+  func SetOperationFlags
+    HRESULT
+    dwOperationFlags [FILEOP_FLAGS_DWORD]
+
+  func SetProgressMessage
+    HRESULT
+    pszMessage LPCWSTR
+
+  func SetProgressDialog
+    HRESULT
+    popd IOperationsProgressDialog*
+
+  func SetProperties
+    HRESULT
+    pproparray IPropertyChangeArray*
+
+  func SetOwnerWindow
+    HRESULT
+    hwndOwner HWND
+
+  func ApplyPropertiesToItem
+    HRESULT
+    psiItem IShellItem*
+
+  func ApplyPropertiesToItems
+    HRESULT
+    punkItems IUnknown*
+
+  func RenameItem
+    HRESULT
+    psiItem IShellItem*
+    pszNewName LPCWSTR
+    pfopsItem IFileOperationProgressSink*
+
+  func RenameItems
+    HRESULT
+    pUnkItems IUnknown*
+    pszNewName LPCWSTR
+
+  func MoveItem
+    HRESULT
+    psiItem IShellItem*
+    psiDestinationFolder IShellItem*
+    pszNewName LPCWSTR
+    pfopsItem IFileOperationProgressSink*
+
+  func MoveItems
+    HRESULT
+    punkItems IUnknown*
+    psiDestinationFolder IShellItem*
+
+  func CopyItem
+    HRESULT
+    psiItem IShellItem*
+    psiDestinationFolder IShellItem*
+    pszCopyName LPCWSTR
+    pfopsItem IFileOperationProgressSink*
+
+  func CopyItems
+    HRESULT
+    punkItems IUnknown*
+    psiDestinationFolder IShellItem*
+
+  func DeleteItem
+    HRESULT
+    psiItem IShellItem*
+    pfopsItem IFileOperationProgressSink*
+
+  func DeleteItems
+    HRESULT
+    punkItems IUnknown*
+
+  func NewItem
+    HRESULT
+    psiDestinationFolder IShellItem*
+    dwFileAttributes DWORD
+    pszName LPCWSTR
+    pszTemplateName LPCWSTR
+    pfopsItem IFileOperationProgressSink*
+
+  func PerformOperations
+    HRESULT
+
+  func GetAnyOperationsAborted
+    HRESULT
+    pfAnyOperationsAborted BOOL*
+
+

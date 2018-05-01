@@ -1,0 +1,11 @@
+include Interfaces\PropertySystem\IPropertyStoreFactory.txt
+
+ingterface IDelayedPropertyStoreFactory base=IPropertyStoreFactory id={40d4577f-e237-4bdb-bd69-58f089431b6a} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetDelayedPropertyStore
+    HRESULT
+    flags GETPROPERTYSTOREFLAGS
+    dwStoreId DWORD
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

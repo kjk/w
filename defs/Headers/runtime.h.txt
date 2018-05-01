@@ -1,0 +1,32 @@
+include Headers\windows.h.txt
+
+header
+struct HSTRING_HEADER
+  Unknown1 UINT
+  Length UINT
+  Unknown2 UINT
+  Unknown3 UINT
+  String LPWSTR
+
+pointer HSTRING_HEADER* HSTRING_HEADER
+
+pointer HSTRING HSTRING_HEADER
+
+pointer HSTRING* HSTRING
+
+pointer HSTRING** HSTRING*
+
+alias "const HSTRING" HSTRING
+
+pointer "const HSTRING*" HSTRING
+
+pointer HSTRING_BUFFER HSTRING_HEADER
+
+pointer HSTRING_BUFFER* HSTRING_BUFFER
+
+alias mdToken ULONG32
+
+alias mdTypeDef mdToken
+
+pointer mdTypeDef* mdTypeDef
+

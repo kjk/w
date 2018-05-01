@@ -1,0 +1,10 @@
+include Interfaces\Shell\SyncMgr\ISyncMgrUIOperation.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrEventLinkUIOperation base=ISyncMgrUIOperation id={64522e52-848b-4015-89ce-5a36f00b94ff} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func Init
+    HRESULT
+    rguidEventID REFGUID
+    pEvent ISyncMgrEvent*
+
+

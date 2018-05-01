@@ -1,0 +1,11 @@
+include WMI\IWbemBackupRestore.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemBackupRestoreEx base=IWbemBackupRestore id={A359DEC5-E813-4834-8A2A-BA7F1D777D76} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func Pause
+    WBEMSTATUS
+
+  func Resume
+    WBEMSTATUS
+
+

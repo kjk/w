@@ -1,0 +1,20 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+
+dll Dcomp.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+flag [COMPOSITIONSURFACE_ACCESS] DWORD display=DWORD
+  COMPOSITIONSURFACE_READ       0x0001
+  COMPOSITIONSURFACE_WRITE      0x0002
+  COMPOSITIONSURFACE_ALL_ACCESS 0x0003
+
+func DCompositionCreateDevice
+  HRESULT
+  dxgiDevice IDXGIDevice*
+  iid REFIID
+  dcompositionDevice void** interfaceId=iid
+
+func DCompositionCreateSurfaceHandle
+  HRESULT
+  desiredAccess [COMPOSITIONSURFACE_ACCESS]
+  securityAttributes SECURITY_ATTRIBUTES*
+  surfaceHandle HANDLE*
+

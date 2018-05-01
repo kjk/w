@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IRequestFilteredSync base=IUnknown id={2e020184-6d18-46a7-a32a-da4aeb06696c} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func SpecifyFilter
+    HRESULT
+    pCallback IFilterRequestCallback*
+
+

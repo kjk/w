@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+
+ingterface IHTMLOMWindowServices base=IUnknown id={3050f5fc-98b5-11cf-bb82-00aa00bdce0b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/Advanced Hosting Interfaces"
+  func moveTo
+    HRESULT
+    x LONG
+    y LONG
+
+  func moveBy
+    HRESULT
+    x LONG
+    y LONG
+
+  func resizeTo
+    HRESULT
+    x LONG
+    y LONG
+
+  func resizeBy
+    HRESULT
+    x LONG
+    y LONG
+
+

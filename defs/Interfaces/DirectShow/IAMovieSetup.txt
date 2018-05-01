@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMovieSetup base=IUnknown id={a3d8cec0-7e5a-11cf-bbc5-00805f6cef20} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Register
+    HRESULT
+
+  func Unregister
+    HRESULT
+
+

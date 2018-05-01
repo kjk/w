@@ -1,0 +1,13 @@
+include Headers\windows.h.txt
+
+dll Ntshrui.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Windows Environment Development/Windows Shell"
+func CanShareFolderW
+  STDAPI
+  pszPath LPCWSTR
+
+func ShowShareFolderUI
+  HRESULT
+  hwndParent HWND
+  pszPath LPCWSTR
+

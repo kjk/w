@@ -1,0 +1,26 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1SimplifiedGeometrySink.txt
+
+ingterface ID2D1GeometrySink base=ID2D1SimplifiedGeometrySink id={2cd9069f-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func AddLine
+    void
+    point D2D1_POINT_2F
+
+  func AddBezier
+    void
+    bezier "CONST D2D1_BEZIER_SEGMENT*"
+
+  func AddQuadraticBezier
+    void
+    bezier "CONST D2D1_QUADRATIC_BEZIER_SEGMENT*"
+
+  func AddQuadraticBeziers
+    void
+    beziers "CONST D2D1_QUADRATIC_BEZIER_SEGMENT*" count=beziersCount
+    beziersCount UINT32
+
+  func AddArc
+    void
+    arc "CONST D2D1_ARC_SEGMENT*"
+
+

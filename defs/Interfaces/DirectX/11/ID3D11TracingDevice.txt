@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11TracingDevice base=IUnknown id={1911c771-1587-413e-a7e0-fb26c3de0268} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Layer"
+  func SetShaderTrackingOptionsByType
+    HRESULT
+    ResourceTypeFlags UINT
+    Options UINT
+
+  func SetShaderTrackingOptions
+    HRESULT
+    pShader IUnknown*
+    Options UINT
+
+

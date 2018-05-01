@@ -1,0 +1,532 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+
+dll Usp10.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Windows Application UI Development/Internationalization for Windows Applications/International Fonts and Text Display/Uniscribe"
+alias SCRIPT_CACHE LPVOID
+
+pointer SCRIPT_CACHE* SCRIPT_CACHE
+
+alias SCRIPT_STRING_ANALYSIS LPVOID
+
+pointer SCRIPT_STRING_ANALYSIS* SCRIPT_STRING_ANALYSIS
+
+alias OPENTYPE_TAG ULONG
+
+pointer OPENTYPE_TAG* OPENTYPE_TAG
+
+struct SCRIPT_DIGITSUBSTITUTE
+  Bitfield1 DWORD
+  Bitfield2 DWORD
+  dwReserved DWORD
+
+pointer SCRIPT_DIGITSUBSTITUTE* SCRIPT_DIGITSUBSTITUTE
+
+pointer "const SCRIPT_DIGITSUBSTITUTE*" SCRIPT_DIGITSUBSTITUTE
+
+struct SCRIPT_PROPERTIES
+  Bitfield1 DWORD
+  Bitfield2 DWORD
+
+pointer "const SCRIPT_PROPERTIES*" SCRIPT_PROPERTIES
+
+pointer "const SCRIPT_PROPERTIES**" "const SCRIPT_PROPERTIES*"
+
+pointer "const SCRIPT_PROPERTIES***" "const SCRIPT_PROPERTIES**"
+
+struct SCRIPT_LOGATTR
+  Bitfield BYTE
+
+pointer SCRIPT_LOGATTR* SCRIPT_LOGATTR
+
+pointer "const SCRIPT_LOGATTR*" SCRIPT_LOGATTR
+
+struct SCRIPT_CHARPROP
+  Bitfield WORD
+
+pointer SCRIPT_CHARPROP* SCRIPT_CHARPROP
+
+struct SCRIPT_STATE
+  Bitfield WORD
+
+pointer SCRIPT_STATE* SCRIPT_STATE
+
+pointer "const SCRIPT_STATE*" SCRIPT_STATE
+
+struct SCRIPT_ANALYSIS
+  Bitfield WORD
+  s SCRIPT_STATE
+
+pointer SCRIPT_ANALYSIS* SCRIPT_ANALYSIS
+
+pointer "const SCRIPT_ANALYSIS*" SCRIPT_ANALYSIS
+
+struct SCRIPT_ITEM
+  iCharPos int
+  a SCRIPT_ANALYSIS
+
+pointer SCRIPT_ITEM* SCRIPT_ITEM
+
+struct SCRIPT_VISATTR
+  Bitfield WORD
+
+pointer SCRIPT_VISATTR* SCRIPT_VISATTR
+
+pointer "const SCRIPT_VISATTR*" SCRIPT_VISATTR
+
+struct SCRIPT_CONTROL
+  Bitfield DWORD
+
+pointer SCRIPT_CONTROL* SCRIPT_CONTROL
+
+pointer "const SCRIPT_CONTROL*" SCRIPT_CONTROL
+
+struct SCRIPT_GLYPHPROP
+  sva SCRIPT_VISATTR
+  reserved WORD
+
+pointer SCRIPT_GLYPHPROP* SCRIPT_GLYPHPROP
+
+pointer "const SCRIPT_GLYPHPROP*" SCRIPT_GLYPHPROP
+
+struct SCRIPT_FONTPROPERTIES
+  cBytes int
+  wgBlank WORD
+  wgDefault WORD
+  wgInvalid WORD
+  wgKashida WORD
+  iKashidaWidth int
+
+pointer SCRIPT_FONTPROPERTIES* SCRIPT_FONTPROPERTIES
+
+struct GOFFSET
+  du LONG
+  dv LONG
+
+pointer GOFFSET* GOFFSET
+
+pointer "const GOFFSET*" GOFFSET
+
+struct OPENTYPE_FEATURE_RECORD
+  tagFeature OPENTYPE_TAG
+  lParameter LONG
+
+pointer OPENTYPE_FEATURE_RECORD* OPENTYPE_FEATURE_RECORD
+
+struct TEXTRANGE_PROPERTIES
+  potfRecords OPENTYPE_FEATURE_RECORD* count=cotfRecords
+  cotfRecords int
+
+pointer TEXTRANGE_PROPERTIES* TEXTRANGE_PROPERTIES
+
+pointer TEXTRANGE_PROPERTIES** TEXTRANGE_PROPERTIES*
+
+struct SCRIPT_TABDEF
+  cTabStops int
+  iScale int
+  pTabStops int* count=cTabStops
+  iTabOrigin int
+
+pointer SCRIPT_TABDEF* SCRIPT_TABDEF
+
+flag [SGCM_FLAGS] DWORD display=DWORD
+  SGCM_RTL 0x00000001
+
+flag [SIC_FLAGS] DWORD display=DWORD
+  SIC_COMPLEX    1
+  SIC_ASCIIDIGIT 2
+  SIC_NEUTRAL    4
+
+flag [SSA_FLAGS] DWORD display=DWORD
+  SSA_PASSWORD        0x00000001
+  SSA_TAB             0x00000002
+  SSA_CLIP            0x00000004
+  SSA_FIT             0x00000008
+  SSA_DZWG            0x00000010
+  SSA_FALLBACK        0x00000020
+  SSA_BREAK           0x00000040
+  SSA_GLYPHS          0x00000080
+  SSA_RTL             0x00000100
+  SSA_GCP             0x00000200
+  SSA_HOTKEY          0x00000400
+  SSA_METAFILE        0x00000800
+  SSA_LINK            0x00001000
+  SSA_HIDEHOTKEY      0x00002000
+  SSA_HOTKEYONLY      0x00002400
+  SSA_FULLMEASURE     0x04000000
+  SSA_LPKANSIFALLBACK 0x08000000
+  SSA_PIDX            0x10000000
+  SSA_LAYOUTRTL       0x20000000
+  SSA_DONTGLYPH       0x40000000
+  SSA_NOKASHIDA       0x80000000
+
+func ScriptApplyDigitSubstitution
+  HRESULT
+  psds "const SCRIPT_DIGITSUBSTITUTE*"
+  psc SCRIPT_CONTROL*
+  pss SCRIPT_STATE*
+
+func ScriptApplyLogicalWidth
+  HRESULT
+  piDx "const int*"
+  cChars int
+  cGlyphs int
+  pwLogClust "const WORD*"
+  psva "const SCRIPT_VISATTR*"
+  piAdvance "const int*"
+  psa "const SCRIPT_ANALYSIS*"
+  pABC ABC*
+  piJustify int*
+
+func ScriptBreak
+  HRESULT
+  pwcChars "const WCHAR*"
+  cChars int
+  psa "const SCRIPT_ANALYSIS*"
+  psla SCRIPT_LOGATTR*
+
+func ScriptCacheGetHeight
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  tmHeight long*
+
+func ScriptCPtoX
+  HRESULT
+  iCP int
+  fTrailing BOOL
+  cChars int
+  cGlyphs int
+  pwLogClust "const WORD*"
+  psva "const SCRIPT_VISATTR*"
+  piAdvance "const int*"
+  psa "const SCRIPT_ANALYSIS*"
+  piX int*
+
+func ScriptFreeCache
+  HRESULT
+  psc SCRIPT_CACHE*
+
+func ScriptGetCMap
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  pwcInChars "const WCHAR*"
+  cChars int
+  dwFlags [SGCM_FLAGS]
+  pwOutGlyphs WORD*
+
+func ScriptGetFontAlternateGlyphs
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  psa SCRIPT_ANALYSIS*
+  tagScript OPENTYPE_TAG
+  tagLangSys OPENTYPE_TAG
+  tagFeature OPENTYPE_TAG
+  wGlyphId WORD
+  cMaxAlternates int
+  pAlternateGlyphs WORD* postCount=pcAlternates
+  pcAlternates int*
+
+func ScriptGetFontFeatureTags
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  psa SCRIPT_ANALYSIS*
+  tagScript OPENTYPE_TAG
+  tagLangSys OPENTYPE_TAG
+  cMaxTags int
+  pFeatureTags OPENTYPE_TAG* postCount=pcTags
+  pcTags int*
+
+func ScriptGetFontLanguageTags
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  psa SCRIPT_ANALYSIS*
+  tagScript OPENTYPE_TAG
+  cMaxTags int
+  pLangSysTags OPENTYPE_TAG* postCount=pcTags
+  pcTags int*
+
+func ScriptGetFontProperties
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  sfp SCRIPT_FONTPROPERTIES*
+
+func ScriptGetFontScriptTags
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  psa SCRIPT_ANALYSIS*
+  cMaxTags int
+  pScriptTags OPENTYPE_TAG* postCount=pcTags
+  pcTags int*
+
+func ScriptGetGlyphABCWidth
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  wGlyph WORD
+  pABC ABC*
+
+func ScriptGetLogicalWidths
+  HRESULT
+  psa "const SCRIPT_ANALYSIS*"
+  cChars int
+  cGlyphs int
+  piGlyphWidth "const int*"
+  pwLogClust "const WORD*"
+  psva "const SCRIPT_VISATTR*"
+  piDx int*
+
+func ScriptGetProperties
+  HRESULT
+  ppSp "const SCRIPT_PROPERTIES***"
+  piNumScripts int*
+
+func ScriptIsComplex
+  HRESULT
+  pwcInChars "const WCHAR*"
+  cInChars int
+  dwFlags [SIC_FLAGS]
+
+func ScriptItemize
+  HRESULT
+  pwcInChars "const WCHAR*"
+  cInChars int
+  cMaxItems int
+  psControl "const SCRIPT_CONTROL*"
+  psState "const SCRIPT_STATE*"
+  pItems SCRIPT_ITEM* postCount=pcItems
+  pcItems int*
+
+func ScriptItemizeOpenType
+  HRESULT
+  pwcInChars "const WCHAR*"
+  cInChars int
+  cMaxItems int
+  psControl "const SCRIPT_CONTROL*"
+  psState "const SCRIPT_STATE*"
+  pItems SCRIPT_ITEM* postCount=pcItems
+  pScriptTags OPENTYPE_TAG*
+  pcItems int*
+
+func ScriptJustify
+  HRESULT
+  psva "const SCRIPT_VISATTR*" count=cGlyphs
+  piAdvance "const int*" count=cGlyphs
+  cGlyphs int
+  iDx int
+  iMinKashida int
+  piJustify int* postCount=cGlyphs
+
+func ScriptLayout
+  HRESULT
+  cRuns int
+  pbLevel "const BYTE*" count=cRuns
+  piVisualToLogical int* postCount=cRuns
+  piLogicalToVisual int* postCount=cRuns
+
+func ScriptPlace
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  pwGlyphs "const WORD*" count=cGlyphs
+  cGlyphs int
+  psva "const SCRIPT_VISATTR*"
+  psa SCRIPT_ANALYSIS*
+  piAdvance int*
+  pGoffset GOFFSET* postCount=cGlyphs
+  pABC ABC*
+
+func ScriptPlaceOpenType
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  psa SCRIPT_ANALYSIS*
+  tagScript OPENTYPE_TAG
+  tagLangSys OPENTYPE_TAG
+  rcRangeChars int*
+  rpRangeProperties TEXTRANGE_PROPERTIES**
+  cRanges int
+  pwcChars "const WCHAR*"
+  pwLogClust WORD*
+  pCharProps SCRIPT_CHARPROP*
+  cChars int
+  pwGlyphs "const WORD*"
+  pGlyphProps "const SCRIPT_GLYPHPROP*" count=cGlyphs
+  cGlyphs int
+  piAdvance int* postCount=cGlyphs
+  pGoffset GOFFSET* postCount=cGlyphs
+  pABC ABC*
+
+func ScriptPositionSingleGlyph
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  psa SCRIPT_ANALYSIS*
+  tagScript OPENTYPE_TAG
+  tagLangSys OPENTYPE_TAG
+  tagFeature OPENTYPE_TAG
+  lParameter LONG
+  wGlyphId WORD
+  iAdvance int
+  Goffset GOFFSET
+  piOutAdvance int*
+  pOutGoffset GOFFSET*
+
+func ScriptRecordDigitSubstitution
+  HRESULT
+  Locale LCID
+  psds SCRIPT_DIGITSUBSTITUTE*
+
+func ScriptShape
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  pwcChars "const WCHAR*"
+  cChars int
+  cMaxGlyphs int
+  psa SCRIPT_ANALYSIS*
+  pwOutGlyphs WORD* postCount=pcGlyphs
+  pwLogClust WORD* postCount=cChars
+  psva SCRIPT_VISATTR* postCount=cMaxGlyphs
+  pcGlyphs int*
+
+func ScriptShapeOpenType
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  psa SCRIPT_ANALYSIS*
+  tagScript OPENTYPE_TAG
+  tagLangSys OPENTYPE_TAG
+  rcRangeChars int*
+  rpRangeProperties TEXTRANGE_PROPERTIES**
+  cRanges int
+  pwcChars "const WCHAR*"
+  cChars int
+  cMaxGlyphs int
+  pwLogClust WORD*
+  pCharProps SCRIPT_CHARPROP*
+  pwOutGlyphs WORD* postCount=pcGlyphs
+  pOutGlyphProps SCRIPT_GLYPHPROP*
+  pcGlyphs int*
+
+func ScriptStringAnalyse
+  HRESULT
+  hdc HDC
+  pString "const void*" length=cString
+  cString int
+  cGlyphs int
+  iCharset int
+  dwFlags [SSA_FLAGS]
+  iReqWidth int
+  psControl SCRIPT_CONTROL*
+  psState SCRIPT_STATE*
+  piDx "const int*"
+  pTabdef SCRIPT_TABDEF*
+  pbInClass "const BYTE*"
+  pssa SCRIPT_STRING_ANALYSIS*
+
+func ScriptStringCPtoX
+  HRESULT
+  ssa SCRIPT_STRING_ANALYSIS
+  icp int
+  fTrailing BOOL
+  pX int*
+
+func ScriptStringFree
+  HRESULT
+  pssa SCRIPT_STRING_ANALYSIS*
+
+func ScriptStringGetLogicalWidths
+  HRESULT
+  ssa SCRIPT_STRING_ANALYSIS
+  piDx int*
+
+func ScriptStringGetOrder
+  HRESULT
+  ssa SCRIPT_STRING_ANALYSIS
+  puOrder UINT*
+
+func ScriptStringOut
+  HRESULT
+  ssa SCRIPT_STRING_ANALYSIS
+  iX int
+  iY int
+  uOptions [ExtTextOutFlags]
+  prc "const RECT*"
+  iMinSel int
+  iMaxSel int
+  fDisabled BOOL
+
+func ScriptString_pcOutChars
+  success NotEqual=0
+  "const int*"
+  ssa SCRIPT_STRING_ANALYSIS
+
+func ScriptString_pLogAttr
+  success NotEqual=0
+  "const SCRIPT_LOGATTR*"
+  ssa SCRIPT_STRING_ANALYSIS
+
+func ScriptString_pSize
+  success NotEqual=0
+  "const SIZE*"
+  ssa SCRIPT_STRING_ANALYSIS
+
+func ScriptStringValidate
+  HRESULT
+  ssa SCRIPT_STRING_ANALYSIS
+
+func ScriptStringXtoCP
+  HRESULT
+  ssa SCRIPT_STRING_ANALYSIS
+  iX int
+  piCh int*
+  piTrailing int*
+
+func ScriptSubstituteSingleGlyph
+  HRESULT
+  hdc HDC
+  psc SCRIPT_CACHE*
+  psa SCRIPT_ANALYSIS*
+  tagScript OPENTYPE_TAG
+  tagLangSys OPENTYPE_TAG
+  tagFeature OPENTYPE_TAG
+  lParameter LONG
+  wGlyphId WORD
+  pwOutGlyphId WORD*
+
+func ScriptTextOut
+  HRESULT
+  hdc "const HDC"
+  psc SCRIPT_CACHE*
+  x int
+  y int
+  fuOptions [ExtTextOutFlags]
+  lprc "const RECT*"
+  psa "const SCRIPT_ANALYSIS*"
+  pwcReserved "const WCHAR*"
+  iReserved int
+  pwGlyphs "const WORD*" count=cGlyphs
+  cGlyphs int
+  piAdvance "const int*"
+  piJustify "const int*"
+  pGoffset "const GOFFSET*"
+
+func ScriptXtoCP
+  HRESULT
+  iX int
+  cChars int
+  cGlyphs int
+  pwLogClust "const WORD*"
+  psva "const SCRIPT_VISATTR*"
+  piAdvance "const int*"
+  psa "const SCRIPT_ANALYSIS*"
+  piCP int*
+  piTrailing int*
+

@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IHomeGroup base=IUnknown id={7a3bd1d9-35a9-4fb3-a467-f48cac35e2d0} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func IsMember
+    HRESULT
+    member BOOL*
+
+  func ShowSharingWizard
+    HRESULT
+    owner HWND
+    sharingchoices HOMEGROUPSHARINGCHOICES*
+
+

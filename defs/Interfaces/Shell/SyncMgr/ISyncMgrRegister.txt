@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrRegister base=IUnknown id={6295DF42-35EE-11d1-8707-00C04FD93327} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func RegisterSyncMgrHandler
+    HRESULT
+    clsidHandler REFCLSID
+    pwszDescription LPCWSTR
+    dwSyncMgrRegisterFlags SYNCMGRREGISTERFLAGS
+
+  func UnregisterSyncMgrHandler
+    HRESULT
+    clsidHandler REFCLSID
+    dwReserved DWORD
+
+  func GetHandlerRegistrationInfo
+    HRESULT
+    clsidHandler REFCLSID
+    pdwSyncMgrRegisterFlags SYNCMGRREGISTERFLAGS*
+
+

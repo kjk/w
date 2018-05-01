@@ -1,0 +1,12 @@
+include Interfaces\URL\IBindStatusCallback.txt
+include Headers\URL.h.txt
+
+ingterface IBindStatusCallbackEx base=IBindStatusCallback id={aaa74ef9-8ee7-4659-88d9-f8c504da73cc} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetBindInfoEx
+    HRESULT
+    grfBINDF BINDF*
+    pbindinfo BINDINFO*
+    grfBINDF2 BINDF2*
+    pdwReserved DWORD*
+
+

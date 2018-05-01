@@ -1,0 +1,5 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDCompositionEffect base=IUnknown id={EC81B08F-BFCB-4e8d-B193-A915587999E8} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+

@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+
+ingterface IThumbnailHandlerFactory base=IUnknown id={e35b4b2e-00da-4bc1-9f13-38bc11f5d417} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetThumbnailHandler
+    HRESULT
+    pidlChild PCUITEMID_CHILD
+    pbc IBindCtx*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

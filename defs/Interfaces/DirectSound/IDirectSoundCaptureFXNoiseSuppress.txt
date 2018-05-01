@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundCaptureFXNoiseSuppress base=IUnknown id={ed311e41-fbae-4175-9625-cd0854f693ca} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func SetAllParameters
+    [DS_HRESULT]
+    pcDscFxNoiseSuppress LPCDSCFXNoiseSuppress
+
+  func GetAllParameters
+    [DS_HRESULT]
+    pDscFxNoiseSuppress LPDSCFXNoiseSuppress
+
+  func Reset
+    [DS_HRESULT]
+
+

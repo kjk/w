@@ -1,0 +1,14 @@
+include Interfaces\Shell\IEmptyVolumeCache.txt
+
+ingterface IEmptyVolumeCache2 base=IEmptyVolumeCache id={02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func InitializeEx
+    HRESULT
+    hkRegKey HKEY
+    pcwszVolume LPCWSTR
+    pcwszKeyName LPCWSTR
+    ppwszDisplayName LPWSTR*
+    ppwszDescription LPWSTR*
+    ppwszBtnText LPWSTR*
+    pdwFlags DWORD*
+
+

@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IEnumSyncChanges base=IUnknown id={5f86be4a-5e78-4e32-ac1c-c24fd223ef85} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func Next
+    HRESULT
+    cChanges ULONG
+    ppChange ISyncChange** postCount=pcFetched
+    pcFetched ULONG*
+
+  func Skip
+    HRESULT
+    cChanges ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppEnum IEnumSyncChanges**
+
+

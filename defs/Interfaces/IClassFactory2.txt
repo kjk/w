@@ -1,0 +1,28 @@
+include Interfaces\IClassFactory.txt
+
+ingterface IClassFactory2 base=IClassFactory id={B196B28F-BAB4-101A-B69C-00AA00341D07} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func GetLicInfo
+    HRESULT
+    pLicInfo LICINFO*
+
+  func RequestLicKey
+    HRESULT
+    dwReserved DWORD
+    pBstrKey BSTR*
+
+  func CreateInstanceLic
+    HRESULT
+    pUnkOuter IUnknown*
+    pUnkReserved IUnknown*
+    riid REFIID
+    bstrKey BSTR
+    ppvObj PVOID* interfaceId=riid
+
+  struct LICINFO
+  cbLicInfo LONG
+  fRuntimeKeyAvail BOOL
+  fLicVerified BOOL
+
+  pointer LICINFO* LICINFO
+
+

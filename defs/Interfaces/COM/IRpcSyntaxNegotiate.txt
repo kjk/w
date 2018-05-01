@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRpcSyntaxNegotiate base=IUnknown id={58a08519-24c8-4935-b482-3fd823333a4f} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func NegotiateSyntax
+    HRESULT
+    pMsg RPCOLEMESSAGE*
+
+

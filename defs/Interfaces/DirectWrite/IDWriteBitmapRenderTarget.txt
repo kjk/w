@@ -1,0 +1,43 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteBitmapRenderTarget base=IUnknown id={5e5a32a3-8dff-4773-9ff6-0696eab77267} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func DrawGlyphRun
+    HRESULT
+    baselineOriginX FLOAT
+    baselineOriginY FLOAT
+    measuringMode DWRITE_MEASURING_MODE
+    glyphRun "DWRITE_GLYPH_RUN const*"
+    renderingParams IDWriteRenderingParams*
+    textColor COLORREF
+    blackBoxRect RECT*
+
+  func GetMemoryDC
+    success NotEqual=0
+    HDC
+
+  func GetPixelsPerDip
+    FLOAT
+
+  func SetPixelsPerDip
+    HRESULT
+    pixelsPerDip FLOAT
+
+  func GetCurrentTransform
+    HRESULT
+    transform DWRITE_MATRIX*
+
+  func SetCurrentTransform
+    HRESULT
+    transform "DWRITE_MATRIX const*"
+
+  func GetSize
+    HRESULT
+    size SIZE*
+
+  func Resize
+    HRESULT
+    width UINT32
+    height UINT32
+
+

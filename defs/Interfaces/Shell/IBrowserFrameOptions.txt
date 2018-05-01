@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBrowserFrameOptions base=IUnknown id={10DF43C8-1DBE-11d3-8B34-006097DF5BD4} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetFrameOptions
+    HRESULT
+    dwMask BROWSERFRAMEOPTIONS
+    pdwOptions BROWSERFRAMEOPTIONS*
+
+

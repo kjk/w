@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ICommandWithParameters base=IUnknown id={0c733a64-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func GetParameterInfo
+    [OLEDB_HRESULT]
+    pcParams DB_UPARAMS*
+    prgParamInfo DBPARAMINFO** derefPostCount=pcParams
+    ppNamesBuffer OLECHAR**
+
+  func MapParameterNames
+    [OLEDB_HRESULT]
+    cParamNames DB_UPARAMS
+    rgParamNames "LPCWSTR []" count=cParamNames
+    rgParamOrdinals "DB_LPARAMS []" postCount=cParamNames
+
+  func SetParameterInfo
+    [OLEDB_HRESULT]
+    cParams DB_UPARAMS
+    rgParamOrdinals "const DB_UPARAMS []" count=cParams
+    rgParamBindInfo "const DBPARAMBINDINFO []" count=cParams
+
+

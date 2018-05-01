@@ -1,0 +1,32 @@
+include Headers\windows.h.txt
+
+dll cscapi.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Windows Environment Development/Windows Shell"
+category "Data Access and Storage/Offline Files"
+interface CCscSearchApiInterface
+
+func CscSearchApiGetInterface
+  NTSTATUS
+  Version ULONG
+  Cookie ULONG
+  Interface CCscSearchApiInterface**
+
+func OfflineFilesEnable
+  [ERROR_CODE]
+  bEnable BOOL
+  pbRebootRequired BOOL*
+
+func OfflineFilesQueryStatus
+  [ERROR_CODE]
+  pbActive BOOL*
+  pbEnabled BOOL*
+
+func OfflineFilesQueryStatusEx
+  [ERROR_CODE]
+  pbActive BOOL*
+  pbEnabled BOOL*
+  pbAvailable BOOL*
+
+func OfflineFilesStart
+  [ERROR_CODE]
+

@@ -1,0 +1,12 @@
+include Interfaces\URL\IAuthenticate.txt
+include Headers\URL.h.txt
+
+ingterface IAuthenticateEx base=IAuthenticate id={2ad1edaf-d83d-48b5-9adf-03dbe19f53bd} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func AuthenticateEx
+    HRESULT
+    phwnd HWND*
+    pszUsername LPWSTR*
+    pszPassword LPWSTR*
+    pauthinfo AUTHENTICATEINFO*
+
+

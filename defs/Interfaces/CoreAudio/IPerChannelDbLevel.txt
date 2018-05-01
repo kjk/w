@@ -1,0 +1,38 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IPerChannelDbLevel base=IUnknown id={C2F8E001-F205-4BC9-99BC-C13B1E048CCB} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetChannelCount
+    [AUDCLNT_HRESULT]
+    pcChannels UINT*
+
+  func GetLevelRange
+    [AUDCLNT_HRESULT]
+    nChannel UINT
+    pfMinLevelDB float*
+    pfMaxLevelDB float*
+    pfStepping float*
+
+  func GetLevel
+    [AUDCLNT_HRESULT]
+    nChannel UINT
+    pfLevelDB float*
+
+  func SetLevel
+    [AUDCLNT_HRESULT]
+    nChannel UINT
+    fLevelDB float
+    pguidEventContext LPCGUID
+
+  func SetLevelUniform
+    [AUDCLNT_HRESULT]
+    fLevelDB float
+    pguidEventContext LPCGUID
+
+  func SetLevelAllChannels
+    [AUDCLNT_HRESULT]
+    aLevelsDB float
+    cChannels ULONG
+    pguidEventContext LPCGUID
+
+

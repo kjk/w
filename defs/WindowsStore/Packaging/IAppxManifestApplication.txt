@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxManifestApplication base=IUnknown id={5da89bf4-3773-46be-b650-7e744863b7e8} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetStringValue
+    HRESULT
+    name LPCWSTR
+    value LPWSTR*
+
+  func GetAppUserModelId
+    HRESULT
+    appUserModelId LPWSTR*
+
+

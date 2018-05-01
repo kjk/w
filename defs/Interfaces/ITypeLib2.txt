@@ -1,0 +1,26 @@
+include Interfaces\ITypeLib.txt
+
+ingterface ITypeLib2 base=ITypeLib id={00020411-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Type Description"
+  func GetCustData
+    HRESULT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func GetLibStatistics
+    HRESULT
+    pcUniqueNames ULONG*
+    pcchUniqueNames ULONG*
+
+  func GetDocumentation2
+    HRESULT
+    index INT
+    lcid LCID
+    pbstrHelpString BSTR*
+    pdwHelpStringContext DWORD*
+    pbstrHelpStringDll BSTR*
+
+  func GetAllCustData
+    HRESULT
+    pCustData CUSTDATA*
+
+

@@ -1,0 +1,139 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMExtTransport base=IUnknown id={A03CD5F0-3045-11cf-8C44-00AA006B6814} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetCapability
+    HRESULT
+    Capability long
+    pValue long*
+    pdblValue double*
+
+  func put_MediaState
+    HRESULT
+    State long
+
+  func get_MediaState
+    HRESULT
+    pState long*
+
+  func put_LocalControl
+    HRESULT
+    State long
+
+  func get_LocalControl
+    HRESULT
+    pState long*
+
+  func GetStatus
+    HRESULT
+    StatusItem long
+    pValue long*
+
+  func GetTransportBasicParameters
+    HRESULT
+    Param long
+    pValue long*
+    ppszData LPOLESTR*
+
+  func SetTransportBasicParameters
+    HRESULT
+    Param long
+    Value long
+    pszData LPCOLESTR
+
+  func GetTransportVideoParameters
+    HRESULT
+    Param long
+    pValue long*
+
+  func SetTransportVideoParameters
+    HRESULT
+    Param long
+    Value long
+
+  func GetTransportAudioParameters
+    HRESULT
+    Param long
+    pValue long*
+
+  func SetTransportAudioParameters
+    HRESULT
+    Param long
+    Value long
+
+  func put_Mode
+    HRESULT
+    Mode long
+
+  func get_Mode
+    HRESULT
+    pMode long*
+
+  func put_Rate
+    HRESULT
+    dblRate double
+
+  func get_Rate
+    HRESULT
+    pdblRate double*
+
+  func GetChase
+    HRESULT
+    pEnabled long*
+    pOffset long*
+    phEvent HEVENT*
+
+  func SetChase
+    HRESULT
+    Enable long
+    Offset long
+    hEvent HEVENT
+
+  func GetBump
+    HRESULT
+    pSpeed long*
+    pDuration long*
+
+  func SetBump
+    HRESULT
+    Speed long
+    Duration long
+
+  func get_AntiClogControl
+    HRESULT
+    pEnabled long*
+
+  func put_AntiClogControl
+    HRESULT
+    Enable long
+
+  func GetEditPropertySet
+    HRESULT
+    EditID long
+    pState long*
+
+  func SetEditPropertySet
+    HRESULT
+    pEditID long*
+    State long
+
+  func GetEditProperty
+    HRESULT
+    EditID long
+    Param long
+    pValue long*
+
+  func SetEditProperty
+    HRESULT
+    EditID long
+    Param long
+    Value long
+
+  func get_EditStart
+    HRESULT
+    pValue long*
+
+  func put_EditStart
+    HRESULT
+    Value long
+
+

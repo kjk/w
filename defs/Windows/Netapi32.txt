@@ -1,0 +1,1918 @@
+include Headers\windows.h.txt
+include Headers\network.h.txt
+
+dll Netapi32.dll callingConvention=STDCALL errorFunc=GetLastError errorIsReturnValue onlineHelp=MSDN
+category "Security and Identity/Directory, Identity, and Access Services/Directory Services/Directories/Active Directory Domain Services/Directory Service"
+category "Networking/Network Management/Alert"
+category "Networking/Network Management/API Buffer"
+category "Networking/Network Management/Directory Service and Domain Join"
+category "Networking/Network Management/Get"
+category "Networking/Network Management/Group"
+category "Networking/Network Management/Local Group"
+category "Networking/Network Management/Message"
+category "Networking/Network Management/Remote Utility"
+category "Networking/Network Management/Schedule"
+category "Networking/Network Management/Server"
+category "Networking/Network Management/Server and Workstation Transport"
+category "Networking/Network Management/Use"
+category "Networking/Network Management/User"
+category "Networking/Network Management/User Modals"
+category "Networking/Network Management/Validation"
+category "Networking/Network Management/Workstation and Workstation User"
+category "Security and Identity/Security Management"
+category Internet/WebDAV
+category "Networking/Network Share Management/NetFile"
+category "Networking/Network Share Management/Session"
+category "Networking/Network Share Management/Network Share"
+category "Networking/Network Share Management/Statistics"
+category "Networking/Network Management/Obsolete"
+category "Data Access and Storage/Distributed File System"
+category "Networking/Network Management/NetShareAlias"
+pointer PZPWSTR* PWSTR
+
+alias LMSTR LPWSTR
+
+pointer "LMSTR []" LMSTR
+
+flag [DsDomainFlags] ULONG display=ULONG
+  DS_DOMAIN_IN_FOREST       0x0001
+  DS_DOMAIN_DIRECT_OUTBOUND 0x0002
+  DS_DOMAIN_TREE_ROOT       0x0004
+  DS_DOMAIN_PRIMARY         0x0008
+  DS_DOMAIN_NATIVE_MODE     0x0010
+  DS_DOMAIN_DIRECT_INBOUND  0x0020
+
+struct DS_DOMAIN_TRUSTS
+  NetbiosDomainName LPTSTR
+  DnsDomainName LPTSTR
+  Flags [DsDomainFlags]
+  ParentIndex ULONG
+  TrustType ULONG
+  TrustAttributes ULONG
+  DomainSid PSID
+  DomainGuid GUID
+
+pointer PDS_DOMAIN_TRUSTS DS_DOMAIN_TRUSTS
+
+pointer PDS_DOMAIN_TRUSTS* PDS_DOMAIN_TRUSTS
+
+struct DOMAIN_CONTROLLER_INFO
+  DomainControllerName LPTSTR
+  DomainControllerAddress LPTSTR
+  DomainControllerAddressType ULONG
+  DomainGuid GUID
+  DomainName LPTSTR
+  DnsForestName LPTSTR
+  Flags ULONG
+  DcSiteName LPTSTR
+  ClientSiteName LPTSTR
+
+pointer PDOMAIN_CONTROLLER_INFO DOMAIN_CONTROLLER_INFO
+
+pointer PDOMAIN_CONTROLLER_INFO* PDOMAIN_CONTROLLER_INFO
+
+enum NET_API_STATUS DWORD
+  success Equal=0
+  NERR_Success                      0
+  ERROR_ACCESS_DENIED               5
+  ERROR_NOT_ENOUGH_MEMORY           8
+  ERROR_NOT_SUPPORTED               50
+  ERROR_DUP_NAME                    52
+  ERROR_BAD_NETPATH                 53
+  ERROR_INVALID_PASSWORD            86
+  ERROR_INVALID_PARAMETER           87
+  ERROR_INVALID_NAME                123
+  ERROR_INVALID_LEVEL               124
+  ERROR_MORE_DATA                   234
+  ERROR_INVALID_DOMAIN_ROLE         1354
+  ERROR_NO_SUCH_DOMAIN              1355
+  ERROR_WRONG_TARGET_NAME           1396
+  RPC_S_PROTSEQ_NOT_SUPPORTED       1703
+  RPC_S_CALL_IN_PROGRESS            1791
+  NERR_NetNotStarted                2102
+  NERR_UnknownServer                2103
+  NERR_ShareMem                     2104
+  NERR_NoNetworkResource            2105
+  NERR_RemoteOnly                   2106
+  NERR_DevNotRedirected             2107
+  NERR_ServerNotStarted             2114
+  NERR_ItemNotFound                 2115
+  NERR_UnknownDevDir                2116
+  NERR_RedirectedPath               2117
+  NERR_DuplicateShare               2118
+  NERR_NoRoom                       2119
+  NERR_TooManyItems                 2121
+  NERR_InvalidMaxUsers              2122
+  NERR_BufTooSmall                  2123
+  NERR_RemoteErr                    2127
+  NERR_LanmanIniError               2131
+  NERR_NetworkError                 2136
+  NERR_WkstaInconsistentState       2137
+  NERR_WkstaNotStarted              2138
+  NERR_BrowserNotStarted            2139
+  NERR_InternalError                2140
+  NERR_BadTransactConfig            2141
+  NERR_InvalidAPI                   2142
+  NERR_BadEventName                 2143
+  NERR_DupNameReboot                2144
+  NERR_CfgCompNotFound              2146
+  NERR_CfgParamNotFound             2147
+  NERR_LineTooLong                  2149
+  NERR_QNotFound                    2150
+  NERR_JobNotFound                  2151
+  NERR_DestNotFound                 2152
+  NERR_DestExists                   2153
+  NERR_QExists                      2154
+  NERR_QNoRoom                      2155
+  NERR_JobNoRoom                    2156
+  NERR_DestNoRoom                   2157
+  NERR_DestIdle                     2158
+  NERR_DestInvalidOp                2159
+  NERR_ProcNoRespond                2160
+  NERR_SpoolerNotLoaded             2161
+  NERR_DestInvalidState             2162
+  NERR_QInvalidState                2163
+  NERR_JobInvalidState              2164
+  NERR_SpoolNoMemory                2165
+  NERR_DriverNotFound               2166
+  NERR_DataTypeInvalid              2167
+  NERR_ProcNotFound                 2168
+  NERR_ServiceTableLocked           2180
+  NERR_ServiceTableFull             2181
+  NERR_ServiceInstalled             2182
+  NERR_ServiceEntryLocked           2183
+  NERR_ServiceNotInstalled          2184
+  NERR_BadServiceName               2185
+  NERR_ServiceCtlTimeout            2186
+  NERR_ServiceCtlBusy               2187
+  NERR_BadServiceProgName           2188
+  NERR_ServiceNotCtrl               2189
+  NERR_ServiceKillProc              2190
+  NERR_ServiceCtlNotValid           2191
+  NERR_NotInDispatchTbl             2192
+  NERR_BadControlRecv               2193
+  NERR_ServiceNotStarting           2194
+  NERR_AlreadyLoggedOn              2200
+  NERR_NotLoggedOn                  2201
+  NERR_BadUsername                  2202
+  NERR_BadPassword                  2203
+  NERR_UnableToAddName_W            2204
+  NERR_UnableToAddName_F            2205
+  NERR_UnableToDelName_W            2206
+  NERR_UnableToDelName_F            2207
+  NERR_LogonsPaused                 2209
+  NERR_LogonServerConflict          2210
+  NERR_LogonNoUserPath              2211
+  NERR_LogonScriptError             2212
+  NERR_StandaloneLogon              2214
+  NERR_LogonServerNotFound          2215
+  NERR_LogonDomainExists            2216
+  NERR_NonValidatedLogon            2217
+  NERR_ACFNotFound                  2219
+  NERR_GroupNotFound                2220
+  NERR_UserNotFound                 2221
+  NERR_ResourceNotFound             2222
+  NERR_GroupExists                  2223
+  NERR_UserExists                   2224
+  NERR_ResourceExists               2225
+  NERR_NotPrimary                   2226
+  NERR_ACFNotLoaded                 2227
+  NERR_ACFNoRoom                    2228
+  NERR_ACFFileIOFail                2229
+  NERR_ACFTooManyLists              2230
+  NERR_UserLogon                    2231
+  NERR_ACFNoParent                  2232
+  NERR_CanNotGrowSegment            2233
+  NERR_SpeGroupOp                   2234
+  NERR_NotInCache                   2235
+  NERR_UserInGroup                  2236
+  NERR_UserNotInGroup               2237
+  NERR_AccountUndefined             2238
+  NERR_AccountExpired               2239
+  NERR_InvalidWorkstation           2240
+  NERR_InvalidLogonHours            2241
+  NERR_PasswordExpired              2242
+  NERR_PasswordCantChange           2243
+  NERR_PasswordHistConflict         2244
+  NERR_PasswordTooShort             2245
+  NERR_PasswordTooRecent            2246
+  NERR_InvalidDatabase              2247
+  NERR_DatabaseUpToDate             2248
+  NERR_SyncRequired                 2249
+  NERR_UseNotFound                  2250
+  NERR_BadAsgType                   2251
+  NERR_DeviceIsShared               2252
+  NERR_SameAsComputerName           2253
+  NERR_NoComputerName               2270
+  NERR_MsgAlreadyStarted            2271
+  NERR_MsgInitFailed                2272
+  NERR_NameNotFound                 2273
+  NERR_AlreadyForwarded             2274
+  NERR_AddForwarded                 2275
+  NERR_AlreadyExists                2276
+  NERR_TooManyNames                 2277
+  NERR_DelComputerName              2278
+  NERR_LocalForward                 2279
+  NERR_GrpMsgProcessor              2280
+  NERR_PausedRemote                 2281
+  NERR_BadReceive                   2282
+  NERR_NameInUse                    2283
+  NERR_MsgNotStarted                2284
+  NERR_NotLocalName                 2285
+  NERR_NoForwardName                2286
+  NERR_RemoteFull                   2287
+  NERR_NameNotForwarded             2288
+  NERR_TruncatedBroadcast           2289
+  NERR_InvalidDevice                2294
+  NERR_WriteFault                   2295
+  NERR_DuplicateName                2297
+  NERR_DeleteLater                  2298
+  NERR_IncompleteDel                2299
+  NERR_MultipleNets                 2300
+  NERR_NetNameNotFound              2310
+  NERR_DeviceNotShared              2311
+  NERR_ClientNameNotFound           2312
+  NERR_FileIdNotFound               2314
+  NERR_ExecFailure                  2315
+  NERR_TmpFile                      2316
+  NERR_TooMuchData                  2317
+  NERR_DeviceShareConflict          2318
+  NERR_BrowserTableIncomplete       2319
+  NERR_NotLocalDomain               2320
+  NERR_IsDfsShare                   2321
+  NERR_DevInvalidOpCode             2331
+  NERR_DevNotFound                  2332
+  NERR_DevNotOpen                   2333
+  NERR_BadQueueDevString            2334
+  NERR_BadQueuePriority             2335
+  NERR_NoCommDevs                   2337
+  NERR_QueueNotFound                2338
+  NERR_BadDevString                 2340
+  NERR_BadDev                       2341
+  NERR_InUseBySpooler               2342
+  NERR_CommDevInUse                 2343
+  NERR_InvalidComputer              2351
+  NERR_MaxLenExceeded               2354
+  NERR_BadComponent                 2356
+  NERR_CantType                     2357
+  NERR_TooManyEntries               2362
+  NERR_ProfileFileTooBig            2370
+  NERR_ProfileOffset                2371
+  NERR_ProfileCleanup               2372
+  NERR_ProfileUnknownCmd            2373
+  NERR_ProfileLoadErr               2374
+  NERR_ProfileSaveErr               2375
+  NERR_LogOverflow                  2377
+  NERR_LogFileChanged               2378
+  NERR_LogFileCorrupt               2379
+  NERR_SourceIsDir                  2380
+  NERR_BadSource                    2381
+  NERR_BadDest                      2382
+  NERR_DifferentServers             2383
+  NERR_RunSrvPaused                 2385
+  NERR_ErrCommRunSrv                2389
+  NERR_ErrorExecingGhost            2391
+  NERR_ShareNotFound                2392
+  NERR_InvalidLana                  2400
+  NERR_OpenFiles                    2401
+  NERR_ActiveConns                  2402
+  NERR_BadPasswordCore              2403
+  NERR_DevInUse                     2404
+  NERR_LocalDrive                   2405
+  NERR_AlertExists                  2430
+  NERR_TooManyAlerts                2431
+  NERR_NoSuchAlert                  2432
+  NERR_BadRecipient                 2433
+  NERR_AcctLimitExceeded            2434
+  NERR_InvalidLogSeek               2440
+  NERR_BadUasConfig                 2450
+  NERR_InvalidUASOp                 2451
+  NERR_LastAdmin                    2452
+  NERR_DCNotFound                   2453
+  NERR_LogonTrackingError           2454
+  NERR_NetlogonNotStarted           2455
+  NERR_CanNotGrowUASFile            2456
+  NERR_TimeDiffAtDC                 2457
+  NERR_PasswordMismatch             2458
+  NERR_NoSuchServer                 2460
+  NERR_NoSuchSession                2461
+  NERR_NoSuchConnection             2462
+  NERR_TooManyServers               2463
+  NERR_TooManySessions              2464
+  NERR_TooManyConnections           2465
+  NERR_TooManyFiles                 2466
+  NERR_NoAlternateServers           2467
+  NERR_TryDownLevel                 2470
+  NERR_UPSDriverNotStarted          2480
+  NERR_UPSInvalidConfig             2481
+  NERR_UPSInvalidCommPort           2482
+  NERR_UPSSignalAsserted            2483
+  NERR_UPSShutdownFailed            2484
+  NERR_BadDosRetCode                2500
+  NERR_ProgNeedsExtraMem            2501
+  NERR_BadDosFunction               2502
+  NERR_RemoteBootFailed             2503
+  NERR_BadFileCheckSum              2504
+  NERR_NoRplBootSystem              2505
+  NERR_RplLoadrNetBiosErr           2506
+  NERR_RplLoadrDiskErr              2507
+  NERR_ImageParamErr                2508
+  NERR_TooManyImageParams           2509
+  NERR_NonDosFloppyUsed             2510
+  NERR_RplBootRestart               2511
+  NERR_RplSrvrCallFailed            2512
+  NERR_CantConnectRplSrvr           2513
+  NERR_CantOpenImageFile            2514
+  NERR_CallingRplSrvr               2515
+  NERR_StartingRplBoot              2516
+  NERR_RplBootServiceTerm           2517
+  NERR_RplBootStartFailed           2518
+  NERR_RPL_CONNECTED                2519
+  NERR_BrowserConfiguredToNotRun    2550
+  NERR_RplNoAdaptersStarted         2610
+  NERR_RplBadRegistry               2611
+  NERR_RplBadDatabase               2612
+  NERR_RplRplfilesShare             2613
+  NERR_RplNotRplServer              2614
+  NERR_RplCannotEnum                2615
+  NERR_RplWkstaInfoCorrupted        2616
+  NERR_RplWkstaNotFound             2617
+  NERR_RplWkstaNameUnavailable      2618
+  NERR_RplProfileInfoCorrupted      2619
+  NERR_RplProfileNotFound           2620
+  NERR_RplProfileNameUnavailable    2621
+  NERR_RplProfileNotEmpty           2622
+  NERR_RplConfigInfoCorrupted       2623
+  NERR_RplConfigNotFound            2624
+  NERR_RplAdapterInfoCorrupted      2625
+  NERR_RplInternal                  2626
+  NERR_RplVendorInfoCorrupted       2627
+  NERR_RplBootInfoCorrupted         2628
+  NERR_RplWkstaNeedsUserAcct        2629
+  NERR_RplNeedsRPLUSERAcct          2630
+  NERR_RplBootNotFound              2631
+  NERR_RplIncompatibleProfile       2632
+  NERR_RplAdapterNameUnavailable    2633
+  NERR_RplConfigNotEmpty            2634
+  NERR_RplBootInUse                 2635
+  NERR_RplBackupDatabase            2636
+  NERR_RplAdapterNotFound           2637
+  NERR_RplVendorNotFound            2638
+  NERR_RplVendorNameUnavailable     2639
+  NERR_RplBootNameUnavailable       2640
+  NERR_RplConfigNameUnavailable     2641
+  NERR_DfsInternalCorruption        2660
+  NERR_DfsVolumeDataCorrupt         2661
+  NERR_DfsNoSuchVolume              2662
+  NERR_DfsVolumeAlreadyExists       2663
+  NERR_DfsAlreadyShared             2664
+  NERR_DfsNoSuchShare               2665
+  NERR_DfsNotALeafVolume            2666
+  NERR_DfsLeafVolume                2667
+  NERR_DfsVolumeHasMultipleServers  2668
+  NERR_DfsCantCreateJunctionPoint   2669
+  NERR_DfsServerNotDfsAware         2670
+  NERR_DfsBadRenamePath             2671
+  NERR_DfsVolumeIsOffline           2672
+  NERR_DfsNoSuchServer              2673
+  NERR_DfsCyclicalName              2674
+  NERR_DfsNotSupportedInServerDfs   2675
+  NERR_DfsDuplicateService          2676
+  NERR_DfsCantRemoveLastServerShare 2677
+  NERR_DfsVolumeIsInterDfs          2678
+  NERR_DfsInconsistent              2679
+  NERR_DfsServerUpgraded            2680
+  NERR_DfsDataIsIdentical           2681
+  NERR_DfsCantRemoveDfsRoot         2682
+  NERR_DfsChildOrParentInDfs        2683
+  NERR_DfsInternalError             2690
+  NERR_SetupAlreadyJoined           2691
+  NERR_SetupNotJoined               2692
+  NERR_SetupDomainController        2693
+  NERR_DefaultJoinRequired          2694
+  NERR_InvalidWorkgroupName         2695
+  NERR_NameUsesIncompatibleCodePage 2696
+  NERR_ComputerAccountNotFound      2697
+  NERR_PersonalSku                  2698
+  NERR_SetupCheckDNSConfig          2699
+  NERR_PasswordMustChange           2701
+  NERR_AccountLockedOut             2702
+  NERR_PasswordTooLong              2703
+  NERR_PasswordNotComplexEnough     2704
+  NERR_PasswordFilterError          2705
+  NERR_NoOfflineJoinInfo            2709
+  NERR_BadOfflineJoinInfo           2710
+  NERR_CantCreateJoinInfo           2711
+  NERR_BadDomainJoinInfo            2712
+  NERR_JoinPerformedMustRestart     2713
+  NERR_NoJoinPending                2714
+  NERR_ValuesNotSet                 2715
+  NERR_CantVerifyHostname           2716
+  NERR_CantLoadOfflineHive          2717
+  NERR_ConnectionInsecure           2718
+  NERR_ProvisioningBlobUnsupported  2719
+  NERR_DS8DCRequired                2720
+  NERR_LDAPCapableDCRequired        2721
+  NERR_DS8DCNotFound                2722
+  NERR_TargetVersionUnsupported     2723
+  ERROR_NO_BROWSER_SERVERS_FOUND    6118
+
+enum NET_COMPUTER_NAME_TYPE UINT
+  NetPrimaryComputerName    0
+  NetAlternateComputerNames 1
+  NetAllComputerNames       2
+  NetComputerNameTypeMax    3
+
+enum NETSETUP_NAME_TYPE UINT
+  NetSetupUnknown           0
+  NetSetupMachine           1
+  NetSetupWorkgroup         2
+  NetSetupDomain            3
+  NetSetupNonExistentDomain 4
+  NetSetupDnsMachine        5
+
+enum NET_VALIDATE_PASSWORD_TYPE LPVOID
+  NetValidateAuthentication 1
+  NetValidatePasswordChange 2
+  NetValidatePasswordReset  3
+
+enum DSROLE_PRIMARY_DOMAIN_INFO_LEVEL UINT
+  DsRolePrimaryDomainInfoBasic 1
+  DsRoleUpgradeStatus          2
+  DsRoleOperationState         3
+
+flag [ServerType] DWORD display=DWORD
+  SV_TYPE_WORKSTATION       0x00000001
+  SV_TYPE_SERVER            0x00000002
+  SV_TYPE_SQLSERVER         0x00000004
+  SV_TYPE_DOMAIN_CTRL       0x00000008
+  SV_TYPE_DOMAIN_BAKCTRL    0x00000010
+  SV_TYPE_TIME_SOURCE       0x00000020
+  SV_TYPE_AFP               0x00000040
+  SV_TYPE_NOVELL            0x00000080
+  SV_TYPE_DOMAIN_MEMBER     0x00000100
+  SV_TYPE_PRINTQ_SERVER     0x00000200
+  SV_TYPE_DIALIN_SERVER     0x00000400
+  SV_TYPE_SERVER_UNIX       0x00000800
+  SV_TYPE_NT                0x00001000
+  SV_TYPE_WFW               0x00002000
+  SV_TYPE_SERVER_MFPN       0x00004000
+  SV_TYPE_SERVER_NT         0x00008000
+  SV_TYPE_POTENTIAL_BROWSER 0x00010000
+  SV_TYPE_BACKUP_BROWSER    0x00020000
+  SV_TYPE_MASTER_BROWSER    0x00040000
+  SV_TYPE_DOMAIN_MASTER     0x00080000
+  SV_TYPE_SERVER_OSF        0x00100000
+  SV_TYPE_SERVER_VMS        0x00200000
+  SV_TYPE_WINDOWS           0x00400000
+  SV_TYPE_DFS               0x00800000
+  SV_TYPE_CLUSTER_NT        0x01000000
+  SV_TYPE_TERMINALSERVER    0x02000000
+  SV_TYPE_CLUSTER_VS_NT     0x04000000
+  SV_TYPE_DCE               0x10000000
+  SV_TYPE_ALTERNATE_XPORT   0x20000000
+  SV_TYPE_LOCAL_LIST_ONLY   0x40000000
+  SV_TYPE_DOMAIN_ENUM       0x80000000
+  SV_TYPE_ALL               0xFFFFFFFF
+
+flag NETSETUP_JOIN_STATUS UINT
+  NetSetupUnknownStatus 0
+  NetSetupUnjoined      1
+  NetSetupWorkgroupName 2
+  NetSetupDomainName    3
+
+pointer PNETSETUP_JOIN_STATUS NETSETUP_JOIN_STATUS
+
+flag [NetUserGetLocalGroupsFlags] DWORD display=DWORD
+  LG_INCLUDE_INDIRECT 0x0001
+
+flag [DsGetDcNameFlags] ULONG display=ULONG
+  DS_FORCE_REDISCOVERY            0x00000001
+  DS_DIRECTORY_SERVICE_REQUIRED   0x00000010
+  DS_DIRECTORY_SERVICE_PREFERRED  0x00000020
+  DS_GC_SERVER_REQUIRED           0x00000040
+  DS_PDC_REQUIRED                 0x00000080
+  DS_BACKGROUND_ONLY              0x00000100
+  DS_IP_REQUIRED                  0x00000200
+  DS_KDC_REQUIRED                 0x00000400
+  DS_TIMESERV_REQUIRED            0x00000800
+  DS_WRITABLE_REQUIRED            0x00001000
+  DS_GOOD_TIMESERV_PREFERRED      0x00002000
+  DS_AVOID_SELF                   0x00004000
+  DS_ONLY_LDAP_NEEDED             0x00008000
+  DS_IS_FLAT_NAME                 0x00010000
+  DS_IS_DNS_NAME                  0x00020000
+  DS_TRY_NEXTCLOSEST_SITE         0x00040000
+  DS_DIRECTORY_SERVICE_6_REQUIRED 0x00080000
+  DS_RETURN_DNS_NAME              0x40000000
+  DS_RETURN_FLAT_NAME             0x80000000
+
+flag [NETSETUP_PROVISION_OPTIONS] DWORD display=DWORD
+  NETSETUP_PROVISION_DOWNLEVEL_PRIV_SUPPORT 0x00000001
+  NETSETUP_PROVISION_REUSE_ACCOUNT          0x00000002
+  NETSETUP_PROVISION_USE_DEFAULT_PASSWORD   0x00000004
+  NETSETUP_PROVISION_SKIP_ACCOUNT_SEARCH    0x00000008
+  NETSETUP_PROVISION_ROOT_CA_CERTS          0x00000010
+  NETSETUP_PROVISION_ONLINE_CALLER          0x40000000
+  NETSETUP_PROVISION_CHECK_PWD_ONLY         0x80000000
+
+struct NETSETUP_PROVISIONING_PARAMS
+  dwVersion DWORD
+  lpDomain LPCWSTR
+  lpMachineName LPCWSTR
+  lpMachineAccountOU LPCWSTR
+  lpDcName LPCWSTR
+  dwProvisionOptions [NETSETUP_PROVISION_OPTIONS]
+  aCertTemplateNames LPCWSTR* count=cCertTemplateNames
+  cCertTemplateNames DWORD
+  aMachinePolicyNames LPCWSTR* count=cMachinePolicyNames
+  cMachinePolicyNames DWORD
+  aMachinePolicyPaths LPCWSTR* count=cMachinePolicyPaths
+  cMachinePolicyPaths DWORD
+
+pointer PNETSETUP_PROVISIONING_PARAMS NETSETUP_PROVISIONING_PARAMS
+
+enum [DFS_FLAG] DWORD display=DWORD
+  DFS_ADD_VOLUME     1
+  DFS_RESTORE_VOLUME 2
+
+flag [DFS_MOVE_FLAG] ULONG display=ULONG
+  DFS_MOVE_FLAG_REPLACE_IF_EXISTS 0x00000001
+
+flag [DFS_REMOVE_FLAG] ULONG display=ULONG
+  DFS_FORCE_REMOVE 0x80000000
+
+enum DFS_NAMESPACE_VERSION_ORIGIN UINT
+  DFS_NAMESPACE_VERSION_ORIGIN_COMBINED 0
+  DFS_NAMESPACE_VERSION_ORIGIN_SERVER   1
+  DFS_NAMESPACE_VERSION_ORIGIN_DOMAIN   2
+
+flag [DFS_NAMESPACE_CAPABILITY_FLAG] ULONGLONG display=ULONGLONG
+  DFS_NAMESPACE_CAPABILITY_ABDE 0x0000000000000001
+
+struct DFS_SUPPORTED_NAMESPACE_VERSION_INFO
+  DomainDfsMajorVersion ULONG
+  DomainDfsMinorVersion ULONG
+  DomainDfsCapabilities [DFS_NAMESPACE_CAPABILITY_FLAG]
+  StandaloneDfsMajorVersion ULONG
+  StandaloneDfsMinorVersion ULONG
+  StandaloneDfsCapabilities [DFS_NAMESPACE_CAPABILITY_FLAG]
+
+pointer PDFS_SUPPORTED_NAMESPACE_VERSION_INFO DFS_SUPPORTED_NAMESPACE_VERSION_INFO
+
+pointer PDFS_SUPPORTED_NAMESPACE_VERSION_INFO* PDFS_SUPPORTED_NAMESPACE_VERSION_INFO
+
+struct HLOG
+  time DWORD
+  last_flags DWORD
+  offset DWORD
+  rec_offset DWORD
+
+pointer LPHLOG HLOG
+
+func DsAddressToSiteNames bothCharset
+  [ERROR_CODE]
+  ComputerName LPCTSTR
+  EntryCount DWORD
+  SocketAddresses PSOCKET_ADDRESS count=EntryCount
+  SiteNames LPTSTR**
+
+func DsAddressToSiteNamesEx bothCharset
+  [ERROR_CODE]
+  ComputerName LPCTSTR
+  EntryCount DWORD
+  SocketAddresses PSOCKET_ADDRESS count=EntryCount
+  SiteNames LPTSTR**
+  SubnetNames LPTSTR**
+
+func DsDeregisterDnsHostRecords bothCharset
+  [ERROR_CODE]
+  ServerName LPTSTR
+  DnsDomainName LPTSTR
+  DomainGuid GUID*
+  DsaGuid GUID*
+  DnsHostName LPTSTR
+
+func DsEnumerateDomainTrusts bothCharset
+  [ERROR_CODE]
+  ServerName LPTSTR
+  Flags ULONG
+  Domains PDS_DOMAIN_TRUSTS*
+  DomainCount PULONG
+
+func DsGetDcCloseW
+  void
+  GetDcContextHandle HANDLE
+
+func DsGetDcName bothCharset
+  [ERROR_CODE]
+  ComputerName LPCTSTR
+  DomainName LPCTSTR
+  DomainGuid GUID*
+  SiteName LPCTSTR
+  Flags [DsGetDcNameFlags]
+  DomainControllerInfo PDOMAIN_CONTROLLER_INFO*
+
+func DsGetDcNext bothCharset
+  [ERROR_CODE]
+  GetDcContextHandle HANDLE
+  SockAddressCount PULONG
+  SockAddresses LPSOCKET_ADDRESS*
+  DnsHostName LPTSTR*
+
+func DsGetDcOpen bothCharset
+  [ERROR_CODE]
+  DnsName LPCTSTR
+  OptionFlags ULONG
+  SiteName LPCTSTR
+  DomainGuid GUID*
+  DnsForestName LPCTSTR
+  DcFlags ULONG
+  RetGetDcContext PHANDLE
+
+func DsGetDcSiteCoverage bothCharset
+  [ERROR_CODE]
+  ServerName LPCTSTR
+  EntryCount PULONG
+  SiteNames LPTSTR** derefPostCount=EntryCount
+
+func DsGetForestTrustInformationW
+  [ERROR_CODE]
+  ServerName LPCWSTR
+  TrustedDomainName LPCWSTR
+  Flags DWORD
+  ForestTrustInfo PLSA_FOREST_TRUST_INFORMATION*
+
+func DsGetSiteName bothCharset
+  [ERROR_CODE]
+  ComputerName LPCTSTR
+  SiteName LPTSTR*
+
+func DsMergeForestTrustInformationW
+  void
+  DomainName LPCWSTR
+  NewForestTrustInfo PLSA_FOREST_TRUST_INFORMATION
+  OldForestTrustInfo PLSA_FOREST_TRUST_INFORMATION
+  ForestTrustInfo PLSA_FOREST_TRUST_INFORMATION*
+
+func DsRoleFreeMemory
+  void
+  Buffer PVOID
+
+func DsRoleGetPrimaryDomainInformation
+  [ERROR_CODE]
+  lpServer LPCWSTR
+  InfoLevel DSROLE_PRIMARY_DOMAIN_INFO_LEVEL
+  Buffer PBYTE*
+
+func DsValidateSubnetName bothCharset
+  [ERROR_CODE]
+  SubnetName LPCTSTR
+
+func NetAlertRaise
+  NET_API_STATUS
+  AlertEventName LPCWSTR
+  Buffer LPVOID
+  BufferSize DWORD
+
+func NetAlertRaiseEx
+  NET_API_STATUS
+  AlertEventName LPCWSTR
+  VariableInfo LPVOID
+  VariableInfoSize DWORD
+  ServiceName LPCWSTR
+
+func NetapipBufferAllocate
+  NET_API_STATUS
+  ByteCount DWORD
+  Buffer LPVOID*
+
+func NetApiBufferAllocate
+  NET_API_STATUS
+  ByteCount DWORD
+  Buffer LPVOID*
+
+func NetApiBufferFree
+  NET_API_STATUS
+  Buffer LPVOID
+
+func NetApiBufferReallocate
+  NET_API_STATUS
+  OldBuffer LPVOID
+  NewByteCount DWORD
+  NewBuffer LPVOID*
+
+func NetApiBufferSize
+  NET_API_STATUS
+  Buffer LPVOID
+  ByteCount LPDWORD
+
+func NetAddAlternateComputerName
+  NET_API_STATUS
+  Server LPCWSTR
+  AlternateName LPCWSTR
+  DomainAccount LPCWSTR
+  DomainAccountPassword LPCWSTR
+  Reserved ULONG
+
+func NetEnumerateComputerNames
+  NET_API_STATUS
+  Server LPCWSTR
+  NameType NET_COMPUTER_NAME_TYPE
+  Reserved ULONG
+  EntryCount PDWORD
+  ComputerNames LPWSTR** derefPostCount=EntryCount
+
+func NetGetJoinableOUs
+  NET_API_STATUS
+  lpServer LPCWSTR
+  lpDomain LPCWSTR
+  lpAccount LPCWSTR
+  lpPassword LPCWSTR
+  OUCount DWORD*
+  OUs LPWSTR**
+
+func NetGetJoinInformation
+  NET_API_STATUS
+  lpServer LPCWSTR
+  lpNameBuffer LPWSTR*
+  BufferType PNETSETUP_JOIN_STATUS
+
+func NetJoinDomain
+  NET_API_STATUS
+  lpServer LPCWSTR
+  lpDomain LPCWSTR
+  lpAccountOU LPCWSTR
+  lpAccount LPCWSTR
+  lpPassword LPCWSTR
+  fJoinOptions DWORD
+
+func NetLogonSetServiceBits
+  NET_API_STATUS
+  ServerName LPWSTR
+  ServiceBitsOfInterest DWORD
+  ServiceBits DWORD
+
+func NetProvisionComputerAccount
+  NET_API_STATUS
+  lpDomain LPCWSTR
+  lpMachineName LPCWSTR
+  lpMachineAccountOU LPCWSTR
+  lpDcName LPCWSTR
+  dwOptions [NETSETUP_PROVISION_OPTIONS]
+  pProvisionBinData PBYTE
+  pdwProvisionBinDataSize DWORD
+  pProvisionTextData LPWSTR
+
+func NetRemoveAlternateComputerName
+  NET_API_STATUS
+  Server LPCWSTR
+  AlternateName LPCWSTR
+  DomainAccount LPCWSTR
+  DomainAccountPassword LPCWSTR
+  Reserved ULONG
+
+func NetRenameMachineInDomain
+  NET_API_STATUS
+  lpServer LPCWSTR
+  lpNewMachineName LPCWSTR
+  lpAccount LPCWSTR
+  lpPassword LPCWSTR
+  fRenameOptions DWORD
+
+func NetRequestOfflineDomainJoin
+  NET_API_STATUS
+  pProvisionBinData BYTE*
+  cbProvisionBinDataSize DWORD
+  dwOptions DWORD
+  lpWindowsPath LPCWSTR
+
+func NetSetPrimaryComputerName
+  NET_API_STATUS
+  Server LPCWSTR
+  PrimaryName LPCWSTR
+  DomainAccount LPCWSTR
+  DomainAccountPassword LPCWSTR
+  Reserved ULONG
+
+func NetUnjoinDomain
+  NET_API_STATUS
+  lpServer LPCWSTR
+  lpAccount LPCWSTR
+  lpPassword LPCWSTR
+  fUnjoinOptions DWORD
+
+func NetValidateName
+  NET_API_STATUS
+  lpServer LPCWSTR
+  lpName LPCWSTR
+  lpAccount LPCWSTR
+  lpPassword LPCWSTR
+  NameType NETSETUP_NAME_TYPE
+
+func NetCreateProvisioningPackage
+  NET_API_STATUS
+  pProvisioningParams PNETSETUP_PROVISIONING_PARAMS
+  pPackageBinData PBYTE*
+  pdwPackageBinDataSize DWORD*
+  pPackageTextData LPWSTR*
+
+func NetRequestProvisioningPackageInstall
+  NET_API_STATUS
+  pPackageBinData BYTE*
+  dwPackageBinDataSize DWORD
+  dwProvisionOptions DWORD
+  lpWindowsPath LPCWSTR
+  pvReserved PVOID
+
+func NetGetAnyDCName
+  NET_API_STATUS
+  servername LPCWSTR
+  domainname LPCWSTR
+  bufptr LPBYTE*
+
+func NetGetDCName
+  NET_API_STATUS
+  servername LPCWSTR
+  domainname LPCWSTR
+  bufptr LPBYTE*
+
+func NetGetDisplayInformationIndex
+  NET_API_STATUS
+  ServerName LPCWSTR
+  Level DWORD
+  Prefix LPCWSTR
+  Index LPDWORD
+
+func NetQueryDisplayInformation
+  NET_API_STATUS
+  ServerName LPCWSTR
+  Level DWORD
+  Index DWORD
+  EntriesRequested DWORD
+  PreferredMaximumLength DWORD
+  ReturnedEntryCount LPDWORD
+  SortedBuffer PVOID*
+
+func NetGroupAdd
+  NET_API_STATUS
+  servername LPCWSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetGroupAddUser
+  NET_API_STATUS
+  servername LPCWSTR
+  GroupName LPCWSTR
+  username LPCWSTR
+
+func NetGroupDel
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+
+func NetGroupDelUser
+  NET_API_STATUS
+  servername LPCWSTR
+  GroupName LPCWSTR
+  Username LPCWSTR
+
+func NetGroupEnum
+  NET_API_STATUS
+  servername LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resume_handle PDWORD_PTR
+
+func NetGroupGetInfo
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetGroupGetUsers
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  ResumeHandle PDWORD_PTR
+
+func NetGroupSetInfo
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetGroupSetUsers
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+  level DWORD
+  buf LPBYTE
+  totalentries DWORD
+
+func NetLocalGroupAdd
+  NET_API_STATUS
+  servername LPCWSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetLocalGroupAddMembers
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+  level DWORD
+  buf LPBYTE
+  totalentries DWORD
+
+func NetLocalGroupDel
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+
+func NetLocalGroupDelMembers
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+  level DWORD
+  buf LPBYTE
+  totalentries DWORD
+
+func NetLocalGroupEnum
+  NET_API_STATUS
+  servername LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resumehandle PDWORD_PTR
+
+func NetLocalGroupGetInfo
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetLocalGroupGetMembers
+  NET_API_STATUS
+  servername LPCWSTR
+  localgroupname LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resumehandle PDWORD_PTR
+
+func NetLocalGroupSetInfo
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetLocalGroupSetMembers
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+  level DWORD
+  buf LPBYTE
+  totalentries DWORD
+
+func NetMessageBufferSend
+  NET_API_STATUS
+  servername LPCWSTR
+  msgname LPCWSTR
+  fromname LPCWSTR
+  buf LPBYTE
+  buflen DWORD
+
+func NetMessageNameAdd
+  NET_API_STATUS
+  servername LPCWSTR
+  msgname LPCWSTR
+
+func NetMessageNameDel
+  NET_API_STATUS
+  servername LPCWSTR
+  msgname LPCWSTR
+
+func NetMessageNameEnum
+  NET_API_STATUS
+  servername LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resume_handle LPDWORD
+
+func NetMessageNameGetInfo
+  NET_API_STATUS
+  servername LPCWSTR
+  msgname LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetRemoteComputerSupports
+  NET_API_STATUS
+  UncServerName LPCWSTR
+  OptionsWanted DWORD
+  OptionsSupported LPDWORD
+
+func NetRemoteTOD
+  NET_API_STATUS
+  UncServerName LPCWSTR
+  BufferPtr LPBYTE*
+
+func NetScheduleJobAdd
+  NET_API_STATUS
+  Servername LPCWSTR
+  Buffer LPBYTE
+  JobId LPDWORD
+
+func NetScheduleJobDel
+  NET_API_STATUS
+  Servername LPCWSTR
+  MinJobId DWORD
+  MaxJobId DWORD
+
+func NetScheduleJobEnum
+  NET_API_STATUS
+  Servername LPCWSTR
+  PointerToBuffer LPBYTE*
+  PreferredMaximumLength DWORD
+  EntriesRead LPDWORD
+  TotalEntries LPDWORD
+  ResumeHandle LPDWORD
+
+func NetScheduleJobGetInfo
+  NET_API_STATUS
+  Servername LPCWSTR
+  JobId DWORD
+  PointerToBuffer LPBYTE*
+
+func NetServerDiskEnum
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resume_handle LPDWORD
+
+func NetServerEnum
+  NET_API_STATUS
+  servername LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  servertype [ServerType]
+  domain LPCWSTR
+  resume_handle LPDWORD
+
+func NetServerEnumEx
+  NET_API_STATUS
+  ServerName LPCWSTR
+  Level DWORD
+  Bufptr LPBYTE*
+  PrefMaxlen DWORD
+  EntriesRead LPDWORD
+  totalentries LPDWORD
+  servertype [ServerType]
+  domain LPCWSTR
+  FirstNameToReturn LPCWSTR
+
+func NetServerGetInfo
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetServerSetInfo
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  buf LPBYTE
+  ParmError LPDWORD
+
+func NetServerSetInfoCommandLine
+  NET_API_STATUS
+  argc WORD
+  argv "LMSTR []" count=argc
+
+func NetServerComputerNameAdd
+  NET_API_STATUS
+  ServerName LPWSTR
+  EmulatedDomainName LPWSTR
+  EmulatedServerName LPWSTR
+
+func NetServerComputerNameDel
+  NET_API_STATUS
+  ServerName LPWSTR
+  EmulatedServerName LPWSTR
+
+func NetServerTransportAdd
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  bufptr LPBYTE
+
+func NetServerTransportAddEx
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  bufptr LPBYTE
+
+func NetServerTransportDel
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  bufptr LPBYTE
+
+func NetServerTransportEnum
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resumehandle LPDWORD
+
+func NetWkstaTransportEnum
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resumehandle LPDWORD
+
+func NetUseAdd
+  NET_API_STATUS
+  UncServerName LMSTR
+  Level DWORD
+  Buf LPBYTE
+  ParmError LPDWORD
+
+func NetUseDel
+  NET_API_STATUS
+  UncServerName LMSTR
+  UseName LMSTR
+  ForceCond DWORD
+
+func NetUseEnum
+  NET_API_STATUS
+  UncServerName LMSTR
+  Level DWORD
+  BufPtr LPBYTE*
+  PreferedMaximumSize DWORD
+  EntriesRead LPDWORD
+  TotalEntries LPDWORD
+  ResumeHandle LPDWORD
+
+func NetUseGetInfo
+  NET_API_STATUS
+  UncServerName LMSTR
+  UseName LMSTR
+  Level DWORD
+  BufPtr LPBYTE*
+
+func NetUserAdd
+  NET_API_STATUS
+  servername LMSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetUserChangePassword
+  NET_API_STATUS
+  domainname LPCWSTR
+  username LPCWSTR
+  oldpassword LPCWSTR
+  newpassword LPCWSTR
+
+func NetUserDel
+  NET_API_STATUS
+  servername LPCWSTR
+  username LPCWSTR
+
+func NetUserEnum
+  NET_API_STATUS
+  servername LPCWSTR
+  level DWORD
+  filter DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resume_handle LPDWORD
+
+func NetUserGetGroups
+  NET_API_STATUS
+  servername LPCWSTR
+  username LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+
+func NetUserGetInfo
+  NET_API_STATUS
+  servername LPCWSTR
+  username LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetUserGetLocalGroups
+  NET_API_STATUS
+  servername LPCWSTR
+  username LPCWSTR
+  level DWORD
+  flags [NetUserGetLocalGroupsFlags]
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+
+func NetUserSetGroups
+  NET_API_STATUS
+  servername LPCWSTR
+  username LPCWSTR
+  level DWORD
+  buf LPBYTE
+  num_entries DWORD
+
+func NetUserSetInfo
+  NET_API_STATUS
+  servername LPCWSTR
+  username LPCWSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetUserModalsGet
+  NET_API_STATUS
+  servername LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetUserModalsSet
+  NET_API_STATUS
+  servername LPCWSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetValidatePasswordPolicyFree
+  NET_API_STATUS
+  OutputArg LPVOID*
+
+func NetValidatePasswordPolicy
+  NET_API_STATUS
+  ServerName LPCWSTR
+  Qualifier LPVOID
+  ValidationType NET_VALIDATE_PASSWORD_TYPE
+  InputArg LPVOID
+  OutputArg LPVOID
+
+func NetWkstaGetInfo
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetWkstaSetInfo
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  buffer LPBYTE
+  parm_err LPDWORD
+
+func NetWkstaUserEnum
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resumehandle LPDWORD
+
+func NetWkstaUserGetInfo
+  NET_API_STATUS
+  reserved LPWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetWkstaUserSetInfo
+  NET_API_STATUS
+  reserved LPWSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetAddServiceAccount
+  NTSTATUS
+  ServerName LPWSTR
+  AccountName LPWSTR
+  Reserved LPWSTR
+  Flags DWORD
+
+func NetEnumerateServiceAccounts
+  NTSTATUS
+  ServerName LPWSTR
+  Flags DWORD
+  AccountsCount DWORD*
+  Accounts PZPWSTR*
+
+func NetIsServiceAccount
+  NTSTATUS
+  ServerName LPWSTR
+  AccountName LPWSTR
+  IsService BOOL*
+
+func NetRemoveServiceAccount
+  NTSTATUS
+  ServerName LPWSTR
+  AccountName LPWSTR
+  Flags DWORD
+
+func DavAddConnection
+  [ERROR_CODE]
+  ConnectionHandle HANDLE*
+  RemoteName LPCWSTR
+  UserName LPCWSTR
+  Password LPCWSTR
+  ClientCert PBYTE
+  CertSize DWORD
+
+func DavDeleteConnection
+  [ERROR_CODE]
+  ConnectionHandle HANDLE
+
+func DavFlushFile
+  [ERROR_CODE]
+  hFile HANDLE
+
+func DavGetExtendedError
+  [ERROR_CODE]
+  hFile HANDLE
+  ExtError DWORD*
+  ExtErrorString LPWSTR
+  cChSize DWORD*
+
+func DavGetHTTPFromUNCPath
+  [ERROR_CODE]
+  UncPath LPCWSTR
+  HttpPath LPWSTR
+  lpSize LPDWORD
+
+func DavGetUNCFromHTTPPath
+  [ERROR_CODE]
+  HttpPath LPCWSTR
+  UncPath LPWSTR
+  lpSize LPDWORD
+
+func NetFileClose
+  NET_API_STATUS
+  servername LMSTR
+  fileid DWORD
+
+func NetFileEnum
+  NET_API_STATUS
+  servername LMSTR
+  basepath LMSTR
+  username LMSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resume_handle PDWORD_PTR
+
+func NetFileGetInfo
+  NET_API_STATUS
+  servername LMSTR
+  fileid DWORD
+  level DWORD
+  bufptr LPBYTE*
+
+func NetSessionDel
+  NET_API_STATUS
+  servername LPWSTR
+  UncClientName LPWSTR
+  username LPWSTR
+
+func NetSessionEnum
+  NET_API_STATUS
+  servername LPWSTR
+  UncClientName LPWSTR
+  username LPWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resume_handle LPDWORD
+
+func NetSessionGetInfo
+  NET_API_STATUS
+  servername LPWSTR
+  UncClientName LPWSTR
+  username LPWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetConnectionEnum
+  NET_API_STATUS
+  servername LMSTR
+  qualifier LMSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resume_handle LPDWORD
+
+func NetShareAdd
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetShareCheck
+  NET_API_STATUS
+  servername LPWSTR
+  device LPWSTR
+  type LPDWORD
+
+func NetShareDel
+  NET_API_STATUS
+  servername LMSTR
+  netname LMSTR
+  reserved DWORD
+
+func NetShareDelSticky
+  NET_API_STATUS
+  servername LMSTR
+  netname LMSTR
+  reserved DWORD
+
+func NetShareDelEx
+  NET_API_STATUS
+  servername LMSTR
+  level DWORD
+  buf LPBYTE
+
+func NetShareEnum
+  NET_API_STATUS
+  servername LPWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resume_handle LPDWORD
+
+func NetShareEnumSticky
+  NET_API_STATUS
+  servername LMSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resume_handle LPDWORD
+
+func NetShareGetInfo
+  NET_API_STATUS
+  servername LPWSTR
+  netname LPWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetShareSetInfo
+  NET_API_STATUS
+  servername LPWSTR
+  netname LPWSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetStatisticsGet
+  NET_API_STATUS
+  server LPWSTR
+  service LPWSTR
+  level DWORD
+  options DWORD
+  bufptr LPBYTE*
+
+func NetAccessAdd
+  NET_API_STATUS
+  servername LPCWSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetAccessCheck
+  NET_API_STATUS
+  reserved LPCWSTR
+  userName LPCWSTR
+  resource LPCWSTR
+  operation DWORD
+  result LPDWORD
+
+func NetAccessDel
+  NET_API_STATUS
+  servername LPCWSTR
+  resource LPCWSTR
+
+func NetAccessEnum
+  NET_API_STATUS
+  servername LPCWSTR
+  BasePath LPCWSTR
+  Recursive DWORD
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resume_handle LPDWORD
+
+func NetAccessGetInfo
+  NET_API_STATUS
+  servername LPCWSTR
+  resource LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetAccessGetUserPerms
+  NET_API_STATUS
+  servername LPCWSTR
+  UGname LPCWSTR
+  resource LPCWSTR
+  Perms LPDWORD
+
+func NetAccessSetInfo
+  NET_API_STATUS
+  servername LPCWSTR
+  resource LPCWSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetAuditClear
+  NET_API_STATUS
+  server LPCWSTR
+  backupfile LPCWSTR
+  service LPCWSTR
+
+func NetAuditRead
+  NET_API_STATUS
+  server LPCWSTR
+  service LPCWSTR
+  auditloghandle LPHLOG
+  offset DWORD
+  reserved1 LPDWORD
+  reserved2 DWORD
+  offsetflag DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  bytesread LPDWORD
+  totalavailable LPDWORD
+
+func NetAuditWrite
+  NET_API_STATUS
+  type DWORD
+  buf LPBYTE
+  numbytes DWORD
+  service LPCWSTR
+  reserved LPBYTE
+
+func NetConfigGet
+  NET_API_STATUS
+  server LPCWSTR
+  component LPCWSTR
+  parameter LPCWSTR
+  bufptr LPBYTE*
+  totalavailable LPDWORD
+
+func NetConfigGetAll
+  NET_API_STATUS
+  server LPCWSTR
+  component LPCWSTR
+  bufptr LPBYTE*
+  totalavailable LPDWORD
+
+func NetConfigSet
+  NET_API_STATUS
+  server LPCWSTR
+  reserved1 LPCWSTR
+  component LPCWSTR
+  level DWORD
+  reserved2 DWORD
+  buf LPBYTE
+  reserved3 DWORD
+
+func NetErrorLogClear
+  NET_API_STATUS
+  UncServerName LPCWSTR
+  BackupFile LPCWSTR
+  Reserved LPBYTE
+
+func NetErrorLogRead
+  NET_API_STATUS
+  UncServerName LPCWSTR
+  Reserved1 LPWSTR
+  ErrorLogHandle LPHLOG
+  Offset DWORD
+  Reserved2 LPDWORD
+  Reserved3 DWORD
+  OffsetFlag DWORD
+  BufPtr LPBYTE*
+  PrefMaxSize DWORD
+  BytesRead LPDWORD
+  TotalAvailable LPDWORD
+
+func NetErrorLogWrite
+  NET_API_STATUS
+  Reserved1 LPBYTE
+  Code DWORD
+  Component LPCWSTR
+  Buffer LPBYTE
+  NumBytes DWORD
+  MsgBuf LPBYTE
+  StrCount DWORD
+  Reserved2 LPBYTE
+
+func NetLocalGroupAddMember
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+  membersid PSID
+
+func NetLocalGroupDelMember
+  NET_API_STATUS
+  servername LPCWSTR
+  groupname LPCWSTR
+  membersid PSID
+
+func NetServiceControl
+  NET_API_STATUS
+  servername LPCWSTR
+  service LPCWSTR
+  opcode DWORD
+  arg DWORD
+  bufptr LPBYTE*
+
+func NetServiceEnum
+  NET_API_STATUS
+  servername LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resume_handle LPDWORD
+
+func NetServiceGetInfo
+  NET_API_STATUS
+  servername LPCWSTR
+  service LPCWSTR
+  level DWORD
+  bufptr LPBYTE*
+
+func NetServiceInstall
+  NET_API_STATUS
+  servername LPCWSTR
+  service LPCWSTR
+  argc DWORD
+  argv "LPCWSTR []" count=argc
+  bufptr LPBYTE*
+
+func NetWkstaTransportAdd
+  NET_API_STATUS
+  servername LMSTR
+  level DWORD
+  buf LPBYTE
+  parm_err LPDWORD
+
+func NetWkstaTransportDel
+  NET_API_STATUS
+  servername LMSTR
+  transportname LMSTR
+  ucond DWORD
+
+func NetDfsAdd
+  NET_API_STATUS
+  DfsEntryPath LPWSTR
+  ServerName LPWSTR
+  PathName LPWSTR
+  Comment LPWSTR
+  Flags [DFS_FLAG]
+
+func NetDfsAddFtRoot
+  NET_API_STATUS
+  ServerName LPWSTR
+  RootShare LPWSTR
+  FtDfsName LPWSTR
+  Comment LPWSTR
+  Flags DWORD
+
+func NetDfsAddRootTarget
+  NET_API_STATUS
+  pDfsPath LPWSTR
+  pTargetPath LPWSTR
+  MajorVersion ULONG
+  pComment LPWSTR
+  Flags ULONG
+
+func NetDfsAddStdRoot
+  NET_API_STATUS
+  ServerName LPWSTR
+  RootShare LPWSTR
+  Comment LPWSTR
+  Flags DWORD
+
+func NetDfsAddStdRootForced
+  NET_API_STATUS
+  ServerName LPWSTR
+  RootShare LPWSTR
+  Comment LPWSTR
+  Store LPWSTR
+
+func NetDfsEnum
+  NET_API_STATUS
+  DfsName LPWSTR
+  Level DWORD
+  PrefMaxLen DWORD
+  Buffer LPBYTE*
+  EntriesRead LPDWORD
+  ResumeHandle LPDWORD
+
+func NetDfsGetClientInfo
+  NET_API_STATUS
+  DfsEntryPath LPWSTR
+  ServerName LPWSTR
+  ShareName LPWSTR
+  Level DWORD
+  Buffer LPBYTE*
+
+func NetDfsGetFtContainerSecurity
+  NET_API_STATUS
+  DomainName LPWSTR
+  SecurityInformation SECURITY_INFORMATION
+  ppSecurityDescriptor PSECURITY_DESCRIPTOR*
+  lpcbSecurityDescriptor LPDWORD
+
+func NetDfsGetInfo
+  NET_API_STATUS
+  DfsEntryPath LPWSTR
+  ServerName LPWSTR
+  ShareName LPWSTR
+  Level DWORD
+  Buffer LPBYTE*
+
+func NetDfsGetSecurity
+  NET_API_STATUS
+  DfsEntryPath LPWSTR
+  SecurityInformation SECURITY_INFORMATION
+  ppSecurityDescriptor PSECURITY_DESCRIPTOR*
+  lpcbSecurityDescriptor LPDWORD
+
+func NetDfsGetStdContainerSecurity
+  NET_API_STATUS
+  MachineName LPWSTR
+  SecurityInformation SECURITY_INFORMATION
+  ppSecurityDescriptor PSECURITY_DESCRIPTOR*
+  lpcbSecurityDescriptor LPDWORD
+
+func NetDfsGetSupportedNamespaceVersion
+  NET_API_STATUS
+  Origin DFS_NAMESPACE_VERSION_ORIGIN
+  pName PWSTR
+  ppVersionInfo PDFS_SUPPORTED_NAMESPACE_VERSION_INFO*
+
+func NetDfsManagerInitialize
+  NET_API_STATUS
+  ServerName LPWSTR
+  Flags DWORD
+
+func NetDfsMove
+  NET_API_STATUS
+  Path LPWSTR
+  NewPath LPWSTR
+  Flags [DFS_MOVE_FLAG]
+
+func NetDfsRemove
+  NET_API_STATUS
+  DfsEntryPath LPWSTR
+  ServerName LPWSTR
+  ShareName LPWSTR
+
+func NetDfsRemoveFtRoot
+  NET_API_STATUS
+  ServerName LPWSTR
+  RootShare LPWSTR
+  FtDfsName LPWSTR
+  Flags DWORD
+
+func NetDfsRemoveFtRootForced
+  NET_API_STATUS
+  DomainName LPWSTR
+  ServerName LPWSTR
+  RootShare LPWSTR
+  FtDfsName LPWSTR
+  Flags DWORD
+
+func NetDfsRemoveRootTarget
+  NET_API_STATUS
+  pDfsPath LPWSTR
+  pTargetPath LPWSTR
+  Flags [DFS_REMOVE_FLAG]
+
+func NetDfsRemoveStdRoot
+  NET_API_STATUS
+  ServerName LPWSTR
+  RootShare LPWSTR
+  Flags DWORD
+
+func NetDfsSetClientInfo
+  NET_API_STATUS
+  DfsEntryPath LPWSTR
+  ServerName LPWSTR
+  ShareName LPWSTR
+  Level DWORD
+  Buffer LPBYTE
+
+func NetDfsSetFtContainerSecurity
+  NET_API_STATUS
+  DomainName LPWSTR
+  SecurityInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+
+func NetDfsSetInfo
+  NET_API_STATUS
+  DfsEntryPath LPWSTR
+  ServerName LPWSTR
+  ShareName LPWSTR
+  Level DWORD
+  Buffer LPBYTE
+
+func NetDfsSetSecurity
+  NET_API_STATUS
+  DfsEntryPath LPWSTR
+  SecurityInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+
+func NetDfsSetStdContainerSecurity
+  NET_API_STATUS
+  MachineName LPWSTR
+  SecurityInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+
+func NetServerAliasAdd
+  NET_API_STATUS
+  servername LMSTR
+  level DWORD
+  buf LPBYTE
+
+func NetServerAliasDel
+  NET_API_STATUS
+  servername LMSTR
+  level DWORD
+  buf LPBYTE
+
+func NetServerAliasEnum
+  NET_API_STATUS
+  servername LMSTR
+  level DWORD
+  bufptr LPBYTE*
+  prefmaxlen DWORD
+  entriesread LPDWORD
+  totalentries LPDWORD
+  resumehandle LPDWORD
+

@@ -1,0 +1,8 @@
+include Interfaces\WIC\IWICBitmapCodecInfo.txt
+
+ingterface IWICBitmapEncoderInfo base=IWICBitmapCodecInfo id={94C9B4EE-A09F-4f92-8A1E-4A9BCE7E76FB} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func CreateInstance
+    [WIC_HRESULT]
+    ppIBitmapEncoder IWICBitmapEncoder**
+
+

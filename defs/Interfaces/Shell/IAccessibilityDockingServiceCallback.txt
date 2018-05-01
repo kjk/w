@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAccessibilityDockingServiceCallback base=IUnknown id={157733FD-A592-42E5-B594-248468C5A81B} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Undocked
+    HRESULT
+    undockReason UNDOCK_REASON
+
+

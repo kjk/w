@@ -1,0 +1,38 @@
+include Interfaces\IUnknown.txt
+
+ingterface IApplicationAssociationRegistration base=IUnknown id={4e530b0a-e611-4c77-a3ac-9031d022281b} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func QueryCurrentDefault
+    HRESULT
+    pszQuery LPCWSTR
+    atQueryType ASSOCIATIONTYPE
+    alQueryLevel ASSOCIATIONLEVEL
+    ppszAssociation LPWSTR*
+
+  func QueryAppIsDefault
+    HRESULT
+    pszQuery LPCWSTR
+    atQueryType ASSOCIATIONTYPE
+    alQueryLevel ASSOCIATIONLEVEL
+    pszAppRegistryName LPCWSTR
+    pfDefault BOOL*
+
+  func QueryAppIsDefaultAll
+    HRESULT
+    alQueryLevel ASSOCIATIONLEVEL
+    pszAppRegistryName LPCWSTR
+    pfDefault BOOL*
+
+  func SetAppAsDefault
+    HRESULT
+    pszAppRegistryName LPCWSTR
+    pszSet LPCWSTR
+    atSetType ASSOCIATIONTYPE
+
+  func SetAppAsDefaultAll
+    HRESULT
+    pszAppRegistryName LPCWSTR
+
+  func ClearUserAssociations
+    HRESULT
+
+

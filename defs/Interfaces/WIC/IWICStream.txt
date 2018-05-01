@@ -1,0 +1,25 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\COM\IStream.txt
+
+ingterface IWICStream base=IStream id={135FF860-22B7-4ddf-B0F6-218F4F299A43} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func InitializeFromIStream
+    [WIC_HRESULT]
+    pIStream IStream*
+
+  func InitializeFromFilename
+    [WIC_HRESULT]
+    wzFileName LPCWSTR
+    dwDesiredAccess DWORD
+
+  func InitializeFromMemory
+    [WIC_HRESULT]
+    pbBuffer WICInProcPointer
+    cbBufferSize DWORD
+
+  func InitializeFromIStreamRegion
+    [WIC_HRESULT]
+    pIStream IStream*
+    ulOffset ULARGE_INTEGER
+    ulMaxSize ULARGE_INTEGER
+
+

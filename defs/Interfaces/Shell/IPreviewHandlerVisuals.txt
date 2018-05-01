@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPreviewHandlerVisuals base=IUnknown id={196bf9a5-b346-4ef0-aa1e-5dcdb76768b1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetBackgroundColor
+    HRESULT
+    color COLORREF
+
+  func SetFont
+    HRESULT
+    plf "const LOGFONTW*"
+
+  func SetTextColor
+    HRESULT
+    color COLORREF
+
+

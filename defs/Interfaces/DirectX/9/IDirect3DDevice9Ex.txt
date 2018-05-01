@@ -1,0 +1,104 @@
+include Interfaces\DirectX\9\IDirect3DDevice9.txt
+
+ingterface IDirect3DDevice9Ex base=IDirect3DDevice9 id={B18B10CE-2649-405a-870F-95F777D4313A} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func SetConvolutionMonoKernel
+    HRESULT
+    width UINT
+    height UINT
+    rows float*
+    columns float*
+
+  func ComposeRects
+    HRESULT
+    pSrc IDirect3DSurface9*
+    pDst IDirect3DSurface9*
+    pSrcRectDescs IDirect3DVertexBuffer9*
+    NumRects UINT
+    pDstRectDescs IDirect3DVertexBuffer9*
+    Operation D3DCOMPOSERECTSOP
+    Xoffset int
+    Yoffset int
+
+  func PresentEx
+    HRESULT
+    pSourceRect "CONST RECT*"
+    pDestRect "CONST RECT*"
+    hDestWindowOverride HWND
+    pDirtyRegion "CONST RGNDATA*"
+    dwFlags DWORD
+
+  func GetGPUThreadPriority
+    HRESULT
+    pPriority INT*
+
+  func SetGPUThreadPriority
+    HRESULT
+    Priority INT
+
+  func WaitForVBlank
+    HRESULT
+    iSwapChain UINT
+
+  func CheckResourceResidency
+    HRESULT
+    pResourceArray IDirect3DResource9** count=NumResources
+    NumResources UINT32
+
+  func SetMaximumFrameLatency
+    HRESULT
+    MaxLatency UINT
+
+  func GetMaximumFrameLatency
+    HRESULT
+    pMaxLatency UINT*
+
+  func CheckDeviceState
+    HRESULT
+    hDestinationWindow HWND
+
+  func CreateRenderTargetEx
+    HRESULT
+    Width UINT
+    Height UINT
+    Format D3DFORMAT
+    MultiSample D3DMULTISAMPLE_TYPE
+    MultisampleQuality DWORD
+    Lockable BOOL
+    ppSurface IDirect3DSurface9**
+    pSharedHandle HANDLE*
+    Usage [D3DUSAGE]
+
+  func CreateOffscreenPlainSurfaceEx
+    HRESULT
+    Width UINT
+    Height UINT
+    Format D3DFORMAT
+    Pool D3DPOOL
+    ppSurface IDirect3DSurface9**
+    pSharedHandle HANDLE*
+    Usage [D3DUSAGE]
+
+  func CreateDepthStencilSurfaceEx
+    HRESULT
+    Width UINT
+    Height UINT
+    Format D3DFORMAT
+    MultiSample D3DMULTISAMPLE_TYPE
+    MultisampleQuality DWORD
+    Discard BOOL
+    ppSurface IDirect3DSurface9**
+    pSharedHandle HANDLE*
+    Usage [D3DUSAGE]
+
+  func ResetEx
+    HRESULT
+    pPresentationParameters D3DPRESENT_PARAMETERS*
+    pFullscreenDisplayMode D3DDISPLAYMODEEX*
+
+  func GetDisplayModeEx
+    HRESULT
+    iSwapChain UINT
+    pMode D3DDISPLAYMODEEX*
+    pRotation D3DDISPLAYROTATION*
+
+

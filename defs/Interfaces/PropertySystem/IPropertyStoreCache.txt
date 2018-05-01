@@ -1,0 +1,27 @@
+include Interfaces\PropertySystem\IPropertyStore.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyStoreCache base=IPropertyStore id={3017056d-9a91-4e90-937d-746c72abbf4f} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func GetState
+    HRESULT
+    key REFPROPERTYKEY
+    pstate PSC_STATE*
+
+  func GetValueAndState
+    HRESULT
+    key REFPROPERTYKEY
+    ppropvar PROPVARIANT*
+    pstate PSC_STATE*
+
+  func SetState
+    HRESULT
+    key REFPROPERTYKEY
+    state PSC_STATE
+
+  func SetValueAndState
+    HRESULT
+    key REFPROPERTYKEY
+    ppropvar "const PROPVARIANT*"
+    state PSC_STATE
+
+

@@ -1,0 +1,58 @@
+include Headers\windows.h.txt
+include Headers\cryptography.h.txt
+
+dll CryptDlg.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Cryptography/Certificate"
+category "Security and Identity/Cryptography/Certificate Trust List"
+alias PFNCMHOOKPROC LPVOID
+
+alias PFNCMFILTERPROC LPVOID
+
+struct CERT_SELECT_STRUCT
+  dwSize DWORD
+  hwndParent HWND
+  hInstance HINSTANCE
+  pTemplateName LPCTSTR
+  dwFlags DWORD
+  szTitle LPCTSTR
+  cCertStore DWORD
+  arrayCertStore HCERTSTORE*
+  szPurposeOid LPCTSTR
+  cCertContext DWORD
+  arrayCertContext PCCERT_CONTEXT*
+  lCustData LPARAM
+  pfnHook PFNCMHOOKPROC
+  pfnFilter PFNCMFILTERPROC
+  szHelpFileName LPCTSTR
+  dwHelpId DWORD
+  hprov HCRYPTPROV
+
+pointer PCERT_SELECT_STRUCT CERT_SELECT_STRUCT
+
+struct CTL_MODIFY_REQUEST
+  pccert PCCERT_CONTEXT
+  dwOperation DWORD
+  dwError DWORD
+
+pointer PCTL_MODIFY_REQUEST CTL_MODIFY_REQUEST
+
+func CertSelectCertificate bothCharset
+  BOOL
+  pCertSelectInfo PCERT_SELECT_STRUCT
+
+func GetFriendlyNameOfCert bothCharset
+  success NotEqual=0
+  DWORD
+  pccert PCCERT_CONTEXT
+  pchBuffer LPTSTR
+  cchBuffer DWORD
+
+func CertModifyCertificatesToTrust
+  HRESULT
+  cCerts int
+  rgCerts PCTL_MODIFY_REQUEST count=cCerts
+  szPurpose LPCSTR
+  hwnd HWND
+  hcertstoreTrust HCERTSTORE
+  pccertSigner PCCERT_CONTEXT
+

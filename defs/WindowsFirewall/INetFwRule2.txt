@@ -1,0 +1,13 @@
+include WindowsFirewall\INetFwRule.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwRule2 base=INetFwRule id={9C27C8DA-189B-4DDE-89F7-8B39A316782C} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall with Advanced Security"
+  func get_EdgeTraversalOptions
+    HRESULT
+    lOptions long*
+
+  func put_EdgeTraversalOptions
+    HRESULT
+    lOptions long
+
+

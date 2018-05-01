@@ -1,0 +1,288 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Resource.txt
+
+ingterface ID2D1RenderTarget base=ID2D1Resource id={2cd90694-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func CreateBitmap
+    [D2D_HRESULT]
+    size D2D1_SIZE_U
+    srcData "CONST void*"
+    pitch UINT32
+    bitmapProperties "CONST D2D1_BITMAP_PROPERTIES*"
+    bitmap ID2D1Bitmap**
+
+  func CreateBitmapFromWicBitmap
+    [D2D_HRESULT]
+    wicBitmapSource IWICBitmapSource*
+    bitmapProperties "CONST D2D1_BITMAP_PROPERTIES*"
+    bitmap ID2D1Bitmap**
+
+  func CreateSharedBitmap
+    [D2D_HRESULT]
+    riid REFIID
+    data void*
+    bitmapProperties "CONST D2D1_BITMAP_PROPERTIES*"
+    bitmap ID2D1Bitmap**
+
+  func CreateBitmapBrush
+    [D2D_HRESULT]
+    bitmap ID2D1Bitmap*
+    bitmapBrushProperties "CONST D2D1_BITMAP_BRUSH_PROPERTIES*"
+    brushProperties "CONST D2D1_BRUSH_PROPERTIES*"
+    bitmapBrush ID2D1BitmapBrush**
+
+  func CreateSolidColorBrush
+    [D2D_HRESULT]
+    color "CONST D2D1_COLOR_F*"
+    brushProperties "CONST D2D1_BRUSH_PROPERTIES*"
+    solidColorBrush ID2D1SolidColorBrush**
+
+  func CreateGradientStopCollection
+    [D2D_HRESULT]
+    gradientStops "CONST D2D1_GRADIENT_STOP*" count=gradientStopsCount
+    gradientStopsCount UINT32
+    colorInterpolationGamma D2D1_GAMMA
+    extendMode D2D1_EXTEND_MODE
+    gradientStopCollection ID2D1GradientStopCollection**
+
+  func CreateLinearGradientBrush
+    [D2D_HRESULT]
+    linearGradientBrushProperties "CONST D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*"
+    brushProperties "CONST D2D1_BRUSH_PROPERTIES*"
+    gradientStopCollection ID2D1GradientStopCollection*
+    linearGradientBrush ID2D1LinearGradientBrush**
+
+  func CreateRadialGradientBrush
+    [D2D_HRESULT]
+    radialGradientBrushProperties "CONST D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*"
+    brushProperties "CONST D2D1_BRUSH_PROPERTIES*"
+    gradientStopCollection ID2D1GradientStopCollection*
+    radialGradientBrush ID2D1RadialGradientBrush**
+
+  func CreateCompatibleRenderTarget
+    [D2D_HRESULT]
+    desiredSize "CONST D2D1_SIZE_F*"
+    desiredPixelSize "CONST D2D1_SIZE_U*"
+    desiredFormat "CONST D2D1_PIXEL_FORMAT*"
+    options D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS
+    bitmapRenderTarget ID2D1BitmapRenderTarget**
+
+  func CreateLayer
+    [D2D_HRESULT]
+    size "CONST D2D1_SIZE_F*"
+    layer ID2D1Layer**
+
+  func CreateMesh
+    [D2D_HRESULT]
+    mesh ID2D1Mesh**
+
+  func DrawLine
+    void
+    point0 D2D1_POINT_2F
+    point1 D2D1_POINT_2F
+    brush ID2D1Brush*
+    strokeWidth FLOAT
+    strokeStyle ID2D1StrokeStyle*
+
+  func DrawRectangle
+    void
+    rect "CONST D2D1_RECT_F*"
+    brush ID2D1Brush*
+    strokeWidth FLOAT
+    strokeStyle ID2D1StrokeStyle*
+
+  func FillRectangle
+    void
+    rect "CONST D2D1_RECT_F*"
+    brush ID2D1Brush*
+
+  func DrawRoundedRectangle
+    void
+    roundedRect "CONST D2D1_ROUNDED_RECT*"
+    brush ID2D1Brush*
+    strokeWidth FLOAT
+    strokeStyle ID2D1StrokeStyle*
+
+  func FillRoundedRectangle
+    void
+    roundedRect "CONST D2D1_ROUNDED_RECT*"
+    brush ID2D1Brush*
+
+  func DrawEllipse
+    void
+    ellipse "CONST D2D1_ELLIPSE*"
+    brush ID2D1Brush*
+    strokeWidth FLOAT
+    strokeStyle ID2D1StrokeStyle*
+
+  func FillEllipse
+    void
+    ellipse "CONST D2D1_ELLIPSE*"
+    brush ID2D1Brush*
+
+  func DrawGeometry
+    void
+    geometry ID2D1Geometry*
+    brush ID2D1Brush*
+    strokeWidth FLOAT
+    strokeStyle ID2D1StrokeStyle*
+
+  func FillGeometry
+    void
+    geometry ID2D1Geometry*
+    brush ID2D1Brush*
+    opacityBrush ID2D1Brush*
+
+  func FillMesh
+    void
+    mesh ID2D1Mesh*
+    brush ID2D1Brush*
+
+  func FillOpacityMask
+    void
+    opacityMask ID2D1Bitmap*
+    brush ID2D1Brush*
+    content D2D1_OPACITY_MASK_CONTENT
+    destinationRectangle "CONST D2D1_RECT_F*"
+    sourceRectangle "CONST D2D1_RECT_F*"
+
+  func DrawBitmap
+    void
+    bitmap ID2D1Bitmap*
+    destinationRectangle "CONST D2D1_RECT_F*"
+    opacity FLOAT
+    interpolationMode D2D1_BITMAP_INTERPOLATION_MODE
+    sourceRectangle "CONST D2D1_RECT_F*"
+
+  func DrawText
+    void
+    string "CONST WCHAR*"
+    stringLength UINT32
+    textFormat IDWriteTextFormat*
+    layoutRect "CONST D2D1_RECT_F*"
+    defaultForegroundBrush ID2D1Brush*
+    options D2D1_DRAW_TEXT_OPTIONS
+    measuringMode DWRITE_MEASURING_MODE
+
+  func DrawTextLayout
+    void
+    origin D2D1_POINT_2F
+    textLayout IDWriteTextLayout*
+    defaultForegroundBrush ID2D1Brush*
+    options D2D1_DRAW_TEXT_OPTIONS
+
+  func DrawGlyphRun
+    void
+    baselineOrigin D2D1_POINT_2F
+    glyphRun "CONST DWRITE_GLYPH_RUN*"
+    foregroundBrush ID2D1Brush*
+    measuringMode DWRITE_MEASURING_MODE
+
+  func SetTransform
+    void
+    transform "CONST D2D1_MATRIX_3X2_F*"
+
+  func GetTransform
+    void
+    transform D2D1_MATRIX_3X2_F*
+
+  func SetAntialiasMode
+    void
+    antialiasMode D2D1_ANTIALIAS_MODE
+
+  func GetAntialiasMode
+    D2D1_ANTIALIAS_MODE
+
+  func SetTextAntialiasMode
+    void
+    textAntialiasMode D2D1_TEXT_ANTIALIAS_MODE
+
+  func GetTextAntialiasMode
+    D2D1_TEXT_ANTIALIAS_MODE
+
+  func SetTextRenderingParams
+    void
+    textRenderingParams IDWriteRenderingParams*
+
+  func GetTextRenderingParams
+    void
+    textRenderingParams IDWriteRenderingParams**
+
+  func SetTags
+    void
+    tag1 D2D1_TAG
+    tag2 D2D1_TAG
+
+  func GetTags
+    void
+    tag1 D2D1_TAG*
+    tag2 D2D1_TAG*
+
+  func PushLayer
+    void
+    layerParameters "CONST D2D1_LAYER_PARAMETERS*"
+    layer ID2D1Layer*
+
+  func PopLayer
+    void
+
+  func Flush
+    [D2D_HRESULT]
+    tag1 D2D1_TAG*
+    tag2 D2D1_TAG*
+
+  func SaveDrawingState
+    void
+    drawingStateBlock ID2D1DrawingStateBlock*
+
+  func RestoreDrawingState
+    void
+    drawingStateBlock ID2D1DrawingStateBlock*
+
+  func PushAxisAlignedClip
+    void
+    clipRect "CONST D2D1_RECT_F*"
+    antialiasMode D2D1_ANTIALIAS_MODE
+
+  func PopAxisAlignedClip
+    void
+
+  func Clear
+    void
+    clearColor "CONST D2D1_COLOR_F*"
+
+  func BeginDraw
+    void
+
+  func EndDraw
+    [D2D_HRESULT]
+    tag1 D2D1_TAG*
+    tag2 D2D1_TAG*
+
+  func GetPixelFormat
+    D2D1_PIXEL_FORMAT
+
+  func SetDpi
+    void
+    dpiX FLOAT
+    dpiY FLOAT
+
+  func GetDpi
+    void
+    dpiX FLOAT*
+    dpiY FLOAT*
+
+  func GetSize
+    D2D1_SIZE_F
+
+  func GetPixelSize
+    D2D1_SIZE_U
+
+  func GetMaximumBitmapSize
+    success NotEqual=0
+    UINT32
+
+  func IsSupported
+    BOOL
+    renderTargetProperties "CONST D2D1_RENDER_TARGET_PROPERTIES*"
+
+

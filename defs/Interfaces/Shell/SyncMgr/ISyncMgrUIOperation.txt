@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrUIOperation base=IUnknown id={fc7cfa47-dfe1-45b5-a049-8cfd82bec271} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func Run
+    HRESULT
+    hwndOwner HWND
+
+

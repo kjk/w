@@ -1,0 +1,53 @@
+include Interfaces\DirectX\DXGI\IDXGIDeviceSubObject.txt
+
+ingterface IDXGISwapChain base=IDXGIDeviceSubObject id={310d36a0-d2e7-4c0a-aa04-6a9d23b8886a} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func Present
+    HRESULT
+    SyncInterval UINT
+    Flags [DXGI_PRESENT_FLAGS]
+
+  func GetBuffer
+    HRESULT
+    Buffer UINT
+    riid REFIID
+    ppSurface void** interfaceId=riid
+
+  func SetFullscreenState
+    HRESULT
+    Fullscreen BOOL
+    pTarget IDXGIOutput*
+
+  func GetFullscreenState
+    HRESULT
+    pFullscreen BOOL*
+    ppTarget IDXGIOutput**
+
+  func GetDesc
+    HRESULT
+    pDesc DXGI_SWAP_CHAIN_DESC*
+
+  func ResizeBuffers
+    HRESULT
+    BufferCount UINT
+    Width UINT
+    Height UINT
+    NewFormat DXGI_FORMAT
+    SwapChainFlags UINT
+
+  func ResizeTarget
+    HRESULT
+    pNewTargetParameters "const DXGI_MODE_DESC*"
+
+  func GetContainingOutput
+    HRESULT
+    ppOutput IDXGIOutput**
+
+  func GetFrameStatistics
+    HRESULT
+    pStats DXGI_FRAME_STATISTICS*
+
+  func GetLastPresentCount
+    HRESULT
+    pLastPresentCount UINT*
+
+

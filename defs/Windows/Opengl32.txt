@@ -1,0 +1,149 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+
+dll Opengl32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Graphics and Gaming/Legacy Graphics/OpenGL/Windows Extensions to OpenGL (WGL)"
+alias HGLRC HANDLE
+
+alias PROC LPVOID
+
+struct LAYERPLANEDESCRIPTOR
+  nSize WORD
+  nVersion WORD
+  dwFlags DWORD
+  iPixelType BYTE
+  cColorBits BYTE
+  cRedBits BYTE
+  cRedShift BYTE
+  cGreenBits BYTE
+  cGreenShift BYTE
+  cBlueBits BYTE
+  cBlueShift BYTE
+  cAlphaBits BYTE
+  cAlphaShift BYTE
+  cAccumBits BYTE
+  cAccumRedBits BYTE
+  cAccumGreenBits BYTE
+  cAccumBlueBits BYTE
+  cAccumAlphaBits BYTE
+  cDepthBits BYTE
+  cStencilBits BYTE
+  cAuxBuffers BYTE
+  iLayerPlane BYTE
+  bReserved BYTE
+  crTransparent COLORREF
+
+pointer LPLAYERPLANEDESCRIPTOR LAYERPLANEDESCRIPTOR
+
+struct POINTFLOAT
+  x FLOAT
+  y FLOAT
+
+struct GLYPHMETRICSFLOAT
+  gmfBlackBoxX FLOAT
+  gmfBlackBoxY FLOAT
+  gmfptGlyphOrigin POINTFLOAT
+  gmfCellIncX FLOAT
+  gmfCellIncY FLOAT
+
+pointer LPGLYPHMETRICSFLOAT GLYPHMETRICSFLOAT
+
+func wglCreateContext
+  success NotEqual=0
+  HGLRC
+  hdc HDC
+
+func wglCreateLayerContext
+  success NotEqual=0
+  HGLRC
+  hdc HDC
+  iLayerPlane int
+
+func wglCopyContext
+  BOOL
+  hglrcSrc HGLRC
+  hglrcDst HGLRC
+  mask UINT
+
+func wglDeleteContext
+  BOOL
+  hglrc HGLRC
+
+func wglDescribeLayerPlane
+  BOOL
+  hdc HDC
+  iPixelFormat int
+  iLayerPlane int
+  nBytes UINT
+  plpd LPLAYERPLANEDESCRIPTOR
+
+func wglGetCurrentContext
+  success NotEqual=0
+  HGLRC
+
+func wglGetCurrentDC
+  success NotEqual=0
+  HDC
+
+func wglGetLayerPaletteEntries
+  success NotEqual=0
+  int
+  hdc HDC
+  iLayerPlane int
+  iStart int
+  cEntries int
+  pcr "const COLORREF*"
+
+func wglGetProcAddress
+  success NotEqual=0
+  PROC
+  lpszProc LPCSTR
+
+func wglMakeCurrent
+  BOOL
+  hdc HDC
+  hglrc HGLRC
+
+func wglRealizeLayerPalette
+  BOOL
+  hdc HDC
+  iLayerPlane int
+  bRealize BOOL
+
+func wglSetLayerPaletteEntries
+  success NotEqual=0
+  int
+  hdc HDC
+  iLayerPlane int
+  iStart int
+  cEntries int
+  pcr "const COLORREF*"
+
+func wglShareLists
+  BOOL
+  hglrc1 HGLRC
+  hglrc2 HGLRC
+
+func wglSwapLayerBuffers
+  BOOL
+  hdc HDC
+  fuPlanes UINT
+
+func wglUseFontBitmaps bothCharset
+  BOOL
+  hdc HDC
+  first DWORD
+  count DWORD
+  listBase DWORD
+
+func wglUseFontOutlines bothCharset
+  BOOL
+  hdc HDC
+  first DWORD
+  count DWORD
+  listBase DWORD
+  deviation FLOAT
+  extrusion FLOAT
+  format int
+  lpgmf LPGLYPHMETRICSFLOAT
+

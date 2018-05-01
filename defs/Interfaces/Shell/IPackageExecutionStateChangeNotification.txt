@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPackageExecutionStateChangeNotification base=IUnknown id={1BB12A62-2AD8-432B-8CCF-0C2C52AFCD5B} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnStateChanged
+    HRESULT
+    pszPackageFullName LPCWSTR
+    pesNewState PACKAGE_EXECUTION_STATE
+
+

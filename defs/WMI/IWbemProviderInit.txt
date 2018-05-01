@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemProviderInit base=IUnknown id={1be41572-91dd-11d1-aeb2-00c04fb68820} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func Initialize
+    WBEMSTATUS
+    wszUser LPWSTR
+    lFlags LONG
+    wszNamespace LPWSTR
+    wszLocale LPWSTR
+    pNamespace IWbemServices*
+    pCtx IWbemContext*
+    pInitSink IWbemProviderInitSink*
+
+

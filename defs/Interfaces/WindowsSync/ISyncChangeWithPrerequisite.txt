@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncChangeWithPrerequisite base=IUnknown id={9e38382f-1589-48c3-92e4-05ecdcb4f3f7} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetPrerequisiteKnowledge
+    HRESULT
+    ppPrerequisiteKnowledge ISyncKnowledge**
+
+  func GetLearnedKnowledgeWithPrerequisite
+    HRESULT
+    pDestinationKnowledge ISyncKnowledge*
+    ppLearnedKnowledgeWithPrerequisite ISyncKnowledge**
+
+

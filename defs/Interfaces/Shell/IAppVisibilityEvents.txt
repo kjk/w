@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAppVisibilityEvents base=IUnknown id={6584CE6B-7D82-49C2-89C9-C6BC02BA8C38} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func AppVisibilityOnMonitorChanged
+    HRESULT
+    hMonitor HMONITOR
+    previousMode MONITOR_APP_VISIBILITY
+    currentMode MONITOR_APP_VISIBILITY
+
+  func LauncherVisibilityChange
+    HRESULT
+    currentVisibleState BOOL
+
+

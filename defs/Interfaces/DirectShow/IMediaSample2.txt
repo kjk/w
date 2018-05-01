@@ -1,0 +1,14 @@
+include Interfaces\DirectShow\IMediaSample.txt
+
+ingterface IMediaSample2 base=IMediaSample id={36b73884-c2c8-11cf-8b46-00805f6cef60} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetProperties
+    HRESULT
+    cbProperties DWORD
+    pbProperties BYTE* length=cbProperties
+
+  func SetProperties
+    HRESULT
+    cbProperties DWORD
+    pbProperties "const BYTE*" length=cbProperties
+
+

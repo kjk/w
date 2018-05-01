@@ -1,0 +1,519 @@
+include Headers\windows.h.txt
+include Headers\sockets.h.txt
+include Headers\cryptography.h.txt
+
+dll Httpapi.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Internet/HTTP Server/Version 1.0/General"
+category "Internet/HTTP Server/Version 1.0/Cache Management"
+category "Internet/HTTP Server/Version 1.0/Configuration"
+category "Internet/HTTP Server/Version 1.0/Input and Output"
+category "Internet/HTTP Server/Version 1.0/SSL"
+category "Internet/HTTP Server/Version 1.0/URL Registration"
+category "Internet/HTTP Server/Version 2.0/Server Session"
+category "Internet/HTTP Server/Version 2.0/URL Groups"
+category "Internet/HTTP Server/Version 2.0/Request Queue"
+alias HTTPAPI_VERSION UINT
+
+alias HTTP_OPAQUE_ID ULONGLONG
+
+alias HTTP_REQUEST_ID HTTP_OPAQUE_ID
+
+alias HTTP_CONNECTION_ID HTTP_OPAQUE_ID
+
+alias HTTP_RAW_CONNECTION_ID HTTP_OPAQUE_ID
+
+alias HTTP_SERVER_SESSION_ID HTTP_OPAQUE_ID
+
+pointer PHTTP_SERVER_SESSION_ID HTTP_SERVER_SESSION_ID
+
+alias HTTP_URL_GROUP_ID HTTP_OPAQUE_ID
+
+pointer PHTTP_URL_GROUP_ID HTTP_URL_GROUP_ID
+
+alias HTTP_URL_CONTEXT ULONGLONG
+
+struct HTTP_BYTE_RANGE
+  StartingOffset ULARGE_INTEGER
+  Length ULARGE_INTEGER
+
+pointer PHTTP_BYTE_RANGE HTTP_BYTE_RANGE
+
+enum HTTP_DATA_CHUNK_TYPE UINT
+  HttpDataChunkFromMemory          0
+  HttpDataChunkFromFileHandle      1
+  HttpDataChunkFromFragmentCache   2
+  HttpDataChunkFromFragmentCacheEx 3
+
+struct [HTTP_DATA_CHUNK_u_s1] display=struct
+  pBuffer PVOID length=BufferLength
+  BufferLength ULONG
+
+struct [HTTP_DATA_CHUNK_u_s2] display=struct
+  ByteRange HTTP_BYTE_RANGE
+  FileHandle HANDLE
+
+struct [HTTP_DATA_CHUNK_u_s3] display=struct
+  FragmentNameLength USHORT
+  pFragmentName PCWSTR
+
+struct [HTTP_DATA_CHUNK_u_s4] display=struct
+  ByteRange HTTP_BYTE_RANGE
+  pFragmentName PCWSTR
+
+union [HTTP_DATA_CHUNK_u] display=union
+  FromMemory [HTTP_DATA_CHUNK_u_s1]
+  FromFileHandle [HTTP_DATA_CHUNK_u_s2]
+  FromFragmentCache [HTTP_DATA_CHUNK_u_s3]
+  FromFragmentCacheEx [HTTP_DATA_CHUNK_u_s4]
+
+struct HTTP_DATA_CHUNK
+  DataChunkType HTTP_DATA_CHUNK_TYPE
+   [HTTP_DATA_CHUNK_u]
+
+pointer PHTTP_DATA_CHUNK HTTP_DATA_CHUNK
+
+enum HTTP_CACHE_POLICY_TYPE UINT
+  HttpCachePolicyNocache         0
+  HttpCachePolicyUserInvalidates 1
+  HttpCachePolicyTimeToLive      2
+
+struct HTTP_CACHE_POLICY
+  Policy HTTP_CACHE_POLICY_TYPE
+  SecondsToLive ULONG
+
+pointer PHTTP_CACHE_POLICY HTTP_CACHE_POLICY
+
+enum HTTP_LOG_DATA_TYPE UINT
+  HttpLogDataTypeFields 0
+
+struct HTTP_LOG_DATA
+  Type HTTP_LOG_DATA_TYPE
+
+pointer PHTTP_LOG_DATA HTTP_LOG_DATA
+
+enum HTTP_SERVICE_CONFIG_ID UINT
+  HttpServiceConfigIPListenList 0
+  HttpServiceConfigSSLCertInfo  1
+  HttpServiceConfigUrlAclInfo   2
+  HttpServiceConfigTimeout      3
+  HttpServiceConfigMax          4
+
+enum HTTP_SERVER_PROPERTY UINT
+  HttpServerAuthenticationProperty         0
+  HttpServerLoggingProperty                1
+  HttpServerQosProperty                    2
+  HttpServerTimeoutsProperty               3
+  HttpServerQueueLengthProperty            4
+  HttpServerStateProperty                  5
+  HttpServer503VerbosityProperty           6
+  HttpServerBindingProperty                7
+  HttpServerExtendedAuthenticationProperty 8
+  HttpServerListenEndpointProperty         9
+
+flag [HttpInitializeFlags] ULONG display=ULONG
+  HTTP_INITIALIZE_SERVER 0x00000001
+  HTTP_INITIALIZE_CONFIG 0x00000002
+
+flag [HTTP_REQUEST_FLAG] ULONG display=ULONG
+  HTTP_REQUEST_FLAG_MORE_ENTITY_BODY_EXISTS 0x00000001
+  HTTP_REQUEST_FLAG_IP_ROUTED               0x00000002
+
+struct HTTP_VERSION
+  MajorVersion USHORT
+  MinorVersion USHORT
+
+enum HTTP_VERB UINT
+  HttpVerbUnparsed  0
+  HttpVerbUnknown   1
+  HttpVerbInvalid   2
+  HttpVerbOPTIONS   3
+  HttpVerbGET       4
+  HttpVerbHEAD      5
+  HttpVerbPOST      6
+  HttpVerbPUT       7
+  HttpVerbDELETE    8
+  HttpVerbTRACE     9
+  HttpVerbCONNECT   10
+  HttpVerbTRACK     11
+  HttpVerbMOVE      12
+  HttpVerbCOPY      13
+  HttpVerbPROPFIND  14
+  HttpVerbPROPPATCH 15
+  HttpVerbMKCOL     16
+  HttpVerbLOCK      17
+  HttpVerbUNLOCK    18
+  HttpVerbSEARCH    19
+
+struct HTTP_COOKED_URL
+  FullUrlLength USHORT
+  HostLength USHORT
+  AbsPathLength USHORT
+  QueryStringLength USHORT
+  pFullUrl PCWSTR
+  pHost PCWSTR
+  pAbsPath PCWSTR
+  pQueryString PCWSTR
+
+struct HTTP_TRANSPORT_ADDRESS
+  pRemoteAddress PSOCKADDR
+  pLocalAddress PSOCKADDR
+
+struct HTTP_UNKNOWN_HEADER
+  NameLength USHORT
+  RawValueLength USHORT
+  pName PCSTR
+  pRawValue PCSTR
+
+pointer PHTTP_UNKNOWN_HEADER HTTP_UNKNOWN_HEADER
+
+struct HTTP_KNOWN_HEADER
+  RawValueLength USHORT
+  pRawValue PCSTR
+
+array "HTTP_KNOWN_HEADER [HttpHeaderRequestMaximum]" base=HTTP_KNOWN_HEADER count=41
+
+array "HTTP_KNOWN_HEADER [HttpHeaderResponseMaximum]" base=HTTP_KNOWN_HEADER count=30
+
+struct HTTP_REQUEST_HEADERS
+  UnknownHeaderCount USHORT
+  pUnknownHeaders PHTTP_UNKNOWN_HEADER count=UnknownHeaderCount
+  TrailerCount USHORT
+  pTrailers PHTTP_UNKNOWN_HEADER count=TrailerCount
+  KnownHeaders "HTTP_KNOWN_HEADER [HttpHeaderRequestMaximum]"
+
+struct HTTP_SSL_CLIENT_CERT_INFO
+  CertFlags [CERT_TRUST_Error] display=ULONG
+  CertEncodedSize ULONG
+  pCertEncoded PUCHAR
+  Token HANDLE
+  CertDeniedByMapper BOOLEAN
+
+pointer PHTTP_SSL_CLIENT_CERT_INFO HTTP_SSL_CLIENT_CERT_INFO
+
+struct HTTP_SSL_INFO
+  ServerCertKeySize USHORT
+  ConnectionKeySize USHORT
+  ServerCertIssuerSize ULONG
+  ServerCertSubjectSize ULONG
+  pServerCertIssuer PCSTR
+  pServerCertSubject PCSTR
+  pClientCertInfo PHTTP_SSL_CLIENT_CERT_INFO
+  SslClientCertNegotiated ULONG
+
+pointer PHTTP_SSL_INFO HTTP_SSL_INFO
+
+struct HTTP_REQUEST_V1
+  Flags [HTTP_REQUEST_FLAG]
+  ConnectionId HTTP_CONNECTION_ID
+  RequestId HTTP_REQUEST_ID
+  UrlContext HTTP_URL_CONTEXT
+  Version HTTP_VERSION
+  Verb HTTP_VERB
+  UnknownVerbLength USHORT
+  RawUrlLength USHORT
+  pUnknownVerb PCSTR
+  pRawUrl PCSTR
+  CookedUrl HTTP_COOKED_URL
+  Address HTTP_TRANSPORT_ADDRESS
+  Headers HTTP_REQUEST_HEADERS
+  BytesReceived ULONGLONG
+  EntityChunkCount USHORT
+  pEntityChunks PHTTP_DATA_CHUNK count=EntityChunkCount
+  RawConnectionId HTTP_RAW_CONNECTION_ID
+  pSslInfo PHTTP_SSL_INFO
+
+enum HTTP_REQUEST_INFO_TYPE UINT
+  HttpRequestInfoTypeAuth        0
+  HttpRequestInfoTypeChannelBind 1
+
+struct HTTP_REQUEST_INFO
+  InfoType HTTP_REQUEST_INFO_TYPE
+  InfoLength ULONG
+  pInfo PVOID length=InfoLength
+
+pointer PHTTP_REQUEST_INFO HTTP_REQUEST_INFO
+
+struct HTTP_REQUEST
+   HTTP_REQUEST_V1
+  RequestInfoCount USHORT
+  pRequestInfo PHTTP_REQUEST_INFO count=RequestInfoCount
+
+pointer PHTTP_REQUEST HTTP_REQUEST
+
+flag [HTTP_RESPONSE_FLAG] ULONG display=ULONG
+  HTTP_RESPONSE_FLAG_MULTIPLE_ENCODINGS_AVAILABLE 0x00000001
+
+struct HTTP_RESPONSE_HEADERS
+  UnknownHeaderCount USHORT
+  pUnknownHeaders PHTTP_UNKNOWN_HEADER count=UnknownHeaderCount
+  TrailerCount USHORT
+  pTrailers PHTTP_UNKNOWN_HEADER count=TrailerCount
+  KnownHeaders "HTTP_KNOWN_HEADER [HttpHeaderResponseMaximum]"
+
+struct HTTP_RESPONSE_V1
+  Flags [HTTP_RESPONSE_FLAG]
+  Version HTTP_VERSION
+  StatusCode USHORT
+  ReasonLength USHORT
+  pReason PCSTR
+  Headers HTTP_RESPONSE_HEADERS
+  EntityChunkCount USHORT
+  pEntityChunks PHTTP_DATA_CHUNK count=EntityChunkCount
+
+enum HTTP_RESPONSE_INFO_TYPE UINT
+  HttpResponseInfoTypeMultipleKnownHeaders   0
+  HttpResponseInfoTypeAuthenticationProperty 1
+  HttpResponseInfoTypeQoSProperty            2
+  HttpResponseInfoTypeChannelBind            3
+
+struct HTTP_RESPONSE_INFO
+  Type HTTP_RESPONSE_INFO_TYPE
+  Length ULONG
+  pInfo PVOID length=Length
+
+pointer PHTTP_RESPONSE_INFO HTTP_RESPONSE_INFO
+
+struct HTTP_RESPONSE
+   HTTP_RESPONSE_V1
+  ResponseInfoCount USHORT
+  pResponseInfo PHTTP_RESPONSE_INFO count=ResponseInfoCount
+
+pointer PHTTP_RESPONSE HTTP_RESPONSE
+
+func HttpCreateHttpHandle
+  [ERROR_CODE_ULONG]
+  pReqQueueHandle PHANDLE
+  Reserved ULONG
+
+func HttpInitialize
+  [ERROR_CODE_ULONG]
+  Version HTTPAPI_VERSION
+  Flags [HttpInitializeFlags]
+  pReserved PVOID
+
+func HttpPrepareUrl
+  [ERROR_CODE_ULONG]
+  Reserved PVOID
+  Flags ULONG
+  Url PCWSTR
+  PreparedUrl PWSTR*
+
+func HttpTerminate
+  [ERROR_CODE_ULONG]
+  Flags [HttpInitializeFlags]
+  pReserved PVOID
+
+func HttpAddFragmentToCache
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  pUrlPrefix PCWSTR
+  pDataChunk PHTTP_DATA_CHUNK
+  pCachePolicy PHTTP_CACHE_POLICY
+  pOverlapped LPOVERLAPPED
+
+func HttpFlushResponseCache
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  pUrlPrefix PCWSTR
+  Flags ULONG
+  pOverlapped LPOVERLAPPED
+
+func HttpReadFragmentFromCache
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  pUrlPrefix PCWSTR
+  pByteRange PHTTP_BYTE_RANGE
+  pBuffer PVOID
+  BufferLength ULONG
+  pBytesRead PULONG
+  pOverlapped LPOVERLAPPED
+
+func HttpDeleteServiceConfiguration
+  [ERROR_CODE_ULONG]
+  ServiceHandle HANDLE
+  ConfigId HTTP_SERVICE_CONFIG_ID
+  pConfigInformation PVOID
+  ConfigInformationLength ULONG
+  pOverlapped LPOVERLAPPED
+
+func HttpQueryServiceConfiguration
+  [ERROR_CODE_ULONG]
+  ServiceHandle HANDLE
+  ConfigId HTTP_SERVICE_CONFIG_ID
+  pInputConfigInfo PVOID
+  InputConfigInfoLength ULONG
+  pOutputConfigInfo PVOID
+  OutputConfigInfoLength ULONG
+  pReturnLength PULONG
+  pOverlapped LPOVERLAPPED
+
+func HttpSetServiceConfiguration
+  [ERROR_CODE_ULONG]
+  ServiceHandle HANDLE
+  ConfigId HTTP_SERVICE_CONFIG_ID
+  pConfigInformation PVOID
+  ConfigInformationLength ULONG
+  pOverlapped LPOVERLAPPED
+
+func HttpReceiveHttpRequest
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  RequestId HTTP_REQUEST_ID
+  Flags ULONG
+  pRequestBuffer PHTTP_REQUEST
+  RequestBufferLength ULONG
+  pBytesReceived PULONG
+  pOverlapped LPOVERLAPPED
+
+func HttpReceiveRequestEntityBody
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  RequestId HTTP_REQUEST_ID
+  Flags ULONG
+  pBuffer PVOID
+  BufferLength ULONG
+  pBytesReceived PULONG
+  pOverlapped LPOVERLAPPED
+
+func HttpSendHttpResponse
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  RequestId HTTP_REQUEST_ID
+  Flags ULONG
+  pHttpResponse PHTTP_RESPONSE
+  pCachePolicy PHTTP_CACHE_POLICY
+  pBytesSent PULONG
+  pReserved2 PVOID
+  Reserved3 ULONG
+  pOverlapped LPOVERLAPPED
+  pLogData PHTTP_LOG_DATA
+
+func HttpSendResponseEntityBody
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  RequestId HTTP_REQUEST_ID
+  Flags ULONG
+  EntityChunkCount USHORT
+  pEntityChunks PHTTP_DATA_CHUNK
+  pBytesSent PULONG
+  pReserved1 PVOID
+  Reserved2 ULONG
+  pOverlapped LPOVERLAPPED
+  pLogData PHTTP_LOG_DATA
+
+func HttpWaitForDisconnect
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  ConnectionId HTTP_CONNECTION_ID
+  pOverlapped LPOVERLAPPED
+
+func HttpReceiveClientCertificate
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  ConnectionId HTTP_CONNECTION_ID
+  Flags ULONG
+  pSslClientCertInfo PHTTP_SSL_CLIENT_CERT_INFO
+  SslClientCertInfoSize ULONG
+  pBytesReceived PULONG
+  pOverlapped LPOVERLAPPED
+
+func HttpAddUrl
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  pFullyQualifiedUrl PCWSTR
+  pReserved PVOID
+
+func HttpRemoveUrl
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  pFullyQualifiedUrl PCWSTR
+
+func HttpCloseServerSession
+  [ERROR_CODE_ULONG]
+  ServerSessionId HTTP_SERVER_SESSION_ID
+
+func HttpCreateServerSession
+  [ERROR_CODE_ULONG]
+  Version HTTPAPI_VERSION
+  pServerSessionId PHTTP_SERVER_SESSION_ID
+  Reserved ULONG
+
+func HttpQueryServerSessionProperty
+  [ERROR_CODE_ULONG]
+  ServerSessionId HTTP_SERVER_SESSION_ID
+  Property HTTP_SERVER_PROPERTY
+  pPropertyInformation PVOID postLength=pReturnLength
+  PropertyInformationLength ULONG
+  pReturnLength PULONG
+
+func HttpSetServerSessionProperty
+  [ERROR_CODE_ULONG]
+  ServerSessionId HTTP_SERVER_SESSION_ID
+  Property HTTP_SERVER_PROPERTY
+  pPropertyInformation PVOID length=PropertyInformationLength
+  PropertyInformationLength ULONG
+
+func HttpAddUrlToUrlGroup
+  [ERROR_CODE_ULONG]
+  UrlGroupId HTTP_URL_GROUP_ID
+  pFullyQualifiedUrl PCWSTR
+  UrlContext HTTP_URL_CONTEXT
+  Reserved ULONG
+
+func HttpCreateUrlGroup
+  [ERROR_CODE_ULONG]
+  ServerSessionId HTTP_SERVER_SESSION_ID
+  pUrlGroupId PHTTP_URL_GROUP_ID
+  Reserved ULONG
+
+func HttpCloseUrlGroup
+  [ERROR_CODE_ULONG]
+  UrlGroupId HTTP_URL_GROUP_ID
+
+func HttpQueryUrlGroupProperty
+  [ERROR_CODE_ULONG]
+  UrlGroupId HTTP_URL_GROUP_ID
+  Property HTTP_SERVER_PROPERTY
+  pPropertyInformation PVOID postLength=pReturnLength
+  PropertyInformationLength ULONG
+  pReturnLength PULONG
+
+func HttpRemoveUrlFromUrlGroup
+  [ERROR_CODE_ULONG]
+  UrlGroupId HTTP_URL_GROUP_ID
+  pFullyQualifiedUrl PCWSTR
+  Flags ULONG
+
+func HttpSetUrlGroupProperty
+  [ERROR_CODE_ULONG]
+  UrlGroupId HTTP_URL_GROUP_ID
+  Property HTTP_SERVER_PROPERTY
+  pPropertyInformation PVOID length=PropertyInformationLength
+  PropertyInformationLength ULONG
+
+func HttpCloseRequestQueue
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+
+func HttpCreateRequestQueue
+  [ERROR_CODE_ULONG]
+  Version HTTPAPI_VERSION
+  pName PCWSTR
+  pSecurityAttributes PSECURITY_ATTRIBUTES
+  Flags ULONG
+  pReqQueueHandle PHANDLE
+
+func HttpSetRequestQueueProperty
+  [ERROR_CODE_ULONG]
+  Handle HANDLE
+  Property HTTP_SERVER_PROPERTY
+  pPropertyInformation PVOID length=PropertyInformationLength
+  PropertyInformationLength ULONG
+  Reserved ULONG
+  pReserved PVOID
+
+func HttpWaitForDemandStart
+  [ERROR_CODE_ULONG]
+  ReqQueueHandle HANDLE
+  pOverlapped LPOVERLAPPED
+

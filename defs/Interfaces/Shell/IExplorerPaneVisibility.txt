@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IExplorerPaneVisibility base=IUnknown id={e07010ec-bc17-44c0-97b0-46c7c95b9edc} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetPaneState
+    HRESULT
+    ep REFEXPLORERPANE
+    peps EXPLORERPANESTATE*
+
+

@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+
+ingterface IContext base=IUnknown id={000001c0-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func SetProperty
+    HRESULT
+    rpolicyId REFGUID
+    flags CPFLAGS
+    pUnk IUnknown*
+
+  func RemoveProperty
+    HRESULT
+    rPolicyId REFGUID
+
+  func GetProperty
+    HRESULT
+    rGuid REFGUID
+    pFlags CPFLAGS*
+    ppUnk IUnknown** interfaceId=rGuid
+
+  func EnumContextProps
+    HRESULT
+    ppEnumContextProps IEnumContextProps**
+
+

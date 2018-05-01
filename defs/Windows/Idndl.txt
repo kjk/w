@@ -1,0 +1,28 @@
+include Headers\windows.h.txt
+
+dll Idndl.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Application UI Development/Internationalization for Windows Applications/Globalization Services/National Language Support"
+func DownlevelGetLocaleScripts
+  success NotEqual=0
+  int
+  lpLocaleName LPCWSTR
+  lpScripts LPWSTR
+  cchScripts int
+
+func DownlevelGetStringScripts
+  success NotEqual=0
+  int
+  dwFlags DWORD
+  lpString LPCWSTR
+  cchString int
+  lpScripts LPWSTR
+  cchScripts int
+
+func DownlevelVerifyScripts
+  BOOL
+  dwFlags DWORD
+  lpLocaleScripts LPCWSTR
+  cchLocaleScripts int
+  lpTestScripts LPCWSTR
+  cchTestScripts int
+

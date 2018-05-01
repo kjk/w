@@ -1,0 +1,74 @@
+include Headers\windows.h.txt
+
+dll SrClient.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Administration/System Restore"
+array "CHAR [MAX_DESC]" base=CHAR count=64
+
+array "WCHAR [MAX_DESC_W]" base=WCHAR count=256
+
+enum [RESTOREPOINT_EVENT] DWORD display=DWORD
+  BEGIN_SYSTEM_CHANGE             100
+  END_SYSTEM_CHANGE               101
+  BEGIN_NESTED_SYSTEM_CHANGE      102
+  END_NESTED_SYSTEM_CHANGE        103
+  BEGIN_NESTED_SYSTEM_CHANGE_NORP 104
+
+enum [RESTOREPOINT_TYPE] DWORD display=DWORD
+  APPLICATION_INSTALL   0
+  APPLICATION_UNINSTALL 1
+  RESTORE               6
+  CHECKPOINT            7
+  DEVICE_DRIVER_INSTALL 10
+  FIRSTRUN              11
+  MODIFY_SETTINGS       12
+  CANCELLED_OPERATION   13
+  BACKUP_RECOVERY       14
+  BACKUP                15
+  MANUAL_CHECKPOINT     16
+  WINDOWS_UPDATE        17
+  CRITICAL_UPDATE       18
+
+struct RESTOREPOINTINFOA
+  dwEventType [RESTOREPOINT_EVENT]
+  dwRestorePtType [RESTOREPOINT_TYPE]
+  llSequenceNumber INT64
+  szDescription "CHAR [MAX_DESC]"
+
+pointer PRESTOREPOINTINFOA RESTOREPOINTINFOA
+
+struct RESTOREPOINTINFOW
+  dwEventType [RESTOREPOINT_EVENT]
+  dwRestorePtType [RESTOREPOINT_TYPE]
+  llSequenceNumber INT64
+  szDescription "WCHAR [MAX_DESC_W]"
+
+pointer PRESTOREPOINTINFOW RESTOREPOINTINFOW
+
+alias [StateMgrStatus] [ERROR_CODE] display=DWORD
+
+struct STATEMGRSTATUS pack=1
+  nStatus [StateMgrStatus]
+  llSequenceNumber INT64
+
+pointer PSTATEMGRSTATUS STATEMGRSTATUS
+
+func SRRemoveRestorePoint
+  [ERROR_CODE]
+  dwRPNum DWORD
+
+func SRSetRestorePointA
+  BOOL
+  pRestorePtSpec PRESTOREPOINTINFOA
+  pSMgrStatus PSTATEMGRSTATUS
+
+func SRSetRestorePointW
+  BOOL
+  pRestorePtSpec PRESTOREPOINTINFOW
+  pSMgrStatus PSTATEMGRSTATUS
+
+func SRSetRestorePointInternal
+  BOOL
+  pRestorePtSpec PRESTOREPOINTINFOW
+  pSMgrStatus PSTATEMGRSTATUS
+  fForceSurrogate BOOL
+

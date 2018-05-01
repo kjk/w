@@ -1,0 +1,25 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemSecurity base=IDispatch id={B54D66E6-2287-11d2-8B33-00600806D9B6} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func get_ImpersonationLevel
+    WBEMSTATUS
+    iImpersonationLevel WbemImpersonationLevelEnum*
+
+  func put_ImpersonationLevel
+    WBEMSTATUS
+    iImpersonationLevel WbemImpersonationLevelEnum
+
+  func get_AuthenticationLevel
+    WBEMSTATUS
+    iAuthenticationLevel WbemAuthenticationLevelEnum*
+
+  func put_AuthenticationLevel
+    WBEMSTATUS
+    iAuthenticationLevel WbemAuthenticationLevelEnum
+
+  func get_Privileges
+    WBEMSTATUS
+    objWbemPrivilegeSet ISWbemPrivilegeSet**
+
+

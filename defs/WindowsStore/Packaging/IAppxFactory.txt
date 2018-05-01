@@ -1,0 +1,32 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxFactory base=IUnknown id={beb94909-e451-438b-b5a7-d79e767b75d8} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func CreatePackageWriter
+    HRESULT
+    outputStream IStream*
+    settings APPX_PACKAGE_SETTINGS*
+    packageWriter IAppxPackageWriter**
+
+  func CreatePackageReader
+    HRESULT
+    inputStream IStream*
+    packageReader IAppxPackageReader**
+
+  func CreateManifestReader
+    HRESULT
+    inputStream IStream*
+    manifestReader IAppxManifestReader**
+
+  func CreateBlockMapReader
+    HRESULT
+    inputStream IStream*
+    blockMapReader IAppxBlockMapReader**
+
+  func CreateValidatedBlockMapReader
+    HRESULT
+    blockMapStream IStream*
+    signatureFileName LPCWSTR
+    blockMapReader IAppxBlockMapReader**
+
+

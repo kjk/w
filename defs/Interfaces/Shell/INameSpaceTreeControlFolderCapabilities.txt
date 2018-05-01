@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface INameSpaceTreeControlFolderCapabilities base=IUnknown id={e9701183-e6b3-4ff2-8568-813615fec7be} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetFolderCapabilities
+    HRESULT
+    nfcMask NSTCFOLDERCAPABILITIES
+    pnfcValue NSTCFOLDERCAPABILITIES*
+
+

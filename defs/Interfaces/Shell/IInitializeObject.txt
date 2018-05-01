@@ -1,0 +1,7 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInitializeObject base=IUnknown id={4622AD16-FF23-11d0-8D34-00A0C90F2719} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+
+

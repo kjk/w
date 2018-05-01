@@ -1,0 +1,48 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOverlay base=IUnknown id={56a868a1-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetPalette
+    HRESULT
+    pdwColors DWORD*
+
+  func SetPalette
+    HRESULT
+    dwColors DWORD
+    pPalette PALETTEENTRY*
+
+  func GetDefaultColorKey
+    HRESULT
+    pColorKey COLORKEY*
+
+  func GetColorKey
+    HRESULT
+    pColorKey COLORKEY*
+
+  func SetColorKey
+    HRESULT
+    pColorKey COLORKEY*
+
+  func GetWindowHandle
+    HRESULT
+    pHwnd HWND*
+
+  func GetClipList
+    HRESULT
+    pSourceRect RECT*
+    pDestinationRect RECT*
+    ppRgnData RGNDATA**
+
+  func GetVideoPosition
+    HRESULT
+    pSourceRect RECT*
+    pDestinationRect RECT*
+
+  func Advise
+    HRESULT
+    pOverlayNotify IOverlayNotify*
+    dwInterests DWORD
+
+  func Unadvise
+    HRESULT
+
+

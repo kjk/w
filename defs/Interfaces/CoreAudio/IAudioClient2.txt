@@ -1,0 +1,21 @@
+include Interfaces\CoreAudio\IAudioClient.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioClient2 base=IAudioClient id={726778CD-F60A-4eda-82DE-E47610CD78AA} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func IsOffloadCapable
+    [AUDCLNT_HRESULT]
+    Category AUDIO_STREAM_CATEGORY
+    pbOffloadCapable BOOL*
+
+  func SetClientProperties
+    [AUDCLNT_HRESULT]
+    pProperties "const AudioClientProperties*"
+
+  func GetBufferSizeLimits
+    [AUDCLNT_HRESULT]
+    pFormat "const WAVEFORMATEX*"
+    bEventDriven BOOL
+    phnsMinBufferDuration REFERENCE_TIME*
+    phnsMaxBufferDuration REFERENCE_TIME*
+
+

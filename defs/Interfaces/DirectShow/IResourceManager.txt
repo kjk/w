@@ -1,0 +1,48 @@
+include Interfaces\IUnknown.txt
+
+ingterface IResourceManager base=IUnknown id={56a868ac-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Register
+    HRESULT
+    pName LPCWSTR
+    cResource LONG
+    plToken LONG*
+
+  func RegisterGroup
+    HRESULT
+    pName LPCWSTR
+    cResource LONG
+    palTokens LONG*
+    plToken LONG*
+
+  func RequestResource
+    HRESULT
+    idResource LONG
+    pFocusObject IUnknown*
+    pConsumer IResourceConsumer*
+
+  func NotifyAcquire
+    HRESULT
+    idResource LONG
+    pConsumer IResourceConsumer*
+    hr HRESULT
+
+  func NotifyRelease
+    HRESULT
+    idResource LONG
+    pConsumer IResourceConsumer*
+    bStillWant BOOL
+
+  func CancelRequest
+    HRESULT
+    idResource LONG
+    pConsumer IResourceConsumer*
+
+  func SetFocus
+    HRESULT
+    pFocusObject IUnknown*
+
+  func ReleaseFocus
+    HRESULT
+    pFocusObject IUnknown*
+
+

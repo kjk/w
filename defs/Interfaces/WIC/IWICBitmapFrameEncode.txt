@@ -1,0 +1,55 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICBitmapFrameEncode base=IUnknown id={00000105-a8f2-4877-ba0a-fd2b6645fb94} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func Initialize
+    [WIC_HRESULT]
+    pIEncoderOptions IPropertyBag2*
+
+  func SetSize
+    [WIC_HRESULT]
+    uiWidth UINT
+    uiHeight UINT
+
+  func SetResolution
+    [WIC_HRESULT]
+    dpiX double
+    dpiY double
+
+  func SetPixelFormat
+    [WIC_HRESULT]
+    pPixelFormat WICPixelFormatGUID*
+
+  func SetColorContexts
+    [WIC_HRESULT]
+    cCount UINT
+    ppIColorContext IWICColorContext**
+
+  func SetPalette
+    [WIC_HRESULT]
+    pIPalette IWICPalette*
+
+  func SetThumbnail
+    [WIC_HRESULT]
+    pIThumbnail IWICBitmapSource*
+
+  func WritePixels
+    [WIC_HRESULT]
+    lineCount UINT
+    cbStride UINT
+    cbBufferSize UINT
+    pbPixels BYTE*
+
+  func WriteSource
+    [WIC_HRESULT]
+    pIBitmapSource IWICBitmapSource*
+    prc WICRect*
+
+  func Commit
+    [WIC_HRESULT]
+
+  func GetMetadataQueryWriter
+    [WIC_HRESULT]
+    ppIMetadataQueryWriter IWICMetadataQueryWriter**
+
+

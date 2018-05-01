@@ -1,0 +1,50 @@
+include Interfaces\DirectInput\IDirectInputDeviceA.txt
+
+ingterface IDirectInputDevice2A base=IDirectInputDeviceA id={5944e682-c92e-11cf-bfc7-444553540000} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Input/DirectInput"
+  func CreateEffect
+    [DI_HRESULT]
+    rguid REFGUID
+    lpeff LPCDIEFFECT
+    ppdeff LPDIRECTINPUTEFFECT*
+    punkOuter LPUNKNOWN
+
+  func EnumEffects
+    [DI_HRESULT]
+    lpCallback LPDIENUMEFFECTSCALLBACKA
+    pvRef LPVOID
+    dwEffType [DIEFT_Flags]
+
+  func GetEffectInfo
+    [DI_HRESULT]
+    pdei LPDIEFFECTINFOA
+    rguid REFGUID
+
+  func GetForceFeedbackState
+    [DI_HRESULT]
+    pdwOut [DIGFFS_Flags*]
+
+  func SendForceFeedbackCommand
+    [DI_HRESULT]
+    dwFlags [DISFFC_Flags]
+
+  func EnumCreatedEffectObjects
+    [DI_HRESULT]
+    lpCallback LPDIENUMCREATEDEFFECTOBJECTSCALLBACK
+    pvRef LPVOID
+    fl DWORD
+
+  func Escape
+    [DI_HRESULT]
+    pesc LPDIEFFESCAPE
+
+  func Poll
+    [DI_HRESULT]
+
+  func SendDeviceData
+    [DI_HRESULT]
+    cbObjectData DWORD
+    rgdod LPCDIDEVICEOBJECTDATA count=pdwInOut
+    pdwInOut LPDWORD
+    fl DWORD
+
+

@@ -1,0 +1,68 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncChangeBatchBase base=IUnknown id={52F6E694-6A71-4494-A184-A8311BF5D227} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetChangeEnumerator
+    HRESULT
+    ppEnum IEnumSyncChanges**
+
+  func GetIsLastBatch
+    HRESULT
+    pfLastBatch BOOL*
+
+  func GetWorkEstimateForBatch
+    HRESULT
+    pdwWorkForBatch DWORD*
+
+  func GetRemainingWorkEstimateForSession
+    HRESULT
+    pdwRemainingWorkForSession DWORD*
+
+  func BeginOrderedGroup
+    HRESULT
+    pbLowerBound "const BYTE*"
+
+  func EndOrderedGroup
+    HRESULT
+    pbUpperBound "const BYTE*"
+    pMadeWithKnowledge ISyncKnowledge*
+
+  func AddItemMetadataToGroup
+    HRESULT
+    pbOwnerReplicaId "const BYTE*"
+    pbItemId "const BYTE*"
+    pChangeVersion "const SYNC_VERSION*"
+    pCreationVersion "const SYNC_VERSION*"
+    dwFlags DWORD
+    dwWorkForChange DWORD
+    ppChangeBuilder ISyncChangeBuilder**
+
+  func GetLearnedKnowledge
+    HRESULT
+    ppLearnedKnowledge ISyncKnowledge**
+
+  func GetPrerequisiteKnowledge
+    HRESULT
+    ppPrerequisteKnowledge ISyncKnowledge**
+
+  func GetSourceForgottenKnowledge
+    HRESULT
+    ppSourceForgottenKnowledge IForgottenKnowledge**
+
+  func SetLastBatch
+    HRESULT
+
+  func SetWorkEstimateForBatch
+    HRESULT
+    dwWorkForBatch DWORD
+
+  func SetRemainingWorkEstimateForSession
+    HRESULT
+    dwRemainingWorkForSession DWORD
+
+  func Serialize
+    HRESULT
+    pbChangeBatch BYTE*
+    pcbChangeBatch DWORD*
+
+

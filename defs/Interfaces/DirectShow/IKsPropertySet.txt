@@ -1,0 +1,29 @@
+include Interfaces\IUnknown.txt
+
+ingterface IKsPropertySet base=IUnknown id={31EFAC30-515C-11d0-A9AA-00AA0061BE93} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Set
+    HRESULT
+    guidPropSet REFGUID
+    dwPropID DWORD
+    pInstanceData LPVOID
+    cbInstanceData DWORD
+    pPropData LPVOID
+    cbPropData DWORD
+
+  func Get
+    HRESULT
+    guidPropSet REFGUID
+    dwPropID DWORD
+    pInstanceData LPVOID
+    cbInstanceData DWORD
+    pPropData LPVOID
+    cbPropData DWORD
+    pcbReturned DWORD*
+
+  func QuerySupported
+    HRESULT
+    guidPropSet REFGUID
+    dwPropID DWORD
+    pTypeSupport DWORD*
+
+

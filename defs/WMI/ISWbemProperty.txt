@@ -1,0 +1,37 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemProperty base=IDispatch id={1A388F98-D4BA-11d1-8B09-00600806D9B6} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func get_Value
+    WBEMSTATUS
+    varValue VARIANT*
+
+  func put_Value
+    WBEMSTATUS
+    varValue VARIANT*
+
+  func get_Name
+    WBEMSTATUS
+    strName BSTR*
+
+  func get_IsLocal
+    WBEMSTATUS
+    bIsLocal VARIANT_BOOL*
+
+  func get_Origin
+    WBEMSTATUS
+    strOrigin BSTR*
+
+  func get_CIMType
+    WBEMSTATUS
+    iCimType WbemCimtypeEnum*
+
+  func get_Qualifiers_
+    WBEMSTATUS
+    objWbemQualifierSet ISWbemQualifierSet**
+
+  func get_IsArray
+    WBEMSTATUS
+    bIsArray VARIANT_BOOL*
+
+

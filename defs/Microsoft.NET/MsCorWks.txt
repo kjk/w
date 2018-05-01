@@ -1,0 +1,129 @@
+include Headers\Windows.h.txt
+include Headers\dotnet.h.txt
+
+dll mscorwks.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Microsoft .NET/Unmanaged/Hosting"
+category "Microsoft .NET/Unmanaged/Fusion"
+alias AssemblyConfig* IAssemblyName*
+
+enum HOST_TYPE UINT
+  HOST_TYPE_DEFAULT   0
+  HOST_TYPE_APPLAUNCH 0x1
+  HOST_TYPE_CORFLAG   0x2
+
+enum AssemblyComparisonResult UINT
+  ACR_Unknown                     0
+  ACR_EquivalentFullMatch         1
+  ACR_EquivalentWeakNamed         2
+  ACR_EquivalentFXUnified         3
+  ACR_EquivalentUnified           4
+  ACR_NonEquivalentVersion        5
+  ACR_NonEquivalent               6
+  ACR_EquivalentPartialMatch      7
+  ACR_EquivalentPartialWeakNamed  8
+  ACR_EquivalentPartialUnified    9
+  ACR_EquivalentPartialFXUnified  10
+  ACR_NonEquivalentPartialVersion 11
+
+pointer AssemblyComparisonResult* AssemblyComparisonResult
+
+func CorLaunchApplication
+  HRESULT
+  dwClickOnceHost HOST_TYPE
+  pwzAppFullName LPCWSTR
+  dwManifestPaths DWORD
+  ppwzManifestPaths LPCWSTR*
+  dwActivationData DWORD
+  ppwzActivationData LPCWSTR*
+  lpProcessInformation LPPROCESS_INFORMATION
+
+func GetCLRIdentityManager
+  STDAPI
+  riid REFIID
+  ppManager IUnknown** interfaceId=riid
+
+func CompareAssemblyIdentity
+  STDAPI
+  pwzAssemblyIdentity1 LPCWSTR
+  fUnified1 BOOL
+  pwzAssemblyIdentity2 LPCWSTR
+  fUnified2 BOOL
+  pfEquivalent BOOL*
+  pResult AssemblyComparisonResult*
+
+func CompareAssemblyIdentityWithConfig
+  STDAPI
+  pwzAssemblyIdentity1 LPCWSTR
+  fUnified1 BOOL
+  pwzAssemblyIdentity2 LPCWSTR
+  fUnified2 BOOL
+  pAssemblyConfig AssemblyConfig*
+  pfEquivalent BOOL*
+  pResult AssemblyComparisonResult*
+
+func CreateAssemblyCache
+  HRESULT
+  ppAsmCache IAssemblyCache**
+  dwReserved DWORD
+
+func CreateAssemblyEnum
+  HRESULT
+  pEnum IAssemblyEnum**
+  pUnkReserved IUnknown*
+  pName IAssemblyName*
+  dwFlags DWORD
+  pvReserved LPVOID
+
+func CreateAssemblyNameObject
+  HRESULT
+  ppAssemblyNameObj LPASSEMBLYNAME*
+  szAssemblyName LPCWSTR
+  dwFlags DWORD
+  pvReserved LPVOID
+
+func CreateHistoryReader
+  HRESULT
+  wzFilePath LPCWSTR
+  ppHistoryReader IHistoryReader**
+
+func CreateInstallReferenceEnum
+  HRESULT
+  ppRefEnum IInstallReferenceEnum**
+  pName IAssemblyName*
+  dwFlags DWORD
+  pvReserved LPVOID
+
+func GetAppIdAuthority
+  HRESULT
+  ppIAppIdAuthority IAppIdAuthority**
+
+func GetCachePath
+  HRESULT
+  dwCacheFlags ASM_CACHE_FLAGS
+  pwzCachePath LPWSTR
+  pcchPath PDWORD
+
+func GetHistoryFileDirectory
+  HRESULT
+  wzDir LPWSTR
+  pdwsize LPCWSTR*
+
+func GetAssemblyIdentityFromFile
+  HRESULT
+  pwzFilePath LPCWSTR
+  riid REFIID
+  ppIdentity IUnknown** interfaceId=riid
+
+func GetIdentityAuthority
+  HRESULT
+  ppIIdentityAuthority IIdentityAuthority**
+
+func PreBindAssemblyEx
+  HRESULT
+  pAppCtx IApplicationContext*
+  pName IAssemblyName*
+  pAsmParent IAssembly*
+  pwzRuntimeVersion LPCWSTR
+  ppNamePostPolicy IAssemblyName**
+  pvReserved LPVOID
+

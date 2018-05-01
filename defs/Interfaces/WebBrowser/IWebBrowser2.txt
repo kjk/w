@@ -1,0 +1,90 @@
+include Interfaces\WebBrowser\IWebBrowserApp.txt
+
+ingterface IWebBrowser2 base=IWebBrowserApp id={D30C1661-CDAF-11d0-8A3E-00C04FC9E26E} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+  func Navigate2
+    HRESULT
+    URL VARIANT*
+    Flags VARIANT*
+    TargetFrameName VARIANT*
+    PostData VARIANT*
+    Headers VARIANT*
+
+  func QueryStatusWB
+    HRESULT
+    cmdID OLECMDID
+    pcmdf OLECMDF*
+
+  func ExecWB
+    HRESULT
+    cmdID OLECMDID
+    cmdexecopt OLECMDEXECOPT
+    pvaIn VARIANT*
+    pvaOut VARIANT*
+
+  func ShowBrowserBar
+    HRESULT
+    pvaClsid VARIANT*
+    pvarShow VARIANT*
+    pvarSize VARIANT*
+
+  func get_ReadyState
+    HRESULT
+    plReadyState READYSTATE*
+
+  func get_Offline
+    HRESULT
+    pbOffline VARIANT_BOOL*
+
+  func put_Offline
+    HRESULT
+    bOffline VARIANT_BOOL
+
+  func get_Silent
+    HRESULT
+    pbSilent VARIANT_BOOL*
+
+  func put_Silent
+    HRESULT
+    bSilent VARIANT_BOOL
+
+  func get_RegisterAsBrowser
+    HRESULT
+    pbRegister VARIANT_BOOL*
+
+  func put_RegisterAsBrowser
+    HRESULT
+    bRegister VARIANT_BOOL
+
+  func get_RegisterAsDropTarget
+    HRESULT
+    pbRegister VARIANT_BOOL*
+
+  func put_RegisterAsDropTarget
+    HRESULT
+    bRegister VARIANT_BOOL
+
+  func get_TheaterMode
+    HRESULT
+    pbRegister VARIANT_BOOL*
+
+  func put_TheaterMode
+    HRESULT
+    bRegister VARIANT_BOOL
+
+  func get_AddressBar
+    HRESULT
+    Value VARIANT_BOOL*
+
+  func put_AddressBar
+    HRESULT
+    Value VARIANT_BOOL
+
+  func get_Resizable
+    HRESULT
+    Value VARIANT_BOOL*
+
+  func put_Resizable
+    HRESULT
+    Value VARIANT_BOOL
+
+

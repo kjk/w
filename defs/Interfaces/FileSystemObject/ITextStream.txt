@@ -1,0 +1,56 @@
+include Interfaces\IDispatch.txt
+include Interfaces\FileSystemObject\FileSystemObject.h.txt
+
+ingterface ITextStream base=IDispatch id={53BAD8C1-E718-11CF-893D-00A0C9054228} errorFunc=HRESULT onlineHelp=MSDN category="Scripting Runtime Library/FileSystemObject"
+  func get_Line
+    HRESULT
+    Line long*
+
+  func get_Column
+    HRESULT
+    Column long*
+
+  func get_AtEndOfStream
+    HRESULT
+    EOS VARIANT_BOOL*
+
+  func get_AtEndOfLine
+    HRESULT
+    EOL VARIANT_BOOL*
+
+  func Read
+    HRESULT
+    Characters long
+    Text BSTR*
+
+  func ReadLine
+    HRESULT
+    Text BSTR*
+
+  func ReadAll
+    HRESULT
+    Text BSTR*
+
+  func Write
+    HRESULT
+    Text BSTR
+
+  func WriteLine
+    HRESULT
+    Text BSTR
+
+  func WriteBlankLines
+    HRESULT
+    Lines long
+
+  func Skip
+    HRESULT
+    Characters long
+
+  func SkipLine
+    HRESULT
+
+  func Close
+    HRESULT
+
+

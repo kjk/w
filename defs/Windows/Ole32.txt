@@ -1,0 +1,1402 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+include Headers\rpc.h.txt
+include Headers\gdi.h.txt
+
+dll Ole32.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Component Object Model (COM)/COM Fundamentals"
+category "Component Object Model (COM)/OLE and Data Transfer"
+category "Component Object Model (COM)/Structured Storage"
+category "Undocumented (UnDoc'd)" onlineHelp=UnDoc'd-ole32
+interface IMessageDispatcher
+
+alias PMessageDispatcher IMessageDispatcher*
+
+alias IMemoryAllocator* LPVOID
+
+alias LPENUMFORMATETC* IEnumFORMATETC**
+
+alias LPENUMOLEVERB* IEnumOLEVERB**
+
+alias LPPERSISTSTORAGE IPersistStorage*
+
+alias LPPERSISTSTREAM IPersistStream*
+
+alias LPOLEINPLACEFRAME IOleInPlaceFrame*
+
+alias LPOLEINPLACEACTIVEOBJECT IOleInPlaceActiveObject*
+
+alias LPDROPTARGET IDropTarget*
+
+alias LPDATAADVISEHOLDER IDataAdviseHolder*
+
+pointer LPDATAADVISEHOLDER* LPDATAADVISEHOLDER
+
+alias LPOLEADVISEHOLDER IOleAdviseHolder*
+
+pointer LPOLEADVISEHOLDER* LPOLEADVISEHOLDER
+
+alias LPDROPSOURCE IDropSource*
+
+alias LPINITIALIZESPY IInitializeSpy*
+
+alias LPMALLOCSPY IMallocSpy*
+
+alias LPMESSAGEFILTER IMessageFilter*
+
+pointer LPMESSAGEFILTER* LPMESSAGEFILTER
+
+alias LPSURROGATE ISurrogate*
+
+alias LPRUNNINGOBJECTTABLE IRunningObjectTable*
+
+pointer LPRUNNINGOBJECTTABLE* LPRUNNINGOBJECTTABLE
+
+alias LPMARSHAL IMarshal*
+
+pointer LPMARSHAL* LPMARSHAL
+
+alias LPOLESTREAM LPVOID
+
+alias CO_MTA_USAGE_COOKIE HANDLE
+
+pointer CO_MTA_USAGE_COOKIE* CO_MTA_USAGE_COOKIE
+
+struct STGOPTIONS
+  usVersion USHORT
+  reserved USHORT
+  ulSectorSize ULONG
+  pwcsTemplateFile "const WCHAR*"
+
+pointer STGOPTIONS* STGOPTIONS
+
+struct COAUTHIDENTITY
+  User USHORT* length=UserLength
+  UserLength ULONG
+  Domain USHORT* length=DomainLength
+  DomainLength ULONG
+  Password USHORT* length=PasswordLength
+  PasswordLength ULONG
+  Flags ULONG
+
+pointer COAUTHIDENTITY* COAUTHIDENTITY
+
+struct COAUTHINFO
+  dwAuthnSvc DWORD
+  dwAuthzSvc DWORD
+  pwszServerPrincName LPWSTR
+  dwAuthnLevel DWORD
+  dwImpersonationLevel DWORD
+  pAuthIdentityData COAUTHIDENTITY*
+  dwCapabilities DWORD
+
+pointer COAUTHINFO* COAUTHINFO
+
+struct COSERVERINFO
+  dwReserved1 DWORD
+  pwszName LPWSTR
+  pAuthInfo COAUTHINFO*
+  dwReserved2 DWORD
+
+pointer COSERVERINFO* COSERVERINFO
+
+struct SOLE_AUTHENTICATION_SERVICE
+  dwAuthnSvc DWORD
+  dwAuthzSvc DWORD
+  pPrincipalName OLECHAR*
+  hr HRESULT
+
+pointer SOLE_AUTHENTICATION_SERVICE* SOLE_AUTHENTICATION_SERVICE
+
+pointer SOLE_AUTHENTICATION_SERVICE** SOLE_AUTHENTICATION_SERVICE*
+
+flag EOLE_AUTHENTICATION_CAPABILITIES DWORD display=DWORD
+  EOAC_NONE              0
+  EOAC_MUTUAL_AUTH       0x1
+  EOAC_SECURE_REFS       0x2
+  EOAC_ACCESS_CONTROL    0x4
+  EOAC_APPID             0x8
+  EOAC_DYNAMIC           0x10
+  EOAC_STATIC_CLOAKING   0x20
+  EOAC_DYNAMIC_CLOAKING  0x40
+  EOAC_ANY_AUTHORITY     0x80
+  EOAC_MAKE_FULLSIC      0x100
+  EOAC_REQUIRE_FULLSIC   0x200
+  EOAC_AUTO_IMPERSONATE  0x400
+  EOAC_DEFAULT           0x800
+  EOAC_DISABLE_AAA       0x1000
+  EOAC_NO_CUSTOM_MARSHAL 0x2000
+
+flag REGCLS DWORD display=DWORD
+  REGCLS_SINGLEUSE      0
+  REGCLS_MULTIPLEUSE    1
+  REGCLS_MULTI_SEPARATE 2
+  REGCLS_SUSPENDED      4
+  REGCLS_SURROGATE      8
+
+enum STGFMT DWORD
+  STGFMT_STORAGE 0
+  STGFMT_NATIVE  1
+  STGFMT_FILE    3
+  STGFMT_ANY     4
+  STGFMT_DOCFILE 5
+
+enum OLERENDER DWORD display=DWORD
+  OLERENDER_NONE   0
+  OLERENDER_DRAW   1
+  OLERENDER_FORMAT 2
+  OLERENDER_ASIS   3
+
+flag [ASYNC_MODE_FLAGS] DWORD display=DWORD
+  ASYNC_MODE_DEFAULT       0x00000000
+  ASYNC_MODE_COMPATIBILITY 0x00000001
+
+func BindMoniker
+  HRESULT
+  pmk LPMONIKER
+  grfOpt DWORD
+  iidResult REFIID
+  ppvResult LPVOID*
+
+func CLSIDFromProgID
+  HRESULT
+  lpszProgID LPCOLESTR
+  lpclsid LPCLSID
+
+func CLSIDFromProgIDEx
+  HRESULT
+  lpszProgID LPCOLESTR
+  lpclsid LPCLSID
+
+func CLSIDFromString
+  HRESULT
+  lpsz LPCOLESTR
+  pclsid LPCLSID
+
+func CoAddRefServerProcess
+  ULONG
+
+func CoAllowSetForegroundWindow
+  HRESULT
+  pUnk IUnknown*
+  lpvReserved LPVOID
+
+func CoCancelCall
+  HRESULT
+  dwThreadId DWORD
+  ulTimeout ULONG
+
+func CoCopyProxy
+  HRESULT
+  pProxy IUnknown*
+  ppCopy IUnknown**
+
+func CoCreateFreeThreadedMarshaler
+  HRESULT
+  punkOuter LPUNKNOWN
+  ppunkMarshal LPUNKNOWN*
+
+func CoCreateGuid
+  HRESULT
+  pguid GUID*
+
+func CoCreateInstance
+  HRESULT
+  rclsid REFCLSID
+  pUnkOuter LPUNKNOWN
+  dwClsContext [CLSCTX]
+  riid REFIID
+  ppv LPVOID*
+
+func CoCreateInstanceEx
+  HRESULT
+  rclsid REFCLSID
+  punkOuter IUnknown*
+  dwClsCtx [CLSCTX]
+  pServerInfo COSERVERINFO*
+  dwCount DWORD
+  pResults MULTI_QI* count=dwCount
+
+func CoDisableCallCancellation
+  HRESULT
+  pReserved LPVOID
+
+func CoDisconnectContext
+  HRESULT
+  dwTimeout DWORD
+
+func CoDisconnectObject
+  HRESULT
+  pUnk LPUNKNOWN
+  dwReserved DWORD
+
+func CoDosDateTimeToFileTime
+  BOOL
+  nDosDate WORD
+  nDosTime WORD
+  lpFileTime FILETIME*
+
+func CoEnableCallCancellation
+  HRESULT
+  pReserved LPVOID
+
+func CoFileTimeNow
+  HRESULT
+  lpFileTime FILETIME*
+
+func CoFileTimeToDosDateTime
+  BOOL
+  lpFileTime FILETIME*
+  lpDosDate LPWORD
+  lpDosTime LPWORD
+
+func CoFreeAllLibraries
+  void
+
+func CoFreeLibrary
+  void
+  hInst HINSTANCE
+
+func CoFreeUnusedLibraries
+  void
+
+func CoFreeUnusedLibrariesEx
+  void
+  dwUnloadDelay DWORD
+  dwReserved DWORD
+
+func CoGetApartmentType
+  HRESULT
+  pAptType APTTYPE*
+  pAptQualifier APTTYPEQUALIFIER*
+
+func CoGetCallContext
+  HRESULT
+  riid REFIID
+  ppInterface void** interfaceId=riid
+
+func CoGetCallerTID
+  HRESULT
+  lpdwTID LPDWORD
+
+func CoGetCancelObject
+  HRESULT
+  dwThreadId DWORD
+  iid REFIID
+  ppUnk void** interfaceId=iid
+
+func CoGetClassObject
+  HRESULT
+  rclsid REFCLSID
+  dwClsContext [CLSCTX]
+  pServerInfo COSERVERINFO*
+  riid REFIID
+  ppv LPVOID*
+
+func CoGetContextToken
+  HRESULT
+  pToken ULONG_PTR*
+
+func CoGetCurrentLogicalThreadId
+  HRESULT
+  pguid GUID*
+
+func CoGetCurrentProcess
+  DWORD
+
+func CoGetInstanceFromFile
+  HRESULT
+  pServerInfo COSERVERINFO*
+  pClsid CLSID*
+  punkOuter IUnknown*
+  dwClsCtx [CLSCTX]
+  grfMode [STGM_FLAGS]
+  pwszName OLECHAR*
+  dwCount DWORD
+  pResults MULTI_QI* count=dwCount
+
+func CoGetInstanceFromIStorage
+  HRESULT
+  pServerInfo COSERVERINFO*
+  pClsid CLSID*
+  punkOuter IUnknown*
+  dwClsCtx [CLSCTX]
+  pstg "struct IStorage*"
+  dwCount DWORD
+  pResults MULTI_QI* count=dwCount
+
+func CoGetInterceptor
+  HRESULT
+  iidIntercepted REFIID
+  punkOuter IUnknown*
+  iid REFIID
+  ppv void** interfaceId=iid
+
+func CoGetInterfaceAndReleaseStream
+  HRESULT
+  pStm LPSTREAM
+  iid REFIID
+  ppv LPVOID*
+
+func CoGetMalloc
+  HRESULT
+  dwMemContext DWORD
+  ppMalloc LPMALLOC*
+
+func CoGetMarshalSizeMax
+  HRESULT
+  pulSize ULONG*
+  riid REFIID
+  pUnk LPUNKNOWN
+  dwDestContext DWORD
+  pvDestContext LPVOID
+  mshlflags MSHLFLAGS
+
+func CoGetObject
+  HRESULT
+  pszName LPCWSTR
+  pBindOptions BIND_OPTS*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func CoGetObjectContext
+  HRESULT
+  riid REFIID
+  ppv LPVOID* interfaceId=riid
+
+func CoGetPSClsid
+  HRESULT
+  riid REFIID
+  pClsid CLSID*
+
+func CoGetStandardMarshal
+  HRESULT
+  riid REFIID
+  pUnk LPUNKNOWN
+  dwDestContext DWORD
+  pvDestContext LPVOID
+  mshlflags MSHLFLAGS
+  ppMarshal LPMARSHAL*
+
+func CoGetStdMarshalEx
+  HRESULT
+  pUnkOuter LPUNKNOWN
+  smexflags DWORD
+  ppUnkInner LPUNKNOWN*
+
+func CoGetTreatAsClass
+  HRESULT
+  clsidOld REFCLSID
+  pClsidNew LPCLSID
+
+func CoImpersonateClient
+  HRESULT
+
+func CoInitialize
+  HRESULT
+  pvReserved LPVOID
+
+func CoInitializeEx
+  HRESULT
+  pvReserved LPVOID
+  dwCoInit [COINIT_FLAG]
+
+func CoInitializeSecurity
+  HRESULT
+  pSecDesc PSECURITY_DESCRIPTOR
+  cAuthSvc LONG
+  asAuthSvc SOLE_AUTHENTICATION_SERVICE*
+  pReserved1 void*
+  dwAuthnLevel [RPC_C_AUTHN_LEVEL] display=DWORD
+  dwImpLevel [RPC_C_IMP_LEVEL] display=DWORD
+  pAuthList void*
+  dwCapabilities EOLE_AUTHENTICATION_CAPABILITIES
+  pReserved3 void*
+
+func CoInstall
+  HRESULT
+  pbc IBindCtx*
+  dwFlags DWORD
+  pClassSpec uCLSSPEC*
+  pQuery QUERYCONTEXT*
+  pszCodeBase LPWSTR
+
+func CoInvalidateRemoteMachineBindings
+  HRESULT
+  pszMachineName LPOLESTR
+
+func CoIsHandlerConnected
+  BOOL
+  pUnk LPUNKNOWN
+
+func CoIsOle1Class
+  BOOL
+  rclsid REFCLSID
+
+func CoLoadLibrary
+  success NotEqual=0
+  HINSTANCE
+  lpszLibName LPOLESTR
+  bAutoFree BOOL
+
+func CoLockObjectExternal
+  HRESULT
+  pUnk LPUNKNOWN
+  fLock BOOL
+  fLastUnlockReleases BOOL
+
+func CoMarshalHresult
+  HRESULT
+  pstm LPSTREAM
+  hresult HRESULT
+
+func CoMarshalInterface
+  HRESULT
+  pStm LPSTREAM
+  riid REFIID
+  pUnk LPUNKNOWN
+  dwDestContext DWORD
+  pvDestContext LPVOID
+  mshlflags MSHLFLAGS
+
+func CoMarshalInterThreadInterfaceInStream
+  HRESULT
+  riid REFIID
+  pUnk LPUNKNOWN
+  ppStm LPSTREAM*
+
+func CoQueryAuthenticationServices
+  HRESULT
+  pcAuthSvc DWORD*
+  asAuthSvc SOLE_AUTHENTICATION_SERVICE**
+
+func CoQueryClientBlanket
+  HRESULT
+  pAuthnSvc DWORD*
+  pAuthzSvc DWORD*
+  pServerPrincName OLECHAR**
+  pAuthnLevel DWORD*
+  pImpLevel DWORD*
+  pPrivs RPC_AUTHZ_HANDLE*
+  pCapabilities DWORD*
+
+func CoQueryProxyBlanket
+  HRESULT
+  pProxy IUnknown*
+  pwAuthnSvc DWORD*
+  pAuthzSvc DWORD*
+  pServerPrincName OLECHAR**
+  pAuthnLevel DWORD*
+  pImpLevel DWORD*
+  pAuthInfo RPC_AUTH_IDENTITY_HANDLE*
+  pCapabilites DWORD*
+
+func CoRegisterClassObject
+  HRESULT
+  rclsid REFCLSID
+  pUnk LPUNKNOWN
+  dwClsContext [CLSCTX]
+  flags REGCLS
+  lpdwRegister LPDWORD
+
+func CoRegisterInitializeSpy
+  HRESULT
+  pSpy LPINITIALIZESPY
+  puliCookie ULARGE_INTEGER*
+
+func CoRegisterMallocSpy
+  HRESULT
+  pMallocSpy LPMALLOCSPY
+
+func CoRegisterMessageFilter
+  HRESULT
+  lpMessageFilter LPMESSAGEFILTER
+  lplpMessageFilter LPMESSAGEFILTER*
+
+func CoRegisterPSClsid
+  HRESULT
+  riid REFIID
+  rclsid REFCLSID
+
+func CoRegisterSurrogate
+  HRESULT
+  pSurrogate LPSURROGATE
+
+func CoReleaseMarshalData
+  HRESULT
+  pStm LPSTREAM
+
+func CoReleaseServerProcess
+  ULONG
+
+func CoResumeClassObjects
+  HRESULT
+
+func CoRevertToSelf
+  HRESULT
+
+func CoRevokeClassObject
+  HRESULT
+  dwRegister DWORD
+
+func CoRevokeInitializeSpy
+  HRESULT
+  uliCookie ULARGE_INTEGER
+
+func CoRevokeMallocSpy
+  HRESULT
+
+func CoSetCancelObject
+  HRESULT
+  pUnk IUnknown*
+
+func CoSetProxyBlanket
+  HRESULT
+  pProxy IUnknown*
+  dwAuthnSvc [RPC_C_AUTHN_SVC] display=DWORD
+  dwAuthzSvc [RPC_C_AUTHZ] display=DWORD
+  pServerPrincName OLECHAR*
+  dwAuthnLevel [RPC_C_AUTHN_LEVEL] display=DWORD
+  dwImpLevel [RPC_C_IMP_LEVEL] display=DWORD
+  pAuthInfo RPC_AUTH_IDENTITY_HANDLE
+  dwCapabilities EOLE_AUTHENTICATION_CAPABILITIES
+
+func CoSuspendClassObjects
+  HRESULT
+
+func CoSwitchCallContext
+  HRESULT
+  pNewObject IUnknown*
+  ppOldObject IUnknown**
+
+func CoTaskMemAlloc
+  success NotEqual=0
+  LPVOID
+  cb SIZE_T
+
+func CoTaskMemFree
+  void
+  pv LPVOID
+
+func CoTaskMemRealloc
+  success NotEqual=0
+  LPVOID
+  pv LPVOID
+  cb SIZE_T
+
+func CoTestCancel
+  HRESULT
+
+func CoTreatAsClass
+  HRESULT
+  clsidOld REFCLSID
+  clsidNew REFCLSID
+
+func CoUninitialize
+  void
+
+func CoUnmarshalHresult
+  HRESULT
+  pstm LPSTREAM
+  phresult HRESULT*
+
+func CoUnmarshalInterface
+  HRESULT
+  pStm LPSTREAM
+  riid REFIID
+  ppv LPVOID*
+
+func CoWaitForMultipleHandles
+  HRESULT
+  dwFlags DWORD
+  dwTimeout DWORD
+  cHandles ULONG
+  pHandles LPHANDLE
+  lpdwindex LPDWORD
+
+func CreateAntiMoniker
+  HRESULT
+  ppmk LPMONIKER*
+
+func CreateBindCtx
+  HRESULT
+  reserved DWORD
+  ppbc LPBC*
+
+func CreateClassMoniker
+  HRESULT
+  rclsid REFCLSID
+  ppmk LPMONIKER*
+
+func CreateFileMoniker
+  HRESULT
+  lpszPathName LPCOLESTR
+  ppmk LPMONIKER*
+
+func CreateGenericComposite
+  HRESULT
+  pmkFirst LPMONIKER
+  pmkRest LPMONIKER
+  ppmkComposite LPMONIKER*
+
+func CreateItemMoniker
+  HRESULT
+  lpszDelim LPCOLESTR
+  lpszItem LPCOLESTR
+  ppmk LPMONIKER*
+
+func CreateObjrefMoniker
+  HRESULT
+  punk LPUNKNOWN
+  ppmk LPMONIKER*
+
+func CreatePointerMoniker
+  HRESULT
+  punk LPUNKNOWN
+  ppmk LPMONIKER*
+
+func GetClassFile
+  HRESULT
+  szFilename LPCOLESTR
+  pclsid CLSID*
+
+func GetRunningObjectTable
+  HRESULT
+  reserved DWORD
+  pprot LPRUNNINGOBJECTTABLE*
+
+func IIDFromString
+  HRESULT
+  lpsz LPCOLESTR
+  lpiid LPIID
+
+func IsAccelerator
+  BOOL
+  hAccel HACCEL
+  cAccelEntries int
+  lpMsg LPMSG
+  lpwCmd WORD*
+
+func IsEqualGUID
+  BOOL
+  rguid1 REFGUID
+  rguid2 REFGUID
+
+func MkParseDisplayName
+  HRESULT
+  pbc LPBC
+  szUserName LPCOLESTR
+  pchEaten ULONG*
+  ppmk LPMONIKER*
+
+func MonikerCommonPrefixWith
+  HRESULT
+  pmkThis LPMONIKER
+  pmkOther LPMONIKER
+  ppmkCommon LPMONIKER*
+
+func MonikerRelativePathTo
+  HRESULT
+  pmkSrc LPMONIKER
+  pmkDest LPMONIKER
+  ppmkRelPath LPMONIKER*
+  dwReserved BOOL
+
+func OleDoAutoConvert
+  HRESULT
+  pStg LPSTORAGE
+  pClsidNew LPCLSID
+
+func OleGetAutoConvert
+  HRESULT
+  clsidOld REFCLSID
+  pClsidNew LPCLSID
+
+func OleGetIconOfClass
+  success Equal=0
+  HGLOBAL
+  rclsid REFCLSID
+  lpszLabel LPOLESTR
+  fUseTypeAsLabel BOOL
+
+func OleGetIconOfFile
+  success Equal=0
+  HGLOBAL
+  lpszPath LPOLESTR
+  fUseFileAsLabel BOOL
+
+func OleRegGetMiscStatus
+  HRESULT
+  clsid REFCLSID
+  dwAspect DVASPECT
+  pdwStatus DWORD*
+
+func OleRegGetUserType
+  HRESULT
+  clsid REFCLSID
+  dwFormOfType DWORD
+  pszUserType LPOLESTR*
+
+func OleSetAutoConvert
+  HRESULT
+  clsidOld REFCLSID
+  clsidNew REFCLSID
+
+func ProgIDFromCLSID
+  HRESULT
+  clsid REFCLSID
+  lplpszProgID LPOLESTR*
+
+func StringFromCLSID
+  HRESULT
+  rclsid REFCLSID
+  lplpsz LPOLESTR*
+
+func StringFromGUID2
+  success NotEqual=0
+  int
+  rguid REFGUID
+  lpsz LPOLESTR outputOnly
+  cchMax int
+
+func StringFromIID
+  HRESULT
+  rclsid REFIID
+  lplpsz LPOLESTR*
+
+func CoRegisterChannelHook
+  HRESULT
+  ExtensionUuid REFGUID
+  pChannelHook IChannelHook*
+
+func CoCreateInstanceFromApp
+  HRESULT
+  rclsid REFCLSID
+  punkOuter IUnknown*
+  dwClsCtx DWORD
+  reserved PVOID
+  dwCount DWORD
+  pResults MULTI_QI* count=dwCount
+
+func CoDecrementMTAUsage
+  HRESULT
+  Cookie CO_MTA_USAGE_COOKIE
+
+func CoHandlePriorityEventsFromMessagePump
+  void
+
+func CoIncrementMTAUsage
+  HRESULT
+  pCookie CO_MTA_USAGE_COOKIE*
+
+func CoSetMessageDispatcher
+  HRESULT
+  pMessageDispatcher PMessageDispatcher
+
+func CreateDataAdviseHolder
+  HRESULT
+  ppDAHolder LPDATAADVISEHOLDER*
+
+func CreateDataCache
+  HRESULT
+  pUnkOuter LPUNKNOWN
+  rclsid REFCLSID
+  iid REFIID
+  ppv LPVOID*
+
+func CreateOleAdviseHolder
+  HRESULT
+  ppOAHolder LPOLEADVISEHOLDER*
+
+func DoDragDrop
+  HRESULT
+  pDataObj LPDATAOBJECT
+  pDropSource LPDROPSOURCE
+  dwOKEffects DWORD
+  pdwEffect LPDWORD
+
+func OleCreate
+  HRESULT
+  rclsid REFCLSID
+  riid REFIID
+  renderopt OLERENDER
+  pFormatEtc LPFORMATETC
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateDefaultHandler
+  HRESULT
+  clsid REFCLSID
+  pUnkOuter LPUNKNOWN
+  riid REFIID
+  lplpObj LPVOID* interfaceId=riid
+
+func OleCreateEmbeddingHelper
+  HRESULT
+  clsid REFCLSID
+  pUnkOuter LPUNKNOWN
+  flags DWORD
+  pCF LPCLASSFACTORY
+  riid REFIID
+  lplpObj LPVOID* interfaceId=riid
+
+func OleCreateEx
+  HRESULT
+  rclsid REFCLSID
+  riid REFIID
+  dwFlags DWORD
+  renderopt OLERENDER
+  cFormats ULONG
+  rgAdvf DWORD* count=cFormats
+  rgFormatEtc LPFORMATETC count=cFormats
+  lpAdviseSink IAdviseSink*
+  rgdwConnection DWORD*
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateFromData
+  HRESULT
+  pSrcDataObj LPDATAOBJECT
+  riid REFIID
+  renderopt OLERENDER
+  pFormatEtc LPFORMATETC
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateFromDataEx
+  HRESULT
+  pSrcDataObj LPDATAOBJECT
+  riid REFIID
+  dwFlags DWORD
+  renderopt OLERENDER
+  cFormats ULONG
+  rgAdvf DWORD* count=cFormats
+  rgFormatEtc LPFORMATETC count=cFormats
+  lpAdviseSink IAdviseSink*
+  rgdwConnection DWORD*
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateFromFile
+  HRESULT
+  rclsid REFCLSID
+  lpszFileName LPCOLESTR
+  riid REFIID
+  renderopt OLERENDER
+  lpFormatEtc LPFORMATETC
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateFromFileEx
+  HRESULT
+  rclsid REFCLSID
+  lpszFileName LPCOLESTR
+  riid REFIID
+  dwFlags DWORD
+  renderopt OLERENDER
+  cFormats ULONG
+  rgAdvf DWORD* count=cFormats
+  rgFormatEtc LPFORMATETC count=cFormats
+  lpAdviseSink IAdviseSink*
+  rgdwConnection DWORD*
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateLink
+  HRESULT
+  pmkLinkSrc LPMONIKER
+  riid REFIID
+  renderopt OLERENDER
+  lpFormatEtc LPFORMATETC
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateLinkEx
+  HRESULT
+  pmkLinkSrc LPMONIKER
+  riid REFIID
+  dwFlags DWORD
+  renderopt OLERENDER
+  cFormats ULONG
+  rgAdvf DWORD* count=cFormats
+  rgFormatEtc LPFORMATETC count=cFormats
+  lpAdviseSink IAdviseSink*
+  rgdwConnection DWORD*
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateLinkFromData
+  HRESULT
+  pSrcDataObj LPDATAOBJECT
+  riid REFIID
+  renderopt OLERENDER
+  pFormatEtc LPFORMATETC
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateLinkFromDataEx
+  HRESULT
+  pSrcDataObj LPDATAOBJECT
+  riid REFIID
+  dwFlags DWORD
+  renderopt OLERENDER
+  cFormats ULONG
+  rgAdvf DWORD* count=cFormats
+  rgFormatEtc LPFORMATETC count=cFormats
+  lpAdviseSink IAdviseSink*
+  rgdwConnection DWORD*
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateLinkToFile
+  HRESULT
+  lpszFileName LPCOLESTR
+  riid REFIID
+  renderopt OLERENDER
+  lpFormatEtc LPFORMATETC
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateLinkToFileEx
+  HRESULT
+  lpszFileName LPCOLESTR
+  riid REFIID
+  dwFlags DWORD
+  renderopt OLERENDER
+  cFormats ULONG
+  rgAdvf DWORD* count=cFormats
+  rgFormatEtc LPFORMATETC count=cFormats
+  lpAdviseSink IAdviseSink*
+  rgdwConnection DWORD*
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleCreateMenuDescriptor
+  success NotEqual=0
+  HOLEMENU
+  hmenuCombined HMENU
+  lpMenuWidths LPOLEMENUGROUPWIDTHS
+
+func OleCreateStaticFromData
+  HRESULT
+  pSrcDataObj LPDATAOBJECT
+  iid REFIID
+  renderopt OLERENDER
+  pFormatEtc LPFORMATETC
+  pClientSite LPOLECLIENTSITE
+  pStg LPSTORAGE
+  ppvObj LPVOID*
+
+func OleDestroyMenuDescriptor
+  VOID
+  holemenu HOLEMENU
+
+func OleDraw
+  HRESULT
+  pUnknown LPUNKNOWN
+  dwAspect DVASPECT
+  hdcDraw HDC
+  lprcBounds LPCRECT
+
+func OleDuplicateData
+  success NotEqual=0
+  HANDLE
+  hSrc HANDLE
+  cfFormat CLIPFORMAT
+  uiFlags UINT
+
+func OleFlushClipboard
+  HRESULT
+
+func OleGetClipboard
+  HRESULT
+  ppDataObj LPDATAOBJECT*
+
+func OleInitialize
+  HRESULT
+  pvReserved LPVOID
+
+func OleIsCurrentClipboard
+  HRESULT
+  pDataObj LPDATAOBJECT
+
+func OleIsRunning
+  BOOL
+  pObject LPOLEOBJECT
+
+func OleLoad
+  HRESULT
+  pStg LPSTORAGE
+  riid REFIID
+  rclsid REFCLSID
+  pClientSite LPOLECLIENTSITE
+  ppvObj LPVOID* interfaceId=riid
+
+func OleLoadFromStream
+  HRESULT
+  pStm LPSTREAM
+  iidInterface REFIID
+  ppvObj LPVOID*
+
+func OleLockRunning
+  HRESULT
+  pUnknown LPUNKNOWN
+  fLock BOOL
+  fLastUnlockCloses BOOL
+
+func OleMetafilePictFromIconAndLabel
+  success NotEqual=0
+  HGLOBAL
+  hIcon HICON
+  lpszLabel LPOLESTR
+  lpszSourceFile LPOLESTR
+  iIconIndex UINT
+
+func OleNoteObjectVisible
+  HRESULT
+  pUnknown LPUNKNOWN
+  fVisible BOOL
+
+func OleQueryCreateFromData
+  HRESULT
+  pSrcDataObject LPDATAOBJECT
+
+func OleQueryLinkFromData
+  HRESULT
+  pSrcDataObject LPDATAOBJECT
+
+func OleRegEnumFormatEtc
+  HRESULT
+  clsid REFCLSID
+  dwDirection DWORD
+  ppenum LPENUMFORMATETC*
+
+func OleRegEnumVerbs
+  HRESULT
+  clsid REFCLSID
+  ppenum LPENUMOLEVERB*
+
+func OleRun
+  HRESULT
+  pUnknown LPUNKNOWN
+
+func OleSave
+  HRESULT
+  pPS LPPERSISTSTORAGE
+  pStg LPSTORAGE
+  fSameAsLoad BOOL
+
+func OleSaveToStream
+  HRESULT
+  pPStm LPPERSISTSTREAM
+  pStm LPSTREAM
+
+func OleSetClipboard
+  HRESULT
+  pDataObj LPDATAOBJECT
+
+func OleSetContainedObject
+  HRESULT
+  pUnknown LPUNKNOWN
+  fContained BOOL
+
+func OleSetMenuDescriptor
+  HRESULT
+  holemenu HOLEMENU
+  hwndFrame HWND
+  hwndActiveObject HWND
+  lpFrame LPOLEINPLACEFRAME
+  lpActiveObj LPOLEINPLACEACTIVEOBJECT
+
+func OleTranslateAccelerator
+  HRESULT
+  lpFrame LPOLEINPLACEFRAME
+  lpFrameInfo LPOLEINPLACEFRAMEINFO
+  lpmsg LPMSG
+
+func OleUninitialize
+  void
+
+func RegisterDragDrop
+  HRESULT
+  hwnd HWND
+  pDropTarget LPDROPTARGET
+
+func ReleaseStgMedium
+  void
+  pMedium LPSTGMEDIUM
+
+func RevokeDragDrop
+  HRESULT
+  hwnd HWND
+
+func CreateILockBytesOnHGlobal
+  WINOLEAPI
+  hGlobal HGLOBAL
+  fDeleteOnRelease BOOL
+  ppLkbyt ILockBytes**
+
+func CreateStreamOnHGlobal
+  WINOLEAPI
+  hGlobal HGLOBAL
+  fDeleteOnRelease BOOL
+  ppstm LPSTREAM*
+
+func FmtIdToPropStgName
+  HRESULT
+  pfmtid "const FMTID*"
+  oszName LPOLESTR
+
+func FreePropVariantArray
+  WINOLEAPI
+  cVariants ULONG
+  rgvars PROPVARIANT* count=cVariants
+
+func GetConvertStg
+  WINOLEAPI
+  pStg IStorage*
+
+func GetHGlobalFromILockBytes
+  WINOLEAPI
+  pLkbyt ILockBytes*
+  phglobal HGLOBAL*
+
+func GetHGlobalFromStream
+  WINOLEAPI
+  pstm IStream*
+  phglobal HGLOBAL*
+
+func OleConvertIStorageToOLESTREAM
+  WINOLEAPI
+  pStg IStorage*
+  lpolestream LPOLESTREAM
+
+func OleConvertIStorageToOLESTREAMEx
+  WINOLEAPI
+  pStg IStorage*
+  cfFormat CLIPFORMAT
+  lWidth LONG
+  lHeight LONG
+  dwSize DWORD
+  pmedium LPSTGMEDIUM
+  lpolestm LPOLESTREAM
+
+func OleConvertOLESTREAMToIStorage
+  WINOLEAPI
+  lpolestream LPOLESTREAM
+  pstg IStorage*
+  ptd "const DVTARGETDEVICE*"
+
+func OleConvertOLESTREAMToIStorageEx
+  WINOLEAPI
+  lpolestm LPOLESTREAM
+  pstg IStorage*
+  pcfFormat CLIPFORMAT*
+  plWidth LONG*
+  plHeight LONG*
+  pdwSize DWORD*
+  pmedium LPSTGMEDIUM
+
+func PropStgNameToFmtId
+  HRESULT
+  oszName "const LPOLESTR"
+  pfmtid FMTID*
+
+func PropVariantClear
+  WINOLEAPI
+  pvar PROPVARIANT*
+
+func PropVariantCopy
+  WINOLEAPI
+  pvarDest PROPVARIANT*
+  pvarSrc "const PROPVARIANT*"
+
+func ReadClassStg
+  WINOLEAPI
+  pStg IStorage*
+  pclsid CLSID*
+
+func ReadClassStm
+  WINOLEAPI
+  pStm IStream*
+  pclsid CLSID*
+
+func ReadFmtUserTypeStg
+  WINOLEAPI
+  pStg IStorage*
+  pcf CLIPFORMAT*
+  lplpszUserType LPWSTR*
+
+func StgConvertPropertyToVariant
+  BOOLEAN
+  prop SERIALIZEDPROPERTYVALUE*
+  CodePage USHORT
+  pvar PROPVARIANT*
+  pma IMemoryAllocator*
+
+func SetConvertStg
+  WINOLEAPI
+  pStg IStorage*
+  fConvert BOOL
+
+func StgConvertVariantToProperty
+  success NotEqual=0
+  SERIALIZEDPROPERTYVALUE*
+  pvar PROPVARIANT*
+  CodePage USHORT
+  pprop SERIALIZEDPROPERTYVALUE*
+  pcb ULONG*
+  pid PROPID
+  fReserved BOOLEAN
+  pcIndirect ULONG*
+
+func StgCreateDocfile
+  HRESULT
+  pwcsName "const WCHAR*"
+  grfMode [STGM_FLAGS]
+  reserved DWORD
+  ppstgOpen IStorage**
+
+func StgCreateDocfileOnILockBytes
+  WINOLEAPI
+  plkbyt ILockBytes*
+  grfMode [STGM_FLAGS]
+  reserved DWORD
+  ppstgOpen IStorage**
+
+func StgCreatePropSetStg
+  HRESULT
+  pStorage IStorage*
+  dwReserved DWORD
+  ppPropSetStg IPropertySetStorage**
+
+func StgCreatePropStg
+  HRESULT
+  pUnk IUnknown*
+  fmtid REFFMTID
+  pclsid "const CLSID*"
+  grfFlags [PROPSETFLAG]
+  dwReserved DWORD
+  ppPropStg IPropertyStorage**
+
+func StgCreateStorageEx
+  WINOLEAPI
+  pwcsName "const WCHAR*"
+  grfMode [STGM_FLAGS]
+  stgfmt STGFMT
+  grfAttrs DWORD
+  pStgOptions STGOPTIONS*
+  pSecurityDescriptor PSECURITY_DESCRIPTOR*
+  riid REFIID
+  ppObjectOpen void** interfaceId=riid
+
+func StgGetIFillLockBytesOnFile
+  WINOLEAPI
+  pwcsName OLECHAR*
+  ppflb IFillLockBytes**
+
+func StgGetIFillLockBytesOnILockBytes
+  WINOLEAPI
+  pilb ILockBytes*
+  ppflb IFillLockBytes**
+
+func StgIsStorageFile
+  WINOLEAPI
+  pwcsName "const WCHAR*"
+
+func StgIsStorageILockBytes
+  WINOLEAPI
+  plkbyt ILockBytes*
+
+func StgOpenAsyncDocfileOnIFillLockBytes
+  WINOLEAPI
+  ppflb IFillLockBytes*
+  grfmode [STGM_FLAGS]
+  asyncFlags [ASYNC_MODE_FLAGS]
+  ppstgOpen IStorage**
+
+func StgOpenPropStg
+  HRESULT
+  pUnk IUnknown*
+  fmtid REFFMTID
+  grfFlags [PROPSETFLAG]
+  dwReserved DWORD
+  ppPropStg IPropertyStorage**
+
+func StgOpenStorage
+  HRESULT
+  pwcsName "const WCHAR*"
+  pstgPriority IStorage*
+  grfMode [STGM_FLAGS]
+  snbExclude SNB
+  reserved DWORD
+  ppstgOpen IStorage**
+
+func StgOpenStorageEx
+  HRESULT
+  pwcsName "const WCHAR*"
+  grfMode [STGM_FLAGS]
+  stgfmt STGFMT
+  grfAttrs DWORD
+  pStgOptions STGOPTIONS*
+  reserved2 void*
+  riid REFIID
+  ppObjectOpen void** interfaceId=riid
+
+func StgOpenStorageOnILockBytes
+  WINOLEAPI
+  plkbyt ILockBytes*
+  pStgPriority IStorage*
+  grfMode [STGM_FLAGS]
+  snbExclude SNB
+  reserved DWORD
+  ppstgOpen IStorage**
+
+func StgPropertyLengthAsVariant
+  success NotEqual=0
+  ULONG
+  pProp SERIALIZEDPROPERTYVALUE*
+  cbProp ULONG
+  CodePage USHORT
+  bReserved BYTE
+
+func StgSetTimes
+  WINOLEAPI
+  lpszName "WCHAR const*"
+  pctime "FILETIME const*"
+  patime "FILETIME const*"
+  pmtime "FILETIME const*"
+
+func WriteClassStg
+  WINOLEAPI
+  pStg IStorage*
+  rclsid REFCLSID
+
+func WriteClassStm
+  WINOLEAPI
+  pStm IStream*
+  rclsid REFCLSID
+
+func WriteFmtUserTypeStg
+  WINOLEAPI
+  pStg IStorage*
+  cf CLIPFORMAT
+  lpszUserType LPWSTR*
+
+func CoGetModuleType
+  HRESULT
+  pwszFile LPCWSTR
+  pModuleType int*
+

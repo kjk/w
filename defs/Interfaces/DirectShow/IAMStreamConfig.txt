@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMStreamConfig base=IUnknown id={C6E13340-30AC-11d0-A18C-00A0C9118956} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetFormat
+    HRESULT
+    pmt AM_MEDIA_TYPE*
+
+  func GetFormat
+    HRESULT
+    ppmt AM_MEDIA_TYPE**
+
+  func GetNumberOfCapabilities
+    HRESULT
+    piCount int*
+    piSize int*
+
+  func GetStreamCaps
+    HRESULT
+    iIndex int
+    ppmt AM_MEDIA_TYPE**
+    pSCC BYTE*
+
+

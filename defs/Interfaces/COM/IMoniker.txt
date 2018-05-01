@@ -1,0 +1,102 @@
+include Interfaces\COM\IPersistStream.txt
+
+ingterface IMoniker base=IPersistStream id={0000000f-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func BindToObject
+    HRESULT
+    pbc IBindCtx*
+    pmkToLeft IMoniker*
+    riidResult REFIID
+    ppvResult void** interfaceId=riidResult
+
+  func BindToStorage
+    HRESULT
+    pbc IBindCtx*
+    pmkToLeft IMoniker*
+    riid REFIID
+    ppvObj void** interfaceId=riid
+
+  func Reduce
+    HRESULT
+    pbc IBindCtx*
+    dwReduceHowFar DWORD
+    ppmkToLeft IMoniker**
+    ppmkReduced IMoniker**
+
+  func ComposeWith
+    HRESULT
+    pmkRight IMoniker*
+    fOnlyIfNotGeneric BOOL
+    ppmkComposite IMoniker**
+
+  func Enum
+    HRESULT
+    fForward BOOL
+    ppenumMoniker IEnumMoniker**
+
+  func IsEqual
+    HRESULT
+    pmkOtherMoniker IMoniker*
+
+  func Hash
+    HRESULT
+    pdwHash DWORD*
+
+  func IsRunning
+    HRESULT
+    pbc IBindCtx*
+    pmkToLeft IMoniker*
+    pmkNewlyRunning IMoniker*
+
+  func GetTimeOfLastChange
+    HRESULT
+    pbc IBindCtx*
+    pmkToLeft IMoniker*
+    pFileTime FILETIME*
+
+  func Inverse
+    HRESULT
+    ppmk IMoniker**
+
+  func CommonPrefixWith
+    HRESULT
+    pmkOther IMoniker*
+    ppmkPrefix IMoniker**
+
+  func RelativePathTo
+    HRESULT
+    pmkOther IMoniker*
+    ppmkRelPath IMoniker**
+
+  func GetDisplayName
+    HRESULT
+    pbc IBindCtx*
+    pmkToLeft IMoniker*
+    ppszDisplayName LPOLESTR*
+
+  func ParseDisplayName
+    HRESULT
+    pbc IBindCtx*
+    pmkToLeft IMoniker*
+    pszDisplayName LPOLESTR
+    pchEaten ULONG*
+    ppmkOut IMoniker**
+
+  func IsSystemMoniker
+    HRESULT
+    pdwMksys MKSYS*
+
+  enum MKSYS DWORD display=DWORD
+    MKSYS_NONE             0
+    MKSYS_GENERICCOMPOSITE 1
+    MKSYS_FILEMONIKER      2
+    MKSYS_ANTIMONIKER      3
+    MKSYS_ITEMMONIKER      4
+    MKSYS_POINTERMONIKER   5
+    MKSYS_CLASSMONIKER     7
+    MKSYS_OBJREFMONIKER    8
+    MKSYS_SESSIONMONIKER   9
+    MKSYS_LUAMONIKER       10
+
+  pointer MKSYS* MKSYS display=DWORD*
+
+

@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IRowsetAsynch base=IUnknown id={0c733a0f-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func RatioFinished
+    [OLEDB_HRESULT]
+    pulDenominator DBCOUNTITEM*
+    pulNumerator DBCOUNTITEM*
+    pcRows DBCOUNTITEM*
+    pfNewRows BOOL*
+
+  func Stop
+    [OLEDB_HRESULT]
+
+

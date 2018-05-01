@@ -1,0 +1,279 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+include Headers\shell.h.txt
+
+ingterface IUnknown id={00000000-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func QueryInterface
+    HRESULT
+    riid REFIID
+    ppvObject void** interfaceId=riid
+
+  func AddRef
+    ULONG
+
+  func Release
+    ULONG
+
+  interface ITypeComp
+
+  interface ITypeLib
+
+  alias MEMBERID DISPID
+
+  pointer MEMBERID* MEMBERID
+
+  alias HREFTYPE DWORD
+
+  pointer HREFTYPE* HREFTYPE
+
+  flag [IDLFLAG] USHORT display=USHORT
+    IDLFLAG_NONE    0
+    IDLFLAG_FIN     0x1
+    IDLFLAG_FOUT    0x2
+    IDLFLAG_FLCID   0x4
+    IDLFLAG_FRETVAL 0x8
+
+  struct IDLDESC
+  dwReserved ULONG_PTR
+  wIDLFlags [IDLFLAG]
+
+  pointer IDLDESC* IDLDESC
+
+  struct PARAMDESCEX
+  cBytes ULONG
+  varDefaultValue VARIANTARG
+
+  pointer LPPARAMDESCEX PARAMDESCEX
+
+  struct PARAMDESC
+  pparamdescex LPPARAMDESCEX
+  wParamFlags USHORT
+
+  union [ELEMDESC_u] display=union
+  idldesc IDLDESC
+  paramdesc PARAMDESC
+
+  union [TYPEDESC_u] display=union
+  lptdesc LPVOID display=TYPEDESC*
+  lpadesc LPVOID display=ARRAYDESC*
+  hreftype HREFTYPE
+
+  struct TYPEDESC
+   [TYPEDESC_u]
+  vt VARTYPE
+
+  pointer TYPEDESC* TYPEDESC
+
+  struct ELEMDESC
+  tdesc TYPEDESC
+   [ELEMDESC_u]
+
+  pointer ELEMDESC* ELEMDESC
+
+  enum FUNCKIND UINT
+    FUNC_VIRTUAL     0
+    FUNC_PUREVIRTUAL 1
+    FUNC_NONVIRTUAL  2
+    FUNC_STATIC      3
+    FUNC_DISPATCH    4
+
+  enum INVOKEKIND UINT
+    INVOKE_FUNC           1
+    INVOKE_PROPERTYGET    2
+    INVOKE_PROPERTYPUT    4
+    INVOKE_PROPERTYPUTREF 8
+
+  flag FUNCFLAGS WORD display=WORD
+    FUNCFLAG_FRESTRICTED       0x1
+    FUNCFLAG_FSOURCE           0x2
+    FUNCFLAG_FBINDABLE         0x4
+    FUNCFLAG_FREQUESTEDIT      0x8
+    FUNCFLAG_FDISPLAYBIND      0x10
+    FUNCFLAG_FDEFAULTBIND      0x20
+    FUNCFLAG_FHIDDEN           0x40
+    FUNCFLAG_FUSESGETLASTERROR 0x80
+    FUNCFLAG_FDEFAULTCOLLELEM  0x100
+    FUNCFLAG_FUIDEFAULT        0x200
+    FUNCFLAG_FNONBROWSABLE     0x400
+    FUNCFLAG_FREPLACEABLE      0x800
+    FUNCFLAG_FIMMEDIATEBIND    0x1000
+
+  struct FUNCDESC
+  memid MEMBERID
+  lprgscode SCODE*
+  lprgelemdescParam ELEMDESC*
+  funckind FUNCKIND
+  invkind INVOKEKIND
+  callconv CALLCONV
+  cParams SHORT
+  cParamsOpt SHORT
+  oVft SHORT
+  cScodes SHORT
+  elemdescFunc ELEMDESC
+  wFuncFlags FUNCFLAGS
+
+  pointer FUNCDESC* FUNCDESC
+
+  pointer FUNCDESC** FUNCDESC*
+
+  union [VARDESC_u] display=union
+  oInst ULONG
+  lpvarValue VARIANT*
+
+  enum VARKIND UINT
+    VAR_PERINSTANCE 0
+    VAR_STATIC      1
+    VAR_CONST       2
+    VAR_DISPATCH    3
+
+  flag VARFLAGS WORD display=WORD
+    VARFLAG_FREADONLY        0x1
+    VARFLAG_FSOURCE          0x2
+    VARFLAG_FBINDABLE        0x4
+    VARFLAG_FREQUESTEDIT     0x8
+    VARFLAG_FDISPLAYBIND     0x10
+    VARFLAG_FDEFAULTBIND     0x20
+    VARFLAG_FHIDDEN          0x40
+    VARFLAG_FRESTRICTED      0x80
+    VARFLAG_FDEFAULTCOLLELEM 0x100
+    VARFLAG_FUIDEFAULT       0x200
+    VARFLAG_FNONBROWSABLE    0x400
+    VARFLAG_FREPLACEABLE     0x800
+    VARFLAG_FIMMEDIATEBIND   0x1000
+
+  struct VARDESC
+  memid MEMBERID
+  lpstrSchema LPOLESTR
+   [VARDESC_u]
+  elemdescVar ELEMDESC
+  wVarFlags VARFLAGS
+  varkind VARKIND
+
+  pointer VARDESC* VARDESC
+
+  pointer VARDESC** VARDESC*
+
+  enum TYPEKIND UINT
+    TKIND_ENUM      0
+    TKIND_RECORD    1
+    TKIND_MODULE    2
+    TKIND_INTERFACE 3
+    TKIND_DISPATCH  4
+    TKIND_COCLASS   5
+    TKIND_ALIAS     6
+    TKIND_UNION     7
+
+  pointer TYPEKIND* TYPEKIND
+
+  enum CHANGEKIND UINT
+    CHANGEKIND_ADDMEMBER        0
+    CHANGEKIND_DELETEMEMBER     1
+    CHANGEKIND_SETNAMES         2
+    CHANGEKIND_SETDOCUMENTATION 3
+    CHANGEKIND_GENERAL          4
+    CHANGEKIND_INVALIDATE       5
+    CHANGEKIND_CHANGEFAILED     6
+
+  enum DESCKIND UINT
+    DESCKIND_NONE           0
+    DESCKIND_FUNCDESC       1
+    DESCKIND_VARDESC        2
+    DESCKIND_TYPECOMP       3
+    DESCKIND_IMPLICITAPPOBJ 4
+
+  pointer DESCKIND* DESCKIND
+
+  enum SYSKIND UINT
+    SYS_WIN16 0
+    SYS_WIN32 1
+    SYS_MAC   2
+    SYS_WIN64 3
+
+  flag LIBFLAGS WORD display=WORD
+    LIBFLAG_FRESTRICTED   0x1
+    LIBFLAG_FCONTROL      0x2
+    LIBFLAG_FHIDDEN       0x4
+    LIBFLAG_FHASDISKIMAGE 0x8
+
+  struct TLIBATTR
+  guid GUID
+  lcid LCID
+  syskind SYSKIND
+  wMajorVerNum WORD
+  wMinorVerNum WORD
+  wLibFlags LIBFLAGS
+
+  pointer TLIBATTR* TLIBATTR
+
+  pointer TLIBATTR** TLIBATTR*
+
+  struct DISPPARAMS
+  rgvarg VARIANTARG* count=cArgs
+  rgdispidNamedArgs DISPID* count=cNamedArgs
+  cArgs UINT
+  cNamedArgs UINT
+
+  pointer DISPPARAMS* DISPPARAMS
+
+  struct EXCEPINFO
+  wCode WORD
+  wReserved WORD
+  bstrSource BSTR
+  bstrDescription BSTR
+  bstrHelpFile BSTR
+  dwHelpContext DWORD
+  pvReserved PVOID
+  pfnDeferredFillIn LPVOID display="HRESULT (__stdcall *)(struct tagEXCEPINFO *)"
+  scode SCODE
+
+  pointer EXCEPINFO* EXCEPINFO
+
+  flag TYPEFLAGS WORD display=WORD
+    TYPEFLAG_FAPPOBJECT     0x1
+    TYPEFLAG_FCANCREATE     0x2
+    TYPEFLAG_FLICENSED      0x4
+    TYPEFLAG_FPREDECLID     0x8
+    TYPEFLAG_FHIDDEN        0x10
+    TYPEFLAG_FCONTROL       0x20
+    TYPEFLAG_FDUAL          0x40
+    TYPEFLAG_FNONEXTENSIBLE 0x80
+    TYPEFLAG_FOLEAUTOMATION 0x100
+    TYPEFLAG_FRESTRICTED    0x200
+    TYPEFLAG_FAGGREGATABLE  0x400
+    TYPEFLAG_FREPLACEABLE   0x800
+    TYPEFLAG_FDISPATCHABLE  0x1000
+    TYPEFLAG_FREVERSEBIND   0x2000
+    TYPEFLAG_FPROXY         0x4000
+
+  struct TYPEATTR
+  guid GUID
+  lcid LCID
+  dwReserved DWORD
+  memidConstructor MEMBERID
+  memidDestructor MEMBERID
+  lpstrSchema LPOLESTR
+  cbSizeInstance ULONG
+  typekind TYPEKIND
+  cFuncs WORD
+  cVars WORD
+  cImplTypes WORD
+  cbSizeVft WORD
+  cbAlignment WORD
+  wTypeFlags TYPEFLAGS
+  wMajorVerNum WORD
+  wMinorVerNum WORD
+  tdescAlias TYPEDESC
+  idldescType IDLDESC
+
+  pointer TYPEATTR* TYPEATTR
+
+  pointer TYPEATTR** TYPEATTR*
+
+  union BINDPTR
+  lpfuncdesc FUNCDESC*
+  lpvardesc VARDESC*
+  lptcomp ITypeComp*
+
+  pointer BINDPTR* BINDPTR
+
+

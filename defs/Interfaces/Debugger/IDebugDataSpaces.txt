@@ -1,0 +1,151 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDebugDataSpaces base=IUnknown id={88f7dfab-3ea7-4c3a-aefb-c4e8106173aa} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func ReadVirtual
+    HRESULT
+    Offset ULONG64
+    Buffer PVOID
+    BufferSize ULONG
+    BytesRead PULONG
+
+  func WriteVirtual
+    HRESULT
+    Offset ULONG64
+    Buffer PVOID
+    BufferSize ULONG
+    BytesWritten PULONG
+
+  func SearchVirtual
+    HRESULT
+    Offset ULONG64
+    Length ULONG64
+    Pattern PVOID
+    PatternSize ULONG
+    PatternGranularity ULONG
+    MatchOffset PULONG64
+
+  func ReadVirtualUncached
+    HRESULT
+    Offset ULONG64
+    Buffer PVOID
+    BufferSize ULONG
+    BytesRead PULONG
+
+  func WriteVirtualUncached
+    HRESULT
+    Offset ULONG64
+    Buffer PVOID
+    BufferSize ULONG
+    BytesWritten PULONG
+
+  func ReadPointersVirtual
+    HRESULT
+    Count ULONG
+    Offset ULONG64
+    Ptrs PULONG64 postCount=Count
+
+  func WritePointersVirtual
+    HRESULT
+    Count ULONG
+    Offset ULONG64
+    Ptrs PULONG64 count=Count
+
+  func ReadPhysical
+    HRESULT
+    Offset ULONG64
+    Buffer PVOID
+    BufferSize ULONG
+    BytesRead PULONG
+
+  func WritePhysical
+    HRESULT
+    Offset ULONG64
+    Buffer PVOID
+    BufferSize ULONG
+    BytesWritten PULONG
+
+  func ReadControl
+    HRESULT
+    Processor ULONG
+    Offset ULONG64
+    Buffer PVOID
+    BufferSize ULONG
+    BytesRead PULONG
+
+  func WriteControl
+    HRESULT
+    Processor ULONG
+    Offset ULONG64
+    Buffer PVOID
+    BufferSize ULONG
+    BytesWritten PULONG
+
+  func ReadIo
+    HRESULT
+    InterfaceType ULONG
+    BusNumber ULONG
+    AddressSpace ULONG
+    Offset ULONG64
+    Buffer PVOID
+    BufferSize ULONG
+    BytesRead PULONG
+
+  func WriteIo
+    HRESULT
+    InterfaceType ULONG
+    BusNumber ULONG
+    AddressSpace ULONG
+    Offset ULONG64
+    Buffer PVOID
+    BufferSize ULONG
+    BytesWritten PULONG
+
+  func ReadMsr
+    HRESULT
+    Msr ULONG
+    Value PULONG64
+
+  func WriteMsr
+    HRESULT
+    Msr ULONG
+    Value ULONG64
+
+  func ReadBusData
+    HRESULT
+    BusDataType ULONG
+    BusNumber ULONG
+    SlotNumber ULONG
+    Offset ULONG
+    Buffer PVOID
+    BufferSize ULONG
+    BytesRead PULONG
+
+  func WriteBusData
+    HRESULT
+    BusDataType ULONG
+    BusNumber ULONG
+    SlotNumber ULONG
+    Offset ULONG
+    Buffer PVOID
+    BufferSize ULONG
+    BytesWritten PULONG
+
+  func CheckLowMemory
+    HRESULT
+
+  func ReadDebuggerData
+    HRESULT
+    Index [DEBUG_DATA_INDEX]
+    Buffer PVOID postLength=DataSize
+    BufferSize ULONG
+    DataSize PULONG
+
+  func ReadProcessorSystemData
+    HRESULT
+    Processor ULONG
+    Index [DEBUG_DATA_INDEX_PROCESSOR]
+    Buffer PVOID postLength=DataSize
+    BufferSize ULONG
+    DataSize PULONG
+
+

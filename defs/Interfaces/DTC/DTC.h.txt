@@ -1,0 +1,59 @@
+include Headers\windows.h.txt
+
+header
+interface IKernelTransaction
+
+interface ITmNodeName
+
+interface ITransaction
+
+interface ITransaction2
+
+interface ITransactionCloner
+
+interface ITransactionDispenser
+
+interface ITransactionOptions
+
+interface ITransactionOutcomeEvents
+
+array "byte [16]" base=byte count=16
+
+array "char [40]" base=char count=40
+
+struct BOID
+  rgb "byte [16]"
+
+pointer BOID* BOID
+
+alias XACTUOW BOID
+
+pointer XACTUOW* XACTUOW
+
+flag XACTTC DWORD display=DWORD
+  XACTTC_NONE           0
+  XACTTC_SYNC_PHASEONE  1
+  XACTTC_SYNC_PHASETWO  2
+  XACTTC_ASYNC_PHASEONE 4
+
+flag XACTRM DWORD display=DWORD
+  XACTRM_OPTIMISTICLASTWINS 1
+  XACTRM_NOREADONLYPREPARES 2
+
+struct XACTTRANSINFO
+  uow XACTUOW
+  isoLevel ISOLEVEL
+  isoFlags ISOFLAG
+  grfTCSupported XACTTC
+  grfRMSupported XACTRM
+  grfTCSupportedRetaining DWORD
+  grfRMSupportedRetaining DWORD
+
+pointer XACTTRANSINFO* XACTTRANSINFO
+
+struct XACTOPT
+  ulTimeout ULONG
+  szDescription "char [40]"
+
+pointer XACTOPT* XACTOPT
+

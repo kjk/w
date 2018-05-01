@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDVRGB219 base=IUnknown id={58473A19-2BC8-4663-8012-25F81BABDDD1} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetRGB219
+    HRESULT
+    bState BOOL
+
+

@@ -1,0 +1,32 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICColorContext base=IUnknown id={3C613A02-34B2-44ea-9A7C-45AEA9C6FD6D} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func InitializeFromFilename
+    [WIC_HRESULT]
+    wzFilename LPCWSTR
+
+  func InitializeFromMemory
+    [WIC_HRESULT]
+    pbBuffer "const BYTE*"
+    cbBufferSize UINT
+
+  func InitializeFromExifColorSpace
+    [WIC_HRESULT]
+    value UINT
+
+  func GetType
+    [WIC_HRESULT]
+    pType WICColorContextType*
+
+  func GetProfileBytes
+    [WIC_HRESULT]
+    cbBuffer UINT
+    pbBuffer BYTE*
+    pcbActual UINT*
+
+  func GetExifColorSpace
+    [WIC_HRESULT]
+    pValue UINT*
+
+

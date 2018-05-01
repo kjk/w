@@ -1,0 +1,64 @@
+include Interfaces\IDispatch.txt
+
+ingterface IShellWindows base=IDispatch id={85CB6900-4D95-11CF-960C-0080C7F4EE85} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func get_Count
+    HRESULT
+    Count long*
+
+  func Item
+    HRESULT
+    index VARIANT
+    Folder IDispatch**
+
+  func _NewEnum
+    HRESULT
+    ppunk IUnknown**
+
+  func Register
+    HRESULT
+    pid IDispatch*
+    hwnd long
+    swClass int
+    plCookie long*
+
+  func RegisterPending
+    HRESULT
+    lThreadId long
+    pvarloc VARIANT*
+    pvarlocRoot VARIANT*
+    swClass int
+    plCookie long*
+
+  func Revoke
+    HRESULT
+    lCookie long
+
+  func OnNavigate
+    HRESULT
+    lCookie long
+    pvarLoc VARIANT*
+
+  func OnActivated
+    HRESULT
+    lCookie long
+    fActive VARIANT_BOOL
+
+  func FindWindowSW
+    HRESULT
+    pvarLoc VARIANT*
+    pvarLocRoot VARIANT*
+    swClass int
+    phwnd long*
+    swfwOptions int
+    ppdispOut IDispatch**
+
+  func OnCreated
+    HRESULT
+    lCookie long
+    punk IUnknown*
+
+  func ProcessAttachDetach
+    HRESULT
+    fAttach VARIANT_BOOL
+
+

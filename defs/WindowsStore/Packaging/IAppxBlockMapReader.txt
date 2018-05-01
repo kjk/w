@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxBlockMapReader base=IUnknown id={5efec991-bca3-42d1-9ec2-e92d609ec22a} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetFile
+    HRESULT
+    filename LPCWSTR
+    file IAppxBlockMapFile**
+
+  func GetFiles
+    HRESULT
+    enumerator IAppxBlockMapFilesEnumerator**
+
+  func GetHashMethod
+    HRESULT
+    hashMethod IUri**
+
+  func GetStream
+    HRESULT
+    blockMapStream IStream**
+
+

@@ -1,0 +1,1800 @@
+include Headers\windows.h.txt
+include Headers\registry.h.txt
+include Headers\shell.h.txt
+include Headers\internet.h.txt
+
+dll ShLwApi.dll callingConvention=STDCALL errorFunc=GetLastError errorIsReturnValue onlineHelp=MSDN
+category "Windows Environment Development/Windows Shell"
+category "Windows Environment Development/Windows Shell/Shell Lightweight Utility/Color Palette"
+category "Windows Environment Development/Windows Shell/Shell Lightweight Utility/Path"
+category "Windows Environment Development/Windows Shell/Shell Lightweight Utility/Registry"
+category "Windows Environment Development/Windows Shell/Shell Lightweight Utility/String"
+category "Windows Environment Development/Windows Shell/Shell Lightweight Utility/Miscellaneous"
+category "Windows Environment Development/Windows Shell/Undocumented"
+category "Undocumented (UnDoc'd)" onlineHelp=UnDoc'd-shlwapi
+alias HUSKEY HANDLE
+
+pointer PHUSKEY HUSKEY
+
+pointer "const LPCTSTR*" LPCTSTR
+
+alias LSTATUS [ERROR_CODE]
+
+interface IConnectionPoint
+
+interface IObjectWithSite
+
+interface IXMLDOMNode
+
+interface IPropertyBag
+
+enum SHREGENUM_FLAGS UINT
+  SHREGENUM_DEFAULT 0x00000000
+  SHREGENUM_HKCU    0x00000001
+  SHREGENUM_HKLM    0x00000010
+  SHREGENUM_BOTH    0x00000011
+
+enum SHREGDEL_FLAGS UINT
+  SHREGDEL_DEFAULT 0x00000000
+  SHREGDEL_HKCU    0x00000001
+  SHREGDEL_HKLM    0x00000010
+  SHREGDEL_BOTH    0x00000011
+
+flag [ShRegSetFlags] UINT display=DWORD
+  SHREGSET_HKCU       0x00000001
+  SHREGSET_FORCE_HKCU 0x00000002
+  SHREGSET_HKLM       0x00000004
+  SHREGSET_DEFAULT    0x00000006
+  SHREGSET_FORCE_HKLM 0x00000008
+
+flag SHCT_FLAGS DWORD display=DWORD
+  CTF_INSIST             0x00000001
+  CTF_THREAD_REF         0x00000002
+  CTF_PROCESS_REF        0x00000004
+  CTF_COINIT_STA         0x00000008
+  CTF_COINIT             0x00000008
+  CTF_FREELIBANDEXIT     0x00000010
+  CTF_REF_COUNTED        0x00000020
+  CTF_WAIT_ALLOWCOM      0x00000040
+  CTF_UNUSED             0x00000080
+  CTF_INHERITWOW64       0x00000100
+  CTF_WAIT_NO_REENTRANCY 0x00000200
+  CTF_KEYBOARD_LOCALE    0x00000400
+  CTF_OLEINITIALIZE      0x00000800
+  CTF_COINIT_MTA         0x00001000
+  CTF_NOADDREFLIB        0x00002000
+
+flag STIF_FLAGS UINT display=int
+  STIF_DEFAULT     0x00000000
+  STIF_SUPPORT_HEX 0x00000001
+
+flag SFBS_FLAGS UINT display=int
+  SFBS_FLAGS_ROUND_TO_NEAREST_DISPLAYED_DIGIT    0x0001
+  SFBS_FLAGS_TRUNCATE_UNDISPLAYED_DECIMAL_DIGITS 0x0002
+
+flag SRRF UINT display=int
+  SRRF_RM_ANY           0x00000000
+  SRRF_RT_REG_NONE      0x00000001
+  SRRF_RT_REG_SZ        0x00000002
+  SRRF_RT_REG_EXPAND_SZ 0x00000004
+  SRRF_RT_REG_BINARY    0x00000008
+  SRRF_RT_REG_DWORD     0x00000010
+  SRRF_RT_DWORD         0x00000018
+  SRRF_RT_REG_MULTI_SZ  0x00000020
+  SRRF_RT_REG_QWORD     0x00000040
+  SRRF_RT_QWORD         0x00000048
+  SRRF_RT_ANY           0x0000ffff
+  SRRF_RM_NORMAL        0x00010000
+  SRRF_RM_SAFE          0x00020000
+  SRRF_RM_SAFENETWORK   0x00040000
+  SRRF_NOEXPAND         0x10000000
+  SRRF_ZEROONFAILURE    0x20000000
+  SRRF_NOVIRT           0x40000000
+
+struct QITAB
+  piid "const IID*"
+  dwOffset int
+
+pointer LPCQITAB QITAB
+
+enum URLIS UINT
+  URLIS_URL       0
+  URLIS_OPAQUE    1
+  URLIS_NOHISTORY 2
+  URLIS_FILEURL   3
+  URLIS_APPLIABLE 4
+  URLIS_DIRECTORY 5
+  URLIS_HASQUERY  6
+
+struct PARSEDURL
+  cbSize DWORD
+  pszProtocol LPCTSTR
+  cchProtocol UINT
+  pszSuffix LPCTSTR
+  cchSuffix UINT
+  nScheme URL_SCHEME
+
+pointer PARSEDURL* PARSEDURL
+
+enum SHGLOBALCOUNTER UINT
+  GLOBALCOUNTER_SEARCHMANAGER                          0
+  GLOBALCOUNTER_SEARCHOPTIONS                          1
+  GLOBALCOUNTER_FOLDERSETTINGSCHANGE                   2
+  GLOBALCOUNTER_RATINGS                                3
+  GLOBALCOUNTER_APPROVEDSITES                          4
+  GLOBALCOUNTER_RESTRICTIONS                           5
+  GLOBALCOUNTER_SHELLSETTINGSCHANGED                   6
+  GLOBALCOUNTER_SYSTEMPIDLCHANGE                       7
+  GLOBALCOUNTER_OVERLAYMANAGER                         8
+  GLOBALCOUNTER_QUERYASSOCIATIONS                      9
+  GLOBALCOUNTER_IESESSIONS                             10
+  GLOBALCOUNTER_IEONLY_SESSIONS                        11
+  GLOBALCOUNTER_APPLICATION_DESTINATIONS               12
+  GLOBALCOUNTER_CSCSYNCINPROGRESS                      13
+  GLOBALCOUNTER_BITBUCKETNUMDELETERS                   14
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_SHARES               15
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_A              16
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_B              17
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_C              18
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_D              19
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_E              20
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_F              21
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_G              22
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_H              23
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_I              24
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_J              25
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_K              26
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_L              27
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_M              28
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_N              29
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_O              30
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_P              31
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_Q              32
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_R              33
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_S              34
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_T              35
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_U              36
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_V              37
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_W              38
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_X              39
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_Y              40
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_Z              41
+  GLOBALCOUNTER_RECYCLEDIRTYCOUNT_SERVERDRIVE          42
+  GLOBALCOUNTER_RECYCLEGLOBALDIRTYCOUNT                43
+  GLOBALCOUNTER_RECYCLEBINENUM                         44
+  GLOBALCOUNTER_RECYCLEBINCORRUPTED                    45
+  GLOBALCOUNTER_RATINGS_STATECOUNTER                   46
+  GLOBALCOUNTER_PRIVATE_PROFILE_CACHE                  47
+  GLOBALCOUNTER_INTERNETTOOLBAR_LAYOUT                 48
+  GLOBALCOUNTER_FOLDERDEFINITION_CACHE                 49
+  GLOBALCOUNTER_COMMONPLACES_LIST_CACHE                50
+  GLOBALCOUNTER_PRIVATE_PROFILE_CACHE_MACHINEWIDE      51
+  GLOBALCOUNTER_ASSOCCHANGED                           52
+  GLOBALCOUNTER_APP_ITEMS_STATE_STORE_CACHE            53
+  GLOBALCOUNTER_SETTINGSYNC_ENABLED                    54
+  GLOBALCOUNTER_APPSFOLDER_FILETYPEASSOCIATION_COUNTER 55
+  GLOBALCOUNTER_USERINFOCHANGED                        56
+
+alias "const SHGLOBALCOUNTER" SHGLOBALCOUNTER
+
+flag [URL_APPLY_FLAGS] DWORD display=DWORD
+  URL_APPLY_DEFAULT     0x00000001
+  URL_APPLY_GUESSSCHEME 0x00000002
+  URL_APPLY_GUESSFILE   0x00000004
+  URL_APPLY_FORCEAPPLY  0x00000008
+
+func SHAllocShared ordinal=7
+  success NotEqual=0
+  HANDLE
+  pvData "const void*"
+  dwSize DWORD
+  dwDestinationProcessId DWORD
+
+func ShellMessageBox bothCharset ordinalW=388 varArgs
+  success NotEqual=0
+  [MessageBoxResult]
+  hInst HINSTANCE
+  hWnd HWND
+  pszMsg LPCTSTR
+  pszTitle LPCTSTR
+  fuStyle [MessageBoxType]
+
+func SHGetViewStatePropertyBag ordinal=515
+  HRESULT
+  pidl PCIDLIST_ABSOLUTE
+  pszBagName LPCWSTR
+  dwFlags DWORD
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHLockShared ordinal=8
+  success NotEqual=0
+  LPVOID
+  hData HANDLE*
+  dwOtherProcId DWORD
+
+func SHUnlockShared ordinal=9
+  BOOL
+  pvData void*
+
+func SHFreeShared ordinal=10
+  BOOL
+  hData HANDLE
+  dwSourceProcId DWORD
+
+func StrStrNW
+  LPCWSTR
+  lpFirst LPCWSTR
+  lpSrch LPCWSTR
+  cchMax UINT
+
+func StrStrNIW
+  LPCWSTR
+  lpFirst LPCWSTR
+  lpSrch LPCWSTR
+  cchMax UINT
+
+func ColorAdjustLuma
+  success NotEqual=0
+  COLORREF
+  clrRGB COLORREF
+  n int
+  fScale BOOL
+
+func ColorHLSToRGB
+  success NotEqual=0
+  COLORREF
+  wHue WORD
+  wLuminance WORD
+  wSaturation WORD
+
+func ColorRGBToHLS
+  void
+  clrRGB COLORREF
+  pwHue WORD*
+  pwLuminance WORD*
+  pwSaturation WORD*
+
+func SHCreateShellPalette
+  success NotEqual=0
+  HPALETTE
+  hdc HDC
+
+func SHGetInverseCMAP
+  HRESULT
+  pbMap BYTE*
+  cbMap ULONG
+
+func PathAddBackslash bothCharset
+  success NotEqual=0
+  LPTSTR
+  lpszPath LPTSTR
+
+func PathAddExtension bothCharset
+  BOOL
+  pszPath LPTSTR
+  pszExtension LPCTSTR
+
+func PathAppend bothCharset
+  BOOL
+  pszPath LPTSTR
+  pszMore LPCTSTR
+
+func PathBuildRoot bothCharset
+  success NotEqual=0
+  LPTSTR
+  szRoot LPTSTR outputOnly
+  iDrive int
+
+func PathCanonicalize bothCharset
+  BOOL
+  lpszDst LPTSTR outputOnly
+  lpszSrc LPCTSTR
+
+func PathCombine bothCharset
+  success NotEqual=0
+  LPTSTR
+  lpszDest LPTSTR outputOnly
+  lpszDir LPCTSTR
+  lpszFile LPCTSTR
+
+func PathCommonPrefix bothCharset
+  int
+  pszFile1 LPCTSTR
+  pszFile2 LPCTSTR
+  pszPath LPTSTR
+
+func PathCompactPath bothCharset
+  BOOL
+  hDC HDC
+  lpszPath LPTSTR
+  dx UINT
+
+func PathCompactPathEx bothCharset
+  BOOL
+  pszOut LPTSTR outputOnly
+  pszSrc LPCTSTR
+  cchMax UINT
+  dwFlags DWORD
+
+func PathCreateFromUrl bothCharset
+  HRESULT
+  pszUrl PCTSTR
+  pszPath PTSTR
+  pcchPath DWORD*
+  dwFlags DWORD
+
+func PathCreateFromUrlAlloc
+  HRESULT
+  pszIn PCWSTR
+  ppszOut PWSTR*
+  dwFlags DWORD
+
+func PathFileExists bothCharset
+  BOOL
+  pszPath LPCTSTR
+
+func PathFindExtension bothCharset
+  success NotEqual=0
+  PTSTR
+  pszPath PTSTR
+
+func PathFindFileName bothCharset
+  success NotEqual=0
+  PTSTR
+  pPath PTSTR
+
+func PathFindNextComponent bothCharset
+  success NotEqual=0
+  PTSTR
+  pszPath PTSTR
+
+func PathFindOnPath bothCharset
+  BOOL
+  pszFile LPTSTR
+  ppszOtherDirs LPCTSTR*
+
+func PathFindSuffixArray bothCharset
+  success NotEqual=0
+  LPCTSTR
+  pszPath LPCTSTR
+  apszSuffix "const LPCTSTR*"
+  iArraySize int
+
+func PathGetArgs bothCharset
+  success NotEqual=0
+  PTSTR
+  pszPath PTSTR
+
+func PathGetCharType bothCharset
+  success NotEqual=0
+  UINT
+  ch TCHAR
+
+func PathGetDriveNumber bothCharset
+  success NotEqual=0
+  int
+  lpsz LPCTSTR
+
+func PathIsContentType bothCharset
+  BOOL
+  pszPath LPCTSTR
+  pszContentType LPCTSTR
+
+func PathIsDirectory bothCharset
+  BOOL
+  pszPath LPCTSTR
+
+func PathIsDirectoryEmpty bothCharset
+  BOOL
+  pszPath LPCTSTR
+
+func PathIsFileSpec bothCharset
+  BOOL
+  lpszPath LPCTSTR
+
+func PathIsHTMLFile bothCharset
+  BOOL
+  pszFile LPCTSTR
+
+func PathIsLFNFileSpec bothCharset
+  BOOL
+  pszName LPCTSTR
+
+func PathIsNetworkPath bothCharset
+  BOOL
+  pszPath LPCTSTR
+
+func PathIsPrefix bothCharset
+  BOOL
+  pszPrefix LPCTSTR
+  pszPath LPCTSTR
+
+func PathIsRelative bothCharset
+  BOOL
+  lpszPath LPCTSTR
+
+func PathIsRoot bothCharset
+  BOOL
+  pPath LPCTSTR
+
+func PathIsSameRoot bothCharset
+  BOOL
+  pszPath1 LPCTSTR
+  pszPath2 LPCTSTR
+
+func PathIsSystemFolder bothCharset
+  BOOL
+  pszPath LPCTSTR
+  dwAttrb DWORD
+
+func PathIsUNC bothCharset
+  BOOL
+  pszPath LPCTSTR
+
+func PathIsUNCServer bothCharset
+  BOOL
+  pszPath LPCTSTR
+
+func PathIsUNCServerShare bothCharset
+  BOOL
+  pszPath LPCTSTR
+
+func PathIsURL bothCharset
+  BOOL
+  pszPath LPCTSTR
+
+func PathMakePretty bothCharset
+  BOOL
+  lpPath LPTSTR
+
+func PathMakeSystemFolder bothCharset
+  BOOL
+  pszPath LPTSTR
+
+func PathMatchSpec bothCharset
+  BOOL
+  pszFile LPCSTR
+  pszSpec LPCSTR
+
+func PathMatchSpecEx bothCharset
+  HRESULT
+  pszFile LPCTSTR
+  pszSpec LPCTSTR
+  dwFlags DWORD
+
+func PathParseIconLocation bothCharset
+  int
+  pszIconFile LPTSTR
+
+func PathQuoteSpaces bothCharset
+  BOOL
+  lpsz LPTSTR
+
+func PathRelativePathTo bothCharset
+  BOOL
+  pszPath LPTSTR
+  pszFrom LPCTSTR
+  dwAttrFrom DWORD
+  pszTo LPCTSTR
+  dwAttrTo DWORD
+
+func PathRemoveArgs bothCharset
+  void
+  pszPath LPTSTR
+
+func PathRemoveBackslash bothCharset
+  success NotEqual=0
+  LPTSTR
+  lpszPath LPTSTR
+
+func PathRemoveBlanks bothCharset
+  void
+  lpszString LPTSTR
+
+func PathRemoveExtension bothCharset
+  void
+  pszPath LPTSTR
+
+func PathRemoveFileSpec bothCharset
+  BOOL
+  pszPath LPTSTR
+
+func PathRenameExtension bothCharset
+  BOOL
+  pszPath LPTSTR
+  pszExt LPCTSTR
+
+func PathSearchAndQualify bothCharset
+  BOOL
+  pcszPath LPCTSTR
+  pszFullyQualifiedPath LPTSTR
+  cchFullyQualifiedPath UINT
+
+func PathSetDlgItemPath bothCharset
+  void
+  hDlg HWND
+  id int
+  pszPath LPCSTR
+
+func PathSkipRoot bothCharset
+  success NotEqual=0
+  PTSTR
+  pszPath PTSTR
+
+func PathStripPath bothCharset
+  void
+  pszPath LPTSTR
+
+func PathStripToRoot bothCharset
+  BOOL
+  szRoot LPTSTR
+
+func PathUndecorate bothCharset
+  void
+  pszPath LPTSTR
+
+func PathUnExpandEnvStrings bothCharset
+  BOOL
+  pszPath LPCTSTR
+  pszBuf LPTSTR outputOnly
+  cchBuf UINT
+
+func PathUnmakeSystemFolder bothCharset
+  BOOL
+  pszPath LPTSTR
+
+func PathUnquoteSpaces bothCharset
+  void
+  lpsz LPTSTR
+
+func SHSkipJunction
+  BOOL
+  pbc IBindCtx*
+  pclsid "const CLSID*"
+
+func UrlApplyScheme bothCharset
+  HRESULT
+  pszIn PCTSTR
+  pszOut PTSTR outputOnly
+  pcchOut DWORD*
+  dwFlags [URL_APPLY_FLAGS]
+
+func UrlCanonicalize bothCharset
+  HRESULT
+  pszUrl PCTSTR
+  pszCanonicalized PTSTR
+  pcchCanonicalized DWORD*
+  dwFlags DWORD
+
+func UrlCombine bothCharset
+  HRESULT
+  pszBase PCTSTR
+  pszRelative PCTSTR
+  pszCombined PTSTR
+  pcchCombined DWORD*
+  dwFlags DWORD
+
+func UrlCompare bothCharset
+  success NotEqual=0
+  int
+  psz1 PCTSTR
+  psz2 PCTSTR
+  fIgnoreSlash BOOL
+
+func UrlCreateFromPath bothCharset
+  HRESULT
+  pszPath PCTSTR
+  pszUrl PTSTR
+  pcchUrl DWORD*
+  dwFlags DWORD
+
+func UrlEscape bothCharset
+  HRESULT
+  pszURL PCTSTR
+  pszEscaped PTSTR
+  pcchEscaped DWORD*
+  dwFlags DWORD
+
+func UrlEscapeSpaces
+  HRESULT
+  pszURL LPCTSTR
+  pszEscaped LPTSTR
+  pcchEscaped LPDWORD
+
+func UrlFixupW ordinal=462
+  HRESULT
+  pcszUrl PCWSTR
+  pszTranslatedUrl PWSTR
+  cchMax DWORD
+
+func UrlGetLocation bothCharset
+  success NotEqual=0
+  LPCTSTR
+  pszURL PCTSTR
+
+func UrlGetPart bothCharset
+  HRESULT
+  pszIn PCTSTR
+  pszOut PTSTR outputOnly
+  pcchOut DWORD*
+  dwPart DWORD
+  dwFlags DWORD
+
+func UrlHash bothCharset
+  HRESULT
+  pszURL PCTSTR
+  pbHash BYTE*
+  cbHash DWORD
+
+func UrlIs bothCharset
+  BOOL
+  pszUrl PCTSTR
+  UrlIs URLIS
+
+func UrlIsFileUrl bothCharset
+  BOOL
+  pszUrl LPCTSTR
+
+func UrlIsNoHistory bothCharset
+  BOOL
+  pszURL PCTSTR
+
+func UrlIsOpaque bothCharset
+  BOOL
+  pszURL PCTSTR
+
+func UrlUnescape bothCharset
+  HRESULT
+  pszURL PTSTR
+  pszUnescaped PTSTR
+  pcchUnescaped DWORD*
+  dwFlags DWORD
+
+func UrlUnescapeInPlace
+  HRESULT
+  pszURL LPTSTR
+  dwFlags DWORD
+
+func AssocCreate
+  HRESULT
+  clsid CLSID
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func AssocGetPerceivedType
+  HRESULT
+  pszExt PCWSTR
+  ptype PERCEIVED*
+  pflag PERCEIVEDFLAG*
+  ppszType PWSTR* outputOnly
+
+func AssocIsDangerous
+  BOOL
+  pszAssoc PCWSTR
+
+func AssocQueryKey bothCharset
+  HRESULT
+  flags ASSOCF
+  key ASSOCKEY
+  pszAssoc LPCTSTR
+  pszExtra LPCTSTR
+  phkeyOut HKEY*
+
+func AssocQueryString bothCharset
+  HRESULT
+  flags ASSOCF
+  str ASSOCSTR
+  pszAssoc LPCTSTR
+  pszExtra LPCTSTR
+  pszOut LPTSTR outputOnly
+  pcchOut DWORD*
+
+func AssocQueryStringByKey bothCharset
+  HRESULT
+  flags ASSOCF
+  str ASSOCSTR
+  hkAssoc HKEY
+  pszExtra LPCTSTR
+  pszOut LPTSTR outputOnly
+  pcchOut DWORD*
+
+func SHCopyKey bothCharset
+  LSTATUS
+  hkeySrc HKEY
+  pszSrcSubKey LPCTSTR
+  hkeyDest HKEY
+  fReserved DWORD
+
+func SHDeleteEmptyKey bothCharset
+  LSTATUS
+  hkey HKEY
+  pszSubKey LPCTSTR
+
+func SHDeleteKey bothCharset
+  LSTATUS
+  hkey HKEY
+  pszSubKey LPCTSTR
+
+func SHDeleteValue bothCharset
+  LSTATUS
+  hkey HKEY
+  pszSubKey LPCTSTR
+  pszValue LPCTSTR
+
+func SHEnumKeyEx bothCharset
+  LSTATUS
+  hkey HKEY
+  dwIndex DWORD
+  pszName LPTSTR outputOnly
+  pcchName LPDWORD
+
+func SHEnumValue bothCharset
+  LSTATUS
+  hkey HKEY
+  dwIndex DWORD
+  pszValueName LPTSTR
+  pcchValueName LPDWORD
+  pdwType [RegType*]
+  pvData LPVOID
+  pcbData LPDWORD
+
+func SHGetValue bothCharset
+  LSTATUS
+  hkey HKEY
+  pszSubKey LPCTSTR
+  pszValue LPCTSTR
+  pdwType [RegType*]
+  pvData LPVOID
+  pcbData LPDWORD
+
+func SHOpenRegStream bothCharset
+  success NotEqual=0
+  IStream*
+  hkey HKEY
+  pszSubkey LPCTSTR
+  pszValue LPCTSTR
+  grfMode [STGM_FLAGS]
+
+func SHOpenRegStream2 bothCharset
+  success NotEqual=0
+  IStream*
+  hkey HKEY
+  pszSubkey LPCTSTR
+  pszValue LPCTSTR
+  grfMode [STGM_FLAGS]
+
+func SHQueryInfoKey bothCharset
+  LSTATUS
+  hkey HKEY
+  pcSubKeys LPDWORD
+  pcchMaxSubKeyLen LPDWORD
+  pcValues LPDWORD
+  pcchMaxValueNameLen LPDWORD
+
+func SHQueryValueEx bothCharset
+  [ERROR_CODE]
+  hkey HKEY
+  pszValue LPCTSTR
+  pdwReserved LPDWORD
+  pdwType [RegType*]
+  pvData LPVOID
+  pcbData LPDWORD
+
+func SHRegCloseUSKey
+  LSTATUS
+  hUSKey HUSKEY
+
+func SHRegCreateUSKey bothCharset
+  LSTATUS
+  pszPath LPCTSTR
+  samDesired REGSAM
+  hRelativeUSKey HUSKEY
+  phNewUSKey PHUSKEY
+  dwFlags [ShRegSetFlags]
+
+func SHRegDeleteEmptyUSKey bothCharset
+  LSTATUS
+  hUSKey HUSKEY
+  pszValue LPCSTR
+  delRegFlags SHREGDEL_FLAGS
+
+func SHRegDeleteUSValue bothCharset
+  LSTATUS
+  hUSKey HUSKEY
+  pszValue LPCTSTR
+  delRegFlags SHREGDEL_FLAGS
+
+func SHRegDuplicateHKey
+  success NotEqual=0
+  HKEY
+  hkey HKEY
+
+func SHRegEnumUSKey bothCharset
+  LSTATUS
+  hUSKey HUSKEY
+  dwIndex DWORD
+  pszName LPTSTR
+  pcchName LPDWORD
+  enumRegFlags SHREGENUM_FLAGS
+
+func SHRegEnumUSValue bothCharset
+  LSTATUS
+  hUSKey HUSKEY
+  dwIndex DWORD
+  pszValueName LPTSTR
+  pcchValueNameLen LPDWORD
+  pdwType [RegType*]
+  pvData void*
+  pcbData LPDWORD
+  enumRegFlags SHREGENUM_FLAGS
+
+func SHRegGetBoolUSValue bothCharset
+  BOOL
+  pszSubKey LPCTSTR
+  pszValue LPCTSTR
+  fIgnoreHKCU BOOL
+  fDefault BOOL
+
+func SHRegGetIntW ordinal=280
+  int
+  hk HKEY
+  szKey LPCWSTR
+  nDefault int
+
+func SHRegGetPath bothCharset
+  LSTATUS
+  hkey HKEY
+  pszSubkey LPCTSTR
+  pszValue LPCTSTR
+  pszPath LPTSTR
+  dwFlags DWORD
+
+func SHRegGetUSValue bothCharset
+  LSTATUS
+  pszSubKey LPCTSTR
+  pszValue LPCTSTR
+  pdwType DWORD*
+  pvData void*
+  pcbData DWORD*
+  fIgnoreHKCU BOOL
+  pvDefaultData void*
+  dwDefaultDataSize DWORD
+
+func SHRegGetValue bothCharset
+  LSTATUS
+  hkey HKEY
+  pszSubKey LPCTSTR
+  pszValue LPCTSTR
+  srrfFlags SRRF
+  pdwType LPDWORD
+  pvData LPVOID
+  pcbData LPDWORD
+
+func SHRegOpenUSKey bothCharset
+  LSTATUS
+  pszPath LPCTSTR
+  samDesired REGSAM
+  hRelativeUSKey HUSKEY
+  phNewUSKey PHUSKEY
+  fIgnoreHKCU BOOL
+
+func SHRegQueryInfoUSKey bothCharset
+  LSTATUS
+  hUSKey HUSKEY
+  pcSubKeys LPDWORD
+  pcchMaxSubKeyLen LPDWORD
+  pcValues LPDWORD
+  pcchMaxValueNameLen LPDWORD
+  enumRegFlags SHREGENUM_FLAGS
+
+func SHRegQueryUSValue bothCharset
+  LSTATUS
+  hUSKey HUSKEY
+  pszValue LPCTSTR
+  pdwType [RegType*]
+  pvData LPVOID postLength=pcbData
+  pcbData LPDWORD
+  fIgnoreHKCU BOOL
+  pvDefaultData LPVOID length=dwDefaultDataSize
+  dwDefaultDataSize DWORD
+
+func SHRegSetPath bothCharset
+  LSTATUS
+  hkey HKEY
+  pszSubkey LPCTSTR
+  pszValue LPCTSTR
+  pszPath LPCTSTR
+  dwFlags DWORD
+
+func SHRegSetUSValue bothCharset
+  LSTATUS
+  pszSubKey LPCTSTR
+  pszValue LPCTSTR
+  dwType DWORD
+  pvData LPVOID
+  cbData DWORD
+  dwFlags DWORD
+
+func SHRegSetValue bothCharset
+  LSTATUS
+  hkey HKEY
+  pszSubKey LPCTSTR
+  pszValue LPCTSTR
+  srrfFlags SRRF
+  dwType DWORD
+  pvData LPCVOID length=cbData
+  cbData DWORD
+
+func SHRegWriteUSValue bothCharset
+  LSTATUS
+  hUSKey HUSKEY
+  pszValue LPCTSTR
+  dwType DWORD
+  pvData LPVOID
+  cbData DWORD
+  dwFlags DWORD
+
+func SHSetValue bothCharset
+  LSTATUS
+  hkey HKEY
+  pszSubKey LPCTSTR
+  pszValue LPCTSTR
+  dwType [RegType]
+  pvData LPCVOID length=cbData
+  cbData DWORD
+
+func CharLowerWrapW
+  LPWSTR
+  pch LPWSTR
+
+func CharUpperBuffWrapW
+  DWORD
+  pch LPWSTR
+  cchLength DWORD
+
+func ChrCmpI bothCharset
+  BOOL
+  w1 TCHAR
+  w2 TCHAR
+
+func CompareStringWrapW
+  int
+  Locale LCID
+  dwCmpFlags DWORD
+  lpString1 LPCWSTR
+  cchCount1 int
+  lpString2 LPCWSTR
+  cchCount2 int
+
+func GetAcceptLanguages bothCharset ordinalA=14 ordinalW=15
+  HRESULT
+  pszLanguages LPTSTR
+  pcchLanguages DWORD*
+
+func GetDateFormatWrapW
+  int
+  Locale LCID
+  dwFlags DWORD
+  lpDate "const SYSTEMTIME*"
+  pwzFormat LPCWSTR
+  pwzDateStr LPWSTR
+  cchDate int
+
+func GetTimeFormatWrapW
+  int
+  Locale LCID
+  dwFlags DWORD
+  lpTime "const SYSTEMTIME*"
+  pwzFormat LPCWSTR
+  pwzTimeStr LPWSTR
+  cchTime int
+
+func IntlStrEqN bothCharset
+  BOOL
+  pszStr1 LPCTSTR
+  pszStr2 LPCTSTR
+  nChar int
+
+func IntlStrEqNI bothCharset
+  BOOL
+  pszStr1 LPCTSTR
+  pszStr2 LPCTSTR
+  nChar int
+
+func IntlStrEqWorker bothCharset
+  BOOL
+  fCaseSens BOOL
+  pszStr1 LPCTSTR
+  pszStr2 LPCTSTR
+  nChar int
+
+func IsCharAlphaNumericWrapW
+  BOOL
+  ch WCHAR
+
+func IsCharSpace bothCharset ordinalW=29
+  BOOL
+  wch TCHAR
+
+func OutputDebugStringWrapW
+  void
+  lpOutputString LPCWSTR
+
+func SHLoadIndirectString ordinal=487
+  HRESULT
+  pszSource PCWSTR
+  pszOutBuf PWSTR outputOnly
+  cchOutBuf UINT
+  ppvReserved void**
+
+func SHStrDup bothCharset
+  HRESULT
+  pszSource LPCTSTR
+  ppwsz LPTSTR*
+
+func StrCat bothCharset
+  PTSTR
+  psz1 PTSTR
+  psz2 PCTSTR
+
+func StrCatBuff bothCharset
+  PTSTR
+  pszDest PTSTR
+  pszSrc PCTSTR
+  cchDestBuffSize int
+
+func StrCatChainW
+  DWORD
+  pszDst PWSTR outputOnly
+  cchDst DWORD
+  ichAt DWORD
+  pszSrc PCWSTR
+
+func StrChr bothCharset
+  PTSTR
+  pszStart PTSTR
+  wMatch TCHAR
+
+func StrChrI bothCharset
+  PTSTR
+  pszStart PTSTR
+  wMatch TCHAR
+
+func StrChrNIW
+  PWSTR
+  pszStart PCWSTR
+  wMatch WCHAR
+  cchMax UINT
+
+func StrChrNW
+  PWSTR
+  pszStart PWSTR
+  wMatch WCHAR
+  cchMax UINT
+
+func StrCmp bothCharset
+  int
+  psz1 PCTSTR
+  psz2 PCTSTR
+
+func StrCmpC bothCharset ordinalA=155 ordinalW=156
+  int
+  lpStr1 LPCTSTR
+  lpStr2 LPCTSTR
+
+func StrCmpI bothCharset
+  int
+  psz1 PCTSTR
+  psz2 PCTSTR
+
+func StrCmpIC bothCharset ordinalA=157 ordinalW=158
+  int
+  lpStr1 LPCTSTR
+  lpStr2 LPCTSTR
+
+func StrCmpLogicalW
+  int
+  psz1 PCWSTR
+  psz2 PCWSTR
+
+func StrCmpN bothCharset
+  int
+  psz1 PCTSTR
+  psz2 PCTSTR
+  nChar int
+
+func StrCmpNC bothCharset ordinalA=151 ordinalW=152
+  int
+  pszStr1 LPCTSTR
+  pszStr2 LPCTSTR
+  nChar int
+
+func StrCmpNI bothCharset
+  int
+  psz1 PCTSTR
+  psz2 PCTSTR
+  nChar int
+
+func StrCmpNIC bothCharset ordinalA=153 ordinalW=154
+  int
+  pszStr1 LPCTSTR
+  pszStr2 LPCTSTR
+  nChar int
+
+func StrCpy bothCharset
+  PTSTR
+  psz1 PTSTR
+  psz2 PCTSTR
+
+func StrCpyN bothCharset
+  PTSTR
+  pszDst PTSTR outputOnly
+  pszSrc PCTSTR
+  cchMax int
+
+func StrCSpn bothCharset
+  int
+  pszStr PCTSTR
+  pszSet PCTSTR
+
+func StrCSpnI bothCharset
+  int
+  pszStr PCTSTR
+  pszSet PCTSTR
+
+func StrDup bothCharset
+  PTSTR
+  pszSrch PCTSTR
+
+func StrFormatByteSize64 bothCharset
+  PTSTR
+  qdw LONGLONG
+  pszBuf PTSTR outputOnly
+  cchBuf UINT
+
+func StrFormatByteSizeA
+  PSTR
+  dw DWORD
+  pszBuf PSTR outputOnly
+  cchBuf UINT
+
+func StrFormatByteSizeW
+  PWSTR
+  qdw LONGLONG
+  pszBuf PWSTR outputOnly
+  cchBuf UINT
+
+func StrFormatByteSizeEx
+  HRESULT
+  ull ULONGLONG
+  flags SFBS_FLAGS
+  pszBuf LPWSTR outputOnly
+  cchBuf UINT
+
+func StrFormatKBSize bothCharset
+  PTSTR
+  qdw LONGLONG
+  pszBuf PTSTR outputOnly
+  cchBuf UINT
+
+func StrFromTimeInterval bothCharset
+  int
+  pszOut PTSTR outputOnly
+  cchMax UINT
+  dwTimeMS DWORD
+  digits int
+
+func StrIsIntlEqual bothCharset
+  BOOL
+  fCaseSens BOOL
+  pszString1 PCTSTR
+  pszString2 PCTSTR
+  nChar int
+
+func StrNCat bothCharset
+  PTSTR
+  psz1 PTSTR
+  psz2 PCTSTR
+  cchMax int
+
+func StrPBrk bothCharset
+  PTSTR
+  psz PTSTR
+  pszSet PCTSTR
+
+func StrRChr bothCharset
+  PTSTR
+  pszStart PTSTR
+  pszEnd PCTSTR
+  wMatch TCHAR
+
+func StrRChrI bothCharset
+  PTSTR
+  pszStart PTSTR
+  pszEnd PCTSTR
+  wMatch TCHAR
+
+func StrRetToBSTR
+  HRESULT
+  pstr STRRET*
+  pidl PCUITEMID_CHILD
+  pbstr BSTR*
+
+func StrRetToBuf bothCharset
+  HRESULT
+  pstr STRRET*
+  pidl PCUITEMID_CHILD
+  pszBuf LPTSTR outputOnly
+  cchBuf UINT
+
+func StrRetToStr bothCharset
+  HRESULT
+  pstr STRRET*
+  pidl PCUITEMID_CHILD
+  ppszName LPTSTR*
+
+func StrRStrI bothCharset
+  PTSTR
+  pszSource PTSTR
+  pszLast PCTSTR
+  pszSrch PCTSTR
+
+func StrSpn bothCharset
+  int
+  psz PCTSTR
+  pszSet PCTSTR
+
+func StrStr bothCharset
+  PTSTR
+  pszFirst PTSTR
+  pszSrch PCTSTR
+
+func StrStrI bothCharset
+  PTSTR
+  pszFirst PTSTR
+  pszSrch PCTSTR
+
+func StrToInt bothCharset
+  int
+  pszSrc PCTSTR
+
+func StrToInt64Ex bothCharset
+  BOOL
+  pszString PCTSTR
+  dwFlags STIF_FLAGS
+  pllRet LONGLONG*
+
+func StrToIntEx bothCharset
+  BOOL
+  pszString PCTSTR
+  dwFlags STIF_FLAGS
+  piRet int*
+
+func StrTrim bothCharset
+  BOOL
+  psz PTSTR
+  pszTrimChars PCTSTR
+
+func wnsprintf bothCharset varArgs
+  int
+  pszDest PTSTR
+  cchDest int
+  pszFmt PCTSTR
+
+func wvnsprintf bothCharset
+  int
+  pszDest PTSTR
+  cchDest int
+  pszFmt PCTSTR
+  arglist va_list
+
+func ConnectToConnectionPoint ordinal=168
+  HRESULT
+  punk IUnknown*
+  riidEvent REFIID
+  fConnect BOOL
+  punkTarget IUnknown*
+  pdwCookie DWORD*
+  ppcpOut IConnectionPoint**
+
+func DllInstall
+  HRESULT
+  bInstall BOOL
+  pszCmdLine PCWSTR
+
+func FindResourceWrapW
+  success NotEqual=0
+  HRSRC
+  hModule HMODULE
+  lpName LPCWSTR
+  lpType LPCWSTR
+
+func GetMenuPosFromID
+  success NotEqual=0
+  int
+  hmenu HMENU
+  id UINT
+
+func HashData
+  HRESULT
+  pbData BYTE*
+  cbData DWORD
+  pbHash BYTE*
+  cbHash DWORD
+
+func GUIDFromString bothCharset ordinalA=269 ordinalW=270
+  BOOL
+  psz LPCTSTR
+  pguid LPGUID
+
+func IsInternetESCEnabled
+  BOOL
+
+func IsOS ordinal=437
+  BOOL
+  dwOS DWORD
+
+func IStream_Copy ordinal=568
+  HRESULT
+  pstmFrom IStream*
+  pstmTo IStream*
+  cb DWORD
+
+func IStream_Read ordinal=184
+  HRESULT
+  pstm IStream*
+  pv VOID*
+  cb ULONG
+
+func IStream_ReadPidl ordinal=512
+  HRESULT
+  pstm IStream*
+  ppidlOut PIDLIST_RELATIVE*
+
+func IStream_ReadStr ordinal=596
+  HRESULT
+  pstm IStream*
+  ppsz PWSTR*
+
+func IStream_Reset ordinal=213
+  HRESULT
+  pstm IStream*
+
+func IStream_Size ordinal=214
+  HRESULT
+  pstm IStream*
+  pui ULARGE_INTEGER*
+
+func IStream_Write ordinal=212
+  HRESULT
+  pstm IStream*
+  pv "const void*"
+  cb ULONG
+
+func IStream_WritePidl ordinal=513
+  HRESULT
+  pstm IStream*
+  pidlWrite PCUIDLIST_RELATIVE
+
+func IStream_WriteStr ordinal=597
+  HRESULT
+  pstm IStream*
+  psz PCWSTR
+
+func IUnknown_AtomicRelease ordinal=169
+  void
+  ppunk void**
+
+func IUnknown_GetSite ordinal=256
+  HRESULT
+  punk IUnknown*
+  riid REFIID
+  ppvSite VOID** interfaceId=riid
+
+func IUnknown_GetWindow ordinal=172
+  HRESULT
+  punk IUnknown*
+  phwnd HWND*
+
+func IUnknown_QueryService ordinal=176
+  HRESULT
+  punk IUnknown*
+  guidService REFGUID
+  riid REFIID
+  ppvOut void** interfaceId=riid
+
+func IUnknown_Set ordinal=199
+  void
+  ppunk IUnknown*
+  punk IUnknown*
+
+func IUnknown_SetSite ordinal=174
+  HRESULT
+  punk IUnknown*
+  punkSite IUnknown*
+
+func MLFreeLibrary ordinal=418
+  BOOL
+  hModule HMODULE
+
+func MLLoadLibrary bothCharset ordinalA=377 ordinalW=378
+  success NotEqual=0
+  HINSTANCE
+  lpszLibFileName LPCTSTR
+  hModule HMODULE
+  dwCrossCodePage DWORD
+
+func MLHtmlHelp bothCharset
+  success NotEqual=0
+  HWND
+  hwndCaller HWND
+  pszFile LPCTSTR
+  uCommand UINT
+  dwData DWORD_PTR
+  dwCrossCodePage DWORD
+
+func MLWinHelp bothCharset
+  BOOL
+  hWndMain HWND
+  lpszHelp LPCTSTR
+  uCommand UINT
+  dwData DWORD_PTR
+
+func ParseURL bothCharset ordinalA=1 ordinalW=2
+  HRESULT
+  pcszUrl LPCTSTR
+  ppu PARSEDURL*
+
+func QISearch ordinal=219
+  HRESULT
+  that void*
+  pqit LPCQITAB
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHAnsiToAnsi ordinal=345
+  success NotEqual=0
+  int
+  pszSrc LPCSTR
+  pszDst LPWSTR outputOnly
+  cchBuf int
+
+func SHAnsiToUnicode ordinal=215
+  success NotEqual=0
+  int
+  pszSrc PCSTR
+  pwszDst PWSTR outputOnly
+  cwchBuf int
+
+func SHAutoComplete
+  HRESULT
+  hwndEdit HWND
+  dwFlags DWORD
+
+func SHCreateMemStream ordinal=12
+  success NotEqual=0
+  IStream*
+  pInit "const BYTE*"
+  cbInit UINT
+
+func SHCreateStreamOnFile bothCharset
+  HRESULT
+  pszFile LPCTSTR
+  grfMode [STGM_FLAGS]
+  ppstm IStream**
+
+func SHCreateStreamOnFileEx
+  HRESULT
+  pszFile LPCWSTR
+  grfMode [STGM_FLAGS]
+  dwAttributes DWORD
+  fCreate BOOL
+  pstmTemplate IStream*
+  ppstm IStream**
+
+func SHCreateThread ordinal=16
+  BOOL
+  pfnThreadProc LPTHREAD_START_ROUTINE
+  pData void*
+  dwFlags SHCT_FLAGS
+  pfnCallback LPTHREAD_START_ROUTINE
+
+func SHCreateThreadRef
+  HRESULT
+  pcRef LONG*
+  ppunk IUnknown**
+
+func SHCreateThreadWithHandle ordinal=615
+  BOOL
+  pfnThreadProc LPTHREAD_START_ROUTINE
+  pData void*
+  flags SHCT_FLAGS
+  pfnCallback LPTHREAD_START_ROUTINE
+  pHandle HANDLE*
+
+func SHFormatDateTime bothCharset ordinalA=353 ordinalW=354
+  success NotEqual=0
+  int
+  pft "const FILETIME*"
+  pdwFlags DWORD*
+  pszBuf LPTSTR outputOnly
+  cchBuf UINT
+
+func SHGetThreadRef
+  HRESULT
+  ppunk IUnknown**
+
+func SHSetThreadRef
+  HRESULT
+  punk IUnknown*
+
+func SHReleaseThreadRef
+  HRESULT
+
+func SHGlobalCounterDecrement ordinal=634
+  long
+  id "const SHGLOBALCOUNTER"
+
+func SHGlobalCounterGetValue ordinal=632
+  long
+  id "const SHGLOBALCOUNTER"
+
+func SHGlobalCounterIncrement ordinal=633
+  long
+  id "const SHGLOBALCOUNTER"
+
+func SHIsChildOrSelf ordinal=204
+  HRESULT
+  hwndParent HWND
+  hwnd HWND
+
+func SHIsLowMemoryMachine
+  BOOL
+  dwType DWORD
+
+func SHMessageBoxCheck bothCharset ordinalA=185 ordinalW=191
+  success NotEqual=0
+  int
+  hwnd HWND
+  pszText LPCTSTR
+  pszCaption LPCTSTR
+  uType UINT
+  iDefault int
+  pszRegVal LPCTSTR
+
+func SHSendMessageBroadcast bothCharset ordinalA=432 ordinalW=433
+  success NotEqual=0
+  LRESULT
+  uMsg UINT
+  wParam WPARAM
+  lParam LPARAM
+
+func SHStripMneumonic bothCharset ordinalA=203 ordinalW=225
+  TCHAR
+  pszMenu LPTSTR*
+
+func SHUnicodeToAnsi ordinal=217
+  success NotEqual=0
+  int
+  pwszSrc PCWSTR
+  pszDst PSTR outputOnly
+  cchBuf int
+
+func SHUnicodeToUnicode ordinal=346
+  success NotEqual=0
+  int
+  pwzSrc PCWSTR
+  pwzDst PWSTR outputOnly
+  cwchBuf int
+
+func StopWatchFlush
+  [ERROR_CODE]
+
+func StopWatchMode
+  DWORD
+
+func WhichPlatform ordinal=276
+  UINT
+
+func GetProcessReference
+  HRESULT
+  punk IUnknown**
+
+func SetProcessReference
+  void
+  punk IUnknown*
+
+func SHRunIndirectRegClientCommand ordinal=467
+  HRESULT
+  hwnd HWND
+  pszClientType LPCWSTR
+
+func DupWideToAnsi ordinal=617
+  HRESULT
+  pwszString LPCWSTR
+  ppszStr LPSTR*
+
+func IStream_ReadStrLong ordinal=644
+  HRESULT
+  pStream IStream*
+  ppwszString LPWSTR*
+
+func IStream_WriteStrLong ordinal=645
+  HRESULT
+  pStream IStream*
+  pwszString LPCWSTR
+
+func IUnknown_RemoveBackReferences ordinal=611
+  HRESULT
+  pUnk IUnknown*
+
+func IUnknown_TranslateAcceleratorGlobal ordinal=638
+  HRESULT
+  pUnk IUnknown*
+  pMsg MSG*
+
+func IUnknown_TranslateAcceleratorIO ordinal=478
+  HRESULT
+  pUnk IUnknown*
+  pMsg MSG*
+
+func MapWin32ErrorToSTG ordinal=485
+  HRESULT
+  hrWin32 HRESULT
+
+func ModeToCreateFileFlags ordinal=486
+  HRESULT
+  grfFlags [STGM_FLAGS]
+  bCreate BOOL
+  pDesiredAccess DWORD*
+  pShareMode DWORD*
+  pDisposition DWORD*
+
+func PathUnExpandEnvStringsForUserW ordinal=466
+  BOOL
+  hUserToken HANDLE
+  pwszPath LPCWSTR
+  pwszBuf LPWSTR
+  cchBuf UINT
+
+func PathUnExpandSystemEnvStringsW ordinal=643
+  BOOL
+  pwszPath LPCWSTR
+  pwszBuf LPWSTR
+  cchBuf UINT
+
+func QuerySourceCreateFromKey ordinal=544
+  HRESULT
+  hKey HKEY
+  pwszSubKey LPCWSTR
+  shouldCreate BOOL
+  riid REFIID
+  ppInterface LPVOID* interfaceId=riid
+
+func QuerySourceCreateFromKeyEx ordinal=576
+  HRESULT
+  hKey HKEY
+  pwszSubKey LPCWSTR
+  shouldCreate BOOL
+  amDesired ACCESS_MASK
+  riid REFIID
+  ppInterface LPVOID* interfaceId=riid
+
+func SHAnsiToUnicodeCPAlloc ordinal=600
+  HRESULT
+  codePage UINT
+  pszString LPCSTR
+  ppwszConverted LPWSTR*
+
+func SHAreIconsEqual ordinal=548
+  BOOL
+  hIcon1 HICON
+  hIcon2 HICON
+
+func SHBoolSystemParametersInfo ordinal=537
+  BOOL
+  uiAction [SystemParametersInfoEnum]
+  pData PVOID
+
+func SHCreatePropertyBagOnMemory ordinal=477
+  HRESULT
+  pUnused PVOID
+  riid REFIID
+  ppv PVOID* interfaceId=riid
+
+func SHCreatePropertyStoreOnXML ordinal=621
+  HRESULT
+  pXmlDomNode IXMLDOMNode*
+  grfMode [STGM_FLAGS]
+  pPropBagInit IPropertyBag*
+  riid REFIID
+  ppv PVOID* interfaceId=riid
+
+func SHCreateStreamOnDllResourceW ordinal=627
+  HRESULT
+  pwszModule LPCWSTR
+  pwszName LPCWSTR
+  pwszType LPCWSTR
+  ppStream IStream**
+
+func SHCreateStreamOnModuleResourceW ordinal=628
+  HRESULT
+  hModule HMODULE
+  pwszName LPCWSTR
+  pwszType LPCWSTR
+  ppStream IStream**
+
+func SHExpandEnvironmentStringsAlloc ordinal=572
+  HRESULT
+  pwszExpandableString LPCWSTR
+  ppwszExpanded LPWSTR*
+
+func SHForwardContextMenuMsg ordinal=545
+  HRESULT
+  pUnk IUnknown*
+  uMsg UINT
+  wParam WPARAM
+  lParam LPARAM
+  pResult LRESULT*
+  useIContextMenu2 BOOL
+
+func SHGetSizeShared ordinal=641
+  DWORD
+  pData PVOID
+
+func SHInvokeCommandOnContextMenu
+  HRESULT
+  hwnd HWND
+  pSite IObjectWithSite*
+  pCtxMenu IContextMenu*
+  fMask [CMIC_Mask]
+  pszVerb LPCSTR
+  pwszDirectory LPCWSTR
+
+func SHInvokeCommandOnContextMenuEx ordinal=639
+  HRESULT
+  hwnd HWND
+  pSite IObjectWithSite*
+  pCtxMenu IContextMenu*
+  fMask [CMIC_Mask]
+  queryFlags UINT
+  pszVerb LPCSTR
+  pwszDirectory LPCWSTR
+
+func SHInvokeCommandWithFlagsAndSite ordinal=571
+  HRESULT
+  hwnd HWND
+  pSite IObjectWithSite*
+  pShellFolder IShellFolder*
+  pidl LPITEMIDLIST
+  fMask [CMIC_Mask]
+  pszVerb LPCSTR
+
+func SHInvokeCommandsOnContextMenuEx ordinal=640
+  HRESULT
+  hwnd HWND
+  pSite IObjectWithSite*
+  pCtxMenu IContextMenu*
+  fMask [CMIC_Mask]
+  queryFlags UINT
+  ppszVerbs LPCSTR* count=numVerbs
+  numVerbs UINT
+  pwszDirectory LPCWSTR
+
+func SHRegSetValue ordinal=631
+  LSTATUS
+  hKey HKEY
+  pwszSubKey LPCWSTR
+  pwszValue LPCWSTR
+  srrfFlags SRRF
+  dwType DWORD
+  pvData LPCVOID length=cbData
+  cbData DWORD
+
+func SHUnicodeToAnsiCPAlloc ordinal=599
+  HRESULT
+  codePage UINT
+  pwszString LPCWSTR
+  ppszConverted LPSTR*
+

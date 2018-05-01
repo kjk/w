@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDragSourceHelper base=IUnknown id={DE5BF786-477A-11D2-839D-00C04FD918D0} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func InitializeFromBitmap
+    HRESULT
+    pshdi LPSHDRAGIMAGE
+    pDataObject IDataObject*
+
+  func InitializeFromWindow
+    HRESULT
+    hwnd HWND
+    ppt POINT*
+    pDataObject IDataObject*
+
+

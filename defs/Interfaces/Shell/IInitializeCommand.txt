@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInitializeCommand base=IUnknown id={85075acf-231f-40ea-9610-d26b7b58f638} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    pszCommandName LPCWSTR
+    ppb IPropertyBag*
+
+

@@ -1,0 +1,22 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+
+ingterface ID3D11ClassInstance base=ID3D11DeviceChild id={a6cd7faa-b0b7-4a2f-9436-8662a65797cb} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Shader"
+  func GetClassLinkage
+    void
+    ppLinkage ID3D11ClassLinkage**
+
+  func GetDesc
+    void
+    pDesc D3D11_CLASS_INSTANCE_DESC*
+
+  func GetInstanceName
+    void
+    pInstanceName LPSTR
+    pBufferLength SIZE_T*
+
+  func GetTypeName
+    void
+    pTypeName LPSTR
+    pBufferLength SIZE_T*
+
+

@@ -1,0 +1,93 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteFontFace base=IUnknown id={5f49804d-7024-4d43-bfa9-d25984f53849} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func GetType
+    DWRITE_FONT_FACE_TYPE
+
+  func GetFiles
+    HRESULT
+    numberOfFiles UINT32*
+    fontFiles IDWriteFontFile** postCount=numberOfFiles
+
+  func GetIndex
+    success NotEqual=0
+    UINT32
+
+  func GetSimulations
+    DWRITE_FONT_SIMULATIONS
+
+  func IsSymbolFont
+    BOOL
+
+  func GetMetrics
+    void
+    fontFaceMetrics DWRITE_FONT_METRICS*
+
+  func GetGlyphCount
+    success NotEqual=0
+    UINT16
+
+  func GetDesignGlyphMetrics
+    HRESULT
+    glyphIndices "UINT16 const*" count=glyphCount
+    glyphCount UINT32
+    glyphMetrics DWRITE_GLYPH_METRICS* postCount=glyphCount
+    isSideways BOOL
+
+  func GetGlyphIndices
+    HRESULT
+    codePoints "UINT32 const*" count=codePointCount
+    codePointCount UINT32
+    glyphIndices UINT16* postCount=codePointCount
+
+  func TryGetFontTable
+    HRESULT
+    openTypeTableTag UINT32
+    tableData "const void**"
+    tableSize UINT32*
+    tableContext void**
+    exists BOOL*
+
+  func ReleaseFontTable
+    void
+    tableContext void*
+
+  func GetGlyphRunOutline
+    HRESULT
+    emSize FLOAT
+    glyphIndices "UINT16 const*" count=glyphCount
+    glyphAdvances "FLOAT const*" count=glyphCount
+    glyphOffsets "DWRITE_GLYPH_OFFSET const*" count=glyphCount
+    glyphCount UINT32
+    isSideways BOOL
+    isRightToLeft BOOL
+    geometrySink IDWriteGeometrySink*
+
+  func GetRecommendedRenderingMode
+    HRESULT
+    emSize FLOAT
+    pixelsPerDip FLOAT
+    measuringMode DWRITE_MEASURING_MODE
+    renderingParams IDWriteRenderingParams*
+    renderingMode DWRITE_RENDERING_MODE*
+
+  func GetGdiCompatibleMetrics
+    HRESULT
+    emSize FLOAT
+    pixelsPerDip FLOAT
+    transform "DWRITE_MATRIX const*"
+    fontFaceMetrics DWRITE_FONT_METRICS*
+
+  func GetGdiCompatibleGlyphMetrics
+    HRESULT
+    emSize FLOAT
+    pixelsPerDip FLOAT
+    transform "DWRITE_MATRIX const*"
+    useGdiNatural BOOL
+    glyphIndices "UINT16 const*" count=glyphCount
+    glyphCount UINT32
+    glyphMetrics DWRITE_GLYPH_METRICS* postCount=glyphCount
+    isSideways BOOL
+
+

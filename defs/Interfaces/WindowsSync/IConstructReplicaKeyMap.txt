@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IConstructReplicaKeyMap base=IUnknown id={ded10970-ec85-4115-b52c-4405845642a5} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func FindOrAddReplica
+    HRESULT
+    pbReplicaId "const BYTE*"
+    pdwReplicaKey DWORD*
+
+

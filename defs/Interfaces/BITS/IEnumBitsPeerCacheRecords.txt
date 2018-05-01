@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumBitsPeerCacheRecords base=IUnknown id={659cdea4-489e-11d9-a9cd-000d56965251} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func Next
+    HRESULT
+    celt ULONG
+    rgelt IBitsPeerCacheRecord** postCount=celt
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppenum IEnumBitsPeerCacheRecords**
+
+  func GetCount
+    HRESULT
+    puCount ULONG*
+
+

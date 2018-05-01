@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRunningObjectTable base=IUnknown id={00000010-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Register
+    HRESULT
+    grfFlags [ROTFLAGS]
+    punkObject IUnknown*
+    pmkObjectName IMoniker*
+    pdwRegister DWORD*
+
+  func Revoke
+    HRESULT
+    dwRegister DWORD
+
+  func IsRunning
+    HRESULT
+    pmkObjectName IMoniker*
+
+  func GetObject
+    HRESULT
+    pmkObjectName IMoniker*
+    ppunkObject IUnknown**
+
+  func NoteChangeTime
+    HRESULT
+    dwRegister DWORD
+    pfiletime FILETIME*
+
+  func GetTimeOfLastChange
+    HRESULT
+    pmkObjectName IMoniker*
+    pfiletime FILETIME*
+
+  func EnumRunning
+    HRESULT
+    ppenumMoniker IEnumMoniker**
+
+  flag [ROTFLAGS] DWORD display=DWORD
+    ROTFLAGS_REGISTRATIONKEEPSALIVE 0x1
+    ROTFLAGS_ALLOWANYCLIENT         0x2
+
+

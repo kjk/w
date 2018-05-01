@@ -1,0 +1,19 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDvdGraphBuilder base=IUnknown id={FCC152B6-F372-11d0-8E00-00C04FD7C08B} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetFiltergraph
+    HRESULT
+    ppGB IGraphBuilder**
+
+  func GetDvdInterface
+    HRESULT
+    riid REFIID
+    ppvIF void** interfaceId=riid
+
+  func RenderDvdVideoVolume
+    HRESULT
+    lpcwszPathName LPCWSTR
+    dwFlags DWORD
+    pStatus AM_DVD_RENDERSTATUS*
+
+

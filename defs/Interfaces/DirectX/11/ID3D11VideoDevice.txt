@@ -1,0 +1,104 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11VideoDevice base=IUnknown id={10EC4D5B-975A-4689-B9E4-D0AAC30FE333} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Microsoft Media Foundation/Direct3D 11 Video"
+  func CreateVideoDecoder
+    HRESULT
+    pVideoDesc "const D3D11_VIDEO_DECODER_DESC*"
+    pConfig "const D3D11_VIDEO_DECODER_CONFIG*"
+    ppDecoder ID3D11VideoDecoder**
+
+  func CreateVideoProcessor
+    HRESULT
+    pEnum ID3D11VideoProcessorEnumerator*
+    RateConversionIndex UINT
+    ppVideoProcessor ID3D11VideoProcessor**
+
+  func CreateAuthenticatedChannel
+    HRESULT
+    ChannelType D3D11_AUTHENTICATED_CHANNEL_TYPE
+    ppAuthenticatedChannel ID3D11AuthenticatedChannel**
+
+  func CreateCryptoSession
+    HRESULT
+    pCryptoType "const GUID*"
+    pDecoderProfile "const GUID*"
+    pKeyExchangeType "const GUID*"
+    ppCryptoSession ID3D11CryptoSession**
+
+  func CreateVideoDecoderOutputView
+    HRESULT
+    pResource ID3D11Resource*
+    pDesc "const D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*"
+    ppVDOVView ID3D11VideoDecoderOutputView**
+
+  func CreateVideoProcessorInputView
+    HRESULT
+    pResource ID3D11Resource*
+    pEnum ID3D11VideoProcessorEnumerator*
+    pDesc "const D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*"
+    ppVPIView ID3D11VideoProcessorInputView**
+
+  func CreateVideoProcessorOutputView
+    HRESULT
+    pResource ID3D11Resource*
+    pEnum ID3D11VideoProcessorEnumerator*
+    pDesc "const D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*"
+    ppVPOView ID3D11VideoProcessorOutputView**
+
+  func CreateVideoProcessorEnumerator
+    HRESULT
+    pDesc "const D3D11_VIDEO_PROCESSOR_CONTENT_DESC*"
+    ppEnum ID3D11VideoProcessorEnumerator**
+
+  func GetVideoDecoderProfileCount
+    success NotEqual=0
+    UINT
+
+  func GetVideoDecoderProfile
+    HRESULT
+    Index UINT
+    pDecoderProfile GUID*
+
+  func CheckVideoDecoderFormat
+    HRESULT
+    pDecoderProfile "const GUID*"
+    Format DXGI_FORMAT
+    pSupported BOOL*
+
+  func GetVideoDecoderConfigCount
+    HRESULT
+    pDesc "const D3D11_VIDEO_DECODER_DESC*"
+    pCount UINT*
+
+  func GetVideoDecoderConfig
+    HRESULT
+    pDesc "const D3D11_VIDEO_DECODER_DESC*"
+    Index UINT
+    pConfig D3D11_VIDEO_DECODER_CONFIG*
+
+  func GetContentProtectionCaps
+    HRESULT
+    pCryptoType "const GUID*"
+    pDecoderProfile "const GUID*"
+    pCaps D3D11_VIDEO_CONTENT_PROTECTION_CAPS*
+
+  func CheckCryptoKeyExchange
+    HRESULT
+    pCryptoType "const GUID*"
+    pDecoderProfile "const GUID*"
+    Index UINT
+    pKeyExchangeType GUID*
+
+  func SetPrivateData
+    HRESULT
+    guid REFGUID
+    DataSize UINT
+    pData "const void*" length=DataSize
+
+  func SetPrivateDataInterface
+    HRESULT
+    guid REFGUID
+    pData "const IUnknown*"
+
+

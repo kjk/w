@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISupportFilteredSync base=IUnknown id={3d128ded-d555-4e0d-bf4b-fb213a8a9302} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func AddFilter
+    HRESULT
+    pFilter IUnknown*
+    filteringType FILTERING_TYPE
+
+

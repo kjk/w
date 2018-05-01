@@ -1,0 +1,15 @@
+include Interfaces\WIC\IWICMetadataHandlerInfo.txt
+
+ingterface IWICMetadataWriterInfo base=IWICMetadataHandlerInfo id={B22E3FBA-3925-4323-B5C1-9EBFC430F236} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetHeader
+    [WIC_HRESULT]
+    guidContainerFormat REFGUID
+    cbSize UINT
+    pHeader WICMetadataHeader*
+    pcbActual UINT*
+
+  func CreateInstance
+    [WIC_HRESULT]
+    ppIWriter IWICMetadataWriter**
+
+

@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IApplicationDestinations base=IUnknown id={12337d35-94c6-48a0-bce7-6a9c69d4d600} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetAppID
+    HRESULT
+    pszAppID LPCWSTR
+
+  func RemoveDestination
+    HRESULT
+    punk IUnknown*
+
+  func RemoveAllDestinations
+    HRESULT
+
+

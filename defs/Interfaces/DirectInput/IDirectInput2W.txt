@@ -1,0 +1,10 @@
+include Interfaces\DirectInput\IDirectInputW.txt
+
+ingterface IDirectInput2W base=IDirectInputW id={5944e663-aa8a-11cf-bfc7-444553540000} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Input/DirectInput"
+  func FindDevice
+    [DI_HRESULT]
+    rguidClass REFGUID
+    ptszName LPCWSTR
+    pguidInstance LPGUID
+
+

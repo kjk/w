@@ -1,0 +1,128 @@
+include Headers\windows.h.txt
+include Headers\snmp.h.txt
+
+dll Snmpapi.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Simple Network Management Protocol (SNMP)"
+func SnmpSvcGetUptime
+  success NotEqual=0
+  DWORD
+
+func SnmpSvcSetLogLevel
+  void
+  nLogLevel INT
+
+func SnmpSvcSetLogType
+  void
+  nLogType INT
+
+func SnmpUtilAsnAnyCpy
+  SNMPAPI
+  pAnyDst AsnAny*
+  pAnySrc AsnAny*
+
+func SnmpUtilAsnAnyFree
+  void
+  pAny AsnAny*
+
+func SnmpUtilDbgPrint
+  void
+  nLogLevel INT
+  szFormat LPSTR
+
+func SnmpUtilIdsToA
+  success NotEqual=0
+  LPSTR
+  Ids UINT*
+  IdLength UINT
+
+func SnmpUtilMemAlloc
+  success NotEqual=0
+  LPVOID
+  nBytes UINT
+
+func SnmpUtilMemFree
+  void
+  pMem LPVOID
+
+func SnmpUtilMemReAlloc
+  success NotEqual=0
+  LPVOID
+  pMem LPVOID
+  nBytes UINT
+
+func SnmpUtilOctetsCmp
+  SNMPAPI
+  pOctets1 AsnOctetString*
+  pOctets2 AsnOctetString*
+
+func SnmpUtilOctetsCpy
+  SNMPAPI
+  pOctetsDst AsnOctetString*
+  pOctetsSrc AsnOctetString*
+
+func SnmpUtilOctetsFree
+  void
+  pOctets AsnOctetString*
+
+func SnmpUtilOctetsNCmp
+  SNMPAPI
+  pOctets1 AsnOctetString*
+  pOctets2 AsnOctetString*
+  nChars UINT
+
+func SnmpUtilOidAppend
+  SNMPAPI
+  pOidDst AsnObjectIdentifier*
+  pOidSrc AsnObjectIdentifier*
+
+func SnmpUtilOidCmp
+  SNMPAPI
+  pOid1 AsnObjectIdentifier*
+  pOid2 AsnObjectIdentifier*
+
+func SnmpUtilOidCpy
+  SNMPAPI
+  pOidDst AsnObjectIdentifier*
+  pOidSrc AsnObjectIdentifier*
+
+func SnmpUtilOidFree
+  void
+  pOid AsnObjectIdentifier*
+
+func SnmpUtilOidNCmp
+  SNMPAPI
+  pOid1 AsnObjectIdentifier*
+  pOid2 AsnObjectIdentifier*
+  nSubIds UINT
+
+func SnmpUtilOidToA
+  success NotEqual=0
+  LPSTR
+  Oid AsnObjectIdentifier*
+
+func SnmpUtilPrintAsnAny
+  void
+  pAny AsnAny*
+
+func SnmpUtilPrintOid
+  void
+  Oid AsnObjectIdentifier*
+
+func SnmpUtilVarBindCpy
+  SNMPAPI
+  pVbDst SnmpVarBind*
+  pVbSrc SnmpVarBind*
+
+func SnmpUtilVarBindListCpy
+  SNMPAPI
+  pVblDst SnmpVarBindList*
+  pVblSrc SnmpVarBindList*
+
+func SnmpUtilVarBindFree
+  void
+  pVb SnmpVarBind*
+
+func SnmpUtilVarBindListFree
+  void
+  pVbl SnmpVarBindList*
+

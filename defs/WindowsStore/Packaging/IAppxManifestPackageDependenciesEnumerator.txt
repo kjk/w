@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxManifestPackageDependenciesEnumerator base=IUnknown id={b43bbcf9-65a6-42dd-bac0-8c6741e7f5a4} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetCurrent
+    HRESULT
+    dependency IAppxManifestPackageDependency**
+
+  func GetHasCurrent
+    HRESULT
+    hasCurrent BOOL*
+
+  func MoveNext
+    HRESULT
+    hasNext BOOL*
+
+

@@ -1,0 +1,29 @@
+include Interfaces\IUnknown.txt
+include Headers\ddraw.h.txt
+
+ingterface IDirectDrawPalette base=IUnknown id={6c14db84-a733-11ce-a521-0020af0be560} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+  func GetCaps
+    [DD_HRESULT]
+    lpdwCaps [DDPCAPS_FLAGS*]
+
+  func GetEntries
+    [DD_HRESULT]
+    dwFlags DWORD
+    dwBase DWORD
+    dwNumEntries DWORD
+    lpEntries LPPALETTEENTRY postCount=dwNumEntries
+
+  func Initialize
+    [DD_HRESULT]
+    lpDD LPDIRECTDRAW
+    dwFlags DWORD
+    lpDDColorTable LPPALETTEENTRY
+
+  func SetEntries
+    [DD_HRESULT]
+    dwFlags DWORD
+    dwStartingEntry DWORD
+    dwCount DWORD
+    lpEntries LPPALETTEENTRY count=dwCount
+
+

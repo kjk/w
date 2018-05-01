@@ -1,0 +1,17 @@
+include Interfaces\DirectX\DXGI\IDXGIResource.txt
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+ingterface IDXGIResource1 base=IDXGIResource id={30961379-4609-4a41-998e-54fe567ee0c1} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func CreateSubresourceSurface
+    HRESULT
+    index UINT
+    ppSurface IDXGISurface2**
+
+  func CreateSharedHandle
+    HRESULT
+    pAttributes "const SECURITY_ATTRIBUTES*"
+    dwAccess DWORD
+    lpName LPCWSTR
+    pHandle HANDLE*
+
+

@@ -1,0 +1,65 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwOpenPort base=IDispatch id={E0483BA0-47FF-4D9C-A6D6-7741D0B195F7} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall"
+  func get_Name
+    HRESULT
+    name BSTR*
+
+  func put_Name
+    HRESULT
+    name BSTR
+
+  func get_IpVersion
+    HRESULT
+    ipVersion NET_FW_IP_VERSION*
+
+  func put_IpVersion
+    HRESULT
+    ipVersion NET_FW_IP_VERSION
+
+  func get_Protocol
+    HRESULT
+    ipProtocol NET_FW_IP_PROTOCOL*
+
+  func put_Protocol
+    HRESULT
+    ipProtocol NET_FW_IP_PROTOCOL
+
+  func get_Port
+    HRESULT
+    portNumber LONG*
+
+  func put_Port
+    HRESULT
+    portNumber LONG
+
+  func get_Scope
+    HRESULT
+    scope NET_FW_SCOPE*
+
+  func put_Scope
+    HRESULT
+    scope NET_FW_SCOPE
+
+  func get_RemoteAddresses
+    HRESULT
+    remoteAddrs BSTR*
+
+  func put_RemoteAddresses
+    HRESULT
+    remoteAddrs BSTR
+
+  func get_Enabled
+    HRESULT
+    enabled VARIANT_BOOL*
+
+  func put_Enabled
+    HRESULT
+    enabled VARIANT_BOOL
+
+  func get_BuiltIn
+    HRESULT
+    builtIn VARIANT_BOOL*
+
+

@@ -1,0 +1,62 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+include Headers\security.h.txt
+
+dll DSSec.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Authorization/Access Control Editor"
+alias PFNREADOBJECTSECURITY LPVOID
+
+alias PFNWRITEOBJECTSECURITY LPVOID
+
+flag [DSSI_FLAGS] DWORD display=DWORD
+  DSSI_READ_ONLY           0x00000001
+  DSSI_NO_ACCESS_CHECK     0x00000002
+  DSSI_NO_EDIT_SACL        0x00000004
+  DSSI_NO_EDIT_OWNER       0x00000008
+  DSSI_IS_ROOT             0x00000010
+  DSSI_NO_FILTER           0x00000020
+  DSSI_NO_READONLY_MESSAGE 0x00000040
+
+func DSCreateSecurityPage
+  STDAPI
+  pwszObjectPath LPCWSTR
+  pwszObjectClass LPCWSTR
+  dwFlags [DSSI_FLAGS]
+  phPage HPROPSHEETPAGE*
+  pfnReadSD PFNREADOBJECTSECURITY
+  pfnWriteSD PFNWRITEOBJECTSECURITY
+  lpContext LPARAM
+
+func DSCreateISecurityInfoObject
+  STDAPI
+  pwszObjectClass LPCWSTR
+  dwFlags [DSSI_FLAGS]
+  ppSI LPSECURITYINFO*
+  pfnReadSD PFNREADOBJECTSECURITY
+  pfnWriteSD PFNWRITEOBJECTSECURITY
+  lpContext LPARAM
+
+func DSCreateISecurityInfoObjectEx
+  STDAPI
+  pwszObjectPath LPCWSTR
+  pwszObjectClass LPCWSTR
+  pwszServer LPCWSTR
+  pwszUserName LPCWSTR
+  pwszPassword LPCWSTR
+  dwFlags [DSSI_FLAGS]
+  ppSI LPSECURITYINFO*
+  pfnReadSD PFNREADOBJECTSECURITY
+  pfnWriteSD PFNWRITEOBJECTSECURITY
+  lpContext LPARAM
+
+func DSEditSecurity
+  STDAPI
+  hwndOwner HWND
+  pwszObjectPath LPCWSTR
+  pwszObjectClass LPCWSTR
+  dwFlags [DSSI_FLAGS]
+  pwszCaption LPCWSTR
+  pfnReadSD PFNREADOBJECTSECURITY
+  pfnWriteSD PFNWRITEOBJECTSECURITY
+  lpContext LPARAM
+

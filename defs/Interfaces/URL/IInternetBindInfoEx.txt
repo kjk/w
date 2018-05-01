@@ -1,0 +1,12 @@
+include Interfaces\URL\IInternetBindInfo.txt
+include Headers\URL.h.txt
+
+ingterface IInternetBindInfoEx base=IInternetBindInfo id={a3e015b7-a82c-4dcd-a150-569aeeed36ab} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetBindInfoEx
+    HRESULT
+    grfBINDF BINDF*
+    pbindinfo BINDINFO*
+    grfBINDF2 BINDF2*
+    pdwReserved DWORD*
+
+

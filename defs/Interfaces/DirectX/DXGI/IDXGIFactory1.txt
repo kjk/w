@@ -1,0 +1,12 @@
+include Interfaces\DirectX\DXGI\IDXGIFactory.txt
+
+ingterface IDXGIFactory1 base=IDXGIFactory id={770aae78-f26f-4dba-a829-253c83d1b387} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func EnumAdapters1
+    HRESULT
+    Adapter UINT
+    ppAdapter IDXGIAdapter1**
+
+  func IsCurrent
+    BOOL
+
+

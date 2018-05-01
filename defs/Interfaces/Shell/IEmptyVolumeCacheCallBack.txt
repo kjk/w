@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEmptyVolumeCacheCallBack base=IUnknown id={6E793361-73C6-11D0-8469-00AA00442901} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func ScanProgress
+    HRESULT
+    dwlSpaceUsed DWORDLONG
+    dwFlags DWORD
+    pcwszStatus LPCWSTR
+
+  func PurgeProgress
+    HRESULT
+    dwlSpaceFreed DWORDLONG
+    dwlSpaceToFree DWORDLONG
+    dwFlags DWORD
+    pcwszStatus LPCWSTR
+
+

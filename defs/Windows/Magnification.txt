@@ -1,0 +1,120 @@
+include Headers\windows.h.txt
+
+dll Magnification.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Application UI Development/Accessibility/Magnification"
+alias MagImageScalingCallback LPVOID
+
+array "float [3]" base=float count=3
+
+array "float [5]" base=float count=5
+
+array "float [3][3]" base="float [3]" count=3
+
+array "float [5][5]" base="float [5]" count=5
+
+struct MAGCOLOREFFECT
+  transform "float [5][5]"
+
+pointer PMAGCOLOREFFECT MAGCOLOREFFECT
+
+struct MAGTRANSFORM
+  v "float [3][3]"
+
+pointer PMAGTRANSFORM MAGTRANSFORM
+
+func MagGetColorEffect
+  BOOL
+  hwnd HWND
+  pEffect PMAGCOLOREFFECT
+
+func MagGetFullscreenColorEffect
+  BOOL
+  pEffect PMAGCOLOREFFECT
+
+func MagGetFullscreenTransform
+  BOOL
+  pMagLevel float*
+  pxOffset int*
+  pyOffset int*
+
+func MagGetImageScalingCallback
+  MagImageScalingCallback
+  hwnd HWND
+
+func MagGetInputTransform
+  BOOL
+  pfEnabled BOOL*
+  prcSource LPRECT
+  prcDest LPRECT
+
+func MagGetWindowFilterList
+  success NotEqual=-1
+  int
+  hwnd HWND
+  pdwFilterMode DWORD*
+  count int
+  pHWND HWND*
+
+func MagGetWindowSource
+  BOOL
+  hwnd HWND
+  pRect RECT*
+
+func MagGetWindowTransform
+  BOOL
+  hwnd HWND
+  pTransform PMAGTRANSFORM
+
+func MagInitialize
+  BOOL
+
+func MagSetColorEffect
+  BOOL
+  hwnd HWND
+  pEffect PMAGCOLOREFFECT
+
+func MagSetFullscreenColorEffect
+  BOOL
+  pEffect PMAGCOLOREFFECT
+
+func MagSetFullscreenTransform
+  BOOL
+  magLevel float
+  xOffset int
+  yOffset int
+
+func MagSetImageScalingCallback
+  BOOL
+  hwnd HWND
+  callback MagImageScalingCallback
+
+func MagSetInputTransform
+  BOOL
+  fEnabled BOOL
+  prcSource "const LPRECT"
+  prcDest "const LPRECT"
+
+func MagSetWindowFilterList
+  BOOL
+  hwnd HWND
+  dwFilterMode DWORD
+  count int
+  pHWND HWND*
+
+func MagSetWindowSource
+  BOOL
+  hwnd HWND
+  rect RECT
+
+func MagSetWindowTransform
+  BOOL
+  hwnd HWND
+  pTransform PMAGTRANSFORM
+
+func MagShowSystemCursor
+  BOOL
+  fShowCursor BOOL
+
+func MagUninitialize
+  BOOL
+

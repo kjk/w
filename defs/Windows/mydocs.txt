@@ -1,0 +1,7 @@
+include Headers\windows.h.txt
+
+dll mydocs.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Environment Development/Windows Shell"
+func PerUserInit ordinal=7
+  void
+

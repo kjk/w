@@ -1,0 +1,9 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID3D10EffectPool base=IUnknown id={9537AB04-3250-412e-8213-FCD2F8677933} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func AsEffect
+    success NotEqual=0
+    ID3D10Effect*
+
+

@@ -1,0 +1,62 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDebugRegisters base=IUnknown id={ce289126-9e84-45a7-937e-67bb18691493} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetNumberRegisters
+    HRESULT
+    Number PULONG
+
+  func GetDescription
+    HRESULT
+    Register ULONG
+    NameBuffer PSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+    Desc PDEBUG_REGISTER_DESCRIPTION
+
+  func GetIndexByName
+    HRESULT
+    Name PCSTR
+    Index PULONG
+
+  func GetValue
+    HRESULT
+    Register ULONG
+    Value PDEBUG_VALUE
+
+  func SetValue
+    HRESULT
+    Register ULONG
+    Value PDEBUG_VALUE
+
+  func GetValues
+    HRESULT
+    Count ULONG
+    Indices PULONG count=Count
+    Start ULONG
+    Values PDEBUG_VALUE postCount=Count
+
+  func SetValues
+    HRESULT
+    Count ULONG
+    Indices PULONG count=Count
+    Start ULONG
+    Values PDEBUG_VALUE count=Count
+
+  func OutputRegisters
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Flags [DEBUG_REGISTERS_FLAGS]
+
+  func GetInstructionOffset
+    HRESULT
+    Offset PULONG64
+
+  func GetStackOffset
+    HRESULT
+    Offset PULONG64
+
+  func GetFrameOffset
+    HRESULT
+    Offset PULONG64
+
+

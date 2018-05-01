@@ -1,0 +1,87 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellLinkW base=IUnknown id={000214F9-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetPath
+    HRESULT
+    pszFile LPWSTR
+    cch int
+    pfd WIN32_FIND_DATAW*
+    fFlags SLGP_FLAGS
+
+  func GetIDList
+    HRESULT
+    ppidl PIDLIST_ABSOLUTE*
+
+  func SetIDList
+    HRESULT
+    pidl PCIDLIST_ABSOLUTE
+
+  func GetDescription
+    HRESULT
+    pszName LPWSTR
+    cch int
+
+  func SetDescription
+    HRESULT
+    pszName LPCWSTR
+
+  func GetWorkingDirectory
+    HRESULT
+    pszDir LPWSTR
+    cch int
+
+  func SetWorkingDirectory
+    HRESULT
+    pszDir LPCWSTR
+
+  func GetArguments
+    HRESULT
+    pszArgs LPWSTR
+    cch int
+
+  func SetArguments
+    HRESULT
+    pszArgs LPCWSTR
+
+  func GetHotkey
+    HRESULT
+    pwHotkey WORD*
+
+  func SetHotkey
+    HRESULT
+    wHotkey WORD
+
+  func GetShowCmd
+    HRESULT
+    piShowCmd int*
+
+  func SetShowCmd
+    HRESULT
+    iShowCmd int
+
+  func GetIconLocation
+    HRESULT
+    pszIconPath LPWSTR
+    cch int
+    piIcon int*
+
+  func SetIconLocation
+    HRESULT
+    pszIconPath LPCWSTR
+    iIcon int
+
+  func SetRelativePath
+    HRESULT
+    pszPathRel LPCWSTR
+    dwReserved DWORD
+
+  func Resolve
+    HRESULT
+    hwnd HWND
+    fFlags SLR_FLAGS
+
+  func SetPath
+    HRESULT
+    pszFile LPCWSTR
+
+

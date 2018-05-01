@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IEnumRangeExceptions base=IUnknown id={0944439f-ddb1-4176-b703-046ff22a2386} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func Next
+    HRESULT
+    cExceptions ULONG
+    ppRangeException IRangeException** postCount=pcFetched
+    pcFetched ULONG*
+
+  func Skip
+    HRESULT
+    cExceptions ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppEnum IEnumRangeExceptions**
+
+

@@ -1,0 +1,17 @@
+include Interfaces\DirectX\9\IDirect3DSwapChain9.txt
+
+ingterface IDirect3DSwapChain9Ex base=IDirect3DSwapChain9 id={91886CAF-1C3D-4d2e-A0AB-3E4C7D8D3303} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func GetLastPresentCount
+    HRESULT
+    pLastPresentCount UINT*
+
+  func GetPresentStats
+    HRESULT
+    pPresentationStatistics D3DPRESENTSTATS*
+
+  func GetDisplayModeEx
+    HRESULT
+    pMode D3DDISPLAYMODEEX*
+    pRotation D3DDISPLAYROTATION*
+
+

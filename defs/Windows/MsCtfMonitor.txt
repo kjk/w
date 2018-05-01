@@ -1,0 +1,11 @@
+include Headers\windows.h.txt
+
+dll MsCtfMonitor.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Application UI Development/User Interaction/Text Services Framework"
+func InitLocalMsCtfMonitor
+  HRESULT
+  dwFlags DWORD
+
+func UninitLocalMsCtfMonitor
+  HRESULT
+

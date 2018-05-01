@@ -1,0 +1,241 @@
+include Headers\native.h.txt
+
+dll Ktmw32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Services/Kernel Transaction Manager (KTM)/Transactions"
+category "System Services/Kernel Transaction Manager (KTM)/Enlistments"
+category "System Services/Kernel Transaction Manager (KTM)/Resource Managers"
+category "System Services/Kernel Transaction Manager (KTM)/Transaction Managers"
+func CommitTransaction
+  BOOL
+  TransactionHandle HANDLE
+
+func CommitTransactionAsync
+  BOOL
+  TransactionHandle HANDLE
+
+func CreateTransaction
+  success NotEqual=0
+  HANDLE
+  lpTransactionAttributes LPSECURITY_ATTRIBUTES
+  UOW LPGUID
+  CreateOptions DWORD
+  IsolationLevel DWORD
+  IsolationFlags DWORD
+  Timeout DWORD
+  Description LPWSTR
+
+func GetTransactionId
+  BOOL
+  TransactionHandle HANDLE
+  TransactionId LPGUID
+
+func GetTransactionInformation
+  BOOL
+  TransactionHandle HANDLE
+  Outcome PDWORD
+  IsolationLevel PDWORD
+  IsolationFlags PDWORD
+  Timeout PDWORD
+  BufferLength DWORD
+  Description LPWSTR
+
+func OpenTransaction
+  success NotEqual=0
+  HANDLE
+  dwDesiredAccess DWORD
+  TransactionId LPGUID
+
+func RollbackComplete
+  BOOL
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func RollbackTransaction
+  BOOL
+  TransactionHandle HANDLE
+
+func RollbackTransactionAsync
+  BOOL
+  TransactionHandle HANDLE
+
+func SetTransactionInformation
+  BOOL
+  TransactionHandle HANDLE
+  IsolationLevel DWORD
+  IsolationFlags DWORD
+  Timeout DWORD
+  Description LPWSTR
+
+func CommitComplete
+  BOOL
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func CommitEnlistment
+  BOOL
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func GetEnlistmentId
+  BOOL
+  EnlistmentHandle HANDLE
+  EnlistmentId LPGUID
+
+func CreateEnlistment
+  success NotEqual=0
+  HANDLE
+  lpEnlistmentrAttributes LPSECURITY_ATTRIBUTES
+  ResourceManagerHandle HANDLE
+  TransactionHandle HANDLE
+  NotificationMask NOTIFICATION_MASK
+  CreateOptions DWORD
+  EnlistmentKey PVOID
+
+func GetEnlistmentRecoveryInformation
+  BOOL
+  EnlistmentHandle HANDLE
+  BufferSize ULONG
+  Buffer PVOID
+  BufferUsed PULONG
+
+func OpenEnlistment
+  success NotEqual=0
+  HANDLE
+  dwDesiredAccess DWORD
+  ResourceManagerHandle HANDLE
+  EnlistmentId LPGUID
+
+func PrepareEnlistment
+  BOOL
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func PrePrepareEnlistment
+  BOOL
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func RecoverEnlistment
+  BOOL
+  EnlistmentHandle HANDLE
+  EnlistmentKey PVOID
+
+func ReadOnlyEnlistment
+  BOOL
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func RollbackEnlistment
+  BOOL
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func SetEnlistmentRecoveryInformation
+  BOOL
+  EnlistmentHandle HANDLE
+  BufferSize ULONG
+  Buffer PVOID
+
+func SinglePhaseReject
+  BOOL
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func CreateResourceManager
+  success NotEqual=0
+  HANDLE
+  lpResourceManagerAttributes LPSECURITY_ATTRIBUTES
+  ResourceManagerID LPGUID
+  CreateOptions DWORD
+  TmHandle HANDLE
+  Description LPWSTR
+
+func GetNotificationResourceManager
+  BOOL
+  ResourceManagerHandle HANDLE
+  TransactionNotification PTRANSACTION_NOTIFICATION
+  NotificationLength ULONG
+  dwMilliseconds DWORD
+  ReturnLength PULONG
+
+func GetNotificationResourceManagerAsync
+  BOOL
+  ResourceManagerHandle HANDLE
+  TransactionNotification PTRANSACTION_NOTIFICATION
+  TransactionNotificationLength ULONG
+  ReturnLength PULONG
+  pOverlapped LPOVERLAPPED
+
+func OpenResourceManager
+  success NotEqual=0
+  HANDLE
+  dwDesiredAccess DWORD
+  TmHandle HANDLE
+  RmGuid LPGUID
+
+func PrepareComplete
+  BOOL
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func PrePrepareComplete
+  BOOL
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func RecoverResourceManager
+  BOOL
+  ResourceManagerHandle HANDLE
+
+func SetResourceManagerCompletionPort
+  BOOL
+  ResourceManagerHandle HANDLE
+  IoCompletionPortHandle HANDLE
+  CompletionKey ULONG_PTR
+
+func CreateTransactionManager
+  success NotEqual=0
+  HANDLE
+  lpTransactionAttributes LPSECURITY_ATTRIBUTES
+  LogFileName LPWSTR
+  CreateOptions ULONG
+  CommitStrength ULONG
+
+func GetCurrentClockTransactionManager
+  BOOL
+  TransactionManagerHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func GetTransactionManagerId
+  BOOL
+  TransactionManagerHandle HANDLE
+  TransactionManagerId LPGUID
+
+func OpenTransactionManager
+  success NotEqual=0
+  HANDLE
+  LogFileName LPWSTR
+  DesiredAccess ACCESS_MASK
+  OpenOptions ULONG
+
+func OpenTransactionManagerById
+  success NotEqual=0
+  HANDLE
+  TransactionManagerId LPGUID
+  DesiredAccess ACCESS_MASK
+  OpenOptions ULONG
+
+func RecoverTransactionManager
+  BOOL
+  TransactionManagerHandle HANDLE
+
+func RenameTransactionManager
+  BOOL
+  LogFileName LPWSTR
+  ExistingTransactionManagerGuid LPGUID
+
+func RollforwardTransactionManager
+  BOOL
+  TransactionManagerHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+

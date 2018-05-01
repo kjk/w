@@ -1,0 +1,28 @@
+include Interfaces\BITS\IBackgroundCopyJob3.txt
+
+ingterface IBackgroundCopyJob4 base=IBackgroundCopyJob3 id={659cdeae-489e-11d9-a9cd-000d56965251} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func SetPeerCachingFlags
+    HRESULT
+    Flags DWORD
+
+  func GetPeerCachingFlags
+    HRESULT
+    pFlags DWORD*
+
+  func GetOwnerIntegrityLevel
+    HRESULT
+    pLevel ULONG*
+
+  func GetOwnerElevationState
+    HRESULT
+    pElevated BOOL*
+
+  func SetMaximumDownloadTime
+    HRESULT
+    Timeout ULONG
+
+  func GetMaximumDownloadTime
+    HRESULT
+    pTimeout ULONG*
+
+

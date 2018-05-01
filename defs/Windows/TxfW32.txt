@@ -1,0 +1,31 @@
+include Headers\windows.h.txt
+include Windows\Clfsw32.txt
+
+dll TxfW32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Data Access and Storage/Local File Systems/Transactional NTFS (TxF)"
+struct TXF_ID
+  LowPart LONGLONG
+  HighPart LONGLONG
+
+pointer PTXF_ID TXF_ID
+
+func TxfLogCreateFileReadContext
+  BOOL
+  LogPath LPCWSTR
+  BeginningLsn CLFS_LSN
+  EndingLSN CLFS_LSN
+  TxfFileId PTXF_ID
+  TxfLogContext PVOID*
+
+func TxfLogDestroyReadContext
+  BOOL
+  TxfLogContext PVOID
+
+func TxfLogReadRecords
+  BOOL
+  TxfLogContext PVOID
+  BufferLength ULONG
+  Buffer PVOID
+  BytesUsed PULONG
+  RecordCount PULONG
+

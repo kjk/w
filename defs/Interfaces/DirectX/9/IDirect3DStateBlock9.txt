@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3DStateBlock9 base=IUnknown id={B07C4FE5-310D-4ba8-A23C-4F0F206F218B} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func GetDevice
+    HRESULT
+    ppDevice IDirect3DDevice9**
+
+  func Capture
+    HRESULT
+
+  func Apply
+    HRESULT
+
+

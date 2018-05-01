@@ -1,0 +1,113 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IUri base=IUnknown id={A39EE748-6A27-4817-A6F2-13914BEF5890} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetPropertyBSTR
+    HRESULT
+    uriProp Uri_PROPERTY
+    pbstrProperty BSTR*
+    dwFlags [Uri_PROPERTY_DISPLAY_FLAGS]
+
+  func GetPropertyLength
+    HRESULT
+    uriProp Uri_PROPERTY
+    pcchProperty DWORD*
+    dwFlags [Uri_PROPERTY_DISPLAY_FLAGS]
+
+  func GetPropertyDWORD
+    HRESULT
+    uriProp Uri_PROPERTY
+    pdwProperty DWORD*
+    dwFlags DWORD
+
+  func HasProperty
+    HRESULT
+    uriProp Uri_PROPERTY
+    pfHasProperty BOOL*
+
+  func GetAbsoluteUri
+    HRESULT
+    pbstrAbsoluteUri BSTR*
+
+  func GetAuthority
+    HRESULT
+    pbstrAuthority BSTR*
+
+  func GetDisplayUri
+    HRESULT
+    pbstrDisplayString BSTR*
+
+  func GetDomain
+    HRESULT
+    pbstrDomain BSTR*
+
+  func GetExtension
+    HRESULT
+    pbstrExtension BSTR*
+
+  func GetFragment
+    HRESULT
+    pbstrFragment BSTR*
+
+  func GetHost
+    HRESULT
+    pbstrHost BSTR*
+
+  func GetPassword
+    HRESULT
+    pbstrPassword BSTR*
+
+  func GetPath
+    HRESULT
+    pbstrPath BSTR*
+
+  func GetPathAndQuery
+    HRESULT
+    pbstrPathAndQuery BSTR*
+
+  func GetQuery
+    HRESULT
+    pbstrQuery BSTR*
+
+  func GetRawUri
+    HRESULT
+    pbstrRawUri BSTR*
+
+  func GetSchemeName
+    HRESULT
+    pbstrSchemeName BSTR*
+
+  func GetUserInfo
+    HRESULT
+    pbstrUserInfo BSTR*
+
+  func GetUserName
+    HRESULT
+    pbstrUserName BSTR*
+
+  func GetHostType
+    HRESULT
+    pdwHostType Uri_HOST_TYPE*
+
+  func GetPort
+    HRESULT
+    pdwPort DWORD*
+
+  func GetScheme
+    HRESULT
+    pdwScheme [URL_SCHEME*|DWORD*]
+
+  func GetZone
+    HRESULT
+    pdwZone [URLZONE*|DWORD*]
+
+  func GetProperties
+    HRESULT
+    pdwFlags [Uri_HAS_FLAGS*|LPDWORD]
+
+  func IsEqual
+    HRESULT
+    pUri IUri*
+    pfEqual BOOL*
+
+

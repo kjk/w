@@ -1,0 +1,405 @@
+include Headers\windows.h.txt
+include Headers\multimedia.h.txt
+
+header
+interface IActivateAudioInterfaceAsyncOperation
+
+interface IActivateAudioInterfaceCompletionHandler
+
+interface IAudioAutoGainControl
+
+interface IAudioBass
+
+interface IAudioCaptureClient
+
+interface IAudioChannelConfig
+
+interface IAudioClient
+
+interface IAudioClient2
+
+interface IAudioClock
+
+interface IAudioClock2
+
+interface IAudioClockAdjustment
+
+interface IAudioDeviceEndpoint
+
+interface IAudioEndpoint
+
+interface IAudioEndpointControl
+
+interface IAudioEndpointOffloadStreamMeter
+
+interface IAudioEndpointOffloadStreamMute
+
+interface IAudioEndpointOffloadStreamVolume
+
+interface IAudioEndpointRT
+
+interface IAudioEndpointVolume
+
+interface IAudioEndpointVolumeCallback
+
+interface IAudioEndpointVolumeEx
+
+interface IAudioInputEndpointRT
+
+interface IAudioInputSelector
+
+interface IAudioLfxControl
+
+interface IAudioLoudness
+
+interface IAudioMeterInformation
+
+interface IAudioMidrange
+
+interface IAudioMute
+
+interface IAudioOutputEndpointRT
+
+interface IAudioOutputSelector
+
+interface IAudioPeakMeter
+
+interface IAudioRenderClient
+
+interface IAudioSessionControl
+
+interface IAudioSessionControl2
+
+interface IAudioSessionEnumerator
+
+interface IAudioSessionEvents
+
+interface IAudioSessionManager
+
+interface IAudioSessionManager2
+
+interface IAudioSessionNotification
+
+interface IAudioStreamVolume
+
+interface IAudioTreble
+
+interface IAudioVolumeDuckNotification
+
+interface IAudioVolumeLevel
+
+interface IChannelAudioVolume
+
+interface IConnector
+
+interface IControlChangeNotify
+
+interface IControlInterface
+
+interface IDeviceSpecificProperty
+
+interface IDeviceTopology
+
+interface IHardwareAudioEngineBase
+
+interface IKsControl
+
+interface IKsFormatSupport
+
+interface IKsJackDescription
+
+interface IKsJackDescription2
+
+interface IKsJackSinkInformation
+
+interface IMMDevice
+
+interface IMMDeviceActivator
+
+interface IMMDeviceCollection
+
+interface IMMDeviceEnumerator
+
+interface IMMEndpoint
+
+interface IMMNotificationClient
+
+interface IPart
+
+interface IPartsList
+
+interface IPerChannelDbLevel
+
+interface ISimpleAudioVolume
+
+interface ISubunit
+
+alias HNSTIME LONGLONG
+
+pointer HNSTIME* HNSTIME
+
+array "WCHAR [MAX_SINK_DESCRIPTION_NAME_LENGTH]" base=WCHAR count=32
+
+array "float [1]" base=float count=1
+
+pointer "float []" float
+
+enum [AUDCLNT_HRESULT] HRESULT display=HRESULT
+  AUDCLNT_S_BUFFER_EMPTY                 0x08890001
+  AUDCLNT_S_THREAD_ALREADY_REGISTERED    0x08890002
+  AUDCLNT_S_POSITION_STALLED             0x08890003
+  AUDCLNT_E_NOT_INITIALIZED              0x88890001
+  AUDCLNT_E_ALREADY_INITIALIZED          0x88890002
+  AUDCLNT_E_WRONG_ENDPOINT_TYPE          0x88890003
+  AUDCLNT_E_DEVICE_INVALIDATED           0x88890004
+  AUDCLNT_E_NOT_STOPPED                  0x88890005
+  AUDCLNT_E_BUFFER_TOO_LARGE             0x88890006
+  AUDCLNT_E_OUT_OF_ORDER                 0x88890007
+  AUDCLNT_E_UNSUPPORTED_FORMAT           0x88890008
+  AUDCLNT_E_INVALID_SIZE                 0x88890009
+  AUDCLNT_E_DEVICE_IN_USE                0x8889000a
+  AUDCLNT_E_BUFFER_OPERATION_PENDING     0x8889000b
+  AUDCLNT_E_THREAD_NOT_REGISTERED        0x8889000c
+  AUDCLNT_E_EXCLUSIVE_MODE_NOT_ALLOWED   0x8889000e
+  AUDCLNT_E_ENDPOINT_CREATE_FAILED       0x8889000f
+  AUDCLNT_E_SERVICE_NOT_RUNNING          0x88890010
+  AUDCLNT_E_EVENTHANDLE_NOT_EXPECTED     0x88890011
+  AUDCLNT_E_EXCLUSIVE_MODE_ONLY          0x88890012
+  AUDCLNT_E_BUFDURATION_PERIOD_NOT_EQUAL 0x88890013
+  AUDCLNT_E_EVENTHANDLE_NOT_SET          0x88890014
+  AUDCLNT_E_INCORRECT_BUFFER_SIZE        0x88890015
+  AUDCLNT_E_BUFFER_SIZE_ERROR            0x88890016
+  AUDCLNT_E_CPUUSAGE_EXCEEDED            0x88890017
+  AUDCLNT_E_BUFFER_ERROR                 0x88890018
+  AUDCLNT_E_BUFFER_SIZE_NOT_ALIGNED      0x88890019
+  AUDCLNT_E_INVALID_DEVICE_PERIOD        0x88890020
+
+enum AUDCLNT_SHAREMODE UINT
+  AUDCLNT_SHAREMODE_SHARED    0
+  AUDCLNT_SHAREMODE_EXCLUSIVE 1
+
+enum AudioSessionState UINT
+  AudioSessionStateInactive 0
+  AudioSessionStateActive   1
+  AudioSessionStateExpired  2
+
+pointer AudioSessionState* AudioSessionState
+
+enum AudioSessionDisconnectReason UINT
+  DisconnectReasonDeviceRemoval         0
+  DisconnectReasonServerShutdown        1
+  DisconnectReasonFormatChanged         2
+  DisconnectReasonSessionLogoff         3
+  DisconnectReasonSessionDisconnected   4
+  DisconnectReasonExclusiveModeOverride 5
+
+enum ConnectorType UINT
+  Unknown_Connector 0
+  Physical_Internal 1
+  Physical_External 2
+  Software_IO       3
+  Software_Fixed    4
+  Network           5
+
+pointer ConnectorType* ConnectorType
+
+enum DataFlow UINT
+  In  0
+  Out 1
+
+pointer DataFlow* DataFlow
+
+enum EDataFlow UINT
+  eRender  0
+  eCapture 1
+  eAll     2
+
+pointer EDataFlow* EDataFlow
+
+enum ERole UINT
+  eConsole        0
+  eMultimedia     1
+  eCommunications 2
+
+enum PartType UINT
+  Connector 0
+  Subunit   1
+
+pointer PartType* PartType
+
+struct [KSIDENTIFIER_s] display=struct
+  Set GUID
+  Id ULONG
+  Flags ULONG
+
+union KSIDENTIFIER
+   [KSIDENTIFIER_s]
+  Alignment LONGLONG
+
+alias KSPROPERTY KSIDENTIFIER
+
+pointer PKSPROPERTY KSPROPERTY
+
+alias KSMETHOD KSIDENTIFIER
+
+pointer PKSMETHOD KSMETHOD
+
+alias KSEVENT KSIDENTIFIER
+
+pointer PKSEVENT KSEVENT
+
+struct KSDATAFORMAT
+  FormatSize ULONG
+  Flags ULONG
+  SampleSize ULONG
+  Reserved ULONG
+  MajorFormat GUID
+  SubFormat GUID
+  Specifier GUID
+
+pointer PKSDATAFORMAT KSDATAFORMAT
+
+pointer PKSDATAFORMAT* PKSDATAFORMAT
+
+enum EPcxConnectionType UINT
+  eConnTypeUnknown               0
+  eConnType3Point5mm             1
+  eConnTypeQuarter               2
+  eConnTypeAtapiInternal         3
+  eConnTypeRCA                   4
+  eConnTypeOptical               5
+  eConnTypeOtherDigital          6
+  eConnTypeOtherAnalog           7
+  eConnTypeMultichannelAnalogDIN 8
+  eConnTypeXlrProfessional       9
+  eConnTypeRJ11Modem             10
+  eConnTypeCombination           11
+
+enum EPcxGeoLocation UINT
+  eGeoLocRear             0x1
+  eGeoLocFront            2
+  eGeoLocLeft             3
+  eGeoLocRight            4
+  eGeoLocTop              5
+  eGeoLocBottom           6
+  eGeoLocRearPanel        7
+  eGeoLocRiser            8
+  eGeoLocInsideMobileLid  9
+  eGeoLocDrivebay         10
+  eGeoLocHDMI             11
+  eGeoLocOutsideMobileLid 12
+  eGeoLocATAPI            13
+  eGeoLocReserved5        14
+  eGeoLocReserved6        15
+
+enum EPcxGenLocation UINT
+  eGenLocPrimaryBox 0
+  eGenLocInternal   1
+  eGenLocSeparate   2
+  eGenLocOther      3
+
+enum EPxcPortConnection UINT
+  ePortConnJack                  0
+  ePortConnIntegratedDevice      1
+  ePortConnBothIntegratedAndJack 2
+  ePortConnUnknown               3
+
+struct KSJACK_DESCRIPTION
+  ChannelMapping [SPEAKER_POSITION]
+  Color COLORREF
+  ConnectionType EPcxConnectionType
+  GeoLocation EPcxGeoLocation
+  GenLocation EPcxGenLocation
+  PortConnection EPxcPortConnection
+  IsConnected BOOL
+
+pointer KSJACK_DESCRIPTION* KSJACK_DESCRIPTION
+
+flag [JACKDESC2_FLAGS] DWORD display=DWORD
+  JACKDESC2_PRESENCE_DETECT_CAPABILITY       0x00000001
+  JACKDESC2_DYNAMIC_FORMAT_CHANGE_CAPABILITY 0x00000002
+
+struct KSJACK_DESCRIPTION2
+  DeviceStateInfo DWORD
+  JackCapabilities [JACKDESC2_FLAGS]
+
+pointer KSJACK_DESCRIPTION2* KSJACK_DESCRIPTION2
+
+enum KSJACK_SINK_CONNECTIONTYPE UINT
+  KSJACK_SINK_CONNECTIONTYPE_HDMI        0
+  KSJACK_SINK_CONNECTIONTYPE_DISPLAYPORT 1
+
+struct KSJACK_SINK_INFORMATION
+  ConnType KSJACK_SINK_CONNECTIONTYPE
+  ManufacturerId WORD
+  ProductId WORD
+  AudioLatency WORD
+  HDCPCapable BOOL
+  AICapable BOOL
+  SinkDescriptionLength UCHAR
+  SinkDescription "WCHAR [MAX_SINK_DESCRIPTION_NAME_LENGTH]"
+  PortId LUID
+
+pointer KSJACK_SINK_INFORMATION* KSJACK_SINK_INFORMATION
+
+struct AUDIO_VOLUME_NOTIFICATION_DATA
+  guidEventContext GUID
+  bMuted BOOL
+  fMasterVolume float
+  nChannels UINT
+  afChannelVolumes "float [1]" count=nChannels
+
+pointer PAUDIO_VOLUME_NOTIFICATION_DATA AUDIO_VOLUME_NOTIFICATION_DATA
+
+enum AUDIO_STREAM_CATEGORY UINT
+  AudioCategory_Other                  0
+  AudioCategory_ForegroundOnlyMedia    1
+  AudioCategory_BackgroundCapableMedia 2
+  AudioCategory_Communications         3
+  AudioCategory_Alerts                 4
+  AudioCategory_SoundEffects           5
+  AudioCategory_GameEffects            6
+  AudioCategory_GameMedia              7
+
+enum AE_POSITION_FLAGS UINT
+  POSITION_INVALID       0
+  POSITION_DISCONTINUOUS 1
+  POSITION_CONTINUOUS    2
+  POSITION_QPC_ERROR     4
+
+flag APO_BUFFER_FLAGS UINT
+  BUFFER_INVALID 0
+  BUFFER_VALID   1
+  BUFFER_SILENT  2
+
+struct AudioClientProperties
+  cbSize UINT32
+  bIsOffload BOOL
+  eCategory AUDIO_STREAM_CATEGORY
+
+pointer "const AudioClientProperties*" AudioClientProperties
+
+struct APO_CONNECTION_PROPERTY
+  pBuffer UINT_PTR
+  u32ValidFrameCount UINT32
+  u32BufferFlags APO_BUFFER_FLAGS
+  u32Signature UINT32
+
+pointer APO_CONNECTION_PROPERTY* APO_CONNECTION_PROPERTY
+
+pointer "const APO_CONNECTION_PROPERTY*" APO_CONNECTION_PROPERTY
+
+struct AE_CURRENT_POSITION
+  u64DevicePosition UINT64
+  u64StreamPosition UINT64
+  u64PaddingFrames UINT64
+  hnsQPCPosition HNSTIME
+  f32FramesPerSecond FLOAT32
+  Flag AE_POSITION_FLAGS
+
+pointer AE_CURRENT_POSITION* AE_CURRENT_POSITION
+
+enum AUDIO_CURVE_TYPE UINT
+  AUDIO_CURVE_TYPE_NONE         0
+  AUDIO_CURVE_TYPE_WINDOWS_FADE 1
+

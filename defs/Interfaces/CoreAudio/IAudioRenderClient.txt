@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioRenderClient base=IUnknown id={F294ACFC-3146-4483-A7BF-ADDCA7C260E2} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func GetBuffer
+    [AUDCLNT_HRESULT]
+    NumFramesRequested UINT32
+    ppData BYTE**
+
+  func ReleaseBuffer
+    [AUDCLNT_HRESULT]
+    NumFramesWritten UINT32
+    dwFlags DWORD
+
+

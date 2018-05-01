@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumSTATSTG base=IUnknown id={0000000d-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Structured Storage/Interfaces"
+  func Next
+    HRESULT
+    celt ULONG
+    rgelt STATSTG* postCount=celt
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppenum IEnumSTATSTG**
+
+

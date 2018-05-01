@@ -1,0 +1,10 @@
+include Interfaces\Shell\AppMgr\IPublishedApp.txt
+include Interfaces\Shell\AppMgr\AppMgr.h.txt
+
+ingterface IPublishedApp2 base=IPublishedApp id={12B81347-1B3A-4A04-AA61-3F768B67FD7E} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Application Manager"
+  func Install2
+    HRESULT
+    pstInstall LPSYSTEMTIME
+    hwndParent HWND
+
+

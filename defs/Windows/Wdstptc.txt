@@ -1,0 +1,84 @@
+include Headers\windows.h.txt
+
+dll Wdstptc.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Administration/Windows Deployment Services (WDS)/Transport Client"
+enum [WdsAuthLevel] ULONG display=ULONG
+  WDS_TRANSPORTCLIENT_AUTH    0x1
+  WDS_TRANSPORTCLIENT_NO_AUTH 0x2
+
+struct WDS_TRANSPORTCLIENT_REQUEST
+  ulLength ULONG
+  ulApiVersion ULONG
+  ulAuthLevel [WdsAuthLevel]
+  pwszServer LPCWSTR
+  pwszNamespace LPCWSTR
+  pwszObjectName LPCWSTR
+  ulCacheSize ULONG
+  ulProtocol ULONG
+  pvProtocolData PVOID length=ulProtocolDataLength
+  ulProtocolDataLength ULONG
+
+pointer PWDS_TRANSPORTCLIENT_REQUEST WDS_TRANSPORTCLIENT_REQUEST
+
+enum TRANSPORTCLIENT_CALLBACK_ID UINT
+  WDS_TRANSPORTCLIENT_SESSION_START    0
+  WDS_TRANSPORTCLIENT_RECEIVE_CONTENTS 1
+  WDS_TRANSPORTCLIENT_SESSION_COMPLETE 2
+  WDS_TRANSPORTCLIENT_RECEIVE_METADATA 3
+  WDS_TRANSPORTCLIENT_SESSION_STARTEX  4
+
+func WdsTransportClientAddRefBuffer
+  [ERROR_CODE]
+  pvBuffer PVOID
+
+func WdsTransportClientCancelSession
+  [ERROR_CODE]
+  hSessionKey HANDLE
+
+func WdsTransportClientCloseSession
+  [ERROR_CODE]
+  hSessionKey HANDLE
+
+func WdsTransportClientCompleteReceive
+  [ERROR_CODE]
+  hSessionKey HANDLE
+  ulSize HANDLE
+  pullOffset PULARGE_INTEGER
+
+func WdsTransportClientInitialize
+  [ERROR_CODE]
+
+func WdsTransportClientInitializeSession
+  [ERROR_CODE]
+  pSessionRequest PWDS_TRANSPORTCLIENT_REQUEST
+  pCallerData PVOID
+  hSessionKey PHANDLE
+
+func WdsTransportClientQueryStatus
+  [ERROR_CODE]
+  hSessionKey HANDLE
+  puStatus PULONG
+  puErrorCode PULONG
+
+func WdsTransportClientRegisterCallback
+  [ERROR_CODE]
+  hSessionKey HANDLE
+  CallbackId TRANSPORTCLIENT_CALLBACK_ID
+  pfnCallback PVOID
+
+func WdsTransportClientReleaseBuffer
+  [ERROR_CODE]
+  pvBuffer PVOID
+
+func WdsTransportClientShutdown
+  [ERROR_CODE]
+
+func WdsTransportClientStartSession
+  [ERROR_CODE]
+  hSessionKey HANDLE
+
+func WdsTransportClientWaitForCompletion
+  [ERROR_CODE]
+  hSessionKey HANDLE
+  uTimeout ULONG
+

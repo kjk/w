@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IUriBuilderFactory base=IUnknown id={E982CE48-0B96-440c-BC37-0C869B27A29E} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func CreateIUriBuilder
+    HRESULT
+    dwFlags DWORD
+    dwReserved DWORD_PTR
+    ppIUriBuilder IUriBuilder**
+
+  func CreateInitializedIUriBuilder
+    HRESULT
+    dwFlags DWORD
+    dwReserved DWORD_PTR
+    ppIUriBuilder IUriBuilder**
+
+

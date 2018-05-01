@@ -1,0 +1,44 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\8\d3d8.txt
+
+ingterface IDirect3DVolume8 base=IUnknown id={BD7349F5-14F1-42e4-9C79-972380DB40C0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/8"
+  func GetDevice
+    HRESULT
+    ppDevice IDirect3DDevice8**
+
+  func SetPrivateData
+    HRESULT
+    refguid REFGUID
+    pData "CONST void*"
+    SizeOfData DWORD
+    Flags DWORD
+
+  func GetPrivateData
+    HRESULT
+    refguid REFGUID
+    pData void*
+    pSizeOfData DWORD*
+
+  func FreePrivateData
+    HRESULT
+    refguid REFGUID
+
+  func GetContainer
+    HRESULT
+    riid REFIID
+    ppContainer void** interfaceId=riid
+
+  func GetDesc
+    HRESULT
+    pDesc D3DVOLUME_DESC*
+
+  func LockBox
+    HRESULT
+    pLockedVolume D3DLOCKED_BOX*
+    pBox "CONST D3DBOX*"
+    Flags DWORD
+
+  func UnlockBox
+    HRESULT
+
+

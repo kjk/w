@@ -1,0 +1,293 @@
+include Headers\windows.h.txt
+include Headers\registry.h.txt
+
+dll WdsPxe.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Administration/Windows Deployment Services (WDS)/Server"
+array "BYTE [PXE_MAX_ADDRESS]" base=BYTE count=16
+
+struct PXE_PROVIDER
+  uSizeOfStruct ULONG
+  pwszName LPWSTR
+  pwszFilePath LPWSTR
+  bIsCritical BOOL
+  uIndex ULONG
+
+pointer PPXE_PROVIDER PXE_PROVIDER
+
+pointer PPXE_PROVIDER* PPXE_PROVIDER
+
+union [PXE_ADDRESS_u] display=union
+  bAddress "BYTE [PXE_MAX_ADDRESS]"
+  uIpAddress ULONG
+
+flag [PXE_ADDR_FLAGS] ULONG display=ULONG
+  PXE_ADDR_BROADCAST      0x0001
+  PXE_ADDR_USE_PORT       0x0002
+  PXE_ADDR_USE_ADDR       0x0004
+  PXE_ADDR_USE_DHCP_RULES 0x0008
+
+struct PXE_ADDRESS
+  uFlags [PXE_ADDR_FLAGS]
+   [PXE_ADDRESS_u]
+  uAddrLen ULONG
+  uPort USHORT
+
+pointer PXE_ADDRESS* PXE_ADDRESS
+
+enum PXE_BOOT_ACTION ULONG
+  PXE_BA_NBP      1
+  PXE_BA_CUSTOM   2
+  PXE_BA_IGNORE   3
+  PXE_BA_REJECTED 4
+
+enum PXE_SEVERITY ULONG
+  PXE_TRACE_VERBOSE 0x00010000
+  PXE_TRACE_INFO    0x00020000
+  PXE_TRACE_WARNING 0x00040000
+  PXE_TRACE_ERROR   0x00080000
+  PXE_TRACE_FATAL   0x00100000
+
+enum PXE_GSI_TYPE ULONG
+  PXE_GSI_TRACE_ENABLED 1
+
+enum PXE_REG_INDEX ULONG
+  PXE_REG_INDEX_TOP    0
+  PXE_REG_INDEX_BOTTOM 0xFFFFFFFF
+
+enum PXE_PROVIDER_ATTRIBUTE ULONG
+  PXE_PROV_ATTR_FILTER 0
+
+enum PXE_CALLBACK_TYPE ULONG
+  PXE_CALLBACK_RECV_REQUEST    0
+  PXE_CALLBACK_SHUTDOWN        1
+  PXE_CALLBACK_SERVICE_CONTROL 2
+
+struct PXE_DHCPV6_OPTION pack=1
+  OptionCode WORD
+  DataLength WORD
+  Data "BYTE [1]" count=DataLength
+
+array "PXE_DHCPV6_OPTION [1]" base=PXE_DHCPV6_OPTION count=1
+
+struct PXE_DHCPV6_RELAY_MESSAGE pack=1
+  MessageType BYTE
+  HopCount BYTE
+  LinkAddress "BYTE [16]"
+  PeerAddress "BYTE [16]"
+  Options "PXE_DHCPV6_OPTION [1]"
+
+pointer PPXE_DHCPV6_RELAY_MESSAGE PXE_DHCPV6_RELAY_MESSAGE
+
+struct PXE_DHCPV6_NESTED_RELAY_MESSAGE
+  pRelayMessage PPXE_DHCPV6_RELAY_MESSAGE length=cbRelayMessage
+  cbRelayMessage ULONG
+  pInterfaceIdOption PVOID length=cbInterfaceIdOption
+  cbInterfaceIdOption WORD
+
+pointer PPXE_DHCPV6_NESTED_RELAY_MESSAGE PXE_DHCPV6_NESTED_RELAY_MESSAGE
+
+func PxeAsyncRecvDone
+  [ERROR_CODE]
+  hClientRequest HANDLE
+  Action PXE_BOOT_ACTION
+
+func PxeDhcpAppendOption
+  [ERROR_CODE]
+  pReplyPacket PVOID postLength=puReplyPacketLen
+  uMaxReplyPacketLen ULONG
+  puReplyPacketLen PULONG
+  bOption BYTE
+  bOptionLen BYTE
+  pValue PVOID length=bOptionLen
+
+func PxeDhcpv6AppendOption
+  [ERROR_CODE]
+  pReply PVOID postLength=pcbReplyUsed
+  cbReply ULONG
+  pcbReplyUsed PULONG
+  wOptionType WORD
+  cbOption WORD
+  pOption PVOID length=cbOption
+
+func PxeDhcpv6AppendOptionRaw
+  [ERROR_CODE]
+  pReply PVOID postLength=pcbReplyUsed
+  cbReply ULONG
+  pcbReplyUsed PULONG
+  cbBuffer USHORT
+  pBuffer PVOID length=cbBuffer
+
+func PxeDhcpGetOptionValue
+  [ERROR_CODE]
+  pPacket PVOID length=uPacketLen
+  uPacketLen ULONG
+  uInstance ULONG
+  bOption BYTE
+  pbOptionLen PBYTE
+  ppOptionValue PVOID*
+
+func PxeDhcpv6GetOptionValue
+  [ERROR_CODE]
+  pPacket PVOID length=uPacketLen
+  uPacketLen ULONG
+  uInstance ULONG
+  wOption WORD
+  pwOptionLen PWORD
+  ppOptionValue PVOID*
+
+func PxeDhcpGetVendorOptionValue
+  [ERROR_CODE]
+  pPacket PVOID length=uPacketLen
+  uPacketLen ULONG
+  bOption BYTE
+  uInstance ULONG
+  pbOptionLen PBYTE
+  ppOptionValue PVOID*
+
+func PxeDhcpv6GetVendorOptionValue
+  [ERROR_CODE]
+  pPacket PVOID length=uPacketLen
+  uPacketLen ULONG
+  dwEnterpriseNumber DWORD
+  wOption WORD
+  uInstance ULONG
+  pwOptionLen PWORD
+  ppOptionValue PVOID*
+
+func PxeDhcpInitialize
+  [ERROR_CODE]
+  pRecvPacket PVOID length=uRecvPacketLen
+  uRecvPacketLen ULONG
+  pReplyPacket PVOID postLength=puReplyPacketLen
+  uMaxReplyPacketLen ULONG
+  puReplyPacketLen PULONG
+
+func PxeDhcpv6Initialize
+  [ERROR_CODE]
+  pRequest PVOID length=cbRequest
+  cbRequest ULONG
+  pReply PVOID postLength=pcbReplyUsed
+  cbReply ULONG
+  pcbReplyUsed PULONG
+
+func PxeDhcpIsValid
+  [ERROR_CODE]
+  pPacket PVOID length=uPacketLen
+  uPacketLen ULONG
+  bRequestPacket BOOL
+  pbPxeOptionPresent PBOOL
+
+func PxeDhcpv6IsValid
+  [ERROR_CODE]
+  pPacket PVOID length=uPacketLen
+  uPacketLen ULONG
+  bRequestPacket BOOL
+  pbPxeOptionPresent PBOOL
+
+func PxeGetServerInfo
+  [ERROR_CODE]
+  uInfoType PXE_GSI_TYPE
+  pBuffer PVOID length=uBufferLen
+  uBufferLen ULONG
+
+func PxeGetServerInfoEx
+  [ERROR_CODE]
+  uInfoType PXE_GSI_TYPE
+  pBuffer PVOID postLength=puBufferUsed
+  uBufferLen ULONG
+  puBufferUsed PULONG
+
+func PxePacketAllocate
+  success NotEqual=0
+  PVOID
+  hProvider HANDLE
+  hClientRequest HANDLE
+  uSize ULONG
+
+func PxePacketFree
+  [ERROR_CODE]
+  hProvider HANDLE
+  hClientRequest HANDLE
+  pPacket PVOID
+
+func PxeProviderEnumClose
+  [ERROR_CODE]
+  hEnum HANDLE
+
+func PxeProviderEnumFirst
+  [ERROR_CODE]
+  phEnum HANDLE*
+
+func PxeProviderEnumNext
+  [ERROR_CODE]
+  hEnum HANDLE
+  ppProvider PPXE_PROVIDER*
+
+func PxeProviderFreeInfo
+  [ERROR_CODE]
+  pProvider PPXE_PROVIDER
+
+func PxeProviderQueryIndex
+  [ERROR_CODE]
+  pszProviderName LPCWSTR
+  puIndex PULONG
+
+func PxeProviderRegister
+  [ERROR_CODE]
+  pszProviderName LPCWSTR
+  pszModulePath LPCWSTR
+  Index PXE_REG_INDEX
+  bIsCritical BOOL
+  phProviderKey PHKEY
+
+func PxeProviderSetAttribute
+  [ERROR_CODE]
+  hProvider HANDLE
+  Attribute PXE_PROVIDER_ATTRIBUTE
+  pParameterBuffer PVOID length=uParamLen
+  uParamLen ULONG
+
+func PxeProviderUnRegister
+  [ERROR_CODE]
+  pszProviderName LPCWSTR
+
+func PxeRegisterCallback
+  [ERROR_CODE]
+  hProvider HANDLE
+  CallbackType PXE_CALLBACK_TYPE
+  pCallbackFunction PVOID
+  pContext PVOID
+
+func PxeSendReply
+  [ERROR_CODE]
+  hClientRequest HANDLE
+  pPacket PVOID length=uPacketLen
+  uPacketLen ULONG
+  pAddress PXE_ADDRESS*
+
+func PxeTrace varArgs
+  [ERROR_CODE]
+  hProvider HANDLE
+  Severity PXE_SEVERITY
+  pszFormat LPCWSTR
+
+func PxeDhcpv6ParseRelayForw
+  [ERROR_CODE]
+  pRelayForwPacket PVOID
+  uRelayForwPacketLen ULONG
+  pRelayMessages PPXE_DHCPV6_NESTED_RELAY_MESSAGE postCount=pnRelayMessages
+  nRelayMessages ULONG
+  pnRelayMessages PULONG
+  ppInnerPacket PBYTE*
+  pcbInnerPacket PULONG
+
+func PxeDhcpv6CreateRelayRepl
+  [ERROR_CODE]
+  pRelayMessages PPXE_DHCPV6_NESTED_RELAY_MESSAGE count=nRelayMessages
+  nRelayMessages ULONG
+  pInnerPacket PBYTE length=cbInnerPacket
+  cbInnerPacket ULONG
+  pReplyBuffer PVOID postLength=pcbReplyBuffer
+  cbReplyBuffer ULONG
+  pcbReplyBuffer PULONG
+

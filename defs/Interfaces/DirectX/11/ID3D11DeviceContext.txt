@@ -1,0 +1,627 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+
+ingterface ID3D11DeviceContext base=ID3D11DeviceChild id={c0bfa96c-e089-44fb-8eaf-26f8796190da} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func VSSetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+
+  func PSSetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView*const* count=NumViews
+
+  func PSSetShader
+    void
+    pPixelShader ID3D11PixelShader*
+    ppClassInstances ID3D11ClassInstance*const* count=NumClassInstances
+    NumClassInstances UINT
+
+  func PSSetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState*const* count=NumSamplers
+
+  func VSSetShader
+    void
+    pVertexShader ID3D11VertexShader*
+    ppClassInstances ID3D11ClassInstance*const* count=NumClassInstances
+    NumClassInstances UINT
+
+  func DrawIndexed
+    void
+    IndexCount UINT
+    StartIndexLocation UINT
+    BaseVertexLocation INT
+
+  func Draw
+    void
+    VertexCount UINT
+    StartVertexLocation UINT
+
+  func Map
+    HRESULT
+    pResource ID3D11Resource*
+    Subresource UINT
+    MapType D3D11_MAP
+    MapFlags D3D11_MAP_FLAG
+    pMappedResource D3D11_MAPPED_SUBRESOURCE*
+
+  func Unmap
+    void
+    pResource ID3D11Resource*
+    Subresource UINT
+
+  func PSSetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+
+  func IASetInputLayout
+    void
+    pInputLayout ID3D11InputLayout*
+
+  func IASetVertexBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppVertexBuffers ID3D11Buffer*const* count=NumBuffers
+    pStrides "const UINT*" count=NumBuffers
+    pOffsets "const UINT*" count=NumBuffers
+
+  func IASetIndexBuffer
+    void
+    pIndexBuffer ID3D11Buffer*
+    Format DXGI_FORMAT
+    Offset UINT
+
+  func DrawIndexedInstanced
+    void
+    IndexCountPerInstance UINT
+    InstanceCount UINT
+    StartIndexLocation UINT
+    BaseVertexLocation INT
+    StartInstanceLocation UINT
+
+  func DrawInstanced
+    void
+    VertexCountPerInstance UINT
+    InstanceCount UINT
+    StartVertexLocation UINT
+    StartInstanceLocation UINT
+
+  func GSSetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+
+  func GSSetShader
+    void
+    pShader ID3D11GeometryShader*
+    ppClassInstances ID3D11ClassInstance*const* count=NumClassInstances
+    NumClassInstances UINT
+
+  func IASetPrimitiveTopology
+    void
+    Topology D3D11_PRIMITIVE_TOPOLOGY
+
+  func VSSetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView*const* count=NumViews
+
+  func VSSetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState*const* count=NumSamplers
+
+  func Begin
+    void
+    pAsync ID3D11Asynchronous*
+
+  func End
+    void
+    pAsync ID3D11Asynchronous*
+
+  func GetData
+    HRESULT
+    pAsync ID3D11Asynchronous*
+    pData void* postLength=DataSize
+    DataSize UINT
+    GetDataFlags UINT
+
+  func SetPredication
+    void
+    pPredicate ID3D11Predicate*
+    PredicateValue BOOL
+
+  func GSSetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView*const* count=NumViews
+
+  func GSSetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState*const* count=NumSamplers
+
+  func OMSetRenderTargets
+    void
+    NumViews UINT
+    ppRenderTargetViews ID3D11RenderTargetView*const* count=NumViews
+    pDepthStencilView ID3D11DepthStencilView*
+
+  func OMSetRenderTargetsAndUnorderedAccessViews
+    void
+    NumRTVs UINT
+    ppRenderTargetViews ID3D11RenderTargetView*const* count=NumRTVs
+    pDepthStencilView ID3D11DepthStencilView*
+    UAVStartSlot UINT
+    NumUAVs UINT
+    ppUnorderedAccessViews ID3D11UnorderedAccessView*const* count=NumUAVs
+    pUAVInitialCounts "const UINT*"
+
+  func OMSetBlendState
+    void
+    pBlendState ID3D11BlendState*
+    BlendFactor "const FLOAT [4]"
+    SampleMask UINT
+
+  func OMSetDepthStencilState
+    void
+    pDepthStencilState ID3D11DepthStencilState*
+    StencilRef UINT
+
+  func SOSetTargets
+    void
+    NumBuffers UINT
+    ppSOTargets ID3D11Buffer*const* count=NumBuffers
+    pOffsets "const UINT*" count=NumBuffers
+
+  func DrawAuto
+    void
+
+  func DrawIndexedInstancedIndirect
+    void
+    pBufferForArgs ID3D11Buffer*
+    AlignedByteOffsetForArgs UINT
+
+  func DrawInstancedIndirect
+    void
+    pBufferForArgs ID3D11Buffer*
+    AlignedByteOffsetForArgs UINT
+
+  func Dispatch
+    void
+    ThreadGroupCountX UINT
+    ThreadGroupCountY UINT
+    ThreadGroupCountZ UINT
+
+  func DispatchIndirect
+    void
+    pBufferForArgs ID3D11Buffer*
+    AlignedByteOffsetForArgs UINT
+
+  func RSSetState
+    void
+    pRasterizerState ID3D11RasterizerState*
+
+  func RSSetViewports
+    void
+    NumViewports UINT
+    pViewports "const D3D11_VIEWPORT*" count=NumViewports
+
+  func RSSetScissorRects
+    void
+    NumRects UINT
+    pRects "const D3D11_RECT*" count=NumRects
+
+  func CopySubresourceRegion
+    void
+    pDstResource ID3D11Resource*
+    DstSubresource UINT
+    DstX UINT
+    DstY UINT
+    DstZ UINT
+    pSrcResource ID3D11Resource*
+    SrcSubresource UINT
+    pSrcBox "const D3D11_BOX*"
+
+  func CopyResource
+    void
+    pDstResource ID3D11Resource*
+    pSrcResource ID3D11Resource*
+
+  func UpdateSubresource
+    void
+    pDstResource ID3D11Resource*
+    DstSubresource UINT
+    pDstBox "const D3D11_BOX*"
+    pSrcData "const void*"
+    SrcRowPitch UINT
+    SrcDepthPitch UINT
+
+  func CopyStructureCount
+    void
+    pDstBuffer ID3D11Buffer*
+    DstAlignedByteOffset UINT
+    pSrcView ID3D11UnorderedAccessView*
+
+  func ClearRenderTargetView
+    void
+    pRenderTargetView ID3D11RenderTargetView*
+    ColorRGBA "const FLOAT [4]"
+
+  func ClearUnorderedAccessViewUint
+    void
+    pUnorderedAccessView ID3D11UnorderedAccessView*
+    Values "const UINT [4]"
+
+  func ClearUnorderedAccessViewFloat
+    void
+    pUnorderedAccessView ID3D11UnorderedAccessView*
+    Values "const FLOAT [4]"
+
+  func ClearDepthStencilView
+    void
+    pDepthStencilView ID3D11DepthStencilView*
+    ClearFlags D3D11_CLEAR_FLAG
+    Depth FLOAT
+    Stencil UINT8
+
+  func GenerateMips
+    void
+    pShaderResourceView ID3D11ShaderResourceView*
+
+  func SetResourceMinLOD
+    void
+    pResource ID3D11Resource*
+    MinLOD FLOAT
+
+  func GetResourceMinLOD
+    FLOAT
+    pResource ID3D11Resource*
+
+  func ResolveSubresource
+    void
+    pDstResource ID3D11Resource*
+    DstSubresource UINT
+    pSrcResource ID3D11Resource*
+    SrcSubresource UINT
+    Format DXGI_FORMAT
+
+  func ExecuteCommandList
+    void
+    pCommandList ID3D11CommandList*
+    RestoreContextState BOOL
+
+  func HSSetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView*const* count=NumViews
+
+  func HSSetShader
+    void
+    pHullShader ID3D11HullShader*
+    ppClassInstances ID3D11ClassInstance*const* count=NumClassInstances
+    NumClassInstances UINT
+
+  func HSSetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState*const* count=NumSamplers
+
+  func HSSetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+
+  func DSSetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView*const* count=NumViews
+
+  func DSSetShader
+    void
+    pDomainShader ID3D11DomainShader*
+    ppClassInstances ID3D11ClassInstance*const* count=NumClassInstances
+    NumClassInstances UINT
+
+  func DSSetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState*const* count=NumSamplers
+
+  func DSSetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+
+  func CSSetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView*const* count=NumViews
+
+  func CSSetUnorderedAccessViews
+    void
+    StartSlot UINT
+    NumUAVs UINT
+    ppUnorderedAccessViews ID3D11UnorderedAccessView*const* count=NumUAVs
+    pUAVInitialCounts "const UINT*" count=NumUAVs
+
+  func CSSetShader
+    void
+    pComputeShader ID3D11ComputeShader*
+    ppClassInstances ID3D11ClassInstance*const* count=NumClassInstances
+    NumClassInstances UINT
+
+  func CSSetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState*const* count=NumSamplers
+
+  func CSSetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+
+  func VSGetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** postCount=NumBuffers
+
+  func PSGetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView** postCount=NumViews
+
+  func PSGetShader
+    void
+    ppPixelShader ID3D11PixelShader**
+    ppClassInstances ID3D11ClassInstance** postCount=pNumClassInstances
+    pNumClassInstances UINT*
+
+  func PSGetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState** postCount=NumSamplers
+
+  func VSGetShader
+    void
+    ppVertexShader ID3D11VertexShader**
+    ppClassInstances ID3D11ClassInstance** postCount=pNumClassInstances
+    pNumClassInstances UINT*
+
+  func PSGetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** postCount=NumBuffers
+
+  func IAGetInputLayout
+    void
+    ppInputLayout ID3D11InputLayout**
+
+  func IAGetVertexBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppVertexBuffers ID3D11Buffer** postCount=NumBuffers
+    pStrides UINT* postCount=NumBuffers
+    pOffsets UINT* postCount=NumBuffers
+
+  func IAGetIndexBuffer
+    void
+    pIndexBuffer ID3D11Buffer**
+    Format DXGI_FORMAT*
+    Offset UINT*
+
+  func GSGetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** postCount=NumBuffers
+
+  func GSGetShader
+    void
+    ppGeometryShader ID3D11GeometryShader**
+    ppClassInstances ID3D11ClassInstance** postCount=pNumClassInstances
+    pNumClassInstances UINT*
+
+  func IAGetPrimitiveTopology
+    void
+    pTopology D3D11_PRIMITIVE_TOPOLOGY*
+
+  func VSGetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView** postCount=NumViews
+
+  func VSGetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState** postCount=NumSamplers
+
+  func GetPredication
+    void
+    ppPredicate ID3D11Predicate**
+    pPredicateValue BOOL*
+
+  func GSGetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView** postCount=NumViews
+
+  func GSGetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState** postCount=NumSamplers
+
+  func OMGetRenderTargets
+    void
+    NumViews UINT
+    ppRenderTargetViews ID3D11RenderTargetView** postCount=NumViews
+    ppDepthStencilView ID3D11DepthStencilView**
+
+  func OMGetRenderTargetsAndUnorderedAccessViews
+    void
+    NumRTVs UINT
+    ppRenderTargetViews ID3D11RenderTargetView** postCount=NumRTVs
+    ppDepthStencilView ID3D11DepthStencilView**
+    UAVStartSlot UINT
+    NumUAVs UINT
+    ppUnorderedAccessViews ID3D11UnorderedAccessView** postCount=NumUAVs
+
+  func OMGetBlendState
+    void
+    ppBlendState ID3D11BlendState**
+    BlendFactor "FLOAT [4]"
+    pSampleMask UINT*
+
+  func OMGetDepthStencilState
+    void
+    ppDepthStencilState ID3D11DepthStencilState**
+    pStencilRef UINT*
+
+  func SOGetTargets
+    void
+    NumBuffers UINT
+    ppSOTargets ID3D11Buffer** postCount=NumBuffers
+
+  func RSGetState
+    void
+    ppRasterizerState ID3D11RasterizerState**
+
+  func RSGetViewports
+    void
+    pNumViewports UINT*
+    pViewports D3D11_VIEWPORT* postCount=pNumViewports
+
+  func RSGetScissorRects
+    void
+    pNumRects UINT*
+    pRects D3D11_RECT* postCount=pNumRects
+
+  func HSGetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView** postCount=NumViews
+
+  func HSGetShader
+    void
+    ppHullShader ID3D11HullShader**
+    ppClassInstances ID3D11ClassInstance** postCount=pNumClassInstances
+    pNumClassInstances UINT*
+
+  func HSGetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState** postCount=NumSamplers
+
+  func HSGetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** postCount=NumBuffers
+
+  func DSGetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView** postCount=NumViews
+
+  func DSGetShader
+    void
+    ppDomainShader ID3D11DomainShader**
+    ppClassInstances ID3D11ClassInstance** postCount=pNumClassInstances
+    pNumClassInstances UINT*
+
+  func DSGetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState** postCount=NumSamplers
+
+  func DSGetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** postCount=NumBuffers
+
+  func CSGetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D11ShaderResourceView** postCount=NumViews
+
+  func CSGetUnorderedAccessViews
+    void
+    StartSlot UINT
+    NumUAVs UINT
+    ppUnorderedAccessViews ID3D11UnorderedAccessView** postCount=NumUAVs
+
+  func CSGetShader
+    void
+    ppComputeShader ID3D11ComputeShader**
+    ppClassInstances ID3D11ClassInstance** postCount=pNumClassInstances
+    pNumClassInstances UINT*
+
+  func CSGetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D11SamplerState** postCount=NumSamplers
+
+  func CSGetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** postCount=NumBuffers
+
+  func ClearState
+    void
+
+  func Flush
+    void
+
+  func GetType
+    success NotEqual=0
+    D3D11_DEVICE_CONTEXT_TYPE
+
+  func GetContextFlags
+    success NotEqual=0
+    UINT
+
+  func FinishCommandList
+    HRESULT
+    RestoreDeferredContextState BOOL
+    ppCommandList ID3D11CommandList**
+
+

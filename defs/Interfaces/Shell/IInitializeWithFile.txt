@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInitializeWithFile base=IUnknown id={b7d14566-0509-4cce-a71f-0a554233bd9b} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    pszFilePath LPCWSTR
+    grfMode [STGM_FLAGS]
+
+

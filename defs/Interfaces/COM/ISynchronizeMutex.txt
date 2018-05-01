@@ -1,0 +1,7 @@
+include Interfaces\COM\ISynchronize.txt
+
+ingterface ISynchronizeMutex base=ISynchronize id={00000025-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func ReleaseMutex
+    HRESULT
+
+

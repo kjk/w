@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface INamespaceWalk base=IUnknown id={57ced8a7-3f4a-432c-9350-30f24483f74f} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Walk
+    HRESULT
+    punkToWalk IUnknown*
+    dwFlags DWORD
+    cDepth int
+    pnswcb INamespaceWalkCB*
+
+  func GetIDArrayResult
+    HRESULT
+    pcItems UINT*
+    prgpidl PIDLIST_ABSOLUTE** derefPostCount=pcItems
+
+

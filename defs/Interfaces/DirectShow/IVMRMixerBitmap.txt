@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRMixerBitmap base=IUnknown id={1E673275-0257-40aa-AF20-7C608D4A0428} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetAlphaBitmap
+    HRESULT
+    pBmpParms "const VMRALPHABITMAP*"
+
+  func UpdateAlphaBitmapParameters
+    HRESULT
+    pBmpParms PVMRALPHABITMAP
+
+  func GetAlphaBitmapParameters
+    HRESULT
+    pBmpParms PVMRALPHABITMAP
+
+

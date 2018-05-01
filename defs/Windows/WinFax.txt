@@ -1,0 +1,199 @@
+include Headers\fax.h.txt
+
+dll WinFax.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Fax Service/Fax Service Client"
+func FaxOpenPort
+  BOOL
+  FaxHandle HANDLE
+  DeviceId DWORD
+  Flags DWORD
+  FaxPortHandle LPHANDLE
+
+func FaxGetConfiguration bothCharset
+  BOOL
+  FaxHandle HANDLE
+  FaxConfig PFAX_CONFIGURATION*
+
+func FaxSetConfiguration bothCharset
+  BOOL
+  FaxHandle HANDLE
+  FaxConfig "const FAX_CONFIGURATION*"
+
+func FaxSetGlobalRoutingInfo bothCharset
+  BOOL
+  FaxHandle HANDLE
+  RoutingInfo "const FAX_GLOBAL_ROUTING_INFO*"
+
+func FaxSetLoggingCategories bothCharset
+  BOOL
+  FaxHandle HANDLE
+  Categories "const FAX_LOG_CATEGORY*"
+  NumberCategories DWORD
+
+func FaxGetDeviceStatus bothCharset
+  BOOL
+  FaxPortHandle HANDLE
+  DeviceStatus PFAX_DEVICE_STATUS*
+
+func FaxGetPort bothCharset
+  BOOL
+  FaxPortHandle HANDLE
+  PortInfo PFAX_PORT_INFO*
+
+func FaxSetPort bothCharset
+  BOOL
+  FaxPortHandle HANDLE
+  PortInfo "const FAX_PORT_INFO*"
+
+func FaxSendDocumentForBroadcast bothCharset
+  BOOL
+  FaxHandle HANDLE
+  FileName LPCTSTR
+  FaxJobId LPDWORD
+  FaxRecipientCallback PFAX_RECIPIENT_CALLBACK
+  Context LPVOID
+
+func FaxPrintCoverPage bothCharset
+  BOOL
+  FaxContextInfo "const FAX_CONTEXT_INFO*"
+  CoverPageInfo "const FAX_COVERPAGE_INFO*"
+
+func FaxStartPrintJob bothCharset
+  BOOL
+  PrinterName LPCTSTR
+  PrintInfo "const FAX_PRINT_INFO*"
+  FaxJobId LPDWORD
+  FaxContextInfo PFAX_CONTEXT_INFO
+
+func FaxAbort
+  BOOL
+  FaxHandle HANDLE
+  JobId DWORD
+
+func FaxEnumJobs bothCharset
+  BOOL
+  FaxHandle HANDLE
+  JobEntry PFAX_JOB_ENTRY*
+  JobsReturned LPDWORD
+
+func FaxGetJob bothCharset
+  BOOL
+  FaxHandle HANDLE
+  JobId DWORD
+  JobEntry PFAX_JOB_ENTRY*
+
+func FaxSetJob bothCharset
+  BOOL
+  FaxHandle HANDLE
+  JobId DWORD
+  Command DWORD
+  JobEntry "const FAX_JOB_ENTRY*"
+
+func FaxAccessCheck
+  BOOL
+  FaxHandle HANDLE
+  AccessMask DWORD
+
+func FaxCompleteJobParams bothCharset
+  BOOL
+  JobParams PFAX_JOB_PARAM*
+  CoverpageInfo PFAX_COVERPAGE_INFO*
+
+func FaxFreeBuffer
+  void
+  Buffer LPVOID
+
+func FaxRegisterRoutingExtensionW
+  BOOL
+  FaxHandle HANDLE
+  ExtensionName LPCWSTR
+  FriendlyName LPCWSTR
+  ImageName LPCWSTR
+  CallBack PFAX_ROUTING_INSTALLATION_CALLBACK
+  Context LPVOID
+
+func FaxRegisterServiceProviderW
+  BOOL
+  DeviceProvider LPCWSTR
+  FriendlyName LPCWSTR
+  ImageName LPCWSTR
+  TspName LPCWSTR
+
+func FaxClose
+  BOOL
+  FaxHandle HANDLE
+
+func FaxConnectFaxServer bothCharset
+  BOOL
+  MachineName LPCTSTR
+  FaxHandle LPHANDLE
+
+func FaxEnableRoutingMethod bothCharset
+  BOOL
+  FaxPortHandle HANDLE
+  RoutingGuid LPCTSTR
+  Enabled BOOL
+
+func FaxEnumGlobalRoutingInfo bothCharset
+  BOOL
+  FaxHandle HANDLE
+  RoutingInfo PFAX_GLOBAL_ROUTING_INFO*
+  MethodsReturned LPDWORD
+
+func FaxEnumPorts bothCharset
+  BOOL
+  FaxHandle HANDLE
+  PortInfo PFAX_PORT_INFO*
+  PortsReturned LPDWORD
+
+func FaxEnumRoutingMethods bothCharset
+  BOOL
+  FaxPortHandle HANDLE
+  RoutingMethod PFAX_ROUTING_METHOD*
+  MethodsReturned LPDWORD
+
+func FaxGetLoggingCategories bothCharset
+  BOOL
+  FaxHandle HANDLE
+  Categories PFAX_LOG_CATEGORY*
+  NumberCategories LPDWORD
+
+func FaxGetPageData
+  BOOL
+  FaxHandle HANDLE
+  JobId DWORD
+  Buffer LPBYTE*
+  BufferSize LPDWORD
+  ImageWidth LPDWORD
+  ImageHeight LPDWORD
+
+func FaxGetRoutingInfo bothCharset
+  BOOL
+  FaxPortHandle HANDLE
+  RoutingGuid LPCTSTR
+  RoutingInfoBuffer LPBYTE*
+  RoutingInfoBufferSize LPDWORD
+
+func FaxInitializeEventQueue
+  BOOL
+  FaxHandle HANDLE
+  CompletionPort HANDLE
+  CompletionKey ULONG_PTR
+  hWnd HWND
+  MessageStart UINT
+
+func FaxSendDocument bothCharset
+  BOOL
+  FaxHandle HANDLE
+  FileName LPCTSTR
+  JobParams PFAX_JOB_PARAM
+  CoverpageInfo "const FAX_COVERPAGE_INFO*"
+  FaxJobId LPDWORD
+
+func FaxSetRoutingInfo bothCharset
+  BOOL
+  FaxPortHandle HANDLE
+  RoutingGuid LPCTSTR
+  RoutingInfoBuffer "const BYTE*"
+  RoutingInfoBufferSize DWORD
+

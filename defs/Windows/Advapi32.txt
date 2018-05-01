@@ -1,0 +1,3637 @@
+include Headers\windows.h.txt
+include Headers\registry.h.txt
+include Headers\events.h.txt
+include Headers\services.h.txt
+include Headers\cryptography.h.txt
+include Headers\security.h.txt
+include Headers\native.h.txt
+include Headers\network.h.txt
+include Headers\processes.h.txt
+include Headers\shell.h.txt
+include Headers\setup.h.txt
+
+dll Advapi32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Services/Windows System Information/Registry"
+category "System Services/Windows System Information/Registry/Obsolete"
+category "Data Access and Storage/Local File Systems/File Management/Encrypted File System (EFS)"
+category "System Services/Processes and Threads/Process"
+category "System Administration/Group Policy"
+category "System Services/Windows System Information/System Shutdown"
+category "Diagnostics/Windows Events/Event Logging"
+category "Diagnostics/Performance Counters"
+category "System Services/Services"
+category "System Services/Windows System Information/System Information"
+category "Windows Application UI Development/Internationalization for Windows Applications/Unicode and Character Sets"
+category "Security and Identity/Cryptography/Service Provider"
+category "Security and Identity/Cryptography/Key Generation and Exchange"
+category "Security and Identity/Cryptography/Data Encryption and Decryption"
+category "Security and Identity/Cryptography/Hash and Digital Signature"
+category "Diagnostics/Windows Events/Event Tracing/Controllers"
+category "Diagnostics/Windows Events/Event Tracing/Classic Providers"
+category "Diagnostics/Windows Events/Event Tracing/Manifest-based Providers"
+category "Diagnostics/Windows Events/Event Tracing/Consumers"
+category "Diagnostics/Windows Events/Event Tracing/Callback"
+category "Diagnostics/Windows Events/Event Tracing/Access Permissions"
+category "Security and Identity/Authorization/Basic Access Control"
+category "Security and Identity/Authorization/Client-Server Access Control"
+category "Security and Identity/Authorization/Low-level Access Control"
+category "Security and Identity/Authorization/Audit Policy"
+category "Security and Identity/Authorization"
+category "Security and Identity/Authentication/Logon User"
+category "Security and Identity/Authentication/Low-level Credentials Management"
+category "Security and Identity/Security Management"
+category "Diagnostics/Debugging and Error Handling/Wait Chain Traversal"
+category "Security and Identity/Authentication/Local Security Authority (LSA)"
+category "Security and Identity/Authentication/Local Security Authority (LSA) Logon"
+category "Security and Identity/Authentication/Local Security Authority (LSA)"
+category "Security and Identity/Cryptography/Data Encryption and Decryption"
+array "TCHAR [HW_PROFILE_GUIDLEN]" base=TCHAR count=39
+
+array "WCHAR [WCT_OBJNAME_LENGTH]" base=WCHAR count=128
+
+alias [REG_ERROR] [ERROR_CODE] display=LONG
+
+struct HW_PROFILE_INFO
+  dwDockInfo DWORD
+  szHwProfileGuid "TCHAR [HW_PROFILE_GUIDLEN]"
+  szHwProfileName "TCHAR [MAX_PROFILE_LEN]"
+
+pointer LPHW_PROFILE_INFO HW_PROFILE_INFO
+
+enum WCT_OBJECT_TYPE UINT
+  WctCriticalSectionType 1
+  WctSendMessageType     2
+  WctMutexType           3
+  WctAlpcType            4
+  WctComType             5
+  WctThreadWaitType      6
+  WctProcessWaitType     7
+  WctThreadType          8
+  WctComActivationType   9
+  WctUnknownType         10
+  WctSocketIoType        11
+  WctSmbIoType           12
+
+enum WCT_OBJECT_STATUS UINT
+  WctStatusNoAccess     1
+  WctStatusRunning      2
+  WctStatusBlocked      3
+  WctStatusPidOnly      4
+  WctStatusPidOnlyRpcss 5
+  WctStatusOwned        6
+  WctStatusNotOwned     7
+  WctStatusAbandoned    8
+  WctStatusUnknown      9
+  WctStatusError        10
+
+struct [WAITCHAIN_NODE_INFO_u_s1] display=struct
+  ObjectName "WCHAR [WCT_OBJNAME_LENGTH]"
+  Timeout LARGE_INTEGER
+  Alertable BOOL
+
+struct [WAITCHAIN_NODE_INFO_u_s2] display=struct
+  ProcessId DWORD
+  ThreadId DWORD
+  WaitTime DWORD
+  ContextSwitches DWORD
+
+union [WAITCHAIN_NODE_INFO_u] display=union
+  LockObject [WAITCHAIN_NODE_INFO_u_s1]
+  ThreadObject [WAITCHAIN_NODE_INFO_u_s2]
+
+struct WAITCHAIN_NODE_INFO
+  ObjectType WCT_OBJECT_TYPE
+  ObjectStatus WCT_OBJECT_STATUS
+  ObjectStatus [WAITCHAIN_NODE_INFO_u]
+
+pointer PWAITCHAIN_NODE_INFO WAITCHAIN_NODE_INFO
+
+enum SC_ENUM_TYPE UINT
+  SC_ENUM_PROCESS_INFO 0
+
+enum TRACE_INFO_CLASS UINT
+  TraceGuidQueryList              0
+  TraceGuidQueryInfo              1
+  TraceGuidQueryProcess           2
+  TraceStackTracingInfo           3
+  TraceSystemTraceEnableFlagsInfo 4
+  TraceSampledProfileIntervalInfo 5
+  TraceProfileSourceConfigInfo    6
+  TraceProfileSourceListInfo      7
+  TracePmcEventListInfo           8
+  TracePmcCounterListInfo         9
+
+alias TRACE_QUERY_INFO_CLASS TRACE_INFO_CLASS
+
+enum PROG_INVOKE_SETTING UINT
+  ProgressInvokeNever        1
+  ProgressInvokeEveryObject  2
+  ProgressInvokeOnError      3
+  ProgressCancelOperation    4
+  ProgressRetryOperation     5
+  ProgressInvokePrePostError 6
+
+enum TRUSTED_INFORMATION_CLASS UINT
+  TrustedDomainNameInformation          1
+  TrustedControllersInformation         2
+  TrustedPosixOffsetInformation         3
+  TrustedPasswordInformation            4
+  TrustedDomainInformationBasic         5
+  TrustedDomainInformationEx            6
+  TrustedDomainAuthInformation          7
+  TrustedDomainFullInformation          8
+  TrustedDomainAuthInformationInternal  9
+  TrustedDomainFullInformationInternal  10
+  TrustedDomainInformationEx2Internal   11
+  TrustedDomainFullInformation2Internal 12
+  TrustedDomainSupportedEncryptionTypes 13
+
+flag [SEF_Flags] ULONG display=ULONG
+  SEF_DACL_AUTO_INHERIT             0x01
+  SEF_SACL_AUTO_INHERIT             0x02
+  SEF_DEFAULT_DESCRIPTOR_FOR_OBJECT 0x04
+  SEF_AVOID_PRIVILEGE_CHECK         0x08
+  SEF_AVOID_OWNER_CHECK             0x10
+  SEF_DEFAULT_OWNER_FROM_PARENT     0x20
+  SEF_DEFAULT_GROUP_FROM_PARENT     0x40
+  SEF_MACL_NO_WRITE_UP              0x100
+  SEF_MACL_NO_READ_UP               0x200
+  SEF_MACL_NO_EXECUTE_UP            0x400
+  SEF_AVOID_OWNER_RESTRICTION       0x1000
+
+enum [SaferScopeId] DWORD display=DWORD
+  SAFER_SCOPEID_MACHINE 1
+  SAFER_SCOPEID_USER    2
+
+flag [MandatoryPolicyFlags] DWORD display=DWORD
+  SYSTEM_MANDATORY_LABEL_NO_WRITE_UP   0x1
+  SYSTEM_MANDATORY_LABEL_NO_READ_UP    0x2
+  SYSTEM_MANDATORY_LABEL_NO_EXECUTE_UP 0x4
+
+flag [LogonFlags] DWORD display=DWORD
+  LOGON_WITH_PROFILE         0x1
+  LOGON_NETCREDENTIALS_ONLY  0x2
+  LOGON_ZERO_PASSWORD_BUFFER 0x4
+
+enum [LogonType] DWORD display=DWORD
+  LOGON32_LOGON_INTERACTIVE       2
+  LOGON32_LOGON_NETWORK           3
+  LOGON32_LOGON_BATCH             4
+  LOGON32_LOGON_SERVICE           5
+  LOGON32_LOGON_UNLOCK            7
+  LOGON32_LOGON_NETWORK_CLEARTEXT 8
+  LOGON32_LOGON_NEW_CREDENTIALS   9
+
+enum [LogonProvider] DWORD display=DWORD
+  LOGON32_PROVIDER_DEFAULT 0
+  LOGON32_PROVIDER_WINNT35 1
+  LOGON32_PROVIDER_WINNT40 2
+  LOGON32_PROVIDER_WINNT50 3
+  LOGON32_PROVIDER_VIRTUAL 4
+
+flag [TreeSecAction] DWORD display=DWORD
+  TREE_SEC_INFO_SET                 0x00000001
+  TREE_SEC_INFO_RESET               0x00000002
+  TREE_SEC_INFO_RESET_KEEP_EXPLICIT 0x00000003
+
+flag [CredGetTargetInfoFlags] DWORD display=DWORD
+  CRED_ALLOW_NAME_RESOLUTION 0x1
+
+enum [CredType] DWORD display=DWORD
+  CRED_TYPE_GENERIC                 1
+  CRED_TYPE_DOMAIN_PASSWORD         2
+  CRED_TYPE_DOMAIN_CERTIFICATE      3
+  CRED_TYPE_DOMAIN_VISIBLE_PASSWORD 4
+  CRED_TYPE_GENERIC_CERTIFICATE     5
+  CRED_TYPE_DOMAIN_EXTENDED         6
+
+flag [CredEnumerateFlags] DWORD display=DWORD
+  CRED_ENUMERATE_ALL_CREDENTIALS 0x1
+
+flag [CreateRestrictedTokenFlags] DWORD display=DWORD
+  DISABLE_MAX_PRIVILEGE 0x1
+  SANDBOX_INERT         0x2
+  LUA_TOKEN             0x4
+  WRITE_RESTRICTED      0x8
+
+enum POLICY_INFORMATION_CLASS UINT
+  PolicyAuditLogInformation           1
+  PolicyAuditEventsInformation        2
+  PolicyPrimaryDomainInformation      3
+  PolicyPdAccountInformation          4
+  PolicyAccountDomainInformation      5
+  PolicyLsaServerRoleInformation      6
+  PolicyReplicaSourceInformation      7
+  PolicyDefaultQuotaInformation       8
+  PolicyModificationInformation       9
+  PolicyAuditFullSetInformation       10
+  PolicyAuditFullQueryInformation     11
+  PolicyDnsDomainInformation          12
+  PolicyDnsDomainInformationInt       13
+  PolicyLocalAccountDomainInformation 14
+
+enum POLICY_DOMAIN_INFORMATION_CLASS UINT
+  PolicyDomainQualityOfServiceInformation 1
+  PolicyDomainEfsInformation              2
+  PolicyDomainKerberosTicketInformation   3
+
+struct EFS_HASH_BLOB
+  cbData DWORD
+  pbData PBYTE length=cbData
+
+pointer PEFS_HASH_BLOB EFS_HASH_BLOB
+
+struct ENCRYPTION_CERTIFICATE_HASH
+  cbTotalLength DWORD
+  pUserSid SID*
+  pHash PEFS_HASH_BLOB
+  lpDisplayInformation LPWSTR
+
+pointer PENCRYPTION_CERTIFICATE_HASH ENCRYPTION_CERTIFICATE_HASH
+
+pointer PENCRYPTION_CERTIFICATE_HASH* PENCRYPTION_CERTIFICATE_HASH
+
+struct ENCRYPTION_CERTIFICATE_HASH_LIST
+  nCert_Hash DWORD
+  pUsers PENCRYPTION_CERTIFICATE_HASH*
+
+pointer PENCRYPTION_CERTIFICATE_HASH_LIST ENCRYPTION_CERTIFICATE_HASH_LIST
+
+pointer PENCRYPTION_CERTIFICATE_HASH_LIST* PENCRYPTION_CERTIFICATE_HASH_LIST
+
+enum INSTALLSPECTYPE UINT
+  APPNAME  1
+  FILEEXT  2
+  PROGID   3
+  COMCLASS 4
+
+struct [INSTALLSPEC_s1] display=struct
+  Name WCHAR*
+  GPOId GUID
+
+struct [INSTALLSPEC_s2] display=struct
+  Clsid GUID
+  ClsCtx [CLSCTX]
+
+union INSTALLSPEC
+  AppName [INSTALLSPEC_s1]
+  FileExt WCHAR*
+  ProgId WCHAR*
+  COMClass [INSTALLSPEC_s2]
+
+struct INSTALLDATA
+  Type INSTALLSPECTYPE
+  Spec INSTALLSPEC
+
+pointer PINSTALLDATA INSTALLDATA
+
+pointer PINSTALLDATA* PINSTALLDATA
+
+struct VALENT
+  ve_valuename LPTSTR
+  ve_valuelen DWORD
+  ve_valueptr DWORD_PTR
+  ve_type DWORD
+
+pointer PVALENT VALENT
+
+struct EFS_CERTIFICATE_BLOB
+  dwCertEncodingType DWORD
+  cbData DWORD
+  pbData PBYTE length=cbData
+
+pointer PEFS_CERTIFICATE_BLOB EFS_CERTIFICATE_BLOB
+
+struct ENCRYPTION_CERTIFICATE
+  cbTotalLength DWORD
+  pUserSid SID*
+  pCertBlob PEFS_CERTIFICATE_BLOB
+
+pointer PENCRYPTION_CERTIFICATE ENCRYPTION_CERTIFICATE
+
+pointer PENCRYPTION_CERTIFICATE* PENCRYPTION_CERTIFICATE
+
+struct ENCRYPTION_CERTIFICATE_LIST
+  nUsers DWORD
+  pUsers PENCRYPTION_CERTIFICATE* count=nUsers
+
+pointer PENCRYPTION_CERTIFICATE_LIST ENCRYPTION_CERTIFICATE_LIST
+
+flag [LocalState] DWORD display=DWORD
+  LOCALSTATE_ASSIGNED               0x1
+  LOCALSTATE_PUBLISHED              0x2
+  LOCALSTATE_UNINSTALL_UNMANAGED    0x4
+  LOCALSTATE_POLICYREMOVE_ORPHAN    0x8
+  LOCALSTATE_POLICYREMOVE_UNINSTALL 0x10
+  LOCALSTATE_ORPHANED               0x20
+  LOCALSTATE_UNINSTALLED            0x40
+
+struct LOCALMANAGEDAPPLICATION
+  pszDeploymentName LPWSTR
+  pszPolicyName LPWSTR
+  pszProductId LPWSTR
+  dwState [LocalState]
+
+pointer PLOCALMANAGEDAPPLICATION LOCALMANAGEDAPPLICATION
+
+pointer PLOCALMANAGEDAPPLICATION* PLOCALMANAGEDAPPLICATION
+
+struct MANAGEDAPPLICATION
+  pszPackageName LPWSTR
+  pszPublisher LPWSTR
+  dwVersionHi DWORD
+  dwVersionLo DWORD
+  dwRevision DWORD
+  GpoId GUID
+  pszPolicyName LPWSTR
+  ProductId GUID
+  Language LANGID
+  pszOwner LPWSTR
+  pszCompany LPWSTR
+  pszComments LPWSTR
+  pszContact LPWSTR
+  pszSupportUrl LPWSTR
+  dwPathType DWORD
+  bInstalled BOOL
+
+pointer PMANAGEDAPPLICATION MANAGEDAPPLICATION
+
+pointer PMANAGEDAPPLICATION* PMANAGEDAPPLICATION
+
+struct PERF_COUNTERSET_INSTANCE
+  CounterSetGuid GUID
+  dwSize ULONG
+  InstanceId ULONG
+  InstanceNameOffset ULONG
+  InstanceNameSize ULONG
+
+pointer PPERF_COUNTERSET_INSTANCE PERF_COUNTERSET_INSTANCE
+
+struct PERF_COUNTERSET_INFO
+  CounterSetGuid GUID
+  ProviderGuid GUID
+  NumCounters ULONG
+  InstanceType ULONG
+
+pointer PPERF_COUNTERSET_INFO PERF_COUNTERSET_INFO
+
+alias PERFLIBREQUEST LPVOID
+
+alias PERF_MEM_ALLOC LPVOID
+
+alias PERF_MEM_FREE LPVOID
+
+struct PERF_PROVIDER_CONTEXT
+  ContextSize DWORD
+  Reserved DWORD
+  ControlCallback PERFLIBREQUEST
+  MemAllocRoutine PERF_MEM_ALLOC
+  MemFreeRoutine PERF_MEM_FREE
+  pMemContext LPVOID
+
+pointer PPERF_PROVIDER_CONTEXT PERF_PROVIDER_CONTEXT
+
+alias PEVENT_FILTER_DESCRIPTOR LPVOID
+
+struct ENABLE_TRACE_PARAMETERS
+  Version ULONG
+  EnableProperty ULONG
+  ControlFlags ULONG
+  SourceId GUID
+  EnableFilterDesc PEVENT_FILTER_DESCRIPTOR
+
+pointer PENABLE_TRACE_PARAMETERS ENABLE_TRACE_PARAMETERS
+
+struct TRACE_GUID_PROPERTIES
+  Guid GUID
+  GuidType ULONG
+  LoggerId ULONG
+  EnableLevel ULONG
+  EnableFlags ULONG
+  IsEnable BOOLEAN
+
+pointer PTRACE_GUID_PROPERTIES TRACE_GUID_PROPERTIES
+
+pointer PTRACE_GUID_PROPERTIES* PTRACE_GUID_PROPERTIES
+
+struct TRACE_GUID_REGISTRATION
+  Guid LPCGUID
+  RegHandle HANDLE
+
+pointer PTRACE_GUID_REGISTRATION TRACE_GUID_REGISTRATION
+
+struct INHERITED_FROM
+  GenerationGap LONG
+  AncestorName LPTSTR
+
+pointer PINHERITED_FROM INHERITED_FROM
+
+struct FN_OBJECT_MGR_FUNCTS
+  Placeholder ULONG
+
+pointer PFN_OBJECT_MGR_FUNCTS FN_OBJECT_MGR_FUNCTS
+
+struct LSA_TRANSLATED_SID
+  Use SID_NAME_USE
+  RelativeId ULONG
+  DomainIndex LONG
+
+pointer PLSA_TRANSLATED_SID LSA_TRANSLATED_SID
+
+pointer PLSA_TRANSLATED_SID* PLSA_TRANSLATED_SID
+
+struct LSA_TRANSLATED_SID2
+  Use SID_NAME_USE
+  Sid PSID
+  DomainIndex LONG
+  Flags ULONG
+
+pointer PLSA_TRANSLATED_SID2 LSA_TRANSLATED_SID2
+
+pointer PLSA_TRANSLATED_SID2* PLSA_TRANSLATED_SID2
+
+struct LSA_TRANSLATED_NAME
+  Use SID_NAME_USE
+  Name LSA_UNICODE_STRING
+  DomainIndex LONG
+
+pointer PLSA_TRANSLATED_NAME LSA_TRANSLATED_NAME
+
+pointer PLSA_TRANSLATED_NAME* PLSA_TRANSLATED_NAME
+
+struct TRUSTED_DOMAIN_INFORMATION_EX
+  Name LSA_UNICODE_STRING
+  FlatName LSA_UNICODE_STRING
+  Sid PSID
+  TrustDirection ULONG
+  TrustType ULONG
+  TrustAttributes ULONG
+
+pointer PTRUSTED_DOMAIN_INFORMATION_EX TRUSTED_DOMAIN_INFORMATION_EX
+
+enum [LsaAuthType] ULONG display=ULONG
+  TRUST_AUTH_TYPE_NONE    0
+  TRUST_AUTH_TYPE_NT4OWF  1
+  TRUST_AUTH_TYPE_CLEAR   2
+  TRUST_AUTH_TYPE_VERSION 3
+
+struct LSA_AUTH_INFORMATION
+  LastUpdateTime LARGE_INTEGER
+  AuthType [LsaAuthType]
+  AuthInfoLength ULONG
+  AuthInfo PUCHAR
+
+pointer PLSA_AUTH_INFORMATION LSA_AUTH_INFORMATION
+
+struct TRUSTED_DOMAIN_AUTH_INFORMATION
+  IncomingAuthInfos ULONG
+  IncomingAuthenticationInformation PLSA_AUTH_INFORMATION
+  IncomingPreviousAuthenticationInformation PLSA_AUTH_INFORMATION
+  OutgoingAuthInfos ULONG
+  OutgoingAuthenticationInformation PLSA_AUTH_INFORMATION
+  OutgoingPreviousAuthenticationInformation PLSA_AUTH_INFORMATION
+
+pointer PTRUSTED_DOMAIN_AUTH_INFORMATION TRUSTED_DOMAIN_AUTH_INFORMATION
+
+flag [TRACE_MESSAGE_FLAGS] ULONG display=ULONG
+  TRACE_MESSAGE_SEQUENCE              1
+  TRACE_MESSAGE_GUID                  2
+  TRACE_MESSAGE_COMPONENTID           4
+  TRACE_MESSAGE_TIMESTAMP             8
+  TRACE_MESSAGE_PERFORMANCE_TIMESTAMP 16
+  TRACE_MESSAGE_SYSTEMINFO            32
+  TRACE_MESSAGE_POINTER32             0x0040
+  TRACE_MESSAGE_POINTER64             0x0080
+
+flag [LSA_LOOKUP_FLAGS] ULONG display=ULONG
+  LSA_LOOKUP_ISOLATED_AS_LOCAL 0x80000000
+
+alias PFE_EXPORT_FUNC LPVOID
+
+alias PFE_IMPORT_FUNC LPVOID
+
+alias LPHANDLER_FUNCTION LPVOID
+
+alias LPHANDLER_FUNCTION_EX LPVOID
+
+alias TRACEHANDLE ULONG64
+
+pointer PTRACEHANDLE TRACEHANDLE
+
+alias WMIDPREQUEST LPVOID
+
+alias ENABLECALLBACK LPVOID
+
+alias FN_PROGRESS LPVOID
+
+alias "const PSID" LPVOID
+
+alias LSA_HANDLE PVOID
+
+pointer PLSA_HANDLE LSA_HANDLE
+
+pointer PLSA_UNICODE_STRING* PLSA_UNICODE_STRING
+
+alias LSA_ENUMERATION_HANDLE ULONG
+
+pointer PLSA_ENUMERATION_HANDLE LSA_ENUMERATION_HANDLE
+
+alias HWCT LPVOID
+
+alias PWAITCHAINCALLBACK LPVOID
+
+alias PCOGETCALLSTATE LPVOID
+
+alias PCOGETACTIVATIONSTATE LPVOID
+
+alias REGHANDLE ULONGLONG
+
+pointer PREGHANDLE REGHANDLE
+
+pointer PLSA_OBJECT_ATTRIBUTES OBJECT_ATTRIBUTES
+
+flag [SHUTDOWN_FLAGS] DWORD display=DWORD
+  SHUTDOWN_FORCE_OTHERS         0x00000001
+  SHUTDOWN_FORCE_SELF           0x00000002
+  SHUTDOWN_RESTART              0x00000004
+  SHUTDOWN_POWEROFF             0x00000008
+  SHUTDOWN_NOREBOOT             0x00000010
+  SHUTDOWN_GRACE_OVERRIDE       0x00000020
+  SHUTDOWN_INSTALL_UPDATES      0x00000040
+  SHUTDOWN_RESTARTAPPS          0x00000080
+  SHUTDOWN_SKIP_SVC_PRESHUTDOWN 0x00000100
+  SHUTDOWN_HYBRID               0x00000200
+  SHUTDOWN_RESTART_BOOTOPTIONS  0x00000400
+
+alias [TOKEN_ACCESS_MASK_DWORD] [TOKEN_ACCESS_MASK] display=DWORD
+
+enum EVENT_INFO_CLASS UINT
+  EventProviderBinaryTrackInfo 0
+
+struct CENTRAL_ACCESS_POLICY_ENTRY
+  Name LSA_UNICODE_STRING
+  Description LSA_UNICODE_STRING
+  ChangeId LSA_UNICODE_STRING
+  LengthAppliesTo ULONG
+  AppliesTo PUCHAR
+  LengthSD ULONG
+  SD PSECURITY_DESCRIPTOR
+  LengthStagedSD ULONG
+  StagedSD PSECURITY_DESCRIPTOR
+  Flags ULONG
+
+pointer PCENTRAL_ACCESS_POLICY_ENTRY CENTRAL_ACCESS_POLICY_ENTRY
+
+pointer PCENTRAL_ACCESS_POLICY_ENTRY* PCENTRAL_ACCESS_POLICY_ENTRY
+
+struct CENTRAL_ACCESS_POLICY
+  CAPID PSID
+  Name LSA_UNICODE_STRING
+  Description LSA_UNICODE_STRING
+  ChangeId LSA_UNICODE_STRING
+  Flags ULONG
+  CAPECount ULONG
+  CAPEs PCENTRAL_ACCESS_POLICY_ENTRY* count=CAPECount
+
+pointer PCENTRAL_ACCESS_POLICY CENTRAL_ACCESS_POLICY
+
+pointer PCENTRAL_ACCESS_POLICY* PCENTRAL_ACCESS_POLICY
+
+flag [RegLoadAppKey_Options] DWORD display=DWORD
+  REG_PROCESS_APPKEY 0x00000001
+
+flag [RTL_ENCRYPT_OPTION_FLAGS] ULONG display=ULONG
+  RTL_ENCRYPT_OPTION_CROSS_PROCESS 0x01
+  RTL_ENCRYPT_OPTION_SAME_LOGON    0x02
+
+func RegCloseKey
+  [REG_ERROR]
+  hKey HKEY
+
+func RegConnectRegistry bothCharset
+  [REG_ERROR]
+  lpMachineName LPCTSTR
+  hKey HKEY
+  phkResult PHKEY
+
+func RegCopyTree bothCharset
+  [REG_ERROR]
+  hKeySrc HKEY
+  lpSubKey LPCTSTR
+  hKeyDest HKEY
+
+func RegCreateKeyEx bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  Reserved DWORD
+  lpClass LPTSTR
+  dwOptions [RegOptions]
+  samDesired REGSAM
+  lpSecurityAttributes LPSECURITY_ATTRIBUTES
+  phkResult PHKEY
+  lpdwDisposition [RegDisposition*]
+
+func RegCreateKeyTransacted bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  Reserved DWORD
+  lpClass LPTSTR
+  dwOptions [RegOptions]
+  samDesired REGSAM
+  lpSecurityAttributes "const LPSECURITY_ATTRIBUTES"
+  phkResult PHKEY
+  lpdwDisposition [RegDisposition*]
+  hTransaction HANDLE
+  pExtendedParemeter PVOID
+
+func RegDeleteKey bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+
+func RegDeleteKeyEx bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  samDesired REGSAM
+  Reserved DWORD
+
+func RegDeleteKeyTransacted bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  samDesired REGSAM
+  Reserved DWORD
+  hTransaction HANDLE
+  pExtendedParameter PVOID
+
+func RegDeleteKeyValue bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  lpValueName LPCTSTR
+
+func RegDeleteTree bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+
+func RegDeleteValue bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpValueName LPCTSTR
+
+func RegDisablePredefinedCache
+  [REG_ERROR]
+
+func RegDisablePredefinedCacheEx
+  [REG_ERROR]
+
+func RegDisableReflectionKey
+  [REG_ERROR]
+  hBase HKEY
+
+func RegEnableReflectionKey
+  [REG_ERROR]
+  hBase HKEY
+
+func RegEnumKeyEx bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  dwIndex DWORD
+  lpName LPTSTR outputOnly
+  lpcName LPDWORD
+  lpReserved LPDWORD
+  lpClass LPTSTR
+  lpcClass LPDWORD
+  lpftLastWriteTime PFILETIME
+
+func RegEnumValue bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  dwIndex DWORD
+  lpValueName LPTSTR outputOnly
+  lpcchValueName LPDWORD
+  lpReserved LPDWORD
+  lpType [RegType*]
+  lpData LPBYTE postLength=lpcbData
+  lpcbData LPDWORD
+
+func RegFlushKey
+  [REG_ERROR]
+  hKey HKEY
+
+func RegGetValue bothCharset
+  [REG_ERROR]
+  hkey HKEY
+  lpSubKey LPCTSTR
+  lpValue LPCTSTR
+  dwFlags DWORD
+  pdwType [RegType*]
+  pvData PVOID postLength=pcbData
+  pcbData LPDWORD
+
+func RegLoadAppKey bothCharset
+  [REG_ERROR]
+  lpFile LPCTSTR
+  phkResult PHKEY
+  samDesired REGSAM
+  dwOptions [RegLoadAppKey_Options]
+  Reserved DWORD
+
+func RegLoadKey bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  lpFile LPCTSTR
+
+func RegLoadMUIString bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  pszValue LPCTSTR
+  pszOutBuf LPTSTR
+  cbOutBuf DWORD
+  pcbData LPDWORD
+  Flags [RegMuiFlags]
+  pszDirectory LPCTSTR
+
+func RegNotifyChangeKeyValue
+  [REG_ERROR]
+  hKey HKEY
+  bWatchSubtree BOOL
+  dwNotifyFilter [RegNotifyFlags]
+  hEvent HANDLE
+  fAsynchronous BOOL
+
+func RegOpenCurrentUser
+  [REG_ERROR]
+  samDesired REGSAM
+  phkResult PHKEY
+
+func RegOpenKeyEx bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  ulOptions DWORD
+  samDesired REGSAM
+  phkResult PHKEY
+
+func RegOpenKeyTransacted bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  ulOptions DWORD
+  samDesired REGSAM
+  phkResult PHKEY
+  hTransaction HANDLE
+  pExtendedParameter PVOID
+
+func RegOpenUserClassesRoot
+  [REG_ERROR]
+  hToken HANDLE
+  dwOptions DWORD
+  samDesired REGSAM
+  phkResult PHKEY
+
+func RegOverridePredefKey
+  [REG_ERROR]
+  hKey HKEY
+  hNewHKey HKEY
+
+func RegQueryInfoKey bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpClass LPTSTR outputOnly
+  lpcClass LPDWORD
+  lpReserved LPDWORD
+  lpcSubKeys LPDWORD
+  lpcMaxSubKeyLen LPDWORD
+  lpcMaxClassLen LPDWORD
+  lpcValues LPDWORD
+  lpcMaxValueNameLen LPDWORD
+  lpcMaxValueLen LPDWORD
+  lpcbSecurityDescriptor LPDWORD
+  lpftLastWriteTime PFILETIME
+
+func RegQueryMultipleValues bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  val_list PVALENT
+  num_vals DWORD
+  lpValueBuf LPVOID display=LPTSTR postLength=ldwTotsize
+  ldwTotsize LPDWORD
+
+func RegQueryReflectionKey
+  [REG_ERROR]
+  hBase HKEY
+  bIsReflectionDisabled BOOL*
+
+func RegQueryValueEx bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpValueName LPCTSTR
+  lpReserved LPDWORD
+  lpType [RegType*]
+  lpData LPBYTE postLength=lpcbData
+  lpcbData LPDWORD
+
+func RegReplaceKey bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  lpNewFile LPCTSTR
+  lpOldFile LPCTSTR
+
+func RegRestoreKey bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpFile LPCTSTR
+  dwFlags DWORD
+
+func RegSaveKey bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpFile LPCTSTR
+  lpSecurityAttributes LPSECURITY_ATTRIBUTES
+
+func RegSaveKeyEx bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpFile LPCTSTR
+  lpSecurityAttributes LPSECURITY_ATTRIBUTES
+  Flags DWORD
+
+func RegSetKeyValue bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  lpValueName LPCTSTR
+  dwType [RegType]
+  lpData LPCVOID
+  cbData DWORD
+
+func RegSetValueEx bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpValueName LPCTSTR
+  Reserved DWORD
+  dwType [RegType]
+  lpData "const BYTE*" length=cbData
+  cbData DWORD
+
+func RegUnLoadKey bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+
+func RegCreateKey bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  phkResult PHKEY
+
+func RegEnumKey bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  dwIndex DWORD
+  lpName LPTSTR outputOnly
+  cchName DWORD
+
+func RegOpenKey bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  phkResult PHKEY
+
+func RegQueryValue bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  lpValue LPTSTR outputOnly
+  lpcbValue PLONG
+
+func RegSetValue bothCharset
+  [REG_ERROR]
+  hKey HKEY
+  lpSubKey LPCTSTR
+  dwType [RegType]
+  lpData LPCTSTR
+  cbData DWORD
+
+func AddUsersToEncryptedFile
+  [ERROR_CODE]
+  lpFileName LPCWSTR
+  pUsers PENCRYPTION_CERTIFICATE_LIST
+
+func CloseEncryptedFileRaw
+  void
+  pvContext PVOID
+
+func DecryptFile bothCharset
+  BOOL
+  lpFileName LPCTSTR
+  dwReserved DWORD
+
+func DuplicateEncryptionInfoFile
+  [ERROR_CODE]
+  SrcFileName LPCTSTR
+  DstFileName LPCTSTR
+  dwCreationDistribution DWORD
+  dwAttributes DWORD
+  lpSecurityAttributes "const LPSECURITY_ATTRIBUTES"
+
+func EncryptFile bothCharset
+  BOOL
+  lpFileName LPCTSTR
+
+func EncryptionDisable
+  BOOL
+  DirPath LPCWSTR
+  Disable BOOL
+
+func FileEncryptionStatus bothCharset
+  BOOL
+  lpFileName LPCTSTR
+  lpStatus LPDWORD
+
+func FreeEncryptionCertificateHashList
+  void
+  pHashes PENCRYPTION_CERTIFICATE_HASH_LIST
+
+func OpenEncryptedFileRaw bothCharset
+  [ERROR_CODE]
+  lpFileName LPCTSTR
+  ulFlags ULONG
+  pvContext PVOID*
+
+func QueryRecoveryAgentsOnEncryptedFile
+  [ERROR_CODE]
+  lpFileName LPCWSTR
+  pRecoveryAgents PENCRYPTION_CERTIFICATE_HASH_LIST*
+
+func QueryUsersOnEncryptedFile
+  [ERROR_CODE]
+  lpFileName LPCWSTR
+  pUsers PENCRYPTION_CERTIFICATE_HASH_LIST*
+
+func ReadEncryptedFileRaw
+  [ERROR_CODE]
+  pfExportCallback PFE_EXPORT_FUNC
+  pvCallbackContext PVOID
+  pvContext PVOID
+
+func RemoveUsersFromEncryptedFile
+  [ERROR_CODE]
+  lpFileName LPCWSTR
+  pHashes PENCRYPTION_CERTIFICATE_HASH_LIST
+
+func SetUserFileEncryptionKey
+  [ERROR_CODE]
+  pEncryptionCertificate PENCRYPTION_CERTIFICATE
+
+func WriteEncryptedFileRaw
+  [ERROR_CODE]
+  pfImportCallback PFE_IMPORT_FUNC
+  pvCallbackContext PVOID
+  pvContext PVOID
+
+func CreateProcessAsUser bothCharset
+  BOOL
+  hToken HANDLE
+  lpApplicationName LPCTSTR
+  lpCommandLine LPTSTR
+  lpProcessAttributes LPSECURITY_ATTRIBUTES
+  lpThreadAttributes LPSECURITY_ATTRIBUTES
+  bInheritHandles BOOL
+  dwCreationFlags [CreateProcessFlags]
+  lpEnvironment LPVOID
+  lpCurrentDirectory LPCTSTR
+  lpStartupInfo LPSTARTUPINFO
+  lpProcessInformation LPPROCESS_INFORMATION
+
+func CreateProcessWithLogonW
+  BOOL
+  lpUsername LPCWSTR
+  lpDomain LPCWSTR
+  lpPassword LPCWSTR
+  dwLogonFlags [LogonFlags]
+  lpApplicationName LPCWSTR
+  lpCommandLine LPWSTR
+  dwCreationFlags [CreateProcessFlags]
+  lpEnvironment LPVOID
+  lpCurrentDirectory LPCWSTR
+  lpStartupInfo LPSTARTUPINFOW
+  lpProcessInfo LPPROCESS_INFORMATION
+
+func CreateProcessWithTokenW
+  BOOL
+  hToken HANDLE
+  dwLogonFlags [LogonFlags]
+  lpApplicationName LPCWSTR
+  lpCommandLine LPWSTR
+  dwCreationFlags [CreateProcessFlags]
+  lpEnvironment LPVOID
+  lpCurrentDirectory LPCWSTR
+  lpStartupInfo LPSTARTUPINFOW
+  lpProcessInfo LPPROCESS_INFORMATION
+
+func GetLocalManagedApplications
+  [ERROR_CODE]
+  bUserApps BOOL
+  pdwApps LPDWORD
+  prgLocalApps PLOCALMANAGEDAPPLICATION*
+
+func GetManagedApplications
+  [ERROR_CODE]
+  pCategory GUID*
+  dwQueryFlags DWORD
+  dwInfoLevel DWORD
+  pdwApps LPDWORD
+  prgManagedApps PMANAGEDAPPLICATION*
+
+func GetManagedApplicationCategories
+  [ERROR_CODE]
+  dwReserved DWORD
+  pAppCategory APPCATEGORYINFOLIST*
+
+func InstallApplication
+  [ERROR_CODE]
+  pInstallInfo PINSTALLDATA*
+
+func UninstallApplication
+  [ERROR_CODE]
+  ProductCode WCHAR*
+  dwStatus DWORD
+
+func AbortSystemShutdown bothCharset
+  BOOL
+  lpMachineName LPTSTR
+
+func InitiateShutdown bothCharset
+  [ERROR_CODE]
+  lpMachineName LPTSTR
+  lpMessage LPTSTR
+  dwGracePeriod DWORD
+  dwShutdownFlags [SHUTDOWN_FLAGS]
+  dwReason [SHTDN_REASON]
+
+func InitiateSystemShutdown bothCharset
+  BOOL
+  lpMachineName LPTSTR
+  lpMessage LPTSTR
+  dwTimeout DWORD
+  bForceAppsClosed BOOL
+  bRebootAfterShutdown BOOL
+
+func InitiateSystemShutdownEx bothCharset
+  BOOL
+  lpMachineName LPTSTR
+  lpMessage LPTSTR
+  dwTimeout DWORD
+  bForceAppsClosed BOOL
+  bRebootAfterShutdown BOOL
+  dwReason [SHTDN_REASON]
+
+func BackupEventLog bothCharset
+  BOOL
+  hEventLog HANDLE
+  lpBackupFileName LPCTSTR
+
+func ClearEventLog bothCharset
+  BOOL
+  hEventLog HANDLE
+  lpBackupFileName LPCTSTR
+
+func CloseEventLog
+  BOOL
+  hEventLog HANDLE
+
+func DeregisterEventSource
+  BOOL
+  hEventLog HANDLE
+
+func GetEventLogInformation
+  BOOL
+  hEventLog HANDLE
+  dwInfoLevel DWORD
+  lpBuffer LPVOID postLength=pcbBytesNeeded
+  cbBufSize DWORD
+  pcbBytesNeeded LPDWORD
+
+func GetNumberOfEventLogRecords
+  BOOL
+  hEventLog HANDLE
+  NumberOfRecords PDWORD
+
+func GetOldestEventLogRecord
+  BOOL
+  hEventLog HANDLE
+  OldestRecord PDWORD
+
+func NotifyChangeEventLog
+  BOOL
+  hEventLog HANDLE
+  hEvent HANDLE
+
+func OpenBackupEventLog bothCharset
+  success NotEqual=0
+  HANDLE
+  lpUNCServerName LPCTSTR
+  lpFileName LPCTSTR
+
+func OpenEventLog bothCharset
+  success NotEqual=0
+  HANDLE
+  lpUNCServerName LPCTSTR
+  lpSourceName LPCTSTR
+
+func ReadEventLog bothCharset
+  BOOL
+  hEventLog HANDLE
+  dwReadFlags DWORD
+  dwRecordOffset DWORD
+  lpBuffer LPVOID
+  nNumberOfBytesToRead DWORD
+  pnBytesRead DWORD*
+  pnMinNumberOfBytesNeeded DWORD*
+
+func RegisterEventSource bothCharset
+  success NotEqual=0
+  HANDLE
+  lpUNCServerName LPCTSTR
+  lpSourceName LPCTSTR
+
+func ReportEvent bothCharset
+  BOOL
+  hEventLog HANDLE
+  wType [EventLogType]
+  wCategory WORD
+  dwEventID DWORD
+  lpUserSid PSID
+  wNumStrings WORD
+  dwDataSize DWORD
+  lpStrings LPCTSTR* count=wNumStrings
+  lpRawData LPVOID length=dwDataSize
+
+func PerfCreateInstance
+  success NotEqual=0
+  PPERF_COUNTERSET_INSTANCE
+  hProvider HANDLE
+  CounterSetGuid LPCGUID
+  szInstanceName LPCWSTR
+  dwInstance ULONG
+
+func PerfDecrementULongCounterValue
+  [ERROR_CODE_ULONG]
+  hProvider HANDLE
+  pInstance PPERF_COUNTERSET_INSTANCE
+  CounterId ULONG
+  lValue ULONG
+
+func PerfDecrementULongLongCounterValue
+  [ERROR_CODE_ULONG]
+  hProvider HANDLE
+  pInstance PPERF_COUNTERSET_INSTANCE
+  CounterId ULONG
+  llValue ULONGLONG
+
+func PerfDeleteInstance
+  [ERROR_CODE_ULONG]
+  hProvider HANDLE
+  InstanceBlock PPERF_COUNTERSET_INSTANCE
+
+func PerfIncrementULongCounterValue
+  [ERROR_CODE_ULONG]
+  hProvider HANDLE
+  pInstance PPERF_COUNTERSET_INSTANCE
+  CounterId ULONG
+  lValue ULONG
+
+func PerfIncrementULongLongCounterValue
+  [ERROR_CODE_ULONG]
+  hProvider HANDLE
+  pInstance PPERF_COUNTERSET_INSTANCE
+  CounterId ULONG
+  llValue ULONGLONG
+
+func PerfQueryInstance
+  success NotEqual=0
+  PPERF_COUNTERSET_INSTANCE
+  hProvider HANDLE
+  CounterSetGuid LPCGUID
+  szInstance LPCWSTR
+  dwInstance ULONG
+
+func PerfSetCounterSetInfo
+  [ERROR_CODE_ULONG]
+  hProvider HANDLE
+  pTemplate PPERF_COUNTERSET_INFO
+  dwTemplateSize ULONG
+
+func PerfSetULongCounterValue
+  [ERROR_CODE_ULONG]
+  hProvider HANDLE
+  pInstance PPERF_COUNTERSET_INSTANCE
+  CounterId ULONG
+  lValue ULONG
+
+func PerfSetULongLongCounterValue
+  [ERROR_CODE_ULONG]
+  hProvider HANDLE
+  pInstance PPERF_COUNTERSET_INSTANCE
+  CounterId ULONG
+  llValue ULONGLONG
+
+func PerfSetCounterRefValue
+  [ERROR_CODE_ULONG]
+  hProvider HANDLE
+  pInstance PPERF_COUNTERSET_INSTANCE
+  CounterId ULONG
+  lpAddr PVOID
+
+func PerfStartProvider
+  [ERROR_CODE_ULONG]
+  ProviderGuid LPGUID
+  ControlCallback PERFLIBREQUEST
+  phProvider HANDLE*
+
+func PerfStartProviderEx
+  [ERROR_CODE_ULONG]
+  ProviderGuid LPGUID
+  ProviderContext PPERF_PROVIDER_CONTEXT
+  phProvider HANDLE*
+
+func PerfStopProvider
+  [ERROR_CODE_ULONG]
+  hProvider HANDLE
+
+func RegisterServiceCtrlHandler bothCharset
+  success NotEqual=0
+  SERVICE_STATUS_HANDLE
+  lpServiceName LPCTSTR
+  lpHandlerProc LPHANDLER_FUNCTION
+
+func RegisterServiceCtrlHandlerEx bothCharset
+  success NotEqual=0
+  SERVICE_STATUS_HANDLE
+  lpServiceName LPCTSTR
+  lpHandlerProc LPHANDLER_FUNCTION_EX
+  lpContext LPVOID
+
+func SetServiceBits
+  BOOL
+  hServiceStatus SERVICE_STATUS_HANDLE
+  dwServiceBits DWORD
+  bSetBitsOn BOOL
+  bUpdateImmediately BOOL
+
+func SetServiceStatus
+  BOOL
+  hServiceStatus SERVICE_STATUS_HANDLE
+  lpServiceStatus LPSERVICE_STATUS
+
+func StartServiceCtrlDispatcher bothCharset
+  BOOL
+  lpServiceTable "const SERVICE_TABLE_ENTRY*"
+
+func ChangeServiceConfig bothCharset
+  BOOL
+  hService SC_HANDLE
+  dwServiceType [ServiceType]
+  dwStartType [ServiceStartType]
+  dwErrorControl [ServiceErrorControl]
+  lpBinaryPathName LPCTSTR
+  lpLoadOrderGroup LPCTSTR
+  lpdwTagId LPDWORD
+  lpDependencies LPCTSTR
+  lpServiceStartName LPCTSTR
+  lpPassword LPCTSTR
+  lpDisplayName LPCTSTR
+
+func ChangeServiceConfig2 bothCharset
+  BOOL
+  hService SC_HANDLE
+  dwInfoLevel [ServiceInfoLevel]
+  lpInfo LPVOID
+
+func CloseServiceHandle
+  BOOL
+  hSCObject SC_HANDLE
+
+func ControlService
+  BOOL
+  hService SC_HANDLE
+  dwControl [ServiceControl]
+  lpServiceStatus LPSERVICE_STATUS
+
+func ControlServiceEx bothCharset
+  BOOL
+  hService SC_HANDLE
+  dwControl DWORD
+  dwInfoLevel DWORD
+  pControlParams PVOID
+
+func CreateService bothCharset
+  success NotEqual=0
+  SC_HANDLE
+  hSCManager SC_HANDLE
+  lpServiceName LPCTSTR
+  lpDisplayName LPCTSTR
+  dwDesiredAccess [ServiceAccess]
+  dwServiceType [ServiceType]
+  dwStartType [ServiceStartType]
+  dwErrorControl [ServiceErrorControl]
+  lpBinaryPathName LPCTSTR
+  lpLoadOrderGroup LPCTSTR
+  lpdwTagId LPDWORD
+  lpDependencies LPCTSTR
+  lpServiceStartName LPCTSTR
+  lpPassword LPCTSTR
+
+func DeleteService
+  BOOL
+  hService SC_HANDLE
+
+func EnumDependentServices bothCharset
+  BOOL
+  hService SC_HANDLE
+  dwServiceState [ServiceState]
+  lpServices LPENUM_SERVICE_STATUS postCount=lpServicesReturned
+  cbBufSize DWORD
+  pcbBytesNeeded LPDWORD
+  lpServicesReturned LPDWORD
+
+func EnumServicesStatusEx bothCharset
+  BOOL
+  hSCManager SC_HANDLE
+  InfoLevel SC_ENUM_TYPE
+  dwServiceType [ServiceType]
+  dwServiceState [ServiceState]
+  lpServices LPBYTE postLength=cbBufSize
+  cbBufSize DWORD
+  pcbBytesNeeded LPDWORD
+  lpServicesReturned LPDWORD
+  lpResumeHandle LPDWORD
+  pszGroupName LPCTSTR
+
+func GetServiceDisplayName bothCharset
+  BOOL
+  hSCManager SC_HANDLE
+  lpServiceName LPCTSTR
+  lpDisplayName LPTSTR
+  lpcchBuffer LPDWORD
+
+func GetServiceKeyName bothCharset
+  BOOL
+  hSCManager SC_HANDLE
+  lpDisplayName LPCTSTR
+  lpServiceName LPTSTR
+  lpcchBuffer LPDWORD
+
+func NotifyBootConfigStatus
+  BOOL
+  BootAcceptable BOOL
+
+func NotifyServiceStatusChange
+  [ERROR_CODE]
+  hService SC_HANDLE
+  dwNotifyMask [ServiceNotifyMask]
+  pNotifyBuffer PSERVICE_NOTIFYA
+
+func NotifyServiceStatusChange bothCharset
+  [ERROR_CODE]
+  hService SC_HANDLE
+  dwNotifyMask [ServiceNotifyMask]
+  pNotifyBuffer PSERVICE_NOTIFY
+
+func OpenSCManager bothCharset
+  success NotEqual=0
+  SC_HANDLE
+  lpMachineName LPCTSTR
+  lpDatabaseName LPCTSTR
+  dwDesiredAccess [SCManagerAccess]
+
+func OpenService bothCharset
+  success NotEqual=0
+  SC_HANDLE
+  hSCManager SC_HANDLE
+  lpServiceName LPCTSTR
+  dwDesiredAccess [ServiceAccess]
+
+func QueryServiceConfig bothCharset
+  BOOL
+  hService SC_HANDLE
+  lpServiceConfig LPQUERY_SERVICE_CONFIG outputOnly
+  cbBufSize DWORD
+  pcbBytesNeeded LPDWORD
+
+func QueryServiceConfig2 bothCharset
+  BOOL
+  hService SC_HANDLE
+  dwInfoLevel [ServiceInfoLevel]
+  lpBuffer LPBYTE postLength=pcbBytesNeeded
+  cbBufSize DWORD
+  pcbBytesNeeded LPDWORD
+
+func QueryServiceDynamicInformation
+  BOOL
+  hServiceStatus SERVICE_STATUS_HANDLE
+  dwInfoLevel DWORD
+  ppDynamicInfo PVOID*
+
+func QueryServiceStatus
+  BOOL
+  hService SC_HANDLE
+  lpServiceStatus LPSERVICE_STATUS
+
+func QueryServiceStatusEx
+  BOOL
+  hService SC_HANDLE
+  InfoLevel SC_STATUS_TYPE
+  lpBuffer LPBYTE postLength=pcbBytesNeeded
+  cbBufSize DWORD
+  pcbBytesNeeded LPDWORD
+
+func StartService bothCharset
+  BOOL
+  hService SC_HANDLE
+  dwNumServiceArgs DWORD
+  lpServiceArgVectors LPCTSTR* count=dwNumServiceArgs
+
+func EnumServicesStatus bothCharset
+  BOOL
+  hSCManager SC_HANDLE
+  dwServiceType [ServiceType]
+  dwServiceState [ServiceState]
+  lpServices LPENUM_SERVICE_STATUS postCount=lpServicesReturned
+  cbBufSize DWORD
+  pcbBytesNeeded LPDWORD
+  lpServicesReturned LPDWORD
+  lpResumeHandle LPDWORD
+
+func LockServiceDatabase
+  success NotEqual=0
+  SC_LOCK
+  hSCManager SC_HANDLE
+
+func QueryServiceLockStatus bothCharset
+  BOOL
+  hSCManager SC_HANDLE
+  lpLockStatus LPQUERY_SERVICE_LOCK_STATUS
+  cbBufSize DWORD
+  pcbBytesNeeded LPDWORD
+
+func UnlockServiceDatabase
+  BOOL
+  ScLock SC_LOCK
+
+func GetCurrentHwProfile bothCharset
+  BOOL
+  lpHwProfileInfo LPHW_PROFILE_INFO
+
+func GetUserName bothCharset
+  BOOL
+  lpBuffer LPTSTR
+  lpnSize LPDWORD
+
+func IsTextUnicode
+  BOOL
+  lpv "const VOID*" length=iSize
+  iSize int
+  lpiResult [IsTextUnicodeFlags*] display=LPINT
+
+func CryptAcquireContext bothCharset
+  BOOL
+  phProv HCRYPTPROV*
+  pszContainer LPCTSTR
+  pszProvider LPCTSTR
+  dwProvType [CryptProv]
+  dwFlags [CryptAcquireContextFlags]
+
+func CryptContextAddRef
+  BOOL
+  hProv HCRYPTPROV
+  pdwReserved DWORD*
+  dwFlags DWORD
+
+func CryptEnumProviders bothCharset
+  BOOL
+  dwIndex DWORD
+  pdwReserved DWORD*
+  dwFlags DWORD
+  pdwProvType [CryptProv*]
+  pszProvName LPTSTR
+  pcbProvName DWORD*
+
+func CryptEnumProviderTypes bothCharset
+  BOOL
+  dwIndex DWORD
+  pdwReserved DWORD*
+  dwFlags DWORD
+  pdwProvType [CryptProv*]
+  pszTypeName LPTSTR
+  pcbTypeName DWORD*
+
+func CryptGetDefaultProvider bothCharset
+  BOOL
+  dwProvType [CryptProv]
+  pdwReserved DWORD*
+  dwFlags DWORD
+  pszProvName LPTSTR
+  pcbProvName DWORD*
+
+func CryptGetProvParam
+  BOOL
+  hProv HCRYPTPROV
+  dwParam [CryptGetProvParam]
+  pbData BYTE* postLength=pdwDataLen
+  pdwDataLen DWORD*
+  dwFlags DWORD
+
+func CryptReleaseContext
+  BOOL
+  hProv HCRYPTPROV
+  dwFlags DWORD
+
+func CryptSetProvider bothCharset
+  BOOL
+  pszProvName LPCTSTR
+  dwProvType [CryptProv]
+
+func CryptSetProviderEx bothCharset
+  BOOL
+  pszProvName LPCTSTR
+  dwProvType [CryptProv]
+  pdwReserved DWORD*
+  dwFlags DWORD
+
+func CryptSetProvParam
+  BOOL
+  hProv HCRYPTPROV
+  dwParam [CryptSetProvParam]
+  pbData "const BYTE*"
+  dwFlags DWORD
+
+func CryptDeriveKey
+  BOOL
+  hProv HCRYPTPROV
+  Algid ALG_ID
+  hBaseData HCRYPTHASH
+  dwFlags DWORD
+  phKey HCRYPTKEY*
+
+func CryptDestroyKey
+  BOOL
+  hKey HCRYPTKEY
+
+func CryptDuplicateKey
+  BOOL
+  hKey HCRYPTKEY
+  pdwReserved DWORD*
+  dwFlags DWORD
+  phKey HCRYPTKEY*
+
+func CryptExportKey
+  BOOL
+  hKey HCRYPTKEY
+  hExpKey HCRYPTKEY
+  dwBlobType [CryptBlobType]
+  dwFlags [CryptExportKeyFlags]
+  pbData BYTE* postLength=pdwDataLen
+  pdwDataLen DWORD*
+
+func CryptGenKey
+  BOOL
+  hProv HCRYPTPROV
+  Algid ALG_ID
+  dwFlags DWORD
+  phKey HCRYPTKEY*
+
+func CryptGenRandom
+  BOOL
+  hProv HCRYPTPROV
+  dwLen DWORD
+  pbBuffer BYTE* length=dwLen
+
+func CryptGetKeyParam
+  BOOL
+  hKey HCRYPTKEY
+  dwParam [CryptKeyParam]
+  pbData BYTE* postLength=pdwDataLen
+  pdwDataLen DWORD*
+  dwFlags DWORD
+
+func CryptGetUserKey
+  BOOL
+  hProv HCRYPTPROV
+  dwKeySpec [CryptKeySpec]
+  phUserKey HCRYPTKEY*
+
+func CryptImportKey
+  BOOL
+  hProv HCRYPTPROV
+  pbData BYTE* length=dwDataLen
+  dwDataLen DWORD
+  hPubKey HCRYPTKEY
+  dwFlags [CryptImportKeyFlags]
+  phKey HCRYPTKEY*
+
+func CryptSetKeyParam
+  BOOL
+  hKey HCRYPTKEY
+  dwParam [CryptKeyParam]
+  pbData "const BYTE*"
+  dwFlags DWORD
+
+func CryptDecrypt
+  BOOL
+  hKey HCRYPTKEY
+  hHash HCRYPTHASH
+  Final BOOL
+  dwFlags DWORD
+  pbData BYTE* length=pdwDataLen
+  pdwDataLen DWORD*
+
+func CryptEncrypt
+  BOOL
+  hKey HCRYPTKEY
+  hHash HCRYPTHASH
+  Final BOOL
+  dwFlags DWORD
+  pbData BYTE* length=pdwDataLen
+  pdwDataLen DWORD*
+  dwBufLen DWORD
+
+func CryptCreateHash
+  BOOL
+  hProv HCRYPTPROV
+  Algid ALG_ID
+  hKey HCRYPTKEY
+  dwFlags [CryptCreateHashFlags]
+  phHash HCRYPTHASH*
+
+func CryptDestroyHash
+  BOOL
+  hHash HCRYPTHASH
+
+func CryptDuplicateHash
+  BOOL
+  hHash HCRYPTHASH
+  pdwReserved DWORD*
+  dwFlags DWORD
+  phHash HCRYPTHASH*
+
+func CryptGetHashParam
+  BOOL
+  hHash HCRYPTHASH
+  dwParam [CryptHashParam]
+  pbData BYTE* postLength=pdwDataLen
+  pdwDataLen DWORD*
+  dwFlags DWORD
+
+func CryptHashData
+  BOOL
+  hHash HCRYPTHASH
+  pbData BYTE* length=dwDataLen
+  dwDataLen DWORD
+  dwFlags [CryptHashDataFlags]
+
+func CryptHashSessionKey
+  BOOL
+  hHash HCRYPTHASH
+  hKey HCRYPTKEY
+  dwFlags DWORD
+
+func CryptSetHashParam
+  BOOL
+  hHash HCRYPTHASH
+  dwParam [CryptHashParam]
+  pbData "const BYTE*"
+  dwFlags DWORD
+
+func CryptSignHash bothCharset
+  BOOL
+  hHash HCRYPTHASH
+  dwKeySpec [CryptKeySpec]
+  sDescription LPCTSTR
+  dwFlags [CryptSignFlags]
+  pbSignature BYTE* length=pdwSigLen
+  pdwSigLen DWORD*
+
+func CryptVerifySignature bothCharset
+  BOOL
+  hHash HCRYPTHASH
+  pbSignature BYTE* length=dwSigLen
+  dwSigLen DWORD
+  hPubKey HCRYPTKEY
+  sDescription LPCTSTR
+  dwFlags [CryptSignFlags]
+
+func ControlTrace bothCharset
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+  SessionName LPCTSTR
+  Properties PEVENT_TRACE_PROPERTIES
+  ControlCode ULONG
+
+func EnableTrace
+  [ERROR_CODE_ULONG]
+  Enable ULONG
+  EnableFlag ULONG
+  EnableLevel ULONG
+  ControlGuid LPCGUID
+  SessionHandle TRACEHANDLE
+
+func EnableTraceEx
+  [ERROR_CODE_ULONG]
+  ProviderId LPCGUID
+  SourceId LPCGUID
+  TraceHandle TRACEHANDLE
+  IsEnabled ULONG
+  Level UCHAR
+  MatchAnyKeyword ULONGLONG
+  MatchAllKeyword ULONGLONG
+  EnableProperty ULONG
+  EnableFilterDesc PEVENT_FILTER_DESCRIPTOR
+
+func EnableTraceEx2
+  [ERROR_CODE_ULONG]
+  TraceHandle TRACEHANDLE
+  ProviderId LPCGUID
+  ControlCode ULONG
+  Level UCHAR
+  MatchAnyKeyword ULONGLONG
+  MatchAllKeyword ULONGLONG
+  Timeout ULONG
+  EnableParameters PENABLE_TRACE_PARAMETERS
+
+func EnumerateTraceGuids
+  [ERROR_CODE_ULONG]
+  GuidPropertiesArray PTRACE_GUID_PROPERTIES* count=GuidCount
+  PropertyArrayCount ULONG
+  GuidCount PULONG
+
+func EnumerateTraceGuidsEx
+  [ERROR_CODE_ULONG]
+  TraceQueryInfoClass TRACE_QUERY_INFO_CLASS
+  InBuffer PVOID length=InBufferSize
+  InBufferSize ULONG
+  OutBuffer PVOID postLength=ReturnLength
+  OutBufferSize ULONG
+  ReturnLength PULONG
+
+func FlushTrace bothCharset
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+  SessionName LPCTSTR
+  Properties PEVENT_TRACE_PROPERTIES
+
+func QueryAllTraces bothCharset
+  [ERROR_CODE_ULONG]
+  PropertyArray PEVENT_TRACE_PROPERTIES* postCount=SessionCount
+  PropertyArrayCount ULONG
+  SessionCount PULONG
+
+func QueryTrace bothCharset
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+  SessionName LPCTSTR
+  Properties PEVENT_TRACE_PROPERTIES
+
+func StartTrace bothCharset
+  [ERROR_CODE_ULONG]
+  SessionHandle PTRACEHANDLE
+  SessionName LPCTSTR
+  Properties PEVENT_TRACE_PROPERTIES
+
+func StopTrace bothCharset
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+  SessionName LPCTSTR
+  Properties PEVENT_TRACE_PROPERTIES
+
+func TraceQueryInformation
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+  InformationClass TRACE_QUERY_INFO_CLASS
+  TraceInformation PVOID
+  InformationLength ULONG
+  ReturnLength PULONG
+
+func TraceSetInformation
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+  InformationClass TRACE_INFO_CLASS
+  TraceInformation PVOID
+  InformationLength ULONG
+
+func UpdateTrace bothCharset
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+  SessionName LPCTSTR
+  Properties PEVENT_TRACE_PROPERTIES
+
+func CreateTraceInstanceId
+  [ERROR_CODE_ULONG]
+  RegHandle HANDLE
+  pInstInfo PEVENT_INSTANCE_INFO
+
+func GetTraceEnableFlags
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+
+func GetTraceEnableLevel
+  UCHAR
+  SessionHandle TRACEHANDLE
+
+func GetTraceLoggerHandle
+  success NotEqual=-1
+  TRACEHANDLE
+  Buffer PVOID
+
+func RegisterTraceGuids bothCharset
+  [ERROR_CODE_ULONG]
+  RequestAddress WMIDPREQUEST
+  RequestContext PVOID
+  ControlGuid LPCGUID
+  GuidCount ULONG
+  TraceGuidReg PTRACE_GUID_REGISTRATION count=GuidCount
+  MofImagePath LPCTSTR
+  MofResourceName LPCTSTR
+  RegistrationHandle PTRACEHANDLE
+
+func TraceEvent
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+  EventTrace PEVENT_TRACE_HEADER
+
+func TraceEventInstance
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+  EventTrace PEVENT_INSTANCE_HEADER
+  pInstInfo PEVENT_INSTANCE_INFO
+  pParentInstInfo PEVENT_INSTANCE_INFO
+
+func TraceMessage varArgs
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+  MessageFlags [TRACE_MESSAGE_FLAGS]
+  MessageGuid LPGUID
+  MessageNumber USHORT
+
+func TraceMessageVa
+  [ERROR_CODE_ULONG]
+  SessionHandle TRACEHANDLE
+  MessageFlags ULONG
+  MessageGuid LPGUID
+  MessageNumber USHORT
+  MessageArgList va_list
+
+func UnregisterTraceGuids
+  [ERROR_CODE_ULONG]
+  RegistrationHandle TRACEHANDLE
+
+func EventActivityIdControl
+  [ERROR_CODE_ULONG]
+  ControlCode [EventActivity]
+  ActivityId LPGUID
+
+func EventEnabled
+  BOOLEAN
+  RegHandle REGHANDLE
+  EventDescriptor PCEVENT_DESCRIPTOR
+
+func EventProviderEnabled
+  BOOLEAN
+  RegHandle REGHANDLE
+  Level UCHAR
+  Keyword ULONGLONG
+
+func EventRegister
+  [ERROR_CODE_ULONG]
+  ProviderId LPCGUID
+  EnableCallback ENABLECALLBACK
+  CallbackContext PVOID
+  RegHandle PREGHANDLE
+
+func EventSetInformation
+  [ERROR_CODE_ULONG]
+  RegHandle REGHANDLE
+  InformationClass EVENT_INFO_CLASS
+  EventInformation PVOID
+  InformationLength ULONG
+
+func EventUnregister
+  [ERROR_CODE_ULONG]
+  RegHandle REGHANDLE
+
+func EventWrite
+  [ERROR_CODE_ULONG]
+  RegHandle REGHANDLE
+  EventDescriptor PCEVENT_DESCRIPTOR
+  UserDataCount ULONG
+  UserData PEVENT_DATA_DESCRIPTOR count=UserDataCount
+
+func EventWriteEx
+  [ERROR_CODE_ULONG]
+  RegHandle REGHANDLE
+  EventDescriptor PCEVENT_DESCRIPTOR
+  Filter ULONG64
+  Flags ULONG
+  ActivityId LPCGUID
+  RelatedActivityId LPCGUID
+  UserDataCount ULONG
+  UserData PEVENT_DATA_DESCRIPTOR
+
+func EventWriteString
+  [ERROR_CODE_ULONG]
+  RegHandle REGHANDLE
+  Level UCHAR
+  Keyword ULONGLONG
+  String PCWSTR
+
+func EventWriteTransfer
+  [ERROR_CODE_ULONG]
+  RegHandle REGHANDLE
+  EventDescriptor PCEVENT_DESCRIPTOR
+  ActivityId LPCGUID
+  RelatedActivityId LPCGUID
+  UserDataCount ULONG
+  UserData PEVENT_DATA_DESCRIPTOR count=UserDataCount
+
+func CloseTrace
+  [ERROR_CODE_ULONG]
+  TraceHandle TRACEHANDLE
+
+func OpenTrace bothCharset
+  success NotEqual=-1
+  TRACEHANDLE
+  Logfile PEVENT_TRACE_LOGFILE
+
+func ProcessTrace
+  [ERROR_CODE_ULONG]
+  HandleArray PTRACEHANDLE count=HandleCount
+  HandleCount ULONG
+  StartTime LPFILETIME
+  EndTime LPFILETIME
+
+func RemoveTraceCallback
+  [ERROR_CODE_ULONG]
+  pGuid LPCGUID
+
+func SetTraceCallback
+  [ERROR_CODE_ULONG]
+  pGuid LPCGUID
+  EventCallback PEVENT_CALLBACK
+
+func EventAccessControl
+  [ERROR_CODE_ULONG]
+  Guid LPGUID
+  Operation ULONG
+  Sid PSID
+  Rights ULONG
+  AllowOrDeny BOOLEAN
+
+func EventAccessQuery
+  [ERROR_CODE_ULONG]
+  Guid LPGUID
+  Buffer PSECURITY_DESCRIPTOR
+  BufferSize PULONG
+
+func EventAccessRemove
+  [ERROR_CODE_ULONG]
+  Guid LPGUID
+
+func AccessCheck
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  ClientToken HANDLE
+  DesiredAccess DWORD
+  GenericMapping PGENERIC_MAPPING
+  PrivilegeSet PPRIVILEGE_SET
+  PrivilegeSetLength LPDWORD
+  GrantedAccess LPDWORD
+  AccessStatus LPBOOL
+
+func AccessCheckByType
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  PrincipalSelfSid PSID
+  ClientToken HANDLE
+  DesiredAccess DWORD
+  ObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeListLength DWORD
+  GenericMapping PGENERIC_MAPPING
+  PrivilegeSet PPRIVILEGE_SET
+  PrivilegeSetLength LPDWORD
+  GrantedAccess LPDWORD
+  AccessStatus LPBOOL
+
+func AccessCheckByTypeResultList
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  PrincipalSelfSid PSID
+  ClientToken HANDLE
+  DesiredAccess DWORD
+  ObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeListLength DWORD
+  GenericMapping PGENERIC_MAPPING
+  PrivilegeSet PPRIVILEGE_SET
+  PrivilegeSetLength LPDWORD
+  GrantedAccessList LPDWORD
+  AccessStatusList LPDWORD
+
+func AdjustTokenGroups
+  BOOL
+  TokenHandle HANDLE
+  ResetToDefault BOOL
+  NewState PTOKEN_GROUPS
+  BufferLength DWORD
+  PreviousState PTOKEN_GROUPS
+  ReturnLength PDWORD
+
+func AdjustTokenPrivileges
+  BOOL
+  TokenHandle HANDLE
+  DisableAllPrivileges BOOL
+  NewState PTOKEN_PRIVILEGES
+  BufferLength DWORD
+  PreviousState PTOKEN_PRIVILEGES
+  ReturnLength PDWORD
+
+func AllocateAndInitializeSid
+  BOOL
+  pIdentifierAuthority PSID_IDENTIFIER_AUTHORITY
+  nSubAuthorityCount BYTE
+  dwSubAuthority0 DWORD
+  dwSubAuthority1 DWORD
+  dwSubAuthority2 DWORD
+  dwSubAuthority3 DWORD
+  dwSubAuthority4 DWORD
+  dwSubAuthority5 DWORD
+  dwSubAuthority6 DWORD
+  dwSubAuthority7 DWORD
+  pSid PSID*
+
+func AllocateLocallyUniqueId
+  BOOL
+  Luid PLUID
+
+func BuildExplicitAccessWithName bothCharset
+  VOID
+  pExplicitAccess PEXPLICIT_ACCESS
+  pTrusteeName LPTSTR
+  AccessPermissions DWORD
+  AccessMode ACCESS_MODE
+  Inheritance [AceFlags]
+
+func BuildImpersonateExplicitAccessWithName bothCharset
+  VOID
+  pExplicitAccess PEXPLICIT_ACCESS
+  pTrusteeName LPTSTR
+  pTrustee PTRUSTEE
+  AccessPermissions DWORD
+  AccessMode ACCESS_MODE
+  Inheritance [AceFlags]
+
+func BuildImpersonateTrustee bothCharset
+  VOID
+  pTrustee PTRUSTEE
+  pImpersonateTrustee PTRUSTEE
+
+func BuildTrusteeWithName bothCharset
+  VOID
+  pTrustee PTRUSTEE
+  pName LPTSTR
+
+func BuildTrusteeWithObjectsAndName bothCharset
+  void
+  pTrustee PTRUSTEE
+  pObjName POBJECTS_AND_NAME
+  ObjectType SE_OBJECT_TYPE
+  ObjectTypeName LPTSTR
+  InheritedObjectTypeName LPTSTR
+  Name LPTSTR
+
+func BuildTrusteeWithObjectsAndSid bothCharset
+  void
+  pTrustee PTRUSTEE
+  pObjSid POBJECTS_AND_SID
+  pObjectGuid GUID*
+  pInheritedObjectGuid GUID*
+  pSid PSID
+
+func BuildTrusteeWithSid bothCharset
+  VOID
+  pTrustee PTRUSTEE
+  pSid PSID
+
+func CheckTokenMembership
+  BOOL
+  TokenHandle HANDLE
+  SidToCheck PSID
+  IsMember PBOOL
+
+func ConvertSecurityDescriptorToStringSecurityDescriptor bothCharset
+  BOOL
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  RequestedStringSDRevision DWORD
+  SecurityInformation SECURITY_INFORMATION
+  StringSecurityDescriptor LPTSTR*
+  StringSecurityDescriptorLen PULONG
+
+func ConvertSidToStringSid bothCharset
+  BOOL
+  Sid PSID
+  StringSid LPTSTR*
+
+func ConvertStringSecurityDescriptorToSecurityDescriptor bothCharset
+  BOOL
+  StringSecurityDescriptor LPCTSTR
+  StringSDRevision DWORD
+  SecurityDescriptor PSECURITY_DESCRIPTOR*
+  SecurityDescriptorSize PULONG
+
+func ConvertStringSidToSid bothCharset
+  BOOL
+  StringSid LPCTSTR
+  Sid PSID*
+
+func CopySid
+  BOOL
+  nDestinationSidLength DWORD
+  pDestinationSid PSID postLength=nDestinationSidLength
+  pSourceSid PSID
+
+func CreateRestrictedToken
+  BOOL
+  ExistingTokenHandle HANDLE
+  Flags [CreateRestrictedTokenFlags]
+  DisableSidCount DWORD
+  SidsToDisable PSID_AND_ATTRIBUTES
+  DeletePrivilegeCount DWORD
+  PrivilegesToDelete PLUID_AND_ATTRIBUTES
+  RestrictedSidCount DWORD
+  SidsToRestrict PSID_AND_ATTRIBUTES
+  NewTokenHandle PHANDLE
+
+func CreateWellKnownSid
+  BOOL
+  WellKnownSidType WELL_KNOWN_SID_TYPE
+  DomainSid PSID
+  pSid PSID postLength=cbSid
+  cbSid DWORD*
+
+func DuplicateToken
+  BOOL
+  ExistingTokenHandle HANDLE
+  ImpersonationLevel SECURITY_IMPERSONATION_LEVEL
+  DuplicateTokenHandle PHANDLE
+
+func DuplicateTokenEx
+  BOOL
+  hExistingToken HANDLE
+  dwDesiredAccess [TOKEN_ACCESS_MASK_DWORD]
+  lpTokenAttributes LPSECURITY_ATTRIBUTES
+  ImpersonationLevel SECURITY_IMPERSONATION_LEVEL
+  TokenType TOKEN_TYPE
+  phNewToken PHANDLE
+
+func EqualDomainSid
+  BOOL
+  pSid1 PSID
+  pSid2 PSID
+  pfEqual BOOL*
+
+func EqualPrefixSid
+  BOOL
+  pSid1 PSID
+  pSid2 PSID
+
+func EqualSid
+  BOOL
+  pSid1 PSID
+  pSid2 PSID
+
+func FreeSid
+  success Equal=0
+  PVOID
+  pSid PSID
+
+func GetAuditedPermissionsFromAcl bothCharset
+  [ERROR_CODE]
+  pacl PACL
+  pTrustee PTRUSTEE
+  pSuccessfulAuditedRights PACCESS_MASK
+  pFailedAuditRights PACCESS_MASK
+
+func GetEffectiveRightsFromAcl bothCharset
+  [ERROR_CODE]
+  pacl PACL
+  pTrustee PTRUSTEE
+  pAccessRights PACCESS_MASK
+
+func GetExplicitEntriesFromAcl bothCharset
+  [ERROR_CODE]
+  pacl PACL
+  pcCountOfExplicitEntries PULONG
+  pListOfExplicitEntries PEXPLICIT_ACCESS* derefPostCount=pcCountOfExplicitEntries
+
+func GetLengthSid
+  DWORD
+  pSid PSID
+
+func GetMultipleTrustee bothCharset
+  success NotEqual=0
+  PTRUSTEE
+  pTrustee PTRUSTEE
+
+func GetMultipleTrusteeOperation bothCharset
+  success NotEqual=0
+  MULTIPLE_TRUSTEE_OPERATION
+  pTrustee PTRUSTEE
+
+func GetNamedSecurityInfo bothCharset
+  [ERROR_CODE]
+  pObjectName LPTSTR
+  ObjectType SE_OBJECT_TYPE
+  SecurityInfo SECURITY_INFORMATION
+  ppsidOwner PSID*
+  ppsidGroup PSID*
+  ppDacl PACL*
+  ppSacl PACL*
+  ppSecurityDescriptor PSECURITY_DESCRIPTOR_RELATIVE*
+
+func GetSecurityDescriptorControl
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  pControl PSECURITY_DESCRIPTOR_CONTROL
+  lpdwRevision LPDWORD
+
+func GetSecurityInfo
+  [ERROR_CODE]
+  handle HANDLE
+  ObjectType SE_OBJECT_TYPE
+  SecurityInfo SECURITY_INFORMATION
+  ppsidOwner PSID*
+  ppsidGroup PSID*
+  ppDacl PACL*
+  ppSacl PACL*
+  ppSecurityDescriptor PSECURITY_DESCRIPTOR*
+
+func GetSidIdentifierAuthority
+  success NotEqual=0
+  PSID_IDENTIFIER_AUTHORITY
+  pSid PSID
+
+func GetSidLengthRequired
+  DWORD
+  nSubAuthorityCount UCHAR
+
+func GetSidSubAuthority
+  PDWORD
+  pSid PSID
+  nSubAuthority DWORD
+
+func GetSidSubAuthorityCount
+  success NotEqual=0
+  PUCHAR
+  pSid PSID
+
+func GetTokenInformation
+  BOOL
+  TokenHandle HANDLE
+  TokenInformationClass TOKEN_INFORMATION_CLASS
+  TokenInformation LPVOID length=TokenInformationLength
+  TokenInformationLength DWORD
+  ReturnLength PDWORD
+
+func GetTrusteeForm bothCharset
+  TRUSTEE_FORM
+  pTrustee PTRUSTEE
+
+func GetTrusteeName bothCharset
+  success NotEqual=0
+  LPTSTR
+  pTrustee PTRUSTEE
+
+func GetTrusteeType bothCharset
+  TRUSTEE_TYPE
+  pTrustee PTRUSTEE
+
+func GetWindowsAccountDomainSid
+  BOOL
+  pSid PSID
+  ppDomainSid PSID postLength=cbSid
+  cbSid DWORD*
+
+func InitializeSid
+  BOOL
+  Sid PSID
+  pIdentifierAuthority PSID_IDENTIFIER_AUTHORITY
+  nSubAuthorityCount BYTE
+
+func IsTokenRestricted
+  BOOL
+  TokenHandle HANDLE
+
+func IsValidSid
+  BOOL
+  pSid PSID
+
+func IsWellKnownSid
+  BOOL
+  pSid PSID
+  WellKnownSidType WELL_KNOWN_SID_TYPE
+
+func LookupAccountName bothCharset
+  BOOL
+  lpSystemName LPCTSTR
+  lpAccountName LPCTSTR
+  Sid PSID postLength=cbSid
+  cbSid LPDWORD
+  ReferencedDomainName LPTSTR outputOnly
+  cchReferencedDomainName LPDWORD
+  peUse PSID_NAME_USE
+
+func LookupAccountSid bothCharset
+  BOOL
+  lpSystemName LPCTSTR
+  lpSid PSID
+  lpName LPTSTR outputOnly
+  cchName LPDWORD
+  lpReferencedDomainName LPTSTR outputOnly
+  cchReferencedDomainName LPDWORD
+  peUse PSID_NAME_USE
+
+func LookupPrivilegeDisplayName bothCharset
+  BOOL
+  lpSystemName LPCTSTR
+  lpName LPCTSTR
+  lpDisplayName LPTSTR outputOnly
+  cchDisplayName LPDWORD
+  lpLanguageId LPDWORD
+
+func LookupPrivilegeName bothCharset
+  BOOL
+  lpSystemName LPCTSTR
+  lpLuid PLUID
+  lpName LPTSTR outputOnly
+  cchName LPDWORD
+
+func LookupPrivilegeValue bothCharset
+  BOOL
+  lpSystemName LPCTSTR
+  lpName LPCTSTR
+  lpLuid PLUID
+
+func OpenProcessToken
+  BOOL
+  ProcessHandle [ProcessHandle]
+  DesiredAccess [TOKEN_ACCESS_MASK_DWORD]
+  TokenHandle PHANDLE
+
+func OpenThreadToken
+  BOOL
+  ThreadHandle [ThreadHandle]
+  DesiredAccess [TOKEN_ACCESS_MASK_DWORD]
+  OpenAsSelf BOOL
+  TokenHandle PHANDLE
+
+func QuerySecurityAccessMask
+  VOID
+  SecurityInformation SECURITY_INFORMATION
+  DesiredAccess LPDWORD
+
+func SetEntriesInAcl bothCharset
+  [ERROR_CODE]
+  cCountOfExplicitEntries ULONG
+  pListOfExplicitEntries PEXPLICIT_ACCESS count=cCountOfExplicitEntries
+  OldAcl PACL
+  NewAcl PACL*
+
+func SetNamedSecurityInfo bothCharset
+  [ERROR_CODE]
+  pObjectName LPTSTR
+  ObjectType SE_OBJECT_TYPE
+  SecurityInfo SECURITY_INFORMATION
+  psidOwner PSID
+  psidGroup PSID
+  pDacl PACL
+  pSacl PACL
+
+func SetSecurityAccessMask
+  VOID
+  SecurityInformation SECURITY_INFORMATION
+  DesiredAccess LPDWORD
+
+func SetSecurityDescriptorControl
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  ControlBitsOfInterest SECURITY_DESCRIPTOR_CONTROL
+  ControlBitsToSet SECURITY_DESCRIPTOR_CONTROL
+
+func SetSecurityInfo
+  [ERROR_CODE]
+  handle HANDLE
+  ObjectType SE_OBJECT_TYPE
+  SecurityInfo SECURITY_INFORMATION
+  psidOwner PSID
+  psidGroup PSID
+  pDacl PACL
+  pSacl PACL
+
+func SetThreadToken
+  BOOL
+  Thread PHANDLE
+  Token HANDLE
+
+func SetTokenInformation
+  BOOL
+  TokenHandle HANDLE
+  TokenInformationClass TOKEN_INFORMATION_CLASS
+  TokenInformation LPVOID length=TokenInformationLength
+  TokenInformationLength DWORD
+
+func TreeResetNamedSecurityInfo bothCharset
+  [ERROR_CODE]
+  pObjectName LPTSTR
+  ObjectType SE_OBJECT_TYPE
+  SecurityInfo SECURITY_INFORMATION
+  pOwner PSID
+  pGroup PSID
+  pDacl PACL
+  pSacl PACL
+  KeepExplicit BOOL
+  fnProgress FN_PROGRESS
+  ProgressInvokeSetting PROG_INVOKE_SETTING
+  Args PVOID
+
+func TreeSetNamedSecurityInfo bothCharset
+  [ERROR_CODE]
+  pObjectName LPTSTR
+  ObjectType SE_OBJECT_TYPE
+  SecurityInfo SECURITY_INFORMATION
+  pOwner PSID
+  pGroup PSID
+  pDacl PACL
+  pSacl PACL
+  dwAction [TreeSecAction]
+  fnProgress FN_PROGRESS
+  ProgressInvokeSetting PROG_INVOKE_SETTING
+  Args PVOID
+
+func AreAllAccessesGranted
+  BOOL
+  GrantedAccess DWORD
+  DesiredAccess DWORD
+
+func AreAnyAccessesGranted
+  BOOL
+  GrantedAccess DWORD
+  DesiredAccess DWORD
+
+func BuildSecurityDescriptor bothCharset
+  [ERROR_CODE]
+  pOwner PTRUSTEE
+  pGroup PTRUSTEE
+  cCountOfAccessEntries ULONG
+  pListOfAccessEntries PEXPLICIT_ACCESS count=cCountOfAccessEntries
+  cCountOfAuditEntries ULONG
+  pListOfAuditEntries PEXPLICIT_ACCESS count=cCountOfAuditEntries
+  pOldSD PSECURITY_DESCRIPTOR
+  pSizeNewSD PULONG
+  pNewSD PSECURITY_DESCRIPTOR*
+
+func ConvertToAutoInheritPrivateObjectSecurity
+  BOOL
+  ParentDescriptor PSECURITY_DESCRIPTOR
+  CurrentSecurityDescriptor PSECURITY_DESCRIPTOR
+  NewSecurityDescriptor PSECURITY_DESCRIPTOR*
+  ObjectType GUID*
+  IsDirectoryObject BOOLEAN
+  GenericMapping PGENERIC_MAPPING
+
+func CreatePrivateObjectSecurity
+  BOOL
+  ParentDescriptor PSECURITY_DESCRIPTOR
+  CreatorDescriptor PSECURITY_DESCRIPTOR
+  NewDescriptor PSECURITY_DESCRIPTOR*
+  IsDirectoryObject BOOL
+  Token HANDLE
+  GenericMapping PGENERIC_MAPPING
+
+func CreatePrivateObjectSecurityEx
+  BOOL
+  ParentDescriptor PSECURITY_DESCRIPTOR
+  CreatorDescriptor PSECURITY_DESCRIPTOR
+  NewDescriptor PSECURITY_DESCRIPTOR*
+  ObjectType GUID*
+  IsContainerObject BOOL
+  AutoInheritFlags [SEF_Flags]
+  Token HANDLE
+  GenericMapping PGENERIC_MAPPING
+
+func CreatePrivateObjectSecurityWithMultipleInheritance
+  BOOL
+  ParentDescriptor PSECURITY_DESCRIPTOR
+  CreatorDescriptor PSECURITY_DESCRIPTOR
+  NewDescriptor PSECURITY_DESCRIPTOR*
+  ObjectTypes GUID** count=GuidCount
+  GuidCount ULONG
+  IsContainerObject BOOL
+  AutoInheritFlags [SEF_Flags]
+  Token HANDLE
+  GenericMapping PGENERIC_MAPPING
+
+func DestroyPrivateObjectSecurity
+  BOOL
+  ObjectDescriptor PSECURITY_DESCRIPTOR*
+
+func GetPrivateObjectSecurity
+  BOOL
+  ObjectDescriptor PSECURITY_DESCRIPTOR
+  SecurityInformation SECURITY_INFORMATION
+  ResultantDescriptor PSECURITY_DESCRIPTOR
+  DescriptorLength DWORD
+  ReturnLength PDWORD
+
+func ImpersonateAnonymousToken
+  BOOL
+  ThreadHandle [ThreadHandle]
+
+func ImpersonateLoggedOnUser
+  BOOL
+  hToken HANDLE
+
+func ImpersonateNamedPipeClient
+  BOOL
+  hNamedPipe HANDLE
+
+func ImpersonateSelf
+  BOOL
+  ImpersonationLevel SECURITY_IMPERSONATION_LEVEL
+
+func LookupSecurityDescriptorParts bothCharset
+  [ERROR_CODE]
+  pOwner PTRUSTEE*
+  pGroup PTRUSTEE*
+  cCountOfAccessEntries PULONG
+  pListOfAccessEntries PEXPLICIT_ACCESS* count=cCountOfAccessEntries
+  cCountOfAuditEntries PULONG
+  pListOfAuditEntries PEXPLICIT_ACCESS* count=cCountOfAuditEntries
+  pSD PSECURITY_DESCRIPTOR
+
+func MapGenericMask
+  VOID
+  AccessMask PDWORD
+  GenericMapping PGENERIC_MAPPING
+
+func ObjectCloseAuditAlarm bothCharset
+  BOOL
+  SubsystemName LPCTSTR
+  HandleId LPVOID
+  GenerateOnClose BOOL
+
+func ObjectDeleteAuditAlarm bothCharset
+  BOOL
+  SubsystemName LPCTSTR
+  HandleId LPVOID
+  GenerateOnClose BOOL
+
+func ObjectOpenAuditAlarm bothCharset
+  BOOL
+  SubsystemName LPCTSTR
+  HandleId LPVOID
+  ObjectTypeName LPTSTR
+  ObjectName LPTSTR
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  ClientToken HANDLE
+  DesiredAccess DWORD
+  GrantedAccess DWORD
+  Privileges PPRIVILEGE_SET
+  ObjectCreation BOOL
+  AccessGranted BOOL
+  GenerateOnClose LPBOOL
+
+func ObjectPrivilegeAuditAlarm bothCharset
+  BOOL
+  SubsystemName LPCTSTR
+  HandleId LPVOID
+  ClientToken HANDLE
+  DesiredAccess DWORD
+  Privileges PPRIVILEGE_SET
+  AccessGranted BOOL
+
+func PrivilegeCheck
+  BOOL
+  ClientToken HANDLE
+  RequiredPrivileges PPRIVILEGE_SET
+  pfResult LPBOOL
+
+func PrivilegedServiceAuditAlarm bothCharset
+  BOOL
+  SubsystemName LPCTSTR
+  ServiceName LPCTSTR
+  ClientToken HANDLE
+  Privileges PPRIVILEGE_SET
+  AccessGranted BOOL
+
+func RevertToSelf
+  BOOL
+
+func SetPrivateObjectSecurity
+  BOOL
+  SecurityInformation SECURITY_INFORMATION
+  ModificationDescriptor PSECURITY_DESCRIPTOR
+  ObjectsSecurityDescriptor PSECURITY_DESCRIPTOR*
+  GenericMapping PGENERIC_MAPPING
+  Token HANDLE
+
+func SetPrivateObjectSecurityEx
+  BOOL
+  SecurityInformation SECURITY_INFORMATION
+  ModificationDescriptor PSECURITY_DESCRIPTOR
+  ObjectsSecurityDescriptor PSECURITY_DESCRIPTOR*
+  AutoInheritFlags [SEF_Flags]
+  GenericMapping PGENERIC_MAPPING
+  Token HANDLE
+
+func GetSecurityDescriptorRMControl
+  [ERROR_CODE]
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  RMControl PUCHAR
+
+func SetSecurityDescriptorRMControl
+  [ERROR_CODE]
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  RMControl PUCHAR
+
+func AccessCheckAndAuditAlarm bothCharset
+  BOOL
+  SubsystemName LPCTSTR
+  HandleId LPVOID
+  ObjectTypeName LPTSTR
+  ObjectName LPTSTR
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  DesiredAccess DWORD
+  GenericMapping PGENERIC_MAPPING
+  ObjectCreation BOOL
+  GrantedAccess LPDWORD
+  AccessStatus LPBOOL
+  pfGenerateOnClose LPBOOL
+
+func AccessCheckByTypeAndAuditAlarm bothCharset
+  BOOL
+  SubsystemName LPCTSTR
+  HandleId LPVOID
+  ObjectTypeName LPCTSTR
+  ObjectName LPCTSTR
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  PrincipalSelfSid PSID
+  DesiredAccess DWORD
+  AuditType AUDIT_EVENT_TYPE
+  Flags DWORD
+  ObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeListLength DWORD
+  GenericMapping PGENERIC_MAPPING
+  ObjectCreation BOOL
+  GrantedAccess LPDWORD
+  AccessStatus LPBOOL
+  pfGenerateOnClose LPBOOL
+
+func AccessCheckByTypeResultListAndAuditAlarm bothCharset
+  BOOL
+  SubsystemName LPCTSTR
+  HandleId LPVOID
+  ObjectTypeName LPCTSTR
+  ObjectName LPCTSTR
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  PrincipalSelfSid PSID
+  DesiredAccess DWORD
+  AuditType AUDIT_EVENT_TYPE
+  Flags DWORD
+  ObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeListLength DWORD
+  GenericMapping PGENERIC_MAPPING
+  ObjectCreation BOOL
+  GrantedAccess LPDWORD
+  AccessStatusList LPDWORD
+  pfGenerateOnClose LPBOOL
+
+func AccessCheckByTypeResultListAndAuditAlarmByHandle bothCharset
+  BOOL
+  SubsystemName LPCTSTR
+  HandleId LPVOID
+  ClientToken HANDLE
+  ObjectTypeName LPCTSTR
+  ObjectName LPCTSTR
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  PrincipalSelfSid PSID
+  DesiredAccess DWORD
+  AuditType AUDIT_EVENT_TYPE
+  Flags DWORD
+  ObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeListLength DWORD
+  GenericMapping PGENERIC_MAPPING
+  ObjectCreation BOOL
+  GrantedAccess LPDWORD
+  AccessStatusList LPDWORD
+  pfGenerateOnClose LPBOOL
+
+func AddAccessAllowedAce
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  AccessMask [ACCESS_MASK_DWORD]
+  pSid PSID
+
+func AddAccessAllowedAceEx
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  AceFlags [AceFlags]
+  AccessMask [ACCESS_MASK_DWORD]
+  pSid PSID
+
+func AddAccessAllowedObjectAce
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  AceFlags [AceFlags]
+  AccessMask [ACCESS_MASK_DWORD]
+  ObjectTypeGuid GUID*
+  InheritedObjectTypeGuid GUID*
+  pSid PSID
+
+func AddAccessDeniedAce
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  AccessMask [ACCESS_MASK_DWORD]
+  pSid PSID
+
+func AddAccessDeniedAceEx
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  AceFlags [AceFlags]
+  AccessMask [ACCESS_MASK_DWORD]
+  pSid PSID
+
+func AddAccessDeniedObjectAce
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  AceFlags [AceFlags]
+  AccessMask [ACCESS_MASK_DWORD]
+  ObjectTypeGuid GUID*
+  InheritedObjectTypeGuid GUID*
+  pSid PSID
+
+func AddAce
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  dwStartingAceIndex DWORD
+  pAceList LPVOID
+  nAceListLength DWORD
+
+func AddAuditAccessAce
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  dwAccessMask [ACCESS_MASK_DWORD]
+  pSid PSID
+  bAuditSuccess BOOL
+  bAuditFailure BOOL
+
+func AddAuditAccessAceEx
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  AceFlags [AceFlags]
+  dwAccessMask [ACCESS_MASK_DWORD]
+  pSid PSID
+  bAuditSuccess BOOL
+  bAuditFailure BOOL
+
+func AddAuditAccessObjectAce
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  AceFlags [AceFlags]
+  AccessMask [ACCESS_MASK_DWORD]
+  ObjectTypeGuid GUID*
+  InheritedObjectTypeGuid GUID*
+  pSid PSID
+  bAuditSuccess BOOL
+  bAuditFailure BOOL
+
+func AddMandatoryAce
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  AceFlags [AceFlags]
+  MandatoryPolicy [MandatoryPolicyFlags]
+  pLabelSid PSID
+
+func DeleteAce
+  BOOL
+  pAcl PACL
+  dwAceIndex DWORD
+
+func FindFirstFreeAce
+  BOOL
+  pAcl PACL
+  pAce PACE*
+
+func FreeInheritedFromArray
+  [ERROR_CODE]
+  pInheritArray PINHERITED_FROM
+  AceCnt USHORT
+  pfnArray PFN_OBJECT_MGR_FUNCTS
+
+func GetAce
+  BOOL
+  pAcl PACL
+  dwAceIndex DWORD
+  pAce PACE*
+
+func GetAclInformation
+  BOOL
+  pAcl PACL
+  pAclInformation LPVOID length=nAclInformationLength
+  nAclInformationLength DWORD
+  dwAclInformationClass ACL_INFORMATION_CLASS
+
+func GetFileSecurity bothCharset
+  BOOL
+  lpFileName LPCTSTR
+  RequestedInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  nLength DWORD
+  lpnLengthNeeded LPDWORD
+
+func GetInheritanceSource bothCharset
+  [ERROR_CODE]
+  pObjectName LPTSTR
+  ObjectType SE_OBJECT_TYPE
+  SecurityInfo SECURITY_INFORMATION
+  Container BOOL
+  pObjectClassGuids GUID** count=GuidCount
+  GuidCount DWORD
+  pAcl PACL
+  pfnArray PFN_OBJECT_MGR_FUNCTS
+  pGenericMapping PGENERIC_MAPPING
+  pInheritArray PINHERITED_FROM
+
+func GetKernelObjectSecurity
+  BOOL
+  Handle HANDLE
+  RequestedInformation SECURITY_INFORMATION
+  pSecurityDescriptor PISECURITY_DESCRIPTOR_RELATIVE
+  nLength DWORD
+  lpnLengthNeeded LPDWORD
+
+func GetSecurityDescriptorDacl
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  lpbDaclPresent LPBOOL
+  pDacl PACL*
+  lpbDaclDefaulted LPBOOL
+
+func GetSecurityDescriptorGroup
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  pGroup PSID*
+  lpbGroupDefaulted LPBOOL
+
+func GetSecurityDescriptorLength
+  DWORD
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+
+func GetSecurityDescriptorOwner
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  pOwner PSID*
+  lpbOwnerDefaulted LPBOOL
+
+func GetSecurityDescriptorSacl
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  lpbSaclPresent LPBOOL
+  pSacl PACL*
+  lpbSaclDefaulted LPBOOL
+
+func InitializeAcl
+  BOOL
+  pAcl PACL
+  nAclLength DWORD
+  dwAclRevision DWORD
+
+func InitializeSecurityDescriptor
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  dwRevision DWORD
+
+func IsValidAcl
+  BOOL
+  pAcl PACL
+
+func IsValidSecurityDescriptor
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+
+func MakeAbsoluteSD
+  BOOL
+  pSelfRelativeSD PSECURITY_DESCRIPTOR_RELATIVE
+  pAbsoluteSD PSECURITY_DESCRIPTOR
+  lpdwAbsoluteSDSize LPDWORD
+  pDacl PACL
+  lpdwDaclSize LPDWORD
+  pSacl PACL
+  lpdwSaclSize LPDWORD
+  pOwner PSID postLength=lpdwOwnerSize
+  lpdwOwnerSize LPDWORD
+  pPrimaryGroup PSID postLength=lpdwPrimaryGroupSize
+  lpdwPrimaryGroupSize LPDWORD
+
+func MakeSelfRelativeSD
+  BOOL
+  pAbsoluteSD PSECURITY_DESCRIPTOR
+  pSelfRelativeSD PSECURITY_DESCRIPTOR
+  lpdwBufferLength LPDWORD
+
+func QueryServiceObjectSecurity
+  BOOL
+  hService SC_HANDLE
+  dwSecurityInformation SECURITY_INFORMATION
+  lpSecurityDescriptor PSECURITY_DESCRIPTOR
+  cbBufSize DWORD
+  pcbBytesNeeded LPDWORD
+
+func RegGetKeySecurity
+  [REG_ERROR]
+  hKey HKEY
+  SecurityInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  lpcbSecurityDescriptor LPDWORD
+
+func RegSetKeySecurity
+  [REG_ERROR]
+  hKey HKEY
+  SecurityInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+
+func SetAclInformation
+  BOOL
+  pAcl PACL
+  pAclInformation LPVOID
+  nAclInformationLength DWORD
+  dwAclInformationClass ACL_INFORMATION_CLASS
+
+func SetFileSecurity bothCharset
+  BOOL
+  lpFileName LPCTSTR
+  SecurityInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+
+func SetKernelObjectSecurity
+  BOOL
+  Handle HANDLE
+  SecurityInformation SECURITY_INFORMATION
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+
+func SetSecurityDescriptorDacl
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  bDaclPresent BOOL
+  pDacl PACL
+  bDaclDefaulted BOOL
+
+func SetSecurityDescriptorGroup
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  pGroup PSID
+  bGroupDefaulted BOOL
+
+func SetSecurityDescriptorOwner
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  pOwner PSID
+  bOwnerDefaulted BOOL
+
+func SetSecurityDescriptorSacl
+  BOOL
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  bSaclPresent BOOL
+  pSacl PACL
+  bSaclDefaulted BOOL
+
+func SetServiceObjectSecurity
+  BOOL
+  hService SC_HANDLE
+  dwSecurityInformation SECURITY_INFORMATION
+  lpSecurityDescriptor PSECURITY_DESCRIPTOR
+
+func AuditComputeEffectivePolicyBySid
+  BOOLEAN
+  pSid "const PSID"
+  pSubCategoryGuids "const GUID*"
+  PolicyCount ULONG
+  ppAuditPolicy PAUDIT_POLICY_INFORMATION*
+
+func AuditComputeEffectivePolicyByToken
+  BOOLEAN
+  hTokenHandle HANDLE
+  pSubCategoryGuids "const GUID*"
+  PolicyCount ULONG
+  ppAuditPolicy PAUDIT_POLICY_INFORMATION*
+
+func AuditEnumerateCategories
+  BOOLEAN
+  ppAuditCategoriesArray GUID**
+  pCountReturned PULONG
+
+func AuditEnumeratePerUserPolicy
+  BOOLEAN
+  ppAuditSidArray PPOLICY_AUDIT_SID_ARRAY*
+
+func AuditEnumerateSubCategories
+  BOOLEAN
+  pAuditCategoryGuid "const GUID*"
+  bRetrieveAllSubCategories BOOLEAN
+  ppAuditSubCategoriesArray GUID**
+  pCountReturned PULONG
+
+func AuditFree
+  VOID
+  Buffer PVOID
+
+func AuditLookupCategoryGuidFromCategoryId
+  BOOLEAN
+  AuditCategoryId POLICY_AUDIT_EVENT_TYPE
+  pAuditCategoryGuid GUID*
+
+func AuditLookupCategoryIdFromCategoryGuid
+  BOOLEAN
+  pAuditCategoryGuid "const GUID*"
+  pAuditCategoryId PPOLICY_AUDIT_EVENT_TYPE
+
+func AuditLookupCategoryName bothCharset
+  BOOLEAN
+  pAuditCategoryGuid "const GUID*"
+  ppszCategoryName PTSTR*
+
+func AuditLookupSubCategoryName bothCharset
+  BOOLEAN
+  pAuditSubCategoryGuid "const GUID*"
+  ppszSubCategoryName PTSTR*
+
+func AuditQueryPerUserPolicy
+  BOOLEAN
+  pSid "const PSID"
+  pSubCategoryGuids "const GUID*"
+  PolicyCount ULONG
+  ppAuditPolicy PAUDIT_POLICY_INFORMATION*
+
+func AuditQuerySystemPolicy
+  BOOLEAN
+  pSubCategoryGuids "const GUID*"
+  PolicyCount ULONG
+  ppAuditPolicy PAUDIT_POLICY_INFORMATION*
+
+func AuditSetPerUserPolicy
+  BOOLEAN
+  pSid "const PSID"
+  pAuditPolicy PCAUDIT_POLICY_INFORMATION
+  PolicyCount ULONG
+
+func AuditSetSystemPolicy
+  BOOLEAN
+  pAuditPolicy PCAUDIT_POLICY_INFORMATION
+  PolicyCount ULONG
+
+func AuditQueryGlobalSacl bothCharset
+  BOOLEAN
+  ObjectTypeName PCTSTR
+  Acl PACL*
+
+func AuditSetGlobalSacl bothCharset
+  BOOLEAN
+  ObjectTypeName PCTSTR
+  Acl PACL
+
+func AuditQuerySecurity
+  BOOLEAN
+  SecurityInformation SECURITY_INFORMATION
+  ppSecurityDescriptor PSECURITY_DESCRIPTOR*
+
+func AuditSetSecurity
+  BOOLEAN
+  SecurityInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+
+func AddConditionalAce
+  BOOL
+  pAcl PACL
+  dwAceRevision DWORD
+  AceFlags [AceFlags]
+  AceType [ACE_TYPE|UCHAR]
+  AccessMask [ACCESS_MASK_DWORD]
+  pSid PSID
+  ConditionStr PWCHAR
+  ReturnLength DWORD*
+
+func GetAppContainerNamedObjectPath
+  BOOL
+  Token HANDLE
+  AppContainerSid PSID
+  ObjectPathLength ULONG
+  ObjectPath LPWSTR
+  ReturnLength PULONG
+
+func LogonUser bothCharset
+  BOOL
+  lpszUsername LPTSTR
+  lpszDomain LPTSTR
+  lpszPassword LPTSTR
+  dwLogonType [LogonType]
+  dwLogonProvider [LogonProvider]
+  phToken PHANDLE
+
+func LogonUserEx bothCharset
+  BOOL
+  lpszUsername LPTSTR
+  lpszDomain LPTSTR
+  lpszPassword LPTSTR
+  dwLogonType [LogonType]
+  dwLogonProvider [LogonProvider]
+  phToken PHANDLE
+  ppLogonSid PSID*
+  ppProfileBuffer PVOID*
+  pdwProfileLength LPDWORD
+  pQuotaLimits PQUOTA_LIMITS
+
+func LogonUserExExW
+  BOOL
+  lpszUsername LPWSTR
+  lpszDomain LPWSTR
+  lpszPassword LPWSTR
+  dwLogonType [LogonType]
+  pTokenGroups PTOKEN_GROUPS
+  dwLogonProvider [LogonProvider]
+  phToken PHANDLE
+  ppLogonSid PSID*
+  ppProfileBuffer PVOID*
+  pdwProfileLength LPDWORD
+  pQuotaLimits PQUOTA_LIMITS
+
+func CredDelete bothCharset
+  BOOL
+  TargetName LPCTSTR
+  Type DWORD
+  Flags DWORD
+
+func CredEnumerate bothCharset
+  BOOL
+  Filter LPCTSTR
+  Flags [CredEnumerateFlags]
+  Count DWORD*
+  Credentials PCREDENTIAL**
+
+func CredFindBestCredential bothCharset
+  BOOL
+  TargetName LPCTSTR
+  Type DWORD
+  Flags DWORD
+  Credential PCREDENTIAL*
+
+func CredFree
+  VOID
+  Buffer PVOID
+
+func CredGetSessionTypes
+  BOOL
+  MaximumPersistCount DWORD
+  MaximumPersist LPDWORD
+
+func CredGetTargetInfo bothCharset
+  BOOL
+  TargetName LPCTSTR
+  Flags [CredGetTargetInfoFlags]
+  TargetInfo PCREDENTIAL_TARGET_INFORMATION*
+
+func CredIsProtected bothCharset
+  BOOL
+  pszProtectedCredentials LPTSTR
+  pProtectionType CRED_PROTECTION_TYPE*
+
+func CredProtect bothCharset
+  BOOL
+  fAsSelf BOOL
+  pszCredentials LPTSTR
+  cchCredentials DWORD
+  pszProtectedCredentials LPTSTR
+  pcchMaxChars DWORD*
+  ProtectionType CRED_PROTECTION_TYPE*
+
+func CredMarshalCredential bothCharset
+  BOOL
+  CredType CRED_MARSHAL_TYPE
+  Credential PVOID
+  MarshaledCredential LPTSTR*
+
+func CredRead bothCharset
+  BOOL
+  TargetName LPCTSTR
+  Type [CredType]
+  Flags DWORD
+  Credential PCREDENTIAL*
+
+func CredReadDomainCredentials bothCharset
+  BOOL
+  TargetInfo PCREDENTIAL_TARGET_INFORMATION
+  Flags DWORD
+  Count DWORD*
+  Credentials PCREDENTIAL**
+
+func CredRename bothCharset
+  BOOL
+  OldTargetName LPCTSTR
+  NewTargetName LPCTSTR
+  Type DWORD
+  Flags DWORD
+
+func CredUnmarshalCredential bothCharset
+  BOOL
+  MarshaledCredential LPCTSTR
+  CredType PCRED_MARSHAL_TYPE
+  Credential PVOID*
+
+func CredUnprotect bothCharset
+  BOOL
+  fAsSelf BOOL
+  pszProtectedCredentials LPTSTR
+  cchCredentials DWORD
+  pszCredentials LPTSTR
+  pcchMaxChars DWORD*
+
+func CredWrite bothCharset
+  BOOL
+  Credential PCREDENTIAL
+  Flags DWORD
+
+func CredWriteDomainCredentials bothCharset
+  BOOL
+  TargetInfo PCREDENTIAL_TARGET_INFORMATION
+  Credential PCREDENTIAL
+  Flags DWORD
+
+func CredIsMarshaledCredential bothCharset
+  BOOL
+  MarshaledCredential LPTSTR
+
+func LsaEnumerateAccountsWithUserRight
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  UserRights PLSA_UNICODE_STRING
+  EnumerationBuffer PVOID*
+  CountReturned PULONG
+
+func LsaEnumerateTrustedDomainsEx
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  EnumerationContext PLSA_ENUMERATION_HANDLE
+  Buffer PVOID*
+  PreferredMaximumLength ULONG
+  CountReturned PULONG
+
+func LsaLookupNames
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  Count ULONG
+  Names PLSA_UNICODE_STRING
+  ReferencedDomains PLSA_REFERENCED_DOMAIN_LIST*
+  Sids PLSA_TRANSLATED_SID*
+
+func LsaLookupNames2
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  Flags [LSA_LOOKUP_FLAGS]
+  Count ULONG
+  Names PLSA_UNICODE_STRING count=Count
+  ReferencedDomains PLSA_REFERENCED_DOMAIN_LIST*
+  Sids PLSA_TRANSLATED_SID2*
+
+func LsaLookupPrivilegeValue
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  Name PUNICODE_STRING
+  Value PLUID
+
+func LsaLookupSids
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  Count ULONG
+  Sids PSID*
+  ReferencedDomains PLSA_REFERENCED_DOMAIN_LIST*
+  Names PLSA_TRANSLATED_NAME*
+
+func LsaLookupSids2
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  LookupOptions ULONG
+  Count ULONG
+  Sids PSID*
+  ReferencedDomains PLSA_REFERENCED_DOMAIN_LIST*
+  Names PLSA_TRANSLATED_NAME*
+
+func LsaAddAccountRights
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  AccountSid PSID
+  UserRights PLSA_UNICODE_STRING
+  CountOfRights ULONG
+
+func LsaEnumerateAccountRights
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  AccountSid PSID
+  UserRights PLSA_UNICODE_STRING*
+  CountOfRights PULONG
+
+func LsaRemoveAccountRights
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  AccountSid PSID
+  AllRights BOOLEAN
+  UserRights PLSA_UNICODE_STRING
+  CountOfRights ULONG
+
+func LsaCreateTrustedDomainEx
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  TrustedDomainInformation PTRUSTED_DOMAIN_INFORMATION_EX
+  AuthenticationInformation PTRUSTED_DOMAIN_AUTH_INFORMATION
+  DesiredAccess ACCESS_MASK
+  TrustedDomainHandle PLSA_HANDLE
+
+func LsaDeleteTrustedDomain
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  TrustedDomainSid PSID
+
+func LsaEnumerateTrustedDomains
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  EnumerationContext PLSA_ENUMERATION_HANDLE
+  Buffer PVOID*
+  PreferedMaximumLength ULONG
+  CountReturned PULONG
+
+func LsaOpenTrustedDomainByName
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  TrustedDomainName PLSA_UNICODE_STRING
+  DesiredAccess ACCESS_MASK
+  TrustedDomainHandle PLSA_HANDLE
+
+func LsaQueryTrustedDomainInfo
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  TrustedDomainSid PSID
+  InformationClass TRUSTED_INFORMATION_CLASS
+  Buffer PVOID*
+
+func LsaQueryTrustedDomainInfoByName
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  TrustedDomainName PLSA_UNICODE_STRING
+  InformationClass TRUSTED_INFORMATION_CLASS
+  Buffer PVOID*
+
+func LsaSetTrustedDomainInfoByName
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  TrustedDomainName PLSA_UNICODE_STRING
+  InformationClass TRUSTED_INFORMATION_CLASS
+  Buffer PVOID
+
+func LsaSetTrustedDomainInformation
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  TrustedDomainSid PSID
+  InformationClass TRUSTED_INFORMATION_CLASS
+  Buffer PVOID
+
+func LsaRetrievePrivateData
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  KeyName PLSA_UNICODE_STRING
+  PrivateData PLSA_UNICODE_STRING*
+
+func LsaStorePrivateData
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  KeyName PLSA_UNICODE_STRING
+  PrivateData PLSA_UNICODE_STRING
+
+func LsaClose
+  NTSTATUS
+  ObjectHandle LSA_HANDLE
+
+func LsaFreeMemory
+  NTSTATUS
+  Buffer PVOID
+
+func LsaNtStatusToWinError
+  success NotEqual=317
+  [ERROR_CODE_ULONG]
+  Status NTSTATUS
+
+func SaferCloseLevel
+  BOOL
+  hLevelHandle SAFER_LEVEL_HANDLE
+
+func SaferIdentifyLevel
+  BOOL
+  dwNumProperties DWORD
+  pCodeProperties PSAFER_CODE_PROPERTIES
+  pLevelHandle SAFER_LEVEL_HANDLE*
+  lpReserved LPVOID
+
+func SaferComputeTokenFromLevel
+  BOOL
+  LevelHandle SAFER_LEVEL_HANDLE
+  InAccessToken HANDLE
+  OutAccessToken PHANDLE
+  dwFlags DWORD
+  lpReserved LPVOID
+
+func SaferCreateLevel
+  BOOL
+  dwScopeId [SaferScopeId]
+  dwLevelId DWORD
+  OpenFlags DWORD
+  pLevelHandle SAFER_LEVEL_HANDLE*
+  lpReserved LPVOID
+
+func SaferGetLevelInformation
+  BOOL
+  LevelHandle SAFER_LEVEL_HANDLE
+  dwInfoType SAFER_OBJECT_INFO_CLASS
+  lpQueryBuffer LPVOID
+  dwInBufferSize DWORD
+  lpdwOutBufferSize LPDWORD
+
+func SaferGetPolicyInformation
+  BOOL
+  dwScopeId [SaferScopeId]
+  SaferPolicyInfoClass SAFER_POLICY_INFO_CLASS
+  InfoBufferSize DWORD
+  InfoBuffer PVOID postLength=InfoBufferRetSize
+  InfoBufferRetSize PDWORD
+  lpReserved LPVOID
+
+func SaferiIsExecutableFileType
+  BOOL
+  szFullPath LPCWSTR
+  bFromShellExecute BOOLEAN
+
+func SaferRecordEventLogEntry
+  BOOL
+  hLevel SAFER_LEVEL_HANDLE
+  szTargetPath LPCWSTR
+  lpReserved LPVOID
+
+func CloseThreadWaitChainSession
+  VOID
+  WctHandle HWCT
+
+func GetThreadWaitChain
+  BOOL
+  WctHandle HWCT
+  Context DWORD_PTR
+  Flags DWORD
+  ThreadId DWORD
+  NodeCount LPDWORD
+  NodeInfoArray PWAITCHAIN_NODE_INFO postCount=NodeCount
+  IsCycle LPBOOL
+
+func OpenThreadWaitChainSession
+  success NotEqual=0
+  HWCT
+  Flags DWORD
+  callback PWAITCHAINCALLBACK
+
+func RegisterWaitChainCOMCallback
+  VOID
+  CallStateCallback PCOGETCALLSTATE
+  ActivationStateCallback PCOGETACTIVATIONSTATE
+
+func LsaOpenPolicy
+  NTSTATUS
+  SystemName PLSA_UNICODE_STRING
+  ObjectAttributes PLSA_OBJECT_ATTRIBUTES
+  DesiredAccess ACCESS_MASK
+  PolicyHandle PLSA_HANDLE
+
+func LsaQueryInformationPolicy
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  InformationClass POLICY_INFORMATION_CLASS
+  Buffer PVOID*
+
+func LsaSetInformationPolicy
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  InformationClass POLICY_INFORMATION_CLASS
+  Buffer PVOID
+
+func LsaGetAppliedCAPIDs
+  NTSTATUS
+  SystemName PLSA_UNICODE_STRING
+  CAPIDs PSID** derefPostCount=CAPIDCount
+  CAPIDCount PULONG
+
+func LsaQueryCAPs
+  NTSTATUS
+  CAPIDs PSID* count=CAPIDCount
+  CAPIDCount ULONG
+  CAPs PCENTRAL_ACCESS_POLICY* derefPostCount=CAPCount
+  CAPCount PULONG
+
+func LsaSetCAPs
+  NTSTATUS
+  CAPDNs PLSA_UNICODE_STRING count=CAPDNCount
+  CAPDNCount ULONG
+  Flags ULONG
+
+func LsaQueryDomainInformationPolicy
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  InformationClass POLICY_DOMAIN_INFORMATION_CLASS
+  Buffer PVOID*
+
+func LsaQueryForestTrustInformation
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  TrustedDomainName PLSA_UNICODE_STRING
+  ForestTrustInfo PLSA_FOREST_TRUST_INFORMATION*
+
+func LsaSetDomainInformationPolicy
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  InformationClass POLICY_DOMAIN_INFORMATION_CLASS
+  Buffer PVOID
+
+func LsaSetForestTrustInformation
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  TrustedDomainName PLSA_UNICODE_STRING
+  ForestTrustInfo PLSA_FOREST_TRUST_INFORMATION
+  CheckOnly BOOLEAN
+  CollisionInfo PLSA_FOREST_TRUST_COLLISION_INFORMATION*
+
+func LsaOpenSecret
+  NTSTATUS
+  PolicyHandle LSA_HANDLE
+  SecretName PLSA_UNICODE_STRING
+  DesiredAccess ACCESS_MASK
+  SecretHandle PLSA_HANDLE
+
+func LsaSetSecret
+  NTSTATUS
+  SecretHandle LSA_HANDLE
+  CurrentValue PLSA_UNICODE_STRING
+  OldValue PLSA_UNICODE_STRING
+
+func LsaQuerySecret
+  NTSTATUS
+  SecretHandle LSA_HANDLE
+  CurrentValue PLSA_UNICODE_STRING*
+  CurrentValueSetTime PLARGE_INTEGER
+  OldValue PLSA_UNICODE_STRING*
+  OldValueSetTime PLARGE_INTEGER
+
+func SystemFunction036 display=RtlGenRandom
+  BOOLEAN
+  RandomBuffer PVOID postLength=RandomBufferLength
+  RandomBufferLength ULONG
+
+func SystemFunction040 display=RtlEncryptMemory
+  NTSTATUS
+  Memory PVOID length=MemorySize
+  MemorySize ULONG
+  OptionFlags [RTL_ENCRYPT_OPTION_FLAGS]
+
+func SystemFunction041 display=RtlDecryptMemory
+  NTSTATUS
+  Memory PVOID length=MemorySize
+  MemorySize ULONG
+  OptionFlags [RTL_ENCRYPT_OPTION_FLAGS]
+

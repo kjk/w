@@ -1,0 +1,49 @@
+include Interfaces\IUnknown.txt
+
+ingterface IChannelHook base=IUnknown id={1008c4a0-7613-11cf-9af1-0020af6e72f4} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func ClientGetSize
+    void
+    uExtent REFGUID
+    riid REFIID
+    pDataSize ULONG*
+
+  func ClientFillBuffer
+    void
+    uExtent REFGUID
+    riid REFIID
+    pDataSize ULONG*
+    pDataBuffer void*
+
+  func ClientNotify
+    void
+    uExtent REFGUID
+    riid REFIID
+    cbDataSize ULONG
+    pDataBuffer void*
+    lDataRep DWORD
+    hrFault HRESULT
+
+  func ServerNotify
+    void
+    uExtent REFGUID
+    riid REFIID
+    cbDataSize ULONG
+    pDataBuffer void*
+    lDataRep DWORD
+
+  func ServerGetSize
+    void
+    uExtent REFGUID
+    riid REFIID
+    hrFault HRESULT
+    pDataSize ULONG*
+
+  func ServerFillBuffer
+    void
+    uExtent REFGUID
+    riid REFIID
+    pDataSize ULONG*
+    pDataBuffer void*
+    hrFault HRESULT
+
+

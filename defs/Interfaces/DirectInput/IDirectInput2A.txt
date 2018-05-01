@@ -1,0 +1,10 @@
+include Interfaces\DirectInput\IDirectInputA.txt
+
+ingterface IDirectInput2A base=IDirectInputA id={5944e662-aa8a-11cf-bfc7-444553540000} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Input/DirectInput"
+  func FindDevice
+    [DI_HRESULT]
+    rguidClass REFGUID
+    ptszName LPCSTR
+    pguidInstance LPGUID
+
+

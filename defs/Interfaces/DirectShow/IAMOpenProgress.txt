@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMOpenProgress base=IUnknown id={8E1C39A1-DE53-11cf-AA63-0080C744528D} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func QueryProgress
+    HRESULT
+    pllTotal LONGLONG*
+    pllCurrent LONGLONG*
+
+  func AbortOperation
+    HRESULT
+
+

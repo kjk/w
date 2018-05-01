@@ -1,0 +1,18 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10ShaderReflectionConstantBuffer id={66C66A94-DDDD-4b62-A66A-F0DA33C2B4D0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Shader"
+  func GetDesc
+    HRESULT
+    pDesc D3D10_SHADER_BUFFER_DESC*
+
+  func GetVariableByIndex
+    success NotEqual=0
+    ID3D10ShaderReflectionVariable*
+    Index UINT
+
+  func GetVariableByName
+    success NotEqual=0
+    ID3D10ShaderReflectionVariable*
+    Name LPCSTR
+
+

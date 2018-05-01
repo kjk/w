@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioLfxControl base=IUnknown id={076A6922-D802-4F83-BAF6-409D9CA11BFE} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Endpoint Volume"
+  func SetLocalEffectsState
+    [AUDCLNT_HRESULT]
+    bEnabled BOOL
+
+  func GetLocalEffectsState
+    [AUDCLNT_HRESULT]
+    pbEnabled BOOL*
+
+

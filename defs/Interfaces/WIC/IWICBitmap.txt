@@ -1,0 +1,19 @@
+include Interfaces\WIC\IWICBitmapSource.txt
+
+ingterface IWICBitmap base=IWICBitmapSource id={00000121-a8f2-4877-ba0a-fd2b6645fb94} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func Lock
+    [WIC_HRESULT]
+    prcLock "const WICRect*"
+    flags DWORD
+    ppILock IWICBitmapLock**
+
+  func SetPalette
+    [WIC_HRESULT]
+    pIPalette IWICPalette*
+
+  func SetResolution
+    [WIC_HRESULT]
+    dpiX double
+    dpiY double
+
+

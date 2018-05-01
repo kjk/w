@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISynchronizeHandle base=IUnknown id={00000031-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func GetHandle
+    HRESULT
+    ph HANDLE*
+
+

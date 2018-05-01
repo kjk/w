@@ -1,0 +1,32 @@
+include Headers\dinput.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDirectInputW base=IUnknown id={89521361-aa8a-11cf-bfc7-444553540000} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Input/DirectInput"
+  func CreateDevice
+    [DI_HRESULT]
+    rguid REFGUID
+    lplpDirectInputDevice LPDIRECTINPUTDEVICEW*
+    pUnkOuter LPUNKNOWN
+
+  func EnumDevices
+    [DI_HRESULT]
+    dwDevType [DI8DEV_FILTER]
+    lpCallback LPDIENUMDEVICESCALLBACKW
+    pvRef LPVOID
+    dwFlags [DIEDFL_Flags]
+
+  func GetDeviceStatus
+    [DI_HRESULT]
+    rguidInstance REFGUID
+
+  func RunControlPanel
+    [DI_HRESULT]
+    hwndOwner HWND
+    dwFlags DWORD
+
+  func Initialize
+    [DI_HRESULT]
+    hinst HINSTANCE
+    dwVersion DWORD
+
+

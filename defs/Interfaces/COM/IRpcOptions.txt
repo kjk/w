@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRpcOptions base=IUnknown id={00000144-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Set
+    HRESULT
+    pPrx IUnknown*
+    dwProperty RPCOPT_PROPERTIES
+    dwValue ULONG_PTR
+
+  func Query
+    HRESULT
+    pPrx IUnknown*
+    dwProperty RPCOPT_PROPERTIES
+    pdwValue ULONG_PTR*
+
+

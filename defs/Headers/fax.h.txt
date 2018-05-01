@@ -1,0 +1,244 @@
+include Headers\windows.h.txt
+
+header
+alias PFAX_RECIPIENT_CALLBACK LPVOID
+
+alias PFAX_ROUTING_INSTALLATION_CALLBACK LPVOID
+
+alias HCALL DWORD
+
+array "TCHAR [MAX_COMPUTERNAME_LENGTH + 1]" base=TCHAR count=16
+
+array "DWORD_PTR [3]" base=DWORD_PTR count=3
+
+struct FAX_CONTEXT_INFO
+  SizeOfStruct DWORD
+  hDC HDC
+  ServerName "TCHAR [MAX_COMPUTERNAME_LENGTH + 1]"
+
+pointer PFAX_CONTEXT_INFO FAX_CONTEXT_INFO
+
+pointer "const FAX_CONTEXT_INFO*" FAX_CONTEXT_INFO
+
+struct FAX_JOB_PARAM
+  SizeOfStruct DWORD
+  RecipientNumber LPCTSTR
+  RecipientName LPCTSTR
+  Tsid LPCTSTR
+  SenderName LPCTSTR
+  SenderCompany LPCTSTR
+  SenderDept LPCTSTR
+  BillingCode LPCTSTR
+  ScheduleAction DWORD
+  ScheduleTime SYSTEMTIME
+  DeliveryReportType DWORD
+  DeliveryReportAddress LPCTSTR
+  DocumentName LPCTSTR
+  CallHandle HCALL
+  Reserved "DWORD_PTR [3]"
+
+pointer PFAX_JOB_PARAM FAX_JOB_PARAM
+
+pointer PFAX_JOB_PARAM* PFAX_JOB_PARAM
+
+struct FAX_TIME
+  Hour WORD
+  Minute WORD
+
+struct FAX_CONFIGURATION
+  SizeOfStruct DWORD
+  Retries DWORD
+  RetryDelay DWORD
+  DirtyDays DWORD
+  Branding BOOL
+  UseDeviceTsid BOOL
+  ServerCp BOOL
+  PauseServerQueue BOOL
+  StartCheapTime FAX_TIME
+  StopCheapTime FAX_TIME
+  ArchiveOutgoingFaxes BOOL
+  ArchiveDirectory LPCTSTR
+  Reserved LPCTSTR
+
+pointer PFAX_CONFIGURATION FAX_CONFIGURATION
+
+pointer PFAX_CONFIGURATION* PFAX_CONFIGURATION
+
+pointer "const FAX_CONFIGURATION*" FAX_CONFIGURATION
+
+struct FAX_GLOBAL_ROUTING_INFO
+  SizeOfStruct DWORD
+  Priority DWORD
+  Guid LPCTSTR
+  FriendlyName LPCTSTR
+  FunctionName LPCTSTR
+  ExtensionImageName LPCTSTR
+  ExtensionFriendlyName LPCTSTR
+
+pointer PFAX_GLOBAL_ROUTING_INFO FAX_GLOBAL_ROUTING_INFO
+
+pointer PFAX_GLOBAL_ROUTING_INFO* PFAX_GLOBAL_ROUTING_INFO
+
+pointer "const FAX_GLOBAL_ROUTING_INFO*" FAX_GLOBAL_ROUTING_INFO
+
+enum [FaxLogCategory] DWORD display=DWORD
+  FAXLOG_CATEGORY_INIT     0
+  FAXLOG_CATEGORY_OUTBOUND 1
+  FAXLOG_CATEGORY_INBOUND  2
+  FAXLOG_CATEGORY_UNKNOWN  3
+
+enum [FaxLogLevel] DWORD display=DWORD
+  FAXLOG_LEVEL_NONE 0
+  FAXLOG_LEVEL_MIN  1
+  FAXLOG_LEVEL_MED  2
+  FAXLOG_LEVEL_MAX  3
+
+struct FAX_LOG_CATEGORY
+  Name LPCTSTR
+  Category [FaxLogCategory]
+  Level [FaxLogLevel]
+
+pointer PFAX_LOG_CATEGORY FAX_LOG_CATEGORY
+
+pointer PFAX_LOG_CATEGORY* PFAX_LOG_CATEGORY
+
+pointer "const FAX_LOG_CATEGORY*" FAX_LOG_CATEGORY
+
+struct FAX_DEVICE_STATUS
+  SizeOfStruct DWORD
+  CallerId LPCTSTR
+  Csid LPCTSTR
+  CurrentPage DWORD
+  DeviceId DWORD
+  DeviceName LPCTSTR
+  DocumentName LPCTSTR
+  JobType DWORD
+  PhoneNumber LPCTSTR
+  RoutingString LPCTSTR
+  SenderName LPCTSTR
+  RecipientName LPCTSTR
+  Size DWORD
+  StartTime FILETIME
+  Status DWORD
+  StatusString LPCTSTR
+  SubmittedTime FILETIME
+  TotalPages DWORD
+  Tsid LPCTSTR
+  UserName LPCTSTR
+
+pointer PFAX_DEVICE_STATUS FAX_DEVICE_STATUS
+
+pointer PFAX_DEVICE_STATUS* PFAX_DEVICE_STATUS
+
+struct FAX_PORT_INFO
+  SizeOfStruct DWORD
+  DeviceId DWORD
+  State DWORD
+  Flags DWORD
+  Rings DWORD
+  Priority DWORD
+  DeviceName LPCTSTR
+  Tsid LPCTSTR
+  Csid LPCTSTR
+
+pointer PFAX_PORT_INFO FAX_PORT_INFO
+
+pointer PFAX_PORT_INFO* PFAX_PORT_INFO
+
+pointer "const FAX_PORT_INFO*" FAX_PORT_INFO
+
+struct FAX_COVERPAGE_INFO
+  SizeOfStruct DWORD
+  CoverPageName LPCTSTR
+  UseServerCoverPage BOOL
+  RecName LPCTSTR
+  RecFaxNumber LPCTSTR
+  RecCompany LPCTSTR
+  RecStreetAddress LPCTSTR
+  RecCity LPCTSTR
+  RecState LPCTSTR
+  RecZip LPCTSTR
+  RecCountry LPCTSTR
+  RecTitle LPCTSTR
+  RecDepartment LPCTSTR
+  RecOfficeLocation LPCTSTR
+  RecHomePhone LPCTSTR
+  RecOfficePhone LPCTSTR
+  SdrName LPCTSTR
+  SdrFaxNumber LPCTSTR
+  SdrCompany LPCTSTR
+  SdrAddress LPCTSTR
+  SdrTitle LPCTSTR
+  SdrDepartment LPCTSTR
+  SdrOfficeLocation LPCTSTR
+  SdrHomePhone LPCTSTR
+  SdrOfficePhone LPCTSTR
+  Note LPCTSTR
+  Subject LPCTSTR
+  TimeSent SYSTEMTIME
+  PageCount DWORD
+
+pointer PFAX_COVERPAGE_INFO FAX_COVERPAGE_INFO
+
+pointer PFAX_COVERPAGE_INFO* PFAX_COVERPAGE_INFO
+
+pointer "const FAX_COVERPAGE_INFO*" FAX_COVERPAGE_INFO
+
+struct FAX_PRINT_INFO
+  SizeOfStruct DWORD
+  DocName LPCTSTR
+  RecipientName LPCTSTR
+  RecipientNumber LPCTSTR
+  SenderName LPCTSTR
+  SenderCompany LPCTSTR
+  SenderDept LPCTSTR
+  SenderBillingCode LPCTSTR
+  Reserved LPCTSTR
+  DrEmailAddress LPCTSTR
+  OutputFileName LPCTSTR
+
+pointer "const FAX_PRINT_INFO*" FAX_PRINT_INFO
+
+struct FAX_JOB_ENTRY
+  SizeOfStruct DWORD
+  JobId DWORD
+  UserName LPCTSTR
+  JobType DWORD
+  QueueStatus DWORD
+  Status DWORD
+  Size DWORD
+  PageCount DWORD
+  RecipientNumber LPCTSTR
+  RecipientName LPCTSTR
+  Tsid LPCTSTR
+  SenderName LPCTSTR
+  SenderCompany LPCTSTR
+  SenderDept LPCTSTR
+  BillingCode LPCTSTR
+  ScheduleAction DWORD
+  ScheduleTime SYSTEMTIME
+  DeliveryReportType DWORD
+  DeliveryReportAddress LPCTSTR
+  DocumentName LPCTSTR
+
+pointer PFAX_JOB_ENTRY FAX_JOB_ENTRY
+
+pointer PFAX_JOB_ENTRY* PFAX_JOB_ENTRY
+
+pointer "const FAX_JOB_ENTRY*" FAX_JOB_ENTRY
+
+struct FAX_ROUTING_METHOD
+  SizeOfStruct DWORD
+  DeviceId DWORD
+  Enabled BOOL
+  DeviceName LPCTSTR
+  Guid LPCTSTR
+  FriendlyName LPCTSTR
+  FunctionName LPCTSTR
+  ExtensionImageName LPCTSTR
+  ExtensionFriendlyName LPCTSTR
+
+pointer PFAX_ROUTING_METHOD FAX_ROUTING_METHOD
+
+pointer PFAX_ROUTING_METHOD* PFAX_ROUTING_METHOD
+

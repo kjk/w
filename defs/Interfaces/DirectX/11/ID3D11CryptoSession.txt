@@ -1,0 +1,26 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11CryptoSession base=ID3D11DeviceChild id={9B32F9AD-BDCC-40a6-A39D-D5C865845720} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Microsoft Media Foundation/Direct3D 11 Video"
+  func GetCryptoType
+    void
+    pCryptoType GUID*
+
+  func GetDecoderProfile
+    void
+    pDecoderProfile GUID*
+
+  func GetCertificateSize
+    HRESULT
+    pCertificateSize UINT*
+
+  func GetCertificate
+    HRESULT
+    CertificateSize UINT
+    pCertificate BYTE*
+
+  func GetCryptoSessionHandle
+    void
+    pCryptoSessionHandle HANDLE*
+
+

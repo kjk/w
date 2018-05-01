@@ -1,0 +1,28 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrConflictStore base=IUnknown id={cf8fc579-c396-4774-85f1-d908a831156e} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func EnumConflicts
+    HRESULT
+    pszHandlerID LPCWSTR
+    pszItemID LPCWSTR
+    ppEnum IEnumSyncMgrConflict**
+
+  func BindToConflict
+    HRESULT
+    pConflictIdInfo "const SYNCMGR_CONFLICT_ID_INFO*"
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func RemoveConflicts
+    HRESULT
+    rgConflictIdInfo "const SYNCMGR_CONFLICT_ID_INFO*" count=cConflicts
+    cConflicts DWORD
+
+  func GetCount
+    HRESULT
+    pszHandlerID LPCWSTR
+    pszItemID LPCWSTR
+    pnConflicts DWORD*
+
+

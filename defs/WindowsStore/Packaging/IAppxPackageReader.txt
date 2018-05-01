@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxPackageReader base=IUnknown id={b5c49650-99bc-481c-9a34-3d53a4106708} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetBlockMap
+    HRESULT
+    blockMapReader IAppxBlockMapReader**
+
+  func GetFootprintFile
+    HRESULT
+    type APPX_FOOTPRINT_FILE_TYPE
+    file IAppxFile**
+
+  func GetPayloadFile
+    HRESULT
+    fileName LPCWSTR
+    file IAppxFile**
+
+  func GetPayloadFiles
+    HRESULT
+    filesEnumerator IAppxFilesEnumerator**
+
+  func GetManifest
+    HRESULT
+    manifestReader IAppxManifestReader**
+
+

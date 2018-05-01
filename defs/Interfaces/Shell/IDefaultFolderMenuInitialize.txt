@@ -1,0 +1,29 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDefaultFolderMenuInitialize base=IUnknown id={7690aa79-f8fc-4615-a327-36f7d18f5d91} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    hwnd HWND
+    pcmcb IContextMenuCB*
+    pidlFolder PCIDLIST_ABSOLUTE
+    psf IShellFolder*
+    cidl UINT
+    apidl PCUITEMID_CHILD_ARRAY count=cidl
+    punkAssociation IUnknown*
+    cKeys UINT
+    aKeys "const HKEY*" count=cKeys
+
+  func SetMenuRestrictions
+    HRESULT
+    dfmrValues DEFAULT_FOLDER_MENU_RESTRICTIONS
+
+  func GetMenuRestrictions
+    HRESULT
+    dfmrMask DEFAULT_FOLDER_MENU_RESTRICTIONS
+    pdfmrValues DEFAULT_FOLDER_MENU_RESTRICTIONS*
+
+  func SetHandlerClsid
+    HRESULT
+    rclsid REFCLSID
+
+

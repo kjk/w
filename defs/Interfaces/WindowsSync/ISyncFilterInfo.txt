@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncFilterInfo base=IUnknown id={794eaaf8-3f2e-47e6-9728-17e6fcf94cb7} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func Serialize
+    HRESULT
+    pbBuffer BYTE*
+    pcbBuffer DWORD*
+
+

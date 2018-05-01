@@ -1,0 +1,16 @@
+include Interfaces\COM\IOleWindow.txt
+
+ingterface IDeskBar base=IOleWindow id={EB0FE173-1A3A-11D0-89B3-00A0C90A90AC} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetClient
+    HRESULT
+    punkClient IUnknown*
+
+  func GetClient
+    HRESULT
+    ppunkClient IUnknown**
+
+  func OnPosRectChangeDB
+    HRESULT
+    prc RECT*
+
+

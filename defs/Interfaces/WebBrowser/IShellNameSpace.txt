@@ -1,0 +1,88 @@
+include Interfaces\WebBrowser\IShellFavoritesNameSpace.txt
+
+ingterface IShellNameSpace base=IShellFavoritesNameSpace id={e572d3c9-37be-4ae2-825d-d521763e3108} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func get_EnumOptions
+    HRESULT
+    pgrfEnumFlags LONG*
+
+  func put_EnumOptions
+    HRESULT
+    lVal LONG
+
+  func get_SelectedItem
+    HRESULT
+    pItem IDispatch**
+
+  func put_SelectedItem
+    HRESULT
+    pItem IDispatch*
+
+  func get_Root
+    HRESULT
+    pvar VARIANT*
+
+  func put_Root
+    HRESULT
+    var VARIANT
+
+  func get_Depth
+    HRESULT
+    piDepth int*
+
+  func put_Depth
+    HRESULT
+    iDepth int
+
+  func get_Mode
+    HRESULT
+    puMode UINT*
+
+  func put_Mode
+    HRESULT
+    uMode UINT
+
+  func get_Flags
+    HRESULT
+    pdwFlags DWORD*
+
+  func put_Flags
+    HRESULT
+    dwFlags DWORD
+
+  func put_TVFlags
+    HRESULT
+    dwFlags DWORD
+
+  func get_TVFlags
+    HRESULT
+    dwFlags DWORD*
+
+  func get_Columns
+    HRESULT
+    bstrColumns BSTR*
+
+  func put_Columns
+    HRESULT
+    bstrColumns BSTR
+
+  func get_CountViewTypes
+    HRESULT
+    piTypes int*
+
+  func SetViewType
+    HRESULT
+    iType int
+
+  func SelectedItems
+    HRESULT
+    ppid IDispatch**
+
+  func Expand
+    HRESULT
+    var VARIANT
+    iDepth int
+
+  func UnselectAll
+    HRESULT
+
+

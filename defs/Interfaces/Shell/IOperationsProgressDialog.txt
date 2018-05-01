@@ -1,0 +1,53 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOperationsProgressDialog base=IUnknown id={0C9FB851-E5C9-43EB-A370-F0677B13874C} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func StartProgressDialog
+    HRESULT
+    hwndOwner HWND
+    flags OPPROGDLGF
+
+  func StopProgressDialog
+    HRESULT
+
+  func SetOperation
+    HRESULT
+    action SPACTION
+
+  func SetMode
+    HRESULT
+    mode PDMODE
+
+  func UpdateProgress
+    HRESULT
+    ullPointsCurrent ULONGLONG
+    ullPointsTotal ULONGLONG
+    ullSizeCurrent ULONGLONG
+    ullSizeTotal ULONGLONG
+    ullItemsCurrent ULONGLONG
+    ullItemsTotal ULONGLONG
+
+  func UpdateLocations
+    HRESULT
+    psiSource IShellItem*
+    psiTarget IShellItem*
+    psiItem IShellItem*
+
+  func ResetTimer
+    HRESULT
+
+  func PauseTimer
+    HRESULT
+
+  func ResumeTimer
+    HRESULT
+
+  func GetMilliseconds
+    HRESULT
+    pullElapsed ULONGLONG*
+    pullRemaining ULONGLONG*
+
+  func GetOperationStatus
+    HRESULT
+    popstatus PDOPSTATUS*
+
+

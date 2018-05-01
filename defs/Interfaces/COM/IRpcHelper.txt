@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRpcHelper base=IUnknown id={00000149-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func GetDCOMProtocolVersion
+    HRESULT
+    pComVersion DWORD*
+
+  func GetIIDFromOBJREF
+    HRESULT
+    pObjRef void*
+    piid IID**
+
+

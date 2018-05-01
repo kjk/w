@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IMediaSample2Config base=IUnknown id={68961E68-832B-41ea-BC91-63593F3E70E3} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetSurface
+    HRESULT
+    ppDirect3DSurface9 IUnknown**
+
+

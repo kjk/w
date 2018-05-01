@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAssocHandlerInvoker base=IUnknown id={92218CAB-ECAA-4335-8133-807FD234C2EE} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SupportsSelection
+    HRESULT
+
+  func Invoke
+    HRESULT
+
+

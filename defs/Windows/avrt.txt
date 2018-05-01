@@ -1,0 +1,71 @@
+include Headers\windows.h.txt
+
+dll Avrt.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Services/Processes and Threads/Thread Ordering Service"
+category "System Services/Processes and Threads/Multimedia Class Scheduler Service"
+enum AVRT_PRIORITY UINT
+  AVRT_PRIORITY_LOW      -1
+  AVRT_PRIORITY_NORMAL   0
+  AVRT_PRIORITY_HIGH     1
+  AVRT_PRIORITY_CRITICAL 2
+
+func AvQuerySystemResponsiveness
+  BOOL
+  AvrtHandle HANDLE
+  SystemResponsivenessValue PULONG
+
+func AvRtCreateThreadOrderingGroup
+  BOOL
+  Context PHANDLE
+  Period PLARGE_INTEGER
+  ThreadOrderingGuid GUID*
+  Timeout PLARGE_INTEGER
+
+func AvRtCreateThreadOrderingGroupEx bothCharset
+  BOOL
+  Context PHANDLE
+  Period PLARGE_INTEGER
+  ThreadOrderingGuid GUID*
+  Timeout PLARGE_INTEGER
+  TaskName LPCTSTR
+
+func AvRtDeleteThreadOrderingGroup
+  BOOL
+  Context HANDLE
+
+func AvRtJoinThreadOrderingGroup
+  BOOL
+  Context PHANDLE
+  ThreadOrderingGuid GUID*
+  Before BOOL
+
+func AvRtLeaveThreadOrderingGroup
+  BOOL
+  Context HANDLE
+
+func AvRtWaitOnThreadOrderingGroup
+  BOOL
+  Context HANDLE
+
+func AvRevertMmThreadCharacteristics
+  BOOL
+  AvrtHandle HANDLE
+
+func AvSetMmMaxThreadCharacteristics bothCharset
+  success NotEqual=0
+  HANDLE
+  FirstTask LPCTSTR
+  SecondTask LPCTSTR
+  TaskIndex LPDWORD
+
+func AvSetMmThreadCharacteristics bothCharset
+  success NotEqual=0
+  HANDLE
+  TaskName LPCTSTR
+  TaskIndex LPDWORD
+
+func AvSetMmThreadPriority
+  BOOL
+  AvrtHandle HANDLE
+  Priority AVRT_PRIORITY
+

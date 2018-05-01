@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11View.txt
+
+ingterface ID3D11UnorderedAccessView base=ID3D11View id={28acf509-7f5c-48f6-8611-f316010a6380} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Resource"
+  func GetDesc
+    void
+    pDesc D3D11_UNORDERED_ACCESS_VIEW_DESC*
+
+

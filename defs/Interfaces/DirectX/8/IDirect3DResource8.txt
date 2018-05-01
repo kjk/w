@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\8\d3d8.txt
+
+ingterface IDirect3DResource8 base=IUnknown id={1B36BB7B-09B7-410a-B445-7D1430D7B33F} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/8"
+  func GetDevice
+    HRESULT
+    ppDevice IDirect3DDevice8**
+
+  func SetPrivateData
+    HRESULT
+    refguid REFGUID
+    pData "CONST void*"
+    SizeOfData DWORD
+    Flags DWORD
+
+  func GetPrivateData
+    HRESULT
+    refguid REFGUID
+    pData void*
+    pSizeOfData DWORD*
+
+  func FreePrivateData
+    HRESULT
+    refguid REFGUID
+
+  func SetPriority
+    success NotEqual=0
+    DWORD
+    PriorityNew DWORD
+
+  func GetPriority
+    success NotEqual=0
+    DWORD
+
+  func PreLoad
+    void
+
+  func GetType
+    success NotEqual=0
+    D3DRESOURCETYPE
+
+

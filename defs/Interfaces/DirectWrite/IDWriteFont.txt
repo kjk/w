@@ -1,0 +1,47 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteFont base=IUnknown id={acd16696-8c14-4f5d-877e-fe3fc1d32737} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func GetFontFamily
+    HRESULT
+    fontFamily IDWriteFontFamily**
+
+  func GetWeight
+    DWRITE_FONT_WEIGHT
+
+  func GetStretch
+    DWRITE_FONT_STRETCH
+
+  func GetStyle
+    DWRITE_FONT_STYLE
+
+  func IsSymbolFont
+    BOOL
+
+  func GetFaceNames
+    HRESULT
+    names IDWriteLocalizedStrings**
+
+  func GetInformationalStrings
+    HRESULT
+    informationalStringID DWRITE_INFORMATIONAL_STRING_ID
+    informationalStrings IDWriteLocalizedStrings**
+    exists BOOL*
+
+  func GetSimulations
+    DWRITE_FONT_SIMULATIONS
+
+  func GetMetrics
+    void
+    fontMetrics DWRITE_FONT_METRICS*
+
+  func HasCharacter
+    HRESULT
+    unicodeValue UINT32
+    exists BOOL*
+
+  func CreateFontFace
+    HRESULT
+    fontFace IDWriteFontFace**
+
+

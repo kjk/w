@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMLatency base=IUnknown id={62EA93BA-EC62-11d2-B770-00C04FB6BD3D} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetLatency
+    HRESULT
+    prtLatency REFERENCE_TIME*
+
+

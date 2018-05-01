@@ -1,0 +1,17 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\DirectComposition\IDCompositionEffect.txt
+
+ingterface IDCompositionEffectGroup base=IDCompositionEffect id={A7929A74-E6B2-4bd6-8B95-4040119CA34D} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func SetOpacity
+    HRESULT
+    opacity float
+
+  func "SetOpacity "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetTransform3D
+    HRESULT
+    transform3D IDCompositionTransform3D*
+
+

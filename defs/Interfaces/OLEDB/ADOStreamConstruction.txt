@@ -1,0 +1,13 @@
+include Interfaces\IDispatch.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ADOStreamConstruction base=IDispatch id={00000568-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_Stream
+    [OLEDB_HRESULT]
+    ppStm IUnknown**
+
+  func put_Stream
+    [OLEDB_HRESULT]
+    pStm IUnknown*
+
+

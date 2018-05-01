@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IParseAndCreateItem base=IUnknown id={67efed0e-e827-4408-b493-78f3982b685c} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetItem
+    HRESULT
+    psi IShellItem*
+
+  func GetItem
+    HRESULT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

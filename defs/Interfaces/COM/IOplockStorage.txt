@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOplockStorage base=IUnknown id={8d19c834-8879-11d1-83e9-00c04fc2c6d4} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func CreateStorageEx
+    HRESULT
+    pwcsName LPCWSTR
+    grfMode [STGM_FLAGS]
+    stgfmt DWORD
+    grfAttrs DWORD
+    riid REFIID
+    ppstgOpen void** interfaceId=riid
+
+  func OpenStorageEx
+    HRESULT
+    pwcsName LPCWSTR
+    grfMode [STGM_FLAGS]
+    stgfmt DWORD
+    grfAttrs DWORD
+    riid REFIID
+    ppstgOpen void** interfaceId=riid
+
+

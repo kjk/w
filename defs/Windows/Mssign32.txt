@@ -1,0 +1,146 @@
+include Headers\windows.h.txt
+include Headers\cryptography.h.txt
+
+dll Mssign32.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Security and Identity/Cryptography/Signer"
+category "Security and Identity/Cryptography/Service Provider"
+category "Security and Identity/Cryptography/MakeCert"
+func SignerFreeSignerContext
+  HRESULT
+  pSignerContext SIGNER_CONTEXT*
+
+func SignerSignEx
+  HRESULT
+  dwFlags [SignerSignEx_FLAGS]
+  pSubjectInfo SIGNER_SUBJECT_INFO*
+  pSignerCert SIGNER_CERT*
+  pSignatureInfo SIGNER_SIGNATURE_INFO*
+  pProviderInfo SIGNER_PROVIDER_INFO*
+  pwszHttpTimeStamp LPCWSTR
+  psRequest PCRYPT_ATTRIBUTES
+  pSipData LPVOID
+  ppSignerContext SIGNER_CONTEXT**
+
+func SignerSignEx2
+  HRESULT
+  dwFlags [SignerSignEx2_FLAGS]
+  pSubjectInfo SIGNER_SUBJECT_INFO*
+  pSignerCert SIGNER_CERT*
+  pSignatureInfo SIGNER_SIGNATURE_INFO*
+  pProviderInfo SIGNER_PROVIDER_INFO*
+  dwTimestampFlags DWORD
+  pszTimestampAlgorithmOid PCSTR
+  pwszHttpTimeStamp PCWSTR
+  psRequest PCRYPT_ATTRIBUTES
+  pSipData PVOID
+  ppSignerContext SIGNER_CONTEXT**
+  pCryptoPolicy PCERT_STRONG_SIGN_PARA
+  pReserved PVOID
+
+func SignError
+  HRESULT
+
+func SignerSign
+  HRESULT
+  pSubjectInfo SIGNER_SUBJECT_INFO*
+  pSignerCert SIGNER_CERT*
+  pSignatureInfo SIGNER_SIGNATURE_INFO*
+  pProviderInfo SIGNER_PROVIDER_INFO*
+  pwszHttpTimeStamp LPCWSTR
+  psRequest PCRYPT_ATTRIBUTES
+  pSipData LPVOID
+
+func SignerTimeStamp
+  HRESULT
+  pSubjectInfo SIGNER_SUBJECT_INFO*
+  pwszHttpTimeStamp LPCWSTR
+  psRequest PCRYPT_ATTRIBUTES
+  pSipData LPVOID
+
+func SignerTimeStampEx2
+  HRESULT
+  dwFlags DWORD
+  pSubjectInfo SIGNER_SUBJECT_INFO*
+  pwszHttpTimeStamp LPCWSTR
+  dwAlgId ALG_ID
+  psRequest PCRYPT_ATTRIBUTES
+  pSipData LPVOID
+  ppSignerContext SIGNER_CONTEXT**
+
+func SignerTimeStampEx
+  HRESULT
+  dwFlags DWORD
+  pSubjectInfo SIGNER_SUBJECT_INFO*
+  pwszHttpTimeStamp LPCWSTR
+  psRequest PCRYPT_ATTRIBUTES
+  pSipData LPVOID
+  ppSignerContext SIGNER_CONTEXT**
+
+func FreeCryptProvFromCertEx
+  void
+  fAcquired BOOL
+  hProv HCRYPTPROV_OR_NCRYPT_KEY_HANDLE
+  dwKeySpec DWORD
+  pwszCapiProvider LPWSTR
+  dwProviderType DWORD
+  pwszTmpContainer LPWSTR
+
+func FreeCryptProvFromCert
+  void
+  fAcquired BOOL
+  hProv HCRYPTPROV
+  pwszCapiProvider LPWSTR
+  dwProviderType DWORD
+  pwszTmpContainer LPWSTR
+
+func GetCryptProvFromCert
+  BOOL
+  hwnd HWND
+  pCert PCCERT_CONTEXT
+  phCryptProv HCRYPTPROV*
+  pdwKeySpec DWORD*
+  pfDidCryptAcquire BOOL*
+  ppwszTmpContainer LPWSTR*
+  ppwszProviderName LPWSTR*
+  pdwProviderType DWORD*
+
+func PvkFreeCryptProv
+  void
+  hProv HCRYPTPROV
+  pwszCapiProvider LPCWSTR
+  dwProviderType DWORD
+  pwszTmpContainer LPWSTR
+
+func PvkGetCryptProv
+  HRESULT
+  hwnd HWND
+  pwszCaption LPCWSTR
+  pwszCapiProvider LPCWSTR
+  dwProviderType DWORD
+  pwszPvkFile LPCWSTR
+  pwszKeyContainerName LPCWSTR
+  pdwKeySpec DWORD*
+  ppwszTmpContainer LPWSTR*
+  phCryptProv HCRYPTPROV*
+
+func PvkPrivateKeyAcquireContextFromMemory
+  BOOL
+  pwszProvName LPCWSTR
+  dwProvType [CryptProv]
+  pbData BYTE*
+  cbData DWORD
+  hwndOwner HWND
+  pwszKeyName LPCWSTR
+  pdwKeySpec DWORD*
+  phCryptProv HCRYPTPROV*
+  ppwszTmpContainer LPTSTR*
+
+func PvkPrivateKeySave
+  BOOL
+  hCryptProv HCRYPTPROV
+  hFile HANDLE
+  dwKeySpec DWORD
+  hwndOwner HWND
+  pwszKeyName LPCWSTR
+  dwFlags DWORD
+

@@ -1,0 +1,92 @@
+include Headers\scard.h.txt
+
+dll SCardDlg.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Authentication/Smart Card"
+alias LPOCNCHKPROC LPVOID
+
+alias LPOCNCONNPROC LPVOID
+
+alias LPOCNDSCPROC LPVOID
+
+flag [SC_DLG_FLAGS] DWORD display=DWORD
+  SC_DLG_MINIMAL_UI 0x01
+  SC_DLG_NO_UI      0x02
+  SC_DLG_FORCE_UI   0x04
+
+struct OPENCARDNAME
+  dwStructSize DWORD
+  hwndOwner HWND
+  hSCardContext SCARDCONTEXT
+  lpstrGroupNames LPTSTR
+  nMaxGroupNames DWORD
+  lpstrCardNames LPTSTR
+  nMaxCardNames DWORD
+  rgguidInterfaces LPCGUID count=cguidInterfaces
+  cguidInterfaces DWORD
+  lpstrRdr LPTSTR
+  nMaxRdr DWORD
+  lpstrCard LPTSTR
+  nMaxCard DWORD
+  lpstrTitle LPCTSTR
+  dwFlags [SC_DLG_FLAGS]
+  pvUserData LPVOID
+  dwShareMode DWORD
+  dwPreferredProtocols DWORD
+  dwActiveProtocol DWORD
+  lpfnConnect LPOCNCONNPROC
+  lpfnCheck LPOCNCHKPROC
+  lpfnDisconnect LPOCNDSCPROC
+  hCardHandle SCARDHANDLE
+
+pointer LPOPENCARDNAME OPENCARDNAME
+
+struct OPENCARD_SEARCH_CRITERIA
+  dwStructSize DWORD
+  lpstrGroupNames LPTSTR
+  nMaxGroupNames DWORD
+  rgguidInterfaces LPCGUID count=cguidInterfaces
+  cguidInterfaces DWORD
+  lpstrCardNames LPTSTR
+  nMaxCardNames DWORD
+  lpfnCheck LPOCNCHKPROC
+  lpfnConnect LPOCNCONNPROC
+  lpfnDisconnect LPOCNDSCPROC
+  pvUserData LPVOID
+  dwShareMode DWORD
+  dwPreferredProtocols DWORD
+
+pointer POPENCARD_SEARCH_CRITERIA OPENCARD_SEARCH_CRITERIA
+
+struct OPENCARDNAME_EX
+  dwStructSize DWORD
+  hSCardContext SCARDCONTEXT
+  hwndOwner HWND
+  dwFlags [SC_DLG_FLAGS]
+  lpstrTitle LPCTSTR
+  lpstrSearchDesc LPCTSTR
+  hIcon HICON
+  pOpenCardSearchCriteria POPENCARD_SEARCH_CRITERIA
+  lpfnConnect LPOCNCONNPROC
+  pvUserData LPVOID
+  dwShareMode DWORD
+  dwPreferredProtocols DWORD
+  lpstrRdr LPTSTR
+  nMaxRdr DWORD
+  lpstrCard LPTSTR
+  nMaxCard DWORD
+  dwActiveProtocol DWORD
+  hCardHandle SCARDHANDLE
+
+pointer LPOPENCARDNAME_EX OPENCARDNAME_EX
+
+func GetOpenCardName bothCharset ordinalA=1 ordinalW=2
+  [SCARD_ERROR]
+  pDlgStruc LPOPENCARDNAME
+
+func SCardDlgExtendedError ordinal=3
+  [SCARD_ERROR]
+
+func SCardUIDlgSelectCard bothCharset ordinalA=4 ordinalW=5
+  [SCARD_ERROR]
+  pDlgStruc LPOPENCARDNAME_EX
+

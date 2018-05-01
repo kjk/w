@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IWindowForBindingUI base=IUnknown id={79eac9d5-bafa-11ce-8c82-00aa004ba90b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetWindow
+    HRESULT
+    rguidReason REFGUID
+    phwnd HWND*
+
+

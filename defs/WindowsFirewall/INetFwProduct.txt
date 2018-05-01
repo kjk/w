@@ -1,0 +1,25 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwProduct base=IDispatch id={71881699-18f4-458b-b892-3ffce5e07f75} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall with Advanced Security"
+  func get_RuleCategories
+    HRESULT
+    ruleCategories VARIANT*
+
+  func put_RuleCategories
+    HRESULT
+    ruleCategories VARIANT
+
+  func get_DisplayName
+    HRESULT
+    displayName BSTR*
+
+  func put_DisplayName
+    HRESULT
+    displayName BSTR
+
+  func get_PathToSignedProductExe
+    HRESULT
+    path BSTR*
+
+

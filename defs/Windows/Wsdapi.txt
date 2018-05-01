@@ -1,0 +1,312 @@
+include Headers\windows.h.txt
+
+dll Wsdapi.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Devices/Web Services on Devices"
+interface IWSDAddress
+
+interface IWSDUdpAddress
+
+interface IWSDXMLContext
+
+interface IWSDDeviceHost
+
+interface IWSDHttpAddress
+
+interface IWSDDeviceProxy
+
+interface IWSDiscoveryProvider
+
+interface IWSDiscoveryPublisher
+
+interface IWSDOutboundAttachment
+
+interface IWSDHttpMessageParameters
+
+interface IWSDUdpMessageParameters
+
+struct WSD_LOCALIZED_STRING
+  lang "const WCHAR*"
+  String "const WCHAR*"
+
+pointer WSD_LOCALIZED_STRING* WSD_LOCALIZED_STRING
+
+struct WSD_LOCALIZED_STRING_LIST
+  Next LPVOID display=WSD_LOCALIZED_STRING_LIST*
+  Element WSD_LOCALIZED_STRING*
+
+pointer WSD_LOCALIZED_STRING_LIST* WSD_LOCALIZED_STRING_LIST
+
+struct WSDXML_NAMESPACE
+  Uri "const WCHAR*"
+  PreferredPrefix "const WCHAR*"
+  Names LPVOID display=WSDXML_NAME*
+  NamesCount WORD
+  Encoding WORD
+
+pointer WSDXML_NAMESPACE* WSDXML_NAMESPACE
+
+struct WSDXML_NAME
+  Space WSDXML_NAMESPACE*
+  LocalName WCHAR*
+
+pointer WSDXML_NAME* WSDXML_NAME
+
+pointer WSDXML_NAME** WSDXML_NAME*
+
+struct WSD_SOAP_FAULT_SUBCODE
+  Value WSDXML_NAME*
+  Subcode LPVOID display=WSD_SOAP_FAULT_SUBCODE*
+
+pointer WSD_SOAP_FAULT_SUBCODE* WSD_SOAP_FAULT_SUBCODE
+
+enum [WSDXML_NODE_TYPE] UINT display=enum
+  ElementType 0
+  TextType    1
+
+struct WSDXML_NODE
+  Type [WSDXML_NODE_TYPE]
+  Parent LPVOID display=WSDXML_ELEMENT*
+  Next LPVOID display=WSDXML_NODE*
+
+pointer WSDXML_NODE* WSDXML_NODE
+
+struct WSDXML_ATTRIBUTE
+  Element LPVOID display=WSDXML_ELEMENT*
+  Next LPVOID display=WSDXML_ATTRIBUTE*
+  Name WSDXML_NAME*
+  Value WCHAR*
+
+pointer WSDXML_ATTRIBUTE* WSDXML_ATTRIBUTE
+
+struct WSDXML_PREFIX_MAPPING
+  Refs DWORD
+  Next LPVOID display=WSDXML_PREFIX_MAPPING*
+  Space WSDXML_NAMESPACE*
+  Prefix WCHAR*
+
+pointer WSDXML_PREFIX_MAPPING* WSDXML_PREFIX_MAPPING
+
+struct WSDXML_ELEMENT
+  Node WSDXML_NODE
+  Name WSDXML_NAME*
+  FirstAttribute WSDXML_ATTRIBUTE*
+  FirstChild WSDXML_NODE*
+  PrefixMappings WSDXML_PREFIX_MAPPING*
+
+pointer WSDXML_ELEMENT* WSDXML_ELEMENT
+
+pointer WSDXML_ELEMENT** WSDXML_ELEMENT*
+
+enum WSD_CONFIG_PARAM_TYPE UINT
+  WSD_CONFIG_MAX_INBOUND_MESSAGE_SIZE     1
+  WSD_CONFIG_MAX_OUTBOUND_MESSAGE_SIZE    2
+  WSD_SECURITY_SSL_CERT_FOR_CLIENT_AUTH   3
+  WSD_SECURITY_SSL_SERVER_CERT_VALIDATION 4
+  WSD_SECURITY_SSL_CLIENT_CERT_VALIDATION 5
+  WSD_SECURITY_SSL_NEGOTIATE_CLIENT_CERT  6
+  WSD_SECURITY_COMPACTSIG_SIGNING_CERT    7
+  WSD_SECURITY_COMPACTSIG_VALIDATION      8
+  WSD_CONFIG_HOSTING_ADDRESSES            9
+  WSD_CONFIG_DEVICE_ADDRESSES             10
+
+struct WSD_CONFIG_PARAM
+  configParamType WSD_CONFIG_PARAM_TYPE
+  pConfigData PVOID
+  dwConfigDataSize DWORD
+
+pointer WSD_CONFIG_PARAM* WSD_CONFIG_PARAM
+
+struct WSD_SOAP_FAULT_CODE
+  Value WSDXML_NAME*
+  Subcode WSD_SOAP_FAULT_SUBCODE*
+
+pointer WSD_SOAP_FAULT_CODE* WSD_SOAP_FAULT_CODE
+
+struct WSD_SOAP_FAULT_REASON
+  Text WSD_LOCALIZED_STRING_LIST*
+
+pointer WSD_SOAP_FAULT_REASON* WSD_SOAP_FAULT_REASON
+
+struct WSD_SOAP_FAULT
+  Code WSD_SOAP_FAULT_CODE*
+  Reason WSD_SOAP_FAULT_REASON*
+  Node "const WCHAR*"
+  Role "const WCHAR*"
+  Detail WSDXML_ELEMENT*
+
+pointer WSD_SOAP_FAULT* WSD_SOAP_FAULT
+
+pointer WSD_SOAP_FAULT** WSD_SOAP_FAULT*
+
+func WSDAllocateLinkedMemory
+  success NotEqual=0
+  void*
+  pParent void*
+  cbSize size_t
+
+func WSDAttachLinkedMemory
+  void
+  pParent void*
+  pChild void*
+
+func WSDCreateDeviceHost
+  HRESULT
+  pszLocalId "const WCHAR*"
+  pContext IWSDXMLContext*
+  ppDeviceHost IWSDDeviceHost**
+
+func WSDCreateDeviceHostAdvanced
+  HRESULT
+  pszLocalId "const WCHAR*"
+  pContext IWSDXMLContext*
+  ppHostAddresses IWSDAddress**
+  dwHostAddressCount DWORD
+  ppDeviceHost IWSDDeviceHost**
+
+func WSDCreateDeviceProxy
+  HRESULT
+  pszDeviceId "const WCHAR*"
+  pszLocalId "const WCHAR*"
+  pContext IWSDXMLContext*
+  ppDeviceProxy IWSDDeviceProxy**
+
+func WSDCreateDeviceProxyAdvanced
+  HRESULT
+  pszDeviceId "const WCHAR*"
+  pDeviceAddress IWSDAddress*
+  pszLocalId "const WCHAR*"
+  pContext IWSDXMLContext*
+  ppDeviceProxy IWSDDeviceProxy**
+
+func WSDCreateDiscoveryProvider
+  HRESULT
+  pContext IWSDXMLContext*
+  ppProvider IWSDiscoveryProvider**
+
+func WSDCreateDiscoveryProvider2
+  HRESULT
+  pContext IWSDXMLContext*
+  pConfigParams WSD_CONFIG_PARAM*
+  dwConfigParamCount DWORD
+  ppProvider IWSDiscoveryProvider**
+
+func WSDCreateDiscoveryPublisher
+  HRESULT
+  pContext IWSDXMLContext*
+  ppPublisher IWSDiscoveryPublisher**
+
+func WSDCreateDiscoveryPublisher2
+  HRESULT
+  pContext IWSDXMLContext*
+  pConfigParams WSD_CONFIG_PARAM*
+  dwConfigParamCount DWORD
+  ppPublisher IWSDiscoveryPublisher**
+
+func WSDCreateHttpAddress
+  HRESULT
+  ppAddress IWSDHttpAddress**
+
+func WSDCreateHttpMessageParameters
+  HRESULT
+  ppTxParams IWSDHttpMessageParameters**
+
+func WSDCreateOutboundAttachment
+  HRESULT
+  attachmentOut IWSDOutboundAttachment**
+
+func WSDCreateUdpAddress
+  HRESULT
+  ppAddress IWSDUdpAddress**
+
+func WSDCreateUdpMessageParameters
+  HRESULT
+  ppTxParams IWSDUdpMessageParameters**
+
+func WSDDetachLinkedMemory
+  void
+  pVoid void*
+
+func WSDFreeLinkedMemory
+  void
+  pVoid void*
+
+func WSDGenerateFault
+  HRESULT
+  pszCode LPCWSTR
+  pszSubCode LPCWSTR
+  pszReason LPCWSTR
+  pszDetail LPCWSTR
+  pContext IWSDXMLContext*
+  ppFault WSD_SOAP_FAULT**
+
+func WSDGenerateFaultEx
+  HRESULT
+  pCode WSDXML_NAME*
+  pSubCode WSDXML_NAME*
+  pReasons WSD_LOCALIZED_STRING_LIST*
+  pszDetail LPCWSTR
+  ppFault WSD_SOAP_FAULT**
+
+func WSDGetConfigurationOption
+  HRESULT
+  dwOption DWORD
+  pVoid LPVOID
+  cbOutBuffer DWORD
+
+func WSDSetConfigurationOption
+  HRESULT
+  dwOption DWORD
+  pVoid LPVOID
+  cbInBuffer DWORD
+
+func WSDUriDecode
+  HRESULT
+  source LPCWSTR
+  cchSource DWORD
+  destOut LPWSTR*
+  cchDestOut DWORD*
+
+func WSDUriEncode
+  HRESULT
+  source LPCWSTR
+  cchSource DWORD
+  destOut LPWSTR*
+  cchDestOut DWORD*
+
+func WSDXMLAddChild
+  HRESULT
+  pParent WSDXML_ELEMENT*
+  pChild WSDXML_ELEMENT*
+
+func WSDXMLAddSibling
+  HRESULT
+  pFirst WSDXML_ELEMENT*
+  pSecond WSDXML_ELEMENT*
+
+func WSDXMLBuildAnyForSingleElement
+  HRESULT
+  pElementName WSDXML_NAME*
+  pszText LPCWSTR
+  ppAny WSDXML_ELEMENT**
+
+func WSDXMLCleanupElement
+  HRESULT
+  pAny WSDXML_ELEMENT*
+
+func WSDXMLCreateContext
+  HRESULT
+  ppContext IWSDXMLContext**
+
+func WSDXMLGetNameFromBuiltinNamespace
+  HRESULT
+  pszNamespace LPCWSTR
+  pszName LPCWSTR
+  ppName WSDXML_NAME**
+
+func WSDXMLGetValueFromAny
+  HRESULT
+  pszNamespace "const WCHAR*"
+  pszName "const WCHAR*"
+  pAny WSDXML_ELEMENT*
+  ppszValue LPCWSTR*
+

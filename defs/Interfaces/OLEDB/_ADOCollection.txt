@@ -1,0 +1,16 @@
+include Interfaces\IDispatch.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface _ADOCollection base=IDispatch id={00000512-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_Count
+    [OLEDB_HRESULT]
+    c long*
+
+  func _NewEnum
+    [OLEDB_HRESULT]
+    ppvObject IUnknown**
+
+  func Refresh
+    [OLEDB_HRESULT]
+
+

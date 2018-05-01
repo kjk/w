@@ -1,0 +1,24 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Bitmap.txt
+
+ingterface ID2D1Bitmap1 base=ID2D1Bitmap id={a898a84c-3873-4588-b08b-ebbf978df041} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetColorContext
+    void
+    colorContext ID2D1ColorContext**
+
+  func GetOptions
+    D2D1_BITMAP_OPTIONS
+
+  func GetSurface
+    [D2D_HRESULT]
+    dxgiSurface IDXGISurface**
+
+  func Map
+    [D2D_HRESULT]
+    options D2D1_MAP_OPTIONS
+    mappedRect D2D1_MAPPED_RECT*
+
+  func Unmap
+    [D2D_HRESULT]
+
+

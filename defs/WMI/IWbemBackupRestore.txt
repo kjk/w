@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemBackupRestore base=IUnknown id={C49E32C7-BC8B-11d2-85D4-00105A1F8304} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func Backup
+    WBEMSTATUS
+    strBackupToFile LPCWSTR
+    lFlags long
+
+  func Restore
+    WBEMSTATUS
+    strRestoreFromFile LPCWSTR
+    lFlags long
+
+

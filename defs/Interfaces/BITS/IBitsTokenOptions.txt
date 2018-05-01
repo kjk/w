@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBitsTokenOptions base=IUnknown id={9a2584c3-f7d2-457a-9a5e-22b67bffc7d2} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func SetHelperTokenFlags
+    HRESULT
+    UsageFlags DWORD
+
+  func GetHelperTokenFlags
+    HRESULT
+    pFlags DWORD*
+
+  func SetHelperToken
+    HRESULT
+
+  func ClearHelperToken
+    HRESULT
+
+  func GetHelperTokenSid
+    HRESULT
+    pSid LPWSTR*
+
+

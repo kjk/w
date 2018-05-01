@@ -1,0 +1,34 @@
+include Interfaces\IUnknown.txt
+include Headers\ddraw.h.txt
+
+ingterface IDirectDrawClipper base=IUnknown id={6c14db85-a733-11ce-a521-0020af0be560} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+  func GetClipList
+    [DD_HRESULT]
+    lpRect LPRECT
+    lpClipList LPRGNDATA
+    lpdwSize LPDWORD
+
+  func GetHWnd
+    [DD_HRESULT]
+    lphWnd HWND*
+
+  func Initialize
+    [DD_HRESULT]
+    lpDD LPDIRECTDRAW
+    dwFlags DWORD
+
+  func IsClipListChanged
+    [DD_HRESULT]
+    lpbChanged BOOL*
+
+  func SetClipList
+    [DD_HRESULT]
+    lpClipList LPRGNDATA
+    dwFlags DWORD
+
+  func SetHWnd
+    [DD_HRESULT]
+    dwFlags DWORD
+    hWnd HWND
+
+

@@ -1,0 +1,140 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteFactory base=IUnknown id={b859ee5a-d838-4b5b-a2e8-1adc7d93db48} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func GetSystemFontCollection
+    HRESULT
+    fontCollection IDWriteFontCollection**
+    checkForUpdates BOOL
+
+  func CreateCustomFontCollection
+    HRESULT
+    collectionLoader IDWriteFontCollectionLoader*
+    collectionKey "void const*"
+    collectionKeySize UINT32
+    fontCollection IDWriteFontCollection**
+
+  func RegisterFontCollectionLoader
+    HRESULT
+    fontCollectionLoader IDWriteFontCollectionLoader*
+
+  func UnregisterFontCollectionLoader
+    HRESULT
+    fontCollectionLoader IDWriteFontCollectionLoader*
+
+  func CreateFontFileReference
+    HRESULT
+    filePath "WCHAR const*"
+    lastWriteTime "FILETIME const*"
+    fontFile IDWriteFontFile**
+
+  func CreateCustomFontFileReference
+    HRESULT
+    fontFileReferenceKey "void const*"
+    fontFileReferenceKeySize UINT32
+    fontFileLoader IDWriteFontFileLoader*
+    fontFile IDWriteFontFile**
+
+  func CreateFontFace
+    HRESULT
+    fontFaceType DWRITE_FONT_FACE_TYPE
+    numberOfFiles UINT32
+    fontFiles "IDWriteFontFile* const*" count=numberOfFiles
+    faceIndex UINT32
+    fontFaceSimulationFlags DWRITE_FONT_SIMULATIONS
+    fontFace IDWriteFontFace**
+
+  func CreateRenderingParams
+    HRESULT
+    renderingParams IDWriteRenderingParams**
+
+  func CreateMonitorRenderingParams
+    HRESULT
+    monitor HMONITOR
+    renderingParams IDWriteRenderingParams**
+
+  func CreateCustomRenderingParams
+    HRESULT
+    gamma FLOAT
+    enhancedContrast FLOAT
+    clearTypeLevel FLOAT
+    pixelGeometry DWRITE_PIXEL_GEOMETRY
+    renderingMode DWRITE_RENDERING_MODE
+    renderingParams IDWriteRenderingParams**
+
+  func RegisterFontFileLoader
+    HRESULT
+    fontFileLoader IDWriteFontFileLoader*
+
+  func UnregisterFontFileLoader
+    HRESULT
+    fontFileLoader IDWriteFontFileLoader*
+
+  func CreateTextFormat
+    HRESULT
+    fontFamilyName "WCHAR const*"
+    fontCollection IDWriteFontCollection*
+    fontWeight DWRITE_FONT_WEIGHT
+    fontStyle DWRITE_FONT_STYLE
+    fontStretch DWRITE_FONT_STRETCH
+    fontSize FLOAT
+    localeName "WCHAR const*"
+    textFormat IDWriteTextFormat**
+
+  func CreateTypography
+    HRESULT
+    typography IDWriteTypography**
+
+  func GetGdiInterop
+    HRESULT
+    gdiInterop IDWriteGdiInterop**
+
+  func CreateTextLayout
+    HRESULT
+    string "WCHAR const*"
+    stringLength UINT32
+    textFormat IDWriteTextFormat*
+    maxWidth FLOAT
+    maxHeight FLOAT
+    textLayout IDWriteTextLayout**
+
+  func CreateGdiCompatibleTextLayout
+    HRESULT
+    string "WCHAR const*"
+    stringLength UINT32
+    textFormat IDWriteTextFormat*
+    layoutWidth FLOAT
+    layoutHeight FLOAT
+    pixelsPerDip FLOAT
+    transform "DWRITE_MATRIX const*"
+    useGdiNatural BOOL
+    textLayout IDWriteTextLayout**
+
+  func CreateEllipsisTrimmingSign
+    HRESULT
+    textFormat IDWriteTextFormat*
+    trimmingSign IDWriteInlineObject**
+
+  func CreateTextAnalyzer
+    HRESULT
+    textAnalyzer IDWriteTextAnalyzer**
+
+  func CreateNumberSubstitution
+    HRESULT
+    substitutionMethod DWRITE_NUMBER_SUBSTITUTION_METHOD
+    localeName "WCHAR const*"
+    ignoreUserOverride BOOL
+    numberSubstitution IDWriteNumberSubstitution**
+
+  func CreateGlyphRunAnalysis
+    HRESULT
+    glyphRun "DWRITE_GLYPH_RUN const*"
+    pixelsPerDip FLOAT
+    transform "DWRITE_MATRIX const*"
+    renderingMode DWRITE_RENDERING_MODE
+    measuringMode DWRITE_MEASURING_MODE
+    baselineOriginX FLOAT
+    baselineOriginY FLOAT
+    glyphRunAnalysis IDWriteGlyphRunAnalysis**
+
+

@@ -1,0 +1,1155 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+include Headers\registry.h.txt
+
+dll comctl32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Application UI Development/User Interaction/Keyboard and Mouse Input/Mouse Input"
+category "Windows Environment Development/Windows Shell"
+category "Windows Application UI Development/Windows Controls/Control Library/Toolbar"
+category "Windows Application UI Development/Windows Controls/Control Library/Property Sheet"
+category "Windows Application UI Development/Windows Controls/Control Library/Status Bar"
+category "Windows Application UI Development/Windows Controls/Control Library/Up-Down Control"
+category "Windows Application UI Development/Windows Controls"
+category "Windows Application UI Development/Windows Controls/Control Library/Drag List Box"
+category "Windows Application UI Development/Windows Controls/Control Library/Flat Scroll Bar"
+category "Windows Application UI Development/Windows Controls/Control Library/Image Lists"
+category "Windows Application UI Development/Windows Controls/Control Library/Task Dialog"
+errorDecode errorFunc=HRESULT
+arch 32
+struct TBBUTTON
+  iBitmap int
+  idCommand int
+  fsState BYTE
+  fsStyle BYTE
+  bReserved "BYTE [2]"
+  dwData DWORD_PTR
+  iString INT_PTR
+
+arch off
+arch 64
+struct TBBUTTON
+  iBitmap int
+  idCommand int
+  fsState BYTE
+  fsStyle BYTE
+  bReserved "BYTE [6]"
+  dwData DWORD_PTR
+  iString INT_PTR
+
+arch off
+alias HDPA LPVOID
+
+pointer HDPA* HDPA
+
+alias "const HDPA" HDPA
+
+alias SUBCLASSPROC LPVOID
+
+alias PFNDPAENUMCALLBACK LPVOID
+
+alias PFNDPASTREAM LPVOID
+
+alias PFNDPACOMPARE LPVOID
+
+alias PFNDPAMERGE LPVOID
+
+alias HDSA LPVOID
+
+alias PFNDSAENUMCALLBACK LPVOID
+
+alias PFNDAENUMCALLBACK LPVOID
+
+pointer PFNDAENUMCALLBACK* PFNDAENUMCALLBACK
+
+alias PFNDACOMPARE LPVOID
+
+alias PFTASKDIALOGCALLBACK LPVOID
+
+alias PFNREADERSCROLL LPVOID
+
+alias PFNREADERTRANSLATEDISPATCH LPVOID
+
+pointer LPCTBBUTTON TBBUTTON
+
+flag [ReaderModeFlag] DWORD display=DWORD
+  RMF_ZEROCURSOR     0x01
+  RMF_VERTICALONLY   0x02
+  RMF_HORIZONTALONLY 0x04
+
+struct READERMODEINFO
+  cbSize UINT
+  hwnd HWND
+  fFlags [ReaderModeFlag]
+  prc LPRECT
+  pfnScroll PFNREADERSCROLL
+  pfnTranslatedDispatch PFNREADERTRANSLATEDISPATCH
+  lParam LPARAM
+
+pointer PREADERMODEINFO READERMODEINFO
+
+flag TASKDIALOG_COMMON_BUTTON_FLAGS UINT
+  TDCBF_OK_BUTTON     0x0001
+  TDCBF_YES_BUTTON    0x0002
+  TDCBF_NO_BUTTON     0x0004
+  TDCBF_CANCEL_BUTTON 0x0008
+  TDCBF_RETRY_BUTTON  0x0010
+  TDCBF_CLOSE_BUTTON  0x0020
+
+flag [ILD_Flags] UINT display=UINT
+  ILD_NORMAL        0x00000000
+  ILD_TRANSPARENT   0x00000001
+  ILD_FOCUS         0x00000002
+  ILD_SELECTED      0x00000004
+  ILD_MASK          0x00000010
+  ILD_IMAGE         0x00000020
+  ILD_ROP           0x00000040
+  ILD_OVERLAYMASK   0x00000F00
+  ILD_PRESERVEALPHA 0x00001000
+  ILD_SCALE         0x00002000
+  ILD_DPISCALE      0x00004000
+  ILD_ASYNC         0x00008000
+
+flag [ILC_Flags] UINT display=UINT
+  ILC_COLOR            0x00000000
+  ILC_MASK             0x00000001
+  ILC_COLOR4           0x00000004
+  ILC_COLOR8           0x00000008
+  ILC_COLOR16          0x00000010
+  ILC_COLOR24          0x00000018
+  ILC_COLOR32          0x00000020
+  ILC_COLORDDB         0x000000FE
+  ILC_PALETTE          0x00000800
+  ILC_MIRROR           0x00002000
+  ILC_PERITEMMIRROR    0x00008000
+  ILC_ORIGINALSIZE     0x00010000
+  ILC_HIGHQUALITYSCALE 0x00020000
+
+enum [WSB_Prop] UINT display=UINT
+  WSB_PROP_CYVSCROLL 0x00000001
+  WSB_PROP_CXHSCROLL 0x00000002
+  WSB_PROP_CYHSCROLL 0x00000004
+  WSB_PROP_CXVSCROLL 0x00000008
+  WSB_PROP_CXHTHUMB  0x00000010
+  WSB_PROP_CYVTHUMB  0x00000020
+  WSB_PROP_VBKGCOLOR 0x00000040
+  WSB_PROP_HBKGCOLOR 0x00000080
+  WSB_PROP_VSTYLE    0x00000100
+  WSB_PROP_HSTYLE    0x00000200
+  WSB_PROP_WINSTYLE  0x00000400
+  WSB_PROP_PALETTE   0x00000800
+  WSB_PROP_MASK      0x00000FFF
+
+enum [ILP_Flags] DWORD display=DWORD
+  ILP_NORMAL    0
+  ILP_DOWNLEVEL 1
+
+flag [TBStyle] DWORD display=DWORD
+  WS_OVERLAPPED        0x00000000
+  BTNS_BUTTON          0x0000
+  BTNS_SEP             0x0001
+  BTNS_CHECK           0x0002
+  BTNS_GROUP           0x0004
+  BTNS_CHECKGROUP      0x0006
+  BTNS_DROPDOWN        0x0008
+  BTNS_AUTOSIZE        0x0010
+  BTNS_NOPREFIX        0x0020
+  BTNS_SHOWTEXT        0x0040
+  BTNS_WHOLEDROPDOWN   0x0080
+  TBSTYLE_TOOLTIPS     0x0100
+  TBSTYLE_WRAPABLE     0x0200
+  TBSTYLE_ALTDRAG      0x0400
+  TBSTYLE_FLAT         0x0800
+  TBSTYLE_LIST         0x1000
+  TBSTYLE_CUSTOMERASE  0x2000
+  TBSTYLE_REGISTERDROP 0x4000
+  TBSTYLE_TRANSPARENT  0x8000
+  WS_MAXIMIZEBOX       0x00010000
+  WS_TABSTOP           0x00010000
+  WS_GROUP             0x00020000
+  WS_MINIMIZEBOX       0x00020000
+  WS_THICKFRAME        0x00040000
+  WS_SYSMENU           0x00080000
+  WS_HSCROLL           0x00100000
+  WS_VSCROLL           0x00200000
+  WS_DLGFRAME          0x00400000
+  WS_BORDER            0x00800000
+  WS_CAPTION           0x00C00000
+  WS_OVERLAPPEDWINDOW  0x00cf0000
+  WS_MAXIMIZE          0x01000000
+  WS_CLIPCHILDREN      0x02000000
+  WS_CLIPSIBLINGS      0x04000000
+  WS_DISABLED          0x08000000
+  WS_VISIBLE           0x10000000
+  WS_MINIMIZE          0x20000000
+  WS_CHILD             0x40000000
+  WS_POPUP             0x80000000
+  WS_POPUPWINDOW       0x80880000
+
+flag [UDStyle] DWORD display=DWORD
+  WS_OVERLAPPED       0x00000000
+  UDS_WRAP            0x0001
+  UDS_SETBUDDYINT     0x0002
+  UDS_ALIGNRIGHT      0x0004
+  UDS_ALIGNLEFT       0x0008
+  UDS_AUTOBUDDY       0x0010
+  UDS_ARROWKEYS       0x0020
+  UDS_HORZ            0x0040
+  UDS_NOTHOUSANDS     0x0080
+  UDS_HOTTRACK        0x0100
+  WS_MAXIMIZEBOX      0x00010000
+  WS_TABSTOP          0x00010000
+  WS_MINIMIZEBOX      0x00020000
+  WS_GROUP            0x00020000
+  WS_THICKFRAME       0x00040000
+  WS_SYSMENU          0x00080000
+  WS_HSCROLL          0x00100000
+  WS_VSCROLL          0x00200000
+  WS_DLGFRAME         0x00400000
+  WS_BORDER           0x00800000
+  WS_CAPTION          0x00C00000
+  WS_OVERLAPPEDWINDOW 0x00cf0000
+  WS_MAXIMIZE         0x01000000
+  WS_CLIPCHILDREN     0x02000000
+  WS_CLIPSIBLINGS     0x04000000
+  WS_DISABLED         0x08000000
+  WS_VISIBLE          0x10000000
+  WS_MINIMIZE         0x20000000
+  WS_CHILD            0x40000000
+  WS_POPUP            0x80000000
+  WS_POPUPWINDOW      0x80880000
+
+flag [MruFlags] UINT display=UINT
+  MRU_BINARY     0x0001
+  MRU_CACHEWRITE 0x0002
+
+alias MRUCMPPROC LPVOID
+
+struct MRUINFO
+  cbSize DWORD
+  uMax UINT
+  fFlags [MruFlags]
+  hKey HKEY
+  lpszSubKey LPCWSTR
+  lpfnCompare MRUCMPPROC
+
+pointer LPMRUINFO MRUINFO
+
+struct COLORMAP
+  from COLORREF
+  to COLORREF
+
+pointer LPCOLORMAP COLORMAP
+
+flag [IccFlags] DWORD display=DWORD
+  ICC_LISTVIEW_CLASSES   0x00000001
+  ICC_TREEVIEW_CLASSES   0x00000002
+  ICC_BAR_CLASSES        0x00000004
+  ICC_TAB_CLASSES        0x00000008
+  ICC_UPDOWN_CLASS       0x00000010
+  ICC_PROGRESS_CLASS     0x00000020
+  ICC_HOTKEY_CLASS       0x00000040
+  ICC_ANIMATE_CLASS      0x00000080
+  ICC_WIN95_CLASSES      0x000000FF
+  ICC_DATE_CLASSES       0x00000100
+  ICC_USEREX_CLASSES     0x00000200
+  ICC_COOL_CLASSES       0x00000400
+  ICC_INTERNET_CLASSES   0x00000800
+  ICC_PAGESCROLLER_CLASS 0x00001000
+  ICC_NATIVEFNTCTL_CLASS 0x00002000
+  ICC_STANDARD_CLASSES   0x00004000
+  ICC_LINK_CLASS         0x00008000
+
+struct INITCOMMONCONTROLSEX
+  dwSize DWORD
+  dwICC [IccFlags]
+
+pointer "const LPINITCOMMONCONTROLSEX" INITCOMMONCONTROLSEX
+
+struct IMAGELISTDRAWPARAMS
+  cbSize DWORD
+  himl HIMAGELIST
+  i int
+  hdcDst HDC
+  x int
+  y int
+  cx int
+  cy int
+  xBitmap int
+  yBitmap int
+  rgbBk COLORREF
+  rgbFg COLORREF
+  fStyle UINT
+  dwRop DWORD
+  fState DWORD
+  Frame DWORD
+  crEffect COLORREF
+
+pointer IMAGELISTDRAWPARAMS* IMAGELISTDRAWPARAMS
+
+struct IMAGEINFO
+  hbmImage HBITMAP
+  hbmMask HBITMAP
+  Unused1 int
+  Unused2 int
+  rcImage RECT
+
+pointer IMAGEINFO* IMAGEINFO
+
+flag TASKDIALOG_FLAGS UINT
+  TDF_ENABLE_HYPERLINKS           0x0001
+  TDF_USE_HICON_MAIN              0x0002
+  TDF_USE_HICON_FOOTER            0x0004
+  TDF_ALLOW_DIALOG_CANCELLATION   0x0008
+  TDF_USE_COMMAND_LINKS           0x0010
+  TDF_USE_COMMAND_LINKS_NO_ICON   0x0020
+  TDF_EXPAND_FOOTER_AREA          0x0040
+  TDF_EXPANDED_BY_DEFAULT         0x0080
+  TDF_VERIFICATION_FLAG_CHECKED   0x0100
+  TDF_SHOW_PROGRESS_BAR           0x0200
+  TDF_SHOW_MARQUEE_PROGRESS_BAR   0x0400
+  TDF_CALLBACK_TIMER              0x0800
+  TDF_POSITION_RELATIVE_TO_WINDOW 0x1000
+  TDF_RTL_LAYOUT                  0x2000
+  TDF_NO_DEFAULT_RADIO_BUTTON     0x4000
+  TDF_CAN_BE_MINIMIZED            0x8000
+
+struct TASKDIALOG_BUTTON pack=1
+  nButtonID int
+  pszButtonText PCWSTR
+
+pointer "const TASKDIALOG_BUTTON*" TASKDIALOG_BUTTON
+
+union [TASKDIALOGCONFIG_u1] display=union
+  hMainIcon HICON
+  pszMainIcon PCWSTR
+
+union [TASKDIALOGCONFIG_u2] display=union
+  hFooterIcon HICON
+  pszFooterIcon PCWSTR
+
+struct TASKDIALOGCONFIG pack=1
+  cbSize UINT
+  hwndParent HWND
+  hInstance HINSTANCE
+  dwFlags TASKDIALOG_FLAGS
+  dwCommonButtons TASKDIALOG_COMMON_BUTTON_FLAGS
+  pszWindowTitle PCWSTR
+   [TASKDIALOGCONFIG_u1]
+  pszMainInstruction PCWSTR
+  pszContent PCWSTR
+  cButtons UINT
+  pButtons "const TASKDIALOG_BUTTON*" count=cButtons
+  nDefaultButton int
+  cRadioButtons UINT
+  pRadioButtons "const TASKDIALOG_BUTTON*" count=cRadioButtons
+  nDefaultRadioButton int
+  pszVerificationText PCWSTR
+  pszExpandedInformation PCWSTR
+  pszExpandedControlText PCWSTR
+  pszCollapsedControlText PCWSTR
+   [TASKDIALOGCONFIG_u2]
+  pszFooter PCWSTR
+  pfCallback PFTASKDIALOGCALLBACK
+  lpCallbackData LONG_PTR
+  cxWidth UINT
+
+pointer "const TASKDIALOGCONFIG*" TASKDIALOGCONFIG
+
+func _TrackMouseEvent
+  BOOL
+  lpEventTrack LPTRACKMOUSEEVENT
+
+func AddMRUStringW ordinal=401
+  success NotEqual=0
+  int
+  hMRU HANDLE
+  szString LPCTSTR
+
+func CreateMRUListW ordinal=400
+  success NotEqual=0
+  int
+  lpmi LPMRUINFO
+
+func DefSubclassProc ordinal=413
+  LRESULT
+  hWnd HWND
+  uMsg [WinMsg]
+  WPARAM WPARAM
+  LPARAM LPARAM
+
+func EnumMRUListW ordinal=403
+  success NotEqual=0
+  int
+  hMRU HANDLE
+  nItem int
+  lpData void*
+  uLen UINT
+
+func FreeMRUList ordinal=152
+  success NotEqual=0
+  int
+  hMRU HANDLE
+
+func GetWindowSubclass ordinal=411
+  BOOL
+  hWnd HWND
+  pfnSubclass SUBCLASSPROC
+  uIdSubclass UINT_PTR
+  pdwRefData DWORD_PTR*
+
+func RemoveWindowSubclass ordinal=412
+  BOOL
+  hWnd HWND
+  pfnSubclass SUBCLASSPROC
+  uIdSubclass UINT_PTR
+
+func SetWindowSubclass ordinal=410
+  BOOL
+  hWnd HWND
+  pfnSubclass SUBCLASSPROC
+  uIdSubclass UINT_PTR
+  dwRefData DWORD_PTR
+
+func CreateMappedBitmap ordinal=8
+  success NotEqual=0
+  HBITMAP
+  hInstance HINSTANCE
+  idBitmap INT_PTR
+  wFlags UINT
+  lpColorMap LPCOLORMAP
+  iNumMaps int
+
+func CreateToolbarEx
+  success NotEqual=0
+  HWND
+  hwnd HWND
+  ws [TBStyle]
+  wID UINT
+  nBitmaps int
+  hBMInst HINSTANCE
+  wBMID UINT_PTR
+  lpButtons LPCTBBUTTON
+  iNumButtons int
+  dxButton int
+  dyButton int
+  dxBitmap int
+  dyBitmap int
+  uStructSize UINT
+
+func CreatePropertySheetPage bothCharset
+  success NotEqual=0
+  HPROPSHEETPAGE
+  lppsp LPCPROPSHEETPAGE
+
+func DestroyPropertySheetPage
+  BOOL
+  hPSPage HPROPSHEETPAGE
+
+func PropertySheet bothCharset
+  success NotEqual=0
+  INT_PTR
+  lppsph LPCPROPSHEETHEADER
+
+func CreateStatusWindow bothCharset ordinalA=6
+  success NotEqual=0
+  HWND
+  style LONG
+  lpszText LPCTSTR
+  hwndParent HWND
+  wID UINT
+
+func DrawStatusText bothCharset ordinalA=5
+  void
+  hdc HDC
+  lprc LPCRECT
+  pszText LPCTSTR
+  uFlags UINT
+
+func MenuHelp ordinal=2
+  void
+  uMsg [WinMsg]
+  wParam WPARAM
+  lParam LPARAM
+  hMainMenu HMENU
+  hInst HINSTANCE
+  hwndStatus HWND
+  lpwIDs LPUINT
+
+func CreateUpDownControl ordinal=16
+  success NotEqual=0
+  HWND
+  dwStyle [UDStyle]
+  x int
+  y int
+  cx int
+  cy int
+  hParent HWND
+  nID int
+  hInst HINSTANCE
+  hBuddy HWND
+  nUpper int
+  nLower int
+  nPos int
+
+func DoReaderMode ordinal=383
+  void
+  prmi PREADERMODEINFO
+
+func DPA_Clone ordinal=331
+  success NotEqual=0
+  HDPA
+  hdpaSource "const HDPA"
+  hdpaNew HDPA
+
+func DPA_Create ordinal=328
+  success NotEqual=0
+  HDPA
+  cpGrow int
+
+func DPA_CreateEx ordinal=340
+  success NotEqual=0
+  HDPA
+  cpGrow int
+  hheap HANDLE
+
+func DPA_DeleteAllPtrs ordinal=337
+  BOOL
+  pdpa HDPA
+
+func DPA_DeletePtr ordinal=336
+  success NotEqual=0
+  void*
+  pdpa HDPA
+  index int
+
+func DPA_Destroy ordinal=329
+  BOOL
+  pdpa HDPA
+
+func DPA_DestroyCallback ordinal=386
+  void
+  pdpa HDPA
+  pfnCB PFNDPAENUMCALLBACK
+  pData void*
+
+func DPA_EnumCallback ordinal=385
+  void
+  pdpa HDPA
+  pfnCB PFNDPAENUMCALLBACK
+  pData void*
+
+func DPA_GetPtr ordinal=332
+  success NotEqual=0
+  void*
+  pdpa HDPA
+  index int
+
+func DPA_GetPtrIndex ordinal=333
+  success NotEqual=0
+  int
+  hdpa HDPA
+  pvoid "const void*"
+
+func DPA_GetSize ordinal=347
+  success NotEqual=0
+  ULONGLONG
+  pdpa HDPA
+
+func DPA_Grow ordinal=330
+  BOOL
+  hdpa HDPA
+  cp int
+
+func DPA_InsertPtr ordinal=334
+  success NotEqual=-1
+  int
+  pdpa HDPA
+  index int
+  p void*
+
+func DPA_LoadStream ordinal=9
+  HRESULT
+  ppdpa HDPA*
+  pfn PFNDPASTREAM
+  pstm IStream*
+  pvInstData void*
+
+func DPA_Merge ordinal=11
+  BOOL
+  hdpaDest HDPA
+  hdpaSrc HDPA
+  dwFlags DWORD
+  pfnCompare PFNDPACOMPARE
+  pfnMerge PFNDPAMERGE
+  lParam LPARAM
+
+func DPA_SaveStream ordinal=10
+  HRESULT
+  pdpa HDPA
+  pfn PFNDPASTREAM
+  pstm IStream*
+  pvInstData void*
+
+func DPA_Search ordinal=339
+  success NotEqual=0
+  int
+  pdpa HDPA
+  pFind void*
+  iStart int
+  pfnCmp PFNDPACOMPARE
+  lParam LPARAM
+  options UINT
+
+func DPA_SetPtr ordinal=335
+  BOOL
+  pdpa HDPA
+  index int
+  p void*
+
+func DPA_Sort ordinal=338
+  BOOL
+  pdpa HDPA
+  pfnCmp PFNDPACOMPARE
+  lParam LPARAM
+
+func DrawShadowText
+  success NotEqual=0
+  int
+  hdc HDC
+  pszText LPCWSTR
+  cch UINT
+  pRect "const RECT*"
+  dwFlags DWORD
+  crText COLORREF
+  crShadow COLORREF
+  ixOffset int
+  iyOffset int
+
+func DrawTextExPrivWrap ordinal=416
+  success NotEqual=0
+  int
+  hdc HDC
+  lpchText LPTSTR
+  cchText int
+  lprc LPRECT
+  dwDTFormat UINT
+  lpDTParams LPDRAWTEXTPARAMS
+
+func DrawTextWrap ordinal=415
+  success NotEqual=0
+  int
+  hdc HDC
+  lpString LPCTSTR
+  nCount int
+  lpRect LPRECT
+  uFormat UINT
+  lpDTParams LPDRAWTEXTPARAMS
+
+func DSA_Clone ordinal=343
+  success NotEqual=0
+  HDSA
+  hdsa HDSA
+
+func DSA_Create ordinal=320
+  success NotEqual=0
+  HDSA
+  cbItem int
+  cbItemGrow int
+
+func DSA_DeleteAllItems ordinal=327
+  BOOL
+  hdsa HDSA
+
+func DSA_DeleteItem ordinal=326
+  BOOL
+  hdsa HDSA
+  nPosition int
+
+func DSA_Destroy ordinal=321
+  BOOL
+  pdsa HDSA
+
+func DSA_DestroyCallback ordinal=388
+  void
+  pdsa HDSA
+  pfnCB PFNDSAENUMCALLBACK
+  pData void*
+
+func DSA_EnumCallback ordinal=387
+  void
+  hdsa HDSA
+  pfnCB PFNDAENUMCALLBACK*
+  pData void*
+
+func DSA_GetItem ordinal=322
+  BOOL
+  pdsa HDSA
+  index int
+  pitem void*
+
+func DSA_GetItemPtr ordinal=323
+  success NotEqual=0
+  void*
+  pdsa HDSA
+  index int
+
+func DSA_GetSize ordinal=348
+  success NotEqual=0
+  ULONGLONG
+  hdsa HDSA
+
+func DSA_InsertItem ordinal=324
+  success NotEqual=-1
+  int
+  pdsa HDSA
+  index int
+  pItem void*
+
+func DSA_SetItem ordinal=325
+  BOOL
+  hdsa HDSA
+  index int
+  pItem void*
+
+func DSA_Sort ordinal=346
+  BOOL
+  pdsa HDSA
+  pfnCompare PFNDACOMPARE
+  lParam LPARAM
+
+func ExtTextOutWrap ordinal=417
+  BOOL
+  hdc HDC
+  X int
+  Y int
+  uOptions UINT
+  lprc "const RECT*"
+  lpString LPCTSTR
+  cbCount UINT
+  lpDx "const INT*"
+
+func GetEffectiveClientRect ordinal=4
+  void
+  hWnd HWND
+  lprc LPRECT
+  lpInfo "const INT*"
+
+func GetMUILanguage
+  success NotEqual=0
+  LANGID
+
+func GetTextExtentPoint32Wrap ordinal=420
+  BOOL
+  hdc HDC
+  lpString LPCTSTR
+  cbCount UINT
+  lpSize LPSIZE
+
+func InitCommonControls ordinal=17
+  void
+
+func InitCommonControlsEx
+  BOOL
+  lpInitCtrls "const LPINITCOMMONCONTROLSEX"
+
+func InitMUILanguage
+  VOID
+  uiLang LANGID
+
+func LoadIconMetric ordinal=380
+  HRESULT
+  hinst HINSTANCE
+  pszName PCWSTR
+  lims int
+  phico HICON*
+
+func LoadIconWithScaleDown ordinal=381
+  HRESULT
+  hinst HINSTANCE
+  pszName PCWSTR
+  cx int
+  cy int
+  phico HICON*
+
+func MirrorIcon ordinal=414
+  BOOL
+  phIconSmall HICON*
+  phIconLarge HICON*
+
+func ShowHideMenuCtl ordinal=3
+  BOOL
+  hWnd HWND
+  uFlags UINT_PTR
+  lpInfo LPINT
+
+func Str_GetPtr bothCharset ordinalA=233 ordinalW=235
+  success NotEqual=0
+  int
+  pszSource LPCTSTR
+  pszDest LPCSTR
+  cchDest int
+
+func Str_SetPtr bothCharset ordinalA=234
+  BOOL
+  ppszCurrent LPTSTR*
+  pszNew LPCTSTR
+
+func DrawInsert ordinal=15
+  void
+  handParent HWND
+  hLB HWND
+  nItem int
+
+func LBItemFromPt ordinal=14
+  success NotEqual=0
+  int
+  hLB HWND
+  pt POINT
+  bAutoScroll BOOL
+
+func MakeDragList ordinal=13
+  BOOL
+  hLB HWND
+
+func FlatSB_EnableScrollBar
+  BOOL
+  hwnd HWND
+  wSBflags int
+  wArrows UINT
+
+func FlatSB_GetScrollInfo
+  BOOL
+  hwnd HWND
+  fnBar [SBType]
+  lpsi LPSCROLLINFO
+
+func FlatSB_GetScrollPos
+  int
+  hwnd HWND
+  code [SBType]
+
+func FlatSB_GetScrollProp
+  BOOL
+  hwnd HWND
+  index [WSB_Prop]
+  pValue LPINT
+
+func FlatSB_GetScrollPropPtr
+  BOOL
+  hwnd HWND
+  index [WSB_Prop]
+  pValue LPINT
+
+func FlatSB_GetScrollRange
+  BOOL
+  hwnd HWND
+  code int
+  lpMinPos LPINT
+  lpMaxPos LPINT
+
+func FlatSB_SetScrollInfo
+  success NotEqual=0
+  int
+  hwnd HWND
+  fnBar [SBType]
+  lpsi LPSCROLLINFO
+  fRedraw BOOL
+
+func FlatSB_SetScrollPos
+  success NotEqual=0
+  int
+  hwnd HWND
+  code int
+  nPos int
+  fRedraw BOOL
+
+func FlatSB_SetScrollProp
+  BOOL
+  hwnd HWND
+  index [WSB_Prop]
+  newValue INT_PTR
+  fRedraw BOOL
+
+func FlatSB_SetScrollRange
+  success NotEqual=0
+  int
+  hwnd HWND
+  code int
+  nMinPos int
+  nMaxPos int
+  fRedraw BOOL
+
+func FlatSB_ShowScrollBar
+  BOOL
+  hwnd HWND
+  code int
+  fShow BOOL
+
+func InitializeFlatSB
+  BOOL
+  hwnd HWND
+
+func UninitializeFlatSB
+  HRESULT
+  hwnd HWND
+
+func HIMAGELIST_QueryInterface
+  HRESULT
+  himl HIMAGELIST
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func ImageList_Add
+  success NotEqual=0
+  int
+  himl HIMAGELIST
+  hbmImage HBITMAP
+  hbmMask HBITMAP
+
+func ImageList_AddMasked
+  success NotEqual=0
+  int
+  himl HIMAGELIST
+  hbmImage HBITMAP
+  crMask COLORREF
+
+func ImageList_BeginDrag
+  BOOL
+  himlTrack HIMAGELIST
+  iTrack int
+  dxHotspot int
+  dyHotspot int
+
+func ImageList_CoCreateInstance
+  HRESULT
+  rclsid REFCLSID
+  punkOuter "const IUnknown*"
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func ImageList_Copy
+  BOOL
+  himlDst HIMAGELIST
+  iDst int
+  himlSrc HIMAGELIST
+  iSrc int
+  uFlags UINT
+
+func ImageList_Create
+  success NotEqual=0
+  HIMAGELIST
+  cx int
+  cy int
+  flags [ILC_Flags]
+  cInitial int
+  cGrow int
+
+func ImageList_Destroy
+  BOOL
+  himl HIMAGELIST
+
+func ImageList_DragEnter
+  BOOL
+  hwndLock HWND
+  x int
+  y int
+
+func ImageList_DragLeave
+  BOOL
+  hwndLock HWND
+
+func ImageList_DragMove
+  BOOL
+  x int
+  y int
+
+func ImageList_DragShowNolock
+  BOOL
+  fShow BOOL
+
+func ImageList_Draw
+  BOOL
+  himl HIMAGELIST
+  i int
+  hdcDst HDC
+  x int
+  y int
+  fStyle [ILD_Flags]
+
+func ImageList_DrawEx
+  BOOL
+  himl HIMAGELIST
+  i int
+  hdcDst HDC
+  x int
+  y int
+  dx int
+  dy int
+  rgbBk COLORREF
+  rgbFg COLORREF
+  fStyle [ILD_Flags]
+
+func ImageList_DrawIndirect
+  BOOL
+  pimldp IMAGELISTDRAWPARAMS*
+
+func ImageList_Duplicate
+  success NotEqual=0
+  HIMAGELIST
+  himl HIMAGELIST
+
+func ImageList_EndDrag
+  VOID
+
+func ImageList_GetBkColor
+  success NotEqual=0
+  COLORREF
+  himl HIMAGELIST
+
+func ImageList_GetDragImage
+  success NotEqual=0
+  HIMAGELIST
+  ppt POINT*
+  pptHotspot POINT*
+
+func ImageList_GetIcon
+  success NotEqual=0
+  HICON
+  himl HIMAGELIST
+  i int
+  flags [ILD_Flags]
+
+func ImageList_GetIconSize
+  BOOL
+  himl HIMAGELIST
+  cx int*
+  cy int*
+
+func ImageList_GetImageCount
+  int
+  himl HIMAGELIST
+
+func ImageList_GetImageInfo
+  BOOL
+  himl HIMAGELIST
+  i int
+  pImageInfo IMAGEINFO*
+
+func ImageList_LoadImage bothCharset
+  success NotEqual=0
+  HIMAGELIST
+  hi HINSTANCE
+  lpbmp LPCTSTR
+  cx int
+  cGrow int
+  crMask COLORREF
+  uType [ImageType]
+  uFlags [LRFlags]
+
+func ImageList_Merge
+  success NotEqual=0
+  HIMAGELIST
+  himl1 HIMAGELIST
+  i1 int
+  himl2 HIMAGELIST
+  i2 int
+  dx int
+  dy int
+
+func ImageList_Read
+  success NotEqual=0
+  HIMAGELIST
+  pstm LPSTREAM
+
+func ImageList_ReadEx
+  HRESULT
+  dwFlags [ILP_Flags]
+  pstm LPSTREAM
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func ImageList_Remove
+  BOOL
+  himl HIMAGELIST
+  i int
+
+func ImageList_Replace
+  BOOL
+  himl HIMAGELIST
+  i int
+  hbmImage HBITMAP
+  hbmMask HBITMAP
+
+func ImageList_ReplaceIcon
+  int
+  himl HIMAGELIST
+  i int
+  hicon HICON
+
+func ImageList_SetBkColor
+  success NotEqual=0
+  COLORREF
+  himl HIMAGELIST
+  clrBk COLORREF
+
+func ImageList_SetColorTable
+  success NotEqual=0
+  int
+  himl HIMAGELIST
+  start int
+  len int
+  prgb RGBQUAD*
+
+func ImageList_SetDragCursorImage
+  BOOL
+  himlDrag HIMAGELIST
+  iDrag int
+  dxHotspot int
+  dyHotspot int
+
+func ImageList_SetIconSize
+  BOOL
+  himl HIMAGELIST
+  cx int
+  cy int
+
+func ImageList_SetImageCount
+  BOOL
+  himl HIMAGELIST
+  uNewCount UINT
+
+func ImageList_SetOverlayImage
+  BOOL
+  himl HIMAGELIST
+  iImage int
+  iOverlay int
+
+func ImageList_Write
+  BOOL
+  himl HIMAGELIST
+  pstm LPSTREAM
+
+func ImageList_WriteEx
+  HRESULT
+  himl HIMAGELIST
+  dwFlags [ILP_Flags]
+  pstm LPSTREAM
+
+func TaskDialog ordinal=344
+  HRESULT
+  hWndParent HWND
+  hInstance HINSTANCE
+  pszWindowTitle PCWSTR
+  pszMainInstruction PCWSTR
+  pszContent PCWSTR
+  dwCommonButtons TASKDIALOG_COMMON_BUTTON_FLAGS
+  pszIcon PCWSTR
+  pnButton int*
+
+func TaskDialogIndirect ordinal=345
+  HRESULT
+  pTaskConfig "const TASKDIALOGCONFIG*"
+  pnButton int*
+  pnRadioButton int*
+  pfVerificationFlagChecked BOOL*
+

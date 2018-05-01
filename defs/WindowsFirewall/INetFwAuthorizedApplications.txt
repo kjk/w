@@ -1,0 +1,26 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwAuthorizedApplications base=IDispatch id={644EFD52-CCF9-486C-97A2-39F352570B30} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall"
+  func get_Count
+    HRESULT
+    count long*
+
+  func Add
+    HRESULT
+    app INetFwAuthorizedApplication*
+
+  func Remove
+    HRESULT
+    imageFileName BSTR
+
+  func Item
+    HRESULT
+    imageFileName BSTR
+    app INetFwAuthorizedApplication**
+
+  func get__NewEnum
+    HRESULT
+    newEnum IUnknown**
+
+

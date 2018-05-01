@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11RefDefaultTrackingOptions base=IUnknown id={03916615-c644-418c-9bf4-75db5be63ca0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Layer"
+  func SetTrackingOptions
+    HRESULT
+    ResourceTypeFlags UINT
+    Options UINT
+
+

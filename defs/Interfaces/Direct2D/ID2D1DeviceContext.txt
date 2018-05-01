@@ -1,0 +1,202 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1RenderTarget.txt
+
+ingterface ID2D1DeviceContext base=ID2D1RenderTarget id={e8f7fe7a-191c-466d-ad95-975678bda998} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func "CreateBitmap "
+    [D2D_HRESULT]
+    size D2D1_SIZE_U
+    sourceData "CONST void*"
+    pitch UINT32
+    bitmapProperties "CONST D2D1_BITMAP_PROPERTIES1*"
+    bitmap ID2D1Bitmap1**
+
+  func "CreateBitmapFromWicBitmap "
+    [D2D_HRESULT]
+    wicBitmapSource IWICBitmapSource*
+    bitmapProperties "CONST D2D1_BITMAP_PROPERTIES1*"
+    bitmap ID2D1Bitmap1**
+
+  func CreateColorContext
+    [D2D_HRESULT]
+    space D2D1_COLOR_SPACE
+    profile "CONST BYTE*" length=profileSize
+    profileSize UINT32
+    colorContext ID2D1ColorContext**
+
+  func CreateColorContextFromFilename
+    [D2D_HRESULT]
+    filename PCWSTR
+    colorContext ID2D1ColorContext**
+
+  func CreateColorContextFromWicColorContext
+    [D2D_HRESULT]
+    wicColorContext IWICColorContext*
+    colorContext ID2D1ColorContext**
+
+  func CreateBitmapFromDxgiSurface
+    [D2D_HRESULT]
+    surface IDXGISurface*
+    bitmapProperties "CONST D2D1_BITMAP_PROPERTIES1*"
+    bitmap ID2D1Bitmap1**
+
+  func CreateEffect
+    [D2D_HRESULT]
+    effectId REFCLSID
+    effect ID2D1Effect**
+
+  func "CreateGradientStopCollection "
+    [D2D_HRESULT]
+    straightAlphaGradientStops "CONST D2D1_GRADIENT_STOP*" count=straightAlphaGradientStopsCount
+    straightAlphaGradientStopsCount UINT32
+    preInterpolationSpace D2D1_COLOR_SPACE
+    postInterpolationSpace D2D1_COLOR_SPACE
+    bufferPrecision D2D1_BUFFER_PRECISION
+    extendMode D2D1_EXTEND_MODE
+    colorInterpolationMode D2D1_COLOR_INTERPOLATION_MODE
+    gradientStopCollection1 ID2D1GradientStopCollection1**
+
+  func CreateImageBrush
+    [D2D_HRESULT]
+    image ID2D1Image*
+    imageBrushProperties "CONST D2D1_IMAGE_BRUSH_PROPERTIES*"
+    brushProperties "CONST D2D1_BRUSH_PROPERTIES*"
+    imageBrush ID2D1ImageBrush**
+
+  func "CreateBitmapBrush "
+    [D2D_HRESULT]
+    bitmap ID2D1Bitmap*
+    bitmapBrushProperties "CONST D2D1_BITMAP_BRUSH_PROPERTIES1*"
+    brushProperties "CONST D2D1_BRUSH_PROPERTIES*"
+    bitmapBrush ID2D1BitmapBrush1**
+
+  func CreateCommandList
+    [D2D_HRESULT]
+    commandList ID2D1CommandList**
+
+  func IsDxgiFormatSupported
+    BOOL
+    format DXGI_FORMAT
+
+  func IsBufferPrecisionSupported
+    BOOL
+    bufferPrecision D2D1_BUFFER_PRECISION
+
+  func GetImageLocalBounds
+    [D2D_HRESULT]
+    image ID2D1Image*
+    localBounds D2D1_RECT_F*
+
+  func GetImageWorldBounds
+    [D2D_HRESULT]
+    image ID2D1Image*
+    worldBounds D2D1_RECT_F*
+
+  func GetGlyphRunWorldBounds
+    [D2D_HRESULT]
+    baselineOrigin D2D1_POINT_2F
+    glyphRun "CONST DWRITE_GLYPH_RUN*"
+    measuringMode DWRITE_MEASURING_MODE
+    bounds D2D1_RECT_F*
+
+  func GetDevice
+    void
+    device ID2D1Device**
+
+  func SetTarget
+    void
+    image ID2D1Image*
+
+  func GetTarget
+    void
+    image ID2D1Image**
+
+  func SetRenderingControls
+    void
+    renderingControls "CONST D2D1_RENDERING_CONTROLS*"
+
+  func GetRenderingControls
+    void
+    renderingControls D2D1_RENDERING_CONTROLS*
+
+  func SetPrimitiveBlend
+    void
+    primitiveBlend D2D1_PRIMITIVE_BLEND
+
+  func GetPrimitiveBlend
+    D2D1_PRIMITIVE_BLEND
+
+  func SetUnitMode
+    void
+    unitMode D2D1_UNIT_MODE
+
+  func GetUnitMode
+    D2D1_UNIT_MODE
+
+  func "DrawGlyphRun "
+    void
+    baselineOrigin D2D1_POINT_2F
+    glyphRun "CONST DWRITE_GLYPH_RUN*"
+    glyphRunDescription "CONST DWRITE_GLYPH_RUN_DESCRIPTION*"
+    foregroundBrush ID2D1Brush*
+    measuringMode DWRITE_MEASURING_MODE
+
+  func DrawImage
+    void
+    image ID2D1Image*
+    targetOffset "CONST D2D1_POINT_2F*"
+    imageRectangle "CONST D2D1_RECT_F*"
+    interpolationMode D2D1_INTERPOLATION_MODE
+    compositeMode D2D1_COMPOSITE_MODE
+
+  func DrawGdiMetafile
+    void
+    gdiMetafile ID2D1GdiMetafile*
+    targetOffset "CONST D2D1_POINT_2F*"
+
+  func "DrawBitmap "
+    void
+    bitmap ID2D1Bitmap*
+    destinationRectangle "CONST D2D1_RECT_F*"
+    opacity FLOAT
+    interpolationMode D2D1_INTERPOLATION_MODE
+    sourceRectangle "CONST D2D1_RECT_F*"
+    perspectiveTransform "CONST D2D1_MATRIX_4X4_F*"
+
+  func "PushLayer "
+    void
+    layerParameters "CONST D2D1_LAYER_PARAMETERS1*"
+    layer ID2D1Layer*
+
+  func InvalidateEffectInputRectangle
+    [D2D_HRESULT]
+    effect ID2D1Effect*
+    input UINT32
+    inputRectangle "CONST D2D1_RECT_F*"
+
+  func GetEffectInvalidRectangleCount
+    [D2D_HRESULT]
+    effect ID2D1Effect*
+    rectangleCount UINT32*
+
+  func GetEffectInvalidRectangles
+    [D2D_HRESULT]
+    effect ID2D1Effect*
+    rectangles D2D1_RECT_F* postCount=rectanglesCount
+    rectanglesCount UINT32
+
+  func GetEffectRequiredInputRectangles
+    [D2D_HRESULT]
+    renderEffect ID2D1Effect*
+    renderImageRectangle "CONST D2D1_RECT_F*"
+    inputDescriptions "CONST D2D1_EFFECT_INPUT_DESCRIPTION*" count=inputCount
+    requiredInputRects D2D1_RECT_F* postCount=inputCount
+    inputCount UINT32
+
+  func "FillOpacityMask "
+    void
+    opacityMask ID2D1Bitmap*
+    brush ID2D1Brush*
+    destinationRectangle "CONST D2D1_RECT_F*"
+    sourceRectangle "CONST D2D1_RECT_F*"
+
+

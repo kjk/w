@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInitializeWithBindCtx base=IUnknown id={71c0d2bc-726d-45cc-a6c0-2e31c1db2159} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    pbc IBindCtx*
+
+

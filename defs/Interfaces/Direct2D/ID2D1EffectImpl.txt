@@ -1,0 +1,18 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1EffectImpl base=IUnknown id={a248fd3f-3e6c-4e63-9f03-7f68ecc91db9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func Initialize
+    [D2D_HRESULT]
+    effectContext ID2D1EffectContext*
+    transformGraph ID2D1TransformGraph*
+
+  func PrepareForRender
+    [D2D_HRESULT]
+    changeType D2D1_CHANGE_TYPE
+
+  func SetGraph
+    [D2D_HRESULT]
+    transformGraph ID2D1TransformGraph*
+
+

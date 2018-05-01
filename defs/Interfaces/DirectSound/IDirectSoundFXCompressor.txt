@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundFXCompressor base=IUnknown id={4bbd1154-62f6-4e2c-a15c-d3b6c417f7a0} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func SetAllParameters
+    [DS_HRESULT]
+    pcDsFxCompressor LPCDSFXCompressor
+
+  func GetAllParameters
+    [DS_HRESULT]
+    pDsFxCompressor LPDSFXCompressor
+
+

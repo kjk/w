@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DTC\DTC.h.txt
+
+ingterface ITransactionOutcomeEvents base=IUnknown id={3A6AD9E2-23B9-11cf-AD60-00AA00A74CCD} errorFunc=HRESULT onlineHelp=MSDN category="System Services/Distributed Transaction Coordinator (DTC)"
+  func Committed
+    HRESULT
+    fRetaining BOOL
+    pNewUOW XACTUOW*
+    hr HRESULT
+
+  func Aborted
+    HRESULT
+    pboidReason BOID*
+    fRetaining BOOL
+    pNewUOW XACTUOW*
+    hr HRESULT
+
+  func HeuristicDecision
+    HRESULT
+    dwDecision DWORD
+    pboidReason BOID*
+    hr HRESULT
+
+  func Indoubt
+    HRESULT
+
+

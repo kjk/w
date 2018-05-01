@@ -1,0 +1,34 @@
+header
+interface IAssembly
+
+interface IAssemblyCache
+
+interface IAssemblyName
+
+interface IAssemblyEnum
+
+interface IHistoryReader
+
+interface IInstallReferenceEnum
+
+interface IAppIdAuthority
+
+interface IIdentityAuthority
+
+interface IApplicationContext
+
+alias LPASSEMBLYNAME IAssemblyName*
+
+pointer LPASSEMBLYNAME* LPASSEMBLYNAME
+
+alias LPPAPPLICATIONCONTEXT IApplicationContext*
+
+pointer LPPAPPLICATIONCONTEXT* LPPAPPLICATIONCONTEXT
+
+flag ASM_CACHE_FLAGS DWORD
+  ASM_CACHE_ZAP      0x1
+  ASM_CACHE_GAC      0x2
+  ASM_CACHE_DOWNLOAD 0x4
+  ASM_CACHE_ROOT     0x8
+  ASM_CACHE_ROOT_EX  0x80
+

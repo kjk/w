@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxFilesEnumerator base=IUnknown id={f007eeaf-9831-411c-9847-917cdc62d1fe} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetCurrent
+    HRESULT
+    file IAppxFile**
+
+  func GetHasCurrent
+    HRESULT
+    hasCurrent BOOL*
+
+  func MoveNext
+    HRESULT
+    hasNext BOOL*
+
+

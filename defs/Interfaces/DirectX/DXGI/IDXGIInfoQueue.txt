@@ -1,0 +1,188 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+ingterface IDXGIInfoQueue base=IUnknown id={D67441C7-672A-476f-9E82-CD55B44949CE} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func SetMessageCountLimit
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    MessageCountLimit UINT64
+
+  func ClearStoredMessages
+    void
+    Producer DXGI_DEBUG_ID
+
+  func GetMessage
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    MessageIndex UINT64
+    pMessage DXGI_INFO_QUEUE_MESSAGE*
+    pMessageByteLength SIZE_T*
+
+  func GetNumStoredMessagesAllowedByRetrievalFilters
+    success NotEqual=0
+    UINT64
+    Producer DXGI_DEBUG_ID
+
+  func GetNumStoredMessages
+    success NotEqual=0
+    UINT64
+    Producer DXGI_DEBUG_ID
+
+  func GetNumMessagesDiscardedByMessageCountLimit
+    success NotEqual=0
+    UINT64
+    Producer DXGI_DEBUG_ID
+
+  func GetMessageCountLimit
+    success NotEqual=0
+    UINT64
+    Producer DXGI_DEBUG_ID
+
+  func GetNumMessagesAllowedByStorageFilter
+    success NotEqual=0
+    UINT64
+    Producer DXGI_DEBUG_ID
+
+  func GetNumMessagesDeniedByStorageFilter
+    success NotEqual=0
+    UINT64
+    Producer DXGI_DEBUG_ID
+
+  func AddStorageFilterEntries
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    pFilter DXGI_INFO_QUEUE_FILTER*
+
+  func GetStorageFilter
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    pFilter DXGI_INFO_QUEUE_FILTER*
+    pFilterByteLength SIZE_T*
+
+  func ClearStorageFilter
+    void
+    Producer DXGI_DEBUG_ID
+
+  func PushEmptyStorageFilter
+    HRESULT
+    Producer DXGI_DEBUG_ID
+
+  func PushDenyAllStorageFilter
+    HRESULT
+    Producer DXGI_DEBUG_ID
+
+  func PushCopyOfStorageFilter
+    HRESULT
+    Producer DXGI_DEBUG_ID
+
+  func PushStorageFilter
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    pFilter DXGI_INFO_QUEUE_FILTER*
+
+  func PopStorageFilter
+    void
+    Producer DXGI_DEBUG_ID
+
+  func GetStorageFilterStackSize
+    success NotEqual=0
+    UINT
+    Producer DXGI_DEBUG_ID
+
+  func AddRetrievalFilterEntries
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    pFilter DXGI_INFO_QUEUE_FILTER*
+
+  func GetRetrievalFilter
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    pFilter DXGI_INFO_QUEUE_FILTER*
+    pFilterByteLength SIZE_T*
+
+  func ClearRetrievalFilter
+    void
+    Producer DXGI_DEBUG_ID
+
+  func PushEmptyRetrievalFilter
+    HRESULT
+    Producer DXGI_DEBUG_ID
+
+  func PushDenyAllRetrievalFilter
+    HRESULT
+    Producer DXGI_DEBUG_ID
+
+  func PushCopyOfRetrievalFilter
+    HRESULT
+    Producer DXGI_DEBUG_ID
+
+  func PushRetrievalFilter
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    pFilter DXGI_INFO_QUEUE_FILTER*
+
+  func PopRetrievalFilter
+    void
+    Producer DXGI_DEBUG_ID
+
+  func GetRetrievalFilterStackSize
+    success NotEqual=0
+    UINT
+    Producer DXGI_DEBUG_ID
+
+  func AddMessage
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    Category DXGI_INFO_QUEUE_MESSAGE_CATEGORY
+    Severity DXGI_INFO_QUEUE_MESSAGE_SEVERITY
+    ID DXGI_INFO_QUEUE_MESSAGE_ID
+    pDescription LPCSTR
+
+  func AddApplicationMessage
+    HRESULT
+    Severity DXGI_INFO_QUEUE_MESSAGE_SEVERITY
+    pDescription LPCSTR
+
+  func SetBreakOnCategory
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    Category DXGI_INFO_QUEUE_MESSAGE_CATEGORY
+    bEnable BOOL
+
+  func SetBreakOnSeverity
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    Severity DXGI_INFO_QUEUE_MESSAGE_SEVERITY
+    bEnable BOOL
+
+  func SetBreakOnID
+    HRESULT
+    Producer DXGI_DEBUG_ID
+    ID DXGI_INFO_QUEUE_MESSAGE_ID
+    bEnable BOOL
+
+  func GetBreakOnCategory
+    BOOL
+    Producer DXGI_DEBUG_ID
+    Category DXGI_INFO_QUEUE_MESSAGE_CATEGORY
+
+  func GetBreakOnSeverity
+    BOOL
+    Producer DXGI_DEBUG_ID
+    Severity DXGI_INFO_QUEUE_MESSAGE_SEVERITY
+
+  func GetBreakOnID
+    BOOL
+    Producer DXGI_DEBUG_ID
+    ID DXGI_INFO_QUEUE_MESSAGE_ID
+
+  func SetMuteDebugOutput
+    void
+    Producer DXGI_DEBUG_ID
+    bMute BOOL
+
+  func GetMuteDebugOutput
+    BOOL
+    Producer DXGI_DEBUG_ID
+
+

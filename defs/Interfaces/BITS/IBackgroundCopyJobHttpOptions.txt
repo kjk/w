@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBackgroundCopyJobHttpOptions base=IUnknown id={f1bd1079-9f01-4bdc-8036-f09b70095066} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func SetClientCertificateByID
+    HRESULT
+    StoreLocation BG_CERT_STORE_LOCATION
+    StoreName LPCWSTR
+    pCertHashBlob byte*
+
+  func SetClientCertificateByName
+    HRESULT
+    StoreLocation BG_CERT_STORE_LOCATION
+    StoreName LPCWSTR
+    SubjectName LPCWSTR
+
+  func RemoveClientCertificate
+    HRESULT
+
+  func GetClientCertificate
+    HRESULT
+    pStoreLocation BG_CERT_STORE_LOCATION*
+    pStoreName LPWSTR*
+    ppCertHashBlob byte**
+    pSubjectName LPWSTR*
+
+  func SetCustomHeaders
+    HRESULT
+    RequestHeaders LPCWSTR
+
+  func GetCustomHeaders
+    HRESULT
+    pRequestHeaders LPWSTR*
+
+  func SetSecurityFlags
+    HRESULT
+    Flags ULONG
+
+  func GetSecurityFlags
+    HRESULT
+    pFlags ULONG*
+
+

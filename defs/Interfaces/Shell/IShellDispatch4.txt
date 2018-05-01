@@ -1,0 +1,20 @@
+include Interfaces\Shell\IShellDispatch3.txt
+
+ingterface IShellDispatch4 base=IShellDispatch3 id={efd84b2d-4bcf-4298-be25-eb542a59fbda} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func WindowsSecurity
+    HRESULT
+
+  func ToggleDesktop
+    HRESULT
+
+  func ExplorerPolicy
+    HRESULT
+    bstrPolicyName BSTR
+    pValue VARIANT*
+
+  func GetSetting
+    HRESULT
+    lSetting long
+    pResult VARIANT_BOOL*
+
+

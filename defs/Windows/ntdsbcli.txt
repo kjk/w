@@ -1,0 +1,118 @@
+include Headers\windows.h.txt
+
+dll Ntdsbcli.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Security and Identity/Directory, Identity, and Access Services/Directory Services/Directories/Active Directory Domain Services/Directory Backup"
+alias HBC LPVOID
+
+pointer HBC* HBC
+
+flag [NtdsBackupType] ULONG display=ULONG
+  BACKUP_TYPE_FULL        0x01
+  BACKUP_TYPE_LOGS_ONLY   0x02
+  BACKUP_TYPE_INCREMENTAL 0x04
+
+flag [NtdsRestoreType] ULONG display=ULONG
+  RESTORE_TYPE_AUTHORATATIVE 0x01
+  RESTORE_TYPE_ONLINE        0x02
+  RESTORE_TYPE_CATCHUP       0x04
+
+func DsBackupClose
+  HRESULT
+  hbc HBC
+
+func DsBackupEnd
+  HRESULT
+  hbc HBC
+
+func DsBackupFree
+  void
+  pvBuffer PVOID
+
+func DsBackupGetBackupLogs bothCharset
+  HRESULT
+  hbc HBC
+  pszBackupLogFiles LPTSTR*
+  pcbSize LPDWORD
+
+func DsBackupGetDatabaseNames bothCharset
+  HRESULT
+  hbc HBC
+  pszAttachmentInfo LPTSTR*
+  pcbSize LPDWORD
+
+func DsBackupOpenFile bothCharset
+  HRESULT
+  hbc HBC
+  szAttachmentName LPCTSTR
+  cbReadHintSize DWORD
+  pliFileSize LARGE_INTEGER*
+
+func DsBackupPrepare bothCharset
+  HRESULT
+  szBackupServer LPCTSTR
+  grbit ULONG
+  btBackupType [NtdsBackupType]
+  ppvExpiryToken PVOID*
+  pcbExpiryTokenSize LPDWORD
+  phbc HBC*
+
+func DsBackupRead
+  HRESULT
+  hbc HBC
+  pvBuffer PVOID postLength=pcbRead
+  cbBuffer DWORD
+  pcbRead PDWORD
+
+func DsBackupTruncateLogs
+  HRESULT
+  hbc HBC
+
+func DsIsNTDSOnline bothCharset
+  HRESULT
+  szServerName LPCTSTR
+  pfNTDSOnline BOOL*
+
+func DsRestoreEnd
+  HRESULT
+  hbc HBC
+
+func DsRestoreGetDatabaseLocations bothCharset
+  HRESULT
+  hbc HBC
+  pszDatabaseLocationList LPWSTR*
+  pcbSize LPDWORD
+
+func DsRestorePrepare bothCharset
+  HRESULT
+  szServerName LPCWSTR
+  rtFlag [NtdsRestoreType]
+  pvExpiryToken PVOID length=cbExpiryTokenSize
+  cbExpiryTokenSize DWORD
+  phbc HBC*
+
+func DsRestoreRegister bothCharset
+  HRESULT
+  hbc HBC
+  szCheckPointFilePath LPCTSTR
+  szLogPath LPCTSTR
+  crstmap LONG
+  szBackupLogPath LPCTSTR
+  genLow ULONG
+  genHigh ULONG
+
+func DsRestoreRegisterComplete
+  HRESULT
+  hbc HBC
+  hrRestoreState HRESULT
+
+func DsSetAuthIdentity bothCharset
+  HRESULT
+  szUserName LPCTSTR
+  szDomainName LPCTSTR
+  szPassword LPCTSTR
+
+func DsSetCurrentBackupLog bothCharset
+  HRESULT
+  szServerName LPCWSTR
+  dwCurrentLog DWORD
+

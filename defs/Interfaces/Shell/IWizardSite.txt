@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IWizardSite base=IUnknown id={88960f5b-422f-4e7b-8013-73415381c3c3} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetPreviousPage
+    HRESULT
+    phpage HPROPSHEETPAGE*
+
+  func GetNextPage
+    HRESULT
+    phpage HPROPSHEETPAGE*
+
+  func GetCancelledPage
+    HRESULT
+    phpage HPROPSHEETPAGE*
+
+

@@ -1,0 +1,18 @@
+include Interfaces\DirectInput\IDirectInputDevice2A.txt
+
+ingterface IDirectInputDevice7A base=IDirectInputDevice2A id={57d7c6bc-2356-11d3-8e9d-00c04f6844ae} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Input/DirectInput"
+  func EnumEffectsInFile
+    [DI_HRESULT]
+    lpszFileName LPCSTR
+    pec LPDIENUMEFFECTSINFILECALLBACK
+    pvRef LPVOID
+    dwFlags [DIFEF_Flags]
+
+  func WriteEffectToFile
+    [DI_HRESULT]
+    lpszFileName LPCSTR
+    dwEntries DWORD
+    rgDiFileEft LPDIFILEEFFECT count=dwEntries
+    dwFlags [DIFEF_Flags]
+
+

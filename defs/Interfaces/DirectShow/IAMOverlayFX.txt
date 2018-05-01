@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMOverlayFX base=IUnknown id={62fae250-7e65-4460-bfc9-6398b322073c} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func QueryOverlayFXCaps
+    HRESULT
+    lpdwOverlayFXCaps DWORD*
+
+  func SetOverlayFX
+    HRESULT
+    dwOverlayFX DWORD
+
+  func GetOverlayFX
+    HRESULT
+    lpdwOverlayFX DWORD*
+
+

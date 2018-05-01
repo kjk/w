@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+
+ingterface IMessageFilter base=IUnknown id={00000016-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func HandleInComingCall
+    success NotEqual=0
+    DWORD
+    dwCallType CALLTYPE
+    htaskCaller HTASK
+    dwTickCount DWORD
+    lpInterfaceInfo LPINTERFACEINFO
+
+  func RetryRejectedCall
+    success NotEqual=0
+    DWORD
+    htaskCallee HTASK
+    dwTickCount DWORD
+    dwRejectType DWORD
+
+  func MessagePending
+    success NotEqual=0
+    PENDINGMSG
+    htaskCallee HTASK
+    dwTickCount DWORD
+    dwPendingType PENDINGTYPE
+
+  enum CALLTYPE DWORD display=DWORD
+    CALLTYPE_TOPLEVEL             1
+    CALLTYPE_NESTED               2
+    CALLTYPE_ASYNC                3
+    CALLTYPE_TOPLEVEL_CALLPENDING 4
+    CALLTYPE_ASYNC_CALLPENDING    5
+
+  enum PENDINGTYPE DWORD display=DWORD
+    PENDINGTYPE_TOPLEVEL 1
+    PENDINGTYPE_NESTED   2
+
+  enum PENDINGMSG DWORD display=DWORD
+    PENDINGMSG_CANCELCALL     0
+    PENDINGMSG_WAITNOPROCESS  1
+    PENDINGMSG_WAITDEFPROCESS 2
+
+

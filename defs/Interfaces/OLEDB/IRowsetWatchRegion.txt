@@ -1,0 +1,41 @@
+include Interfaces\OLEDB\IRowsetWatchAll.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IRowsetWatchRegion base=IRowsetWatchAll id={0c733a45-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func CreateWatchRegion
+    [OLEDB_HRESULT]
+    dwWatchMode DBWATCHMODE
+    phRegion HWATCHREGION*
+
+  func ChangeWatchMode
+    [OLEDB_HRESULT]
+    hRegion HWATCHREGION
+    dwWatchMode DBWATCHMODE
+
+  func DeleteWatchRegion
+    [OLEDB_HRESULT]
+    hRegion HWATCHREGION
+
+  func GetWatchRegionInfo
+    [OLEDB_HRESULT]
+    hRegion HWATCHREGION
+    pdwWatchMode DBWATCHMODE*
+    phChapter HCHAPTER*
+    pcbBookmark DBBKMARK*
+    ppBookmark BYTE**
+    pcRows DBROWCOUNT*
+
+  func Refresh
+    [OLEDB_HRESULT]
+    pcChangesObtained DBCOUNTITEM*
+    prgChanges DBROWWATCHCHANGE** derefPostCount=pcChangesObtained
+
+  func ShrinkWatchRegion
+    [OLEDB_HRESULT]
+    hRegion HWATCHREGION
+    hChapter HCHAPTER
+    cbBookmark DBBKMARK
+    pBookmark BYTE* length=cbBookmark
+    cRows DBROWCOUNT
+
+

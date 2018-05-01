@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IObjectWithProgID base=IUnknown id={71e806fb-8dee-46fc-bf8c-7748a8a1ae13} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetProgID
+    HRESULT
+    pszProgID LPCWSTR
+
+  func GetProgID
+    HRESULT
+    ppszProgID LPWSTR*
+
+

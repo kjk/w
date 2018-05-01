@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrSyncItemContainer base=IUnknown id={90701133-be32-4129-a65c-99e616cafff4} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func GetSyncItem
+    HRESULT
+    pszItemID LPCWSTR
+    ppItem ISyncMgrSyncItem**
+
+  func GetSyncItemEnumerator
+    HRESULT
+    ppenum IEnumSyncMgrSyncItems**
+
+  func GetSyncItemCount
+    HRESULT
+    pcItems ULONG*
+
+

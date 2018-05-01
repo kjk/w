@@ -1,0 +1,21 @@
+include Headers\windows.h.txt
+include Headers\dotnet.h.txt
+
+dll SxS.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Application Installation and Servicing/Isolated Applications and Side-by-side Assemblies/Side-by-side Assemblies"
+flag [CreateAsmNameObjFlags] DWORD display=DWORD
+  CANOF_PARSE_DISPLAY_NAME 0x1
+  CANOF_SET_DEFAULT_VALUES 0x2
+
+func CreateAssemblyCache
+  HRESULT
+  ppAsmCache IAssemblyCache**
+  dwReserved DWORD
+
+func CreateAssemblyNameObject
+  HRESULT
+  ppAssemblyNameObj LPASSEMBLYNAME*
+  szAssemblyName LPCWSTR
+  dwFlags [CreateAsmNameObjFlags]
+  pvReserved LPVOID
+

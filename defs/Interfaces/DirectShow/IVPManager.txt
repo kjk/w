@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVPManager base=IUnknown id={aac18c18-e186-46d2-825d-a1f8dc8e395a} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetVideoPortIndex
+    HRESULT
+    dwVideoPortIndex DWORD
+
+  func GetVideoPortIndex
+    HRESULT
+    pdwVideoPortIndex DWORD*
+
+

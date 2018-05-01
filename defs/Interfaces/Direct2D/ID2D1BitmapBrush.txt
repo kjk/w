@@ -1,0 +1,34 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Brush.txt
+
+ingterface ID2D1BitmapBrush base=ID2D1Brush id={2cd906aa-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetExtendModeX
+    void
+    extendModeX D2D1_EXTEND_MODE
+
+  func SetExtendModeY
+    void
+    extendModeY D2D1_EXTEND_MODE
+
+  func SetInterpolationMode
+    void
+    interpolationMode D2D1_BITMAP_INTERPOLATION_MODE
+
+  func SetBitmap
+    void
+    bitmap ID2D1Bitmap*
+
+  func GetExtendModeX
+    D2D1_EXTEND_MODE
+
+  func GetExtendModeY
+    D2D1_EXTEND_MODE
+
+  func GetInterpolationMode
+    D2D1_BITMAP_INTERPOLATION_MODE
+
+  func GetBitmap
+    void
+    bitmap ID2D1Bitmap**
+
+

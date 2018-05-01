@@ -1,0 +1,13 @@
+ingterface ID3DX11DataLoader errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/D3DX"
+  func Load
+    HRESULT
+
+  func Decompress
+    HRESULT
+    ppData void**
+    pcBytes SIZE_T*
+
+  func Destroy
+    HRESULT
+
+

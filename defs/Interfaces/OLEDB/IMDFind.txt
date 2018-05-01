@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IMDFind base=IUnknown id={a07cccd2-8148-11d0-87bb-00c04fc33942} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func FindCell
+    [OLEDB_HRESULT]
+    ulStartingOrdinal DBORDINAL
+    cMembers DBCOUNTITEM
+    rgpwszMember LPCOLESTR* count=cMembers
+    pulCellOrdinal DBORDINAL*
+
+  func FindTuple
+    [OLEDB_HRESULT]
+    ulAxisIdentifier ULONG
+    ulStartingOrdinal DBORDINAL
+    cMembers DBCOUNTITEM
+    rgpwszMember LPCOLESTR* count=cMembers
+    pulTupleOrdinal ULONG*
+
+

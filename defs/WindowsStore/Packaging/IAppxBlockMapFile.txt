@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxBlockMapFile base=IUnknown id={277672ac-4f63-42c1-8abc-beae3600eb59} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetBlocks
+    HRESULT
+    blocks IAppxBlockMapBlocksEnumerator**
+
+  func GetLocalFileHeaderSize
+    HRESULT
+    lfhSize UINT32*
+
+  func GetName
+    HRESULT
+    name LPWSTR*
+
+  func GetUncompressedSize
+    HRESULT
+    size UINT64*
+
+  func ValidateFileHash
+    HRESULT
+    fileStream IStream*
+    isValid BOOL*
+
+

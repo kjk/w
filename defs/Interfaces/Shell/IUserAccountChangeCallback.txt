@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IUserAccountChangeCallback base=IUnknown id={a561e69a-b4b8-4113-91a5-64c6bcca3430} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnPictureChange
+    HRESULT
+    pszUserName LPCWSTR
+
+

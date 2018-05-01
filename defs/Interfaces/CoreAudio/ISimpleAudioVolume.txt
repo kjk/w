@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface ISimpleAudioVolume base=IUnknown id={87CE5498-68D6-44E5-9215-6DA47EF883D8} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func SetMasterVolume
+    [AUDCLNT_HRESULT]
+    fLevel float
+    EventContext LPCGUID
+
+  func GetMasterVolume
+    [AUDCLNT_HRESULT]
+    pfLevel float*
+
+  func SetMute
+    [AUDCLNT_HRESULT]
+    bMute "const BOOL"
+    EventContext LPCGUID
+
+  func GetMute
+    [AUDCLNT_HRESULT]
+    pbMute BOOL*
+
+

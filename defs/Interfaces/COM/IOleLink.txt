@@ -1,0 +1,48 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOleLink base=IUnknown id={0000011d-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func SetUpdateOptions
+    HRESULT
+    dwUpdateOpt DWORD
+
+  func GetUpdateOptions
+    HRESULT
+    pdwUpdateOpt DWORD*
+
+  func SetSourceMoniker
+    HRESULT
+    pmk IMoniker*
+    rclsid REFCLSID
+
+  func GetSourceMoniker
+    HRESULT
+    ppmk IMoniker**
+
+  func SetSourceDisplayName
+    HRESULT
+    pszStatusText LPCOLESTR
+
+  func GetSourceDisplayName
+    HRESULT
+    ppszDisplayName LPOLESTR*
+
+  func BindToSource
+    HRESULT
+    bindflags DWORD
+    pbc IBindCtx*
+
+  func BindIfRunning
+    HRESULT
+
+  func GetBoundSource
+    HRESULT
+    ppunk IUnknown**
+
+  func UnbindSource
+    HRESULT
+
+  func Update
+    HRESULT
+    pbc IBindCtx*
+
+

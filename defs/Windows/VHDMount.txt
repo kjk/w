@@ -1,0 +1,21 @@
+include Headers\windows.h.txt
+
+dll VHDMount.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Virtualization/Microsoft Virtual Server"
+func GetSCSIAddress
+  [ERROR_CODE_ULONG]
+  VHDFileName PWCHAR
+  Flags ULONG
+  SCSIAddressLength ULONG
+  SCSIAddress PWCHAR
+
+func MountVHD
+  [ERROR_CODE_ULONG]
+  VHDFileName PWCHAR
+  Flags ULONG
+
+func UnmountVHD
+  [ERROR_CODE_ULONG]
+  VHDFileName PWCHAR
+  Flags ULONG
+

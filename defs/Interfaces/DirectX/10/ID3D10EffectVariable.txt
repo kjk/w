@@ -1,0 +1,113 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10EffectVariable id={AE897105-00E6-45bf-BB8E-281DD6DB8E1B} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func IsValid
+    BOOL
+
+  func GetType
+    success NotEqual=0
+    ID3D10EffectType*
+
+  func GetDesc
+    HRESULT
+    pDesc D3D10_EFFECT_VARIABLE_DESC*
+
+  func GetAnnotationByIndex
+    success NotEqual=0
+    ID3D10EffectVariable*
+    Index UINT
+
+  func GetAnnotationByName
+    success NotEqual=0
+    ID3D10EffectVariable*
+    Name LPCSTR
+
+  func GetMemberByIndex
+    success NotEqual=0
+    ID3D10EffectVariable*
+    Index UINT
+
+  func GetMemberByName
+    success NotEqual=0
+    ID3D10EffectVariable*
+    Name LPCSTR
+
+  func GetMemberBySemantic
+    success NotEqual=0
+    ID3D10EffectVariable*
+    Semantic LPCSTR
+
+  func GetElement
+    success NotEqual=0
+    ID3D10EffectVariable*
+    Index UINT
+
+  func GetParentConstantBuffer
+    success NotEqual=0
+    ID3D10EffectConstantBuffer*
+
+  func AsScalar
+    success NotEqual=0
+    ID3D10EffectScalarVariable*
+
+  func AsVector
+    success NotEqual=0
+    ID3D10EffectVectorVariable*
+
+  func AsMatrix
+    success NotEqual=0
+    ID3D10EffectMatrixVariable*
+
+  func AsString
+    success NotEqual=0
+    ID3D10EffectStringVariable*
+
+  func AsShaderResource
+    success NotEqual=0
+    ID3D10EffectShaderResourceVariable*
+
+  func AsRenderTargetView
+    success NotEqual=0
+    ID3D10EffectRenderTargetViewVariable*
+
+  func AsDepthStencilView
+    success NotEqual=0
+    ID3D10EffectDepthStencilViewVariable*
+
+  func AsConstantBuffer
+    success NotEqual=0
+    ID3D10EffectConstantBuffer*
+
+  func AsShader
+    success NotEqual=0
+    ID3D10EffectShaderVariable*
+
+  func AsBlend
+    success NotEqual=0
+    ID3D10EffectBlendVariable*
+
+  func AsDepthStencil
+    success NotEqual=0
+    ID3D10EffectDepthStencilVariable*
+
+  func AsRasterizer
+    success NotEqual=0
+    ID3D10EffectRasterizerVariable*
+
+  func AsSampler
+    success NotEqual=0
+    ID3D10EffectSamplerVariable*
+
+  func SetRawValue
+    HRESULT
+    pData void*
+    Offset UINT
+    Count UINT
+
+  func GetRawValue
+    HRESULT
+    pData void*
+    Offset UINT
+    Count UINT
+
+

@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IObjectArray base=IUnknown id={92CA9DCD-5622-4bba-A805-5E9F541BD8C9} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetCount
+    HRESULT
+    pcObjects UINT*
+
+  func GetAt
+    HRESULT
+    uiIndex UINT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBanneredBar base=IUnknown id={596A9A94-013E-11d1-8D34-00A0C90F2719} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetIconSize
+    HRESULT
+    iIcon DWORD
+
+  func GetIconSize
+    HRESULT
+    piIcon DWORD*
+
+  func SetBitmap
+    HRESULT
+    hBitmap HBITMAP
+
+  func GetBitmap
+    HRESULT
+    phBitmap HBITMAP*
+
+

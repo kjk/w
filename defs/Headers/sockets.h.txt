@@ -1,0 +1,742 @@
+include Headers\windows.h.txt
+
+header
+arch 32
+struct WSADATA
+  wVersion WORD
+  wHighVersion WORD
+  szDescription "char [WSADESCRIPTION_LEN + 1]"
+  szSystemStatus "char [WSASYS_STATUS_LEN + 1]"
+  iMaxSockets "unsigned short"
+  iMaxUdpDg "unsigned short"
+  lpVendorInfo [LPVOID|char*]
+
+pointer LPWSADATA WSADATA
+
+struct servent
+  s_name char*
+  s_aliases char**
+  s_port short
+  s_proto char*
+
+pointer "struct servent*" servent
+
+arch off
+arch 64
+struct WSADATA
+  wVersion WORD
+  wHighVersion WORD
+  iMaxSockets "unsigned short"
+  iMaxUdpDg "unsigned short"
+  lpVendorInfo [LPVOID|char*]
+  szDescription "char [WSADESCRIPTION_LEN + 1]"
+  szSystemStatus "char [WSASYS_STATUS_LEN + 1]"
+
+pointer LPWSADATA WSADATA
+
+struct servent
+  s_name char*
+  s_aliases char**
+  s_proto char*
+  s_port short
+
+pointer "struct servent*" servent
+
+arch off
+alias "const SOCKET_PEER_TARGET_NAME*" LPVOID
+
+alias "const SOCKET_SECURITY_QUERY_TEMPLATE*" LPVOID
+
+alias WSAOVERLAPPED OVERLAPPED
+
+pointer LPWSAOVERLAPPED WSAOVERLAPPED
+
+alias LPWSAOVERLAPPED_COMPLETION_ROUTINE LPVOID
+
+alias LPLOOKUPSERVICE_COMPLETION_ROUTINE LPVOID
+
+alias socklen_t int
+
+alias LPCONDITIONPROC LPVOID
+
+alias WSAEVENT HANDLE
+
+pointer "const WSAEVENT*" WSAEVENT
+
+alias u_int "unsigned int"
+
+array "int [FD_MAX_EVENTS]" base=int count=10
+
+array "TCHAR [WSAPROTOCOL_LEN + 1]" base=TCHAR count=256
+
+array "DWORD [MAX_PROTOCOL_CHAIN]" base=DWORD count=7
+
+array "char [WSADESCRIPTION_LEN + 1]" base=char count=257
+
+array "char [WSASYS_STATUS_LEN + 1]" base=char count=129
+
+array "char [14]" base=char count=14
+
+enum [AddressFamily] int display=int
+  AF_UNSPEC     0
+  AF_UNIX       1
+  AF_INET       2
+  AF_IMPLINK    3
+  AF_PUP        4
+  AF_CHAOS      5
+  AF_IPX/AF_NS  6
+  AF_ISO/AF_OSI 7
+  AF_ECMA       8
+  AF_DATAKIT    9
+  AF_CCITT      10
+  AF_SNA        11
+  AF_DECnet     12
+  AF_DLI        13
+  AF_LAT        14
+  AF_HYLINK     15
+  AF_APPLETALK  16
+  AF_NETBIOS    17
+  AF_VOICEVIEW  18
+  AF_FIREFOX    19
+  AF_UNKNOWN1   20
+  AF_BAN        21
+  AF_ATM        22
+  AF_INET6      23
+  AF_CLUSTER    24
+  AF_12844      25
+  AF_IRDA       26
+  AF_NETDES     28
+  AF_TCNPROCESS 29
+  AF_TCNMESSAGE 30
+  AF_ICLFXBM    31
+  AF_BTH        32
+
+enum ADDRESS_FAMILY USHORT
+  AF_UNSPEC     0
+  AF_UNIX       1
+  AF_INET       2
+  AF_IMPLINK    3
+  AF_PUP        4
+  AF_CHAOS      5
+  AF_IPX/AF_NS  6
+  AF_ISO/AF_OSI 7
+  AF_ECMA       8
+  AF_DATAKIT    9
+  AF_CCITT      10
+  AF_SNA        11
+  AF_DECnet     12
+  AF_DLI        13
+  AF_LAT        14
+  AF_HYLINK     15
+  AF_APPLETALK  16
+  AF_NETBIOS    17
+  AF_VOICEVIEW  18
+  AF_FIREFOX    19
+  AF_UNKNOWN1   20
+  AF_BAN        21
+  AF_ATM        22
+  AF_INET6      23
+  AF_CLUSTER    24
+  AF_12844      25
+  AF_IRDA       26
+  AF_NETDES     28
+  AF_TCNPROCESS 29
+  AF_TCNMESSAGE 30
+  AF_ICLFXBM    31
+  AF_BTH        32
+
+alias [ADDRESS_FAMILY_ushort] ADDRESS_FAMILY display=u_short
+
+alias [ADDRESS_FAMILY_short] ADDRESS_FAMILY display=short
+
+enum [SocketType] int display=int
+  SOCK_STREAM    1
+  SOCK_DGRAM     2
+  SOCK_RAW       3
+  SOCK_RDM       4
+  SOCK_SEQPACKET 5
+
+enum [SocketProtocol] int display=int
+  IPPROTO_IP       0
+  IPPROTO_ICMP     1
+  IPPROTO_IGMP     2
+  IPPROTO_GGP      3
+  IPPROTO_IPV4     4
+  IPPROTO_ST       5
+  IPPROTO_TCP      6
+  IPPROTO_CBT      7
+  IPPROTO_EGP      8
+  IPPROTO_IGP      9
+  IPPROTO_PUP      12
+  IPPROTO_UDP      17
+  IPPROTO_IDP      22
+  IPPROTO_RDP      27
+  IPPROTO_IPV6     41
+  IPPROTO_ROUTING  43
+  IPPROTO_FRAGMENT 44
+  IPPROTO_ESP      50
+  IPPROTO_AH       51
+  IPPROTO_ICMPV6   58
+  IPPROTO_NONE     59
+  IPPROTO_DSTOPTS  60
+  IPPROTO_ND       77
+  IPPROTO_PIM      103
+  IPPROTO_PGM      113
+  IPPROTO_L2TP     115
+  IPPROTO_SCTP     132
+  IPPROTO_RAW      255
+
+struct "struct sockaddr"
+  sa_family [ADDRESS_FAMILY_ushort]
+  sa_data "char [14]"
+
+pointer "struct sockaddr*" "struct sockaddr"
+
+pointer "const sockaddr*" "struct sockaddr"
+
+pointer "const struct sockaddr*" "struct sockaddr"
+
+flag [AI_FLAGS] UINT display=int
+  AI_PASSIVE                0x00000001
+  AI_CANONNAME              0x00000002
+  AI_NUMERICHOST            0x00000004
+  AI_NUMERICSERV            0x00000008
+  AI_ALL                    0x00000100
+  AI_ADDRCONFIG             0x00000400
+  AI_V4MAPPED               0x00000800
+  AI_NON_AUTHORITATIVE      0x00004000
+  AI_SECURE                 0x00008000
+  AI_RETURN_PREFERRED_NAMES 0x00010000
+  AI_FQDN                   0x00020000
+  AI_FILESERVER             0x00040000
+
+struct "struct addrinfo"
+  ai_flags [AI_FLAGS]
+  ai_family [AddressFamily]
+  ai_socktype [SocketType]
+  ai_protocol [SocketProtocol]
+  ai_addrlen size_t
+  ai_canonname char*
+  ai_addr "struct sockaddr*"
+  ai_next LPVOID display="struct addrinfo*"
+
+pointer "struct addrinfo*" "struct addrinfo"
+
+pointer "const struct addrinfo*" "struct addrinfo"
+
+pointer "struct addrinfo**" "struct addrinfo*"
+
+struct ADDRINFOW
+  ai_flags [AI_FLAGS]
+  ai_family [AddressFamily]
+  ai_socktype [SocketType]
+  ai_protocol [SocketProtocol]
+  ai_addrlen size_t
+  ai_canonname PWSTR
+  ai_addr "struct sockaddr*"
+  ai_next LPVOID display=PADDRINFOW
+
+pointer "const ADDRINFOW*" ADDRINFOW
+
+pointer PADDRINFOW ADDRINFOW
+
+pointer PADDRINFOW* PADDRINFOW
+
+struct ADDRINFOEX
+  ai_flags [AI_FLAGS]
+  ai_family [AddressFamily]
+  ai_socktype [SocketType]
+  ai_protocol [SocketProtocol]
+  ai_addrlen size_t
+  ai_canonname PCTSTR
+  ai_addr "struct sockaddr*"
+  ai_blob void*
+  ai_bloblen size_t
+  ai_provider LPGUID
+  ai_next LPVOID display=PADDRINFOEX
+
+pointer PADDRINFOEX ADDRINFOEX
+
+pointer "const ADDRINFOEX*" ADDRINFOEX
+
+pointer PADDRINFOEX* PADDRINFOEX
+
+enum SOCKET UINT_PTR
+  INVALID_SOCKET -1
+
+array "SOCKET [FD_SETSIZE]" base=SOCKET count=64
+
+struct fd_set
+  fd_count u_int
+  fd_array "SOCKET [FD_SETSIZE]" count=fd_count
+
+pointer fd_set* fd_set
+
+struct WSAPROTOCOLCHAIN
+  ChainLen int
+  ChainEntries "DWORD [MAX_PROTOCOL_CHAIN]" count=ChainLen
+
+flag [WSA_PROVIDER_FLAGS] DWORD display=DWORD
+  PFL_MULTIPLE_PROTO_ENTRIES  0x00000001
+  PFL_RECOMMENDED_PROTO_ENTRY 0x00000002
+  PFL_HIDDEN                  0x00000004
+  PFL_MATCHES_PROTOCOL_ZERO   0x00000008
+  PFL_NETWORKDIRECT_PROVIDER  0x00000010
+
+flag [WSA_SERVICE_FLAGS_1] DWORD display=DWORD
+  XP1_CONNECTIONLESS           0x00000001
+  XP1_GUARANTEED_DELIVERY      0x00000002
+  XP1_GUARANTEED_ORDER         0x00000004
+  XP1_MESSAGE_ORIENTED         0x00000008
+  XP1_PSEUDO_STREAM            0x00000010
+  XP1_GRACEFUL_CLOSE           0x00000020
+  XP1_EXPEDITED_DATA           0x00000040
+  XP1_CONNECT_DATA             0x00000080
+  XP1_DISCONNECT_DATA          0x00000100
+  XP1_SUPPORT_BROADCAST        0x00000200
+  XP1_SUPPORT_MULTIPOINT       0x00000400
+  XP1_MULTIPOINT_CONTROL_PLANE 0x00000800
+  XP1_MULTIPOINT_DATA_PLANE    0x00001000
+  XP1_QOS_SUPPORTED            0x00002000
+  XP1_INTERRUPT                0x00004000
+  XP1_UNI_SEND                 0x00008000
+  XP1_UNI_RECV                 0x00010000
+  XP1_IFS_HANDLES              0x00020000
+  XP1_PARTIAL_MESSAGE          0x00040000
+  XP1_SAN_SUPPORT_SDP          0x00080000
+
+enum [NetworkByteOrder] int display=int
+  BIGENDIAN    0x0000
+  LITTLEENDIAN 0x0001
+
+enum [SecurityScheme] int display=int
+  SECURITY_PROTOCOL_NONE 0x0000
+
+struct WSAPROTOCOL_INFO
+  dwServiceFlags1 [WSA_SERVICE_FLAGS_1]
+  dwServiceFlags2 DWORD
+  dwServiceFlags3 DWORD
+  dwServiceFlags4 DWORD
+  dwProviderFlags [WSA_PROVIDER_FLAGS]
+  ProviderId GUID
+  dwCatalogEntryId DWORD
+  ProtocolChain WSAPROTOCOLCHAIN
+  iVersion int
+  iAddressFamily [AddressFamily]
+  iMaxSockAddr int
+  iMinSockAddr int
+  iSocketType [SocketType]
+  iProtocol [SocketProtocol]
+  iProtocolMaxOffset int
+  iNetworkByteOrder [NetworkByteOrder]
+  iSecurityScheme [SecurityScheme]
+  dwMessageSize DWORD
+  dwProviderReserved DWORD
+  szProtocol "TCHAR [WSAPROTOCOL_LEN + 1]"
+
+pointer LPWSAPROTOCOL_INFO WSAPROTOCOL_INFO
+
+alias SOCKADDR "struct sockaddr"
+
+pointer SOCKADDR* SOCKADDR
+
+pointer "const SOCKADDR*" SOCKADDR
+
+pointer PSOCKADDR SOCKADDR
+
+pointer LPSOCKADDR SOCKADDR
+
+pointer LPSOCKADDR* LPSOCKADDR
+
+union [IN6_ADDR_u] display=union
+  Byte "UCHAR [16]"
+  Word "USHORT [8]"
+
+struct IN6_ADDR
+  u [IN6_ADDR_u]
+
+pointer IN6_ADDR* IN6_ADDR
+
+pointer "const IN6_ADDR*" IN6_ADDR
+
+flag [FDEvents] ULONG display=long
+  FD_READ                     0x00000001
+  FD_WRITE                    0x00000002
+  FD_OOB                      0x00000004
+  FD_ACCEPT                   0x00000008
+  FD_CONNECT                  0x00000010
+  FD_CLOSE                    0x00000020
+  FD_QOS                      0x00000040
+  FD_GROUP_QOS                0x00000080
+  FD_ROUTING_INTERFACE_CHANGE 0x00000100
+  FD_ADDRESS_LIST_CHANGE      0x00000200
+
+struct WSANETWORKEVENTS
+  lNetworkEvents [FDEvents]
+  iErrorCode "int [FD_MAX_EVENTS]"
+
+pointer LPWSANETWORKEVENTS WSANETWORKEVENTS
+
+struct [IN_ADDR_u_s1] display=struct
+  s_b1 UCHAR
+  s_b2 UCHAR
+  s_b3 UCHAR
+  s_b4 UCHAR
+
+struct [IN_ADDR_u_s2] display=struct
+  s_w1 USHORT
+  s_w2 USHORT
+
+union [IN_ADDR_u] display=union
+  S_un_b [IN_ADDR_u_s1]
+  S_un_w [IN_ADDR_u_s2]
+  S_addr ULONG
+
+struct IN_ADDR
+  S_un [IN_ADDR_u]
+
+pointer "const IN_ADDR*" IN_ADDR
+
+pointer IN_ADDR* IN_ADDR
+
+alias "struct in_addr" IN_ADDR
+
+enum SOCKET_SECURITY_PROTOCOL UINT
+  SOCKET_SECURITY_PROTOCOL_DEFAULT 0
+  SOCKET_SECURITY_PROTOCOL_IPSEC   1
+  SOCKET_SECURITY_PROTOCOL_IPSEC2  2
+
+flag [SocketInfoFlags] ULONG display=ULONG
+  SOCKET_INFO_CONNECTION_SECURED      0x1
+  SOCKET_INFO_CONNECTION_ENCRYPTED    0x2
+  SOCKET_INFO_CONNECTION_IMPERSONATED 0x4
+
+struct SOCKET_SECURITY_QUERY_INFO
+  SecurityProtocol SOCKET_SECURITY_PROTOCOL
+  Flags [SocketInfoFlags]
+  PeerApplicationAccessTokenHandle UINT64
+  PeerMachineAccessTokenHandle UINT64
+
+pointer SOCKET_SECURITY_QUERY_INFO* SOCKET_SECURITY_QUERY_INFO
+
+flag [SocketSecurityFlags] ULONG display=ULONG
+  SOCKET_SETTINGS_GUARANTEE_ENCRYPTION 0x1
+  SOCKET_SETTINGS_ALLOW_INSECURE       0x2
+
+struct SOCKET_SECURITY_SETTINGS
+  SecurityProtocol SOCKET_SECURITY_PROTOCOL
+  SecurityFlags [SocketSecurityFlags]
+
+pointer "const SOCKET_SECURITY_SETTINGS*" SOCKET_SECURITY_SETTINGS
+
+struct "struct timeval"
+  tv_sec long
+  tv_usec long
+
+pointer "struct timeval*" "struct timeval"
+
+pointer "const struct timeval*" "struct timeval"
+
+struct "struct hostent"
+  h_name char*
+  h_aliases char**
+  h_addrtype [ADDRESS_FAMILY_short]
+  h_length short
+  h_addr_list char**
+
+pointer "struct hostent*" "struct hostent"
+
+struct "struct PROTOENT"
+  p_name char*
+  p_aliases char**
+  p_proto short
+
+pointer "struct PROTOENT*" "struct PROTOENT"
+
+struct SOCKET_ADDRESS
+  lpSockaddr LPSOCKADDR length=iSockaddrLength
+  iSockaddrLength INT
+
+pointer SOCKET_ADDRESS* SOCKET_ADDRESS
+
+pointer PSOCKET_ADDRESS SOCKET_ADDRESS
+
+pointer LPSOCKET_ADDRESS* PSOCKET_ADDRESS
+
+array "SOCKET_ADDRESS [1]" base=SOCKET_ADDRESS count=1
+
+struct SOCKET_ADDRESS_LIST
+  iAddressCount INT
+  Address "SOCKET_ADDRESS [1]" count=iAddressCount
+
+pointer PSOCKET_ADDRESS_LIST SOCKET_ADDRESS_LIST
+
+struct WSANAMESPACE_INFO
+  NSProviderId GUID
+  dwNameSpace DWORD
+  fActive BOOL
+  dwVersion DWORD
+  lpszIdentifier LPTSTR
+
+pointer LPWSANAMESPACE_INFO WSANAMESPACE_INFO
+
+struct BLOB
+  cbSize ULONG
+  pBlobData BYTE* length=cbSize
+
+pointer LPBLOB BLOB
+
+struct WSANAMESPACE_INFOEX
+  NSProviderId GUID
+  dwNameSpace DWORD
+  fActive BOOL
+  dwVersion DWORD
+  lpszIdentifier LPTSTR
+  ProviderSpecific BLOB
+
+pointer LPWSANAMESPACE_INFOEX WSANAMESPACE_INFOEX
+
+struct WSANSCLASSINFO
+  lpszName LPTSTR
+  dwNameSpace DWORD
+  dwValueType DWORD
+  dwValueSize DWORD
+  lpValue LPVOID
+
+pointer LPWSANSCLASSINFO WSANSCLASSINFO
+
+struct WSASERVICECLASSINFO
+  lpServiceClassId LPGUID
+  lpszServiceClassName LPTSTR
+  dwCount DWORD
+  lpClassInfos LPWSANSCLASSINFO
+
+pointer LPWSASERVICECLASSINFO WSASERVICECLASSINFO
+
+enum WSAECOMPARATOR UINT
+  COMP_EQUAL   0
+  COMP_NOTLESS 1
+
+struct WSAVERSION
+  dwVersion DWORD
+  ecHow WSAECOMPARATOR
+
+pointer LPWSAVERSION WSAVERSION
+
+struct AFPROTOCOLS
+  iAddressFamily INT
+  iProtocol INT
+
+pointer LPAFPROTOCOLS AFPROTOCOLS
+
+struct CSADDR_INFO
+  LocalAddr SOCKET_ADDRESS
+  RemoteAddr SOCKET_ADDRESS
+  iSocketType INT
+  iProtocol INT
+
+pointer LPCSADDR_INFO CSADDR_INFO
+
+struct WSAQUERYSET
+  dwSize DWORD
+  lpszServiceInstanceName LPTSTR
+  lpServiceClassId LPGUID
+  lpVersion LPWSAVERSION
+  lpszComment LPTSTR
+  dwNameSpace DWORD
+  lpNSProviderId LPGUID
+  lpszContext LPTSTR
+  dwNumberOfProtocols DWORD
+  lpafpProtocols LPAFPROTOCOLS
+  lpszQueryString LPTSTR
+  dwNumberOfCsAddrs DWORD
+  lpcsaBuffer LPCSADDR_INFO
+  dwOutputFlags DWORD
+  lpBlob LPBLOB
+
+pointer LPWSAQUERYSET WSAQUERYSET
+
+struct WSABUF
+  len u_long
+  buf [LPVOID|char*] length=len
+
+pointer LPWSABUF WSABUF
+
+struct [WSABUF_IN] display=WSABUF
+  len u_long
+  buf [LPVOID|char*] postLength=len
+
+pointer [LPWSABUF_IN] [WSABUF_IN] display=LPWSABUF
+
+struct WSAMSG
+  name LPSOCKADDR
+  namelen INT
+  lpBuffers LPWSABUF
+  dwBufferCount ULONG
+  Control WSABUF
+  dwFlags ULONG
+
+pointer LPWSAMSG WSAMSG
+
+enum WSAESETSERVICEOP UINT
+  RNRSERVICE_REGISTER   0
+  RNRSERVICE_DEREGISTER 1
+  RNRSERVICE_DELETE     2
+
+enum GROUP "unsigned int"
+  SG_UNCONSTRAINED_GROUP 0x1
+  SG_CONSTRAINED_GROUP   0x2
+
+flag SERVICETYPE ULONG
+  SERVICETYPE_NOTRAFFIC           0x00000000
+  SERVICETYPE_BESTEFFORT          0x00000001
+  SERVICETYPE_CONTROLLEDLOAD      0x00000002
+  SERVICETYPE_GUARANTEED          0x00000003
+  SERVICETYPE_NETWORK_UNAVAILABLE 0x00000004
+  SERVICETYPE_GENERAL_INFORMATION 0x00000005
+  SERVICETYPE_NOCHANGE            0x00000006
+  SERVICETYPE_NONCONFORMING       0x00000009
+  SERVICETYPE_NETWORK_CONTROL     0x0000000A
+  SERVICETYPE_QUALITATIVE         0x0000000D
+
+struct FLOWSPEC
+  TokenRate ULONG
+  TokenBucketSize ULONG
+  PeakBandwidth ULONG
+  Latency ULONG
+  DelayVariation ULONG
+  ServiceType SERVICETYPE
+  MaxSduSize ULONG
+  MinimumPolicedSize ULONG
+
+struct QOS
+  SendingFlowspec FLOWSPEC
+  ReceivingFlowspec FLOWSPEC
+  ProviderSpecific WSABUF
+
+pointer LPQOS QOS
+
+enum [SocketLevel] int display=int
+  IPPROTO_IP   0
+  IPPROTO_TCP  6
+  IPPROTO_UDP  17
+  IPPROTO_IPV6 41
+  IPPROTO_RM   113
+  NSPROTO_IPX  1000
+  SOL_SOCKET   0xffff
+
+flag [SocketOption] DWORD display=int
+  TCP_NODELAY           0x0001
+  SO_REUSEADDR          0x0004
+  SO_KEEPALIVE          0x0008
+  SO_DONTROUTE          0x0010
+  SO_BROADCAST          0x0020
+  SO_LINGER             0x0080
+  SO_OOBINLINE          0x0100
+  SO_SNDBUF             0x1001
+  SO_RCVBUF             0x1002
+  SO_SNDTIMEO           0x1005
+  SO_RCVTIMEO           0x1006
+  SO_ERROR              0x1007
+  SO_MAX_MSG_SIZE       0x2003
+  SO_CONDITIONAL_ACCEPT 0x3002
+
+flag [SendRecvFlags] DWORD display=DWORD
+  MSG_OOB       0x1
+  MSG_PEEK      0x2
+  MSG_DONTROUTE 0x4
+  MSG_WAITALL   0x8
+  MSG_INTERRUPT 0x10
+  MSG_PARTIAL   0x8000
+
+pointer [SendRecvFlags*] [SendRecvFlags] display=LPDWORD
+
+flag [NI_Flags] UINT display=int
+  NI_NOFQDN      0x01
+  NI_NUMERICHOST 0x02
+  NI_NAMEREQD    0x04
+  NI_NUMERICSERV 0x08
+  NI_DGRAM       0x10
+
+enum [SocketCode-int] int display=int
+  SOCKET_ERROR -1
+
+enum [SocketCode-INT] int display=INT
+  SOCKET_ERROR -1
+
+flag [NameSpaceFlags] DWORD display=DWORD
+  NS_DEFAULT     0
+  NS_SAP         1
+  NS_NDS         2
+  NS_PEER_BROWSE 3
+  NS_TCPIP_LOCAL 10
+  NS_TCPIP_HOSTS 11
+  NS_DNS         12
+  NS_NETBT       13
+  NS_WINS        14
+  NS_NBP         20
+  NS_MS          30
+  NS_STDA        31
+  NS_NTDS        32
+  NS_X500        40
+  NS_NIS         41
+  NS_VNS         50
+
+flag [ResolutionFlags] DWORD display=DWORD
+  RES_SOFT_SEARCH   0x00000001
+  RES_FIND_MULTIPLE 0x00000002
+  RES_SERVICE       0x00000004
+
+flag [GetService_Props] DWORD display=DWORD
+  PROP_COMMENT      0x00000001
+  PROP_LOCALE       0x00000002
+  PROP_DISPLAY_HINT 0x00000004
+  PROP_VERSION      0x00000008
+  PROP_START_TIME   0x00000010
+  PROP_MACHINE      0x00000020
+  PROP_ADDRESSES    0x00000100
+  PROP_SD           0x00000200
+  PROP_ALL          0x80000000
+
+flag [SetService_Operation] DWORD display=DWORD
+  SERVICE_REGISTER    0x00000001
+  SERVICE_DEREGISTER  0x00000002
+  SERVICE_FLUSH       0x00000003
+  SERVICE_ADD_TYPE    0x00000004
+  SERVICE_DELETE_TYPE 0x00000005
+
+flag [SetService_Flags] DWORD display=DWORD
+  SERVICE_FLAG_DEFER 0x00000001
+  SERVICE_FLAG_HARD  0x00000002
+
+flag [SetService_FlagsOut] DWORD display=DWORD
+  SET_SERVICE_PARTIAL_SUCCESS 0x00000001
+
+pointer [SetService_FlagsOut*] [SetService_FlagsOut] display=LPDWORD
+
+flag [TransmitFile_Flags] DWORD display=DWORD
+  TF_USE_DEFAULT_WORKER 0x00
+  TF_DISCONNECT         0x01
+  TF_REUSE_SOCKET       0x02
+  TF_WRITE_BEHIND       0x04
+  TF_USE_SYSTEM_THREAD  0x10
+  TF_USE_KERNEL_APC     0x20
+
+enum [SocketShutdownFlags] int display=int
+  SD_RECEIVE 0x00
+  SD_SEND    0x01
+  SD_BOTH    0x02
+
+enum [INET_ADDR_OUTPUT] "unsigned long" display="unsigned long"
+  INADDR_NONE 0xffffffff
+
+enum [Socket_IOCTL] long display=long
+  FIONREAD   0x4004667f
+  SIOCGHIWAT 0x40047301
+  SIOCGLOWAT 0x40047303
+  SIOCATMARK 0x40047307
+  FIOASYNC   0x8004667d
+  FIONBIO    0x8004667e
+  SIOCSHIWAT 0x80047300
+  SIOCSLOWAT 0x80047302
+

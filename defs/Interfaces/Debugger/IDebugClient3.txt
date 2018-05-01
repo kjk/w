@@ -1,0 +1,37 @@
+include Interfaces\Debugger\IDebugClient2.txt
+
+ingterface IDebugClient3 base=IDebugClient2 id={dd492d7f-71b8-4ad6-a8dc-1c887479ff91} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetRunningProcessSystemIdByExecutableNameWide
+    HRESULT
+    Server ULONG64
+    ExeName PCWSTR
+    Flags [DEBUG_GET_PROC_FLAGS]
+    Id PULONG
+
+  func GetRunningProcessDescriptionWide
+    HRESULT
+    Server ULONG64
+    SystemId ULONG
+    Flags [DEBUG_PROC_DESC_FLAGS]
+    ExeName PWSTR
+    ExeNameSize ULONG
+    ActualExeNameSize PULONG
+    Description PWSTR
+    DescriptionSize ULONG
+    ActualDescriptionSize PULONG
+
+  func CreateProcessWide
+    HRESULT
+    Server ULONG64
+    CommandLine PWSTR
+    CreateFlags [DEBUG_CREATE_PROCESS_FLAGS]
+
+  func CreateProcessAndAttachWide
+    HRESULT
+    Server ULONG64
+    CommandLine PWSTR
+    CreateFlags [DEBUG_CREATE_PROCESS_FLAGS]
+    ProcessId ULONG
+    AttachFlags [DEBUG_ATTACH_PROC_FLAGS]
+
+

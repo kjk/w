@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrHandlerCollection base=IUnknown id={a7f337a3-d20b-45cb-9ed7-87d094ca5045} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func GetHandlerEnumerator
+    HRESULT
+    ppenum IEnumString**
+
+  func BindToHandler
+    HRESULT
+    pszHandlerID LPCWSTR
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

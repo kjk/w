@@ -1,0 +1,87 @@
+include Headers\windows.h.txt
+
+dll api-ms-win-net-isolation-l1.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Windows Firewall Technologies/Windows Firewall with Advanced Security"
+alias PAC_CHANGES_CALLBACK_FN LPVOID
+
+enum NETISO_ERROR_TYPE UINT
+  NETISO_ERROR_TYPE_NONE                   0x00
+  NETISO_ERROR_TYPE_PRIVATE_NETWORK        0x01
+  NETISO_ERROR_TYPE_INTERNET_CLIENT        0x02
+  NETISO_ERROR_TYPE_INTERNET_CLIENT_SERVER 0x03
+
+pointer NETISO_ERROR_TYPE* NETISO_ERROR_TYPE
+
+struct INET_FIREWALL_AC_CAPABILITIES
+  count DWORD
+  capabilities SID_AND_ATTRIBUTES* count=count
+
+struct INET_FIREWALL_AC_BINARIES
+  count DWORD
+  binaries LPWSTR* count=count
+
+struct INET_FIREWALL_APP_CONTAINER
+  appContainerSid SID*
+  userSid SID*
+  appContainerName LPWSTR
+  displayName LPWSTR
+  description LPWSTR
+  capabilities INET_FIREWALL_AC_CAPABILITIES
+  binaries INET_FIREWALL_AC_BINARIES
+  workingDirectory LPWSTR
+  packageFullName LPWSTR
+
+pointer PINET_FIREWALL_APP_CONTAINER INET_FIREWALL_APP_CONTAINER
+
+pointer PINET_FIREWALL_APP_CONTAINER* PINET_FIREWALL_APP_CONTAINER
+
+func NetworkIsolationDiagnoseConnectFailureAndGetInfo
+  [ERROR_CODE]
+  wszServerName LPCWSTR
+  netIsoError NETISO_ERROR_TYPE*
+
+func NetworkIsolationEnumAppContainers
+  [ERROR_CODE]
+  Flags DWORD
+  pdwNumPublicAppCs DWORD*
+  ppPublicAppCs PINET_FIREWALL_APP_CONTAINER* derefPostCount=pdwNumPublicAppCs
+
+func NetworkIsolationEnumerateAppContainerRules
+  HRESULT
+  newEnum IEnumVARIANT**
+
+func NetworkIsolationFreeAppContainers
+  [ERROR_CODE]
+  pPublicAppCs PINET_FIREWALL_APP_CONTAINER
+
+func NetworkIsolationGetAppContainerConfig
+  [ERROR_CODE]
+  pdwNumPublicAppCs DWORD*
+  appContainerSids PSID_AND_ATTRIBUTES* derefPostCount=pdwNumPublicAppCs
+
+func NetworkIsolationRegisterForAppContainerChanges
+  [ERROR_CODE]
+  flags DWORD
+  callback PAC_CHANGES_CALLBACK_FN
+  context PVOID
+  registrationObject HANDLE*
+
+func NetworkIsolationSetAppContainerConfig
+  [ERROR_CODE]
+  dwNumPublicAppCs DWORD
+  appContainerSids PSID_AND_ATTRIBUTES count=dwNumPublicAppCs
+
+func NetworkIsolationSetupAppContainerBinaries
+  HRESULT
+  applicationContainerSid PSID
+  packageFullName LPCWSTR
+  packageFolder LPCWSTR
+  displayName LPCWSTR
+  bBinariesFullyComputed BOOL
+  binaries LPCWSTR* count=binariesCount
+  binariesCount DWORD
+
+func NetworkIsolationUnregisterForAppContainerChanges
+  [ERROR_CODE]
+  registrationObject HANDLE
+

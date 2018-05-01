@@ -1,0 +1,57 @@
+include Headers\windows.h.txt
+
+dll WdsBp.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Administration/Windows Deployment Services (WDS)/Network Boot Program"
+flag [WDSBP_PK_TYPE] BYTE display=BYTE
+  WDSBP_PK_TYPE_DHCP   1
+  WDSBP_PK_TYPE_WDSNBP 2
+  WDSBP_PK_TYPE_BCD    4
+  WDSBP_PK_TYPE_DHCPV6 8
+
+pointer [WDSBP_PK_TYPE*] [WDSBP_PK_TYPE] display=PBYTE
+
+func WdsBpAddOption
+  HRESULT
+  hHandle HANDLE
+  uOption ULONG
+  uValueLen ULONG
+  pValue PVOID length=uValueLen
+
+func WdsBpCloseHandle
+  HRESULT
+  hHandle HANDLE
+
+func WdsBpGetOptionBuffer
+  HRESULT
+  hHandle HANDLE
+  uBufferLen ULONG
+  pBuffer PVOID postLength=puBytes
+  puBytes PULONG
+
+func WdsBpInitialize
+  HRESULT
+  bPacketType [WDSBP_PK_TYPE]
+  phHandle HANDLE*
+
+func WdsBpParseInitialize
+  HRESULT
+  pPacket PVOID length=uPacketLen
+  uPacketLen ULONG
+  pbPacketType [WDSBP_PK_TYPE]
+  phHandle HANDLE*
+
+func WdsBpQueryOption
+  HRESULT
+  hHandle HANDLE
+  uOption ULONG
+  uValueLen ULONG
+  pValue PVOID postLength=puBytes
+  puBytes PULONG
+
+func WdsBpParseInitializev6
+  HRESULT
+  pPacket PVOID length=uPacketLen
+  uPacketLen ULONG
+  pbPacketType [WDSBP_PK_TYPE]
+  phHandle HANDLE*
+

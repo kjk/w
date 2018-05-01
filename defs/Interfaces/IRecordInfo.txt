@@ -1,0 +1,82 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRecordInfo base=IUnknown id={0000002F-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/User-Defined Data Types (UDT)"
+  func RecordInit
+    HRESULT
+    pvNew PVOID
+
+  func RecordClear
+    HRESULT
+    pvExisting PVOID
+
+  func RecordCopy
+    HRESULT
+    pvExisting PVOID
+    pvNew PVOID
+
+  func GetGuid
+    HRESULT
+    pguid GUID*
+
+  func GetName
+    HRESULT
+    pbstrName BSTR*
+
+  func GetSize
+    HRESULT
+    pcbSize ULONG*
+
+  func GetTypeInfo
+    HRESULT
+    ppTypeInfo ITypeInfo**
+
+  func GetField
+    HRESULT
+    pvData PVOID
+    szFieldName LPCOLESTR
+    pvarField VARIANT*
+
+  func GetFieldNoCopy
+    HRESULT
+    pvData PVOID
+    szFieldName LPCOLESTR
+    pvarField VARIANT*
+    ppvDataCArray PVOID*
+
+  func PutField
+    HRESULT
+    wFlags ULONG
+    pvData PVOID
+    szFieldName LPCOLESTR
+    pvarField VARIANT*
+
+  func PutFieldNoCopy
+    HRESULT
+    wFlags ULONG
+    pvData PVOID
+    szFieldName LPCOLESTR
+    pvarField VARIANT*
+
+  func GetFieldNames
+    HRESULT
+    pcNames ULONG*
+    rgBstrNames BSTR* postCount=pcNames
+
+  func IsMatchingType
+    BOOL
+    pRecordInfo IRecordInfo*
+
+  func RecordCreate
+    success NotEqual=0
+    PVOID
+
+  func RecordCreateCopy
+    HRESULT
+    pvSource PVOID
+    ppvDest PVOID*
+
+  func RecordDestroy
+    HRESULT
+    pvRecord PVOID
+
+

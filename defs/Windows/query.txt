@@ -1,0 +1,176 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+
+dll query.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Services/Indexing Service"
+interface ICommand
+
+alias DBCOMMANDOP WORD
+
+alias "TCHAR const*" TCHAR*
+
+alias "WCHAR const* const*" WCHAR**
+
+alias "PROPVARIANT const*" PROPVARIANT*
+
+alias DBCOMMANDTREE* LPVOID
+
+pointer DBCOMMANDTREE** DBCOMMANDTREE*
+
+alias "DBCOMMANDTREE const*" DBCOMMANDTREE*
+
+alias "DBCOMMANDTREE const* const*" DBCOMMANDTREE**
+
+struct CIPROPERTYDEF
+  wcsFriendlyName LPWSTR
+  dbType DWORD
+  dbCol DBID
+
+pointer CIPROPERTYDEF* CIPROPERTYDEF
+
+pointer "CIPROPERTYDEF const*" CIPROPERTYDEF
+
+struct CI_STATE pack=4
+  cbStruct DWORD
+  cWordList DWORD
+  cPersistentIndex DWORD
+  cQueries DWORD
+  cDocuments DWORD
+  cFreshTest DWORD
+  dwMergeProgress DWORD
+  eState DWORD
+  cFilteredDocuments DWORD
+  cTotalDocuments DWORD
+  cPendingScans DWORD
+  dwIndexSize DWORD
+  cUniqueKeys DWORD
+  cSecQDocuments DWORD
+  dwPropCacheSize DWORD
+
+pointer CI_STATE* CI_STATE
+
+func CIState
+  STDAPI
+  pwcsCat "WCHAR const*"
+  pwcsMachine "WCHAR const*"
+  pCiState CI_STATE*
+
+func LocateCatalogs bothCharset
+  STDAPI
+  pwszScope "TCHAR const*"
+  iBmk ULONG
+  pwszMachine TCHAR*
+  pcMachine ULONG*
+  pwszCat TCHAR*
+  pcCat ULONG*
+
+func SetCatalogState
+  STDAPI
+  pwcsCat "WCHAR const*"
+  pwcsMachine "WCHAR const*"
+  dwNewState DWORD
+  pdwOldState DWORD*
+
+func CICreateCommand
+  STDAPI
+  ppICommand IUnknown** interfaceId=riid
+  pUnkOuter IUnknown*
+  riid REFIID
+  pwcsCatalog "WCHAR const*"
+  pwcsMachine "WCHAR const*"
+
+func CIMakeICommand
+  STDAPI
+  ppCommand ICommand**
+  cScope ULONG
+  aDepths "DWORD const*"
+  awcsScope "WCHAR const* const*"
+  awcsCatalogs "WCHAR const* const*"
+  awcsMachine "WCHAR const* const*"
+
+func CIBuildQueryNode
+  STDAPI
+  wcsProperty "WCHAR const*"
+  dbOperator DBCOMMANDOP
+  pvarPropertyValue "PROPVARIANT const*"
+  ppTree DBCOMMANDTREE**
+  cProperties ULONG
+  pProperty "CIPROPERTYDEF const*"
+  LocaleID LCID
+
+func CIBuildQueryTree
+  STDAPI
+  pExistingTree "DBCOMMANDTREE const*"
+  cSiblings ULONG
+  ppSibsToCombine "DBCOMMANDTREE const* const*"
+  ppTree DBCOMMANDTREE**
+
+func CIRestrictionToFullTree
+  STDAPI
+  pTree "DBCOMMANDTREE const*"
+  pwszColumns "WCHAR const*"
+  pwszSortColumns "WCHAR const*"
+  pwszGroupings "WCHAR const*"
+  ppTree DBCOMMANDTREE**
+  cProperties ULONG
+  pProperties CIPROPERTYDEF*
+  LocaleID LCID
+
+func CITextToFullTree
+  STDAPI
+  pwszRestriction "WCHAR const*"
+  pwszColumns "WCHAR const*"
+  pwszSortColumns "WCHAR const*"
+  pwszGroupings "WCHAR const*"
+  ppTree DBCOMMANDTREE**
+  cProperties ULONG
+  pProperties CIPROPERTYDEF*
+  LocaleID LCID
+
+func CITextToFullTreeEx
+  STDAPI
+  pwszRestriction "WCHAR const*"
+  ulDialect ULONG
+  pwszColumns "WCHAR const*"
+  pwszSortColumns "WCHAR const*"
+  pwszGroupings "WCHAR const*"
+  ppTree DBCOMMANDTREE**
+  cProperties ULONG
+  pProperties CIPROPERTYDEF*
+  LocaleID LCID
+
+func CITextToSelectTree
+  STDAPI
+  pwszRestriction "WCHAR const*"
+  ppTree DBCOMMANDTREE**
+  cProperties ULONG
+  pProperties CIPROPERTYDEF*
+  LocaleID LCID
+
+func CITextToSelectTreeEx
+  STDAPI
+  pwszRestriction "WCHAR const*"
+  ulDialect ULONG
+  ppTree DBCOMMANDTREE**
+  cProperties ULONG
+  pProperties CIPROPERTYDEF*
+  LocaleID LCID
+
+func LoadIFilter
+  STDAPI
+  pwcsPath "WCHAR const*"
+  pUnkOuter IUnknown*
+  ppIUnk void**
+
+func BindIFilterFromStorage
+  STDAPI
+  pStg IStorage*
+  pUnkOuter IUnknown*
+  ppIUnk void**
+
+func BindIFilterFromStream
+  STDAPI
+  pStm IStream*
+  pUnkOuter IUnknown*
+  ppIUnk void**
+

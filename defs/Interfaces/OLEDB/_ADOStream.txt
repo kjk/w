@@ -1,0 +1,113 @@
+include Interfaces\IDispatch.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface _ADOStream base=IDispatch id={00001565-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_Size
+    [OLEDB_HRESULT]
+    pSize long*
+
+  func get_EOS
+    [OLEDB_HRESULT]
+    pEOS VARIANT_BOOL*
+
+  func get_Position
+    [OLEDB_HRESULT]
+    pPos long*
+
+  func put_Position
+    [OLEDB_HRESULT]
+    Position long
+
+  func get_Type
+    [OLEDB_HRESULT]
+    pType StreamTypeEnum*
+
+  func put_Type
+    [OLEDB_HRESULT]
+    Type StreamTypeEnum
+
+  func get_LineSeparator
+    [OLEDB_HRESULT]
+    pLS LineSeparatorEnum*
+
+  func put_LineSeparator
+    [OLEDB_HRESULT]
+    LineSeparator LineSeparatorEnum
+
+  func get_State
+    [OLEDB_HRESULT]
+    pState ObjectStateEnum*
+
+  func get_Mode
+    [OLEDB_HRESULT]
+    pMode ConnectModeEnum*
+
+  func put_Mode
+    [OLEDB_HRESULT]
+    Mode ConnectModeEnum
+
+  func get_Charset
+    [OLEDB_HRESULT]
+    pbstrCharset BSTR*
+
+  func put_Charset
+    [OLEDB_HRESULT]
+    Charset BSTR
+
+  func Read
+    [OLEDB_HRESULT]
+    NumBytes StreamReadEnum
+    pVal VARIANT*
+
+  func Open
+    [OLEDB_HRESULT]
+    Source VARIANT
+    Mode ConnectModeEnum
+    Options StreamOpenOptionsEnum
+    UserName BSTR
+    Password BSTR
+
+  func Close
+    [OLEDB_HRESULT]
+
+  func SkipLine
+    [OLEDB_HRESULT]
+
+  func Write
+    [OLEDB_HRESULT]
+    Buffer VARIANT
+
+  func SetEOS
+    [OLEDB_HRESULT]
+
+  func CopyTo
+    [OLEDB_HRESULT]
+    DestStream _ADOStream*
+    CharNumber long
+
+  func Flush
+    [OLEDB_HRESULT]
+
+  func SaveToFile
+    [OLEDB_HRESULT]
+    FileName BSTR
+    Options SaveOptionsEnum
+
+  func LoadFromFile
+    [OLEDB_HRESULT]
+    FileName BSTR
+
+  func ReadText
+    [OLEDB_HRESULT]
+    NumChars StreamReadEnum
+    pbstr BSTR*
+
+  func WriteText
+    [OLEDB_HRESULT]
+    Data BSTR
+    Options StreamWriteEnum
+
+  func Cancel
+    [OLEDB_HRESULT]
+
+

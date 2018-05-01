@@ -1,0 +1,15 @@
+include Interfaces\Debugger\IDebugOutputCallbacks.txt
+
+ingterface IDebugOutputCallbacks2 base=IDebugOutputCallbacks id={67721fe9-56d2-4a44-a325-2b65513ce6eb} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Callback COM Interfaces"
+  func GetInterestMask
+    HRESULT
+    Mask [PDEBUG_OUTCB_INTEREST]
+
+  func Output2
+    HRESULT
+    Which [DEBUG_OUTCB_TYPE]
+    Flags [DEBUG_OUTCB_FLAGS]
+    Arg ULONG64
+    Text PCWSTR
+
+

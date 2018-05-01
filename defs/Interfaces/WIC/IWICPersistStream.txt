@@ -1,0 +1,17 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\COM\IPersistStream.txt
+
+ingterface IWICPersistStream base=IPersistStream id={00675040-6908-45F8-86A3-49C7DFD6D9AD} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func LoadEx
+    [WIC_HRESULT]
+    pIStream IStream*
+    pguidPreferredVendor "const GUID*"
+    dwPersistOptions DWORD
+
+  func SaveEx
+    [WIC_HRESULT]
+    pIStream IStream*
+    dwPersistOptions DWORD
+    fClearDirty BOOL
+
+

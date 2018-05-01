@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioEndpointVolumeCallback base=IUnknown id={657804FA-D6AD-4496-8A60-352752AF4F89} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Endpoint Volume"
+  func OnNotify
+    [AUDCLNT_HRESULT]
+    pNotify PAUDIO_VOLUME_NOTIFICATION_DATA
+
+

@@ -1,0 +1,33 @@
+include Interfaces\IUnknown.txt
+include Headers\registry.h.txt
+
+ingterface IDefaultExtractIconInit base=IUnknown id={41ded17d-d6b3-4261-997d-88c60e4b1d58} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetFlags
+    HRESULT
+    uFlags UINT
+
+  func SetKey
+    HRESULT
+    hkey HKEY
+
+  func SetNormalIcon
+    HRESULT
+    pszFile LPCWSTR
+    iIcon int
+
+  func SetOpenIcon
+    HRESULT
+    pszFile LPCWSTR
+    iIcon int
+
+  func SetShortcutIcon
+    HRESULT
+    pszFile LPCWSTR
+    iIcon int
+
+  func SetDefaultIcon
+    HRESULT
+    pszFile LPCWSTR
+    iIcon int
+
+

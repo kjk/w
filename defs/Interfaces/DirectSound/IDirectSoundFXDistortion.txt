@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundFXDistortion base=IUnknown id={8ecf4326-455f-4d8b-bda9-8d5d3e9e3e0b} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func SetAllParameters
+    [DS_HRESULT]
+    pcDsFxDistortion LPCDSFXDistortion
+
+  func GetAllParameters
+    [DS_HRESULT]
+    pDsFxDistortion LPDSFXDistortion
+
+

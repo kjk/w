@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+
+ingterface IUrlMon base=IUnknown id={00000026-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func AsyncGetClassBits
+    HRESULT
+    rclsid REFCLSID
+    pszTYPE LPCWSTR
+    pszExt LPCWSTR
+    dwFileVersionMS DWORD
+    dwFileVersionLS DWORD
+    pszCodeBase LPCWSTR
+    pbc IBindCtx*
+    dwClassContext DWORD
+    riid REFIID
+    flags DWORD
+
+

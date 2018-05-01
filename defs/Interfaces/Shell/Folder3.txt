@@ -1,0 +1,12 @@
+include Interfaces\Shell\Folder2.txt
+
+ingterface Folder3 base=Folder2 id={A7AE5F64-C4D7-4d7f-9307-4D24EE54B841} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func get_ShowWebViewBarricade
+    HRESULT
+    pbShowWebViewBarricade VARIANT_BOOL*
+
+  func put_ShowWebViewBarricade
+    HRESULT
+    bShowWebViewBarricade VARIANT_BOOL
+
+

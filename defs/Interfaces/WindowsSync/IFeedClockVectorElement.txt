@@ -1,0 +1,13 @@
+include Interfaces\WindowsSync\IClockVectorElement.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IFeedClockVectorElement base=IClockVectorElement id={a40b46d2-e97b-4156-b6da-991f501b0f05} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetSyncTime
+    HRESULT
+    pSyncTime SYNC_TIME*
+
+  func GetFlags
+    HRESULT
+    pbFlags BYTE*
+
+

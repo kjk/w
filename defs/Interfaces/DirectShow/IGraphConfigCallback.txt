@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IGraphConfigCallback base=IUnknown id={ade0fd60-d19d-11d2-abf6-00a0c905f375} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Reconfigure
+    HRESULT
+    pvContext PVOID
+    dwFlags DWORD
+
+

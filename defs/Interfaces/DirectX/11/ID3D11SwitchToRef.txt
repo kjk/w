@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+
+ingterface ID3D11SwitchToRef base=IUnknown id={1ef337e3-58e7-4f83-a692-db221f5ed47e} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Layer"
+  func SetUseRef
+    BOOL
+    UseRef BOOL
+
+  func GetUseRef
+    BOOL
+
+

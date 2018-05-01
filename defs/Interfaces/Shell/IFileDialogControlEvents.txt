@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFileDialogControlEvents base=IUnknown id={36116642-D713-4b97-9B83-7484A9D00433} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnItemSelected
+    HRESULT
+    pfdc IFileDialogCustomize*
+    dwIDCtl DWORD
+    dwIDItem DWORD
+
+  func OnButtonClicked
+    HRESULT
+    pfdc IFileDialogCustomize*
+    dwIDCtl DWORD
+
+  func OnCheckButtonToggled
+    HRESULT
+    pfdc IFileDialogCustomize*
+    dwIDCtl DWORD
+    bChecked BOOL
+
+  func OnControlActivating
+    HRESULT
+    pfdc IFileDialogCustomize*
+    dwIDCtl DWORD
+
+

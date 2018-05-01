@@ -1,0 +1,70 @@
+include Interfaces\IUnknown.txt
+
+ingterface IExplorerBrowser base=IUnknown id={dfd3b6b5-c10c-4be9-85f6-a66969f402f6} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    hwndParent HWND
+    prc "const RECT*"
+    pfs "const FOLDERSETTINGS*"
+
+  func Destroy
+    HRESULT
+
+  func SetRect
+    HRESULT
+    phdwp HDWP*
+    rcBrowser RECT
+
+  func SetPropertyBag
+    HRESULT
+    pszPropertyBag LPCWSTR
+
+  func SetEmptyText
+    HRESULT
+    pszEmptyText LPCWSTR
+
+  func SetFolderSettings
+    HRESULT
+    pfs "const FOLDERSETTINGS*"
+
+  func Advise
+    HRESULT
+    psbe IExplorerBrowserEvents*
+    pdwCookie DWORD*
+
+  func Unadvise
+    HRESULT
+    dwCookie DWORD
+
+  func SetOptions
+    HRESULT
+    dwFlag EXPLORER_BROWSER_OPTIONS
+
+  func GetOptions
+    HRESULT
+    pdwFlag EXPLORER_BROWSER_OPTIONS*
+
+  func BrowseToIDList
+    HRESULT
+    pidl PCUIDLIST_RELATIVE
+    uFlags UINT
+
+  func BrowseToObject
+    HRESULT
+    punk IUnknown*
+    uFlags UINT
+
+  func FillFromObject
+    HRESULT
+    punk IUnknown*
+    dwFlags EXPLORER_BROWSER_FILL_FLAGS
+
+  func RemoveAll
+    HRESULT
+
+  func GetCurrentView
+    HRESULT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

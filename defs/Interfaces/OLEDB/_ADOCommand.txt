@@ -1,0 +1,29 @@
+include Interfaces\OLEDB\Command25.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface _ADOCommand base=Command25 id={986761E8-7269-4890-AA65-AD7C03697A6D} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func putref_CommandStream
+    [OLEDB_HRESULT]
+    pStream IUnknown*
+
+  func get_CommandStream
+    [OLEDB_HRESULT]
+    pvStream VARIANT*
+
+  func put_Dialect
+    [OLEDB_HRESULT]
+    bstrDialect BSTR
+
+  func get_Dialect
+    [OLEDB_HRESULT]
+    pbstrDialect BSTR*
+
+  func put_NamedParameters
+    [OLEDB_HRESULT]
+    fNamedParameters VARIANT_BOOL
+
+  func get_NamedParameters
+    [OLEDB_HRESULT]
+    pfNamedParameters VARIANT_BOOL*
+
+

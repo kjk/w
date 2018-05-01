@@ -1,0 +1,63 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRWindowlessControl9 base=IUnknown id={8f537d09-f85e-4414-b23b-502e54c79927} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetNativeVideoSize
+    HRESULT
+    lpWidth LONG*
+    lpHeight LONG*
+    lpARWidth LONG*
+    lpARHeight LONG*
+
+  func GetMinIdealVideoSize
+    HRESULT
+    lpWidth LONG*
+    lpHeight LONG*
+
+  func GetMaxIdealVideoSize
+    HRESULT
+    lpWidth LONG*
+    lpHeight LONG*
+
+  func SetVideoPosition
+    HRESULT
+    lpSRCRect "const LPRECT"
+    lpDSTRect "const LPRECT"
+
+  func GetVideoPosition
+    HRESULT
+    lpSRCRect LPRECT
+    lpDSTRect LPRECT
+
+  func GetAspectRatioMode
+    HRESULT
+    lpAspectRatioMode DWORD*
+
+  func SetAspectRatioMode
+    HRESULT
+    AspectRatioMode DWORD
+
+  func SetVideoClippingWindow
+    HRESULT
+    hwnd HWND
+
+  func RepaintVideo
+    HRESULT
+    hwnd HWND
+    hdc HDC
+
+  func DisplayModeChanged
+    HRESULT
+
+  func GetCurrentImage
+    HRESULT
+    lpDib BYTE**
+
+  func SetBorderColor
+    HRESULT
+    Clr COLORREF
+
+  func GetBorderColor
+    HRESULT
+    lpClr COLORREF*
+
+

@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncFullEnumerationChange base=IUnknown id={9785e0bd-bdff-40c4-98c5-b34b2f1991b3} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetLearnedKnowledgeAfterRecoveryComplete
+    HRESULT
+    ppLearnedKnowledge ISyncKnowledge**
+
+  func GetLearnedForgottenKnowledge
+    HRESULT
+    ppLearnedForgottenKnowledge IForgottenKnowledge**
+
+

@@ -1,0 +1,205 @@
+include Headers\windows.h.txt
+
+header
+interface IAsynchronousDataRetriever
+
+interface IChangeConflict
+
+interface IChangeUnitException
+
+interface IChangeUnitListFilterInfo
+
+interface IClockVector
+
+interface IClockVectorElement
+
+interface IConstructReplicaKeyMap
+
+interface ICoreFragment
+
+interface ICoreFragmentInspector
+
+interface IDataRetrieverCallback
+
+interface IEnumChangeUnitExceptions
+
+interface IEnumClockVector
+
+interface IEnumFeedClockVector
+
+interface IEnumRangeExceptions
+
+interface IEnumSingleItemExceptions
+
+interface IEnumSyncChanges
+
+interface IEnumSyncChangeUnits
+
+interface IFeedClockVector
+
+interface IFeedClockVectorElement
+
+interface IFilterRequestCallback
+
+interface IForgottenKnowledge
+
+interface IKnowledgeSyncProvider
+
+interface ILoadChangeContext
+
+interface IProviderConverter
+
+interface IRangeException
+
+interface IRecoverableError
+
+interface IRecoverableErrorData
+
+interface IReplicaKeyMap
+
+interface IRequestFilteredSync
+
+interface ISingleItemException
+
+interface ISupportFilteredSync
+
+interface ISupportLastWriteTime
+
+interface ISyncCallback
+
+interface ISyncCallback2
+
+interface ISyncChange
+
+interface ISyncChangeBatch
+
+interface ISyncChangeBatchAdvanced
+
+interface ISyncChangeBatchBase
+
+interface ISyncChangeBatchBase2
+
+interface ISyncChangeBatchWithPrerequisite
+
+interface ISyncChangeBuilder
+
+interface ISyncChangeUnit
+
+interface ISyncChangeWithPrerequisite
+
+interface ISyncFilterInfo
+
+interface ISyncFilterInfo2
+
+interface ISyncFullEnumerationChange
+
+interface ISyncFullEnumerationChangeBatch
+
+interface ISynchronousDataRetriever
+
+interface ISyncKnowledge
+
+interface ISyncKnowledge2
+
+interface ISyncProvider
+
+interface ISyncSessionExtendedErrorInfo
+
+interface ISyncSessionState
+
+interface ISyncSessionState2
+
+pointer "const BYTE*const*" "const BYTE*"
+
+enum CONFLICT_RESOLUTION_POLICY UINT
+  CRP_NONE                      0
+  CRP_DESTINATION_PROVIDER_WINS 1
+  CRP_SOURCE_PROVIDER_WINS      2
+
+enum FILTERING_TYPE UINT
+  FT_CURRENT_ITEMS_ONLY 0
+
+enum KNOWLEDGE_COOKIE_COMPARISON_RESULT UINT
+  KCCR_COOKIE_KNOWLEDGE_EQUAL          0
+  KCCR_COOKIE_KNOWLEDGE_CONTAINED      1
+  KCCR_COOKIE_KNOWLEDGE_CONTAINS       2
+  KCCR_COOKIE_KNOWLEDGE_NOT_COMPARABLE 3
+
+pointer KNOWLEDGE_COOKIE_COMPARISON_RESULT* KNOWLEDGE_COOKIE_COMPARISON_RESULT
+
+enum SYNC_FULL_ENUMERATION_ACTION UINT
+  SFEA_FULL_ENUMERATION 0
+  SFEA_PARTIAL_SYNC     1
+  SFEA_ABORT            2
+
+pointer SYNC_FULL_ENUMERATION_ACTION* SYNC_FULL_ENUMERATION_ACTION
+
+enum SYNC_PROGRESS_STAGE UINT
+  SPS_CHANGE_DETECTION   0
+  SPS_CHANGE_ENUMERATION 1
+  SPS_CHANGE_APPLICATION 2
+
+pointer SYNC_PROGRESS_STAGE* SYNC_PROGRESS_STAGE
+
+enum SYNC_PROVIDER_ROLE UINT
+  SPR_SOURCE      0
+  SPR_DESTINATION 1
+
+pointer SYNC_PROVIDER_ROLE* SYNC_PROVIDER_ROLE
+
+enum SYNC_RESOLVE_ACTION UINT
+  SRA_DEFER                       0
+  SRA_ACCEPT_DESTINATION_PROVIDER 1
+  SRA_ACCEPT_SOURCE_PROVIDER      2
+  SRA_MERGE                       3
+  SRA_TRANSFER_AND_DEFER          4
+
+pointer SYNC_RESOLVE_ACTION* SYNC_RESOLVE_ACTION
+
+enum SYNC_SERIALIZATION_VERSION UINT
+  SYNC_SERIALIZATION_VERSION_V1 1
+  SYNC_SERIALIZATION_VERSION_V2 4
+
+pointer SYNC_SERIALIZATION_VERSION* SYNC_SERIALIZATION_VERSION
+
+enum SYNC_STATISTICS UINT
+  SYNC_STATISTICS_RANGE_COUNT 0
+
+struct ID_PARAMETER_PAIR
+  fIsVariable BOOL
+  cbIdSize USHORT
+
+struct ID_PARAMETERS
+  dwSize DWORD
+  replicaId ID_PARAMETER_PAIR
+  itemId ID_PARAMETER_PAIR
+  changeUnitId ID_PARAMETER_PAIR
+
+pointer ID_PARAMETERS* ID_PARAMETERS
+
+struct SYNC_RANGE
+  pbClosedLowerBound BYTE*
+  pbClosedUpperBound BYTE*
+
+pointer "const SYNC_RANGE*" SYNC_RANGE
+
+struct SYNC_SESSION_STATISTICS
+  dwChangesApplied DWORD
+  dwChangesFailed DWORD
+
+pointer SYNC_SESSION_STATISTICS* SYNC_SESSION_STATISTICS
+
+struct SYNC_TIME
+  dwDate DWORD
+  dwTime DWORD
+
+pointer SYNC_TIME* SYNC_TIME
+
+struct SYNC_VERSION
+  dwLastUpdatingReplicaKey DWORD
+  ullTickCount ULONGLONG
+
+pointer SYNC_VERSION* SYNC_VERSION
+
+pointer "const SYNC_VERSION*" SYNC_VERSION
+

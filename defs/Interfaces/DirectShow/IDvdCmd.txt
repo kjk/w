@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDvdCmd base=IUnknown id={5a4a97e4-94ee-4a55-9751-74b5643aa27d} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func WaitForStart
+    HRESULT
+
+  func WaitForEnd
+    HRESULT
+
+

@@ -1,0 +1,19 @@
+include Interfaces\COM\IOleWindow.txt
+
+ingterface IDockingWindowSite base=IOleWindow id={2a342fc2-7b26-11d0-8ca9-00a0c92dbfe8} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetBorderDW
+    HRESULT
+    punkObj IUnknown*
+    prcBorder LPRECT
+
+  func RequestBorderSpaceDW
+    HRESULT
+    punkObj IUnknown*
+    pbw LPCBORDERWIDTHS
+
+  func SetBorderSpaceDW
+    HRESULT
+    punkObj IUnknown*
+    pbw LPCBORDERWIDTHS
+
+

@@ -1,0 +1,24 @@
+include Interfaces\BITS\IBackgroundCopyJob2.txt
+
+ingterface IBackgroundCopyJob3 base=IBackgroundCopyJob2 id={443c8934-90ff-48ed-bcde-26f5c7450042} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func ReplaceRemotePrefix
+    HRESULT
+    OldPrefix LPCWSTR
+    NewPrefix LPCWSTR
+
+  func AddFileWithRanges
+    HRESULT
+    RemoteUrl LPCWSTR
+    LocalName LPCWSTR
+    RangeCount DWORD
+    Ranges BG_FILE_RANGE[]
+
+  func SetFileACLFlags
+    HRESULT
+    Flags DWORD
+
+  func GetFileACLFlags
+    HRESULT
+    Flags DWORD*
+
+

@@ -1,0 +1,464 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+
+dll Mscms.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Graphics and Gaming/Legacy Graphics/Windows Color System/Advanced"
+category "Graphics and Gaming/Legacy Graphics/Windows Color System/Device Calibration and Characterization"
+category "Graphics and Gaming/Legacy Graphics/Windows Color System/Profile Management"
+alias TAGTYPE DWORD
+
+pointer PTAGTYPE TAGTYPE
+
+array "BYTE [44]" base=BYTE count=44
+
+enum COLORPROFILETYPE UINT
+  CPT_ICC  0
+  CPT_DMP  1
+  CPT_CAMP 2
+  CPT_GMMP 3
+
+enum COLORPROFILESUBTYPE UINT
+  CPST_PERCEPTUAL            0
+  CPST_RELATIVE_COLORIMETRIC 1
+  CPST_SATURATION            2
+  CPST_ABSOLUTE_COLORIMETRIC 3
+  CPST_NONE                  4
+  CPST_RGB_WORKING_SPACE     5
+  CPST_CUSTOM_WORKING_SPACE  6
+
+struct PROFILEHEADER
+  phSize DWORD
+  phCMMType DWORD
+  phVersion DWORD
+  phClass [PROFILE_CLASS]
+  phDataColorSpace [COLOR_SPACE]
+  phConnectionSpace [CONNECTION_SPACE]
+  phDateTime "DWORD [3]"
+  phSignature DWORD
+  phPlatform DWORD
+  phProfileFlags [PROFILE_FLAG]
+  phManufacturer DWORD
+  phModel DWORD
+  phAttributes "DWORD [2]"
+  phRenderingIntent [RENDERING_INTENT]
+  phIlluminant CIEXYZ
+  phCreator DWORD
+  phReserved "BYTE [44]"
+
+pointer PPROFILEHEADER PROFILEHEADER
+
+enum [PROFILE_TYPE] DWORD display=DWORD
+  PROFILE_FILENAME  1
+  PROFILE_MEMBUFFER 2
+
+struct PROFILE
+  dwType [PROFILE_TYPE]
+  pProfileData PVOID length=cbDataSize
+  cbDataSize DWORD
+
+pointer PPROFILE PROFILE
+
+enum [PROFILE_ACCESS] DWORD display=DWORD
+  PROFILE_READ      1
+  PROFILE_READWRITE 2
+
+flag [WCS_OPEN_PROFILE_FLAG] DWORD display=DWORD
+  DONT_USE_EMBEDDED_WCS_PROFILES 0x00000001
+
+func CheckBitmapBits
+  BOOL
+  hColorTransform HTRANSFORM
+  pSrcBits PVOID
+  bmInput BMFORMAT
+  dwWidth DWORD
+  dwHeight DWORD
+  dwStride DWORD
+  paResult PBYTE
+  pfnCallback PBMCALLBACKFN
+  lpCallbackData LPARAM
+
+func CheckColors
+  BOOL
+  hColorTransform HTRANSFORM
+  paInputColors PCOLOR count=nColors
+  nColors DWORD
+  ctInput COLORTYPE
+  paResult PBYTE count=nColors
+
+func ConvertColorNameToIndex
+  BOOL
+  hProfile HPROFILE
+  paColorName PCOLOR_NAME count=dwCount
+  paIndex PDWORD count=dwCount
+  dwCount DWORD
+
+func ConvertIndexToColorName
+  BOOL
+  hProfile HPROFILE
+  paIndex PDWORD count=dwCount
+  paColorName PCOLOR_NAME count=dwCount
+  dwCount DWORD
+
+func CreateColorTransform bothCharset
+  success NotEqual=0
+  HTRANSFORM
+  pLogColorSpace LPLOGCOLORSPACE
+  hDestProfile HPROFILE
+  hTargetProfile HPROFILE
+  dwFlags [CCT_FLAGS]
+
+func CreateMultiProfileTransform
+  success NotEqual=0
+  HTRANSFORM
+  pahProfiles PHPROFILE count=nProfiles
+  nProfiles DWORD
+  padwIntent [RENDERING_INTENT*] count=nIntents
+  nIntents DWORD
+  dwFlags [CCT_FLAGS]
+  indexPreferredCMM DWORD
+
+func DeleteColorTransform
+  BOOL
+  hColorTransform HTRANSFORM
+
+func GetCMMInfo
+  success NotEqual=0
+  DWORD
+  hColorTransform HTRANSFORM
+  dwInfo [CMM_INFO]
+
+func GetNamedProfileInfo
+  BOOL
+  hProfile HPROFILE
+  pNamedProfileInfo PNAMED_PROFILE_INFO
+
+func SelectCMM
+  BOOL
+  cmmID DWORD
+
+func TranslateBitmapBits
+  BOOL
+  hColorTransform HTRANSFORM
+  pSrcBits PVOID
+  bmInput BMFORMAT
+  dwWidth DWORD
+  dwHeight DWORD
+  dwInputStride DWORD
+  pDestBits PVOID
+  bmOutput BMFORMAT
+  dwOutputStride DWORD
+  pfnCallback PBMCALLBACKFN
+  ulCallbackData LPARAM
+
+func TranslateColors
+  BOOL
+  hColorTransform HTRANSFORM
+  paInputColors PCOLOR count=nColors
+  nColors DWORD
+  ctInput COLORTYPE
+  paOutputColors PCOLOR count=nColors
+  ctOutput COLORTYPE
+
+func WcsCheckColors
+  BOOL
+  hColorTransform HTRANSFORM
+  nColors DWORD
+  nInputChannels DWORD
+  cdtInput COLORDATATYPE
+  cbInput DWORD
+  pInputData PVOID length=cbInput
+  paResult PBYTE count=nColors
+
+func WcsTranslateColors
+  BOOL
+  hColorTransform HTRANSFORM
+  nColors DWORD
+  nInputChannels DWORD
+  cdtInput COLORDATATYPE
+  cbInput DWORD
+  pInputData PVOID length=cbInput
+  nOutputChannels DWORD
+  cdtOutput COLORDATATYPE
+  cbOutput DWORD
+  pOutputData PVOID postLength=cbOutput
+
+func CloseColorProfile
+  BOOL
+  hProfile HPROFILE
+
+func CreateDeviceLinkProfile bothCharset
+  BOOL
+  pahProfiles PHPROFILE count=nProfiles
+  nProfiles DWORD
+  padwIntent [RENDERING_INTENT*] count=nIntents
+  nIntents DWORD
+  dwFlags [CCT_FLAGS]
+  pProfileData PBYTE
+  indexPreferredCMM DWORD
+
+func GetColorProfileElement
+  BOOL
+  hProfile HPROFILE
+  tag TAGTYPE
+  dwOffset DWORD
+  pcbSize PDWORD
+  pBuffer PVOID postLength=pcbSize
+  pbReference PBOOL
+
+func GetColorProfileElementTag
+  BOOL
+  hProfile HPROFILE
+  dwIndex DWORD
+  pTag PTAGTYPE
+
+func GetColorProfileFromHandle
+  BOOL
+  hProfile HPROFILE
+  pBuffer PBYTE postLength=pcbSize
+  pcbSize PDWORD
+
+func GetColorProfileHeader
+  BOOL
+  hProfile HPROFILE
+  pHeader PPROFILEHEADER
+
+func GetCountColorProfileElements
+  BOOL
+  hProfile HPROFILE
+  pnCount PDWORD
+
+func GetPS2ColorRenderingDictionary
+  BOOL
+  hProfile HPROFILE
+  dwIntent [RENDERING_INTENT]
+  pBuffer PBYTE postLength=pcbSize
+  pcbSize PDWORD
+  pbBinary PBOOL
+
+func GetPS2ColorRenderingIntent
+  BOOL
+  hProfile HPROFILE
+  dwIntent [RENDERING_INTENT]
+  pBuffer PBYTE postLength=pcbSize
+  pcbSize PDWORD
+
+func GetPS2ColorSpaceArray
+  BOOL
+  hProfile HPROFILE
+  dwIntent [RENDERING_INTENT]
+  dwCSAType DWORD
+  pBuffer PBYTE postLength=pcbSize
+  pcbSize PDWORD
+  pbBinary PBOOL
+
+func IsColorProfileTagPresent
+  BOOL
+  hProfile HPROFILE
+  tag TAGTYPE
+  pbPresent PBOOL
+
+func IsColorProfileValid
+  BOOL
+  hProfile HPROFILE
+  pbValid PBOOL
+
+func OpenColorProfile bothCharset
+  success NotEqual=0
+  HPROFILE
+  pProfile PPROFILE
+  dwDesiredAccess [PROFILE_ACCESS]
+  dwShareMode [FILE_SHARE_MODE]
+  dwCreationMode [CreationDisposition]
+
+func SetColorProfileElement
+  BOOL
+  hProfile HPROFILE
+  tag TAGTYPE
+  dwOffset DWORD
+  pcbSize PDWORD
+  pBuffer PVOID length=pcbSize
+
+func SetColorProfileElementReference
+  BOOL
+  hProfile HPROFILE
+  newTag TAGTYPE
+  refTag TAGTYPE
+
+func SetColorProfileElementSize
+  BOOL
+  hProfile HPROFILE
+  tag TAGTYPE
+  cbSize DWORD
+
+func SetColorProfileHeader
+  BOOL
+  hProfile HPROFILE
+  pHeader PPROFILEHEADER
+
+func WcsGetCalibrationManagementState
+  BOOL
+  pbIsEnabled BOOL*
+
+func WcsSetCalibrationManagementState
+  BOOL
+  bIsEnabled BOOL
+
+func AssociateColorProfileWithDevice bothCharset
+  BOOL
+  pMachineName PCTSTR
+  pProfileName PCTSTR
+  pDeviceName PCTSTR
+
+func CreateProfileFromLogColorSpace bothCharset
+  BOOL
+  pLogColorSpace LPLOGCOLORSPACE
+  pBuffer PBYTE*
+
+func DisassociateColorProfileFromDevice bothCharset
+  BOOL
+  pMachineName PCTSTR
+  pProfileName PCTSTR
+  pDeviceName PCTSTR
+
+func EnumColorProfiles bothCharset
+  BOOL
+  pMachineName PCTSTR
+  pEnumRecord PENUMTYPE
+  pBuffer PBYTE postLength=pdwSize
+  pdwSize PDWORD
+  pnProfiles PDWORD
+
+func GetColorDirectory bothCharset
+  BOOL
+  pMachineName PCTSTR
+  pBuffer PTSTR postLength=pdwSize
+  pdwSize PDWORD
+
+func GetStandardColorSpaceProfile bothCharset
+  BOOL
+  pMachineName PCTSTR
+  dwProfileID [LCSCSTYPE_DWORD]
+  pProfileName PTSTR
+  pdwSize PDWORD
+
+func InstallColorProfile bothCharset
+  BOOL
+  pMachineName PCTSTR
+  pProfileName PCTSTR
+
+func RegisterCMM bothCharset
+  BOOL
+  pMachineName PCTSTR
+  cmmID DWORD
+  pCMMdll PCTSTR
+
+func SetStandardColorSpaceProfile bothCharset
+  BOOL
+  pMachineName PCTSTR
+  dwProfileID [LCSCSTYPE_DWORD]
+  pProfilename PCSTR
+
+func UninstallColorProfile bothCharset
+  BOOL
+  pMachineName PCTSTR
+  pProfileName PCTSTR
+  bDelete BOOL
+
+func UnregisterCMM bothCharset
+  BOOL
+  pMachineName PCTSTR
+  cmmID DWORD
+
+func WcsAssociateColorProfileWithDevice bothCharset
+  BOOL
+  profileManagementScope WCS_PROFILE_MANAGEMENT_SCOPE
+  pProfileName PCWSTR
+  pDeviceName PCWSTR
+
+func WcsCreateIccProfile
+  success NotEqual=0
+  HPROFILE
+  hWcsProfile HPROFILE
+  dwOptions DWORD
+
+func WcsDisassociateColorProfileFromDevice
+  BOOL
+  profileManagementScope WCS_PROFILE_MANAGEMENT_SCOPE
+  pProfileName PCWSTR
+  pDeviceName PCWSTR
+
+func WcsEnumColorProfiles
+  BOOL
+  profileManagementScope WCS_PROFILE_MANAGEMENT_SCOPE
+  pEnumRecord PENUMTYPEW
+  pBuffer PBYTE
+  dwSize DWORD
+  pnProfiles PDWORD
+
+func WcsEnumColorProfilesSize
+  BOOL
+  profileManagementScope WCS_PROFILE_MANAGEMENT_SCOPE
+  pEnumRecord PENUMTYPEW
+  pdwSize PDWORD
+
+func WcsGetDefaultColorProfile
+  BOOL
+  profileManagementScope WCS_PROFILE_MANAGEMENT_SCOPE
+  pDeviceName PCWSTR
+  cptColorProfileType COLORPROFILETYPE
+  cpstColorProfileSubType COLORPROFILESUBTYPE
+  dwProfileID [LCSCSTYPE_DWORD]
+  cbProfileName DWORD
+  pProfileName LPWSTR
+
+func WcsGetDefaultColorProfileSize
+  BOOL
+  profileManagementScope WCS_PROFILE_MANAGEMENT_SCOPE
+  pDeviceName PCWSTR
+  cptColorProfileType COLORPROFILETYPE
+  cpstColorProfileSubType COLORPROFILESUBTYPE
+  dwProfileID [LCSCSTYPE_DWORD]
+  pcbProfileName PDWORD
+
+func WcsGetDefaultRenderingIntent
+  BOOL
+  scope WCS_PROFILE_MANAGEMENT_SCOPE
+  pdwRenderingIntent [RENDERING_INTENT*]
+
+func WcsGetUsePerUserProfiles
+  BOOL
+  pDeviceName LPCWSTR
+  dwDeviceClass [DEVICE_CLASS]
+  pUsePerUserProfiles BOOL*
+
+func WcsOpenColorProfile bothCharset
+  success NotEqual=0
+  HPROFILE
+  pCDMPProfile PPROFILE
+  pCAMPProfile PPROFILE
+  pGMMPProfile PPROFILE
+  dwDesiredAccess [PROFILE_ACCESS]
+  dwShareMode [FILE_SHARE_MODE]
+  dwCreationMode [CreationDisposition]
+  dwFlags [WCS_OPEN_PROFILE_FLAG]
+
+func WcsSetDefaultColorProfile
+  BOOL
+  profileManagementScope WCS_PROFILE_MANAGEMENT_SCOPE
+  pDeviceName PCWSTR
+  cptColorProfileType COLORPROFILETYPE
+  cpstColorProfileSubType COLORPROFILESUBTYPE
+  dwProfileID [LCSCSTYPE_DWORD]
+  pProfileName LPCWSTR
+
+func WcsSetDefaultRenderingIntent
+  BOOL
+  scope WCS_PROFILE_MANAGEMENT_SCOPE
+  dwRenderingIntent [RENDERING_INTENT]
+
+func WcsSetUsePerUserProfiles
+  BOOL
+  pDeviceName LPCWSTR
+  dwDeviceClass [DEVICE_CLASS]
+  usePerUserProfiles BOOL
+

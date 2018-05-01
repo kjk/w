@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+
+ingterface ICreateObject base=IUnknown id={75121952-e0d0-43e5-9380-1d80483acf72} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func CreateObject
+    HRESULT
+    clsid REFCLSID
+    pUnkOuter IUnknown*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDVSplitter base=IUnknown id={92a3a302-da7c-4a1f-ba7e-1802bb5d2d02} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func DiscardAlternateVideoFrames
+    HRESULT
+    nDiscard int
+
+

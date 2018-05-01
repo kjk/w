@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISupportLastWriteTime base=IUnknown id={eadf816f-d0bd-43ca-8f40-5acdc6c06f7a} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetItemChangeTime
+    HRESULT
+    pbItemId "const BYTE*"
+    pullTimestamp ULONGLONG*
+
+  func GetChangeUnitChangeTime
+    HRESULT
+    pbItemId "const BYTE*"
+    pbChangeUnitId "const BYTE*"
+    pullTimestamp ULONGLONG*
+
+

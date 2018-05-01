@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IGlobalInterfaceTable base=IUnknown id={00000146-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func RegisterInterfaceInGlobal
+    HRESULT
+    pUnk IUnknown*
+    riid REFIID
+    pdwCookie DWORD*
+
+  func RevokeInterfaceFromGlobal
+    HRESULT
+    dwCookie DWORD
+
+  func GetInterfaceFromGlobal
+    HRESULT
+    dwCookie DWORD
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

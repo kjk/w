@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemCallResult base=IUnknown id={44aca675-e8fc-11d0-a07c-00c04fb68820} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func GetResultObject
+    WBEMSTATUS
+    lTimeout long
+    ppResultObject IWbemClassObject**
+
+  func GetResultString
+    WBEMSTATUS
+    lTimeout long
+    pstrResultString BSTR*
+
+  func GetResultServices
+    WBEMSTATUS
+    lTimeout long
+    ppServices IWbemServices**
+
+  func GetCallStatus
+    WBEMSTATUS
+    lTimeout long
+    plStatus long*
+
+

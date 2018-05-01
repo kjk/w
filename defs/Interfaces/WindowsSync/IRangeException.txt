@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IRangeException base=IUnknown id={75ae8777-6848-49f7-956c-a3a92f5096e8} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetClosedRangeStart
+    HRESULT
+    pbClosedRangeStart BYTE*
+    pcbIdSize DWORD*
+
+  func GetClosedRangeEnd
+    HRESULT
+    pbClosedRangeEnd BYTE*
+    pcbIdSize DWORD*
+
+  func GetClockVector
+    HRESULT
+    riid REFIID
+    ppUnk void** interfaceId=riid
+
+

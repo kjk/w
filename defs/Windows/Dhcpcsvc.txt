@@ -1,0 +1,157 @@
+include Headers\windows.h.txt
+
+dll Dhcpcsvc.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Dynamic Host Configuration Protocol (DHCP)/DHCP Client"
+category "Networking/Multicast Address Dynamic Client Allocation Protocol (MADCAP)"
+alias IP_ADDR_FAMILY "unsigned short"
+
+union IPNG_ADDRESS
+  IpAddrV4 DWORD
+  IpAddrV6 "BYTE [16]"
+
+struct MCAST_LEASE_REQUEST
+  LeaseStartTime LONG
+  MaxLeaseStartTime LONG
+  LeaseDuration DWORD
+  MinLeaseDuration DWORD
+  ServerAddress IPNG_ADDRESS
+  MinAddrCount WORD
+  AddrCount WORD
+  pAddrBuf PBYTE
+
+pointer PMCAST_LEASE_REQUEST MCAST_LEASE_REQUEST
+
+struct MCAST_LEASE_RESPONSE
+  LeaseStartTime LONG
+  LeaseEndTime LONG
+  ServerAddress IPNG_ADDRESS
+  AddrCount WORD
+  pAddrBuf PBYTE
+
+pointer PMCAST_LEASE_RESPONSE MCAST_LEASE_RESPONSE
+
+struct MCAST_SCOPE_CTX
+  ScopeID IPNG_ADDRESS
+  Interface IPNG_ADDRESS
+  ServerID IPNG_ADDRESS
+
+pointer PMCAST_SCOPE_CTX MCAST_SCOPE_CTX
+
+struct MCAST_SCOPE_ENTRY
+  ScopeCtx MCAST_SCOPE_CTX
+  LastAddr IPNG_ADDRESS
+  TTL DWORD
+  ScopeDesc UNICODE_STRING
+
+pointer PMCAST_SCOPE_ENTRY MCAST_SCOPE_ENTRY
+
+struct DHCPCAPI_CLASSID
+  Flags ULONG
+  Data LPBYTE
+  nBytesData ULONG
+
+pointer LPDHCPCAPI_CLASSID DHCPCAPI_CLASSID
+
+struct DHCPAPI_PARAMS
+  Flags ULONG
+  OptionId ULONG
+  IsVendor BOOL
+  Data LPBYTE
+  nBytesData DWORD
+
+pointer LPDHCPCAPI_PARAMS DHCPAPI_PARAMS
+
+struct DHCPCAPI_PARAMS_ARRAY
+  nParams ULONG
+  Params LPDHCPCAPI_PARAMS
+
+struct MCAST_CLIENT_UID
+  ClientUID LPBYTE
+  ClientUIDLength DWORD
+
+pointer LPMCAST_CLIENT_UID MCAST_CLIENT_UID
+
+func DhcpCApiCleanup
+  VOID
+
+func DhcpDeRegisterParamChange
+  [ERROR_CODE]
+  Flags DWORD
+  Reserved LPVOID
+  Event LPVOID
+
+func DhcpRegisterParamChange
+  [ERROR_CODE]
+  Flags DWORD
+  Reserved LPVOID
+  AdapterName LPWSTR
+  pClassId LPDHCPCAPI_CLASSID
+  Params DHCPCAPI_PARAMS_ARRAY
+  Handle LPVOID
+
+func DhcpRequestParams
+  [ERROR_CODE]
+  Flags DWORD
+  Reserved LPVOID
+  AdapterName LPWSTR
+  ClassId LPDHCPCAPI_CLASSID
+  SendParams DHCPCAPI_PARAMS_ARRAY
+  RecdParams DHCPCAPI_PARAMS_ARRAY
+  Buffer LPBYTE
+  pSize LPDWORD
+  RequestIdStr LPWSTR
+
+func DhcpRemoveDNSRegistrations
+  [ERROR_CODE]
+
+func DhcpUndoRequestParams
+  [ERROR_CODE]
+  Flags DWORD
+  Reserved LPVOID
+  AdapterName LPWSTR
+  RequestIdStr LPWSTR
+
+func DhcpCApiInitialize
+  [ERROR_CODE]
+  Version LPDWORD
+
+func McastApiCleanup
+  VOID
+
+func McastApiStartup
+  [ERROR_CODE]
+  pVersion PDWORD
+
+func McastEnumerateScopes
+  [ERROR_CODE]
+  AddrFamily IP_ADDR_FAMILY
+  ReQuery BOOL
+  pScopeList PMCAST_SCOPE_ENTRY
+  pScopeLen PDWORD
+  pScopeCount PDWORD
+
+func McastGenUID
+  [ERROR_CODE]
+  pRequestID LPMCAST_CLIENT_UID
+
+func McastReleaseAddress
+  [ERROR_CODE]
+  AddrFamily IP_ADDR_FAMILY
+  pRequestID LPMCAST_CLIENT_UID
+  pReleaseRequest PMCAST_LEASE_REQUEST
+
+func McastRenewAddress
+  [ERROR_CODE]
+  AddrFamily IP_ADDR_FAMILY
+  pRequestID LPMCAST_CLIENT_UID
+  pRenewRequest PMCAST_LEASE_REQUEST
+  pRenewResponse PMCAST_LEASE_RESPONSE
+
+func McastRequestAddress
+  [ERROR_CODE]
+  AddrFamily IP_ADDR_FAMILY
+  pRequestID LPMCAST_CLIENT_UID
+  pScopeCtx PMCAST_SCOPE_CTX
+  pAddrRequest PMCAST_LEASE_REQUEST
+  pAddrResponse PMCAST_LEASE_RESPONSE
+

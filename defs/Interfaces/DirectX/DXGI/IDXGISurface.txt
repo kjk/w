@@ -1,0 +1,16 @@
+include Interfaces\DirectX\DXGI\IDXGIDeviceSubObject.txt
+
+ingterface IDXGISurface base=IDXGIDeviceSubObject id={cafcb56c-6ac3-4889-bf47-9e23bbd260ec} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func GetDesc
+    HRESULT
+    pDesc DXGI_SURFACE_DESC*
+
+  func Map
+    HRESULT
+    pLockedRect DXGI_MAPPED_RECT*
+    MapFlags UINT
+
+  func Unmap
+    HRESULT
+
+

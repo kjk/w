@@ -1,0 +1,10 @@
+include Interfaces\OLEDB\Recordset21.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface _ADORecordset base=Recordset21 id={00001556-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func Save
+    [OLEDB_HRESULT]
+    Destination VARIANT
+    PersistFormat PersistFormatEnum
+
+

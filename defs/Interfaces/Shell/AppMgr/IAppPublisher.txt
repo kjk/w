@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\AppMgr\AppMgr.h.txt
+
+ingterface IAppPublisher base=IUnknown id={07250A10-9CF9-11D1-9076-006008059382} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Application Manager"
+  func GetNumberOfCategories
+    HRESULT
+    pdwCat DWORD*
+
+  func GetCategories
+    HRESULT
+    pAppCategoryList APPCATEGORYINFOLIST*
+
+  func GetNumberOfApps
+    HRESULT
+    pdwApps DWORD*
+
+  func EnumApps
+    HRESULT
+    pAppCategoryId GUID*
+    ppepa IEnumPublishedApps**
+
+

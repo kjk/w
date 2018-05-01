@@ -1,0 +1,19 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMGraphStreams base=IUnknown id={632105FA-072E-11d3-8AF9-00C04FB6BD3D} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func FindUpstreamInterface
+    HRESULT
+    pPin IPin*
+    riid REFIID
+    ppvInterface void** interfaceId=riid
+    dwFlags DWORD
+
+  func SyncUsingStreamOffset
+    HRESULT
+    bUseStreamOffset BOOL
+
+  func SetMaxGraphLatency
+    HRESULT
+    rtMaxGraphLatency REFERENCE_TIME
+
+

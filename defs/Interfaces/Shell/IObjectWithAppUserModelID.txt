@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IObjectWithAppUserModelID base=IUnknown id={36db0196-9665-46d1-9ba7-d3709eecf9ed} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetAppID
+    HRESULT
+    pszAppID LPCWSTR
+
+  func GetAppID
+    HRESULT
+    ppszAppID LPWSTR*
+
+

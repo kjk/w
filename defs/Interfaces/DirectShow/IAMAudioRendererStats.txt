@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMAudioRendererStats base=IUnknown id={22320CB2-D41A-11d2-BF7C-D7CB9DF0BF93} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetStatParam
+    HRESULT
+    dwParam DWORD
+    pdwParam1 DWORD*
+    pdwParam2 DWORD*
+
+

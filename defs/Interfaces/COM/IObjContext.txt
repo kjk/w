@@ -1,0 +1,25 @@
+include Interfaces\COM\IContext.txt
+
+ingterface IObjContext base=IContext id={000001c6-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Reserved1
+    void
+
+  func Reserved2
+    void
+
+  func Reserved3
+    void
+
+  func Reserved4
+    void
+
+  func Reserved5
+    void
+
+  func Reserved6
+    void
+
+  func Reserved7
+    void
+
+

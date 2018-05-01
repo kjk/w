@@ -1,0 +1,90 @@
+include Interfaces\IUnknown.txt
+include Headers\multimedia.h.txt
+
+ingterface IDirectSoundBuffer base=IUnknown id={279afa85-4981-11ce-a521-0020af0be560} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func GetCaps
+    [DS_HRESULT]
+    pDSBufferCaps LPDSBCAPS
+
+  func GetCurrentPosition
+    [DS_HRESULT]
+    pdwCurrentPlayCursor LPDWORD
+    pdwCurrentWriteCursor LPDWORD
+
+  func GetFormat
+    [DS_HRESULT]
+    pwfxFormat LPWAVEFORMATEX
+    dwSizeAllocated DWORD
+    pdwSizeWritten LPDWORD
+
+  func GetVolume
+    [DS_HRESULT]
+    plVolume LPLONG
+
+  func GetPan
+    [DS_HRESULT]
+    plPan LPLONG
+
+  func GetFrequency
+    [DS_HRESULT]
+    pdwFrequency LPDWORD
+
+  func GetStatus
+    [DS_HRESULT]
+    pdwStatus LPDWORD
+
+  func Initialize
+    [DS_HRESULT]
+    pDirectSound LPDIRECTSOUND
+    pcDSBufferDesc LPCDSBUFFERDESC
+
+  func Lock
+    [DS_HRESULT]
+    dwOffset DWORD
+    dwBytes DWORD
+    ppvAudioPtr1 LPVOID*
+    pdwAudioBytes1 LPDWORD
+    ppvAudioPtr2 LPVOID*
+    pdwAudioBytes2 LPDWORD
+    dwFlags [DSBLOCK_Flags]
+
+  func Play
+    [DS_HRESULT]
+    dwReserved1 DWORD
+    dwPriority DWORD
+    dwFlags [DSBPLAY_Flags]
+
+  func SetCurrentPosition
+    [DS_HRESULT]
+    dwNewPosition DWORD
+
+  func SetFormat
+    [DS_HRESULT]
+    pcfxFormat LPCWAVEFORMATEX
+
+  func SetVolume
+    [DS_HRESULT]
+    lVolume LONG
+
+  func SetPan
+    [DS_HRESULT]
+    lPan LONG
+
+  func SetFrequency
+    [DS_HRESULT]
+    dwFrequency DWORD
+
+  func Stop
+    [DS_HRESULT]
+
+  func Unlock
+    [DS_HRESULT]
+    pvAudioPtr1 LPVOID
+    dwAudioBytes1 DWORD
+    pvAudioPtr2 LPVOID
+    dwAudioBytes2 DWORD
+
+  func Restore
+    [DS_HRESULT]
+
+

@@ -1,0 +1,23 @@
+include Interfaces\IDispatch.txt
+include Interfaces\FileSystemObject\FileSystemObject.h.txt
+
+ingterface IFolderCollection base=IDispatch id={C7C3F5A3-88A3-11D0-ABCB-00A0C90FFFC0} errorFunc=HRESULT onlineHelp=MSDN category="Scripting Runtime Library/FileSystemObject"
+  func Add
+    HRESULT
+    Name BSTR
+    ppfolder IFolder**
+
+  func get_Item
+    HRESULT
+    Key VARIANT
+    ppfolder IFolder**
+
+  func get__NewEnum
+    HRESULT
+    ppenum IUnknown**
+
+  func get_Count
+    HRESULT
+    plCount long*
+
+

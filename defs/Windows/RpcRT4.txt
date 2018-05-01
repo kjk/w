@@ -1,0 +1,2737 @@
+include Headers\windows.h.txt
+include Headers\cryptography.h.txt
+include Headers\rpc.h.txt
+
+dll RpcRT4.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Networking/Remote Procedure Call (RPC)"
+category "Networking/Remote Procedure Call (RPC)/Universally Unique Identifier (UUID)"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/Client and Server Contexts"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/Strings"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/Unions"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/Arrays"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/Structures"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/Transmit and Represent"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/Interface Pointer"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/User Marshal"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/Byte Count Pointer"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/Auxilary Routines"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/Interpreter Calls"
+category "Networking/Remote Procedure Call (RPC)/RPC NDR Interface/Full Pointer"
+alias handle_t LPVOID
+
+pointer handle_t* handle_t
+
+alias MIDL_ES_READ LPVOID
+
+alias MIDL_ES_ALLOC LPVOID
+
+alias MIDL_ES_WRITE LPVOID
+
+alias RPC_INTERFACE_GROUP LPVOID
+
+pointer PRPC_INTERFACE_GROUP RPC_INTERFACE_GROUP
+
+alias RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN LPVOID
+
+alias "const IPSFactoryBufferVtbl*" LPVOID
+
+alias "const PCInterfaceProxyVtblList*" LPVOID
+
+alias "const PCInterfaceStubVtblList*" LPVOID
+
+alias "const PCInterfaceName*" "const char*"
+
+alias "const PIIDLookup" LPVOID
+
+alias "const IID**" IID**
+
+alias PFORMAT_STRING LPBYTE
+
+alias NDR_RUNDOWN LPVOID
+
+alias NDR_CCONTEXT LPVOID
+
+pointer NDR_CCONTEXT* NDR_CCONTEXT
+
+alias RPC_FORWARD_FUNCTION* LPVOID
+
+alias RPC_ADDRESS_CHANGE_FN* LPVOID
+
+alias RPC_DISPATCH_FUNCTION* LPVOID
+
+alias I_RPC_MUTEX LPVOID
+
+pointer I_RPC_MUTEX* I_RPC_MUTEX
+
+interface IRpcStubBuffer
+
+interface IPSFactoryBuffer
+
+alias MIDL_STUB_MESSAGE* LPVOID
+
+alias PMIDL_STUB_MESSAGE LPVOID
+
+alias PMIDL_STUB_DESC LPVOID
+
+alias "const MIDL_STUB_DESC*" LPVOID
+
+array "void* [2]" base=void* count=2
+
+array "UINT_PTR [3]" base=UINT_PTR count=3
+
+array "ULONG_PTR [5]" base=ULONG_PTR count=5
+
+alias [BOOL|int] BOOL display=int
+
+struct NDR_USER_MARSHAL_INFO_LEVEL1
+  Buffer void*
+  BufferSize "unsigned long"
+  pfnAllocate void*
+  pfnFree void*
+  pRpcChannelBuffer IRpcChannelBuffer*
+  Reserved "ULONG_PTR [5]"
+
+union [NDR_USER_MARSHAL_INFO_u] display=union
+  Level1 NDR_USER_MARSHAL_INFO_LEVEL1
+
+struct NDR_USER_MARSHAL_INFO
+  InformationLevel "unsigned long"
+   [NDR_USER_MARSHAL_INFO_u]
+
+pointer NDR_USER_MARSHAL_INFO* NDR_USER_MARSHAL_INFO
+
+enum [BindingOptions] "unsigned long" display="unsigned long"
+  RPC_C_DONT_FAIL              4
+  RPC_C_OPT_SESSION_ID         6
+  RPC_C_OPT_COOKIE_AUTH        7
+  RPC_C_OPT_RESOURCE_TYPE_UUID 8
+  RPC_C_OPT_BINDING_NONCAUSAL  9
+  RPC_C_OPT_UNIQUE_BINDING     11
+  RPC_C_OPT_DONT_LINGER        13
+  RPC_C_OPT_MAX_OPTIONS        17
+
+flag [InterfaceRegistrationFlags] "unsigned int" display="unsigned int"
+  RPC_IF_AUTOLISTEN                   0x0001
+  RPC_IF_OLE                          0x0002
+  RPC_IF_ALLOW_UNKNOWN_AUTHORITY      0x0004
+  RPC_IF_ALLOW_SECURE_ONLY            0x0008
+  RPC_IF_ALLOW_CALLBACKS_WITH_NO_AUTH 0x0010
+  RPC_IF_ALLOW_LOCAL_ONLY             0x0020
+  RPC_IF_SEC_NO_CACHE                 0x0040
+  RPC_IF_SEC_CACHE_PER_PROC           0x0080
+  RPC_IF_ASYNC_CALLBACK               0x0100
+
+enum MIDL_ES_CODE UINT
+  MES_ENCODE       0
+  MES_DECODE       1
+  MES_ENCODE_NDR64 2
+
+enum MIDL_ES_HANDLE_STYLE "unsigned long" display="unsigned long"
+  MES_INCREMENTAL_HANDLE    0
+  MES_FIXED_BUFFER_HANDLE   1
+  MES_DYNAMIC_BUFFER_HANDLE 2
+
+struct RPC_INTERFACE_TEMPLATE
+  Version "unsigned long"
+  IfSpec RPC_IF_HANDLE
+  MgrTypeUuid UUID*
+  MgrEpv RPC_MGR_EPV*
+  Flags "unsigned int"
+  MaxCalls "unsigned int"
+  MaxRpcSize "unsigned int"
+  IfCallback RPC_IF_CALLBACK_FN*
+  UuidVector UUID_VECTOR*
+  Annotation RPC_TSTR
+  SecurityDescriptor void*
+
+pointer RPC_INTERFACE_TEMPLATE* RPC_INTERFACE_TEMPLATE
+
+struct RPC_ENDPOINT_TEMPLATE
+  Version "unsigned long"
+  ProtSeq RPC_TSTR
+  Endpoint RPC_TSTR
+  SecurityDescriptor void*
+  Backlog "unsigned long"
+
+pointer RPC_ENDPOINT_TEMPLATE* RPC_ENDPOINT_TEMPLATE
+
+union CLIENT_CALL_RETURN
+  Pointer void*
+  Simple LONG_PTR
+
+struct ProxyFileInfo
+  pProxyVtblList "const PCInterfaceProxyVtblList*"
+  pStubVtblList "const PCInterfaceStubVtblList*"
+  pNamesArray "const PCInterfaceName*"
+  pDelegatedIIDs "const IID**"
+  pIIDLookupRtn "const PIIDLookup"
+  TableSize "unsigned short"
+  TableVersion "unsigned short"
+  pAsyncIIDLookup "const IID**"
+  Filler2 LONG_PTR
+  Filler3 LONG_PTR
+  Filler4 LONG_PTR
+
+pointer ProxyFileInfo* ProxyFileInfo
+
+pointer "const ProxyFileInfo**" ProxyFileInfo*
+
+struct CStdPSFactoryBuffer
+  lpVtbl "const IPSFactoryBufferVtbl*"
+  RefCount long
+  pProxyFileList "const ProxyFileInfo**"
+  Filler1 long
+
+pointer CStdPSFactoryBuffer* CStdPSFactoryBuffer
+
+struct [NDR_SCONTEXT_s] display=struct
+  pad "void* [2]"
+  userContext void*
+
+pointer NDR_SCONTEXT [NDR_SCONTEXT_s]
+
+struct RPC_MESSAGE
+  Handle RPC_BINDING_HANDLE
+  DataRepresentation "unsigned long"
+  Buffer void* length=BufferLength
+  BufferLength "unsigned int"
+  ProcNum "unsigned int"
+  TransferSyntax PRPC_SYNTAX_IDENTIFIER
+  RpcInterfaceInformation void*
+  ReservedForRuntime void*
+  ManagerEpv RPC_MGR_EPV*
+  ImportContext void*
+  RpcFlags "unsigned long"
+
+pointer RPC_MESSAGE* RPC_MESSAGE
+
+pointer PRPC_MESSAGE RPC_MESSAGE
+
+struct RPC_TRANSFER_SYNTAX
+  Uuid UUID
+  VersMajor "unsigned short"
+  VersMinor "unsigned short"
+
+pointer RPC_TRANSFER_SYNTAX* RPC_TRANSFER_SYNTAX
+
+struct RPC_DISPATCH_TABLE
+  DispatchTableCount "unsigned int"
+  DispatchTable RPC_DISPATCH_FUNCTION* count=DispatchTableCount
+  Reserved LONG_PTR
+
+pointer RPC_DISPATCH_TABLE* RPC_DISPATCH_TABLE
+
+pointer PRPC_DISPATCH_TABLE RPC_DISPATCH_TABLE
+
+struct RPC_PROTSEQ_ENDPOINT
+  RpcProtocolSequence "unsigned char*"
+  Endpoint "unsigned char*"
+
+pointer PRPC_PROTSEQ_ENDPOINT RPC_PROTSEQ_ENDPOINT
+
+struct RPC_SERVER_INTERFACE
+  Length "unsigned int"
+  InterfaceId RPC_SYNTAX_IDENTIFIER
+  TransferSyntax RPC_SYNTAX_IDENTIFIER
+  DispatchTable PRPC_DISPATCH_TABLE
+  RpcProtseqEndpointCount "unsigned int"
+  RpcProtseqEndpoint PRPC_PROTSEQ_ENDPOINT count=RpcProtseqEndpointCount
+  DefaultManagerEpv RPC_MGR_EPV*
+  InterpreterInfo "void const*"
+  Flags "unsigned int"
+
+pointer RPC_SERVER_INTERFACE* RPC_SERVER_INTERFACE
+
+enum RPC_HTTP_REDIRECTOR_STAGE UINT
+  RPCHTTP_RS_REDIRECT  1
+  RPCHTTP_RS_ACCESS_1  2
+  RPCHTTP_RS_SESSION   3
+  RPCHTTP_RS_ACCESS_2  4
+  RPCHTTP_RS_INTERFACE 5
+
+struct RDR_CALLOUT_STATE
+  LastError RPC_STATUS
+  LastEEInfo void*
+  LastCalledStage RPC_HTTP_REDIRECTOR_STAGE
+  ServerName "unsigned short*"
+  ServerPort "unsigned short*"
+  RemoteUser "unsigned short*"
+  AuthType "unsigned short*"
+  ResourceTypePresent "unsigned char"
+  SessionIdPresent "unsigned char"
+  InterfacePresent "unsigned char"
+  ResourceType UUID
+  SessionId UUID
+  Interface RPC_SYNTAX_IDENTIFIER
+  CertContext void*
+
+pointer RDR_CALLOUT_STATE* RDR_CALLOUT_STATE
+
+struct MIDL_TYPE_PICKLING_INFO
+  Version "unsigned long"
+  Flags "unsigned long"
+  Reserved "UINT_PTR [3]"
+
+pointer "const MIDL_TYPE_PICKLING_INFO*" MIDL_TYPE_PICKLING_INFO
+
+enum [RPC_TRANSPORT_TYPE] "unsigned int" display="unsigned int"
+  TRANSPORT_TYPE_CN   0x01
+  TRANSPORT_TYPE_DG   0x02
+  TRANSPORT_TYPE_LPC  0x04
+  TRANSPORT_TYPE_WMSG 0x08
+
+pointer [RPC_TRANSPORT_TYPE*] [RPC_TRANSPORT_TYPE] display="unsigned int*"
+
+struct MIDL_SYNTAX_INFO
+  TransferSyntax RPC_SYNTAX_IDENTIFIER
+  DispatchTable RPC_DISPATCH_TABLE*
+  ProcString PFORMAT_STRING
+  FmtStringOffset "const unsigned short*"
+  TypeString PFORMAT_STRING
+  aUserMarshalQuadruple "const void*"
+  pReserved1 ULONG_PTR
+  pReserved2 ULONG_PTR
+
+pointer PMIDL_SYNTAX_INFO MIDL_SYNTAX_INFO
+
+struct MIDL_STUBLESS_PROXY_INFO
+  pStubDesc PMIDL_STUB_DESC
+  ProcFormatString PFORMAT_STRING
+  FormatStringOffset "const unsigned short*"
+  pTransferSyntax PRPC_SYNTAX_IDENTIFIER
+  nCount ULONG_PTR
+  pSyntaxInfo PMIDL_SYNTAX_INFO count=nCount
+
+pointer MIDL_STUBLESS_PROXY_INFO* MIDL_STUBLESS_PROXY_INFO
+
+struct FULL_PTR_TO_REFID_ELEMENT
+  Next LPVOID display=FULL_PTR_TO_REFID_ELEMENT*
+  Pointer void*
+  RefId "unsigned long"
+  State "unsigned char"
+
+pointer PFULL_PTR_TO_REFID_ELEMENT FULL_PTR_TO_REFID_ELEMENT
+
+pointer PFULL_PTR_TO_REFID_ELEMENT* PFULL_PTR_TO_REFID_ELEMENT
+
+enum XLAT_SIDE UINT
+  XLAT_SERVER 1
+  XLAT_CLIENT 2
+
+struct [FULL_PTR_XLAT_TABLES_s1] display=struct
+  XlatTable void**
+  StateTable "unsigned char*"
+  NumberOfEntries "unsigned long"
+
+struct [FULL_PTR_XLAT_TABLES_s2] display=struct
+  XlatTable PFULL_PTR_TO_REFID_ELEMENT*
+  NumberOfBuckets "unsigned long"
+  HashMask "unsigned long"
+
+struct FULL_PTR_XLAT_TABLES
+  RefIdToPointer [FULL_PTR_XLAT_TABLES_s1]
+  PointerToRefId [FULL_PTR_XLAT_TABLES_s2]
+  NextRefId "unsigned long"
+  XlatSide XLAT_SIDE
+
+pointer PFULL_PTR_XLAT_TABLES FULL_PTR_XLAT_TABLES
+
+func DceErrorInqText bothCharset
+  RPC_STATUS
+  StatusToConvert "unsigned long"
+  ErrorText RPC_TSTR
+
+func MesBufferHandleReset
+  RPC_STATUS
+  Handle handle_t
+  HandleStyle MIDL_ES_HANDLE_STYLE
+  OpCode MIDL_ES_CODE
+  ppBuffer char**
+  BufferSize "unsigned long"
+  pEncodedSize "unsigned long*"
+
+func MesDecodeBufferHandleCreate
+  RPC_STATUS
+  Buffer [LPVOID|char*] length=BufferSize
+  BufferSize "unsigned long"
+  pHandle handle_t*
+
+func MesDecodeIncrementalHandleCreate
+  RPC_STATUS
+  UserState void*
+  ReadFn MIDL_ES_READ
+  pHandle handle_t*
+
+func MesEncodeDynBufferHandleCreate
+  RPC_STATUS
+  ppBuffer char**
+  pEncodedSize "unsigned long*"
+  pHandle handle_t*
+
+func MesEncodeFixedBufferHandleCreate
+  RPC_STATUS
+  Buffer [LPVOID|char*] length=BufferSize
+  BufferSize "unsigned long"
+  pEncodedSize "unsigned long*"
+  pHandle handle_t*
+
+func MesEncodeIncrementalHandleCreate
+  RPC_STATUS
+  UserState void*
+  AllocFn MIDL_ES_ALLOC
+  WriteFn MIDL_ES_WRITE
+  pHandle handle_t*
+
+func MesHandleFree
+  RPC_STATUS
+  Handle handle_t
+
+func MesIncrementalHandleReset
+  RPC_STATUS
+  Handle handle_t
+  UserState void*
+  AllocFn MIDL_ES_ALLOC
+  WriteFn MIDL_ES_WRITE
+  ReadFn MIDL_ES_READ
+  OpCode MIDL_ES_CODE
+
+func MesInqProcEncodingId
+  RPC_STATUS
+  Handle handle_t
+  pInterfaceId PRPC_SYNTAX_IDENTIFIER
+  pProcNum "unsigned long*"
+
+func RpcAsyncAbortCall
+  RPC_STATUS
+  pAsync PRPC_ASYNC_STATE
+  ExceptionCode "unsigned long"
+
+func RpcAsyncCancelCall
+  RPC_STATUS
+  pAsync PRPC_ASYNC_STATE
+  fAbortCall BOOL
+
+func RpcAsyncCompleteCall
+  RPC_STATUS
+  pAsync PRPC_ASYNC_STATE
+  Reply PVOID
+
+func RpcAsyncGetCallStatus
+  RPC_STATUS
+  pAsync PRPC_ASYNC_STATE
+
+func RpcAsyncInitializeHandle
+  RPC_STATUS
+  pAsync PRPC_ASYNC_STATE
+  Size "unsigned int"
+
+func RpcAsyncRegisterInfo
+  void
+
+func RpcBindingBind
+  RPC_STATUS
+  pAsync PRPC_ASYNC_STATE
+  Binding RPC_BINDING_HANDLE
+  IfSpec RPC_IF_HANDLE
+
+func RpcBindingCopy
+  RPC_STATUS
+  SourceBinding RPC_BINDING_HANDLE
+  DestinationBinding RPC_BINDING_HANDLE*
+
+func RpcBindingCreate bothCharset
+  RPC_STATUS
+  Template RPC_BINDING_HANDLE_TEMPLATE_V1*
+  Security RPC_BINDING_HANDLE_SECURITY_V1*
+  Options RPC_BINDING_HANDLE_OPTIONS_V1*
+  Binding RPC_BINDING_HANDLE*
+
+func RpcBindingFree
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE*
+
+func RpcBindingFromStringBinding bothCharset
+  RPC_STATUS
+  StringBinding RPC_TSTR
+  Binding RPC_BINDING_HANDLE*
+
+func RpcBindingInqAuthClient bothCharset
+  RPC_STATUS
+  ClientBinding RPC_BINDING_HANDLE
+  Privs RPC_AUTHZ_HANDLE*
+  ServerPrincName RPC_TSTR* outputOnly
+  AuthnLevel [RPC_C_AUTHN_LEVEL*]
+  AuthnSvc [RPC_C_AUTHN_SVC*]
+  AuthzSvc [RPC_C_AUTHZ*]
+
+func RpcBindingInqAuthClientEx bothCharset
+  RPC_STATUS
+  ClientBinding RPC_BINDING_HANDLE
+  Privs RPC_AUTHZ_HANDLE*
+  ServerPrincName RPC_TSTR* outputOnly
+  AuthnLevel [RPC_C_AUTHN_LEVEL*]
+  AuthnSvc [RPC_C_AUTHN_SVC*]
+  AuthzSvc [RPC_C_AUTHZ*]
+  flags "unsigned long"
+
+func RpcBindingInqAuthInfo bothCharset
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  ServerPrincName RPC_TSTR*
+  AuthnLevel [RPC_C_AUTHN_LEVEL*]
+  AuthnSvc [RPC_C_AUTHN_SVC*]
+  AuthIdentity RPC_AUTH_IDENTITY_HANDLE*
+  AuthzSvc [RPC_C_AUTHZ*]
+
+func RpcBindingInqAuthInfoEx bothCharset
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  ServerPrincName RPC_TSTR
+  AuthnLevel [RPC_C_AUTHN_LEVEL*]
+  AuthnSvc [RPC_C_AUTHN_SVC*]
+  AuthIdentity RPC_AUTH_IDENTITY_HANDLE*
+  AuthzSvc [RPC_C_AUTHZ*]
+  RpcQosVersion "unsigned long"
+  SecurityQos RPC_SECURITY_QOS*
+
+func RpcBindingInqObject
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  ObjectUuid UUID*
+
+func RpcBindingInqOption
+  RPC_STATUS
+  hBinding RPC_BINDING_HANDLE
+  Option "unsigned long"
+  pOptionValue "unsigned long*"
+
+func RpcBindingReset
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+
+func RpcBindingServerFromClient
+  RPC_STATUS
+  ClientBinding RPC_BINDING_HANDLE
+  ServerBinding RPC_BINDING_HANDLE*
+
+func RpcBindingSetAuthInfo bothCharset
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  ServerPrincName RPC_TSTR
+  AuthnLevel [RPC_C_AUTHN_LEVEL]
+  AuthnSvc [RPC_C_AUTHN_SVC]
+  AuthIdentity RPC_AUTH_IDENTITY_HANDLE
+  AuthzService "unsigned long"
+
+func RpcBindingSetAuthInfoEx bothCharset
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  ServerPrincName RPC_TSTR
+  AuthnLevel [RPC_C_AUTHN_LEVEL]
+  AuthnSvc [RPC_C_AUTHN_SVC]
+  AuthIdentity RPC_AUTH_IDENTITY_HANDLE
+  AuthzSvc [RPC_C_AUTHZ]
+  SecurityQOS RPC_SECURITY_QOS*
+
+func RpcBindingSetObject
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  ObjectUuid UUID*
+
+func RpcBindingSetOption
+  RPC_STATUS
+  hBinding RPC_BINDING_HANDLE
+  Option [BindingOptions]
+  OptionValue "unsigned long"
+
+func RpcBindingToStringBinding bothCharset
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  StringBinding RPC_TSTR* outputOnly
+
+func RpcBindingUnbind
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+
+func RpcBindingVectorFree
+  RPC_STATUS
+  BindingVector RPC_BINDING_VECTOR**
+
+func RpcCancelThread
+  RPC_STATUS
+  ThreadHandle HANDLE
+
+func RpcCancelThreadEx
+  RPC_STATUS
+  ThreadHandle HANDLE
+  Timeout LONG
+
+func RpcCertGeneratePrincipalName bothCharset
+  void
+  Context PCCERT_CONTEXT
+  Flags DWORD
+  pBuffer UCHAR**
+
+func RpcEpRegister bothCharset
+  RPC_STATUS
+  IfSpec RPC_IF_HANDLE
+  BindingVector RPC_BINDING_VECTOR*
+  UuidVector UUID_VECTOR*
+  Annotation RPC_TSTR
+
+func RpcEpRegisterNoReplace bothCharset
+  RPC_STATUS
+  IfSpec RPC_IF_HANDLE
+  BindingVector RPC_BINDING_VECTOR*
+  UuidVector UUID_VECTOR*
+  Annotation RPC_TSTR
+
+func RpcEpResolveBinding
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  IfSpec RPC_IF_HANDLE
+
+func RpcEpUnregister
+  RPC_STATUS
+  IfSpec RPC_IF_HANDLE
+  BindingVector RPC_BINDING_VECTOR*
+  UuidVector UUID_VECTOR*
+
+func RpcErrorAddRecord
+  RPC_STATUS
+  ErrorInfo RPC_EXTENDED_ERROR_INFO*
+
+func RpcErrorClearInformation
+  void
+
+func RpcErrorEndEnumeration
+  RPC_STATUS
+  EnumHandle RPC_ERROR_ENUM_HANDLE*
+
+func RpcErrorGetNextRecord
+  RPC_STATUS
+  EnumHandle RPC_ERROR_ENUM_HANDLE*
+  CopyStrings BOOL
+  ErrorInfo RPC_EXTENDED_ERROR_INFO*
+
+func RpcErrorGetNumberOfRecords
+  RPC_STATUS
+  EnumHandle RPC_ERROR_ENUM_HANDLE*
+  Records int*
+
+func RpcErrorLoadErrorInfo
+  RPC_STATUS
+  ErrorBlob PVOID
+  BlobSize size_t
+  EnumHandle RPC_ERROR_ENUM_HANDLE*
+
+func RpcErrorResetEnumeration
+  RPC_STATUS
+  EnumHandle RPC_ERROR_ENUM_HANDLE*
+
+func RpcErrorSaveErrorInfo
+  RPC_STATUS
+  EnumHandle RPC_ERROR_ENUM_HANDLE*
+  ErrorBlob PVOID*
+  BlobSize size_t*
+
+func RpcErrorStartEnumeration
+  RPC_STATUS
+  EnumHandle RPC_ERROR_ENUM_HANDLE*
+
+func RpcIfIdVectorFree
+  RPC_STATUS
+  IfIdVec RPC_IF_ID_VECTOR**
+
+func RpcIfInqId
+  RPC_STATUS
+  RpcIfHandle RPC_IF_HANDLE
+  RpcIfId RPC_IF_ID*
+
+func RpcImpersonateClient
+  RPC_STATUS
+  BindingHandle RPC_BINDING_HANDLE
+
+func RpcMgmtEnableIdleCleanup
+  RPC_STATUS
+
+func RpcMgmtEpEltInqBegin
+  RPC_STATUS
+  EpBinding RPC_BINDING_HANDLE
+  InquiryType "unsigned long"
+  IfId RPC_IF_ID*
+  VersOption "unsigned long"
+  ObjectUuid UUID*
+  InquiryContext RPC_EP_INQ_HANDLE*
+
+func RpcMgmtEpEltInqDone
+  RPC_STATUS
+  InquiryContext RPC_EP_INQ_HANDLE*
+
+func RpcMgmtEpEltInqNext bothCharset
+  RPC_STATUS
+  InquiryContext RPC_EP_INQ_HANDLE
+  IfId RPC_IF_ID*
+  Binding RPC_BINDING_HANDLE*
+  ObjectUuid UUID*
+  Annotation RPC_TSTR* outputOnly
+
+func RpcMgmtEpUnregister
+  RPC_STATUS
+  EpBinding RPC_BINDING_HANDLE
+  IfId RPC_IF_ID*
+  Binding RPC_BINDING_HANDLE
+  ObjectUuid UUID*
+
+func RpcMgmtInqComTimeout
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  Timeout "unsigned int*"
+
+func RpcMgmtInqDefaultProtectLevel
+  RPC_STATUS
+  AuthnSvc [RPC_C_AUTHN_SVC] display="unsigned int"
+  AuthnLevel [RPC_C_AUTHN_LEVEL-unsigned-int*]
+
+func RpcMgmtInqIfIds
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  IfIdVector RPC_IF_ID_VECTOR**
+
+func RpcMgmtInqServerPrincName bothCharset
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  AuthnSvc [RPC_C_AUTHN_SVC] display="unsigned int"
+  ServerPrincName RPC_TSTR* outputOnly
+
+func RpcMgmtInqStats
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  Statistics RPC_STATS_VECTOR**
+
+func RpcMgmtIsServerListening
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+
+func RpcMgmtSetAuthorizationFn
+  RPC_STATUS
+  AuthorizationFn RPC_MGMT_AUTHORIZATION_FN
+
+func RpcMgmtSetCancelTimeout
+  RPC_STATUS
+  Seconds "signed int"
+
+func RpcMgmtSetComTimeout
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  Timeout "unsigned int"
+
+func RpcMgmtSetServerStackSize
+  RPC_STATUS
+  ThreadStackSize "unsigned int"
+
+func RpcMgmtStatsVectorFree
+  RPC_STATUS
+  StatsVector RPC_STATS_VECTOR**
+
+func RpcMgmtStopServerListening
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+
+func RpcMgmtWaitServerListen
+  RPC_STATUS
+
+func RpcNetworkInqProtseqs bothCharset
+  RPC_STATUS
+  ProtSeqVector RPC_PROTSEQ_VECTOR**
+
+func RpcNetworkIsProtseqValid bothCharset
+  RPC_STATUS
+  Protseq RPC_TSTR
+
+func RpcNsBindingInqEntryName bothCharset
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  EntryNameSyntax "unsigned long"
+  EntryName RPC_TSTR* outputOnly
+
+func RpcObjectInqType
+  RPC_STATUS
+  ObjUuid UUID*
+  TypeUuid UUID*
+
+func RpcObjectSetInqFn
+  RPC_STATUS
+  InquiryFn RPC_OBJECT_INQ_FN
+
+func RpcObjectSetType
+  RPC_STATUS
+  ObjUuid UUID*
+  TypeUuid UUID*
+
+func RpcProtseqVectorFree bothCharset
+  RPC_STATUS
+  ProtSeqVector RPC_PROTSEQ_VECTOR**
+
+func RpcRevertToSelf
+  RPC_STATUS
+
+func RpcRevertToSelfEx
+  RPC_STATUS
+  BindingHandle RPC_BINDING_HANDLE
+
+func RpcServerInqBindings
+  RPC_STATUS
+  BindingVector RPC_BINDING_VECTOR**
+
+func RpcServerInqCallAttributes bothCharset
+  RPC_STATUS
+  ClientBinding RPC_BINDING_HANDLE
+  RpcCallAttributes void*
+
+func RpcServerInqDefaultPrincName bothCharset
+  RPC_STATUS
+  AuthnSvc [RPC_C_AUTHN_SVC]
+  PrincName RPC_TSTR*
+
+func RpcServerInqBindingHandle
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE*
+
+func RpcServerInqIf
+  RPC_STATUS
+  IfSpec RPC_IF_HANDLE
+  MgrTypeUuid UUID*
+  MgrEpv RPC_MGR_EPV**
+
+func RpcServerListen
+  RPC_STATUS
+  MinimumCallThreads "unsigned int"
+  MaxCalls "unsigned int"
+  DontWait "unsigned int"
+
+func RpcServerRegisterAuthInfo bothCharset
+  RPC_STATUS
+  ServerPrincName RPC_TSTR
+  AuthnSvc [RPC_C_AUTHN_SVC]
+  GetKeyFn RPC_AUTH_KEY_RETRIEVAL_FN
+  Arg void*
+
+func RpcServerRegisterIf
+  RPC_STATUS
+  IfSpec RPC_IF_HANDLE
+  MgrTypeUuid UUID*
+  MgrEpv RPC_MGR_EPV*
+
+func RpcServerRegisterIf2
+  RPC_STATUS
+  IfSpec RPC_IF_HANDLE
+  MgrTypeUuid UUID*
+  MgrEpv RPC_MGR_EPV*
+  Flags [InterfaceRegistrationFlags]
+  MaxCalls "unsigned int"
+  MaxRpcSize "unsigned int"
+  IfCallbackFn RPC_IF_CALLBACK_FN*
+
+func RpcServerRegisterIfEx
+  RPC_STATUS
+  IfSpec RPC_IF_HANDLE
+  MgrTypeUuid UUID*
+  MgrEpv RPC_MGR_EPV*
+  Flags [InterfaceRegistrationFlags]
+  MaxCalls "unsigned int"
+  IfCallback RPC_IF_CALLBACK_FN*
+
+func RpcServerSubscribeForNotification
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  Notification RPC_NOTIFICATIONS
+  NotificationType RPC_NOTIFICATION_TYPES
+  NotificationInfo RPC_ASYNC_NOTIFICATION_INFO*
+
+func RpcServerTestCancel
+  RPC_STATUS
+  BindingHandle RPC_BINDING_HANDLE
+
+func RpcServerUnregisterIf
+  RPC_STATUS
+  IfSpec RPC_IF_HANDLE
+  MgrTypeUuid UUID*
+  WaitForCallsToComplete "unsigned int"
+
+func RpcServerUnregisterIfEx
+  RPC_STATUS
+  IfSpec RPC_IF_HANDLE
+  MgrTypeUuid UUID*
+  RundownContextHandles int
+
+func RpcServerUnsubscribeForNotification
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  Notification RPC_NOTIFICATIONS
+  NotificationsQueued "unsigned long*"
+
+func RpcServerUseAllProtseqs
+  RPC_STATUS
+  MaxCalls "unsigned int"
+  SecurityDescriptor void*
+
+func RpcServerUseAllProtseqsEx
+  RPC_STATUS
+  MaxCalls "unsigned int"
+  SecurityDescriptor void*
+  Policy PRPC_POLICY
+
+func RpcServerUseAllProtseqsIf
+  RPC_STATUS
+  MaxCalls "unsigned int"
+  IfSpec RPC_IF_HANDLE
+  SecurityDescriptor void*
+
+func RpcServerUseAllProtseqsIfEx
+  RPC_STATUS
+  MaxCalls "unsigned int"
+  IfSpec RPC_IF_HANDLE
+  SecurityDescriptor void*
+  Policy PRPC_POLICY
+
+func RpcServerUseProtseq bothCharset
+  RPC_STATUS
+  ProtSeq RPC_TSTR
+  MaxCalls "unsigned int"
+  SecurityDescriptor void*
+
+func RpcServerUseProtseqEx bothCharset
+  RPC_STATUS
+  ProtSeq RPC_TSTR
+  MaxCalls "unsigned int"
+  SecurityDescriptor void*
+  Policy PRPC_POLICY
+
+func RpcServerUseProtseqEp bothCharset
+  RPC_STATUS
+  Protseq RPC_TSTR
+  MaxCalls "unsigned int"
+  Endpoint RPC_TSTR
+  SecurityDescriptor void*
+
+func RpcServerUseProtseqEpEx bothCharset
+  RPC_STATUS
+  Protseq RPC_TSTR
+  MaxCalls "unsigned int"
+  Endpoint RPC_TSTR
+  SecurityDescriptor void*
+  Policy PRPC_POLICY
+
+func RpcServerUseProtseqIf bothCharset
+  RPC_STATUS
+  Protseq RPC_TSTR
+  MaxCalls "unsigned int"
+  IfSpec RPC_IF_HANDLE
+  SecurityDescriptor void*
+
+func RpcServerUseProtseqIfEx bothCharset
+  RPC_STATUS
+  Protseq RPC_TSTR
+  MaxCalls "unsigned int"
+  IfSpec RPC_IF_HANDLE
+  SecurityDescriptor void*
+  Policy PRPC_POLICY
+
+func RpcSmAllocate
+  success NotEqual=0
+  void*
+  Size size_t
+  pStatus RPC_STATUS*
+
+func RpcSmClientFree
+  RPC_STATUS
+  NodeToFree void*
+
+func RpcSmDestroyClientContext
+  RPC_STATUS
+  ContextHandle void**
+
+func RpcSmDisableAllocate
+  RPC_STATUS
+
+func RpcSmEnableAllocate
+  RPC_STATUS
+
+func RpcSmFree
+  RPC_STATUS
+  NodeToFree void*
+
+func RpcSmGetThreadHandle
+  success NotEqual=0
+  RPC_SS_THREAD_HANDLE
+  pStatus RPC_STATUS*
+
+func RpcSmSetClientAllocFree
+  RPC_STATUS
+  pfnAllocate RPC_CLIENT_ALLOC*
+  pfnFree RPC_CLIENT_FREE*
+
+func RpcSmSetThreadHandle
+  RPC_STATUS
+  Handle RPC_SS_THREAD_HANDLE
+
+func RpcSmSwapClientAllocFree
+  RPC_STATUS
+  pfnAllocate RPC_CLIENT_ALLOC*
+  pfnFree RPC_CLIENT_FREE*
+  pfnOldAllocate RPC_CLIENT_ALLOC**
+  pfnOldFree RPC_CLIENT_FREE**
+
+func RpcSsAllocate
+  success NotEqual=0
+  void*
+  Size size_t
+
+func RpcSsContextLockExclusive
+  RPC_STATUS
+  ServerBindingHandle RPC_BINDING_HANDLE
+  UserContext PVOID
+
+func RpcSsContextLockShared
+  RPC_STATUS
+  ServerBindingHandle RPC_BINDING_HANDLE
+  UserContext PVOID
+
+func RpcSsDestroyClientContext
+  void
+  ContextHandle void**
+
+func RpcSsDisableAllocate
+  void
+
+func RpcSsDontSerializeContext
+  void
+
+func RpcSsEnableAllocate
+  void
+
+func RpcSsFree
+  void
+  NodeToFree void*
+
+func RpcSsGetThreadHandle
+  success NotEqual=0
+  RPC_SS_THREAD_HANDLE
+
+func RpcSsSetClientAllocFree
+  void
+  pfnAllocate RPC_CLIENT_ALLOC*
+  pfnFree RPC_CLIENT_FREE*
+
+func RpcSsSetThreadHandle
+  void
+  Handle RPC_SS_THREAD_HANDLE
+
+func RpcSsSwapClientAllocFree
+  void
+  pfnAllocate RPC_CLIENT_ALLOC*
+  pfnFree RPC_CLIENT_FREE*
+  pfnOldAllocate RPC_CLIENT_ALLOC**
+  pfnOldFree RPC_CLIENT_FREE**
+
+func RpcStringBindingCompose bothCharset
+  RPC_STATUS
+  ObjUuid TCHAR*
+  ProtSeq TCHAR*
+  NetworkAddr TCHAR*
+  EndPoint TCHAR*
+  Options TCHAR*
+  StringBinding TCHAR** outputOnly
+
+func RpcStringBindingParse bothCharset
+  RPC_STATUS
+  StringBinding TCHAR*
+  ObjectUuid TCHAR** outputOnly
+  ProtSeq TCHAR** outputOnly
+  NetworkAddr TCHAR** outputOnly
+  EndPoint TCHAR** outputOnly
+  NetworkOptions TCHAR** outputOnly
+
+func RpcStringFree bothCharset
+  RPC_STATUS
+  String RPC_TSTR*
+
+func RpcTestCancel
+  RPC_STATUS
+
+func I_RpcBindingInqLocalClientPID
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  Pid "unsigned long*"
+
+func RpcFreeAuthorizationContext
+  RPC_STATUS
+  pAuthzClientContext PVOID*
+
+func RpcGetAuthorizationContextForClient
+  RPC_STATUS
+  ClientBinding RPC_BINDING_HANDLE
+  ImpersonateOnReturn BOOL
+  Reserved1 PVOID
+  pExpirationTime PLARGE_INTEGER
+  Reserved2 LUID
+  Reserved3 DWORD
+  Reserved4 PVOID
+  pAuthzClientContext PVOID*
+
+func RpcServerInterfaceGroupActivate
+  RPC_STATUS
+  IfGroup RPC_INTERFACE_GROUP
+
+func RpcServerInterfaceGroupClose
+  RPC_STATUS
+  IfGroup RPC_INTERFACE_GROUP
+
+func RpcServerInterfaceGroupCreate bothCharset
+  RPC_STATUS
+  Interfaces RPC_INTERFACE_TEMPLATE* count=NumIfs
+  NumIfs "unsigned long"
+  Endpoints RPC_ENDPOINT_TEMPLATE* count=NumEndpoints
+  NumEndpoints "unsigned long"
+  IdlePeriod "unsigned long"
+  IdleCallbackFn RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN
+  IdleCallbackContext void*
+  IfGroup PRPC_INTERFACE_GROUP
+
+func RpcServerInterfaceGroupDeactivate
+  RPC_STATUS
+  IfGroup RPC_INTERFACE_GROUP
+  ForceDeactivation "unsigned long"
+
+func RpcServerInterfaceGroupInqBindings
+  RPC_STATUS
+  IfGroup RPC_INTERFACE_GROUP
+  BindingVector RPC_BINDING_VECTOR**
+
+func RpcServerRegisterIf3
+  RPC_STATUS
+  IfSpec RPC_IF_HANDLE
+  MgrTypeUuid UUID*
+  MgrEpv RPC_MGR_EPV*
+  Flags [InterfaceRegistrationFlags]
+  MaxCalls "unsigned int"
+  MaxRpcSize "unsigned int"
+  IfCallback RPC_IF_CALLBACK_FN*
+  SecurityDescriptor void*
+
+func I_RpcAllocate
+  success NotEqual=0
+  void*
+  Size "unsigned int"
+
+func I_RpcAsyncAbortCall
+  RPC_STATUS
+  pAsync PRPC_ASYNC_STATE
+  ExceptionCode "unsigned long"
+
+func I_RpcAsyncSetHandle
+  RPC_STATUS
+  Message PRPC_MESSAGE
+  pAsync PRPC_ASYNC_STATE
+
+func I_RpcBindingCopy
+  RPC_STATUS
+  SourceBinding RPC_BINDING_HANDLE
+  DestinationBinding RPC_BINDING_HANDLE*
+
+func I_RpcBindingCreateNP
+  RPC_STATUS
+  ServerName RPC_WSTR
+  ServiceName RPC_WSTR
+  NetworkOptions RPC_WSTR
+  Binding RPC_BINDING_HANDLE*
+
+func I_RpcBindingHandleToAsyncHandle
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  AsyncHandle void**
+
+func I_RpcBindingInqDynamicEndpoint
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  DynamicEndpoint RPC_CSTR*
+
+func I_RpcBindingInqDynamicEndpoint bothCharset
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  DynamicEndpoint RPC_TSTR*
+
+func I_RpcBindingInqMarshalledTargetInfo
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  MarshalledTargetInfoSize "unsigned long*"
+  MarshalledTargetInfo RPC_CSTR*
+
+func I_RpcBindingInqSecurityContext
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  SecurityContextHandle void**
+
+func I_RpcBindingInqSecurityContextKeyInfo
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  KeyInfo void*
+
+func I_RpcBindingInqTransportType
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  Type [RPC_TRANSPORT_TYPE*]
+
+func I_RpcBindingInqWireIdForSnego
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  WireId "unsigned char*"
+
+func I_RpcBindingIsClientLocal
+  RPC_STATUS
+  BindingHandle RPC_BINDING_HANDLE
+  ClientLocalFlag "unsigned int*"
+
+func I_RpcBindingToStaticStringBindingW
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  StringBinding "unsigned short**"
+
+func I_RpcClearMutex
+  void
+  Mutex I_RPC_MUTEX
+
+func I_RpcConnectionInqSockBuffSize
+  RPC_STATUS
+  RecvBuffSize "unsigned long*"
+  SendBuffSize "unsigned long*"
+
+func I_RpcConnectionSetSockBuffSize
+  RPC_STATUS
+  RecvBuffSize "unsigned long"
+  SendBuffSize "unsigned long"
+
+func I_RpcDeleteMutex
+  void
+  Mutex I_RPC_MUTEX
+
+func I_RpcFree
+  void
+  Object void*
+
+func I_RpcFreeBuffer
+  RPC_STATUS
+  Message RPC_MESSAGE*
+
+func I_RpcFreePipeBuffer
+  RPC_STATUS
+  Message RPC_MESSAGE*
+
+func I_RpcGetBuffer
+  RPC_STATUS
+  Message RPC_MESSAGE*
+
+func I_RpcGetBufferWithObject
+  RPC_STATUS
+  Message RPC_MESSAGE*
+  ObjectUuid UUID*
+
+func I_RpcGetCurrentCallHandle
+  success NotEqual=0
+  RPC_BINDING_HANDLE
+
+func I_RpcGetExtendedError
+  RPC_STATUS
+
+func I_RpcIfInqTransferSyntaxes
+  RPC_STATUS
+  RpcIfHandle RPC_IF_HANDLE
+  TransferSyntaxes RPC_TRANSFER_SYNTAX* postCount=TransferSyntaxCount
+  TransferSyntaxSize "unsigned int"
+  TransferSyntaxCount "unsigned int*"
+
+func I_RpcMapWin32Status
+  long
+  Status RPC_STATUS
+
+func I_RpcMgmtEnableDedicatedThreadPool
+  RPC_STATUS
+
+func I_RpcNegotiateTransferSyntax
+  RPC_STATUS
+  Message RPC_MESSAGE*
+
+func I_RpcNsBindingSetEntryName
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  EntryNameSyntax "unsigned long"
+  EntryName RPC_CSTR
+
+func I_RpcNsBindingSetEntryName bothCharset
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  EntryNameSyntax "unsigned long"
+  EntryName RPC_TSTR
+
+func I_RpcNsInterfaceExported
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned short*"
+  RpcInterfaceInformation RPC_SERVER_INTERFACE*
+
+func I_RpcNsInterfaceUnexported
+  RPC_STATUS
+  EntryNameSyntax "unsigned long"
+  EntryName "unsigned short*"
+  RpcInterfaceInformation RPC_SERVER_INTERFACE*
+
+func I_RpcOpenClientProcess
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  DesiredAccess "unsigned long"
+  ClientProcess void**
+
+func I_RpcPauseExecution
+  void
+  Milliseconds "unsigned long"
+
+func I_RpcReallocPipeBuffer
+  RPC_STATUS
+  Message PRPC_MESSAGE
+  NewSize "unsigned int"
+
+func I_RpcReceive
+  RPC_STATUS
+  Message PRPC_MESSAGE
+  Size "unsigned int"
+
+func I_RpcRecordCalloutFailure
+  void
+  RpcStatus RPC_STATUS
+  CallOutState RDR_CALLOUT_STATE*
+  DllName "unsigned short*"
+
+func I_RpcRequestMutex
+  void
+  Mutex I_RPC_MUTEX*
+
+func I_RpcSend
+  RPC_STATUS
+  Message PRPC_MESSAGE
+
+func I_RpcSendReceive
+  RPC_STATUS
+  Message RPC_MESSAGE*
+
+func I_RpcServerCheckClientRestriction
+  RPC_STATUS
+  Context RPC_BINDING_HANDLE
+
+func I_RpcServerInqAddressChangeFn
+  success NotEqual=0
+  RPC_ADDRESS_CHANGE_FN*
+
+func I_RpcServerInqLocalConnAddress
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  Buffer void*
+  BufferSize "unsigned long*"
+  AddressFormat "unsigned long*"
+
+func I_RpcServerInqRemoteConnAddress
+  RPC_STATUS
+  Binding RPC_BINDING_HANDLE
+  Buffer void*
+  BufferSize "unsigned long*"
+  AddressFormat "unsigned long*"
+
+func I_RpcServerInqTransportType
+  RPC_STATUS
+  Type [RPC_TRANSPORT_TYPE*]
+
+func I_RpcServerRegisterForwardFunction
+  RPC_STATUS
+  pForwardFunction RPC_FORWARD_FUNCTION*
+
+func I_RpcServerSetAddressChangeFn
+  RPC_STATUS
+  pAddressChangeFn RPC_ADDRESS_CHANGE_FN*
+
+func I_RpcServerStartService
+  RPC_STATUS
+  Protseq RPC_WSTR
+  Endpoint RPC_WSTR
+  IfSpec RPC_IF_HANDLE
+
+func I_RpcServerUseProtseq2 bothCharset
+  RPC_STATUS
+  NetworkAddress RPC_TSTR
+  Protseq RPC_TSTR
+  MaxCalls "unsigned int"
+  SecurityDescriptor void*
+  Policy void*
+
+func I_RpcServerUseProtseqEp2 bothCharset
+  RPC_STATUS
+  NetworkAddress RPC_TSTR
+  Protseq RPC_TSTR
+  MaxCalls "unsigned int"
+  Endpoint RPC_TSTR
+  SecurityDescriptor void*
+  Policy void*
+
+func I_RpcSessionStrictContextHandle
+  void
+
+func I_RpcSsDontSerializeContext
+  void
+
+func I_RpcTurnOnEEInfoPropagation
+  RPC_STATUS
+
+func I_UuidCreate
+  RPC_STATUS
+  Uuid UUID*
+
+func RpcServerCompleteSecurityCallback
+  RPC_STATUS
+  BindingHandle RPC_BINDING_HANDLE
+  Status RPC_STATUS
+
+func RpcServerYield
+  void
+
+func RpcSsGetContextBinding
+  RPC_STATUS
+  ContextHandle void*
+  Binding RPC_BINDING_HANDLE*
+
+func RpcUserFree
+  void
+  AsyncHandle handle_t
+  pBuffer void*
+
+func UuidCompare
+  "signed int"
+  Uuid1 UUID*
+  Uuid2 UUID*
+  Status RPC_STATUS*
+
+func UuidCreate
+  RPC_STATUS
+  Uuid UUID*
+
+func UuidCreateSequential
+  RPC_STATUS
+  Uuid UUID*
+
+func UuidCreateNil
+  RPC_STATUS
+  Nil_Uuid UUID*
+
+func UuidEqual
+  [BOOL|int]
+  Uuid1 UUID*
+  Uuid2 UUID*
+  Status RPC_STATUS*
+
+func UuidFromString bothCharset
+  RPC_STATUS
+  StringUuid RPC_TSTR
+  Uuid UUID*
+
+func UuidHash
+  "unsigned short"
+  Uuid UUID*
+  Status RPC_STATUS*
+
+func UuidIsNil
+  [BOOL|int]
+  Uuid UUID*
+  Status RPC_STATUS*
+
+func UuidToString bothCharset
+  RPC_STATUS
+  Uuid UUID*
+  StringUuid RPC_TSTR* outputOnly
+
+func CStdStubBuffer_AddRef
+  ULONG
+  This IRpcStubBuffer*
+
+func CStdStubBuffer_Connect
+  HRESULT
+  This IRpcStubBuffer*
+  pUnkServer IUnknown*
+
+func CStdStubBuffer_CountRefs
+  ULONG
+  This IRpcStubBuffer*
+
+func CStdStubBuffer_DebugServerQueryInterface
+  HRESULT
+  This IRpcStubBuffer*
+  ppv void**
+
+func CStdStubBuffer_DebugServerRelease
+  void
+  This IRpcStubBuffer*
+  pv void*
+
+func CStdStubBuffer_Disconnect
+  void
+  This IRpcStubBuffer*
+
+func CStdStubBuffer_Invoke
+  HRESULT
+  This IRpcStubBuffer*
+  pRpcMsg RPCOLEMESSAGE*
+  pRpcChannelBuffer IRpcChannelBuffer*
+
+func CStdStubBuffer_IsIIDSupported
+  IRpcStubBuffer*
+  This IRpcStubBuffer*
+  riid REFIID
+
+func CStdStubBuffer_QueryInterface
+  HRESULT
+  This IRpcStubBuffer*
+  riid REFIID
+  ppvObject void** interfaceId=riid
+
+func IUnknown_AddRef_Proxy
+  ULONG
+  This IUnknown*
+
+func IUnknown_QueryInterface_Proxy
+  HRESULT
+  This IUnknown*
+  riid REFIID
+  ppvObject void** interfaceId=riid
+
+func IUnknown_Release_Proxy
+  ULONG
+  This IUnknown*
+
+func NdrClearOutParameters
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+  ArgAddr void*
+
+func NdrContextHandleInitialize
+  NDR_SCONTEXT
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrContextHandleSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrContextHandleMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrConvert
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrCStdStubBuffer_Release
+  ULONG
+  This IRpcStubBuffer*
+  pPSF IPSFactoryBuffer*
+
+func NdrCStdStubBuffer2_Release
+  ULONG
+  This IRpcStubBuffer*
+  pPSF IPSFactoryBuffer*
+
+func NdrDllCanUnloadNow
+  HRESULT
+  pPSFactoryBuffer CStdPSFactoryBuffer*
+
+func NdrDllGetClassObject
+  HRESULT
+  rclsid REFCLSID
+  riid REFIID
+  ppv void** interfaceId=riid
+  pProxyFileList "const ProxyFileInfo**"
+  pclsid "const CLSID*"
+  pPSFactoryBuffer CStdPSFactoryBuffer*
+
+func NdrDllRegisterProxy
+  HRESULT
+  hDll HMODULE
+  pProxyFileList "const ProxyFileInfo**"
+  pclsid "const CLSID*"
+
+func NdrDllUnregisterProxy
+  HRESULT
+  hDll HMODULE
+  pProxyFileList "const ProxyFileInfo**"
+  pclsid "const CLSID*"
+
+func NdrOleAllocate
+  success NotEqual=0
+  void*
+  size size_t
+
+func NdrOleFree
+  void
+  NodeToFree void*
+
+func NdrPointerBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrPointerFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrPointerMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrPointerUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fSkipRefCheck "unsigned char"
+
+func NdrProxyErrorHandler
+  HRESULT
+  dwExceptionCode DWORD
+
+func NdrProxyFreeBuffer
+  void
+  This void*
+  pStubMsg MIDL_STUB_MESSAGE*
+
+func NdrProxyGetBuffer
+  void
+  This void*
+  pStubMsg PMIDL_STUB_MESSAGE
+
+func NdrProxyInitialize
+  void
+  This void*
+  pRpcMsg PRPC_MESSAGE
+  pStubMsg PMIDL_STUB_MESSAGE
+  pStubDescriptor PMIDL_STUB_DESC
+  ProcNum "unsigned int"
+
+func NdrProxySendReceive
+  void
+  This void*
+  pStubMsg MIDL_STUB_MESSAGE*
+
+func NdrSimpleTypeMarshall
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  FormatChar "unsigned char"
+
+func NdrSimpleTypeUnmarshall
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  FormatChar "unsigned char"
+
+func NdrStubForwardingFunction
+  void
+  pThis IRpcStubBuffer*
+  pChannel IRpcChannelBuffer*
+  pMsg PRPC_MESSAGE
+  pdwStubPhase DWORD*
+
+func NdrStubGetBuffer
+  void
+  This IRpcStubBuffer*
+  pRpcChannelBuffer IRpcChannelBuffer*
+  pStubMsg PMIDL_STUB_MESSAGE
+
+func NdrStubInitialize
+  void
+  pRpcMsg PRPC_MESSAGE
+  pStubMsg PMIDL_STUB_MESSAGE
+  pStubDescriptor PMIDL_STUB_DESC
+  pRpcChannelBuffer IRpcChannelBuffer*
+
+func NdrAllocate
+  success NotEqual=0
+  void*
+  pStubMsg PMIDL_STUB_MESSAGE
+  Len size_t
+
+func NdrClientContextMarshall
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  ContextHandle NDR_CCONTEXT
+  fCheck int
+
+func NdrClientContextUnmarshall
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pContextHandle NDR_CCONTEXT*
+  BindHandle RPC_BINDING_HANDLE
+
+func NdrConvert2
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+  NumberParams long
+
+func NdrCorrelationFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+
+func NdrCorrelationInitialize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory void*
+  CacheSize "unsigned long"
+  flags "unsigned long"
+
+func NdrCorrelationPass
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+
+func NdrCreateServerInterfaceFromStub
+  RPC_STATUS
+  pStub IRpcStubBuffer*
+  pServerIf RPC_SERVER_INTERFACE*
+
+func NdrMapCommAndFaultStatus
+  RPC_STATUS
+  pStubMsg PMIDL_STUB_MESSAGE
+  pCommStatus "unsigned long*"
+  pFaultStatus "unsigned long*"
+  Status RPC_STATUS
+
+func NdrMesProcEncodeDecode varArgs
+  void
+  Handle handle_t
+  pStubDesc "const MIDL_STUB_DESC*"
+  pFormatString PFORMAT_STRING
+
+func NdrMesProcEncodeDecode2 varArgs
+  CLIENT_CALL_RETURN
+  Handle handle_t
+  pStubDesc "const MIDL_STUB_DESC*"
+  pFormatString PFORMAT_STRING
+
+func NdrMesSimpleTypeAlignSize
+  size_t
+  Handle handle_t
+
+func NdrMesSimpleTypeDecode
+  void
+  Handle handle_t
+  pObject void*
+  Size short
+
+func NdrMesSimpleTypeEncode
+  void
+  Handle handle_t
+  pStubDesc "const MIDL_STUB_DESC*"
+  pObject "const void*"
+  Size short
+
+func NdrMesTypeAlignSize
+  size_t
+  Handle handle_t
+  pStubDesc "const MIDL_STUB_DESC*"
+  pFormatString PFORMAT_STRING
+  pObject "const void*"
+
+func NdrMesTypeAlignSize2
+  size_t
+  Handle handle_t
+  pPicklingInfo "const MIDL_TYPE_PICKLING_INFO*"
+  pStubDesc "const MIDL_STUB_DESC*"
+  pFormatString PFORMAT_STRING
+  pObject "const void*"
+
+func NdrMesTypeDecode
+  void
+  Handle handle_t
+  pStubDesc "const MIDL_STUB_DESC*"
+  pFormatString PFORMAT_STRING
+  pObject void*
+
+func NdrMesTypeDecode2
+  void
+  Handle handle_t
+  pPicklingInfo "const MIDL_TYPE_PICKLING_INFO*"
+  pStubDesc "const MIDL_STUB_DESC*"
+  pFormatString PFORMAT_STRING
+  pObject void*
+
+func NdrMesTypeEncode
+  void
+  Handle handle_t
+  pStubDesc "const MIDL_STUB_DESC*"
+  pFormatString PFORMAT_STRING
+  pObject "const void*"
+
+func NdrMesTypeEncode2
+  void
+  Handle handle_t
+  pPicklingInfo "const MIDL_TYPE_PICKLING_INFO*"
+  pStubDesc "const MIDL_STUB_DESC*"
+  pFormatString PFORMAT_STRING
+  pObject "const void*"
+
+func NdrMesTypeFree2
+  void
+  Handle handle_t
+  pPicklingInfo "const MIDL_TYPE_PICKLING_INFO*"
+  pStubDesc "const MIDL_STUB_DESC*"
+  pFormatString PFORMAT_STRING
+  pObject void*
+
+func NdrPartialIgnoreClientBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory void*
+
+func NdrPartialIgnoreClientMarshall
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory void*
+
+func NdrPartialIgnoreServerInitialize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory void**
+  pFormat PFORMAT_STRING
+
+func NdrPartialIgnoreServerUnmarshall
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory void**
+
+func NdrPointerMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrRangeUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrRpcSmClientAllocate
+  success NotEqual=0
+  void*
+  Size size_t
+
+func NdrRpcSmClientFree
+  void
+  NodeToFree void*
+
+func NdrRpcSmSetClientToOsf
+  void
+  pMessage PMIDL_STUB_MESSAGE
+
+func NdrRpcSsDefaultAllocate
+  success NotEqual=0
+  void*
+  Size size_t
+
+func NdrRpcSsDefaultFree
+  void
+  NodeToFree void*
+
+func NdrRpcSsDisableAllocate
+  void
+  pMessage PMIDL_STUB_MESSAGE
+
+func NdrRpcSsEnableAllocate
+  void
+  pMessage PMIDL_STUB_MESSAGE
+
+func NdrServerContextMarshall
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  ContextHandle NDR_SCONTEXT
+  RundownRoutine NDR_RUNDOWN
+
+func NdrServerContextNewMarshall
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  ContextHandle NDR_SCONTEXT
+  RundownRoutine NDR_RUNDOWN
+  pFormat PFORMAT_STRING
+
+func NdrServerContextNewUnmarshall
+  NDR_SCONTEXT
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrServerContextUnmarshall
+  NDR_SCONTEXT
+  pStubMsg PMIDL_STUB_MESSAGE
+
+func NDRCContextBinding
+  success NotEqual=0
+  RPC_BINDING_HANDLE
+  CContext NDR_CCONTEXT
+
+func NDRCContextMarshall
+  void
+  CContext NDR_CCONTEXT
+  pBuff void*
+
+func NDRCContextUnmarshall
+  void
+  pCContext NDR_CCONTEXT*
+  hBinding RPC_BINDING_HANDLE
+  pBuff void*
+  DataRepresentation "unsigned long"
+
+func NDRSContextMarshall
+  void
+  CContext NDR_SCONTEXT
+  pBuff void*
+  userRunDownIn NDR_RUNDOWN
+
+func NDRSContextMarshall2
+  void
+  BindingHandle RPC_BINDING_HANDLE
+  CContext NDR_SCONTEXT
+  pBuff void*
+  userRunDownIn NDR_RUNDOWN
+  CtxGuard void*
+  Flags "unsigned long"
+
+func NDRSContextMarshallEx
+  void
+  BindingHandle RPC_BINDING_HANDLE
+  CContext NDR_SCONTEXT
+  pBuff void*
+  userRunDownIn NDR_RUNDOWN
+
+func NDRSContextUnmarshall
+  NDR_SCONTEXT
+  pBuff void*
+  DataRepresentation "unsigned long"
+
+func NDRSContextUnmarshall2
+  NDR_SCONTEXT
+  BindingHandle RPC_BINDING_HANDLE
+  pBuff void*
+  DataRepresentation "unsigned long"
+  CtxGuard void*
+  Flags "unsigned long"
+
+func NDRSContextUnmarshallEx
+  NDR_SCONTEXT
+  BindingHandle RPC_BINDING_HANDLE
+  pBuff void*
+  DataRepresentation "unsigned long"
+
+func NdrConformantStringBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantStringMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantStringUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrConformantStringMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrNonConformantStringBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrNonConformantStringMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrNonConformantStringMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrNonConformantStringUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrEncapsulatedUnionBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrEncapsulatedUnionFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrEncapsulatedUnionMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrEncapsulatedUnionMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrEncapsulatedUnionUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrNonEncapsulatedUnionBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrNonEncapsulatedUnionFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrNonEncapsulatedUnionMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrNonEncapsulatedUnionMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrNonEncapsulatedUnionUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrFixedArrayBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrFixedArrayFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrFixedArrayMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrFixedArrayMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrFixedArrayUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrConformantArrayUnmarshall
+  success Equal=0
+  "unsigned char*"
+  NdrConformantArrayUnmarshall PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrConformantArrayBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantArrayMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantArrayFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantArrayMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrComplexArrayBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrComplexArrayMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrComplexArrayUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrComplexArrayFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrComplexArrayMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrConformantVaryingArrayBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantVaryingArrayFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantVaryingArrayMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantVaryingArrayMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrConformantVaryingArrayUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrVaryingArrayBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrVaryingArrayFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrVaryingArrayMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrVaryingArrayMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrVaryingArrayUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrSimpleStructBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrSimpleStructMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrSimpleStructUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrSimpleStructFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrSimpleStructMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrComplexStructBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrComplexStructMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrComplexStructUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrComplexStructFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrComplexStructMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrConformantVaryingStructBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantVaryingStructFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantVaryingStructMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantVaryingStructMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrConformantVaryingStructUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrConformantStructBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantStructFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantStructMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrConformantStructMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrConformantStructUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrXmitOrRepAsBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrXmitOrRepAsFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrXmitOrRepAsMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrXmitOrRepAsMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrXmitOrRepAsUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrInterfacePointerBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrInterfacePointerFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrInterfacePointerMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrInterfacePointerUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrInterfacePointerMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrGetUserMarshalInfo
+  RPC_STATUS
+  pFlags "unsigned long*"
+  InformationLevel "unsigned long"
+  pMarshalInfo NDR_USER_MARSHAL_INFO*
+
+func NdrUserMarshalBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrUserMarshalFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrUserMarshalMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrUserMarshalUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrUserMarshalMemorySize
+  "unsigned long"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func NdrUserMarshalSimpleTypeConvert
+  success Equal=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  FormatChar "unsigned char"
+
+func NdrByteCountPointerBufferSize
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrByteCountPointerFree
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrByteCountPointerMarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pMemory "unsigned char*"
+  pFormat PFORMAT_STRING
+
+func NdrByteCountPointerUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  ppMemory "unsigned char**"
+  pFormat PFORMAT_STRING
+  fMustAlloc "unsigned char"
+
+func NdrClientInitializeNew
+  void
+  pRpcMsg PRPC_MESSAGE
+  pStubMsg PMIDL_STUB_MESSAGE
+  pStubDescriptor PMIDL_STUB_DESC
+  ProcNum "unsigned int"
+
+func NdrServerInitializeNew
+  success Equal=0
+  "unsigned char*"
+  pRpcMsg PRPC_MESSAGE
+  pStubMsg PMIDL_STUB_MESSAGE
+  pStubDescriptor PMIDL_STUB_DESC
+
+func NdrServerInitializePartial
+  void
+  pRpcMsg PRPC_MESSAGE
+  pStubMsg PMIDL_STUB_MESSAGE
+  pStubDescriptor PMIDL_STUB_DESC
+  RequestedBufferSize "unsigned long"
+
+func NdrClientInitialize
+  void
+  pRpcMsg PRPC_MESSAGE
+  pStubMsg PMIDL_STUB_MESSAGE
+  pStubDescriptor PMIDL_STUB_DESC
+  ProcNum "unsigned int"
+
+func NdrServerInitialize
+  success Equal=0
+  "unsigned char*"
+  pRpcMsg PRPC_MESSAGE
+  pStubMsg PMIDL_STUB_MESSAGE
+  pStubDescriptor PMIDL_STUB_DESC
+
+func NdrServerInitializeUnmarshall
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pStubDescriptor PMIDL_STUB_DESC
+  pRpcMsg PRPC_MESSAGE
+
+func NdrServerInitializeMarshall
+  void
+  pRpcMsg PRPC_MESSAGE
+  pStubMsg PMIDL_STUB_MESSAGE
+
+func NdrGetBuffer
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  BufferLength "unsigned long"
+  Handle RPC_BINDING_HANDLE
+
+func NdrNsGetBuffer
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  BufferLength "unsigned long"
+  Handle RPC_BINDING_HANDLE
+
+func NdrSendReceive
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pBufferEnd "unsigned char*"
+
+func NdrNsSendReceive
+  success Equal=0
+  "unsigned char*"
+  pStubMsg PMIDL_STUB_MESSAGE
+  pBufferEnd "unsigned char*"
+  pAutoHandle RPC_BINDING_HANDLE*
+
+func NdrFreeBuffer
+  void
+  pStubMsg PMIDL_STUB_MESSAGE
+
+func NdrGetDcomProtocolVersion
+  RPC_STATUS
+  pStubMsg PMIDL_STUB_MESSAGE
+  pVersion RPC_VERSION*
+
+func NdrClientCall2 varArgs maxVarArgs=36
+  CLIENT_CALL_RETURN
+  pStubDescriptor PMIDL_STUB_DESC
+  pFormat PFORMAT_STRING
+
+func NdrClientCall varArgs
+  CLIENT_CALL_RETURN
+  pStubDescriptor PMIDL_STUB_DESC
+  pFormat PFORMAT_STRING
+
+func NdrAsyncClientCall varArgs
+  CLIENT_CALL_RETURN
+  pStubDescriptor PMIDL_STUB_DESC
+  pFormat PFORMAT_STRING
+
+func NdrDcomAsyncClientCall varArgs
+  CLIENT_CALL_RETURN
+  pStubDescriptor PMIDL_STUB_DESC
+  pFormat PFORMAT_STRING
+
+func NdrAsyncServerCall
+  void
+  pRpcMsg PRPC_MESSAGE
+
+func NdrAsyncStubCall
+  success Equal=0
+  long
+  pThis IRpcStubBuffer*
+  pChannel IRpcChannelBuffer*
+  pRpcMsg PRPC_MESSAGE
+  pdwStubPhase "unsigned long*"
+
+func NdrDcomAsyncStubCall
+  success Equal=0
+  long
+  pThis IRpcStubBuffer*
+  pChannel IRpcChannelBuffer*
+  pRpcMsg PRPC_MESSAGE
+  pdwStubPhase "unsigned long*"
+
+func NdrStubCall2
+  success Equal=0
+  long
+  pThis IRpcStubBuffer*
+  pChannel IRpcChannelBuffer*
+  pRpcMsg PRPC_MESSAGE
+  pdwStubPhase "unsigned long*"
+
+func NdrServerCall2
+  void
+  pRpcMsg PRPC_MESSAGE
+
+func NdrStubCall
+  success Equal=0
+  long
+  pThis IRpcStubBuffer*
+  pChannel IRpcChannelBuffer*
+  pRpcMsg PRPC_MESSAGE
+  pdwStubPhase "unsigned long*"
+
+func NdrServerCall
+  void
+  pRpcMsg PRPC_MESSAGE
+
+func NdrServerUnmarshall
+  success NotEqual=0
+  int
+  pChannel IRpcChannelBuffer*
+  pRpcMsg PRPC_MESSAGE
+  pStubMsg PMIDL_STUB_MESSAGE
+  pStubDescriptor PMIDL_STUB_DESC
+  pFormat PFORMAT_STRING
+  pParamList void*
+
+func NdrServerMarshall
+  void
+  pThis IRpcStubBuffer*
+  pChannel IRpcChannelBuffer*
+  pStubMsg PMIDL_STUB_MESSAGE
+  pFormat PFORMAT_STRING
+
+func Ndr64AsyncClientCall varArgs
+  CLIENT_CALL_RETURN
+  pProxyInfo MIDL_STUBLESS_PROXY_INFO*
+  nProcNum "unsigned long"
+  pReturnValue void*
+
+func Ndr64AsyncServerCall64
+  void
+  pRpcMsg PRPC_MESSAGE
+
+func Ndr64AsyncServerCallAll
+  void
+  pRpcMsg PRPC_MESSAGE
+
+func Ndr64DcomAsyncClientCall varArgs
+  CLIENT_CALL_RETURN
+  pProxyInfo MIDL_STUBLESS_PROXY_INFO*
+  nProcNum "unsigned long"
+  pReturnValue void*
+
+func Ndr64DcomAsyncStubCall
+  success NotEqual=0
+  long
+  pThis IRpcStubBuffer*
+  pChannel IRpcChannelBuffer*
+  pRpcMsg PRPC_MESSAGE
+  pdwStubPhase "unsigned long*"
+
+func NdrServerCallAll
+  void
+  pRpcMsg PRPC_MESSAGE
+
+func NdrServerCallNdr64
+  void
+  pRpcMsg PRPC_MESSAGE
+
+func NdrStubCall3
+  success Equal=0
+  long
+  pThis IRpcStubBuffer*
+  pChannel IRpcChannelBuffer*
+  pRpcMsg PRPC_MESSAGE
+  pdwStubPhase "unsigned long*"
+
+func NdrFullPointerXlatInit
+  success NotEqual=0
+  PFULL_PTR_XLAT_TABLES
+  NumberOfPointers "unsigned long"
+  XlatSide XLAT_SIDE
+
+func NdrFullPointerXlatFree
+  void
+  pXlatTables PFULL_PTR_XLAT_TABLES
+
+func NdrFullPointerQueryPointer
+  success NotEqual=0
+  int
+  pXlatTables PFULL_PTR_XLAT_TABLES
+  pPointer void*
+  QueryType "unsigned char"
+  pRefId "unsigned long*"
+
+func NdrFullPointerQueryRefId
+  success NotEqual=0
+  int
+  pXlatTables PFULL_PTR_XLAT_TABLES
+  RefId "unsigned long"
+  QueryType "unsigned char"
+  ppPointer void**
+
+func NdrFullPointerInsertRefId
+  void
+  pXlatTables PFULL_PTR_XLAT_TABLES
+  RefId "unsigned long"
+  pPointer void*
+
+func NdrFullPointerFree
+  success NotEqual=0
+  int
+  pXlatTables PFULL_PTR_XLAT_TABLES
+  Pointer void*
+

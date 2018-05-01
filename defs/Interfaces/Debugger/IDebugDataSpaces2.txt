@@ -1,0 +1,45 @@
+include Interfaces\Debugger\IDebugDataSpaces.txt
+
+ingterface IDebugDataSpaces2 base=IDebugDataSpaces id={7a5e852f-96e9-468f-ac1b-0b3addc4a049} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func VirtualToPhysical
+    HRESULT
+    Virtual ULONG64
+    Physical PULONG64
+
+  func GetVirtualTranslationPhysicalOffsets
+    HRESULT
+    Virtual ULONG64
+    Offsets PULONG64
+    OffsetsSize ULONG
+    Levels PULONG
+
+  func ReadHandleData
+    HRESULT
+    Handle ULONG64
+    DataType ULONG
+    Buffer PVOID postLength=DataSize
+    BufferSize ULONG
+    DataSize PULONG
+
+  func FillVirtual
+    HRESULT
+    Start ULONG64
+    Size ULONG
+    Pattern PVOID
+    PatternSize ULONG
+    Filled PULONG
+
+  func FillPhysical
+    HRESULT
+    Start ULONG64
+    Size ULONG
+    Pattern PVOID
+    PatternSize ULONG
+    Filled PULONG
+
+  func QueryVirtual
+    HRESULT
+    Offset ULONG64
+    Info PMEMORY_BASIC_INFORMATION64
+
+

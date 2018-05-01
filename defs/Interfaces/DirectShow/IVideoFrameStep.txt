@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVideoFrameStep base=IUnknown id={e46a9787-2b71-444d-a4b5-1fab7b708d6a} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Step
+    HRESULT
+    dwFrames DWORD
+    pStepObject IUnknown*
+
+  func CanStep
+    HRESULT
+    bMultiple long
+    pStepObject IUnknown*
+
+  func CancelStep
+    HRESULT
+
+

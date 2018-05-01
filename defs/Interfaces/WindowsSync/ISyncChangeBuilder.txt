@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncChangeBuilder base=IUnknown id={56f14771-8677-484f-a170-e386e418a676} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func AddChangeUnitMetadata
+    HRESULT
+    pbChangeUnitId "const BYTE*"
+    pChangeUnitVersion "const SYNC_VERSION*"
+
+

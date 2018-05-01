@@ -1,0 +1,66 @@
+include Interfaces\IDispatch.txt
+include Interfaces\XMLHTTP\XMLHTTP.h.txt
+
+ingterface IXMLHTTPRequest base=IDispatch id={ED8C108D-4349-11D2-91A4-00C04F7969E8} errorFunc=HRESULT onlineHelp=MSDN category="Internet/XML HTTP Request"
+  func open
+    HRESULT
+    bstrMethod BSTR
+    bstrUrl BSTR
+    varAsync VARIANT
+    bstrUser VARIANT
+    bstrPassword VARIANT
+
+  func setRequestHeader
+    HRESULT
+    bstrHeader BSTR
+    bstrValue BSTR
+
+  func getResponseHeader
+    HRESULT
+    bstrHeader BSTR
+    pbstrValue BSTR*
+
+  func getAllResponseHeaders
+    HRESULT
+    pbstrHeaders BSTR*
+
+  func send
+    HRESULT
+    varBody VARIANT
+
+  func abort
+    HRESULT
+
+  func get_status
+    HRESULT
+    plStatus [HTTP_STATUS*|long*]
+
+  func get_statusText
+    HRESULT
+    pbstrStatus BSTR*
+
+  func get_responseXML
+    HRESULT
+    ppBody IDispatch**
+
+  func get_responseText
+    HRESULT
+    pbstrBody BSTR*
+
+  func get_responseBody
+    HRESULT
+    pvarBody VARIANT*
+
+  func get_responseStream
+    HRESULT
+    pvarBody VARIANT*
+
+  func get_readyState
+    HRESULT
+    plState [READYSTATE*|long*]
+
+  func put_onreadystatechange
+    HRESULT
+    pReadyStateSink IDispatch*
+
+

@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11Asynchronous.txt
+
+ingterface ID3D11Counter base=ID3D11Asynchronous id={6e8c49fb-a371-4770-b440-29086022b741} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func GetDesc
+    void
+    pDesc D3D11_COUNTER_DESC*
+
+

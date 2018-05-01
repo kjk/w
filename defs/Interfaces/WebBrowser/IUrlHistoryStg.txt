@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+
+ingterface IUrlHistoryStg base=IUnknown id={3C374A41-BAE4-11CF-BF7D-00AA006946EE} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+  func AddUrl
+    HRESULT
+    pocsUrl LPCOLESTR
+    pocsTitle LPCOLESTR
+    dwFlags DWORD
+
+  func DeleteUrl
+    HRESULT
+    pocsUrl LPCOLESTR
+    dwFlags DWORD
+
+  func QueryUrl
+    HRESULT
+    pocsUrl LPCOLESTR
+    dwFlags DWORD
+    lpSTATURL LPSTATURL
+
+  func BindToObject
+    HRESULT
+    pocsUrl LPCOLESTR
+    riid REFIID
+    ppvOut void** interfaceId=riid
+
+  func EnumUrls
+    HRESULT
+    ppEnum IEnumSTATURL**
+
+

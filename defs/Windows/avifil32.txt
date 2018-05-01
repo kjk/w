@@ -1,0 +1,414 @@
+include Headers\windows.h.txt
+include Headers\multimedia.h.txt
+
+dll avifil32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Audio and Video/Legacy Audio and Video/Windows Multimedia/Video for Windows/AVIFile"
+alias STDAPI_(LONG) LONG
+
+alias STDAPI_(ULONG) ULONG
+
+alias STDAPI_(LPVOID) LPVOID
+
+alias AVISAVECALLBACK LPVOID
+
+interface IAVIFile
+
+interface IAVIStream
+
+interface IGetFrame
+
+alias PAVIFILE IAVIFile*
+
+pointer PAVIFILE* PAVIFILE
+
+alias PAVISTREAM IAVIStream*
+
+pointer PAVISTREAM* PAVISTREAM
+
+alias PGETFRAME IGetFrame*
+
+alias STDAPI_(PGETFRAME) PGETFRAME
+
+flag [AVISTREAMINFO_FLAGS] DWORD display=DWORD
+  AVISTREAMINFO_DISABLED      0x00000001
+  AVISTREAMINFO_FORMATCHANGES 0x00010000
+
+struct AVISTREAMINFO
+  fccType FOURCC display=DWORD
+  fccHandler DWORD
+  dwFlags [AVISTREAMINFO_FLAGS]
+  dwCaps DWORD
+  wPriority WORD
+  wLanguage WORD
+  dwScale DWORD
+  dwRate DWORD
+  dwStart DWORD
+  dwLength DWORD
+  dwInitialFrames DWORD
+  dwSuggestedBufferSize DWORD
+  dwQuality DWORD
+  dwSampleSize DWORD
+  rcFrame RECT
+  dwEditCount DWORD
+  dwFormatChangeCount DWORD
+  szName "TCHAR [64]"
+
+pointer AVISTREAMINFO* AVISTREAMINFO
+
+flag [AVIFILEINFO_FLAGS] DWORD display=DWORD
+  AVIFILEINFO_HASINDEX       0x00000010
+  AVIFILEINFO_MUSTUSEINDEX   0x00000020
+  AVIFILEINFO_ISINTERLEAVED  0x00000100
+  AVIFILEINFO_WASCAPTUREFILE 0x00010000
+  AVIFILEINFO_COPYRIGHTED    0x00020000
+
+flag [AVIFILECAPS] DWORD display=DWORD
+  AVIFILECAPS_CANREAD       0x00000001
+  AVIFILECAPS_CANWRITE      0x00000002
+  AVIFILECAPS_ALLKEYFRAMES  0x00000010
+  AVIFILECAPS_NOCOMPRESSION 0x00000020
+
+struct AVIFILEINFO
+  dwMaxBytesPerSec DWORD
+  dwFlags [AVIFILEINFO_FLAGS]
+  dwCaps [AVIFILECAPS]
+  dwStreams DWORD
+  dwSuggestedBufferSize DWORD
+  dwWidth DWORD
+  dwHeight DWORD
+  dwScale DWORD
+  dwRate DWORD
+  dwLength DWORD
+  dwEditCount DWORD
+  szFileType "TCHAR [64]"
+
+pointer AVIFILEINFO* AVIFILEINFO
+
+struct AVICOMPRESSOPTIONS
+  fccType DWORD
+  fccHandler DWORD
+  dwKeyFrameEvery DWORD
+  dwQuality DWORD
+  dwBytesPerSecond DWORD
+  dwFlags DWORD
+  lpFormat LPVOID
+  cbFormat DWORD
+  lpParms LPVOID
+  cbParms DWORD
+  dwInterleaveEvery DWORD
+
+pointer AVICOMPRESSOPTIONS* AVICOMPRESSOPTIONS
+
+pointer LPAVICOMPRESSOPTIONS AVICOMPRESSOPTIONS
+
+pointer LPAVICOMPRESSOPTIONS* LPAVICOMPRESSOPTIONS
+
+func AVIBuildFilter bothCharset
+  STDAPI
+  lpszFilter LPTSTR
+  cbFilter LONG
+  fSaving BOOL
+
+func AVIClearClipboard
+  STDAPI
+
+func AVIFileAddRef
+  success NotEqual=0
+  STDAPI_(ULONG)
+  pfile PAVIFILE
+
+func AVIFileCreateStream bothCharset
+  STDAPI
+  pfile PAVIFILE
+  ppavi PAVISTREAM*
+  psi AVISTREAMINFO*
+
+func AVIFileEndRecord
+  STDAPI
+  pfile PAVIFILE
+
+func AVIFileExit
+  STDAPI_(VOID)
+
+func AVIFileGetStream
+  STDAPI
+  pfile PAVIFILE
+  ppavi PAVISTREAM*
+  fccType DWORD
+  lParam LONG
+
+func AVIFileInfo bothCharset
+  STDAPI
+  pfile PAVIFILE
+  pfi AVIFILEINFO*
+  lSize LONG
+
+func AVIFileInit
+  STDAPI_(VOID)
+
+func AVIFileOpen bothCharset
+  STDAPI
+  ppfile PAVIFILE*
+  szFile LPCTSTR
+  mode UINT
+  pclsidHandler CLSID
+
+func AVIFileReadData
+  STDAPI
+  pfile PAVIFILE
+  ckid DWORD
+  lpData LPVOID
+  lpcbData LONG*
+
+func AVIFileRelease
+  success NotEqual=0
+  STDAPI_(ULONG)
+  pfile PAVIFILE
+
+func AVIFileWriteData
+  STDAPI
+  pfile PAVIFILE
+  ckid DWORD
+  lpData LPVOID
+  cbData LONG
+
+func AVIGetFromClipboard
+  STDAPI
+  lppf PAVIFILE*
+
+func AVIMakeCompressedStream
+  STDAPI
+  ppsCompressed PAVISTREAM*
+  psSource PAVISTREAM
+  lpOptions AVICOMPRESSOPTIONS*
+  pclsidHandler CLSID*
+
+func AVIMakeFileFromStreams
+  STDAPI
+  ppfile PAVIFILE*
+  nStreams int
+  papStreams PAVISTREAM*
+
+func AVIMakeStreamFromClipboard
+  STDAPI
+  cfFormat UINT
+  hGlobal HANDLE
+  ppstream PAVISTREAM*
+
+func AVIPutFileOnClipboard
+  STDAPI
+  pf PAVIFILE
+
+func AVISave bothCharset varArgs
+  HRESULT
+  szFile LPCTSTR
+  pclsidHandler CLSID*
+  lpfnCallback AVISAVECALLBACK
+  nStreams int
+  pavi PAVISTREAM
+  lpOptions LPAVICOMPRESSOPTIONS
+
+func AVISaveOptions
+  BOOL
+  hwnd HWND
+  uiFlags UINT
+  nStreams int
+  ppavi PAVISTREAM*
+  plpOptions LPAVICOMPRESSOPTIONS*
+
+func AVISaveOptionsFree
+  success NotEqual=0
+  LONG
+  nStreams int
+  plpOptions LPAVICOMPRESSOPTIONS*
+
+func AVISaveV bothCharset
+  STDAPI
+  szFile LPCTSTR
+  pclsidHandler CLSID*
+  lpfnCallback AVISAVECALLBACK
+  nStreams int
+  ppavi PAVISTREAM*
+  plpOptions LPAVICOMPRESSOPTIONS*
+
+func AVIStreamAddRef
+  success NotEqual=0
+  STDAPI_(LONG)
+  pavi PAVISTREAM
+
+func AVIStreamBeginStreaming
+  STDAPI
+  pavi PAVISTREAM
+  lStart LONG
+  lEnd LONG
+  lRate LONG
+
+func AVIStreamCreate
+  STDAPI
+  ppavi PAVISTREAM*
+  lParam1 LONG
+  lParam2 LONG
+  pclsidHandler CLSID*
+
+func AVIStreamEndStreaming
+  STDAPI
+  pavi PAVISTREAM
+
+func AVIStreamFindSample
+  success NotEqual=0
+  STDAPI_(LONG)
+  pavi PAVISTREAM
+  lPos LONG
+  lFlags LONG
+
+func AVIStreamGetFrame
+  success NotEqual=0
+  STDAPI_(LPVOID)
+  pgf PGETFRAME
+  lPos LONG
+
+func AVIStreamGetFrameClose
+  STDAPI
+  pget PGETFRAME
+
+func AVIStreamGetFrameOpen
+  success NotEqual=0
+  STDAPI_(PGETFRAME)
+  pavi PAVISTREAM
+  lpbiWanted LPBITMAPINFOHEADER
+
+func AVIStreamInfo bothCharset
+  STDAPI
+  pavi PAVISTREAM
+  psi AVISTREAMINFO*
+  lSize LONG
+
+func AVIStreamLength
+  success NotEqual=0
+  STDAPI_(LONG)
+  pavi PAVISTREAM
+
+func AVIStreamOpenFromFile bothCharset
+  STDAPI
+  ppavi PAVISTREAM*
+  szFile LPCTSTR
+  fccType DWORD
+  lParam LONG
+  mode UINT
+  pclsidHandler CLSID*
+
+func AVIStreamRead
+  STDAPI
+  pavi PAVISTREAM
+  lStart LONG
+  lSamples LONG
+  lpBuffer LPVOID
+  cbBuffer LONG
+  plBytes LONG*
+  plSamples LONG*
+
+func AVIStreamReadData
+  STDAPI
+  pavi PAVISTREAM
+  ckid DWORD
+  lpData LPVOID
+  lpcbData LONG*
+
+func AVIStreamReadFormat
+  STDAPI
+  pavi PAVISTREAM
+  lPos LONG
+  lpFormat LPVOID
+  lpcbFormat LONG*
+
+func AVIStreamRelease
+  success NotEqual=0
+  STDAPI_(LONG)
+  pavi PAVISTREAM
+
+func AVIStreamSampleToTime
+  success NotEqual=0
+  STDAPI_(LONG)
+  pavi PAVISTREAM
+  lSample LONG
+
+func AVIStreamSetFormat
+  STDAPI
+  pavi PAVISTREAM
+  lPos LONG
+  lpFormat LPVOID
+  cbFormat LONG
+
+func AVIStreamStart
+  success NotEqual=0
+  STDAPI_(LONG)
+  pavi PAVISTREAM
+
+func AVIStreamTimeToSample
+  success NotEqual=0
+  STDAPI_(LONG)
+  pavi PAVISTREAM
+  lTime LONG
+
+func AVIStreamWrite
+  STDAPI
+  pavi PAVISTREAM
+  lStart LONG
+  lSamples LONG
+  lpBuffer LPVOID
+  cbBuffer LONG
+  dwFlags DWORD
+  plSampWritten LONG*
+  plBytesWritten LONG*
+
+func AVIStreamWriteData
+  STDAPI
+  pavi PAVISTREAM
+  ckid DWORD
+  lpData LPVOID
+  cbData LONG
+
+func CreateEditableStream
+  STDAPI
+  ppsEditable PAVISTREAM*
+  psSource PAVISTREAM
+
+func EditStreamClone
+  STDAPI
+  pavi PAVISTREAM
+  ppResult PAVISTREAM*
+
+func EditStreamCopy
+  STDAPI
+  pavi PAVISTREAM
+  plStart LONG*
+  plLength LONG*
+  ppResult PAVISTREAM*
+
+func EditStreamCut
+  STDAPI
+  pavi PAVISTREAM
+  plStart LONG*
+  plLength LONG*
+  ppResult PAVISTREAM*
+
+func EditStreamPaste
+  STDAPI
+  pavi PAVISTREAM
+  plPos LONG*
+  plLength LONG*
+  pstream PAVISTREAM
+  lStart LONG
+  lLength LONG
+
+func EditStreamSetInfo bothCharset
+  STDAPI
+  pavi PAVISTREAM
+  lpInfo AVISTREAMINFO*
+  cbInfo LONG
+
+func EditStreamSetName bothCharset
+  STDAPI
+  pavi PAVISTREAM
+  lpszName LPCTSTR
+

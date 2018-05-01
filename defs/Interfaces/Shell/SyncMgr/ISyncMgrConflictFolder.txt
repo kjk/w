@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrConflictFolder base=IUnknown id={59287f5e-bc81-4fca-a7f1-e5a8ecdb1d69} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func GetConflictIDList
+    HRESULT
+    pConflict ISyncMgrConflict*
+    ppidlConflict PIDLIST_RELATIVE*
+
+

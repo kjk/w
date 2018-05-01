@@ -1,0 +1,37 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemPrivilegeSet base=IDispatch id={26EE67BF-5804-11d2-8B4A-00600806D9B6} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func get__NewEnum
+    WBEMSTATUS
+    pUnk IUnknown**
+
+  func Item
+    WBEMSTATUS
+    iPrivilege WbemPrivilegeEnum
+    objWbemPrivilege ISWbemPrivilege**
+
+  func get_Count
+    WBEMSTATUS
+    iCount long*
+
+  func Add
+    WBEMSTATUS
+    iPrivilege WbemPrivilegeEnum
+    bIsEnabled VARIANT_BOOL
+    objWbemPrivilege ISWbemPrivilege**
+
+  func Remove
+    WBEMSTATUS
+    iPrivilege WbemPrivilegeEnum
+
+  func DeleteAll
+    WBEMSTATUS
+
+  func AddAsString
+    WBEMSTATUS
+    strPrivilege BSTR
+    bIsEnabled VARIANT_BOOL
+    objWbemPrivilege ISWbemPrivilege**
+
+

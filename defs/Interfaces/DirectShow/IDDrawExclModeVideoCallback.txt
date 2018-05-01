@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDDrawExclModeVideoCallback base=IUnknown id={913c24a0-20ab-11d2-9038-00a0c9697298} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func OnUpdateOverlay
+    HRESULT
+    bBefore BOOL
+    dwFlags DWORD
+    bOldVisible BOOL
+    prcOldSrc "const RECT*"
+    prcOldDest "const RECT*"
+    bNewVisible BOOL
+    prcNewSrc "const RECT*"
+    prcNewDest "const RECT*"
+
+  func OnUpdateColorKey
+    HRESULT
+    pKey "const COLORKEY*"
+    dwColor DWORD
+
+  func OnUpdateSize
+    HRESULT
+    dwWidth DWORD
+    dwHeight DWORD
+    dwARWidth DWORD
+    dwARHeight DWORD
+
+

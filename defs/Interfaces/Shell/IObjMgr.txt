@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IObjMgr base=IUnknown id={00BB2761-6A77-11D0-A535-00C04FD7D062} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Append
+    HRESULT
+    punk IUnknown*
+
+  func Remove
+    HRESULT
+    punk IUnknown*
+
+

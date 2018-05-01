@@ -1,0 +1,21 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\DirectX\10\ID3D10EffectVariable.txt
+
+ingterface ID3D10EffectConstantBuffer base=ID3D10EffectVariable id={56648F4D-CC8B-4444-A5AD-B5A3D76E91B3} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func SetConstantBuffer
+    HRESULT
+    pConstantBuffer ID3D10Buffer*
+
+  func GetConstantBuffer
+    HRESULT
+    ppConstantBuffer ID3D10Buffer**
+
+  func SetTextureBuffer
+    HRESULT
+    pTextureBuffer ID3D10ShaderResourceView*
+
+  func GetTextureBuffer
+    HRESULT
+    ppTextureBuffer ID3D10ShaderResourceView**
+
+

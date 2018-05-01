@@ -1,0 +1,12 @@
+include Interfaces\OLEDB\Command15.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface Command25 base=Command15 id={0000154E-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_State
+    [OLEDB_HRESULT]
+    plObjState LONG*
+
+  func Cancel
+    [OLEDB_HRESULT]
+
+

@@ -1,0 +1,10 @@
+include WindowsStore\DeviceAccess\DeviceAccess.h.txt
+
+dll DeviceAccess.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Devices/Device Access"
+func CreateDeviceAccessInstance
+  HRESULT
+  deviceInterfacePath LPCWSTR
+  desiredAccess [FILE_ACCESS_MASK]
+  createAsync ICreateDeviceAccessAsync**
+

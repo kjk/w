@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IIOCancelInformation base=IUnknown id={f5b0bf81-8cb5-4b1b-9449-1a159e0c733c} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetCancelInformation
+    HRESULT
+    dwThreadID DWORD
+    uMsgCancel UINT
+
+  func GetCancelInformation
+    HRESULT
+    pdwThreadID DWORD*
+    puMsgCancel UINT*
+
+

@@ -1,0 +1,16 @@
+include Headers\directx.h.txt
+
+ingterface ID3DInclude errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/Common Version"
+  func Open
+    HRESULT
+    IncludeType D3D_INCLUDE_TYPE
+    pFileName LPCSTR
+    pParentData LPCVOID
+    ppData LPCVOID*
+    pBytes UINT*
+
+  func Close
+    HRESULT
+    pData LPCVOID
+
+

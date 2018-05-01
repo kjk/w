@@ -1,0 +1,19 @@
+include Interfaces\Shell\ICommDlgBrowser.txt
+
+ingterface ICommDlgBrowser2 base=ICommDlgBrowser id={10339516-2894-11d2-9039-00C04F8EEB3E} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Notify
+    HRESULT
+    ppshv IShellView*
+    dwNotifyType DWORD
+
+  func GetDefaultMenuText
+    HRESULT
+    ppshv IShellView*
+    pszText LPWSTR
+    cchMax int
+
+  func GetViewFlags
+    HRESULT
+    pdwFlags DWORD*
+
+

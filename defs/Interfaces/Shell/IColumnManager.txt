@@ -1,0 +1,30 @@
+include Interfaces\IUnknown.txt
+
+ingterface IColumnManager base=IUnknown id={d8ec27bb-3f3b-4042-b10a-4acfd924d453} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetColumnInfo
+    HRESULT
+    propkey REFPROPERTYKEY
+    pcmci "const CM_COLUMNINFO*"
+
+  func GetColumnInfo
+    HRESULT
+    propkey REFPROPERTYKEY
+    pcmci CM_COLUMNINFO*
+
+  func GetColumnCount
+    HRESULT
+    dwFlags CM_ENUM_FLAGS
+    puCount UINT*
+
+  func GetColumns
+    HRESULT
+    dwFlags CM_ENUM_FLAGS
+    rgkeyOrder PROPERTYKEY* postCount=cColumns
+    cColumns UINT
+
+  func SetColumns
+    HRESULT
+    rgkeyOrder "const PROPERTYKEY*" count=cVisible
+    cVisible UINT
+
+

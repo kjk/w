@@ -1,0 +1,56 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrSynchronize base=IUnknown id={6295DF40-35EE-11d1-8707-00C04FD93327} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func Initialize
+    HRESULT
+    dwReserved DWORD
+    dwSyncMgrFlags SYNCMGRFLAG
+    cbCookie DWORD
+    lpCookie "const BYTE*" length=cbCookie
+
+  func GetHandlerInfo
+    HRESULT
+    ppSyncMgrHandlerInfo SYNCMGRHANDLERINFO**
+
+  func EnumSyncMgrItems
+    HRESULT
+    ppSyncMgrEnumItems ISyncMgrEnumItems**
+
+  func GetItemObject
+    HRESULT
+    ItemID REFGUID
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func ShowProperties
+    HRESULT
+    hWndParent HWND
+    ItemID REFGUID
+
+  func SetProgressCallback
+    HRESULT
+    lpCallBack ISyncMgrSynchronizeCallback*
+
+  func PrepareForSync
+    HRESULT
+    cbNumItems ULONG
+    pItemIDs GUID* count=cbNumItems
+    hWndParent HWND
+    dwReserved DWORD
+
+  func Synchronize
+    HRESULT
+    hWndParent HWND
+
+  func SetItemStatus
+    HRESULT
+    pItemID REFGUID
+    dwSyncMgrStatus SYNCMGRSTATUS
+
+  func ShowError
+    HRESULT
+    hWndParent HWND
+    ErrorID REFGUID
+
+

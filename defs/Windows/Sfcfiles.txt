@@ -1,0 +1,16 @@
+include Headers\windows.h.txt
+
+dll Sfcfiles.dll callingConvention=STDCALL errorFunc=NTSTATUS onlineHelp=MSDN
+category "System Administration/Windows Resource Protection (WRP)"
+struct PPROTECT_FILE_ENTRY
+  SourceFileName PWSTR
+  FileName PWSTR
+  InfName PWSTR
+
+pointer PPROTECT_FILE_ENTRY* PPROTECT_FILE_ENTRY
+
+func SfcGetFiles
+  NTSTATUS
+  ProtFileData PPROTECT_FILE_ENTRY*
+  FileCount PULONG
+

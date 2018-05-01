@@ -1,0 +1,12 @@
+include Interfaces\DirectShow\IMemAllocator.txt
+
+ingterface IMemAllocatorCallbackTemp base=IMemAllocator id={379a0cf0-c1de-11d2-abf5-00a0c905f375} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetNotify
+    HRESULT
+    pNotify IMemAllocatorNotifyCallbackTemp*
+
+  func GetFreeCount
+    HRESULT
+    plBuffersFree LONG*
+
+

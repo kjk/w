@@ -1,0 +1,641 @@
+include Headers\windows.h.txt
+
+dll Clfsw32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Data Access and Storage/Common Log File System (CLFS)/Logs"
+category "Data Access and Storage/Common Log File System (CLFS)/Containers"
+category "Data Access and Storage/Common Log File System (CLFS)/Crash Restart"
+category "Data Access and Storage/Common Log File System (CLFS)/Archiving"
+category "Data Access and Storage/Common Log File System (CLFS)/Marshaling"
+category "Data Access and Storage/Common Log File System (CLFS)/Log Sequence Numbers (LSN)"
+category "Data Access and Storage/Common Log File System (CLFS)/Management"
+alias PCLFS_SCAN_CONTEXT LPVOID
+
+alias PFILE LPVOID
+
+alias CLFS_PRINT_RECORD_ROUTINE LPVOID
+
+alias CLFS_BLOCK_ALLOCATION LPVOID
+
+alias CLFS_BLOCK_DEALLOCATION LPVOID
+
+alias CLFS_CONTAINER_ID ULONG
+
+alias CLFS_LOG_ARCHIVE_CONTEXT LPVOID
+
+pointer PCLFS_LOG_ARCHIVE_CONTEXT CLFS_LOG_ARCHIVE_CONTEXT
+
+pointer "LONGLONG []" LONGLONG
+
+alias PLOG_TAIL_ADVANCE_CALLBACK LPVOID
+
+alias PLOG_FULL_HANDLER_CALLBACK LPVOID
+
+alias PLOG_UNPINNED_CALLBACK LPVOID
+
+array "WCHAR [CLFS_MAX_CONTAINER_INFO]" base=WCHAR count=256
+
+flag CLFS_CONTAINER_STATE UINT32
+  ClfsContainerInitializing            0x01
+  ClfsContainerInactive                0x02
+  ClfsContainerActive                  0x04
+  ClfsContainerActivePendingDelete     0x08
+  ClfsContainerPendingArchive          0x10
+  ClfsContainerPendingArchiveAndDelete 0x20
+
+struct CLS_CONTAINER_INFORMATION
+  FileAttributes ULONG
+  CreationTime ULONGLONG
+  LastAccessTime ULONGLONG
+  LastWriteTime ULONGLONG
+  ContainerSize LONGLONG
+  FileNameActualLength ULONG
+  FileNameLength ULONG
+  FileName "WCHAR [CLFS_MAX_CONTAINER_INFO]"
+  State CLFS_CONTAINER_STATE
+  PhysicalContainerId CLFS_CONTAINER_ID
+  LogicalContainerId CLFS_CONTAINER_ID
+
+struct CLFS_ARCHIVE_DESCRIPTOR
+  coffLow ULONGLONG
+  coffHigh ULONGLONG
+  infoContainer CLS_CONTAINER_INFORMATION
+
+pointer "CLFS_ARCHIVE_DESCRIPTOR []" CLFS_ARCHIVE_DESCRIPTOR
+
+enum CLFS_RECORD_TYPE UINT8
+  ClfsNullRecord    0x00
+  ClfsDataRecord    0x01
+  ClfsRestartRecord 0x02
+
+pointer PCLFS_RECORD_TYPE CLFS_RECORD_TYPE
+
+enum CLFS_IOSTATS_CLASS UINT
+  ClfsIoStatsDefault 0x0000
+
+enum CLFS_CONTEXT_MODE UINT
+  ClfsContextNone     0x00
+  ClfsContextUndoNext 0x01
+  ClfsContextPrevious 0x02
+  ClfsContextForward  0x03
+
+flag CLFS_SCAN_MODE UINT8
+  CLFS_SCAN_INIT        0x01
+  CLFS_SCAN_FORWARD     0x02
+  CLFS_SCAN_BACKWARD    0x04
+  CLFS_SCAN_CLOSE       0x08
+  CLFS_SCAN_INITIALIZED 0x10
+  CLFS_SCAN_BUFFERED    0x20
+
+enum CLFS_LOG_ARCHIVE_MODE UINT
+  ClfsLogArchiveEnabled  0x01
+  ClfsLogArchiveDisabled 0x02
+
+struct CLS_LSN
+  Internal ULONGLONG
+
+alias CLFS_LSN CLS_LSN
+
+pointer PCLFS_LSN CLFS_LSN
+
+alias "const PCLFS_LSN" PCLFS_LSN
+
+alias "const CLFS_LSN*" PCLFS_LSN
+
+struct CLFS_WRITE_ENTRY
+  Buffer PVOID
+  ByteLength ULONG
+
+pointer PCLFS_WRITE_ENTRY CLFS_WRITE_ENTRY
+
+struct CLFS_INFORMATION
+  TotalAvailable LONGLONG
+  CurrentAvailable LONGLONG
+  TotalReservation LONGLONG
+  BaseFileSize ULONGLONG
+  ContainerSize ULONGLONG
+  TotalContainers ULONG
+  FreeContainers ULONG
+  TotalClients ULONG
+  Attributes ULONG
+  FlushThreshold ULONG
+  SectorSize ULONG
+  MinArchiveTailLsn CLS_LSN
+  BaseLsn CLS_LSN
+  LastFlushedLsn CLS_LSN
+  LastLsn CLS_LSN
+  RestartLsn CLS_LSN
+  Identity GUID
+
+pointer PCLFS_INFORMATION CLFS_INFORMATION
+
+enum CLFS_MGMT_POLICY_TYPE UINT
+  ClfsMgmtPolicyMaximumSize           0
+  ClfsMgmtPolicyMinimumSize           1
+  ClfsMgmtPolicyNewContainerSize      2
+  ClfsMgmtPolicyGrowthRate            3
+  ClfsMgmtPolicyLogTail               4
+  ClfsMgmtPolicyAutoShrink            5
+  ClfsMgmtPolicyAutoGrow              6
+  ClfsMgmtPolicyNewContainerPrefix    7
+  ClfsMgmtPolicyNewContainerSuffix    8
+  ClfsMgmtPolicyNewContainerExtension 9
+
+struct [CLFS_MGMT_POLICY_u_s1] display=struct
+  Containers ULONG
+
+struct [CLFS_MGMT_POLICY_u_s2] display=struct
+  Containers ULONG
+
+struct [CLFS_MGMT_POLICY_u_s3] display=struct
+  SizeInBytes ULONG
+
+struct [CLFS_MGMT_POLICY_u_s4] display=struct
+  AbsoluteGrowthInContainers ULONG
+  RelativeGrowthPercentage ULONG
+
+struct [CLFS_MGMT_POLICY_u_s5] display=struct
+  MinimumAvailablePercentage ULONG
+  MinimumAvailableContainers ULONG
+
+struct [CLFS_MGMT_POLICY_u_s6] display=struct
+  Percentage ULONG
+
+struct [CLFS_MGMT_POLICY_u_s7] display=struct
+  Enabled ULONG
+
+struct [CLFS_MGMT_POLICY_u_s8] display=struct
+  PrefixLengthInBytes USHORT
+  PrefixString "WCHAR [1]"
+
+struct [CLFS_MGMT_POLICY_u_s9] display=struct
+  NextContainerSuffix ULONGLONG
+
+struct [CLFS_MGMT_POLICY_u_s10] display=struct
+  ExtensionLengthInBytes USHORT
+  ExtensionString "WCHAR [1]"
+
+union [CLFS_MGMT_POLICY_u] display=union
+  MaximumSize [CLFS_MGMT_POLICY_u_s1]
+  MinimumSize [CLFS_MGMT_POLICY_u_s2]
+  NewContainerSize [CLFS_MGMT_POLICY_u_s3]
+  GrowthRate [CLFS_MGMT_POLICY_u_s4]
+  LogTail [CLFS_MGMT_POLICY_u_s5]
+  AutoShrink [CLFS_MGMT_POLICY_u_s6]
+  AutoGrow [CLFS_MGMT_POLICY_u_s7]
+  NewContainerPrefix [CLFS_MGMT_POLICY_u_s8]
+  NewContainerSuffix [CLFS_MGMT_POLICY_u_s9]
+  NewContainerExtension [CLFS_MGMT_POLICY_u_s10]
+
+struct CLFS_MGMT_POLICY
+  Version ULONG
+  LengthInBytes ULONG
+  PolicyFlags ULONG
+  PolicyType CLFS_MGMT_POLICY_TYPE
+  PolicyParameters [CLFS_MGMT_POLICY_u]
+
+pointer PCLFS_MGMT_POLICY CLFS_MGMT_POLICY
+
+enum CLFS_MGMT_NOTIFICATION_TYPE UINT
+  ClfsMgmtAdvanceTailNotification    0
+  ClfsMgmtLogFullHandlerNotification 1
+  ClfsMgmtLogUnpinnedNotification    2
+  ClfsMgmtLogWriteNotification       3
+
+struct CLFS_MGMT_NOTIFICATION
+  Notification CLFS_MGMT_NOTIFICATION_TYPE
+  Lsn CLFS_LSN
+  LogIsPinned USHORT
+
+pointer PCLFS_MGMT_NOTIFICATION CLFS_MGMT_NOTIFICATION
+
+struct LOG_MANAGEMENT_CALLBACKS
+  CallbackContext PVOID
+  AdvanceTailCallback PLOG_TAIL_ADVANCE_CALLBACK
+  LogFullHandlerCallback PLOG_FULL_HANDLER_CALLBACK
+  LogUnpinnedCallback PLOG_UNPINNED_CALLBACK
+
+pointer PLOG_MANAGEMENT_CALLBACKS LOG_MANAGEMENT_CALLBACKS
+
+enum [CREATE_LOG_DISPOSITION] ULONG display=ULONG
+  CREATE_NEW    1
+  OPEN_EXISTING 3
+  OPEN_ALWAYS   4
+
+enum [CREATE_LOG_FLAGS_ATTRIBUTES] ULONG display=ULONG
+  FILE_ATTRIBUTE_ARCHIVE 0x00000020
+  FILE_FLAG_OVERLAPPED   0x40000000
+
+func AlignReservedLog
+  BOOL
+  pvMarshal PVOID
+  cReservedRecords ULONG
+  rgcbReservation "LONGLONG []" count=cReservedRecords
+  pcbAlignReservation PLONGLONG
+
+func AllocReservedLog
+  BOOL
+  pvMarshal PVOID
+  cReservedRecords ULONG
+  pcbAdjustment PLONGLONG
+
+func CloseAndResetLogFile
+  BOOL
+  hLog HANDLE
+
+func CreateLogFile
+  success NotEqual=0
+  HANDLE
+  pszLogFileName LPCWSTR
+  fDesiredAccess ACCESS_MASK
+  dwShareMode [FILE_SHARE_MODE]
+  psaLogFile LPSECURITY_ATTRIBUTES
+  fCreateDisposition [CREATE_LOG_DISPOSITION]
+  fFlagsAndAttributes [CREATE_LOG_FLAGS_ATTRIBUTES]
+
+func DeleteLogByHandle
+  BOOL
+  hLog HANDLE
+
+func DeleteLogFile
+  BOOL
+  pszLogFileName LPCWSTR
+  pvReserved PVOID
+
+func DumpLogRecords
+  BOOL
+  pwszLogFileName PWSTR
+  fRecordType CLFS_RECORD_TYPE
+  plsnStart PCLFS_LSN
+  plsnEnd PCLFS_LSN
+  pstrmOut PFILE
+  pfnPrintRecord CLFS_PRINT_RECORD_ROUTINE
+  pfnAllocBlock CLFS_BLOCK_ALLOCATION
+  pfnFreeBlock CLFS_BLOCK_DEALLOCATION
+  pvBlockAllocContext PVOID
+  cbBlock ULONG
+  cMaxBlocks ULONG
+
+func FlushLogBuffers
+  BOOL
+  pvMarshal PVOID
+  pOverlapped LPOVERLAPPED
+
+func FlushLogToLsn
+  BOOL
+  pvMarshalContext PVOID
+  plsnFlush PCLFS_LSN
+  plsnLastFlushed PCLFS_LSN
+  pOverlapped LPOVERLAPPED
+
+func FreeReservedLog
+  BOOL
+  pvMarshal PVOID
+  cReservedRecords ULONG
+  pcbAdjustment PLONGLONG
+
+func ReserveAndAppendLog
+  BOOL
+  pvMarshal PVOID
+  rgWriteEntries PCLFS_WRITE_ENTRY count=cWriteEntries
+  cWriteEntries ULONG
+  plsnUndoNext PCLFS_LSN
+  plsnPrevious PCLFS_LSN
+  cReserveRecords ULONG
+  rgcbReservation "LONGLONG []" count=cReserveRecords
+  fFlags ULONG
+  plsn PCLFS_LSN
+  pOverlapped LPOVERLAPPED
+
+func ReserveAndAppendLogAligned
+  BOOL
+  pvMarshal PVOID
+  rgWriteEntries PCLFS_WRITE_ENTRY count=cWriteEntries
+  cWriteEntries ULONG
+  cbEntryAlignment ULONG
+  plsnUndoNext PCLFS_LSN
+  plsnPrevious PCLFS_LSN
+  cReserveRecords ULONG
+  rgcbReservation "LONGLONG []" count=cReserveRecords
+  fFlags ULONG
+  plsn PCLFS_LSN
+  overlapped LPOVERLAPPED
+
+func GetLogFileInformation
+  BOOL
+  hLog HANDLE
+  pinfoBuffer PCLFS_INFORMATION
+  cbBuffer PULONG
+
+func GetLogIoStatistics
+  BOOL
+  hLog HANDLE
+  pvStatsBuffer PVOID
+  cbStatsBuffer ULONG
+  eStatsClass CLFS_IOSTATS_CLASS
+  pcbStatsWritten PULONG
+
+func ReadLogRecord
+  BOOL
+  pvMarshal PVOID
+  plsnFirst PCLFS_LSN
+  eContextMode CLFS_CONTEXT_MODE
+  ppvReadBuffer PVOID*
+  pcbReadBuffer PULONG
+  peRecordType PCLFS_RECORD_TYPE
+  plsnUndoNext PCLFS_LSN
+  plsnPrevious PCLFS_LSN
+  ppvReadContext PVOID*
+  pOverlapped LPOVERLAPPED
+
+func ReadNextLogRecord
+  BOOL
+  pvReadContext PVOID
+  ppvBuffer PVOID*
+  pcbBuffer PULONG
+  peRecordType PCLFS_RECORD_TYPE
+  plsnUser PCLFS_LSN
+  plsnUndoNext PCLFS_LSN
+  plsnPrevious PCLFS_LSN
+  plsnRecord PCLFS_LSN
+  pOverlapped LPOVERLAPPED
+
+func SetEndOfLog
+  BOOL
+  hLog HANDLE
+  plsnEnd PCLFS_LSN
+  lpOverlapped LPOVERLAPPED
+
+func TruncateLog
+  BOOL
+  pvMarshal PVOID
+  plsnEnd PCLFS_LSN
+  lpOverlapped LPOVERLAPPED
+
+func TerminateReadLog
+  BOOL
+  pvCursorContext PVOID
+
+func GetLogReservationInfo
+  BOOL
+  pvMarshal PVOID
+  pcbRecordNumber PULONG
+  pcbUserReservation PLONGLONG
+  pcbCommitReservation PLONGLONG
+
+func AddLogContainer
+  BOOL
+  hLog HANDLE
+  pcbContainer PULONGLONG
+  pwszContainerPath LPWSTR
+  pReserved LPVOID
+
+func AddLogContainerSet
+  BOOL
+  hLog HANDLE
+  cContainers USHORT
+  pcbContainer PULONGLONG
+  rgwszContainerPath LPWSTR* count=cContainers
+  Reserved PVOID
+
+func CreateLogContainerScanContext
+  BOOL
+  hLog HANDLE
+  cFromContainer ULONG
+  cContainers ULONG
+  eScanMode CLFS_SCAN_MODE
+  pcxScan PCLFS_SCAN_CONTEXT
+  pOverlapped LPOVERLAPPED
+
+func ScanLogContainers
+  BOOL
+  pcxScan PCLFS_SCAN_CONTEXT
+  eScanMode CLFS_SCAN_MODE
+  pReserved LPVOID
+
+func GetLogContainerName
+  BOOL
+  hLog HANDLE
+  cidLogicalContainer CLFS_CONTAINER_ID
+  pwstrContainerName LPCWSTR
+  cLenContainerName ULONG
+  pcActualLenContainerName PULONG
+
+func RemoveLogContainer
+  BOOL
+  hLog HANDLE
+  pwszContainerPath LPWSTR
+  fForce BOOL
+  pReserved LPVOID
+
+func RemoveLogContainerSet
+  BOOL
+  hLog HANDLE
+  cContainers USHORT
+  rgwszContainerPath LPWSTR* count=cContainers
+  fForce BOOL
+  pReserved LPVOID
+
+func AdvanceLogBase
+  BOOL
+  pvMarshal PVOID
+  plsnBase PCLFS_LSN
+  fFlags ULONG
+  pOverlapped LPOVERLAPPED
+
+func ReadLogRestartArea
+  BOOL
+  pvMarshal PVOID
+  ppvRestartBuffer PVOID*
+  pcbRestartBuffer PULONG
+  plsn PCLFS_LSN
+  ppvContext PVOID*
+  pOverlapped LPOVERLAPPED
+
+func ReadPreviousLogRestartArea
+  BOOL
+  pvReadContext PVOID
+  ppvRestartBuffer PVOID*
+  pcbRestartBuffer PULONG
+  plsnRestart PCLFS_LSN
+  pOverlapped LPOVERLAPPED
+
+func WriteLogRestartArea
+  BOOL
+  pvMarshal PVOID
+  pvRestartBuffer PVOID
+  cbRestartBuffer ULONG
+  plsnBase PCLFS_LSN
+  fFlags ULONG
+  pcbWritten PULONG
+  plsnNext PCLFS_LSN
+  pOverlapped LPOVERLAPPED
+
+func GetNextLogArchiveExtent
+  BOOL
+  pvArchiveContext CLFS_LOG_ARCHIVE_CONTEXT
+  rgadExtent "CLFS_ARCHIVE_DESCRIPTOR []" count=cDescriptors
+  cDescriptors ULONG
+  pcDescriptorsReturned PULONG
+
+func PrepareLogArchive
+  BOOL
+  hLog HANDLE
+  pszBaseLogFileName PWSTR
+  cLen ULONG
+  plsnLow "const PCLFS_LSN"
+  plsnHigh "const PCLFS_LSN"
+  pcActualLength PULONG
+  poffBaseLogFileData PULONGLONG
+  pcbBaseLogFileLength PULONGLONG
+  plsnBase PCLFS_LSN
+  plsnLast PCLFS_LSN
+  plsnCurrentArchiveTail PCLFS_LSN
+  ppvArchiveContext PCLFS_LOG_ARCHIVE_CONTEXT
+
+func ReadLogArchiveMetadata
+  BOOL
+  pvArchiveContext CLFS_LOG_ARCHIVE_CONTEXT
+  cbOffset ULONG
+  cbBytesToRead ULONG
+  pbReadBuffer PBYTE
+  pcbBytesRead PULONG
+
+func SetLogArchiveMode
+  BOOL
+  hLog HANDLE
+  eMode CLFS_LOG_ARCHIVE_MODE
+
+func SetLogArchiveTail
+  BOOL
+  hLog HANDLE
+  plsnArchiveTail PCLFS_LSN
+  pReserved LPVOID
+
+func TerminateLogArchive
+  BOOL
+  pvArchiveContext CLFS_LOG_ARCHIVE_CONTEXT
+
+func ValidateLog
+  BOOL
+  pszLogFileName LPCWSTR
+  psaLogFile LPSECURITY_ATTRIBUTES
+  pinfoBuffer PCLFS_INFORMATION
+  pcbBuffer PULONG
+
+func CreateLogMarshallingArea
+  BOOL
+  hLog HANDLE
+  pfnAllocBuffer CLFS_BLOCK_ALLOCATION
+  pfnFreeBuffer CLFS_BLOCK_DEALLOCATION
+  pvBlockAllocContext PVOID
+  cbMarshallingBuffer ULONG
+  cMaxWriteBuffers ULONG
+  cMaxReadBuffers ULONG
+  ppvMarshal PVOID*
+
+func DeleteLogMarshallingArea
+  BOOL
+  pvMarshal PVOID
+
+func LsnBlockOffset
+  ULONG
+  plsn "const CLFS_LSN*"
+
+func LsnContainer
+  CLFS_CONTAINER_ID
+  plsn "const CLFS_LSN*"
+
+func LsnCreate
+  CLFS_LSN
+  cidContainer CLFS_CONTAINER_ID
+  offBlock ULONG
+  cRecord ULONG
+
+func LsnEqual
+  BOOL
+  plsn1 "const CLFS_LSN*"
+  plsn2 "const CLFS_LSN*"
+
+func LsnGreater
+  BOOL
+  plsn1 "const CLFS_LSN*"
+  plsn2 "const CLFS_LSN*"
+
+func LsnLess
+  BOOL
+  plsn1 "const CLFS_LSN*"
+  plsn2 "const CLFS_LSN*"
+
+func LsnNull
+  BOOL
+  plsn "const CLFS_LSN*"
+
+func LsnRecordSequence
+  ULONG
+  plsn "const CLFS_LSN*"
+
+func LsnDecrement
+  CLFS_LSN
+  plsn PCLFS_LSN
+
+func LsnIncrement
+  CLFS_LSN
+  plsn PCLFS_LSN
+
+func LsnInvalid
+  BOOL
+  plsn "const CLFS_LSN*"
+
+func DeregisterManageableLogClient
+  BOOL
+  hLog HANDLE
+
+func HandleLogFull
+  BOOL
+  hLog HANDLE
+
+func InstallLogPolicy
+  BOOL
+  hLog HANDLE
+  pPolicy PCLFS_MGMT_POLICY
+
+func LogTailAdvanceFailure
+  BOOL
+  hLog HANDLE
+  dwReason [ERROR_CODE]
+
+func QueryLogPolicy
+  BOOL
+  hLog HANDLE
+  ePolicyType CLFS_MGMT_POLICY_TYPE
+  pPolicyBuffer PCLFS_MGMT_POLICY
+  pcbPolicyBuffer PULONG
+
+func ReadLogNotification
+  BOOL
+  hLog HANDLE
+  pNotification PCLFS_MGMT_NOTIFICATION
+  lpOverlapped LPOVERLAPPED
+
+func RegisterForLogWriteNotification
+  BOOL
+  hLog HANDLE
+  cbThreshold ULONG
+  fEnable BOOL
+
+func RemoveLogPolicy
+  BOOL
+  hLog HANDLE
+  ePolicyType CLFS_MGMT_POLICY_TYPE
+
+func RegisterManageableLogClient
+  BOOL
+  hLog HANDLE
+  pCallbacks PLOG_MANAGEMENT_CALLBACKS
+
+func SetLogFileSizeWithPolicy
+  BOOL
+  hLog HANDLE
+  pDesiredSize PULONGLONG
+  pResultingSize PULONGLONG
+

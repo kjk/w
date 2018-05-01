@@ -1,0 +1,95 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemObjectPath base=IDispatch id={5791BC27-CE9C-11d1-97BF-0000F81E849C} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func get_Path
+    WBEMSTATUS
+    strPath BSTR*
+
+  func put_Path
+    WBEMSTATUS
+    strPath BSTR
+
+  func get_RelPath
+    WBEMSTATUS
+    strRelPath BSTR*
+
+  func put_RelPath
+    WBEMSTATUS
+    strRelPath BSTR
+
+  func get_Server
+    WBEMSTATUS
+    strServer BSTR*
+
+  func put_Server
+    WBEMSTATUS
+    strServer BSTR
+
+  func get_Namespace
+    WBEMSTATUS
+    strNamespace BSTR*
+
+  func put_Namespace
+    WBEMSTATUS
+    strNamespace BSTR
+
+  func get_ParentNamespace
+    WBEMSTATUS
+    strParentNamespace BSTR*
+
+  func get_DisplayName
+    WBEMSTATUS
+    strDisplayName BSTR*
+
+  func put_DisplayName
+    WBEMSTATUS
+    strDisplayName BSTR
+
+  func get_Class
+    WBEMSTATUS
+    strClass BSTR*
+
+  func put_Class
+    WBEMSTATUS
+    strClass BSTR
+
+  func get_IsClass
+    WBEMSTATUS
+    bIsClass VARIANT_BOOL*
+
+  func SetAsClass
+    WBEMSTATUS
+
+  func get_IsSingleton
+    WBEMSTATUS
+    bIsSingleton VARIANT_BOOL*
+
+  func SetAsSingleton
+    WBEMSTATUS
+
+  func get_Keys
+    WBEMSTATUS
+    objWbemNamedValueSet ISWbemNamedValueSet**
+
+  func get_Security_
+    WBEMSTATUS
+    objWbemSecurity ISWbemSecurity**
+
+  func get_Locale
+    WBEMSTATUS
+    strLocale BSTR*
+
+  func put_Locale
+    WBEMSTATUS
+    strLocale BSTR
+
+  func get_Authority
+    WBEMSTATUS
+    strAuthority BSTR*
+
+  func put_Authority
+    WBEMSTATUS
+    strAuthority BSTR
+
+

@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IReleaseMarshalBuffers base=IUnknown id={eb0cb9e8-7996-11d2-872e-0000f8080859} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func ReleaseMarshalBuffer
+    HRESULT
+    pMsg RPCOLEMESSAGE*
+    dwFlags DWORD
+    pChnl IUnknown*
+
+

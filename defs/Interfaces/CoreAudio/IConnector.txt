@@ -1,0 +1,36 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IConnector base=IUnknown id={9c2c4058-23f5-41de-877a-df3af236a09e} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetType
+    [AUDCLNT_HRESULT]
+    pType ConnectorType*
+
+  func GetDataFlow
+    [AUDCLNT_HRESULT]
+    pFlow DataFlow*
+
+  func ConnectTo
+    [AUDCLNT_HRESULT]
+    pConnectTo IConnector*
+
+  func Disconnect
+    [AUDCLNT_HRESULT]
+
+  func IsConnected
+    [AUDCLNT_HRESULT]
+    pbConnected BOOL*
+
+  func GetConnectedTo
+    [AUDCLNT_HRESULT]
+    ppConTo IConnector**
+
+  func GetConnectorIdConnectedTo
+    [AUDCLNT_HRESULT]
+    ppwstrConnectorId LPWSTR*
+
+  func GetDeviceIdConnectedTo
+    [AUDCLNT_HRESULT]
+    ppwstrDeviceId LPWSTR*
+
+

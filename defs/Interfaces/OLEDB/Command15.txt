@@ -1,0 +1,77 @@
+include Interfaces\OLEDB\_ADO.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface Command15 base=_ADO id={00001508-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_ActiveConnection
+    [OLEDB_HRESULT]
+    ppvObject _ADOConnection**
+
+  func putref_ActiveConnection
+    [OLEDB_HRESULT]
+    pCon _ADOConnection*
+
+  func put_ActiveConnection
+    [OLEDB_HRESULT]
+    vConn VARIANT
+
+  func get_CommandText
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func put_CommandText
+    [OLEDB_HRESULT]
+    bstr BSTR
+
+  func get_CommandTimeout
+    [OLEDB_HRESULT]
+    pl LONG*
+
+  func put_CommandTimeout
+    [OLEDB_HRESULT]
+    Timeout LONG
+
+  func get_Prepared
+    [OLEDB_HRESULT]
+    pfPrepared VARIANT_BOOL*
+
+  func put_Prepared
+    [OLEDB_HRESULT]
+    fPrepared VARIANT_BOOL
+
+  func Execute
+    [OLEDB_HRESULT]
+    RecordsAffected VARIANT*
+    Parameters VARIANT*
+    Options [ExecuteOptionCommandTypeEnum]
+    ppirs _ADORecordset**
+
+  func CreateParameter
+    [OLEDB_HRESULT]
+    Name BSTR
+    Type DataTypeEnum
+    Direction ParameterDirectionEnum
+    Size long
+    Value VARIANT
+    ppiprm _ADOParameter**
+
+  func get_Parameters
+    [OLEDB_HRESULT]
+    ppvObject ADOParameters**
+
+  func put_CommandType
+    [OLEDB_HRESULT]
+    lCmdType CommandTypeEnum
+
+  func get_CommandType
+    [OLEDB_HRESULT]
+    plCmdType CommandTypeEnum*
+
+  func get_Name
+    [OLEDB_HRESULT]
+    pbstrName BSTR*
+
+  func put_Name
+    [OLEDB_HRESULT]
+    bstrName BSTR
+
+

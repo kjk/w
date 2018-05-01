@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IComThreadingInfo base=IUnknown id={000001ce-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func GetCurrentApartmentType
+    HRESULT
+    pAptType APTTYPE*
+
+  func GetCurrentThreadType
+    HRESULT
+    pThreadType THDTYPE*
+
+  func GetCurrentLogicalThreadId
+    HRESULT
+    pguidLogicalThreadId GUID*
+
+  func SetCurrentLogicalThreadId
+    HRESULT
+    rguid REFGUID
+
+

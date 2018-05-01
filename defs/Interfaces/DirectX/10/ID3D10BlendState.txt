@@ -1,0 +1,9 @@
+include Interfaces\DirectX\10\ID3D10DeviceChild.txt
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10BlendState base=ID3D10DeviceChild id={EDAD8D19-8A35-4d6d-8566-2EA276CDE161} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Core"
+  func GetDesc
+    void
+    pDesc D3D10_BLEND_DESC*
+
+

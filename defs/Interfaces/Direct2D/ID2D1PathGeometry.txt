@@ -1,0 +1,21 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Geometry.txt
+
+ingterface ID2D1PathGeometry base=ID2D1Geometry id={2cd906a5-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func Open
+    [D2D_HRESULT]
+    geometrySink ID2D1GeometrySink**
+
+  func Stream
+    [D2D_HRESULT]
+    geometrySink ID2D1GeometrySink*
+
+  func GetSegmentCount
+    [D2D_HRESULT]
+    count UINT32*
+
+  func GetFigureCount
+    [D2D_HRESULT]
+    count UINT32*
+
+

@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface INewWindowManager base=IUnknown id={D2BC4C84-3F72-4a52-A604-7BCBF3982CBB} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func EvaluateNewWindow
+    HRESULT
+    pszUrl LPCWSTR
+    pszName LPCWSTR
+    pszUrlContext LPCWSTR
+    pszFeatures LPCWSTR
+    fReplace BOOL
+    dwFlags DWORD
+    dwUserActionTime DWORD
+
+

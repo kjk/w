@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioSessionNotification base=IUnknown id={641DD20B-4D41-49CC-ABA3-174B9477BB08} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func OnSessionCreated
+    [AUDCLNT_HRESULT]
+    NewSession IAudioSessionControl*
+
+

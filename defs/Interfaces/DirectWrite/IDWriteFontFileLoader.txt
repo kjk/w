@@ -1,0 +1,11 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteFontFileLoader base=IUnknown id={727cad4e-d6af-4c9e-8a08-d695b11caa49} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func CreateStreamFromKey
+    HRESULT
+    fontFileReferenceKey "void const*"
+    fontFileReferenceKeySize UINT32
+    fontFileStream IDWriteFontFileStream**
+
+

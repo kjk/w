@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IProtectFocus base=IUnknown id={d81f90a3-8156-44f7-ad28-5abb87003274} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/Advanced Hosting Interfaces"
+  func AllowFocusChange
+    HRESULT
+    pfAllow BOOL*
+
+

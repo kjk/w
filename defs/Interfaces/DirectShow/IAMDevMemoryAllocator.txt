@@ -1,0 +1,28 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMDevMemoryAllocator base=IUnknown id={c6545bf0-e76b-11d0-bd52-00a0c911ce86} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetInfo
+    HRESULT
+    pdwcbTotalFree DWORD*
+    pdwcbLargestFree DWORD*
+    pdwcbTotalMemory DWORD*
+    pdwcbMinimumChunk DWORD*
+
+  func CheckMemory
+    HRESULT
+    pBuffer "const BYTE*"
+
+  func Alloc
+    HRESULT
+    pdwcbBuffer DWORD*
+
+  func Free
+    HRESULT
+    pBuffer BYTE*
+
+  func GetDevMemoryObject
+    HRESULT
+    ppUnkInnner IUnknown**
+    pUnkOuter IUnknown*
+
+

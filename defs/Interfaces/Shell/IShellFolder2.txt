@@ -1,0 +1,40 @@
+include Interfaces\Shell\IShellFolder.txt
+
+ingterface IShellFolder2 base=IShellFolder id={93F2F68C-1D1B-11d3-A30E-00C04F79ABD1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetDefaultSearchGUID
+    HRESULT
+    pguid GUID*
+
+  func EnumSearches
+    HRESULT
+    ppenum IEnumExtraSearch**
+
+  func GetDefaultColumn
+    HRESULT
+    dwRes DWORD
+    pSort ULONG*
+    pDisplay ULONG*
+
+  func GetDefaultColumnState
+    HRESULT
+    iColumn UINT
+    pcsFlags SHCOLSTATEF*
+
+  func GetDetailsEx
+    HRESULT
+    pidl PCUITEMID_CHILD
+    pscid "const SHCOLUMNID*"
+    pv VARIANT*
+
+  func GetDetailsOf
+    HRESULT
+    pidl PCUITEMID_CHILD
+    iColumn UINT
+    psd SHELLDETAILS*
+
+  func MapColumnToSCID
+    HRESULT
+    iColumn UINT
+    pscid SHCOLUMNID*
+
+

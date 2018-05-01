@@ -1,0 +1,58 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBitsPeerCacheAdministration base=IUnknown id={659cdead-489e-11d9-a9cd-000d56965251} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func GetMaximumCacheSize
+    HRESULT
+    pBytes DWORD*
+
+  func SetMaximumCacheSize
+    HRESULT
+    Bytes DWORD
+
+  func GetMaximumContentAge
+    HRESULT
+    pSeconds ULONG*
+
+  func SetMaximumContentAge
+    HRESULT
+    Seconds ULONG
+
+  func GetConfigurationFlags
+    HRESULT
+    pFlags DWORD*
+
+  func SetConfigurationFlags
+    HRESULT
+    Flags DWORD
+
+  func EnumRecords
+    HRESULT
+    ppEnum IEnumBitsPeerCacheRecords**
+
+  func GetRecord
+    HRESULT
+    id REFGUID
+    ppRecord IBitsPeerCacheRecord**
+
+  func ClearRecords
+    HRESULT
+
+  func DeleteRecord
+    HRESULT
+    id REFGUID
+
+  func DeleteUrl
+    HRESULT
+    url LPCWSTR
+
+  func EnumPeers
+    HRESULT
+    ppEnum IEnumBitsPeers**
+
+  func ClearPeers
+    HRESULT
+
+  func DiscoverPeers
+    HRESULT
+
+

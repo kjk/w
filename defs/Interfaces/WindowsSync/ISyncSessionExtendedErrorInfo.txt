@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncSessionExtendedErrorInfo base=IUnknown id={326c6810-790a-409b-b741-6999388761eb} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetSyncProviderWithError
+    HRESULT
+    ppProviderWithError ISyncProvider**
+
+

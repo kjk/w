@@ -1,0 +1,2434 @@
+dll KernelBase.dll
+sourceModule Advapi32.dll include=Windows\Advapi32.xml
+func AccessCheck
+
+func AccessCheckAndAuditAlarmW
+
+func AccessCheckByType
+
+func AccessCheckByTypeAndAuditAlarmW
+
+func AccessCheckByTypeResultList
+
+func AccessCheckByTypeResultListAndAuditAlarmByHandleW
+
+func AccessCheckByTypeResultListAndAuditAlarmW
+
+func AddAccessAllowedAce
+
+func AddAccessAllowedAceEx
+
+func AddAccessAllowedObjectAce
+
+func AddAccessDeniedAce
+
+func AddAccessDeniedAceEx
+
+func AddAccessDeniedObjectAce
+
+func AddAce
+
+func AddAuditAccessAce
+
+func AddAuditAccessAceEx
+
+func AddAuditAccessObjectAce
+
+func AddMandatoryAce
+
+func AdjustTokenGroups
+
+func AdjustTokenPrivileges
+
+func AllocateAndInitializeSid
+
+func AllocateLocallyUniqueId
+
+func AreAllAccessesGranted
+
+func AreAnyAccessesGranted
+
+func CheckTokenMembership
+
+func CloseTrace
+
+func ControlTraceA
+
+func ControlTraceW
+
+func ConvertToAutoInheritPrivateObjectSecurity
+
+func CopySid
+
+func CreatePrivateObjectSecurity
+
+func CreatePrivateObjectSecurityEx
+
+func CreatePrivateObjectSecurityWithMultipleInheritance
+
+func CreateProcessAsUserW
+
+func CreateRestrictedToken
+
+func CreateWellKnownSid
+
+func DeleteAce
+
+func DestroyPrivateObjectSecurity
+
+func DuplicateToken
+
+func DuplicateTokenEx
+
+func EnableTraceEx2
+
+func EnumerateTraceGuidsEx
+
+func EqualDomainSid
+
+func EqualPrefixSid
+
+func EqualSid
+
+func EventAccessControl
+
+func EventAccessQuery
+
+func EventAccessRemove
+
+func EventActivityIdControl
+
+func EventEnabled
+
+func EventProviderEnabled
+
+func EventRegister
+
+func EventSetInformation
+
+func EventUnregister
+
+func EventWrite
+
+func EventWriteEx
+
+func EventWriteString
+
+func EventWriteTransfer
+
+func FindFirstFreeAce
+
+func FreeSid
+
+func GetAce
+
+func GetAclInformation
+
+func GetAppContainerNamedObjectPath
+
+func GetFileSecurityW
+
+func GetKernelObjectSecurity
+
+func GetLengthSid
+
+func GetPrivateObjectSecurity
+
+func GetSecurityDescriptorControl
+
+func GetSecurityDescriptorDacl
+
+func GetSecurityDescriptorGroup
+
+func GetSecurityDescriptorLength
+
+func GetSecurityDescriptorOwner
+
+func GetSecurityDescriptorRMControl
+
+func GetSecurityDescriptorSacl
+
+func GetSidIdentifierAuthority
+
+func GetSidLengthRequired
+
+func GetSidSubAuthority
+
+func GetSidSubAuthorityCount
+
+func GetTokenInformation
+
+func GetTraceEnableFlags
+
+func GetTraceEnableLevel
+
+func GetTraceLoggerHandle
+
+func GetWindowsAccountDomainSid
+
+func ImpersonateAnonymousToken
+
+func ImpersonateLoggedOnUser
+
+func ImpersonateNamedPipeClient
+
+func ImpersonateSelf
+
+func InitializeAcl
+
+func InitializeSecurityDescriptor
+
+func InitializeSid
+
+func IsTokenRestricted
+
+func IsValidAcl
+
+func IsValidSecurityDescriptor
+
+func IsValidSid
+
+func IsWellKnownSid
+
+func MakeAbsoluteSD
+
+func MakeSelfRelativeSD
+
+func MapGenericMask
+
+func ObjectCloseAuditAlarmW
+
+func ObjectDeleteAuditAlarmW
+
+func ObjectOpenAuditAlarmW
+
+func ObjectPrivilegeAuditAlarmW
+
+func OpenProcessToken
+
+func OpenThreadToken
+
+func OpenTraceW
+
+func PrivilegeCheck
+
+func PrivilegedServiceAuditAlarmW
+
+func ProcessTrace
+
+func QueryAllTracesA
+
+func QueryAllTracesW
+
+func QuerySecurityAccessMask
+
+func RegCloseKey
+
+func RegCopyTreeW
+
+func RegCreateKeyExA
+
+func RegCreateKeyExW
+
+func RegDeleteKeyExA
+
+func RegDeleteKeyExW
+
+func RegDeleteTreeA
+
+func RegDeleteTreeW
+
+func RegDeleteValueA
+
+func RegDeleteValueW
+
+func RegDisablePredefinedCacheEx
+
+func RegEnumKeyExA
+
+func RegEnumKeyExW
+
+func RegEnumValueA
+
+func RegEnumValueW
+
+func RegFlushKey
+
+func RegGetKeySecurity
+
+func RegGetValueA
+
+func RegGetValueW
+
+func RegisterTraceGuidsA
+
+func RegisterTraceGuidsW
+
+func RegLoadAppKeyA
+
+func RegLoadAppKeyW
+
+func RegLoadKeyA
+
+func RegLoadKeyW
+
+func RegLoadMUIStringA
+
+func RegLoadMUIStringW
+
+func RegNotifyChangeKeyValue
+
+func RegOpenCurrentUser
+
+func RegOpenKeyExA
+
+func RegOpenKeyExW
+
+func RegOpenUserClassesRoot
+
+func RegQueryInfoKeyA
+
+func RegQueryInfoKeyW
+
+func RegQueryValueExA
+
+func RegQueryValueExW
+
+func RegRestoreKeyA
+
+func RegRestoreKeyW
+
+func RegSaveKeyExA
+
+func RegSaveKeyExW
+
+func RegSetKeySecurity
+
+func RegSetValueExA
+
+func RegSetValueExW
+
+func RegUnLoadKeyA
+
+func RegUnLoadKeyW
+
+func RemoveTraceCallback
+
+func RevertToSelf
+
+func SetAclInformation
+
+func SetFileSecurityW
+
+func SetKernelObjectSecurity
+
+func SetPrivateObjectSecurity
+
+func SetPrivateObjectSecurityEx
+
+func SetSecurityAccessMask
+
+func SetSecurityDescriptorControl
+
+func SetSecurityDescriptorDacl
+
+func SetSecurityDescriptorGroup
+
+func SetSecurityDescriptorOwner
+
+func SetSecurityDescriptorRMControl
+
+func SetSecurityDescriptorSacl
+
+func SetThreadToken
+
+func SetTokenInformation
+
+func SetTraceCallback
+
+func StartTraceA
+
+func StartTraceW
+
+func StopTraceW
+
+func TraceEvent
+
+func TraceMessage
+
+func TraceMessageVa
+
+func TraceQueryInformation
+
+func TraceSetInformation
+
+func UnregisterTraceGuids
+
+sourceModule Kernel32.dll include=Windows\Kernel32.xml
+func AcquireSRWLockExclusive
+
+func AcquireSRWLockShared
+
+func ActivateActCtx
+
+func AddDllDirectory
+
+func AddRefActCtx
+
+func AddResourceAttributeAce
+
+func AddScopedPolicyIDAce
+
+func AddSIDToBoundaryDescriptor
+
+func AddVectoredContinueHandler
+
+func AddVectoredExceptionHandler
+
+func AllocConsole
+
+func AreFileApisANSI
+
+func AttachConsole
+
+func Beep
+
+func CallbackMayRunLong
+
+func CancelIo
+
+func CancelIoEx
+
+func CancelSynchronousIo
+
+func CancelThreadpoolIo
+
+func CancelWaitableTimer
+
+func ChangeTimerQueueTimer
+
+func CheckRemoteDebuggerPresent
+
+func CheckTokenCapability
+
+func CheckTokenMembershipEx
+
+func ClearCommBreak
+
+func ClearCommError
+
+func CloseHandle
+
+func ClosePrivateNamespace
+
+func CloseThreadpool
+
+func CloseThreadpoolCleanupGroup
+
+func CloseThreadpoolCleanupGroupMembers
+
+func CloseThreadpoolIo
+
+func CloseThreadpoolTimer
+
+func CloseThreadpoolWait
+
+func CloseThreadpoolWork
+
+func CompareFileTime
+
+func CompareStringA
+
+func CompareStringEx
+
+func CompareStringOrdinal
+
+func CompareStringW
+
+func ConnectNamedPipe
+
+func ContinueDebugEvent
+
+func ConvertDefaultLocale
+
+func CopyFile2
+
+func CopyFileExW
+
+func CreateActCtxW
+
+func CreateBoundaryDescriptorW
+
+func CreateConsoleScreenBuffer
+
+func CreateDirectoryA
+
+func CreateDirectoryExW
+
+func CreateDirectoryW
+
+func CreateEventA
+
+func CreateEventExA
+
+func CreateEventExW
+
+func CreateEventW
+
+func CreateFile2
+
+func CreateFileA
+
+func CreateFileMappingFromApp
+
+func CreateFileMappingNumaW
+
+func CreateFileMappingW
+
+func CreateFileW
+
+func CreateHardLinkW
+
+func CreateIoCompletionPort
+
+func CreateMemoryResourceNotification
+
+func CreateMutexA
+
+func CreateMutexExA
+
+func CreateMutexExW
+
+func CreateMutexW
+
+func CreateNamedPipeW
+
+func CreatePipe
+
+func CreatePrivateNamespaceW
+
+func CreateProcessA
+
+func CreateProcessW
+
+func CreateRemoteThread
+
+func CreateRemoteThreadEx
+
+func CreateSemaphoreExW
+
+func CreateSymbolicLinkW
+
+func CreateThread
+
+func CreateThreadpool
+
+func CreateThreadpoolCleanupGroup
+
+func CreateThreadpoolIo
+
+func CreateThreadpoolTimer
+
+func CreateThreadpoolWait
+
+func CreateThreadpoolWork
+
+func CreateTimerQueue
+
+func CreateTimerQueueTimer
+
+func CreateWaitableTimerExW
+
+func DeactivateActCtx
+
+func DebugActiveProcess
+
+func DebugActiveProcessStop
+
+func DebugBreak
+
+func DecodePointer
+
+func DecodeSystemPointer
+
+func DefineDosDeviceW
+
+func DelayLoadFailureHook
+
+func DeleteBoundaryDescriptor
+
+func DeleteCriticalSection
+
+func DeleteFileA
+
+func DeleteFileW
+
+func DeleteProcThreadAttributeList
+
+func DeleteSynchronizationBarrier
+
+func DeleteTimerQueueEx
+
+func DeleteTimerQueueTimer
+
+func DeleteVolumeMountPointW
+
+func DeviceIoControl
+
+func DisableThreadLibraryCalls
+
+func DisassociateCurrentThreadFromCallback
+
+func DisconnectNamedPipe
+
+func DuplicateHandle
+
+func EncodePointer
+
+func EncodeSystemPointer
+
+func EnterCriticalSection
+
+func EnterSynchronizationBarrier
+
+func EnumCalendarInfoExEx
+
+func EnumCalendarInfoExW
+
+func EnumCalendarInfoW
+
+func EnumDateFormatsExEx
+
+func EnumDateFormatsExW
+
+func EnumDateFormatsW
+
+func EnumLanguageGroupLocalesW
+
+func EnumResourceLanguagesExA
+
+func EnumResourceLanguagesExW
+
+func EnumResourceNamesExA
+
+func EnumResourceNamesExW
+
+func EnumResourceTypesExA
+
+func EnumResourceTypesExW
+
+func EnumSystemCodePagesW
+
+func EnumSystemFirmwareTables
+
+func EnumSystemGeoID
+
+func EnumSystemLanguageGroupsW
+
+func EnumSystemLocalesA
+
+func EnumSystemLocalesEx
+
+func EnumSystemLocalesW
+
+func EnumTimeFormatsEx
+
+func EnumTimeFormatsW
+
+func EnumUILanguagesW
+
+func EscapeCommFunction
+
+func ExitProcess
+
+func ExitThread
+
+func ExpandEnvironmentStringsA
+
+func ExpandEnvironmentStringsW
+
+func FatalAppExitA
+
+func FatalAppExitW
+
+func FileTimeToLocalFileTime
+
+func FileTimeToSystemTime
+
+func FillConsoleOutputAttribute
+
+func FillConsoleOutputCharacterA
+
+func FillConsoleOutputCharacterW
+
+func FindActCtxSectionGuid
+
+func FindActCtxSectionStringW
+
+func FindClose
+
+func FindCloseChangeNotification
+
+func FindFirstChangeNotificationA
+
+func FindFirstChangeNotificationW
+
+func FindFirstFileA
+
+func FindFirstFileExA
+
+func FindFirstFileExW
+
+func FindFirstFileW
+
+func FindFirstVolumeW
+
+func FindNextChangeNotification
+
+func FindNextFileA
+
+func FindNextFileW
+
+func FindNextVolumeW
+
+func FindNLSString
+
+func FindNLSStringEx
+
+func FindResourceExW
+
+func FindStringOrdinal
+
+func FindVolumeClose
+
+func FlsAlloc
+
+func FlsFree
+
+func FlsGetValue
+
+func FlsSetValue
+
+func FlushConsoleInputBuffer
+
+func FlushFileBuffers
+
+func FlushInstructionCache
+
+func FlushProcessWriteBuffers
+
+func FlushViewOfFile
+
+func FoldStringW
+
+func FormatMessageA
+
+func FormatMessageW
+
+func FreeConsole
+
+func FreeEnvironmentStringsA
+
+func FreeEnvironmentStringsW
+
+func FreeLibrary
+
+func FreeLibraryAndExitThread
+
+func FreeLibraryWhenCallbackReturns
+
+func FreeResource
+
+func GenerateConsoleCtrlEvent
+
+func GetACP
+
+func GetApplicationRecoveryCallback
+
+func GetApplicationRestartSettings
+
+func GetCalendarInfoEx
+
+func GetCalendarInfoW
+
+func GetCommandLineA
+
+func GetCommandLineW
+
+func GetCommConfig
+
+func GetCommMask
+
+func GetCommModemStatus
+
+func GetCommProperties
+
+func GetCommState
+
+func GetCommTimeouts
+
+func GetComputerNameExA
+
+func GetComputerNameExW
+
+func GetConsoleCP
+
+func GetConsoleCursorInfo
+
+func GetConsoleMode
+
+func GetConsoleOutputCP
+
+func GetConsoleScreenBufferInfo
+
+func GetConsoleScreenBufferInfoEx
+
+func GetConsoleTitleW
+
+func GetCPInfo
+
+func GetCPInfoExW
+
+func GetCurrencyFormatEx
+
+func GetCurrencyFormatW
+
+func GetCurrentActCtx
+
+func GetCurrentDirectoryA
+
+func GetCurrentDirectoryW
+
+func GetCurrentProcess
+
+func GetCurrentProcessId
+
+func GetCurrentProcessorNumber
+
+func GetCurrentProcessorNumberEx
+
+func GetCurrentThread
+
+func GetCurrentThreadId
+
+func GetDateFormatA
+
+func GetDateFormatEx
+
+func GetDateFormatW
+
+func GetDiskFreeSpaceA
+
+func GetDiskFreeSpaceExA
+
+func GetDiskFreeSpaceExW
+
+func GetDiskFreeSpaceW
+
+func GetDriveTypeA
+
+func GetDriveTypeW
+
+func GetDynamicTimeZoneInformation
+
+func GetEnvironmentStrings
+
+func GetEnvironmentStringsA
+
+func GetEnvironmentStringsW
+
+func GetEnvironmentVariableA
+
+func GetEnvironmentVariableW
+
+func GetErrorMode
+
+func GetExitCodeProcess
+
+func GetExitCodeThread
+
+func GetFileAttributesA
+
+func GetFileAttributesExA
+
+func GetFileAttributesExW
+
+func GetFileAttributesW
+
+func GetFileInformationByHandle
+
+func GetFileInformationByHandleEx
+
+func GetFileMUIInfo
+
+func GetFileMUIPath
+
+func GetFileSize
+
+func GetFileSizeEx
+
+func GetFileTime
+
+func GetFileType
+
+func GetFinalPathNameByHandleA
+
+func GetFinalPathNameByHandleW
+
+func GetFullPathNameA
+
+func GetFullPathNameW
+
+func GetGeoInfoW
+
+func GetHandleInformation
+
+func GetLargePageMinimum
+
+func GetLargestConsoleWindowSize
+
+func GetLastError
+
+func GetLocaleInfoA
+
+func GetLocaleInfoEx
+
+func GetLocaleInfoW
+
+func GetLocalTime
+
+func GetLogicalDrives
+
+func GetLogicalDriveStringsW
+
+func GetLogicalProcessorInformation
+
+func GetLogicalProcessorInformationEx
+
+func GetLongPathNameA
+
+func GetLongPathNameW
+
+func GetModuleFileNameA
+
+func GetModuleFileNameW
+
+func GetModuleHandleA
+
+func GetModuleHandleExA
+
+func GetModuleHandleExW
+
+func GetModuleHandleW
+
+func GetNamedPipeClientComputerNameW
+
+func GetNativeSystemInfo
+
+func GetNLSVersion
+
+func GetNLSVersionEx
+
+func GetNumaHighestNodeNumber
+
+func GetNumaNodeProcessorMaskEx
+
+func GetNumberFormatEx
+
+func GetNumberFormatW
+
+func GetNumberOfConsoleInputEvents
+
+func GetOEMCP
+
+func GetOverlappedResult
+
+func GetOverlappedResultEx
+
+func GetPriorityClass
+
+func GetProcAddress
+
+func GetProcessGroupAffinity
+
+func GetProcessHandleCount
+
+func GetProcessHeap
+
+func GetProcessHeaps
+
+func GetProcessId
+
+func GetProcessIdOfThread
+
+func GetProcessMitigationPolicy
+
+func GetProcessPreferredUILanguages
+
+func GetProcessTimes
+
+func GetProcessVersion
+
+func GetProcessWorkingSetSizeEx
+
+func GetProductInfo
+
+func GetQueuedCompletionStatus
+
+func GetQueuedCompletionStatusEx
+
+func GetShortPathNameW
+
+func GetStartupInfoW
+
+func GetStdHandle
+
+func GetStringScripts
+
+func GetStringTypeA
+
+func GetStringTypeExW
+
+func GetStringTypeW
+
+func GetSystemDefaultLangID
+
+func GetSystemDefaultLCID
+
+func GetSystemDefaultLocaleName
+
+func GetSystemDefaultUILanguage
+
+func GetSystemDirectoryA
+
+func GetSystemDirectoryW
+
+func GetSystemFileCacheSize
+
+func GetSystemFirmwareTable
+
+func GetSystemInfo
+
+func GetSystemPreferredUILanguages
+
+func GetSystemTime
+
+func GetSystemTimeAdjustment
+
+func GetSystemTimeAsFileTime
+
+func GetSystemTimePreciseAsFileTime
+
+func GetSystemWindowsDirectoryA
+
+func GetSystemWindowsDirectoryW
+
+func GetTempFileNameW
+
+func GetTempPathW
+
+func GetThreadContext
+
+func GetThreadGroupAffinity
+
+func GetThreadId
+
+func GetThreadIdealProcessorEx
+
+func GetThreadLocale
+
+func GetThreadPreferredUILanguages
+
+func GetThreadPriority
+
+func GetThreadPriorityBoost
+
+func GetThreadTimes
+
+func GetThreadUILanguage
+
+func GetTickCount
+
+func GetTickCount64
+
+func GetTimeFormatA
+
+func GetTimeFormatEx
+
+func GetTimeFormatW
+
+func GetTimeZoneInformation
+
+func GetTimeZoneInformationForYear
+
+func GetUILanguageInfo
+
+func GetUserDefaultLangID
+
+func GetUserDefaultLCID
+
+func GetUserDefaultLocaleName
+
+func GetUserDefaultUILanguage
+
+func GetUserGeoID
+
+func GetUserPreferredUILanguages
+
+func GetVersion
+
+func GetVersionExA
+
+func GetVersionExW
+
+func GetVolumeInformationByHandleW
+
+func GetVolumeInformationW
+
+func GetVolumeNameForVolumeMountPointW
+
+func GetVolumePathNamesForVolumeNameW
+
+func GetVolumePathNameW
+
+func GetWindowsDirectoryA
+
+func GetWindowsDirectoryW
+
+func GetWriteWatch
+
+func GlobalAlloc
+
+func GlobalFree
+
+func GlobalMemoryStatusEx
+
+func HeapAlloc
+
+func HeapCompact
+
+func HeapCreate
+
+func HeapDestroy
+
+func HeapFree
+
+func HeapLock
+
+func HeapQueryInformation
+
+func HeapReAlloc
+
+func HeapSetInformation
+
+func HeapSize
+
+func HeapSummary
+
+func HeapUnlock
+
+func HeapValidate
+
+func HeapWalk
+
+func InitializeConditionVariable
+
+func InitializeCriticalSection
+
+func InitializeCriticalSectionAndSpinCount
+
+func InitializeCriticalSectionEx
+
+func InitializeProcThreadAttributeList
+
+func InitializeSListHead
+
+func InitializeSRWLock
+
+func InitializeSynchronizationBarrier
+
+func InitOnceBeginInitialize
+
+func InitOnceComplete
+
+func InitOnceExecuteOnce
+
+func InitOnceInitialize
+
+func InterlockedCompareExchange
+
+func InterlockedCompareExchange64
+
+func InterlockedDecrement
+
+func InterlockedExchange
+
+func InterlockedExchangeAdd
+
+func InterlockedFlushSList
+
+func InterlockedIncrement
+
+func InterlockedPopEntrySList
+
+func InterlockedPushEntrySList
+
+func InterlockedPushListSList
+
+func InterlockedPushListSListEx
+
+func IsDBCSLeadByte
+
+func IsDBCSLeadByteEx
+
+func IsDebuggerPresent
+
+func IsNLSDefinedString
+
+func IsProcessInJob
+
+func IsProcessorFeaturePresent
+
+func IsThreadAFiber
+
+func IsThreadpoolTimerSet
+
+func IsValidCodePage
+
+func IsValidLanguageGroup
+
+func IsValidLocale
+
+func IsValidLocaleName
+
+func IsValidNLSVersion
+
+func IsWow64Process
+
+func K32EmptyWorkingSet
+
+func K32EnumDeviceDrivers
+
+func K32EnumPageFilesA
+
+func K32EnumPageFilesW
+
+func K32EnumProcesses
+
+func K32EnumProcessModules
+
+func K32EnumProcessModulesEx
+
+func K32GetDeviceDriverBaseNameA
+
+func K32GetDeviceDriverBaseNameW
+
+func K32GetDeviceDriverFileNameA
+
+func K32GetDeviceDriverFileNameW
+
+func K32GetMappedFileNameA
+
+func K32GetMappedFileNameW
+
+func K32GetModuleBaseNameA
+
+func K32GetModuleBaseNameW
+
+func K32GetModuleFileNameExA
+
+func K32GetModuleFileNameExW
+
+func K32GetModuleInformation
+
+func K32GetPerformanceInfo
+
+func K32GetProcessImageFileNameA
+
+func K32GetProcessImageFileNameW
+
+func K32GetProcessMemoryInfo
+
+func K32GetWsChanges
+
+func K32GetWsChangesEx
+
+func K32InitializeProcessForWsWatch
+
+func K32QueryWorkingSet
+
+func K32QueryWorkingSetEx
+
+func LCIDToLocaleName
+
+func LCMapStringA
+
+func LCMapStringEx
+
+func LCMapStringW
+
+func LeaveCriticalSection
+
+func LeaveCriticalSectionWhenCallbackReturns
+
+func LoadLibraryExA
+
+func LoadLibraryExW
+
+func LoadResource
+
+func LoadStringByReference
+
+func LocalAlloc
+
+func LocaleNameToLCID
+
+func LocalFileTimeToFileTime
+
+func LocalFree
+
+func LocalLock
+
+func LocalReAlloc
+
+func LocalUnlock
+
+func LockFile
+
+func LockFileEx
+
+func LockResource
+
+func lstrcmp
+
+func lstrcmpA
+
+func lstrcmpi
+
+func lstrcmpiA
+
+func lstrcmpiW
+
+func lstrcmpW
+
+func lstrcpyn
+
+func lstrcpynA
+
+func lstrcpynW
+
+func lstrlen
+
+func lstrlenA
+
+func lstrlenW
+
+func MapViewOfFile
+
+func MapViewOfFileEx
+
+func MapViewOfFileExNuma
+
+func MapViewOfFileFromApp
+
+func MoveFileExW
+
+func MoveFileWithProgressW
+
+func MultiByteToWideChar
+
+func NeedCurrentDirectoryForExePathA
+
+func NeedCurrentDirectoryForExePathW
+
+func OpenEventA
+
+func OpenEventW
+
+func OpenFileMappingW
+
+func OpenMutexW
+
+func OpenPrivateNamespaceW
+
+func OpenProcess
+
+func OpenSemaphoreW
+
+func OpenThread
+
+func OpenWaitableTimerW
+
+func OutputDebugStringA
+
+func OutputDebugStringW
+
+func PeekConsoleInputA
+
+func PeekConsoleInputW
+
+func PeekNamedPipe
+
+func PostQueuedCompletionStatus
+
+func PrefetchVirtualMemory
+
+func ProcessIdToSessionId
+
+func PulseEvent
+
+func PurgeComm
+
+func QueryActCtxSettingsW
+
+func QueryActCtxW
+
+func QueryDepthSList
+
+func QueryDosDeviceW
+
+func QueryFullProcessImageNameA
+
+func QueryFullProcessImageNameW
+
+func QueryIdleProcessorCycleTime
+
+func QueryIdleProcessorCycleTimeEx
+
+func QueryMemoryResourceNotification
+
+func QueryPerformanceCounter
+
+func QueryPerformanceFrequency
+
+func QueryProcessAffinityUpdateMode
+
+func QueryProcessCycleTime
+
+func QueryThreadCycleTime
+
+func QueryThreadpoolStackInformation
+
+func QueryUnbiasedInterruptTime
+
+func QueueUserAPC
+
+func QueueUserWorkItem
+
+func ReadConsoleA
+
+func ReadConsoleInputA
+
+func ReadConsoleInputW
+
+func ReadConsoleOutputA
+
+func ReadConsoleOutputAttribute
+
+func ReadConsoleOutputCharacterA
+
+func ReadConsoleOutputCharacterW
+
+func ReadConsoleOutputW
+
+func ReadConsoleW
+
+func ReadDirectoryChangesW
+
+func ReadFile
+
+func ReadFileEx
+
+func ReadFileScatter
+
+func ReadProcessMemory
+
+func ReleaseActCtx
+
+func ReleaseMutex
+
+func ReleaseMutexWhenCallbackReturns
+
+func ReleaseSemaphore
+
+func ReleaseSemaphoreWhenCallbackReturns
+
+func ReleaseSRWLockExclusive
+
+func ReleaseSRWLockShared
+
+func RemoveDirectoryA
+
+func RemoveDirectoryW
+
+func RemoveDllDirectory
+
+func RemoveVectoredContinueHandler
+
+func RemoveVectoredExceptionHandler
+
+func ReOpenFile
+
+func ReplaceFileW
+
+func ResetEvent
+
+func ResetWriteWatch
+
+func ResolveDelayLoadedAPI
+
+func ResolveDelayLoadsFromDll
+
+func ResolveLocaleName
+
+func ResumeThread
+
+func ScrollConsoleScreenBufferA
+
+func ScrollConsoleScreenBufferW
+
+func SearchPathA
+
+func SearchPathW
+
+func SetCalendarInfoW
+
+func SetCommBreak
+
+func SetCommConfig
+
+func SetCommMask
+
+func SetCommState
+
+func SetCommTimeouts
+
+func SetComputerNameExW
+
+func SetConsoleActiveScreenBuffer
+
+func SetConsoleCP
+
+func SetConsoleCtrlHandler
+
+func SetConsoleCursorInfo
+
+func SetConsoleCursorPosition
+
+func SetConsoleInputExeNameA
+
+func SetConsoleInputExeNameW
+
+func SetConsoleMode
+
+func SetConsoleOutputCP
+
+func SetConsoleScreenBufferInfoEx
+
+func SetConsoleScreenBufferSize
+
+func SetConsoleTextAttribute
+
+func SetConsoleTitleW
+
+func SetConsoleWindowInfo
+
+func SetCriticalSectionSpinCount
+
+func SetCurrentDirectoryA
+
+func SetCurrentDirectoryW
+
+func SetDefaultDllDirectories
+
+func SetDynamicTimeZoneInformation
+
+func SetEndOfFile
+
+func SetEnvironmentVariableA
+
+func SetEnvironmentVariableW
+
+func SetErrorMode
+
+func SetEvent
+
+func SetEventWhenCallbackReturns
+
+func SetFileApisToANSI
+
+func SetFileApisToOEM
+
+func SetFileAttributesA
+
+func SetFileAttributesW
+
+func SetFileInformationByHandle
+
+func SetFilePointer
+
+func SetFilePointerEx
+
+func SetFileTime
+
+func SetFileValidData
+
+func SetHandleCount
+
+func SetHandleInformation
+
+func SetLastError
+
+func SetLocaleInfoW
+
+func SetLocalTime
+
+func SetNamedPipeHandleState
+
+func SetPriorityClass
+
+func SetProcessAffinityUpdateMode
+
+func SetProcessMitigationPolicy
+
+func SetProcessPreferredUILanguages
+
+func SetProcessShutdownParameters
+
+func SetProcessWorkingSetSizeEx
+
+func SetStdHandle
+
+func SetStdHandleEx
+
+func SetSystemFileCacheSize
+
+func SetSystemTime
+
+func SetThreadContext
+
+func SetThreadGroupAffinity
+
+func SetThreadIdealProcessorEx
+
+func SetThreadLocale
+
+func SetThreadpoolStackInformation
+
+func SetThreadpoolThreadMaximum
+
+func SetThreadpoolThreadMinimum
+
+func SetThreadpoolTimer
+
+func SetThreadpoolWait
+
+func SetThreadPreferredUILanguages
+
+func SetThreadPriority
+
+func SetThreadPriorityBoost
+
+func SetThreadStackGuarantee
+
+func SetThreadUILanguage
+
+func SetTimeZoneInformation
+
+func SetUnhandledExceptionFilter
+
+func SetupComm
+
+func SetUserGeoID
+
+func SetWaitableTimer
+
+func SetWaitableTimerEx
+
+func SignalObjectAndWait
+
+func SizeofResource
+
+func Sleep
+
+func SleepConditionVariableCS
+
+func SleepConditionVariableSRW
+
+func SleepEx
+
+func StartThreadpoolIo
+
+func SubmitThreadpoolWork
+
+func SuspendThread
+
+func SwitchToThread
+
+func SystemTimeToFileTime
+
+func SystemTimeToTzSpecificLocalTime
+
+func TerminateProcess
+
+func TerminateThread
+
+func TlsAlloc
+
+func TlsFree
+
+func TlsGetValue
+
+func TlsSetValue
+
+func TransactNamedPipe
+
+func TransmitCommChar
+
+func TryAcquireSRWLockExclusive
+
+func TryAcquireSRWLockShared
+
+func TryEnterCriticalSection
+
+func TrySubmitThreadpoolCallback
+
+func TzSpecificLocalTimeToSystemTime
+
+func UnhandledExceptionFilter
+
+func UnlockFile
+
+func UnlockFileEx
+
+func UnmapViewOfFile
+
+func UnregisterWaitEx
+
+func UpdateProcThreadAttribute
+
+func VerifyScripts
+
+func VerLanguageNameA
+
+func VerLanguageNameW
+
+func VerSetConditionMask
+
+func VirtualAlloc
+
+func VirtualAllocEx
+
+func VirtualAllocExNuma
+
+func VirtualFree
+
+func VirtualFreeEx
+
+func VirtualLock
+
+func VirtualProtect
+
+func VirtualProtectEx
+
+func VirtualQuery
+
+func VirtualQueryEx
+
+func VirtualUnlock
+
+func WaitCommEvent
+
+func WaitForDebugEvent
+
+func WaitForMultipleObjectsEx
+
+func WaitForSingleObject
+
+func WaitForSingleObjectEx
+
+func WaitForThreadpoolIoCallbacks
+
+func WaitForThreadpoolTimerCallbacks
+
+func WaitForThreadpoolWaitCallbacks
+
+func WaitForThreadpoolWorkCallbacks
+
+func WaitNamedPipeW
+
+func WaitOnAddress
+
+func WakeAllConditionVariable
+
+func WakeByAddressAll
+
+func WakeByAddressSingle
+
+func WakeConditionVariable
+
+func WerRegisterFile
+
+func WerRegisterMemoryBlock
+
+func WerRegisterRuntimeExceptionModule
+
+func WerUnregisterFile
+
+func WerUnregisterMemoryBlock
+
+func WerUnregisterRuntimeExceptionModule
+
+func WideCharToMultiByte
+
+func Wow64DisableWow64FsRedirection
+
+func Wow64RevertWow64FsRedirection
+
+func WriteConsoleA
+
+func WriteConsoleInputA
+
+func WriteConsoleInputW
+
+func WriteConsoleOutputA
+
+func WriteConsoleOutputAttribute
+
+func WriteConsoleOutputCharacterA
+
+func WriteConsoleOutputCharacterW
+
+func WriteConsoleOutputW
+
+func WriteConsoleW
+
+func WriteFile
+
+func WriteFileEx
+
+func WriteFileGather
+
+func WriteProcessMemory
+
+func ZombifyActCtx
+
+sourceModule msvcrxx.dll include=Windows\msvcrxx.xml
+func __wgetmainargs
+
+func _amsg_exit
+
+func _c_exit
+
+func _cexit
+
+func _exit
+
+func _initterm
+
+func _initterm_e
+
+func _onexit
+
+func _purecall
+
+func _time64
+
+func atexit
+
+func exit
+
+func time
+
+func wprintf
+
+sourceModule Normaliz.dll include=Windows\Normaliz.xml
+func IdnToAscii
+
+func IdnToNameprepUnicode
+
+func IdnToUnicode
+
+func IsNormalizedString
+
+func NormalizeString
+
+sourceModule NtDsAPI.dll include=Windows\NtDsAPI.xml
+func DsBindWithSpnExW
+
+func DsCrackNamesW
+
+func DsFreeDomainControllerInfoW
+
+func DsFreeNameResultW
+
+func DsFreePasswordCredentials
+
+func DsGetDomainControllerInfoW
+
+func DsMakePasswordCredentialsW
+
+func DsUnBindW
+
+sourceModule Psapi.dll include=Windows\Psapi.xml
+func EmptyWorkingSet
+
+func EnumDeviceDrivers
+
+func EnumPageFilesA
+
+func EnumPageFilesW
+
+func EnumProcesses
+
+func EnumProcessModules
+
+func EnumProcessModulesEx
+
+func GetDeviceDriverBaseNameA
+
+func GetDeviceDriverBaseNameW
+
+func GetDeviceDriverFileNameA
+
+func GetDeviceDriverFileNameW
+
+func GetMappedFileNameA
+
+func GetMappedFileNameW
+
+func GetModuleBaseNameA
+
+func GetModuleBaseNameW
+
+func GetModuleFileNameExA
+
+func GetModuleFileNameExW
+
+func GetModuleInformation
+
+func GetPerformanceInfo
+
+func GetProcessImageFileNameA
+
+func GetProcessImageFileNameW
+
+func GetProcessMemoryInfo
+
+func GetWsChanges
+
+func GetWsChangesEx
+
+func InitializeProcessForWsWatch
+
+func QueryWorkingSet
+
+func QueryWorkingSetEx
+
+sourceModule Shell32.dll include=Windows\Shell32.xml
+func PathCleanupSpec
+
+func PathIsExe
+
+func SHCoCreateInstance
+
+func SHCreateDirectoryExW
+
+func SHGetDesktopFolder
+
+func SHGetFileInfoW
+
+func SHGetFolderLocation
+
+func SHGetFolderPathA
+
+func SHGetFolderPathAndSubDirW
+
+func SHGetFolderPathW
+
+func SHGetInstanceExplorer
+
+func SHGetKnownFolderPath
+
+func SHGetSpecialFolderPathA
+
+func SHGetSpecialFolderPathW
+
+func SHSetKnownFolderPath
+
+sourceModule ShLwApi.dll include=Windows\ShLwApi.xml
+func ChrCmpIA
+
+func ChrCmpIW
+
+func GetAcceptLanguagesA
+
+func GetAcceptLanguagesW
+
+func HashData
+
+func IsCharSpaceA
+
+func IsCharSpaceW
+
+func IsInternetESCEnabled
+
+func ParseURLA
+
+func ParseURLW
+
+func PathAddBackslashA
+
+func PathAddBackslashW
+
+func PathAddExtensionA
+
+func PathAddExtensionW
+
+func PathAppendA
+
+func PathAppendW
+
+func PathCanonicalizeA
+
+func PathCanonicalizeW
+
+func PathCombineA
+
+func PathCombineW
+
+func PathCommonPrefixA
+
+func PathCommonPrefixW
+
+func PathCreateFromUrlA
+
+func PathCreateFromUrlAlloc
+
+func PathCreateFromUrlW
+
+func PathFileExistsA
+
+func PathFileExistsW
+
+func PathFindExtensionA
+
+func PathFindExtensionW
+
+func PathFindFileNameA
+
+func PathFindFileNameW
+
+func PathFindNextComponentA
+
+func PathFindNextComponentW
+
+func PathGetArgsA
+
+func PathGetArgsW
+
+func PathGetCharTypeA
+
+func PathGetCharTypeW
+
+func PathGetDriveNumberA
+
+func PathGetDriveNumberW
+
+func PathIsFileSpecA
+
+func PathIsFileSpecW
+
+func PathIsLFNFileSpecA
+
+func PathIsLFNFileSpecW
+
+func PathIsPrefixA
+
+func PathIsPrefixW
+
+func PathIsRelativeA
+
+func PathIsRelativeW
+
+func PathIsRootA
+
+func PathIsRootW
+
+func PathIsSameRootA
+
+func PathIsSameRootW
+
+func PathIsUNCA
+
+func PathIsUNCServerA
+
+func PathIsUNCServerShareA
+
+func PathIsUNCServerShareW
+
+func PathIsUNCServerW
+
+func PathIsUNCW
+
+func PathIsURLA
+
+func PathIsURLW
+
+func PathMatchSpecA
+
+func PathMatchSpecExA
+
+func PathMatchSpecExW
+
+func PathMatchSpecW
+
+func PathParseIconLocationA
+
+func PathParseIconLocationW
+
+func PathQuoteSpacesA
+
+func PathQuoteSpacesW
+
+func PathRelativePathToA
+
+func PathRelativePathToW
+
+func PathRemoveBackslashA
+
+func PathRemoveBackslashW
+
+func PathRemoveBlanksA
+
+func PathRemoveBlanksW
+
+func PathRemoveExtensionA
+
+func PathRemoveExtensionW
+
+func PathRemoveFileSpecA
+
+func PathRemoveFileSpecW
+
+func PathRenameExtensionA
+
+func PathRenameExtensionW
+
+func PathSearchAndQualifyA
+
+func PathSearchAndQualifyW
+
+func PathSkipRootA
+
+func PathSkipRootW
+
+func PathStripPathA
+
+func PathStripPathW
+
+func PathStripToRootA
+
+func PathStripToRootW
+
+func PathUnExpandEnvStringsA
+
+func PathUnExpandEnvStringsW
+
+func PathUnquoteSpacesA
+
+func PathUnquoteSpacesW
+
+func QISearch
+
+func SHLoadIndirectString
+
+func SHRegCloseUSKey
+
+func SHRegCreateUSKeyA
+
+func SHRegCreateUSKeyW
+
+func SHRegDeleteEmptyUSKeyA
+
+func SHRegDeleteEmptyUSKeyW
+
+func SHRegDeleteUSValueA
+
+func SHRegDeleteUSValueW
+
+func SHRegEnumUSKeyA
+
+func SHRegEnumUSKeyW
+
+func SHRegEnumUSValueA
+
+func SHRegEnumUSValueW
+
+func SHRegGetBoolUSValueA
+
+func SHRegGetBoolUSValueW
+
+func SHRegGetUSValueA
+
+func SHRegGetUSValueW
+
+func SHRegOpenUSKeyA
+
+func SHRegOpenUSKeyW
+
+func SHRegQueryInfoUSKeyA
+
+func SHRegQueryInfoUSKeyW
+
+func SHRegQueryUSValueA
+
+func SHRegQueryUSValueW
+
+func SHRegSetUSValueA
+
+func SHRegSetUSValueW
+
+func SHRegWriteUSValueA
+
+func SHRegWriteUSValueW
+
+func StrCatBuffA
+
+func StrCatBuffW
+
+func StrCatChainW
+
+func StrChrA
+
+func StrChrIA
+
+func StrChrIW
+
+func StrChrNIW
+
+func StrChrNW
+
+func StrChrW
+
+func StrCmpCA
+
+func StrCmpCW
+
+func StrCmpICA
+
+func StrCmpICW
+
+func StrCmpLogicalW
+
+func StrCmpIW
+
+func StrCmpNA
+
+func StrCmpNCA
+
+func StrCmpNCW
+
+func StrCmpNIA
+
+func StrCmpNICA
+
+func StrCmpNICW
+
+func StrCmpNIW
+
+func StrCmpNW
+
+func StrCmpW
+
+func StrCpyNW
+
+func StrCSpnA
+
+func StrCSpnIA
+
+func StrCSpnIW
+
+func StrCSpnW
+
+func StrDupA
+
+func StrDupW
+
+func StrIsIntlEqualA
+
+func StrIsIntlEqualW
+
+func StrPBrkA
+
+func StrPBrkW
+
+func StrRChrA
+
+func StrRChrIA
+
+func StrRChrIW
+
+func StrRChrW
+
+func StrRStrIA
+
+func StrRStrIW
+
+func StrSpnA
+
+func StrSpnW
+
+func StrStrA
+
+func StrStrIA
+
+func StrStrIW
+
+func StrStrNIW
+
+func StrStrNW
+
+func StrStrW
+
+func StrToInt64ExA
+
+func StrToInt64ExW
+
+func StrToIntA
+
+func StrToIntExA
+
+func StrToIntExW
+
+func StrToIntW
+
+func StrTrimA
+
+func StrTrimW
+
+func UrlApplySchemeA
+
+func UrlApplySchemeW
+
+func UrlCanonicalizeA
+
+func UrlCanonicalizeW
+
+func UrlCombineA
+
+func UrlCombineW
+
+func UrlCompareA
+
+func UrlCompareW
+
+func UrlCreateFromPathA
+
+func UrlCreateFromPathW
+
+func UrlEscapeA
+
+func UrlEscapeW
+
+func UrlFixupW
+
+func UrlGetLocationA
+
+func UrlGetLocationW
+
+func UrlGetPartA
+
+func UrlGetPartW
+
+func UrlHashA
+
+func UrlHashW
+
+func UrlIsA
+
+func UrlIsNoHistoryA
+
+func UrlIsNoHistoryW
+
+func UrlIsOpaqueA
+
+func UrlIsOpaqueW
+
+func UrlIsW
+
+func UrlUnescapeA
+
+func UrlUnescapeW
+
+sourceModule User32.dll include=Windows\User32.xml
+func CharLowerA
+
+func CharLowerBuffA
+
+func CharLowerBuffW
+
+func CharLowerW
+
+func CharNextA
+
+func CharNextExA
+
+func CharNextW
+
+func CharPrevA
+
+func CharPrevExA
+
+func CharPrevW
+
+func CharUpperA
+
+func CharUpperBuffA
+
+func CharUpperBuffW
+
+func CharUpperW
+
+func IsCharAlphaA
+
+func IsCharAlphaNumericA
+
+func IsCharAlphaNumericW
+
+func IsCharAlphaW
+
+func IsCharLowerA
+
+func IsCharLowerW
+
+func IsCharUpperA
+
+func IsCharUpperW
+
+func LoadStringA
+
+func LoadStringW
+
+sourceModule version.dll include=Windows\version.xml
+func GetFileVersionInfoExW
+
+func GetFileVersionInfoSizeExW
+
+func VerFindFileA
+
+func VerFindFileW
+
+func VerQueryValueA
+
+func VerQueryValueW
+
+sourceModule Wininet.dll include=Windows\Wininet.xml
+func InternetTimeFromSystemTimeA
+
+func InternetTimeFromSystemTimeW
+
+func InternetTimeToSystemTimeA
+
+func InternetTimeToSystemTimeW
+

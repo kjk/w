@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IDeviceSpecificProperty base=IUnknown id={3B22BCBF-2586-4af0-8583-205D391B807C} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetType
+    [AUDCLNT_HRESULT]
+    pVType VARTYPE*
+
+  func GetValue
+    [AUDCLNT_HRESULT]
+    pvValue void*
+    pcbValue DWORD*
+
+  func SetValue
+    [AUDCLNT_HRESULT]
+    pvValue void*
+    cbValue DWORD
+    pguidEventContext LPCGUID
+
+  func Get4BRange
+    [AUDCLNT_HRESULT]
+    plMin LONG*
+    plMax LONG*
+    plStepping LONG*
+
+

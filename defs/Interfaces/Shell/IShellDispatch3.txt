@@ -1,0 +1,9 @@
+include Interfaces\Shell\IShellDispatch2.txt
+
+ingterface IShellDispatch3 base=IShellDispatch2 id={177160ca-bb5a-411c-841d-bd38facdeaa0} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func AddToRecent
+    HRESULT
+    varFile VARIANT
+    bstrCategory BSTR
+
+

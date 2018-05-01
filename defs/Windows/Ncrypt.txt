@@ -1,0 +1,633 @@
+include Headers\windows.h.txt
+include Headers\cryptography.h.txt
+include Headers\security.h.txt
+
+dll NCrypt.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Security and Identity/Cryptography API: Next Generation (CNG)/Key Storage"
+category "Security and Identity/Cryptography API: Next Generation (CNG)/SSL Provider"
+category "Security and Identity/Cryptography API: Next Generation (CNG)/CNG Data Protection API (DPAPI)"
+alias NCRYPT_HANDLE ULONG_PTR
+
+alias NCRYPT_PROV_HANDLE ULONG_PTR
+
+pointer NCRYPT_PROV_HANDLE* NCRYPT_PROV_HANDLE
+
+alias NCRYPT_SECRET_HANDLE ULONG_PTR
+
+pointer NCRYPT_SECRET_HANDLE* NCRYPT_SECRET_HANDLE
+
+alias NCRYPT_HASH_HANDLE ULONG_PTR
+
+pointer NCRYPT_HASH_HANDLE* NCRYPT_HASH_HANDLE
+
+alias NCryptBufferDesc BCryptBufferDesc
+
+pointer NCryptBufferDesc* NCryptBufferDesc
+
+pointer PNCryptBufferDesc NCryptBufferDesc
+
+alias NCRYPT_DESCRIPTOR_HANDLE HANDLE
+
+pointer NCRYPT_DESCRIPTOR_HANDLE* NCRYPT_DESCRIPTOR_HANDLE
+
+alias PFN_NCRYPT_ALLOC LPVOID
+
+alias PFN_NCRYPT_FREE LPVOID
+
+alias NCRYPT_STREAM_HANDLE HANDLE
+
+pointer NCRYPT_STREAM_HANDLE* NCRYPT_STREAM_HANDLE
+
+alias PFNCryptStreamOutputCallback LPVOID
+
+alias WCHAR[NCRYPT_SSL_MAX_NAME_SIZE] WCHAR*
+
+alias NCRYPT_SSL_CIPHER_SUITE* LPVOID
+
+pointer NCRYPT_SSL_CIPHER_SUITE** NCRYPT_SSL_CIPHER_SUITE*
+
+alias NCRYPT_SSL_CIPHER_LENGTHS* LPVOID
+
+struct NCryptAlgorithmName
+  pszName LPWSTR
+  dwClass DWORD
+  dwAlgOperations DWORD
+  dwFlags DWORD
+
+pointer NCryptAlgorithmName* NCryptAlgorithmName
+
+pointer NCryptAlgorithmName** NCryptAlgorithmName*
+
+struct NCryptKeyName
+  pszName LPWSTR
+  pszAlgid LPWSTR
+  dwLegacyKeySpec DWORD
+  dwFlags DWORD
+
+pointer NCryptKeyName* NCryptKeyName
+
+pointer NCryptKeyName** NCryptKeyName*
+
+struct NCryptProviderName
+  pszName LPWSTR
+  pszComment LPWSTR
+
+pointer NCryptProviderName* NCryptProviderName
+
+pointer NCryptProviderName** NCryptProviderName*
+
+enum [SslContentType] DWORD display=DWORD
+  CT_CHANGE_CIPHER_SPEC 20
+  CT_ALERT              21
+  CT_HANDSHAKE          22
+  CT_APPLICATIONDATA    23
+
+struct NCRYPT_ALLOC_PARA
+  cbSize DWORD
+  pfnAlloc PFN_NCRYPT_ALLOC
+  pfnFree PFN_NCRYPT_FREE
+
+pointer "const NCRYPT_ALLOC_PARA*" NCRYPT_ALLOC_PARA
+
+struct NCRYPT_PROTECT_STREAM_INFO
+  pfnStreamOutput PFNCryptStreamOutputCallback
+  pvCallbackCtxt void*
+
+pointer NCRYPT_PROTECT_STREAM_INFO* NCRYPT_PROTECT_STREAM_INFO
+
+func NCryptCreatePersistedKey
+  SECURITY_STATUS
+  hProvider NCRYPT_PROV_HANDLE
+  phKey NCRYPT_KEY_HANDLE*
+  pszAlgId LPCWSTR
+  pszKeyName LPCWSTR
+  dwLegacyKeySpec DWORD
+  dwFlags DWORD
+
+func NCryptDecrypt
+  SECURITY_STATUS
+  hKey NCRYPT_KEY_HANDLE
+  pbInput PBYTE length=cbInput
+  cbInput DWORD
+  pPaddingInfo VOID*
+  pbOutput PBYTE postLength=pcbResult
+  cbOutput DWORD
+  pcbResult DWORD*
+  dwFlags DWORD
+
+func NCryptDeleteKey
+  SECURITY_STATUS
+  hKey NCRYPT_KEY_HANDLE
+  dwFlags DWORD
+
+func NCryptDeriveKey
+  SECURITY_STATUS
+  hSharedSecret NCRYPT_SECRET_HANDLE
+  pwszKDF LPCWSTR
+  pParameterList NCryptBufferDesc*
+  pbDerivedKey PBYTE postLength=pcbResult
+  cbDerivedKey DWORD
+  pcbResult DWORD*
+  dwFlags ULONG
+
+func NCryptEncrypt
+  SECURITY_STATUS
+  hKey NCRYPT_KEY_HANDLE
+  pbInput PBYTE length=cbInput
+  cbInput DWORD
+  pPaddingInfo VOID*
+  pbOutput PBYTE postLength=pcbResult
+  cbOutput DWORD
+  pcbResult DWORD*
+  dwFlags DWORD
+
+func NCryptEnumAlgorithms
+  SECURITY_STATUS
+  hProvider NCRYPT_PROV_HANDLE
+  dwAlgOperations DWORD
+  pdwAlgCount DWORD*
+  ppAlgList NCryptAlgorithmName**
+  dwFlags DWORD
+
+func NCryptEnumKeys
+  SECURITY_STATUS
+  hProvider NCRYPT_PROV_HANDLE
+  pszScope LPCWSTR
+  ppKeyName NCryptKeyName**
+  ppEnumState PVOID*
+  dwFlags DWORD
+
+func NCryptEnumStorageProviders
+  SECURITY_STATUS
+  pdwProviderCount DWORD*
+  ppProviderList NCryptProviderName**
+  dwFlags DWORD
+
+func NCryptExportKey
+  SECURITY_STATUS
+  hKey NCRYPT_KEY_HANDLE
+  hExportKey NCRYPT_KEY_HANDLE
+  pszBlobType LPCWSTR
+  pParameterList NCryptBufferDesc*
+  pbOutput PBYTE postLength=pcbResult
+  cbOutput DWORD
+  pcbResult DWORD*
+  dwFlags DWORD
+
+func NCryptFinalizeKey
+  SECURITY_STATUS
+  hKey NCRYPT_KEY_HANDLE
+  dwFlags DWORD
+
+func NCryptFreeBuffer
+  SECURITY_STATUS
+  pvInput PVOID
+
+func NCryptFreeObject
+  SECURITY_STATUS
+  hObject NCRYPT_HANDLE
+
+func NCryptGetProperty
+  SECURITY_STATUS
+  hObject NCRYPT_HANDLE
+  pszProperty LPCWSTR
+  pbOutput PBYTE postLength=pcbResult
+  cbOutput DWORD
+  pcbResult DWORD*
+  dwFlags DWORD
+
+func NCryptImportKey
+  SECURITY_STATUS
+  hProvider NCRYPT_PROV_HANDLE
+  hImportKey NCRYPT_KEY_HANDLE
+  pszBlobType LPCWSTR
+  pParameterList NCryptBufferDesc*
+  phKey NCRYPT_KEY_HANDLE*
+  pbData PBYTE length=cbData
+  cbData DWORD
+  dwFlags DWORD
+
+func NCryptIsAlgSupported
+  SECURITY_STATUS
+  hProvider NCRYPT_PROV_HANDLE
+  pszAlgId LPCWSTR
+  dwFlags DWORD
+
+func NCryptIsKeyHandle
+  BOOL
+  hKey NCRYPT_KEY_HANDLE
+
+func NCryptKeyDerivation
+  SECURITY_STATUS
+  hKey NCRYPT_KEY_HANDLE
+  pParameterList NCryptBufferDesc*
+  pbDerivedKey PUCHAR
+  cbDerivedKey DWORD
+  pcbResult DWORD*
+  dwFlags ULONG
+
+func NCryptNotifyChangeKey
+  SECURITY_STATUS
+  hProvider NCRYPT_PROV_HANDLE
+  phEvent HANDLE*
+  dwFlags DWORD
+
+func NCryptOpenKey
+  SECURITY_STATUS
+  hProvider NCRYPT_PROV_HANDLE
+  phKey NCRYPT_KEY_HANDLE*
+  pszKeyName LPCWSTR
+  dwLegacyKeySpec DWORD
+  dwFlags DWORD
+
+func NCryptOpenStorageProvider
+  SECURITY_STATUS
+  phProvider NCRYPT_PROV_HANDLE*
+  pszProviderName LPCWSTR
+  dwFlags DWORD
+
+func NCryptSecretAgreement
+  SECURITY_STATUS
+  hPrivKey NCRYPT_KEY_HANDLE
+  hPubKey NCRYPT_KEY_HANDLE
+  phSecret NCRYPT_SECRET_HANDLE*
+  dwFlags DWORD
+
+func NCryptSetProperty
+  SECURITY_STATUS
+  hObject NCRYPT_HANDLE
+  pszProperty LPCWSTR
+  pbInput PBYTE length=cbInput
+  cbInput DWORD
+  dwFlags DWORD
+
+func NCryptSignHash
+  SECURITY_STATUS
+  hKey NCRYPT_KEY_HANDLE
+  pPaddingInfo VOID*
+  pbHashValue PBYTE length=cbHashValue
+  cbHashValue DWORD
+  pbSignature PBYTE postLength=pcbResult
+  cbSignature DWORD
+  pcbResult DWORD*
+  dwFlags DWORD
+
+func NCryptTranslateHandle
+  SECURITY_STATUS
+  phProvider NCRYPT_PROV_HANDLE*
+  phKey NCRYPT_KEY_HANDLE*
+  hLegacyProv HCRYPTPROV
+  hLegacyKey HCRYPTKEY
+  dwLegacyKeySpec DWORD
+  dwFlags DWORD
+
+func NCryptVerifySignature
+  SECURITY_STATUS
+  hKey NCRYPT_KEY_HANDLE
+  pPaddingInfo VOID*
+  pbHashValue PBYTE length=cbHashValue
+  cbHashValue DWORD
+  pbSignature PBYTE length=cbSignature
+  cbSignature DWORD
+  dwFlags DWORD
+
+func SslChangeNotify
+  SECURITY_STATUS
+  hEvent HANDLE
+  dwFlags DWORD
+
+func SslComputeClientAuthHash
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hMasterKey NCRYPT_KEY_HANDLE
+  hHandshakeHash NCRYPT_HASH_HANDLE
+  pszAlgId LPCWSTR
+  pbOutput PBYTE postLength=pcbResult
+  cbOutput DWORD
+  pcbResult DWORD*
+  dwFlags DWORD
+
+func SslComputeEapKeyBlock
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hMasterKey NCRYPT_KEY_HANDLE
+  pbRandoms PBYTE length=cbRandoms
+  cbRandoms DWORD
+  pbOutput PBYTE postLength=pcbResult
+  cbOutput DWORD
+  pcbResult DWORD*
+  dwFlags DWORD
+
+func SslComputeFinishedHash
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hMasterKey NCRYPT_KEY_HANDLE
+  hHandshakeHash NCRYPT_HASH_HANDLE
+  pbOutput PBYTE length=cbOutput
+  cbOutput DWORD
+  dwFlags DWORD
+
+func SslCreateClientAuthHash
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  phHandshakeHash NCRYPT_HASH_HANDLE*
+  dwProtocol DWORD
+  dwCipherSuite DWORD
+  pszHashAlgId LPCWSTR
+  dwFlags DWORD
+
+func SslCreateEphemeralKey
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  phEphemeralKey NCRYPT_KEY_HANDLE*
+  dwProtocol DWORD
+  dwCipherSuite DWORD
+  dwKeyType DWORD
+  dwKeyBitLen DWORD
+  pbParams PBYTE length=cbParams
+  cbParams DWORD
+  dwFlags DWORD
+
+func SslCreateHandshakeHash
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  phHandshakeHash NCRYPT_HASH_HANDLE*
+  dwProtocol DWORD
+  dwCipherSuite DWORD
+  dwFlags DWORD
+
+func SslDecrementProviderReferenceCount
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+
+func SslDecryptPacket
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hKey NCRYPT_KEY_HANDLE
+  pbInput PBYTE length=cbInput
+  cbInput DWORD
+  pbOutput PBYTE postLength=pcbResult
+  cbOutput DWORD
+  pcbResult DWORD*
+  SequenceNumber ULONGLONG
+  dwFlags DWORD
+
+func SslEncryptPacket
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hKey NCRYPT_KEY_HANDLE
+  pbInput PBYTE length=cbInput
+  cbInput DWORD
+  pbOutput PBYTE postLength=pcbResult
+  cbOutput DWORD
+  pcbResult DWORD*
+  SequenceNumber ULONGLONG
+  dwContentType [SslContentType]
+  dwFlags DWORD
+
+func SslEnumCipherSuites
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hPrivateKey NCRYPT_KEY_HANDLE
+  ppCipherSuite NCRYPT_SSL_CIPHER_SUITE**
+  ppEnumState PVOID*
+  dwFlags DWORD
+
+func SslEnumProtocolProviders
+  SECURITY_STATUS
+  pdwProviderCount DWORD*
+  ppProviderList NCryptProviderName**
+  dwFlags DWORD
+
+func SslExportKey
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hKey NCRYPT_KEY_HANDLE
+  pszBlobType LPCWSTR
+  pbOutput PBYTE postLength=pcbResult
+  cbOutput DWORD
+  pcbResult DWORD*
+  dwFlags DWORD
+
+func SslFreeBuffer
+  SECURITY_STATUS
+  pvInput PVOID
+
+func SslFreeObject
+  SECURITY_STATUS
+  hObject NCRYPT_HANDLE
+  dwFlags DWORD
+
+func SslGenerateMasterKey
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hPrivateKey NCRYPT_KEY_HANDLE
+  hPublicKey NCRYPT_KEY_HANDLE
+  phMasterKey NCRYPT_KEY_HANDLE*
+  dwProtocol DWORD
+  dwCipherSuite DWORD
+  pParameterList PNCryptBufferDesc
+  pbOutput PBYTE postLength=pcbResult
+  cbOutput DWORD
+  pcbResult DWORD*
+  dwFlags DWORD
+
+func SslGenerateSessionKeys
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hMasterKey NCRYPT_KEY_HANDLE
+  phReadKey NCRYPT_KEY_HANDLE*
+  phWriteKey NCRYPT_KEY_HANDLE*
+  pParameterList PNCryptBufferDesc
+  dwFlags DWORD
+
+func SslGetCipherSuitePRFHashAlgorithm
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  dwProtocol DWORD
+  dwCipherSuite DWORD
+  dwKeyType DWORD
+  szPRFHash WCHAR[NCRYPT_SSL_MAX_NAME_SIZE]
+  dwFlags DWORD
+
+func SslGetKeyProperty
+  SECURITY_STATUS
+  hKey NCRYPT_KEY_HANDLE
+  pszProperty LPCWSTR
+  ppbOutput PBYTE postLength=pcbOutput
+  pcbOutput DWORD*
+  dwFlags DWORD
+
+func SslGetProviderProperty
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  pszProperty LPCWSTR
+  ppbOutput PBYTE postLength=pcbOutput
+  pcbOutput DWORD*
+  ppEnumState PVOID*
+  dwFlags DWORD
+
+func SslHashHandshake
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hHandshakeHash NCRYPT_HASH_HANDLE
+  pbInput PBYTE length=cbInput
+  cbInput DWORD
+  dwFlags DWORD
+
+func SslImportKey
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  phKey NCRYPT_KEY_HANDLE*
+  pszBlobType LPCWSTR
+  pbKeyBlob PBYTE length=cbKeyBlob
+  cbKeyBlob DWORD
+  dwFlags DWORD
+
+func SslImportMasterKey
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hPrivateKey NCRYPT_KEY_HANDLE
+  phMasterKey NCRYPT_KEY_HANDLE*
+  dwProtocol DWORD
+  dwCipherSuite DWORD
+  pParameterList PNCryptBufferDesc
+  pbEncryptedKey PBYTE length=cbEncryptedKey
+  cbEncryptedKey DWORD
+  dwFlags DWORD
+
+func SslIncrementProviderReferenceCount
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+
+func SslLookupCipherLengths
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  dwProtocol DWORD
+  dwCipherSuite DWORD
+  dwKeyType DWORD
+  pCipherLengths NCRYPT_SSL_CIPHER_LENGTHS*
+  cbCipherLengths DWORD
+  dwFlags DWORD
+
+func SslLookupCipherSuiteInfo
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  dwProtocol DWORD
+  dwCipherSuite DWORD
+  dwKeyType DWORD
+  pCipherSuite NCRYPT_SSL_CIPHER_SUITE*
+  dwFlags DWORD
+
+func SslOpenPrivateKey
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  phPrivateKey NCRYPT_KEY_HANDLE*
+  pCertContext PCCERT_CONTEXT
+  dwFlags DWORD
+
+func SslOpenProvider
+  SECURITY_STATUS
+  phSslProvider NCRYPT_PROV_HANDLE*
+  pszProviderName LPCWSTR
+  dwFlags DWORD
+
+func SslSignHash
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hPrivateKey NCRYPT_KEY_HANDLE
+  pbHashValue PBYTE length=cbHashValue
+  cbHashValue DWORD
+  pbSignature PBYTE postLength=pcbResult
+  cbSignature DWORD
+  pcbResult DWORD*
+  dwFlags DWORD
+
+func SslVerifySignature
+  SECURITY_STATUS
+  hSslProvider NCRYPT_PROV_HANDLE
+  hPublicKey NCRYPT_KEY_HANDLE
+  pbHashValue PBYTE length=cbHashValue
+  cbHashValue DWORD
+  pbSignature PBYTE length=cbSignature
+  cbSignature DWORD
+  dwFlags DWORD
+
+func NCryptCreateProtectionDescriptor
+  NTSTATUS
+  pwszDescriptorString LPCWSTR
+  dwFlags DWORD
+  phDescriptor NCRYPT_DESCRIPTOR_HANDLE*
+
+func NCryptCloseProtectionDescriptor
+  NTSTATUS
+  hDescriptor NCRYPT_DESCRIPTOR_HANDLE
+
+func NCryptGetProtectionDescriptorInfo
+  NTSTATUS
+  hDescriptor NCRYPT_DESCRIPTOR_HANDLE
+  pMemPara "const NCRYPT_ALLOC_PARA*"
+  dwInfoType DWORD
+  ppvInfo void*
+
+func NCryptProtectSecret
+  NTSTATUS
+  hDescriptor NCRYPT_DESCRIPTOR_HANDLE
+  dwFlags DWORD
+  pbData "const BYTE*" length=cbData
+  cbData ULONG
+  pMemPara "const NCRYPT_ALLOC_PARA*"
+  hWnd HWND
+  ppbProtectedBlob BYTE**
+  pcbProtectedBlob ULONG*
+
+func NCryptQueryProtectionDescriptorName
+  NTSTATUS
+  pwszName LPCWSTR
+  pwszDescriptorString LPWSTR
+  pcDescriptorString SIZE_T*
+  dwFlags DWORD
+
+func NCryptRegisterProtectionDescriptorName
+  NTSTATUS
+  pwszName LPCWSTR
+  pwszDescriptorString LPCWSTR
+  dwFlags DWORD
+
+func NCryptStreamClose
+  NTSTATUS
+  hStream NCRYPT_STREAM_HANDLE
+
+func NCryptStreamOpenToProtect
+  NTSTATUS
+  hDescriptor NCRYPT_DESCRIPTOR_HANDLE
+  dwFlags DWORD
+  hWnd HWND
+  pStreamInfo NCRYPT_PROTECT_STREAM_INFO*
+  phStream NCRYPT_STREAM_HANDLE*
+
+func NCryptStreamOpenToUnprotect
+  NTSTATUS
+  pStreamInfo NCRYPT_PROTECT_STREAM_INFO*
+  dwFlags DWORD
+  hWnd HWND
+  phStream NCRYPT_STREAM_HANDLE*
+
+func NCryptStreamUpdate
+  NTSTATUS
+  hStream NCRYPT_STREAM_HANDLE
+  pbData "const BYTE*" length=cbData
+  cbData SIZE_T
+  fFinal BOOL
+
+func NCryptUnprotectSecret
+  NTSTATUS
+  phDescriptor NCRYPT_DESCRIPTOR_HANDLE*
+  dwFlags DWORD
+  pbProtectedBlob "const BYTE*" length=cbProtectedBlob
+  cbProtectedBlob ULONG
+  pMemPara "const NCRYPT_ALLOC_PARA*"
+  hWnd HWND
+  ppbData BYTE**
+  pcbData ULONG*
+

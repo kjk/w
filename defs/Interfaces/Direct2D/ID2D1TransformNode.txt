@@ -1,0 +1,8 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1TransformNode base=IUnknown id={b2efe1e7-729f-4102-949f-505fa21bf666} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetInputCount
+    UINT32
+
+

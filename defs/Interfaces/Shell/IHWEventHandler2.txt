@@ -1,0 +1,11 @@
+include Interfaces\Shell\IHWEventHandler.txt
+
+ingterface IHWEventHandler2 base=IHWEventHandler id={CFCC809F-295D-42e8-9FFC-424B33C487E6} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func HandleEventWithHWND
+    HRESULT
+    pszDeviceID LPCWSTR
+    pszAltDeviceID LPCWSTR
+    pszEventType LPCWSTR
+    hwndOwner HWND
+
+

@@ -1,0 +1,78 @@
+include Interfaces\Debugger\IDebugSymbolGroup.txt
+
+ingterface IDebugSymbolGroup2 base=IDebugSymbolGroup id={6a7ccc5f-fb5e-4dcc-b41c-6c20307bccc7} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Other COM Interfaces"
+  func AddSymbolWide
+    HRESULT
+    Name PCWSTR
+    Index PULONG
+
+  func RemoveSymbolByNameWide
+    HRESULT
+    Name PCWSTR
+
+  func GetSymbolNameWide
+    HRESULT
+    Index ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+
+  func WriteSymbolWide
+    HRESULT
+    Index ULONG
+    Value PCWSTR
+
+  func OutputAsTypeWide
+    HRESULT
+    Index ULONG
+    Type PCWSTR
+
+  func GetSymbolTypeName
+    HRESULT
+    Index ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+
+  func GetSymbolTypeNameWide
+    HRESULT
+    Index ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+
+  func GetSymbolSize
+    HRESULT
+    Index ULONG
+    Size PULONG
+
+  func GetSymbolOffset
+    HRESULT
+    Index ULONG
+    Offset PULONG64
+
+  func GetSymbolRegister
+    HRESULT
+    Index ULONG
+    Register PULONG
+
+  func GetSymbolValueText
+    HRESULT
+    Index ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+
+  func GetSymbolValueTextWide
+    HRESULT
+    Index ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+
+  func GetSymbolEntryInformation
+    HRESULT
+    Index ULONG
+    Entry PDEBUG_SYMBOL_ENTRY
+
+

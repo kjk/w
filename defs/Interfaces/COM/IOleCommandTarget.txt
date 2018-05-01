@@ -1,0 +1,40 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOleCommandTarget base=IUnknown id={b722bccb-4e68-101b-a2bc-00aa00404770} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func QueryStatus
+    HRESULT
+    pguidCmdGroup "const GUID*"
+    cCmds ULONG
+    prgCmds OLECMD[] count=cCmds
+    pCmdText OLECMDTEXT*
+
+  func Exec
+    HRESULT
+    pguidCmdGroup "const GUID*"
+    nCmdID DWORD
+    nCmdexecopt DWORD
+    pvaIn VARIANT*
+    pvaOut VARIANT*
+
+  array "wchar_t [1]" base=wchar_t count=1
+
+  struct OLECMD
+  cmdID ULONG
+  cmdf OLECMDF
+
+  pointer OLECMD[] OLECMD
+
+  flag OLECMDTEXTF DWORD display=DWORD
+    OLECMDTEXTF_NONE   0
+    OLECMDTEXTF_NAME   1
+    OLECMDTEXTF_STATUS 2
+
+  struct OLECMDTEXT
+  cmdtextf OLECMDTEXTF
+  cwActual ULONG
+  cwBuf ULONG
+  rgwz "wchar_t [1]" count=cwActual
+
+  pointer OLECMDTEXT* OLECMDTEXT
+
+

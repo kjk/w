@@ -1,0 +1,17 @@
+include Interfaces\DirectX\8\IDirect3DResource8.txt
+
+ingterface IDirect3DBaseTexture8 base=IDirect3DResource8 id={B4211CFA-51B9-4a9f-AB78-DB99B2BB678E} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/8"
+  func SetLOD
+    success NotEqual=0
+    DWORD
+    LODNew DWORD
+
+  func GetLOD
+    success NotEqual=0
+    DWORD
+
+  func GetLevelCount
+    success NotEqual=0
+    DWORD
+
+

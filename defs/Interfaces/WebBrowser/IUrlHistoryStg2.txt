@@ -1,0 +1,16 @@
+include Interfaces\WebBrowser\IUrlHistoryStg.txt
+
+ingterface IUrlHistoryStg2 base=IUrlHistoryStg id={AFA0DC11-C313-11d0-831A-00C04FD5AE38} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+  func AddUrlAndNotify
+    HRESULT
+    pocsUrl LPCOLESTR
+    pocsTitle LPCOLESTR
+    dwFlags DWORD
+    fWriteHistory BOOL
+    poctNotify IOleCommandTarget*
+    punkISFolder IUnknown*
+
+  func ClearHistory
+    HRESULT
+
+

@@ -1,0 +1,470 @@
+include Headers\windows.h.txt
+include Headers\internet.h.txt
+
+dll Winhttp.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Internet/Windows HTTP Services (WinHTTP)"
+category "Internet/Windows HTTP Services (WinHTTP)/WebSocket"
+flag [CallbackNotificationFlags] DWORD display=DWORD
+  WINHTTP_CALLBACK_FLAG_RESOLVE_NAME          0x00000003
+  WINHTTP_CALLBACK_FLAG_CONNECT_TO_SERVER     0x0000000c
+  WINHTTP_CALLBACK_FLAG_SEND_REQUEST          0x00000030
+  WINHTTP_CALLBACK_FLAG_RECEIVE_RESPONSE      0x000000c0
+  WINHTTP_CALLBACK_FLAG_CLOSE_CONNECTION      0x00000300
+  WINHTTP_CALLBACK_FLAG_HANDLES               0x00000c00
+  WINHTTP_CALLBACK_FLAG_DETECTING_PROXY       0x00001000
+  WINHTTP_CALLBACK_FLAG_REDIRECT              0x00004000
+  WINHTTP_CALLBACK_FLAG_INTERMEDIATE_RESPONSE 0x00008000
+  WINHTTP_CALLBACK_FLAG_SECURE_FAILURE        0x00010000
+  WINHTTP_CALLBACK_FLAG_HEADERS_AVAILABLE     0x00020000
+  WINHTTP_CALLBACK_FLAG_DATA_AVAILABLE        0x00040000
+  WINHTTP_CALLBACK_FLAG_READ_COMPLETE         0x00080000
+  WINHTTP_CALLBACK_FLAG_WRITE_COMPLETE        0x00100000
+  WINHTTP_CALLBACK_FLAG_REQUEST_ERROR         0x00200000
+  WINHTTP_CALLBACK_FLAG_SENDREQUEST_COMPLETE  0x00400000
+  WINHTTP_CALLBACK_FLAG_ALL_COMPLETIONS       0x007e0000
+  WINHTTP_CALLBACK_FLAG_ALL_NOTIFICATIONS     0xffffffff
+
+enum [HttpOpenAccessType] DWORD display=DWORD
+  WINHTTP_ACCESS_TYPE_DEFAULT_PROXY 0
+  WINHTTP_ACCESS_TYPE_NO_PROXY      1
+  WINHTTP_ACCESS_TYPE_NAMED_PROXY   3
+
+enum [WinHttpOpenFlags] DWORD display=DWORD
+  WINHTTP_FLAG_ASYNC 0x10000000
+
+flag [WinHttpOpenRequestFlags] DWORD display=DWORD
+  WINHTTP_FLAG_ESCAPE_PERCENT       0x00000004
+  WINHTTP_FLAG_NULL_CODEPAGE        0x00000008
+  WINHTTP_FLAG_ESCAPE_DISABLE       0x00000040
+  WINHTTP_FLAG_ESCAPE_DISABLE_QUERY 0x00000080
+  WINHTTP_FLAG_BYPASS_PROXY_CACHE   0x00000100
+  WINHTTP_FLAG_SECURE               0x00800000
+
+enum [WinHttpOption] DWORD display=DWORD
+  WINHTTP_OPTION_CALLBACK                      1
+  WINHTTP_OPTION_RESOLVE_TIMEOUT               2
+  WINHTTP_OPTION_CONNECT_TIMEOUT               3
+  WINHTTP_OPTION_CONNECT_RETRIES               4
+  WINHTTP_OPTION_SEND_TIMEOUT                  5
+  WINHTTP_OPTION_RECEIVE_TIMEOUT               6
+  WINHTTP_OPTION_RECEIVE_RESPONSE_TIMEOUT      7
+  WINHTTP_OPTION_HANDLE_TYPE                   9
+  WINHTTP_OPTION_READ_BUFFER_SIZE              12
+  WINHTTP_OPTION_WRITE_BUFFER_SIZE             13
+  WINHTTP_OPTION_PARENT_HANDLE                 21
+  WINHTTP_OPTION_EXTENDED_ERROR                24
+  WINHTTP_OPTION_SECURITY_FLAGS                31
+  WINHTTP_OPTION_SECURITY_CERTIFICATE_STRUCT   32
+  WINHTTP_OPTION_URL                           34
+  WINHTTP_OPTION_SECURITY_KEY_BITNESS          36
+  WINHTTP_OPTION_PROXY                         38
+  WINHTTP_OPTION_USER_AGENT                    41
+  WINHTTP_OPTION_CONTEXT_VALUE                 45
+  WINHTTP_OPTION_CLIENT_CERT_CONTEXT           47
+  WINHTTP_OPTION_REQUEST_PRIORITY              58
+  WINHTTP_OPTION_HTTP_VERSION                  59
+  WINHTTP_OPTION_DISABLE_FEATURE               63
+  WINHTTP_OPTION_CODEPAGE                      68
+  WINHTTP_OPTION_MAX_CONNS_PER_SERVER          73
+  WINHTTP_OPTION_MAX_CONNS_PER_1_0_SERVER      74
+  WINHTTP_OPTION_AUTOLOGON_POLICY              77
+  WINHTTP_OPTION_SERVER_CERT_CONTEXT           78
+  WINHTTP_OPTION_ENABLE_FEATURE                79
+  WINHTTP_OPTION_WORKER_THREAD_COUNT           80
+  WINHTTP_OPTION_PASSPORT_COBRANDING_TEXT      81
+  WINHTTP_OPTION_PASSPORT_COBRANDING_URL       82
+  WINHTTP_OPTION_CONFIGURE_PASSPORT_AUTH       83
+  WINHTTP_OPTION_SECURE_PROTOCOLS              84
+  WINHTTP_OPTION_ENABLETRACING                 85
+  WINHTTP_OPTION_PASSPORT_SIGN_OUT             86
+  WINHTTP_OPTION_PASSPORT_RETURN_URL           87
+  WINHTTP_OPTION_REDIRECT_POLICY               88
+  WINHTTP_OPTION_MAX_HTTP_AUTOMATIC_REDIRECTS  89
+  WINHTTP_OPTION_MAX_HTTP_STATUS_CONTINUE      90
+  WINHTTP_OPTION_MAX_RESPONSE_HEADER_SIZE      91
+  WINHTTP_OPTION_MAX_RESPONSE_DRAIN_SIZE       92
+  WINHTTP_OPTION_CONNECTION_INFO               93
+  WINHTTP_OPTION_CLIENT_CERT_ISSUER_LIST       94
+  WINHTTP_OPTION_SPN                           96
+  WINHTTP_OPTION_GLOBAL_PROXY_CREDS            97
+  WINHTTP_OPTION_GLOBAL_SERVER_CREDS           98
+  WINHTTP_OPTION_UNLOAD_NOTIFY_EVENT           99
+  WINHTTP_OPTION_REJECT_USERPWD_IN_URL         100
+  WINHTTP_OPTION_USE_GLOBAL_SERVER_CREDENTIALS 101
+  WINHTTP_OPTION_USERNAME                      0x1000
+  WINHTTP_OPTION_PASSWORD                      0x1001
+  WINHTTP_OPTION_PROXY_USERNAME                0x1002
+  WINHTTP_OPTION_PROXY_PASSWORD                0x1003
+
+flag [WinHttpAddReqFlag] DWORD display=DWORD
+  WINHTTP_ADDREQ_FLAG_COALESCE_WITH_SEMICOLON 0x01000000
+  WINHTTP_ADDREQ_FLAG_ADD_IF_NEW              0x10000000
+  WINHTTP_ADDREQ_FLAG_ADD                     0x20000000
+  WINHTTP_ADDREQ_FLAG_COALESCE_WITH_COMMA     0x40000000
+  WINHTTP_ADDREQ_FLAG_REPLACE                 0x80000000
+
+flag [WinHttpQueryLevelFlags] DWORD display=DWORD
+  WINHTTP_QUERY_MIME_VERSION              0
+  WINHTTP_QUERY_CONTENT_TYPE              1
+  WINHTTP_QUERY_CONTENT_TRANSFER_ENCODING 2
+  WINHTTP_QUERY_CONTENT_ID                3
+  WINHTTP_QUERY_CONTENT_DESCRIPTION       4
+  WINHTTP_QUERY_CONTENT_LENGTH            5
+  WINHTTP_QUERY_CONTENT_LANGUAGE          6
+  WINHTTP_QUERY_ALLOW                     7
+  WINHTTP_QUERY_PUBLIC                    8
+  WINHTTP_QUERY_DATE                      9
+  WINHTTP_QUERY_EXPIRES                   10
+  WINHTTP_QUERY_LAST_MODIFIED             11
+  WINHTTP_QUERY_MESSAGE_ID                12
+  WINHTTP_QUERY_URI                       13
+  WINHTTP_QUERY_DERIVED_FROM              14
+  WINHTTP_QUERY_COST                      15
+  WINHTTP_QUERY_LINK                      16
+  WINHTTP_QUERY_PRAGMA                    17
+  WINHTTP_QUERY_VERSION                   18
+  WINHTTP_QUERY_STATUS_CODE               19
+  WINHTTP_QUERY_STATUS_TEXT               20
+  WINHTTP_QUERY_RAW_HEADERS               21
+  WINHTTP_QUERY_RAW_HEADERS_CRLF          22
+  WINHTTP_QUERY_CONNECTION                23
+  WINHTTP_QUERY_ACCEPT                    24
+  WINHTTP_QUERY_ACCEPT_CHARSET            25
+  WINHTTP_QUERY_ACCEPT_ENCODING           26
+  WINHTTP_QUERY_ACCEPT_LANGUAGE           27
+  WINHTTP_QUERY_AUTHORIZATION             28
+  WINHTTP_QUERY_CONTENT_ENCODING          29
+  WINHTTP_QUERY_FORWARDED                 30
+  WINHTTP_QUERY_FROM                      31
+  WINHTTP_QUERY_IF_MODIFIED_SINCE         32
+  WINHTTP_QUERY_LOCATION                  33
+  WINHTTP_QUERY_ORIG_URI                  34
+  WINHTTP_QUERY_REFERER                   35
+  WINHTTP_QUERY_RETRY_AFTER               36
+  WINHTTP_QUERY_SERVER                    37
+  WINHTTP_QUERY_TITLE                     38
+  WINHTTP_QUERY_USER_AGENT                39
+  WINHTTP_QUERY_WWW_AUTHENTICATE          40
+  WINHTTP_QUERY_PROXY_AUTHENTICATE        41
+  WINHTTP_QUERY_ACCEPT_RANGES             42
+  WINHTTP_QUERY_SET_COOKIE                43
+  WINHTTP_QUERY_COOKIE                    44
+  WINHTTP_QUERY_REQUEST_METHOD            45
+  WINHTTP_QUERY_REFRESH                   46
+  WINHTTP_QUERY_CONTENT_DISPOSITION       47
+  WINHTTP_QUERY_AGE                       48
+  WINHTTP_QUERY_CACHE_CONTROL             49
+  WINHTTP_QUERY_CONTENT_BASE              50
+  WINHTTP_QUERY_CONTENT_LOCATION          51
+  WINHTTP_QUERY_CONTENT_MD5               52
+  WINHTTP_QUERY_CONTENT_RANGE             53
+  WINHTTP_QUERY_ETAG                      54
+  WINHTTP_QUERY_HOST                      55
+  WINHTTP_QUERY_IF_MATCH                  56
+  WINHTTP_QUERY_IF_NONE_MATCH             57
+  WINHTTP_QUERY_IF_RANGE                  58
+  WINHTTP_QUERY_IF_UNMODIFIED_SINCE       59
+  WINHTTP_QUERY_MAX_FORWARDS              60
+  WINHTTP_QUERY_PROXY_AUTHORIZATION       61
+  WINHTTP_QUERY_RANGE                     62
+  WINHTTP_QUERY_TRANSFER_ENCODING         63
+  WINHTTP_QUERY_UPGRADE                   64
+  WINHTTP_QUERY_VARY                      65
+  WINHTTP_QUERY_VIA                       66
+  WINHTTP_QUERY_WARNING                   67
+  WINHTTP_QUERY_EXPECT                    68
+  WINHTTP_QUERY_PROXY_CONNECTION          69
+  WINHTTP_QUERY_UNLESS_MODIFIED_SINCE     70
+  WINHTTP_QUERY_PROXY_SUPPORT             75
+  WINHTTP_QUERY_AUTHENTICATION_INFO       76
+  WINHTTP_QUERY_PASSPORT_URLS             77
+  WINHTTP_QUERY_PASSPORT_CONFIG           78
+  WINHTTP_QUERY_CUSTOM                    65535
+  WINHTTP_QUERY_FLAG_NUMBER               0x20000000
+  WINHTTP_QUERY_FLAG_SYSTEMTIME           0x40000000
+  WINHTTP_QUERY_FLAG_REQUEST_HEADERS      0x80000000
+
+struct WINHTTP_PROXY_RESULT_ENTRY
+  fProxy BOOL
+  fBypass BOOL
+  ProxyScheme INTERNET_SCHEME
+  pwszProxy PWSTR
+  ProxyPort INTERNET_PORT
+
+pointer WINHTTP_PROXY_RESULT_ENTRY* WINHTTP_PROXY_RESULT_ENTRY
+
+struct WINHTTP_PROXY_RESULT
+  cEntries DWORD
+  pEntries WINHTTP_PROXY_RESULT_ENTRY* count=cEntries
+
+pointer WINHTTP_PROXY_RESULT* WINHTTP_PROXY_RESULT
+
+enum WINHTTP_WEB_SOCKET_BUFFER_TYPE UINT
+  WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE  0
+  WINHTTP_WEB_SOCKET_BINARY_FRAGMENT_BUFFER_TYPE 1
+  WINHTTP_WEB_SOCKET_UTF8_MESSAGE_BUFFER_TYPE    2
+  WINHTTP_WEB_SOCKET_UTF8_FRAGMENT_BUFFER_TYPE   3
+  WINHTTP_WEB_SOCKET_CLOSE_BUFFER_TYPE           4
+
+pointer WINHTTP_WEB_SOCKET_BUFFER_TYPE* WINHTTP_WEB_SOCKET_BUFFER_TYPE
+
+enum WINHTTP_WEB_SOCKET_CLOSE_STATUS USHORT display=USHORT
+  WINHTTP_WEB_SOCKET_SUCCESS_CLOSE_STATUS                1000
+  WINHTTP_WEB_SOCKET_ENDPOINT_TERMINATED_CLOSE_STATUS    1001
+  WINHTTP_WEB_SOCKET_PROTOCOL_ERROR_CLOSE_STATUS         1002
+  WINHTTP_WEB_SOCKET_INVALID_DATA_TYPE_CLOSE_STATUS      1003
+  WINHTTP_WEB_SOCKET_EMPTY_CLOSE_STATUS                  1005
+  WINHTTP_WEB_SOCKET_ABORTED_CLOSE_STATUS                1006
+  WINHTTP_WEB_SOCKET_INVALID_PAYLOAD_CLOSE_STATUS        1007
+  WINHTTP_WEB_SOCKET_POLICY_VIOLATION_CLOSE_STATUS       1008
+  WINHTTP_WEB_SOCKET_MESSAGE_TOO_BIG_CLOSE_STATUS        1009
+  WINHTTP_WEB_SOCKET_UNSUPPORTED_EXTENSIONS_CLOSE_STATUS 1010
+  WINHTTP_WEB_SOCKET_SERVER_ERROR_CLOSE_STATUS           1011
+  WINHTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS 1015
+
+pointer WINHTTP_WEB_SOCKET_CLOSE_STATUS* WINHTTP_WEB_SOCKET_CLOSE_STATUS display=USHORT*
+
+func WinHttpAddRequestHeaders
+  BOOL
+  hRequest HINTERNET
+  pwszHeaders LPCWSTR
+  dwHeadersLength DWORD
+  dwModifiers [WinHttpAddReqFlag]
+
+func WinHttpCheckPlatform
+  BOOL
+
+func WinHttpCloseHandle
+  BOOL
+  hInternet HINTERNET
+
+func WinHttpConnect
+  HINTERNET
+  hSession HINTERNET
+  pswzServerName LPCWSTR
+  nServerPort INTERNET_PORT
+  dwReserved DWORD
+
+func WinHttpCrackUrl
+  BOOL
+  pwszUrl LPCWSTR
+  dwUrlLength DWORD
+  dwFlags [InternetCrackUrlFlags]
+  lpUrlComponents LPURL_COMPONENTSW outputOnly
+
+func WinHttpCreateProxyResolver
+  [ERROR_CODE]
+  hSession HINTERNET
+  phResolver HINTERNET*
+
+func WinHttpCreateUrl
+  BOOL
+  lpUrlComponents LPURL_COMPONENTSW
+  dwFlags [InternetCrackUrlFlags]
+  pwszUrl LPWSTR
+  lpdwUrlLength LPDWORD
+
+func WinHttpDetectAutoProxyConfigUrl
+  BOOL
+  dwAutoDetectFlags DWORD
+  ppwszAutoConfigUrl LPWSTR*
+
+func WinHttpFreeProxyResult
+  VOID
+  pProxyResult WINHTTP_PROXY_RESULT*
+
+func WinHttpGetDefaultProxyConfiguration
+  BOOL
+  pProxyInfo WINHTTP_PROXY_INFO*
+
+func WinHttpGetIEProxyConfigForCurrentUser
+  BOOL
+  pProxyConfig WINHTTP_CURRENT_USER_IE_PROXY_CONFIG*
+
+func WinHttpGetProxyForUrl
+  BOOL
+  hSession HINTERNET
+  lpcwszUrl LPCWSTR
+  pAutoProxyOptions WINHTTP_AUTOPROXY_OPTIONS*
+  pProxyInfo WINHTTP_PROXY_INFO*
+
+func WinHttpGetProxyForUrlEx
+  [ERROR_CODE]
+  hResolver HINTERNET
+  pcwszUrl PCWSTR
+  pAutoProxyOptions WINHTTP_AUTOPROXY_OPTIONS*
+  pContext DWORD_PTR
+
+func WinHttpGetProxyResult
+  [ERROR_CODE]
+  hResolver HINTERNET
+  pProxyResult WINHTTP_PROXY_RESULT*
+
+func WinHttpOpen
+  HINTERNET
+  pwszUserAgent LPCWSTR
+  dwAccessType [HttpOpenAccessType]
+  pwszProxyName LPCWSTR
+  pwszProxyBypass LPCWSTR
+  dwFlags [WinHttpOpenFlags]
+
+func WinHttpOpenRequest
+  HINTERNET
+  hConnect HINTERNET
+  pwszVerb LPCWSTR
+  pwszObjectName LPCWSTR
+  pwszVersion LPCWSTR
+  pwszReferrer LPCWSTR
+  ppwszAcceptTypes LPCWSTR*
+  dwFlags [WinHttpOpenRequestFlags]
+
+func WinHttpQueryAuthSchemes
+  BOOL
+  hRequest HINTERNET
+  lpdwSupportedSchemes LPDWORD
+  lpdwFirstScheme LPDWORD
+  pdwAuthTarget LPDWORD
+
+func WinHttpQueryDataAvailable
+  BOOL
+  hRequest HINTERNET
+  lpdwNumberOfBytesAvailable LPDWORD
+
+func WinHttpQueryHeaders
+  BOOL
+  hRequest HINTERNET
+  dwInfoLevel [WinHttpQueryLevelFlags]
+  pwszName LPCWSTR
+  lpBuffer LPVOID postLength=lpdwBufferLength
+  lpdwBufferLength LPDWORD
+  lpdwIndex LPDWORD
+
+func WinHttpQueryOption
+  BOOL
+  hInternet HINTERNET
+  dwOption [WinHttpOption]
+  lpBuffer LPVOID postLength=lpdwBufferLength
+  lpdwBufferLength LPDWORD
+
+func WinHttpReadData
+  BOOL
+  hRequest HINTERNET
+  lpBuffer LPVOID postLength=lpdwNumberOfBytesRead
+  dwNumberOfBytesToRead DWORD
+  lpdwNumberOfBytesRead LPDWORD
+
+func WinHttpReceiveResponse
+  BOOL
+  hRequest HINTERNET
+  lpReserved LPVOID
+
+func WinHttpResetAutoProxy
+  [ERROR_CODE]
+  hSession HINTERNET
+  dwFlags DWORD
+
+func WinHttpSendRequest
+  BOOL
+  hRequest HINTERNET
+  pwszHeaders LPCWSTR
+  dwHeadersLength DWORD
+  lpOptional LPVOID length=dwOptionalLength
+  dwOptionalLength DWORD
+  dwTotalLength DWORD
+  dwContext DWORD_PTR
+
+func WinHttpSetCredentials
+  BOOL
+  hRequest HINTERNET
+  AuthTargets DWORD
+  AuthScheme DWORD
+  pwszUserName LPCWSTR
+  pwszPassword LPCWSTR
+  pAuthParams LPVOID
+
+func WinHttpSetDefaultProxyConfiguration
+  BOOL
+  pProxyInfo WINHTTP_PROXY_INFO*
+
+func WinHttpSetOption
+  BOOL
+  hInternet HINTERNET
+  dwOption [WinHttpOption]
+  lpBuffer LPVOID length=dwBufferLength
+  dwBufferLength DWORD
+
+func WinHttpSetStatusCallback
+  success NotEqual=0
+  WINHTTP_STATUS_CALLBACK
+  hInternet HINTERNET
+  lpfnInternetCallback WINHTTP_STATUS_CALLBACK
+  dwNotificationFlags [CallbackNotificationFlags]
+  dwReserved DWORD_PTR
+
+func WinHttpSetTimeouts
+  BOOL
+  hInternet HINTERNET
+  dwResolveTimeout int
+  dwConnectTimeout int
+  dwSendTimeout int
+  dwReceiveTimeout int
+
+func WinHttpTimeFromSystemTime
+  BOOL
+  pst SYSTEMTIME*
+  pwszTime LPWSTR
+
+func WinHttpTimeToSystemTime
+  BOOL
+  pwszTime LPCWSTR
+  pst SYSTEMTIME*
+
+func WinHttpWriteData
+  BOOL
+  hRequest HINTERNET
+  lpBuffer LPCVOID length=dwNumberOfBytesToWrite
+  dwNumberOfBytesToWrite DWORD
+  lpdwNumberOfBytesWritten LPDWORD
+
+func WinHttpWebSocketClose
+  [ERROR_CODE]
+  hWebSocket HINTERNET
+  usStatus WINHTTP_WEB_SOCKET_CLOSE_STATUS
+  pvReason PVOID length=dwReasonLength
+  dwReasonLength DWORD
+
+func WinHttpWebSocketCompleteUpgrade
+  HINTERNET
+  hRequest HINTERNET
+  pContext DWORD_PTR
+
+func WinHttpWebSocketQueryCloseStatus
+  [ERROR_CODE]
+  hWebSocket HINTERNET
+  pusStatus WINHTTP_WEB_SOCKET_CLOSE_STATUS*
+  pvReason PVOID postLength=pdwReasonLengthConsumed
+  dwReasonLength DWORD
+  pdwReasonLengthConsumed DWORD*
+
+func WinHttpWebSocketReceive
+  [ERROR_CODE]
+  hWebSocket HINTERNET
+  pvBuffer PVOID postLength=pdwBytesRead
+  dwBufferLength DWORD
+  pdwBytesRead DWORD*
+  peBufferType WINHTTP_WEB_SOCKET_BUFFER_TYPE*
+
+func WinHttpWebSocketSend
+  [ERROR_CODE]
+  hWebSocket HINTERNET
+  eBufferType WINHTTP_WEB_SOCKET_BUFFER_TYPE
+  pvBuffer PVOID length=dwBufferLength
+  dwBufferLength DWORD
+
+func WinHttpWebSocketShutdown
+  [ERROR_CODE]
+  hWebSocket HINTERNET
+  usStatus WINHTTP_WEB_SOCKET_CLOSE_STATUS
+  pvReason PVOID length=dwReasonLength
+  dwReasonLength DWORD
+

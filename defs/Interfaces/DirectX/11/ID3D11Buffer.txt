@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11Resource.txt
+
+ingterface ID3D11Buffer base=ID3D11Resource id={48570b85-d1ee-4fcd-a250-eb350722b037} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Resource"
+  func GetDesc
+    void
+    pDesc D3D11_BUFFER_DESC*
+
+

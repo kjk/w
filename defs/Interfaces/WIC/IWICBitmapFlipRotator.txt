@@ -1,0 +1,9 @@
+include Interfaces\WIC\IWICBitmapSource.txt
+
+ingterface IWICBitmapFlipRotator base=IWICBitmapSource id={5009834F-2D6A-41ce-9E1B-17C5AFF7A782} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func Initialize
+    [WIC_HRESULT]
+    pISource IWICBitmapSource*
+    options WICBitmapTransformOptions
+
+

@@ -1,0 +1,32 @@
+include Headers\security.h.txt
+
+dll Schannel.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Authentication/SSP-AP Security Packages"
+alias PX509Certificate LPVOID
+
+pointer PX509Certificate* PX509Certificate
+
+func SslCrackCertificate
+  BOOL
+  pbCertificate PUCHAR length=dwCertificate
+  dwCertificate DWORD
+  dwFlags DWORD
+  ppCertificate PX509Certificate*
+
+func SslEmptyCache bothCharset
+  BOOL
+  pszTargetName LPSTR
+  dwFlags DWORD
+
+func SslFreeCertificate
+  void
+  pCertificate PX509Certificate
+
+func SslGetServerIdentity
+  SECURITY_STATUS
+  ClientHello PBYTE length=ClientHelloSize
+  ClientHelloSize DWORD
+  ServerIdentity PBYTE*
+  ServerIdentitySize PDWORD
+  Flags DWORD
+

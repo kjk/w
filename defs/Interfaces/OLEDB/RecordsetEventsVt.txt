@@ -1,0 +1,80 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface RecordsetEventsVt base=IUnknown id={00001403-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func WillChangeField
+    [OLEDB_HRESULT]
+    cFields LONG
+    Fields VARIANT
+    adStatus EventStatusEnum*
+    pRecordset _ADORecordset*
+
+  func FieldChangeComplete
+    [OLEDB_HRESULT]
+    cFields LONG
+    Fields VARIANT
+    pError ADOError*
+    adStatus EventStatusEnum*
+    pRecordset _ADORecordset*
+
+  func WillChangeRecord
+    [OLEDB_HRESULT]
+    adReason EventReasonEnum
+    cRecords LONG
+    adStatus EventStatusEnum*
+    pRecordset _ADORecordset*
+
+  func RecordChangeComplete
+    [OLEDB_HRESULT]
+    adReason EventReasonEnum
+    cRecords LONG
+    pError ADOError*
+    adStatus EventStatusEnum*
+    pRecordset _ADORecordset*
+
+  func WillChangeRecordset
+    [OLEDB_HRESULT]
+    adReason EventReasonEnum
+    adStatus EventStatusEnum*
+    pRecordset _ADORecordset*
+
+  func RecordsetChangeComplete
+    [OLEDB_HRESULT]
+    adReason EventReasonEnum
+    pError ADOError*
+    adStatus EventStatusEnum*
+    pRecordset _ADORecordset*
+
+  func WillMove
+    [OLEDB_HRESULT]
+    adReason EventReasonEnum
+    adStatus EventStatusEnum*
+    pRecordset _ADORecordset*
+
+  func MoveComplete
+    [OLEDB_HRESULT]
+    adReason EventReasonEnum
+    pError ADOError*
+    adStatus EventStatusEnum*
+    pRecordset _ADORecordset*
+
+  func EndOfRecordset
+    [OLEDB_HRESULT]
+    fMoreData VARIANT_BOOL*
+    adStatus EventStatusEnum*
+    pRecordset _ADORecordset*
+
+  func FetchProgress
+    [OLEDB_HRESULT]
+    Progress long
+    MaxProgress long
+    adStatus EventStatusEnum*
+    pRecordset _ADORecordset*
+
+  func FetchComplete
+    [OLEDB_HRESULT]
+    pError ADOError*
+    adStatus EventStatusEnum*
+    pRecordset _ADORecordset*
+
+

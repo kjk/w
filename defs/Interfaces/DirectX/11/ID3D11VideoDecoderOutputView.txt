@@ -1,0 +1,9 @@
+include Interfaces\DirectX\11\ID3D11View.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11VideoDecoderOutputView base=ID3D11View id={C2931AEA-2A85-4f20-860F-FBA1FD256E18} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Microsoft Media Foundation/Direct3D 11 Video"
+  func GetDesc
+    void
+    pDesc D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*
+
+

@@ -1,0 +1,28 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteInlineObject base=IUnknown id={8339FDE3-106F-47ab-8373-1C6295EB10B3} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func Draw
+    HRESULT
+    clientDrawingContext void*
+    renderer IDWriteTextRenderer*
+    originX FLOAT
+    originY FLOAT
+    isSideways BOOL
+    isRightToLeft BOOL
+    clientDrawingEffect IUnknown*
+
+  func GetMetrics
+    HRESULT
+    metrics DWRITE_INLINE_OBJECT_METRICS*
+
+  func GetOverhangMetrics
+    HRESULT
+    overhangs DWRITE_OVERHANG_METRICS*
+
+  func GetBreakConditions
+    HRESULT
+    breakConditionBefore DWRITE_BREAK_CONDITION*
+    breakConditionAfter DWRITE_BREAK_CONDITION*
+
+

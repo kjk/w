@@ -1,0 +1,133 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBackgroundCopyJob base=IUnknown id={37668d37-507e-4160-9316-26306d150b12} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func AddFileSet
+    HRESULT
+    cFileCount ULONG
+    pFileSet BG_FILE_INFO*
+
+  func AddFile
+    HRESULT
+    RemoteUrl LPCWSTR
+    LocalName LPCWSTR
+
+  func EnumFiles
+    HRESULT
+    pEnum IEnumBackgroundCopyFiles**
+
+  func Suspend
+    HRESULT
+
+  func Resume
+    HRESULT
+
+  func Cancel
+    HRESULT
+
+  func Complete
+    HRESULT
+
+  func GetId
+    HRESULT
+    pVal GUID*
+
+  func GetType
+    HRESULT
+    pVal BG_JOB_TYPE*
+
+  func GetProgress
+    HRESULT
+    pVal BG_JOB_PROGRESS*
+
+  func GetTimes
+    HRESULT
+    pVal BG_JOB_TIMES*
+
+  func GetState
+    HRESULT
+    pVal BG_JOB_STATE*
+
+  func GetError
+    HRESULT
+    ppError IBackgroundCopyError**
+
+  func GetOwner
+    HRESULT
+    pVal LPWSTR*
+
+  func SetDisplayName
+    HRESULT
+    Val LPCWSTR
+
+  func GetDisplayName
+    HRESULT
+    pVal LPWSTR* outputOnly
+
+  func SetDescription
+    HRESULT
+    Val LPCWSTR
+
+  func GetDescription
+    HRESULT
+    pVal LPWSTR*
+
+  func SetPriority
+    HRESULT
+    Val BG_JOB_PRIORITY
+
+  func GetPriority
+    HRESULT
+    pVal BG_JOB_PRIORITY*
+
+  func SetNotifyFlags
+    HRESULT
+    Val ULONG
+
+  func GetNotifyFlags
+    HRESULT
+    pVal ULONG*
+
+  func SetNotifyInterface
+    HRESULT
+    Val IUnknown*
+
+  func GetNotifyInterface
+    HRESULT
+    pVal IUnknown**
+
+  func SetMinimumRetryDelay
+    HRESULT
+    Seconds ULONG
+
+  func GetMinimumRetryDelay
+    HRESULT
+    Seconds ULONG*
+
+  func SetNoProgressTimeout
+    HRESULT
+    Seconds ULONG
+
+  func GetNoProgressTimeout
+    HRESULT
+    Seconds ULONG*
+
+  func GetErrorCount
+    HRESULT
+    Errors ULONG*
+
+  func SetProxySettings
+    HRESULT
+    ProxyUsage BG_JOB_PROXY_USAGE
+    ProxyList "const WCHAR*"
+    ProxyBypassList "const WCHAR*"
+
+  func GetProxySettings
+    HRESULT
+    pProxyUsage BG_JOB_PROXY_USAGE*
+    pProxyList LPWSTR*
+    pProxyBypassList LPWSTR*
+
+  func TakeOwnership
+    HRESULT
+
+

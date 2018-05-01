@@ -1,0 +1,12 @@
+include Interfaces\IDispatch.txt
+
+ingterface DFConstraint base=IDispatch id={4a3df050-23bd-11d2-939f-00a0c91eedba} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func get_Name
+    HRESULT
+    pbs BSTR*
+
+  func get_Value
+    HRESULT
+    pv VARIANT*
+
+

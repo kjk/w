@@ -1,0 +1,33 @@
+include Headers\windows.h.txt
+include Headers\URL.h.txt
+
+dll Shdocvw.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Environment Development/Windows Shell"
+category "Web Development/Internet Explorer Development/Security and Privacy/Internet Privacy"
+interface IEnumPrivacyRecords
+
+func ShellDDEInit ordinal=118
+  void
+  init BOOL
+
+func SoftwareUpdateMessageBox
+  success NotEqual=0
+  DWORD
+  hWnd HWND
+  pszDistUnit LPCWSTR
+  dwFlags DWORD
+  psdi LPSOFTDISTINFO
+
+func DoPrivacyDlg
+  HRESULT
+  hwndParent HWND
+  pszUrl LPCWSTR
+  pPrivacyEnum IEnumPrivacyRecords*
+  fReportAllSites BOOL
+
+func ImportPrivacySettings
+  BOOL
+  szFilename LPCWSTR
+  pfParsePrivacyPreferences BOOL*
+  pfParsePerSiteRules BOOL*
+

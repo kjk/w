@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IExplorerCommandProvider base=IUnknown id={64961751-0835-43c0-8ffe-d57686530e64} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetCommands
+    HRESULT
+    punkSite IUnknown*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetCommand
+    HRESULT
+    rguidCommandId REFGUID
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

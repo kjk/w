@@ -1,0 +1,22 @@
+include Interfaces\Shell\Folder.txt
+
+ingterface Folder2 base=Folder id={f0d2d8ef-3890-11d2-bf8b-00c04fb93661} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func get_Self
+    HRESULT
+    ppfi FolderItem**
+
+  func get_OfflineStatus
+    HRESULT
+    pul LONG*
+
+  func Synchronize
+    HRESULT
+
+  func get_HaveToShowWebViewBarricade
+    HRESULT
+    pbHaveToShowWebViewBarricade VARIANT_BOOL*
+
+  func DismissedWebViewBarricade
+    HRESULT
+
+

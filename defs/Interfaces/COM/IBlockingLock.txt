@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBlockingLock base=IUnknown id={30f3d47a-6447-11d1-8e3c-00c04fb9386d} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Lock
+    HRESULT
+    dwTimeout DWORD
+
+  func Unlock
+    HRESULT
+
+

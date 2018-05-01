@@ -1,0 +1,26 @@
+include Interfaces\IDispatch.txt
+include Interfaces\NLM\NLMDefs.h.txt
+
+ingterface IEnumNetworks base=IDispatch id={DCB00003-570F-4A9B-8D69-199FDBA5723B} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Network List Manager"
+  func get__NewEnum
+    HRESULT
+    ppEnumVar IEnumVARIANT**
+
+  func Next
+    HRESULT
+    celt ULONG
+    rgelt INetwork** count=celt postCount=celt
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppEnumNetwork IEnumNetworks**
+
+

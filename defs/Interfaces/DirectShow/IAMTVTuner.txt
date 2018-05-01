@@ -1,0 +1,50 @@
+include Interfaces\DirectShow\IAMTuner.txt
+
+ingterface IAMTVTuner base=IAMTuner id={211A8766-03AC-11d1-8D13-00AA00BD8339} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func get_AvailableTVFormats
+    HRESULT
+    lAnalogVideoStandard long*
+
+  func get_TVFormat
+    HRESULT
+    plAnalogVideoStandard long*
+
+  func AutoTune
+    HRESULT
+    lChannel long
+    plFoundSignal long*
+
+  func StoreAutoTune
+    HRESULT
+
+  func get_NumInputConnections
+    HRESULT
+    plNumInputConnections long*
+
+  func put_InputType
+    HRESULT
+    lIndex long
+    InputType TunerInputType
+
+  func get_InputType
+    HRESULT
+    lIndex long
+    pInputType TunerInputType*
+
+  func put_ConnectInput
+    HRESULT
+    lIndex long
+
+  func get_ConnectInput
+    HRESULT
+    plIndex long*
+
+  func get_VideoFrequency
+    HRESULT
+    lFreq long*
+
+  func get_AudioFrequency
+    HRESULT
+    lFreq long*
+
+

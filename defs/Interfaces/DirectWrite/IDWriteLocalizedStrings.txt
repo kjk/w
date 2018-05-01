@@ -1,0 +1,37 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteLocalizedStrings base=IUnknown id={08256209-099a-4b34-b86d-c22b110e7771} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func GetCount
+    success NotEqual=0
+    UINT32
+
+  func FindLocaleName
+    HRESULT
+    localeName "WCHAR const*"
+    index UINT32*
+    exists BOOL*
+
+  func GetLocaleNameLength
+    HRESULT
+    index UINT32
+    length UINT32*
+
+  func GetLocaleName
+    HRESULT
+    index UINT32
+    localeName WCHAR* outputOnly
+    size UINT32
+
+  func GetStringLength
+    HRESULT
+    index UINT32
+    length UINT32*
+
+  func GetString
+    HRESULT
+    index UINT32
+    stringBuffer WCHAR* outputOnly
+    size UINT32
+
+

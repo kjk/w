@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+
+ingterface ITypeChangeEvents base=IUnknown id={00020410-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Type Building"
+  func RequestTypeChange
+    HRESULT
+    changeKind CHANGEKIND
+    pTInfoBefore ITypeInfo*
+    pStrName LPOLESTR
+    pfCancel INT*
+
+  func AfterTypeChange
+    HRESULT
+    changeKind CHANGEKIND
+    pTInfoAfter ITypeInfo*
+    pStrName LPOLESTR
+
+

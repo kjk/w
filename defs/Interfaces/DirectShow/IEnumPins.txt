@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumPins base=IUnknown id={56a86892-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Next
+    HRESULT
+    cPins ULONG
+    ppPins IPin** postCount=pcFetched
+    pcFetched ULONG*
+
+  func Skip
+    HRESULT
+    cPins ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppEnum IEnumPins**
+
+

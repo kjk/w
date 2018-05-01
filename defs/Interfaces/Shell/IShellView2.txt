@@ -1,0 +1,23 @@
+include Interfaces\Shell\IShellView.txt
+
+ingterface IShellView2 base=IShellView id={88E39E80-3578-11CF-AE69-08002B2E1262} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetView
+    HRESULT
+    pvid SHELLVIEWID*
+    uView ULONG
+
+  func CreateViewWindow2
+    HRESULT
+    lpParams LPSV2CVW2_PARAMS
+
+  func HandleRename
+    HRESULT
+    pidlNew PCUITEMID_CHILD
+
+  func SelectAndPositionItem
+    HRESULT
+    pidlItem PCUITEMID_CHILD
+    uFlags UINT
+    ppt POINT*
+
+

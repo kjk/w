@@ -1,0 +1,42 @@
+include Interfaces\IDispatch.txt
+
+ingterface IWebWizardHost base=IDispatch id={18bcc359-4990-4bfb-b951-3c83702be5f9} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func FinalBack
+    HRESULT
+
+  func FinalNext
+    HRESULT
+
+  func Cancel
+    HRESULT
+
+  func put_Caption
+    HRESULT
+    bstrCaption BSTR
+
+  func get_Caption
+    HRESULT
+    pbstrCaption BSTR*
+
+  func put_Property
+    HRESULT
+    bstrPropertyName BSTR
+    pvProperty VARIANT*
+
+  func get_Property
+    HRESULT
+    bstrPropertyName BSTR
+    pvProperty VARIANT*
+
+  func SetWizardButtons
+    HRESULT
+    vfEnableBack VARIANT_BOOL
+    vfEnableNext VARIANT_BOOL
+    vfLastPage VARIANT_BOOL
+
+  func SetHeaderText
+    HRESULT
+    bstrHeaderTitle BSTR
+    bstrHeaderSubtitle BSTR
+
+

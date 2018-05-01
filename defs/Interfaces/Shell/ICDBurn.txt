@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+
+ingterface ICDBurn base=IUnknown id={3d73a659-e5d0-4d42-afc0-5121ba425c8d} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetRecorderDriveLetter
+    HRESULT
+    pszDrive LPWSTR
+    cch UINT
+
+  func Burn
+    HRESULT
+    hwnd HWND
+
+  func HasRecordableDrive
+    HRESULT
+    pfHasRecorder BOOL*
+
+

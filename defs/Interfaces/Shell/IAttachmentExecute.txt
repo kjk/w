@@ -1,0 +1,53 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAttachmentExecute base=IUnknown id={73db1241-1e85-4581-8e4f-a81e1d0f8c57} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetClientTitle
+    HRESULT
+    pszTitle LPCWSTR
+
+  func SetClientGuid
+    HRESULT
+    guid REFGUID
+
+  func SetLocalPath
+    HRESULT
+    pszLocalPath LPCWSTR
+
+  func SetFileName
+    HRESULT
+    pszFileName LPCWSTR
+
+  func SetSource
+    HRESULT
+    pszSource LPCWSTR
+
+  func SetReferrer
+    HRESULT
+    pszReferrer LPCWSTR
+
+  func CheckPolicy
+    HRESULT
+
+  func Prompt
+    HRESULT
+    hwnd HWND
+    prompt ATTACHMENT_PROMPT
+    paction ATTACHMENT_ACTION*
+
+  func Save
+    HRESULT
+
+  func Execute
+    HRESULT
+    hwnd HWND
+    pszVerb LPCWSTR
+    phProcess HANDLE*
+
+  func SaveWithUI
+    HRESULT
+    hwnd HWND
+
+  func ClearClientState
+    HRESULT
+
+

@@ -1,0 +1,15 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\DirectComposition\IDCompositionSurface.txt
+
+ingterface IDCompositionVirtualSurface base=IDCompositionSurface id={AE471C51-5F53-4A24-8D3E-D0C39C30B3F0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func Resize
+    HRESULT
+    width UINT
+    height UINT
+
+  func Trim
+    HRESULT
+    rectangles "const RECT*" count=count
+    count UINT
+
+

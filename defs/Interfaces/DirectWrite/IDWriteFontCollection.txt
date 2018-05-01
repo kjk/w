@@ -1,0 +1,25 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteFontCollection base=IUnknown id={a84cee02-3eea-4eee-a827-87c1a02a0fcc} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func GetFontFamilyCount
+    success NotEqual=0
+    UINT32
+
+  func GetFontFamily
+    HRESULT
+    index UINT32
+    fontFamily IDWriteFontFamily**
+
+  func FindFamilyName
+    HRESULT
+    familyName "WCHAR const*"
+    index UINT32*
+    exists BOOL*
+
+  func GetFontFromFontFace
+    HRESULT
+    fontFace IDWriteFontFace*
+    font IDWriteFont**
+
+

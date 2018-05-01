@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRMonitorConfig base=IUnknown id={9cf0b1b6-fbaa-4b7f-88cf-cf1f130a0dce} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetMonitor
+    HRESULT
+    pGUID "const VMRGUID*"
+
+  func GetMonitor
+    HRESULT
+    pGUID VMRGUID*
+
+  func SetDefaultMonitor
+    HRESULT
+    pGUID "const VMRGUID*"
+
+  func GetDefaultMonitor
+    HRESULT
+    pGUID VMRGUID*
+
+  func GetAvailableMonitors
+    HRESULT
+    pInfo VMRMONITORINFO*
+    dwMaxInfoArraySize DWORD
+    pdwNumDevices DWORD*
+
+

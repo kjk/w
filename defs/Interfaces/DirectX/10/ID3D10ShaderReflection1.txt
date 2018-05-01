@@ -1,0 +1,72 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID3D10ShaderReflection1 base=IUnknown id={C3457783-A846-47CE-9520-CEA6F66E7447} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Shader"
+  func GetDesc
+    HRESULT
+    pDesc D3D10_SHADER_DESC*
+
+  func GetConstantBufferByIndex
+    success NotEqual=0
+    ID3D10ShaderReflectionConstantBuffer*
+    Index UINT
+
+  func GetConstantBufferByName
+    success NotEqual=0
+    ID3D10ShaderReflectionConstantBuffer*
+    Name LPCSTR
+
+  func GetResourceBindingDesc
+    HRESULT
+    ResourceIndex UINT
+    pDesc D3D10_SHADER_INPUT_BIND_DESC*
+
+  func GetInputParameterDesc
+    HRESULT
+    ParameterIndex UINT
+    pDesc D3D10_SIGNATURE_PARAMETER_DESC*
+
+  func GetOutputParameterDesc
+    HRESULT
+    ParameterIndex UINT
+    pDesc D3D10_SIGNATURE_PARAMETER_DESC*
+
+  func GetVariableByName
+    success NotEqual=0
+    ID3D10ShaderReflectionVariable*
+    Name LPCSTR
+
+  func GetResourceBindingDescByName
+    HRESULT
+    Name LPCSTR
+    pDesc D3D10_SHADER_INPUT_BIND_DESC*
+
+  func GetMovInstructionCount
+    HRESULT
+    pCount UINT*
+
+  func GetMovcInstructionCount
+    HRESULT
+    pCount UINT*
+
+  func GetConversionInstructionCount
+    HRESULT
+    pCount UINT*
+
+  func GetBitwiseInstructionCount
+    HRESULT
+    pCount UINT*
+
+  func GetGSInputPrimitive
+    HRESULT
+    pPrim D3D10_PRIMITIVE*
+
+  func IsLevel9Shader
+    HRESULT
+    pbLevel9Shader BOOL*
+
+  func IsSampleFrequencyShader
+    HRESULT
+    pbSampleFrequency BOOL*
+
+

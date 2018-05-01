@@ -1,0 +1,30 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEmptyVolumeCache base=IUnknown id={8FCE5227-04DA-11d1-A004-00805F8ABE06} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    hkRegKey HKEY
+    pcwszVolume LPCWSTR
+    ppwszDisplayName LPWSTR*
+    ppwszDescription LPWSTR*
+    pdwFlags DWORD*
+
+  func GetSpaceUsed
+    HRESULT
+    pdwlSpaceUsed DWORDLONG*
+    picb IEmptyVolumeCacheCallBack*
+
+  func Purge
+    HRESULT
+    dwlSpaceToFree DWORDLONG
+    picb IEmptyVolumeCacheCallBack*
+
+  func ShowProperties
+    HRESULT
+    hwnd HWND
+
+  func Deactivate
+    HRESULT
+    pdwFlags DWORD*
+
+

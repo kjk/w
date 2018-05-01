@@ -1,0 +1,222 @@
+include Headers\dwrite.h.txt
+include Interfaces\DirectWrite\IDWriteTextFormat.txt
+
+ingterface IDWriteTextLayout base=IDWriteTextFormat id={53737037-6d14-410b-9bfe-0b182bb70961} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func SetMaxWidth
+    HRESULT
+    maxWidth FLOAT
+
+  func SetMaxHeight
+    HRESULT
+    maxHeight FLOAT
+
+  func SetFontCollection
+    HRESULT
+    fontCollection IDWriteFontCollection*
+    textRange DWRITE_TEXT_RANGE
+
+  func SetFontFamilyName
+    HRESULT
+    fontFamilyName "WCHAR const*"
+    textRange DWRITE_TEXT_RANGE
+
+  func SetFontWeight
+    HRESULT
+    fontWeight DWRITE_FONT_WEIGHT
+    textRange DWRITE_TEXT_RANGE
+
+  func SetFontStyle
+    HRESULT
+    fontStyle DWRITE_FONT_STYLE
+    textRange DWRITE_TEXT_RANGE
+
+  func SetFontStretch
+    HRESULT
+    fontStretch DWRITE_FONT_STRETCH
+    textRange DWRITE_TEXT_RANGE
+
+  func SetFontSize
+    HRESULT
+    fontSize FLOAT
+    textRange DWRITE_TEXT_RANGE
+
+  func SetUnderline
+    HRESULT
+    hasUnderline BOOL
+    textRange DWRITE_TEXT_RANGE
+
+  func SetStrikethrough
+    HRESULT
+    hasStrikethrough BOOL
+    textRange DWRITE_TEXT_RANGE
+
+  func SetDrawingEffect
+    HRESULT
+    drawingEffect IUnknown*
+    textRange DWRITE_TEXT_RANGE
+
+  func SetInlineObject
+    HRESULT
+    inlineObject IDWriteInlineObject*
+    textRange DWRITE_TEXT_RANGE
+
+  func SetTypography
+    HRESULT
+    typography IDWriteTypography*
+    textRange DWRITE_TEXT_RANGE
+
+  func SetLocaleName
+    HRESULT
+    localeName "WCHAR const*"
+    textRange DWRITE_TEXT_RANGE
+
+  func GetMaxWidth
+    FLOAT
+
+  func GetMaxHeight
+    FLOAT
+
+  func "GetFontCollection "
+    HRESULT
+    currentPosition UINT32
+    fontCollection IDWriteFontCollection**
+    textRange DWRITE_TEXT_RANGE*
+
+  func "GetFontFamilyNameLength "
+    HRESULT
+    currentPosition UINT32
+    nameLength UINT32*
+    textRange DWRITE_TEXT_RANGE*
+
+  func "GetFontFamilyName "
+    HRESULT
+    currentPosition UINT32
+    fontFamilyName WCHAR* outputOnly
+    nameSize UINT32
+    textRange DWRITE_TEXT_RANGE*
+
+  func "GetFontWeight "
+    HRESULT
+    currentPosition UINT32
+    fontWeight DWRITE_FONT_WEIGHT*
+    textRange DWRITE_TEXT_RANGE*
+
+  func "GetFontStyle "
+    HRESULT
+    currentPosition UINT32
+    fontStyle DWRITE_FONT_STYLE*
+    textRange DWRITE_TEXT_RANGE*
+
+  func "GetFontStretch "
+    HRESULT
+    currentPosition UINT32
+    fontStretch DWRITE_FONT_STRETCH*
+    textRange DWRITE_TEXT_RANGE*
+
+  func "GetFontSize "
+    HRESULT
+    currentPosition UINT32
+    fontSize FLOAT*
+    textRange DWRITE_TEXT_RANGE*
+
+  func GetUnderline
+    HRESULT
+    currentPosition UINT32
+    hasUnderline BOOL*
+    textRange DWRITE_TEXT_RANGE*
+
+  func GetStrikethrough
+    HRESULT
+    currentPosition UINT32
+    hasStrikethrough BOOL*
+    textRange DWRITE_TEXT_RANGE*
+
+  func GetDrawingEffect
+    HRESULT
+    currentPosition UINT32
+    drawingEffect IUnknown**
+    textRange DWRITE_TEXT_RANGE*
+
+  func GetInlineObject
+    HRESULT
+    currentPosition UINT32
+    inlineObject IDWriteInlineObject**
+    textRange DWRITE_TEXT_RANGE*
+
+  func GetTypography
+    HRESULT
+    currentPosition UINT32
+    typography IDWriteTypography**
+    textRange DWRITE_TEXT_RANGE*
+
+  func "GetLocaleNameLength "
+    HRESULT
+    currentPosition UINT32
+    nameLength UINT32*
+    textRange DWRITE_TEXT_RANGE*
+
+  func "GetLocaleName "
+    HRESULT
+    currentPosition UINT32
+    localeName WCHAR* outputOnly
+    nameSize UINT32
+    textRange DWRITE_TEXT_RANGE*
+
+  func Draw
+    HRESULT
+    clientDrawingContext void*
+    renderer IDWriteTextRenderer*
+    originX FLOAT
+    originY FLOAT
+
+  func GetLineMetrics
+    HRESULT
+    lineMetrics DWRITE_LINE_METRICS* postCount=maxLineCount
+    maxLineCount UINT32
+    actualLineCount UINT32*
+
+  func GetMetrics
+    HRESULT
+    textMetrics DWRITE_TEXT_METRICS*
+
+  func GetOverhangMetrics
+    HRESULT
+    overhangs DWRITE_OVERHANG_METRICS*
+
+  func GetClusterMetrics
+    HRESULT
+    clusterMetrics DWRITE_CLUSTER_METRICS* postCount=maxClusterCount
+    maxClusterCount UINT32
+    actualClusterCount UINT32*
+
+  func DetermineMinWidth
+    HRESULT
+    minWidth FLOAT*
+
+  func HitTestPoint
+    HRESULT
+    pointX FLOAT
+    pointY FLOAT
+    isTrailingHit BOOL*
+    isInside BOOL*
+    hitTestMetrics DWRITE_HIT_TEST_METRICS*
+
+  func HitTestTextPosition
+    HRESULT
+    textPosition UINT32
+    isTrailingHit BOOL
+    pointX FLOAT*
+    pointY FLOAT*
+    hitTestMetrics DWRITE_HIT_TEST_METRICS*
+
+  func HitTestTextRange
+    HRESULT
+    textPosition UINT32
+    textLength UINT32
+    originX FLOAT
+    originY FLOAT
+    hitTestMetrics DWRITE_HIT_TEST_METRICS* postCount=maxHitTestMetricsCount
+    maxHitTestMetricsCount UINT32
+    actualHitTestMetricsCount UINT32*
+
+

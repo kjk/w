@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IObjectWithFolderEnumMode base=IUnknown id={6a9d9026-0e6e-464c-b000-42ecc07de673} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetMode
+    HRESULT
+    feMode FOLDER_ENUM_MODE
+
+  func GetMode
+    HRESULT
+    pfeMode FOLDER_ENUM_MODE*
+
+

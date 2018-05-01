@@ -1,0 +1,208 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDvdControl2 base=IUnknown id={33BC7430-EEC0-11D2-8201-00A0C9D74842} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func PlayTitle
+    HRESULT
+    ulTitle ULONG
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func PlayChapterInTitle
+    HRESULT
+    ulTitle ULONG
+    ulChapter ULONG
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func PlayAtTimeInTitle
+    HRESULT
+    ulTitle ULONG
+    pStartTime DVD_HMSF_TIMECODE*
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func Stop
+    HRESULT
+
+  func ReturnFromSubmenu
+    HRESULT
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func PlayAtTime
+    HRESULT
+    pTime DVD_HMSF_TIMECODE*
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func PlayChapter
+    HRESULT
+    ulChapter ULONG
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func PlayPrevChapter
+    HRESULT
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func ReplayChapter
+    HRESULT
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func PlayNextChapter
+    HRESULT
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func PlayForwards
+    HRESULT
+    dSpeed double
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func PlayBackwards
+    HRESULT
+    dSpeed double
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func ShowMenu
+    HRESULT
+    MenuID DVD_MENU_ID
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func Resume
+    HRESULT
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func SelectRelativeButton
+    HRESULT
+    buttonDir DVD_RELATIVE_BUTTON
+
+  func ActivateButton
+    HRESULT
+
+  func SelectButton
+    HRESULT
+    ulButton ULONG
+
+  func SelectAndActivateButton
+    HRESULT
+    ulButton ULONG
+
+  func StillOff
+    HRESULT
+
+  func Pause
+    HRESULT
+    bState BOOL
+
+  func SelectAudioStream
+    HRESULT
+    ulAudio ULONG
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func SelectSubpictureStream
+    HRESULT
+    ulSubPicture ULONG
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func SetSubpictureState
+    HRESULT
+    bState BOOL
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func SelectAngle
+    HRESULT
+    ulAngle ULONG
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func SelectParentalLevel
+    HRESULT
+    ulParentalLevel ULONG
+
+  func SelectParentalCountry
+    HRESULT
+    bCountry "BYTE [2]"
+
+  func SelectKaraokeAudioPresentationMode
+    HRESULT
+    ulMode ULONG
+
+  func SelectVideoModePreference
+    HRESULT
+    ulPreferredDisplayMode ULONG
+
+  func SetDVDDirectory
+    HRESULT
+    pszwPath LPCWSTR
+
+  func ActivateAtPosition
+    HRESULT
+    point POINT
+
+  func SelectAtPosition
+    HRESULT
+    point POINT
+
+  func PlayChaptersAutoStop
+    HRESULT
+    ulTitle ULONG
+    ulChapter ULONG
+    ulChaptersToPlay ULONG
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func AcceptParentalLevelChange
+    HRESULT
+    bAccept BOOL
+
+  func SetOption
+    HRESULT
+    flag DVD_OPTION_FLAG
+    fState BOOL
+
+  func SetState
+    HRESULT
+    pState IDvdState*
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func PlayPeriodInTitleAutoStop
+    HRESULT
+    ulTitle ULONG
+    pStartTime DVD_HMSF_TIMECODE*
+    pEndTime DVD_HMSF_TIMECODE*
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func SetGPRM
+    HRESULT
+    ulIndex ULONG
+    wValue WORD
+    dwFlags DWORD
+    ppCmd IDvdCmd**
+
+  func SelectDefaultMenuLanguage
+    HRESULT
+    Language LCID
+
+  func SelectDefaultAudioLanguage
+    HRESULT
+    Language LCID
+    audioExtension DVD_AUDIO_LANG_EXT
+
+  func SelectDefaultSubpictureLanguage
+    HRESULT
+    Language LCID
+    subpictureExtension DVD_SUBPICTURE_LANG_EXT
+
+

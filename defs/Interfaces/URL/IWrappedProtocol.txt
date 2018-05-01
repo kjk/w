@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IWrappedProtocol base=IUnknown id={53c84785-8425-4dc5-971b-e58d9c19f9b6} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetWrapperCode
+    HRESULT
+    pnCode LONG*
+    dwReserved DWORD_PTR
+
+

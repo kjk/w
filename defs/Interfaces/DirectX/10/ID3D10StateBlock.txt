@@ -1,0 +1,18 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID3D10StateBlock base=IUnknown id={0803425A-57F5-4dd6-9465-A87570834A08} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Core"
+  func Capture
+    HRESULT
+
+  func Apply
+    HRESULT
+
+  func ReleaseAllDeviceObjects
+    HRESULT
+
+  func GetDevice
+    HRESULT
+    ppDevice ID3D10Device**
+
+

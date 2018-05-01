@@ -1,0 +1,34 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IPersistMoniker base=IUnknown id={79eac9c9-baf9-11ce-8c82-00aa004ba90b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetClassID
+    HRESULT
+    pClassID CLSID*
+
+  func IsDirty
+    HRESULT
+
+  func Load
+    HRESULT
+    fFullyAvailable BOOL
+    pimkName IMoniker*
+    pibc LPBC
+    grfMode [STGM_FLAGS]
+
+  func Save
+    HRESULT
+    pimkName IMoniker*
+    pbc LPBC
+    fRemember BOOL
+
+  func SaveCompleted
+    HRESULT
+    pimkName IMoniker*
+    pibc LPBC
+
+  func GetCurMoniker
+    HRESULT
+    ppimkName IMoniker**
+
+

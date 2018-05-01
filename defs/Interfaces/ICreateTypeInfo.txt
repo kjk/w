@@ -1,0 +1,112 @@
+include Interfaces\IUnknown.txt
+include Interfaces\ITypeInfo.txt
+
+ingterface ICreateTypeInfo base=IUnknown id={00020405-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Type Building"
+  func SetGuid
+    HRESULT
+    guid REFGUID
+
+  func SetTypeFlags
+    HRESULT
+    uTypeFlags UINT
+
+  func SetDocString
+    HRESULT
+    pStrDoc LPOLESTR
+
+  func SetHelpContext
+    HRESULT
+    dwHelpContext DWORD
+
+  func SetVersion
+    HRESULT
+    wMajorVerNum WORD
+    wMinorVerNum WORD
+
+  func AddRefTypeInfo
+    HRESULT
+    pTInfo ITypeInfo*
+    phRefType HREFTYPE*
+
+  func AddFuncDesc
+    HRESULT
+    index UINT
+    pFuncDesc FUNCDESC*
+
+  func AddImplType
+    HRESULT
+    index UINT
+    hRefType HREFTYPE
+
+  func SetImplTypeFlags
+    HRESULT
+    index UINT
+    implTypeFlags IMPLTYPEFLAGS
+
+  func SetAlignment
+    HRESULT
+    cbAlignment WORD
+
+  func SetSchema
+    HRESULT
+    pStrSchema LPOLESTR
+
+  func AddVarDesc
+    HRESULT
+    index UINT
+    pVarDesc VARDESC*
+
+  func SetFuncAndParamNames
+    HRESULT
+    index UINT
+    rgszNames LPOLESTR* count=cNames
+    cNames UINT
+
+  func SetVarName
+    HRESULT
+    index UINT
+    szName LPOLESTR
+
+  func SetTypeDescAlias
+    HRESULT
+    pTDescAlias TYPEDESC*
+
+  func DefineFuncAsDllEntry
+    HRESULT
+    index UINT
+    szDllName LPOLESTR
+    szProcName LPOLESTR
+
+  func SetFuncDocString
+    HRESULT
+    index UINT
+    szDocString LPOLESTR
+
+  func SetVarDocString
+    HRESULT
+    index UINT
+    szDocString LPOLESTR
+
+  func SetFuncHelpContext
+    HRESULT
+    index UINT
+    dwHelpContext DWORD
+
+  func SetVarHelpContext
+    HRESULT
+    index UINT
+    dwHelpContext DWORD
+
+  func SetMops
+    HRESULT
+    index UINT
+    bstrMops BSTR
+
+  func SetTypeIdldesc
+    HRESULT
+    pIdlDesc IDLDESC*
+
+  func LayOut
+    HRESULT
+
+

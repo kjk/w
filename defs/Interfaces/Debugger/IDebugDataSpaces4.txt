@@ -1,0 +1,85 @@
+include Interfaces\Debugger\IDebugDataSpaces3.txt
+
+ingterface IDebugDataSpaces4 base=IDebugDataSpaces3 id={d98ada1f-29e9-4ef5-a6c0-e53349883212} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetOffsetInformation
+    HRESULT
+    Space ULONG
+    Which ULONG
+    Offset ULONG64
+    Buffer PVOID
+    BufferSize ULONG
+    InfoSize PULONG
+
+  func GetNextDifferentlyValidOffsetVirtual
+    HRESULT
+    Offset ULONG64
+    NextOffset PULONG64
+
+  func GetValidRegionVirtual
+    HRESULT
+    Base ULONG64
+    Size ULONG
+    ValidBase PULONG64
+    ValidSize PULONG
+
+  func SearchVirtual2
+    HRESULT
+    Offset ULONG64
+    Length ULONG64
+    Flags [DEBUG_VSEARCH_FLAGS]
+    Pattern PVOID
+    PatternSize ULONG
+    PatternGranularity ULONG
+    MatchOffset PULONG64
+
+  func ReadMultiByteStringVirtual
+    HRESULT
+    Offset ULONG64
+    MaxBytes ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    StringBytes PULONG
+
+  func ReadMultiByteStringVirtualWide
+    HRESULT
+    Offset ULONG64
+    MaxBytes ULONG
+    CodePage ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    StringBytes PULONG
+
+  func ReadUnicodeStringVirtual
+    HRESULT
+    Offset ULONG64
+    MaxBytes ULONG
+    CodePage ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    StringBytes PULONG
+
+  func ReadUnicodeStringVirtualWide
+    HRESULT
+    Offset ULONG64
+    MaxBytes ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    StringBytes PULONG
+
+  func ReadPhysical2
+    HRESULT
+    Offset ULONG64
+    Flags [DEBUG_PHYSICAL_FLAGS]
+    Buffer PVOID
+    BufferSize ULONG
+    BytesRead PULONG
+
+  func WritePhysical2
+    HRESULT
+    Offset ULONG64
+    Flags [DEBUG_PHYSICAL_FLAGS]
+    Buffer PVOID
+    BufferSize ULONG
+    BytesWritten PULONG
+
+

@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPipeByte base=IUnknown id={DB2F3ACA-2F86-11d1-8E04-00C04FB9989A} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Pull
+    HRESULT
+    buf BYTE*
+    cRequest ULONG
+    pcReturned ULONG*
+
+  func Push
+    HRESULT
+    buf BYTE*
+    cSent ULONG
+
+

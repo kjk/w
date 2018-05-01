@@ -1,0 +1,9 @@
+include Interfaces\DirectX\10\ID3D10DeviceChild.txt
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10View base=ID3D10DeviceChild id={C902B03F-60A7-49BA-9936-2A3AB37A7E33} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Resource"
+  func GetResource
+    void
+    ppResource ID3D10Resource**
+
+

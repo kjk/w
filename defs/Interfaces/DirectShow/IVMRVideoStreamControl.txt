@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRVideoStreamControl base=IUnknown id={058d1f11-2a54-4bef-bd54-df706626b727} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetColorKey
+    HRESULT
+    lpClrKey LPDDCOLORKEY
+
+  func GetColorKey
+    HRESULT
+    lpClrKey LPDDCOLORKEY
+
+  func SetStreamActiveState
+    HRESULT
+    fActive BOOL
+
+  func GetStreamActiveState
+    HRESULT
+    lpfActive BOOL*
+
+

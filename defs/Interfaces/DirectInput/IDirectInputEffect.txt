@@ -1,0 +1,47 @@
+include Headers\dinput.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDirectInputEffect base=IUnknown id={e7e1f7c0-88d2-11d0-9ad0-00a0c9a06e35} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Input/DirectInput"
+  func Initialize
+    [DI_HRESULT]
+    hinst HINSTANCE
+    dwVersion DWORD
+    rguid REFGUID
+
+  func GetEffectGuid
+    [DI_HRESULT]
+    pguid LPGUID
+
+  func GetParameters
+    [DI_HRESULT]
+    peff LPDIEFFECT
+    dwFlags [DIEP_Flags]
+
+  func SetParameters
+    [DI_HRESULT]
+    peff LPCDIEFFECT
+    dwFlags [DIEP_Flags]
+
+  func Start
+    [DI_HRESULT]
+    dwIterations DWORD
+    dwFlags [DIES_Flags]
+
+  func Stop
+    [DI_HRESULT]
+
+  func GetEffectStatus
+    [DI_HRESULT]
+    pdwFlags [DIEGES_Flags*]
+
+  func Download
+    [DI_HRESULT]
+
+  func Unload
+    [DI_HRESULT]
+
+  func Escape
+    [DI_HRESULT]
+    pesc LPDIEFFESCAPE
+
+

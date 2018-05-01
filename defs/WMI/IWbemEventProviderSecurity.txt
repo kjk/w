@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemEventProviderSecurity base=IUnknown id={631f7d96-d993-11d2-b339-00105a1f4aaf} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func AccessCheck
+    WBEMSTATUS
+    wszQueryLanguage WBEM_CWSTR
+    wszQuery WBEM_CWSTR
+    lSidLength long
+    pSid "const BYTE*"
+
+

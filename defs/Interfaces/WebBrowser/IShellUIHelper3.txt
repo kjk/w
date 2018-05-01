@@ -1,0 +1,56 @@
+include Interfaces\WebBrowser\IShellUIHelper2.txt
+
+ingterface IShellUIHelper3 base=IShellUIHelper2 id={528DF2EC-D419-40bc-9B6D-DCDBF9C1B25D} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Content Extensions/Shell Helper/Interfaces"
+  func AddService
+    HRESULT
+    URL BSTR
+
+  func IsServiceInstalled
+    HRESULT
+    URL BSTR
+    Verb BSTR
+    pdwResult DWORD*
+
+  func InPrivateFilteringEnabled
+    HRESULT
+    pfEnabled VARIANT_BOOL*
+
+  func AddToFavoritesBar
+    HRESULT
+    URL BSTR
+    Title BSTR
+    Type VARIANT*
+
+  func BuildNewTabPage
+    HRESULT
+
+  func SetRecentlyClosedVisible
+    HRESULT
+    fVisible VARIANT_BOOL
+
+  func SetActivitiesVisible
+    HRESULT
+    fVisible VARIANT_BOOL
+
+  func ContentDiscoveryReset
+    HRESULT
+
+  func IsSuggestedSitesEnabled
+    HRESULT
+    pfEnabled VARIANT_BOOL*
+
+  func EnableSuggestedSites
+    HRESULT
+    fEnable VARIANT_BOOL
+
+  func NavigateToSuggestedSites
+    HRESULT
+    bstrRelativeUrl BSTR
+
+  func ShowTabsHelp
+    HRESULT
+
+  func ShowInPrivateHelp
+    HRESULT
+
+

@@ -1,0 +1,8 @@
+include Interfaces\COM\ISynchronizeHandle.txt
+
+ingterface ISynchronizeEvent base=ISynchronizeHandle id={00000032-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func SetEventHandle
+    HRESULT
+    ph HANDLE*
+
+

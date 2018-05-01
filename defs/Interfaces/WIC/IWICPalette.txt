@@ -1,0 +1,51 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICPalette base=IUnknown id={00000040-a8f2-4877-ba0a-fd2b6645fb94} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func InitializePredefined
+    [WIC_HRESULT]
+    ePaletteType WICBitmapPaletteType
+    fAddTransparentColor BOOL
+
+  func InitializeCustom
+    [WIC_HRESULT]
+    pColors WICColor*
+    cCount UINT
+
+  func InitializeFromBitmap
+    [WIC_HRESULT]
+    pISurface IWICBitmapSource*
+    cCount UINT
+    fAddTransparentColor BOOL
+
+  func InitializeFromPalette
+    [WIC_HRESULT]
+    pIPalette IWICPalette*
+
+  func GetType
+    [WIC_HRESULT]
+    pePaletteType WICBitmapPaletteType*
+
+  func GetColorCount
+    [WIC_HRESULT]
+    pcCount UINT*
+
+  func GetColors
+    [WIC_HRESULT]
+    cCount UINT
+    pColors WICColor*
+    pcActualColors UINT*
+
+  func IsBlackWhite
+    [WIC_HRESULT]
+    pfIsBlackWhite BOOL*
+
+  func IsGrayscale
+    [WIC_HRESULT]
+    pfIsGrayscale BOOL*
+
+  func HasAlpha
+    [WIC_HRESULT]
+    pfHasAlpha BOOL*
+
+

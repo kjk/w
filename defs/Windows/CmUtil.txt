@@ -1,0 +1,14 @@
+include Headers\windows.h.txt
+
+dll CmUtil.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Routing and Remote Access Service/Remote Access/Remote Access Service"
+func CmFree
+  success NotEqual=0
+  void*
+  pvPtr void*
+
+func CmMalloc
+  success NotEqual=0
+  void*
+  nBytes size_t
+

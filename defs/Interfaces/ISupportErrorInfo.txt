@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISupportErrorInfo base=IUnknown id={DF0B3D60-548F-101B-8E65-08002B2BD119} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Error-Handling"
+  func InterfaceSupportsErrorInfo
+    HRESULT
+    riid REFIID
+
+

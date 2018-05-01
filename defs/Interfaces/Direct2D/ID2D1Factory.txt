@@ -1,0 +1,81 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1Factory base=IUnknown id={06152247-6f50-465a-9245-118bfd3b6007} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func ReloadSystemMetrics
+    [D2D_HRESULT]
+
+  func GetDesktopDpi
+    void
+    dpiX FLOAT*
+    dpiY FLOAT*
+
+  func CreateRectangleGeometry
+    [D2D_HRESULT]
+    rectangle "CONST D2D1_RECT_F*"
+    rectangleGeometry ID2D1RectangleGeometry**
+
+  func CreateRoundedRectangleGeometry
+    [D2D_HRESULT]
+    roundedRectangle "CONST D2D1_ROUNDED_RECT*"
+    roundedRectangleGeometry ID2D1RoundedRectangleGeometry**
+
+  func CreateEllipseGeometry
+    [D2D_HRESULT]
+    ellipse "CONST D2D1_ELLIPSE*"
+    ellipseGeometry ID2D1EllipseGeometry**
+
+  func CreateGeometryGroup
+    [D2D_HRESULT]
+    fillMode D2D1_FILL_MODE
+    geometries ID2D1Geometry** count=geometriesCount
+    geometriesCount UINT32
+    geometryGroup ID2D1GeometryGroup**
+
+  func CreateTransformedGeometry
+    [D2D_HRESULT]
+    sourceGeometry ID2D1Geometry*
+    transform "CONST D2D1_MATRIX_3X2_F*"
+    transformedGeometry ID2D1TransformedGeometry**
+
+  func CreatePathGeometry
+    [D2D_HRESULT]
+    pathGeometry ID2D1PathGeometry**
+
+  func CreateStrokeStyle
+    [D2D_HRESULT]
+    strokeStyleProperties "CONST D2D1_STROKE_STYLE_PROPERTIES*"
+    dashes "CONST FLOAT*" count=dashesCount
+    dashesCount UINT32
+    strokeStyle ID2D1StrokeStyle**
+
+  func CreateDrawingStateBlock
+    [D2D_HRESULT]
+    drawingStateDescription "CONST D2D1_DRAWING_STATE_DESCRIPTION*"
+    textRenderingParams IDWriteRenderingParams*
+    drawingStateBlock ID2D1DrawingStateBlock**
+
+  func CreateWicBitmapRenderTarget
+    [D2D_HRESULT]
+    target IWICBitmap*
+    renderTargetProperties "CONST D2D1_RENDER_TARGET_PROPERTIES*"
+    renderTarget ID2D1RenderTarget**
+
+  func CreateHwndRenderTarget
+    [D2D_HRESULT]
+    renderTargetProperties "CONST D2D1_RENDER_TARGET_PROPERTIES*"
+    hwndRenderTargetProperties "CONST D2D1_HWND_RENDER_TARGET_PROPERTIES*"
+    hwndRenderTarget ID2D1HwndRenderTarget**
+
+  func CreateDxgiSurfaceRenderTarget
+    [D2D_HRESULT]
+    dxgiSurface IDXGISurface*
+    renderTargetProperties "CONST D2D1_RENDER_TARGET_PROPERTIES*"
+    renderTarget ID2D1RenderTarget**
+
+  func CreateDCRenderTarget
+    [D2D_HRESULT]
+    renderTargetProperties "CONST D2D1_RENDER_TARGET_PROPERTIES*"
+    dcRenderTarget ID2D1DCRenderTarget**
+
+

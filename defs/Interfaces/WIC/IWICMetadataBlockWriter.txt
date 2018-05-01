@@ -1,0 +1,26 @@
+include Interfaces\WIC\IWICMetadataBlockReader.txt
+
+ingterface IWICMetadataBlockWriter base=IWICMetadataBlockReader id={08FB9676-B444-41E8-8DBE-6A53A542BFF1} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func InitializeFromBlockReader
+    [WIC_HRESULT]
+    pIMDBlockReader IWICMetadataBlockReader*
+
+  func GetWriterByIndex
+    [WIC_HRESULT]
+    nIndex UINT
+    ppIMetadataWriter IWICMetadataWriter**
+
+  func AddWriter
+    [WIC_HRESULT]
+    pIMetadataWriter IWICMetadataWriter*
+
+  func SetWriterByIndex
+    [WIC_HRESULT]
+    nIndex UINT
+    pIMetadataWriter IWICMetadataWriter*
+
+  func RemoveWriterByIndex
+    [WIC_HRESULT]
+    nIndex UINT
+
+

@@ -1,0 +1,19 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1RenderInfo.txt
+
+ingterface ID2D1ComputeInfo base=ID2D1RenderInfo id={5598b14b-9fd7-48b7-9bdb-8f0964eb38bc} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetComputeShaderConstantBuffer
+    [D2D_HRESULT]
+    buffer "CONST BYTE*" length=bufferCount
+    bufferCount UINT32
+
+  func SetComputeShader
+    [D2D_HRESULT]
+    shaderId REFGUID
+
+  func SetResourceTexture
+    [D2D_HRESULT]
+    textureIndex UINT32
+    resourceTexture ID2D1ResourceTexture*
+
+

@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioClock base=IUnknown id={CD63314F-3FBA-4a1b-812C-EF96358728E7} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func GetFrequency
+    [AUDCLNT_HRESULT]
+    pu64Frequency UINT64*
+
+  func GetPosition
+    [AUDCLNT_HRESULT]
+    pu64Position UINT64*
+    pu64QPCPosition UINT64*
+
+  func GetCharacteristics
+    [AUDCLNT_HRESULT]
+    pdwCharacteristics DWORD*
+
+

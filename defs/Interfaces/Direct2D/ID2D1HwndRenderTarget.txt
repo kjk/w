@@ -1,0 +1,16 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1RenderTarget.txt
+
+ingterface ID2D1HwndRenderTarget base=ID2D1RenderTarget id={2cd90698-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func CheckWindowState
+    D2D1_WINDOW_STATE
+
+  func Resize
+    [D2D_HRESULT]
+    pixelSize "CONST D2D1_SIZE_U*"
+
+  func GetHwnd
+    success NotEqual=0
+    HWND
+
+

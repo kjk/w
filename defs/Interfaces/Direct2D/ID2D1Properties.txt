@@ -1,0 +1,66 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1Properties base=IUnknown id={483473d7-cd46-4f9d-9d3a-3112aa80159d} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetPropertyCount
+    UINT32
+
+  func GetPropertyName
+    [D2D_HRESULT]
+    index UINT32
+    name PWSTR
+    nameCount UINT32
+
+  func GetPropertyNameLength
+    success NotEqual=0
+    UINT32
+    index UINT32
+
+  func GetType
+    success NotEqual=0
+    D2D1_PROPERTY_TYPE
+    index UINT32
+
+  func GetPropertyIndex
+    [D2D1_PROPERTY_INDEX]
+    name PCWSTR
+
+  func SetValueByName
+    [D2D_HRESULT]
+    name PCWSTR
+    type D2D1_PROPERTY_TYPE
+    data "CONST BYTE*" length=dataSize
+    dataSize UINT32
+
+  func SetValue
+    [D2D_HRESULT]
+    index UINT32
+    type D2D1_PROPERTY_TYPE
+    data "CONST BYTE*" length=dataSize
+    dataSize UINT32
+
+  func GetValueByName
+    [D2D_HRESULT]
+    name PCWSTR
+    type D2D1_PROPERTY_TYPE
+    data BYTE* postLength=dataSize
+    dataSize UINT32
+
+  func GetValue
+    [D2D_HRESULT]
+    index UINT32
+    type D2D1_PROPERTY_TYPE
+    data BYTE* postLength=dataSize
+    dataSize UINT32
+
+  func GetValueSize
+    success NotEqual=0
+    UINT32
+    index UINT32
+
+  func GetSubProperties
+    [D2D_HRESULT]
+    index UINT32
+    subProperties ID2D1Properties**
+
+

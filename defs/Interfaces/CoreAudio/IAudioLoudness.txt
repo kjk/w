@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioLoudness base=IUnknown id={7D8B1437-DD53-4350-9C1B-1EE2890BD938} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetEnabled
+    [AUDCLNT_HRESULT]
+    pbEnabled BOOL*
+
+  func SetEnabled
+    [AUDCLNT_HRESULT]
+    bEnable BOOL
+    pguidEventContext LPCGUID
+
+

@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioEndpointControl base=IUnknown id={C684B72A-6DF4-4774-BDF9-76B77509B653} errorFunc=HRESULT onlineHelp=MSDN category="System Services/Remote Desktop Services/AudioEndpoint"
+  func Start
+    [AUDCLNT_HRESULT]
+
+  func Reset
+    [AUDCLNT_HRESULT]
+
+  func Stop
+    [AUDCLNT_HRESULT]
+
+

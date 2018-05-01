@@ -1,0 +1,312 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDebugSymbols base=IUnknown id={8c31e98c-983a-48a5-9016-6fe5d667a950} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetSymbolOptions
+    HRESULT
+    Options PULONG
+
+  func AddSymbolOptions
+    HRESULT
+    Options ULONG
+
+  func RemoveSymbolOptions
+    HRESULT
+    Options ULONG
+
+  func SetSymbolOptions
+    HRESULT
+    Options ULONG
+
+  func GetNameByOffset
+    HRESULT
+    Offset ULONG64
+    NameBuffer PSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+    Displacement PULONG64
+
+  func GetOffsetByName
+    HRESULT
+    Symbol PCSTR
+    Offset PULONG64
+
+  func GetNearNameByOffset
+    HRESULT
+    Offset ULONG64
+    Delta LONG
+    NameBuffer PSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+    Displacement PULONG64
+
+  func GetLineByOffset
+    HRESULT
+    Offset ULONG64
+    Line PULONG
+    FileBuffer PSTR
+    FileBufferSize ULONG
+    FileSize PULONG
+    Displacement PULONG64
+
+  func GetOffsetByLine
+    HRESULT
+    Line ULONG
+    File PCSTR
+    Offset PULONG64
+
+  func GetNumberModules
+    HRESULT
+    Loaded PULONG
+    Unloaded PULONG
+
+  func GetModuleByIndex
+    HRESULT
+    Index ULONG
+    Base PULONG64
+
+  func GetModuleByModuleName
+    HRESULT
+    Name PCSTR
+    StartIndex ULONG
+    Index PULONG
+    Base PULONG64
+
+  func GetModuleByOffset
+    HRESULT
+    Offset ULONG64
+    StartIndex ULONG
+    Index PULONG
+    Base PULONG64
+
+  func GetModuleNames
+    HRESULT
+    Index ULONG
+    Base ULONG64
+    ImageNameBuffer PSTR
+    ImageNameBufferSize ULONG
+    ImageNameSize PULONG
+    ModuleNameBuffer PSTR
+    ModuleNameBufferSize ULONG
+    ModuleNameSize PULONG
+    LoadedImageNameBuffer PSTR
+    LoadedImageNameBufferSize ULONG
+    LoadedImageNameSize PULONG
+
+  func GetModuleParameters
+    HRESULT
+    Count ULONG
+    Bases PULONG64 count=Count
+    Start ULONG
+    Params PDEBUG_MODULE_PARAMETERS postCount=Count
+
+  func GetSymbolModule
+    HRESULT
+    Symbol PCSTR
+    Base PULONG64
+
+  func GetTypeName
+    HRESULT
+    Module ULONG64
+    TypeId ULONG
+    NameBuffer PSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+
+  func GetTypeId
+    HRESULT
+    Module ULONG64
+    Name PCSTR
+    TypeId PULONG
+
+  func GetTypeSize
+    HRESULT
+    Module ULONG64
+    TypeId ULONG
+    Size PULONG
+
+  func GetFieldOffset
+    HRESULT
+    Module ULONG64
+    TypeId ULONG
+    Field PCSTR
+    Offset PULONG
+
+  func GetSymbolTypeId
+    HRESULT
+    Symbol PCSTR
+    TypeId PULONG
+    Module PULONG64
+
+  func GetOffsetTypeId
+    HRESULT
+    Offset ULONG64
+    TypeId PULONG
+    Module PULONG64
+
+  func ReadTypedDataVirtual
+    HRESULT
+    Offset ULONG64
+    Module ULONG64
+    TypeId ULONG
+    Buffer PVOID
+    BufferSize ULONG
+    BytesRead PULONG
+
+  func WriteTypedDataVirtual
+    HRESULT
+    Offset ULONG64
+    Module ULONG64
+    TypeId ULONG
+    Buffer PVOID
+    BufferSize ULONG
+    BytesWritten PULONG
+
+  func OutputTypedDataVirtual
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Offset ULONG64
+    Module ULONG64
+    TypeId ULONG
+    Flags [DEBUG_TYPEOPTS]
+
+  func ReadTypedDataPhysical
+    HRESULT
+    Offset ULONG64
+    Module ULONG64
+    TypeId ULONG
+    Buffer PVOID
+    BufferSize ULONG
+    BytesRead PULONG
+
+  func WriteTypedDataPhysical
+    HRESULT
+    Offset ULONG64
+    Module ULONG64
+    TypeId ULONG
+    Buffer PVOID
+    BufferSize ULONG
+    BytesWritten PULONG
+
+  func OutputTypedDataPhysical
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Offset ULONG64
+    Module ULONG64
+    TypeId ULONG
+    Flags [DEBUG_TYPEOPTS]
+
+  func GetScope
+    HRESULT
+    InstructionOffset PULONG64
+    ScopeFrame PDEBUG_STACK_FRAME
+    ScopeContext PVOID
+    ScopeContextSize ULONG
+
+  func SetScope
+    HRESULT
+    InstructionOffset ULONG64
+    ScopeFrame PDEBUG_STACK_FRAME
+    ScopeContext PVOID
+    ScopeContextSize ULONG
+
+  func ResetScope
+    HRESULT
+
+  func GetScopeSymbolGroup
+    HRESULT
+    Flags [DEBUG_SCOPE_GROUP_FLAGS]
+    Update PDEBUG_SYMBOL_GROUP
+    Symbols PDEBUG_SYMBOL_GROUP*
+
+  func CreateSymbolGroup
+    HRESULT
+    Group PDEBUG_SYMBOL_GROUP*
+
+  func StartSymbolMatch
+    HRESULT
+    Pattern PCSTR
+    Handle PULONG64
+
+  func GetNextSymbolMatch
+    HRESULT
+    Handle ULONG64
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    MatchSize PULONG
+    Offset PULONG64
+
+  func EndSymbolMatch
+    HRESULT
+    Handle ULONG64
+
+  func Reload
+    HRESULT
+    Module PCSTR
+
+  func GetSymbolPath
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    PathSize PULONG
+
+  func SetSymbolPath
+    HRESULT
+    Path PCSTR
+
+  func AppendSymbolPath
+    HRESULT
+    Addition PCSTR
+
+  func GetImagePath
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    PathSize PULONG
+
+  func SetImagePath
+    HRESULT
+    Path PCSTR
+
+  func AppendImagePath
+    HRESULT
+    Addition PCSTR
+
+  func GetSourcePath
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    PathSize PULONG
+
+  func GetSourcePathElement
+    HRESULT
+    Index ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    ElementSize PULONG
+
+  func SetSourcePath
+    HRESULT
+    Path PCSTR
+
+  func AppendSourcePath
+    HRESULT
+    Addition PCSTR
+
+  func FindSourceFile
+    HRESULT
+    StartElement ULONG
+    File PCSTR
+    Flags [DEBUG_FIND_SOURCE_FLAGS]
+    FoundElement PULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    FoundSize PULONG
+
+  func GetSourceFileLineOffsets
+    HRESULT
+    File PCSTR
+    Buffer PULONG64
+    BufferLines ULONG
+    FileLines PULONG
+
+

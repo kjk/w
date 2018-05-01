@@ -1,0 +1,13 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1PathGeometry.txt
+
+ingterface ID2D1PathGeometry1 base=ID2D1PathGeometry id={62baa2d2-ab54-41b7-b872-787e0106a421} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func ComputePointAndSegmentAtLength
+    [D2D_HRESULT]
+    length FLOAT
+    startSegment UINT32
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    pointDescription D2D1_POINT_DESCRIPTION*
+
+

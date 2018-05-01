@@ -1,0 +1,45 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBandSite base=IUnknown id={4CF504B0-DE96-11D0-8B3F-00A0C911E8E5} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func AddBand
+    HRESULT
+    punk IUnknown*
+
+  func EnumBands
+    HRESULT
+    uBand UINT
+    pdwBandID DWORD*
+
+  func QueryBand
+    HRESULT
+    dwBandID DWORD
+    ppstb IDeskBand**
+    pdwState DWORD*
+    pszName LPWSTR
+    cchName int
+
+  func SetBandState
+    HRESULT
+    dwBandID DWORD
+    dwMask DWORD
+    dwState DWORD
+
+  func RemoveBand
+    HRESULT
+    dwBandID DWORD
+
+  func GetBandObject
+    HRESULT
+    dwBandID DWORD
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func SetBandSiteInfo
+    HRESULT
+    pbsinfo "const BANDSITEINFO*"
+
+  func GetBandSiteInfo
+    HRESULT
+    pbsinfo BANDSITEINFO*
+
+

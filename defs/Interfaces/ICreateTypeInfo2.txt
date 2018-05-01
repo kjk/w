@@ -1,0 +1,76 @@
+include Interfaces\ICreateTypeInfo.txt
+
+ingterface ICreateTypeInfo2 base=ICreateTypeInfo id={0002040E-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Type Building"
+  func DeleteFuncDesc
+    HRESULT
+    index UINT
+
+  func DeleteFuncDescByMemId
+    HRESULT
+    memid MEMBERID
+    invKind INVOKEKIND
+
+  func DeleteVarDesc
+    HRESULT
+    index UINT
+
+  func DeleteVarDescByMemId
+    HRESULT
+    memid MEMBERID
+
+  func DeleteImplType
+    HRESULT
+    index UINT
+
+  func SetCustData
+    HRESULT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func SetFuncCustData
+    HRESULT
+    index UINT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func SetParamCustData
+    HRESULT
+    indexFunc UINT
+    indexParam UINT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func SetVarCustData
+    HRESULT
+    index UINT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func SetImplTypeCustData
+    HRESULT
+    index UINT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func SetHelpStringContext
+    HRESULT
+    dwHelpStringContext ULONG
+
+  func SetFuncHelpStringContext
+    HRESULT
+    index UINT
+    dwHelpStringContext ULONG
+
+  func SetVarHelpStringContext
+    HRESULT
+    index UINT
+    dwHelpStringContext ULONG
+
+  func Invalidate
+    HRESULT
+
+  func SetName
+    HRESULT
+    szName LPOLESTR
+
+

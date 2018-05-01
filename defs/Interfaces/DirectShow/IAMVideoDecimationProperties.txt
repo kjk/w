@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMVideoDecimationProperties base=IUnknown id={60d32930-13da-11d3-9ec6-c4fcaef5c7be} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func QueryDecimationUsage
+    HRESULT
+    lpUsage DECIMATION_USAGE*
+
+  func SetDecimationUsage
+    HRESULT
+    Usage DECIMATION_USAGE
+
+

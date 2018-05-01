@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\DeviceAccess\DeviceAccess.h.txt
+
+ingterface ICreateDeviceAccessAsync base=IUnknown id={3474628F-683D-42D2-ABCB-DB018C6503BC} errorFunc=HRESULT onlineHelp=MSDN category="Devices/Device Access"
+  func Cancel
+    HRESULT
+
+  func Wait
+    HRESULT
+    timeout DWORD
+
+  func Close
+    HRESULT
+
+  func GetResult
+    HRESULT
+    riid REFIID
+    deviceAccess void** interfaceId=riid
+
+

@@ -1,0 +1,172 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemServices base=IUnknown id={9556dc99-828c-11cf-a37e-00aa003240c7} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func OpenNamespace
+    WBEMSTATUS
+    strNamespace "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    ppWorkingNamespace IWbemServices**
+    ppResult IWbemCallResult**
+
+  func CancelAsyncCall
+    WBEMSTATUS
+    pSink IWbemObjectSink*
+
+  func QueryObjectSink
+    WBEMSTATUS
+    lFlags long
+    ppResponseHandler IWbemObjectSink**
+
+  func GetObject
+    WBEMSTATUS
+    strObjectPath "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    ppObject IWbemClassObject**
+    ppCallResult IWbemCallResult**
+
+  func GetObjectAsync
+    WBEMSTATUS
+    strObjectPath "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    pResponseHandler IWbemObjectSink*
+
+  func PutClass
+    WBEMSTATUS
+    pObject IWbemClassObject*
+    lFlags long
+    pCtx IWbemContext*
+    ppCallResult IWbemCallResult**
+
+  func PutClassAsync
+    WBEMSTATUS
+    pObject IWbemClassObject*
+    lFlags long
+    pCtx IWbemContext*
+    pResponseHandler IWbemObjectSink*
+
+  func DeleteClass
+    WBEMSTATUS
+    strClass "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    ppCallResult IWbemCallResult**
+
+  func DeleteClassAsync
+    WBEMSTATUS
+    strClass "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    pResponseHandler IWbemObjectSink*
+
+  func CreateClassEnum
+    WBEMSTATUS
+    strSuperclass "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    ppEnum IEnumWbemClassObject**
+
+  func CreateClassEnumAsync
+    WBEMSTATUS
+    strSuperclass "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    pResponseHandler IWbemObjectSink*
+
+  func PutInstance
+    WBEMSTATUS
+    pInst IWbemClassObject*
+    lFlags long
+    pCtx IWbemContext*
+    ppCallResult IWbemCallResult**
+
+  func PutInstanceAsync
+    WBEMSTATUS
+    pInst IWbemClassObject*
+    lFlags long
+    pCtx IWbemContext*
+    pResponseHandler IWbemObjectSink*
+
+  func DeleteInstance
+    WBEMSTATUS
+    strObjectPath "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    ppCallResult IWbemCallResult**
+
+  func DeleteInstanceAsync
+    WBEMSTATUS
+    strObjectPath "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    pResponseHandler IWbemObjectSink*
+
+  func CreateInstanceEnum
+    WBEMSTATUS
+    strFilter "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    ppEnum IEnumWbemClassObject**
+
+  func CreateInstanceEnumAsync
+    WBEMSTATUS
+    strFilter "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    pResponseHandler IWbemObjectSink*
+
+  func ExecQuery
+    WBEMSTATUS
+    strQueryLanguage "const BSTR"
+    strQuery "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    ppEnum IEnumWbemClassObject**
+
+  func ExecQueryAsync
+    WBEMSTATUS
+    strQueryLanguage "const BSTR"
+    strQuery "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    pResponseHandler IWbemObjectSink*
+
+  func ExecNotificationQuery
+    WBEMSTATUS
+    strQueryLanguage "const BSTR"
+    strQuery "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    ppEnum IEnumWbemClassObject**
+
+  func ExecNotificationQueryAsync
+    WBEMSTATUS
+    strQueryLanguage "const BSTR"
+    strQuery "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    pResponseHandler IWbemObjectSink*
+
+  func ExecMethod
+    WBEMSTATUS
+    strObjectPath "const BSTR"
+    strMethodName "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    pInParams IWbemClassObject*
+    ppOutParams IWbemClassObject**
+    ppCallResult IWbemCallResult**
+
+  func ExecMethodAsync
+    WBEMSTATUS
+    strObjectPath "const BSTR"
+    strMethodName "const BSTR"
+    lFlags long
+    pCtx IWbemContext*
+    pInParams IWbemClassObject*
+    pResponseHandler IWbemObjectSink*
+
+

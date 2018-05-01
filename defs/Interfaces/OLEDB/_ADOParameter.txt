@@ -1,0 +1,73 @@
+include Interfaces\OLEDB\_ADO.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface _ADOParameter base=_ADO id={0000150C-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_Name
+    [OLEDB_HRESULT]
+    pbstr BSTR*
+
+  func put_Name
+    [OLEDB_HRESULT]
+    bstr BSTR
+
+  func get_Value
+    [OLEDB_HRESULT]
+    pvar VARIANT*
+
+  func put_Value
+    [OLEDB_HRESULT]
+    val VARIANT
+
+  func get_Type
+    [OLEDB_HRESULT]
+    psDataType DataTypeEnum*
+
+  func put_Type
+    [OLEDB_HRESULT]
+    sDataType DataTypeEnum
+
+  func put_Direction
+    [OLEDB_HRESULT]
+    lParmDirection ParameterDirectionEnum
+
+  func get_Direction
+    [OLEDB_HRESULT]
+    plParmDirection ParameterDirectionEnum*
+
+  func put_Precision
+    [OLEDB_HRESULT]
+    bPrecision BYTE
+
+  func get_Precision
+    [OLEDB_HRESULT]
+    pbPrecision BYTE*
+
+  func put_NumericScale
+    [OLEDB_HRESULT]
+    bScale BYTE
+
+  func get_NumericScale
+    [OLEDB_HRESULT]
+    pbScale BYTE*
+
+  func put_Size
+    [OLEDB_HRESULT]
+    l long
+
+  func get_Size
+    [OLEDB_HRESULT]
+    pl long*
+
+  func AppendChunk
+    [OLEDB_HRESULT]
+    Val VARIANT
+
+  func get_Attributes
+    [OLEDB_HRESULT]
+    plParmAttribs ParameterAttributesEnum*
+
+  func put_Attributes
+    [OLEDB_HRESULT]
+    lParmAttribs ParameterAttributesEnum
+
+

@@ -1,0 +1,13 @@
+include Interfaces\WindowsSync\ISyncSessionState.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncSessionState2 base=ISyncSessionState id={9e37cfa3-9e38-4c61-9ca3-ffe810b45ca2} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func SetProviderWithError
+    HRESULT
+    fSelf BOOL
+
+  func GetSessionErrorStatus
+    HRESULT
+    phrSessionError HRESULT*
+
+

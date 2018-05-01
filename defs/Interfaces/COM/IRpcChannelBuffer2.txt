@@ -1,0 +1,8 @@
+include Interfaces\COM\IRpcChannelBuffer.txt
+
+ingterface IRpcChannelBuffer2 base=IRpcChannelBuffer id={594f31d0-7f19-11d0-b194-00a0c90dc8bf} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func GetProtocolVersion
+    HRESULT
+    pdwVersion DWORD*
+
+

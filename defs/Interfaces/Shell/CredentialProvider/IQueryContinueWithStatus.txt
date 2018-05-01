@@ -1,0 +1,9 @@
+include Interfaces\Shell\IQueryContinue.txt
+include Interfaces\Shell\CredentialProvider\CredentialProvider.h.txt
+
+ingterface IQueryContinueWithStatus base=IQueryContinue id={9090be5b-502b-41fb-bccc-0049a6c7254b} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Credential Provider"
+  func SetStatusMessage
+    HRESULT
+    psz LPCWSTR
+
+

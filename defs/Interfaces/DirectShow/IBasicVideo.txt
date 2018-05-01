@@ -1,0 +1,145 @@
+include Interfaces\IDispatch.txt
+
+ingterface IBasicVideo base=IDispatch id={56a868b5-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func get_AvgTimePerFrame
+    HRESULT
+    pAvgTimePerFrame REFTIME*
+
+  func get_BitRate
+    HRESULT
+    pBitRate long*
+
+  func get_BitErrorRate
+    HRESULT
+    pBitErrorRate long*
+
+  func get_VideoWidth
+    HRESULT
+    pVideoWidth long*
+
+  func get_VideoHeight
+    HRESULT
+    pVideoHeight long*
+
+  func put_SourceLeft
+    HRESULT
+    SourceLeft long
+
+  func get_SourceLeft
+    HRESULT
+    pSourceLeft long*
+
+  func put_SourceWidth
+    HRESULT
+    SourceWidth long
+
+  func get_SourceWidth
+    HRESULT
+    pSourceWidth long*
+
+  func put_SourceTop
+    HRESULT
+    SourceTop long
+
+  func get_SourceTop
+    HRESULT
+    pSourceTop long*
+
+  func put_SourceHeight
+    HRESULT
+    SourceHeight long
+
+  func get_SourceHeight
+    HRESULT
+    pSourceHeight long*
+
+  func put_DestinationLeft
+    HRESULT
+    DestinationLeft long
+
+  func get_DestinationLeft
+    HRESULT
+    pDestinationLeft long*
+
+  func put_DestinationWidth
+    HRESULT
+    DestinationWidth long
+
+  func get_DestinationWidth
+    HRESULT
+    pDestinationWidth long*
+
+  func put_DestinationTop
+    HRESULT
+    DestinationTop long
+
+  func get_DestinationTop
+    HRESULT
+    pDestinationTop long*
+
+  func put_DestinationHeight
+    HRESULT
+    DestinationHeight long
+
+  func get_DestinationHeight
+    HRESULT
+    pDestinationHeight long*
+
+  func SetSourcePosition
+    HRESULT
+    Left long
+    Top long
+    Width long
+    Height long
+
+  func GetSourcePosition
+    HRESULT
+    pLeft long*
+    pTop long*
+    pWidth long*
+    pHeight long*
+
+  func SetDefaultSourcePosition
+    HRESULT
+
+  func SetDestinationPosition
+    HRESULT
+    Left long
+    Top long
+    Width long
+    Height long
+
+  func GetDestinationPosition
+    HRESULT
+    pLeft long*
+    pTop long*
+    pWidth long*
+    pHeight long*
+
+  func SetDefaultDestinationPosition
+    HRESULT
+
+  func GetVideoSize
+    HRESULT
+    pWidth long*
+    pHeight long*
+
+  func GetVideoPaletteEntries
+    HRESULT
+    StartIndex long
+    Entries long
+    pRetrieved long*
+    pPalette long*
+
+  func GetCurrentImage
+    HRESULT
+    pBufferSize long*
+    pDIBImage long*
+
+  func IsUsingDefaultSource
+    HRESULT
+
+  func IsUsingDefaultDestination
+    HRESULT
+
+

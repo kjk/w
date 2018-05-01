@@ -1,0 +1,28 @@
+include Interfaces\URL\IInternetZoneManagerEx.txt
+include Headers\URL.h.txt
+
+ingterface IInternetZoneManagerEx2 base=IInternetZoneManagerEx id={EDC17559-DD5D-4846-8EEF-8BECBA5A4ABF} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetZoneAttributesEx
+    HRESULT
+    dwZone [URLZONE|DWORD]
+    pZoneAttributes ZONEATTRIBUTES*
+    dwFlags ZAFLAGS
+
+  func GetZoneSecurityState
+    HRESULT
+    dwZoneIndex DWORD
+    fRespectPolicy BOOL
+    pdwState [SECURITY_IE_STATE*]
+    pfPolicyEncountered BOOL*
+
+  func GetIESecurityState
+    HRESULT
+    fRespectPolicy BOOL
+    pdwState [SECURITY_IE_STATE*]
+    pfPolicyEncountered BOOL*
+    fNoCache BOOL
+
+  func FixUnsecureSettings
+    HRESULT
+
+

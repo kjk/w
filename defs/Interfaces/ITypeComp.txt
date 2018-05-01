@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface ITypeComp base=IUnknown id={00020403-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Type Description"
+  func Bind
+    HRESULT
+    szName LPOLESTR
+    lHashVal ULONG
+    wFlags WORD
+    ppTInfo ITypeInfo**
+    pDescKind DESCKIND*
+    pBindPtr BINDPTR*
+
+  func BindType
+    HRESULT
+    szName LPOLESTR
+    lHashVal ULONG
+    ppTInfo ITypeInfo**
+    ppTComp ITypeComp**
+
+

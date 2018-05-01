@@ -1,0 +1,53 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDocObjectService base=IUnknown id={3050f801-98b5-11cf-bb82-00aa00bdce0b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/Advanced Hosting Interfaces"
+  func FireBeforeNavigate2
+    HRESULT
+    pDispatch IDispatch*
+    lpszUrl LPCWSTR
+    dwFlags DWORD
+    lpszFrameName LPCWSTR
+    pPostData BYTE*
+    cbPostData DWORD
+    lpszHeaders LPCWSTR
+    fPlayNavSound BOOL
+    pfCancel BOOL*
+
+  func FireNavigateComplete2
+    HRESULT
+    pHTMLWindow2 IHTMLWindow2*
+    dwFlags DWORD
+
+  func FireDownloadBegin
+    HRESULT
+
+  func FireDownloadComplete
+    HRESULT
+
+  func FireDocumentComplete
+    HRESULT
+    pHTMLWindow IHTMLWindow2*
+    dwFlags DWORD
+
+  func UpdateDesktopComponent
+    HRESULT
+    pHTMLWindow IHTMLWindow2*
+
+  func GetPendingUrl
+    HRESULT
+    pbstrPendingUrl BSTR*
+
+  func ActiveElementChanged
+    HRESULT
+    pHTMLElement IHTMLElement*
+
+  func GetUrlSearchComponent
+    HRESULT
+    pbstrSearch BSTR*
+
+  func IsErrorUrl
+    HRESULT
+    lpszUrl LPCWSTR
+    pfIsError BOOL*
+
+

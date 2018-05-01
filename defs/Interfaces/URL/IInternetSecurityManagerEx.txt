@@ -1,0 +1,17 @@
+include Interfaces\URL\IInternetSecurityManager.txt
+include Headers\URL.h.txt
+
+ingterface IInternetSecurityManagerEx base=IInternetSecurityManager id={F164EDF1-CC7C-4f0d-9A94-34222625C393} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func ProcessUrlActionEx
+    HRESULT
+    pwszUrl LPCWSTR
+    dwAction [URLACTION_FLAGS]
+    pPolicy BYTE* postLength=cbPolicy
+    cbPolicy DWORD
+    pContext BYTE* length=cbContext
+    cbContext DWORD
+    dwFlags PUAF
+    dwReserved DWORD
+    pdwOutFlags PUAFOUT*
+
+

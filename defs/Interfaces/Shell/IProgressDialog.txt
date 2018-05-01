@@ -1,0 +1,53 @@
+include Interfaces\IUnknown.txt
+
+ingterface IProgressDialog base=IUnknown id={EBBC7C04-315E-11d2-B62F-006097DF5BD4} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func StartProgressDialog
+    HRESULT
+    hwndParent HWND
+    punkEnableModless IUnknown*
+    dwFlags DWORD
+    pvResevered LPCVOID
+
+  func StopProgressDialog
+    HRESULT
+
+  func SetTitle
+    HRESULT
+    pwzTitle LPCWSTR
+
+  func SetAnimation
+    HRESULT
+    hInstAnimation HINSTANCE
+    idAnimation UINT
+
+  func HasUserCancelled
+    BOOL
+
+  func SetProgress
+    HRESULT
+    dwCompleted DWORD
+    dwTotal DWORD
+
+  func SetProgress64
+    HRESULT
+    ullCompleted ULONGLONG
+    ullTotal ULONGLONG
+
+  func SetLine
+    HRESULT
+    dwLineNum DWORD
+    pwzString LPCWSTR
+    fCompactPath BOOL
+    pvResevered LPCVOID
+
+  func SetCancelMsg
+    HRESULT
+    pwzCancelMsg LPCWSTR
+    pvResevered LPCVOID
+
+  func Timer
+    HRESULT
+    dwTimerAction DWORD
+    pvResevered LPCVOID
+
+

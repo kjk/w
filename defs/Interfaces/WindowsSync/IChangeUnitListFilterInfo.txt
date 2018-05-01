@@ -1,0 +1,20 @@
+include Interfaces\WindowsSync\ISyncFilterInfo.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IChangeUnitListFilterInfo base=ISyncFilterInfo id={f2837671-0bdf-43fa-b502-232375fb50c2} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func Initialize
+    HRESULT
+    ppbChangeUnitIds "const BYTE*const*" count=dwChangeUnitCount
+    dwChangeUnitCount DWORD
+
+  func GetChangeUnitIdCount
+    HRESULT
+    pdwChangeUnitIdCount DWORD*
+
+  func GetChangeUnitId
+    HRESULT
+    dwChangeUnitIdIndex DWORD
+    pbChangeUnitId BYTE* postCount=pcbIdSize
+    pcbIdSize DWORD*
+
+

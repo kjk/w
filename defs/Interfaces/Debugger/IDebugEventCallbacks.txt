@@ -1,0 +1,84 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDebugEventCallbacks base=IUnknown id={337be28b-5036-4d72-b6bf-c45fbb9f2eaa} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Callback COM Interfaces"
+  func GetInterestMask
+    HRESULT
+    Mask [PDEBUG_EVENT_FLAGS]
+
+  func Breakpoint
+    HRESULT
+    Bp PDEBUG_BREAKPOINT
+
+  func Exception
+    HRESULT
+    Exception PEXCEPTION_RECORD64
+    FirstChance ULONG
+
+  func CreateThread
+    HRESULT
+    Handle ULONG64
+    DataOffset ULONG64
+    StartOffset ULONG64
+
+  func ExitThread
+    HRESULT
+    ExitCode ULONG
+
+  func CreateProcess
+    HRESULT
+    ImageFileHandle ULONG64
+    Handle ULONG64
+    BaseOffset ULONG64
+    ModuleSize ULONG
+    ModuleName PCSTR
+    ImageName PCSTR
+    CheckSum ULONG
+    TimeDateStamp ULONG
+    InitialThreadHandle ULONG64
+    ThreadDataOffset ULONG64
+    StartOffset ULONG64
+
+  func ExitProcess
+    HRESULT
+    ExitCode ULONG
+
+  func LoadModule
+    HRESULT
+    ImageFileHandle ULONG64
+    BaseOffset ULONG64
+    ModuleSize ULONG
+    ModuleName PCSTR
+    ImageName PCSTR
+    CheckSum ULONG
+    TimeDateStamp ULONG
+
+  func UnloadModule
+    HRESULT
+    ImageBaseName PCSTR
+    BaseOffset ULONG64
+
+  func SystemError
+    HRESULT
+    Error ULONG
+    Level ULONG
+
+  func SessionStatus
+    HRESULT
+    Status [DEBUG_SESSION_STATUS]
+
+  func ChangeDebuggeeState
+    HRESULT
+    Flags [DEBUG_CDS_FLAGS]
+    Argument ULONG64
+
+  func ChangeEngineState
+    HRESULT
+    Flags [DEBUG_CES_FLAGS]
+    Argument ULONG64
+
+  func ChangeSymbolState
+    HRESULT
+    Flags [DEBUG_CSS_FLAGS]
+    Argument ULONG64
+
+

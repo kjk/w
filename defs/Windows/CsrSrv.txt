@@ -1,0 +1,187 @@
+include Headers\windows.h.txt
+include Headers\native.h.txt
+
+dll CsrSrv.dll callingConvention=STDCALL errorFunc=NTSTATUS onlineHelp=MSDN
+category "NT Native/Client-Server (CSR)"
+alias PCSR_THREAD LPVOID
+
+pointer PCSR_THREAD* PCSR_THREAD
+
+alias PCSR_API_MESSAGE LPVOID
+
+alias PCSR_NT_SESSION LPVOID
+
+alias PCSR_PROCESS LPVOID
+
+pointer PCSR_PROCESS* PCSR_PROCESS
+
+alias CSR_WAIT_FUNCTION LPVOID
+
+func CsrAddStaticServerThread
+  success NotEqual=0
+  PCSR_THREAD
+  hThread HANDLE
+  ClientId PCLIENT_ID
+  ThreadFlags ULONG
+
+func CsrCallServerFromServer
+  NTSTATUS
+  ReceiveMsg PCSR_API_MESSAGE
+  ReplyMsg PCSR_API_MESSAGE
+
+func CsrConnectToUser
+  success NotEqual=0
+  PCSR_THREAD
+
+func CsrCreateProcess
+  NTSTATUS
+  hProcess HANDLE
+  hThread HANDLE
+  ClientId PCLIENT_ID
+  NtSession PCSR_NT_SESSION
+  Flags ULONG
+  DebugCid PCLIENT_ID
+
+func CsrCreateRemoteThread
+  NTSTATUS
+  hThread HANDLE
+  ClientId PCLIENT_ID
+
+func CsrCreateWait
+  BOOLEAN
+  WaitList PLIST_ENTRY
+  WaitFunction CSR_WAIT_FUNCTION
+  CsrWaitThread PCSR_THREAD
+  WaitApiMessage PCSR_API_MESSAGE
+  WaitContext PVOID
+  UserWaitList PLIST_ENTRY
+
+func CsrDebugProcess
+  NTSTATUS
+  CsrProcess PCSR_PROCESS
+
+func CsrDebugProcessStop
+  NTSTATUS
+  CsrProcess PCSR_PROCESS
+
+func CsrDereferenceProcess
+  VOID
+  CsrProcess PCSR_PROCESS
+
+func CsrDereferenceThread
+  VOID
+  CsrThread PCSR_THREAD
+
+func CsrDereferenceWait
+  VOID
+  WaitList PLIST_ENTRY
+
+func CsrDestroyProcess
+  NTSTATUS
+  Cid PCLIENT_ID
+  ExitStatus NTSTATUS
+
+func CsrDestroyThread
+  NTSTATUS
+  Cid PCLIENT_ID
+
+func CsrExecServerThread
+  NTSTATUS
+  ThreadHandler PVOID
+  Flags ULONG
+
+func CsrGetProcessLuid
+  NTSTATUS
+  hProcess HANDLE
+  Luid PLUID
+
+func CsrImpersonateClient
+  BOOLEAN
+  CsrThread PCSR_THREAD
+
+func CsrLockProcessByClientId
+  NTSTATUS
+  Pid HANDLE
+  CsrProcess PCSR_PROCESS*
+
+func CsrLockThreadByClientId
+  NTSTATUS
+  Tid HANDLE
+  CsrThread PCSR_THREAD*
+
+func CsrMoveSatisfiedWait
+  VOID
+  NewEntry PLIST_ENTRY
+  WaitList PLIST_ENTRY
+
+func CsrNotifyWait
+  BOOLEAN
+  WaitList PLIST_ENTRY
+  WaitType ULONG
+  WaitArgument1 PVOID
+  WaitArgument2 PVOID
+
+func CsrPopulateDosDevices
+  VOID
+
+func CsrLockedReferenceProcess
+  VOID
+  CsrProcess PCSR_PROCESS
+
+func CsrQueryApiPort
+  success NotEqual=0
+  HANDLE
+
+func CsrReferenceThread
+  VOID
+  CsrThread PCSR_THREAD
+
+func CsrRevertToSelf
+  BOOLEAN
+
+func CsrServerInitialization
+  NTSTATUS
+  ArgumentCount ULONG
+  Arguments LPVOID
+
+func CsrSetBackgroundPriority
+  VOID
+  CsrProcess PCSR_PROCESS
+
+func CsrSetCallingSpooler
+  VOID
+  Reserved ULONG
+
+func CsrSetForegroundPriority
+  VOID
+  CsrProcess PCSR_PROCESS
+
+func CsrShutdownProcesses
+  NTSTATUS
+  CallerLuid PLUID
+  Flags ULONG
+
+func CsrUnhandledExceptionFilter
+  LONG
+  ExceptionInfo PEXCEPTION_POINTERS
+
+func CsrUnlockProcess
+  NTSTATUS
+  CsrProcess PCSR_PROCESS
+
+func CsrUnlockThread
+  NTSTATUS
+  CsrThread PCSR_THREAD
+
+func CsrValidateMessageBuffer
+  BOOLEAN
+  ApiMessage PCSR_API_MESSAGE
+  Buffer PVOID* length=ArgumentSize
+  ArgumentSize ULONG
+  ArgumentCount ULONG
+
+func CsrValidateMessageString
+  BOOLEAN
+  ApiMessage PCSR_API_MESSAGE
+  MessageString LPWSTR*
+

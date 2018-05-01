@@ -1,0 +1,97 @@
+include Headers\windows.h.txt
+
+dll Rasdlg.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Routing and Remote Access Service/Remote Access/Remote Access Service"
+alias RASPBDLGFUNC LPVOID
+
+flag [RASDDFLAG] DWORD display=DWORD
+  RASDDFLAG_PositionDlg 0x00000001
+  RASDDFLAG_NoPrompt    0x00000002
+  RASDDFLAG_LinkFailure 0x80000000
+
+struct RASENTRYDLG pack=4
+  dwSize DWORD
+  hwndOwner HWND
+  dwFlags [RASDDFLAG]
+  xDlg LONG
+  yDlg LONG
+  szEntry "TCHAR [RAS_MaxEntryName + 1]"
+  dwError DWORD
+  reserved ULONG_PTR
+  reserved2 ULONG_PTR
+
+pointer LPRASENTRYDLG RASENTRYDLG
+
+flag [RASMDFLAG] DWORD display=DWORD
+  RASMDFLAG_PositionDlg    0x00000001
+  RASMDFLAG_UpdateDefaults 0x80000000
+
+enum [RASMDPAGE] DWORD display=DWORD
+  RASMDPAGE_Status      0
+  RASMDPAGE_Summary     1
+  RASMDPAGE_Preferences 2
+
+struct RASMONITORDLG pack=4
+  dwSize DWORD
+  hwndOwner HWND
+  dwFlags [RASMDFLAG]
+  dwStartPage [RASMDPAGE]
+  xDlg LONG
+  yDlg LONG
+  dwError DWORD
+  reserved ULONG_PTR
+  reserved2 ULONG_PTR
+
+pointer LPRASMONITORDLG RASMONITORDLG
+
+struct RASDIALDLG pack=4
+  dwSize DWORD
+  hwndOwner HWND
+  dwFlags DWORD
+  xDlg LONG
+  yDlg LONG
+  dwSubEntry DWORD
+  dwError DWORD
+  reserved ULONG_PTR
+  reserved2 ULONG_PTR
+
+pointer LPRASDIALDLG RASDIALDLG
+
+struct RASPBDLG pack=4
+  dwSize DWORD
+  hwndOwner HWND
+  dwFlags DWORD
+  xDlg LONG
+  yDlg LONG
+  dwCallbackId ULONG_PTR
+  pCallback RASPBDLGFUNC
+  dwError DWORD
+  reserved ULONG_PTR
+  reserved2 ULONG_PTR
+
+pointer LPRASPBDLG RASPBDLG
+
+func RasDialDlg bothCharset
+  BOOL
+  lpszPhonebook LPTSTR
+  lpszEntry LPTSTR
+  lpszPhoneNumber LPTSTR
+  lpInfo LPRASDIALDLG
+
+func RasEntryDlg bothCharset
+  BOOL
+  lpszPhonebook LPTSTR
+  lpszEntry LPTSTR
+  lpInfo LPRASENTRYDLG
+
+func RasMonitorDlg bothCharset
+  BOOL
+  lpszDeviceName LPTSTR
+  lpInfo LPRASMONITORDLG
+
+func RasPhonebookDlg bothCharset
+  BOOL
+  lpszPhonebook LPTSTR
+  lpszEntry LPTSTR
+  lpInfo LPRASPBDLG
+

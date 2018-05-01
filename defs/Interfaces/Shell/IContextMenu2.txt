@@ -1,0 +1,10 @@
+include Interfaces\Shell\IContextMenu.txt
+
+ingterface IContextMenu2 base=IContextMenu id={000214f4-0000-0000-c000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func HandleMenuMsg
+    HRESULT
+    uMsg UINT
+    wParam WPARAM
+    lParam LPARAM
+
+

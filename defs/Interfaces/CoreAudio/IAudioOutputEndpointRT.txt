@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioOutputEndpointRT base=IUnknown id={8FA906E4-C31C-4e31-932E-19A66385E9AA} errorFunc=HRESULT onlineHelp=MSDN category="System Services/Remote Desktop Services/AudioEndpoint"
+  func GetOutputDataPointer
+    success NotEqual=0
+    UINT_PTR
+    u32FrameCount UINT32
+    pAeTimeStamp AE_CURRENT_POSITION*
+
+  func ReleaseOutputDataPointer
+    void
+    pConnectionProperty "const APO_CONNECTION_PROPERTY*"
+
+  func PulseEndpoint
+    void
+
+

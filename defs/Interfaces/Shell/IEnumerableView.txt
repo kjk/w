@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumerableView base=IUnknown id={8C8BF236-1AEC-495f-9894-91D57C3C686F} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetEnumReadyCallback
+    HRESULT
+    percb IEnumReadyCallback*
+
+  func CreateEnumIDListFromContents
+    HRESULT
+    pidlFolder PCIDLIST_ABSOLUTE
+    dwEnumFlags DWORD
+    ppEnumIDList IEnumIDList**
+
+

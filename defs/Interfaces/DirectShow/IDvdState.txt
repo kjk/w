@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDvdState base=IUnknown id={86303d6d-1c4a-4087-ab42-f711167048ef} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetDiscID
+    HRESULT
+    pullUniqueID ULONGLONG*
+
+  func GetParentalLevel
+    HRESULT
+    pulParentalLevel ULONG*
+
+

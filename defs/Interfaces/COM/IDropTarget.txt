@@ -1,0 +1,28 @@
+include Interfaces\IUnknown.txt
+include Headers\gdi.h.txt
+
+ingterface IDropTarget base=IUnknown id={00000122-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func DragEnter
+    HRESULT
+    pDataObj IDataObject*
+    grfKeyState DWORD
+    pt POINTL
+    pdwEffect DWORD*
+
+  func DragOver
+    HRESULT
+    grfKeyState DWORD
+    pt POINTL
+    pdwEffect DWORD*
+
+  func DragLeave
+    HRESULT
+
+  func Drop
+    HRESULT
+    pDataObj IDataObject*
+    grfKeyState DWORD
+    pt POINTL
+    pdwEffect DWORD*
+
+

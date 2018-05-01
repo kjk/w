@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFileSinkFilter base=IUnknown id={a2104830-7c70-11cf-8bce-00aa00a3f1a6} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetFileName
+    HRESULT
+    pszFileName LPCOLESTR
+    pmt "const AM_MEDIA_TYPE*"
+
+  func GetCurFile
+    HRESULT
+    ppszFileName LPOLESTR*
+    pmt AM_MEDIA_TYPE*
+
+

@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3DVertexDeclaration9 base=IUnknown id={DD13C59C-36FA-4098-A8FB-C7ED39DC8546} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func GetDevice
+    HRESULT
+    ppDevice IDirect3DDevice9**
+
+  func GetDeclaration
+    HRESULT
+    pElement D3DVERTEXELEMENT9* postCount=pNumElements
+    pNumElements UINT*
+
+

@@ -1,0 +1,12 @@
+include Interfaces\DirectX\DXGI\IDXGIDevice.txt
+
+ingterface IDXGIDevice1 base=IDXGIDevice id={77db970f-6276-48ba-ba28-070143b4392c} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func SetMaximumFrameLatency
+    HRESULT
+    MaxLatency UINT
+
+  func GetMaximumFrameLatency
+    HRESULT
+    pMaxLatency UINT*
+
+

@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface ICurrentWorkingDirectory base=IUnknown id={91956D21-9276-11d1-921A-006097DF5BD4} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetDirectory
+    HRESULT
+    pwzPath LPWSTR
+    cchSize DWORD
+
+  func SetDirectory
+    HRESULT
+    pwzPath LPCWSTR
+
+

@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IContextMenuCB base=IUnknown id={3409E930-5A39-11d1-83FA-00A0C90DC849} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func CallBack
+    HRESULT
+    psf IShellFolder*
+    hwndOwner HWND
+    pdtobj IDataObject*
+    uMsg UINT
+    wParam WPARAM
+    lParam LPARAM
+
+

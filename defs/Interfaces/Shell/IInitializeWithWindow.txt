@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInitializeWithWindow base=IUnknown id={3E68D4BD-7135-4D10-8018-9FB6D9F33FA1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    hwnd HWND
+
+

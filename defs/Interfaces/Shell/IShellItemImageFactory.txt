@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellItemImageFactory base=IUnknown id={bcc18b79-ba16-442f-80c4-8a59c30c463b} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetImage
+    HRESULT
+    size SIZE
+    flags SIIGBF
+    phbm HBITMAP*
+
+

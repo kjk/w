@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDataAdviseHolder base=IUnknown id={00000110-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func Advise
+    HRESULT
+    pDataObject IDataObject*
+    pFetc FORMATETC*
+    advf ADVF
+    pAdvise IAdviseSink*
+    pdwConnection DWORD*
+
+  func Unadvise
+    HRESULT
+    dwConnection DWORD
+
+  func EnumAdvise
+    HRESULT
+    ppenumAdvise IEnumSTATDATA**
+
+  func SendOnDataChange
+    HRESULT
+    pDataObject IDataObject*
+    dwReserved DWORD
+    advf ADVF
+
+

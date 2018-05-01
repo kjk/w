@@ -1,0 +1,102 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteTextFormat base=IUnknown id={9c906818-31d7-4fd3-a151-7c5e225db55a} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func SetTextAlignment
+    HRESULT
+    textAlignment DWRITE_TEXT_ALIGNMENT
+
+  func SetParagraphAlignment
+    HRESULT
+    paragraphAlignment DWRITE_PARAGRAPH_ALIGNMENT
+
+  func SetWordWrapping
+    HRESULT
+    wordWrapping DWRITE_WORD_WRAPPING
+
+  func SetReadingDirection
+    HRESULT
+    readingDirection DWRITE_READING_DIRECTION
+
+  func SetFlowDirection
+    HRESULT
+    flowDirection DWRITE_FLOW_DIRECTION
+
+  func SetIncrementalTabStop
+    HRESULT
+    incrementalTabStop FLOAT
+
+  func SetTrimming
+    HRESULT
+    trimmingOptions "DWRITE_TRIMMING const*"
+    trimmingSign IDWriteInlineObject*
+
+  func SetLineSpacing
+    HRESULT
+    lineSpacingMethod DWRITE_LINE_SPACING_METHOD
+    lineSpacing FLOAT
+    baseline FLOAT
+
+  func GetTextAlignment
+    DWRITE_TEXT_ALIGNMENT
+
+  func GetParagraphAlignment
+    DWRITE_PARAGRAPH_ALIGNMENT
+
+  func GetWordWrapping
+    DWRITE_WORD_WRAPPING
+
+  func GetReadingDirection
+    DWRITE_READING_DIRECTION
+
+  func GetFlowDirection
+    DWRITE_FLOW_DIRECTION
+
+  func GetIncrementalTabStop
+    FLOAT
+
+  func GetTrimming
+    HRESULT
+    trimmingOptions DWRITE_TRIMMING*
+    trimmingSign IDWriteInlineObject**
+
+  func GetLineSpacing
+    HRESULT
+    lineSpacingMethod DWRITE_LINE_SPACING_METHOD*
+    lineSpacing FLOAT*
+    baseline FLOAT*
+
+  func GetFontCollection
+    HRESULT
+    fontCollection IDWriteFontCollection**
+
+  func GetFontFamilyNameLength
+    success NotEqual=0
+    UINT32
+
+  func GetFontFamilyName
+    HRESULT
+    fontFamilyName WCHAR* outputOnly
+    nameSize UINT32
+
+  func GetFontWeight
+    DWRITE_FONT_WEIGHT
+
+  func GetFontStyle
+    DWRITE_FONT_STYLE
+
+  func GetFontStretch
+    DWRITE_FONT_STRETCH
+
+  func GetFontSize
+    FLOAT
+
+  func GetLocaleNameLength
+    UINT32
+
+  func GetLocaleName
+    HRESULT
+    localeName WCHAR* outputOnly
+    nameSize UINT32
+
+

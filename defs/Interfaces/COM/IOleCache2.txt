@@ -1,0 +1,14 @@
+include Interfaces\COM\IOleCache.txt
+
+ingterface IOleCache2 base=IOleCache id={00000128-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func UpdateCache
+    HRESULT
+    pDataObject LPDATAOBJECT
+    grfUpdf DWORD
+    pReserved LPVOID
+
+  func DiscardCache
+    HRESULT
+    dwDiscardOptions DWORD
+
+

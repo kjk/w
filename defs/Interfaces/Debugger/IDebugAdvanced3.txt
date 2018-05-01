@@ -1,0 +1,39 @@
+include Interfaces\Debugger\IDebugAdvanced2.txt
+
+ingterface IDebugAdvanced3 base=IDebugAdvanced2 id={cba4abb4-84c4-444d-87ca-a04e13286739} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetSourceFileInformationWide
+    HRESULT
+    Which [DEBUG_SRCFILE_TYPE]
+    SourceFile PWSTR
+    Arg64 ULONG64
+    Arg32 ULONG
+    Buffer PVOID
+    BufferSize ULONG
+    InfoSize PULONG
+
+  func FindSourceFileAndTokenWide
+    HRESULT
+    StartElement ULONG
+    ModAddr ULONG64
+    File PCWSTR
+    Flags [DEBUG_FIND_SOURCE_FLAGS]
+    FileToken PVOID
+    FileTokenSize ULONG
+    FoundElement PULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    FoundSize PULONG
+
+  func GetSymbolInformationWide
+    HRESULT
+    Which [DEBUG_SYMINFO_TYPE]
+    Arg64 ULONG64
+    Arg32 ULONG
+    Buffer PVOID
+    BufferSize ULONG
+    InfoSize PULONG
+    StringBuffer PWSTR
+    StringBufferSize ULONG
+    StringSize PULONG
+
+

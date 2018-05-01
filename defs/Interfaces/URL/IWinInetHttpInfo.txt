@@ -1,0 +1,13 @@
+include Interfaces\URL\IWinInetInfo.txt
+include Headers\URL.h.txt
+
+ingterface IWinInetHttpInfo base=IWinInetInfo id={79eac9d8-bafa-11ce-8c82-00aa004ba90b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func QueryInfo
+    HRESULT
+    dwOption [HTTP_QUERY_FLAGS]
+    pBuffer LPVOID postLength=pcbBuf
+    pcbBuf DWORD*
+    pdwFlags DWORD*
+    pdwReserved DWORD*
+
+

@@ -1,0 +1,14 @@
+include Interfaces\Shell\IPersistSerializedPropStorage.txt
+
+ingterface IPersistSerializedPropStorage2 base=IPersistSerializedPropStorage id={77effa68-4f98-4366-ba72-573b3d880571} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetPropertyStorageSize
+    HRESULT
+    pcb DWORD*
+
+  func GetPropertyStorageBuffer
+    HRESULT
+    psps SERIALIZEDPROPSTORAGE*
+    cb DWORD
+    pcbWritten DWORD*
+
+

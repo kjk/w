@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPinConnection base=IUnknown id={4a9a62d3-27d4-403d-91e9-89f540e55534} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func DynamicQueryAccept
+    HRESULT
+    pmt "const AM_MEDIA_TYPE*"
+
+  func NotifyEndOfStream
+    HRESULT
+    hNotifyEvent HANDLE
+
+  func IsEndPin
+    HRESULT
+
+  func DynamicDisconnect
+    HRESULT
+
+

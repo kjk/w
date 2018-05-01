@@ -1,0 +1,33 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteGdiInterop base=IUnknown id={1edd9491-9853-4299-898f-6432983b6f3a} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func CreateFontFromLOGFONT
+    HRESULT
+    logFont "LOGFONTW const*"
+    font IDWriteFont**
+
+  func ConvertFontToLOGFONT
+    HRESULT
+    font IDWriteFont*
+    logFont LOGFONTW*
+    isSystemFont BOOL*
+
+  func ConvertFontFaceToLOGFONT
+    HRESULT
+    font IDWriteFontFace*
+    logFont LOGFONTW*
+
+  func CreateFontFaceFromHdc
+    HRESULT
+    hdc HDC
+    fontFace IDWriteFontFace**
+
+  func CreateBitmapRenderTarget
+    HRESULT
+    hdc HDC
+    width UINT32
+    height UINT32
+    renderTarget IDWriteBitmapRenderTarget**
+
+

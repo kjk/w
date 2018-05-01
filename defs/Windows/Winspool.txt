@@ -1,0 +1,829 @@
+include Headers\windows.h.txt
+include Headers\registry.h.txt
+
+dll Winspool.drv callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Documents and Printing/Printing/Print Spooler"
+interface IPrintAsyncNotifyCallback
+
+interface IPrintAsyncNotifyChannel
+
+alias PCORE_PRINTER_DRIVER LPVOID
+
+alias PrintAsyncNotificationType* GUID*
+
+flag [PrinterNotifyType] WORD display=WORD
+  PRINTER_NOTIFY_TYPE 0x00
+  JOB_NOTIFY_TYPE     0x01
+  SERVER_NOTIFY_TYPE  0x02
+
+struct [PRINTER_NOTIFY_INFO_DATA_u_s] display=struct
+  cbBuf DWORD
+  pBuf LPVOID count=cbBuf
+
+union [PRINTER_NOTIFY_INFO_DATA_u] display=union
+  adwData "DWORD [2]"
+  Data [PRINTER_NOTIFY_INFO_DATA_u_s]
+
+struct PRINTER_NOTIFY_INFO_DATA
+  Type [PrinterNotifyType]
+  Field WORD
+  Reserved DWORD
+  Id DWORD
+  NotifyData [PRINTER_NOTIFY_INFO_DATA_u]
+
+array "PRINTER_NOTIFY_INFO_DATA [1]" base=PRINTER_NOTIFY_INFO_DATA count=1
+
+flag [PRINTER_NOTIFY_INFO_FLAGS] DWORD display=DWORD
+  PRINTER_NOTIFY_INFO_DISCARDED 0x01
+
+struct PRINTER_NOTIFY_INFO
+  Version DWORD
+  Flags [PRINTER_NOTIFY_INFO_FLAGS]
+  Count DWORD
+  aData "PRINTER_NOTIFY_INFO_DATA [1]" count=Count
+
+pointer PPRINTER_NOTIFY_INFO PRINTER_NOTIFY_INFO
+
+flag PRINTER_OPTION_FLAGS DWORD display=DWORD
+  PRINTER_OPTION_NO_CACHE       1
+  PRINTER_OPTION_CACHE          2
+  PRINTER_OPTION_CLIENT_CHANGE  4
+  PRINTER_OPTION_NO_CLIENT_DATA 8
+
+struct PRINTER_OPTIONS
+  cbSize UINT
+  dwFlags PRINTER_OPTION_FLAGS
+
+pointer PPRINTER_OPTIONS PRINTER_OPTIONS
+
+flag [PRINTER_ACCESS_MASK] ACCESS_MASK display=ACCESS_MASK
+  PRINTER_ACCESS_ADMINISTER 0x00000004
+  PRINTER_ACCESS_USE        0x00000008
+  PRINTER_ALL_ACCESS        0x000F000C
+
+struct PRINTER_DEFAULTS
+  pDatatype LPTSTR
+  pDevMode LPDEVMODE
+  DesiredAccess [PRINTER_ACCESS_MASK]
+
+pointer LPPRINTER_DEFAULTS PRINTER_DEFAULTS
+
+enum [DeviceCapability] WORD display=WORD
+  DC_FIELDS            1
+  DC_PAPERS            2
+  DC_PAPERSIZE         3
+  DC_MINEXTENT         4
+  DC_MAXEXTENT         5
+  DC_BINS              6
+  DC_DUPLEX            7
+  DC_SIZE              8
+  DC_EXTRA             9
+  DC_VERSION           10
+  DC_DRIVER            11
+  DC_BINNAMES          12
+  DC_ENUMRESOLUTIONS   13
+  DC_FILEDEPENDENCIES  14
+  DC_TRUETYPE          15
+  DC_PAPERNAMES        16
+  DC_ORIENTATION       17
+  DC_COPIES            18
+  DC_BINADJUST         19
+  DC_EMF_COMPLIANT     20
+  DC_DATATYPE_PRODUCED 21
+  DC_COLLATE           22
+  DC_MANUFACTURER      23
+  DC_MODEL             24
+  DC_PERSONALITY       25
+  DC_PRINTRATE         26
+  DC_PRINTRATEUNIT     27
+  DC_PRINTERMEM        28
+  DC_MEDIAREADY        29
+  DC_STAPLE            30
+  DC_PRINTRATEPPM      31
+  DC_COLORDEVICE       32
+  DC_NUP               33
+  DC_MEDIATYPENAMES    34
+  DC_MEDIATYPES        35
+
+flag [EnumPrintersFlags] DWORD display=DWORD
+  PRINTER_ENUM_DEFAULT     0x00000001
+  PRINTER_ENUM_LOCAL       0x00000002
+  PRINTER_ENUM_CONNECTIONS 0x00000004
+  PRINTER_ENUM_FAVORITE    0x00000004
+  PRINTER_ENUM_NAME        0x00000008
+  PRINTER_ENUM_REMOTE      0x00000010
+  PRINTER_ENUM_SHARED      0x00000020
+  PRINTER_ENUM_NETWORK     0x00000040
+  PRINTER_ENUM_EXPAND      0x00004000
+  PRINTER_ENUM_CONTAINER   0x00008000
+  PRINTER_ENUM_ICON1       0x00010000
+  PRINTER_ENUM_ICON2       0x00020000
+  PRINTER_ENUM_ICON3       0x00040000
+  PRINTER_ENUM_ICON4       0x00080000
+  PRINTER_ENUM_ICON5       0x00100000
+  PRINTER_ENUM_ICON6       0x00200000
+  PRINTER_ENUM_ICON7       0x00400000
+  PRINTER_ENUM_ICON8       0x00800000
+  PRINTER_ENUM_ICONMASK    0x00ff0000
+  PRINTER_ENUM_HIDE        0x01000000
+
+flag [DocumentMode] DWORD display=DWORD
+  DM_OUT_DEFAULT 1
+  DM_OUT_BUFFER  2
+  DM_IN_PROMPT   4
+  DM_IN_BUFFER   8
+
+flag [PrinterChangeFlags] DWORD display=DWORD
+  PRINTER_CHANGE_ADD_PRINTER               0x00000001
+  PRINTER_CHANGE_SET_PRINTER               0x00000002
+  PRINTER_CHANGE_DELETE_PRINTER            0x00000004
+  PRINTER_CHANGE_FAILED_CONNECTION_PRINTER 0x00000008
+  PRINTER_CHANGE_PRINTER                   0x000000FF
+  PRINTER_CHANGE_ADD_JOB                   0x00000100
+  PRINTER_CHANGE_SET_JOB                   0x00000200
+  PRINTER_CHANGE_DELETE_JOB                0x00000400
+  PRINTER_CHANGE_WRITE_JOB                 0x00000800
+  PRINTER_CHANGE_JOB                       0x0000FF00
+  PRINTER_CHANGE_ADD_FORM                  0x00010000
+  PRINTER_CHANGE_SET_FORM                  0x00020000
+  PRINTER_CHANGE_DELETE_FORM               0x00040000
+  PRINTER_CHANGE_FORM                      0x00070000
+  PRINTER_CHANGE_ADD_PORT                  0x00100000
+  PRINTER_CHANGE_CONFIGURE_PORT            0x00200000
+  PRINTER_CHANGE_DELETE_PORT               0x00400000
+  PRINTER_CHANGE_PORT                      0x00700000
+  PRINTER_CHANGE_ADD_PRINT_PROCESSOR       0x01000000
+  PRINTER_CHANGE_DELETE_PRINT_PROCESSOR    0x04000000
+  PRINTER_CHANGE_PRINT_PROCESSOR           0x07000000
+  PRINTER_CHANGE_ADD_PRINTER_DRIVER        0x10000000
+  PRINTER_CHANGE_SET_PRINTER_DRIVER        0x20000000
+  PRINTER_CHANGE_DELETE_PRINTER_DRIVER     0x40000000
+  PRINTER_CHANGE_PRINTER_DRIVER            0x70000000
+  PRINTER_CHANGE_ALL                       0x7777FFFF
+  PRINTER_CHANGE_TIMEOUT                   0x80000000
+
+pointer [PrinterChangeFlags*] [PrinterChangeFlags] display=PDWORD
+
+enum [JobControl] DWORD display=DWORD
+  JOB_CONTROL_PAUSE             1
+  JOB_CONTROL_RESUME            2
+  JOB_CONTROL_CANCEL            3
+  JOB_CONTROL_RESTART           4
+  JOB_CONTROL_DELETE            5
+  JOB_CONTROL_SENT_TO_PRINTER   6
+  JOB_CONTROL_LAST_PAGE_EJECTED 7
+  JOB_CONTROL_RETAIN            8
+  JOB_CONTROL_RELEASE           9
+
+enum [PrinterControl] DWORD display=DWORD
+  PRINTER_CONTROL_PAUSE      1
+  PRINTER_CONTROL_RESUME     2
+  PRINTER_CONTROL_PURGE      3
+  PRINTER_CONTROL_SET_STATUS 4
+
+enum EPrintXPSJobOperation UINT
+  kJobProduction  1
+  kJobConsumption 2
+
+enum EPrintXPSJobProgress UINT
+  kAddingDocumentSequence 0
+  kDocumentSequenceAdded  1
+  kAddingFixedDocument    2
+  kFixedDocumentAdded     3
+  kAddingFixedPage        4
+  kFixedPageAdded         5
+  kResourceAdded          6
+  kFontAdded              7
+  kImageAdded             8
+  kXpsDocumentCommitted   9
+
+enum PrintAsyncNotifyUserFilter UINT
+  kPerUser  0
+  kAllUsers 1
+
+enum PrintAsyncNotifyConversationStyle UINT
+  kBiDirectional  0
+  kUniDirectional 1
+
+struct PRINTER_NOTIFY_OPTIONS_TYPE
+  Type [PrinterNotifyType]
+  Reserved0 WORD
+  Reserved1 DWORD
+  Reserved2 DWORD
+  Count DWORD
+  pFields PWORD count=Count
+
+pointer PPRINTER_NOTIFY_OPTIONS_TYPE PRINTER_NOTIFY_OPTIONS_TYPE
+
+flag [PrinterNotifyFlags] DWORD display=DWORD
+  PRINTER_NOTIFY_OPTIONS_REFRESH 0x01
+
+struct PRINTER_NOTIFY_OPTIONS
+  Version DWORD
+  Flags [PrinterNotifyFlags]
+  Count DWORD
+  pTypes PPRINTER_NOTIFY_OPTIONS_TYPE count=Count
+
+pointer PPRINTER_NOTIFY_OPTIONS PRINTER_NOTIFY_OPTIONS
+
+func AddJob bothCharset
+  BOOL
+  hPrinter HANDLE
+  Level DWORD
+  pData LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+
+func AddMonitor bothCharset
+  BOOL
+  pName LPTSTR
+  Level DWORD
+  pMonitors LPBYTE
+
+func AddPrinter bothCharset
+  success NotEqual=0
+  HANDLE
+  pName LPTSTR*
+  Level DWORD
+  pPrinter LPBYTE
+
+func AddPrinterConnection bothCharset
+  BOOL
+  pName LPTSTR
+
+func AddPrinterConnection2 bothCharset
+  BOOL
+  hWnd HWND
+  pszName LPCTSTR
+  dwLevel DWORD
+  pConnectionInfo PVOID
+
+func AddPrinterDriver bothCharset
+  BOOL
+  pName LPTSTR
+  Level DWORD
+  pDriverInfo LPBYTE
+
+func AddPrinterDriverEx bothCharset
+  BOOL
+  pName LPTSTR
+  Level DWORD
+  pDriverInfo LPBYTE
+  dwFileCopyFlags DWORD
+
+func AddPrintProcessor bothCharset
+  BOOL
+  pName LPTSTR
+  pEnvironment LPTSTR
+  pPathName LPTSTR
+  pPrintProcessorName LPTSTR
+
+func AddPrintProvidor bothCharset
+  BOOL
+  pName LPTSTR
+  Level DWORD
+  pProviderInfo LPBYTE
+
+func ConfigurePort bothCharset
+  BOOL
+  pName LPTSTR
+  hWnd HWND
+  pPortName LPTSTR
+
+func DeleteForm bothCharset
+  BOOL
+  hPrinter HANDLE
+  pFormName LPTSTR
+
+func DeleteMonitor bothCharset
+  BOOL
+  pName LPTSTR
+  pEnvironment LPTSTR
+  pMonitorName LPTSTR
+
+func DeletePort bothCharset
+  BOOL
+  pName LPTSTR
+  hWnd HWND
+  pPortName LPTSTR
+
+func DeletePrinterConnection bothCharset
+  BOOL
+  pName LPTSTR
+
+func DeletePrinterData bothCharset
+  [ERROR_CODE]
+  hPrinter HANDLE
+  pValueName LPTSTR
+
+func DeletePrinterDataEx bothCharset
+  [ERROR_CODE]
+  hPrinter HANDLE
+  pKeyName LPCTSTR
+  pValueName LPCTSTR
+
+func DeletePrinterDriver bothCharset
+  BOOL
+  pName LPTSTR
+  pEnvironment LPTSTR
+  pDriverName LPTSTR
+
+func DeletePrinterDriverEx bothCharset
+  BOOL
+  pName LPTSTR
+  pEnvironment LPTSTR
+  pDriverName LPTSTR
+  dwDeleteFlag DWORD
+  dwVersionFlag DWORD
+
+func DeletePrinterKey bothCharset
+  [ERROR_CODE]
+  hPrinter HANDLE
+  pKeyName LPCTSTR
+
+func DeletePrintProcessor bothCharset
+  BOOL
+  pName LPTSTR
+  pEnvironment LPTSTR
+  pPrintProcessorName LPTSTR
+
+func DeletePrintProvidor bothCharset
+  BOOL
+  pName LPTSTR
+  pEnvironment LPTSTR
+  pPrintProviderName LPTSTR
+
+func EnumForms bothCharset
+  BOOL
+  hPrinter HANDLE
+  Level DWORD
+  pForm LPBYTE postLength=pcbNeeded
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+  pcReturned LPDWORD
+
+func EnumJobs bothCharset
+  BOOL
+  hPrinter HANDLE
+  FirstJob DWORD
+  NoJobs DWORD
+  Level DWORD
+  pJob LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+  pcReturned LPDWORD
+
+func EnumMonitors bothCharset
+  BOOL
+  pName LPTSTR
+  Level DWORD
+  pMonitors LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+  pcReturned LPDWORD
+
+func EnumPorts bothCharset
+  BOOL
+  pName LPTSTR
+  Level DWORD
+  pPorts LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+  pcReturned LPDWORD
+
+func EnumPrinterData bothCharset
+  [ERROR_CODE]
+  hPrinter HANDLE
+  dwIndex DWORD
+  pValueName LPTSTR
+  cbValueName DWORD
+  pcbValueName LPDWORD
+  pType LPDWORD
+  pData LPBYTE
+  cbData DWORD
+  pcbData LPDWORD
+
+func EnumPrinterDataEx bothCharset
+  [ERROR_CODE]
+  hPrinter HANDLE
+  pKeyName LPCTSTR
+  pEnumValues LPBYTE postLength=pcbEnumValues
+  cbEnumValues DWORD
+  pcbEnumValues LPDWORD
+  pnEnumValues LPDWORD
+
+func EnumPrinterDrivers bothCharset
+  BOOL
+  pName LPTSTR
+  pEnvironment LPTSTR
+  Level DWORD
+  pDriverInfo LPBYTE postLength=cbBuf
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+  pcReturned LPDWORD
+
+func EnumPrinterKey bothCharset
+  [ERROR_CODE]
+  hPrinter HANDLE
+  pKeyName LPCTSTR
+  pSubkey LPTSTR
+  cbSubkey DWORD
+  pcbSubkey LPDWORD
+
+func EnumPrinters bothCharset
+  BOOL
+  Flags [EnumPrintersFlags]
+  Name LPTSTR
+  Level DWORD
+  pPrinterEnum LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+  pcReturned LPDWORD
+
+func EnumPrintProcessorDatatypes bothCharset
+  BOOL
+  pName LPTSTR
+  pPrintProcessorName LPTSTR
+  Level DWORD
+  pDatatypes LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+  pcReturned LPDWORD
+
+func EnumPrintProcessors bothCharset
+  BOOL
+  pName LPTSTR
+  pEnvironment LPTSTR
+  Level DWORD
+  pPrintProcessorInfo LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+  pcReturned LPDWORD
+
+func FlushPrinter
+  BOOL
+  hPrinter HANDLE
+  pBuf LPVOID
+  cbBuf DWORD
+  pcWritten LPDWORD
+  cSleep DWORD
+
+func GetForm bothCharset
+  BOOL
+  hPrinter HANDLE
+  pFormName LPTSTR
+  Level DWORD
+  pForm LPBYTE postLength=pcbNeeded
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+
+func GetJob bothCharset
+  BOOL
+  hPrinter HANDLE
+  JobId DWORD
+  Level DWORD
+  pJob LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+
+func GetPrinter bothCharset
+  BOOL
+  hPrinter HANDLE
+  Level DWORD
+  pPrinter LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+
+func GetPrinterData bothCharset errorIsReturnValue
+  [ERROR_CODE]
+  hPrinter HANDLE
+  pValueName LPTSTR
+  pType [RegType*]
+  pData LPBYTE postLength=pcbNeeded
+  nSize DWORD
+  pcbNeeded LPDWORD
+
+func GetPrinterDataEx bothCharset errorIsReturnValue
+  [ERROR_CODE]
+  hPrinter HANDLE
+  pKeyName LPCTSTR
+  pValueName LPCTSTR
+  pType [RegType*]
+  pData LPBYTE postLength=pcbNeeded
+  nSize DWORD
+  pcbNeeded LPDWORD
+
+func GetPrinterDriver bothCharset
+  BOOL
+  hPrinter HANDLE
+  pEnvironment LPTSTR
+  Level DWORD
+  pDriverInfo LPBYTE postLength=pcbNeeded
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+
+func GetPrinterDriverDirectory bothCharset
+  BOOL
+  pName LPTSTR
+  pEnvironment LPTSTR
+  Level DWORD
+  pDriverDirectory LPWSTR display=LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+
+func GetPrintProcessorDirectory bothCharset
+  BOOL
+  pName LPTSTR
+  pEnvironment LPTSTR
+  Level DWORD
+  pPrintProcessorInfo LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+
+func OpenPrinter bothCharset
+  BOOL
+  pPrinterName LPTSTR
+  phPrinter LPHANDLE
+  pDefault LPPRINTER_DEFAULTS
+
+func ResetPrinter bothCharset
+  BOOL
+  hPrinter HANDLE
+  pDefault LPPRINTER_DEFAULTS
+
+func StartDocPrinter bothCharset
+  success NotEqual=0
+  DWORD
+  hPrinter HANDLE
+  Level DWORD
+  pDocInfo LPBYTE
+
+func SetForm bothCharset
+  BOOL
+  hPrinter HANDLE
+  pFormName LPTSTR
+  Level DWORD
+  pForm LPTSTR
+
+func SetJob bothCharset
+  BOOL
+  hPrinter HANDLE
+  JobId DWORD
+  Level DWORD
+  pJob LPBYTE
+  Command [JobControl]
+
+func SetPort bothCharset
+  BOOL
+  pName LPTSTR
+  pPortName LPTSTR
+  dwLevel DWORD
+  pPortInfo LPBYTE
+
+func SetPrinter bothCharset
+  BOOL
+  hPrinter HANDLE
+  Level DWORD
+  pPrinter LPBYTE
+  Command [PrinterControl]
+
+func SetPrinterData bothCharset
+  [ERROR_CODE]
+  hPrinter HANDLE
+  pValueName LPTSTR
+  Type [RegType]
+  pData LPBYTE length=cbData
+  cbData DWORD
+
+func SetPrinterDataEx bothCharset
+  [ERROR_CODE]
+  hPrinter HANDLE
+  pKeyName LPCTSTR
+  pValueName LPCTSTR
+  Type [RegType]
+  pData LPBYTE length=cbData
+  cbData DWORD
+
+func DeviceCapabilities bothCharset
+  success NotEqual=0
+  DWORD
+  pDevice LPCTSTR
+  pPort LPCTSTR
+  fwCapability [DeviceCapability]
+  pOutput LPTSTR
+  pDevMode "const DEVMODE*"
+
+func CorePrinterDriverInstalled bothCharset
+  HRESULT
+  pszServer LPCTSTR
+  pszEnvironment LPCTSTR
+  CoreDriverGUID GUID
+  ftDriverDate FILETIME
+  dwlDriverVersion DWORDLONG
+  pbDriverInstalled BOOL*
+
+func DeletePrinterDriverPackage bothCharset
+  HRESULT
+  pszServer LPCTSTR
+  pszInfPath LPCTSTR
+  pszEnvironment LPCTSTR
+
+func GetCorePrinterDrivers bothCharset
+  HRESULT
+  pszServer LPCTSTR
+  pszEnvironment LPCTSTR
+  pszzCoreDriverDependencies LPCTSTR
+  cCorePrinterDrivers DWORD
+  pCorePrinterDrivers PCORE_PRINTER_DRIVER
+
+func GetPrinterDriverPackagePath bothCharset
+  HRESULT
+  pszServer LPCTSTR
+  pszEnvironment LPCTSTR
+  pszLanguage LPCTSTR
+  pszPackageID LPCTSTR
+  pszDriverPackageCab LPTSTR
+  cchDriverPackageCab DWORD
+  pcchRequiredSize LPDWORD
+
+func InstallPrinterDriverFromPackage bothCharset
+  HRESULT
+  pszServer LPCTSTR
+  pszInfPath LPCTSTR
+  pszDriverName LPCTSTR
+  pszEnvironment LPCTSTR
+  dwFlags DWORD
+
+func UploadPrinterDriverPackage bothCharset
+  HRESULT
+  pszServer LPCTSTR
+  pszInfPath LPCTSTR
+  pszEnvironment LPCTSTR
+  dwFlags DWORD
+  hwnd HWND
+  pszDestInfPath LPTSTR
+  pcchDestInfPath PULONG
+
+func AbortPrinter
+  BOOL
+  hPrinter HANDLE
+
+func AddForm bothCharset
+  BOOL
+  hPrinter HANDLE
+  Level DWORD
+  pForm LPBYTE
+
+func AddPort bothCharset
+  BOOL
+  pName LPTSTR
+  hWnd HWND
+  pMonitorName LPTSTR
+
+func AdvancedDocumentProperties bothCharset
+  success NotEqual=0
+  LONG
+  hWnd HWND
+  hPrinter HANDLE
+  pDeviceName LPTSTR
+  pDevModeOutput PDEVMODE
+  pDevModeInput PDEVMODE
+
+func ClosePrinter
+  BOOL
+  hPrinter HANDLE
+
+func ConnectToPrinterDlg
+  success NotEqual=0
+  HANDLE
+  hwnd HWND
+  Flags DWORD
+
+func CreatePrintAsyncNotifyChannel
+  HRESULT
+  pName LPCWSTR
+  pSchema PrintAsyncNotificationType*
+  filter PrintAsyncNotifyUserFilter
+  directionality PrintAsyncNotifyConversationStyle
+  pCallback IPrintAsyncNotifyCallback*
+  ppChannel IPrintAsyncNotifyChannel**
+
+func DeletePrinter
+  BOOL
+  hPrinter HANDLE
+
+func DocumentProperties bothCharset
+  success Greater=-1
+  LONG
+  hWnd HWND
+  hPrinter HANDLE
+  pDeviceName LPTSTR
+  pDevModeOutput PDEVMODE
+  pDevModeInput PDEVMODE
+  fMode [DocumentMode]
+
+func EndDocPrinter
+  BOOL
+  hPrinter HANDLE
+
+func EndPagePrinter
+  BOOL
+  hPrinter HANDLE
+
+func FindClosePrinterChangeNotification
+  BOOL
+  hChange HANDLE
+
+func FindFirstPrinterChangeNotification
+  success NotEqual=0
+  HANDLE
+  hPrinter HANDLE
+  fdwFilter [PrinterChangeFlags]
+  fdwOptions DWORD
+  pPrinterNotifyOptions PPRINTER_NOTIFY_OPTIONS
+
+func FindNextPrinterChangeNotification
+  BOOL
+  hChange HANDLE
+  pdwChange [PrinterChangeFlags*]
+  pPrinterNotifyOptions PPRINTER_NOTIFY_OPTIONS
+  ppPrinterNotifyInfo LPVOID*
+
+func FreePrinterNotifyInfo
+  BOOL
+  pPrinterNotifyInfo PPRINTER_NOTIFY_INFO
+
+func GetDefaultPrinter bothCharset ordinalA=201 ordinalW=203
+  BOOL
+  pszBuffer LPTSTR outputOnly
+  pcchBuffer LPDWORD
+
+func GetPrinterDriver2 bothCharset
+  BOOL
+  hWnd HWND
+  hPrinter HANDLE
+  pEnvironment LPTSTR
+  Level DWORD
+  pDriverInfo LPBYTE
+  cbBuf DWORD
+  pcbNeeded LPDWORD
+
+func OpenPrinter2 bothCharset
+  BOOL
+  pPrinterName LPCTSTR
+  phPrinter LPHANDLE
+  pDefault LPPRINTER_DEFAULTS
+  pOptions PPRINTER_OPTIONS
+
+func PrinterProperties
+  BOOL
+  hWnd HWND
+  hPrinter HANDLE
+
+func ReadPrinter
+  BOOL
+  hPrinter HANDLE
+  pBuf LPVOID
+  cbBuf DWORD
+  pNoBytesRead LPDWORD
+
+func RegisterForPrintAsyncNotifications
+  HRESULT
+  pName LPCWSTR
+  pSchema PrintAsyncNotificationType*
+  filter PrintAsyncNotifyUserFilter
+  directionality PrintAsyncNotifyConversationStyle
+  pCallback IPrintAsyncNotifyCallback*
+  pRegistrationHandler HANDLE*
+
+func ReportJobProcessingProgress
+  HRESULT
+  printerHandle HANDLE
+  jobId ULONG
+  jobOperation EPrintXPSJobOperation
+  jobProgress EPrintXPSJobProgress
+
+func ScheduleJob
+  BOOL
+  hPrinter HANDLE
+  dwJobID DWORD
+
+func SetDefaultPrinter bothCharset ordinalA=202 ordinalW=204
+  BOOL
+  pszPrinter LPCTSTR
+
+func StartPagePrinter
+  BOOL
+  hPrinter HANDLE
+
+func UnRegisterForPrintAsyncNotifications
+  HRESULT
+  hRegistrationHandler HANDLE
+
+func WritePrinter
+  BOOL
+  hPrinter HANDLE
+  pBuf LPVOID length=cbBuf
+  cbBuf DWORD
+  pcWritten LPDWORD
+

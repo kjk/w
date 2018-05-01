@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundFXEcho base=IUnknown id={8bd28edf-50db-4e92-a2bd-445488d1ed42} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func SetAllParameters
+    [DS_HRESULT]
+    pcDsFxEcho LPCDSFXEcho
+
+  func GetAllParameters
+    [DS_HRESULT]
+    pDsFxEcho LPDSFXEcho
+
+

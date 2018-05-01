@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPersistSerializedPropStorage base=IUnknown id={e318ad57-0aa0-450f-aca5-6fab7103d917} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetFlags
+    HRESULT
+    flags PERSIST_SPROPSTORE_FLAGS
+
+  func SetPropertyStorage
+    HRESULT
+    psps PCUSERIALIZEDPROPSTORAGE
+    cb DWORD
+
+  func GetPropertyStorage
+    HRESULT
+    ppsps SERIALIZEDPROPSTORAGE**
+    pcb DWORD*
+
+

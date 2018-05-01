@@ -1,0 +1,40 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IMofCompiler base=IUnknown id={6daf974e-2e37-11d2-aec9-00c04fb68820} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func CompileFile
+    WBEMSTATUS
+    FileName LPWSTR
+    ServerAndNamespace LPWSTR
+    User LPWSTR
+    Authority LPWSTR
+    Password LPWSTR
+    lOptionFlags WBEM_COMPILER_OPTIONS
+    lClassFlags WBEM_CHANGE_FLAG_TYPE
+    lInstanceFlags WBEM_CHANGE_FLAG_TYPE
+    pInfo WBEM_COMPILE_STATUS_INFO*
+
+  func CompileBuffer
+    WBEMSTATUS
+    BuffSize long
+    pBuffer BYTE*
+    ServerAndNamespace LPWSTR
+    User LPWSTR
+    Authority LPWSTR
+    Password LPWSTR
+    lOptionFlags WBEM_COMPILER_OPTIONS
+    lClassFlags LONG
+    lInstanceFlags LONG
+    pInfo WBEM_COMPILE_STATUS_INFO*
+
+  func CreateBMOF
+    WBEMSTATUS
+    TextFileName LPWSTR
+    BMOFFileName LPWSTR
+    ServerAndNamespace LPWSTR
+    lOptionFlags WBEM_COMPILER_OPTIONS
+    lClassFlags WBEM_CHANGE_FLAG_TYPE
+    lInstanceFlags WBEM_CHANGE_FLAG_TYPE
+    pInfo WBEM_COMPILE_STATUS_INFO*
+
+

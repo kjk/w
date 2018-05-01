@@ -1,0 +1,28 @@
+include Interfaces\IUnknown.txt
+
+ingterface IQueueCommand base=IUnknown id={56a868b7-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func InvokeAtStreamTime
+    HRESULT
+    pCmd IDeferredCommand**
+    time REFTIME
+    iid GUID*
+    dispidMethod long
+    wFlags short
+    cArgs long
+    pDispParams VARIANT*
+    pvarResult VARIANT*
+    puArgErr short*
+
+  func InvokeAtPresentationTime
+    HRESULT
+    pCmd IDeferredCommand**
+    time REFTIME
+    iid GUID*
+    dispidMethod long
+    wFlags short
+    cArgs long
+    pDispParams VARIANT*
+    pvarResult VARIANT*
+    puArgErr short*
+
+

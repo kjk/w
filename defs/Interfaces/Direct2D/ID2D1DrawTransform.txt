@@ -1,0 +1,9 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Transform.txt
+
+ingterface ID2D1DrawTransform base=ID2D1Transform id={36bfdcb6-9739-435d-a30d-a653beff6a6f} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetDrawInfo
+    [D2D_HRESULT]
+    drawInfo ID2D1DrawInfo*
+
+

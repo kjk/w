@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPropertyBag base=IUnknown id={55272A00-42CB-11CE-8135-00AA004BB851} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Content Extensions/ActiveX Controls/Interfaces"
+  func Read
+    HRESULT
+    pszPropName LPCOLESTR
+    pVar VARIANT*
+    pErrorLog IErrorLog*
+
+  func Write
+    HRESULT
+    pszPropName LPCOLESTR
+    pVar VARIANT*
+
+

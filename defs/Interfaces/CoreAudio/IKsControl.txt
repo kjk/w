@@ -1,0 +1,29 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IKsControl base=IUnknown id={28F54685-06FD-11D2-B27A-00A0C9223196} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func KsProperty
+    [AUDCLNT_HRESULT]
+    Property PKSPROPERTY
+    PropertyLength ULONG
+    PropertyData void*
+    DataLength ULONG
+    BytesReturned ULONG*
+
+  func KsMethod
+    [AUDCLNT_HRESULT]
+    Method PKSMETHOD
+    MethodLength ULONG
+    MethodData void*
+    DataLength ULONG
+    BytesReturned ULONG*
+
+  func KsEvent
+    [AUDCLNT_HRESULT]
+    Event PKSEVENT
+    EventLength ULONG
+    EventData void*
+    DataLength ULONG
+    BytesReturned ULONG*
+
+

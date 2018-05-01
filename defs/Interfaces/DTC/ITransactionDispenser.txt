@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DTC\DTC.h.txt
+
+ingterface ITransactionDispenser base=IUnknown id={3A6AD9E1-23B9-11cf-AD60-00AA00A74CCD} errorFunc=HRESULT onlineHelp=MSDN category="System Services/Distributed Transaction Coordinator (DTC)"
+  func GetOptionsObject
+    HRESULT
+    ppOptions ITransactionOptions**
+
+  func BeginTransaction
+    HRESULT
+    punkOuter IUnknown*
+    isoLevel ISOLEVEL
+    isoFlags ISOFLAG
+    pOptions ITransactionOptions*
+    ppTransaction ITransaction**
+
+

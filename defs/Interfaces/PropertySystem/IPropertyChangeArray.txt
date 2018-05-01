@@ -1,0 +1,36 @@
+include Interfaces\IUnknown.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyChangeArray base=IUnknown id={380f5cad-1b5e-42f2-805d-637fd392d31e} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func GetCount
+    HRESULT
+    pcOperations UINT*
+
+  func GetAt
+    HRESULT
+    iIndex UINT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func InsertAt
+    HRESULT
+    iIndex UINT
+    ppropChange IPropertyChange*
+
+  func Append
+    HRESULT
+    ppropChange IPropertyChange*
+
+  func AppendOrReplace
+    HRESULT
+    ppropChange IPropertyChange*
+
+  func RemoveAt
+    HRESULT
+    iIndex UINT
+
+  func IsKeyInArray
+    HRESULT
+    key REFPROPERTYKEY
+
+

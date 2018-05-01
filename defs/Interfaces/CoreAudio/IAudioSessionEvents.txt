@@ -1,0 +1,41 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioSessionEvents base=IUnknown id={24918ACC-64B3-37C1-8CA9-74A66E9957A8} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func OnDisplayNameChanged
+    [AUDCLNT_HRESULT]
+    NewDisplayName LPCWSTR
+    EventContext LPCGUID
+
+  func OnIconPathChanged
+    [AUDCLNT_HRESULT]
+    NewIconPath LPCWSTR
+    EventContext LPCGUID
+
+  func OnSimpleVolumeChanged
+    [AUDCLNT_HRESULT]
+    NewVolume float
+    NewMute BOOL
+    EventContext LPCGUID
+
+  func OnChannelVolumeChanged
+    [AUDCLNT_HRESULT]
+    ChannelCount DWORD
+    NewChannelVolumeArray "float []" count=ChannelCount
+    ChangedChannel DWORD
+    EventContext LPCGUID
+
+  func OnGroupingParamChanged
+    [AUDCLNT_HRESULT]
+    NewGroupingParam LPCGUID
+    EventContext LPCGUID
+
+  func OnStateChanged
+    [AUDCLNT_HRESULT]
+    NewState AudioSessionState
+
+  func OnSessionDisconnected
+    [AUDCLNT_HRESULT]
+    DisconnectReason AudioSessionDisconnectReason
+
+

@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAsyncReader base=IUnknown id={56a868aa-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func RequestAllocator
+    HRESULT
+    pPreferred IMemAllocator*
+    pProps ALLOCATOR_PROPERTIES*
+    ppActual IMemAllocator**
+
+  func Request
+    HRESULT
+    pSample IMediaSample*
+    dwUser DWORD_PTR
+
+  func WaitForNext
+    HRESULT
+    dwTimeout DWORD
+    ppSample IMediaSample**
+    pdwUser DWORD_PTR*
+
+  func SyncReadAligned
+    HRESULT
+    pSample IMediaSample*
+
+  func SyncRead
+    HRESULT
+    llPosition LONGLONG
+    lLength LONG
+    pBuffer BYTE*
+
+  func Length
+    HRESULT
+    pTotal LONGLONG*
+    pAvailable LONGLONG*
+
+  func BeginFlush
+    HRESULT
+
+  func EndFlush
+    HRESULT
+
+

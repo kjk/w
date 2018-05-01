@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IActivateAudioInterfaceCompletionHandler base=IUnknown id={41D949AB-9862-444A-80F6-C261334DA5EB} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func ActivateCompleted
+    [AUDCLNT_HRESULT]
+    activateOperation IActivateAudioInterfaceAsyncOperation*
+
+

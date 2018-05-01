@@ -1,0 +1,99 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFileOperationProgressSink base=IUnknown id={04b0f1a7-9490-44bc-96e1-4296a31252e2} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func StartOperations
+    HRESULT
+
+  func FinishOperations
+    HRESULT
+    hrResult HRESULT
+
+  func PreRenameItem
+    HRESULT
+    dwFlags DWORD
+    psiItem IShellItem*
+    pszNewName LPCWSTR
+
+  func PostRenameItem
+    HRESULT
+    dwFlags DWORD
+    psiItem IShellItem*
+    pszNewName LPCWSTR
+    hrRename HRESULT
+    psiNewlyCreated IShellItem*
+
+  func PreMoveItem
+    HRESULT
+    dwFlags DWORD
+    psiItem IShellItem*
+    psiDestinationFolder IShellItem*
+    pszNewName LPCWSTR
+
+  func PostMoveItem
+    HRESULT
+    dwFlags DWORD
+    psiItem IShellItem*
+    psiDestinationFolder IShellItem*
+    pszNewName LPCWSTR
+    hrMove HRESULT
+    psiNewlyCreated IShellItem*
+
+  func PreCopyItem
+    HRESULT
+    dwFlags DWORD
+    psiItem IShellItem*
+    psiDestinationFolder IShellItem*
+    pszNewName LPCWSTR
+
+  func PostCopyItem
+    HRESULT
+    dwFlags DWORD
+    psiItem IShellItem*
+    psiDestinationFolder IShellItem*
+    pszNewName LPCWSTR
+    hrCopy HRESULT
+    psiNewlyCreated IShellItem*
+
+  func PreDeleteItem
+    HRESULT
+    dwFlags DWORD
+    psiItem IShellItem*
+
+  func PostDeleteItem
+    HRESULT
+    dwFlags DWORD
+    psiItem IShellItem*
+    hrDelete HRESULT
+    psiNewlyCreated IShellItem*
+
+  func PreNewItem
+    HRESULT
+    dwFlags DWORD
+    psiDestinationFolder IShellItem*
+    pszNewName LPCWSTR
+
+  func PostNewItem
+    HRESULT
+    dwFlags DWORD
+    psiDestinationFolder IShellItem*
+    pszNewName LPCWSTR
+    pszTemplateName LPCWSTR
+    dwFileAttributes DWORD
+    hrNew HRESULT
+    psiNewItem IShellItem*
+
+  func UpdateProgress
+    HRESULT
+    iWorkTotal UINT
+    iWorkSoFar UINT
+
+  func ResetTimer
+    HRESULT
+
+  func PauseTimer
+    HRESULT
+
+  func ResumeTimer
+    HRESULT
+
+

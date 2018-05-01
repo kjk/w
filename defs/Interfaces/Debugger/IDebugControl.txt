@@ -1,0 +1,507 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDebugControl base=IUnknown id={5182e668-105e-416e-ad92-24ef800424ba} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetInterrupt
+    HRESULT
+
+  func SetInterrupt
+    HRESULT
+    Flags [DEBUG_INTERRUPT_TYPE]
+
+  func GetInterruptTimeout
+    HRESULT
+    Seconds PULONG
+
+  func SetInterruptTimeout
+    HRESULT
+    Seconds ULONG
+
+  func GetLogFile
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    FileSize PULONG
+    Append PBOOL
+
+  func OpenLogFile
+    HRESULT
+    File PCSTR
+    Append BOOL
+
+  func CloseLogFile
+    HRESULT
+
+  func GetLogMask
+    HRESULT
+    Mask [PDEBUG_OUTPUT_FLAGS]
+
+  func SetLogMask
+    HRESULT
+    Mask [DEBUG_OUTPUT_FLAGS]
+
+  func Input
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    InputSize PULONG
+
+  func ReturnInput
+    HRESULT
+    Buffer PCSTR
+
+  func Output varArgs
+    HRESULT
+    Mask [DEBUG_OUTPUT_FLAGS]
+    Format PCSTR
+
+  func OutputVaList
+    HRESULT
+    Mask [DEBUG_OUTPUT_FLAGS]
+    Format PCSTR
+    Args va_list
+
+  func ControlledOutput varArgs
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Mask [DEBUG_OUTPUT_FLAGS]
+    Format PCSTR
+
+  func ControlledOutputVaList
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Mask [DEBUG_OUTPUT_FLAGS]
+    Format PCSTR
+    Args va_list
+
+  func OutputPrompt varArgs
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Format PCSTR
+
+  func OutputPromptVaList
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Format PCSTR
+    Args va_list
+
+  func GetPromptText
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    TextSize PULONG
+
+  func OutputCurrentState
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Flags [DEBUG_CURRENT_FLAGS]
+
+  func OutputVersionInformation
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+
+  func GetNotifyEventHandle
+    HRESULT
+    Handle PULONG64
+
+  func SetNotifyEventHandle
+    HRESULT
+    Handle ULONG64
+
+  func Assemble
+    HRESULT
+    Offset ULONG64
+    Instr PCSTR
+    EndOffset PULONG64
+
+  func Disassemble
+    HRESULT
+    Offset ULONG64
+    Flags [DEBUG_DISASM_FLAGS]
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    DisassemblySize PULONG
+    EndOffset PULONG64
+
+  func GetDisassembleEffectiveOffset
+    HRESULT
+    Offset PULONG64
+
+  func OutputDisassembly
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Offset ULONG64
+    Flags [DEBUG_DISASM_FLAGS]
+    EndOffset PULONG64
+
+  func OutputDisassemblyLines
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    PreviousLines ULONG
+    TotalLines ULONG
+    Offset ULONG64
+    Flags [DEBUG_DISASM_FLAGS]
+    OffsetLine PULONG
+    StartOffset PULONG64
+    EndOffset PULONG64
+    LineOffsets PULONG64
+
+  func GetNearInstruction
+    HRESULT
+    Offset ULONG64
+    Delta LONG
+    NearOffset PULONG64
+
+  func GetStackTrace
+    HRESULT
+    FrameOffset ULONG64
+    StackOffset ULONG64
+    InstructionOffset ULONG64
+    Frames PDEBUG_STACK_FRAME
+    FramesSize ULONG
+    FramesFilled PULONG
+
+  func GetReturnOffset
+    HRESULT
+    Offset PULONG64
+
+  func OutputStackTrace
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Frames PDEBUG_STACK_FRAME
+    FramesSize ULONG
+    Flags [DEBUG_STACK_FLAGS]
+
+  func GetDebuggeeType
+    HRESULT
+    Class PULONG
+    Qualifier PULONG
+
+  func GetActualProcessorType
+    HRESULT
+    Type PULONG
+
+  func GetExecutingProcessorType
+    HRESULT
+    Type PULONG
+
+  func GetNumberPossibleExecutingProcessorTypes
+    HRESULT
+    Number PULONG
+
+  func GetPossibleExecutingProcessorTypes
+    HRESULT
+    Start ULONG
+    Count ULONG
+    Types PULONG postCount=Count
+
+  func GetNumberProcessors
+    HRESULT
+    Number PULONG
+
+  func GetSystemVersion
+    HRESULT
+    PlatformId PULONG
+    Major PULONG
+    Minor PULONG
+    ServicePackString PSTR
+    ServicePackStringSize ULONG
+    ServicePackStringUsed PULONG
+    ServicePackNumber PULONG
+    BuildString PSTR
+    BuildStringSize ULONG
+    BuildStringUsed PULONG
+
+  func GetPageSize
+    HRESULT
+    Size PULONG
+
+  func IsPointer64Bit
+    HRESULT
+
+  func ReadBugCheckData
+    HRESULT
+    Code PULONG
+    Arg1 PULONG64
+    Arg2 PULONG64
+    Arg3 PULONG64
+    Arg4 PULONG64
+
+  func GetNumberSupportedProcessorTypes
+    HRESULT
+    Number PULONG
+
+  func GetSupportedProcessorTypes
+    HRESULT
+    Start ULONG
+    Count ULONG
+    Types PULONG postCount=Count
+
+  func GetProcessorTypeNames
+    HRESULT
+    Type ULONG
+    FullNameBuffer PSTR
+    FullNameBufferSize ULONG
+    FullNameSize PULONG
+    AbbrevNameBuffer PSTR
+    AbbrevNameBufferSize ULONG
+    AbbrevNameSize PULONG
+
+  func GetEffectiveProcessorType
+    HRESULT
+    Type PULONG
+
+  func SetEffectiveProcessorType
+    HRESULT
+    Type ULONG
+
+  func GetExecutionStatus
+    HRESULT
+    Status PULONG
+
+  func SetExecutionStatus
+    HRESULT
+    Status ULONG
+
+  func GetCodeLevel
+    HRESULT
+    Level PULONG
+
+  func SetCodeLevel
+    HRESULT
+    Level ULONG
+
+  func GetEngineOptions
+    HRESULT
+    Options [PDEBUG_ENGOPT_FLAGS]
+
+  func AddEngineOptions
+    HRESULT
+    Options [DEBUG_ENGOPT_FLAGS]
+
+  func RemoveEngineOptions
+    HRESULT
+    Options [DEBUG_ENGOPT_FLAGS]
+
+  func SetEngineOptions
+    HRESULT
+    Options [DEBUG_ENGOPT_FLAGS]
+
+  func GetSystemErrorControl
+    HRESULT
+    OutputLevel PULONG
+    BreakLevel PULONG
+
+  func SetSystemErrorControl
+    HRESULT
+    OutputLevel ULONG
+    BreakLevel ULONG
+
+  func GetTextMacro
+    HRESULT
+    Slot ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    MacroSize PULONG
+
+  func SetTextMacro
+    HRESULT
+    Slot ULONG
+    Macro PCSTR
+
+  func GetRadix
+    HRESULT
+    Radix PULONG
+
+  func SetRadix
+    HRESULT
+    Radix ULONG
+
+  func Evaluate
+    HRESULT
+    Expression PCSTR
+    DesiredType ULONG
+    Value PDEBUG_VALUE
+    RemainderIndex PULONG
+
+  func CoerceValue
+    HRESULT
+    In PDEBUG_VALUE
+    OutType ULONG
+    Out PDEBUG_VALUE
+
+  func CoerceValues
+    HRESULT
+    Count ULONG
+    In PDEBUG_VALUE count=Count
+    OutTypes PULONG
+    Out PDEBUG_VALUE postCount=Count
+
+  func Execute
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Command PCSTR
+    Flags [DEBUG_EXECUTE_FLAGS]
+
+  func ExecuteCommandFile
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    CommandFile PCSTR
+    Flags [DEBUG_EXECUTE_FLAGS]
+
+  func GetNumberBreakpoints
+    HRESULT
+    Number PULONG
+
+  func GetBreakpointByIndex
+    HRESULT
+    Index ULONG
+    Bp PDEBUG_BREAKPOINT*
+
+  func GetBreakpointById
+    HRESULT
+    Id ULONG
+    Bp PDEBUG_BREAKPOINT*
+
+  func GetBreakpointParameters
+    HRESULT
+    Count ULONG
+    Ids PULONG
+    Start ULONG
+    Params PDEBUG_BREAKPOINT_PARAMETERS postCount=Count
+
+  func AddBreakpoint
+    HRESULT
+    Type ULONG
+    DesiredId ULONG
+    Bp PDEBUG_BREAKPOINT*
+
+  func RemoveBreakpoint
+    HRESULT
+    Bp PDEBUG_BREAKPOINT
+
+  func AddExtension
+    HRESULT
+    Path PCSTR
+    Flags ULONG
+    Handle PULONG64
+
+  func RemoveExtension
+    HRESULT
+    Handle ULONG64
+
+  func GetExtensionByPath
+    HRESULT
+    Path PCSTR
+    Handle PULONG64
+
+  func CallExtension
+    HRESULT
+    Handle ULONG64
+    Function PCSTR
+    Arguments PCSTR
+
+  func GetExtensionFunction
+    HRESULT
+    Handle ULONG64
+    FuncName PCSTR
+    Function FARPROC*
+
+  func GetWindbgExtensionApis32
+    HRESULT
+    Api PWINDBG_EXTENSION_APIS32
+
+  func GetWindbgExtensionApis64
+    HRESULT
+    Api PWINDBG_EXTENSION_APIS64
+
+  func GetNumberEventFilters
+    HRESULT
+    SpecificEvents PULONG
+    SpecificExceptions PULONG
+    ArbitraryExceptions PULONG
+
+  func GetEventFilterText
+    HRESULT
+    Index ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    TextSize PULONG
+
+  func GetEventFilterCommand
+    HRESULT
+    Index ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    CommandSize PULONG
+
+  func SetEventFilterCommand
+    HRESULT
+    Index ULONG
+    Command PCSTR
+
+  func GetSpecificFilterParameters
+    HRESULT
+    Start ULONG
+    Count ULONG
+    Params PDEBUG_SPECIFIC_FILTER_PARAMETERS postCount=Count
+
+  func SetSpecificFilterParameters
+    HRESULT
+    Start ULONG
+    Count ULONG
+    Params PDEBUG_SPECIFIC_FILTER_PARAMETERS count=Count
+
+  func GetSpecificFilterArgument
+    HRESULT
+    Index ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    ArgumentSize PULONG
+
+  func SetSpecificFilterArgument
+    HRESULT
+    Index ULONG
+    Argument PCSTR
+
+  func GetExceptionFilterParameters
+    HRESULT
+    Count ULONG
+    Codes PULONG count=Count
+    Start ULONG
+    Params PDEBUG_EXCEPTION_FILTER_PARAMETERS postCount=Count
+
+  func SetExceptionFilterParameters
+    HRESULT
+    Count ULONG
+    Params PDEBUG_EXCEPTION_FILTER_PARAMETERS count=Count
+
+  func GetExceptionFilterSecondCommand
+    HRESULT
+    Index ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    CommandSize PULONG
+
+  func SetExceptionFilterSecondCommand
+    HRESULT
+    Index ULONG
+    Command PCSTR
+
+  func WaitForEvent
+    HRESULT
+    Flags ULONG
+    Timeout [DEBUG_TIMEOUT]
+
+  func GetLastEventInformation
+    HRESULT
+    Type PULONG
+    ProcessId PULONG
+    ThreadId PULONG
+    ExtraInformation PVOID
+    ExtraInformationSize ULONG
+    ExtraInformationUsed PULONG
+    Description PSTR
+    DescriptionSize ULONG
+    DescriptionUsed PULONG
+
+

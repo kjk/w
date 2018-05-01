@@ -1,0 +1,466 @@
+include Headers\windows.h.txt
+
+dll WtsApi32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Services/Remote Desktop Services"
+category "System Services/Remote Desktop Services/RemoteFX Media Redirection"
+array "TCHAR [WTS_COMMENT_LENGTH + 1]" base=TCHAR count=61
+
+array "TCHAR [USERNAME_LENGTH + 1]" base=TCHAR count=21
+
+array "TCHAR [DOMAIN_LENGTH + 1]" base=TCHAR count=18
+
+array WTSLISTENERNAME base=TCHAR count=33
+
+pointer PWTSLISTENERNAME WTSLISTENERNAME
+
+struct WTS_PROCESS_INFO
+  SessionId DWORD
+  ProcessId DWORD
+  pProcessName LPTSTR
+  pUserSid PSID
+
+pointer PWTS_PROCESS_INFO WTS_PROCESS_INFO
+
+pointer PWTS_PROCESS_INFO* PWTS_PROCESS_INFO
+
+enum WTS_CONNECTSTATE_CLASS UINT
+  WTSActive       0
+  WTSConnected    1
+  WTSConnectQuery 2
+  WTSShadow       3
+  WTSDisconnected 4
+  WTSIdle         5
+  WTSListen       6
+  WTSReset        7
+  WTSDown         8
+  WTSInit         9
+
+struct WTS_SESSION_INFO
+  SessionId DWORD
+  pWinStationName LPTSTR
+  State WTS_CONNECTSTATE_CLASS
+
+pointer PWTS_SESSION_INFO WTS_SESSION_INFO
+
+pointer PWTS_SESSION_INFO* PWTS_SESSION_INFO
+
+enum WTS_INFO_CLASS UINT
+  WTSInitialProgram     0
+  WTSApplicationName    1
+  WTSWorkingDirectory   2
+  WTSOEMId              3
+  WTSSessionId          4
+  WTSUserName           5
+  WTSWinStationName     6
+  WTSDomainName         7
+  WTSConnectState       8
+  WTSClientBuildNumber  9
+  WTSClientName         10
+  WTSClientDirectory    11
+  WTSClientProductId    12
+  WTSClientHardwareId   13
+  WTSClientAddress      14
+  WTSClientDisplay      15
+  WTSClientProtocolType 16
+  WTSIdleTime           17
+  WTSLogonTime          18
+  WTSIncomingBytes      19
+  WTSOutgoingBytes      20
+  WTSIncomingFrames     21
+  WTSOutgoingFrames     22
+
+enum WTS_CONFIG_CLASS UINT
+  WTSUserConfigInitialProgram                0
+  WTSUserConfigWorkingDirectory              1
+  WTSUserConfigfInheritInitialProgram        2
+  WTSUserConfigfAllowLogonTerminalServer     3
+  WTSUserConfigTimeoutSettingsConnections    4
+  WTSUserConfigTimeoutSettingsDisconnections 5
+  WTSUserConfigTimeoutSettingsIdle           6
+  WTSUserConfigfDeviceClientDrives           7
+  WTSUserConfigfDeviceClientPrinters         8
+  WTSUserConfigfDeviceClientDefaultPrinter   9
+  WTSUserConfigBrokenTimeoutSettings         10
+  WTSUserConfigReconnectSettings             11
+  WTSUserConfigModemCallbackSettings         12
+  WTSUserConfigModemCallbackPhoneNumber      13
+  WTSUserConfigShadowingSettings             14
+  WTSUserConfigTerminalServerProfilePath     15
+  WTSUserConfigTerminalServerHomeDir         16
+  WTSUserConfigTerminalServerHomeDirDrive    17
+  WTSUserConfigfTerminalServerRemoteHomeDir  18
+
+enum WTS_VIRTUAL_CLASS UINT
+  WTSVirtualClientData 0
+  WTSVirtualFileHandle 1
+
+enum [ConsoleNotificationFlags] DWORD display=DWORD
+  NOTIFY_FOR_THIS_SESSION 0
+  NOTIFY_FOR_ALL_SESSIONS 1
+
+enum [WtsServerHandle] HANDLE display=HANDLE reset
+  WTS_CURRENT_SERVER_HANDLE 0
+
+flag [WtsEventFlags] DWORD display=DWORD
+  WTS_EVENT_NONE        0x00000000
+  WTS_EVENT_CREATE      0x00000001
+  WTS_EVENT_DELETE      0x00000002
+  WTS_EVENT_RENAME      0x00000004
+  WTS_EVENT_CONNECT     0x00000008
+  WTS_EVENT_DISCONNECT  0x00000010
+  WTS_EVENT_LOGON       0x00000020
+  WTS_EVENT_LOGOFF      0x00000040
+  WTS_EVENT_STATECHANGE 0x00000080
+  WTS_EVENT_LICENSE     0x00000100
+  WTS_EVENT_ALL         0x7fffffff
+  WTS_EVENT_FLUSH       0x80000000
+
+pointer [WtsEventFlags*] [WtsEventFlags] display=DWORD*
+
+struct WTSLISTENERCONFIG
+  version ULONG
+  fEnableListener ULONG
+  MaxConnectionCount ULONG
+  fPromptForPassword ULONG
+  fInheritColorDepth ULONG
+  ColorDepth ULONG
+  fInheritBrokenTimeoutSettings ULONG
+  BrokenTimeoutSettings ULONG
+  fDisablePrinterRedirection ULONG
+  fDisableDriveRedirection ULONG
+  fDisableComPortRedirection ULONG
+  fDisableLPTPortRedirection ULONG
+  fDisableClipboardRedirection ULONG
+  fDisableAudioRedirection ULONG
+  fDisablePNPRedirection ULONG
+  fDisableDefaultMainClientPrinter ULONG
+  LanAdapter ULONG
+  PortNumber ULONG
+  fInheritShadowSettings ULONG
+  ShadowSettings ULONG
+  TimeoutSettingsConnection ULONG
+  TimeoutSettingsDisconnection ULONG
+  TimeoutSettingsIdle ULONG
+  SecurityLayer ULONG
+  MinEncryptionLevel ULONG
+  UserAuthentication ULONG
+  Comment "TCHAR [WTS_COMMENT_LENGTH + 1]"
+  LogonUserName "TCHAR [USERNAME_LENGTH + 1]"
+  LogonDomain "TCHAR [DOMAIN_LENGTH + 1]"
+  WorkDirectory "TCHAR [MAX_PATH + 1]"
+  InitialProgram "TCHAR [MAX_PATH + 1]"
+
+pointer PWTSLISTENERCONFIG WTSLISTENERCONFIG
+
+enum WTS_TYPE_CLASS UINT
+  WTSTypeProcessInfoLevel0 0
+  WTSTypeProcessInfoLevel1 1
+  WTSTypeSessionInfoLevel1 2
+
+struct WTS_SERVER_INFO
+  pServerName LPTSTR
+
+pointer PWTS_SERVER_INFO WTS_SERVER_INFO
+
+pointer PWTS_SERVER_INFO* PWTS_SERVER_INFO
+
+struct WTS_SESSION_INFO_1
+  ExecEnvId DWORD
+  State WTS_CONNECTSTATE_CLASS
+  SessionId DWORD
+  pSessionName LPTSTR
+  pHostName LPTSTR
+  pUserName LPTSTR
+  pDomainName LPTSTR
+  pFarmName LPTSTR
+
+pointer PWTS_SESSION_INFO_1 WTS_SESSION_INFO_1
+
+pointer PWTS_SESSION_INFO_1* PWTS_SESSION_INFO_1
+
+func WTSCloseServer
+  void
+  hServer [WtsServerHandle]
+
+func WTSConnectSession bothCharset
+  BOOL
+  LogonId ULONG
+  TargetLogonId ULONG
+  pPassword PTSTR
+  bWait BOOL
+
+func WTSCreateListener bothCharset
+  BOOL
+  hServer [WtsServerHandle]
+  pReserved PVOID
+  Reserved DWORD
+  pListenerName LPTSTR
+  pBuffer PWTSLISTENERCONFIG
+  flag DWORD
+
+func WTSDisconnectSession
+  BOOL
+  hServer [WtsServerHandle]
+  SessionId DWORD
+  bWait BOOL
+
+func WTSEnableChildSessions
+  BOOL
+  bEnable BOOL
+
+func WTSEnumerateListeners bothCharset
+  BOOL
+  hServer [WtsServerHandle]
+  pReserved PVOID
+  Reserved DWORD
+  pListeners PWTSLISTENERNAME
+  pCount DWORD*
+
+func WTSEnumerateProcesses bothCharset
+  BOOL
+  hServer [WtsServerHandle]
+  Reserved DWORD
+  Version DWORD
+  ppProcessInfo PWTS_PROCESS_INFO*
+  pCount DWORD*
+
+func WTSEnumerateProcessesEx bothCharset
+  BOOL
+  hServer [WtsServerHandle]
+  pLevel DWORD*
+  SessionID DWORD
+  ppProcessInfo LPTSTR*
+  pCount DWORD*
+
+func WTSEnumerateServers bothCharset
+  BOOL
+  pDomainName LPTSTR
+  Reserved DWORD
+  Version DWORD
+  ppServerInfo PWTS_SERVER_INFO*
+  pCount DWORD*
+
+func WTSEnumerateSessions bothCharset
+  BOOL
+  hServer [WtsServerHandle]
+  Reserved DWORD
+  Version DWORD
+  ppSessionInfo PWTS_SESSION_INFO*
+  pCount DWORD*
+
+func WTSEnumerateSessionsEx bothCharset
+  BOOL
+  hServer [WtsServerHandle]
+  pLevel DWORD*
+  Filter DWORD
+  ppSessionInfo PWTS_SESSION_INFO_1*
+  pCount DWORD*
+
+func WTSFreeMemory
+  void
+  pMemory PVOID
+
+func WTSFreeMemoryEx bothCharset
+  BOOL
+  WTSTypeClass WTS_TYPE_CLASS
+  pMemory PVOID
+  NumberOfEntries ULONG
+
+func WTSGetChildSessionId
+  BOOL
+  pSessionId ULONG*
+
+func WTSGetListenerSecurity bothCharset
+  BOOL
+  hServer [WtsServerHandle]
+  pReserved PVOID
+  Reserved DWORD
+  pListenerName LPTSTR
+  SecurityInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  nLength DWORD
+  lpnLengthNeeded LPDWORD
+
+func WTSIsChildSessionsEnabled
+  BOOL
+  pbEnabled BOOL*
+
+func WTSLogoffSession
+  BOOL
+  hServer [WtsServerHandle]
+  SessionId DWORD
+  bWait BOOL
+
+func WTSOpenServer bothCharset
+  success NotEqual=0
+  HANDLE
+  pServerName LPTSTR
+
+func WTSOpenServerEx bothCharset
+  success NotEqual=0
+  HANDLE
+  pServerName LPTSTR
+
+func WTSQueryListenerConfig bothCharset
+  BOOL
+  hServer [WtsServerHandle]
+  pReserved PVOID
+  Reserved DWORD
+  pListenerName LPTSTR
+  pBuffer PWTSLISTENERCONFIG
+
+func WTSQuerySessionInformation bothCharset
+  BOOL
+  hServer [WtsServerHandle]
+  SessionId DWORD
+  WTSInfoClass WTS_INFO_CLASS
+  ppBuffer LPTSTR*
+  pBytesReturned DWORD*
+
+func WTSQueryUserConfig bothCharset
+  BOOL
+  pServerName LPTSTR
+  pUserName LPTSTR
+  WTSConfigClass WTS_CONFIG_CLASS
+  ppBuffer LPTSTR*
+  pBytesReturned DWORD*
+
+func WTSQueryUserToken
+  BOOL
+  SessionId ULONG
+  phToken PHANDLE
+
+func WTSRegisterSessionNotification
+  BOOL
+  hWnd HWND
+  dwFlags [ConsoleNotificationFlags]
+
+func WTSRegisterSessionNotificationEx
+  BOOL
+  hServer [WtsServerHandle]
+  hWnd HWND
+  dwFlags [ConsoleNotificationFlags]
+
+func WTSSendMessage bothCharset
+  BOOL
+  hServer [WtsServerHandle]
+  SessionId DWORD
+  pTitle LPTSTR
+  TitleLength DWORD
+  pMessage LPTSTR
+  MessageLength DWORD
+  Style DWORD
+  Timeout DWORD
+  pResponse DWORD*
+  bWait BOOL
+
+func WTSSetListenerSecurity bothCharset
+  BOOL
+  hServer [WtsServerHandle]
+  pReserved PVOID
+  Reserved DWORD
+  pListenerName LPTSTR
+  SecurityInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+
+func WTSSetUserConfig bothCharset
+  BOOL
+  pServerName LPTSTR
+  pUserName LPTSTR
+  WTSConfigClass WTS_CONFIG_CLASS
+  pBuffer LPTSTR
+  DataLength DWORD
+
+func WTSShutdownSystem
+  BOOL
+  hServer [WtsServerHandle]
+  ShutdownFlag DWORD
+
+func WTSStartRemoteControlSession bothCharset
+  BOOL
+  pTargetServerName LPTSTR
+  TargetLogonId ULONG
+  HotkeyVk BYTE
+  HotkeyModifiers USHORT
+
+func WTSStopRemoteControlSession
+  BOOL
+  LogonId ULONG
+
+func WTSTerminateProcess
+  BOOL
+  hServer [WtsServerHandle]
+  ProcessId DWORD
+  ExitCode DWORD
+
+func WTSUnRegisterSessionNotification
+  BOOL
+  hWnd HWND
+
+func WTSUnRegisterSessionNotificationEx
+  BOOL
+  hServer [WtsServerHandle]
+  hWnd HWND
+
+func WTSVirtualChannelClose
+  BOOL
+  hChannelHandle HANDLE
+
+func WTSVirtualChannelOpen
+  success NotEqual=0
+  HANDLE
+  hServer [WtsServerHandle]
+  SessionId DWORD
+  pVirtualName LPSTR
+
+func WTSVirtualChannelOpenEx
+  success NotEqual=0
+  HANDLE
+  SessionId DWORD
+  pVirtualName LPSTR
+  flags DWORD
+
+func WTSVirtualChannelPurgeInput
+  BOOL
+  hChannelHandle HANDLE
+
+func WTSVirtualChannelPurgeOutput
+  BOOL
+  hChannelHandle HANDLE
+
+func WTSVirtualChannelQuery
+  BOOL
+  hChannelHandle HANDLE
+  WtsVirtualClass WTS_VIRTUAL_CLASS
+  ppBuffer PVOID*
+  pBytesReturned DWORD*
+
+func WTSVirtualChannelRead
+  BOOL
+  hChannelHandle HANDLE
+  TimeOut ULONG
+  Buffer LPVOID display=PCHAR postLength=pBytesRead
+  BufferSize ULONG
+  pBytesRead PULONG
+
+func WTSVirtualChannelWrite
+  BOOL
+  hChannelHandle HANDLE
+  Buffer LPVOID display=PCHAR length=Length
+  Length ULONG
+  pBytesWritten PULONG
+
+func WTSWaitSystemEvent
+  BOOL
+  hServer [WtsServerHandle]
+  EventMask [WtsEventFlags]
+  pEventFlags [WtsEventFlags*]
+
+func WTSSetRenderHint
+  HRESULT
+  pRenderHintID UINT64*
+  hwndOwner HWND
+  renderHintType DWORD
+  cbHintDataLength DWORD
+  pHintData BYTE*
+

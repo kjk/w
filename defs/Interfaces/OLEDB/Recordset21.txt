@@ -1,0 +1,18 @@
+include Interfaces\OLEDB\Recordset20.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface Recordset21 base=Recordset20 id={00001555-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func Seek
+    [OLEDB_HRESULT]
+    KeyValues VARIANT
+    SeekOption SeekEnum
+
+  func put_Index
+    [OLEDB_HRESULT]
+    Index BSTR
+
+  func get_Index
+    [OLEDB_HRESULT]
+    pbstrIndex BSTR*
+
+

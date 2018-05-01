@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMPhysicalPinInfo base=IUnknown id={F938C991-3029-11cf-8C44-00AA006B6814} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetPhysicalType
+    HRESULT
+    pType long*
+    ppszType LPOLESTR*
+
+

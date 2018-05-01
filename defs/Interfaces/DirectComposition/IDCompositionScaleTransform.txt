@@ -1,0 +1,37 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\DirectComposition\IDCompositionTransform.txt
+
+ingterface IDCompositionScaleTransform base=IDCompositionTransform id={71FDE914-40EF-45ef-BD51-68B037C339F9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func SetScaleX
+    HRESULT
+    scaleX float
+
+  func "SetScaleX "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetScaleY
+    HRESULT
+    scaleY float
+
+  func "SetScaleY "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetCenterX
+    HRESULT
+    centerX float
+
+  func "SetCenterX "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetCenterY
+    HRESULT
+    centerY float
+
+  func "SetCenterY "
+    HRESULT
+    animation IDCompositionAnimation*
+
+

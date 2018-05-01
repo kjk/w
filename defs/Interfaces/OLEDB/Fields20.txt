@@ -1,0 +1,16 @@
+include Interfaces\OLEDB\Fields15.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface Fields20 base=Fields15 id={0000154D-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func _Append
+    [OLEDB_HRESULT]
+    Name BSTR
+    Type DataTypeEnum
+    DefinedSize long
+    Attrib FieldAttributeEnum
+
+  func Delete
+    [OLEDB_HRESULT]
+    Index VARIANT
+
+

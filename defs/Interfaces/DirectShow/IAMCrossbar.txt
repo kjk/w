@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMCrossbar base=IUnknown id={C6E13380-30AC-11d0-A18C-00A0C9118956} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func get_PinCounts
+    HRESULT
+    OutputPinCount long*
+    InputPinCount long*
+
+  func CanRoute
+    HRESULT
+    OutputPinIndex long
+    InputPinIndex long
+
+  func Route
+    HRESULT
+    OutputPinIndex long
+    InputPinIndex long
+
+  func get_IsRoutedTo
+    HRESULT
+    OutputPinIndex long
+    InputPinIndex long*
+
+  func get_CrossbarPinInfo
+    HRESULT
+    IsInputPin BOOL
+    PinIndex long
+    PinIndexRelated long*
+    PhysicalType long*
+
+

@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISurrogate base=IUnknown id={00000022-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func LoadDllServer
+    HRESULT
+    Clsid REFCLSID
+
+  func FreeSurrogate
+    HRESULT
+
+

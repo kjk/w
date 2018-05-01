@@ -1,0 +1,240 @@
+include Headers\windows.h.txt
+include Headers\native.h.txt
+
+dll ImageHlp.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Diagnostics/Debugging and Error Handling/Debug Help Library/Image Help Library"
+arch 32
+struct IMAGE_LOAD_CONFIG_DIRECTORY
+  Size DWORD
+  TimeDateStamp DWORD
+  MajorVersion WORD
+  MinorVersion WORD
+  GlobalFlagsClear DWORD
+  GlobalFlagsSet DWORD
+  CriticalSectionDefaultTimeout DWORD
+  DeCommitFreeBlockThreshold DWORD
+  DeCommitTotalFreeThreshold DWORD
+  LockPrefixTable DWORD
+  MaximumAllocationSize DWORD
+  VirtualMemoryThreshold DWORD
+  ProcessHeapFlags [HEAP_FLAGS]
+  ProcessAffinityMask DWORD
+  CSDVersion WORD
+  Reserved1 WORD
+  EditList DWORD
+  SecurityCookie DWORD
+  SEHandlerTable DWORD
+  SEHandlerCount DWORD
+
+arch off
+arch 64
+struct IMAGE_LOAD_CONFIG_DIRECTORY
+  Size DWORD
+  TimeDateStamp DWORD
+  MajorVersion WORD
+  MinorVersion WORD
+  GlobalFlagsClear DWORD
+  GlobalFlagsSet DWORD
+  CriticalSectionDefaultTimeout DWORD
+  DeCommitFreeBlockThreshold ULONGLONG
+  DeCommitTotalFreeThreshold ULONGLONG
+  LockPrefixTable ULONGLONG
+  MaximumAllocationSize ULONGLONG
+  VirtualMemoryThreshold ULONGLONG
+  ProcessAffinityMask ULONGLONG
+  ProcessHeapFlags [HEAP_FLAGS]
+  CSDVersion WORD
+  Reserved1 WORD
+  EditList ULONGLONG
+  SecurityCookie ULONGLONG
+  SEHandlerTable ULONGLONG
+  SEHandlerCount ULONGLONG
+
+arch off
+alias DIGEST_FUNCTION LPVOID
+
+alias DIGEST_HANDLE PVOID
+
+alias PIMAGEHLP_STATUS_ROUTINE LPVOID
+
+pointer PIMAGE_LOAD_CONFIG_DIRECTORY IMAGE_LOAD_CONFIG_DIRECTORY
+
+flag [WIN_CERT_TYPE] WORD display=WORD
+  WIN_CERT_TYPE_X509             0x0001
+  WIN_CERT_TYPE_PKCS_SIGNED_DATA 0x0002
+  WIN_CERT_TYPE_RESERVED_1       0x0003
+  WIN_CERT_TYPE_TS_STACK_SIGNED  0x0004
+
+struct WIN_CERTIFICATE
+  dwLength DWORD
+  wRevision WORD
+  wCertificateType [WIN_CERT_TYPE]
+  bCertificate "BYTE [ANYSIZE_ARRAY]"
+
+pointer LPWIN_CERTIFICATE WIN_CERTIFICATE
+
+struct LOADED_IMAGE
+  ModuleName PSTR
+  hFile HANDLE
+  MappedAddress PUCHAR
+  FileHeader PIMAGE_NT_HEADERS
+  LastRvaSection PIMAGE_SECTION_HEADER
+  NumberOfSections ULONG
+  Sections PIMAGE_SECTION_HEADER
+  Characteristics [IMAGE_FILE_CHARACTERISTICS_ULONG]
+  fSystemImage BOOLEAN
+  fDOSImage BOOLEAN
+  fReadOnly BOOLEAN
+  Version UCHAR
+  Links LIST_ENTRY
+  SizeOfImage ULONG
+
+pointer PLOADED_IMAGE LOADED_IMAGE
+
+func GetImageConfigInformation
+  BOOL
+  LoadedImage PLOADED_IMAGE
+  ImageConfigInformation PIMAGE_LOAD_CONFIG_DIRECTORY
+
+func GetImageUnusedHeaderBytes
+  success NotEqual=0
+  DWORD
+  LoadedImage PLOADED_IMAGE
+  SizeUnusedHeaderBytes PDWORD
+
+func ImageLoad
+  success NotEqual=0
+  PLOADED_IMAGE
+  DllName PSTR
+  DllPath PSTR
+
+func ImageUnload
+  BOOL
+  LoadedImage PLOADED_IMAGE
+
+func MapAndLoad
+  BOOL
+  ImageName PSTR
+  DllPath PSTR
+  LoadedImage PLOADED_IMAGE
+  DotDll BOOL
+  ReadOnly BOOL
+
+func SetImageConfigInformation
+  BOOL
+  LoadedImage PLOADED_IMAGE
+  ImageConfigInformation PIMAGE_LOAD_CONFIG_DIRECTORY
+
+func UnMapAndLoad
+  BOOL
+  LoadedImage PLOADED_IMAGE
+
+func ImageAddCertificate
+  BOOL
+  FileHandle HANDLE
+  Certificate LPWIN_CERTIFICATE
+  Index PDWORD
+
+func ImageEnumerateCertificates
+  BOOL
+  FileHandle HANDLE
+  TypeFilter WORD
+  CertificateCount PDWORD
+  Indices PDWORD count=IndexCount
+  IndexCount DWORD
+
+func ImageGetCertificateData
+  BOOL
+  FileHandle HANDLE
+  CertificateIndex DWORD
+  Certificate LPWIN_CERTIFICATE postLength=RequiredLength
+  RequiredLength PDWORD
+
+func ImageGetCertificateHeader
+  BOOL
+  FileHandle HANDLE
+  CertificateIndex DWORD
+  CertificateHeader LPWIN_CERTIFICATE
+
+func ImageGetDigestStream
+  BOOL
+  FileHandle HANDLE
+  DigestLevel DWORD
+  DigestFunction DIGEST_FUNCTION
+  DigestHandle DIGEST_HANDLE
+
+func ImageRemoveCertificate
+  BOOL
+  FileHandle HANDLE
+  Index DWORD
+
+func BindImage
+  BOOL
+  ImageName PSTR
+  DllPath PSTR
+  SymbolPath PSTR
+
+func BindImageEx
+  BOOL
+  Flags DWORD
+  ImageName PSTR
+  DllPath PSTR
+  SymbolPath PSTR
+  StatusRoutine PIMAGEHLP_STATUS_ROUTINE
+
+func CheckSumMappedFile
+  success NotEqual=0
+  PIMAGE_NT_HEADERS
+  BaseAddress PVOID
+  FileLength DWORD
+  HeaderSum PDWORD
+  CheckSum PDWORD
+
+func MapFileAndCheckSum bothCharset
+  success Equal=0
+  DWORD
+  Filename PTSTR
+  HeaderSum PDWORD
+  CheckSum PDWORD
+
+func ReBaseImage
+  BOOL
+  CurrentImageName PCSTR
+  SymbolPath PCSTR
+  fReBase BOOL
+  fRebaseSysfileOk BOOL
+  fGoingDown BOOL
+  CheckImageSize ULONG
+  OldImageSize ULONG*
+  OldImageBase ULONG_PTR*
+  NewImageSize ULONG*
+  NewImageBase ULONG_PTR*
+  TimeStamp ULONG
+
+func SplitSymbols
+  BOOL
+  ImageName PSTR
+  SymbolsPath PSTR
+  SymbolFilePath PSTR
+  Flags DWORD
+
+func TouchFileTimes
+  BOOL
+  FileHandle HANDLE
+  pSystemTime PSYSTEMTIME
+
+func UpdateDebugInfoFile
+  BOOL
+  ImageFileName PSTR
+  SymbolPath PSTR
+  DebugFilePath PSTR
+  NtHeaders PIMAGE_NT_HEADERS
+
+func UpdateDebugInfoFileEx
+  BOOL
+  ImageFileName PSTR
+  SymbolPath PSTR
+  DebugFilePath PSTR
+  NtHeaders PIMAGE_NT_HEADERS
+  OldChecksum DWORD
+

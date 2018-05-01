@@ -1,0 +1,102 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+include Headers\gdi.h.txt
+
+dll Oleacc.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Windows Application UI Development/Accessibility/Windows Automation/Microsoft Active Accessibility/Active Accessibility User Interface Services/Client"
+category "Windows Application UI Development/Accessibility/Windows Automation/Microsoft Active Accessibility/Active Accessibility User Interface Services/Server"
+interface IAccessible
+
+func AccessibleChildren
+  STDAPI
+  paccContainer IAccessible*
+  iChildStart LONG
+  cChildren LONG
+  rgvarChildren VARIANT* postCount=pcObtained
+  pcObtained LONG*
+
+func AccessibleObjectFromEvent
+  STDAPI
+  hwnd HWND
+  dwObjectID DWORD
+  dwChildID DWORD
+  ppacc IAccessible**
+  pvarChild VARIANT*
+
+func AccessibleObjectFromPoint
+  STDAPI
+  ptScreen POINT
+  ppacc IAccessible**
+  pvarChild VARIANT*
+
+func AccessibleObjectFromWindow
+  STDAPI
+  hwnd HWND
+  dwObjectID DWORD
+  riid REFIID
+  ppvObject void** interfaceId=riid
+
+func GetOleaccVersionInfo
+  void
+  pdwVer DWORD*
+  pdwBuild DWORD*
+
+func GetProcessHandleFromHwnd
+  success NotEqual=0
+  HANDLE
+  hwnd HWND
+
+func GetRoleText bothCharset
+  success NotEqual=0
+  UINT
+  dwRole DWORD
+  lpszRole LPTSTR
+  cchRoleMax UINT
+
+func GetStateText bothCharset
+  success NotEqual=0
+  UINT
+  dwStateBit DWORD
+  lpszStateBit LPTSTR
+  cchStateBitMax UINT
+
+func WindowFromAccessibleObject
+  STDAPI
+  pacc IAccessible*
+  phwnd HWND*
+
+func CreateStdAccessibleObject
+  STDAPI
+  hwnd HWND
+  idObject LONG
+  riidInterface REFIID
+  ppvObject void** interfaceId=riidInterface
+
+func CreateStdAccessibleProxy
+  STDAPI
+  hwnd HWND
+  pszClassName LPCTSTR
+  idObject LONG
+  riidInterface REFIID
+  ppvObject void** interfaceId=riidInterface
+
+func LresultFromObject
+  success NotEqual=0
+  LRESULT
+  riid REFIID
+  wParam WPARAM
+  pAcc LPUNKNOWN
+
+func ObjectFromLresult
+  STDAPI
+  lResult LRESULT
+  riid REFIID
+  wParam WPARAM
+  ppvObject void** interfaceId=riid
+
+func AccSetRunningUtilityState
+  STDAPI
+  hwndApp HWND
+  dwUtilityStateMask DWORD
+  dwUtilityState DWORD
+

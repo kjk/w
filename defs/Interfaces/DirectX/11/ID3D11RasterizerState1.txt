@@ -1,0 +1,9 @@
+include Interfaces\DirectX\11\ID3D11RasterizerState.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11RasterizerState1 base=ID3D11RasterizerState id={1217d7a6-5039-418c-b042-9cbe256afd6e} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func GetDesc1
+    void
+    pDesc D3D11_RASTERIZER_DESC1*
+
+

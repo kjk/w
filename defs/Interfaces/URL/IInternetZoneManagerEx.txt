@@ -1,0 +1,23 @@
+include Interfaces\URL\IInternetZoneManager.txt
+include Headers\URL.h.txt
+
+ingterface IInternetZoneManagerEx base=IInternetZoneManager id={A4C23339-8E06-431e-9BF4-7E711C085648} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetZoneActionPolicyEx
+    HRESULT
+    dwZone [URLZONE|DWORD]
+    dwAction [URLACTION_FLAGS]
+    pPolicy BYTE* postLength=cbPolicy
+    cbPolicy DWORD
+    urlZoneReg URLZONEREG
+    dwFlags ZAFLAGS
+
+  func SetZoneActionPolicyEx
+    HRESULT
+    dwZone [URLZONE|DWORD]
+    dwAction [URLACTION_FLAGS]
+    pPolicy BYTE* length=cbPolicy
+    cbPolicy DWORD
+    urlZoneReg URLZONEREG
+    dwFlags ZAFLAGS
+
+

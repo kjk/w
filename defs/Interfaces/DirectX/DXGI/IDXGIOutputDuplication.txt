@@ -1,0 +1,44 @@
+include Interfaces\DirectX\DXGI\IDXGIObject.txt
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+ingterface IDXGIOutputDuplication base=IDXGIObject id={191cfac3-a341-470d-b26e-a864f428319c} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func GetDesc
+    void
+    pDesc DXGI_OUTDUPL_DESC*
+
+  func AcquireNextFrame
+    HRESULT
+    TimeoutInMilliseconds UINT
+    pFrameInfo DXGI_OUTDUPL_FRAME_INFO*
+    ppDesktopResource IDXGIResource**
+
+  func GetFrameDirtyRects
+    HRESULT
+    DirtyRectsBufferSize UINT
+    pDirtyRectsBuffer RECT*
+    pDirtyRectsBufferSizeRequired UINT*
+
+  func GetFrameMoveRects
+    HRESULT
+    MoveRectsBufferSize UINT
+    pMoveRectBuffer DXGI_OUTDUPL_MOVE_RECT*
+    pMoveRectsBufferSizeRequired UINT*
+
+  func GetFramePointerShape
+    HRESULT
+    PointerShapeBufferSize UINT
+    pPointerShapeBuffer void*
+    pPointerShapeBufferSizeRequired UINT*
+    pPointerShapeInfo DXGI_OUTDUPL_POINTER_SHAPE_INFO*
+
+  func MapDesktopSurface
+    HRESULT
+    pLockedRect DXGI_MAPPED_RECT*
+
+  func UnMapDesktopSurface
+    HRESULT
+
+  func ReleaseFrame
+    HRESULT
+
+

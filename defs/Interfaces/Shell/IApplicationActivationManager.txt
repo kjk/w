@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+
+ingterface IApplicationActivationManager base=IUnknown id={2e941141-7f97-4756-ba1d-9decde894a3d} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func ActivateApplication
+    HRESULT
+    appUserModelId LPCWSTR
+    arguments LPCWSTR
+    options ACTIVATEOPTIONS
+    processId DWORD*
+
+  func ActivateForFile
+    HRESULT
+    appUserModelId LPCWSTR
+    itemArray IShellItemArray*
+    verb LPCWSTR
+    processId DWORD*
+
+  func ActivateForProtocol
+    HRESULT
+    appUserModelId LPCWSTR
+    itemArray IShellItemArray*
+    processId DWORD*
+
+

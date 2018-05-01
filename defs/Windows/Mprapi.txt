@@ -1,0 +1,731 @@
+include Headers\windows.h.txt
+
+dll Mprapi.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Routing and Remote Access Service/Routing/Router Management/Router Administration"
+alias RAS_SERVER_HANDLE HANDLE
+
+alias MPR_SERVER_HANDLE HANDLE
+
+pointer MPR_SERVER_HANDLE* MPR_SERVER_HANDLE
+
+alias MIB_SERVER_HANDLE HANDLE
+
+pointer MIB_SERVER_HANDLE* MIB_SERVER_HANDLE
+
+array "WCHAR [MAX_INTERFACE_NAME_LEN + 1]" base=WCHAR count=257
+
+struct MPR_IPINIP_INTERFACE_0
+  wszFriendlyName "WCHAR [MAX_INTERFACE_NAME_LEN + 1]"
+  Guid GUID
+
+pointer PMPR_IPINIP_INTERFACE_0 MPR_IPINIP_INTERFACE_0
+
+func MprAdminPortEnum
+  [ERROR_CODE]
+  hRasServer RAS_SERVER_HANDLE
+  dwLevel DWORD
+  hConnection HANDLE
+  lplpbBuffer LPBYTE*
+  dwPrefMaxLen DWORD
+  lpdwEntriesRead LPDWORD
+  lpdwTotalEntries LPDWORD
+  lpdwResumeHandle LPDWORD
+
+func MprAdminConnectionGetInfo
+  [ERROR_CODE]
+  hRasServer RAS_SERVER_HANDLE
+  dwLevel DWORD
+  hConnection HANDLE
+  lplpbBuffer LPBYTE*
+
+func MprAdminPortGetInfo
+  [ERROR_CODE]
+  hRasServer RAS_SERVER_HANDLE
+  dwLevel DWORD
+  hPort HANDLE
+  lplpbBuffer LPBYTE*
+
+func MprAdminConnectionClearStats
+  [ERROR_CODE]
+  hRasServer RAS_SERVER_HANDLE
+  hConnection HANDLE
+
+func MprAdminPortClearStats
+  [ERROR_CODE]
+  hRasServer RAS_SERVER_HANDLE
+  hPort HANDLE
+
+func MprAdminPortReset
+  [ERROR_CODE]
+  hRasServer RAS_SERVER_HANDLE
+  hPort HANDLE
+
+func MprAdminPortDisconnect
+  [ERROR_CODE]
+  hRasServer RAS_SERVER_HANDLE
+  hPort HANDLE
+
+func MprAdminConnectionRemoveQuarantine
+  [ERROR_CODE]
+  hRasServer HANDLE
+  hRasConnection HANDLE
+  fIsIpAddress BOOL
+
+func MprAdminUserGetInfo
+  [ERROR_CODE]
+  lpszServer "const WCHAR*"
+  lpszUser "const WCHAR*"
+  dwLevel DWORD
+  lpbBuffer LPBYTE
+
+func MprAdminUserSetInfo
+  [ERROR_CODE]
+  lpszServer "const WCHAR*"
+  lpszUser "const WCHAR*"
+  dwLevel DWORD
+  lpbBuffer "const LPBYTE"
+
+func MprAdminSendUserMessage
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hConnection HANDLE
+  lpwszMessage LPWSTR
+
+func MprAdminGetPDCServer
+  [ERROR_CODE]
+  lpszDomain "const WCHAR*"
+  lpszServer "const WCHAR*"
+  lpszPDCServer LPWSTR
+
+func MprAdminIsServiceRunning
+  BOOL
+  lpwsServerName LPWSTR
+
+func MprAdminServerConnect
+  [ERROR_CODE]
+  lpwsServerName LPWSTR
+  phMprServer MPR_SERVER_HANDLE*
+
+func MprAdminServerDisconnect
+  VOID
+  hMprServer MPR_SERVER_HANDLE
+
+func MprAdminServerGetCredentials
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  dwLevel DWORD
+  lplpbBuffer LPBYTE*
+
+func MprAdminServerSetCredentials
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  dwLevel DWORD
+  lpbBuffer LPBYTE
+
+func MprAdminBufferFree
+  [ERROR_CODE]
+  pBuffer LPVOID
+
+func MprAdminGetErrorString
+  [ERROR_CODE]
+  dwError DWORD
+  lpwsErrorString LPWSTR*
+
+func MprAdminServerGetInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  dwLevel DWORD
+  lplpbBuffer LPBYTE*
+
+func MprAdminServerSetInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  dwLevel DWORD
+  lpbBuffer LPBYTE
+
+func MprAdminEstablishDomainRasServer
+  [ERROR_CODE]
+  pszDomain PWCHAR
+  pszMachine PWCHAR
+  bEnable BOOL
+
+func MprAdminIsDomainRasServer
+  [ERROR_CODE]
+  pszDomain PWCHAR
+  pszMachine PWCHAR
+  pbIsRasServer PBOOL
+
+func MprAdminTransportCreate
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  dwTransportId DWORD
+  lpwsTransportName LPWSTR
+  pGlobalInfo LPBYTE
+  dwGlobalInfoSize DWORD
+  pClientInterfaceInfo LPBYTE
+  dwClientInterfaceInfoSize DWORD
+  lpwsDLLPath LPWSTR
+
+func MprAdminTransportSetInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  dwTransportId DWORD
+  pGlobalInfo LPBYTE
+  dwGlobalInfoSize DWORD
+  pClientInterfaceInfo LPBYTE
+  dwClientInterfaceInfoSize DWORD
+
+func MprAdminTransportGetInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  dwTransportId DWORD
+  ppGlobalInfo LPBYTE*
+  lpdwGlobalInfoSize LPDWORD
+  ppClientInterfaceInfo LPBYTE*
+  lpdwClientInterfaceInfoSize LPDWORD
+
+func MprAdminDeviceEnum
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  dwLevel DWORD
+  lplpbBuffer LPBYTE*
+  lpdwTotalEntries LPDWORD
+
+func MprAdminInterfaceGetHandle
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  lpwsInterfaceName LPWSTR
+  phInterface HANDLE*
+  fIncludeClientInterfaces BOOL
+
+func MprAdminInterfaceCreate
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  dwLevel DWORD
+  lpbBuffer LPBYTE
+  phInterface HANDLE*
+
+func MprAdminInterfaceGetInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwLevel DWORD
+  lplpbBuffer LPBYTE*
+
+func MprAdminInterfaceSetInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwLevel DWORD
+  lpbBuffer LPBYTE
+
+func MprAdminInterfaceDelete
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+
+func MprAdminInterfaceDeviceGetInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwIndex DWORD
+  dwLevel DWORD
+  lplpBuffer LPBYTE*
+
+func MprAdminInterfaceDeviceSetInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwIndex DWORD
+  dwLevel DWORD
+  lplpBuffer LPBYTE
+
+func MprAdminInterfaceTransportRemove
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwTransportId DWORD
+
+func MprAdminInterfaceTransportAdd
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwTransportId DWORD
+  pInterfaceInfo LPBYTE
+  dwInterfaceInfoSize DWORD
+
+func MprAdminInterfaceTransportGetInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwTransportId DWORD
+  ppInterfaceInfo LPBYTE*
+  lpdwpInterfaceInfoSize LPDWORD
+
+func MprAdminInterfaceTransportSetInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwTransportId DWORD
+  pInterfaceInfo LPBYTE
+  dwInterfaceInfoSize DWORD
+
+func MprAdminInterfaceEnum
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  dwLevel DWORD
+  lplpbBuffer LPBYTE*
+  dwPrefMaxLen DWORD
+  lpdwEntriesRead LPDWORD
+  lpdwTotalEntries LPDWORD
+  lpdwResumeHandle LPDWORD
+
+func MprSetupIpInIpInterfaceFriendlyNameEnum
+  [ERROR_CODE]
+  pwszMachineName PWCHAR
+  lplpBuffer LPBYTE*
+  lpdwEntriesRead LPDWORD
+
+func MprSetupIpInIpInterfaceFriendlyNameFree
+  [ERROR_CODE]
+  lpBuffer LPVOID
+
+func MprSetupIpInIpInterfaceFriendlyNameCreate
+  [ERROR_CODE]
+  pwszMachineName PWCHAR
+  pNameInformation PMPR_IPINIP_INTERFACE_0
+
+func MprSetupIpInIpInterfaceFriendlyNameDelete
+  [ERROR_CODE]
+  pwszMachineName PWCHAR
+  pGuid GUID*
+
+func MprAdminInterfaceSetCredentials
+  [ERROR_CODE]
+  lpwsServer LPWSTR
+  lpwsInterfaceName LPWSTR
+  lpwsUserName LPWSTR
+  lpwsDomainName LPWSTR
+  lpwsPassword LPWSTR
+
+func MprAdminInterfaceGetCredentials
+  [ERROR_CODE]
+  lpwsServer LPWSTR
+  lpwsInterfaceName LPWSTR
+  lpwsUserName LPWSTR
+  lpwsPassword LPWSTR
+  lpwsDomainName LPWSTR
+
+func MprAdminInterfaceSetCredentialsEx
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwLevel DWORD
+  lpbBuffer LPBYTE
+
+func MprAdminInterfaceGetCredentialsEx
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwLevel DWORD
+  lplpbBuffer LPBYTE*
+
+func MprAdminInterfaceConnect
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  hEvent HANDLE
+  fSynchronous BOOL
+
+func MprAdminInterfaceDisconnect
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+
+func MprAdminInterfaceUpdateRoutes
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwProtocolId DWORD
+  hEvent HANDLE
+
+func MprAdminInterfaceQueryUpdateResult
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+  dwProtocolId DWORD
+  lpdwUpdateResult LPDWORD
+
+func MprAdminInterfaceUpdatePhonebookInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hInterface HANDLE
+
+func MprAdminRegisterConnectionNotification
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hEventNotification HANDLE
+
+func MprAdminDeregisterConnectionNotification
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  hEventNotification HANDLE
+
+func MprAdminMIBServerConnect
+  [ERROR_CODE]
+  lpwsServerName LPWSTR
+  phMibServer MIB_SERVER_HANDLE*
+
+func MprAdminMIBServerDisconnect
+  VOID
+  hMibServer MIB_SERVER_HANDLE
+
+func MprAdminMIBEntryCreate
+  [ERROR_CODE]
+  hMibServer MIB_SERVER_HANDLE
+  dwPid DWORD
+  dwRoutingPid DWORD
+  lpEntry LPVOID
+  dwEntrySize DWORD
+
+func MprAdminMIBEntryDelete
+  [ERROR_CODE]
+  hMibServer MIB_SERVER_HANDLE
+  dwProtocolId DWORD
+  dwRoutingPid DWORD
+  lpEntry LPVOID
+  dwEntrySize DWORD
+
+func MprAdminMIBEntrySet
+  [ERROR_CODE]
+  hMibServer MIB_SERVER_HANDLE
+  dwProtocolId DWORD
+  dwRoutingPid DWORD
+  lpEntry LPVOID
+  dwEntrySize DWORD
+
+func MprAdminMIBEntryGet
+  [ERROR_CODE]
+  hMibServer MIB_SERVER_HANDLE
+  dwProtocolId DWORD
+  dwRoutingPid DWORD
+  lpInEntry LPVOID
+  dwInEntrySize DWORD
+  lplpOutEntry LPVOID*
+  lpOutEntrySize LPDWORD
+
+func MprAdminMIBEntryGetFirst
+  [ERROR_CODE]
+  hMibServer MIB_SERVER_HANDLE
+  dwProtocolId DWORD
+  dwRoutingPid DWORD
+  lpInEntry LPVOID
+  dwInEntrySize DWORD
+  lplpOutEntry LPVOID*
+  lpOutEntrySize LPDWORD
+
+func MprAdminMIBEntryGetNext
+  [ERROR_CODE]
+  hMibServer MIB_SERVER_HANDLE
+  dwProtocolId DWORD
+  dwRoutingPid DWORD
+  lpInEntry LPVOID
+  dwInEntrySize DWORD
+  lplpOutEntry LPVOID*
+  lpOutEntrySize LPDWORD
+
+func MprAdminMIBGetTrapInfo
+  [ERROR_CODE]
+  hMibServer MIB_SERVER_HANDLE
+  dwProtocolId DWORD
+  dwRoutingPid DWORD
+  lpInData LPVOID
+  dwInDataSize DWORD
+  lplpOutData LPVOID*
+  lpOutDataSize LPDWORD
+
+func MprAdminMIBSetTrapInfo
+  [ERROR_CODE]
+  dwProtocolId DWORD
+  dwRoutingPid DWORD
+  hEvent HANDLE
+  lpInData LPVOID
+  dwInDataSize DWORD
+  lplpOutData LPVOID*
+  lpOutDataSize LPDWORD
+
+func MprAdminMIBBufferFree
+  [ERROR_CODE]
+  pBuffer LPVOID
+
+func MprConfigServerInstall
+  [ERROR_CODE]
+  dwLevel DWORD
+  pBuffer PVOID
+
+func MprConfigServerConnect
+  [ERROR_CODE]
+  lpwsServerName LPWSTR
+  phMprConfig HANDLE*
+
+func MprConfigServerDisconnect
+  VOID
+  hMprConfig HANDLE
+
+func MprConfigServerRefresh
+  [ERROR_CODE]
+  hMprConfig HANDLE
+
+func MprConfigBufferFree
+  [ERROR_CODE]
+  pBuffer LPVOID
+
+func MprConfigServerGetInfo
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  dwLevel DWORD
+  lplpbBuffer LPBYTE*
+
+func MprConfigServerSetInfo
+  [ERROR_CODE]
+  hMprServer MPR_SERVER_HANDLE
+  dwLevel DWORD
+  lpbBuffer LPBYTE
+
+func MprConfigServerBackup
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  lpwsPath LPWSTR
+
+func MprConfigServerRestore
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  lpwsPath LPWSTR
+
+func MprConfigTransportCreate
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  dwTransportId DWORD
+  lpwsTransportName LPWSTR
+  pGlobalInfo LPBYTE
+  dwGlobalInfoSize DWORD
+  pClientInterfaceInfo LPBYTE
+  dwClientInterfaceInfoSize DWORD
+  lpwsDLLPath LPWSTR
+  phRouterTransport HANDLE*
+
+func MprConfigTransportDelete
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterTransport HANDLE
+
+func MprConfigTransportGetHandle
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  dwTransportId DWORD
+  phRouterTransport HANDLE*
+
+func MprConfigTransportSetInfo
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterTransport HANDLE
+  pGlobalInfo LPBYTE
+  dwGlobalInfoSize DWORD
+  pClientInterfaceInfo LPBYTE
+  dwClientInterfaceInfoSize DWORD
+  lpwsDLLPath LPWSTR
+
+func MprConfigTransportGetInfo
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterTransport HANDLE
+  ppGlobalInfo LPBYTE*
+  lpdwGlobalInfoSize LPDWORD
+  ppClientInterfaceInfo LPBYTE*
+  lpdwClientInterfaceInfoSize LPDWORD
+  lplpwsDLLPath LPWSTR*
+
+func MprConfigTransportEnum
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  dwLevel DWORD
+  lplpBuffer LPBYTE*
+  dwPrefMaxLen DWORD
+  lpdwEntriesRead LPDWORD
+  lpdwTotalEntries LPDWORD
+  lpdwResumeHandle LPDWORD
+
+func MprConfigInterfaceCreate
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  dwLevel DWORD
+  lpbBuffer LPBYTE
+  phRouterInterface HANDLE*
+
+func MprConfigInterfaceDelete
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterInterface HANDLE
+
+func MprConfigInterfaceGetHandle
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  lpwsInterfaceName LPWSTR
+  phRouterInterface HANDLE*
+
+func MprConfigInterfaceGetInfo
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterInterface HANDLE
+  dwLevel DWORD
+  lplpBuffer LPBYTE*
+  lpdwBufferSize LPDWORD
+
+func MprConfigInterfaceSetInfo
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterInterface HANDLE
+  dwLevel DWORD
+  lpbBuffer LPBYTE
+
+func MprConfigInterfaceEnum
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  dwLevel DWORD
+  lplpBuffer LPBYTE*
+  dwPrefMaxLen DWORD
+  lpdwEntriesRead LPDWORD
+  lpdwTotalEntries LPDWORD
+  lpdwResumeHandle LPDWORD
+
+func MprConfigInterfaceTransportAdd
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterInterface HANDLE
+  dwTransportId DWORD
+  lpwsTransportName LPWSTR
+  pInterfaceInfo LPBYTE
+  dwInterfaceInfoSize DWORD
+  phRouterIfTransport HANDLE*
+
+func MprConfigInterfaceTransportRemove
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterInterface HANDLE
+  hRouterIfTransport HANDLE
+
+func MprConfigInterfaceTransportGetHandle
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterInterface HANDLE
+  dwTransportId DWORD
+  phRouterIfTransport HANDLE*
+
+func MprConfigInterfaceTransportGetInfo
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterInterface HANDLE
+  hRouterIfTransport HANDLE
+  ppInterfaceInfo LPBYTE*
+  lpdwInterfaceInfoSize LPDWORD
+
+func MprConfigInterfaceTransportSetInfo
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterInterface HANDLE
+  hRouterIfTransport HANDLE
+  pInterfaceInfo LPBYTE
+  dwInterfaceInfoSize DWORD
+
+func MprConfigInterfaceTransportEnum
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  hRouterInterface HANDLE
+  dwLevel DWORD
+  lplpBuffer LPBYTE*
+  dwPrefMaxLen DWORD
+  lpdwEntriesRead LPDWORD
+  lpdwTotalEntries LPDWORD
+  lpdwResumeHandle LPDWORD
+
+func MprConfigGetFriendlyName
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  pszGuidName PWCHAR
+  pszBuffer PWCHAR
+  dwBufferSize DWORD
+
+func MprConfigGetGuidName
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  pszFriendlyName PWCHAR
+  pszBuffer PWCHAR
+  dwBufferSize DWORD
+
+func MprConfigFilterGetInfo
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  dwLevel DWORD
+  lpBuffer LPBYTE
+
+func MprConfigFilterSetInfo
+  [ERROR_CODE]
+  hMprConfig HANDLE
+  dwLevel DWORD
+  lpBuffer LPBYTE
+
+func MprInfoCreate
+  [ERROR_CODE]
+  dwVersion DWORD
+  lplpNewHeader LPVOID*
+
+func MprInfoDelete
+  [ERROR_CODE]
+  lpHeader LPVOID
+
+func MprInfoRemoveAll
+  [ERROR_CODE]
+  lpHeader LPVOID
+  lplpNewHeader LPVOID*
+
+func MprInfoDuplicate
+  [ERROR_CODE]
+  lpHeader LPVOID
+  lplpNewHeader LPVOID*
+
+func MprInfoBlockAdd
+  [ERROR_CODE]
+  lpHeader LPVOID
+  dwInfoType DWORD
+  dwItemSize DWORD
+  dwItemCount DWORD
+  lpItemData LPBYTE
+  lplpNewHeader LPVOID*
+
+func MprInfoBlockRemove
+  [ERROR_CODE]
+  lpHeader LPVOID
+  dwInfoType DWORD
+  lplpNewHeader LPVOID*
+
+func MprInfoBlockSet
+  [ERROR_CODE]
+  lpHeader LPVOID
+  dwInfoType DWORD
+  dwItemSize DWORD
+  dwItemCount DWORD
+  lpItemData LPBYTE
+  lplpNewHeader LPVOID*
+
+func MprInfoBlockFind
+  [ERROR_CODE]
+  lpHeader LPVOID
+  dwInfoType DWORD
+  lpdwItemSize LPDWORD
+  lpdwItemCount LPDWORD
+  lplpItemData LPBYTE*
+
+func MprInfoBlockQuerySize
+  DWORD
+  lpHeader LPVOID
+

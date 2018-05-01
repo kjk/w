@@ -1,0 +1,7 @@
+include Interfaces\IUnknown.txt
+
+ingterface IObjectWithBackReferences base=IUnknown id={321a6a6a-d61f-4bf3-97ae-14be2986bb36} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func RemoveBackReferences
+    HRESULT
+
+

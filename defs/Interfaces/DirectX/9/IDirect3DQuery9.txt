@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3DQuery9 base=IUnknown id={d9771460-a695-4f26-bbd3-27b840b541cc} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func GetDevice
+    HRESULT
+    ppDevice IDirect3DDevice9**
+
+  func GetType
+    success NotEqual=0
+    D3DQUERYTYPE
+
+  func GetDataSize
+    success NotEqual=0
+    DWORD
+
+  func Issue
+    HRESULT
+    dwIssueFlags DWORD
+
+  func GetData
+    HRESULT
+    pData void*
+    dwSize DWORD
+    dwGetDataFlags DWORD
+
+

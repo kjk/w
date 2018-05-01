@@ -1,0 +1,17 @@
+include Interfaces\DirectShow\IAMTuner.txt
+
+ingterface IBPCSatelliteTuner base=IAMTuner id={211A8765-03AC-11d1-8D13-00AA00BD8339} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func get_DefaultSubChannelTypes
+    HRESULT
+    plDefaultVideoType long*
+    plDefaultAudioType long*
+
+  func put_DefaultSubChannelTypes
+    HRESULT
+    lDefaultVideoType long
+    lDefaultAudioType long
+
+  func IsTapingPermitted
+    HRESULT
+
+

@@ -1,0 +1,12 @@
+include WMI\IUnsecuredApartment.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemUnsecuredApartment base=IUnsecuredApartment id={31739d04-3471-4cf4-9a7c-57a44ae71956} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func CreateSinkStub
+    WBEMSTATUS
+    pSink IWbemObjectSink*
+    dwFlags DWORD
+    wszReserved LPCWSTR
+    ppStub IWbemObjectSink**
+
+

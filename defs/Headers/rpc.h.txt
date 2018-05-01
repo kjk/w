@@ -1,0 +1,402 @@
+include Headers\windows.h.txt
+
+header
+alias RPC_BINDING_HANDLE void*
+
+pointer RPC_BINDING_HANDLE* RPC_BINDING_HANDLE
+
+alias RPC_TSTR LPTSTR
+
+pointer RPC_TSTR* RPC_TSTR
+
+alias RPC_CSTR LPSTR
+
+pointer RPC_CSTR* RPC_CSTR
+
+alias RPC_WSTR LPWSTR
+
+alias RPC_IF_HANDLE void*
+
+alias RPC_NS_HANDLE void*
+
+pointer RPC_NS_HANDLE* RPC_NS_HANDLE
+
+alias RPC_AUTHZ_HANDLE void*
+
+pointer RPC_AUTHZ_HANDLE* RPC_AUTHZ_HANDLE
+
+alias RPC_AUTH_IDENTITY_HANDLE void*
+
+pointer RPC_AUTH_IDENTITY_HANDLE* RPC_AUTH_IDENTITY_HANDLE
+
+alias RPC_EP_INQ_HANDLE void*
+
+pointer RPC_EP_INQ_HANDLE* RPC_EP_INQ_HANDLE
+
+alias RPC_CLIENT_ALLOC* LPVOID
+
+pointer RPC_CLIENT_ALLOC** RPC_CLIENT_ALLOC*
+
+alias RPC_CLIENT_FREE* LPVOID
+
+pointer RPC_CLIENT_FREE** RPC_CLIENT_FREE*
+
+alias RPC_MGMT_AUTHORIZATION_FN LPVOID
+
+alias RPC_OBJECT_INQ_FN LPVOID
+
+alias RPC_MGR_EPV* void*
+
+pointer RPC_MGR_EPV** RPC_MGR_EPV*
+
+alias RPC_AUTH_KEY_RETRIEVAL_FN LPVOID
+
+alias RPC_IF_CALLBACK_FN* LPVOID
+
+alias RPC_SS_THREAD_HANDLE void*
+
+alias PFN_RPCNOTIFICATION_ROUTINE LPVOID
+
+array "UUID* [1]" base=UUID* count=1
+
+array "RPC_TSTR [1]" base=RPC_TSTR count=1
+
+array "LONG_PTR [4]" base=LONG_PTR count=4
+
+array "unsigned long [1]" base="unsigned long" count=1
+
+array "RPC_BINDING_HANDLE [1]" base=RPC_BINDING_HANDLE count=1
+
+struct RPC_PROTSEQ_VECTOR
+  Count "unsigned int"
+  Protseq "RPC_TSTR [1]" count=Count
+
+pointer RPC_PROTSEQ_VECTOR* RPC_PROTSEQ_VECTOR
+
+pointer RPC_PROTSEQ_VECTOR** RPC_PROTSEQ_VECTOR*
+
+union [RPC_BINDING_HANDLE_TEMPLATE_V1_u] display=union
+  Reserved RPC_TSTR
+
+flag [RPC_BHT] "unsigned long" display="unsigned long"
+  RPC_BHT_OBJECT_UUID_VALID 0x1
+
+struct RPC_BINDING_HANDLE_TEMPLATE_V1
+  Version "unsigned long"
+  Flags [RPC_BHT]
+  ProtocolSequence "unsigned long"
+  NetworkAddress RPC_TSTR
+  StringEndpoint RPC_TSTR
+  u1 [RPC_BINDING_HANDLE_TEMPLATE_V1_u]
+  ObjectUuid UUID
+
+pointer RPC_BINDING_HANDLE_TEMPLATE_V1* RPC_BINDING_HANDLE_TEMPLATE_V1
+
+flag [RPC_C_QOS_CAPABILITIES] "unsigned long" display="unsigned long"
+  RPC_C_QOS_CAPABILITIES_DEFAULT                     0x0
+  RPC_C_QOS_CAPABILITIES_MUTUAL_AUTH                 0x1
+  RPC_C_QOS_CAPABILITIES_MAKE_FULLSIC                0x2
+  RPC_C_QOS_CAPABILITIES_ANY_AUTHORITY               0x4
+  RPC_C_QOS_CAPABILITIES_IGNORE_DELEGATE_FAILURE     0x8
+  RPC_C_QOS_CAPABILITIES_LOCAL_MA_HINT               0x10
+  RPC_C_QOS_CAPABILITIES_SCHANNEL_FULL_AUTH_IDENTITY 0x20
+
+enum [RPC_C_QOS_IDENTITY] "unsigned long" display="unsigned long"
+  RPC_C_QOS_IDENTITY_STATIC  0
+  RPC_C_QOS_IDENTITY_DYNAMIC 1
+
+enum [RPC_C_IMP_LEVEL] "unsigned long" display="unsigned long"
+  RPC_C_IMP_LEVEL_DEFAULT     0
+  RPC_C_IMP_LEVEL_ANONYMOUS   1
+  RPC_C_IMP_LEVEL_IDENTIFY    2
+  RPC_C_IMP_LEVEL_IMPERSONATE 3
+  RPC_C_IMP_LEVEL_DELEGATE    4
+
+struct RPC_SECURITY_QOS
+  Version "unsigned long"
+  Capabilities [RPC_C_QOS_CAPABILITIES]
+  IdentityTracking [RPC_C_QOS_IDENTITY]
+  ImpersonationType [RPC_C_IMP_LEVEL]
+
+pointer RPC_SECURITY_QOS* RPC_SECURITY_QOS
+
+enum [RPC_C_AUTHN_LEVEL] "unsigned long" display="unsigned long"
+  RPC_C_AUTHN_LEVEL_DEFAULT       0
+  RPC_C_AUTHN_LEVEL_NONE          1
+  RPC_C_AUTHN_LEVEL_CONNECT       2
+  RPC_C_AUTHN_LEVEL_CALL          3
+  RPC_C_AUTHN_LEVEL_PKT           4
+  RPC_C_AUTHN_LEVEL_PKT_INTEGRITY 5
+  RPC_C_AUTHN_LEVEL_PKT_PRIVACY   6
+
+pointer [RPC_C_AUTHN_LEVEL*] [RPC_C_AUTHN_LEVEL] display="unsigned long*"
+
+enum [RPC_C_AUTHN_SVC] "unsigned long" display="unsigned long"
+  RPC_C_AUTHN_NONE          0
+  RPC_C_AUTHN_DCE_PRIVATE   1
+  RPC_C_AUTHN_DCE_PUBLIC    2
+  RPC_C_AUTHN_DEC_PUBLIC    4
+  RPC_C_AUTHN_GSS_NEGOTIATE 9
+  RPC_C_AUTHN_WINNT         10
+  RPC_C_AUTHN_GSS_SCHANNEL  14
+  RPC_C_AUTHN_GSS_KERBEROS  16
+  RPC_C_AUTHN_DPA           17
+  RPC_C_AUTHN_MSN           18
+  RPC_C_AUTHN_DIGEST        21
+  RPC_C_AUTHN_MQ            100
+  RPC_C_AUTHN_DEFAULT       0xFFFFFFFF
+
+pointer [RPC_C_AUTHN_SVC*] [RPC_C_AUTHN_SVC] display="unsigned long*"
+
+flag [SEC_WINNT_AUTH_IDENTITY] "unsigned long" display="unsigned long"
+  SEC_WINNT_AUTH_IDENTITY_ANSI    0x1
+  SEC_WINNT_AUTH_IDENTITY_UNICODE 0x2
+
+struct SEC_WINNT_AUTH_IDENTITY
+  User RPC_TSTR
+  UserLength "unsigned long"
+  Domain RPC_TSTR
+  DomainLength "unsigned long"
+  Password RPC_TSTR
+  PasswordLength long
+  Flags [SEC_WINNT_AUTH_IDENTITY]
+
+pointer SEC_WINNT_AUTH_IDENTITY* SEC_WINNT_AUTH_IDENTITY
+
+struct RPC_BINDING_HANDLE_SECURITY_V1
+  Version "unsigned long"
+  ServerPrincName RPC_TSTR
+  AuthnLevel [RPC_C_AUTHN_LEVEL]
+  AuthnSvc [RPC_C_AUTHN_SVC]
+  AuthIdentity SEC_WINNT_AUTH_IDENTITY*
+  SecurityQos RPC_SECURITY_QOS*
+
+pointer RPC_BINDING_HANDLE_SECURITY_V1* RPC_BINDING_HANDLE_SECURITY_V1
+
+flag [RPC_BHO] "unsigned long" display="unsigned long"
+  RPC_BHO_NONCAUSAL                0x1
+  RPC_BHO_DONTLINGER               0x2
+  RPC_BHO_EXCLUSIVE_AND_GUARANTEED 0x4
+
+struct RPC_BINDING_HANDLE_OPTIONS_V1
+  Version "unsigned long"
+  Flags [RPC_BHO]
+  ComTimeout "unsigned long"
+  CallTimeout "unsigned long"
+
+pointer RPC_BINDING_HANDLE_OPTIONS_V1* RPC_BINDING_HANDLE_OPTIONS_V1
+
+struct RPC_BINDING_VECTOR
+  Count "unsigned long"
+  BindingH "RPC_BINDING_HANDLE [1]" count=Count
+
+pointer RPC_BINDING_VECTOR* RPC_BINDING_VECTOR
+
+pointer RPC_BINDING_VECTOR** RPC_BINDING_VECTOR*
+
+struct RPC_IF_ID
+  Uuid UUID
+  VersMajor "unsigned short"
+  VersMinor "unsigned short"
+
+pointer RPC_IF_ID* RPC_IF_ID
+
+array "RPC_IF_ID* [1]" base=RPC_IF_ID* count=1
+
+struct RPC_IF_ID_VECTOR
+  Count "unsigned long"
+  IfId "RPC_IF_ID* [1]" count=Count
+
+pointer RPC_IF_ID_VECTOR* RPC_IF_ID_VECTOR
+
+pointer RPC_IF_ID_VECTOR** RPC_IF_ID_VECTOR*
+
+struct RPC_STATS_VECTOR
+  Count "unsigned int"
+  Stats "unsigned long [1]" count=Count
+
+pointer RPC_STATS_VECTOR* RPC_STATS_VECTOR
+
+pointer RPC_STATS_VECTOR** RPC_STATS_VECTOR*
+
+struct UUID_VECTOR
+  Count "unsigned long"
+  Uuid "UUID* [1]" count=Count
+
+pointer UUID_VECTOR* UUID_VECTOR
+
+struct RPC_VERSION
+  MajorVersion "unsigned short"
+  MinorVersion "unsigned short"
+
+pointer RPC_VERSION* RPC_VERSION
+
+struct RPC_SYNTAX_IDENTIFIER
+  SyntaxGUID GUID
+  SyntaxVersion RPC_VERSION
+
+pointer PRPC_SYNTAX_IDENTIFIER RPC_SYNTAX_IDENTIFIER
+
+flag [RPC_POLICY_EndPoint] "unsigned long" display="unsigned long"
+  RPC_C_USE_INTERNET_PORT        0x1
+  RPC_C_USE_INTRANET_PORT        0x2
+  RPC_C_DONT_FAIL                0x4
+  RPC_C_RPCHTTP_USE_LOAD_BALANCE 0x8
+
+flag [RPC_POLICY_Nic] "unsigned long" display="unsigned long"
+  RPC_C_BIND_TO_ALL_NICS 1
+
+struct RPC_POLICY
+  Length "unsigned int"
+  EndpointFlags [RPC_POLICY_EndPoint]
+  NICFlags [RPC_POLICY_Nic]
+
+pointer PRPC_POLICY RPC_POLICY
+
+struct RPC_ERROR_ENUM_HANDLE
+  Signature ULONG
+  CurrentPos void*
+  Head void*
+
+pointer RPC_ERROR_ENUM_HANDLE* RPC_ERROR_ENUM_HANDLE
+
+enum RPC_NOTIFICATIONS UINT
+  RpcNotificationCallNone         0
+  RpcNotificationClientDisconnect 1
+  RpcNotificationCallCancel       2
+
+alias [RPC_C_AUTHN_LEVEL-unsigned-int] [RPC_C_AUTHN_LEVEL] display="unsigned int"
+
+pointer [RPC_C_AUTHN_LEVEL-unsigned-int*] [RPC_C_AUTHN_LEVEL-unsigned-int] display="unsigned int*"
+
+enum [RPC_C_AUTHZ] "unsigned long" display="unsigned long"
+  RPC_C_AUTHZ_NONE    0
+  RPC_C_AUTHZ_NAME    1
+  RPC_C_AUTHZ_DCE     2
+  RPC_C_AUTHZ_DEFAULT 0xffffffff
+
+pointer [RPC_C_AUTHZ*] [RPC_C_AUTHZ] display="unsigned long*"
+
+enum RPC_STATUS [ERROR_CODE]
+  RPC_S_OK                    0
+  RPC_S_ACCESS_DENIED         5
+  RPC_S_OUT_OF_MEMORY         14
+  RPC_S_INVALID_ARG           87
+  RPC_S_BUFFER_TOO_SMALL      122
+  RPC_S_OUT_OF_THREADS        164
+  RPC_S_ASYNC_CALL_PENDING    997
+  RPC_S_SERVER_OUT_OF_MEMORY  1130
+  RPC_S_UNKNOWN_PRINCIPAL     1332
+  RPC_S_INVALID_SECURITY_DESC 1338
+  RPC_S_TIMEOUT               1460
+  RPC_S_NOT_ENOUGH_QUOTA      1816
+
+pointer RPC_STATUS* RPC_STATUS
+
+enum ExtendedErrorParamTypes UINT
+  eeptAnsiString    1
+  eeptUnicodeString 2
+  eeptLongVal       3
+  eeptShortVal      4
+  eeptPointerVal    5
+  eeptNone          6
+  eeptBinary        7
+
+struct BinaryParam
+  Buffer void*
+  Size short
+
+union [RPC_EE_INFO_PARAM_u] display=union
+  AnsiString LPSTR
+  UnicodeString LPWSTR
+  LVal long
+  SVal short
+  PVal ULONGLONG
+  BVal BinaryParam
+
+struct RPC_EE_INFO_PARAM
+  ParameterType ExtendedErrorParamTypes
+  u [RPC_EE_INFO_PARAM_u]
+
+array "RPC_EE_INFO_PARAM [MaxNumberOfEEInfoParams]" base=RPC_EE_INFO_PARAM count=4
+
+union [RPC_EXTENDED_ERROR_INFO_u] display=union
+  SystemTime SYSTEMTIME
+  FileTime FILETIME
+
+flag [RPC_EE_FLAGS] USHORT display=USHORT
+  EEInfoPreviousRecordsMissing 1
+  EEInfoNextRecordsMissing     2
+  EEInfoUseFileTime            4
+
+struct RPC_EXTENDED_ERROR_INFO
+  Version ULONG
+  ComputerName LPWSTR
+  ProcessID ULONG
+  u [RPC_EXTENDED_ERROR_INFO_u]
+  GeneratingComponent ULONG
+  Status ULONG
+  DetectionLocation USHORT
+  Flags [RPC_EE_FLAGS]
+  NumberOfParameters int
+  Parameters "RPC_EE_INFO_PARAM [MaxNumberOfEEInfoParams]"
+
+pointer RPC_EXTENDED_ERROR_INFO* RPC_EXTENDED_ERROR_INFO
+
+struct [RPC_ASYNC_NOTIFICATION_INFO_s1]
+  NotificationRoutine PFN_RPCNOTIFICATION_ROUTINE
+  hThread HANDLE
+
+struct [RPC_ASYNC_NOTIFICATION_INFO_s2]
+  hIOPort HANDLE
+  dwNumberOfBytesTransferred DWORD
+  dwCompletionKey DWORD_PTR
+  lpOverlapped LPOVERLAPPED
+
+struct [RPC_ASYNC_NOTIFICATION_INFO_s3]
+  hWnd HWND
+  Msg [WinMsg]
+
+union RPC_ASYNC_NOTIFICATION_INFO
+  APC [RPC_ASYNC_NOTIFICATION_INFO_s1]
+  IOC [RPC_ASYNC_NOTIFICATION_INFO_s2]
+  HWND [RPC_ASYNC_NOTIFICATION_INFO_s3]
+  hEvent HANDLE
+  NotificationRoutine PFN_RPCNOTIFICATION_ROUTINE
+
+pointer RPC_ASYNC_NOTIFICATION_INFO* RPC_ASYNC_NOTIFICATION_INFO
+
+flag [RPC_ASYNC_STATE_FLAGS] "unsigned long" display="unsigned long"
+  RPC_C_NOTIFY_ON_SEND_COMPLETE 0x1
+  RPC_C_INFINITE_TIMEOUT        0xFFFFFFFF
+
+enum RPC_ASYNC_EVENT UINT
+  RpcCallComplete     0
+  RpcSendComplete     1
+  RpcReceiveComplete  2
+  RpcClientDisconnect 3
+  RpcClientCancel     4
+
+enum RPC_NOTIFICATION_TYPES UINT
+  RpcNotificationTypeNone     0
+  RpcNotificationTypeEvent    1
+  RpcNotificationTypeApc      2
+  RpcNotificationTypeIoc      3
+  RpcNotificationTypeHwnd     4
+  RpcNotificationTypeCallback 5
+
+struct RPC_ASYNC_STATE
+  Size "unsigned int"
+  Signature "unsigned long"
+  Lock long
+  Flags [RPC_ASYNC_STATE_FLAGS]
+  StubInfo void*
+  UserInfo void*
+  RuntimeInfo void*
+  Event RPC_ASYNC_EVENT
+  NotificationType RPC_NOTIFICATION_TYPES
+  u RPC_ASYNC_NOTIFICATION_INFO
+  Reserved "LONG_PTR [4]"
+
+pointer PRPC_ASYNC_STATE RPC_ASYNC_STATE
+

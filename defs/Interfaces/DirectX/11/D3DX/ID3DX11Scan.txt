@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+
+ingterface ID3DX11Scan base=IUnknown id={5089b68f-e71d-4d38-be8e-f363b95a9405} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/D3DCSX"
+  func SetScanDirection
+    HRESULT
+    Direction D3DX11_SCAN_DIRECTION
+
+  func Scan
+    HRESULT
+    ElementType D3DX11_SCAN_DATA_TYPE
+    OpCode D3DX11_SCAN_OPCODE
+    ElementScanSize UINT
+    pSrc ID3D11UnorderedAccessView*
+    pDst ID3D11UnorderedAccessView*
+
+  func Multiscan
+    HRESULT
+    ElementType D3DX11_SCAN_DATA_TYPE
+    OpCode D3DX11_SCAN_OPCODE
+    ElementScanSize UINT
+    ElementScanPitch UINT
+    ScanCount UINT
+    pSrc ID3D11UnorderedAccessView*
+    pDst ID3D11UnorderedAccessView*
+
+

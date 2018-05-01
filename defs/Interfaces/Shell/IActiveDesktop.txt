@@ -1,0 +1,186 @@
+include Interfaces\IUnknown.txt
+
+ingterface IActiveDesktop base=IUnknown id={f490eb00-1240-11d1-9888-006097deacf9} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func ApplyChanges
+    HRESULT
+    dwFlags DWORD
+
+  func GetWallpaper
+    HRESULT
+    pwszWallpaper LPWSTR
+    cchWallpaper UINT
+    dwFlags DWORD
+
+  func SetWallpaper
+    HRESULT
+    pwszWallpaper LPCWSTR
+    dwReserved DWORD
+
+  func GetWallpaperOptions
+    HRESULT
+    pwpo LPWALLPAPEROPT
+    dwReserved DWORD
+
+  func SetWallpaperOptions
+    HRESULT
+    pwpo LPCWALLPAPEROPT
+    dwReserved DWORD
+
+  func GetPattern
+    HRESULT
+    pwszPattern LPWSTR
+    cchPattern UINT
+    dwReserved DWORD
+
+  func SetPattern
+    HRESULT
+    pwszPattern LPCWSTR
+    dwReserved DWORD
+
+  func GetDesktopItemOptions
+    HRESULT
+    pco LPCOMPONENTSOPT
+    dwReserved DWORD
+
+  func SetDesktopItemOptions
+    HRESULT
+    pco LPCCOMPONENTSOPT
+    dwReserved DWORD
+
+  func AddDesktopItem
+    HRESULT
+    pcomp LPCCOMPONENT
+    dwReserved DWORD
+
+  func AddDesktopItemWithUI
+    HRESULT
+    hwnd HWND
+    pcomp LPCOMPONENT
+    dwReserved DWORD
+
+  func ModifyDesktopItem
+    HRESULT
+    pcomp LPCCOMPONENT
+    dwFlags DWORD
+
+  func RemoveDesktopItem
+    HRESULT
+    pcomp LPCCOMPONENT
+    dwReserved DWORD
+
+  func GetDesktopItemCount
+    HRESULT
+    lpiCount LPINT
+    dwReserved DWORD
+
+  func GetDesktopItem
+    HRESULT
+    nComponent int
+    pcomp LPCOMPONENT
+    dwReserved DWORD
+
+  func GetDesktopItemByID
+    HRESULT
+    dwID ULONG_PTR
+    pcomp LPCOMPONENT
+    dwReserved DWORD
+
+  func GenerateDesktopItemHtml
+    HRESULT
+    pwszFileName LPCWSTR
+    pcomp LPCOMPONENT
+    dwReserved DWORD
+
+  func AddUrl
+    HRESULT
+    hwnd HWND
+    pszSource LPCWSTR
+    pcomp LPCOMPONENT
+    dwFlags DWORD
+
+  func GetDesktopItemBySource
+    HRESULT
+    pwszSource LPCWSTR
+    pcomp LPCOMPONENT
+    dwReserved DWORD
+
+  array "WCHAR [INTERNET_MAX_URL_LENGTH]" base=WCHAR count=2084
+
+  enum [WPSTYLE] DWORD display=DWORD
+    WPSTYLE_CENTER     0
+    WPSTYLE_TILE       1
+    WPSTYLE_STRETCH    2
+    WPSTYLE_KEEPASPECT 3
+    WPSTYLE_CROPTOFIT  4
+    WPSTYLE_SPAN       5
+
+  struct WALLPAPEROPT
+  dwSize DWORD
+  dwStyle [WPSTYLE]
+
+  pointer LPWALLPAPEROPT WALLPAPEROPT
+
+  pointer LPCWALLPAPEROPT WALLPAPEROPT
+
+  struct COMPONENTSOPT
+  dwSize DWORD
+  fEnableComponents BOOL
+  fActiveDesktop BOOL
+
+  pointer LPCOMPONENTSOPT COMPONENTSOPT
+
+  pointer LPCCOMPONENTSOPT COMPONENTSOPT
+
+  enum [COMP_TYPE] int display=int
+    COMP_TYPE_HTMLDOC 0
+    COMP_TYPE_PICTURE 1
+    COMP_TYPE_WEBSITE 2
+    COMP_TYPE_CONTROL 3
+    COMP_TYPE_CFHTML  4
+
+  struct COMPPOS
+  dwSize DWORD
+  iLeft int
+  iTop int
+  dwWidth DWORD
+  dwHeight DWORD
+  izIndex int
+  fCanResize BOOL
+  fCanResizeX BOOL
+  fCanResizeY BOOL
+  iPreferredLeftPercent int
+  iPreferredTopPercent int
+
+  flag [COMP_ITEM_STATE] DWORD display=DWORD
+    IS_NORMAL     0x00000001
+    IS_FULLSCREEN 0x00000002
+    IS_SPLIT      0x00000004
+
+  struct COMPSTATEINFO
+  dwSize DWORD
+  iLeft int
+  iTop int
+  dwWidth DWORD
+  dwHeight DWORD
+  dwItemState [COMP_ITEM_STATE]
+
+  struct COMPONENT
+  dwSize DWORD
+  dwID DWORD
+  iComponentType [COMP_TYPE]
+  fChecked BOOL
+  fDirty BOOL
+  fNoScroll BOOL
+  cpPos COMPPOS
+  wszFriendlyName "WCHAR [MAX_PATH]"
+  wszSource "WCHAR [INTERNET_MAX_URL_LENGTH]"
+  wszSubscribedURL "WCHAR [INTERNET_MAX_URL_LENGTH]"
+  dwCurItemState DWORD
+  csiOriginal COMPSTATEINFO
+  csiRestored COMPSTATEINFO
+
+  pointer LPCOMPONENT COMPONENT
+
+  pointer LPCCOMPONENT COMPONENT
+
+

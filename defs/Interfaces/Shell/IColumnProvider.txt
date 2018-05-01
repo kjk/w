@@ -1,0 +1,72 @@
+include Interfaces\IUnknown.txt
+include Headers\shell.h.txt
+
+ingterface IColumnProvider base=IUnknown id={E8025004-1C42-11d2-BE2C-00A0C9A83DA1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    psci LPCSHCOLUMNINIT
+
+  func GetColumnInfo
+    HRESULT
+    dwIndex DWORD
+    psci SHCOLUMNINFO*
+
+  func GetItemData
+    HRESULT
+    pscid LPCSHCOLUMNID
+    pscd LPCSHCOLUMNDATA
+    pvarData VARIANT*
+
+  flag [LVCFMT_FLAGS] DWORD display=DWORD
+    LVCFMT_LEFT               0x0000
+    LVCFMT_RIGHT              0x0001
+    LVCFMT_CENTER             0x0002
+    LVCFMT_JUSTIFYMASK        0x0003
+    LVCFMT_FIXED_WIDTH        0x00100
+    LVCFMT_IMAGE              0x0800
+    LVCFMT_BITMAP_ON_RIGHT    0x1000
+    LVCFMT_COL_HAS_IMAGES     0x8000
+    LVCFMT_NO_DPI_SCALE       0x40000
+    LVCFMT_FIXED_RATIO        0x80000
+    LVCFMT_LINE_BREAK         0x100000
+    LVCFMT_FILL               0x200000
+    LVCFMT_TILE_PLACEMENTMASK 0x300000
+    LVCFMT_WRAP               0x400000
+    LVCFMT_NO_TITLE           0x800000
+    LVCFMT_SPLITBUTTON        0x1000000
+
+  array "WCHAR [MAX_COLUMN_NAME_LEN]" base=WCHAR count=80
+
+  array "WCHAR [MAX_COLUMN_DESC_LEN]" base=WCHAR count=128
+
+  struct SHCOLUMNINFO pack=1
+  scid SHCOLUMNID
+  vt VARTYPE
+  fmt [LVCFMT_FLAGS]
+  cChars UINT
+  csFlags SHCOLSTATEF
+  wszTitle "WCHAR [MAX_COLUMN_NAME_LEN]"
+  wszDescription "WCHAR [MAX_COLUMN_DESC_LEN]"
+
+  pointer SHCOLUMNINFO* SHCOLUMNINFO
+
+  struct SHCOLUMNINIT pack=8
+  dwFlags ULONG
+  dwReserved ULONG
+  wszFolder "WCHAR [MAX_PATH]"
+
+  pointer LPCSHCOLUMNINIT SHCOLUMNINIT
+
+  flag [SHCDF_FLAGS] ULONG display=ULONG
+    SHCDF_UPDATEITEM 0x00000001
+
+  struct SHCOLUMNDATA pack=8
+  dwFlags [SHCDF_FLAGS]
+  dwFileAttributes [FileAttributes]
+  dwReserved ULONG
+  pwszExt WCHAR*
+  wszFile "WCHAR [MAX_PATH]"
+
+  pointer LPCSHCOLUMNDATA SHCOLUMNDATA
+
+

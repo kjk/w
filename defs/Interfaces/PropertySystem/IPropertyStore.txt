@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyStore base=IUnknown id={886d8eeb-8cf2-4446-8d02-cdba1dbdcf99} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func GetCount
+    HRESULT
+    cProps DWORD*
+
+  func GetAt
+    HRESULT
+    iProp DWORD
+    pkey PROPERTYKEY*
+
+  func GetValue
+    HRESULT
+    key REFPROPERTYKEY
+    pv PROPVARIANT*
+
+  func SetValue
+    HRESULT
+    key REFPROPERTYKEY
+    propvar REFPROPVARIANT
+
+  func Commit
+    HRESULT
+
+

@@ -1,0 +1,40 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEncoderAPI base=IUnknown id={70423839-6ACC-4b23-B079-21DBF08156A5} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func IsSupported
+    HRESULT
+    Api "const GUID*"
+
+  func IsAvailable
+    HRESULT
+    Api "const GUID*"
+
+  func GetParameterRange
+    HRESULT
+    Api "const GUID*"
+    ValueMin VARIANT*
+    ValueMax VARIANT*
+    SteppingDelta VARIANT*
+
+  func GetParameterValues
+    HRESULT
+    Api "const GUID*"
+    Values VARIANT**
+    ValuesCount ULONG*
+
+  func GetDefaultValue
+    HRESULT
+    Api "const GUID*"
+    Value VARIANT*
+
+  func GetValue
+    HRESULT
+    Api "const GUID*"
+    Value VARIANT*
+
+  func SetValue
+    HRESULT
+    Api "const GUID*"
+    Value VARIANT*
+
+

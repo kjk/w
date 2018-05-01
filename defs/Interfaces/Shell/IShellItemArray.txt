@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellItemArray base=IUnknown id={b63ea76d-1f85-456f-a19c-48159efa858b} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func BindToHandler
+    HRESULT
+    pbc IBindCtx*
+    bhid REFGUID
+    riid REFIID
+    ppvOut void** interfaceId=riid
+
+  func GetPropertyStore
+    HRESULT
+    flags GETPROPERTYSTOREFLAGS
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetPropertyDescriptionList
+    HRESULT
+    keyType REFPROPERTYKEY
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetAttributes
+    HRESULT
+    AttribFlags SIATTRIBFLAGS
+    sfgaoMask SFGAOF
+    psfgaoAttribs SFGAOF*
+
+  func GetCount
+    HRESULT
+    pdwNumItems DWORD*
+
+  func GetItemAt
+    HRESULT
+    dwIndex DWORD
+    ppsi IShellItem**
+
+  func EnumItems
+    HRESULT
+    ppenumShellItems IEnumShellItems**
+
+

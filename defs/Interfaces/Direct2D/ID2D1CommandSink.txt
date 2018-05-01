@@ -1,0 +1,135 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1CommandSink base=IUnknown id={54d7898a-a061-40a7-bec7-e465bcba2c4f} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func BeginDraw
+    [D2D_HRESULT]
+
+  func EndDraw
+    [D2D_HRESULT]
+
+  func SetAntialiasMode
+    [D2D_HRESULT]
+    antialiasMode D2D1_ANTIALIAS_MODE
+
+  func SetTags
+    [D2D_HRESULT]
+    tag1 D2D1_TAG
+    tag2 D2D1_TAG
+
+  func SetTextAntialiasMode
+    [D2D_HRESULT]
+    textAntialiasMode D2D1_TEXT_ANTIALIAS_MODE
+
+  func SetTextRenderingParams
+    [D2D_HRESULT]
+    textRenderingParams IDWriteRenderingParams*
+
+  func SetTransform
+    [D2D_HRESULT]
+    transform "CONST D2D1_MATRIX_3X2_F*"
+
+  func SetPrimitiveBlend
+    [D2D_HRESULT]
+    primitiveBlend D2D1_PRIMITIVE_BLEND
+
+  func SetUnitMode
+    [D2D_HRESULT]
+    unitMode D2D1_UNIT_MODE
+
+  func Clear
+    [D2D_HRESULT]
+    color "CONST D2D1_COLOR_F*"
+
+  func DrawGlyphRun
+    [D2D_HRESULT]
+    baselineOrigin D2D1_POINT_2F
+    glyphRun "CONST DWRITE_GLYPH_RUN*"
+    glyphRunDescription "CONST DWRITE_GLYPH_RUN_DESCRIPTION*"
+    foregroundBrush ID2D1Brush*
+    measuringMode DWRITE_MEASURING_MODE
+
+  func DrawLine
+    [D2D_HRESULT]
+    point0 D2D1_POINT_2F
+    point1 D2D1_POINT_2F
+    brush ID2D1Brush*
+    strokeWidth FLOAT
+    strokeStyle ID2D1StrokeStyle*
+
+  func DrawGeometry
+    [D2D_HRESULT]
+    geometry ID2D1Geometry*
+    brush ID2D1Brush*
+    strokeWidth FLOAT
+    strokeStyle ID2D1StrokeStyle*
+
+  func DrawRectangle
+    [D2D_HRESULT]
+    rect "CONST D2D1_RECT_F*"
+    brush ID2D1Brush*
+    strokeWidth FLOAT
+    strokeStyle ID2D1StrokeStyle*
+
+  func DrawBitmap
+    [D2D_HRESULT]
+    bitmap ID2D1Bitmap*
+    destinationRectangle "CONST D2D1_RECT_F*"
+    opacity FLOAT
+    interpolationMode D2D1_INTERPOLATION_MODE
+    sourceRectangle "CONST D2D1_RECT_F*"
+    perspectiveTransform "CONST D2D1_MATRIX_4X4_F*"
+
+  func DrawImage
+    [D2D_HRESULT]
+    image ID2D1Image*
+    targetOffset "CONST D2D1_POINT_2F*"
+    imageRectangle "CONST D2D1_RECT_F*"
+    interpolationMode D2D1_INTERPOLATION_MODE
+    compositeMode D2D1_COMPOSITE_MODE
+
+  func DrawGdiMetafile
+    [D2D_HRESULT]
+    gdiMetafile ID2D1GdiMetafile*
+    targetOffset "CONST D2D1_POINT_2F*"
+
+  func FillMesh
+    [D2D_HRESULT]
+    mesh ID2D1Mesh*
+    brush ID2D1Brush*
+
+  func FillOpacityMask
+    [D2D_HRESULT]
+    opacityMask ID2D1Bitmap*
+    brush ID2D1Brush*
+    destinationRectangle "CONST D2D1_RECT_F*"
+    sourceRectangle "CONST D2D1_RECT_F*"
+
+  func FillGeometry
+    [D2D_HRESULT]
+    geometry ID2D1Geometry*
+    brush ID2D1Brush*
+    opacityBrush ID2D1Brush*
+
+  func FillRectangle
+    [D2D_HRESULT]
+    rect "CONST D2D1_RECT_F*"
+    brush ID2D1Brush*
+
+  func PushAxisAlignedClip
+    [D2D_HRESULT]
+    clipRect "CONST D2D1_RECT_F*"
+    antialiasMode D2D1_ANTIALIAS_MODE
+
+  func PushLayer
+    [D2D_HRESULT]
+    layerParameters1 "CONST D2D1_LAYER_PARAMETERS1*"
+    layer ID2D1Layer*
+
+  func PopAxisAlignedClip
+    [D2D_HRESULT]
+
+  func PopLayer
+    [D2D_HRESULT]
+
+

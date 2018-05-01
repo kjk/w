@@ -1,0 +1,80 @@
+include Interfaces\IDispatch.txt
+include Interfaces\FileSystemObject\FileSystemObject.h.txt
+
+ingterface IFile base=IDispatch id={C7C3F5A4-88A3-11D0-ABCB-00A0C90FFFC0} errorFunc=HRESULT onlineHelp=MSDN category="Scripting Runtime Library/FileSystemObject"
+  func get_Path
+    HRESULT
+    pbstrPath BSTR*
+
+  func get_Name
+    HRESULT
+    pbstrName BSTR*
+
+  func put_Name
+    HRESULT
+    pbstrName BSTR
+
+  func get_ShortPath
+    HRESULT
+    pbstrPath BSTR*
+
+  func get_ShortName
+    HRESULT
+    pbstrName BSTR*
+
+  func get_Drive
+    HRESULT
+    ppdrive IDrive**
+
+  func get_ParentFolder
+    HRESULT
+    ppfolder IFolder**
+
+  func get_Attributes
+    HRESULT
+    pfa FileAttribute*
+
+  func put_Attributes
+    HRESULT
+    pfa FileAttribute
+
+  func get_DateCreated
+    HRESULT
+    pdate DATE*
+
+  func get_DateLastModified
+    HRESULT
+    pdate DATE*
+
+  func get_DateLastAccessed
+    HRESULT
+    pdate DATE*
+
+  func get_Size
+    HRESULT
+    pvarSize VARIANT*
+
+  func get_Type
+    HRESULT
+    pbstrType BSTR*
+
+  func Delete
+    HRESULT
+    Force VARIANT_BOOL
+
+  func Copy
+    HRESULT
+    Destination BSTR
+    OverWriteFiles VARIANT_BOOL
+
+  func Move
+    HRESULT
+    Destination BSTR
+
+  func OpenAsTextStream
+    HRESULT
+    IOMode IOMode
+    Format Tristate
+    ppts ITextStream**
+
+

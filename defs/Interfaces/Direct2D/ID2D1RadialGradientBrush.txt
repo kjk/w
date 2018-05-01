@@ -1,0 +1,37 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Brush.txt
+
+ingterface ID2D1RadialGradientBrush base=ID2D1Brush id={2cd906ac-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetCenter
+    void
+    center D2D1_POINT_2F
+
+  func SetGradientOriginOffset
+    void
+    gradientOriginOffset D2D1_POINT_2F
+
+  func SetRadiusX
+    void
+    radiusX FLOAT
+
+  func SetRadiusY
+    void
+    radiusY FLOAT
+
+  func GetCenter
+    D2D1_POINT_2F
+
+  func GetGradientOriginOffset
+    D2D1_POINT_2F
+
+  func GetRadiusX
+    FLOAT
+
+  func GetRadiusY
+    FLOAT
+
+  func GetGradientStopCollection
+    void
+    gradientStopCollection ID2D1GradientStopCollection**
+
+

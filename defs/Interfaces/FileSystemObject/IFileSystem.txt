@@ -1,0 +1,136 @@
+include Interfaces\IDispatch.txt
+include Interfaces\FileSystemObject\FileSystemObject.h.txt
+
+ingterface IFileSystem base=IDispatch id={0AB5A3D0-E5B6-11D0-ABF5-00A0C90FFFC0} errorFunc=HRESULT onlineHelp=MSDN category="Scripting Runtime Library/FileSystemObject"
+  func get_Drives
+    HRESULT
+    ppdrives IDriveCollection**
+
+  func BuildPath
+    HRESULT
+    Path BSTR
+    Name BSTR
+    pbstrResult BSTR*
+
+  func GetDriveName
+    HRESULT
+    Path BSTR
+    pbstrResult BSTR*
+
+  func GetParentFolderName
+    HRESULT
+    Path BSTR
+    pbstrResult BSTR*
+
+  func GetFileName
+    HRESULT
+    Path BSTR
+    pbstrResult BSTR*
+
+  func GetBaseName
+    HRESULT
+    Path BSTR
+    pbstrResult BSTR*
+
+  func GetExtensionName
+    HRESULT
+    Path BSTR
+    pbstrResult BSTR*
+
+  func GetAbsolutePathName
+    HRESULT
+    Path BSTR
+    pbstrResult BSTR*
+
+  func GetTempName
+    HRESULT
+    pbstrResult BSTR*
+
+  func DriveExists
+    HRESULT
+    DriveSpec BSTR
+    pfExists VARIANT_BOOL*
+
+  func FileExists
+    HRESULT
+    FileSpec BSTR
+    pfExists VARIANT_BOOL*
+
+  func FolderExists
+    HRESULT
+    FolderSpec BSTR
+    pfExists VARIANT_BOOL*
+
+  func GetDrive
+    HRESULT
+    DriveSpec BSTR
+    ppdrive IDrive**
+
+  func GetFile
+    HRESULT
+    FilePath BSTR
+    ppfile IFile**
+
+  func GetFolder
+    HRESULT
+    FolderPath BSTR
+    ppfolder IFolder**
+
+  func GetSpecialFolder
+    HRESULT
+    SpecialFolder SpecialFolderConst
+    ppfolder IFolder**
+
+  func DeleteFile
+    HRESULT
+    FileSpec BSTR
+    Force VARIANT_BOOL
+
+  func DeleteFolder
+    HRESULT
+    FolderSpec BSTR
+    Force VARIANT_BOOL
+
+  func MoveFile
+    HRESULT
+    Source BSTR
+    Destination BSTR
+
+  func MoveFolder
+    HRESULT
+    Source BSTR
+    Destination BSTR
+
+  func CopyFile
+    HRESULT
+    Source BSTR
+    Destination BSTR
+    OverWriteFiles VARIANT_BOOL
+
+  func CopyFolder
+    HRESULT
+    Source BSTR
+    Destination BSTR
+    OverWriteFiles VARIANT_BOOL
+
+  func CreateFolder
+    HRESULT
+    Path BSTR
+    ppfolder IFolder**
+
+  func CreateTextFile
+    HRESULT
+    FileName BSTR
+    Overwrite VARIANT_BOOL
+    Unicode VARIANT_BOOL
+    ppts ITextStream**
+
+  func OpenTextFile
+    HRESULT
+    FileName BSTR
+    IOMode IOMode
+    Create VARIANT_BOOL
+    Format Tristate
+    ppts ITextStream**
+
+

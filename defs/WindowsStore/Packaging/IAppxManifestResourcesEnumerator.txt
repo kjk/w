@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxManifestResourcesEnumerator base=IUnknown id={de4dfbbd-881a-48bb-858c-d6f2baeae6ed} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetCurrent
+    HRESULT
+    resource LPWSTR*
+
+  func GetHasCurrent
+    HRESULT
+    hasCurrent BOOL*
+
+  func MoveNext
+    HRESULT
+    hasNext BOOL*
+
+

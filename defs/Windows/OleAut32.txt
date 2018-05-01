@@ -1,0 +1,2485 @@
+include Headers\ole.h.txt
+
+dll OleAut32.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Component Object Model (COM)/COM Fundamentals"
+category "Component Object Model (COM)/OLE and Data Transfer"
+category "Component Object Model (COM)/Controls and Property Pages"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Array"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/BSTR and Vector"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Currency Arithmetic"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/char"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/unsigned char"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/short"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/unsigned short"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/long"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/unsigned long"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/float"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/double"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/DATE"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/CURRENCY"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/BSTR"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/BOOL"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/DECIMAL"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/LONG64"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Data Type Conversion/ULONG64"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Date and Time Conversion"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Decimal Arithmetic"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Numeric Parsing"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/RPC Data Marshaling"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/String Manipulation"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Variant Arithmetic"
+category "Component Object Model (COM)/Automation/Conversion and Manipulation/Variant Manipulation"
+category "Component Object Model (COM)/Automation/Dispatch"
+category "Component Object Model (COM)/Automation/Error-Handling"
+category "Component Object Model (COM)/Automation/Formatting"
+category "Component Object Model (COM)/Automation/Picture"
+category "Component Object Model (COM)/Automation/Registration"
+category "Component Object Model (COM)/Automation/Type Building"
+category "Component Object Model (COM)/Automation/Type Description"
+category "Component Object Model (COM)/Automation/User-Defined Data Types (UDT)"
+alias DECIMAL* LPVOID
+
+alias LPDECIMAL LPVOID
+
+alias "const DECIMAL*" LPVOID
+
+alias OLE_COLOR DWORD
+
+pointer LPBSTR BSTR
+
+pointer SHORT* SHORT
+
+struct [PICTDESC_u_s1] display=struct
+  hbitmap HBITMAP
+  hpal HPALETTE
+
+struct [PICTDESC_u_s2] display=struct
+  hmeta HMETAFILE
+  xExt int
+  yExt int
+
+struct [PICTDESC_u_s3] display=struct
+  hicon HICON
+
+struct [PICTDESC_u_s4] display=struct
+  hemf HENHMETAFILE
+
+union [PICTDESC_u] display=union
+  bmp [PICTDESC_u_s1]
+  wmf [PICTDESC_u_s2]
+  icon [PICTDESC_u_s3]
+  emf [PICTDESC_u_s4]
+
+flag [PICTYPE] UINT display=UINT
+  PICTYPE_UNINITIALIZED -1
+  PICTYPE_NONE          0
+  PICTYPE_BITMAP        1
+  PICTYPE_METAFILE      2
+  PICTYPE_ICON          3
+  PICTYPE_ENHMETAFILE   4
+
+struct PICTDESC
+  cbSizeofstruct UINT
+  picType [PICTYPE]
+   [PICTDESC_u]
+
+pointer LPPICTDESC PICTDESC
+
+struct CY
+  Lo "unsigned long"
+  Hi long
+
+pointer CY* CY
+
+pointer LPCY CY
+
+struct FONTDESC
+  cbSizeofstruct UINT
+  lpstrName LPOLESTR
+  cySize CY
+  sWeight SHORT
+  sCharset SHORT
+  fItalic BOOL
+  fUnderline BOOL
+  fStrikethrough BOOL
+
+pointer LPFONTDESC FONTDESC
+
+struct OCPFIPARAMS
+  cbStructSize ULONG
+  hWndOwner HWND
+  x int
+  y int
+  lpszCaption LPCOLESTR
+  cObjects ULONG
+  lplpUnk LPUNKNOWN*
+  cPages ULONG
+  lpPages CLSID*
+  lcid LCID
+  dispidInitialProperty DISPID
+
+pointer LPOCPFIPARAMS OCPFIPARAMS
+
+enum [OleLoadPictureExFlags] DWORD display=DWORD
+  LP_DEFAULT    0x00
+  LP_MONOCHROME 0x01
+  LP_VGACOLOR   0x02
+  LP_COLOR      0x04
+
+enum REGKIND UINT
+  REGKIND_DEFAULT  0
+  REGKIND_REGISTER 1
+  REGKIND_NONE     2
+
+struct UDATE
+  st SYSTEMTIME
+  wDayOfYear USHORT
+
+pointer UDATE* UDATE
+
+flag [NUMPRS_FLAG] ULONG display=ULONG
+  NUMPRS_LEADING_WHITE  0x0001
+  NUMPRS_TRAILING_WHITE 0x0002
+  NUMPRS_LEADING_PLUS   0x0004
+  NUMPRS_TRAILING_PLUS  0x0008
+  NUMPRS_LEADING_MINUS  0x0010
+  NUMPRS_TRAILING_MINUS 0x0020
+  NUMPRS_HEX_OCT        0x0040
+  NUMPRS_PARENS         0x0080
+  NUMPRS_DECIMAL        0x0100
+  NUMPRS_THOUSANDS      0x0200
+  NUMPRS_CURRENCY       0x0400
+  NUMPRS_EXPONENT       0x0800
+  NUMPRS_USE_ALL        0x1000
+  NUMPRS_STD            0x1FFF
+  NUMPRS_NEG            0x10000
+  NUMPRS_INEXACT        0x20000
+
+struct NUMPARSE
+  cDig INT
+  dwInFlags [NUMPRS_FLAG]
+  dwOutFlags [NUMPRS_FLAG]
+  cchUsed INT
+  nBaseShift INT
+  nPwr10 INT
+
+pointer NUMPARSE* NUMPARSE
+
+struct PARAMDATA
+  szName OLECHAR*
+  vt VARTYPE
+
+pointer PARAMDATA* PARAMDATA
+
+struct METHODDATA
+  szName OLECHAR*
+  ppdata PARAMDATA* count=cArgs
+  dispid DISPID
+  iMeth UINT
+  cc CALLCONV
+  cArgs UINT
+  wFlags [InvokeFlags]
+  vtReturn VARTYPE
+
+pointer METHODDATA* METHODDATA
+
+struct INTERFACEDATA
+  pmethdata METHODDATA* count=cMembers
+  cMembers UINT
+
+pointer INTERFACEDATA* INTERFACEDATA
+
+func OleIconToCursor ordinal=415
+  success NotEqual=0
+  HCURSOR
+  hinstExe HINSTANCE
+  hIcon HICON
+
+func OleCreateFontIndirect ordinal=420
+  HRESULT
+  lpFontDesc LPFONTDESC
+  riid REFIID
+  lplpvObj LPVOID* interfaceId=riid
+
+func OleCreatePictureIndirect ordinal=419
+  HRESULT
+  lpPictDesc LPPICTDESC
+  riid REFIID
+  fOwn BOOL
+  lplpvObj LPVOID* interfaceId=riid
+
+func OleLoadPicture ordinal=418
+  HRESULT
+  lpstream LPSTREAM
+  lSize LONG
+  fRunmode BOOL
+  riid REFIID
+  lplpvObj LPVOID* interfaceId=riid
+
+func OleLoadPictureEx ordinal=401
+  HRESULT
+  lpstream LPSTREAM
+  lSize LONG
+  fRunmode BOOL
+  riid REFIID
+  xSizeDesired DWORD
+  ySizeDesired DWORD
+  dwFlags [OleLoadPictureExFlags]
+  lplpvObj LPVOID* interfaceId=riid
+
+func OleCreatePropertyFrame ordinal=417
+  HRESULT
+  hwndOwner HWND
+  x UINT
+  y UINT
+  lpszCaption LPCOLESTR
+  cObjects ULONG
+  ppUnk LPUNKNOWN*
+  cPages ULONG
+  pPageClsID LPCLSID
+  lcid LCID
+  dwReserved DWORD
+  pvReserved LPVOID
+
+func OleCreatePropertyFrameIndirect ordinal=416
+  HRESULT
+  lpParams LPOCPFIPARAMS
+
+func OleLoadPicturePath ordinal=424
+  HRESULT
+  szURLorPath LPOLESTR
+  punkCaller LPUNKNOWN
+  dwReserved DWORD
+  clrReserved OLE_COLOR
+  riid REFIID
+  ppvRet LPVOID* interfaceId=riid
+
+func OleTranslateColor ordinal=421
+  HRESULT
+  clr OLE_COLOR
+  hpal HPALETTE
+  lpcolorref COLORREF*
+
+func SafeArrayAccessData ordinal=23
+  HRESULT
+  psa SAFEARRAY*
+  ppvData void**
+
+func SafeArrayAllocData ordinal=37
+  HRESULT
+  psa SAFEARRAY*
+
+func SafeArrayAllocDescriptor ordinal=36
+  HRESULT
+  cDims UINT
+  ppsaOut SAFEARRAY**
+
+func SafeArrayAllocDescriptorEx ordinal=41
+  HRESULT
+  vt VARTYPE
+  cDims UINT
+  ppsaOut SAFEARRAY**
+
+func SafeArrayCopy ordinal=27
+  HRESULT
+  psa SAFEARRAY*
+  ppsaOut SAFEARRAY**
+
+func SafeArrayCopyData ordinal=412
+  HRESULT
+  psaSource SAFEARRAY*
+  psaTarget SAFEARRAY*
+
+func SafeArrayCreate ordinal=15
+  success NotEqual=0
+  SAFEARRAY*
+  vt VARTYPE
+  cDims UINT
+  rgsabound SAFEARRAYBOUND* count=cDims
+
+func SafeArrayCreateEx ordinal=42
+  success NotEqual=0
+  SAFEARRAY*
+  vt VARTYPE
+  cDims UINT
+  rgsabound SAFEARRAYBOUND* count=cDims
+  pvExtra PVOID
+
+func SafeArrayCreateVector ordinal=411
+  success NotEqual=0
+  SAFEARRAY*
+  vt VARTYPE
+  lLbound LONG
+  cElements ULONG
+
+func SafeArrayCreateVectorEx ordinal=43
+  success NotEqual=0
+  SAFEARRAY*
+  vt VARTYPE
+  lLbound LONG
+  cElements ULONG
+  pvExtra PVOID
+
+func SafeArrayDestroy ordinal=16
+  HRESULT
+  psa SAFEARRAY*
+
+func SafeArrayDestroyData ordinal=39
+  HRESULT
+  psa SAFEARRAY*
+
+func SafeArrayDestroyDescriptor ordinal=38
+  HRESULT
+  psa SAFEARRAY*
+
+func SafeArrayGetDim ordinal=17
+  success NotEqual=0
+  UINT
+  psa SAFEARRAY*
+
+func SafeArrayGetElement ordinal=25
+  HRESULT
+  psa SAFEARRAY*
+  rgIndices LONG*
+  pv void*
+
+func SafeArrayGetElemsize ordinal=18
+  success NotEqual=0
+  UINT
+  psa SAFEARRAY*
+
+func SafeArrayGetIID ordinal=67
+  HRESULT
+  psa SAFEARRAY*
+  pguid GUID*
+
+func SafeArrayGetLBound ordinal=20
+  HRESULT
+  psa SAFEARRAY*
+  nDim UINT
+  plLbound LONG*
+
+func SafeArrayGetRecordInfo ordinal=45
+  HRESULT
+  psa SAFEARRAY*
+  prinfo IRecordInfo**
+
+func SafeArrayGetUBound ordinal=19
+  HRESULT
+  psa SAFEARRAY*
+  nDim UINT
+  plUbound LONG*
+
+func SafeArrayGetVartype ordinal=77
+  HRESULT
+  psa SAFEARRAY*
+  pvt VARTYPE*
+
+func SafeArrayLock ordinal=21
+  HRESULT
+  psa SAFEARRAY*
+
+func SafeArrayPtrOfIndex ordinal=148
+  HRESULT
+  psa SAFEARRAY*
+  rgIndices LONG*
+  ppvData void**
+
+func SafeArrayPutElement ordinal=26
+  HRESULT
+  psa SAFEARRAY*
+  rgIndices LONG*
+  pv void*
+
+func SafeArrayRedim ordinal=40
+  HRESULT
+  psa SAFEARRAY*
+  psaboundNew SAFEARRAYBOUND*
+
+func SafeArraySetIID ordinal=57
+  HRESULT
+  psa SAFEARRAY*
+  guid REFGUID
+
+func SafeArraySetRecordInfo ordinal=44
+  HRESULT
+  psa SAFEARRAY*
+  prinfo IRecordInfo*
+
+func SafeArrayUnaccessData ordinal=24
+  HRESULT
+  psa SAFEARRAY*
+
+func SafeArrayUnlock ordinal=22
+  HRESULT
+  psa SAFEARRAY*
+
+func BstrFromVector ordinal=414
+  HRESULT
+  psa SAFEARRAY*
+  pbstr BSTR*
+
+func SetOaNoCache ordinal=327
+  void
+
+func VarBstrCat ordinal=313
+  HRESULT
+  bstrLeft BSTR
+  bstrRight BSTR
+  pbstrResult LPBSTR
+
+func VarBstrCmp ordinal=314
+  HRESULT
+  bstrLeft BSTR
+  bstrRight BSTR
+  lcid LCID
+  dwFlags ULONG
+
+func VectorFromBstr ordinal=413
+  HRESULT
+  bstr BSTR
+  ppsa SAFEARRAY**
+
+func VarCyAbs ordinal=306
+  HRESULT
+  cyIn CY
+  pcyResult LPCY
+
+func VarCyAdd ordinal=299
+  HRESULT
+  cyLeft CY
+  cyRight CY
+  pcyResult LPCY
+
+func VarCyCmp ordinal=311
+  HRESULT
+  cyLeft CY
+  cyRight CY
+
+func VarCyCmpR8 ordinal=312
+  HRESULT
+  cyLeft CY
+  dblRight double
+
+func VarCyFix ordinal=307
+  HRESULT
+  cyIn CY
+  pcyResult LPCY
+
+func VarCyInt ordinal=308
+  HRESULT
+  cyIn CY
+  pcyResult LPCY
+
+func VarCyMul ordinal=303
+  HRESULT
+  cyLeft CY
+  cyRight CY
+  pcyResult LPCY
+
+func VarCyMulI4 ordinal=304
+  HRESULT
+  cyLeft CY
+  lRight long
+  pcyResult LPCY
+
+func VarCyMulI8 ordinal=329
+  HRESULT
+  cyLeft CY
+  lRight LONG64
+  pcyResult LPCY
+
+func VarCyNeg ordinal=309
+  HRESULT
+  cyIn CY
+  pcyResult LPCY
+
+func VarCyRound ordinal=310
+  HRESULT
+  cyIn CY
+  cDecimals int
+  pcyResult LPCY
+
+func VarCySub ordinal=305
+  HRESULT
+  cyLeft CY
+  cyRight CY
+  pcyResult LPCY
+
+func GetVarConversionLocaleSetting ordinal=326
+  HRESULT
+  dwFlags ULONG*
+
+func SetVarConversionLocaleSetting ordinal=325
+  HRESULT
+  dwFlags ULONG
+
+func VarI1FromUI1 ordinal=244
+  HRESULT
+  bIn BYTE
+  pcOut CHAR*
+
+func VarI1FromUI2 ordinal=254
+  HRESULT
+  uiIn USHORT
+  pcOut CHAR*
+
+func VarI1FromUI4 ordinal=255
+  HRESULT
+  ulIn ULONG
+  pcOut CHAR*
+
+func VarI1FromUI8 ordinal=377
+  HRESULT
+  i64In ULONG64
+  pcOut CHAR*
+
+func VarI1FromI2 ordinal=245
+  HRESULT
+  uiIn SHORT
+  pcOut CHAR*
+
+func VarI1FromI4 ordinal=246
+  HRESULT
+  lIn LONG
+  pcOut CHAR*
+
+func VarI1FromI8 ordinal=376
+  HRESULT
+  i64In LONG64
+  pcOut CHAR*
+
+func VarI1FromR4 ordinal=247
+  HRESULT
+  fltIn FLOAT
+  pcOut CHAR*
+
+func VarI1FromR8 ordinal=248
+  HRESULT
+  dblIn DOUBLE
+  pcOut CHAR*
+
+func VarI1FromCy ordinal=250
+  HRESULT
+  cyIn CY
+  pcOut CHAR*
+
+func VarI1FromDec ordinal=256
+  HRESULT
+  pdecIn "const DECIMAL*"
+  pcOut CHAR*
+
+func VarI1FromDate ordinal=249
+  HRESULT
+  dateIn DATE
+  pcOut CHAR*
+
+func VarI1FromStr ordinal=251
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  pcOut CHAR*
+
+func VarI1FromDisp ordinal=252
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  pcOut CHAR*
+
+func VarI1FromBool ordinal=253
+  HRESULT
+  boolIn VARIANT_BOOL
+  pcOut CHAR*
+
+func VarUI1FromUI2 ordinal=238
+  HRESULT
+  uiIn USHORT
+  pbOut BYTE*
+
+func VarUI1FromUI4 ordinal=239
+  HRESULT
+  ulIn ULONG
+  pbOut BYTE*
+
+func VarUI1FromUI8 ordinal=373
+  HRESULT
+  i64In ULONG64
+  pbOut BYTE*
+
+func VarUI1FromI1 ordinal=237
+  HRESULT
+  cIn CHAR
+  pbOut BYTE*
+
+func VarUI1FromI2 ordinal=130
+  HRESULT
+  sIn SHORT
+  pbOut BYTE*
+
+func VarUI1FromI4 ordinal=131
+  HRESULT
+  lIn LONG
+  pbOut BYTE*
+
+func VarUI1FromI8 ordinal=372
+  HRESULT
+  i64In LONG64
+  pbOut BYTE*
+
+func VarUI1FromR4 ordinal=132
+  HRESULT
+  fltIn FLOAT
+  pbOut BYTE*
+
+func VarUI1FromR8 ordinal=133
+  HRESULT
+  dblIn DOUBLE
+  pbOut BYTE*
+
+func VarUI1FromCy ordinal=134
+  HRESULT
+  cyIn CY
+  pbOut BYTE*
+
+func VarUI1FromDec ordinal=240
+  HRESULT
+  pdecIn "const DECIMAL*"
+  pbOut BYTE*
+
+func VarUI1FromDate ordinal=135
+  HRESULT
+  dateIn DATE
+  pbOut BYTE*
+
+func VarUI1FromStr ordinal=136
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  pbOut BYTE*
+
+func VarUI1FromDisp ordinal=137
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  pbOut BYTE*
+
+func VarUI1FromBool ordinal=138
+  HRESULT
+  boolIn VARIANT_BOOL
+  pbOut BYTE*
+
+func VarI2FromUI1 ordinal=48
+  HRESULT
+  bIn BYTE
+  psOut SHORT*
+
+func VarI2FromUI2 ordinal=206
+  HRESULT
+  uiIn USHORT
+  psOut SHORT*
+
+func VarI2FromUI4 ordinal=207
+  HRESULT
+  ulIn ULONG
+  psOut SHORT*
+
+func VarI2FromUI8 ordinal=347
+  HRESULT
+  ui64In ULONG64
+  psOut SHORT*
+
+func VarI2FromI1 ordinal=205
+  HRESULT
+  cIn CHAR
+  psOut SHORT*
+
+func VarI2FromI4 ordinal=49
+  HRESULT
+  lIn LONG
+  psOut SHORT*
+
+func VarI2FromI8 ordinal=346
+  HRESULT
+  i64In LONG64
+  psOut SHORT*
+
+func VarI2FromR4 ordinal=50
+  HRESULT
+  fltIn FLOAT
+  psOut SHORT*
+
+func VarI2FromR8 ordinal=51
+  HRESULT
+  dblIn DOUBLE
+  psOut SHORT*
+
+func VarI2FromCy ordinal=52
+  HRESULT
+  cyIn CY
+  psOut SHORT*
+
+func VarI2FromDec ordinal=208
+  HRESULT
+  pdecIn "const DECIMAL*"
+  psOut SHORT*
+
+func VarI2FromDate ordinal=53
+  HRESULT
+  dateIn DATE
+  psOut SHORT*
+
+func VarI2FromStr ordinal=54
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  psOut SHORT*
+
+func VarI2FromDisp ordinal=55
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  psOut SHORT*
+
+func VarI2FromBool ordinal=56
+  HRESULT
+  boolIn VARIANT_BOOL
+  psOut SHORT*
+
+func VarUI2FromI1 ordinal=267
+  HRESULT
+  cIn CHAR
+  puiOut USHORT*
+
+func VarUI2FromI2 ordinal=258
+  HRESULT
+  uiIn SHORT
+  puiOut USHORT*
+
+func VarUI2FromI4 ordinal=259
+  HRESULT
+  lIn LONG
+  puiOut USHORT*
+
+func VarUI2FromI8 ordinal=378
+  HRESULT
+  i64In LONG64
+  puiOut USHORT*
+
+func VarUI2FromUI1 ordinal=257
+  HRESULT
+  bIn BYTE
+  puiOut USHORT*
+
+func VarUI2FromUI4 ordinal=268
+  HRESULT
+  ulIn ULONG
+  puiOut USHORT*
+
+func VarUI2FromUI8 ordinal=379
+  HRESULT
+  i64In ULONG64
+  puiOut USHORT*
+
+func VarUI2FromR4 ordinal=260
+  HRESULT
+  fltIn FLOAT
+  puiOut USHORT*
+
+func VarUI2FromR8 ordinal=261
+  HRESULT
+  dblIn DOUBLE
+  puiOut USHORT*
+
+func VarUI2FromCy ordinal=263
+  HRESULT
+  cyIn CY
+  puiOut USHORT*
+
+func VarUI2FromDec ordinal=269
+  HRESULT
+  pdecIn "const DECIMAL*"
+  puiOut USHORT*
+
+func VarUI2FromDate ordinal=262
+  HRESULT
+  dateIn DATE
+  puiOut USHORT*
+
+func VarUI2FromStr ordinal=264
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  puiOut USHORT*
+
+func VarUI2FromDisp ordinal=265
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  puiOut USHORT*
+
+func VarUI2FromBool ordinal=266
+  HRESULT
+  boolIn VARIANT_BOOL
+  puiOut USHORT*
+
+func VarI4FromUI2 ordinal=210
+  HRESULT
+  uiIn USHORT
+  plOut LONG*
+
+func VarI4FromUI4 ordinal=211
+  HRESULT
+  ulIn ULONG
+  plOut LONG*
+
+func VarI4FromUI8 ordinal=349
+  HRESULT
+  ui64In ULONG64
+  plOut LONG*
+
+func VarI4FromI1 ordinal=209
+  HRESULT
+  cIn CHAR
+  plOut LONG*
+
+func VarI4FromUI1 ordinal=58
+  HRESULT
+  bIn BYTE
+  plOut LONG*
+
+func VarI4FromI2 ordinal=59
+  HRESULT
+  sIn SHORT
+  plOut LONG*
+
+func VarI4FromI8 ordinal=348
+  HRESULT
+  i64In LONG64
+  plOut LONG*
+
+func VarI4FromR4 ordinal=60
+  HRESULT
+  fltIn FLOAT
+  plOut LONG*
+
+func VarI4FromR8 ordinal=61
+  HRESULT
+  dblIn DOUBLE
+  plOut LONG*
+
+func VarI4FromCy ordinal=62
+  HRESULT
+  cyIn CY
+  plOut LONG*
+
+func VarI4FromDec ordinal=212
+  HRESULT
+  pdecIn "const DECIMAL*"
+  plOut LONG*
+
+func VarI4FromDate ordinal=63
+  HRESULT
+  dateIn DATE
+  plOut LONG*
+
+func VarI4FromStr ordinal=64
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  plOut LONG*
+
+func VarI4FromDisp ordinal=65
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  plOut LONG*
+
+func VarI4FromBool ordinal=66
+  HRESULT
+  boolIn VARIANT_BOOL
+  plOut LONG*
+
+func VarUI4FromUI2 ordinal=281
+  HRESULT
+  uiIn USHORT
+  pulOut ULONG*
+
+func VarUI4FromI1 ordinal=280
+  HRESULT
+  cIn CHAR
+  pulOut ULONG*
+
+func VarUI4FromI2 ordinal=271
+  HRESULT
+  uiIn SHORT
+  pulOut ULONG*
+
+func VarUI4FromUI1 ordinal=270
+  HRESULT
+  bIn BYTE
+  pulOut ULONG*
+
+func VarUI4FromUI8 ordinal=426
+  HRESULT
+  ui64In ULONG64
+  plOut ULONG*
+
+func VarUI4FromI4 ordinal=272
+  HRESULT
+  lIn LONG
+  pulOut ULONG*
+
+func VarUI4FromI8 ordinal=425
+  HRESULT
+  i64In LONG64
+  plOut ULONG*
+
+func VarUI4FromR4 ordinal=273
+  HRESULT
+  fltIn FLOAT
+  pulOut ULONG*
+
+func VarUI4FromR8 ordinal=274
+  HRESULT
+  dblIn DOUBLE
+  pulOut ULONG*
+
+func VarUI4FromCy ordinal=276
+  HRESULT
+  cyIn CY
+  pulOut ULONG*
+
+func VarUI4FromDec ordinal=282
+  HRESULT
+  pdecIn "const DECIMAL*"
+  pulOut ULONG*
+
+func VarUI4FromDate ordinal=275
+  HRESULT
+  dateIn DATE
+  pulOut ULONG*
+
+func VarUI4FromStr ordinal=277
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  pulOut ULONG*
+
+func VarUI4FromDisp ordinal=278
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  pulOut ULONG*
+
+func VarUI4FromBool ordinal=279
+  HRESULT
+  boolIn VARIANT_BOOL
+  pulOut ULONG*
+
+func VarR4FromUI2 ordinal=214
+  HRESULT
+  uiIn USHORT
+  pfltOut FLOAT*
+
+func VarR4FromUI4 ordinal=215
+  HRESULT
+  ulIn ULONG
+  pfltOut FLOAT*
+
+func VarR4FromUI8 ordinal=361
+  HRESULT
+  ui64In ULONG64
+  pfltOut FLOAT*
+
+func VarR4FromI1 ordinal=213
+  HRESULT
+  cIn CHAR
+  pfltOut FLOAT*
+
+func VarR4FromUI1 ordinal=68
+  HRESULT
+  bIn BYTE
+  pfltOut FLOAT*
+
+func VarR4FromI2 ordinal=69
+  HRESULT
+  sIn SHORT
+  pfltOut FLOAT*
+
+func VarR4FromI4 ordinal=70
+  HRESULT
+  lIn LONG
+  pfltOut FLOAT*
+
+func VarR4FromI8 ordinal=360
+  HRESULT
+  i64In LONG64
+  pfltOut FLOAT*
+
+func VarR4FromR8 ordinal=71
+  HRESULT
+  dblIn DOUBLE
+  pfltOut FLOAT*
+
+func VarR4FromCy ordinal=72
+  HRESULT
+  cyIn CY
+  pfltOut FLOAT*
+
+func VarR4FromDec ordinal=216
+  HRESULT
+  pdecIn "const DECIMAL*"
+  pfltOut FLOAT*
+
+func VarR4FromDate ordinal=73
+  HRESULT
+  dateIn DATE
+  pfltOut FLOAT*
+
+func VarR4FromStr ordinal=74
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  pfltOut FLOAT*
+
+func VarR4FromDisp ordinal=75
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  pfltOut FLOAT*
+
+func VarR4FromBool ordinal=76
+  HRESULT
+  boolIn VARIANT_BOOL
+  pfltOut FLOAT*
+
+func VarR8FromUI2 ordinal=218
+  HRESULT
+  uiIn USHORT
+  pdblOut DOUBLE*
+
+func VarR8FromUI4 ordinal=219
+  HRESULT
+  ulIn ULONG
+  pdblOut DOUBLE*
+
+func VarR8FromUI8 ordinal=363
+  HRESULT
+  ui64In ULONG64
+  pdblOut DOUBLE*
+
+func VarR8FromI1 ordinal=217
+  HRESULT
+  cIn CHAR
+  pdblOut DOUBLE*
+
+func VarR8FromUI1 ordinal=78
+  HRESULT
+  bIn BYTE
+  pdblOut DOUBLE*
+
+func VarR8FromI2 ordinal=79
+  HRESULT
+  sIn SHORT
+  pdblOut DOUBLE*
+
+func VarR8FromI4 ordinal=80
+  HRESULT
+  lIn LONG
+  pdblOut DOUBLE*
+
+func VarR8FromI8 ordinal=362
+  HRESULT
+  i64In LONG64
+  pdblOut DOUBLE*
+
+func VarR8FromR4 ordinal=81
+  HRESULT
+  fltIn FLOAT
+  pdblOut DOUBLE*
+
+func VarR8FromCy ordinal=82
+  HRESULT
+  cyIn CY
+  pdblOut DOUBLE*
+
+func VarR8FromDec ordinal=220
+  HRESULT
+  pdecIn "const DECIMAL*"
+  pdblOut DOUBLE*
+
+func VarR8FromDate ordinal=83
+  HRESULT
+  dateIn DATE
+  pdblOut DOUBLE*
+
+func VarR8FromStr ordinal=84
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  pdblOut DOUBLE*
+
+func VarR8FromDisp ordinal=85
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  pdblOut DOUBLE*
+
+func VarR8FromBool ordinal=86
+  HRESULT
+  boolIn VARIANT_BOOL
+  pdblOut DOUBLE*
+
+func VarDateFromUI2 ordinal=222
+  HRESULT
+  uiIn USHORT
+  pdateOut DATE*
+
+func VarDateFromUI4 ordinal=223
+  HRESULT
+  ulIn ULONG
+  pdateOut DATE*
+
+func VarDateFromUI8 ordinal=365
+  HRESULT
+  ui64In ULONG64
+  pdateOut DATE*
+
+func VarDateFromI1 ordinal=221
+  HRESULT
+  cIn CHAR
+  pdateOut DATE*
+
+func VarDateFromUI1 ordinal=88
+  HRESULT
+  bIn BYTE
+  pdateOut DATE*
+
+func VarDateFromI2 ordinal=89
+  HRESULT
+  sIn SHORT
+  pdateOut DATE*
+
+func VarDateFromI4 ordinal=90
+  HRESULT
+  lIn LONG
+  pdateOut DATE*
+
+func VarDateFromI8 ordinal=364
+  HRESULT
+  i64In LONG64
+  pdateOut DATE*
+
+func VarDateFromR4 ordinal=91
+  HRESULT
+  fltIn FLOAT
+  pdateOut DATE*
+
+func VarDateFromR8 ordinal=92
+  HRESULT
+  dblIn DOUBLE
+  pdateOut DATE*
+
+func VarDateFromCy ordinal=93
+  HRESULT
+  cyIn CY
+  pdateOut DATE*
+
+func VarDateFromDec ordinal=224
+  HRESULT
+  pdecIn "const DECIMAL*"
+  pdateOut DATE*
+
+func VarDateFromStr ordinal=94
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  pdateOut DATE*
+
+func VarDateFromDisp ordinal=95
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  pdateOut DATE*
+
+func VarDateFromBool ordinal=96
+  HRESULT
+  boolIn VARIANT_BOOL
+  pdateOut DATE*
+
+func VarCyFromUI2 ordinal=226
+  HRESULT
+  uiIn USHORT
+  pcyOut CY*
+
+func VarCyFromUI4 ordinal=227
+  HRESULT
+  ulIn ULONG
+  pcyOut CY*
+
+func VarCyFromUI8 ordinal=367
+  HRESULT
+  ui64In ULONG64
+  pcyOut CY*
+
+func VarCyFromI1 ordinal=225
+  HRESULT
+  cIn CHAR
+  pcyOut CY*
+
+func VarCyFromUI1 ordinal=98
+  HRESULT
+  bIn BYTE
+  pcyOut CY*
+
+func VarCyFromI2 ordinal=99
+  HRESULT
+  sIn SHORT
+  pcyOut CY*
+
+func VarCyFromI4 ordinal=100
+  HRESULT
+  lIn LONG
+  pcyOut CY*
+
+func VarCyFromI8 ordinal=366
+  HRESULT
+  i64In LONG64
+  pcyOut CY*
+
+func VarCyFromR4 ordinal=101
+  HRESULT
+  fltIn FLOAT
+  pcyOut CY*
+
+func VarCyFromR8 ordinal=102
+  HRESULT
+  dblIn DOUBLE
+  pcyOut CY*
+
+func VarCyFromDec ordinal=228
+  HRESULT
+  pdecIn "const DECIMAL*"
+  pcyOut CY*
+
+func VarCyFromDate ordinal=103
+  HRESULT
+  dateIn DATE
+  pcyOut CY*
+
+func VarCyFromStr ordinal=104
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  pcyOut CY*
+
+func VarCyFromDisp ordinal=105
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  pcyOut CY*
+
+func VarCyFromBool ordinal=106
+  HRESULT
+  boolIn VARIANT_BOOL
+  pcyOut CY*
+
+func VarBstrFromUI2 ordinal=230
+  HRESULT
+  uiIn USHORT
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromUI4 ordinal=231
+  HRESULT
+  ulIn ULONG
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromUI8 ordinal=369
+  HRESULT
+  ui64In ULONG64
+  lcid LCID
+  dwFlags "unsigned long"
+  pbstrOut BSTR*
+
+func VarBstrFromI1 ordinal=229
+  HRESULT
+  cIn CHAR
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromUI1 ordinal=108
+  HRESULT
+  bVal BYTE
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromI2 ordinal=109
+  HRESULT
+  iVal SHORT
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromI4 ordinal=110
+  HRESULT
+  lIn LONG
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromI8 ordinal=368
+  HRESULT
+  i64In LONG64
+  lcid LCID
+  dwFlags "unsigned long"
+  pbstrOut BSTR*
+
+func VarBstrFromR4 ordinal=111
+  HRESULT
+  fltIn FLOAT
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromR8 ordinal=112
+  HRESULT
+  dblIn DOUBLE
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromCy ordinal=113
+  HRESULT
+  cyIn CY
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromDec ordinal=232
+  HRESULT
+  pdecIn "const DECIMAL*"
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromDate ordinal=114
+  HRESULT
+  dateIn DATE
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromDisp ordinal=115
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBstrFromBool ordinal=116
+  HRESULT
+  boolIn VARIANT_BOOL
+  lcid LCID
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarBoolFromUI2 ordinal=234
+  HRESULT
+  uiIn USHORT
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromUI4 ordinal=235
+  HRESULT
+  ulIn ULONG
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromUI8 ordinal=371
+  HRESULT
+  i64In ULONG64
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromI1 ordinal=233
+  HRESULT
+  cIn CHAR
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromUI1 ordinal=118
+  HRESULT
+  bIn BYTE
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromI2 ordinal=119
+  HRESULT
+  sIn SHORT
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromI4 ordinal=120
+  HRESULT
+  lIn LONG
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromI8 ordinal=370
+  HRESULT
+  i64In LONG64
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromR4 ordinal=121
+  HRESULT
+  fltIn FLOAT
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromR8 ordinal=122
+  HRESULT
+  dblIn DOUBLE
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromCy ordinal=124
+  HRESULT
+  cyIn CY
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromDec ordinal=236
+  HRESULT
+  pdecIn "const DECIMAL*"
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromDate ordinal=123
+  HRESULT
+  dateIn DATE
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromStr ordinal=125
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  pboolOut VARIANT_BOOL*
+
+func VarBoolFromDisp ordinal=126
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  pboolOut VARIANT_BOOL*
+
+func VarDecFromUI2 ordinal=242
+  HRESULT
+  uiIn USHORT
+  pdecOut DECIMAL*
+
+func VarDecFromUI4 ordinal=243
+  HRESULT
+  ulIn ULONG
+  pdecOut DECIMAL*
+
+func VarDecFromUI8 ordinal=375
+  HRESULT
+  ui64In ULONG64
+  pdecOut DECIMAL*
+
+func VarDecFromI1 ordinal=241
+  HRESULT
+  cIn CHAR
+  pdecOut DECIMAL*
+
+func VarDecFromUI1 ordinal=190
+  HRESULT
+  bIn BYTE
+  pdecOut DECIMAL*
+
+func VarDecFromI2 ordinal=191
+  HRESULT
+  uiIn SHORT
+  pdecOut DECIMAL*
+
+func VarDecFromI4 ordinal=192
+  HRESULT
+  lIn LONG
+  pdecOut DECIMAL*
+
+func VarDecFromI8 ordinal=374
+  HRESULT
+  i64In LONG64
+  pdecOut DECIMAL*
+
+func VarDecFromR4 ordinal=193
+  HRESULT
+  fltIn FLOAT
+  pdecOut DECIMAL*
+
+func VarDecFromR8 ordinal=194
+  HRESULT
+  dblIn DOUBLE
+  pdecOut DECIMAL*
+
+func VarDecFromCy ordinal=196
+  HRESULT
+  cyIn CY
+  pdecOut DECIMAL*
+
+func VarDecFromDate ordinal=195
+  HRESULT
+  dateIn DATE
+  pdecOut DECIMAL*
+
+func VarDecFromStr ordinal=197
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  pdecOut DECIMAL*
+
+func VarDecFromDisp ordinal=198
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  pdecOut DECIMAL*
+
+func VarDecFromBool ordinal=199
+  HRESULT
+  boolIn VARIANT_BOOL
+  pdecOut DECIMAL*
+
+func VarI8FromBool ordinal=341
+  HRESULT
+  boolIn VARIANT_BOOL
+  pi64Out LONG64*
+
+func VarI8FromCy ordinal=337
+  HRESULT
+  cyIn CY
+  pi64Out LONG64*
+
+func VarI8FromDate ordinal=338
+  HRESULT
+  dateIn DATE
+  pi64Out LONG64*
+
+func VarI8FromDec ordinal=345
+  HRESULT
+  pdecIn "const DECIMAL*"
+  pi64Out LONG64*
+
+func VarI8FromDisp ordinal=340
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  pi64Out LONG64*
+
+func VarI8FromI1 ordinal=342
+  HRESULT
+  cIn CHAR
+  pi64Out LONG64*
+
+func VarI8FromI2 ordinal=334
+  HRESULT
+  sIn SHORT
+  pi64Out LONG64*
+
+func VarI8FromR4 ordinal=335
+  HRESULT
+  fltIn FLOAT
+  pi64Out LONG64*
+
+func VarI8FromR8 ordinal=336
+  HRESULT
+  dblIn DOUBLE
+  pi64Out LONG64*
+
+func VarI8FromStr ordinal=339
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags "unsigned long"
+  pi64Out LONG64*
+
+func VarI8FromUI1 ordinal=333
+  HRESULT
+  bIn BYTE
+  pi64Out LONG64*
+
+func VarI8FromUI2 ordinal=343
+  HRESULT
+  uiIn USHORT
+  pi64Out LONG64*
+
+func VarI8FromUI4 ordinal=344
+  HRESULT
+  ulIn ULONG
+  pi64Out LONG64*
+
+func VarI8FromUI8 ordinal=427
+  HRESULT
+  ui64In ULONG64
+  pi64Out LONG64*
+
+func VarUI8FromBool ordinal=437
+  HRESULT
+  boolIn VARIANT_BOOL
+  pi64Out ULONG64*
+
+func VarUI8FromCy ordinal=433
+  HRESULT
+  cyIn CY
+  pi64Out ULONG64*
+
+func VarUI8FromDate ordinal=434
+  HRESULT
+  dateIn DATE
+  pi64Out ULONG64*
+
+func VarUI8FromDec ordinal=441
+  HRESULT
+  pdecIn "const DECIMAL*"
+  pi64Out ULONG64*
+
+func VarUI8FromDisp ordinal=436
+  HRESULT
+  pdispIn IDispatch*
+  lcid LCID
+  pi64Out ULONG64*
+
+func VarUI8FromI1 ordinal=438
+  HRESULT
+  cIn CHAR
+  pi64Out ULONG64*
+
+func VarUI8FromI2 ordinal=430
+  HRESULT
+  sIn SHORT
+  pi64Out ULONG64*
+
+func VarUI8FromI8 ordinal=428
+  HRESULT
+  ui64In LONG64
+  pi64Out ULONG64*
+
+func VarUI8FromR4 ordinal=431
+  HRESULT
+  fltIn FLOAT
+  pi64Out ULONG64*
+
+func VarUI8FromR8 ordinal=432
+  HRESULT
+  dblIn DOUBLE
+  pi64Out ULONG64*
+
+func VarUI8FromStr ordinal=435
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags "unsigned long"
+  pi64Out ULONG64*
+
+func VarUI8FromUI1 ordinal=429
+  HRESULT
+  bIn BYTE
+  pi64Out ULONG64*
+
+func VarUI8FromUI2 ordinal=439
+  HRESULT
+  uiIn USHORT
+  pi64Out ULONG64*
+
+func VarUI8FromUI4 ordinal=440
+  HRESULT
+  ulIn ULONG
+  pi64Out ULONG64*
+
+func DosDateTimeToVariantTime ordinal=14
+  success NotEqual=0
+  INT
+  wDosDate USHORT
+  wDosTime USHORT
+  pvtime DOUBLE*
+
+func GetAltMonthNames ordinal=332
+  HRESULT
+  lcid LCID
+  prgp LPOLESTR**
+
+func SystemTimeToVariantTime ordinal=184
+  success NotEqual=0
+  INT
+  lpSystemTime LPSYSTEMTIME
+  pvtime DOUBLE*
+
+func VarDateFromUdate ordinal=330
+  HRESULT
+  pudateIn UDATE*
+  dwFlags ULONG
+  pdateOut DATE*
+
+func VarDateFromUdateEx ordinal=319
+  HRESULT
+  pudateIn UDATE*
+  lcid LCID
+  dwFlags ULONG
+  pdateOut DATE*
+
+func VariantTimeToDosDateTime ordinal=13
+  success NotEqual=0
+  INT
+  vtime DOUBLE
+  pwDosDate USHORT*
+  pwDosTime USHORT*
+
+func VariantTimeToSystemTime ordinal=185
+  success NotEqual=0
+  INT
+  vtime DOUBLE
+  lpSystemTime LPSYSTEMTIME
+
+func VarUdateFromDate ordinal=331
+  HRESULT
+  dateIn DATE
+  dwFlags ULONG
+  pudateOut UDATE*
+
+func VarDecAbs ordinal=182
+  HRESULT
+  pdecIn LPDECIMAL
+  pdecResult LPDECIMAL
+
+func VarDecAdd ordinal=177
+  HRESULT
+  pdecLeft LPDECIMAL
+  pdecRight LPDECIMAL
+  pdecResult LPDECIMAL
+
+func VarDecCmp ordinal=204
+  HRESULT
+  pdecLeft LPDECIMAL
+  pdecRight LPDECIMAL
+
+func VarDecCmpR8 ordinal=298
+  HRESULT
+  pdecLeft LPDECIMAL
+  dblRight double
+
+func VarDecDiv ordinal=178
+  HRESULT
+  pdecLeft LPDECIMAL
+  pdecRight LPDECIMAL
+  pdecResult LPDECIMAL
+
+func VarDecFix ordinal=187
+  HRESULT
+  pdecIn LPDECIMAL
+  pdecResult LPDECIMAL
+
+func VarDecInt ordinal=188
+  HRESULT
+  pdecIn LPDECIMAL
+  pdecResult LPDECIMAL
+
+func VarDecMul ordinal=179
+  HRESULT
+  pdecLeft LPDECIMAL
+  pdecRight LPDECIMAL
+  pdecResult LPDECIMAL
+
+func VarDecNeg ordinal=189
+  HRESULT
+  pdecIn LPDECIMAL
+  pdecResult LPDECIMAL
+
+func VarDecRound ordinal=203
+  HRESULT
+  pdecIn LPDECIMAL
+  cDecimals int
+  pdecResult LPDECIMAL
+
+func VarDecSub ordinal=181
+  HRESULT
+  pdecLeft LPDECIMAL
+  pdecRight LPDECIMAL
+  pdecResult LPDECIMAL
+
+func VarNumFromParseNum ordinal=47
+  HRESULT
+  pnumprs NUMPARSE*
+  rgbDig BYTE*
+  dwVtBits ULONG
+  pvar VARIANT*
+
+func VarParseNumFromStr ordinal=46
+  HRESULT
+  strIn LPCOLESTR
+  lcid LCID
+  dwFlags ULONG
+  pnumprs NUMPARSE*
+  rgbDig BYTE*
+
+func BSTR_UserFree ordinal=286
+  void
+  pFlags "unsigned long*"
+  pBstr BSTR*
+
+func BSTR_UserFree64
+  void
+  pFlags "unsigned long*"
+  pBstr BSTR*
+
+func BSTR_UserMarshal ordinal=284
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  pBstr BSTR*
+
+func BSTR_UserMarshal64
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  pBstr BSTR*
+
+func BSTR_UserSize ordinal=283
+  success NotEqual=0
+  "unsigned long"
+  pFlags "unsigned long*"
+  Offset "unsigned long"
+  pBstr BSTR*
+
+func BSTR_UserSize64
+  success NotEqual=0
+  "unsigned long"
+  pFlags "unsigned long*"
+  Offset "unsigned long"
+  pBstr BSTR*
+
+func BSTR_UserUnmarshal ordinal=285
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  pBstr BSTR*
+
+func BSTR_UserUnmarshal64
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  pBstr BSTR*
+
+func LPSAFEARRAY_Marshal ordinal=296
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  ppSafeArray LPSAFEARRAY*
+  piid "const IID*"
+
+func LPSAFEARRAY_Size ordinal=295
+  success NotEqual=0
+  "unsigned long"
+  pFlags "unsigned long*"
+  Offset "unsigned long"
+  ppSafeArray LPSAFEARRAY*
+  piid "const IID*"
+
+func LPSAFEARRAY_Unmarshal ordinal=297
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  ppSafeArray LPSAFEARRAY*
+  piid "const IID*"
+
+func LPSAFEARRAY_UserFree ordinal=294
+  void
+  pFlags "unsigned long*"
+  ppSafeArray LPSAFEARRAY*
+
+func LPSAFEARRAY_UserMarshal ordinal=292
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  ppSafeArray LPSAFEARRAY*
+
+func LPSAFEARRAY_UserSize ordinal=291
+  success NotEqual=0
+  "unsigned long"
+  pFlags "unsigned long*"
+  Offset "unsigned long"
+  ppSafeArray LPSAFEARRAY*
+
+func LPSAFEARRAY_UserUnmarshal ordinal=293
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  ppSafeArray LPSAFEARRAY*
+
+func VARIANT_UserFree ordinal=290
+  void
+  pFlags "unsigned long*"
+  pVariant VARIANT*
+
+func VARIANT_UserFree64
+  void
+  pFlags "unsigned long*"
+  pVariant VARIANT*
+
+func VARIANT_UserMarshal ordinal=288
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  pVariant VARIANT*
+
+func VARIANT_UserMarshal64
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  pVariant VARIANT*
+
+func VARIANT_UserSize ordinal=287
+  success NotEqual=0
+  "unsigned long"
+  pFlags "unsigned long*"
+  Offset "unsigned long"
+  pVariant VARIANT*
+
+func VARIANT_UserSize64
+  success NotEqual=0
+  "unsigned long"
+  pFlags "unsigned long*"
+  Offset "unsigned long"
+  pVariant VARIANT*
+
+func VARIANT_UserUnmarshal ordinal=289
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  pVariant VARIANT*
+
+func VARIANT_UserUnmarshal64
+  success NotEqual=0
+  "unsigned char*"
+  pFlags "unsigned long*"
+  pBuffer "unsigned char*"
+  pVariant VARIANT*
+
+func SysAllocString ordinal=2
+  success NotEqual=0
+  BSTR
+  psz "const OLECHAR*"
+
+func SysAllocStringByteLen ordinal=150
+  success NotEqual=0
+  BSTR
+  psz LPCSTR
+  len UINT
+
+func SysAllocStringLen ordinal=4
+  success NotEqual=0
+  BSTR
+  strIn "const OLECHAR*"
+  ui UINT
+
+func SysFreeString ordinal=6
+  void
+  bstrString BSTR
+
+func SysReAllocString ordinal=3
+  success NotEqual=0
+  INT
+  pbstr BSTR*
+  psz "const OLECHAR*"
+
+func SysReAllocStringLen ordinal=5
+  success NotEqual=0
+  INT
+  pbstr BSTR*
+  psz "const OLECHAR*"
+  len "unsigned int"
+
+func SysStringByteLen ordinal=149
+  success NotEqual=0
+  UINT
+  bstr BSTR
+
+func SysStringLen ordinal=7
+  success NotEqual=0
+  UINT
+  bstr BSTR
+
+func VarAbs ordinal=168
+  HRESULT
+  pvarIn LPVARIANT
+  pvarResult LPVARIANT
+
+func VarAdd ordinal=141
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarAnd ordinal=142
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarCat ordinal=318
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarCmp ordinal=176
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  lcid LCID
+  dwFlags ULONG
+
+func VarDiv ordinal=143
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarEqv ordinal=152
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarFix ordinal=169
+  HRESULT
+  pvarIn LPVARIANT
+  pvarResult LPVARIANT
+
+func VarIdiv ordinal=153
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarImp ordinal=154
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarInt ordinal=172
+  HRESULT
+  pvarIn LPVARIANT
+  pvarResult LPVARIANT
+
+func VarMod ordinal=155
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarMul ordinal=156
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarNeg ordinal=173
+  HRESULT
+  pvarIn LPVARIANT
+  pvarResult LPVARIANT
+
+func VarNot ordinal=174
+  HRESULT
+  pvarIn LPVARIANT
+  pvarResult LPVARIANT
+
+func VarOr ordinal=157
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarPow ordinal=158
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarR4CmpR8 ordinal=316
+  HRESULT
+  fltLeft float
+  dblRight double
+
+func VarR8Pow ordinal=315
+  HRESULT
+  dblLeft double
+  dblRight double
+  pdblResult double*
+
+func VarR8Round ordinal=317
+  HRESULT
+  dblIn double
+  cDecimals int
+  pdblResult double*
+
+func VarRound ordinal=175
+  HRESULT
+  pvarIn LPVARIANT
+  cDecimals int
+  pvarResult LPVARIANT
+
+func VarSub ordinal=159
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VarXor ordinal=167
+  HRESULT
+  pvarLeft LPVARIANT
+  pvarRight LPVARIANT
+  pvarResult LPVARIANT
+
+func VariantChangeType ordinal=12
+  HRESULT
+  pvargDest VARIANTARG*
+  pvarSrc "const VARIANTARG*"
+  wFlags USHORT
+  vt VARTYPE
+
+func VariantChangeTypeEx ordinal=147
+  HRESULT
+  pvargDest VARIANTARG*
+  pvarSrc "const VARIANTARG*"
+  lcid LCID
+  wFlags USHORT
+  vt VARTYPE
+
+func VariantClear ordinal=9
+  HRESULT
+  pvarg VARIANTARG*
+
+func VariantCopy ordinal=10
+  HRESULT
+  pvargDest VARIANTARG*
+  pvargSrc "const VARIANTARG*"
+
+func VariantCopyInd ordinal=11
+  HRESULT
+  pvarDest VARIANT*
+  pvargSrc "const VARIANTARG*"
+
+func VariantInit ordinal=8
+  void
+  pvarg VARIANTARG*
+
+func CreateDispTypeInfo ordinal=31
+  HRESULT
+  pidata INTERFACEDATA*
+  lcid LCID
+  pptinfo ITypeInfo**
+
+func CreateStdDispatch ordinal=32
+  HRESULT
+  punkOuter IUnknown*
+  pvThis void*
+  ptinfo ITypeInfo*
+  ppunkStdDisp IUnknown**
+
+func DispCallFunc ordinal=146
+  HRESULT
+  pvInstance void*
+  oVft ULONG_PTR
+  cc CALLCONV
+  vtReturn VARTYPE
+  cActuals UINT
+  prgvt VARTYPE*
+  prgpvarg VARIANTARG**
+  pvargResult VARIANT*
+
+func DispGetIDsOfNames ordinal=29
+  HRESULT
+  ptinfo ITypeInfo*
+  rgszNames OLECHAR** count=cNames
+  cNames UINT
+  rgdispid DISPID* postCount=cNames
+
+func DispGetParam ordinal=28
+  HRESULT
+  pdispparams DISPPARAMS*
+  position UINT
+  vtTarg VARTYPE
+  pvarResult VARIANT*
+  puArgErr UINT*
+
+func DispInvoke ordinal=30
+  HRESULT
+  _this void*
+  ptinfo ITypeInfo*
+  dispidMember DISPID
+  wFlags WORD
+  pparams DISPPARAMS*
+  pvarResult VARIANT*
+  pexcepinfo EXCEPINFO*
+  puArgErr UINT*
+
+func CreateErrorInfo ordinal=202
+  HRESULT
+  pperrinfo ICreateErrorInfo**
+
+func GetErrorInfo ordinal=200
+  HRESULT
+  dwReserved ULONG
+  pperrinfo IErrorInfo**
+
+func SetErrorInfo ordinal=201
+  HRESULT
+  dwReserved ULONG
+  perrinfo IErrorInfo*
+
+func VarFormat ordinal=87
+  HRESULT
+  pvarIn LPVARIANT
+  pstrFormat LPOLESTR
+  iFirstDay int
+  iFirstWeek int
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarFormatCurrency ordinal=127
+  HRESULT
+  pvarIn LPVARIANT
+  iNumDig int
+  iIncLead int
+  iUseParens int
+  iGroup int
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarFormatDateTime ordinal=97
+  HRESULT
+  pvarIn LPVARIANT
+  iNamedFormat int
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarFormatFromTokens ordinal=139
+  HRESULT
+  pvarIn LPVARIANT
+  pstrFormat LPOLESTR
+  pbTokCur LPBYTE
+  dwFlags ULONG
+  pbstrOut BSTR*
+  lcid LCID
+
+func VarFormatNumber ordinal=107
+  HRESULT
+  pvarIn LPVARIANT
+  iNumDig int
+  iIncLead int
+  iUseParens int
+  iGroup int
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarFormatPercent ordinal=117
+  HRESULT
+  pvarIn LPVARIANT
+  iNumDig int
+  iIncLead int
+  iUseParens int
+  iGroup int
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarMonthName ordinal=129
+  HRESULT
+  iMonth int
+  fAbbrev int
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func VarTokenizeFormatString ordinal=140
+  HRESULT
+  pstrFormat LPOLESTR
+  rgbTok LPBYTE length=cbTok
+  cbTok int
+  iFirstDay int
+  iFirstWeek int
+  lcid LCID
+  pcbActual int*
+
+func VarWeekdayName ordinal=128
+  HRESULT
+  iWeekday int
+  fAbbrev int
+  iFirstDay int
+  dwFlags ULONG
+  pbstrOut BSTR*
+
+func OleLoadPictureFile ordinal=422
+  HRESULT
+  varFileName VARIANT
+  lplpdispPicture LPDISPATCH*
+
+func OleLoadPictureFileEx ordinal=402
+  HRESULT
+  varFileName VARIANT
+  xSizeDesired DWORD
+  ySizeDesired DWORD
+  dwFlags DWORD
+  lplpdispPicture LPDISPATCH*
+
+func OleSavePictureFile ordinal=423
+  HRESULT
+  lpdispPicture LPDISPATCH
+  bstrFileName BSTR
+
+func GetActiveObject ordinal=35
+  HRESULT
+  rclsid REFCLSID
+  pvReserved void*
+  ppunk IUnknown** interfaceId=rclsid
+
+func RegisterActiveObject ordinal=33
+  HRESULT
+  punk IUnknown*
+  rclsid REFCLSID
+  dwFlags DWORD
+  pdwRegister DWORD*
+
+func RevokeActiveObject ordinal=34
+  HRESULT
+  dwRegister DWORD
+  pvReserved void*
+
+func CreateTypeLib ordinal=160
+  HRESULT
+  syskind SYSKIND
+  szFile LPCOLESTR
+  ppctlib ICreateTypeLib**
+
+func CreateTypeLib2 ordinal=180
+  HRESULT
+  syskind SYSKIND
+  szFile LPCOLESTR
+  ppctlib ICreateTypeLib2**
+
+func OACreateTypeLib2
+  HRESULT
+  syskind SYSKIND
+  szFile LPCOLESTR
+  ppctlib ICreateTypeLib2**
+
+func OaBuildVersion ordinal=170
+  success NotEqual=0
+  ULONG
+
+func LHashValOfNameSys ordinal=165
+  success NotEqual=0
+  ULONG
+  syskind SYSKIND
+  lcid LCID
+  szName "const OLECHAR*"
+
+func LHashValOfNameSysA ordinal=166
+  success NotEqual=0
+  ULONG
+  syskind SYSKIND
+  lcid LCID
+  szName LPCSTR
+
+func LoadRegTypeLib ordinal=162
+  HRESULT
+  rguid REFGUID
+  wVerMajor WORD
+  wVerMinor WORD
+  lcid LCID
+  pptlib ITypeLib**
+
+func LoadTypeLib ordinal=161
+  HRESULT
+  szFile LPCOLESTR
+  pptlib ITypeLib**
+
+func LoadTypeLibEx ordinal=183
+  HRESULT
+  szFile LPCOLESTR
+  regkind REGKIND
+  pptlib ITypeLib**
+
+func OaEnablePerUserTLibRegistration ordinal=444
+  void
+
+func QueryPathOfRegTypeLib ordinal=164
+  HRESULT
+  guid REFGUID
+  wMaj USHORT
+  wMin USHORT
+  lcid LCID
+  lpbstrPathName LPBSTR
+
+func RegisterTypeLib ordinal=163
+  HRESULT
+  ptlib ITypeLib*
+  szFullPath LPCOLESTR
+  szHelpDir LPCOLESTR
+
+func RegisterTypeLibForUser ordinal=442
+  HRESULT
+  ptlib ITypeLib*
+  szFullPath OLECHAR*
+  szHelpDir OLECHAR*
+
+func UnRegisterTypeLib ordinal=186
+  HRESULT
+  libID REFGUID
+  wVerMajor WORD
+  wVerMinor WORD
+  lcid LCID
+  syskind SYSKIND
+
+func UnRegisterTypeLibForUser ordinal=443
+  HRESULT
+  libID REFGUID
+  wMajorVerNum WORD
+  wMinorVerNum WORD
+  lcid LCID
+  syskind SYSKIND
+
+func ClearCustData ordinal=171
+  void
+  pCustData LPCUSTDATA
+
+func GetRecordInfoFromGuids ordinal=322
+  HRESULT
+  rGuidTypeLib REFGUID
+  uVerMajor ULONG
+  uVerMinor ULONG
+  lcid LCID
+  rGuidTypeInfo REFGUID
+  ppRecInfo IRecordInfo**
+
+func GetRecordInfoFromTypeInfo ordinal=323
+  HRESULT
+  pTypeInfo ITypeInfo*
+  ppRecInfo IRecordInfo**
+

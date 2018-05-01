@@ -1,0 +1,14 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1TransformNode.txt
+
+ingterface ID2D1ConcreteTransform base=ID2D1TransformNode id={1a799d8a-69f7-4e4c-9fed-437ccc6684cc} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetOutputBuffer
+    [D2D_HRESULT]
+    bufferPrecision D2D1_BUFFER_PRECISION
+    channelDepth D2D1_CHANNEL_DEPTH
+
+  func SetCached
+    void
+    isCached BOOL
+
+

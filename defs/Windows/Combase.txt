@@ -1,0 +1,547 @@
+include Headers\ole.h.txt
+include Headers\runtime.h.txt
+
+dll Combase.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+sourceModule Ole32.dll include=Windows\Ole32.xml
+func CLSIDFromProgID
+
+func CLSIDFromString
+
+func CoAddRefServerProcess
+
+func CoCancelCall
+
+func CoCopyProxy
+
+func CoCreateFreeThreadedMarshaler
+
+func CoCreateGuid
+
+func CoCreateInstance
+
+func CoCreateInstanceEx
+
+func CoCreateInstanceFromApp
+
+func CoDecrementMTAUsage
+
+func CoDisableCallCancellation
+
+func CoDisconnectContext
+
+func CoDisconnectObject
+
+func CoEnableCallCancellation
+
+func CoFreeUnusedLibraries
+
+func CoFreeUnusedLibrariesEx
+
+func CoGetApartmentType
+
+func CoGetCallContext
+
+func CoGetCallerTID
+
+func CoGetCancelObject
+
+func CoGetClassObject
+
+func CoGetContextToken
+
+func CoGetCurrentLogicalThreadId
+
+func CoGetCurrentProcess
+
+func CoGetInstanceFromFile
+
+func CoGetInstanceFromIStorage
+
+func CoGetInterfaceAndReleaseStream
+
+func CoGetMalloc
+
+func CoGetMarshalSizeMax
+
+func CoGetModuleType
+
+func CoGetObjectContext
+
+func CoGetPSClsid
+
+func CoGetStandardMarshal
+
+func CoGetStdMarshalEx
+
+func CoGetTreatAsClass
+
+func CoImpersonateClient
+
+func CoIncrementMTAUsage
+
+func CoInitializeEx
+
+func CoInitializeSecurity
+
+func CoInvalidateRemoteMachineBindings
+
+func CoIsHandlerConnected
+
+func CoLockObjectExternal
+
+func CoMarshalHresult
+
+func CoMarshalInterface
+
+func CoMarshalInterThreadInterfaceInStream
+
+func CoQueryAuthenticationServices
+
+func CoQueryClientBlanket
+
+func CoQueryProxyBlanket
+
+func CoRegisterClassObject
+
+func CoRegisterInitializeSpy
+
+func CoRegisterMallocSpy
+
+func CoRegisterMessageFilter
+
+func CoRegisterPSClsid
+
+func CoRegisterSurrogate
+
+func CoReleaseMarshalData
+
+func CoReleaseServerProcess
+
+func CoResumeClassObjects
+
+func CoRevertToSelf
+
+func CoRevokeClassObject
+
+func CoRevokeInitializeSpy
+
+func CoRevokeMallocSpy
+
+func CoSetCancelObject
+
+func CoSetProxyBlanket
+
+func CoSuspendClassObjects
+
+func CoSwitchCallContext
+
+func CoTaskMemAlloc
+
+func CoTaskMemFree
+
+func CoTaskMemRealloc
+
+func CoTestCancel
+
+func CoUninitialize
+
+func CoUnmarshalHresult
+
+func CoUnmarshalInterface
+
+func CoWaitForMultipleHandles
+
+func CreateStreamOnHGlobal
+
+func FreePropVariantArray
+
+func GetHGlobalFromStream
+
+func IIDFromString
+
+func ProgIDFromCLSID
+
+func PropVariantClear
+
+func PropVariantCopy
+
+func StringFromCLSID
+
+func StringFromGUID2
+
+func StringFromIID
+
+sourceModule OleAut32.dll include=Windows\OleAut32.xml
+func CreateErrorInfo
+
+func GetErrorInfo
+
+func SetErrorInfo
+
+category "Component Object Model (COM)/COM Fundamentals"
+category "Additional Resources/Windows Runtime C++"
+category "Component Object Model (COM)/COM Fundamentals"
+interface IRestrictedErrorInfo
+
+interface IRoMetaDataLocator
+
+interface IApartmentShutdown
+
+interface IViewObjectPresentNotifySite
+
+interface IInspectable
+
+alias ROPARAMIIDHANDLE HANDLE
+
+pointer ROPARAMIIDHANDLE* ROPARAMIIDHANDLE
+
+alias "const IRoMetaDataLocator&" IRoMetaDataLocator*
+
+alias RO_REGISTRATION_COOKIE LPVOID
+
+pointer RO_REGISTRATION_COOKIE* RO_REGISTRATION_COOKIE
+
+alias APARTMENT_SHUTDOWN_REGISTRATION_COOKIE HANDLE
+
+pointer APARTMENT_SHUTDOWN_REGISTRATION_COOKIE* APARTMENT_SHUTDOWN_REGISTRATION_COOKIE
+
+alias PINSPECT_HSTRING_CALLBACK LPVOID
+
+alias PFNGETACTIVATIONFACTORY LPVOID
+
+pointer PFNGETACTIVATIONFACTORY* PFNGETACTIVATIONFACTORY
+
+alias PActivatableClassRegistration LPVOID
+
+pointer PActivatableClassRegistration* PActivatableClassRegistration
+
+flag RO_ERROR_REPORTING_FLAGS UINT32 display=UINT32
+  RO_ERROR_REPORTING_NONE                 0x00000000
+  RO_ERROR_REPORTING_SUPPRESSEXCEPTIONS   0x00000001
+  RO_ERROR_REPORTING_FORCEEXCEPTIONS      0x00000002
+  RO_ERROR_REPORTING_USESETERRORINFO      0x00000004
+  RO_ERROR_REPORTING_SUPPRESSSETERRORINFO 0x00000008
+
+pointer RO_ERROR_REPORTING_FLAGS* RO_ERROR_REPORTING_FLAGS display=UINT32*
+
+struct ServerInformation
+  dwServerPid DWORD
+  dwServerTid DWORD
+  ui64ServerAddress UINT64
+
+pointer PServerInformation ServerInformation
+
+enum RO_INIT_TYPE UINT
+  RO_INIT_SINGLETHREADED 0
+  RO_INIT_MULTITHREADED  1
+
+func CoEnterApplicationThreadLifetimeLoop
+  void
+
+func CoGetApplicationThreadReference
+  HRESULT
+  ppThreadReference IUnknown**
+
+func CoWaitForMultipleObjects
+  HRESULT
+  dwFlags DWORD
+  dwTimeout DWORD
+  cHandles ULONG
+  pHandles LPHANDLE
+  lpdwIndex LPDWORD
+
+func GetRestrictedErrorInfo
+  HRESULT
+  ppRestrictedErrorInfo IRestrictedErrorInfo**
+
+func SetRestrictedErrorInfo
+  HRESULT
+  pRestrictedErrorInfo IRestrictedErrorInfo*
+
+func CoDecodeProxy
+  HRESULT
+  dwClientPid DWORD
+  ui64ProxyAddress UINT64
+  pServerInformation PServerInformation
+
+func HSTRING_UserFree
+  void
+  pFlags ULONG*
+  ppidl HSTRING*
+
+func HSTRING_UserFree64
+  void
+  pFlags ULONG*
+  ppidl HSTRING*
+
+func HSTRING_UserMarshal
+  success NotEqual=0
+  UCHAR*
+  pFlags ULONG*
+  pBuffer UCHAR*
+  ppidl HSTRING*
+
+func HSTRING_UserMarshal64
+  success NotEqual=0
+  UCHAR*
+  pFlags ULONG*
+  pBuffer UCHAR*
+  ppidl HSTRING*
+
+func HSTRING_UserSize
+  success NotEqual=0
+  ULONG
+  pFlags ULONG*
+  StartingSize ULONG
+  ppidl HSTRING*
+
+func HSTRING_UserSize64
+  success NotEqual=0
+  ULONG
+  pFlags ULONG*
+  StartingSize ULONG
+  ppidl HSTRING*
+
+func HSTRING_UserUnmarshal
+  success NotEqual=0
+  UCHAR*
+  pFlags ULONG*
+  pBuffer UCHAR*
+  ppidl HSTRING*
+
+func HSTRING_UserUnmarshal64
+  success NotEqual=0
+  UCHAR*
+  pFlags ULONG*
+  pBuffer UCHAR*
+  ppidl HSTRING*
+
+func RoActivateInstance
+  HRESULT
+  activatableClassId HSTRING
+  instance IInspectable**
+
+func RoCaptureErrorContext
+  HRESULT
+  hrError HRESULT
+
+func RoFailFastWithErrorContext
+  void
+  hrError HRESULT
+
+func RoFreeParameterizedTypeExtra
+  HRESULT
+  extra ROPARAMIIDHANDLE
+
+func RoGetActivatableClassRegistration
+  HRESULT
+  activatableClassId HSTRING
+  activatableClassRegistration PActivatableClassRegistration*
+
+func RoGetActivationFactory
+  HRESULT
+  activatableClassId HSTRING
+  iid REFIID
+  factory void** interfaceId=iid
+
+func RoGetApartmentIdentifier
+  HRESULT
+  apartmentIdentifier UINT64*
+
+func RoGetErrorReportingFlags
+  HRESULT
+  pflags RO_ERROR_REPORTING_FLAGS*
+
+func RoGetParameterizedTypeInstanceIID
+  HRESULT
+  nameElementCount UINT32
+  nameElements PCWSTR* count=nameElementCount
+  metaDataLocator "const IRoMetaDataLocator&"
+  iid GUID*
+  pExtra ROPARAMIIDHANDLE*
+
+func RoGetServerActivatableClasses
+  HRESULT
+  serverName HSTRING
+  activatableClassIds HSTRING** derefPostCount=count
+  count DWORD*
+
+func RoInitialize
+  HRESULT
+  initType RO_INIT_TYPE
+
+func RoOriginateError
+  BOOL
+  error HRESULT
+  message HSTRING
+
+func RoOriginateErrorW
+  BOOL
+  error HRESULT
+  cchMax UINT
+  message PCWSTR
+
+func RoParameterizedTypeExtraGetTypeSignature
+  HRESULT
+  extra ROPARAMIIDHANDLE
+
+func RoRegisterActivationFactories
+  HRESULT
+  activatableClassIds HSTRING* count=count
+  activationFactoryCallbacks PFNGETACTIVATIONFACTORY* count=count
+  count UINT32
+  cookie RO_REGISTRATION_COOKIE*
+
+func RoRegisterForApartmentShutdown
+  HRESULT
+  callbackObject IApartmentShutdown*
+  apartmentIdentifier UINT64*
+  regCookie APARTMENT_SHUTDOWN_REGISTRATION_COOKIE*
+
+func RoResolveRestrictedErrorInfoReference
+  HRESULT
+  reference PCWSTR
+  ppRestrictedErrorInfo IRestrictedErrorInfo**
+
+func RoRevokeActivationFactories
+  void
+  cookie RO_REGISTRATION_COOKIE
+
+func RoSetErrorReportingFlags
+  HRESULT
+  flags RO_ERROR_REPORTING_FLAGS
+
+func RoTransformError
+  BOOL
+  oldError HRESULT
+  newError HRESULT
+  message HSTRING
+
+func RoTransformErrorW
+  BOOL
+  oldError HRESULT
+  newError HRESULT
+  cchMax UINT
+  message PCWSTR
+
+func RoUninitialize
+  void
+
+func RoUnregisterForApartmentShutdown
+  HRESULT
+  regCookie APARTMENT_SHUTDOWN_REGISTRATION_COOKIE
+
+func WindowsCompareStringOrdinal
+  HRESULT
+  string1 HSTRING
+  string2 HSTRING
+  result INT32*
+
+func WindowsConcatString
+  HRESULT
+  string1 HSTRING
+  string2 HSTRING
+  newString HSTRING*
+
+func WindowsCreateString
+  HRESULT
+  sourceString LPCWSTR
+  length UINT32
+  string HSTRING*
+
+func WindowsCreateStringReference
+  HRESULT
+  sourceString PCWSTR
+  length UINT32
+  hstringHeader HSTRING_HEADER*
+  string HSTRING*
+
+func WindowsDeleteString
+  HRESULT
+  string HSTRING
+
+func WindowsDeleteStringBuffer
+  HRESULT
+  bufferHandle HSTRING_BUFFER
+
+func WindowsDuplicateString
+  HRESULT
+  string HSTRING
+  newString HSTRING*
+
+func WindowsGetStringLen
+  success NotEqual=0
+  UINT32
+  string HSTRING
+
+func WindowsGetStringRawBuffer
+  success NotEqual=0
+  PCWSTR
+  string HSTRING
+  length UINT32*
+
+func WindowsInspectString
+  HRESULT
+  targetHString UINT_PTR
+  machine USHORT
+  callback PINSPECT_HSTRING_CALLBACK
+  context void*
+  length UINT32*
+  targetStringAddress UINT_PTR*
+
+func WindowsIsStringEmpty
+  BOOL
+  string HSTRING
+
+func WindowsPreallocateStringBuffer
+  HRESULT
+  length UINT32
+  mutableBuffer WCHAR**
+  bufferHandle HSTRING_BUFFER*
+
+func WindowsPromoteStringBuffer
+  HRESULT
+  bufferHandle HSTRING_BUFFER
+  string HSTRING*
+
+func WindowsReplaceString
+  HRESULT
+  string HSTRING
+  stringReplaced HSTRING
+  stringReplaceWith HSTRING
+  newString HSTRING*
+
+func WindowsStringHasEmbeddedNull
+  HRESULT
+  string HSTRING
+  hasEmbedNull BOOL*
+
+func WindowsSubstring
+  HRESULT
+  string HSTRING
+  startIndex UINT32
+  newString HSTRING*
+
+func WindowsSubstringWithSpecifiedLength
+  HRESULT
+  string HSTRING
+  startIndex UINT32
+  length UINT32
+  newString HSTRING*
+
+func WindowsTrimStringEnd
+  HRESULT
+  string HSTRING
+  trimString HSTRING
+  newString HSTRING*
+
+func WindowsTrimStringStart
+  HRESULT
+  string HSTRING
+  trimString HSTRING
+  newString HSTRING*
+
+func CoAllowUnmarshalerCLSID
+  HRESULT
+  clsid REFCLSID
+

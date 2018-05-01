@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface ICatalogFileInfo base=IUnknown id={711C7600-6B48-11d1-B403-00AA00B92AF1} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetCatalogFile
+    HRESULT
+    ppszCatalogFile LPSTR*
+
+  func GetJavaTrust
+    HRESULT
+    ppJavaTrust void**
+
+

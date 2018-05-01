@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMDroppedFrames base=IUnknown id={C6E13344-30AC-11d0-A18C-00A0C9118956} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetNumDropped
+    HRESULT
+    plDropped long*
+
+  func GetNumNotDropped
+    HRESULT
+    plNotDropped long*
+
+  func GetDroppedInfo
+    HRESULT
+    lSize long
+    plArray long*
+    plNumCopied long*
+
+  func GetAverageFrameSize
+    HRESULT
+    plAverageSize long*
+
+

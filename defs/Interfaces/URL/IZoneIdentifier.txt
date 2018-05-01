@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IZoneIdentifier base=IUnknown id={cd45f185-1b21-48e2-967b-ead743a8914e} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetId
+    HRESULT
+    pdwZone [URLZONE*|DWORD*]
+
+  func SetId
+    HRESULT
+    dwZone [URLZONE|DWORD]
+
+  func Remove
+    HRESULT
+
+

@@ -1,0 +1,149 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwRule base=IDispatch id={AF230D27-BABA-4E42-ACED-F524F22CFCE2} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall with Advanced Security"
+  func get_Name
+    HRESULT
+    name BSTR*
+
+  func put_Name
+    HRESULT
+    name BSTR
+
+  func get_Description
+    HRESULT
+    desc BSTR*
+
+  func put_Description
+    HRESULT
+    desc BSTR
+
+  func get_ApplicationName
+    HRESULT
+    imageFileName BSTR*
+
+  func put_ApplicationName
+    HRESULT
+    imageFileName BSTR
+
+  func get_ServiceName
+    HRESULT
+    serviceName BSTR*
+
+  func put_ServiceName
+    HRESULT
+    serviceName BSTR
+
+  func get_Protocol
+    HRESULT
+    protocol LONG*
+
+  func put_Protocol
+    HRESULT
+    protocol LONG
+
+  func get_LocalPorts
+    HRESULT
+    portNumbers BSTR*
+
+  func put_LocalPorts
+    HRESULT
+    portNumbers BSTR
+
+  func get_RemotePorts
+    HRESULT
+    portNumbers BSTR*
+
+  func put_RemotePorts
+    HRESULT
+    portNumbers BSTR
+
+  func get_LocalAddresses
+    HRESULT
+    localAddrs BSTR*
+
+  func put_LocalAddresses
+    HRESULT
+    localAddrs BSTR
+
+  func get_RemoteAddresses
+    HRESULT
+    remoteAddrs BSTR*
+
+  func put_RemoteAddresses
+    HRESULT
+    remoteAddrs BSTR
+
+  func get_IcmpTypesAndCodes
+    HRESULT
+    icmpTypesAndCodes BSTR*
+
+  func put_IcmpTypesAndCodes
+    HRESULT
+    icmpTypesAndCodes BSTR
+
+  func get_Direction
+    HRESULT
+    dir NET_FW_RULE_DIRECTION*
+
+  func put_Direction
+    HRESULT
+    dir NET_FW_RULE_DIRECTION
+
+  func get_Interfaces
+    HRESULT
+    interfaces VARIANT*
+
+  func put_Interfaces
+    HRESULT
+    interfaces VARIANT
+
+  func get_InterfaceTypes
+    HRESULT
+    interfaceTypes BSTR*
+
+  func put_InterfaceTypes
+    HRESULT
+    interfaceTypes BSTR
+
+  func get_Enabled
+    HRESULT
+    enabled VARIANT_BOOL*
+
+  func put_Enabled
+    HRESULT
+    enabled VARIANT_BOOL
+
+  func get_Grouping
+    HRESULT
+    context BSTR*
+
+  func put_Grouping
+    HRESULT
+    context BSTR
+
+  func get_Profiles
+    HRESULT
+    profileTypesBitmask long*
+
+  func put_Profiles
+    HRESULT
+    profileTypesBitmask long
+
+  func get_EdgeTraversal
+    HRESULT
+    enabled VARIANT_BOOL*
+
+  func put_EdgeTraversal
+    HRESULT
+    enabled VARIANT_BOOL
+
+  func get_Action
+    HRESULT
+    action NET_FW_ACTION*
+
+  func put_Action
+    HRESULT
+    action NET_FW_ACTION
+
+

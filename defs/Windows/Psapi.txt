@@ -1,0 +1,132 @@
+include Headers\windows.h.txt
+include Headers\processes.h.txt
+
+dll Psapi.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Diagnostics/Process Status API (PSAPI)"
+func EmptyWorkingSet
+  BOOL
+  hProcess [ProcessHandle]
+
+func EnumDeviceDrivers
+  BOOL
+  lpImageBase LPVOID*
+  cb DWORD
+  lpcbNeeded LPDWORD
+
+func EnumPageFiles bothCharset
+  BOOL
+  pCallbackRoutine PENUM_PAGE_CALLBACK
+  lpContext LPVOID
+
+func EnumProcesses
+  BOOL
+  pProcessIds DWORD* postLength=pBytesReturned
+  cb DWORD
+  pBytesReturned DWORD*
+
+func EnumProcessModules
+  BOOL
+  hProcess [ProcessHandle]
+  lphModule HMODULE*
+  cb DWORD
+  lpcbNeeded LPDWORD
+
+func EnumProcessModulesEx
+  BOOL
+  hProcess [ProcessHandle]
+  lphModule HMODULE*
+  cb DWORD
+  lpcbNeeded LPDWORD
+  dwFilterFlag DWORD
+
+func GetDeviceDriverBaseName bothCharset
+  success NotEqual=0
+  DWORD
+  ImageBase LPVOID
+  lpBaseName LPTSTR outputOnly
+  nSize DWORD
+
+func GetDeviceDriverFileName bothCharset
+  success NotEqual=0
+  DWORD
+  ImageBase LPVOID
+  lpFilename LPTSTR outputOnly
+  nSize DWORD
+
+func GetMappedFileName bothCharset
+  success NotEqual=0
+  DWORD
+  hProcess [ProcessHandle]
+  lpv LPVOID
+  lpFilename LPTSTR outputOnly
+  nSize DWORD
+
+func GetModuleBaseName bothCharset
+  success NotEqual=0
+  DWORD
+  hProcess [ProcessHandle]
+  hModule HMODULE
+  lpBaseName LPTSTR outputOnly
+  nSize DWORD
+
+func GetModuleFileNameEx bothCharset
+  success NotEqual=0
+  DWORD
+  hProcess [ProcessHandle]
+  hModule HMODULE
+  lpFilename LPTSTR outputOnly
+  nSize DWORD
+
+func GetModuleInformation
+  BOOL
+  hProcess [ProcessHandle]
+  hModule HMODULE
+  lpmodinfo LPMODULEINFO
+  cb DWORD
+
+func GetPerformanceInfo
+  BOOL
+  pPerformanceInformation PPERFORMANCE_INFORMATION
+  cb DWORD
+
+func GetProcessImageFileName bothCharset
+  success NotEqual=0
+  DWORD
+  hProcess [ProcessHandle]
+  lpImageFileName LPTSTR outputOnly
+  nSize DWORD
+
+func GetProcessMemoryInfo
+  BOOL
+  Process HANDLE
+  ppsmemCounters PPROCESS_MEMORY_COUNTERS
+  cb DWORD
+
+func GetWsChanges
+  BOOL
+  hProcess [ProcessHandle]
+  lpWatchInfo PPSAPI_WS_WATCH_INFORMATION
+  cb DWORD
+
+func GetWsChangesEx
+  BOOL
+  hProcess [ProcessHandle]
+  lpWatchInfoEx PPSAPI_WS_WATCH_INFORMATION_EX
+  cb DWORD
+
+func InitializeProcessForWsWatch
+  BOOL
+  hProcess [ProcessHandle]
+
+func QueryWorkingSet
+  BOOL
+  hProcess [ProcessHandle]
+  pv PVOID
+  cb DWORD
+
+func QueryWorkingSetEx
+  BOOL
+  hProcess [ProcessHandle]
+  pv PVOID
+  cb DWORD
+

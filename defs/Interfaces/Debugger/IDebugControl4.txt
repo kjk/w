@@ -1,0 +1,358 @@
+include Interfaces\Debugger\IDebugControl3.txt
+
+ingterface IDebugControl4 base=IDebugControl3 id={94e60ce9-9b41-4b19-9fc0-6d9eb35272b3} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetLogFileWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    FileSize PULONG
+    Append PBOOL
+
+  func OpenLogFileWide
+    HRESULT
+    File PCWSTR
+    Append BOOL
+
+  func InputWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    InputSize PULONG
+
+  func ReturnInputWide
+    HRESULT
+    Buffer PCWSTR
+
+  func OutputWide varArgs
+    HRESULT
+    Mask [DEBUG_OUTPUT_FLAGS]
+    Format PCWSTR
+
+  func OutputVaListWide
+    HRESULT
+    Mask [DEBUG_OUTPUT_FLAGS]
+    Format PCWSTR
+    Args va_list
+
+  func ControlledOutputWide
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Mask [DEBUG_OUTPUT_FLAGS]
+    Format PCWSTR
+
+  func ControlledOutputVaListWide
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Mask [DEBUG_OUTPUT_FLAGS]
+    Format PCWSTR
+    Args va_list
+
+  func OutputPromptWide varArgs
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Format PCWSTR
+
+  func OutputPromptVaListWide
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Format PCWSTR
+    Args va_list
+
+  func GetPromptTextWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    TextSize PULONG
+
+  func AssembleWide
+    HRESULT
+    Offset ULONG64
+    Instr PCWSTR
+    EndOffset PULONG64
+
+  func DisassembleWide
+    HRESULT
+    Offset ULONG64
+    Flags [DEBUG_DISASM_FLAGS]
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    DisassemblySize PULONG
+    EndOffset PULONG64
+
+  func GetProcessorTypeNamesWide
+    HRESULT
+    Type ULONG
+    FullNameBuffer PWSTR
+    FullNameBufferSize ULONG
+    FullNameSize PULONG
+    AbbrevNameBuffer PWSTR
+    AbbrevNameBufferSize ULONG
+    AbbrevNameSize PULONG
+
+  func GetTextMacroWide
+    HRESULT
+    Slot ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    MacroSize PULONG
+
+  func SetTextMacroWide
+    HRESULT
+    Slot ULONG
+    Macro PCWSTR
+
+  func EvaluateWide
+    HRESULT
+    Expression PCWSTR
+    DesiredType ULONG
+    Value PDEBUG_VALUE
+    RemainderIndex PULONG
+
+  func ExecuteWide
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Command PCWSTR
+    Flags [DEBUG_EXECUTE_FLAGS]
+
+  func ExecuteCommandFileWide
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    CommandFile PCWSTR
+    Flags [DEBUG_EXECUTE_FLAGS]
+
+  func GetBreakpointByIndex2
+    HRESULT
+    Index ULONG
+    Bp PDEBUG_BREAKPOINT2*
+
+  func GetBreakpointById2
+    HRESULT
+    Id ULONG
+    Bp PDEBUG_BREAKPOINT2*
+
+  func AddBreakpoint2
+    HRESULT
+    Type ULONG
+    DesiredId ULONG
+    Bp PDEBUG_BREAKPOINT2*
+
+  func RemoveBreakpoint2
+    HRESULT
+    Bp PDEBUG_BREAKPOINT2
+
+  func AddExtensionWide
+    HRESULT
+    Path PCWSTR
+    Flags ULONG
+    Handle PULONG64
+
+  func GetExtensionByPathWide
+    HRESULT
+    Path PCWSTR
+    Handle PULONG64
+
+  func CallExtensionWide
+    HRESULT
+    Handle ULONG64
+    Function PCWSTR
+    Arguments PCWSTR
+
+  func GetExtensionFunctionWide
+    HRESULT
+    Handle ULONG64
+    FuncName PCWSTR
+    Function FARPROC*
+
+  func GetEventFilterTextWide
+    HRESULT
+    Index ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    TextSize PULONG
+
+  func GetEventFilterCommandWide
+    HRESULT
+    Index ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    CommandSize PULONG
+
+  func SetEventFilterCommandWide
+    HRESULT
+    Index ULONG
+    Command PCWSTR
+
+  func GetSpecificFilterArgumentWide
+    HRESULT
+    Index ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    ArgumentSize PULONG
+
+  func SetSpecificFilterArgumentWide
+    HRESULT
+    Index ULONG
+    Argument PCWSTR
+
+  func GetExceptionFilterSecondCommandWide
+    HRESULT
+    Index ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    CommandSize PULONG
+
+  func SetExceptionFilterSecondCommandWide
+    HRESULT
+    Index ULONG
+    Command PCWSTR
+
+  func GetLastEventInformationWide
+    HRESULT
+    Type PULONG
+    ProcessId PULONG
+    ThreadId PULONG
+    ExtraInformation PVOID
+    ExtraInformationSize ULONG
+    ExtraInformationUsed PULONG
+    Description PWSTR
+    DescriptionSize ULONG
+    DescriptionUsed PULONG
+
+  func GetTextReplacementWide
+    HRESULT
+    SrcText PCWSTR
+    Index ULONG
+    SrcBuffer PWSTR
+    SrcBufferSize ULONG
+    SrcSize PULONG
+    DstBuffer PWSTR
+    DstBufferSize ULONG
+    DstSize PULONG
+
+  func SetTextReplacementWide
+    HRESULT
+    SrcText PCWSTR
+    DstText PCWSTR
+
+  func SetExpressionSyntaxByNameWide
+    HRESULT
+    AbbrevName PCWSTR
+
+  func GetExpressionSyntaxNamesWide
+    HRESULT
+    Index ULONG
+    FullNameBuffer PWSTR
+    FullNameBufferSize ULONG
+    FullNameSize PULONG
+    AbbrevNameBuffer PWSTR
+    AbbrevNameBufferSize ULONG
+    AbbrevNameSize PULONG
+
+  func GetEventIndexDescriptionWide
+    HRESULT
+    Index ULONG
+    Which ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    DescSize PULONG
+
+  func GetLogFile2
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    FileSize PULONG
+    Flags [PDEBUG_LOG_FLAGS]
+
+  func OpenLogFile2
+    HRESULT
+    File PCSTR
+    Flags [DEBUG_LOG_FLAGS]
+
+  func GetLogFile2Wide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    FileSize PULONG
+    Flags [PDEBUG_LOG_FLAGS]
+
+  func OpenLogFile2Wide
+    HRESULT
+    File PCWSTR
+    Flags [DEBUG_LOG_FLAGS]
+
+  func GetSystemVersionValues
+    HRESULT
+    PlatformId PULONG
+    Win32Major PULONG
+    Win32Minor PULONG
+    KdMajor PULONG
+    KdMinor PULONG
+
+  func GetSystemVersionString
+    HRESULT
+    Which ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    StringSize PULONG
+
+  func GetSystemVersionStringWide
+    HRESULT
+    Which ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    StringSize PULONG
+
+  func GetContextStackTrace
+    HRESULT
+    StartContext PVOID
+    StartContextSize ULONG
+    Frames PDEBUG_STACK_FRAME
+    FramesSize ULONG
+    FrameContexts PVOID
+    FrameContextsSize ULONG
+    FrameContextsEntrySize ULONG
+    FramesFilled PULONG
+
+  func OutputContextStackTrace
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Frames PDEBUG_STACK_FRAME
+    FramesSize ULONG
+    FrameContexts PVOID
+    FrameContextsSize ULONG
+    FrameContextsEntrySize ULONG
+    Flags [DEBUG_STACK_FLAGS]
+
+  func GetStoredEventInformation
+    HRESULT
+    Type PULONG
+    ProcessId PULONG
+    ThreadId PULONG
+    Context PVOID
+    ContextSize ULONG
+    ContextUsed PULONG
+    ExtraInformation PVOID
+    ExtraInformationSize ULONG
+    ExtraInformationUsed PULONG
+
+  func GetManagedStatus
+    HRESULT
+    Flags [PDEBUG_MANAGED_FLAGS]
+    WhichString [DEBUG_MANSTR_TYPE]
+    String PSTR
+    StringSize ULONG
+    StringNeeded PULONG
+
+  func GetManagedStatusWide
+    HRESULT
+    Flags [PDEBUG_MANAGED_FLAGS]
+    WhichString [DEBUG_MANSTR_TYPE]
+    String PWSTR
+    StringSize ULONG
+    StringNeeded PULONG
+
+  func ResetManagedStatus
+    HRESULT
+    Flags [DEBUG_MANRESET_FLAGS]
+
+

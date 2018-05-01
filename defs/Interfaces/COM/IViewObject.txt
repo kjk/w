@@ -1,0 +1,49 @@
+include Interfaces\IUnknown.txt
+
+ingterface IViewObject base=IUnknown id={0000010d-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func Draw
+    HRESULT
+    dwDrawAspect DWORD
+    lindex LONG
+    pvAspect void*
+    ptd DVTARGETDEVICE*
+    hdcTargetDev HDC
+    hdcDraw HDC
+    lprcBounds LPCRECTL
+    lprcWBounds LPCRECTL
+    dwContinue ULONG_PTR
+    dwContinue ULONG_PTR
+
+  func GetColorSet
+    HRESULT
+    dwDrawAspect DWORD
+    lindex LONG
+    pvAspect void*
+    ptd DVTARGETDEVICE*
+    hicTargetDev HDC
+    ppColorSet LOGPALETTE**
+
+  func Freeze
+    HRESULT
+    dwDrawAspect DWORD
+    lindex LONG
+    pvAspect void*
+    pdwFreeze DWORD*
+
+  func Unfreeze
+    HRESULT
+    dwFreeze DWORD
+
+  func SetAdvise
+    HRESULT
+    aspects DWORD
+    advf ADVF
+    pAdvSink IAdviseSink*
+
+  func GetAdvise
+    HRESULT
+    pAspects DWORD*
+    pAdvf ADVF*
+    ppAdvSink IAdviseSink**
+
+

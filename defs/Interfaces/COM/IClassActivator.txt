@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IClassActivator base=IUnknown id={00000140-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func GetClassObject
+    HRESULT
+    rclsid REFCLSID
+    dwClassContext DWORD
+    locale LCID
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

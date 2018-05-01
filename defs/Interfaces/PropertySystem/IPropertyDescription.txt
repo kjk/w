@@ -1,0 +1,98 @@
+include Interfaces\IUnknown.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyDescription base=IUnknown id={6f79d558-3e96-4549-a1d1-7d75d2288814} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func GetPropertyKey
+    HRESULT
+    pkey PROPERTYKEY*
+
+  func GetCanonicalName
+    HRESULT
+    ppszName LPWSTR*
+
+  func GetPropertyType
+    HRESULT
+    pvartype VARTYPE*
+
+  func GetDisplayName
+    HRESULT
+    ppszName LPWSTR*
+
+  func GetEditInvitation
+    HRESULT
+    ppszInvite LPWSTR*
+
+  func GetTypeFlags
+    HRESULT
+    mask PROPDESC_TYPE_FLAGS
+    ppdtFlags PROPDESC_TYPE_FLAGS*
+
+  func GetViewFlags
+    HRESULT
+    ppdvFlags PROPDESC_VIEW_FLAGS*
+
+  func GetDefaultColumnWidth
+    HRESULT
+    pcxChars UINT*
+
+  func GetDisplayType
+    HRESULT
+    pdisplaytype PROPDESC_DISPLAYTYPE*
+
+  func GetColumnState
+    HRESULT
+    pcsFlags SHCOLSTATEF*
+
+  func GetGroupingRange
+    HRESULT
+    pgr PROPDESC_GROUPING_RANGE*
+
+  func GetRelativeDescriptionType
+    HRESULT
+    prdt PROPDESC_RELATIVEDESCRIPTION_TYPE*
+
+  func GetRelativeDescription
+    HRESULT
+    propvar1 REFPROPVARIANT
+    propvar2 REFPROPVARIANT
+    ppszDesc1 LPWSTR*
+    ppszDesc2 LPWSTR*
+
+  func GetSortDescription
+    HRESULT
+    psd PROPDESC_SORTDESCRIPTION*
+
+  func GetSortDescriptionLabel
+    HRESULT
+    fDescending BOOL
+    ppszDescription LPWSTR*
+
+  func GetAggregationType
+    HRESULT
+    paggtype PROPDESC_AGGREGATION_TYPE*
+
+  func GetConditionType
+    HRESULT
+    pcontype PROPDESC_CONDITION_TYPE*
+    popDefault CONDITION_OPERATION*
+
+  func GetEnumTypeList
+    HRESULT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func CoerceToCanonicalValue
+    HRESULT
+    ppropvar PROPVARIANT*
+
+  func FormatForDisplay
+    HRESULT
+    propvar REFPROPVARIANT
+    pdfFlags PROPDESC_FORMAT_FLAGS
+    ppszDisplay LPWSTR*
+
+  func IsValueCanonical
+    HRESULT
+    propvar REFPROPVARIANT
+
+

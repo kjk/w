@@ -1,0 +1,35 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Resource.txt
+
+ingterface ID2D1StrokeStyle base=ID2D1Resource id={2cd9069d-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetStartCap
+    D2D1_CAP_STYLE
+
+  func GetEndCap
+    D2D1_CAP_STYLE
+
+  func GetDashCap
+    D2D1_CAP_STYLE
+
+  func GetMiterLimit
+    FLOAT
+
+  func GetLineJoin
+    D2D1_LINE_JOIN
+
+  func GetDashOffset
+    FLOAT
+
+  func GetDashStyle
+    D2D1_DASH_STYLE
+
+  func GetDashesCount
+    success NotEqual=0
+    UINT32
+
+  func GetDashes
+    void
+    dashes FLOAT* postCount=dashesCount
+    dashesCount UINT32
+
+

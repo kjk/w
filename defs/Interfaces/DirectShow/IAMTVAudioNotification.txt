@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMTVAudioNotification base=IUnknown id={83EC1C33-23D1-11d1-99E6-00A0C9560266} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func OnEvent
+    HRESULT
+    Event AMTVAudioEventType
+
+

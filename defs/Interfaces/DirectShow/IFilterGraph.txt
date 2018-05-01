@@ -1,0 +1,1469 @@
+include Interfaces\IUnknown.txt
+include Headers\directx.h.txt
+include Headers\ddraw.h.txt
+include Headers\multimedia.h.txt
+
+ingterface IFilterGraph base=IUnknown id={56a8689f-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func AddFilter
+    HRESULT
+    pFilter IBaseFilter*
+    pName LPCWSTR
+
+  func RemoveFilter
+    HRESULT
+    pFilter IBaseFilter*
+
+  func EnumFilters
+    HRESULT
+    ppEnum IEnumFilters**
+
+  func FindFilterByName
+    HRESULT
+    pName LPCWSTR
+    ppFilter IBaseFilter**
+
+  func ConnectDirect
+    HRESULT
+    ppinOut IPin*
+    ppinIn IPin*
+    pmt "const AM_MEDIA_TYPE*"
+
+  func Reconnect
+    HRESULT
+    ppin IPin*
+
+  func Disconnect
+    HRESULT
+    ppin IPin*
+
+  func SetDefaultSyncSource
+    HRESULT
+
+  interface IAMAnalogVideoDecoder
+
+  interface IAMAnalogVideoEncoder
+
+  interface IAMAsyncReaderTimestampScaling
+
+  interface IAMAudioInputMixer
+
+  interface IAMAudioRendererStats
+
+  interface IAMBufferNegotiation
+
+  interface IAMCameraControl
+
+  interface IAMCertifiedOutputProtection
+
+  interface IAMClockAdjust
+
+  interface IAMClockSlave
+
+  interface IAMCopyCaptureFileProgress
+
+  interface IAMCrossbar
+
+  interface IAMDecoderCaps
+
+  interface IAMDeviceRemoval
+
+  interface IAMDevMemoryAllocator
+
+  interface IAMDevMemoryControl
+
+  interface IAMDroppedFrames
+
+  interface IAMExtDevice
+
+  interface IAMExtTransport
+
+  interface IAMFilterMiscFlags
+
+  interface IAMGraphBuilderCallback
+
+  interface IAMGraphStreams
+
+  interface IAMLatency
+
+  interface IAMOpenProgress
+
+  interface IAMOverlayFX
+
+  interface IAMovieSetup
+
+  interface IAMPhysicalPinInfo
+
+  interface IAMPluginControl
+
+  interface IAMPushSource
+
+  interface IAMResourceControl
+
+  interface IAMStreamConfig
+
+  interface IAMStreamControl
+
+  interface IAMStreamSelect
+
+  interface IAMTimecodeDisplay
+
+  interface IAMTimecodeGenerator
+
+  interface IAMTimecodeReader
+
+  interface IAMTuner
+
+  interface IAMTunerNotification
+
+  interface IAMTVAudio
+
+  interface IAMTVAudioNotification
+
+  interface IAMTVTuner
+
+  interface IAMVfwCaptureDialogs
+
+  interface IAMVfwCompressDialogs
+
+  interface IAMVideoCompression
+
+  interface IAMVideoControl
+
+  interface IAMVideoDecimationProperties
+
+  interface IAMVideoProcAmp
+
+  interface IAsyncReader
+
+  interface IBaseFilter
+
+  interface IBPCSatelliteTuner
+
+  interface ICaptureGraphBuilder
+
+  interface ICaptureGraphBuilder2
+
+  interface ICodecAPI
+
+  interface IConfigAviMux
+
+  interface IConfigInterleaving
+
+  interface ICreateDevEnum
+
+  interface IDDrawExclModeVideo
+
+  interface IDDrawExclModeVideoCallback
+
+  interface IDecimateVideoImage
+
+  interface IDistributorNotify
+
+  interface IDrawVideoImage
+
+  interface IDvdCmd
+
+  interface IDvdControl
+
+  interface IDvdControl2
+
+  interface IDvdGraphBuilder
+
+  interface IDvdInfo
+
+  interface IDvdInfo2
+
+  interface IDvdState
+
+  interface IDVEnc
+
+  interface IDVRGB219
+
+  interface IDVSplitter
+
+  interface IEncoderAPI
+
+  interface IEnumFilters
+
+  interface IEnumMediaTypes
+
+  interface IEnumPins
+
+  interface IEnumRegFilters
+
+  interface IEnumStreamIdMap
+
+  interface IFileSinkFilter
+
+  interface IFileSinkFilter2
+
+  interface IFileSourceFilter
+
+  interface IFilterChain
+
+  interface IFilterGraph2
+
+  interface IFilterGraph3
+
+  interface IFilterMapper
+
+  interface IFilterMapper2
+
+  interface IFilterMapper3
+
+  interface IGetCapabilitiesKey
+
+  interface IGraphBuilder
+
+  interface IGraphConfig
+
+  interface IGraphConfigCallback
+
+  interface IGraphVersion
+
+  interface IIPDVDec
+
+  interface IKsPropertySet
+
+  interface IMediaEventSink
+
+  interface IMediaFilter
+
+  interface IMediaPropertyBag
+
+  interface IMediaSample
+
+  interface IMediaSample2
+
+  interface IMediaSample2Config
+
+  interface IMediaSeeking
+
+  interface IMemAllocator
+
+  interface IMemAllocatorCallbackTemp
+
+  interface IMemAllocatorNotifyCallbackTemp
+
+  interface IMemInputPin
+
+  interface IMpeg2Demultiplexer
+
+  interface IMPEG2StreamIdMap
+
+  interface IOverlay
+
+  interface IOverlayNotify
+
+  interface IOverlayNotify2
+
+  interface IPersistMediaPropertyBag
+
+  interface IPin
+
+  interface IPinConnection
+
+  interface IPinFlowControl
+
+  interface IQualityControl
+
+  interface IReferenceClock
+
+  interface IReferenceClock2
+
+  interface IReferenceClockTimerControl
+
+  interface IRegisterServiceProvider
+
+  interface IResourceConsumer
+
+  interface IResourceManager
+
+  interface ISeekingPassThru
+
+  interface IStreamBuilder
+
+  interface IVideoEncoder
+
+  interface IVideoFrameStep
+
+  interface IVMRAspectRatioControl
+
+  interface IVMRAspectRatioControl9
+
+  interface IVMRDeinterlaceControl
+
+  interface IVMRDeinterlaceControl9
+
+  interface IVMRFilterConfig
+
+  interface IVMRFilterConfig9
+
+  interface IVMRImageCompositor
+
+  interface IVMRImageCompositor9
+
+  interface IVMRImagePresenter
+
+  interface IVMRImagePresenter9
+
+  interface IVMRImagePresenterConfig
+
+  interface IVMRImagePresenterConfig9
+
+  interface IVMRImagePresenterExclModeConfig
+
+  interface IVMRMixerBitmap
+
+  interface IVMRMixerBitmap9
+
+  interface IVMRMixerControl
+
+  interface IVMRMixerControl9
+
+  interface IVMRMonitorConfig
+
+  interface IVMRMonitorConfig9
+
+  interface IVMRSurface
+
+  interface IVMRSurface9
+
+  interface IVMRSurfaceAllocator
+
+  interface IVMRSurfaceAllocator9
+
+  interface IVMRSurfaceAllocatorEx9
+
+  interface IVMRSurfaceAllocatorNotify
+
+  interface IVMRSurfaceAllocatorNotify9
+
+  interface IVMRVideoStreamControl
+
+  interface IVMRVideoStreamControl9
+
+  interface IVMRWindowlessControl
+
+  interface IVMRWindowlessControl9
+
+  interface IVPManager
+
+  interface IDirect3DSurface9
+
+  interface IDirect3DDevice9
+
+  alias HEVENT DWORD_PTR
+
+  pointer HEVENT* HEVENT
+
+  alias HSEMAPHORE DWORD_PTR
+
+  alias REFTIME double
+
+  pointer REFTIME* REFTIME
+
+  alias OAHWND LONG_PTR
+
+  pointer OAHWND* OAHWND
+
+  pointer OAEVENT* LONG_PTR
+
+  alias DVD_SubpictureATR "BYTE [6]"
+
+  pointer DVD_SubpictureATR* DVD_SubpictureATR
+
+  alias DVD_AudioATR "BYTE [8]"
+
+  pointer DVD_AudioATR* DVD_AudioATR
+
+  alias DVD_VideoATR "BYTE [2]"
+
+  pointer DVD_VideoATR* DVD_VideoATR
+
+  alias DVD_REGISTER WORD
+
+  array "BOOL [8]" base=BOOL count=8
+
+  array "BYTE [256]" base=BYTE count=256
+
+  array "BYTE [768]" base=BYTE count=768
+
+  array "BYTE [4076]" base=BYTE count=4076
+
+  array "BYTE [4056]" base=BYTE count=4056
+
+  array "wchar_t [32]" base=wchar_t count=32
+
+  array "wchar_t [256]" base=wchar_t count=256
+
+  array "wchar_t [512]" base=wchar_t count=512
+
+  array GPRMARRAY base=DVD_REGISTER count=16
+
+  pointer GPRMARRAY* GPRMARRAY
+
+  array SPRMARRAY base=DVD_REGISTER count=24
+
+  pointer SPRMARRAY* SPRMARRAY
+
+  enum DVD_AUDIO_LANG_EXT UINT
+    DVD_AUD_EXT_NotSpecified      0
+    DVD_AUD_EXT_Captions          1
+    DVD_AUD_EXT_VisuallyImpaired  2
+    DVD_AUD_EXT_DirectorComments1 3
+    DVD_AUD_EXT_DirectorComments2 4
+
+  pointer DVD_AUDIO_LANG_EXT* DVD_AUDIO_LANG_EXT
+
+  enum DVD_VIDEO_COMPRESSION UINT
+    DVD_VideoCompression_Other 0
+    DVD_VideoCompression_MPEG1 1
+    DVD_VideoCompression_MPEG2 2
+
+  struct DVD_VideoAttributes
+  fPanscanPermitted BOOL
+  fLetterboxPermitted BOOL
+  ulAspectX ULONG
+  ulAspectY ULONG
+  ulFrameRate ULONG
+  ulFrameHeight ULONG
+  Compression DVD_VIDEO_COMPRESSION
+  fLine21Field1InGOP BOOL
+  fLine21Field2InGOP BOOL
+  ulSourceResolutionX ULONG
+  ulSourceResolutionY ULONG
+  fIsSourceLetterboxed BOOL
+  fIsFilmMode BOOL
+
+  pointer DVD_VideoAttributes* DVD_VideoAttributes
+
+  enum DVD_AUDIO_APPMODE UINT
+    DVD_AudioMode_None     0
+    DVD_AudioMode_Karaoke  1
+    DVD_AudioMode_Surround 2
+    DVD_AudioMode_Other    3
+
+  enum DVD_AUDIO_FORMAT UINT
+    DVD_AudioFormat_AC3       0
+    DVD_AudioFormat_MPEG1     1
+    DVD_AudioFormat_MPEG1_DRC 2
+    DVD_AudioFormat_MPEG2     3
+    DVD_AudioFormat_MPEG2_DRC 4
+    DVD_AudioFormat_LPCM      5
+    DVD_AudioFormat_DTS       6
+    DVD_AudioFormat_SDDS      7
+    DVD_AudioFormat_Other     8
+
+  struct DVD_AudioAttributes
+  AppMode DVD_AUDIO_APPMODE
+  AppModeData BYTE
+  AudioFormat DVD_AUDIO_FORMAT
+  Language LCID
+  LanguageExtension DVD_AUDIO_LANG_EXT
+  fHasMultichannelInfo BOOL
+  dwFrequency DWORD
+  bQuantization BYTE
+  bNumberOfChannels BYTE
+  dwReserved "DWORD [2]"
+
+  pointer DVD_AudioAttributes* DVD_AudioAttributes
+
+  array "DVD_AudioAttributes [8]" base=DVD_AudioAttributes count=8
+
+  struct DVD_HMSF_TIMECODE
+  bHours BYTE
+  bMinutes BYTE
+  bSeconds BYTE
+  bFrames BYTE
+
+  pointer DVD_HMSF_TIMECODE* DVD_HMSF_TIMECODE
+
+  enum DVD_SUBPICTURE_TYPE UINT
+    DVD_SPType_NotSpecified 0
+    DVD_SPType_Language     1
+    DVD_SPType_Other        2
+
+  enum DVD_SUBPICTURE_CODING UINT
+    DVD_SPCoding_RunLength 0
+    DVD_SPCoding_Extended  1
+    DVD_SPCoding_Other     2
+
+  enum DVD_SUBPICTURE_LANG_EXT UINT
+    DVD_SP_EXT_NotSpecified              0
+    DVD_SP_EXT_Caption_Normal            1
+    DVD_SP_EXT_Caption_Big               2
+    DVD_SP_EXT_Caption_Children          3
+    DVD_SP_EXT_CC_Normal                 5
+    DVD_SP_EXT_CC_Big                    6
+    DVD_SP_EXT_CC_Children               7
+    DVD_SP_EXT_Forced                    9
+    DVD_SP_EXT_DirectorComments_Normal   13
+    DVD_SP_EXT_DirectorComments_Big      14
+    DVD_SP_EXT_DirectorComments_Children 15
+
+  pointer DVD_SUBPICTURE_LANG_EXT* DVD_SUBPICTURE_LANG_EXT
+
+  struct DVD_SubpictureAttributes
+  Type DVD_SUBPICTURE_TYPE
+  CodingMode DVD_SUBPICTURE_CODING
+  Language LCID
+  LanguageExtension DVD_SUBPICTURE_LANG_EXT
+
+  pointer DVD_SubpictureAttributes* DVD_SubpictureAttributes
+
+  array "DVD_SubpictureAttributes [32]" base=DVD_SubpictureAttributes count=32
+
+  struct REGPINTYPES
+  clsMajorType "const CLSID*"
+  clsMinorType "const CLSID*"
+
+  pointer "const REGPINTYPES*" REGPINTYPES
+
+  struct REGFILTERPINS
+  strName LPWSTR
+  bRendered BOOL
+  bOutput BOOL
+  bZero BOOL
+  bMany BOOL
+  clsConnectsToFilter "const CLSID*"
+  strConnectsToPin "const WCHAR*"
+  nMediaTypes UINT
+  lpMediaType "const REGPINTYPES*" count=nMediaTypes
+
+  pointer "const REGFILTERPINS*" REGFILTERPINS
+
+  struct REGPINMEDIUM
+  clsMedium CLSID
+  dw1 DWORD
+  dw2 DWORD
+
+  pointer "const REGPINMEDIUM*" REGPINMEDIUM
+
+  struct REGFILTERPINS2
+  dwFlags DWORD
+  cInstances UINT
+  nMediaTypes UINT
+  lpMediaType "const REGPINTYPES*" count=nMediaTypes
+  nMediums UINT
+  lpMedium "const REGPINMEDIUM*" count=nMediums
+  clsPinCategory "const CLSID*"
+
+  pointer "const REGFILTERPINS2*" REGFILTERPINS2
+
+  struct [REGFILTER2_u_s1] display=struct
+  cPins ULONG
+  rgPins "const REGFILTERPINS*" count=cPins
+
+  struct [REGFILTER2_u_s2] display=struct
+  cPins2 ULONG
+  rgPins2 "const REGFILTERPINS2*" count=cPins2
+
+  union [REGFILTER2_u] display=union
+   [REGFILTER2_u_s1]
+   [REGFILTER2_u_s2]
+
+  enum [FILTER_MERIT] DWORD display=DWORD
+    MERIT_SW_COMPRESSOR 0x100000
+    MERIT_HW_COMPRESSOR 0x100050
+    MERIT_DO_NOT_USE    0x200000
+    MERIT_UNLIKELY      0x400000
+    MERIT_NORMAL        0x600000
+    MERIT_PREFERRED     0x800000
+
+  struct REGFILTER2
+  dwVersion DWORD
+  dwMerit [FILTER_MERIT]
+   [REGFILTER2_u]
+
+  pointer "const REGFILTER2*" REGFILTER2
+
+  struct DVINFO
+  dwDVAAuxSrc DWORD
+  dwDVAAuxCtl DWORD
+  dwDVAAuxSrc1 DWORD
+  dwDVAAuxCtl1 DWORD
+  dwDVVAuxSrc DWORD
+  dwDVVAuxCtl DWORD
+  dwDVReserved "DWORD [2]"
+
+  pointer DVINFO* DVINFO
+
+  struct VMR9MonitorInfo
+  uDevID UINT
+  rcMonitor RECT
+  hMon HMONITOR
+  dwFlags [MONITORINFO_Flags]
+  szDevice "wchar_t [32]"
+  szDescription "wchar_t [512]"
+  liDriverVersion LARGE_INTEGER
+  dwVendorId DWORD
+  dwDeviceId DWORD
+  dwSubSysId DWORD
+  dwRevision DWORD
+
+  pointer VMR9MonitorInfo* VMR9MonitorInfo
+
+  enum PIN_DIRECTION UINT
+    PINDIR_INPUT  0
+    PINDIR_OUTPUT 1
+
+  pointer PIN_DIRECTION* PIN_DIRECTION
+
+  struct PIN_INFO
+  pFilter IBaseFilter*
+  dir PIN_DIRECTION
+  achName "WCHAR [128]"
+
+  pointer PIN_INFO* PIN_INFO
+
+  struct AMCOPPCommand
+  macKDI GUID
+  guidCommandID GUID
+  dwSequence DWORD
+  cbSizeData DWORD
+  CommandData "BYTE [4056]" count=cbSizeData
+
+  pointer "const AMCOPPCommand*" AMCOPPCommand
+
+  struct AMCOPPSignature
+  Signature "BYTE [256]"
+
+  pointer AMCOPPSignature* AMCOPPSignature
+
+  struct AMCOPPStatusInput
+  rApp GUID
+  guidStatusRequestID GUID
+  dwSequence DWORD
+  cbSizeData DWORD
+  StatusData "BYTE [4056]" count=cbSizeData
+
+  pointer "const AMCOPPStatusInput*" AMCOPPStatusInput
+
+  struct VMRGUID
+  pGUID GUID*
+  GUID GUID
+
+  pointer VMRGUID* VMRGUID
+
+  pointer "const VMRGUID*" VMRGUID
+
+  struct VMRMONITORINFO
+  guid VMRGUID
+  rcMonitor RECT
+  hMon HMONITOR
+  dwFlags [MONITORINFO_Flags]
+  szDevice "wchar_t [32]"
+  szDescription "wchar_t [256]"
+  liDriverVersion LARGE_INTEGER
+  dwVendorId DWORD
+  dwDeviceId DWORD
+  dwSubSysId DWORD
+  dwRevision DWORD
+
+  pointer VMRMONITORINFO* VMRMONITORINFO
+
+  struct AMCOPPStatusOutput
+  macKDI GUID
+  cbSizeData DWORD
+  COPPStatus "BYTE [4076]" count=cbSizeData
+
+  pointer AMCOPPStatusOutput* AMCOPPStatusOutput
+
+  struct DVD_ATR
+  ulCAT ULONG
+  pbATRI "BYTE [768]"
+
+  pointer DVD_ATR* DVD_ATR
+
+  struct DVD_MenuAttributes
+  fCompatibleRegion "BOOL [8]"
+  VideoAttributes DVD_VideoAttributes
+  fAudioPresent BOOL
+  AudioAttributes DVD_AudioAttributes
+  fSubpicturePresent BOOL
+  SubpictureAttributes DVD_SubpictureAttributes
+
+  pointer DVD_MenuAttributes* DVD_MenuAttributes
+
+  struct DVD_MUA_MixingInfo
+  fMixTo0 BOOL
+  fMixTo1 BOOL
+  fMix0InPhase BOOL
+  fMix1InPhase BOOL
+  dwSpeakerPosition [SPEAKER_POSITION]
+
+  array "DVD_MUA_MixingInfo [8]" base=DVD_MUA_MixingInfo count=8
+
+  struct DVD_MUA_Coeff
+  log2_alpha double
+  log2_beta double
+
+  array "DVD_MUA_Coeff [8]" base=DVD_MUA_Coeff count=8
+
+  struct DVD_MultichannelAudioAttributes
+  Info "DVD_MUA_MixingInfo [8]"
+  Coeff "DVD_MUA_Coeff [8]"
+
+  array "DVD_MultichannelAudioAttributes [8]" base=DVD_MultichannelAudioAttributes count=8
+
+  enum DVD_TITLE_APPMODE UINT
+    DVD_AppMode_Not_Specified 0
+    DVD_AppMode_Karaoke       1
+    DVD_AppMode_Other         3
+
+  union [DVD_TitleAttributes_u] display=union
+  AppMode DVD_TITLE_APPMODE
+  TitleLength DVD_HMSF_TIMECODE
+
+  struct DVD_TitleAttributes
+   [DVD_TitleAttributes_u]
+  VideoAttributes DVD_VideoAttributes
+  ulNumberOfAudioStreams ULONG
+  AudioAttributes "DVD_AudioAttributes [8]"
+  MultichannelAudioAttributes "DVD_MultichannelAudioAttributes [8]"
+  ulNumberOfSubpictureStreams ULONG
+  SubpictureAttributes "DVD_SubpictureAttributes [32]"
+
+  pointer DVD_TitleAttributes* DVD_TitleAttributes
+
+  enum DVD_KARAOKE_ASSIGNMENT UINT
+    DVD_Assignment_reserved0 0
+    DVD_Assignment_reserved1 1
+    DVD_Assignment_LR        2
+    DVD_Assignment_LRM       3
+    DVD_Assignment_LR1       4
+    DVD_Assignment_LRM1      5
+    DVD_Assignment_LR12      6
+    DVD_Assignment_LRM12     7
+
+  flag DVD_KARAOKE_CONTENTS WORD display=WORD
+    DVD_Karaoke_GuideVocal1  0x1
+    DVD_Karaoke_GuideVocal2  0x2
+    DVD_Karaoke_GuideMelody1 0x4
+    DVD_Karaoke_GuideMelody2 0x8
+    DVD_Karaoke_GuideMelodyA 0x10
+    DVD_Karaoke_GuideMelodyB 0x20
+    DVD_Karaoke_SoundEffectA 0x40
+    DVD_Karaoke_SoundEffectB 0x80
+
+  array "DVD_KARAOKE_CONTENTS [8]" base=DVD_KARAOKE_CONTENTS count=8 display="WORD [8]"
+
+  struct DVD_KaraokeAttributes
+  bVersion BYTE
+  fMasterOfCeremoniesInGuideVocal1 BOOL
+  fDuet BOOL
+  ChannelAssignment DVD_KARAOKE_ASSIGNMENT
+  wChannelContents "DVD_KARAOKE_CONTENTS [8]"
+
+  pointer DVD_KaraokeAttributes* DVD_KaraokeAttributes
+
+  struct FILTER_INFO
+  achName "WCHAR [128]"
+  pGraph IFilterGraph*
+
+  pointer FILTER_INFO* FILTER_INFO
+
+  struct ALLOCATOR_PROPERTIES
+  cBuffers long
+  cbBuffer long
+  cbAlign long
+  cbPrefix long
+
+  pointer ALLOCATOR_PROPERTIES* ALLOCATOR_PROPERTIES
+
+  pointer "const ALLOCATOR_PROPERTIES*" ALLOCATOR_PROPERTIES
+
+  struct TIMECODE
+  wFrameRate WORD
+  wFrameFract WORD
+  dwFrames DWORD
+
+  enum [TIMECODE_SAMPLE_FLAGS] DWORD display=DWORD
+    ED_DEVCAP_TIMECODE_READ 4121
+    ED_DEVCAP_ATN_READ      5047
+    ED_DEVCAP_RTC_READ      5050
+
+  struct TIMECODE_SAMPLE
+  qwTick LONGLONG
+  timecode TIMECODE
+  dwUser DWORD
+  dwFlags [TIMECODE_SAMPLE_FLAGS]
+
+  pointer PTIMECODE_SAMPLE TIMECODE_SAMPLE
+
+  enum AM_DVD_STREAM_FLAGS DWORD display=DWORD
+    AM_DVD_STREAM_VIDEO  0x1
+    AM_DVD_STREAM_AUDIO  0x2
+    AM_DVD_STREAM_SUBPIC 0x4
+
+  struct AM_DVD_RENDERSTATUS
+  hrVPEStatus HRESULT
+  bDvdVolInvalid BOOL
+  bDvdVolUnknown BOOL
+  bNoLine21In BOOL
+  bNoLine21Out BOOL
+  iNumStreams int
+  iNumStreamsFailed int
+  dwFailedStreamsFlag AM_DVD_STREAM_FLAGS
+
+  pointer AM_DVD_RENDERSTATUS* AM_DVD_RENDERSTATUS
+
+  struct REGFILTER
+  Clsid CLSID
+  Name LPWSTR
+
+  pointer REGFILTER* REGFILTER
+
+  pointer REGFILTER** REGFILTER*
+
+  enum [MediaContent] DWORD display=DWORD
+    MPEG2_PROGRAM_STREAM_MAP           0x00000000
+    MPEG2_PROGRAM_ELEMENTARY_STREAM    0x00000001
+    MPEG2_PROGRAM_DIRECTORY_PES_PACKET 0x00000002
+    MPEG2_PROGRAM_PACK_HEADER          0x00000003
+    MPEG2_PROGRAM_PES_STREAM           0x00000004
+    MPEG2_PROGRAM_SYSTEM_HEADER        0x00000005
+
+  struct STREAM_ID_MAP
+  stream_id ULONG
+  dwMediaSampleContent [MediaContent]
+  ulSubstreamFilterValue ULONG
+  iDataOffset int
+
+  pointer STREAM_ID_MAP* STREAM_ID_MAP
+
+  flag [COLORKEY_Type] DWORD display=DWORD
+    CK_NOCOLORKEY 0
+    CK_INDEX      0x1
+    CK_RGB        0x2
+
+  struct COLORKEY
+  KeyType [COLORKEY_Type]
+  PaletteIndex DWORD
+  LowColorValue COLORREF
+  HighColorValue COLORREF
+
+  pointer COLORKEY* COLORKEY
+
+  pointer "const COLORKEY*" COLORKEY
+
+  struct DVD_PLAYBACK_LOCATION
+  TitleNum ULONG
+  ChapterNum ULONG
+  TimeCode ULONG
+
+  pointer DVD_PLAYBACK_LOCATION* DVD_PLAYBACK_LOCATION
+
+  flag DVD_TIMECODE_FLAGS ULONG display=ULONG
+    DVD_TC_FLAG_25fps        0x1
+    DVD_TC_FLAG_30fps        0x2
+    DVD_TC_FLAG_DropFrame    0x4
+    DVD_TC_FLAG_Interpolated 0x8
+
+  struct DVD_PLAYBACK_LOCATION2
+  TitleNum ULONG
+  ChapterNum ULONG
+  TimeCode DVD_HMSF_TIMECODE
+  TimeCodeFlags DVD_TIMECODE_FLAGS
+
+  pointer DVD_PLAYBACK_LOCATION2* DVD_PLAYBACK_LOCATION2
+
+  flag VMRPresentationFlags DWORD display=DWORD
+    VMRSample_SyncPoint        0x1
+    VMRSample_Preroll          0x2
+    VMRSample_Discontinuity    0x4
+    VMRSample_TimeValid        0x8
+    VMRSample_SrcDstRectsValid 0x10
+
+  flag [AM_VIDEO_FLAG] DWORD display=DWORD
+    AM_VIDEO_FLAG_INTERLEAVED_FRAME 0x0000
+    AM_VIDEO_FLAG_FIELD1            0x0001
+    AM_VIDEO_FLAG_FIELD2            0x0002
+    AM_VIDEO_FLAG_FIELD1FIRST       0x0004
+    AM_VIDEO_FLAG_WEAVE             0x0008
+    AM_VIDEO_FLAG_REPEAT_FIELD      0x0040
+
+  struct VMRPRESENTATIONINFO
+  dwFlags VMRPresentationFlags
+  lpSurf LPDIRECTDRAWSURFACE7
+  rtStart REFERENCE_TIME
+  rtEnd REFERENCE_TIME
+  szAspectRatio SIZE
+  rcSrc RECT
+  rcDst RECT
+  dwTypeSpecificFlags [AM_VIDEO_FLAG]
+  dwInterlaceFlags [AMINTERLACE_FLAGS]
+
+  pointer VMRPRESENTATIONINFO* VMRPRESENTATIONINFO
+
+  struct VMR9PresentationInfo
+  dwFlags VMRPresentationFlags
+  lpSurf IDirect3DSurface9*
+  rtStart REFERENCE_TIME
+  rtEnd REFERENCE_TIME
+  szAspectRatio SIZE
+  rcSrc RECT
+  rcDst RECT
+  dwReserved1 DWORD
+  dwReserved2 DWORD
+
+  pointer VMR9PresentationInfo* VMR9PresentationInfo
+
+  flag [VMRALPHABITMAP_Flags] DWORD display=DWORD
+    VMRBITMAP_DISABLE     0x00000001
+    VMRBITMAP_HDC         0x00000002
+    VMRBITMAP_ENTIREDDS   0x00000004
+    VMRBITMAP_SRCCOLORKEY 0x00000008
+    VMRBITMAP_SRCRECT     0x00000010
+
+  struct NORMALIZEDRECT
+  left float
+  top float
+  right float
+  bottom float
+
+  pointer NORMALIZEDRECT* NORMALIZEDRECT
+
+  pointer "const NORMALIZEDRECT*" NORMALIZEDRECT
+
+  struct VMRALPHABITMAP
+  dwFlags [VMRALPHABITMAP_Flags]
+  hdc HDC
+  pDDS LPDIRECTDRAWSURFACE7
+  rSrc RECT
+  rDest NORMALIZEDRECT
+  fAlpha FLOAT
+  clrSrcKey COLORREF
+
+  pointer "const VMRALPHABITMAP*" VMRALPHABITMAP
+
+  pointer PVMRALPHABITMAP VMRALPHABITMAP
+
+  flag [VMR9AlphaBitmap_Flags] DWORD display=DWORD
+    VMR9AlphaBitmap_Disable     0x1
+    VMR9AlphaBitmap_hDC         0x2
+    VMR9AlphaBitmap_EntireDDS   0x4
+    VMR9AlphaBitmap_SrcColorKey 0x8
+    VMR9AlphaBitmap_SrcRect     0x10
+    VMR9AlphaBitmap_FilterMode  0x20
+
+  struct VMR9NormalizedRect
+  left float
+  top float
+  right float
+  bottom float
+
+  pointer VMR9NormalizedRect* VMR9NormalizedRect
+
+  pointer "const VMR9NormalizedRect*" VMR9NormalizedRect
+
+  flag VMR9MixerPrefs DWORD display=DWORD
+    MixerPref9_NoDecimation           0x1
+    MixerPref9_DecimateOutput         0x2
+    MixerPref9_ARAdjustXorY           0x4
+    MixerPref9_NonSquareMixing        0x8
+    MixerPref9_DecimateMask           0xf
+    MixerPref9_BiLinearFiltering      0x10
+    MixerPref9_PointFiltering         0x20
+    MixerPref9_AnisotropicFiltering   0x40
+    MixerPref9_PyramidalQuadFiltering 0x80
+    MixerPref9_GaussianQuadFiltering  0x100
+    MixerPref9_FilteringReserved      0xe00
+    MixerPref9_FilteringMask          0xff0
+    MixerPref9_RenderTargetRGB        0x1000
+    MixerPref9_RenderTargetYUV        0x2000
+    MixerPref9_RenderTargetReserved   0xfc000
+    MixerPref9_RenderTargetMask       0xff000
+    MixerPref9_DynamicSwitchToBOB     0x100000
+    MixerPref9_DynamicDecimateBy2     0x200000
+    MixerPref9_DynamicReserved        0xc00000
+    MixerPref9_DynamicMask            0xf00000
+
+  struct VMR9AlphaBitmap
+  dwFlags [VMR9AlphaBitmap_Flags]
+  hdc HDC
+  pDDS IDirect3DSurface9*
+  rSrc RECT
+  rDest VMR9NormalizedRect
+  fAlpha FLOAT
+  clrSrcKey COLORREF
+  dwFilterMode VMR9MixerPrefs
+
+  pointer VMR9AlphaBitmap* VMR9AlphaBitmap
+
+  pointer "const VMR9AlphaBitmap*" VMR9AlphaBitmap
+
+  flag VMRSurfaceAllocationFlags DWORD display=DWORD
+    AMAP_PIXELFORMAT_VALID 0x1
+    AMAP_3D_TARGET         0x2
+    AMAP_ALLOW_SYSMEM      0x4
+    AMAP_FORCE_SYSMEM      0x8
+    AMAP_DIRECTED_FLIP     0x10
+    AMAP_DXVA_TARGET       0x20
+
+  struct VMRALLOCATIONINFO
+  dwFlags VMRSurfaceAllocationFlags
+  lpHdr LPBITMAPINFOHEADER
+  lpPixFmt LPDDPIXELFORMAT
+  szAspectRatio SIZE
+  dwMinBuffers DWORD
+  dwMaxBuffers DWORD
+  dwInterlaceFlags [AMINTERLACE_FLAGS]
+  szNativeSize SIZE
+
+  pointer VMRALLOCATIONINFO* VMRALLOCATIONINFO
+
+  flag VMR9SurfaceAllocationFlags DWORD display=DWORD
+    VMR9AllocFlag_3DRenderTarget   0x1
+    VMR9AllocFlag_DXVATarget       0x2
+    VMR9AllocFlag_TextureSurface   0x4
+    VMR9AllocFlag_OffscreenSurface 0x8
+    VMR9AllocFlag_RGBDynamicSwitch 0x10
+    VMR9AllocFlag_UsageReserved    0xe0
+    VMR9AllocFlag_UsageMask        0xff
+
+  struct VMR9AllocationInfo
+  dwFlags VMR9SurfaceAllocationFlags
+  dwWidth DWORD
+  dwHeight DWORD
+  Format D3DFORMAT
+  Pool D3DPOOL
+  MinBuffers DWORD
+  szAspectRatio SIZE
+  szNativeSize SIZE
+
+  pointer VMR9AllocationInfo* VMR9AllocationInfo
+
+  flag AM_STREAM_INFO_FLAGS DWORD display=DWORD
+    AM_STREAM_INFO_START_DEFINED   0x1
+    AM_STREAM_INFO_STOP_DEFINED    0x2
+    AM_STREAM_INFO_DISCARDING      0x4
+    AM_STREAM_INFO_STOP_SEND_EXTRA 0x10
+
+  struct AM_STREAM_INFO
+  tStart REFERENCE_TIME
+  tStop REFERENCE_TIME
+  dwStartCookie DWORD
+  dwStopCookie DWORD
+  dwFlags AM_STREAM_INFO_FLAGS
+
+  pointer AM_STREAM_INFO* AM_STREAM_INFO
+
+  struct VMRFrequency
+  dwNumerator DWORD
+  dwDenominator DWORD
+
+  struct VMRVideoDesc
+  dwSize DWORD
+  dwSampleWidth DWORD
+  dwSampleHeight DWORD
+  SingleFieldPerSample BOOL
+  dwFourCC DWORD
+  InputSampleFreq VMRFrequency
+  OutputFrameFreq VMRFrequency
+
+  pointer VMRVideoDesc* VMRVideoDesc
+
+  struct VMRVIDEOSTREAMINFO
+  pddsVideoSurface LPDIRECTDRAWSURFACE7
+  dwWidth DWORD
+  dwHeight DWORD
+  dwStrmID DWORD
+  fAlpha FLOAT
+  ddClrKey DDCOLORKEY
+  rNormal NORMALIZEDRECT
+
+  pointer VMRVIDEOSTREAMINFO* VMRVIDEOSTREAMINFO
+
+  enum VMRDeinterlaceTech UINT
+    DeinterlaceTech_Unknown             0
+    DeinterlaceTech_BOBLineReplicate    0x1
+    DeinterlaceTech_BOBVerticalStretch  0x2
+    DeinterlaceTech_MedianFiltering     0x4
+    DeinterlaceTech_EdgeFiltering       0x10
+    DeinterlaceTech_FieldAdaptive       0x20
+    DeinterlaceTech_PixelAdaptive       0x40
+    DeinterlaceTech_MotionVectorSteered 0x80
+
+  struct VMRDeinterlaceCaps
+  dwSize DWORD
+  dwNumPreviousOutputFrames DWORD
+  dwNumForwardRefSamples DWORD
+  dwNumBackwardRefSamples DWORD
+  DeinterlaceTechnology VMRDeinterlaceTech
+
+  pointer VMRDeinterlaceCaps* VMRDeinterlaceCaps
+
+  struct VMR9Frequency
+  dwNumerator DWORD
+  dwDenominator DWORD
+
+  enum VMR9_SampleFormat UINT
+    VMR9_SampleReserved                  1
+    VMR9_SampleProgressiveFrame          2
+    VMR9_SampleFieldInterleavedEvenFirst 3
+    VMR9_SampleFieldInterleavedOddFirst  4
+    VMR9_SampleFieldSingleEven           5
+    VMR9_SampleFieldSingleOdd            6
+
+  struct VMR9VideoDesc
+  dwSize DWORD
+  dwSampleWidth DWORD
+  dwSampleHeight DWORD
+  SampleFormat VMR9_SampleFormat
+  dwFourCC DWORD
+  InputSampleFreq VMR9Frequency
+  OutputFrameFreq VMR9Frequency
+
+  pointer VMR9VideoDesc* VMR9VideoDesc
+
+  enum VMR9DeinterlaceTech UINT
+    DeinterlaceTech9_Unknown             0
+    DeinterlaceTech9_BOBLineReplicate    0x1
+    DeinterlaceTech9_BOBVerticalStretch  0x2
+    DeinterlaceTech9_MedianFiltering     0x4
+    DeinterlaceTech9_EdgeFiltering       0x10
+    DeinterlaceTech9_FieldAdaptive       0x20
+    DeinterlaceTech9_PixelAdaptive       0x40
+    DeinterlaceTech9_MotionVectorSteered 0x80
+
+  struct VMR9DeinterlaceCaps
+  dwSize DWORD
+  dwNumPreviousOutputFrames DWORD
+  dwNumForwardRefSamples DWORD
+  dwNumBackwardRefSamples DWORD
+  DeinterlaceTechnology VMR9DeinterlaceTech
+
+  pointer VMR9DeinterlaceCaps* VMR9DeinterlaceCaps
+
+  struct VMR9VideoStreamInfo
+  pddsVideoSurface IDirect3DSurface9*
+  dwWidth DWORD
+  dwHeight DWORD
+  dwStrmID DWORD
+  fAlpha FLOAT
+  rNormal VMR9NormalizedRect
+  rtStart REFERENCE_TIME
+  rtEnd REFERENCE_TIME
+  SampleFormat VMR9_SampleFormat
+
+  pointer VMR9VideoStreamInfo* VMR9VideoStreamInfo
+
+  flag VMR9ProcAmpControlFlags DWORD display=DWORD
+    ProcAmpControl9_Brightness 0x1
+    ProcAmpControl9_Contrast   0x2
+    ProcAmpControl9_Hue        0x4
+    ProcAmpControl9_Saturation 0x8
+
+  struct VMR9ProcAmpControl
+  dwSize DWORD
+  dwFlags DWORD
+  Brightness float
+  Contrast float
+  Hue float
+  Saturation float
+
+  pointer VMR9ProcAmpControl* VMR9ProcAmpControl
+
+  struct VMR9ProcAmpControlRange
+  dwSize DWORD
+  dwProperty VMR9ProcAmpControlFlags
+  MinValue float
+  MaxValue float
+  DefaultValue float
+  StepSize float
+
+  pointer VMR9ProcAmpControlRange* VMR9ProcAmpControlRange
+
+  flag [DVD_AUDIO_CAPS] DWORD display=DWORD
+    DVD_AUDIO_CAPS_AC3   0x00000001
+    DVD_AUDIO_CAPS_MPEG2 0x00000002
+    DVD_AUDIO_CAPS_LPCM  0x00000004
+    DVD_AUDIO_CAPS_DTS   0x00000008
+    DVD_AUDIO_CAPS_SDDS  0x00000010
+
+  struct DVD_DECODER_CAPS
+  dwSize DWORD
+  dwAudioCaps [DVD_AUDIO_CAPS]
+  dFwdMaxRateVideo double
+  dFwdMaxRateAudio double
+  dFwdMaxRateSP double
+  dBwdMaxRateVideo double
+  dBwdMaxRateAudio double
+  dBwdMaxRateSP double
+  dwRes1 DWORD
+  dwRes2 DWORD
+  dwRes3 DWORD
+  dwRes4 DWORD
+
+  pointer DVD_DECODER_CAPS* DVD_DECODER_CAPS
+
+  enum VALID_UOP_SOMTHING_OR_OTHER DWORD
+    UOP_FLAG_Play_Title_Or_AtTime                   0x00000001
+    UOP_FLAG_Play_Chapter                           0x00000002
+    UOP_FLAG_Play_Title                             0x00000004
+    UOP_FLAG_Stop                                   0x00000008
+    UOP_FLAG_ReturnFromSubMenu                      0x00000010
+    UOP_FLAG_Play_Chapter_Or_AtTime                 0x00000020
+    UOP_FLAG_PlayPrev_Or_Replay_Chapter             0x00000040
+    UOP_FLAG_PlayNext_Chapter                       0x00000080
+    UOP_FLAG_Play_Forwards                          0x00000100
+    UOP_FLAG_Play_Backwards                         0x00000200
+    UOP_FLAG_ShowMenu_Title                         0x00000400
+    UOP_FLAG_ShowMenu_Root                          0x00000800
+    UOP_FLAG_ShowMenu_SubPic                        0x00001000
+    UOP_FLAG_ShowMenu_Audio                         0x00002000
+    UOP_FLAG_ShowMenu_Angle                         0x00004000
+    UOP_FLAG_ShowMenu_Chapter                       0x00008000
+    UOP_FLAG_Resume                                 0x00010000
+    UOP_FLAG_Select_Or_Activate_Button              0x00020000
+    UOP_FLAG_Still_Off                              0x00040000
+    UOP_FLAG_Pause_On                               0x00080000
+    UOP_FLAG_Select_Audio_Stream                    0x00100000
+    UOP_FLAG_Select_SubPic_Stream                   0x00200000
+    UOP_FLAG_Select_Angle                           0x00400000
+    UOP_FLAG_Select_Karaoke_Audio_Presentation_Mode 0x00800000
+    UOP_FLAG_Select_Video_Mode_Preference           0x01000000
+
+  pointer VALID_UOP_SOMTHING_OR_OTHER* VALID_UOP_SOMTHING_OR_OTHER
+
+  enum VideoProcAmpProperty long display=long
+    VideoProcAmp_Brightness            0
+    VideoProcAmp_Contrast              1
+    VideoProcAmp_Hue                   2
+    VideoProcAmp_Saturation            3
+    VideoProcAmp_Sharpness             4
+    VideoProcAmp_Gamma                 5
+    VideoProcAmp_ColorEnable           6
+    VideoProcAmp_WhiteBalance          7
+    VideoProcAmp_BacklightCompensation 8
+    VideoProcAmp_Gain                  9
+
+  enum VideoProcAmpFlags long display=long
+    VideoProcAmp_Flags_Auto   0x1
+    VideoProcAmp_Flags_Manual 0x2
+
+  pointer VideoProcAmpFlags* VideoProcAmpFlags display=long*
+
+  enum [MediaEventCode] long display=long
+    EC_COMPLETE                  0x01
+    EC_USERABORT                 0x02
+    EC_ERRORABORT                0x03
+    EC_TIME                      0x04
+    EC_REPAINT                   0x05
+    EC_STREAM_ERROR_STOPPED      0x06
+    EC_STREAM_ERROR_STILLPLAYING 0x07
+    EC_ERROR_STILLPLAYING        0x08
+    EC_PALETTE_CHANGED           0x09
+    EC_VIDEO_SIZE_CHANGED        0x0A
+    EC_QUALITY_CHANGE            0x0B
+    EC_SHUTTING_DOWN             0x0C
+    EC_CLOCK_CHANGED             0x0D
+    EC_PAUSED                    0x0E
+    EC_OPENING_FILE              0x10
+    EC_BUFFERING_DATA            0x11
+    EC_FULLSCREEN_LOST           0x12
+    EC_ACTIVATE                  0x13
+    EC_NEED_RESTART              0x14
+    EC_WINDOW_DESTROYED          0x15
+    EC_DISPLAY_CHANGED           0x16
+    EC_STARVATION                0x17
+    EC_OLE_EVENT                 0x18
+    EC_NOTIFY_WINDOW             0x19
+    EC_STREAM_CONTROL_STOPPED    0x1A
+    EC_STREAM_CONTROL_STARTED    0x1B
+    EC_END_OF_SEGMENT            0x1C
+    EC_SEGMENT_STARTED           0x1D
+    EC_LENGTH_CHANGED            0x1E
+    EC_DEVICE_LOST               0x1f
+    EC_SAMPLE_NEEDED             0x20
+    EC_PROCESSING_LATENCY        0x21
+    EC_SAMPLE_LATENCY            0x22
+    EC_SCRUB_TIME                0x23
+    EC_STEP_COMPLETE             0x24
+    EC_SKIP_FRAMES               0x25
+    EC_TIMECODE_AVAILABLE        0x30
+    EC_EXTDEVICE_MODE_CHANGE     0x31
+    EC_STATE_CHANGE              0x32
+    EC_PLEASE_REOPEN             0x40
+    EC_STATUS                    0x41
+    EC_MARKER_HIT                0x42
+    EC_LOADSTATUS                0x43
+    EC_FILE_CLOSED               0x44
+    EC_ERRORABORTEX              0x45
+    EC_EOS_SOON                  0x46
+    EC_CONTENTPROPERTY_CHANGED   0x47
+    EC_BANDWIDTHCHANGE           0x48
+    EC_VIDEOFRAMEREADY           0x49
+    EC_GRAPH_CHANGED             0x50
+    EC_CLOCK_UNSET               0x51
+    EC_VMR_RENDERDEVICE_SET      0x53
+    EC_VMR_SURFACE_FLIPPED       0x54
+    EC_VMR_RECONNECTION_FAILED   0x55
+    EC_PREPROCESS_COMPLETE       0x56
+    EC_CODECAPI_EVENT            0x57
+    EC_WMT_INDEX_EVENT           0x0251
+    EC_WMT_EVENT                 0x0252
+    EC_BUILT                     0x300
+    EC_UNBUILT                   0x301
+
+  pointer [MediaEventCode*] [MediaEventCode] display=long*
+
+  enum AMTunerModeType UINT
+    AMTUNER_MODE_DEFAULT  0
+    AMTUNER_MODE_TV       0x1
+    AMTUNER_MODE_FM_RADIO 0x2
+    AMTUNER_MODE_AM_RADIO 0x4
+    AMTUNER_MODE_DSS      0x8
+
+  pointer AMTunerModeType* AMTunerModeType
+
+  enum AMTunerEventType UINT
+    AMTUNER_EVENT_CHANGED 0x1
+
+  enum AMTVAudioEventType UINT
+    AMTVAUDIO_EVENT_CHANGED 0x1
+
+  enum DECIMATION_USAGE UINT
+    DECIMATION_LEGACY             0
+    DECIMATION_USE_DECODER_ONLY   1
+    DECIMATION_USE_VIDEOPORT_ONLY 2
+    DECIMATION_USE_OVERLAY_ONLY   3
+    DECIMATION_DEFAULT            4
+
+  pointer DECIMATION_USAGE* DECIMATION_USAGE
+
+  enum DVD_MENU_ID UINT
+    DVD_MENU_Title      2
+    DVD_MENU_Root       3
+    DVD_MENU_Subpicture 4
+    DVD_MENU_Audio      5
+    DVD_MENU_Angle      6
+    DVD_MENU_Chapter    7
+
+  enum DVD_DOMAIN UINT
+    DVD_DOMAIN_FirstPlay         1
+    DVD_DOMAIN_VideoManagerMenu  2
+    DVD_DOMAIN_VideoTitleSetMenu 3
+    DVD_DOMAIN_Title             4
+    DVD_DOMAIN_Stop              5
+
+  pointer DVD_DOMAIN* DVD_DOMAIN
+
+  enum InterleavingMode UINT
+    INTERLEAVE_NONE          0
+    INTERLEAVE_CAPTURE       1
+    INTERLEAVE_FULL          2
+    INTERLEAVE_NONE_BUFFERED 3
+
+  pointer InterleavingMode* InterleavingMode
+
+  enum DVD_RELATIVE_BUTTON UINT
+    DVD_Relative_Upper 1
+    DVD_Relative_Lower 2
+    DVD_Relative_Left  3
+    DVD_Relative_Right 4
+
+  enum TunerInputType UINT
+    TunerInputCable   0
+    TunerInputAntenna 1
+
+  pointer TunerInputType* TunerInputType
+
+  enum DVD_DISC_SIDE UINT
+    DVD_SIDE_A 1
+    DVD_SIDE_B 2
+
+  pointer DVD_DISC_SIDE* DVD_DISC_SIDE
+
+  enum DVD_TextCharSet UINT
+    DVD_CharSet_Unicode                       0
+    DVD_CharSet_ISO646                        1
+    DVD_CharSet_JIS_Roman_Kanji               2
+    DVD_CharSet_ISO8859_1                     3
+    DVD_CharSet_ShiftJIS_Kanji_Roman_Katakana 4
+
+  pointer "enum DVD_TextCharSet*" DVD_TextCharSet
+
+  enum DVD_TextStringType UINT
+    DVD_Struct_Volume      0x1
+    DVD_Struct_Title       0x2
+    DVD_Struct_ParentalID  0x3
+    DVD_Struct_PartOfTitle 0x4
+    DVD_Struct_Cell        0x5
+    DVD_Stream_Audio       0x10
+    DVD_Stream_Subpicture  0x11
+    DVD_Stream_Angle       0x12
+    DVD_Channel_Audio      0x20
+    DVD_General_Name       0x30
+    DVD_General_Comments   0x31
+    DVD_Title_Series       0x38
+    DVD_Title_Movie        0x39
+    DVD_Title_Video        0x3a
+    DVD_Title_Album        0x3b
+    DVD_Title_Song         0x3c
+    DVD_Title_Other        0x3f
+    DVD_Title_Sub_Series   0x40
+    DVD_Title_Sub_Movie    0x41
+    DVD_Title_Sub_Video    0x42
+    DVD_Title_Sub_Album    0x43
+    DVD_Title_Sub_Song     0x44
+    DVD_Title_Sub_Other    0x47
+    DVD_Title_Orig_Series  0x48
+    DVD_Title_Orig_Movie   0x49
+    DVD_Title_Orig_Video   0x4a
+    DVD_Title_Orig_Album   0x4b
+    DVD_Title_Orig_Song    0x4c
+    DVD_Title_Orig_Other   0x4f
+    DVD_Other_Scene        0x50
+    DVD_Other_Cut          0x51
+    DVD_Other_Take         0x52
+
+  pointer "enum DVD_TextStringType*" DVD_TextStringType
+
+  enum DVD_OPTION_FLAG UINT
+    DVD_ResetOnStop                     1
+    DVD_NotifyParentalLevelChange       2
+    DVD_HMSF_TimeCodeEvents             3
+    DVD_AudioDuringFFwdRew              4
+    DVD_EnableNonblockingAPIs           5
+    DVD_CacheSizeInMB                   6
+    DVD_EnablePortableBookmarks         7
+    DVD_EnableExtendedCopyProtectErrors 8
+    DVD_NotifyPositionChange            9
+    DVD_IncreaseOutputControl           10
+    DVD_EnableStreaming                 11
+    DVD_EnableESOutput                  12
+    DVD_EnableTitleLength               13
+    DVD_DisableStillThrottle            14
+    DVD_EnableLoggingEvents             15
+    DVD_MaxReadBurstInKB                16
+    DVD_ReadBurstPeriodInMS             17
+
+  enum FILTER_STATE UINT
+    State_Stopped 0
+    State_Paused  1
+    State_Running 2
+
+  pointer FILTER_STATE* FILTER_STATE
+
+  alias OAFilterState FILTER_STATE
+
+  pointer OAFilterState* OAFilterState
+
+  enum QualityMessageType UINT
+    Famine 0
+    Flood  1
+
+  struct Quality
+  Type QualityMessageType
+  Proportion long
+  Late REFERENCE_TIME
+  TimeStamp REFERENCE_TIME
+
+  flag AM_FILTER_MISC_FLAGS ULONG display=ULONG
+    AM_FILTER_MISC_FLAGS_IS_RENDERER 0x1
+    AM_FILTER_MISC_FLAGS_IS_SOURCE   0x2
+
+

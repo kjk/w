@@ -1,0 +1,749 @@
+include Headers\windows.h.txt
+include Headers\shell.h.txt
+include Headers\gdi.h.txt
+
+dll UxTheme.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Windows Application UI Development/Windows Controls/Visual Styles"
+category "Windows Application UI Development/User Interaction/Windows Touch/Boundary Feedback"
+alias HANIMATIONBUFFER HANDLE
+
+alias HPAINTBUFFER HANDLE
+
+alias DTT_CALLBACK_PROC LPVOID
+
+alias INTLIST* LPVOID
+
+flag [BPPF_Flags] DWORD display=DWORD
+  BPPF_ERASE     0x0001
+  BPPF_NOCLIP    0x0002
+  BPPF_NONCLIENT 0x0004
+
+struct BP_PAINTPARAMS
+  cbSize DWORD
+  dwFlags [BPPF_Flags]
+  prcExclude "const RECT*"
+  pBlendFunction "const BLENDFUNCTION*"
+
+pointer BP_PAINTPARAMS* BP_PAINTPARAMS
+
+enum BP_ANIMATIONSTYLE UINT
+  BPAS_NONE   0
+  BPAS_LINEAR 1
+  BPAS_CUBIC  2
+  BPAS_SINE   3
+
+struct BP_ANIMATIONPARAMS
+  cbSize DWORD
+  dwFlags DWORD
+  style BP_ANIMATIONSTYLE
+  dwDuration DWORD
+
+pointer BP_ANIMATIONPARAMS* BP_ANIMATIONPARAMS
+
+flag [DTBG_Flags] DWORD display=DWORD
+  DTBG_CLIPRECT        0x00000001
+  DTBG_DRAWSOLID       0x00000002
+  DTBG_OMITBORDER      0x00000004
+  DTBG_OMITCONTENT     0x00000008
+  DTBG_COMPUTINGREGION 0x00000010
+  DTBG_MIRRORDC        0x00000020
+  DTBG_NOMIRROR        0x00000040
+
+struct DTBGOPTS
+  dwSize DWORD
+  dwFlags [DTBG_Flags]
+  rcClip RECT
+
+pointer "const DTBGOPTS*" DTBGOPTS
+
+flag [DTT_Flags] DWORD display=DWORD
+  DTT_TEXTCOLOR    0x1
+  DTT_BORDERCOLOR  0x2
+  DTT_SHADOWCOLOR  0x4
+  DTT_SHADOWTYPE   0x8
+  DTT_SHADOWOFFSET 0x10
+  DTT_BORDERSIZE   0x20
+  DTT_FONTPROP     0x40
+  DTT_COLORPROP    0x80
+  DTT_STATEID      0x100
+  DTT_CALCRECT     0x200
+  DTT_APPLYOVERLAY 0x400
+  DTT_GLOWSIZE     0x800
+  DTT_CALLBACK     0x1000
+  DTT_COMPOSITED   0x1000
+
+enum TEXTSHADOWTYPE int display=int
+  TST_NONE       0
+  TST_SINGLE     1
+  TST_CONTINUOUS 2
+
+struct DTTOPTS
+  dwSize DWORD
+  dwFlags [DTT_Flags]
+  crText COLORREF
+  crBorder COLORREF
+  crShadow COLORREF
+  iTextShadowType TEXTSHADOWTYPE
+  ptShadowOffset POINT
+  iBorderSize int
+  iFontPropId int
+  iColorPropId int
+  iStateId int
+  fApplyOverlay BOOL
+  iGlowSize int
+  pfnDrawTextCallback DTT_CALLBACK_PROC
+  lParam LPARAM
+
+pointer "const DTTOPTS*" DTTOPTS
+
+enum THEMESIZE UINT
+  TS_MIN  0
+  TS_TRUE 1
+  TS_DRAW 2
+
+enum PROPERTYORIGIN UINT
+  PO_STATE    0
+  PO_PART     1
+  PO_CLASS    2
+  PO_GLOBAL   3
+  PO_NOTFOUND 4
+
+pointer PROPERTYORIGIN* PROPERTYORIGIN
+
+flag [EnableThemeDialogTextureFlags] DWORD display=DWORD
+  ETDT_DISABLE                 0x00000001
+  ETDT_ENABLE                  0x00000002
+  ETDT_USETABTEXTURE           0x00000004
+  ETDT_ENABLETAB               0x00000006
+  ETDT_USEAEROWIZARDTABTEXTURE 0x00000008
+  ETDT_ENABLEAEROWIZARDTAB     0x0000000a
+
+flag [HitTestThemeBackgroundOptions] DWORD display=DWORD
+  HTTB_BACKGROUNDSEG         0x00000000
+  HTTB_FIXEDBORDER           0x00000002
+  HTTB_CAPTION               0x00000004
+  HTTB_RESIZINGBORDER_LEFT   0x00000010
+  HTTB_RESIZINGBORDER_TOP    0x00000020
+  HTTB_RESIZINGBORDER_RIGHT  0x00000040
+  HTTB_RESIZINGBORDER_BOTTOM 0x00000080
+  HTTB_RESIZINGBORDER        0x000000f0
+  HTTB_SIZINGTEMPLATE        0x00000100
+  HTTB_SYSTEMSIZINGMARGINS   0x00000200
+
+enum [HitTestReturnCode] WORD display=WORD
+  HTERROR       -2
+  HTTRANSPARENT -1
+  HTNOWHERE     0
+  HTCLIENT      1
+  HTCAPTION     2
+  HTSYSMENU     3
+  HTGROWBOX     4
+  HTMENU        5
+  HTHSCROLL     6
+  HTVSCROLL     7
+  HTMINBUTTON   8
+  HTMAXBUTTON   9
+  HTLEFT        10
+  HTRIGHT       11
+  HTTOP         12
+  HTTOPLEFT     13
+  HTTOPRIGHT    14
+  HTBOTTOM      15
+  HTBOTTOMLEFT  16
+  HTBOTTOMRIGHT 17
+  HTBORDER      18
+  HTOBJECT      19
+  HTCLOSE       20
+  HTHELP        21
+
+pointer [HitTestReturnCode*] [HitTestReturnCode] display=WORD*
+
+flag [DrawThemeParentBackgroundFlags] DWORD display=DWORD
+  DTPB_WINDOWDC          0x00000001
+  DTPB_USECTLCOLORSTATIC 0x00000002
+  DTPB_USEERASEBKGND     0x00000004
+
+enum BP_BUFFERFORMAT DWORD
+  BPBF_COMPATIBLEBITMAP 0
+  BPBF_DIB              1
+  BPBF_TOPDOWNDIB       2
+  BPBF_TOPDOWNMONODIB   3
+
+enum WINDOWTHEMEATTRIBUTETYPE DWORD
+  WTA_NONCLIENT 1
+
+enum TA_TRANSFORM_TYPE UINT
+  TATT_TRANSLATE_2D 0
+  TATT_SCALE_2D     1
+  TATT_OPACITY      2
+  TATT_CLIP         3
+
+enum TA_PROPERTY UINT
+  TAP_FLAGS              0
+  TAP_TRANSFORMCOUNT     1
+  TAP_STAGGERDELAY       2
+  TAP_STAGGERDELAYCAP    3
+  TAP_STAGGERDELAYFACTOR 4
+  TAP_ZORDER             5
+
+flag TA_TRANSFORM_FLAG UINT
+  TATF_NONE              0x0
+  TATF_TARGETVALUES_USER 0x1
+  TATF_HASINITIALVALUES  0x2
+  TATF_HASORIGINVALUES   0x4
+
+struct TA_TRANSFORM pack=8
+  eTransformType TA_TRANSFORM_TYPE
+  dwTimingFunctionId DWORD
+  dwStartTime DWORD
+  dwDurationTime DWORD
+  eFlags TA_TRANSFORM_FLAG
+
+pointer TA_TRANSFORM* TA_TRANSFORM
+
+enum TA_TIMINGFUNCTION_TYPE UINT
+  TTFT_UNDEFINED    0
+  TTFT_CUBIC_BEZIER 1
+
+struct TA_TIMINGFUNCTION pack=8
+  eTimingFunctionType TA_TIMINGFUNCTION_TYPE
+
+pointer TA_TIMINGFUNCTION* TA_TIMINGFUNCTION
+
+func BeginBufferedAnimation
+  success NotEqual=0
+  HANIMATIONBUFFER
+  hwnd HWND
+  hdcTarget HDC
+  rcTarget "const RECT*"
+  dwFormat BP_BUFFERFORMAT
+  pPaintParams BP_PAINTPARAMS*
+  pAnimationParams BP_ANIMATIONPARAMS*
+  phdcFrom HDC*
+  phdcTo HDC*
+
+func BeginBufferedPaint
+  success NotEqual=0
+  HPAINTBUFFER
+  hdcTarget HDC
+  prcTarget "const RECT*"
+  dwFormat BP_BUFFERFORMAT
+  pPaintParams BP_PAINTPARAMS*
+  phdc HDC*
+
+func BufferedPaintClear
+  HRESULT
+  hBufferedPaint HPAINTBUFFER
+  prc "const RECT*"
+
+func BufferedPaintInit
+  HRESULT
+
+func BufferedPaintRenderAnimation
+  BOOL
+  hwnd HWND
+  hdcTarget HDC
+
+func BufferedPaintSetAlpha
+  HRESULT
+  hBufferedPaint HPAINTBUFFER
+  prc "const RECT*"
+  alpha BYTE
+
+func BufferedPaintStopAllAnimations
+  HRESULT
+  hwnd HWND
+
+func BufferedPaintUnInit
+  HRESULT
+
+func CloseThemeData
+  HRESULT
+  hTheme HTHEME
+
+func DrawThemeBackground
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  pRect "const RECT*"
+  pClipRect "const RECT*"
+
+func DrawThemeBackgroundEx ordinal=47
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  pRect "const RECT*"
+  pOptions "const DTBGOPTS*"
+
+func DrawThemeEdge
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  pDestRect LPCRECT
+  uEdge [BorderEdge]
+  uFlags [BorderFlag]
+  pContentRect LPRECT
+
+func DrawThemeIcon
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  pRect LPCRECT
+  himl HIMAGELIST
+  iImageIndex int
+
+func DrawThemeParentBackground
+  HRESULT
+  hwnd HWND
+  hdc HDC
+  prc "const RECT*"
+
+func DrawThemeParentBackgroundEx
+  HRESULT
+  hwnd HWND
+  hdc HDC
+  dwFlags [DrawThemeParentBackgroundFlags]
+  prc "const RECT*"
+
+func DrawThemeText
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  pszText LPCWSTR
+  iCharCount int
+  dwTextFlags [DrawTextFlags]
+  dwTextFlags2 DWORD
+  pRect LPCRECT
+
+func DrawThemeTextEx
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  pszText LPCWSTR
+  iCharCount int
+  dwFlags [DrawTextFlags]
+  pRect LPRECT
+  pOptions "const DTTOPTS*"
+
+func EnableThemeDialogTexture
+  HRESULT
+  hwnd HWND
+  dwFlags [EnableThemeDialogTextureFlags]
+
+func EnableTheming
+  HRESULT
+  fEnable BOOL
+
+func EndBufferedAnimation
+  HRESULT
+  hbpAnimation HANIMATIONBUFFER
+  fUpdateTarget BOOL
+
+func EndBufferedPaint
+  HRESULT
+  hBufferedPaint HPAINTBUFFER
+  fUpdateTarget BOOL
+
+func GetBufferedPaintBits
+  HRESULT
+  hBufferedPaint HPAINTBUFFER
+  ppbBuffer RGBQUAD**
+  pcxRow int*
+
+func GetBufferedPaintDC
+  success NotEqual=0
+  HDC
+  hBufferedPaint HPAINTBUFFER
+
+func GetBufferedPaintTargetDC
+  success NotEqual=0
+  HDC
+  hBufferedPaint HPAINTBUFFER
+
+func GetBufferedPaintTargetRect
+  HRESULT
+  hBufferedPaint HPAINTBUFFER
+  prc RECT*
+
+func GetCurrentThemeName
+  HRESULT
+  pszThemeFileName LPWSTR outputOnly
+  dwMaxNameChars int
+  pszColorBuff LPWSTR outputOnly
+  cchMaxColorChars int
+  pszSizeBuff LPWSTR outputOnly
+  cchMaxSizeChars int
+
+func GetThemeAnimationTransform
+  HRESULT
+  hTheme HTHEME
+  iStoryboardId int
+  iTargetId int
+  dwTransformIndex DWORD
+  pTransform TA_TRANSFORM*
+  cbSize DWORD
+  pcbSizeOut DWORD
+
+func GetThemeAppProperties
+  DWORD
+
+func GetThemeBackgroundContentRect
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  pBoundingRect LPCRECT
+  pContentRect LPRECT
+
+func GetThemeBackgroundExtent
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  pContentRect LPCRECT
+  pExtentRect LPRECT
+
+func GetThemeBackgroundRegion
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  pRect LPCRECT
+  pRegion HRGN*
+
+func GetThemeBitmap
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  dwFlags ULONG
+  phBitmap HBITMAP*
+
+func GetThemeBool
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  pfVal BOOL*
+
+func GetThemeColor
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  pColor COLORREF*
+
+func GetThemeDocumentationProperty
+  HRESULT
+  pszThemeName LPCWSTR
+  pszPropertyName LPCWSTR
+  pszValueBuff LPWSTR
+  cchMaxValChars int
+
+func GetThemeEnumValue
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  piVal int*
+
+func GetThemeFilename
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  pszThemeFilename LPWSTR
+  cchMaxBuffChars int
+
+func GetThemeFont
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  iPropId int
+  pFont LOGFONTW*
+
+func GetThemeInt
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  piVal int*
+
+func GetThemeIntList
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  pIntList INTLIST*
+
+func GetThemeMargins
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  iPropId int
+  prc LPRECT
+  pMargins MARGINS*
+
+func GetThemeMetric
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  iPropId int
+  piVal int*
+
+func GetThemePartSize
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  prc LPCRECT
+  eSize THEMESIZE
+  psz SIZE*
+
+func GetThemePosition
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  pPoint POINT*
+
+func GetThemePropertyOrigin
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  pOrigin PROPERTYORIGIN*
+
+func GetThemeRect
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  pRect LPRECT
+
+func GetThemeStream
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  ppvStream VOID**
+  pcbStream DWORD*
+  hInst HINSTANCE
+
+func GetThemeString
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+  iPropId int
+  pszBuff LPWSTR
+  cchMaxBuffChars int
+
+func GetThemeSysBool
+  BOOL
+  hTheme HTHEME
+  iBoolID int
+
+func GetThemeSysColor
+  COLORREF
+  hTheme HTHEME
+  iColorID [SysColorIndex]
+
+func GetThemeSysColorBrush
+  success NotEqual=0
+  HBRUSH
+  hTheme HTHEME
+  iColorID int
+
+func GetThemeSysFont
+  HRESULT
+  hTheme HTHEME
+  iFontID int
+  plf LOGFONTW*
+
+func GetThemeSysInt
+  HRESULT
+  hTheme HTHEME
+  iIntID int
+  piValue int*
+
+func GetThemeSysSize
+  int
+  hTheme HTHEME
+  iSizeID int
+
+func GetThemeSysString
+  HRESULT
+  hTheme HTHEME
+  iStringID int
+  pszStringBuff LPWSTR
+  cchMaxStringChars int
+
+func GetThemeTextExtent
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  pszText LPCWSTR
+  iCharCount int
+  dwTextFlags [DrawTextFlags]
+  pBoundingRect LPCRECT
+  pExtentRect LPRECT
+
+func GetThemeTextMetrics
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  ptm TEXTMETRIC*
+
+func GetThemeTimingFunction
+  HRESULT
+  hTheme HTHEME
+  iTimingFunctionId int
+  pTimingFunction TA_TIMINGFUNCTION*
+  cbSize DWORD
+  pcbSizeOut DWORD
+
+func GetThemeTransitionDuration
+  HRESULT
+  hTheme HTHEME
+  iPartId int
+  iStateIdFrom int
+  iStateIdTo int
+  iPropId int
+  pdwDuration DWORD*
+
+func GetWindowTheme
+  success NotEqual=0
+  HTHEME
+  hWnd HWND
+
+func HitTestThemeBackground
+  HRESULT
+  hTheme HTHEME
+  hdc HDC
+  iPartId int
+  iStateId int
+  dwOptions [HitTestThemeBackgroundOptions]
+  pRect LPCRECT
+  hrgn HRGN
+  ptTest POINT
+  pwHitTestCode [HitTestReturnCode*]
+
+func IsAppThemed
+  BOOL
+
+func IsCompositionActive
+  BOOL
+
+func IsThemeActive
+  BOOL
+
+func IsThemeBackgroundPartiallyTransparent
+  BOOL
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+
+func IsThemeDialogTextureEnabled
+  BOOL
+  hwnd HWND
+
+func IsThemePartDefined
+  BOOL
+  hTheme HTHEME
+  iPartId int
+  iStateId int
+
+func OpenThemeData
+  success NotEqual=0
+  HTHEME
+  hwnd HWND
+  pszClassList LPCWSTR
+
+func OpenThemeDataEx ordinal=61
+  success NotEqual=0
+  HTHEME
+  hwnd HWND
+  pszClassIdList LPCWSTR
+  dwFlags DWORD
+
+func SetThemeAppProperties
+  void
+  dwFlags DWORD
+
+func SetWindowTheme
+  HRESULT
+  hwnd HWND
+  pszSubAppName LPCWSTR
+  pszSubIdList LPCWSTR
+
+func SetWindowThemeAttribute
+  HRESULT
+  hwnd HWND
+  eAttribute WINDOWTHEMEATTRIBUTETYPE
+  pvAttribute PVOID length=cbAttribute
+  cbAttribute DWORD
+
+func GetThemeAnimationProperty
+  HRESULT
+  hTheme HTHEME
+  iStoryboardId int
+  iTargetId int
+  eProperty TA_PROPERTY
+  pvProperty VOID*
+  cbSize DWORD
+  pcbSizeOut DWORD
+
+func BeginPanningFeedback
+  BOOL
+  hwnd HWND
+
+func EndPanningFeedback
+  BOOL
+  hwnd HWND
+  fAnimateBack BOOL
+
+func UpdatePanningFeedback
+  BOOL
+  hwnd HWND
+  lTotalOverpanOffsetX LONG
+  lTotalOverpanOffsetY LONG
+  fInInertia BOOL
+

@@ -1,0 +1,10 @@
+include Interfaces\Shell\IURLSearchHook.txt
+
+ingterface IURLSearchHook2 base=IURLSearchHook id={5ee44da4-6d32-46e3-86bc-07540dedd0e0} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func TranslateWithSearchContext
+    HRESULT
+    lpwszSearchURL LPWSTR
+    cchBufferSize DWORD
+    pSearchContext ISearchContext*
+
+

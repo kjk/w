@@ -1,0 +1,13 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1DrawingStateBlock.txt
+
+ingterface ID2D1DrawingStateBlock1 base=ID2D1DrawingStateBlock id={689f1f85-c72e-4e33-8f19-85754efd5ace} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func "GetDescription "
+    void
+    stateDescription D2D1_DRAWING_STATE_DESCRIPTION1*
+
+  func "SetDescription "
+    void
+    stateDescription "CONST D2D1_DRAWING_STATE_DESCRIPTION1*"
+
+

@@ -1,0 +1,30 @@
+include Headers\windows.h.txt
+
+dll Faultrep.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Diagnostics/Windows Error Reporting"
+enum EFaultRepRetVal UINT
+  frrvOk                 0
+  frrvOkManifest         1
+  frrvOkQueued           2
+  frrvErr                3
+  frrvErrNoDW            4
+  frrvErrTimeout         5
+  frrvLaunchDebugger     6
+  frrvOkHeadless         7
+  frrvErrAnotherInstance 8
+
+func WerReportHang
+  HRESULT
+  hwndHungWinow HWND
+  wszHungApplicationName PCWSTR
+
+func AddERExcludedApplication bothCharset
+  BOOL
+  szApplication LPCTSTR
+
+func ReportFault
+  success NotEqual=0
+  EFaultRepRetVal
+  pep LPEXCEPTION_POINTERS
+  dwMode DWORD
+

@@ -1,0 +1,58 @@
+include WMI\IWbemClassObject.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemObjectAccess base=IWbemClassObject id={49353c9a-516b-11d1-aea6-00c04fb68820} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func GetPropertyHandle
+    WBEMSTATUS
+    wszPropertyName LPCWSTR
+    pType CIMTYPE*
+    plHandle long*
+
+  func WritePropertyValue
+    WBEMSTATUS
+    lHandle long
+    lNumBytes long
+    aData "const byte*"
+
+  func ReadPropertyValue
+    WBEMSTATUS
+    lHandle long
+    lBufferSize long
+    plNumBytes long*
+    aData byte*
+
+  func ReadDWORD
+    WBEMSTATUS
+    lHandle long
+    pdw DWORD*
+
+  func WriteDWORD
+    WBEMSTATUS
+    lHandle long
+    dw DWORD
+
+  func ReadQWORD
+    WBEMSTATUS
+    lHandle long
+    pqw "unsigned __int64*"
+
+  func WriteQWORD
+    WBEMSTATUS
+    lHandle long
+    pw "unsigned __int64"
+
+  func GetPropertyInfoByHandle
+    WBEMSTATUS
+    lHandle long
+    pstrName BSTR*
+    pType CIMTYPE*
+
+  func Lock
+    WBEMSTATUS
+    lFlags long
+
+  func Unlock
+    WBEMSTATUS
+    lFlags long
+
+

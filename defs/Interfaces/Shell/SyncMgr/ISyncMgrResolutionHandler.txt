@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrResolutionHandler base=IUnknown id={40A3D052-8BFF-4c4b-A338-D4A395700DE9} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func QueryAbilities
+    HRESULT
+    pdwAbilities SYNCMGR_RESOLUTION_ABILITIES_FLAGS*
+
+  func KeepOther
+    HRESULT
+    psiOther IShellItem*
+    pFeedback SYNCMGR_RESOLUTION_FEEDBACK*
+
+  func KeepRecent
+    HRESULT
+    pFeedback SYNCMGR_RESOLUTION_FEEDBACK*
+
+  func RemoveFromSyncSet
+    HRESULT
+    pFeedback SYNCMGR_RESOLUTION_FEEDBACK*
+
+  func KeepItems
+    HRESULT
+    pArray ISyncMgrConflictResolutionItems*
+    pFeedback SYNCMGR_RESOLUTION_FEEDBACK*
+
+

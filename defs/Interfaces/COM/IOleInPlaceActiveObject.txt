@@ -1,0 +1,26 @@
+include Interfaces\COM\IOleWindow.txt
+
+ingterface IOleInPlaceActiveObject base=IOleWindow id={00000117-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func TranslateAccelerator
+    HRESULT
+    lpmsg LPMSG
+
+  func OnFrameWindowActivate
+    HRESULT
+    fActivate BOOL
+
+  func OnDocWindowActivate
+    HRESULT
+    fActivate BOOL
+
+  func ResizeBorder
+    HRESULT
+    prcBorder LPCRECT
+    pUIWindow IOleInPlaceUIWindow*
+    fFrameWindow BOOL
+
+  func EnableModeless
+    HRESULT
+    fEnable BOOL
+
+

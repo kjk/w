@@ -1,0 +1,4 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+
+ingterface ID3D11PixelShader base=ID3D11DeviceChild id={ea82e40d-51dc-4f33-93d4-db7c9125ae8c} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Shader"
+

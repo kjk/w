@@ -1,0 +1,111 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwPolicy2 base=IDispatch id={98325047-C671-4174-8D81-DEFCD3F03186} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall with Advanced Security"
+  func get_CurrentProfileTypes
+    HRESULT
+    profileTypesBitmask long*
+
+  func get_FirewallEnabled
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    enabled VARIANT_BOOL*
+
+  func put_FirewallEnabled
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    enabled VARIANT_BOOL
+
+  func get_ExcludedInterfaces
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    interfaces VARIANT*
+
+  func put_ExcludedInterfaces
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    interfaces VARIANT
+
+  func get_BlockAllInboundTraffic
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    Block VARIANT_BOOL*
+
+  func put_BlockAllInboundTraffic
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    Block VARIANT_BOOL
+
+  func get_NotificationsDisabled
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    disabled VARIANT_BOOL*
+
+  func put_NotificationsDisabled
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    disabled VARIANT_BOOL
+
+  func get_UnicastResponsesToMulticastBroadcastDisabled
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    disabled VARIANT_BOOL*
+
+  func put_UnicastResponsesToMulticastBroadcastDisabled
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    disabled VARIANT_BOOL
+
+  func get_Rules
+    HRESULT
+    rules INetFwRules**
+
+  func get_ServiceRestriction
+    HRESULT
+    ServiceRestriction INetFwServiceRestriction**
+
+  func EnableRuleGroup
+    HRESULT
+    profileTypesBitmask long
+    group BSTR
+    enable VARIANT_BOOL
+
+  func IsRuleGroupEnabled
+    HRESULT
+    profileTypesBitmask long
+    group BSTR
+    enabled VARIANT_BOOL*
+
+  func RestoreLocalFirewallDefaults
+    HRESULT
+
+  func get_DefaultInboundAction
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    action NET_FW_ACTION*
+
+  func put_DefaultInboundAction
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    action NET_FW_ACTION
+
+  func get_DefaultOutboundAction
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    action NET_FW_ACTION*
+
+  func put_DefaultOutboundAction
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE2
+    action NET_FW_ACTION
+
+  func get_IsRuleGroupCurrentlyEnabled
+    HRESULT
+    group BSTR
+    enabled VARIANT_BOOL*
+
+  func get_LocalPolicyModifyState
+    HRESULT
+    modifyState NET_FW_MODIFY_STATE*
+
+

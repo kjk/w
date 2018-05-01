@@ -1,0 +1,4 @@
+include Interfaces\Shell\IRelatedItem.txt
+
+ingterface IViewStateIdentityItem base=IRelatedItem id={9D264146-A94F-4195-9F9F-3BB12CE0C955} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+

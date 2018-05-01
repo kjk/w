@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface ITranscodeImage base=IUnknown id={BAE86DDD-DC11-421c-B7AB-CC55D1D65C44} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func TranscodeImage
+    HRESULT
+    pShellItem IShellItem*
+    uiMaxWidth UINT
+    uiMaxHeight UINT
+    flags DWORD
+    pvImage IStream*
+    puiWidth UINT*
+    puiHeight UINT*
+
+

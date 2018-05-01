@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IWebBrowserEventsService base=IUnknown id={54A8F188-9EBD-4795-AD16-9B4945119636} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+  func FireBeforeNavigate2Event
+    HRESULT
+    pfCancel VARIANT_BOOL*
+
+  func FireNavigateComplete2Event
+    HRESULT
+
+  func FireDownloadBeginEvent
+    HRESULT
+
+  func FireDownloadCompleteEvent
+    HRESULT
+
+  func FireDocumentCompleteEvent
+    HRESULT
+
+

@@ -1,0 +1,182 @@
+include Headers\windows.h.txt
+
+dll Websocket callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Networking/WebSocket Protocol Component"
+alias WEB_SOCKET_HANDLE HANDLE
+
+pointer WEB_SOCKET_HANDLE* WEB_SOCKET_HANDLE
+
+enum WEB_SOCKET_ACTION UINT
+  WEB_SOCKET_NO_ACTION                        0
+  WEB_SOCKET_SEND_TO_NETWORK_ACTION           1
+  WEB_SOCKET_INDICATE_SEND_COMPLETE_ACTION    2
+  WEB_SOCKET_RECEIVE_FROM_NETWORK_ACTION      3
+  WEB_SOCKET_INDICATE_RECEIVE_COMPLETE_ACTION 4
+
+pointer WEB_SOCKET_ACTION* WEB_SOCKET_ACTION
+
+enum WEB_SOCKET_ACTION_QUEUE UINT
+  WEB_SOCKET_SEND_ACTION_QUEUE    0x1
+  WEB_SOCKET_RECEIVE_ACTION_QUEUE 0x2
+  WEB_SOCKET_ALL_ACTION_QUEUE     0x3
+
+enum WEB_SOCKET_BUFFER_TYPE UINT
+  WEB_SOCKET_UTF8_MESSAGE_BUFFER_TYPE     0x80000000
+  WEB_SOCKET_UTF8_FRAGMENT_BUFFER_TYPE    0x80000001
+  WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE   0x80000002
+  WEB_SOCKET_BINARY_FRAGMENT_BUFFER_TYPE  0x80000003
+  WEB_SOCKET_CLOSE_BUFFER_TYPE            0x80000004
+  WEB_SOCKET_PING_PONG_BUFFER_TYPE        0x80000005
+  WEB_SOCKET_UNSOLICITED_PONG_BUFFER_TYPE 0x80000006
+
+pointer WEB_SOCKET_BUFFER_TYPE* WEB_SOCKET_BUFFER_TYPE
+
+enum WEB_SOCKET_CLOSE_STATUS USHORT display=USHORT
+  WEB_SOCKET_SUCCESS_CLOSE_STATUS                1000
+  WEB_SOCKET_ENDPOINT_UNAVAILABLE_CLOSE_STATUS   1001
+  WEB_SOCKET_PROTOCOL_ERROR_CLOSE_STATUS         1002
+  WEB_SOCKET_INVALID_DATA_TYPE_CLOSE_STATUS      1003
+  WEB_SOCKET_EMPTY_CLOSE_STATUS                  1005
+  WEB_SOCKET_ABORTED_CLOSE_STATUS                1006
+  WEB_SOCKET_INVALID_PAYLOAD_CLOSE_STATUS        1007
+  WEB_SOCKET_POLICY_VIOLATION_CLOSE_STATUS       1008
+  WEB_SOCKET_MESSAGE_TOO_BIG_CLOSE_STATUS        1009
+  WEB_SOCKET_UNSUPPORTED_EXTENSIONS_CLOSE_STATUS 1010
+  WEB_SOCKET_SERVER_ERROR_CLOSE_STATUS           1011
+  WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS 1015
+
+enum WEB_SOCKET_PROPERTY_TYPE UINT
+  WEB_SOCKET_RECEIVE_BUFFER_SIZE_PROPERTY_TYPE       0
+  WEB_SOCKET_SEND_BUFFER_SIZE_PROPERTY_TYPE          1
+  WEB_SOCKET_DISABLE_MASKING_PROPERTY_TYPE           2
+  WEB_SOCKET_ALLOCATED_BUFFER_PROPERTY_TYPE          3
+  WEB_SOCKET_DISABLE_UTF8_VERIFICATION_PROPERTY_TYPE 4
+  WEB_SOCKET_KEEPALIVE_INTERVAL_PROPERTY_TYPE        5
+  WEB_SOCKET_SUPPORTED_VERSIONS_PROPERTY_TYPE        6
+
+struct [WEB_SOCKET_BUFFER_s1] display=struct
+  pbBuffer PBYTE length=ulBufferLength
+  ulBufferLength ULONG
+
+struct [WEB_SOCKET_BUFFER_s2] display=struct
+  pbReason PBYTE length=ulReasonLength
+  ulReasonLength ULONG
+  usStatus WEB_SOCKET_CLOSE_STATUS
+
+union WEB_SOCKET_BUFFER
+  Data [WEB_SOCKET_BUFFER_s1]
+  CloseStatus [WEB_SOCKET_BUFFER_s2]
+
+pointer WEB_SOCKET_BUFFER* WEB_SOCKET_BUFFER
+
+struct WEB_SOCKET_HTTP_HEADER
+  pcName PCHAR
+  ulNameLength ULONG
+  pcValue PCHAR
+  ulValueLength ULONG
+
+pointer PWEB_SOCKET_HTTP_HEADER WEB_SOCKET_HTTP_HEADER
+
+pointer PWEB_SOCKET_HTTP_HEADER* PWEB_SOCKET_HTTP_HEADER
+
+pointer "const PWEB_SOCKET_HTTP_HEADER" WEB_SOCKET_HTTP_HEADER
+
+struct WEB_SOCKET_PROPERTY
+  Type WEB_SOCKET_PROPERTY_TYPE
+  pvValue PVOID length=ulValueSize
+  ulValueSize ULONG
+
+pointer "const PWEB_SOCKET_PROPERTY" WEB_SOCKET_PROPERTY
+
+func WebSocketAbortHandle
+  VOID
+  hWebSocket WEB_SOCKET_HANDLE
+
+func WebSocketBeginClientHandshake
+  HRESULT
+  hWebSocket WEB_SOCKET_HANDLE
+  pszSubprotocols PCSTR* count=ulSubprotocolCount
+  ulSubprotocolCount ULONG
+  pszExtensions PCSTR* count=ulExtensionCount
+  ulExtensionCount ULONG
+  pInitialHeaders "const PWEB_SOCKET_HTTP_HEADER" count=ulInitialHeaderCount
+  ulInitialHeaderCount ULONG
+  pAdditionalHeaders PWEB_SOCKET_HTTP_HEADER* derefPostCount=pulAdditionalHeaderCount
+  pulAdditionalHeaderCount ULONG*
+
+func WebSocketBeginServerHandshake
+  HRESULT
+  hWebSocket WEB_SOCKET_HANDLE
+  pszSubprotocolSelected PCSTR
+  pszExtensionSelected PCSTR* count=ulExtensionSelectedCount
+  ulExtensionSelectedCount ULONG
+  pRequestHeaders "const PWEB_SOCKET_HTTP_HEADER" count=ulRequestHeaderCount
+  ulRequestHeaderCount ULONG
+  pResponseHeaders PWEB_SOCKET_HTTP_HEADER* derefPostCount=pulResponseHeaderCount
+  pulResponseHeaderCount ULONG*
+
+func WebSocketCompleteAction
+  VOID
+  hWebSocket WEB_SOCKET_HANDLE
+  pvActionContext PVOID
+  ulBytesTransferred ULONG
+
+func WebSocketCreateClientHandle
+  HRESULT
+  pProperties "const PWEB_SOCKET_PROPERTY" count=ulPropertyCount
+  ulPropertyCount ULONG
+  phWebSocket WEB_SOCKET_HANDLE*
+
+func WebSocketCreateServerHandle
+  HRESULT
+  pProperties "const PWEB_SOCKET_PROPERTY" count=ulPropertyCount
+  ulPropertyCount ULONG
+  phWebSocket WEB_SOCKET_HANDLE*
+
+func WebSocketDeleteHandle
+  VOID
+  hWebSocket WEB_SOCKET_HANDLE
+
+func WebSocketEndClientHandshake
+  HRESULT
+  hWebSocket WEB_SOCKET_HANDLE
+  pResponseHeaders "const PWEB_SOCKET_HTTP_HEADER" count=ulReponseHeaderCount
+  ulReponseHeaderCount ULONG
+  pulSelectedExtensions ULONG* postCount=pulSelectedExtensionCount
+  pulSelectedExtensionCount ULONG*
+  pulSelectedSubprotocol ULONG*
+
+func WebSocketEndServerHandshake
+  HRESULT
+  hWebSocket WEB_SOCKET_HANDLE
+
+func WebSocketGetAction
+  HRESULT
+  hWebSocket WEB_SOCKET_HANDLE
+  eActionQueue WEB_SOCKET_ACTION_QUEUE
+  pDataBuffers WEB_SOCKET_BUFFER* postCount=pulDataBufferCount
+  pulDataBufferCount ULONG*
+  pAction WEB_SOCKET_ACTION*
+  pBufferType WEB_SOCKET_BUFFER_TYPE*
+  pvApplicationContext PVOID*
+  pvActionContext PVOID*
+
+func WebSocketGetGlobalProperty
+  HRESULT
+  eType WEB_SOCKET_PROPERTY
+  pvValue PVOID postLength=ulSize
+  ulSize ULONG*
+
+func WebSocketReceive
+  HRESULT
+  hWebSocket WEB_SOCKET_HANDLE
+  pBuffer WEB_SOCKET_BUFFER*
+  pvContext PVOID
+
+func WebSocketSend
+  HRESULT
+  hWebSocket WEB_SOCKET_HANDLE
+  BufferType WEB_SOCKET_BUFFER_TYPE
+  pBuffer WEB_SOCKET_BUFFER*
+  Context PVOID
+

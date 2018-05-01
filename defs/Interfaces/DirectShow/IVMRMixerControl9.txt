@@ -1,0 +1,65 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRMixerControl9 base=IUnknown id={1a777eaa-47c8-4930-b2c9-8fee1c1b0f3b} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetAlpha
+    HRESULT
+    dwStreamID DWORD
+    Alpha float
+
+  func GetAlpha
+    HRESULT
+    dwStreamID DWORD
+    pAlpha float*
+
+  func SetZOrder
+    HRESULT
+    dwStreamID DWORD
+    dwZ DWORD
+
+  func GetZOrder
+    HRESULT
+    dwStreamID DWORD
+    pZ DWORD*
+
+  func SetOutputRect
+    HRESULT
+    dwStreamID DWORD
+    pRect "const VMR9NormalizedRect*"
+
+  func GetOutputRect
+    HRESULT
+    dwStreamID DWORD
+    pRect VMR9NormalizedRect*
+
+  func SetBackgroundClr
+    HRESULT
+    ClrBkg COLORREF
+
+  func GetBackgroundClr
+    HRESULT
+    lpClrBkg COLORREF*
+
+  func SetMixingPrefs
+    HRESULT
+    dwMixerPrefs DWORD
+
+  func GetMixingPrefs
+    HRESULT
+    pdwMixerPrefs DWORD*
+
+  func SetProcAmpControl
+    HRESULT
+    dwStreamID DWORD
+    lpClrControl VMR9ProcAmpControl*
+
+  func GetProcAmpControl
+    HRESULT
+    dwStreamID DWORD
+    lpClrControl VMR9ProcAmpControl*
+
+  func GetProcAmpControlRange
+    HRESULT
+    dwStreamID DWORD
+    lpClrControl VMR9ProcAmpControlRange*
+
+

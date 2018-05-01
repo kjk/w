@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+
+ingterface INamespaceWalkCB base=IUnknown id={d92995f8-cf5e-4a76-bf59-ead39ea2b97e} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func FoundItem
+    HRESULT
+    psf IShellFolder*
+    pidl PCUITEMID_CHILD
+
+  func EnterFolder
+    HRESULT
+    psf IShellFolder*
+    pidl PCUITEMID_CHILD
+
+  func LeaveFolder
+    HRESULT
+    psf IShellFolder*
+    pidl PCUITEMID_CHILD
+
+  func InitializeProgressDialog
+    HRESULT
+    ppszTitle LPWSTR*
+    ppszCancel LPWSTR*
+
+

@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface ICDBurnExt base=IUnknown id={2271dcca-74fc-4414-8fb7-c56b05ace2d7} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetSupportedActionTypes
+    HRESULT
+    pdwActions CDBE_ACTIONS*
+
+

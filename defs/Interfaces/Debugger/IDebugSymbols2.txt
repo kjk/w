@@ -1,0 +1,56 @@
+include Interfaces\Debugger\IDebugSymbols.txt
+
+ingterface IDebugSymbols2 base=IDebugSymbols id={3a707211-afdd-4495-ad4f-56fecdf8163f} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetModuleVersionInformation
+    HRESULT
+    Index ULONG
+    Base ULONG64
+    Item PCSTR
+    Buffer PVOID
+    BufferSize ULONG
+    VerInfoSize PULONG
+
+  func GetModuleNameString
+    HRESULT
+    Which [DEBUG_MODNAME]
+    Index ULONG
+    Base ULONG64
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+
+  func GetConstantName
+    HRESULT
+    Module ULONG64
+    TypeId ULONG
+    Value ULONG64
+    NameBuffer PSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+
+  func GetFieldName
+    HRESULT
+    Module ULONG64
+    TypeId ULONG
+    FieldIndex ULONG
+    NameBuffer PSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+
+  func GetTypeOptions
+    HRESULT
+    Options [PDEBUG_TYPEOPTS]
+
+  func AddTypeOptions
+    HRESULT
+    Options [DEBUG_TYPEOPTS]
+
+  func RemoveTypeOptions
+    HRESULT
+    Options [DEBUG_TYPEOPTS]
+
+  func SetTypeOptions
+    HRESULT
+    Options [DEBUG_TYPEOPTS]
+
+

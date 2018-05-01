@@ -1,0 +1,170 @@
+include Headers\windows.h.txt
+
+dll Wecapi.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Diagnostics/Windows Events/Windows Event Collector"
+alias EC_HANDLE HANDLE
+
+alias EC_OBJECT_ARRAY_PROPERTY_HANDLE HANDLE
+
+enum EC_SUBSCRIPTION_PROPERTY_ID UINT
+  EcSubscriptionEnabled                0
+  EcSubscriptionEventSources           1
+  EcSubscriptionEventSourceAddress     2
+  EcSubscriptionEventSourceEnabled     3
+  EcSubscriptionEventSourceUserName    4
+  EcSubscriptionEventSourcePassword    5
+  EcSubscriptionDescription            6
+  EcSubscriptionURI                    7
+  EcSubscriptionConfigurationMode      8
+  EcSubscriptionExpires                9
+  EcSubscriptionQuery                  10
+  EcSubscriptionTransportName          11
+  EcSubscriptionTransportPort          12
+  EcSubscriptionDeliveryMode           13
+  EcSubscriptionDeliveryMaxItems       14
+  EcSubscriptionDeliveryMaxLatencyTime 15
+  EcSubscriptionHeartbeatInterval      16
+  EcSubscriptionLocale                 17
+  EcSubscriptionContentFormat          18
+  EcSubscriptionLogFile                19
+  EcSubscriptionPublisherName          20
+  EcSubscriptionCredentialsType        21
+  EcSubscriptionCommonUserName         22
+  EcSubscriptionCommonPassword         23
+  EcSubscriptionHostName               24
+  EcSubscriptionReadExistingEvents     25
+  EcSubscriptionDialect                26
+
+enum EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID UINT
+  EcSubscriptionRunTimeStatusActive           0
+  EcSubscriptionRunTimeStatusLastError        1
+  EcSubscriptionRunTimeStatusLastErrorMessage 2
+  EcSubscriptionRunTimeStatusLastErrorTime    3
+  EcSubscriptionRunTimeStatusNextRetryTime    4
+  EcSubscriptionRunTimeStatusInfoIdEND        5
+
+union [EC_VARIANT_u] display=union
+  BooleanVal BOOL
+  UInt32Val UINT32
+  DateTimeVal ULONGLONG
+  StringVal LPCWSTR
+  BinaryVal PBYTE
+  BooleanArr BOOL*
+  Int32Arr INT32*
+  StringArr LPWSTR*
+  PropertyHandleVal EC_OBJECT_ARRAY_PROPERTY_HANDLE
+
+flag EC_VARIANT_TYPE DWORD display=DWORD
+  EcVarTypeNull                  0
+  EcVarTypeBoolean               1
+  EcVarTypeUInt32                2
+  EcVarTypeDateTime              3
+  EcVarTypeString                4
+  EcVarObjectArrayPropertyHandle 5
+  EC_VARIANT_TYPE_ARRAY          128
+
+struct EC_VARIANT
+   [EC_VARIANT_u]
+  Count DWORD
+  Type EC_VARIANT_TYPE
+
+pointer PEC_VARIANT EC_VARIANT
+
+func EcClose
+  BOOL
+  Object EC_HANDLE
+
+func EcDeleteSubscription
+  BOOL
+  SubscriptionName LPCWSTR
+  Flags DWORD
+
+func EcEnumNextSubscription
+  BOOL
+  SubscriptionEnum EC_HANDLE
+  SubscriptionNameBufferSize DWORD
+  SubscriptionNameBuffer LPWSTR
+  SubscriptionNameBufferUsed PDWORD
+
+func EcGetObjectArrayProperty
+  BOOL
+  ObjectArray EC_OBJECT_ARRAY_PROPERTY_HANDLE
+  PropertyId EC_SUBSCRIPTION_PROPERTY_ID
+  ArrayIndex DWORD
+  Flags DWORD
+  PropertyValueBufferSize DWORD
+  PropertyValueBuffer PEC_VARIANT
+  PropertyValueBufferUsed PDWORD
+
+func EcGetObjectArraySize
+  BOOL
+  ObjectArray EC_OBJECT_ARRAY_PROPERTY_HANDLE
+  ObjectArraySize PDWORD
+
+func EcGetSubscriptionProperty
+  BOOL
+  Subscription EC_HANDLE
+  PropertyId EC_SUBSCRIPTION_PROPERTY_ID
+  Flags DWORD
+  PropertyValueBufferSize DWORD
+  PropertyValueBuffer PEC_VARIANT
+  PropertyValueBufferUsed PDWORD
+
+func EcGetSubscriptionRunTimeStatus
+  BOOL
+  SubscriptionName LPCWSTR
+  StatusInfoId EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID
+  EventSourceName LPCWSTR
+  Flags DWORD
+  StatusValueBufferSize DWORD
+  StatusValueBuffer PEC_VARIANT
+  StatusValueBufferUsed PDWORD
+
+func EcInsertObjectArrayElement
+  BOOL
+  ObjectArray EC_OBJECT_ARRAY_PROPERTY_HANDLE
+  ArrayIndex DWORD
+
+func EcOpenSubscriptionEnum
+  success NotEqual=0
+  EC_HANDLE
+  Flags DWORD
+
+func EcOpenSubscription
+  success NotEqual=0
+  EC_HANDLE
+  SubscriptionName LPCWSTR
+  AccessMask DWORD
+  Flags DWORD
+
+func EcSaveSubscription
+  BOOL
+  Subscription EC_HANDLE
+  Flags DWORD
+
+func EcSetObjectArrayProperty
+  BOOL
+  ObjectArray EC_OBJECT_ARRAY_PROPERTY_HANDLE
+  PropertyId EC_SUBSCRIPTION_PROPERTY_ID
+  ArrayIndex DWORD
+  Flags DWORD
+  PropertyValue PEC_VARIANT
+
+func EcSetSubscriptionProperty
+  BOOL
+  Subscription EC_HANDLE
+  PropertyId EC_SUBSCRIPTION_PROPERTY_ID
+  Flags DWORD
+  PropertyValue PEC_VARIANT
+
+func EcRemoveObjectArrayElement
+  BOOL
+  ObjectArray EC_OBJECT_ARRAY_PROPERTY_HANDLE
+  ArrayIndex DWORD
+
+func EcRetrySubscription
+  BOOL
+  SubscriptionName LPCWSTR
+  EventSourceName LPCWSTR
+  Flags DWORD
+

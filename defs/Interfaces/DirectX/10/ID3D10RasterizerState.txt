@@ -1,0 +1,9 @@
+include Interfaces\DirectX\10\ID3D10DeviceChild.txt
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10RasterizerState base=ID3D10DeviceChild id={A2A07292-89AF-4345-BE2E-C53D9FBB6E9F} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Core"
+  func GetDesc
+    void
+    pDesc D3D10_RASTERIZER_DESC*
+
+

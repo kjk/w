@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IChannelAudioVolume base=IUnknown id={1C158861-B533-4B30-B1CF-E853E51C59B8} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func GetChannelCount
+    [AUDCLNT_HRESULT]
+    pdwCount UINT32*
+
+  func SetChannelVolume
+    [AUDCLNT_HRESULT]
+    dwIndex UINT32
+    fLevel "const float"
+    EventContext LPCGUID
+
+  func GetChannelVolume
+    [AUDCLNT_HRESULT]
+    dwIndex UINT32
+    pfLevel float*
+
+  func SetAllVolumes
+    [AUDCLNT_HRESULT]
+    dwCount UINT32
+    pfVolumes "const float*" count=dwCount
+    EventContext LPCGUID
+
+  func GetAllVolumes
+    [AUDCLNT_HRESULT]
+    dwCount UINT32
+    pfVolumes float* postCount=dwCount
+
+

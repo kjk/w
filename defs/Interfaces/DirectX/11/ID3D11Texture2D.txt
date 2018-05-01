@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11Resource.txt
+
+ingterface ID3D11Texture2D base=ID3D11Resource id={6f15aaf2-d208-4e89-9ab4-489535d34f9c} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Resource"
+  func GetDesc
+    void
+    pDesc D3D11_TEXTURE2D_DESC*
+
+

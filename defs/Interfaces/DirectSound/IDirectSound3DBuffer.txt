@@ -1,0 +1,93 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSound3DBuffer base=IUnknown id={279afa86-4981-11ce-a521-0020af0be560} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func GetAllParameters
+    [DS_HRESULT]
+    pDs3dBuffer LPDS3DBUFFER
+
+  func GetConeAngles
+    [DS_HRESULT]
+    pdwInsideConeAngle LPDWORD
+    pdwOutsideConeAngle LPDWORD
+
+  func GetConeOrientation
+    [DS_HRESULT]
+    pvOrientation D3DVECTOR*
+
+  func GetConeOutsideVolume
+    [DS_HRESULT]
+    plConeOutsideVolume LPLONG
+
+  func GetMaxDistance
+    [DS_HRESULT]
+    pflMaxDistance D3DVALUE*
+
+  func GetMinDistance
+    [DS_HRESULT]
+    pflMinDistance D3DVALUE*
+
+  func GetMode
+    [DS_HRESULT]
+    pdwMode LPDWORD
+
+  func GetPosition
+    [DS_HRESULT]
+    pvPosition D3DVECTOR*
+
+  func GetVelocity
+    [DS_HRESULT]
+    pvVelocity D3DVECTOR*
+
+  func SetAllParameters
+    [DS_HRESULT]
+    pcDs3dBuffer LPCDS3DBUFFER
+    dwApply DWORD
+
+  func SetConeAngles
+    [DS_HRESULT]
+    dwInsideConeAngle DWORD
+    dwOutsideConeAngle DWORD
+    dwApply DWORD
+
+  func SetConeOrientation
+    [DS_HRESULT]
+    x D3DVALUE
+    y D3DVALUE
+    z D3DVALUE
+    dwApply DWORD
+
+  func SetConeOutsideVolume
+    [DS_HRESULT]
+    lConeOutsideVolume LONG
+    dwApply DWORD
+
+  func SetMaxDistance
+    [DS_HRESULT]
+    flMaxDistance D3DVALUE
+    dwApply DWORD
+
+  func SetMinDistance
+    [DS_HRESULT]
+    flMinDistance D3DVALUE
+    dwApply DWORD
+
+  func SetMode
+    [DS_HRESULT]
+    dwMode DWORD
+    dwApply DWORD
+
+  func SetPosition
+    [DS_HRESULT]
+    x D3DVALUE
+    y D3DVALUE
+    z D3DVALUE
+    dwApply DWORD
+
+  func SetVelocity
+    [DS_HRESULT]
+    x D3DVALUE
+    y D3DVALUE
+    z D3DVALUE
+    dwApply DWORD
+
+

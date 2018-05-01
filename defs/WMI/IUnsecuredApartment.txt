@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IUnsecuredApartment base=IUnknown id={1cfaba8c-1523-11d1-ad79-00c04fd8fdff} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func CreateObjectStub
+    WBEMSTATUS
+    pObject IUnknown*
+    ppStub IUnknown**
+
+

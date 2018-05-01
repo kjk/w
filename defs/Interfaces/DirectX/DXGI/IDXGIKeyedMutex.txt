@@ -1,0 +1,13 @@
+include Interfaces\DirectX\DXGI\IDXGIDeviceSubObject.txt
+
+ingterface IDXGIKeyedMutex base=IDXGIDeviceSubObject id={9d8e1289-d7b3-465f-8126-250e349af85d} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func AcquireSync
+    HRESULT
+    Key UINT64
+    dwMilliseconds DWORD
+
+  func ReleaseSync
+    HRESULT
+    Key UINT64
+
+

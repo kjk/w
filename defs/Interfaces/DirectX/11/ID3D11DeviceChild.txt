@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\11\ID3D11Device.txt
+
+ingterface ID3D11DeviceChild base=IUnknown id={1841e5c8-16b0-489b-bcc8-44cfb0d5deae} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func GetDevice
+    void
+    ppDevice ID3D11Device**
+
+  func GetPrivateData
+    HRESULT
+    guid REFGUID
+    pDataSize UINT*
+    pData void*
+
+  func SetPrivateData
+    HRESULT
+    guid REFGUID
+    DataSize UINT
+    pData "const void*" length=DataSize
+
+  func SetPrivateDataInterface
+    HRESULT
+    guid REFGUID
+    pData "const IUnknown*"
+
+

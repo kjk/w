@@ -1,0 +1,85 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwIcmpSettings base=IDispatch id={A6207B2E-7CDD-426A-951E-5E1CBC5AFEAD} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall"
+  func get_AllowOutboundDestinationUnreachable
+    HRESULT
+    allow VARIANT_BOOL*
+
+  func put_AllowOutboundDestinationUnreachable
+    HRESULT
+    allow VARIANT_BOOL
+
+  func get_AllowRedirect
+    HRESULT
+    allow VARIANT_BOOL*
+
+  func put_AllowRedirect
+    HRESULT
+    allow VARIANT_BOOL
+
+  func get_AllowInboundEchoRequest
+    HRESULT
+    allow VARIANT_BOOL*
+
+  func put_AllowInboundEchoRequest
+    HRESULT
+    allow VARIANT_BOOL
+
+  func get_AllowOutboundTimeExceeded
+    HRESULT
+    allow VARIANT_BOOL*
+
+  func put_AllowOutboundTimeExceeded
+    HRESULT
+    allow VARIANT_BOOL
+
+  func get_AllowOutboundParameterProblem
+    HRESULT
+    allow VARIANT_BOOL*
+
+  func put_AllowOutboundParameterProblem
+    HRESULT
+    allow VARIANT_BOOL
+
+  func get_AllowOutboundSourceQuench
+    HRESULT
+    allow VARIANT_BOOL*
+
+  func put_AllowOutboundSourceQuench
+    HRESULT
+    allow VARIANT_BOOL
+
+  func get_AllowInboundRouterRequest
+    HRESULT
+    allow VARIANT_BOOL*
+
+  func put_AllowInboundRouterRequest
+    HRESULT
+    allow VARIANT_BOOL
+
+  func get_AllowInboundTimestampRequest
+    HRESULT
+    allow VARIANT_BOOL*
+
+  func put_AllowInboundTimestampRequest
+    HRESULT
+    allow VARIANT_BOOL
+
+  func get_AllowInboundMaskRequest
+    HRESULT
+    allow VARIANT_BOOL*
+
+  func put_AllowInboundMaskRequest
+    HRESULT
+    allow VARIANT_BOOL
+
+  func get_AllowOutboundPacketTooBig
+    HRESULT
+    allow VARIANT_BOOL*
+
+  func put_AllowOutboundPacketTooBig
+    HRESULT
+    allow VARIANT_BOOL
+
+

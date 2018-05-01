@@ -1,0 +1,20 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Resource.txt
+
+ingterface ID2D1GradientStopCollection base=ID2D1Resource id={2cd906a7-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetGradientStopCount
+    success NotEqual=0
+    UINT32
+
+  func GetGradientStops
+    void
+    gradientStops D2D1_GRADIENT_STOP* postCount=gradientStopsCount
+    gradientStopsCount UINT32
+
+  func GetColorInterpolationGamma
+    D2D1_GAMMA
+
+  func GetExtendMode
+    D2D1_EXTEND_MODE
+
+

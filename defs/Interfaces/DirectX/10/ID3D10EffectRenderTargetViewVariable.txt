@@ -1,0 +1,25 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\DirectX\10\ID3D10EffectVariable.txt
+
+ingterface ID3D10EffectRenderTargetViewVariable base=ID3D10EffectVariable id={28CA0CC3-C2C9-40bb-B57F-67B737122B17} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func SetRenderTarget
+    HRESULT
+    pResource ID3D10RenderTargetView*
+
+  func GetRenderTarget
+    HRESULT
+    ppResource ID3D10RenderTargetView**
+
+  func SetRenderTargetArray
+    HRESULT
+    ppResources ID3D10RenderTargetView** count=Count
+    Offset UINT
+    Count UINT
+
+  func GetRenderTargetArray
+    HRESULT
+    ppResources ID3D10RenderTargetView** count=Count
+    Offset UINT
+    Count UINT
+
+

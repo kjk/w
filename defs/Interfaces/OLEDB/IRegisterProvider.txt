@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IRegisterProvider base=IUnknown id={0c733ab9-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func GetURLMapping
+    [OLEDB_HRESULT]
+    pwszURL LPCOLESTR
+    dwReserved DB_DWRESERVE
+    pclsidProvider CLSID*
+
+  func SetURLMapping
+    [OLEDB_HRESULT]
+    pwszURL LPCOLESTR
+    dwReserved DB_DWRESERVE
+    rclsidProvider REFCLSID
+
+  func UnregisterProvider
+    [OLEDB_HRESULT]
+    pwszURL LPCOLESTR
+    dwReserved DB_DWRESERVE
+    rclsidProvider REFCLSID
+
+

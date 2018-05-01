@@ -1,0 +1,99 @@
+include Headers\windows.h.txt
+include Headers\security.h.txt
+
+dll SspiCli.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Security and Identity/Authentication/Security Support Provider Interface (SSPI)"
+func SspiCompareAuthIdentities
+  SECURITY_STATUS
+  AuthIdentity1 PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+  AuthIdentity2 PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+  SameSuppliedUser PBOOLEAN
+  SameSuppliedIdentity PBOOLEAN
+
+func SspiCopyAuthIdentity
+  SECURITY_STATUS
+  AuthData PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+  AuthDataCopy PSEC_WINNT_AUTH_IDENTITY_OPAQUE*
+
+func SspiDecryptAuthIdentity
+  SECURITY_STATUS
+  EncryptedAuthData PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+
+func SspiEncodeAuthIdentityAsStrings
+  SECURITY_STATUS
+  pAuthIdentity PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+  ppszUserName PCWSTR*
+  ppszDomainName PCWSTR*
+  ppszPackedCredentialsString PCWSTR*
+
+func SspiEncodeStringsAsAuthIdentity
+  SECURITY_STATUS
+  pszUserName PCWSTR
+  pszDomainName PCWSTR
+  pszPackedCredentialsString PCWSTR
+  ppAuthIdentity PSEC_WINNT_AUTH_IDENTITY_OPAQUE*
+
+func SspiEncryptAuthIdentity
+  SECURITY_STATUS
+  AuthData PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+
+func SspiExcludePackage
+  SECURITY_STATUS
+  AuthIdentity PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+  pszPackageName PCWSTR
+  ppNewAuthIdentity PSEC_WINNT_AUTH_IDENTITY_OPAQUE*
+
+func SspiFreeAuthIdentity
+  SECURITY_STATUS
+  AuthData PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+
+func SspiGetTargetHostName
+  SECURITY_STATUS
+  pszTargetName PCWSTR
+  pszHostName PWSTR*
+
+func SspiIsAuthIdentityEncrypted
+  BOOLEAN
+  EncryptedAuthData PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+
+func SspiLocalFree
+  VOID
+  DataBuffer PVOID
+
+func SspiMarshalAuthIdentity
+  SECURITY_STATUS
+  AuthIdentity PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+  AuthIdentityLength "unsigned long*"
+  AuthIdentityByteArray "unsigned long*"
+
+func SspiPrepareForCredRead
+  SECURITY_STATUS
+  AuthIdentity PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+  pszTargetName PCWSTR
+  pCredmanCredentialType PULONG
+  ppszCredmanTargetName PCWSTR*
+
+func SspiPrepareForCredWrite
+  SECURITY_STATUS
+  AuthIdentity PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+  pszTargetName PCWSTR
+  pCredmanCredentialType PULONG
+  ppszCredmanTargetName PCWSTR*
+  ppszCredmanUserName PCWSTR*
+  ppCredentialBlob PUCHAR*
+  pCredentialBlobSize PULONG
+
+func SspiUnmarshalAuthIdentity
+  SECURITY_STATUS
+  AuthIdentityLength "unsigned long"
+  AuthIdentityByteArray char*
+  ppAuthIdentity PSEC_WINNT_AUTH_IDENTITY_OPAQUE*
+
+func SspiValidateAuthIdentity
+  SECURITY_STATUS
+  AuthData PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+
+func SspiZeroAuthIdentity
+  SECURITY_STATUS
+  AuthData PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+

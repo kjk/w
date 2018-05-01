@@ -1,0 +1,47 @@
+include Interfaces\IUnknown.txt
+include Interfaces\ICreateTypeInfo.txt
+
+ingterface ICreateTypeLib base=IUnknown id={00020406-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Type Building"
+  func CreateTypeInfo
+    HRESULT
+    szName LPOLESTR
+    tkind TYPEKIND
+    ppCTInfo ICreateTypeInfo**
+
+  func SetName
+    HRESULT
+    szName LPOLESTR
+
+  func SetVersion
+    HRESULT
+    wMajorVerNum WORD
+    wMinorVerNum WORD
+
+  func SetGuid
+    HRESULT
+    guid REFGUID
+
+  func SetDocString
+    HRESULT
+    szDoc LPOLESTR
+
+  func SetHelpFileName
+    HRESULT
+    szHelpFileName LPOLESTR
+
+  func SetHelpContext
+    HRESULT
+    dwHelpContext DWORD
+
+  func SetLcid
+    HRESULT
+    lcid LCID
+
+  func SetLibFlags
+    HRESULT
+    uLibFlags UINT
+
+  func SaveAllChanges
+    HRESULT
+
+

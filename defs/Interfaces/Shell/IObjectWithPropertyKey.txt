@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IObjectWithPropertyKey base=IUnknown id={fc0ca0a7-c316-4fd2-9031-3e628e6d4f23} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetPropertyKey
+    HRESULT
+    key REFPROPERTYKEY
+
+  func GetPropertyKey
+    HRESULT
+    pkey PROPERTYKEY*
+
+

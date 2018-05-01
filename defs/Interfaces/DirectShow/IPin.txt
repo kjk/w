@@ -1,0 +1,65 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPin base=IUnknown id={56a86891-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Connect
+    HRESULT
+    pReceivePin IPin*
+    pmt "const AM_MEDIA_TYPE*"
+
+  func ReceiveConnection
+    HRESULT
+    pConnector IPin*
+    pmt "const AM_MEDIA_TYPE*"
+
+  func Disconnect
+    HRESULT
+
+  func ConnectedTo
+    HRESULT
+    pPin IPin**
+
+  func ConnectionMediaType
+    HRESULT
+    pmt AM_MEDIA_TYPE*
+
+  func QueryPinInfo
+    HRESULT
+    pInfo PIN_INFO*
+
+  func QueryDirection
+    HRESULT
+    pPinDir PIN_DIRECTION*
+
+  func QueryId
+    HRESULT
+    Id LPWSTR*
+
+  func QueryAccept
+    HRESULT
+    pmt "const AM_MEDIA_TYPE*"
+
+  func EnumMediaTypes
+    HRESULT
+    ppEnum IEnumMediaTypes**
+
+  func QueryInternalConnections
+    HRESULT
+    apPin IPin**
+    nPin ULONG*
+
+  func EndOfStream
+    HRESULT
+
+  func BeginFlush
+    HRESULT
+
+  func EndFlush
+    HRESULT
+
+  func NewSegment
+    HRESULT
+    tStart REFERENCE_TIME
+    tStop REFERENCE_TIME
+    dRate double
+
+

@@ -1,0 +1,39 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDDrawExclModeVideo base=IUnknown id={153ACC21-D83B-11d1-82BF-00A0C9696C8F} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetDDrawObject
+    HRESULT
+    pDDrawObject IDirectDraw*
+
+  func GetDDrawObject
+    HRESULT
+    ppDDrawObject IDirectDraw**
+    pbUsingExternal BOOL*
+
+  func SetDDrawSurface
+    HRESULT
+    pDDrawSurface IDirectDrawSurface*
+
+  func GetDDrawSurface
+    HRESULT
+    ppDDrawSurface IDirectDrawSurface**
+    pbUsingExternal BOOL*
+
+  func SetDrawParameters
+    HRESULT
+    prcSource "const RECT*"
+    prcTarget "const RECT*"
+
+  func GetNativeVideoProps
+    HRESULT
+    pdwVideoWidth DWORD*
+    pdwVideoHeight DWORD*
+    pdwPictAspectRatioX DWORD*
+    pdwPictAspectRatioY DWORD*
+
+  func SetCallbackInterface
+    HRESULT
+    pCallback IDDrawExclModeVideoCallback*
+    dwFlags DWORD
+
+

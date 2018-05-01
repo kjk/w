@@ -1,0 +1,67 @@
+include Interfaces\WebBrowser\IShellUIHelper.txt
+
+ingterface IShellUIHelper2 base=IShellUIHelper id={a7fe6eda-1932-4281-b881-87b31b8bc52c} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Content Extensions/Shell Helper/Interfaces"
+  func AddSearchProvider
+    HRESULT
+    URL BSTR
+
+  func RunOnceShown
+    HRESULT
+
+  func SkipRunOnce
+    HRESULT
+
+  func CustomizeSettings
+    HRESULT
+    fSQM VARIANT_BOOL
+    fPhishing VARIANT_BOOL
+    bstrLocale BSTR
+
+  func SqmEnabled
+    HRESULT
+    pfEnabled VARIANT_BOOL*
+
+  func PhishingEnabled
+    HRESULT
+    pfEnabled VARIANT_BOOL*
+
+  func BrandImageUri
+    HRESULT
+    pbstrUri BSTR*
+
+  func SkipTabsWelcome
+    HRESULT
+
+  func DiagnoseConnection
+    HRESULT
+
+  func CustomizeClearType
+    HRESULT
+    fSet VARIANT_BOOL
+
+  func IsSearchProviderInstalled
+    HRESULT
+    URL BSTR
+    pdwResult DWORD*
+
+  func IsSearchMigrated
+    HRESULT
+    pfMigrated VARIANT_BOOL*
+
+  func DefaultSearchProvider
+    HRESULT
+    pbstrName BSTR*
+
+  func RunOnceRequiredSettingsComplete
+    HRESULT
+    fComplete VARIANT_BOOL
+
+  func RunOnceHasShown
+    HRESULT
+    pfShown VARIANT_BOOL*
+
+  func SearchGuideUrl
+    HRESULT
+    pbstrUrl BSTR*
+
+

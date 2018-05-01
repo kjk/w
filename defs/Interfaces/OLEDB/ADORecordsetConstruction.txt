@@ -1,0 +1,29 @@
+include Interfaces\IDispatch.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ADORecordsetConstruction base=IDispatch id={00000283-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_Rowset
+    [OLEDB_HRESULT]
+    ppRowset IUnknown**
+
+  func put_Rowset
+    [OLEDB_HRESULT]
+    pRowset IUnknown*
+
+  func get_Chapter
+    [OLEDB_HRESULT]
+    plChapter ADO_LONGPTR*
+
+  func put_Chapter
+    [OLEDB_HRESULT]
+    lChapter ADO_LONGPTR
+
+  func get_RowPosition
+    [OLEDB_HRESULT]
+    ppRowPos IUnknown**
+
+  func put_RowPosition
+    [OLEDB_HRESULT]
+    pRowPos IUnknown*
+
+

@@ -1,0 +1,5 @@
+include Interfaces\IDispatch.txt
+include Interfaces\WebBrowser\IWebBrowser.txt
+
+ingterface DWebBrowserEvents base=IDispatch id={EAB22AC2-30C1-11CF-A7EB-0000C05BAE0B} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+

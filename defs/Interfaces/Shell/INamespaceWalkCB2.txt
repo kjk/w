@@ -1,0 +1,8 @@
+include Interfaces\Shell\INamespaceWalkCB.txt
+
+ingterface INamespaceWalkCB2 base=INamespaceWalkCB id={7ac7492b-c38e-438a-87db-68737844ff70} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func WalkComplete
+    HRESULT
+    hr HRESULT
+
+

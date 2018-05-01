@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+
+ingterface IExplorerCommand base=IUnknown id={a08ce4d0-fa25-44ab-b57c-c7b1c323e0b9} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetTitle
+    HRESULT
+    psiItemArray IShellItemArray*
+    ppszName LPWSTR*
+
+  func GetIcon
+    HRESULT
+    psiItemArray IShellItemArray*
+    ppszIcon LPWSTR*
+
+  func GetToolTip
+    HRESULT
+    psiItemArray IShellItemArray*
+    ppszInfotip LPWSTR*
+
+  func GetCanonicalName
+    HRESULT
+    pguidCommandName GUID*
+
+  func GetState
+    HRESULT
+    psiItemArray IShellItemArray*
+    fOkToBeSlow BOOL
+    pCmdState EXPCMDSTATE*
+
+  func Invoke
+    HRESULT
+    psiItemArray IShellItemArray*
+    pbc IBindCtx*
+
+  func GetFlags
+    HRESULT
+    pFlags EXPCMDFLAGS*
+
+  func EnumSubCommands
+    HRESULT
+    ppEnum IEnumExplorerCommand**
+
+

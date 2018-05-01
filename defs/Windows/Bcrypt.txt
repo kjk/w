@@ -1,0 +1,574 @@
+include Headers\windows.h.txt
+include Headers\cryptography.h.txt
+
+dll Bcrypt.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Security and Identity/Cryptography API: Next Generation (CNG)/Cryptographic Configuration"
+category "Security and Identity/Cryptography API: Next Generation (CNG)/Cryptographic Primitive"
+category "Security and Identity/Cryptography API: Next Generation (CNG)/Helper"
+alias BCRYPT_HANDLE LPVOID
+
+alias BCRYPT_ALG_HANDLE LPVOID
+
+pointer BCRYPT_ALG_HANDLE* BCRYPT_ALG_HANDLE
+
+alias BCRYPT_HASH_HANDLE LPVOID
+
+pointer BCRYPT_HASH_HANDLE* BCRYPT_HASH_HANDLE
+
+alias BCRYPT_SECRET_HANDLE LPVOID
+
+pointer BCRYPT_SECRET_HANDLE* BCRYPT_SECRET_HANDLE
+
+struct CRYPT_CONTEXT_CONFIG
+  dwFlags ULONG
+  dwReserved ULONG
+
+pointer PCRYPT_CONTEXT_CONFIG CRYPT_CONTEXT_CONFIG
+
+pointer PCRYPT_CONTEXT_CONFIG* PCRYPT_CONTEXT_CONFIG
+
+pointer PCRYPT_CONTEXT_FUNCTION_CONFIG CRYPT_CONTEXT_CONFIG
+
+pointer PCRYPT_CONTEXT_FUNCTION_CONFIG* PCRYPT_CONTEXT_FUNCTION_CONFIG
+
+struct BCRYPT_ALGORITHM_IDENTIFIER
+  pszName LPWSTR
+  dwClass ULONG
+  dwFlags ULONG
+
+pointer BCRYPT_ALGORITHM_IDENTIFIER* BCRYPT_ALGORITHM_IDENTIFIER
+
+pointer BCRYPT_ALGORITHM_IDENTIFIER** BCRYPT_ALGORITHM_IDENTIFIER*
+
+struct CRYPT_CONTEXT_FUNCTION_PROVIDERS
+  cProviders ULONG
+  rgpszProviders PWSTR* count=cProviders
+
+pointer PCRYPT_CONTEXT_FUNCTION_PROVIDERS CRYPT_CONTEXT_FUNCTION_PROVIDERS
+
+pointer PCRYPT_CONTEXT_FUNCTION_PROVIDERS* PCRYPT_CONTEXT_FUNCTION_PROVIDERS
+
+struct CRYPT_CONTEXT_FUNCTIONS
+  cFunctions ULONG
+  rgpszFunctions PWSTR* count=cFunctions
+
+pointer PCRYPT_CONTEXT_FUNCTIONS CRYPT_CONTEXT_FUNCTIONS
+
+pointer PCRYPT_CONTEXT_FUNCTIONS* PCRYPT_CONTEXT_FUNCTIONS
+
+struct CRYPT_CONTEXTS
+  cContexts ULONG
+  rgpszContexts PWSTR* count=cContexts
+
+pointer PCRYPT_CONTEXTS CRYPT_CONTEXTS
+
+pointer PCRYPT_CONTEXTS* PCRYPT_CONTEXTS
+
+struct BCRYPT_PROVIDER_NAME
+  pszProviderName LPWSTR
+
+pointer BCRYPT_PROVIDER_NAME* BCRYPT_PROVIDER_NAME
+
+pointer BCRYPT_PROVIDER_NAME** BCRYPT_PROVIDER_NAME*
+
+alias CRYPT_PROVIDERS CRYPT_CONTEXT_FUNCTION_PROVIDERS
+
+pointer PCRYPT_PROVIDERS CRYPT_PROVIDERS
+
+pointer PCRYPT_PROVIDERS* PCRYPT_PROVIDERS
+
+struct CRYPT_INTERFACE_REG
+  dwInterface ULONG
+  dwFlags ULONG
+  cFunctions ULONG
+  rgpszFunctions PWSTR* count=cFunctions
+
+pointer PCRYPT_INTERFACE_REG CRYPT_INTERFACE_REG
+
+pointer PCRYPT_INTERFACE_REG* PCRYPT_INTERFACE_REG
+
+struct CRYPT_IMAGE_REG
+  pszImage PWSTR
+  cInterfaces ULONG
+  rgpInterfaces PCRYPT_INTERFACE_REG* count=cInterfaces
+
+pointer PCRYPT_IMAGE_REG CRYPT_IMAGE_REG
+
+struct CRYPT_PROVIDER_REG
+  cAliases ULONG
+  rgpszAliases PWSTR* count=cAliases
+  pUM PCRYPT_IMAGE_REG
+  pKM PCRYPT_IMAGE_REG
+
+pointer PCRYPT_PROVIDER_REG CRYPT_PROVIDER_REG
+
+pointer PCRYPT_PROVIDER_REG* PCRYPT_PROVIDER_REG
+
+struct CRYPT_PROPERTY_REF
+  pszProperty PWSTR
+  cbValue ULONG
+  pbValue PUCHAR
+
+pointer PCRYPT_PROPERTY_REF CRYPT_PROPERTY_REF
+
+pointer PCRYPT_PROPERTY_REF* PCRYPT_PROPERTY_REF
+
+struct CRYPT_IMAGE_REF
+  pszImage PWSTR
+  dwFlags ULONG
+
+pointer PCRYPT_IMAGE_REF CRYPT_IMAGE_REF
+
+struct CRYPT_PROVIDER_REF
+  dwInterface ULONG
+  pszFunction PWSTR
+  pszProvider PWSTR
+  cProperties ULONG
+  rgpProperties PCRYPT_PROPERTY_REF* count=cProperties
+  pUM PCRYPT_IMAGE_REF
+  pKM PCRYPT_IMAGE_REF
+
+pointer PCRYPT_PROVIDER_REF CRYPT_PROVIDER_REF
+
+pointer PCRYPT_PROVIDER_REF* PCRYPT_PROVIDER_REF
+
+struct CRYPT_PROVIDER_REFS
+  cProviders ULONG
+  rgpProviders PCRYPT_PROVIDER_REF* count=cProviders
+
+pointer PCRYPT_PROVIDER_REFS CRYPT_PROVIDER_REFS
+
+pointer PCRYPT_PROVIDER_REFS* PCRYPT_PROVIDER_REFS
+
+enum [CryptConfigTable] ULONG display=ULONG
+  CRYPT_LOCAL  0x00000001
+  CRYPT_DOMAIN 0x00000002
+
+enum [CryptInterface] ULONG display=ULONG
+  BCRYPT_CIPHER_INTERFACE                0x00000001
+  BCRYPT_HASH_INTERFACE                  0x00000002
+  BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE 0x00000003
+  BCRYPT_SECRET_AGREEMENT_INTERFACE      0x00000004
+  BCRYPT_SIGNATURE_INTERFACE             0x00000005
+  BCRYPT_RNG_INTERFACE                   0x00000006
+  NCRYPT_KEY_STORAGE_INTERFACE           0x00010001
+  NCRYPT_SCHANNEL_INTERFACE              0x00010002
+  NCRYPT_SCHANNEL_SIGNATURE_INTERFACE    0x00010003
+
+enum [CryptPriority] ULONG display=ULONG
+  CRYPT_PRIORITY_TOP    0x00000000
+  CRYPT_PRIORITY_BOTTOM 0xFFFFFFFF
+
+flag [CryptOperation] ULONG display=ULONG
+  BCRYPT_CIPHER_OPERATION                0x00000001
+  BCRYPT_HASH_OPERATION                  0x00000002
+  BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION 0x00000004
+  BCRYPT_SECRET_AGREEMENT_OPERATION      0x00000008
+  BCRYPT_SIGNATURE_OPERATION             0x00000010
+  BCRYPT_RNG_OPERATION                   0x00000020
+
+enum [CryptMode] ULONG display=ULONG
+  CRYPT_UM  0x00000001
+  CRYPT_KM  0x00000002
+  CRYPT_MM  0x00000003
+  CRYPT_ANY 0x00000004
+
+flag [CryptEnumFlags] ULONG display=ULONG
+  CRYPT_ALL_FUNCTIONS 0x00000001
+  CRYPT_ALL_PROVIDERS 0x00000002
+
+flag [CryptDeriveKeyFlags] ULONG display=ULONG
+  KDF_USE_SECRET_AS_HMAC_KEY_FLAG 0x1
+
+flag [BCryptOpenAlgorithmProviderFlags] ULONG display=DWORD
+  BCRYPT_PROV_DISPATCH        0x00000001
+  BCRYPT_ALG_HANDLE_HMAC_FLAG 0x00000008
+
+func BCryptAddContextFunction
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+  dwInterface [CryptInterface]
+  pszFunction LPCWSTR
+  dwPosition [CryptPriority]
+
+func BCryptConfigureContext
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+  pConfig PCRYPT_CONTEXT_CONFIG
+
+func BCryptConfigureContextFunction
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+  dwInterface [CryptInterface]
+  pszFunction LPCWSTR
+  pConfig PCRYPT_CONTEXT_FUNCTION_CONFIG
+
+func BCryptCreateContext
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+  pConfig PCRYPT_CONTEXT_CONFIG
+
+func BCryptDeleteContext
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+
+func BCryptEnumAlgorithms
+  NTSTATUS
+  dwAlgOperations [CryptOperation]
+  pAlgCount ULONG*
+  ppAlgList BCRYPT_ALGORITHM_IDENTIFIER**
+  dwFlags ULONG
+
+func BCryptEnumContextFunctionProviders
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+  dwInterface [CryptInterface]
+  pszFunction LPCWSTR
+  pcbBuffer ULONG*
+  ppBuffer PCRYPT_CONTEXT_FUNCTION_PROVIDERS*
+
+func BCryptEnumContextFunctions
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+  dwInterface [CryptInterface]
+  pcbBuffer ULONG*
+  ppBuffer PCRYPT_CONTEXT_FUNCTIONS*
+
+func BCryptEnumContexts
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pcbBuffer ULONG*
+  ppBuffer PCRYPT_CONTEXTS*
+
+func BCryptEnumProviders
+  NTSTATUS
+  pszAlgId LPCWSTR
+  pImplCount ULONG*
+  ppImplList BCRYPT_PROVIDER_NAME**
+  dwFlags ULONG
+
+func BCryptEnumRegisteredProviders
+  NTSTATUS
+  pcbBuffer ULONG*
+  ppBuffer PCRYPT_PROVIDERS*
+
+func BCryptGetFipsAlgorithmMode
+  NTSTATUS
+  pfEnabled BOOLEAN*
+
+func BCryptQueryContextConfiguration
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+  pcbBuffer ULONG*
+  ppBuffer PCRYPT_CONTEXT_CONFIG*
+
+func BCryptQueryContextFunctionConfiguration
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+  dwInterface [CryptInterface]
+  pszFunction LPCWSTR
+  pcbBuffer ULONG*
+  ppBuffer PCRYPT_CONTEXT_FUNCTION_CONFIG*
+
+func BCryptQueryContextFunctionProperty
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+  dwInterface [CryptInterface]
+  pszFunction LPCWSTR
+  pszProperty LPCWSTR
+  pcbValue ULONG*
+  ppbValue PUCHAR*
+
+func BCryptQueryProviderRegistration
+  NTSTATUS
+  pszProvider LPCWSTR
+  dwMode [CryptMode]
+  dwInterface [CryptInterface]
+  pcbBuffer ULONG*
+  ppBuffer PCRYPT_PROVIDER_REG*
+
+func BCryptRegisterConfigChangeNotify
+  NTSTATUS
+  phEvent HANDLE*
+
+func BCryptRemoveContextFunction
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+  dwInterface [CryptInterface]
+  pszFunction LPCWSTR
+
+func BCryptResolveProviders
+  NTSTATUS
+  pszContext LPCWSTR
+  dwInterface [CryptInterface]
+  pszFunction LPCWSTR
+  pszProvider LPCWSTR
+  dwMode [CryptMode]
+  dwFlags [CryptEnumFlags]
+  pcbBuffer ULONG*
+  ppBuffer PCRYPT_PROVIDER_REFS*
+
+func BCryptSetContextFunctionProperty
+  NTSTATUS
+  dwTable [CryptConfigTable]
+  pszContext LPCWSTR
+  dwInterface [CryptInterface]
+  pszFunction LPCWSTR
+  pszProperty LPCWSTR
+  cbValue ULONG
+  pbValue PUCHAR length=cbValue
+
+func BCryptUnregisterConfigChangeNotify
+  NTSTATUS
+  hEvent HANDLE
+
+func BCryptCloseAlgorithmProvider
+  NTSTATUS
+  hAlgorithm BCRYPT_ALG_HANDLE
+  dwFlags ULONG
+
+func BCryptCreateHash
+  NTSTATUS
+  hAlgorithm BCRYPT_ALG_HANDLE
+  phHash BCRYPT_HASH_HANDLE*
+  pbHashObject PUCHAR length=cbHashObject
+  cbHashObject ULONG
+  pbSecret PUCHAR length=cbSecret
+  cbSecret ULONG
+  dwFlags ULONG
+
+func BCryptDecrypt
+  NTSTATUS
+  hKey BCRYPT_KEY_HANDLE
+  pbInput PUCHAR length=cbInput
+  cbInput ULONG
+  pPaddingInfo VOID*
+  pbIV PUCHAR length=cbIV
+  cbIV ULONG
+  pbOutput PUCHAR postLength=pcbResult
+  cbOutput ULONG
+  pcbResult ULONG*
+  dwFlags ULONG
+
+func BCryptDeriveKey
+  NTSTATUS
+  hSharedSecret BCRYPT_SECRET_HANDLE
+  pwszKDF LPCWSTR
+  pParameterList BCryptBufferDesc*
+  pbDerivedKey PUCHAR postLength=pcbResult
+  cbDerivedKey ULONG
+  pcbResult ULONG*
+  dwFlags [CryptDeriveKeyFlags]
+
+func BCryptDestroyHash
+  NTSTATUS
+  hHash BCRYPT_HASH_HANDLE
+
+func BCryptDestroyKey
+  NTSTATUS
+  hKey BCRYPT_KEY_HANDLE
+
+func BCryptDestroySecret
+  NTSTATUS
+  hSecret BCRYPT_SECRET_HANDLE
+
+func BCryptDuplicateHash
+  NTSTATUS
+  hHash BCRYPT_HASH_HANDLE
+  phNewHash BCRYPT_HASH_HANDLE*
+  pbHashObject PUCHAR length=cbHashObject
+  cbHashObject ULONG
+  dwFlags ULONG
+
+func BCryptDuplicateKey
+  NTSTATUS
+  hKey BCRYPT_KEY_HANDLE
+  phNewKey BCRYPT_KEY_HANDLE*
+  pbKeyObject PUCHAR length=cbKeyObject
+  cbKeyObject ULONG
+  dwFlags ULONG
+
+func BCryptEncrypt
+  NTSTATUS
+  hKey BCRYPT_KEY_HANDLE
+  pbInput PUCHAR length=cbInput
+  cbInput ULONG
+  pPaddingInfo VOID*
+  pbIV PUCHAR length=cbIV
+  cbIV ULONG
+  pbOutput PUCHAR postLength=pcbResult
+  cbOutput ULONG
+  pcbResult ULONG*
+  dwFlags ULONG
+
+func BCryptExportKey
+  NTSTATUS
+  hKey BCRYPT_KEY_HANDLE
+  hExportKey BCRYPT_KEY_HANDLE
+  pszBlobType LPCWSTR
+  pbOutput PUCHAR postLength=pcbResult
+  cbOutput ULONG
+  pcbResult ULONG*
+  dwFlags ULONG
+
+func BCryptFinalizeKeyPair
+  NTSTATUS
+  hKey BCRYPT_KEY_HANDLE
+  dwFlags ULONG
+
+func BCryptFinishHash
+  NTSTATUS
+  hHash BCRYPT_HASH_HANDLE
+  pbOutput PUCHAR length=cbOutput
+  cbOutput ULONG
+  dwFlags ULONG
+
+func BCryptFreeBuffer
+  VOID
+  pvBuffer PVOID
+
+func BCryptGenerateKeyPair
+  NTSTATUS
+  hAlgorithm BCRYPT_ALG_HANDLE
+  phKey BCRYPT_KEY_HANDLE*
+  dwLength ULONG
+  dwFlags ULONG
+
+func BCryptGenerateSymmetricKey
+  NTSTATUS
+  hAlgorithm BCRYPT_ALG_HANDLE
+  phKey BCRYPT_KEY_HANDLE*
+  pbKeyObject PUCHAR length=cbKeyObject
+  cbKeyObject ULONG
+  pbSecret PUCHAR length=cbSecret
+  cbSecret ULONG
+  dwFlags ULONG
+
+func BCryptGenRandom
+  NTSTATUS
+  hAlgorithm BCRYPT_ALG_HANDLE
+  pbBuffer PUCHAR length=cbBuffer
+  cbBuffer ULONG
+  dwFlags ULONG
+
+func BCryptGetProperty
+  NTSTATUS
+  hObject BCRYPT_HANDLE
+  pszProperty LPCWSTR
+  pbOutput PUCHAR postLength=pcbResult
+  cbOutput ULONG
+  pcbResult ULONG*
+  dwFlags ULONG
+
+func BCryptHashData
+  NTSTATUS
+  hHash BCRYPT_HASH_HANDLE
+  pbInput PUCHAR length=cbInput
+  cbInput ULONG
+  dwFlags ULONG
+
+func BCryptImportKey
+  NTSTATUS
+  hAlgorithm BCRYPT_ALG_HANDLE
+  hImportKey BCRYPT_KEY_HANDLE
+  pszBlobType LPCWSTR
+  phKey BCRYPT_KEY_HANDLE*
+  pbKeyObject PUCHAR length=cbKeyObject
+  cbKeyObject ULONG
+  pbInput PUCHAR length=cbInput
+  cbInput ULONG
+  dwFlags ULONG
+
+func BCryptImportKeyPair
+  NTSTATUS
+  hAlgorithm BCRYPT_ALG_HANDLE
+  hImportKey BCRYPT_KEY_HANDLE
+  pszBlobType LPCWSTR
+  phKey BCRYPT_KEY_HANDLE*
+  pbInput PUCHAR length=cbInput
+  cbInput ULONG
+  dwFlags ULONG
+
+func BCryptKeyDerivation
+  NTSTATUS
+  hKey BCRYPT_KEY_HANDLE
+  pParameterList BCryptBufferDesc*
+  pbDerivedKey PUCHAR
+  cbDerivedKey ULONG
+  pcbResult ULONG*
+  dwFlags ULONG
+
+func BCryptOpenAlgorithmProvider
+  NTSTATUS
+  phAlgorithm BCRYPT_ALG_HANDLE*
+  pszAlgId LPCWSTR
+  pszImplementation LPCWSTR
+  dwFlags [BCryptOpenAlgorithmProviderFlags]
+
+func BCryptSecretAgreement
+  NTSTATUS
+  hPrivKey BCRYPT_KEY_HANDLE
+  hPubKey BCRYPT_KEY_HANDLE
+  phSecret BCRYPT_SECRET_HANDLE*
+  dwFlags ULONG
+
+func BCryptSetProperty
+  NTSTATUS
+  hObject BCRYPT_HANDLE
+  pszProperty LPCWSTR
+  pbInput PUCHAR length=cbInput
+  cbInput ULONG
+  dwFlags ULONG
+
+func BCryptSignHash
+  NTSTATUS
+  hKey BCRYPT_KEY_HANDLE
+  pPaddingInfo VOID*
+  pbInput PBYTE length=cbInput
+  cbInput DWORD
+  pbOutput PBYTE postLength=pcbResult
+  cbOutput DWORD
+  pcbResult DWORD*
+  dwFlags ULONG
+
+func BCryptVerifySignature
+  NTSTATUS
+  hKey BCRYPT_KEY_HANDLE
+  pPaddingInfo VOID*
+  pbHash PUCHAR length=cbHash
+  cbHash ULONG
+  pbSignature PUCHAR length=cbSignature
+  cbSignature ULONG
+  dwFlags ULONG
+
+func BCryptDeriveKeyCapi
+  NTSTATUS
+  hHash BCRYPT_HASH_HANDLE
+  hTargetAlg BCRYPT_ALG_HANDLE
+  pbDerivedKey PUCHAR length=cbDerivedKey
+  cbDerivedKey ULONG
+  dwFlags ULONG
+
+func BCryptDeriveKeyPBKDF2
+  NTSTATUS
+  hPrf BCRYPT_ALG_HANDLE
+  pbPassword PUCHAR length=cbPassword
+  cbPassword ULONG
+  pbSalt PUCHAR length=cbSalt
+  cbSalt ULONG
+  cIterations ULONGLONG
+  pbDerivedKey PUCHAR length=cbDerivedKey
+  cbDerivedKey ULONG
+  dwFlags ULONG
+

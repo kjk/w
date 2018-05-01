@@ -1,0 +1,33 @@
+include Interfaces\IUnknown.txt
+
+ingterface IContextMenu base=IUnknown id={000214e4-0000-0000-c000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func QueryContextMenu
+    HRESULT
+    hmenu HMENU
+    indexMenu UINT
+    idCmdFirst UINT
+    idCmdLast UINT
+    uFlags UINT
+
+  func InvokeCommand
+    HRESULT
+    pici CMINVOKECOMMANDINFO*
+
+  func GetCommandString
+    HRESULT
+    idCmd UINT_PTR
+    uType [GCS_TYPE]
+    pReserved UINT*
+    pszName LPSTR
+    cchMax UINT
+
+  enum [GCS_TYPE] UINT display=UINT
+    GCS_VERBA     0x00000000
+    GCS_HELPTEXTA 0x00000001
+    GCS_VALIDATEA 0x00000002
+    GCS_VERBW     0x00000004
+    GCS_HELPTEXTW 0x00000005
+    GCS_VALIDATEW 0x00000006
+    GCS_VERBICONW 0x00000014
+
+

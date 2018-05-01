@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IStreamUnbufferedInfo base=IUnknown id={8a68fdda-1fdc-4c20-8ceb-416643b5a625} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetSectorSize
+    HRESULT
+    pcbSectorSize ULONG*
+
+

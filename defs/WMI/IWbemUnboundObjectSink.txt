@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemUnboundObjectSink base=IUnknown id={e246107b-b06e-11d0-ad61-00c04fd8fdff} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func IndicateToConsumer
+    WBEMSTATUS
+    pLogicalConsumer IWbemClassObject*
+    lNumObjects long
+    apObjects IWbemClassObject**
+
+

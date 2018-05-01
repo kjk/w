@@ -1,0 +1,2319 @@
+include Headers\windows.h.txt
+
+dll esent.dll callingConvention=STDCALL onlineHelp=MSDN
+category "Data Access and Storage/Extensible Storage Engine"
+arch 32
+array "unsigned char [12]" base="unsigned char" count=12
+
+struct JET_INDEXID
+  cbStruct "unsigned long"
+  rgbIndexId "unsigned char [12]"
+
+arch off
+arch 64
+array "unsigned char [16]" base="unsigned char" count=16
+
+struct JET_INDEXID
+  cbStruct "unsigned long"
+  rgbIndexId "unsigned char [16]"
+
+arch off
+alias JET_GRBIT "unsigned long"
+
+alias "const JET_GRBIT" JET_GRBIT
+
+alias JET_PCSTR LPCTSTR
+
+alias JET_PSTR LPCTSTR
+
+alias JET_API_PTR UINT_PTR
+
+pointer JET_API_PTR* JET_API_PTR
+
+alias JET_COLUMNID "unsigned long"
+
+pointer JET_COLUMNID* JET_COLUMNID
+
+pointer "const JET_COLUMNID* const" JET_COLUMNID
+
+alias JET_HANDLE JET_API_PTR
+
+pointer JET_HANDLE* JET_HANDLE
+
+alias JET_PFNSTATUS LPVOID
+
+alias JET_CALLBACK LPVOID
+
+alias JET_CBTYP "unsigned long"
+
+alias JET_OBJTYP "unsigned long"
+
+alias JET_OSSNAPID JET_API_PTR
+
+pointer JET_OSSNAPID* JET_OSSNAPID
+
+alias "const JET_OSSNAPID" JET_OSSNAPID
+
+alias JET_PFNREALLOC LPVOID
+
+alias JET_COLTYP "unsigned long"
+
+alias "const TCHAR*" TCHAR*
+
+alias "unsigned long* const" "unsigned long*"
+
+alias "const unsigned long*" "unsigned long*"
+
+array "TCHAR [JET_BASE_NAME_LENGTH + 1]" base=TCHAR count=4
+
+array "char [JET_MAX_COMPUTERNAME_LENGTH + 1]" base=char count=16
+
+enum JET_SESID JET_API_PTR displayHex
+  JET_sesidNil -1
+  NULL         0
+
+pointer JET_SESID* JET_SESID
+
+enum JET_INSTANCE JET_API_PTR displayHex
+  JET_instanceNil -1
+  NULL            0
+
+pointer JET_INSTANCE* JET_INSTANCE
+
+enum JET_TABLEID JET_API_PTR displayHex
+  JET_tableidNil -1
+  NULL           0
+
+pointer JET_TABLEID* JET_TABLEID
+
+enum JET_LS JET_API_PTR displayHex
+  JET_LSNil -1
+  NULL      0
+
+pointer JET_LS* JET_LS
+
+enum [JET_param] "unsigned long" display="unsigned long"
+  JET_paramSystemPath                                      0
+  JET_paramTempPath                                        1
+  JET_paramLogFilePath                                     2
+  JET_paramBaseName                                        3
+  JET_paramEventSource                                     4
+  JET_paramMaxSessions                                     5
+  JET_paramMaxOpenTables                                   6
+  JET_paramPreferredMaxOpenTables                          7
+  JET_paramMaxCursors                                      8
+  JET_paramMaxVerPages                                     9
+  JET_paramMaxTemporaryTables                              10
+  JET_paramLogFileSize                                     11
+  JET_paramLogBuffers                                      12
+  JET_paramWaitLogFlush                                    13
+  JET_paramLogCheckpointPeriod                             14
+  JET_paramLogWaitingUserMax                               15
+  JET_paramCommitDefault                                   16
+  JET_paramCircularLog                                     17
+  JET_paramDbExtensionSize                                 18
+  JET_paramPageTempDBMin                                   19
+  JET_paramPageFragment                                    20
+  JET_paramBatchIOBufferMax                                22
+  JET_paramCacheSizeMax                                    23
+  JET_paramCheckpointDepthMax                              24
+  JET_paramLRUKCorrInterval                                25
+  JET_paramLRUKHistoryMax                                  26
+  JET_paramLRUKPolicy                                      27
+  JET_paramLRUKTimeout                                     28
+  JET_paramLRUKTrxCorrInterval                             29
+  JET_paramOutstandingIOMax                                30
+  JET_paramStartFlushThreshold                             31
+  JET_paramStopFlushThreshold                              32
+  JET_paramRecovery                                        34
+  JET_paramEnableOnlineDefrag                              35
+  JET_paramCacheSize                                       41
+  JET_paramCheckFormatWhenOpenFail                         44
+  JET_paramEnableIndexChecking                             45
+  JET_paramEnableTempTableVersioning                       46
+  JET_paramIgnoreLogVersion                                47
+  JET_paramDeleteOldLogs                                   48
+  JET_paramEventSourceKey                                  49
+  JET_paramNoInformationEvent                              50
+  JET_paramEventLoggingLevel                               51
+  JET_paramDeleteOutOfRangeLogs                            52
+  JET_paramAccessDeniedRetryPeriod                         53
+  JET_paramEnableIndexCleanup                              54
+  JET_paramCacheSizeMin                                    60
+  JET_paramPreferredVerPages                               63
+  JET_paramDatabasePageSize                                64
+  JET_paramDisableCallbacks                                65
+  JET_paramBackupChunkSize                                 66
+  JET_paramBackupOutstandingReads                          67
+  JET_paramSLVProviderEnable                               68
+  JET_paramLogFileCreateAsynch                             69
+  JET_paramErrorToString                                   70
+  JET_paramZeroDatabaseDuringBackup                        71
+  JET_paramUnicodeIndexDefault                             72
+  JET_paramRuntimeCallback                                 73
+  JET_paramCleanupMismatchedLogFiles                       77
+  JET_paramRecordUpgradeDirtyLevel                         78
+  JET_paramGlobalMinVerPages                               81
+  JET_paramOSSnapshotTimeout                               82
+  JET_paramExceptionAction                                 98
+  JET_paramEventLogCache                                   99
+  JET_paramCreatePathIfNotExist                            100
+  JET_paramPageHintCacheSize                               101
+  JET_paramOneDatabasePerSession                           102
+  JET_paramMaxInstances                                    104
+  JET_paramVersionStoreTaskQueueMax                        105
+  JET_paramDisablePerfmon                                  107
+  JET_paramIndexTuplesLengthMin                            110
+  JET_paramIndexTuplesLengthMax                            111
+  JET_paramIndexTuplesToIndexMax                           112
+  JET_paramAlternateDatabaseRecoveryPath                   113
+  JET_paramCachedClosedTables                              125
+  JET_paramEnableFileCache                                 126
+  JET_paramEnableViewCache                                 127
+  JET_paramVerPageSize                                     128
+  JET_paramConfiguration                                   129
+  JET_paramEnableAdvanced                                  130
+  JET_paramMaxColtyp                                       131
+  JET_paramIndexTupleIncrement                             132
+  JET_paramIndexTupleStart                                 133
+  JET_paramKeyMost                                         134
+  JET_paramCheckpointIOMax                                 135
+  JET_paramLegacyFileNames                                 136
+  JET_paramTableClass1Name                                 137
+  JET_paramTableClass2Name                                 138
+  JET_paramTableClass3Name                                 139
+  JET_paramTableClass4Name                                 140
+  JET_paramTableClass5Name                                 141
+  JET_paramTableClass6Name                                 142
+  JET_paramTableClass7Name                                 143
+  JET_paramTableClass8Name                                 144
+  JET_paramTableClass9Name                                 145
+  JET_paramTableClass10Name                                146
+  JET_paramTableClass11Name                                147
+  JET_paramTableClass12Name                                148
+  JET_paramTableClass13Name                                149
+  JET_paramTableClass14Name                                150
+  JET_paramTableClass15Name                                151
+  JET_paramIOPriority                                      152
+  JET_paramWaypointLatency                                 153
+  JET_paramEnablePersistedCallbacks                        156
+  JET_paramDefragmentSequentialBTrees                      160
+  JET_paramDefragmentSequentialBTreesDensityCheckFrequency 161
+  JET_paramIOThrottlingTimeQuanta                          162
+  JET_paramLVChunkSizeMost                                 163
+  JET_paramMaxCoalesceReadSize                             164
+  JET_paramMaxCoalesceWriteSize                            165
+  JET_paramMaxCoalesceReadGapSize                          166
+  JET_paramMaxCoalesceWriteGapSize                         167
+  JET_paramEnableDBScanInRecovery                          169
+  JET_paramDbScanThrottle                                  170
+  JET_paramDbScanIntervalMinSec                            171
+  JET_paramDbScanIntervalMaxSec                            172
+  JET_paramCachePriority                                   177
+  JET_paramMaxTransactionSize                              178
+  JET_paramPrereadIOMax                                    179
+  JET_paramEnableDBScanSerialization                       180
+  JET_paramHungIOThreshold                                 181
+  JET_paramHungIOActions                                   182
+  JET_paramMinDataForXpress                                183
+  JET_paramProcessFriendlyName                             186
+  JET_paramDurableCommitCallback                           187
+
+enum JET_DBID "unsigned long"
+  NULL        0
+  JET_dbidNil 0xFFFFFFFF
+
+pointer JET_DBID* JET_DBID
+
+pointer JET_INDEXID* JET_INDEXID
+
+enum JET_ERR long
+  success Greater=-1
+  JET_errFileCompressed                            -4005
+  JET_errFileIOFail                                -4004
+  JET_errFileIORetry                               -4003
+  JET_errFileIOAbort                               -4002
+  JET_errFileIOBeyondEOF                           -4001
+  JET_errFileIOSparse                              -4000
+  JET_errLSNotSet                                  -3002
+  JET_errLSAlreadySet                              -3001
+  JET_errLSCallbackNotSpecified                    -3000
+  JET_errOSSnapshotInvalidSnapId                   -2404
+  JET_errOSSnapshotNotAllowed                      -2403
+  JET_errOSSnapshotTimeOut                         -2402
+  JET_errOSSnapshotInvalidSequence                 -2401
+  JET_errCallbackNotResolved                       -2102
+  JET_errCallbackFailed                            -2101
+  JET_errRollbackError                             -1917
+  JET_errOneDatabasePerSession                     -1916
+  JET_errRecordFormatConversionFailed              -1915
+  JET_errSessionInUse                              -1914
+  JET_errSessionContextNotSetByThisThread          -1913
+  JET_errSessionContextAlreadySet                  -1912
+  JET_errEntryPointNotFound                        -1911
+  JET_errSessionSharingViolation                   -1910
+  JET_errTooManySplits                             -1909
+  JET_errAccessDenied                              -1907
+  JET_errInvalidOperation                          -1906
+  JET_errLogCorrupted                              -1852
+  JET_errAfterInitialization                       -1850
+  JET_errFileInvalidType                           -1812
+  JET_errFileNotFound                              -1811
+  JET_errPermissionDenied                          -1809
+  JET_errDiskFull                                  -1808
+  JET_errTooManyAttachedDatabases                  -1805
+  JET_errTempFileOpenError                         -1803
+  JET_errInvalidOnSort                             -1702
+  JET_errTooManySorts                              -1701
+  JET_errLanguageNotSupported                      -1619
+  JET_errDataHasChanged                            -1611
+  JET_errUpdateNotPrepared                         -1609
+  JET_errKeyNotMade                                -1608
+  JET_errAlreadyPrepared                           -1607
+  JET_errKeyDuplicate                              -1605
+  JET_errRecordPrimaryChanged                      -1604
+  JET_errNoCurrentRecord                           -1603
+  JET_errRecordNoCopy                              -1602
+  JET_errRecordNotFound                            -1601
+  JET_errInvalidPlaceholderColumn                  -1530
+  JET_errDerivedColumnCorruption                   -1529
+  JET_errMultiValuedDuplicateAfterTruncation       -1528
+  JET_errLVCorrupted                               -1526
+  JET_errMultiValuedDuplicate                      -1525
+  JET_errDefaultValueTooBig                        -1524
+  JET_errCannotBeTagged                            -1521
+  JET_errColumnInRelationship                      -1519
+  JET_errBadItagSequence                           -1518
+  JET_errBadColumnId                               -1517
+  JET_errKeyIsMade                                 -1516
+  JET_errNoCurrentIndex                            -1515
+  JET_errTaggedNotNULL                             -1514
+  JET_errInvalidColumnType                         -1511
+  JET_errColumnRedundant                           -1510
+  JET_errMultiValuedColumnMustBeTagged             -1509
+  JET_errColumnDuplicate                           -1508
+  JET_errColumnNotFound                            -1507
+  JET_errColumnTooBig                              -1506
+  JET_errColumnIndexed                             -1505
+  JET_errNullInvalid                               -1504
+  JET_errColumnDoesNotFit                          -1503
+  JET_errColumnNoChunk                             -1502
+  JET_errColumnLong                                -1501
+  JET_errIndexTuplesKeyTooSmall                    -1437
+  JET_errIndexTuplesCannotRetrieveFromIndex        -1436
+  JET_errIndexTuplesInvalidLimits                  -1435
+  JET_errIndexTuplesVarSegMacNotAllowed            -1434
+  JET_errIndexTuplesTextBinaryColumnsOnly          -1433
+  JET_errIndexTuplesNonUniqueOnly                  -1432
+  JET_errIndexTuplesTooManyColumns                 -1431
+  JET_errIndexTuplesSecondaryIndexOnly             -1430
+  JET_errInvalidIndexId                            -1416
+  JET_errSecondaryIndexCorrupted                   -1414
+  JET_errPrimaryIndexCorrupted                     -1413
+  JET_errIndexBuildCorrupted                       -1412
+  JET_errMultiValuedIndexViolation                 -1411
+  JET_errTooManyOpenIndexes                        -1410
+  JET_errInvalidCreateIndex                        -1409
+  JET_errIndexInvalidDef                           -1406
+  JET_errIndexMustStay                             -1405
+  JET_errIndexNotFound                             -1404
+  JET_errIndexDuplicate                            -1403
+  JET_errIndexHasPrimary                           -1402
+  JET_errIndexCantBuild                            -1401
+  JET_errCannotAddFixedVarColumnToDerivedTable     -1330
+  JET_errClientRequestToStopJetService             -1329
+  JET_errInvalidSettings                           -1328
+  JET_errDDLNotInheritable                         -1326
+  JET_errCannotNestDDL                             -1325
+  JET_errFixedInheritedDDL                         -1324
+  JET_errFixedDDL                                  -1323
+  JET_errExclusiveTableLockRequired                -1322
+  JET_errCannotDeleteTemplateTable                 -1319
+  JET_errCannotDeleteSystemTable                   -1318
+  JET_errCannotDeleteTempTable                     -1317
+  JET_errInvalidObject                             -1316
+  JET_errObjectDuplicate                           -1314
+  JET_errTooManyOpenTablesAndCleanupTimedOut       -1313
+  JET_errIllegalOperation                          -1312
+  JET_errTooManyOpenTables                         -1311
+  JET_errInvalidTableId                            -1310
+  JET_errTableNotEmpty                             -1308
+  JET_errDensityInvalid                            -1307
+  JET_errObjectNotFound                            -1305
+  JET_errTableInUse                                -1304
+  JET_errTableDuplicate                            -1303
+  JET_errTableLocked                               -1302
+  JET_errInvalidCreateDbVersion                    -1225
+  JET_errDatabaseCorruptedNoRepair                 -1224
+  JET_errDatabaseSignInUse                         -1222
+  JET_errPartiallyAttachedDB                       -1221
+  JET_errCatalogCorrupted                          -1220
+  JET_errForceDetachNotAllowed                     -1219
+  JET_errDatabaseIdInUse                           -1218
+  JET_errDatabaseInvalidPath                       -1217
+  JET_errAttachedDatabaseMismatch                  -1216
+  JET_errDatabaseSharingViolation                  -1215
+  JET_errTooManyInstances                          -1214
+  JET_errPageSizeMismatch                          -1213
+  JET_errDatabase500Format                         -1212
+  JET_errDatabase400Format                         -1211
+  JET_errDatabase200Format                         -1210
+  JET_errInvalidDatabaseVersion                    -1209
+  JET_errCannotDisableVersioning                   -1208
+  JET_errDatabaseLocked                            -1207
+  JET_errDatabaseCorrupted                         -1206
+  JET_errDatabaseInvalidPages                      -1205
+  JET_errDatabaseInvalidName                       -1204
+  JET_errDatabaseNotFound                          -1203
+  JET_errDatabaseInUse                             -1202
+  JET_errDatabaseDuplicate                         -1201
+  JET_errInvalidInstance                           -1115
+  JET_errSesidTableIdMismatch                      -1114
+  JET_errCannotMaterializeForwardOnlySort          -1113
+  JET_errRecordTooBigForBackwardCompatibility      -1112
+  JET_errSessionWriteConflict                      -1111
+  JET_errTransReadOnly                             -1110
+  JET_errRollbackRequired                          -1109
+  JET_errInTransaction                             -1108
+  JET_errWriteConflictPrimaryIndex                 -1105
+  JET_errInvalidSesid                              -1104
+  JET_errTransTooDeep                              -1103
+  JET_errWriteConflict                             -1102
+  JET_errOutOfSessions                             -1101
+  JET_errInstanceUnavailableDueToFatalLogDiskFull  -1092
+  JET_errDatabaseUnavailable                       -1091
+  JET_errInstanceUnavailable                       -1090
+  JET_errInstanceNameInUse                         -1086
+  JET_errTempPathInUse                             -1085
+  JET_errLogFilePathInUse                          -1084
+  JET_errSystemPathInUse                           -1083
+  JET_errSystemParamsAlreadySet                    -1082
+  JET_errRunningInMultiInstanceMode                -1081
+  JET_errRunningInOneInstanceMode                  -1080
+  JET_errOutOfSequentialIndexValues                -1078
+  JET_errOutOfDbtimeValues                         -1077
+  JET_errOutOfAutoincrementValues                  -1076
+  JET_errOutOfLongValueIDs                         -1075
+  JET_errOutOfObjectIDs                            -1074
+  JET_errTooManyMempoolEntries                     -1073
+  JET_errRecordNotDeleted                          -1072
+  JET_errCannotIndex                               -1071
+  JET_errVersionStoreOutOfMemory                   -1069
+  JET_errVersionStoreOutOfMemoryAndCleanupTimedOut -1066
+  JET_errVersionStoreEntryTooBig                   -1065
+  JET_errInvalidLCMapStringFlags                   -1064
+  JET_errInvalidCodePage                           -1063
+  JET_errInvalidLanguageId                         -1062
+  JET_errInvalidCountry                            -1061
+  JET_errTooManyActiveUsers                        -1059
+  JET_errNotInTransaction                          -1054
+  JET_errNullKeyDisallowed                         -1053
+  JET_errLinkNotSupported                          -1052
+  JET_errIndexInUse                                -1051
+  JET_errColumnNotUpdatable                        -1048
+  JET_errInvalidBufferSize                         -1047
+  JET_errColumnInUse                               -1046
+  JET_errInvalidBookmark                           -1045
+  JET_errInvalidFilename                           -1044
+  JET_errContainerNotEmpty                         -1043
+  JET_errTooManyColumns                            -1040
+  JET_errBufferTooSmall                            -1038
+  JET_errFileAccessDenied                          -1032
+  JET_errInitInProgress                            -1031
+  JET_errAlreadyInitialized                        -1030
+  JET_errNotInitialized                            -1029
+  JET_errInvalidDatabase                           -1028
+  JET_errTooManyOpenDatabases                      -1027
+  JET_errRecordTooBig                              -1026
+  JET_errInvalidLogDirectory                       -1025
+  JET_errInvalidSystemPath                         -1024
+  JET_errInvalidPath                               -1023
+  JET_errDiskIO                                    -1022
+  JET_errOutOfFileHandles                          -1020
+  JET_errPageNotInitialized                        -1019
+  JET_errReadVerifyFailure                         -1018
+  JET_errRecordDeleted                             -1017
+  JET_errTooManyKeys                               -1016
+  JET_errTooManyIndexes                            -1015
+  JET_errOutOfBuffers                              -1014
+  JET_errOutOfCursors                              -1013
+  JET_errOutOfDatabaseSpace                        -1012
+  JET_errOutOfMemory                               -1011
+  JET_errInvalidDatabaseId                         -1010
+  JET_errDatabaseFileReadOnly                      -1008
+  JET_errInvalidParameter                          -1003
+  JET_errInvalidName                               -1002
+  JET_errFeatureNotAvailable                       -1001
+  JET_errTermInProgress                            -1000
+  JET_errInvalidGrbit                              -900
+  JET_errLogFileNotCopied                          -616
+  JET_errRestoreOfNonBackupDatabase                -615
+  JET_errCheckpointDepthTooDeep                    -614
+  JET_errSLVReadVerifyFailure                      -613
+  JET_errLogReadVerifyFailure                      -612
+  JET_errExistingLogFileIsNotContiguous            -611
+  JET_errExistingLogFileHasBadSignature            -610
+  JET_errUnicodeNormalizationNotSupported          -603
+  JET_errUnicodeTranslationFail                    -602
+  JET_errUnicodeTranslationBufferTooSmall          -601
+  JET_errSectorSizeNotSupported                    -583
+  JET_errSoftRecoveryOnSnapshot                    -581
+  JET_errDatabasesNotFromSameSnapshot              -580
+  JET_errRecoveredWithoutUndo                      -579
+  JET_errBadRestoreTargetInstance                  -577
+  JET_errMustDisableLoggingForDbUpgrade            -575
+  JET_errLogCorruptDuringHardRecovery              -574
+  JET_errLogCorruptDuringHardRestore               -573
+  JET_errLogTornWriteDuringHardRecovery            -571
+  JET_errLogTornWriteDuringHardRestore             -570
+  JET_errMissingFileToBackup                       -569
+  JET_errDbTimeTooNew                              -567
+  JET_errDbTimeTooOld                              -566
+  JET_errMissingCurrentLogFiles                    -565
+  JET_errDatabaseIncompleteUpgrade                 -563
+  JET_errDatabaseAlreadyUpgraded                   -562
+  JET_errBadBackupDatabaseSize                     -561
+  JET_errMissingFullBackup                         -560
+  JET_errMissingRestoreLogFiles                    -557
+  JET_errGivenLogFileIsNotContiguous               -556
+  JET_errGivenLogFileHasBadSignature               -555
+  JET_errStartingRestoreLogTooHigh                 -554
+  JET_errEndingRestoreLogTooLow                    -553
+  JET_errDatabasePatchFileMismatch                 -552
+  JET_errConsistentTimeMismatch                    -551
+  JET_errDatabaseDirtyShutdown                     -550
+  JET_errStreamingDataNotLogged                    -549
+  JET_errLogSequenceEndDatabasesConsistent         -548
+  JET_errLogSectorSizeMismatchDatabasesConsistent  -547
+  JET_errLogSectorSizeMismatch                     -546
+  JET_errLogFileSizeMismatchDatabasesConsistent    -545
+  JET_errSoftRecoveryOnBackupDatabase              -544
+  JET_errRequiredLogFilesMissing                   -543
+  JET_errCheckpointFileNotFound                    -542
+  JET_errLogFileSizeMismatch                       -541
+  JET_errDatabaseStreamingFileMismatch             -540
+  JET_errDatabaseLogSetMismatch                    -539
+  JET_errPatchFileMissing                          -538
+  JET_errBadSLVSignature                           -537
+  JET_errRedoAbruptEnded                           -536
+  JET_errBadPatchPage                              -535
+  JET_errMissingPatchPage                          -534
+  JET_errCheckpointCorrupt                         -533
+  JET_errBadCheckpointSignature                    -532
+  JET_errBadDbSignature                            -531
+  JET_errBadLogSignature                           -530
+  JET_errLogDiskFull                               -529
+  JET_errMissingLogFile                            -528
+  JET_errRecoveredWithErrors                       -527
+  JET_errInvalidBackup                             -526
+  JET_errMakeBackupDirectoryFail                   -525
+  JET_errDeleteBackupFileFail                      -524
+  JET_errBackupNotAllowedYet                       -523
+  JET_errInvalidBackupSequence                     -521
+  JET_errNoBackup                                  -520
+  JET_errLogSequenceEnd                            -519
+  JET_errLogBufferTooSmall                         -517
+  JET_errLoggingDisabled                           -516
+  JET_errInvalidLogSequence                        -515
+  JET_errBadLogVersion                             -514
+  JET_errLogGenerationMismatch                     -513
+  JET_errCannotLogDuringRecoveryRedo               -512
+  JET_errLogDisabledDueToRecoveryFailure           -511
+  JET_errLogWriteFail                              -510
+  JET_errMissingPreviousLogFile                    -509
+  JET_errRestoreInProgress                         -506
+  JET_errBackupInProgress                          -505
+  JET_errBackupDirectoryNotEmpty                   -504
+  JET_errNoBackupDirectory                         -503
+  JET_errLogFileCorrupt                            -501
+  JET_errInvalidLoggedOperation                    -500
+  JET_errKeyTooBig                                 -408
+  JET_errKeyTruncated                              -346
+  JET_errDbTimeCorrupted                           -344
+  JET_errSPOwnExtCorrupted                         -343
+  JET_errSPAvailExtCacheOutOfMemory                -342
+  JET_errSPAvailExtCorrupted                       -341
+  JET_errSPAvailExtCacheOutOfSync                  -340
+  JET_errBadParentPageLink                         -338
+  JET_errNTSystemCallFailed                        -334
+  JET_errBadBookmark                               -328
+  JET_errBadPageLink                               -327
+  JET_errKeyBoundary                               -324
+  JET_errPageBoundary                              -323
+  JET_errPreviousVersion                           -322
+  JET_errDatabaseBufferDependenciesCorrupted       -255
+  JET_errInternalError                             -107
+  JET_errTaskDropped                               -106
+  JET_errTooManyIO                                 -105
+  JET_errOutOfThreads                              -103
+  JET_errFileClose                                 -102
+  JET_errRfsNotArmed                               -101
+  JET_errRfsFailure                                -100
+  JET_wrnNyi                                       -1
+  JET_errSuccess                                   0
+  JET_wrnRemainingVersions                         321
+  JET_wrnUniqueKey                                 345
+  JET_wrnSeparateLongValue                         406
+  JET_wrnExistingLogFileHasBadSignature            558
+  JET_wrnExistingLogFileIsNotContiguous            559
+  JET_wrnSkipThisRecord                            564
+  JET_wrnTargetInstanceRunning                     578
+  JET_wrnDatabaseRepaired                          595
+  JET_wrnColumnNull                                1004
+  JET_wrnBufferTruncated                           1006
+  JET_wrnDatabaseAttached                          1007
+  JET_wrnSortOverflow                              1009
+  JET_wrnSeekNotEqual                              1039
+  JET_wrnNoErrorInfo                               1055
+  JET_wrnNoIdleActivity                            1058
+  JET_wrnNoWriteLock                               1067
+  JET_wrnColumnSetNull                             1068
+  JET_wrnTableEmpty                                1301
+  JET_wrnTableInUseBySystem                        1327
+  JET_wrnCorruptIndexDeleted                       1415
+  JET_wrnColumnMaxTruncated                        1512
+  JET_wrnCopyLongValue                             1520
+  JET_wrnColumnSkipped                             1531
+  JET_wrnColumnNotLocal                            1532
+  JET_wrnColumnMoreTags                            1533
+  JET_wrnColumnTruncated                           1534
+  JET_wrnColumnPresent                             1535
+  JET_wrnColumnSingleValue                         1536
+  JET_wrnColumnDefault                             1537
+  JET_wrnDataHasChanged                            1610
+  JET_wrnKeyChanged                                1618
+  JET_wrnFileOpenReadOnly                          1813
+  JET_wrnIdleFull                                  1908
+  JET_wrnDefragAlreadyRunning                      2000
+  JET_wrnDefragNotRunning                          2001
+  JET_wrnCallbackNotRegistered                     2100
+
+struct JET_SPACEHINTS
+  cbStruct "unsigned long"
+  ulInitialDensity "unsigned long"
+  cbInitial "unsigned long"
+  grbit JET_GRBIT
+  ulMaintDensity "unsigned long"
+  ulGrowth "unsigned long"
+  cbMinExtent "unsigned long"
+  cbMaxExtent "unsigned long"
+
+pointer JET_SPACEHINTS* JET_SPACEHINTS
+
+flag [JET_UNICODEINDEX_FLAGS] "unsigned long" display="unsigned long"
+  NORM_IGNORECASE     0x00000001
+  NORM_IGNORENONSPACE 0x00000002
+  NORM_IGNORESYMBOLS  0x00000004
+  LCMAP_SORTKEY       0x00000400
+  LCMAP_BYTEREV       0x00000800
+  SORT_STRINGSORT     0x00001000
+  NORM_IGNOREKANATYPE 0x00010000
+  NORM_IGNOREWIDTH    0x00020000
+
+struct JET_UNICODEINDEX
+  lcid "unsigned long"
+  dwMapFlags [JET_UNICODEINDEX_FLAGS]
+
+pointer JET_UNICODEINDEX* JET_UNICODEINDEX
+
+struct JET_UNICODEINDEX2
+  szLocaleName WCHAR*
+  dwMapFlags [JET_UNICODEINDEX_FLAGS]
+
+pointer JET_UNICODEINDEX2* JET_UNICODEINDEX2
+
+struct JET_COLUMNDEF
+  cbStruct "unsigned long"
+  columnid JET_COLUMNID
+  coltyp JET_COLTYP
+  wCountry "unsigned short"
+  langid "unsigned short"
+  cp "unsigned short"
+  wCollate "unsigned short"
+  cbMax "unsigned long"
+  grbit JET_GRBIT
+
+pointer "const JET_COLUMNDEF*" JET_COLUMNDEF
+
+struct JET_CONVERT
+  szOldDll TCHAR*
+  fFlags "unsigned long"
+
+pointer JET_CONVERT* JET_CONVERT
+
+union [JET_INDEXCREATE_u1] display=union
+  lcid "unsigned long"
+  pidxunicode JET_UNICODEINDEX*
+
+struct JET_TUPLELIMITS
+  chLengthMin "unsigned long"
+  chLengthMax "unsigned long"
+  chToIndexMax "unsigned long"
+  cchIncrement "unsigned long"
+  ichStart "unsigned long"
+
+pointer JET_TUPLELIMITS* JET_TUPLELIMITS
+
+union [JET_INDEXCREATE_u2] display=union
+  cbVarSegMac "unsigned long"
+  ptuplelimits JET_TUPLELIMITS*
+
+struct JET_CONDITIONALCOLUMN
+  cbStruct "unsigned long"
+  szColumnName TCHAR*
+  grbit JET_GRBIT
+
+pointer JET_CONDITIONALCOLUMN* JET_CONDITIONALCOLUMN
+
+struct JET_INDEXCREATE
+  cbStruct "unsigned long"
+  szIndexName TCHAR*
+  szKey TCHAR*
+  cbKey "unsigned long"
+  grbit JET_GRBIT
+  ulDensity "unsigned long"
+   [JET_INDEXCREATE_u1]
+   [JET_INDEXCREATE_u2]
+  rgconditionalcolumn JET_CONDITIONALCOLUMN* count=cConditionalColumn
+  cConditionalColumn "unsigned long"
+  err JET_ERR
+  cbKeyMost "unsigned long"
+
+pointer JET_INDEXCREATE* JET_INDEXCREATE
+
+struct JET_INDEXCREATE2
+  cbStruct "unsigned long"
+  szIndexName TCHAR*
+  szKey TCHAR*
+  cbKey "unsigned long"
+  grbit JET_GRBIT
+  ulDensity "unsigned long"
+   [JET_INDEXCREATE_u1]
+   [JET_INDEXCREATE_u2]
+  rgconditionalcolumn JET_CONDITIONALCOLUMN* count=cConditionalColumn
+  cConditionalColumn "unsigned long"
+  err JET_ERR
+  cbKeyMost "unsigned long"
+  pSpacehints JET_SPACEHINTS*
+
+pointer JET_INDEXCREATE2* JET_INDEXCREATE2
+
+struct JET_COLUMNCREATE
+  cbStruct "unsigned long"
+  szColumnName TCHAR*
+  coltyp JET_COLTYP
+  cbMax "unsigned long"
+  grbit JET_GRBIT
+  pvDefault void* length=cbDefault
+  cbDefault "unsigned long"
+  cp "unsigned long"
+  columnid JET_COLUMNID
+  err JET_ERR
+
+pointer JET_COLUMNCREATE* JET_COLUMNCREATE
+
+struct JET_TABLECREATE
+  cbStruct "unsigned long"
+  szTableName TCHAR*
+  szTemplateTableName TCHAR*
+  ulPages "unsigned long"
+  ulDensity "unsigned long"
+  rgcolumncreate JET_COLUMNCREATE* count=cColumns
+  cColumns "unsigned long"
+  rgindexcreate JET_INDEXCREATE* count=cIndexes
+  cIndexes "unsigned long"
+  grbit JET_GRBIT
+  tableid JET_TABLEID
+  cCreated "unsigned long"
+
+pointer JET_TABLECREATE* JET_TABLECREATE
+
+struct JET_TABLECREATE2
+  cbStruct "unsigned long"
+  szTableName TCHAR*
+  szTemplateTableName TCHAR*
+  ulPages "unsigned long"
+  ulDensity "unsigned long"
+  rgcolumncreate JET_COLUMNCREATE* count=cColumns
+  cColumns "unsigned long"
+  rgindexcreate JET_INDEXCREATE* count=cIndexes
+  cIndexes "unsigned long"
+  szCallback TCHAR*
+  cbtyp JET_CBTYP
+  grbit JET_GRBIT
+  tableid JET_TABLEID
+  cCreated "unsigned long"
+
+pointer JET_TABLECREATE2* JET_TABLECREATE2
+
+struct JET_SETSYSPARAM
+  paramid [JET_param]
+  lParam JET_API_PTR
+  sz "const TCHAR*"
+  err JET_ERR
+
+pointer JET_SETSYSPARAM* JET_SETSYSPARAM
+
+struct JET_ENUMCOLUMNID
+  columnid JET_COLUMNID
+  ctagSequence "unsigned long"
+  rgtagSequence "unsigned long*" count=ctagSequence
+
+pointer JET_ENUMCOLUMNID* JET_ENUMCOLUMNID
+
+struct JET_ENUMCOLUMNVALUE
+  itagSequence "unsigned long"
+  err JET_ERR
+  cbData "unsigned long"
+  pvData void* length=cbData
+
+pointer JET_ENUMCOLUMNVALUE* JET_ENUMCOLUMNVALUE
+
+struct [JET_ENUMCOLUMN_u_s1] display=struct
+  cEnumColumnValue "unsigned long"
+  rgEnumColumnValue JET_ENUMCOLUMNVALUE* count=cEnumColumnValue
+
+struct [JET_ENUMCOLUMN_u_s2] display=struct
+  cbData "unsigned long"
+  pvData void* length=cbData
+
+union [JET_ENUMCOLUMN_u] display=union
+   [JET_ENUMCOLUMN_u_s1]
+   [JET_ENUMCOLUMN_u_s2]
+
+struct JET_ENUMCOLUMN
+  columnid JET_COLUMNID
+  err JET_ERR
+   [JET_ENUMCOLUMN_u]
+
+pointer JET_ENUMCOLUMN* JET_ENUMCOLUMN
+
+pointer JET_ENUMCOLUMN** JET_ENUMCOLUMN*
+
+struct JET_LOGINFO
+  cbSize "unsigned long"
+  ulGenLow "unsigned long"
+  ulGenHigh "unsigned long"
+  szBaseName "TCHAR [JET_BASE_NAME_LENGTH + 1]"
+
+pointer JET_LOGINFO* JET_LOGINFO
+
+struct JET_INSTANCE_INFO
+  hInstanceId JET_INSTANCE
+  szInstanceName TCHAR*
+  cDatabases JET_API_PTR
+  szDatabaseFileName TCHAR** count=cDatabases
+  szDatabaseDisplayName TCHAR** count=cDatabases
+  szDatabaseSLVFileName TCHAR** count=cDatabases
+
+pointer JET_INSTANCE_INFO* JET_INSTANCE_INFO
+
+pointer JET_INSTANCE_INFO** JET_INSTANCE_INFO*
+
+struct JET_RECPOS
+  cbStruct "unsigned long"
+  centriesLT "unsigned long"
+  centriesInRange "unsigned long"
+  centriesTotal "unsigned long"
+
+pointer JET_RECPOS* JET_RECPOS
+
+struct JET_RECSIZE
+  cbData "unsigned __int64"
+  cbLongValueData "unsigned __int64"
+  cbOverhead "unsigned __int64"
+  cbLongValueOverhead "unsigned __int64"
+  cNonTaggedColumns "unsigned __int64"
+  cTaggedColumns "unsigned __int64"
+  cLongValues "unsigned __int64"
+  cMultiValues "unsigned __int64"
+
+pointer JET_RECSIZE* JET_RECSIZE
+
+struct JET_RSTMAP
+  szDatabaseName TCHAR*
+  szNewDatabaseName TCHAR*
+
+pointer JET_RSTMAP* JET_RSTMAP
+
+struct JET_LGPOS
+  ib "unsigned short"
+  isec "unsigned short"
+  lGeneration long
+
+struct JET_LOGTIME
+  bSeconds char
+  bMinutes char
+  bHours char
+  bDay char
+  bMonth char
+  bYear char
+  bFiller1 char
+  bFiller2 char
+
+struct JET_RSTINFO
+  cbStruct "unsigned long"
+  rgrstmap JET_RSTMAP* count=crstmap
+  crstmap long
+  lgposStop JET_LGPOS
+  logtimeStop JET_LOGTIME
+  pfnStatus JET_PFNSTATUS
+
+pointer JET_RSTINFO* JET_RSTINFO
+
+struct JET_INDEXRANGE
+  cbStruct "unsigned long"
+  tableid JET_TABLEID
+  grbit JET_GRBIT
+
+pointer JET_INDEXRANGE* JET_INDEXRANGE
+
+struct JET_RECORDLIST
+  cbStruct "unsigned long"
+  tableid JET_TABLEID
+  cRecord "unsigned long"
+  columnidBookmark JET_COLUMNID
+
+pointer JET_RECORDLIST* JET_RECORDLIST
+
+struct JET_OPENTEMPORARYTABLE
+  cbStruct "unsigned long"
+  prgcolumndef "const JET_COLUMNDEF*" count=ccolumn
+  ccolumn "unsigned long"
+  pidxunicode JET_UNICODEINDEX*
+  grbit JET_GRBIT
+  prgcolumnid JET_COLUMNID* postCount=ccolumn
+  cbKeyMost "unsigned long"
+  cbVarSegMac "unsigned long"
+  tableid JET_TABLEID
+
+pointer JET_OPENTEMPORARYTABLE* JET_OPENTEMPORARYTABLE
+
+struct JET_OPENTEMPORARYTABLE2
+  cbStruct "unsigned long"
+  prgcolumndef "const JET_COLUMNDEF*" count=ccolumn
+  ccolumn "unsigned long"
+  pidxunicode JET_UNICODEINDEX2*
+  grbit JET_GRBIT
+  prgcolumnid JET_COLUMNID* postCount=ccolumn
+  cbKeyMost "unsigned long"
+  cbVarSegMac "unsigned long"
+  tableid JET_TABLEID
+
+pointer JET_OPENTEMPORARYTABLE2* JET_OPENTEMPORARYTABLE2
+
+struct JET_RETINFO
+  cbStruct "unsigned long"
+  ibLongValue "unsigned long"
+  itagSequence "unsigned long"
+  columnidNextTagged JET_COLUMNID
+
+pointer JET_RETINFO* JET_RETINFO
+
+struct JET_RETRIEVECOLUMN
+  columnid JET_COLUMNID
+  pvData void* postLength=cbActual
+  cbData "unsigned long"
+  cbActual "unsigned long"
+  grbit JET_GRBIT
+  ibLongValue "unsigned long"
+  itagSequence "unsigned long"
+  columnidNextTagged JET_COLUMNID
+  err JET_ERR
+
+pointer JET_RETRIEVECOLUMN* JET_RETRIEVECOLUMN
+
+struct JET_SETINFO
+  cbStruct "unsigned long"
+  ibLongValue "unsigned long"
+  itagSequence "unsigned long"
+
+pointer JET_SETINFO* JET_SETINFO
+
+struct JET_SETCOLUMN
+  columnid JET_COLUMNID
+  pvData "const void*" length=cbData
+  cbData "unsigned long"
+  grbit JET_GRBIT
+  ibLongValue "unsigned long"
+  itagSequence "unsigned long"
+  err JET_ERR
+
+pointer JET_SETCOLUMN* JET_SETCOLUMN
+
+enum [JetMoveRow] long display=long
+  JET_MovePrevious -1
+  JET_MoveNext     1
+  JET_MoveLast     0x7fffffff
+  JET_MoveFirst    0x80000000
+
+flag [JetMoveFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitMoveKeyNE 0x00000001
+
+flag [JetMakeKeyFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitNewKey                  0x00000001
+  JET_bitStrLimit                0x00000002
+  JET_bitSubStrLimit             0x00000004
+  JET_bitNormalizedKey           0x00000008
+  JET_bitKeyDataZeroLength       0x00000010
+  JET_bitFullColumnStartLimit    0x00000100
+  JET_bitFullColumnEndLimit      0x00000200
+  JET_bitPartialColumnStartLimit 0x00000400
+  JET_bitPartialColumnEndLimit   0x00000800
+
+flag [JetSeekFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitSeekEQ          0x00000001
+  JET_bitSeekLT          0x00000002
+  JET_bitSeekLE          0x00000004
+  JET_bitSeekGE          0x00000008
+  JET_bitSeekGT          0x00000010
+  JET_bitSetIndexRange   0x00000020
+  JET_bitCheckUniqueness 0x00000040
+
+flag [JetCommitTransactionFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitCommitLazyFlush      0x00000001
+  JET_bitWaitLastLevel0Commit 0x00000002
+  JET_bitWaitAllLevel0Commit  0x00000008
+
+flag [JetSetIndexRangeFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitRangeInclusive       0x00000001
+  JET_bitRangeUpperLimit      0x00000002
+  JET_bitRangeInstantDuration 0x00000004
+  JET_bitRangeRemove          0x00000008
+
+flag [JetGetLockFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitReadLock  0x00000001
+  JET_bitWriteLock 0x00000002
+
+flag [JetGotoSecondaryIndexBookmarkFlags] JET_GRBIT display="const JET_GRBIT"
+  JET_bitBookmarkPermitVirtualCurrency 0x00000001
+
+flag [JetCreateIndexFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitIndexUnique             0x00000001
+  JET_bitIndexPrimary            0x00000002
+  JET_bitIndexDisallowNull       0x00000004
+  JET_bitIndexIgnoreNull         0x00000008
+  JET_bitIndexIgnoreAnyNull      0x00000020
+  JET_bitIndexIgnoreFirstNull    0x00000040
+  JET_bitIndexLazyFlush          0x00000080
+  JET_bitIndexEmpty              0x00000100
+  JET_bitIndexUnversioned        0x00000200
+  JET_bitIndexSortNullsHigh      0x00000400
+  JET_bitIndexUnicode            0x00000800
+  JET_bitIndexTuples             0x00001000
+  JET_bitIndexTupleLimits        0x00002000
+  JET_bitIndexCrossProduct       0x00004000
+  JET_bitIndexKeyMost            0x00008000
+  JET_bitIndexDisallowTruncation 0x00010000
+
+flag [JetOpenTableFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitTableDenyWrite     0x00000001
+  JET_bitTableDenyRead      0x00000002
+  JET_bitTableReadOnly      0x00000004
+  JET_bitTableUpdatable     0x00000008
+  JET_bitTablePermitDDL     0x00000010
+  JET_bitTableNoCache       0x00000020
+  JET_bitTablePreread       0x00000040
+  JET_bitTableOpportuneRead 0x00000080
+  JET_bitTableSequential    0x00008000
+
+flag [JetOpenTempTableFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitTTIndexed              0x00000001
+  JET_bitTTUnique               0x00000002
+  JET_bitTTUpdatable            0x00000004
+  JET_bitTTScrollable           0x00000008
+  JET_bitTTSortNullsHigh        0x00000010
+  JET_bitTTForceMaterialization 0x00000020
+  JET_bitTTForwardOnly          0x00000040
+
+flag [JetSetColumnFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitSetAppendLV                    0x00000001
+  JET_bitSetOverwriteLV                 0x00000004
+  JET_bitSetSizeLV                      0x00000008
+  JET_bitSetZeroLength                  0x00000020
+  JET_bitSetSeparateLV                  0x00000040
+  JET_bitSetUniqueMultiValues           0x00000080
+  JET_bitSetUniqueNormalizedMultiValues 0x00000100
+  JET_bitSetRevertToDefaultValue        0x00000200
+
+flag [JetBackupFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitBackupIncremental 0x00000001
+  JET_bitBackupAtomic      0x00000004
+  JET_bitBackupSnapshot    0x00000010
+
+flag [JetOpenDatabaseFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitDbReadOnly             0x00000001
+  JET_bitDbExclusive            0x00000002
+  JET_bitDbDeleteCorruptIndexes 0x00000010
+  JET_bitDbUpgrade              0x00000200
+  JET_bitDbDeleteUnicodeIndexes 0x00000400
+
+flag [JetDetachDatabase2Flags] JET_GRBIT display=JET_GRBIT
+  JET_bitForceDetach         0x00000001
+  JET_bitForceCloseAndDetach 0x00000003
+
+flag [JetCreateDatabaseFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitDbRecoveryOff       0x00000008
+  JET_bitDbShadowingOff      0x00000080
+  JET_bitDbOverwriteExisting 0x00000200
+
+flag [JetBeginTransaction2Flags] JET_GRBIT display=JET_GRBIT
+  JET_bitTransactionReadOnly 0x00000001
+
+flag [JetCompactFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitCompactStats  0x00000020
+  JET_bitCompactRepair 0x00000040
+
+flag [JetDefragmentFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitDefragmentBatchStart          0x00000001
+  JET_bitDefragmentBatchStop           0x00000002
+  JET_bitDefragmentAvailSpaceTreesOnly 0x00000040
+
+flag [JetEndExternalBackupInstance2Flags] JET_GRBIT display=JET_GRBIT
+  JET_bitBackupEndNormal    0x0001
+  JET_bitBackupEndAbort     0x0002
+  JET_bitBackupTruncateDone 0x0100
+
+flag [JetEnumerateColumnsFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitEnumerateCopy                     0x00000001
+  JET_bitEnumerateIgnoreDefault            0x00000020
+  JET_bitEnumeratePresenceOnly             0x00020000
+  JET_bitEnumerateTaggedOnly               0x00040000
+  JET_bitEnumerateCompressOutput           0x00080000
+  JET_bitEnumerateIgnoreUserDefinedDefault 0x00100000
+
+flag [JetEscrowUpdateFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitEscrowNoRollback 0x0001
+
+flag [JetGetLSFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitLSReset  0x00000001
+  JET_bitLSCursor 0x00000002
+  JET_bitLSTable  0x00000004
+
+flag [JetIdleFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitIdleFlushBuffers 0x00000001
+  JET_bitIdleCompact      0x00000002
+  JET_bitIdleStatus       0x00000004
+
+flag [JetInitFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitReplayIgnoreMissingDB     0x00000004
+  JET_bitRecoveryWithoutUndo       0x00000008
+  JET_bitTruncateLogsAfterRecovery 0x00000010
+  JET_bitReplayMissingMapEntryDB   0x00000020
+  JET_bitLogStreamMustExist        0x00000040
+
+flag [JetTerm2Flags] JET_GRBIT display=JET_GRBIT
+  JET_bitTermComplete   0x00000001
+  JET_bitTermAbrupt     0x00000002
+  JET_bitTermStopBackup 0x00000004
+
+flag [JetRetrieveColumnFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitRetrieveCopy                0x00000001
+  JET_bitRetrieveFromIndex           0x00000002
+  JET_bitRetrieveFromPrimaryBookmark 0x00000004
+  JET_bitRetrieveTag                 0x00000008
+  JET_bitRetrieveNull                0x00000010
+  JET_bitRetrieveIgnoreDefault       0x00000020
+  JET_bitRetrieveLongId              0x00000040
+  JET_bitRetrieveLongValueRefCount   0x00000080
+  JET_bitRetrieveTuple               0x00000800
+
+flag [JetRollbackFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitRollbackAll 0x00000001
+
+flag [JetSetCurrentIndexFlags] JET_GRBIT display=JET_GRBIT
+  JET_bitMoveFirst 0x00000000
+  JET_bitNoMove    0x00000002
+
+flag [JetUpdateFlags] JET_GRBIT display="const JET_GRBIT"
+  JET_bitUpdateCheckESE97Compatibility 0x00000001
+
+enum [JetPrepareUpdateOption] "unsigned long" display="unsigned long"
+  JET_prepInsert                   0
+  JET_prepReplace                  2
+  JET_prepCancel                   3
+  JET_prepReplaceNoLock            4
+  JET_prepInsertCopy               5
+  JET_prepInsertCopyDeleteOriginal 7
+
+struct JET_SIGNATURE
+  ulRandom "unsigned long"
+  logtimeCreate JET_LOGTIME
+  szComputerName "char [JET_MAX_COMPUTERNAME_LENGTH + 1]"
+
+struct JET_COMMIT_ID
+  signLog JET_SIGNATURE
+  reserved int
+  commitId __int64
+
+pointer JET_COMMIT_ID* JET_COMMIT_ID
+
+struct JET_TABLECREATE3
+  cbStruct "unsigned long"
+  szTableName TCHAR*
+  szTemplateTableName TCHAR*
+  ulPages "unsigned long"
+  ulDensity "unsigned long"
+  rgcolumncreate JET_COLUMNCREATE* count=cColumns
+  cColumns "unsigned long"
+  rgindexcreate JET_INDEXCREATE2* count=cIndexes
+  cIndexes "unsigned long"
+  szCallback TCHAR*
+  cbtyp JET_CBTYP
+  grbit JET_GRBIT
+  pSeqSpacehints JET_SPACEHINTS*
+  pLVSpacehints JET_SPACEHINTS*
+  cbSeparateLV "unsigned long"
+  tableid JET_TABLEID
+  cCreated "unsigned long"
+
+pointer JET_TABLECREATE3* JET_TABLECREATE3
+
+struct JET_RECSIZE2
+  cbData "unsigned __int64"
+  cbLongValueData "unsigned __int64"
+  cbOverhead "unsigned __int64"
+  cbLongValueOverhead "unsigned __int64"
+  cNonTaggedColumns "unsigned __int64"
+  cTaggedColumns "unsigned __int64"
+  cLongValues "unsigned __int64"
+  cMultiValues "unsigned __int64"
+  cCompressedColumns "unsigned __int64"
+  cbDataCompressed "unsigned __int64"
+  cbLongValueDataCompressed "unsigned __int64"
+
+pointer JET_RECSIZE2* JET_RECSIZE2
+
+enum JET_RELOP UINT
+  JET_relopEquals               0
+  JET_relopPrefixEquals         1
+  JET_relopNotEquals            2
+  JET_relopLessThanOrEqual      3
+  JET_relopLessThan             4
+  JET_relopGreaterThanOrEqual   5
+  JET_relopGreaterThan          6
+  JET_relopBitmaskEqualsZero    7
+  JET_relopBitmaskNotEqualsZero 8
+
+struct JET_INDEX_COLUMN
+  columnid JET_COLUMNID
+  relop JET_RELOP
+  pv void*
+  cb "unsigned long"
+  grbit JET_GRBIT
+
+pointer JET_INDEX_COLUMN* JET_INDEX_COLUMN
+
+struct JET_INDEX_RANGE
+  rgStartColumns JET_INDEX_COLUMN* count=cStartColumns
+  cStartColumns "unsigned long"
+  rgEndColumns JET_INDEX_COLUMN* count=cEndColumns
+  cEndColumns "unsigned long"
+
+pointer "const JET_INDEX_RANGE* const" JET_INDEX_RANGE
+
+func JetAddColumn bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szColumnName JET_PCSTR
+  pcolumndef "const JET_COLUMNDEF*"
+  pvDefault "const void*" length=cbDefault
+  cbDefault "unsigned long"
+  pcolumnid JET_COLUMNID*
+
+func JetAttachDatabase bothCharset
+  JET_ERR
+  sesid JET_SESID
+  szFilename JET_PCSTR
+  grbit [JetOpenDatabaseFlags]
+
+func JetAttachDatabase2 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  szFilename JET_PCSTR
+  cpgDatabaseSizeMax "const unsigned long"
+  grbit [JetOpenDatabaseFlags]
+
+func JetBackup bothCharset
+  JET_ERR
+  szBackupPath JET_PCSTR
+  grbit [JetBackupFlags]
+  pfnStatus JET_PFNSTATUS
+
+func JetBackupInstance bothCharset
+  JET_ERR
+  instance JET_INSTANCE
+  szBackupPath JET_PCSTR
+  grbit [JetBackupFlags]
+  pfnStatus JET_PFNSTATUS
+
+func JetBeginExternalBackup
+  JET_ERR
+  grbit [JetBackupFlags]
+
+func JetBeginExternalBackupInstance
+  JET_ERR
+  instance JET_INSTANCE
+  grbit [JetBackupFlags]
+
+func JetBeginSession bothCharset
+  JET_ERR
+  instance JET_INSTANCE
+  psesid JET_SESID*
+  szUserName JET_PCSTR
+  szPassword JET_PCSTR
+
+func JetBeginTransaction
+  JET_ERR
+  sesid JET_SESID
+
+func JetBeginTransaction2
+  JET_ERR
+  sesid JET_SESID
+  grbit [JetBeginTransaction2Flags]
+
+func JetCloseDatabase
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  grbit JET_GRBIT
+
+func JetCloseFile
+  JET_ERR
+  hfFile JET_HANDLE
+
+func JetCloseFileInstance
+  JET_ERR
+  instance JET_INSTANCE
+  hfFile JET_HANDLE
+
+func JetCloseTable
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+
+func JetCommitTransaction
+  JET_ERR
+  sesid JET_SESID
+  grbit [JetCommitTransactionFlags]
+
+func JetCompact bothCharset
+  JET_ERR
+  sesid JET_SESID
+  szDatabaseSrc JET_PCSTR
+  szDatabaseDest JET_PCSTR
+  pfnStatus JET_PFNSTATUS
+  pconvert JET_CONVERT*
+  grbit [JetCompactFlags]
+
+func JetComputeStats
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+
+func JetCreateDatabase bothCharset
+  JET_ERR
+  sesid JET_SESID
+  szFilename JET_PCSTR
+  szConnect JET_PCSTR
+  pdbid JET_DBID*
+  grbit [JetCreateDatabaseFlags]
+
+func JetCreateDatabase2 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  szFilename JET_PCSTR
+  cpgDatabaseSizeMax "const unsigned long"
+  pdbid JET_DBID*
+  grbit [JetCreateDatabaseFlags]
+
+func JetCreateIndex bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szIndexName JET_PCSTR
+  grbit [JetCreateIndexFlags]
+  szKey JET_PCSTR
+  cbKey "unsigned long"
+  lDensity "unsigned long"
+
+func JetCreateIndex2 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pindexcreate JET_INDEXCREATE* count=cIndexCreate
+  cIndexCreate "unsigned long"
+
+func JetCreateInstance bothCharset
+  JET_ERR
+  pinstance JET_INSTANCE*
+  szInstanceName JET_PCSTR
+
+func JetCreateInstance2 bothCharset
+  JET_ERR
+  pinstance JET_INSTANCE*
+  szInstanceName JET_PCSTR
+  szDisplayName JET_PCSTR
+  grbit JET_GRBIT
+
+func JetCreateTable bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  szTableName JET_PCSTR
+  lPages "unsigned long"
+  lDensity "unsigned long"
+  ptableid JET_TABLEID*
+
+func JetCreateTableColumnIndex bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  ptablecreate JET_TABLECREATE*
+
+func JetCreateTableColumnIndex2 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  ptablecreate JET_TABLECREATE2*
+
+func JetDefragment bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  szTableName JET_PCSTR
+  pcPasses "unsigned long*"
+  pcSeconds "unsigned long*"
+  grbit [JetDefragmentFlags]
+
+func JetDefragment2 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  szTableName JET_PCSTR
+  pcPasses "unsigned long*"
+  pcSeconds "unsigned long*"
+  callback JET_CALLBACK
+  grbit [JetDefragmentFlags]
+
+func JetDelete
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+
+func JetDeleteColumn bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szColumnName JET_PCSTR
+
+func JetDeleteColumn2 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szColumnName JET_PCSTR
+  grbit "const JET_GRBIT"
+
+func JetDeleteIndex bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szIndexName JET_PCSTR
+
+func JetDeleteTable bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  szTableName JET_PCSTR
+
+func JetDetachDatabase bothCharset
+  JET_ERR
+  sesid JET_SESID
+  szFilename JET_PCSTR
+
+func JetDetachDatabase2 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  szFilename JET_PCSTR
+  grbit [JetDetachDatabase2Flags]
+
+func JetDupCursor
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  ptableid JET_TABLEID*
+  grbit JET_GRBIT
+
+func JetDupSession
+  JET_ERR
+  sesid JET_SESID
+  psesid JET_SESID*
+
+func JetEnableMultiInstance bothCharset
+  JET_ERR
+  psetsysparam JET_SETSYSPARAM* count=csetsysparam
+  csetsysparam "unsigned long"
+  pcsetsucceed "unsigned long*"
+
+func JetEndExternalBackup
+  JET_ERR
+
+func JetEndExternalBackupInstance
+  JET_ERR
+  instance JET_INSTANCE
+
+func JetEndExternalBackupInstance2
+  JET_ERR
+  instance JET_INSTANCE
+  grbit [JetEndExternalBackupInstance2Flags]
+
+func JetEndSession
+  JET_ERR
+  sesid JET_SESID
+  grbit JET_GRBIT
+
+func JetEnumerateColumns
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  cEnumColumnId "unsigned long"
+  rgEnumColumnId JET_ENUMCOLUMNID* count=cEnumColumnId
+  pcEnumColumn "unsigned long*"
+  prgEnumColumn JET_ENUMCOLUMN** derefPostCount=pcEnumColumn
+  pfnRealloc JET_PFNREALLOC
+  pvReallocContext void*
+  cbDataMost "unsigned long"
+  grbit [JetEnumerateColumnsFlags]
+
+func JetEscrowUpdate
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  columnid JET_COLUMNID
+  pv void* length=cbMax
+  cbMax "unsigned long"
+  pvOld void* postLength=pcbOldActual
+  cbOldMax "unsigned long"
+  pcbOldActual "unsigned long*"
+  grbit [JetEscrowUpdateFlags]
+
+func JetExternalRestore bothCharset
+  JET_ERR
+  szCheckpointFilePath JET_PSTR
+  szLogPath JET_PSTR
+  rgrstmap JET_RSTMAP* count=crstfilemap
+  crstfilemap long
+  szBackupLogPath JET_PSTR
+  genLow long
+  genHigh long
+  pfn JET_PFNSTATUS
+
+func JetExternalRestore2 bothCharset
+  JET_ERR
+  szCheckpointFilePath JET_PSTR
+  szLogPath JET_PSTR
+  rgrstmap JET_RSTMAP* count=crstfilemap
+  crstfilemap long
+  szBackupLogPath JET_PSTR
+  pLogInfo JET_LOGINFO*
+  szTargetInstanceName JET_PSTR
+  szTargetInstanceLogPath JET_PSTR
+  szTargetInstanceCheckpointPath JET_PSTR
+  pfn JET_PFNSTATUS
+
+func JetFreeBuffer
+  JET_ERR
+  pbBuf char*
+
+func JetGetAttachInfo bothCharset
+  JET_ERR
+  szz tchar*
+  cbMax "unsigned long"
+  pcbActual "unsigned long*"
+
+func JetGetAttachInfoInstance bothCharset
+  JET_ERR
+  instance JET_INSTANCE
+  szz tchar*
+  cbMax "unsigned long"
+  pcbActual "unsigned long*"
+
+func JetGetBookmark
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pvBookmark void*
+  cbMax "unsigned long"
+  pcbActual "unsigned long*"
+
+func JetGetColumnInfo bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  szTableName JET_PCSTR
+  szColumnName JET_PCSTR
+  pvResult void*
+  cbMax "unsigned long"
+  InfoLevel "unsigned long"
+
+func JetGetCurrentIndex bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szIndexName JET_PSTR
+  cchIndexName "unsigned long"
+
+func JetGetCursorInfo
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pvResult void*
+  cbMax "unsigned long"
+  InfoLevel "unsigned long"
+
+func JetGetDatabaseFileInfo bothCharset
+  JET_ERR
+  szDatabaseName JET_PCSTR
+  pvResult void*
+  cbMax "unsigned long"
+  InfoLevel "unsigned long"
+
+func JetGetDatabaseInfo bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  pvResult void*
+  cbMax "unsigned long"
+  InfoLevel "unsigned long"
+
+func JetGetIndexInfo bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  szTableName JET_PCSTR
+  szIndexName JET_PCSTR
+  pvResult void*
+  cbResult "unsigned long"
+  InfoLevel "unsigned long"
+
+func JetGetInstanceInfo bothCharset
+  JET_ERR
+  pcInstanceInfo "unsigned long*"
+  paInstanceInfo JET_INSTANCE_INFO**
+
+func JetGetInstanceMiscInfo
+  JET_ERR
+  instance JET_INSTANCE
+  pvResult void*
+  cbMax "unsigned long"
+  InfoLevel "unsigned long"
+
+func JetGetLock
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  grbit [JetGetLockFlags]
+
+func JetGetLogInfo bothCharset
+  JET_ERR
+  szz tchar*
+  cbMax "unsigned long"
+  pcbActual "unsigned long*"
+
+func JetGetLogInfoInstance bothCharset
+  JET_ERR
+  instance JET_INSTANCE
+  szz tchar*
+  cbMax "unsigned long"
+  pcbActual "unsigned long*"
+
+func JetGetLogInfoInstance2 bothCharset
+  JET_ERR
+  instance JET_INSTANCE
+  szz tchar*
+  cbMax "unsigned long"
+  pcbActual "unsigned long*"
+  pLogInfo JET_LOGINFO*
+
+func JetGetLS
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pls JET_LS*
+  grbit [JetGetLSFlags]
+
+func JetGetObjectInfo bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  objtyp JET_OBJTYP
+  szContainerName JET_PCSTR
+  szObjectName JET_PCSTR
+  pvResult void*
+  cbMax "unsigned long"
+  InfoLevel "unsigned long"
+
+func JetGetRecordPosition
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  precpos JET_RECPOS*
+  cbRecpos "unsigned long"
+
+func JetGetRecordSize
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  precsize JET_RECSIZE*
+  grbit "const JET_GRBIT"
+
+func JetGetSecondaryIndexBookmark
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pvSecondaryKey void*
+  cbSecondaryKeyMax "unsigned long"
+  pcbSecondaryKeyActual "unsigned long*"
+  pvPrimaryBookmark void*
+  cbPrimaryBookmarkMax "unsigned long"
+  pcbPrimaryKeyActual "unsigned long*"
+  grbit "const JET_GRBIT"
+
+func JetGetSystemParameter bothCharset
+  JET_ERR
+  instance JET_INSTANCE
+  sesid JET_SESID
+  paramid [JET_param]
+  plParam JET_API_PTR*
+  szParam JET_PSTR
+  cbMax "unsigned long"
+
+func JetGetTableColumnInfo bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szColumnName JET_PCSTR
+  pvResult void*
+  cbMax "unsigned long"
+  InfoLevel "unsigned long"
+
+func JetGetTableIndexInfo bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szIndexName JET_PCSTR
+  pvResult void*
+  cbResult "unsigned long"
+  InfoLevel "unsigned long"
+
+func JetGetTableInfo bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pvResult void*
+  cbMax "unsigned long"
+  InfoLevel "unsigned long"
+
+func JetGetThreadStats
+  JET_ERR
+  pvResult void*
+  cbMax "unsigned long"
+
+func JetGetTruncateLogInfoInstance bothCharset
+  JET_ERR
+  instance JET_INSTANCE
+  szz tchar*
+  cbMax "unsigned long"
+  pcbActual "unsigned long*"
+
+func JetGetVersion
+  JET_ERR
+  sesid JET_SESID
+  pwVersion "unsigned long*"
+
+func JetGotoBookmark
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pvBookmark void* length=cbBookmark
+  cbBookmark "unsigned long"
+
+func JetGotoPosition
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  precpos JET_RECPOS*
+
+func JetGotoSecondaryIndexBookmark
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pvSecondaryKey void*
+  cbSecondaryKey "unsigned long"
+  pvPrimaryBookmark void*
+  cbPrimaryBookmark "unsigned long"
+  grbit [JetGotoSecondaryIndexBookmarkFlags]
+
+func JetGrowDatabase
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  cpg "unsigned long"
+  pcpgReal "unsigned long*"
+
+func JetIdle
+  JET_ERR
+  sesid JET_SESID
+  grbit [JetIdleFlags]
+
+func JetIndexRecordCount
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pcrec "unsigned long*"
+  crecMax "unsigned long"
+
+func JetInit
+  JET_ERR
+  pinstance JET_INSTANCE*
+
+func JetInit2
+  JET_ERR
+  pinstance JET_INSTANCE*
+  grbit [JetInitFlags]
+
+func JetInit3 bothCharset
+  JET_ERR
+  pinstance JET_INSTANCE*
+  prstInfo JET_RSTINFO*
+  grbit [JetInitFlags]
+
+func JetIntersectIndexes
+  JET_ERR
+  sesid JET_SESID
+  rgindexrange JET_INDEXRANGE* count=cindexrange
+  cindexrange "unsigned long"
+  precordlist JET_RECORDLIST*
+  grbit JET_GRBIT
+
+func JetMakeKey
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pvData "const void*" length=cbData
+  cbData "unsigned long"
+  grbit [JetMakeKeyFlags]
+
+func JetMove
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  cRow [JetMoveRow]
+  grbit [JetMoveFlags]
+
+func JetOpenDatabase bothCharset
+  JET_ERR
+  sesid JET_SESID
+  szFilename JET_PCSTR
+  szConnect JET_PCSTR
+  pdbid JET_DBID*
+  grbit [JetOpenDatabaseFlags]
+
+func JetOpenFile bothCharset
+  JET_ERR
+  szFileName JET_PCSTR
+  phfFile JET_HANDLE*
+  pulFileSizeLow "unsigned long*"
+  pulFileSizeHigh "unsigned long*"
+
+func JetOpenFileInstance bothCharset
+  JET_ERR
+  instance JET_INSTANCE
+  szFileName JET_PCSTR
+  phfFile JET_HANDLE*
+  pulFileSizeLow "unsigned long*"
+  pulFileSizeHigh "unsigned long*"
+
+func JetOpenTable bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  szTableName JET_PCSTR
+  pvParameters "const void*" length=cbParameters
+  cbParameters "unsigned long"
+  grbit [JetOpenTableFlags]
+  ptableid JET_TABLEID*
+
+func JetOpenTemporaryTable
+  JET_ERR
+  sesid JET_SESID
+  popentemporarytable JET_OPENTEMPORARYTABLE*
+
+func JetOpenTempTable
+  JET_ERR
+  sesid JET_SESID
+  prgcolumndef "const JET_COLUMNDEF*" count=ccolumn
+  ccolumn "unsigned long"
+  grbit [JetOpenTempTableFlags]
+  ptableid JET_TABLEID*
+  prgcolumnid JET_COLUMNID* postCount=ccolumn
+
+func JetOpenTempTable2
+  JET_ERR
+  sesid JET_SESID
+  prgcolumndef "const JET_COLUMNDEF*" count=ccolumn
+  ccolumn "unsigned long"
+  lcid "unsigned long"
+  grbit [JetOpenTempTableFlags]
+  ptableid JET_TABLEID*
+  prgcolumnid JET_COLUMNID* postCount=ccolumn
+
+func JetOpenTempTable3
+  JET_ERR
+  sesid JET_SESID
+  prgcolumndef "const JET_COLUMNDEF*" count=ccolumn
+  ccolumn "unsigned long"
+  pidxunicode JET_UNICODEINDEX*
+  grbit [JetOpenTempTableFlags]
+  ptableid JET_TABLEID*
+  prgcolumnid JET_COLUMNID* postCount=ccolumn
+
+func JetOSSnapshotAbort
+  JET_ERR
+  snapId "const JET_OSSNAPID"
+  grbit "const JET_GRBIT"
+
+func JetOSSnapshotEnd
+  JET_ERR
+  snapId "const JET_OSSNAPID"
+  grbit "const JET_GRBIT"
+
+func JetOSSnapshotFreeze bothCharset
+  JET_ERR
+  snapId "const JET_OSSNAPID"
+  pcInstanceInfo "unsigned long*"
+  paInstanceInfo JET_INSTANCE_INFO**
+  grbit "const JET_GRBIT"
+
+func JetOSSnapshotGetFreezeInfo bothCharset
+  JET_ERR
+  snapId "const JET_OSSNAPID"
+  pcInstanceInfo "unsigned long*"
+  paInstanceInfo JET_INSTANCE_INFO**
+  grbit "const JET_GRBIT"
+
+func JetOSSnapshotPrepare
+  JET_ERR
+  psnapId JET_OSSNAPID*
+  grbit "const JET_GRBIT"
+
+func JetOSSnapshotPrepareInstance
+  JET_ERR
+  snapId JET_OSSNAPID
+  instance JET_INSTANCE
+  grbit "const JET_GRBIT"
+
+func JetOSSnapshotThaw
+  JET_ERR
+  snapId "const JET_OSSNAPID"
+  grbit "const JET_GRBIT"
+
+func JetOSSnapshotTruncateLog
+  JET_ERR
+  snapId "const JET_OSSNAPID"
+  grbit "const JET_GRBIT"
+
+func JetOSSnapshotTruncateLogInstance
+  JET_ERR
+  snapId "const JET_OSSNAPID"
+  instance JET_INSTANCE
+  grbit "const JET_GRBIT"
+
+func JetPrepareUpdate
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  prep [JetPrepareUpdateOption]
+
+func JetReadFile
+  JET_ERR
+  hfFile JET_HANDLE
+  pv void* postLength=pcbActual
+  cb "unsigned long"
+  pcbActual "unsigned long*"
+
+func JetReadFileInstance
+  JET_ERR
+  instance JET_INSTANCE
+  hfFile JET_HANDLE
+  pv void* postLength=pcb
+  cb "unsigned long"
+  pcb "unsigned long*"
+
+func JetRegisterCallback
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  cbtyp JET_CBTYP
+  pCallback JET_CALLBACK
+  pvContext void*
+  phCallbackId JET_HANDLE*
+
+func JetRenameColumn bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szName JET_PCSTR
+  szNameNew JET_PCSTR
+  grbit JET_GRBIT
+
+func JetRenameTable bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  szName JET_PCSTR
+  szNameNew JET_PCSTR
+
+func JetResetSessionContext
+  JET_ERR
+  sesid JET_SESID
+
+func JetResetTableSequential
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  grbit JET_GRBIT
+
+func JetRestore bothCharset
+  JET_ERR
+  sz JET_PCSTR
+  pfn JET_PFNSTATUS
+
+func JetRestore2 bothCharset
+  JET_ERR
+  sz JET_PCSTR
+  szDest JET_PCSTR
+  pfn JET_PFNSTATUS
+
+func JetRestoreInstance bothCharset
+  JET_ERR
+  instance JET_INSTANCE
+  sz JET_PCSTR
+  szDest JET_PCSTR
+  pfn JET_PFNSTATUS
+
+func JetRetrieveColumn
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  columnid JET_COLUMNID
+  pvData void* postLength=pcbActual
+  cbData "unsigned long"
+  pcbActual "unsigned long*"
+  grbit [JetRetrieveColumnFlags]
+  pretinfo JET_RETINFO*
+
+func JetRetrieveColumns
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pretrievecolumn JET_RETRIEVECOLUMN* count=cretrievecolumn
+  cretrievecolumn "unsigned long"
+
+func JetRetrieveKey
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pvData void* postLength=pcbActual
+  cbMax "unsigned long"
+  pcbActual "unsigned long*"
+  grbit JET_GRBIT
+
+func JetRollback
+  JET_ERR
+  sesid JET_SESID
+  grbit [JetRollbackFlags]
+
+func JetSeek
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  grbit [JetSeekFlags]
+
+func JetSetColumn
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  columnid JET_COLUMNID
+  pvData "const void*" length=cbData
+  cbData "unsigned long"
+  grbit [JetSetColumnFlags]
+  psetinfo JET_SETINFO*
+
+func JetSetColumnDefaultValue bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  szTableName JET_PCSTR
+  szColumnName JET_PCSTR
+  pvData "const void*" length=cbData
+  cbData "const unsigned long"
+  grbit "const JET_GRBIT"
+
+func JetSetColumns
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  psetcolumn JET_SETCOLUMN* count=csetcolumn
+  csetcolumn "unsigned long"
+
+func JetSetCurrentIndex bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szIndexName JET_PCSTR
+
+func JetSetCurrentIndex2 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szIndexName JET_PCSTR
+  grbit [JetSetCurrentIndexFlags]
+
+func JetSetCurrentIndex3 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szIndexName JET_PCSTR
+  grbit [JetSetCurrentIndexFlags]
+  itagSequence "unsigned long"
+
+func JetSetCurrentIndex4 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  szIndexName JET_PCSTR
+  pindexid JET_INDEXID*
+  grbit [JetSetCurrentIndexFlags]
+  itagSequence "unsigned long"
+
+func JetSetDatabaseSize bothCharset
+  JET_ERR
+  sesid JET_SESID
+  szDatabaseName JET_PCSTR
+  cpg "unsigned long"
+  pcpgReal "unsigned long*"
+
+func JetSetIndexRange
+  JET_ERR
+  sesid JET_SESID
+  tableidSrc JET_TABLEID
+  grbit [JetSetIndexRangeFlags]
+
+func JetSetLS
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  ls JET_LS
+  grbit JET_GRBIT
+
+func JetSetSessionContext
+  JET_ERR
+  sesid JET_SESID
+  ulContext JET_API_PTR
+
+func JetSetSystemParameter bothCharset
+  JET_ERR
+  pinstance JET_INSTANCE*
+  sesid JET_SESID
+  paramid [JET_param]
+  lParam JET_API_PTR
+  szParam JET_PCSTR
+
+func JetSetTableSequential
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  grbit JET_GRBIT
+
+func JetStopBackup
+  JET_ERR
+
+func JetStopBackupInstance
+  JET_ERR
+  instance JET_INSTANCE
+
+func JetStopService
+  JET_ERR
+
+func JetStopServiceInstance
+  JET_ERR
+  instance JET_INSTANCE
+
+func JetTerm
+  JET_ERR
+  instance JET_INSTANCE
+
+func JetTerm2
+  JET_ERR
+  instance JET_INSTANCE
+  grbit [JetTerm2Flags]
+
+func JetTruncateLog
+  JET_ERR
+
+func JetTruncateLogInstance
+  JET_ERR
+  instance JET_INSTANCE
+
+func JetUnregisterCallback
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  cbtyp JET_CBTYP
+  hCallbackId JET_HANDLE
+
+func JetUpdate
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pvBookmark void* postLength=pcbActual
+  cbBookmark "unsigned long"
+  pcbActual "unsigned long*"
+
+func JetUpdate2
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pvBookmark void* postLength=pcbActual
+  cbBookmark "unsigned long"
+  pcbActual "unsigned long*"
+  grbit [JetUpdateFlags]
+
+func JetBeginTransaction3
+  JET_ERR
+  sesid JET_SESID
+  trxid __int64
+  grbit JET_GRBIT
+
+func JetCommitTransaction2
+  JET_ERR
+  sesid JET_SESID
+  grbit JET_GRBIT
+  cmsecDurableCommit DWORD
+  pCommitID JET_COMMIT_ID*
+
+func JetCreateIndex3 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pindexcreate JET_INDEXCREATE2* count=cIndexCreate
+  cIndexCreate "unsigned long"
+
+func JetCreateIndex4 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  pindexcreate JET_INDEXCREATE2* count=cIndexCreate
+  cIndexCreate "unsigned long"
+
+func JetCreateTableColumnIndex3 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  ptablecreate JET_TABLECREATE3*
+
+func JetCreateTableColumnIndex4 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  ptablecreate JET_TABLECREATE3*
+
+func JetGetErrorInfoW
+  JET_ERR
+  pvContext void*
+  pvResult void*
+  cbMax "unsigned long"
+  InfoLevel "unsigned long"
+  grbit JET_GRBIT
+
+func JetGetRecordSize2
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  precsize JET_RECSIZE2*
+  grbit "const JET_GRBIT"
+
+func JetGetSessionParameter
+  JET_ERR
+  sesid JET_SESID
+  sesparamid "unsigned long"
+  pvParam void*
+  cbParamMax "unsigned long"
+  pcbParamActual "unsigned long"
+
+func JetPrereadIndexRanges
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  rgIndexRanges "const JET_INDEX_RANGE* const" count=cIndexRanges
+  cIndexRanges "const unsigned long"
+  pcRangesPreread "unsigned long* const"
+  rgcolumnidPreread "const JET_COLUMNID* const" count=ccolumnidPreread
+  ccolumnidPreread "const unsigned long"
+  grbit JET_GRBIT
+
+func JetPrereadKeys
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  rgpvKeys "const void**" count=ckeys
+  rgcbKeys "const unsigned long*" count=ckeys
+  ckeys long
+  pckeysPreread long*
+  grbit JET_GRBIT
+
+func JetResizeDatabase
+  JET_ERR
+  sesid JET_SESID
+  dbid JET_DBID
+  cpg "unsigned long"
+  pcpgActual "unsigned long*"
+  grbit "const JET_GRBIT"
+
+func JetSetCursorFilter
+  JET_ERR
+  sesid JET_SESID
+  tableid JET_TABLEID
+  rgFilters JET_INDEX_COLUMN* count=cFilters
+  cFilters DWORD
+  grbit JET_GRBIT
+
+func JetSetSessionParameter
+  JET_ERR
+  sesid JET_SESID
+  sesparamid "unsigned long"
+  pvParam void* length=cbParam
+  cbParam "unsigned long"
+
+func JetStopServiceInstance2
+  JET_ERR
+  instance JET_INSTANCE
+
+func JetDefragment3 bothCharset
+  JET_ERR
+  sesid JET_SESID
+  szDatabaseName JET_PCSTR
+  szTableName JET_PCSTR
+  pcPasses "unsigned long*"
+  pcSeconds "unsigned long*"
+  callback JET_CALLBACK
+  pvContext void*
+  grbit JET_GRBIT
+
+func JetOpenTemporaryTable2
+  JET_ERR
+  sesid JET_SESID
+  popentemporarytable JET_OPENTEMPORARYTABLE2*
+

@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMVideoProcAmp base=IUnknown id={C6E13360-30AC-11d0-A18C-00A0C9118956} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetRange
+    HRESULT
+    Property VideoProcAmpProperty
+    pMin long*
+    pMax long*
+    pSteppingDelta long*
+    pDefault long*
+    pCapsFlags VideoProcAmpFlags*
+
+  func Set
+    HRESULT
+    Property VideoProcAmpProperty
+    lValue long
+    Flags VideoProcAmpFlags
+
+  func Get
+    HRESULT
+    Property VideoProcAmpProperty
+    lValue long*
+    Flags VideoProcAmpFlags*
+
+

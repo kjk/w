@@ -1,0 +1,14 @@
+include Headers\windows.h.txt
+
+dll Loadperf.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Diagnostics/Performance Counters"
+func LoadPerfCounterTextStrings bothCharset
+  [ERROR_CODE]
+  commandLine LPCTSTR
+  bQuietModeArg BOOL
+
+func UnloadPerfCounterTextStrings bothCharset
+  [ERROR_CODE]
+  commandLine LPCTSTR
+  bQuietModeArg BOOL
+

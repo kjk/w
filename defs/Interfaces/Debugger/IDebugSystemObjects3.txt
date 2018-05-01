@@ -1,0 +1,49 @@
+include Interfaces\Debugger\IDebugSystemObjects2.txt
+
+ingterface IDebugSystemObjects3 base=IDebugSystemObjects2 id={e9676e2f-e286-4ea3-b0f9-dfe5d9fc330e} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetEventSystem
+    HRESULT
+    Id PULONG
+
+  func GetCurrentSystemId
+    HRESULT
+    Id PULONG
+
+  func SetCurrentSystemId
+    HRESULT
+    Id ULONG
+
+  func GetNumberSystems
+    HRESULT
+    Number PULONG
+
+  func GetSystemIdsByIndex
+    HRESULT
+    Start ULONG
+    Count ULONG
+    Ids PULONG postCount=Count
+
+  func GetTotalNumberThreadsAndProcesses
+    HRESULT
+    TotalThreads PULONG
+    TotalProcesses PULONG
+    LargestProcessThreads PULONG
+    LargestSystemThreads PULONG
+    LargestSystemProcesses PULONG
+
+  func GetCurrentSystemServer
+    HRESULT
+    Server PULONG64
+
+  func GetSystemByServer
+    HRESULT
+    Server ULONG64
+    Id PULONG
+
+  func GetCurrentSystemServerName
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+
+

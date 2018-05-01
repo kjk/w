@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface ITimeAndNoticeControl base=IUnknown id={bc0bf6ae-8878-11d1-83e9-00c04fc2c6d4} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func SuppressChanges
+    HRESULT
+    res1 DWORD
+    res2 DWORD
+
+

@@ -1,0 +1,42 @@
+include Interfaces\URL\IInternetSecurityManagerEx.txt
+include Headers\URL.h.txt
+
+ingterface IInternetSecurityManagerEx2 base=IInternetSecurityManagerEx id={F1E50292-A795-4117-8E09-2B560A72AC60} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func MapUrlToZoneEx2
+    HRESULT
+    pUri IUri*
+    pdwZone [URLZONE*|DWORD*]
+    dwFlags [MUTZ_FLAGS]
+    ppwszMappedUrl LPWSTR*
+    pdwOutFlags [MUTZ_OUT_FLAGS*]
+
+  func ProcessUrlActionEx2
+    HRESULT
+    pUri IUri*
+    dwAction [URLACTION_FLAGS]
+    pPolicy BYTE* postLength=cbPolicy
+    cbPolicy DWORD
+    pContext BYTE* length=cbContext
+    cbContext DWORD
+    dwFlags PUAF
+    dwReserved DWORD_PTR
+    pdwOutFlags PUAFOUT*
+
+  func GetSecurityIdEx2
+    HRESULT
+    pUri IUri*
+    pbSecurityId BYTE* postLength=pcbSecurityId
+    pcbSecurityId DWORD*
+    dwReserved DWORD_PTR
+
+  func QueryCustomPolicyEx2
+    HRESULT
+    pUri IUri*
+    guidKey REFGUID
+    ppPolicy BYTE** derefPostLength=pcbPolicy
+    pcbPolicy DWORD*
+    pContext BYTE* length=cbContext
+    cbContext DWORD
+    dwReserved DWORD_PTR
+
+

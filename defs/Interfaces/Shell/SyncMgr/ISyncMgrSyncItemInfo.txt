@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrSyncItemInfo base=IUnknown id={e7fd9502-be0c-4464-90a1-2b5277031232} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func GetTypeLabel
+    HRESULT
+    ppszTypeLabel LPWSTR*
+
+  func GetComment
+    HRESULT
+    ppszComment LPWSTR*
+
+  func GetLastSyncTime
+    HRESULT
+    pftLastSync FILETIME*
+
+  func IsEnabled
+    HRESULT
+
+  func IsConnected
+    HRESULT
+
+

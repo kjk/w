@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDelegateFolder base=IUnknown id={ADD8BA80-002B-11D0-8F0F-00C04FD7D062} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetItemAlloc
+    HRESULT
+    pmalloc IMalloc*
+
+

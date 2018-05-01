@@ -1,0 +1,27 @@
+include Interfaces\XMLHTTP\IXMLHTTPRequest.txt
+include Interfaces\XMLHTTP\XMLHTTP.h.txt
+
+ingterface IServerXMLHTTPRequest base=IXMLHTTPRequest id={2e9196bf-13ba-4dd4-91ca-6c571f281495} errorFunc=HRESULT onlineHelp=MSDN category="Internet/XML HTTP Request"
+  func setTimeouts
+    HRESULT
+    resolveTimeout long
+    connectTimeout long
+    sendTimeout long
+    receiveTimeout long
+
+  func waitForResponse
+    HRESULT
+    timeoutInSeconds VARIANT
+    isSuccessful VARIANT_BOOL*
+
+  func getOption
+    HRESULT
+    option SERVERXMLHTTP_OPTION
+    value VARIANT*
+
+  func setOption
+    HRESULT
+    option SERVERXMLHTTP_OPTION
+    value VARIANT
+
+

@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioVolumeDuckNotification base=IUnknown id={C3B284D4-6D39-4359-B3CF-B56DDB3BB39C} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func OnVolumeDuckNotification
+    [AUDCLNT_HRESULT]
+    sessionID LPCWSTR
+    countCommunicationSessions UINT32
+
+  func OnVolumeUnduckNotification
+    [AUDCLNT_HRESULT]
+    sessionID LPCWSTR
+
+

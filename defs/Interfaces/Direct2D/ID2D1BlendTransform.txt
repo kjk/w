@@ -1,0 +1,13 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1ConcreteTransform.txt
+
+ingterface ID2D1BlendTransform base=ID2D1ConcreteTransform id={63ac0b32-ba44-450f-8806-7f4ca1ff2f1b} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetDescription
+    void
+    description "CONST D2D1_BLEND_DESCRIPTION*"
+
+  func GetDescription
+    void
+    description D2D1_BLEND_DESCRIPTION*
+
+

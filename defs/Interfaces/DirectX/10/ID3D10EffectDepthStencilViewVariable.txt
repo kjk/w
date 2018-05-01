@@ -1,0 +1,25 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\DirectX\10\ID3D10EffectVariable.txt
+
+ingterface ID3D10EffectDepthStencilViewVariable base=ID3D10EffectVariable id={3E02C918-CC79-4985-B622-2D92AD701623} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func SetDepthStencil
+    HRESULT
+    pResource ID3D10DepthStencilView*
+
+  func GetDepthStencil
+    HRESULT
+    ppResource ID3D10DepthStencilView**
+
+  func SetDepthStencilArray
+    HRESULT
+    ppResources ID3D10DepthStencilView** count=Count
+    Offset UINT
+    Count UINT
+
+  func GetDepthStencilArray
+    HRESULT
+    ppResources ID3D10DepthStencilView** count=Count
+    Offset UINT
+    Count UINT
+
+

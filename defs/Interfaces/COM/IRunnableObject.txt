@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRunnableObject base=IUnknown id={00000126-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func GetRunningClass
+    HRESULT
+    lpClsid LPCLSID
+
+  func Run
+    HRESULT
+    pbc LPBINDCTX
+
+  func IsRunning
+    BOOL
+
+  func LockRunning
+    HRESULT
+    fLock BOOL
+    fLastUnlockCloses BOOL
+
+  func SetContainedObject
+    HRESULT
+    fContained BOOL
+
+

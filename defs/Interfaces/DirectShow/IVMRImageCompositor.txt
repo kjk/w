@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRImageCompositor base=IUnknown id={7a4fb5af-479f-4074-bb40-ce6722e43c82} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func InitCompositionTarget
+    HRESULT
+    pD3DDevice IUnknown*
+    pddsRenderTarget LPDIRECTDRAWSURFACE7
+
+  func TermCompositionTarget
+    HRESULT
+    pD3DDevice IUnknown*
+    pddsRenderTarget LPDIRECTDRAWSURFACE7
+
+  func SetStreamMediaType
+    HRESULT
+    dwStrmID DWORD
+    pmt AM_MEDIA_TYPE*
+    fTexture BOOL
+
+  func CompositeImage
+    HRESULT
+    pD3DDevice IUnknown*
+    pddsRenderTarget LPDIRECTDRAWSURFACE7
+    pmtRenderTarget AM_MEDIA_TYPE*
+    rtStart REFERENCE_TIME
+    rtEnd REFERENCE_TIME
+    dwClrBkGnd DWORD
+    pVideoStreamInfo VMRVIDEOSTREAMINFO*
+    cStreams UINT
+
+

@@ -1,0 +1,18 @@
+include Interfaces\COM\IEnumString.txt
+
+ingterface IEnumACString base=IEnumString id={8E74C210-CF9D-4eaf-A403-7356428F0A5A} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func NextItem
+    HRESULT
+    pszUrl LPWSTR
+    cchMax ULONG
+    pulSortIndex ULONG*
+
+  func SetEnumOptions
+    HRESULT
+    dwOptions DWORD
+
+  func GetEnumOptions
+    HRESULT
+    pdwOptions DWORD*
+
+

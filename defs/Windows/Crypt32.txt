@@ -1,0 +1,1666 @@
+include Headers\windows.h.txt
+include Headers\cryptography.h.txt
+
+dll Crypt32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Cryptography/Service Provider"
+category "Security and Identity/Cryptography/Object Encoding and Decoding"
+category "Security and Identity/Cryptography/Data Encryption and Decryption"
+category "Security and Identity/Cryptography/Certificate Store"
+category "Security and Identity/Cryptography/Certificate and Certificate Store Maintenance"
+category "Security and Identity/Cryptography/Certificate"
+category "Security and Identity/Cryptography/Certificate Revocation List"
+category "Security and Identity/Cryptography/Certificate Trust List"
+category "Security and Identity/Cryptography/Extended Property"
+category "Security and Identity/Cryptography/Verification Functions Using CTLs"
+category "Security and Identity/Cryptography/Certificate Chain Verification"
+category "Security and Identity/Cryptography/Low-level Message"
+category "Security and Identity/Cryptography/Simplified Message"
+category "Security and Identity/Cryptography/Data Management"
+category "Security and Identity/Cryptography/Data Conversion"
+category "Security and Identity/Cryptography/Enhanced Key Usage"
+category "Security and Identity/Cryptography/Key Identifier"
+category "Security and Identity/Cryptography/Object Identifier (OID) Support"
+category "Security and Identity/Cryptography/Personal Information Exchange (PFX)"
+func CryptInstallDefaultContext
+  BOOL
+  hCryptProv HCRYPTPROV
+  dwDefaultType DWORD
+  pvDefaultPara "const void*"
+  dwFlags DWORD
+  pvReserved void*
+  phDefaultContext HCRYPTDEFAULTCONTEXT*
+
+func CryptUninstallDefaultContext
+  BOOL
+  hDefaultContext HCRYPTDEFAULTCONTEXT
+  dwFlags DWORD
+  pvReserved void*
+
+func CryptDecodeObject
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  lpszStructType LPCSTR
+  pbEncoded "const BYTE*" length=cbEncoded
+  cbEncoded DWORD
+  dwFlags [CryptDecodeObjectFlags]
+  pvStructInfo void* postLength=pcbStructInfo
+  pcbStructInfo DWORD*
+
+func CryptDecodeObjectEx
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  lpszStructType LPCSTR
+  pbEncoded "const BYTE*" length=cbEncoded
+  cbEncoded DWORD
+  dwFlags [CryptDecodeObjectFlags]
+  pDecodePara PCRYPT_DECODE_PARA
+  pvStructInfo void* postLength=pcbStructInfo
+  pcbStructInfo DWORD*
+
+func CryptEncodeObject
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  lpszStructType LPCSTR
+  pvStructInfo "const void*"
+  pbEncoded BYTE* postLength=pcbEncoded
+  pcbEncoded DWORD*
+
+func CryptEncodeObjectEx
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  lpszStructType LPCSTR
+  pvStructInfo "const void*"
+  dwFlags [CryptEncodeObjectFlags]
+  pEncodePara PCRYPT_ENCODE_PARA
+  pvEncoded void* postLength=pcbEncoded
+  pcbEncoded DWORD*
+
+func CryptProtectData
+  BOOL
+  pDataIn DATA_BLOB*
+  szDataDescr LPCWSTR
+  pOptionalEntropy DATA_BLOB*
+  pvReserved PVOID
+  pPromptStruct CRYPTPROTECT_PROMPTSTRUCT*
+  dwFlags [CryptProtectDataFlags]
+  pDataOut DATA_BLOB*
+
+func CryptProtectMemory
+  BOOL
+  pData LPVOID length=cbData
+  cbData DWORD
+  dwFlags [CryptProtectMemoryFlags]
+
+func CryptUnprotectData
+  BOOL
+  pDataIn DATA_BLOB*
+  ppszDataDescr LPWSTR*
+  pOptionalEntropy DATA_BLOB*
+  pvReserved PVOID
+  pPromptStruct CRYPTPROTECT_PROMPTSTRUCT*
+  dwFlags [CryptProtectDataFlags]
+  pDataOut DATA_BLOB*
+
+func CryptUnprotectMemory
+  BOOL
+  pData LPVOID length=cbData
+  cbData DWORD
+  dwFlags [CryptProtectMemoryFlags]
+
+func CertAddStoreToCollection
+  BOOL
+  hCollectionStore HCERTSTORE
+  hSiblingStore HCERTSTORE
+  dwUpdateFlag [CertPhysicalStoreFlags]
+  dwPriority DWORD
+
+func CertCloseStore
+  BOOL
+  hCertStore HCERTSTORE
+  dwFlags [CertCloseStoreFlags]
+
+func CertControlStore
+  BOOL
+  hCertStore HCERTSTORE
+  dwFlags DWORD
+  dwCtrlType [CertControlType]
+  pvCtrlPara "const void*"
+
+func CertDuplicateStore
+  success NotEqual=0
+  HCERTSTORE
+  hCertStore HCERTSTORE
+
+func CertEnumPhysicalStore
+  BOOL
+  pvSystemStore "const void*"
+  dwFlags DWORD
+  pvArg void*
+  pfnEnum PFN_CERT_ENUM_PHYSICAL_STORE
+
+func CertEnumSystemStore
+  BOOL
+  dwFlags [CertSystemStoreFlags]
+  pvSystemStoreLocationPara void*
+  pvArg void*
+  pfnEnum PFN_CERT_ENUM_SYSTEM_STORE
+
+func CertEnumSystemStoreLocation
+  BOOL
+  dwFlags DWORD
+  pvArg void*
+  pfnEnum PFN_CERT_ENUM_SYSTEM_STORE_LOCATION
+
+func CertGetStoreProperty
+  BOOL
+  hCertStore HCERTSTORE
+  dwPropId DWORD
+  pvData void*
+  pcbData DWORD*
+
+func CertOpenStore
+  success NotEqual=0
+  HCERTSTORE
+  lpszStoreProvider [CERT_STORE_PROVIDER]
+  dwMsgAndCertEncodingType [CertEncodingType]
+  hCryptProv HCRYPTPROV_LEGACY
+  dwFlags [CertOpenStoreFlags]
+  pvPara "const void*"
+
+func CertOpenSystemStore bothCharset
+  success NotEqual=0
+  HCERTSTORE
+  hprov HCRYPTPROV_LEGACY
+  szSubsystemProtocol LPCTSTR
+
+func CertRegisterPhysicalStore
+  BOOL
+  pvSystemStore "const void*"
+  dwFlags DWORD
+  pwszStoreName LPCWSTR
+  pStoreInfo PCERT_PHYSICAL_STORE_INFO
+  pvReserved void*
+
+func CertRegisterSystemStore
+  BOOL
+  pvSystemStore "const void*"
+  dwFlags DWORD
+  pStoreInfo PCERT_SYSTEM_STORE_INFO
+  pvReserved void*
+
+func CertRemoveStoreFromCollection
+  void
+  hCollectionStore HCERTSTORE
+  hSiblingStore HCERTSTORE
+
+func CertSaveStore
+  BOOL
+  hCertStore HCERTSTORE
+  dwMsgAndCertEncodingType DWORD
+  dwSaveAs DWORD
+  dwSaveTo DWORD
+  pvSaveToPara void*
+  dwFlags DWORD
+
+func CertSetStoreProperty
+  BOOL
+  hCertStore HCERTSTORE
+  dwPropId DWORD
+  dwFlags DWORD
+  pvData "const void*"
+
+func CertUnregisterPhysicalStore
+  BOOL
+  pvSystemStore "const void*"
+  dwFlags DWORD
+  pwszStoreName LPCWSTR
+
+func CertUnregisterSystemStore
+  BOOL
+  pvSystemStore "const void*"
+  dwFlags DWORD
+
+func CertAddSerializedElementToStore
+  BOOL
+  hCertStore HCERTSTORE
+  pbElement "const BYTE*"
+  cbElement DWORD
+  dwAddDisposition DWORD
+  dwFlags DWORD
+  dwContextTypeFlags DWORD
+  pdwContextType [CertificateStoreContextType*]
+  ppvContext "const void**"
+
+func CertCreateContext
+  success NotEqual=0
+  "const void*"
+  dwContextType [CertificateStoreContextType]
+  dwEncodingType [CertEncodingType]
+  pbEncoded "const BYTE*" length=cbEncoded
+  cbEncoded DWORD
+  dwFlags [CertCreateContextFlags]
+  pCreatePara PCERT_CREATE_CONTEXT_PARA
+
+func CertEnumSubjectInSortedCTL
+  BOOL
+  pCtlContext PCCTL_CONTEXT
+  ppvNextSubject void**
+  pSubjectIdentifier PCRYPT_DER_BLOB
+  pEncodedAttributes PCRYPT_DER_BLOB
+
+func CertFindSubjectInCTL
+  success NotEqual=0
+  PCTL_ENTRY
+  dwEncodingType [CertEncodingType]
+  dwSubjectType DWORD
+  pvSubject void*
+  pCtlContext PCCTL_CONTEXT
+  dwFlags DWORD
+
+func CertFindSubjectInSortedCTL
+  BOOL
+  pSubjectIdentifier PCRYPT_DATA_BLOB
+  pCtlContext PCCTL_CONTEXT
+  dwFlags DWORD
+  pvReserved void*
+  pEncodedAttributes PCRYPT_DER_BLOB
+
+func CertAddCertificateContextToStore
+  BOOL
+  hCertStore HCERTSTORE
+  pCertContext PCCERT_CONTEXT
+  dwAddDisposition DWORD
+  ppStoreContext PCCERT_CONTEXT*
+
+func CertAddCertificateLinkToStore
+  BOOL
+  hCertStore HCERTSTORE
+  pCertContext PCCERT_CONTEXT
+  dwAddDisposition DWORD
+  ppStoreContext PCCERT_CONTEXT*
+
+func CertAddEncodedCertificateToStore
+  BOOL
+  hCertStore HCERTSTORE
+  dwCertEncodingType [CertEncodingType]
+  pbCertEncoded "const BYTE*" length=cbCertEncoded
+  cbCertEncoded DWORD
+  dwAddDisposition [CertStoreAddDisposition]
+  ppCertContext PCCERT_CONTEXT*
+
+func CertAddRefServerOcspResponse
+  VOID
+  hServerOcspResponse HCERT_SERVER_OCSP_RESPONSE
+
+func CertAddRefServerOcspResponseContext
+  VOID
+  pServerOcspResponseContext PCCERT_SERVER_OCSP_RESPONSE_CONTEXT
+
+func CertCloseServerOcspResponse
+  VOID
+  hServerOcspResponse HCERT_SERVER_OCSP_RESPONSE
+  dwFlags DWORD
+
+func CertCreateCertificateContext
+  success NotEqual=0
+  PCCERT_CONTEXT
+  dwCertEncodingType [CertEncodingType]
+  pbCertEncoded "const BYTE*"
+  cbCertEncoded DWORD
+
+func CertCreateSelfSignCertificate
+  success NotEqual=0
+  PCCERT_CONTEXT
+  hCryptProvOrNCryptKey HCRYPTPROV_OR_NCRYPT_KEY_HANDLE
+  pSubjectIssuerBlob PCERT_NAME_BLOB
+  dwFlags DWORD
+  pKeyProvInfo PCRYPT_KEY_PROV_INFO
+  pSignatureAlgorithm PCRYPT_ALGORITHM_IDENTIFIER
+  pStartTime PSYSTEMTIME
+  pEndTime PSYSTEMTIME
+  pExtensions PCERT_EXTENSIONS
+
+func CertDeleteCertificateFromStore
+  BOOL
+  pCertContext PCCERT_CONTEXT
+
+func CertDuplicateCertificateContext
+  success NotEqual=0
+  PCCERT_CONTEXT
+  pCertContext PCCERT_CONTEXT
+
+func CertEnumCertificatesInStore
+  success NotEqual=0
+  PCCERT_CONTEXT
+  hCertStore HCERTSTORE
+  pPrevCertContext PCCERT_CONTEXT
+
+func CertFindCertificateInStore
+  success NotEqual=0
+  PCCERT_CONTEXT
+  hCertStore HCERTSTORE
+  dwCertEncodingType [CertEncodingType]
+  dwFindFlags DWORD
+  dwFindType [CertFindType]
+  pvFindPara "const void*"
+  pPrevCertContext PCCERT_CONTEXT
+
+func CertFreeCertificateContext
+  BOOL
+  pCertContext PCCERT_CONTEXT
+
+func CertGetIssuerCertificateFromStore
+  success NotEqual=0
+  PCCERT_CONTEXT
+  hCertStore HCERTSTORE
+  pSubjectContext PCCERT_CONTEXT
+  pPrevIssuerContext PCCERT_CONTEXT
+  pdwFlags DWORD*
+
+func CertGetServerOcspResponseContext
+  success NotEqual=0
+  PCCERT_SERVER_OCSP_RESPONSE_CONTEXT
+  hServerOcspResponse HCERT_SERVER_OCSP_RESPONSE
+  dwFlags DWORD
+  pvReserved LPVOID
+
+func CertGetSubjectCertificateFromStore
+  success NotEqual=0
+  PCCERT_CONTEXT
+  hCertStore HCERTSTORE
+  dwCertEncodingType [CertEncodingType]
+  pCertId PCERT_INFO
+
+func CertGetValidUsages
+  BOOL
+  cCerts DWORD
+  rghCerts PCCERT_CONTEXT* count=cCerts
+  cNumOIDs int*
+  rghOIDs LPSTR* postCount=pcbOIDs
+  pcbOIDs DWORD*
+
+func CertOpenServerOcspResponse
+  success NotEqual=0
+  HCERT_SERVER_OCSP_RESPONSE
+  pChainContext PCCERT_CHAIN_CONTEXT
+  dwFlags DWORD
+  pvReserved LPVOID
+
+func CertRetrieveLogoOrBiometricInfo
+  BOOL
+  pCertContext PCCERT_CONTEXT
+  lpszLogoOrBiometricType LPCSTR
+  dwRetrievalFlags DWORD
+  dwTimeout DWORD
+  dwFlags DWORD
+  pvReserved void*
+  ppbData BYTE**
+  pcbData DWORD*
+  ppwszMimeType LPWSTR*
+
+func CertSelectCertificateChains
+  BOOL
+  pSelectionContext LPCGUID
+  dwFlags [CertSelectFlags]
+  pChainParameters PCCERT_SELECT_CHAIN_PARA
+  cCriteria DWORD
+  rgpCriteria PCCERT_SELECT_CRITERIA count=cCriteria
+  hStore HCERTSTORE
+  pcSelection PDWORD
+  pprgpSelection PCCERT_CHAIN_CONTEXT**
+
+func CertSerializeCertificateStoreElement
+  BOOL
+  pCertContext PCCERT_CONTEXT
+  dwFlags DWORD
+  pbElement BYTE* postLength=pcbElement
+  pcbElement DWORD*
+
+func CertVerifySubjectCertificateContext
+  BOOL
+  pSubject PCCERT_CONTEXT
+  pIssuer PCCERT_CONTEXT
+  pdwFlags DWORD*
+
+func CertAddCRLContextToStore
+  BOOL
+  hCertStore HCERTSTORE
+  pCrlContext PCCRL_CONTEXT
+  dwAddDisposition DWORD
+  ppStoreContext PCCRL_CONTEXT*
+
+func CertAddCRLLinkToStore
+  BOOL
+  hCertStore HCERTSTORE
+  pCrlContext PCCRL_CONTEXT
+  dwAddDisposition DWORD
+  ppStoreContext PCCRL_CONTEXT*
+
+func CertAddEncodedCRLToStore
+  BOOL
+  hCertStore HCERTSTORE
+  dwCertEncodingType [CertEncodingType]
+  pbCrlEncoded "const BYTE*" length=cbCrlEncoded
+  cbCrlEncoded DWORD
+  dwAddDisposition DWORD
+  ppCrlContext PCCRL_CONTEXT*
+
+func CertCreateCRLContext
+  success NotEqual=0
+  PCCRL_CONTEXT
+  dwCertEncodingType [CertEncodingType]
+  pbCrlEncoded "const BYTE*" length=cbCrlEncoded
+  cbCrlEncoded DWORD
+
+func CertDeleteCRLFromStore
+  BOOL
+  pCrlContext PCCRL_CONTEXT
+
+func CertDuplicateCRLContext
+  success NotEqual=0
+  PCCRL_CONTEXT
+  pCrlContext PCCRL_CONTEXT
+
+func CertEnumCRLsInStore
+  success NotEqual=0
+  PCCRL_CONTEXT
+  hCertStore HCERTSTORE
+  pPrevCrlContext PCCRL_CONTEXT
+
+func CertFindCertificateInCRL
+  BOOL
+  pCert PCCERT_CONTEXT
+  pCrlContext PCCRL_CONTEXT
+  dwFlags DWORD
+  pvReserved void*
+  ppCrlEntry PCRL_ENTRY*
+
+func CertFindCRLInStore
+  success NotEqual=0
+  PCCRL_CONTEXT
+  hCertStore HCERTSTORE
+  dwEncodingType [CertEncodingType]
+  dwFindFlags [CrlFindIssuedByFlags]
+  dwFindType [CrlFindType]
+  pvFindPara "const void*"
+  pPrevCrlContext PCCRL_CONTEXT
+
+func CertFreeCRLContext
+  BOOL
+  pCrlContext PCCRL_CONTEXT
+
+func CertGetCRLFromStore
+  success NotEqual=0
+  PCCRL_CONTEXT
+  hCertStore HCERTSTORE
+  pIssuerContext PCCERT_CONTEXT
+  pPrevCrlContext PCCRL_CONTEXT
+  pdwFlags DWORD*
+
+func CertSerializeCRLStoreElement
+  BOOL
+  pCrlContext PCCRL_CONTEXT
+  dwFlags DWORD
+  pbElement BYTE* postLength=pcbElement
+  pcbElement DWORD*
+
+func CertAddCTLContextToStore
+  BOOL
+  hCertStore HCERTSTORE
+  pCtlContext PCCTL_CONTEXT
+  dwAddDisposition DWORD
+  ppStoreContext PCCTL_CONTEXT*
+
+func CertAddCTLLinkToStore
+  BOOL
+  hCertStore HCERTSTORE
+  pCtlContext PCCTL_CONTEXT
+  dwAddDisposition DWORD
+  ppStoreContext PCCTL_CONTEXT*
+
+func CertAddEncodedCTLToStore
+  BOOL
+  hCertStore HCERTSTORE
+  dwMsgAndCertEncodingType DWORD
+  pbCtlEncoded "const BYTE*" length=cbCtlEncoded
+  cbCtlEncoded DWORD
+  dwAddDisposition DWORD
+  ppCtlContext PCCTL_CONTEXT*
+
+func CertCreateCTLContext
+  success NotEqual=0
+  PCCTL_CONTEXT
+  dwMsgAndCertEncodingType DWORD
+  pbCtlEncoded "const BYTE*" length=cbCtlEncoded
+  cbCtlEncoded DWORD
+
+func CertDeleteCTLFromStore
+  BOOL
+  pCtlContext PCCTL_CONTEXT
+
+func CertDuplicateCTLContext
+  success NotEqual=0
+  PCCTL_CONTEXT
+  pCtlContext PCCTL_CONTEXT
+
+func CertEnumCTLsInStore
+  success NotEqual=0
+  PCCTL_CONTEXT
+  hCertStore HCERTSTORE
+  pPrevCtlContext PCCTL_CONTEXT
+
+func CertFindCTLInStore
+  success NotEqual=0
+  PCCTL_CONTEXT
+  hCertStore HCERTSTORE
+  dwMsgAndCertEncodingType DWORD
+  dwFindFlags DWORD
+  dwFindType DWORD
+  pvFindPara "const void*"
+  pPrevCtlContext PCCTL_CONTEXT
+
+func CertFreeCTLContext
+  BOOL
+  pCtlContext PCCTL_CONTEXT
+
+func CertSerializeCTLStoreElement
+  BOOL
+  pCtlContext PCCTL_CONTEXT
+  dwFlags DWORD
+  pbElement BYTE* postLength=pcbElement
+  pcbElement DWORD*
+
+func CertEnumCertificateContextProperties
+  success NotEqual=0
+  DWORD
+  pCertContext PCCERT_CONTEXT
+  dwPropId DWORD
+
+func CertEnumCRLContextProperties
+  success NotEqual=0
+  DWORD
+  pCrlContext PCCRL_CONTEXT
+  dwPropId DWORD
+
+func CertEnumCTLContextProperties
+  success NotEqual=0
+  DWORD
+  pCtlContext PCCTL_CONTEXT
+  dwPropId DWORD
+
+func CertGetCertificateContextProperty
+  BOOL
+  pCertContext PCCERT_CONTEXT
+  dwPropId [CertPropId]
+  pvData void* postLength=pcbData
+  pcbData DWORD*
+
+func CertGetCRLContextProperty
+  BOOL
+  pCrlContext PCCRL_CONTEXT
+  dwPropId [CertPropId]
+  pvData void* postLength=pcbData
+  pcbData DWORD*
+
+func CertGetCTLContextProperty
+  BOOL
+  pCtlContext PCCTL_CONTEXT
+  dwPropId [CertPropId]
+  pvData void* postLength=pcbData
+  pcbData DWORD*
+
+func CertSetCertificateContextProperty
+  BOOL
+  pCertContext PCCERT_CONTEXT
+  dwPropId [CertPropId]
+  dwFlags [CertSetPropertyFlags]
+  pvData "const void*"
+
+func CertSetCRLContextProperty
+  BOOL
+  pCrlContext PCCRL_CONTEXT
+  dwPropId [CertPropId]
+  dwFlags [CertSetPropertyFlags]
+  pvData "const void*"
+
+func CertSetCTLContextProperty
+  BOOL
+  pCtlContext PCCTL_CONTEXT
+  dwPropId [CertPropId]
+  dwFlags DWORD
+  pvData "const void*"
+
+func CertVerifyCTLUsage
+  BOOL
+  dwEncodingType [CertEncodingType]
+  dwSubjectType DWORD
+  pvSubject void*
+  pSubjectUsage PCTL_USAGE
+  dwFlags DWORD
+  pVerifyUsagePara PCTL_VERIFY_USAGE_PARA
+  pVerifyUsageStatus PCTL_VERIFY_USAGE_STATUS
+
+func CryptMsgEncodeAndSignCTL
+  BOOL
+  dwMsgEncodingType [CertEncodingType]
+  pCtlInfo PCTL_INFO
+  pSignInfo PCMSG_SIGNED_ENCODE_INFO
+  dwFlags DWORD
+  pbEncoded BYTE* postLength=pcbEncoded
+  pcbEncoded DWORD*
+
+func CryptMsgGetAndVerifySigner
+  BOOL
+  hCryptMsg HCRYPTMSG
+  cSignerStore DWORD
+  rghSignerStore HCERTSTORE* count=cSignerStore
+  dwFlags DWORD
+  ppSigner PCCERT_CONTEXT*
+  pdwSignerIndex DWORD*
+
+func CryptMsgSignCTL
+  BOOL
+  dwMsgEncodingType [CertEncodingType]
+  pbCtlContent BYTE*
+  cbCtlContent DWORD
+  pSignInfo PCMSG_SIGNED_ENCODE_INFO
+  dwFlags DWORD
+  pbEncoded BYTE* postLength=pcbEncoded
+  pcbEncoded DWORD*
+
+func CertCreateCertificateChainEngine
+  BOOL
+  pConfig PCERT_CHAIN_ENGINE_CONFIG
+  phChainEngine HCERTCHAINENGINE*
+
+func CertCreateCTLEntryFromCertificateContextProperties
+  BOOL
+  pCertContext PCCERT_CONTEXT
+  cOptAttr DWORD
+  rgOptAttr PCRYPT_ATTRIBUTE count=cOptAttr
+  dwFlags DWORD
+  pvReserved void*
+  pCtlEntry PCTL_ENTRY
+  pcbCtlEntry DWORD*
+
+func CertDuplicateCertificateChain
+  success NotEqual=0
+  PCCERT_CHAIN_CONTEXT
+  pChainContext PCCERT_CHAIN_CONTEXT
+
+func CertFindChainInStore
+  success NotEqual=0
+  PCCERT_CHAIN_CONTEXT
+  hCertStore HCERTSTORE
+  dwCertEncodingType [CertEncodingType]
+  dwFindFlags DWORD
+  dwFindType DWORD
+  pvFindPara "const void*"
+  pPrevChainContext PCCERT_CHAIN_CONTEXT
+
+func CertFreeCertificateChain
+  VOID
+  pChainContext PCCERT_CHAIN_CONTEXT
+
+func CertFreeCertificateChainEngine
+  void
+  hChainEngine HCERTCHAINENGINE
+
+func CertFreeCertificateChainList
+  VOID
+  prgpSelection PCCERT_CHAIN_CONTEXT*
+
+func CertGetCertificateChain
+  BOOL
+  hChainEngine HCERTCHAINENGINE
+  pCertContext PCCERT_CONTEXT
+  pTime LPFILETIME
+  hAdditionalStore HCERTSTORE
+  pChainPara PCERT_CHAIN_PARA
+  dwFlags [CertChainFlags]
+  pvReserved LPVOID
+  ppChainContext PCCERT_CHAIN_CONTEXT*
+
+func CertIsValidCRLForCertificate
+  BOOL
+  pCert PCCERT_CONTEXT
+  pCRL PCCRL_CONTEXT
+  dwFlags DWORD
+  pvReserved void*
+
+func CertSetCertificateContextPropertiesFromCTLEntry
+  BOOL
+  pCertContext PCCERT_CONTEXT
+  pCtlEntry PCTL_ENTRY
+  dwFlags DWORD
+
+func CertVerifyCertificateChainPolicy
+  BOOL
+  pszPolicyOID LPCSTR
+  pChainContext PCCERT_CHAIN_CONTEXT
+  pPolicyPara PCERT_CHAIN_POLICY_PARA
+  pPolicyStatus PCERT_CHAIN_POLICY_STATUS
+
+func CryptMsgCalculateEncodedLength
+  success NotEqual=0
+  DWORD
+  dwMsgEncodingType [CertEncodingType]
+  dwFlags DWORD
+  dwMsgType [CryptMsgType]
+  pvMsgEncodeInfo "const void*" length=cbData
+  pszInnerContentObjID LPSTR
+  cbData DWORD
+
+func CryptMsgClose
+  BOOL
+  hCryptMsg HCRYPTMSG
+
+func CryptMsgControl
+  BOOL
+  hCryptMsg HCRYPTMSG
+  dwFlags [CryptMsgControlFlags]
+  dwCtrlType [CryptMsgControlType]
+  pvCtrlPara "const void*"
+
+func CryptMsgUpdate
+  BOOL
+  hCryptMsg HCRYPTMSG
+  pbData "const BYTE*" length=cbData
+  cbData DWORD
+  fFinal BOOL
+
+func CryptMsgCountersign
+  BOOL
+  hCryptMsg HCRYPTMSG
+  dwIndex DWORD
+  cCountersigners DWORD
+  rgCountersigners PCMSG_SIGNER_ENCODE_INFO count=cCountersigners
+
+func CryptMsgCountersignEncoded
+  BOOL
+  dwEncodingType [CertEncodingType]
+  pbSignerInfo PBYTE length=cbSignerInfo
+  cbSignerInfo DWORD
+  cCountersigners DWORD
+  rgCountersigners PCMSG_SIGNER_ENCODE_INFO count=cCountersigners
+  pbCountersignature PBYTE postLength=pcbCountersignature
+  pcbCountersignature PDWORD
+
+func CryptMsgDuplicate
+  success NotEqual=0
+  HCRYPTMSG
+  hCryptMsg HCRYPTMSG
+
+func CryptMsgGetParam
+  BOOL
+  hCryptMsg HCRYPTMSG
+  dwParamType [CryptMsgParamType]
+  dwIndex DWORD
+  pvData void* postLength=pcbData
+  pcbData DWORD*
+
+func CryptMsgOpenToDecode
+  success NotEqual=0
+  HCRYPTMSG
+  dwMsgEncodingType [CertEncodingType]
+  dwFlags [CryptMsgOpenFlags]
+  dwMsgType [CryptMsgType]
+  hCryptProv HCRYPTPROV_LEGACY
+  pRecipientInfo PCERT_INFO
+  pStreamInfo PCMSG_STREAM_INFO
+
+func CryptMsgOpenToEncode
+  success NotEqual=0
+  HCRYPTMSG
+  dwMsgEncodingType [CertEncodingType]
+  dwFlags DWORD
+  dwMsgType [CryptMsgType]
+  pvMsgEncodeInfo "const void*"
+  pszInnerContentObjID LPSTR
+  pStreamInfo PCMSG_STREAM_INFO
+
+func CryptMsgVerifyCountersignatureEncoded
+  BOOL
+  hCryptProv HCRYPTPROV_LEGACY
+  dwEncodingType [CertEncodingType]
+  pbSignerInfo PBYTE length=cbSignerInfo
+  cbSignerInfo DWORD
+  pbSignerInfoCountersignature PBYTE postLength=cbSignerInfoCountersignature
+  cbSignerInfoCountersignature DWORD
+  pciCountersigner PCERT_INFO
+
+func CryptMsgVerifyCountersignatureEncodedEx
+  BOOL
+  hCryptProv HCRYPTPROV_LEGACY
+  dwEncodingType [CertEncodingType]
+  pbSignerInfo PBYTE length=cbSignerInfo
+  cbSignerInfo DWORD
+  pbSignerInfoCountersignature PBYTE length=cbSignerInfoCountersignature
+  cbSignerInfoCountersignature DWORD
+  dwSignerType [CryptMsgSignerType]
+  pvSigner void*
+  dwFlags DWORD
+  pvReserved void*
+
+func CryptDecodeMessage
+  BOOL
+  dwMsgTypeFlags DWORD
+  pDecryptPara PCRYPT_DECRYPT_MESSAGE_PARA
+  pVerifyPara PCRYPT_VERIFY_MESSAGE_PARA
+  dwSignerIndex DWORD
+  pbEncodedBlob "const BYTE*" length=cbEncodedBlob
+  cbEncodedBlob DWORD
+  dwPrevInnerContentType DWORD
+  pdwMsgType [CryptMsgType*]
+  pdwInnerContentType DWORD*
+  pbDecoded BYTE* postLength=pcbDecoded
+  pcbDecoded DWORD*
+  ppXchgCert PCCERT_CONTEXT*
+  ppSignerCert PCCERT_CONTEXT*
+
+func CryptDecryptAndVerifyMessageSignature
+  BOOL
+  pDecryptPara PCRYPT_DECRYPT_MESSAGE_PARA
+  pVerifyPara PCRYPT_VERIFY_MESSAGE_PARA
+  dwSignerIndex DWORD
+  pbEncryptedBlob "const BYTE*" length=cbEncryptedBlob
+  cbEncryptedBlob DWORD
+  pbDecrypted BYTE* postCount=pcbDecrypted
+  pcbDecrypted DWORD*
+  ppXchgCert PCCERT_CONTEXT*
+  ppSignerCert PCCERT_CONTEXT*
+
+func CryptDecryptMessage
+  BOOL
+  pDecryptPara PCRYPT_DECRYPT_MESSAGE_PARA
+  pbEncryptedBlob "const BYTE*" length=cbEncryptedBlob
+  cbEncryptedBlob DWORD
+  pbDecrypted BYTE* postLength=pcbDecrypted
+  pcbDecrypted DWORD*
+  ppXchgCert PCCERT_CONTEXT*
+
+func CryptEncryptMessage
+  BOOL
+  pEncryptPara PCRYPT_ENCRYPT_MESSAGE_PARA
+  cRecipientCert DWORD
+  rgpRecipientCert "PCCERT_CONTEXT []" count=cRecipientCert
+  pbToBeEncrypted "const BYTE*" length=cbToBeEncrypted
+  cbToBeEncrypted DWORD
+  pbEncryptedBlob BYTE* postLength=pcbEncryptedBlob
+  pcbEncryptedBlob DWORD*
+
+func CryptGetMessageCertificates
+  success NotEqual=0
+  HCERTSTORE
+  dwMsgAndCertEncodingType DWORD
+  hCryptProv HCRYPTPROV_LEGACY
+  dwFlags DWORD
+  pbSignedBlob "const BYTE*" length=cbSignedBlob
+  cbSignedBlob DWORD
+
+func CryptGetMessageSignerCount
+  success NotEqual=0
+  LONG
+  dwMsgEncodingType [CertEncodingType]
+  pbSignedBlob "const BYTE*" length=cbSignedBlob
+  cbSignedBlob DWORD
+
+func CryptHashMessage
+  BOOL
+  pHashPara PCRYPT_HASH_MESSAGE_PARA
+  fDetachedHash BOOL
+  cToBeHashed DWORD
+  rgpbToBeHashed "const BYTE* []" count=cToBeHashed
+  rgcbToBeHashed "DWORD []" count=cToBeHashed
+  pbHashedBlob BYTE* postLength=pcbHashedBlob
+  pcbHashedBlob DWORD*
+  pbComputedHash BYTE* postLength=pcbComputedHash
+  pcbComputedHash DWORD*
+
+func CryptSignAndEncryptMessage
+  BOOL
+  pSignPara PCRYPT_SIGN_MESSAGE_PARA
+  pEncryptPara PCRYPT_ENCRYPT_MESSAGE_PARA
+  cRecipientCert DWORD
+  rgpRecipientCert "PCCERT_CONTEXT []" count=cRecipientCert
+  pbToBeSignedAndEncrypted "const BYTE*" length=cbToBeSignedAndEncrypted
+  cbToBeSignedAndEncrypted DWORD
+  pbSignedAndEncryptedBlob BYTE* postLength=pcbSignedAndEncryptedBlob
+  pcbSignedAndEncryptedBlob DWORD*
+
+func CryptSignMessageWithKey
+  BOOL
+  pSignPara PCRYPT_KEY_SIGN_MESSAGE_PARA
+  pbToBeSigned "const BYTE*" length=cToBeSigned
+  cToBeSigned DWORD
+  pbSignedBlob BYTE* postLength=pcbSignedBlob
+  pcbSignedBlob DWORD*
+
+func CryptSignMessage
+  BOOL
+  pSignPara PCRYPT_SIGN_MESSAGE_PARA
+  fDetachedSignature BOOL
+  cToBeSigned DWORD
+  rgpbToBeSigned "const BYTE* []" count=cToBeSigned
+  rgcbToBeSigned "DWORD []" count=cToBeSigned
+  pbSignedBlob BYTE* postLength=pcbSignedBlob
+  pcbSignedBlob DWORD*
+
+func CryptVerifyDetachedMessageHash
+  BOOL
+  pHashPara PCRYPT_HASH_MESSAGE_PARA
+  pbDetachedHashBlob BYTE* length=cbDetachedHashBlob
+  cbDetachedHashBlob DWORD
+  cToBeHashed DWORD
+  rgpbToBeHashed "const BYTE* []" count=cToBeHashed
+  rgcbToBeHashed DWORD
+  pbComputedHash BYTE* postLength=pcbComputedHash
+  pcbComputedHash DWORD*
+
+func CryptVerifyDetachedMessageSignature
+  BOOL
+  pVerifyPara PCRYPT_VERIFY_MESSAGE_PARA
+  dwSignerIndex DWORD
+  pbDetachedSignBlob "const BYTE*" length=cbDetachedSignBlob
+  cbDetachedSignBlob DWORD
+  cToBeSigned DWORD
+  rgpbToBeSigned "const BYTE* []" count=cToBeSigned
+  rgcbToBeSigned "DWORD []" count=cToBeSigned
+  ppSignerCert PCCERT_CONTEXT*
+
+func CryptVerifyMessageHash
+  BOOL
+  pHashPara PCRYPT_HASH_MESSAGE_PARA
+  pbHashedBlob BYTE* length=cbHashedBlob
+  cbHashedBlob DWORD
+  pbToBeHashed BYTE* postLength=pcbToBeHashed
+  pcbToBeHashed DWORD*
+  pbComputedHash BYTE* postLength=pcbComputedHash
+  pcbComputedHash DWORD*
+
+func CryptVerifyMessageSignature
+  BOOL
+  pVerifyPara PCRYPT_VERIFY_MESSAGE_PARA
+  dwSignerIndex DWORD
+  pbSignedBlob "const BYTE*" length=cbSignedBlob
+  cbSignedBlob DWORD
+  pbDecoded BYTE* postLength=pcbDecoded
+  pcbDecoded DWORD*
+  ppSignerCert PCCERT_CONTEXT*
+
+func CryptVerifyMessageSignatureWithKey
+  BOOL
+  pVerifyPara PCRYPT_KEY_VERIFY_MESSAGE_PARA
+  pPublicKeyInfo PCERT_PUBLIC_KEY_INFO
+  pbSignedBlob "const BYTE*" length=cbSignedBlob
+  cbSignedBlob DWORD
+  pbDecoded BYTE* postLength=pcbDecoded
+  pcbDecoded DWORD*
+
+func CertCompareCertificate
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  pCertId1 PCERT_INFO
+  pCertId2 PCERT_INFO
+
+func CertCompareCertificateName
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  pCertName1 PCERT_NAME_BLOB
+  pCertName2 PCERT_NAME_BLOB
+
+func CertCompareIntegerBlob
+  BOOL
+  pInt1 PCRYPT_INTEGER_BLOB
+  pInt2 PCRYPT_INTEGER_BLOB
+
+func CertComparePublicKeyInfo
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  pPublicKey1 PCERT_PUBLIC_KEY_INFO
+  pPublicKey2 PCERT_PUBLIC_KEY_INFO
+
+func CertFindAttribute
+  success NotEqual=0
+  PCRYPT_ATTRIBUTE
+  pszObjId LPCSTR
+  cAttr DWORD
+  rgAttr CRYPT_ATTRIBUTE[] count=cAttr
+
+func CertFindExtension
+  PCERT_EXTENSION
+  pszObjId LPCSTR
+  cExtensions DWORD
+  rgExtensions CERT_EXTENSION[] count=cExtensions
+
+func CertFindRDNAttr
+  PCERT_RDN_ATTR
+  pszObjId LPCSTR
+  pName PCERT_NAME_INFO
+
+func CertGetIntendedKeyUsage
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  pCertInfo PCERT_INFO
+  pbKeyUsage BYTE* postLength=cbKeyUsage
+  cbKeyUsage DWORD
+
+func CertGetPublicKeyLength
+  success NotEqual=0
+  DWORD
+  dwCertEncodingType [CertEncodingType]
+  pPublicKey PCERT_PUBLIC_KEY_INFO
+
+func CertIsRDNAttrsInCertificateName
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  dwFlags DWORD
+  pCertName PCERT_NAME_BLOB
+  pRDN PCERT_RDN
+
+func CertVerifyCRLRevocation
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  pCertId PCERT_INFO
+  cCrlInfo DWORD
+  rgpCrlInfo "PCRL_INFO []" count=cCrlInfo
+
+func CertVerifyCRLTimeValidity
+  success NotEqual=0
+  LONG
+  pTimeToVerify LPFILETIME
+  pCrlInfo PCRL_INFO
+
+func CertVerifyRevocation
+  BOOL
+  dwEncodingType [CertEncodingType]
+  dwRevType DWORD
+  cContext DWORD
+  rgpvContext "PVOID []" count=cContext
+  dwFlags DWORD
+  pRevPara PCERT_REVOCATION_PARA
+  pRevStatus PCERT_REVOCATION_STATUS
+
+func CertVerifyTimeValidity
+  LONG
+  pTimeToVerify LPFILETIME
+  pCertInfo PCERT_INFO
+
+func CertVerifyValidityNesting
+  BOOL
+  pSubjectInfo PCERT_INFO
+  pIssuerInfo PCERT_INFO
+
+func CryptExportPKCS8
+  BOOL
+  hCryptProv HCRYPTPROV
+  dwKeySpec [CryptKeySpec]
+  pszPrivateKeyObjId LPSTR
+  dwFlags DWORD
+  pvAuxInfo void*
+  pbPrivateKeyBlob BYTE* postLength=pcbPrivateKeyBlob
+  pcbPrivateKeyBlob DWORD*
+
+func CryptExportPKCS8Ex
+  BOOL
+  psExportParams CRYPT_PKCS8_EXPORT_PARAMS*
+  dwFlags DWORD
+  pvAuxInfo void*
+  pbPrivateKeyBlob BYTE* postLength=pcbPrivateKeyBlob
+  pcbPrivateKeyBlob DWORD*
+
+func CryptExportPublicKeyInfo
+  BOOL
+  hCryptProvOrNCryptKey HCRYPTPROV_OR_NCRYPT_KEY_HANDLE
+  dwKeySpec [CryptKeySpec]
+  dwCertEncodingType [CertEncodingType]
+  pInfo PCERT_PUBLIC_KEY_INFO
+  pcbInfo DWORD*
+
+func CryptExportPublicKeyInfoEx
+  BOOL
+  hCryptProvOrNCryptKey HCRYPTPROV_OR_NCRYPT_KEY_HANDLE
+  dwKeySpec [CryptKeySpec]
+  dwCertEncodingType [CertEncodingType]
+  pszPublicKeyObjId LPSTR
+  dwFlags DWORD
+  pvAuxInfo void*
+  pInfo PCERT_PUBLIC_KEY_INFO
+  pcbInfo DWORD*
+
+func CryptExportPublicKeyInfoFromBCryptKeyHandle
+  BOOL
+  hBCryptKey BCRYPT_KEY_HANDLE
+  dwCertEncodingType [CertEncodingType]
+  pszPublicKeyObjId LPSTR
+  dwFlags DWORD
+  pvAuxInfo void*
+  pInfo PCERT_PUBLIC_KEY_INFO
+  pcbInfo DWORD
+
+func CryptFindCertificateKeyProvInfo
+  BOOL
+  pCert PCCERT_CONTEXT
+  dwFlags DWORD
+  pvReserved void*
+
+func CryptFindLocalizedName
+  success NotEqual=0
+  LPCWSTR
+  pwszCryptName LPCWSTR
+
+func CryptHashCertificate
+  BOOL
+  hCryptProv HCRYPTPROV_LEGACY
+  Algid ALG_ID
+  dwFlags DWORD
+  pbEncoded "const BYTE*" length=cbEncoded
+  cbEncoded DWORD
+  pbComputedHash BYTE* postLength=pcbComputedHash
+  pcbComputedHash DWORD*
+
+func CryptHashCertificate2
+  BOOL
+  pwszCNGHashAlgid LPCWSTR
+  dwFlags DWORD
+  pvReserved void*
+  pbEncoded BYTE* length=cbEncoded
+  cbEncoded DWORD
+  pbComputedHash BYTE* postLength=pcbComputedHash
+  pcbComputedHash DWORD*
+
+func CryptHashPublicKeyInfo
+  BOOL
+  hCryptProv HCRYPTPROV_LEGACY
+  Algid ALG_ID
+  dwFlags DWORD
+  dwCertEncodingType [CertEncodingType]
+  pInfo PCERT_PUBLIC_KEY_INFO
+  pbComputedHash BYTE* postLength=pcbComputedHash
+  pcbComputedHash DWORD*
+
+func CryptHashToBeSigned
+  BOOL
+  hCryptProv HCRYPTPROV_LEGACY
+  dwCertEncodingType [CertEncodingType]
+  pbEncoded "const BYTE*" length=cbEncoded
+  cbEncoded DWORD
+  pbComputedHash BYTE* postLength=pcbComputedHash
+  pcbComputedHash DWORD*
+
+func CryptImportPKCS8
+  BOOL
+  sPrivateKeyAndParams CRYPT_PKCS8_IMPORT_PARAMS
+  dwFlags DWORD
+  phCryptProv HCRYPTPROV*
+  pvAuxInfo void*
+
+func CryptImportPublicKeyInfo
+  BOOL
+  hCryptProv HCRYPTPROV
+  dwCertEncodingType [CertEncodingType]
+  pInfo PCERT_PUBLIC_KEY_INFO
+  phKey HCRYPTKEY*
+
+func CryptImportPublicKeyInfoEx
+  BOOL
+  hCryptProv HCRYPTPROV
+  dwCertEncodingType [CertEncodingType]
+  pInfo PCERT_PUBLIC_KEY_INFO
+  aiKeyAlg ALG_ID
+  dwFlags DWORD
+  pvAuxInfo void*
+  phKey HCRYPTKEY*
+
+func CryptImportPublicKeyInfoEx2
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  pInfo PCERT_PUBLIC_KEY_INFO
+  dwFlags DWORD
+  pvAuxInfo void*
+  phKey BCRYPT_KEY_HANDLE*
+
+func CryptMemAlloc
+  success NotEqual=0
+  LPVOID
+  cbSize ULONG
+
+func CryptMemFree
+  void
+  pv LPVOID
+
+func CryptMemRealloc
+  success NotEqual=0
+  LPVOID
+  pv LPVOID
+  cbSize ULONG
+
+func CryptQueryObject
+  BOOL
+  dwObjectType [CryptObjectType]
+  pvObject "const void*"
+  dwExpectedContentTypeFlags [CryptExpectedContentType]
+  dwExpectedFormatTypeFlags [CryptExpectedFormatType]
+  dwFlags DWORD
+  pdwMsgAndCertEncodingType [CertEncodingType*]
+  pdwContentType [CryptContentType*]
+  pdwFormatType [CryptFormatType*]
+  phCertStore HCERTSTORE*
+  phMsg HCRYPTMSG*
+  ppvContext "const void**"
+
+func CryptSignAndEncodeCertificate
+  BOOL
+  hCryptProvOrNCryptKey HCRYPTPROV_OR_NCRYPT_KEY_HANDLE
+  dwKeySpec [CryptKeySpec]
+  dwCertEncodingType [CertEncodingType]
+  lpszStructType LPCSTR
+  pvStructInfo "const void*"
+  pSignatureAlgorithm PCRYPT_ALGORITHM_IDENTIFIER
+  pvHashAuxInfo "const void*"
+  pbEncoded PBYTE postLength=pcbEncoded
+  pcbEncoded DWORD*
+
+func CryptSignCertificate
+  BOOL
+  hCryptProvOrNCryptKey HCRYPTPROV_OR_NCRYPT_KEY_HANDLE
+  dwKeySpec [CryptKeySpec]
+  dwCertEncodingType [CertEncodingType]
+  pbEncodedToBeSigned "const BYTE*" length=cbEncodedToBeSigned
+  cbEncodedToBeSigned DWORD
+  pSignatureAlgorithm PCRYPT_ALGORITHM_IDENTIFIER
+  pvHashAuxInfo "const void*"
+  pbSignature BYTE* postLength=pcbSignature
+  pcbSignature DWORD*
+
+func CryptSIPAddProvider
+  BOOL
+  psNewProv SIP_ADD_NEWPROVIDER*
+
+func CryptSIPCreateIndirectData
+  BOOL
+  pSubjectInfo SIP_SUBJECTINFO*
+  pcbIndirectData DWORD*
+  pIndirectData SIP_INDIRECT_DATA*
+
+func CryptSIPGetSignedDataMsg
+  BOOL
+  pSubjectInfo SIP_SUBJECTINFO*
+  pdwEncodingType [CertEncodingType*]
+  dwIndex DWORD
+  pcbSignedDataMsg DWORD*
+  pbSignedDataMsg BYTE* postLength=pcbSignedDataMsg
+
+func CryptSIPLoad
+  BOOL
+  pgSubject "const GUID*"
+  dwFlags DWORD
+  pSipDispatch SIP_DISPATCH_INFO*
+
+func CryptSIPPutSignedDataMsg
+  BOOL
+  pSubjectInfo SIP_SUBJECTINFO*
+  pdwEncodingType [CertEncodingType*]
+  dwIndex DWORD
+  pcbSignedDataMsg DWORD*
+  pbSignedDataMsg BYTE* postLength=pcbSignedDataMsg
+
+func CryptSIPRemoveProvider
+  BOOL
+  pgProv GUID*
+
+func CryptSIPRemoveSignedDataMsg
+  BOOL
+  pSubjectInfo SIP_SUBJECTINFO*
+  dwIndex DWORD
+
+func CryptSIPRetrieveSubjectGuid
+  BOOL
+  FileName LPCWSTR
+  hFileIn HANDLE
+  pgSubject GUID*
+
+func CryptSIPRetrieveSubjectGuidForCatalogFile
+  BOOL
+  FileName LPCWSTR
+  hFileIn HANDLE
+  pgSubject GUID*
+
+func CryptSIPVerifyIndirectData
+  BOOL
+  pSubjectInfo SIP_SUBJECTINFO*
+  pIndirectData SIP_INDIRECT_DATA*
+
+func CryptUpdateProtectedState
+  BOOL
+  pOldSid PSID
+  pwszOldPassword LPCWSTR
+  dwFlags DWORD
+  pdwSuccessCount DWORD*
+  pdwFailureCount DWORD*
+
+func CryptVerifyCertificateSignature
+  BOOL
+  hCryptProv HCRYPTPROV_LEGACY
+  dwCertEncodingType [CertEncodingType]
+  pbEncoded BYTE* length=cbEncoded
+  cbEncoded DWORD
+  pPublicKey PCERT_PUBLIC_KEY_INFO
+
+func CryptVerifyCertificateSignatureEx
+  BOOL
+  hCryptProv HCRYPTPROV_LEGACY
+  dwCertEncodingType [CertEncodingType]
+  dwSubjectType [CryptSubjectType]
+  pvSubject void*
+  dwIssuerType [CryptIssuerType]
+  pvIssuer void*
+  dwFlags DWORD
+  pvReserved void*
+
+func CertIsStrongHashToSign
+  BOOL
+  pStrongSignPara PCCERT_STRONG_SIGN_PARA
+  pwszCNGHashAlgid LPCWSTR
+  pSigningCert PCCERT_CONTEXT
+
+func CryptSIPGetCaps
+  BOOL
+  pSubjInfo SIP_SUBJECTINFO*
+  pCaps SIP_CAP_SET*
+
+func CertAlgIdToOID
+  success NotEqual=0
+  LPCSTR
+  dwAlgId DWORD
+
+func CertGetNameString bothCharset
+  success NotEqual=0
+  DWORD
+  pCertContext PCCERT_CONTEXT
+  dwType [CertNameType]
+  dwFlags [CertNameFlags]
+  pvTypePara void*
+  pszNameString LPTSTR
+  cchNameString DWORD
+
+func CertNameToStr bothCharset
+  success NotEqual=0
+  DWORD
+  dwCertEncodingType [CertEncodingType]
+  pName PCERT_NAME_BLOB
+  dwStrType [CertStrType]
+  psz LPTSTR
+  csz DWORD
+
+func CertOIDToAlgId
+  success NotEqual=0
+  DWORD
+  pszObjId LPCSTR
+
+func CertRDNValueToStr bothCharset
+  success NotEqual=0
+  DWORD
+  dwValueType DWORD
+  pValue PCERT_RDN_VALUE_BLOB
+  psz LPTSTR
+  csz DWORD
+
+func CertStrToName bothCharset
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  pszX500 LPCTSTR
+  dwStrType [CertStrType]
+  pvReserved void*
+  pbEncoded BYTE* postLength=pcbEncoded
+  pcbEncoded DWORD*
+  ppszError LPCTSTR*
+
+func CryptBinaryToString bothCharset
+  BOOL
+  pbBinary "const BYTE*" length=cbBinary
+  cbBinary DWORD
+  dwFlags [CryptStringFlags]
+  pszString LPTSTR
+  pcchString DWORD*
+
+func CryptFormatObject
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  dwFormatType DWORD
+  dwFormatStrType [CryptFormatStrType]
+  pFormatStruct void*
+  lpszStructType LPCSTR
+  pbEncoded "const BYTE*" length=cbEncoded
+  cbEncoded DWORD
+  pbFormat void* postLength=pcbFormat
+  pcbFormat DWORD*
+
+func CryptStringToBinary bothCharset
+  BOOL
+  pszString LPCTSTR
+  cchString DWORD
+  dwFlags [CryptStringFlags]
+  pbBinary BYTE* postLength=pcbBinary
+  pcbBinary DWORD*
+  pdwSkip DWORD*
+  pdwFlags [CryptStringFlags*]
+
+func CertAddEnhancedKeyUsageIdentifier
+  BOOL
+  pCertContext PCCERT_CONTEXT
+  pszUsageIdentifier LPCSTR
+
+func CertGetEnhancedKeyUsage
+  BOOL
+  pCertContext PCCERT_CONTEXT
+  dwFlags [CertFindFlags]
+  pUsage PCERT_ENHKEY_USAGE
+  pcbUsage DWORD*
+
+func CertRemoveEnhancedKeyUsageIdentifier
+  BOOL
+  pCertContext PCCERT_CONTEXT
+  pszUsageIdentifier LPCSTR
+
+func CertSetEnhancedKeyUsage
+  BOOL
+  pCertContext PCCERT_CONTEXT
+  pUsage PCERT_ENHKEY_USAGE
+
+func CryptCreateKeyIdentifierFromCSP
+  BOOL
+  dwCertEncodingType [CertEncodingType]
+  pszPubKeyOID LPCSTR
+  pPubKeyStruc "const PUBLICKEYSTRUC*"
+  cbPubKeyStruc DWORD
+  dwFlags DWORD
+  pvReserved void*
+  pbHash BYTE* postLength=pcbHash
+  pcbHash DWORD*
+
+func CryptEnumKeyIdentifierProperties
+  BOOL
+  pKeyIdentifier "const CRYPT_HASH_BLOB*"
+  dwPropId DWORD
+  dwFlags DWORD
+  pwszComputerName LPCWSTR
+  pvReserved void*
+  pvArg void*
+  pfnEnum PFN_CRYPT_ENUM_KEYID_PROP
+
+func CryptGetKeyIdentifierProperty
+  BOOL
+  pKeyIdentifier "const CRYPT_HASH_BLOB*"
+  dwPropId DWORD
+  dwFlags DWORD
+  pwszComputerName LPCWSTR
+  pvReserved void*
+  pvData void* postLength=pcbData
+  pcbData DWORD*
+
+func CryptSetKeyIdentifierProperty
+  BOOL
+  pKeyIdentifier "const CRYPT_HASH_BLOB*"
+  dwPropId DWORD
+  dwFlags DWORD
+  pwszComputerName LPCWSTR
+  pvReserved void*
+  pvData "const void*"
+
+func CryptEnumOIDFunction
+  BOOL
+  dwEncodingType [CertEncodingType]
+  pszFuncName LPCSTR
+  pszOID LPCSTR
+  dwFlags DWORD
+  pvArg void*
+  pfnEnumOIDFunc PFN_CRYPT_ENUM_OID_FUNC
+
+func CryptEnumOIDInfo
+  BOOL
+  dwGroupId [CryptGroupId]
+  dwFlags DWORD
+  pvArg void*
+  pfnEnumOIDInfo PFN_CRYPT_ENUM_OID_INFO
+
+func CryptFindOIDInfo
+  success NotEqual=0
+  PCCRYPT_OID_INFO
+  dwKeyType [CryptFindOidInfoKeyType]
+  pvKey void*
+  dwGroupId [CryptFindOidInfoGroudId]
+
+func CryptFreeOIDFunctionAddress
+  BOOL
+  hFuncAddr HCRYPTOIDFUNCADDR
+  dwFlags DWORD
+
+func CryptGetOIDFunctionAddress
+  BOOL
+  hFuncSet HCRYPTOIDFUNCSET
+  dwEncodingType [CertEncodingType]
+  pszOID LPCSTR
+  dwFlags DWORD
+  ppvFuncAddr void**
+  phFuncAddr HCRYPTOIDFUNCADDR*
+
+func CryptGetDefaultOIDFunctionAddress
+  BOOL
+  hFuncSet HCRYPTOIDFUNCSET
+  dwEncodingType [CertEncodingType]
+  pwszDll LPCWSTR
+  dwFlags DWORD
+  ppvFuncAddr void**
+  phFuncAddr HCRYPTOIDFUNCADDR*
+
+func CryptGetDefaultOIDDllList
+  BOOL
+  hFuncSet HCRYPTOIDFUNCSET
+  dwEncodingType [CertEncodingType]
+  pwszDllList LPWSTR
+  pcchDllList DWORD*
+
+func CryptGetOIDFunctionValue
+  BOOL
+  dwEncodingType [CertEncodingType]
+  pszFuncName LPCSTR
+  pszOID LPCSTR
+  pwszValueName LPCWSTR
+  pdwValueType DWORD*
+  pbValueData BYTE* postLength=pcbValueData
+  pcbValueData DWORD*
+
+func CryptInitOIDFunctionSet
+  success NotEqual=0
+  HCRYPTOIDFUNCSET
+  pszFuncName LPCSTR
+  dwFlags DWORD
+
+func CryptInstallOIDFunctionAddress
+  BOOL
+  hModule HMODULE
+  dwEncodingType [CertEncodingType]
+  pszFuncName LPCSTR
+  cFuncEntry DWORD
+  rgFuncEntry CRYPT_OID_FUNC_ENTRY[] count=cFuncEntry
+  dwFlags [CryptInstallOIDFlags]
+
+func CryptRegisterDefaultOIDFunction
+  BOOL
+  dwEncodingType [CertEncodingType]
+  pszFuncName LPCSTR
+  dwIndex DWORD
+  pwszDll LPCWSTR
+
+func CryptRegisterOIDFunction
+  BOOL
+  dwEncodingType [CertEncodingType]
+  pszFuncName LPCSTR
+  pszOID LPCSTR
+  pwszDll LPCWSTR
+  pszOverrideFuncName LPCSTR
+
+func CryptRegisterOIDInfo
+  BOOL
+  pInfo PCCRYPT_OID_INFO
+  dwFlags DWORD
+
+func CryptSetOIDFunctionValue
+  BOOL
+  dwEncodingType [CertEncodingType]
+  pszFuncName LPCSTR
+  pszOID LPCSTR
+  pwszValueName LPCWSTR
+  dwValueType DWORD
+  pbValueData "const BYTE*" length=cbValueData
+  cbValueData DWORD
+
+func CryptUnregisterDefaultOIDFunction
+  BOOL
+  dwEncodingType [CertEncodingType]
+  pszFuncName LPCSTR
+  pwszDll LPCWSTR
+
+func CryptUnregisterOIDFunction
+  BOOL
+  dwEncodingType [CertEncodingType]
+  pszFuncName LPCSTR
+  pszOID LPCSTR
+
+func CryptUnregisterOIDInfo
+  BOOL
+  pInfo PCCRYPT_OID_INFO
+
+func PFXExportCertStore
+  BOOL
+  hStore HCERTSTORE
+  pPFX CRYPT_DATA_BLOB*
+  szPassword LPCWSTR
+  dwFlags DWORD
+
+func PFXExportCertStoreEx
+  BOOL
+  hStore HCERTSTORE
+  pPFX CRYPT_DATA_BLOB*
+  szPassword LPCWSTR
+  pvReserved void*
+  dwFlags DWORD
+
+func PFXImportCertStore
+  success NotEqual=0
+  HCERTSTORE
+  pPFX CRYPT_DATA_BLOB*
+  szPassword LPCWSTR
+  dwFlags DWORD
+
+func PFXIsPFXBlob
+  BOOL
+  pPFX CRYPT_DATA_BLOB*
+
+func PFXVerifyPassword
+  BOOL
+  pPFX CRYPT_DATA_BLOB*
+  szPassword LPCWSTR
+  dwFlags DWORD
+

@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMDecoderCaps base=IUnknown id={c0dff467-d499-4986-972b-e1d9090fa941} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetDecoderCaps
+    HRESULT
+    dwCapIndex DWORD
+    lpdwCap DWORD*
+
+

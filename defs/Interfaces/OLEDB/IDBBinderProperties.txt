@@ -1,0 +1,8 @@
+include Interfaces\OLEDB\IDBProperties.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IDBBinderProperties base=IDBProperties id={0c733ab3-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func Reset
+    [OLEDB_HRESULT]
+
+

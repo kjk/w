@@ -1,0 +1,15 @@
+include Interfaces\WindowsSync\ISyncCallback.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncCallback2 base=ISyncCallback id={47ce84af-7442-4ead-8630-12015e030ad7} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func OnChangeApplied
+    HRESULT
+    dwChangesApplied DWORD
+    dwChangesFailed DWORD
+
+  func OnChangeFailed
+    HRESULT
+    dwChangesApplied DWORD
+    dwChangesFailed DWORD
+
+

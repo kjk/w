@@ -1,0 +1,52 @@
+include Headers\windows.h.txt
+
+dll Normaliz.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Application UI Development/Internationalization for Windows Applications/Globalization Services/National Language Support"
+alias NORM_FORM LPVOID
+
+flag [IdnFlags] DWORD display=DWORD
+  IDN_ALLOW_UNASSIGNED     0x01
+  IDN_USE_STD3_ASCII_RULES 0x02
+
+func IdnToAscii
+  success NotEqual=0
+  int
+  dwFlags [IdnFlags]
+  lpUnicodeCharStr LPCWSTR
+  cchUnicodeChar int
+  lpASCIICharStr LPWSTR
+  cchASCIIChar int
+
+func IdnToNameprepUnicode
+  success NotEqual=0
+  int
+  dwFlags [IdnFlags]
+  lpUnicodeCharStr LPCWSTR
+  cchUnicodeChar int
+  lpNameprepCharStr LPWSTR
+  cchNameprepChar int
+
+func IdnToUnicode
+  success NotEqual=0
+  int
+  dwFlags [IdnFlags]
+  lpASCIICharStr LPCWSTR
+  cchASCIIChar int
+  lpUnicodeCharStr LPWSTR
+  cchUnicodeChar int
+
+func IsNormalizedString
+  BOOL
+  NormForm NORM_FORM
+  lpString LPCWSTR
+  cwLength int
+
+func NormalizeString
+  success NotEqual=0
+  int
+  NormForm NORM_FORM
+  lpSrcString LPCWSTR
+  cwSrcLength int
+  lpDstString LPWSTR
+  cwDstLength int
+

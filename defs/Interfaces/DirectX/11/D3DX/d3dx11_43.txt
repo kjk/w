@@ -1,0 +1,274 @@
+dll d3dx11_43.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/D3DX"
+func D3DX11CompileFromFile bothCharset
+  HRESULT
+  pSrcFile LPCTSTR
+  pDefines "const D3D10_SHADER_MACRO*"
+  pInclude LPD3D10INCLUDE
+  pFunctionName LPCSTR
+  pProfile LPCSTR
+  Flags1 [D3D10_SHADER]
+  Flags2 [D3D10_EFFECT]
+  pPump ID3DX11ThreadPump*
+  ppShader ID3D10Blob**
+  ppErrorMsgs ID3D10Blob**
+  pHResult HRESULT*
+
+func D3DX11CompileFromMemory
+  HRESULT
+  pSrcData LPCSTR
+  SrcDataLen SIZE_T
+  pFileName LPCSTR
+  pDefines "const D3D10_SHADER_MACRO*"
+  pInclude LPD3D10INCLUDE
+  pFunctionName LPCSTR
+  pProfile LPCSTR
+  Flags1 UINT
+  Flags2 UINT
+  pPump ID3DX11ThreadPump*
+  ppShader ID3D10Blob**
+  ppErrorMsgs ID3D10Blob**
+  pHResult HRESULT*
+
+func D3DX11CompileFromResource bothCharset
+  HRESULT
+  hSrcModule HMODULE
+  pSrcResource LPCTSTR
+  pSrcFileName LPCTSTR
+  pDefines "const D3D10_SHADER_MACRO*"
+  pInclude LPD3D10INCLUDE
+  pFunctionName LPCSTR
+  pProfile LPCSTR
+  Flags1 UINT
+  Flags2 UINT
+  pPump ID3DX11ThreadPump*
+  ppShader ID3D10Blob**
+  ppErrorMsgs ID3D10Blob**
+  pHResult HRESULT*
+
+func D3DX11ComputeNormalMap
+  HRESULT
+  pContext ID3D11DeviceContext*
+  pSrcTexture ID3D11Texture2D*
+  Flags [D3DX_NORMALMAP]
+  Channel UINT
+  Amplitude FLOAT
+  pDestTexture ID3D11Texture2D*
+
+func D3DX11CreateAsyncCompilerProcessor
+  HRESULT
+  pFileName LPCSTR
+  pDefines "const D3D11_SHADER_MACRO*"
+  pInclude LPD3D10INCLUDE
+  pFunctionName LPCSTR
+  pProfile LPCSTR
+  Flags1 UINT
+  Flags2 UINT
+  ppCompiledShader ID3D10Blob**
+  ppErrorBuffer ID3D10Blob**
+  ppDataProcessor ID3DX11DataProcessor**
+
+func D3DX11CreateAsyncFileLoader bothCharset
+  HRESULT
+  pFileName LPCTSTR
+  ppDataLoader ID3DX11DataLoader**
+
+func D3DX11CreateAsyncMemoryLoader
+  HRESULT
+  pData LPCVOID
+  cbData SIZE_T
+  ppDataLoader ID3DX11DataLoader**
+
+func D3DX11CreateAsyncResourceLoader bothCharset
+  HRESULT
+  hSrcModule HMODULE
+  pSrcResource LPCTSTR
+  ppDataLoader ID3DX11DataLoader**
+
+func D3DX11CreateAsyncShaderPreprocessProcessor
+  HRESULT
+  pFileName LPCSTR
+  pDefines "const D3D11_SHADER_MACRO*"
+  pInclude LPD3D10INCLUDE
+  ppShaderText ID3D10Blob**
+  ppErrorBuffer ID3D10Blob**
+  ppDataProcessor ID3DX11DataProcessor**
+
+func D3DX11CreateAsyncShaderResourceViewProcessor
+  HRESULT
+  pDevice ID3D11Device*
+  pLoadInfo D3DX11_IMAGE_LOAD_INFO*
+  ppDataProcessor ID3DX11DataProcessor**
+
+func D3DX11CreateAsyncTextureInfoProcessor
+  HRESULT
+  pImageInfo D3DX11_IMAGE_INFO*
+  ppDataProcessor ID3DX11DataProcessor**
+
+func D3DX11CreateAsyncTextureProcessor
+  HRESULT
+  pDevice ID3D11Device*
+  pLoadInfo D3DX11_IMAGE_LOAD_INFO*
+  ppDataProcessor ID3DX11DataProcessor**
+
+func D3DX11CreateShaderResourceViewFromFile bothCharset
+  HRESULT
+  pDevice ID3D11Device*
+  pSrcFile LPCTSTR
+  pLoadInfo D3DX11_IMAGE_LOAD_INFO*
+  pPump ID3DX11ThreadPump*
+  ppShaderResourceView ID3D11ShaderResourceView**
+  pHResult HRESULT*
+
+func D3DX11CreateShaderResourceViewFromMemory
+  HRESULT
+  pDevice ID3D11Device*
+  pSrcData LPCVOID
+  SrcDataSize SIZE_T
+  pLoadInfo D3DX11_IMAGE_LOAD_INFO*
+  pPump ID3DX11ThreadPump*
+  ppShaderResourceView ID3D11ShaderResourceView**
+  pHResult HRESULT*
+
+func D3DX11CreateShaderResourceViewFromResource bothCharset
+  HRESULT
+  pDevice ID3D11Device*
+  hSrcModule HMODULE
+  pSrcResource LPCTSTR
+  pLoadInfo D3DX11_IMAGE_LOAD_INFO*
+  pPump ID3DX11ThreadPump*
+  ppShaderResourceView ID3D11ShaderResourceView**
+  pHResult HRESULT*
+
+func D3DX11CreateTextureFromFile bothCharset
+  HRESULT
+  pDevice ID3D11Device*
+  pSrcFile LPCTSTR
+  pLoadInfo D3DX11_IMAGE_LOAD_INFO*
+  pPump ID3DX11ThreadPump*
+  ppTexture ID3D11Resource**
+  pHResult HRESULT*
+
+func D3DX11CreateTextureFromMemory
+  HRESULT
+  pDevice ID3D11Device*
+  pSrcData LPCVOID
+  SrcDataSize SIZE_T
+  pLoadInfo D3DX11_IMAGE_LOAD_INFO*
+  pPump ID3DX11ThreadPump*
+  ppTexture ID3D11Resource**
+  pHResult HRESULT*
+
+func D3DX11CreateTextureFromResource bothCharset
+  HRESULT
+  pDevice ID3D11Device*
+  hSrcModule HMODULE
+  pSrcResource LPCTSTR
+  pLoadInfo D3DX11_IMAGE_LOAD_INFO*
+  pPump ID3DX11ThreadPump*
+  ppTexture ID3D11Resource**
+  pHResult HRESULT*
+
+func D3DX11CreateThreadPump
+  HRESULT
+  cIoThreads UINT
+  cProcThreads UINT
+  ppThreadPump ID3DX11ThreadPump**
+
+func D3DX11FilterTexture
+  HRESULT
+  pContext ID3D11DeviceContext*
+  pTexture ID3D11Resource*
+  SrcLevel UINT
+  MipFilter UINT
+
+func D3DX11GetImageInfoFromFile bothCharset
+  HRESULT
+  pSrcFile LPCTSTR
+  pPump ID3DX11ThreadPump*
+  pSrcInfo D3DX11_IMAGE_INFO*
+  pHResult HRESULT*
+
+func D3DX11GetImageInfoFromMemory
+  HRESULT
+  pSrcData LPCVOID
+  SrcDataSize SIZE_T
+  pPump ID3DX11ThreadPump*
+  pSrcInfo D3DX11_IMAGE_INFO*
+  pHResult HRESULT*
+
+func D3DX11GetImageInfoFromResource bothCharset
+  HRESULT
+  hSrcModule HMODULE
+  pSrcResource LPCTSTR
+  pPump ID3DX11ThreadPump*
+  pSrcInfo D3DX11_IMAGE_INFO*
+  pHResult HRESULT*
+
+func D3DX11LoadTextureFromTexture
+  HRESULT
+  pSrcTexture ID3D11Resource*
+  pLoadInfo D3DX11_TEXTURE_LOAD_INFO*
+  pDstTexture ID3D11Resource*
+
+func D3DX11PreprocessShaderFromFile bothCharset
+  HRESULT
+  pFileName LPCTSTR
+  pDefines "const D3D11_SHADER_MACRO*"
+  pInclude LPD3D10INCLUDE
+  pPump ID3DX11ThreadPump*
+  ppShaderText ID3D10Blob**
+  ppErrorMsgs ID3D10Blob**
+  pHResult HRESULT*
+
+func D3DX11PreprocessShaderFromMemory
+  HRESULT
+  pSrcData LPCSTR
+  SrcDataSize SIZE_T
+  pFileName LPCSTR
+  pDefines "const D3D11_SHADER_MACRO*"
+  pInclude LPD3D10INCLUDE
+  pPump ID3DX11ThreadPump*
+  ppShaderText ID3D10Blob**
+  ppErrorMsgs ID3D10Blob**
+  pHResult HRESULT*
+
+func D3DX11PreprocessShaderFromResource bothCharset
+  HRESULT
+  hModule HMODULE
+  pResourceName LPCTSTR
+  pSrcFileName LPCTSTR
+  pDefines "const D3D11_SHADER_MACRO*"
+  pInclude LPD3D10INCLUDE
+  pPump ID3DX11ThreadPump*
+  ppShaderText ID3D10Blob**
+  ppErrorMsgs ID3D10Blob**
+  pHResult HRESULT*
+
+func D3DX11SaveTextureToFile bothCharset
+  HRESULT
+  pContext ID3D11DeviceContext*
+  pSrcTexture ID3D11Resource*
+  DestFormat D3DX11_IMAGE_FILE_FORMAT
+  pDestFile LPCTSTR
+
+func D3DX11SaveTextureToMemory
+  HRESULT
+  pContext ID3D11DeviceContext*
+  pSrcTexture ID3D11Resource*
+  DestFormat D3DX11_IMAGE_FILE_FORMAT
+  ppDestBuf LPD3D10BLOB*
+  Flags UINT
+
+func D3DX11SHProjectCubeMap
+  HRESULT
+  pContext ID3D11DeviceContext*
+  Order UINT
+  pCubeMap ID3D11Texture2D*
+  pROut FLOAT*
+  pGOut FLOAT*
+  pBOut FLOAT*
+
+func D3DX11UnsetAllDeviceObjects
+  HRESULT
+  pContext ID3D11DeviceContext*
+

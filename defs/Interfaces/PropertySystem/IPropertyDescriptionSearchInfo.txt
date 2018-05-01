@@ -1,0 +1,21 @@
+include Interfaces\PropertySystem\IPropertyDescription.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyDescriptionSearchInfo base=IPropertyDescription id={078f91bd-29a2-440f-924e-46a291524520} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func GetSearchInfoFlags
+    HRESULT
+    ppdsiFlags PROPDESC_SEARCHINFO_FLAGS*
+
+  func GetColumnIndexType
+    HRESULT
+    ppdciType PROPDESC_COLUMNINDEX_TYPE*
+
+  func GetProjectionString
+    HRESULT
+    ppszProjection LPWSTR*
+
+  func GetMaxSize
+    HRESULT
+    pcbMaxSize UINT*
+
+

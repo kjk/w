@@ -1,0 +1,28 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDCompositionSurface base=IUnknown id={BB8A4953-2C99-4F5A-96F5-4819027FA3AC} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func BeginDraw
+    HRESULT
+    updateRect "const RECT*"
+    iid REFIID
+    surface void** interfaceId=iid
+    updateOffset POINT*
+
+  func EndDraw
+    HRESULT
+
+  func SuspendDraw
+    HRESULT
+
+  func ResumeDraw
+    HRESULT
+
+  func Scroll
+    HRESULT
+    scrollRect "const RECT*"
+    clipRect "const RECT*"
+    offsetX int
+    offsetY int
+
+

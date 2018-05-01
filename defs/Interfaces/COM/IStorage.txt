@@ -1,0 +1,100 @@
+include Interfaces\IUnknown.txt
+
+ingterface IStorage base=IUnknown id={0000000b-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Structured Storage/Interfaces"
+  func CreateStream
+    HRESULT
+    pwcsName "const OLECHAR*"
+    grfMode [STGM_FLAGS]
+    reserved1 DWORD
+    reserved2 DWORD
+    ppstm IStream**
+
+  func OpenStream
+    HRESULT
+    pwcsName "const OLECHAR*"
+    reserved1 void*
+    grfMode [STGM_FLAGS]
+    reserved2 DWORD
+    ppstm IStream**
+
+  func CreateStorage
+    HRESULT
+    pwcsName "const OLECHAR*"
+    grfMode [STGM_FLAGS]
+    reserved1 DWORD
+    reserved2 DWORD
+    ppstg IStorage**
+
+  func OpenStorage
+    HRESULT
+    pwcsName "const OLECHAR*"
+    pstgPriority IStorage*
+    grfMode [STGM_FLAGS]
+    snbExclude SNB
+    reserved DWORD
+    ppstg IStorage**
+
+  func CopyTo
+    HRESULT
+    ciidExclude DWORD
+    rgiidExclude "const IID*" count=ciidExclude
+    snbExclude SNB
+    pstgDest IStorage*
+
+  func MoveElementTo
+    HRESULT
+    pwcsName "const OLECHAR*"
+    pstgDest IStorage*
+    pwcsNewName "const OLECHAR*"
+    grfFlags STGMOVE
+
+  func Commit
+    HRESULT
+    grfCommitFlags STGC
+
+  func Revert
+    HRESULT
+
+  func EnumElements
+    HRESULT
+    reserved1 DWORD
+    reserved2 void*
+    reserved3 DWORD
+    ppenum IEnumSTATSTG**
+
+  func DestroyElement
+    HRESULT
+    pwcsName "const OLECHAR*"
+
+  func RenameElement
+    HRESULT
+    pwcsOldName "const OLECHAR*"
+    pwcsNewName "const OLECHAR*"
+
+  func SetElementTimes
+    HRESULT
+    pwcsName "const OLECHAR*"
+    pctime "const FILETIME*"
+    patime "const FILETIME*"
+    pmtime "const FILETIME*"
+
+  func SetClass
+    HRESULT
+    clsid REFCLSID
+
+  func SetStateBits
+    HRESULT
+    grfStateBits DWORD
+    grfMask DWORD
+
+  func Stat
+    HRESULT
+    pstatstg STATSTG*
+    grfStatFlag STATFLAG
+
+  enum STGMOVE DWORD display=DWORD
+    STGMOVE_MOVE        0
+    STGMOVE_COPY        1
+    STGMOVE_SHALLOWCOPY 2
+
+

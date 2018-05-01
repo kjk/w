@@ -1,0 +1,98 @@
+include Interfaces\IUnknown.txt
+
+ingterface INameSpaceTreeControl base=IUnknown id={028212A3-B627-47e9-8856-C14265554E4F} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    hwndParent HWND
+    prc RECT*
+    nsctsFlags NSTCSTYLE
+
+  func TreeAdvise
+    HRESULT
+    punk IUnknown*
+    pdwCookie DWORD*
+
+  func TreeUnadvise
+    HRESULT
+    dwCookie DWORD
+
+  func AppendRoot
+    HRESULT
+    psiRoot IShellItem*
+    grfEnumFlags SHCONTF
+    grfRootStyle NSTCROOTSTYLE
+    pif IShellItemFilter*
+
+  func InsertRoot
+    HRESULT
+    iIndex int
+    psiRoot IShellItem*
+    grfEnumFlags SHCONTF
+    grfRootStyle NSTCROOTSTYLE
+    pif IShellItemFilter*
+
+  func RemoveRoot
+    HRESULT
+    psiRoot IShellItem*
+
+  func RemoveAllRoots
+    HRESULT
+
+  func GetRootItems
+    HRESULT
+    ppsiaRootItems IShellItemArray**
+
+  func SetItemState
+    HRESULT
+    psi IShellItem*
+    nstcisMask NSTCITEMSTATE
+    nstcisFlags NSTCITEMSTATE
+
+  func GetItemState
+    HRESULT
+    psi IShellItem*
+    nstcisMask NSTCITEMSTATE
+    pnstcisFlags NSTCITEMSTATE*
+
+  func GetSelectedItems
+    HRESULT
+    psiaItems IShellItemArray**
+
+  func GetItemCustomState
+    HRESULT
+    psi IShellItem*
+    piStateNumber int*
+
+  func SetItemCustomState
+    HRESULT
+    psi IShellItem*
+    iStateNumber int
+
+  func EnsureItemVisible
+    HRESULT
+    psi IShellItem*
+
+  func SetTheme
+    HRESULT
+    pszTheme LPCWSTR
+
+  func GetNextItem
+    HRESULT
+    psi IShellItem*
+    nstcgi NSTCGNI
+    ppsiNext IShellItem**
+
+  func HitTest
+    HRESULT
+    ppt POINT*
+    ppsiOut IShellItem**
+
+  func GetItemRect
+    HRESULT
+    psi IShellItem*
+    prect RECT*
+
+  func CollapseAll
+    HRESULT
+
+

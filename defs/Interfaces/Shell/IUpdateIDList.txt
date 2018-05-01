@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IUpdateIDList base=IUnknown id={6589b6d2-5f8d-4b9e-b7e0-23cdd9717d8c} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Update
+    HRESULT
+    pbc IBindCtx*
+    pidlIn PCUITEMID_CHILD
+    ppidlOut PITEMID_CHILD*
+
+

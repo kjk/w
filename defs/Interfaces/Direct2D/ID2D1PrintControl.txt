@@ -1,0 +1,16 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1PrintControl base=IUnknown id={2c1d867d-c290-41c8-ae7e-34a98702e9a5} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func AddPage
+    [D2D_HRESULT]
+    commandList ID2D1CommandList*
+    pageSize D2D_SIZE_F
+    pagePrintTicketStream IStream*
+    tag1 D2D1_TAG*
+    tag2 D2D1_TAG*
+
+  func Close
+    [D2D_HRESULT]
+
+

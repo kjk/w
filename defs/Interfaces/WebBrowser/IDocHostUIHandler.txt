@@ -1,0 +1,78 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDocHostUIHandler base=IUnknown id={bd3f23c0-d43e-11cf-893b-00aa00bdce1a} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/Advanced Hosting Interfaces"
+  func ShowContextMenu
+    HRESULT
+    dwID DWORD
+    ppt POINT*
+    pcmdtReserved IUnknown*
+    pdispReserved IDispatch*
+
+  func GetHostInfo
+    HRESULT
+    pInfo DOCHOSTUIINFO*
+
+  func ShowUI
+    HRESULT
+    dwID DWORD
+    pActiveObject IOleInPlaceActiveObject*
+    pCommandTarget IOleCommandTarget*
+    pFrame IOleInPlaceFrame*
+    pDoc IOleInPlaceUIWindow*
+
+  func HideUI
+    HRESULT
+
+  func UpdateUI
+    HRESULT
+
+  func EnableModeless
+    HRESULT
+    fEnable BOOL
+
+  func OnDocWindowActivate
+    HRESULT
+    fActivate BOOL
+
+  func OnFrameWindowActivate
+    HRESULT
+    fActivate BOOL
+
+  func ResizeBorder
+    HRESULT
+    prcBorder LPCRECT
+    pUIWindow IOleInPlaceUIWindow*
+    fRameWindow BOOL
+
+  func TranslateAccelerator
+    HRESULT
+    lpMsg LPMSG
+    pguidCmdGroup "const GUID*"
+    nCmdID DWORD
+
+  func GetOptionKeyPath
+    HRESULT
+    pchKey LPOLESTR*
+    dw DWORD
+
+  func GetDropTarget
+    HRESULT
+    pDropTarget IDropTarget*
+    ppDropTarget IDropTarget**
+
+  func GetExternal
+    HRESULT
+    ppDispatch IDispatch**
+
+  func TranslateUrl
+    HRESULT
+    dwTranslate DWORD
+    pchURLIn OLECHAR*
+    ppchURLOut OLECHAR**
+
+  func FilterDataObject
+    HRESULT
+    pDO IDataObject*
+    ppDORet IDataObject**
+
+

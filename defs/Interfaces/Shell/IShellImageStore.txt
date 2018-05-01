@@ -1,0 +1,67 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellImageStore base=IUnknown id={48C8118C-B924-11D1-98D5-00C04FB687DA} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Open
+    HRESULT
+    dwMode DWORD
+    pdwLock DWORD*
+
+  func Create
+    HRESULT
+    dwMode DWORD
+    pdwLock DWORD*
+
+  func ReleaseLock
+    HRESULT
+    pdwLock "DWORD const*"
+
+  func Close
+    HRESULT
+    pdwLock "DWORD const*"
+
+  func Commit
+    HRESULT
+    pdwLock "DWORD const*"
+
+  func IsLocked
+    HRESULT
+
+  func GetMode
+    HRESULT
+    pdwMode DWORD*
+
+  func GetCapabilities
+    HRESULT
+    pdwCapMask DWORD*
+
+  func AddEntry
+    HRESULT
+    pszName LPCWSTR
+    pftTimeStamp "const FILETIME*"
+    dwMode DWORD
+    hImage HBITMAP
+
+  func GetEntry
+    HRESULT
+    pszName LPCWSTR
+    dwMode DWORD
+    phImage HBITMAP*
+
+  func DeleteEntry
+    HRESULT
+    pszName LPCWSTR
+
+  func IsEntryInStore
+    HRESULT
+    pszName LPCWSTR
+    pftTimeStamp FILETIME*
+
+  func Enum
+    HRESULT
+    ppEnum LPENUMSHELLIMAGESTORE*
+
+  alias LPENUMSHELLIMAGESTORE IEnumShellImageStore*
+
+  pointer LPENUMSHELLIMAGESTORE* LPENUMSHELLIMAGESTORE
+
+

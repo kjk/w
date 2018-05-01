@@ -1,0 +1,8 @@
+dll CryptBase.dll
+sourceModule Advapi32.dll include=Windows\Advapi32.xml
+func SystemFunction036
+
+func SystemFunction040
+
+func SystemFunction041
+

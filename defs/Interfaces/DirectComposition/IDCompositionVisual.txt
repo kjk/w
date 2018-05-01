@@ -1,0 +1,74 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDCompositionVisual base=IUnknown id={4d93059d-097b-4651-9a60-f0f25116e2f3} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func SetOffsetX
+    HRESULT
+    offsetX float
+
+  func "SetOffsetX "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetOffsetY
+    HRESULT
+    offsetY float
+
+  func "SetOffsetY "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetTransform
+    HRESULT
+    matrix "const D2D_MATRIX_3X2_F&"
+
+  func "SetTransform "
+    HRESULT
+    transform IDCompositionTransform*
+
+  func SetTransformParent
+    HRESULT
+    visual IDCompositionVisual*
+
+  func SetEffect
+    HRESULT
+    effect IDCompositionEffect*
+
+  func SetBitmapInterpolationMode
+    HRESULT
+    interpolationMode DCOMPOSITION_BITMAP_INTERPOLATION_MODE
+
+  func SetBorderMode
+    HRESULT
+    borderMode DCOMPOSITION_BORDER_MODE
+
+  func SetClip
+    HRESULT
+    rect "const D2D_RECT_F&"
+
+  func "SetClip "
+    HRESULT
+    clip IDCompositionClip*
+
+  func SetContent
+    HRESULT
+    content IUnknown*
+
+  func AddVisual
+    HRESULT
+    visual IDCompositionVisual*
+    insertAbove BOOL
+    referenceVisual IDCompositionVisual*
+
+  func RemoveVisual
+    HRESULT
+    visual IDCompositionVisual*
+
+  func RemoveAllVisuals
+    HRESULT
+
+  func SetCompositeMode
+    HRESULT
+    compositeMode DCOMPOSITION_COMPOSITE_MODE
+
+

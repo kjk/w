@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioChannelConfig base=IUnknown id={BB11C46F-EC28-493C-B88A-5DB88062CE98} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func SetChannelConfig
+    [AUDCLNT_HRESULT]
+    dwConfig DWORD
+    pguidEventContext LPCGUID
+
+  func GetChannelConfig
+    [AUDCLNT_HRESULT]
+    pdwConfig DWORD*
+
+

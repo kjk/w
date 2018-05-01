@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IClockVectorElement base=IUnknown id={e71c4250-adf8-4a07-8fae-5669596909c1} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetReplicaKey
+    HRESULT
+    pdwReplicaKey DWORD*
+
+  func GetTickCount
+    HRESULT
+    pullTickCount ULONGLONG*
+
+

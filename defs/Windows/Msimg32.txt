@@ -1,0 +1,59 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+
+dll Msimg32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Bitmaps"
+alias COLOR16 USHORT
+
+struct TRIVERTEX
+  x LONG
+  y LONG
+  Red COLOR16
+  Green COLOR16
+  Blue COLOR16
+  Alpha COLOR16
+
+pointer PTRIVERTEX TRIVERTEX
+
+enum [GradientFillMode] ULONG display=ULONG
+  GRADIENT_FILL_RECT_H   0x00000000
+  GRADIENT_FILL_RECT_V   0x00000001
+  GRADIENT_FILL_TRIANGLE 0x00000002
+
+func AlphaBlend
+  BOOL
+  hdcDest HDC
+  xoriginDest int
+  yoriginDest int
+  wDest int
+  hDest int
+  hdcSrc HDC
+  xoriginSrc int
+  yoriginSrc int
+  wSrc int
+  hSrc int
+  ftn BLENDFUNCTION
+
+func GradientFill
+  BOOL
+  hdc HDC
+  pVertex PTRIVERTEX
+  nVertex ULONG
+  pMesh PVOID
+  nMesh ULONG
+  ulMode [GradientFillMode]
+
+func TransparentBlt
+  BOOL
+  hdcDest HDC
+  xoriginDest int
+  yoriginDest int
+  wDest int
+  hDest int
+  hdcSrc HDC
+  xoriginSrc int
+  yoriginSrc int
+  wSrc int
+  hSrc int
+  crTransparent UINT
+

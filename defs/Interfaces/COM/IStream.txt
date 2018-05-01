@@ -1,0 +1,54 @@
+include Interfaces\COM\ISequentialStream.txt
+
+ingterface IStream base=ISequentialStream id={0000000c-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Structured Storage/Interfaces"
+  func Seek
+    HRESULT
+    dlibMove LARGE_INTEGER
+    dwOrigin STREAM_SEEK
+    plibNewPosition ULARGE_INTEGER*
+
+  func SetSize
+    HRESULT
+    libNewSize ULARGE_INTEGER
+
+  func CopyTo
+    HRESULT
+    pstm IStream*
+    cb ULARGE_INTEGER
+    pcbRead ULARGE_INTEGER*
+    pcbWritten ULARGE_INTEGER*
+
+  func Commit
+    HRESULT
+    grfCommitFlags STGC
+
+  func Revert
+    HRESULT
+
+  func LockRegion
+    HRESULT
+    libOffset ULARGE_INTEGER
+    cb ULARGE_INTEGER
+    dwLockType LOCKTYPE
+
+  func UnlockRegion
+    HRESULT
+    libOffset ULARGE_INTEGER
+    cb ULARGE_INTEGER
+    dwLockType LOCKTYPE
+
+  func Stat
+    HRESULT
+    pstatstg STATSTG*
+    grfStatFlag STATFLAG
+
+  func Clone
+    HRESULT
+    ppstm IStream**
+
+  enum STREAM_SEEK DWORD display=DWORD
+    STREAM_SEEK_SET 0
+    STREAM_SEEK_CUR 1
+    STREAM_SEEK_END 2
+
+

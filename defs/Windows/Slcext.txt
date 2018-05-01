@@ -1,0 +1,12 @@
+include Headers\windows.h.txt
+
+dll Slcext.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Administration/Software Licensing API (SLAPI)"
+func SLAcquireGenuineTicket
+  HRESULT
+  ppTicketBlob void**
+  pcbTicketBlob UINT*
+  pwszTemplateId PCWSTR
+  pwszServerUrl PCWSTR
+  pwszClientToken PCWSTR
+

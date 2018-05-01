@@ -1,0 +1,4820 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+
+dll gdiplus.dll callingConvention=STDCALL onlineHelp=MSDN
+category "Graphics and Gaming/Legacy Graphics/GDI+/GDI+ Flat API"
+interface IDirectDrawSurface7
+
+alias LOGFONT* LPLOGFONT
+
+alias "GDIPCONST LOGFONT*" LOGFONT*
+
+alias "GDIPCONST GUID*" GUID*
+
+alias "GDIPCONST WCHAR*" WCHAR*
+
+alias REAL float
+
+pointer REAL* REAL
+
+alias "GDIPCONST REAL*" REAL*
+
+alias "GDIPCONST UINT16*" UINT16*
+
+alias "GDIPCONST void*" void*
+
+pointer "GDIPCONST BITMAPINFO*" BITMAPINFO
+
+alias "GDIPCONST CLSID*" CLSID*
+
+alias "GDIPCONST BYTE*" BYTE*
+
+alias GdiplusAbort* LPVOID
+
+alias DebugEventProc LPVOID
+
+alias NotificationHookProc LPVOID
+
+alias NotificationUnhookProc LPVOID
+
+alias GetThumbnailImageAbort LPVOID
+
+alias DrawImageAbort LPVOID
+
+alias EnumerateMetafileProc LPVOID
+
+alias GraphicsState UINT
+
+pointer GraphicsState* GraphicsState
+
+alias GraphicsContainer UINT
+
+pointer GraphicsContainer* GraphicsContainer
+
+alias ARGB DWORD
+
+pointer ARGB* ARGB
+
+alias "GDIPCONST ARGB*" ARGB*
+
+pointer "GDIPCONST EncoderParameters*" EncoderParameters
+
+array "ARGB [1]" base=ARGB count=1
+
+array "REAL [5]" base=REAL count=5
+
+array "REAL [5][5]" base="REAL [5]" count=5
+
+alias GpCachedBitmap* LPVOID
+
+pointer GpCachedBitmap** GpCachedBitmap*
+
+alias GpPath* LPVOID
+
+pointer GpPath** GpPath*
+
+alias "GDIPCONST GpPath*" LPVOID
+
+alias GpPathIterator* LPVOID
+
+pointer GpPathIterator** GpPathIterator*
+
+alias GpPathGradient* LPVOID
+
+pointer GpPathGradient** GpPathGradient*
+
+alias GpFontFamily* LPVOID
+
+pointer GpFontFamily** GpFontFamily*
+
+alias "GDIPCONST GpFontFamily*" GpFontFamily*
+
+pointer "GpFontFamily* []" GpFontFamily*
+
+alias GpPen* LPVOID
+
+pointer GpPen** GpPen*
+
+alias "GDIPCONST GpPen*" LPVOID
+
+alias GpGraphics* LPVOID
+
+pointer GpGraphics** GpGraphics*
+
+alias "GDIPCONST GpGraphics*" GpGraphics*
+
+alias "const GpGraphics*" GpGraphics*
+
+alias GpRegion* LPVOID
+
+pointer GpRegion** GpRegion*
+
+alias GpBrush* LPVOID
+
+pointer GpBrush** GpBrush*
+
+alias "GDIPCONST GpBrush*" GpBrush*
+
+alias GpHatch* LPVOID
+
+pointer GpHatch** GpHatch*
+
+alias GpImage* LPVOID
+
+pointer GpImage** GpImage*
+
+alias GpTexture* LPVOID
+
+pointer GpTexture** GpTexture*
+
+alias GpImageAttributes* LPVOID
+
+pointer GpImageAttributes** GpImageAttributes*
+
+alias "GDIPCONST GpImageAttributes*" GpImageAttributes*
+
+alias GpSolidFill* LPVOID
+
+pointer GpSolidFill** GpSolidFill*
+
+alias GpLineGradient* LPVOID
+
+pointer GpLineGradient** GpLineGradient*
+
+alias GpCustomLineCap* LPVOID
+
+pointer GpCustomLineCap** GpCustomLineCap*
+
+alias GpAdjustableArrowCap* LPVOID
+
+pointer GpAdjustableArrowCap** GpAdjustableArrowCap*
+
+alias GpBitmap* LPVOID
+
+pointer GpBitmap** GpBitmap*
+
+alias CGpEffect* LPVOID
+
+alias GpMetafile* LPVOID
+
+pointer GpMetafile** GpMetafile*
+
+alias "GDIPCONST GpMetafile*" GpMetafile*
+
+alias GpFontCollection* LPVOID
+
+pointer GpFontCollection** GpFontCollection*
+
+alias GpFont* LPVOID
+
+pointer GpFont** GpFont*
+
+alias "GDIPCONST GpFont*" GpFont*
+
+alias GpStringFormat* LPVOID
+
+pointer GpStringFormat** GpStringFormat*
+
+alias "GDIPCONST GpStringFormat*" GpStringFormat*
+
+alias GpMatrix* LPVOID
+
+pointer GpMatrix** GpMatrix*
+
+alias "GDIPCONST GpMatrix*" LPVOID
+
+enum [PropertyTagType] WORD display=WORD
+  PropertyTagTypeByte      1
+  PropertyTagTypeASCII     2
+  PropertyTagTypeShort     3
+  PropertyTagTypeLong      4
+  PropertyTagTypeRational  5
+  PropertyTagTypeUndefined 7
+  PropertyTagTypeSLONG     9
+  PropertyTagTypeSRational 10
+
+struct PropertyItem
+  id PROPID
+  length ULONG
+  type [PropertyTagType]
+  value VOID* length=length
+
+pointer PropertyItem* PropertyItem
+
+pointer "GDIPCONST PropertyItem*" PropertyItem
+
+struct METAHEADER pack=2
+  mtType WORD
+  mtHeaderSize WORD
+  mtVersion WORD
+  mtSize DWORD
+  mtNoObjects WORD
+  mtMaxRecord DWORD
+  mtNoParameters WORD
+
+struct ENHMETAHEADER3
+  iType DWORD
+  nSize DWORD
+  rclBounds RECTL
+  rclFrame RECTL
+  dSignature DWORD
+  nVersion DWORD
+  nBytes DWORD
+  nRecords DWORD
+  nHandles WORD
+  sReserved WORD
+  nDescription DWORD
+  offDescription DWORD
+  nPalEntries DWORD
+  szlDevice SIZEL
+  szlMillimeters SIZEL
+
+union [MetafileHeader_u] display=union
+  WmfHeader METAHEADER
+  EmfHeader ENHMETAHEADER3
+
+enum MetafileType UINT
+  MetafileTypeInvalid      0
+  MetafileTypeWmf          1
+  MetafileTypeWmfPlaceable 2
+  MetafileTypeEmf          3
+  MetafileTypeEmfPlusOnly  4
+  MetafileTypeEmfPlusDual  5
+
+flag [GDIP_EMFPLUSFLAGS] UINT display=UINT
+  GDIP_EMFPLUSFLAGS_DISPLAY 0x00000001
+
+struct MetafileHeader
+  Type MetafileType
+  Size UINT
+  Version UINT
+  EmfPlusFlags [GDIP_EMFPLUSFLAGS]
+  DpiX REAL
+  DpiY REAL
+  X INT
+  Y INT
+  Width INT
+  Height INT
+  Height [MetafileHeader_u]
+  EmfPlusHeaderSize INT
+  LogicalDpiX INT
+  LogicalDpiY INT
+
+pointer MetafileHeader* MetafileHeader
+
+struct PWMFRect16 pack=2
+  Left INT16
+  Top INT16
+  Right INT16
+  Bottom INT16
+
+struct WmfPlaceableFileHeader pack=2
+  Key UINT32
+  Hmf INT16
+  BoundingBox PWMFRect16
+  Inch INT16
+  Reserved UINT32
+  Checksum INT16
+
+pointer "GDIPCONST WmfPlaceableFileHeader*" WmfPlaceableFileHeader
+
+struct BitmapData
+  Width UINT
+  Height UINT
+  Stride INT
+  PixelFormat PixelFormat
+  Scan0 VOID*
+  Reserved UINT_PTR
+
+pointer BitmapData* BitmapData
+
+struct Color
+  Argb ARGB
+
+struct ColorMap
+  oldColor Color
+  newColor Color
+
+pointer "GDIPCONST ColorMap*" ColorMap
+
+struct ColorMatrix
+  m "REAL [5][5]"
+
+pointer "GDIPCONST ColorMatrix*" ColorMatrix
+
+struct ImageItemData
+  Size UINT
+  Position UINT
+  Desc VOID* length=DescSize
+  DescSize UINT
+  Data VOID* length=DataSize
+  DataSize UINT
+  Cookie UINT
+
+pointer ImageItemData* ImageItemData
+
+flag PaletteFlags UINT display=PaletteFlags
+  PaletteFlagsHasAlpha  0x0001
+  PaletteFlagsGrayScale 0x0002
+  PaletteFlagsHalftone  0x0004
+
+struct ColorPalette
+  Flags PaletteFlags
+  Count UINT
+  Entries "ARGB [1]" count=Count
+
+pointer ColorPalette* ColorPalette
+
+pointer "GDIPCONST ColorPalette*" ColorPalette
+
+struct GdiplusStartupOutput
+  NotificationHook NotificationHookProc
+  NotificationUnhook NotificationUnhookProc
+
+pointer GdiplusStartupOutput* GdiplusStartupOutput
+
+struct GdiplusStartupInput
+  GdiplusVersion UINT32
+  DebugEventCallback DebugEventProc
+  SuppressBackgroundThread BOOL
+  SuppressExternalCodecs BOOL
+
+pointer "const GdiplusStartupInput*" GdiplusStartupInput
+
+flag ImageCodecFlags DWORD display=DWORD
+  ImageCodecFlagsEncoder        0x00000001
+  ImageCodecFlagsDecoder        0x00000002
+  ImageCodecFlagsSupportBitmap  0x00000004
+  ImageCodecFlagsSupportVector  0x00000008
+  ImageCodecFlagsSeekableEncode 0x00000010
+  ImageCodecFlagsBlockingDecode 0x00000020
+  ImageCodecFlagsBuiltin        0x00010000
+  ImageCodecFlagsSystem         0x00020000
+  ImageCodecFlagsUser           0x00040000
+
+struct ImageCodecInfo
+  Clsid CLSID
+  FormatID GUID
+  CodecName "const WCHAR*"
+  DllName "const WCHAR*"
+  FormatDescription "const WCHAR*"
+  FilenameExtension "const WCHAR*"
+  MimeType "const WCHAR*"
+  Flags ImageCodecFlags
+  Version DWORD
+  SigCount DWORD
+  SigSize DWORD
+  SigPattern "const BYTE*"
+  SigMask "const BYTE*"
+
+pointer ImageCodecInfo* ImageCodecInfo
+
+struct Point
+  X INT
+  Y INT
+
+pointer "GDIPCONST Point*" Point
+
+pointer GpPoint* Point
+
+pointer "GDIPCONST GpPoint*" Point
+
+struct PointF
+  X REAL
+  Y REAL
+
+pointer PointF* PointF
+
+pointer "GDIPCONST PointF*" PointF
+
+pointer GpPointF* PointF
+
+pointer "GDIPCONST GpPointF*" PointF
+
+flag PathPointType BYTE display=BYTE
+  PathPointTypeStart        0
+  PathPointTypeLine         1
+  PathPointTypeBezier       3
+  PathPointTypeDashMode     0x10
+  PathPointTypePathMarker   0x20
+  PathPointTypeCloseSubpath 0x80
+
+pointer PathPointType* PathPointType display=BYTE*
+
+pointer "GDIPCONST PathPointType*" PathPointType display="GDIPCONST BYTE*"
+
+struct PathData
+  Count INT
+  Points PointF* count=Count
+  Types PathPointType* count=Count
+
+pointer GpPathData* PathData
+
+struct Rect
+  X INT
+  Y INT
+  Width INT
+  Height INT
+
+pointer "GDIPCONST Rect*" Rect
+
+pointer GpRect* Rect
+
+pointer "GDIPCONST GpRect*" Rect
+
+struct RectF
+  X REAL
+  Y REAL
+  Width REAL
+  Height REAL
+
+pointer RectF* RectF
+
+pointer "GDIPCONST RectF*" RectF
+
+pointer GpRectF* RectF
+
+pointer "GDIPCONST GpRectF*" RectF
+
+struct CharacterRange
+  First INT
+  Length INT
+
+pointer "GDIPCONST CharacterRange*" CharacterRange
+
+enum DitherType UINT
+  DitherTypeNone           0
+  DitherTypeSolid          1
+  DitherTypeOrdered4x4     2
+  DitherTypeOrdered8x8     3
+  DitherTypeOrdered16x16   4
+  DitherTypeSpiral4x4      5
+  DitherTypeSpiral8x8      6
+  DitherTypeDualSpiral4x4  7
+  DitherTypeDualSpiral8x8  8
+  DitherTypeErrorDiffusion 9
+  DitherTypeMax            10
+
+enum GpFillMode UINT
+  FillModeAlternate 0
+  FillModeWinding   1
+
+pointer GpFillMode* GpFillMode
+
+enum GpWrapMode UINT
+  WrapModeTile       0
+  WrapModeTileFlipX  1
+  WrapModeTileFlipY  2
+  WrapModeTileFlipXY 3
+  WrapModeClamp      4
+
+pointer GpWrapMode* GpWrapMode
+
+enum GpPenAlignment UINT
+  PenAlignmentCenter 0
+  PenAlignmentInset  1
+
+pointer GpPenAlignment* GpPenAlignment
+
+enum PaletteType UINT
+  PaletteTypeCustom           0
+  PaletteTypeOptimal          1
+  PaletteTypeFixedBW          2
+  PaletteTypeFixedHalftone8   3
+  PaletteTypeFixedHalftone27  4
+  PaletteTypeFixedHalftone64  5
+  PaletteTypeFixedHalftone125 6
+  PaletteTypeFixedHalftone216 7
+  PaletteTypeFixedHalftone252 8
+  PaletteTypeFixedHalftone256 9
+
+enum HistogramFormat UINT
+  HistogramFormatARGB  0
+  HistogramFormatPARGB 1
+  HistogramFormatRGB   2
+  HistogramFormatGray  3
+  HistogramFormatB     4
+  HistogramFormatG     5
+  HistogramFormatR     6
+  HistogramFormatA     7
+
+enum ColorMatrixFlags UINT
+  ColorMatrixFlagsDefault   0
+  ColorMatrixFlagsSkipGrays 1
+  ColorMatrixFlagsAltGray   2
+
+enum ColorChannelFlags UINT
+  ColorChannelFlagsC    0
+  ColorChannelFlagsM    1
+  ColorChannelFlagsY    2
+  ColorChannelFlagsK    3
+  ColorChannelFlagsLast 4
+
+enum SmoothingMode UINT
+  SmoothingModeInvalid      -1
+  SmoothingModeDefault      0
+  SmoothingModeHighSpeed    1
+  SmoothingModeHighQuality  2
+  SmoothingModeNone         3
+  SmoothingModeAntiAlias8x4 4
+  SmoothingModeAntiAlias8x8 5
+
+pointer SmoothingMode* SmoothingMode
+
+enum StringAlignment UINT
+  StringAlignmentNear   0
+  StringAlignmentCenter 1
+  StringAlignmentFar    2
+
+pointer StringAlignment* StringAlignment
+
+enum WarpMode UINT
+  WarpModePerspective 0
+  WarpModeBilinear    1
+
+enum GpPenType UINT
+  PenTypeUnknown        -1
+  PenTypeSolidColor     0
+  PenTypeHatchFill      1
+  PenTypeTextureFill    2
+  PenTypePathGradient   3
+  PenTypeLinearGradient 4
+
+pointer GpPenType* GpPenType
+
+enum GpDashStyle UINT
+  DashStyleSolid      0
+  DashStyleDash       1
+  DashStyleDashDot    2
+  DashStyleDashDotDot 3
+  DashStyleCustom     4
+
+pointer GpDashStyle* GpDashStyle
+
+enum CustomLineCapType UINT
+  CustomLineCapTypeDefault         0
+  CustomLineCapTypeAdjustableArrow 1
+
+pointer CustomLineCapType* CustomLineCapType
+
+enum RotateFlipType UINT
+  RotateNoneFlipNone 0
+  Rotate90FlipNone   1
+  Rotate180FlipNone  2
+  Rotate270FlipNone  3
+  RotateNoneFlipX    4
+  Rotate90FlipX      5
+  Rotate180FlipX     6
+  Rotate270FlipX     7
+
+enum GpFlushIntention UINT
+  FlushIntentionFlush 0
+  FlushIntentionSync  1
+
+enum PixelOffsetMode UINT
+  PixelOffsetModeInvalid     -1
+  PixelOffsetModeDefault     0
+  PixelOffsetModeHighSpeed   1
+  PixelOffsetModeHighQuality 2
+  PixelOffsetModeNone        3
+  PixelOffsetModeHalf        4
+
+pointer PixelOffsetMode* PixelOffsetMode
+
+enum GpCoordinateSpace UINT
+  CoordinateSpaceWorld  0
+  CoordinateSpacePage   1
+  CoordinateSpaceDevice 2
+
+enum EmfType UINT
+  EmfTypeEmfOnly     3
+  EmfTypeEmfPlusOnly 4
+  EmfTypeEmfPlusDual 5
+
+enum MetafileFrameUnit UINT
+  MetafileFrameUnitPixel      2
+  MetafileFrameUnitPoint      3
+  MetafileFrameUnitInch       4
+  MetafileFrameUnitDocument   5
+  MetafileFrameUnitMillimeter 6
+  MetafileFrameUnitGdi        7
+
+enum StringDigitSubstitute UINT
+  StringDigitSubstituteUser        0
+  StringDigitSubstituteNone        1
+  StringDigitSubstituteNational    2
+  StringDigitSubstituteTraditional 3
+
+pointer StringDigitSubstitute* StringDigitSubstitute
+
+enum GpTestControlEnum UINT
+  TestControlForceBilinear  0
+  TestControlNoICM          1
+  TestControlGetBuildNumber 2
+
+enum CombineMode UINT
+  CombineModeReplace    0
+  CombineModeIntersect  1
+  CombineModeUnion      2
+  CombineModeXor        3
+  CombineModeExclude    4
+  CombineModeComplement 5
+
+enum GpBrushType UINT
+  BrushTypeSolidColor     0
+  BrushTypeHatchFill      1
+  BrushTypeTextureFill    2
+  BrushTypePathGradient   3
+  BrushTypeLinearGradient 4
+
+pointer GpBrushType* GpBrushType
+
+enum GpHatchStyle UINT
+  HatchStyleHorizontal             0
+  HatchStyleVertical               1
+  HatchStyleForwardDiagonal        2
+  HatchStyleBackwardDiagonal       3
+  HatchStyleCross                  4
+  HatchStyleDiagonalCross          5
+  HatchStyle05Percent              6
+  HatchStyle10Percent              7
+  HatchStyle20Percent              8
+  HatchStyle25Percent              9
+  HatchStyle30Percent              10
+  HatchStyle40Percent              11
+  HatchStyle50Percent              12
+  HatchStyle60Percent              13
+  HatchStyle70Percent              14
+  HatchStyle75Percent              15
+  HatchStyle80Percent              16
+  HatchStyle90Percent              17
+  HatchStyleLightDownwardDiagonal  18
+  HatchStyleLightUpwardDiagonal    19
+  HatchStyleDarkDownwardDiagonal   20
+  HatchStyleDarkUpwardDiagonal     21
+  HatchStyleWideDownwardDiagonal   22
+  HatchStyleWideUpwardDiagonal     23
+  HatchStyleLightVertical          24
+  HatchStyleLightHorizontal        25
+  HatchStyleNarrowVertical         26
+  HatchStyleNarrowHorizontal       27
+  HatchStyleDarkVertical           28
+  HatchStyleDarkHorizontal         29
+  HatchStyleDashedDownwardDiagonal 30
+  HatchStyleDashedUpwardDiagonal   31
+  HatchStyleDashedHorizontal       32
+  HatchStyleDashedVertical         33
+  HatchStyleSmallConfetti          34
+  HatchStyleLargeConfetti          35
+  HatchStyleZigZag                 36
+  HatchStyleWave                   37
+  HatchStyleDiagonalBrick          38
+  HatchStyleHorizontalBrick        39
+  HatchStyleWeave                  40
+  HatchStylePlaid                  41
+  HatchStyleDivot                  42
+  HatchStyleDottedGrid             43
+  HatchStyleDottedDiamond          44
+  HatchStyleShingle                45
+  HatchStyleTrellis                46
+  HatchStyleSphere                 47
+  HatchStyleSmallGrid              48
+  HatchStyleSmallCheckerBoard      49
+  HatchStyleLargeCheckerBoard      50
+  HatchStyleOutlinedDiamond        51
+  HatchStyleSolidDiamond           52
+
+pointer GpHatchStyle* GpHatchStyle
+
+enum LinearGradientMode UINT
+  LinearGradientModeHorizontal       0
+  LinearGradientModeVertical         1
+  LinearGradientModeForwardDiagonal  2
+  LinearGradientModeBackwardDiagonal 3
+
+enum Unit UINT
+  UnitWorld      0
+  UnitDisplay    1
+  UnitPixel      2
+  UnitPoint      3
+  UnitInch       4
+  UnitDocument   5
+  UnitMillimeter 6
+
+pointer Unit* Unit
+
+alias GpUnit Unit
+
+pointer GpUnit* GpUnit
+
+enum GpLineCap UINT
+  LineCapFlat          0
+  LineCapSquare        1
+  LineCapRound         2
+  LineCapTriangle      3
+  LineCapNoAnchor      0x10
+  LineCapSquareAnchor  0x11
+  LineCapRoundAnchor   0x12
+  LineCapDiamondAnchor 0x13
+  LineCapArrowAnchor   0x14
+  LineCapCustom        0xff
+
+pointer GpLineCap* GpLineCap
+
+enum GpDashCap UINT
+  DashCapFlat     0
+  DashCapRound    1
+  DashCapTriangle 2
+
+pointer GpDashCap* GpDashCap
+
+enum GpLineJoin UINT
+  LineJoinMiter        0
+  LineJoinBevel        1
+  LineJoinRound        2
+  LineJoinMiterClipped 3
+
+pointer GpLineJoin* GpLineJoin
+
+enum GpMatrixOrder UINT
+  MatrixOrderPrepend 0
+  MatrixOrderAppend  1
+
+enum ImageType UINT
+  ImageTypeUnknown  0
+  ImageTypeBitmap   1
+  ImageTypeMetafile 2
+
+pointer ImageType* ImageType
+
+enum ColorAdjustType UINT
+  ColorAdjustTypeDefault 0
+  ColorAdjustTypeBitmap  1
+  ColorAdjustTypeBrush   2
+  ColorAdjustTypePen     3
+  ColorAdjustTypeText    4
+  ColorAdjustTypeCount   5
+  ColorAdjustTypeAny     6
+
+enum CompositingMode UINT
+  CompositingModeSourceOver 0
+  CompositingModeSourceCopy 1
+
+pointer CompositingMode* CompositingMode
+
+enum CompositingQuality UINT
+  CompositingQualityInvalid        -1
+  CompositingQualityDefault        0
+  CompositingQualityHighSpeed      1
+  CompositingQualityHighQuality    2
+  CompositingQualityGammaCorrected 3
+  CompositingQualityAssumeLinear   4
+
+pointer CompositingQuality* CompositingQuality
+
+enum TextRenderingHint UINT
+  TextRenderingHintSystemDefault            0
+  TextRenderingHintSingleBitPerPixelGridFit 1
+  TextRenderingHintSingleBitPerPixel        2
+  TextRenderingHintAntiAliasGridFit         3
+  TextRenderingHintAntiAlias                4
+  TextRenderingHintClearTypeGridFit         5
+
+pointer TextRenderingHint* TextRenderingHint
+
+enum StringTrimming UINT
+  StringTrimmingNone              0
+  StringTrimmingCharacter         1
+  StringTrimmingWord              2
+  StringTrimmingEllipsisCharacter 3
+  StringTrimmingEllipsisWord      4
+  StringTrimmingEllipsisPath      5
+
+pointer StringTrimming* StringTrimming
+
+alias EmfPlusRecordType LPVOID
+
+enum GpStatus UINT
+  success Equal=0
+  Ok                        0
+  GenericError              1
+  InvalidParameter          2
+  OutOfMemory               3
+  ObjectBusy                4
+  InsufficientBuffer        5
+  NotImplemented            6
+  Win32Error                7
+  WrongState                8
+  Aborted                   9
+  FileNotFound              10
+  ValueOverflow             11
+  AccessDenied              12
+  UnknownImageFormat        13
+  FontFamilyNotFound        14
+  FontStyleNotFound         15
+  NotTrueTypeFont           16
+  UnsupportedGdiplusVersion 17
+  GdiplusNotInitialized     18
+  PropertyNotFound          19
+  PropertyNotSupported      20
+  ProfileNotFound           21
+
+enum [FontStyle] INT display=INT
+  FontStyleRegular    0
+  FontStyleBold       1
+  FontStyleItalic     2
+  FontStyleBoldItalic 3
+  FontStyleUnderline  4
+  FontStyleStrikeout  8
+
+pointer [FontStyle*] [FontStyle] display=INT*
+
+flag [StringFormatFlags] UINT display=INT
+  StringFormatFlagsDirectionRightToLeft  0x00000001
+  StringFormatFlagsDirectionVertical     0x00000002
+  StringFormatFlagsNoFitBlackBox         0x00000004
+  StringFormatFlagsDisplayFormatControl  0x00000020
+  StringFormatFlagsNoFontFallback        0x00000400
+  StringFormatFlagsMeasureTrailingSpaces 0x00000800
+  StringFormatFlagsNoWrap                0x00001000
+  StringFormatFlagsLineLimit             0x00002000
+  StringFormatFlagsNoClip                0x00004000
+
+pointer [StringFormatFlags*] [StringFormatFlags] display=INT*
+
+flag [ImageLockMode] UINT display=UINT
+  ImageLockModeRead         0x0001
+  ImageLockModeWrite        0x0002
+  ImageLockModeUserInputBuf 0x0004
+
+enum [HotkeyPrefix] INT display=INT
+  HotkeyPrefixNone 0
+  HotkeyPrefixShow 1
+  HotkeyPrefixHide 2
+
+pointer [HotkeyPrefix*] [HotkeyPrefix] display=INT*
+
+flag [DriverStringOptions] UINT display=INT
+  DriverStringOptionsCmapLookup      1
+  DriverStringOptionsVertical        2
+  DriverStringOptionsRealizedAdvance 4
+  DriverStringOptionsLimitSubpixel   8
+
+func GdiplusStartup
+  GpStatus
+  token ULONG_PTR*
+  input "const GdiplusStartupInput*"
+  output GdiplusStartupOutput*
+
+func GdiplusShutdown
+  void
+  token ULONG_PTR
+
+func GdipCreatePath
+  GpStatus
+  brushMode GpFillMode
+  path GpPath**
+
+func GdipCreatePath2
+  GpStatus
+  points "GDIPCONST GpPointF*" count=count
+  types "GDIPCONST PathPointType*" count=count
+  count INT
+  fillMode GpFillMode
+  path GpPath**
+
+func GdipCreatePath2I
+  GpStatus
+  points "GDIPCONST GpPoint*" count=count
+  types "GDIPCONST PathPointType*" count=count
+  count INT
+  fillMode GpFillMode
+  path GpPath**
+
+func GdipClonePath
+  GpStatus
+  path GpPath*
+  clonePath GpPath**
+
+func GdipDeletePath
+  GpStatus
+  path GpPath*
+
+func GdipResetPath
+  GpStatus
+  path GpPath*
+
+func GdipGetPointCount
+  GpStatus
+  path GpPath*
+  count INT*
+
+func GdipGetPathTypes
+  GpStatus
+  path GpPath*
+  types PathPointType* postCount=count
+  count INT
+
+func GdipGetPathPoints
+  GpStatus
+  path GpPath*
+  points GpPointF* postCount=count
+  count INT
+
+func GdipGetPathPointsI
+  GpStatus
+  path GpPath*
+  points GpPoint* postCount=count
+  count INT
+
+func GdipGetPathFillMode
+  GpStatus
+  path GpPath*
+  fillmode GpFillMode*
+
+func GdipSetPathFillMode
+  GpStatus
+  path GpPath*
+  fillmode GpFillMode
+
+func GdipGetPathData
+  GpStatus
+  path GpPath*
+  pathData GpPathData*
+
+func GdipStartPathFigure
+  GpStatus
+  path GpPath*
+
+func GdipClosePathFigure
+  GpStatus
+  path GpPath*
+
+func GdipClosePathFigures
+  GpStatus
+  path GpPath*
+
+func GdipSetPathMarker
+  GpStatus
+  path GpPath*
+
+func GdipClearPathMarkers
+  GpStatus
+  path GpPath*
+
+func GdipReversePath
+  GpStatus
+  path GpPath*
+
+func GdipGetPathLastPoint
+  GpStatus
+  path GpPath*
+  lastPoint GpPointF*
+
+func GdipAddPathLine
+  GpStatus
+  path GpPath*
+  x1 REAL
+  y1 REAL
+  x2 REAL
+  y2 REAL
+
+func GdipAddPathLine2
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipAddPathArc ordinal=1
+  GpStatus
+  path GpPath*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+  startAngle REAL
+  sweepAngle REAL
+
+func GdipAddPathBezier
+  GpStatus
+  path GpPath*
+  x1 REAL
+  y1 REAL
+  x2 REAL
+  y2 REAL
+  x3 REAL
+  y3 REAL
+  x4 REAL
+  y4 REAL
+
+func GdipAddPathBeziers
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipAddPathCurve
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipAddPathCurve2
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+  tension REAL
+
+func GdipAddPathCurve3
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+  offset INT
+  numberOfSegments INT
+  tension REAL
+
+func GdipAddPathClosedCurve
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipAddPathClosedCurve2
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+  tension REAL
+
+func GdipAddPathRectangle
+  GpStatus
+  path GpPath*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+
+func GdipAddPathRectangles
+  GpStatus
+  path GpPath*
+  rects "GDIPCONST GpRectF*" count=count
+  count INT
+
+func GdipAddPathEllipse
+  GpStatus
+  path GpPath*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+
+func GdipAddPathPie
+  GpStatus
+  path GpPath*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+  startAngle REAL
+  sweepAngle REAL
+
+func GdipAddPathPolygon
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipAddPathPath
+  GpStatus
+  path GpPath*
+  addingPath "GDIPCONST GpPath*"
+  connect BOOL
+
+func GdipAddPathString
+  GpStatus
+  path GpPath*
+  string "GDIPCONST WCHAR*"
+  length INT
+  family "GDIPCONST GpFontFamily*"
+  style INT
+  emSize REAL
+  layoutRect "GDIPCONST RectF*"
+  format "GDIPCONST GpStringFormat*"
+
+func GdipAddPathStringI
+  GpStatus
+  path GpPath*
+  string "GDIPCONST WCHAR*"
+  length INT
+  family "GDIPCONST GpFontFamily*"
+  style INT
+  emSize REAL
+  layoutRect "GDIPCONST Rect*"
+  format "GDIPCONST GpStringFormat*"
+
+func GdipAddPathLineI
+  GpStatus
+  path GpPath*
+  x1 INT
+  y1 INT
+  x2 INT
+  y2 INT
+
+func GdipAddPathLine2I
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipAddPathArcI
+  GpStatus
+  path GpPath*
+  x INT
+  y INT
+  width INT
+  height INT
+  startAngle REAL
+  sweepAngle REAL
+
+func GdipAddPathBezierI
+  GpStatus
+  path GpPath*
+  x1 INT
+  y1 INT
+  x2 INT
+  y2 INT
+  x3 INT
+  y3 INT
+  x4 INT
+  y4 INT
+
+func GdipAddPathBeziersI
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipAddPathCurveI
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipAddPathCurve2I
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+  tension REAL
+
+func GdipAddPathCurve3I
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+  offset INT
+  numberOfSegments INT
+  tension REAL
+
+func GdipAddPathClosedCurveI
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipAddPathClosedCurve2I
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+  tension REAL
+
+func GdipAddPathRectangleI
+  GpStatus
+  path GpPath*
+  x INT
+  y INT
+  width INT
+  height INT
+
+func GdipAddPathRectanglesI
+  GpStatus
+  path GpPath*
+  rects "GDIPCONST GpRect*" count=count
+  count INT
+
+func GdipAddPathEllipseI
+  GpStatus
+  path GpPath*
+  x INT
+  y INT
+  width INT
+  height INT
+
+func GdipAddPathPieI
+  GpStatus
+  path GpPath*
+  x INT
+  y INT
+  width INT
+  height INT
+  startAngle REAL
+  sweepAngle REAL
+
+func GdipAddPathPolygonI
+  GpStatus
+  path GpPath*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipFlattenPath
+  GpStatus
+  path GpPath*
+  matrix GpMatrix*
+  flatness REAL
+
+func GdipWindingModeOutline
+  GpStatus
+  path GpPath*
+  matrix GpMatrix*
+  flatness REAL
+
+func GdipWidenPath
+  GpStatus
+  nativePath GpPath*
+  pen GpPen*
+  matrix GpMatrix*
+  flatness REAL
+
+func GdipWarpPath
+  GpStatus
+  path GpPath*
+  matrix GpMatrix*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+  srcx REAL
+  srcy REAL
+  srcwidth REAL
+  srcheight REAL
+  warpMode WarpMode
+  flatness REAL
+
+func GdipTransformPath
+  GpStatus
+  path GpPath*
+  matrix GpMatrix*
+
+func GdipGetPathWorldBounds
+  GpStatus
+  path GpPath*
+  bounds GpRectF*
+  matrix "GDIPCONST GpMatrix*"
+  pen "GDIPCONST GpPen*"
+
+func GdipGetPathWorldBoundsI
+  GpStatus
+  path GpPath*
+  bounds GpRect*
+  matrix "GDIPCONST GpMatrix*"
+  pen "GDIPCONST GpPen*"
+
+func GdipIsVisiblePathPoint
+  GpStatus
+  path GpPath*
+  x REAL
+  y REAL
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipIsVisiblePathPointI
+  GpStatus
+  path GpPath*
+  x INT
+  y INT
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipIsOutlineVisiblePathPoint
+  GpStatus
+  path GpPath*
+  x REAL
+  y REAL
+  pen GpPen*
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipIsOutlineVisiblePathPointI
+  GpStatus
+  path GpPath*
+  x INT
+  y INT
+  pen GpPen*
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipCreatePathIter
+  GpStatus
+  iterator GpPathIterator**
+  path GpPath*
+
+func GdipDeletePathIter
+  GpStatus
+  iterator GpPathIterator*
+
+func GdipPathIterNextSubpath
+  GpStatus
+  iterator GpPathIterator*
+  resultCount INT*
+  startIndex INT*
+  endIndex INT*
+  isClosed BOOL*
+
+func GdipPathIterNextSubpathPath
+  GpStatus
+  iterator GpPathIterator*
+  resultCount INT*
+  path GpPath*
+  isClosed BOOL*
+
+func GdipPathIterNextPathType
+  GpStatus
+  iterator GpPathIterator*
+  resultCount INT*
+  pathType PathPointType*
+  startIndex INT*
+  endIndex INT*
+
+func GdipPathIterNextMarker
+  GpStatus
+  iterator GpPathIterator*
+  resultCount INT*
+  startIndex INT*
+  endIndex INT*
+
+func GdipPathIterNextMarkerPath
+  GpStatus
+  iterator GpPathIterator*
+  resultCount INT*
+  path GpPath*
+
+func GdipPathIterGetCount
+  GpStatus
+  iterator GpPathIterator*
+  count INT*
+
+func GdipPathIterGetSubpathCount
+  GpStatus
+  iterator GpPathIterator*
+  count INT*
+
+func GdipPathIterIsValid
+  GpStatus
+  iterator GpPathIterator*
+  valid BOOL*
+
+func GdipPathIterHasCurve
+  GpStatus
+  iterator GpPathIterator*
+  hasCurve BOOL*
+
+func GdipPathIterRewind
+  GpStatus
+  iterator GpPathIterator*
+
+func GdipPathIterEnumerate
+  GpStatus
+  iterator GpPathIterator*
+  resultCount INT*
+  points GpPointF* postCount=resultCount
+  types PathPointType* postCount=resultCount
+  count INT
+
+func GdipPathIterCopyData
+  GpStatus
+  iterator GpPathIterator*
+  resultCount INT*
+  points GpPointF* postCount=resultCount
+  types PathPointType* postCount=resultCount
+  startIndex INT
+  endIndex INT
+
+func GdipCreateMatrix
+  GpStatus
+  matrix GpMatrix**
+
+func GdipCreateMatrix2
+  GpStatus
+  m11 REAL
+  m12 REAL
+  m21 REAL
+  m22 REAL
+  dx REAL
+  dy REAL
+  matrix GpMatrix**
+
+func GdipCreateMatrix3
+  GpStatus
+  rect "GDIPCONST GpRectF*"
+  dstplg "GDIPCONST GpPointF*"
+  matrix GpMatrix**
+
+func GdipCreateMatrix3I
+  GpStatus
+  rect "GDIPCONST GpRect*"
+  dstplg "GDIPCONST GpPoint*"
+  matrix GpMatrix**
+
+func GdipCloneMatrix
+  GpStatus
+  matrix GpMatrix*
+  cloneMatrix GpMatrix**
+
+func GdipDeleteMatrix
+  GpStatus
+  matrix GpMatrix*
+
+func GdipSetMatrixElements
+  GpStatus
+  matrix GpMatrix*
+  m11 REAL
+  m12 REAL
+  m21 REAL
+  m22 REAL
+  dx REAL
+  dy REAL
+
+func GdipMultiplyMatrix
+  GpStatus
+  matrix GpMatrix*
+  matrix2 GpMatrix*
+  order GpMatrixOrder
+
+func GdipTranslateMatrix
+  GpStatus
+  matrix GpMatrix*
+  offsetX REAL
+  offsetY REAL
+  order GpMatrixOrder
+
+func GdipScaleMatrix
+  GpStatus
+  matrix GpMatrix*
+  scaleX REAL
+  scaleY REAL
+  order GpMatrixOrder
+
+func GdipRotateMatrix
+  GpStatus
+  matrix GpMatrix*
+  angle REAL
+  order GpMatrixOrder
+
+func GdipShearMatrix
+  GpStatus
+  matrix GpMatrix*
+  shearX REAL
+  shearY REAL
+  order GpMatrixOrder
+
+func GdipInvertMatrix
+  GpStatus
+  matrix GpMatrix*
+
+func GdipTransformMatrixPoints
+  GpStatus
+  matrix GpMatrix*
+  pts GpPointF* count=count
+  count INT
+
+func GdipTransformMatrixPointsI
+  GpStatus
+  matrix GpMatrix*
+  pts GpPoint* count=count
+  count INT
+
+func GdipVectorTransformMatrixPoints
+  GpStatus
+  matrix GpMatrix*
+  pts GpPointF* count=count
+  count INT
+
+func GdipVectorTransformMatrixPointsI
+  GpStatus
+  matrix GpMatrix*
+  pts GpPoint* count=count
+  count INT
+
+func GdipGetMatrixElements
+  GpStatus
+  matrix "GDIPCONST GpMatrix*"
+  matrixOut REAL*
+
+func GdipIsMatrixInvertible
+  GpStatus
+  matrix "GDIPCONST GpMatrix*"
+  result BOOL*
+
+func GdipIsMatrixIdentity
+  GpStatus
+  matrix "GDIPCONST GpMatrix*"
+  result BOOL*
+
+func GdipIsMatrixEqual
+  GpStatus
+  matrix "GDIPCONST GpMatrix*"
+  matrix2 "GDIPCONST GpMatrix*"
+  result BOOL*
+
+func GdipCreateRegion
+  GpStatus
+  region GpRegion**
+
+func GdipCreateRegionRect
+  GpStatus
+  rect "GDIPCONST GpRectF*"
+  region GpRegion**
+
+func GdipCreateRegionRectI
+  GpStatus
+  rect "GDIPCONST GpRect*"
+  region GpRegion**
+
+func GdipCreateRegionPath
+  GpStatus
+  path GpPath*
+  region GpRegion**
+
+func GdipCreateRegionRgnData
+  GpStatus
+  regionData "GDIPCONST BYTE*" length=size
+  size INT
+  region GpRegion**
+
+func GdipCreateRegionHrgn
+  GpStatus
+  hRgn HRGN
+  region GpRegion**
+
+func GdipCloneRegion
+  GpStatus
+  region GpRegion*
+  cloneRegion GpRegion**
+
+func GdipDeleteRegion
+  GpStatus
+  region GpRegion*
+
+func GdipSetInfinite
+  GpStatus
+  region GpRegion*
+
+func GdipSetEmpty
+  GpStatus
+  region GpRegion*
+
+func GdipCombineRegionRect
+  GpStatus
+  region GpRegion*
+  rect "GDIPCONST GpRectF*"
+  combineMode CombineMode
+
+func GdipCombineRegionRectI
+  GpStatus
+  region GpRegion*
+  rect "GDIPCONST GpRect*"
+  combineMode CombineMode
+
+func GdipCombineRegionPath
+  GpStatus
+  region GpRegion*
+  path GpPath*
+  combineMode CombineMode
+
+func GdipCombineRegionRegion
+  GpStatus
+  region GpRegion*
+  region2 GpRegion*
+  combineMode CombineMode
+
+func GdipTranslateRegion
+  GpStatus
+  region GpRegion*
+  dx REAL
+  dy REAL
+
+func GdipTranslateRegionI
+  GpStatus
+  region GpRegion*
+  dx INT
+  dy INT
+
+func GdipTransformRegion
+  GpStatus
+  region GpRegion*
+  matrix GpMatrix*
+
+func GdipGetRegionBounds
+  GpStatus
+  region GpRegion*
+  graphics GpGraphics*
+  rect GpRectF*
+
+func GdipGetRegionBoundsI
+  GpStatus
+  region GpRegion*
+  graphics GpGraphics*
+  rect GpRect*
+
+func GdipGetRegionHRgn
+  GpStatus
+  region GpRegion*
+  graphics GpGraphics*
+  hRgn HRGN*
+
+func GdipIsEmptyRegion
+  GpStatus
+  region GpRegion*
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipIsInfiniteRegion
+  GpStatus
+  region GpRegion*
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipIsEqualRegion
+  GpStatus
+  region GpRegion*
+  region2 GpRegion*
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipGetRegionDataSize
+  GpStatus
+  region GpRegion*
+  bufferSize UINT*
+
+func GdipGetRegionData
+  GpStatus
+  region GpRegion*
+  buffer BYTE* postCount=sizeFilled
+  bufferSize UINT
+  sizeFilled UINT*
+
+func GdipIsVisibleRegionPoint
+  GpStatus
+  region GpRegion*
+  x REAL
+  y REAL
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipIsVisibleRegionPointI
+  GpStatus
+  region GpRegion*
+  x INT
+  y INT
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipIsVisibleRegionRect
+  GpStatus
+  region GpRegion*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipIsVisibleRegionRectI
+  GpStatus
+  region GpRegion*
+  x INT
+  y INT
+  width INT
+  height INT
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipGetRegionScansCount
+  GpStatus
+  region GpRegion*
+  count UINT*
+  matrix GpMatrix*
+
+func GdipGetRegionScans
+  GpStatus
+  region GpRegion*
+  rects GpRectF* postCount=count
+  count INT*
+  matrix GpMatrix*
+
+func GdipGetRegionScansI
+  GpStatus
+  region GpRegion*
+  rects GpRect* postCount=count
+  count INT*
+  matrix GpMatrix*
+
+func GdipCloneBrush
+  GpStatus
+  brush GpBrush*
+  cloneBrush GpBrush**
+
+func GdipDeleteBrush
+  GpStatus
+  brush GpBrush*
+
+func GdipGetBrushType
+  GpStatus
+  brush GpBrush*
+  type GpBrushType*
+
+func GdipCreateHatchBrush
+  GpStatus
+  hatchstyle GpHatchStyle
+  forecol ARGB
+  backcol ARGB
+  brush GpHatch**
+
+func GdipGetHatchStyle
+  GpStatus
+  brush GpHatch*
+  hatchstyle GpHatchStyle*
+
+func GdipGetHatchForegroundColor
+  GpStatus
+  brush GpHatch*
+  forecol ARGB*
+
+func GdipGetHatchBackgroundColor
+  GpStatus
+  brush GpHatch*
+  backcol ARGB*
+
+func GdipCreateTexture
+  GpStatus
+  image GpImage*
+  wrapmode GpWrapMode
+  texture GpTexture**
+
+func GdipCreateTexture2
+  GpStatus
+  image GpImage*
+  wrapmode GpWrapMode
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+  texture GpTexture**
+
+func GdipCreateTextureIA
+  GpStatus
+  image GpImage*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+  texture GpTexture**
+
+func GdipCreateTexture2I
+  GpStatus
+  image GpImage*
+  wrapmode GpWrapMode
+  x INT
+  y INT
+  width INT
+  height INT
+  texture GpTexture**
+
+func GdipCreateTextureIAI
+  GpStatus
+  image GpImage*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+  x INT
+  y INT
+  width INT
+  height INT
+  texture GpTexture**
+
+func GdipGetTextureTransform
+  GpStatus
+  brush GpTexture*
+  matrix GpMatrix*
+
+func GdipSetTextureTransform
+  GpStatus
+  brush GpTexture*
+  matrix "GDIPCONST GpMatrix*"
+
+func GdipResetTextureTransform
+  GpStatus
+  brush GpTexture*
+
+func GdipMultiplyTextureTransform
+  GpStatus
+  brush GpTexture*
+  matrix "GDIPCONST GpMatrix*"
+  order GpMatrixOrder
+
+func GdipTranslateTextureTransform
+  GpStatus
+  brush GpTexture*
+  dx REAL
+  dy REAL
+  order GpMatrixOrder
+
+func GdipScaleTextureTransform
+  GpStatus
+  brush GpTexture*
+  sx REAL
+  sy REAL
+  order GpMatrixOrder
+
+func GdipRotateTextureTransform
+  GpStatus
+  brush GpTexture*
+  angle REAL
+  order GpMatrixOrder
+
+func GdipSetTextureWrapMode
+  GpStatus
+  brush GpTexture*
+  wrapmode GpWrapMode
+
+func GdipGetTextureWrapMode
+  GpStatus
+  brush GpTexture*
+  wrapmode GpWrapMode*
+
+func GdipGetTextureImage
+  GpStatus
+  brush GpTexture*
+  image GpImage**
+
+func GdipCreateSolidFill
+  GpStatus
+  color ARGB
+  brush GpSolidFill**
+
+func GdipSetSolidFillColor
+  GpStatus
+  brush GpSolidFill*
+  color ARGB
+
+func GdipGetSolidFillColor
+  GpStatus
+  brush GpSolidFill*
+  color ARGB*
+
+func GdipCreateLineBrush
+  GpStatus
+  point1 "GDIPCONST GpPointF*"
+  point2 "GDIPCONST GpPointF*"
+  color1 ARGB
+  color2 ARGB
+  wrapMode GpWrapMode
+  lineGradient GpLineGradient**
+
+func GdipCreateLineBrushI
+  GpStatus
+  point1 "GDIPCONST GpPoint*"
+  point2 "GDIPCONST GpPoint*"
+  color1 ARGB
+  color2 ARGB
+  wrapMode GpWrapMode
+  lineGradient GpLineGradient**
+
+func GdipCreateLineBrushFromRect
+  GpStatus
+  rect "GDIPCONST GpRectF*"
+  color1 ARGB
+  color2 ARGB
+  mode LinearGradientMode
+  wrapMode GpWrapMode
+  lineGradient GpLineGradient**
+
+func GdipCreateLineBrushFromRectI
+  GpStatus
+  rect "GDIPCONST GpRect*"
+  color1 ARGB
+  color2 ARGB
+  mode LinearGradientMode
+  wrapMode GpWrapMode
+  lineGradient GpLineGradient**
+
+func GdipCreateLineBrushFromRectWithAngle
+  GpStatus
+  rect "GDIPCONST GpRectF*"
+  color1 ARGB
+  color2 ARGB
+  angle REAL
+  isAngleScalable BOOL
+  wrapMode GpWrapMode
+  lineGradient GpLineGradient**
+
+func GdipCreateLineBrushFromRectWithAngleI
+  GpStatus
+  rect "GDIPCONST GpRect*"
+  color1 ARGB
+  color2 ARGB
+  angle REAL
+  isAngleScalable BOOL
+  wrapMode GpWrapMode
+  lineGradient GpLineGradient**
+
+func GdipSetLineColors
+  GpStatus
+  brush GpLineGradient*
+  color1 ARGB
+  color2 ARGB
+
+func GdipGetLineColors
+  GpStatus
+  brush GpLineGradient*
+  colors ARGB*
+
+func GdipGetLineRect
+  GpStatus
+  brush GpLineGradient*
+  rect GpRectF*
+
+func GdipGetLineRectI
+  GpStatus
+  brush GpLineGradient*
+  rect GpRect*
+
+func GdipSetLineGammaCorrection
+  GpStatus
+  brush GpLineGradient*
+  useGammaCorrection BOOL
+
+func GdipGetLineGammaCorrection
+  GpStatus
+  brush GpLineGradient*
+  useGammaCorrection BOOL*
+
+func GdipGetLineBlendCount
+  GpStatus
+  brush GpLineGradient*
+  count INT*
+
+func GdipGetLineBlend
+  GpStatus
+  brush GpLineGradient*
+  blend REAL* postCount=count
+  positions REAL* postCount=count
+  count INT
+
+func GdipSetLineBlend
+  GpStatus
+  brush GpLineGradient*
+  blend "GDIPCONST REAL*" count=count
+  positions "GDIPCONST REAL*" count=count
+  count INT
+
+func GdipGetLinePresetBlendCount
+  GpStatus
+  brush GpLineGradient*
+  count INT*
+
+func GdipGetLinePresetBlend
+  GpStatus
+  brush GpLineGradient*
+  blend ARGB* postCount=count
+  positions REAL* postCount=count
+  count INT
+
+func GdipSetLinePresetBlend
+  GpStatus
+  brush GpLineGradient*
+  blend "GDIPCONST ARGB*" count=count
+  positions "GDIPCONST REAL*" count=count
+  count INT
+
+func GdipSetLineSigmaBlend
+  GpStatus
+  brush GpLineGradient*
+  focus REAL
+  scale REAL
+
+func GdipSetLineLinearBlend
+  GpStatus
+  brush GpLineGradient*
+  focus REAL
+  scale REAL
+
+func GdipSetLineWrapMode
+  GpStatus
+  brush GpLineGradient*
+  wrapmode GpWrapMode
+
+func GdipGetLineWrapMode
+  GpStatus
+  brush GpLineGradient*
+  wrapmode GpWrapMode*
+
+func GdipGetLineTransform
+  GpStatus
+  brush GpLineGradient*
+  matrix GpMatrix*
+
+func GdipSetLineTransform
+  GpStatus
+  brush GpLineGradient*
+  matrix "GDIPCONST GpMatrix*"
+
+func GdipResetLineTransform
+  GpStatus
+  brush GpLineGradient*
+
+func GdipMultiplyLineTransform
+  GpStatus
+  brush GpLineGradient*
+  matrix "GDIPCONST GpMatrix*"
+  order GpMatrixOrder
+
+func GdipTranslateLineTransform
+  GpStatus
+  brush GpLineGradient*
+  dx REAL
+  dy REAL
+  order GpMatrixOrder
+
+func GdipScaleLineTransform
+  GpStatus
+  brush GpLineGradient*
+  sx REAL
+  sy REAL
+  order GpMatrixOrder
+
+func GdipRotateLineTransform
+  GpStatus
+  brush GpLineGradient*
+  angle REAL
+  order GpMatrixOrder
+
+func GdipCreatePathGradient
+  GpStatus
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+  wrapMode GpWrapMode
+  polyGradient GpPathGradient**
+
+func GdipCreatePathGradientI
+  GpStatus
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+  wrapMode GpWrapMode
+  polyGradient GpPathGradient**
+
+func GdipCreatePathGradientFromPath
+  GpStatus
+  path "GDIPCONST GpPath*"
+  polyGradient GpPathGradient**
+
+func GdipGetPathGradientCenterColor
+  GpStatus
+  brush GpPathGradient*
+  colors ARGB*
+
+func GdipSetPathGradientCenterColor
+  GpStatus
+  brush GpPathGradient*
+  colors ARGB
+
+func GdipGetPathGradientSurroundColorsWithCount
+  GpStatus
+  brush GpPathGradient*
+  color ARGB* postCount=count
+  count INT*
+
+func GdipSetPathGradientSurroundColorsWithCount
+  GpStatus
+  brush GpPathGradient*
+  color "GDIPCONST ARGB*" count=count
+  count INT*
+
+func GdipGetPathGradientPath
+  GpStatus
+  brush GpPathGradient*
+  path GpPath*
+
+func GdipSetPathGradientPath
+  GpStatus
+  brush GpPathGradient*
+  path "GDIPCONST GpPath*"
+
+func GdipGetPathGradientCenterPoint
+  GpStatus
+  brush GpPathGradient*
+  points GpPointF*
+
+func GdipGetPathGradientCenterPointI
+  GpStatus
+  brush GpPathGradient*
+  points GpPoint*
+
+func GdipSetPathGradientCenterPoint
+  GpStatus
+  brush GpPathGradient*
+  points "GDIPCONST GpPointF*"
+
+func GdipSetPathGradientCenterPointI
+  GpStatus
+  brush GpPathGradient*
+  points "GDIPCONST GpPoint*"
+
+func GdipGetPathGradientRect
+  GpStatus
+  brush GpPathGradient*
+  rect GpRectF*
+
+func GdipGetPathGradientRectI
+  GpStatus
+  brush GpPathGradient*
+  rect GpRect*
+
+func GdipGetPathGradientPointCount
+  GpStatus
+  brush GpPathGradient*
+  count INT*
+
+func GdipGetPathGradientSurroundColorCount
+  GpStatus
+  brush GpPathGradient*
+  count INT*
+
+func GdipSetPathGradientGammaCorrection
+  GpStatus
+  brush GpPathGradient*
+  useGammaCorrection BOOL
+
+func GdipGetPathGradientGammaCorrection
+  GpStatus
+  brush GpPathGradient*
+  useGammaCorrection BOOL*
+
+func GdipGetPathGradientBlendCount
+  GpStatus
+  brush GpPathGradient*
+  count INT*
+
+func GdipGetPathGradientBlend
+  GpStatus
+  brush GpPathGradient*
+  blend REAL* postCount=count
+  positions REAL* postCount=count
+  count INT
+
+func GdipSetPathGradientBlend
+  GpStatus
+  brush GpPathGradient*
+  blend "GDIPCONST REAL*" count=count
+  positions "GDIPCONST REAL*" count=count
+  count INT
+
+func GdipGetPathGradientPresetBlendCount
+  GpStatus
+  brush GpPathGradient*
+  count INT*
+
+func GdipGetPathGradientPresetBlend
+  GpStatus
+  brush GpPathGradient*
+  blend ARGB* postCount=count
+  positions REAL* postCount=count
+  count INT
+
+func GdipSetPathGradientPresetBlend
+  GpStatus
+  brush GpPathGradient*
+  blend "GDIPCONST ARGB*" count=count
+  positions "GDIPCONST REAL*" count=count
+  count INT
+
+func GdipSetPathGradientSigmaBlend
+  GpStatus
+  brush GpPathGradient*
+  focus REAL
+  scale REAL
+
+func GdipSetPathGradientLinearBlend
+  GpStatus
+  brush GpPathGradient*
+  focus REAL
+  scale REAL
+
+func GdipGetPathGradientWrapMode
+  GpStatus
+  brush GpPathGradient*
+  wrapmode GpWrapMode*
+
+func GdipSetPathGradientWrapMode
+  GpStatus
+  brush GpPathGradient*
+  wrapmode GpWrapMode
+
+func GdipGetPathGradientTransform
+  GpStatus
+  brush GpPathGradient*
+  matrix GpMatrix*
+
+func GdipSetPathGradientTransform
+  GpStatus
+  brush GpPathGradient*
+  matrix GpMatrix*
+
+func GdipResetPathGradientTransform
+  GpStatus
+  brush GpPathGradient*
+
+func GdipMultiplyPathGradientTransform
+  GpStatus
+  brush GpPathGradient*
+  matrix "GDIPCONST GpMatrix*"
+  order GpMatrixOrder
+
+func GdipTranslatePathGradientTransform
+  GpStatus
+  brush GpPathGradient*
+  dx REAL
+  dy REAL
+  order GpMatrixOrder
+
+func GdipScalePathGradientTransform
+  GpStatus
+  brush GpPathGradient*
+  sx REAL
+  sy REAL
+  order GpMatrixOrder
+
+func GdipRotatePathGradientTransform
+  GpStatus
+  brush GpPathGradient*
+  angle REAL
+  order GpMatrixOrder
+
+func GdipGetPathGradientFocusScales
+  GpStatus
+  brush GpPathGradient*
+  xScale REAL*
+  yScale REAL*
+
+func GdipSetPathGradientFocusScales
+  GpStatus
+  brush GpPathGradient*
+  xScale REAL
+  yScale REAL
+
+func GdipCreatePen1
+  GpStatus
+  color ARGB
+  width REAL
+  unit GpUnit
+  pen GpPen**
+
+func GdipCreatePen2
+  GpStatus
+  brush GpBrush*
+  width REAL
+  unit GpUnit
+  pen GpPen**
+
+func GdipClonePen
+  GpStatus
+  pen GpPen*
+  clonepen GpPen**
+
+func GdipDeletePen
+  GpStatus
+  pen GpPen*
+
+func GdipSetPenWidth
+  GpStatus
+  pen GpPen*
+  width REAL
+
+func GdipGetPenWidth
+  GpStatus
+  pen GpPen*
+  width REAL*
+
+func GdipSetPenUnit
+  GpStatus
+  pen GpPen*
+  unit GpUnit
+
+func GdipGetPenUnit
+  GpStatus
+  pen GpPen*
+  unit GpUnit*
+
+func GdipSetPenLineCap197819
+  GpStatus
+  pen GpPen*
+  startCap GpLineCap
+  endCap GpLineCap
+  dashCap GpDashCap
+
+func GdipSetPenStartCap
+  GpStatus
+  pen GpPen*
+  startCap GpLineCap
+
+func GdipSetPenEndCap
+  GpStatus
+  pen GpPen*
+  endCap GpLineCap
+
+func GdipSetPenDashCap197819
+  GpStatus
+  pen GpPen*
+  dashCap GpDashCap
+
+func GdipGetPenStartCap
+  GpStatus
+  pen GpPen*
+  startCap GpLineCap*
+
+func GdipGetPenEndCap
+  GpStatus
+  pen GpPen*
+  endCap GpLineCap*
+
+func GdipGetPenDashCap197819
+  GpStatus
+  pen GpPen*
+  dashCap GpDashCap*
+
+func GdipSetPenLineJoin
+  GpStatus
+  pen GpPen*
+  lineJoin GpLineJoin
+
+func GdipGetPenLineJoin
+  GpStatus
+  pen GpPen*
+  lineJoin GpLineJoin*
+
+func GdipSetPenCustomStartCap
+  GpStatus
+  pen GpPen*
+  customCap GpCustomLineCap*
+
+func GdipGetPenCustomStartCap
+  GpStatus
+  pen GpPen*
+  customCap GpCustomLineCap**
+
+func GdipSetPenCustomEndCap
+  GpStatus
+  pen GpPen*
+  customCap GpCustomLineCap*
+
+func GdipGetPenCustomEndCap
+  GpStatus
+  pen GpPen*
+  customCap GpCustomLineCap**
+
+func GdipSetPenMiterLimit
+  GpStatus
+  pen GpPen*
+  miterLimit REAL
+
+func GdipGetPenMiterLimit
+  GpStatus
+  pen GpPen*
+  miterLimit REAL*
+
+func GdipSetPenMode
+  GpStatus
+  pen GpPen*
+  penMode GpPenAlignment
+
+func GdipGetPenMode
+  GpStatus
+  pen GpPen*
+  penMode GpPenAlignment*
+
+func GdipSetPenTransform
+  GpStatus
+  pen GpPen*
+  matrix GpMatrix*
+
+func GdipGetPenTransform
+  GpStatus
+  pen GpPen*
+  matrix GpMatrix*
+
+func GdipResetPenTransform
+  GpStatus
+  pen GpPen*
+
+func GdipMultiplyPenTransform
+  GpStatus
+  pen GpPen*
+  matrix "GDIPCONST GpMatrix*"
+  order GpMatrixOrder
+
+func GdipTranslatePenTransform
+  GpStatus
+  pen GpPen*
+  dx REAL
+  dy REAL
+  order GpMatrixOrder
+
+func GdipScalePenTransform
+  GpStatus
+  pen GpPen*
+  sx REAL
+  sy REAL
+  order GpMatrixOrder
+
+func GdipRotatePenTransform
+  GpStatus
+  pen GpPen*
+  angle REAL
+  order GpMatrixOrder
+
+func GdipSetPenColor
+  GpStatus
+  pen GpPen*
+  argb ARGB
+
+func GdipGetPenColor
+  GpStatus
+  pen GpPen*
+  argb ARGB*
+
+func GdipSetPenBrushFill
+  GpStatus
+  pen GpPen*
+  brush GpBrush*
+
+func GdipGetPenBrushFill
+  GpStatus
+  pen GpPen*
+  brush GpBrush**
+
+func GdipGetPenFillType
+  GpStatus
+  pen GpPen*
+  type GpPenType*
+
+func GdipGetPenDashStyle
+  GpStatus
+  pen GpPen*
+  dashstyle GpDashStyle*
+
+func GdipSetPenDashStyle
+  GpStatus
+  pen GpPen*
+  dashstyle GpDashStyle
+
+func GdipGetPenDashOffset
+  GpStatus
+  pen GpPen*
+  offset REAL*
+
+func GdipSetPenDashOffset
+  GpStatus
+  pen GpPen*
+  offset REAL
+
+func GdipGetPenDashCount
+  GpStatus
+  pen GpPen*
+  count INT*
+
+func GdipSetPenDashArray
+  GpStatus
+  pen GpPen*
+  dash "GDIPCONST REAL*" count=count
+  count INT
+
+func GdipGetPenDashArray
+  GpStatus
+  pen GpPen*
+  dash REAL* postCount=count
+  count INT
+
+func GdipGetPenCompoundCount
+  GpStatus
+  pen GpPen*
+  count INT*
+
+func GdipSetPenCompoundArray
+  GpStatus
+  pen GpPen*
+  dash "GDIPCONST REAL*" count=count
+  count INT
+
+func GdipGetPenCompoundArray
+  GpStatus
+  pen GpPen*
+  dash REAL* postCount=count
+  count INT
+
+func GdipCreateCustomLineCap
+  GpStatus
+  fillPath GpPath*
+  strokePath GpPath*
+  baseCap GpLineCap
+  baseInset REAL
+  customCap GpCustomLineCap**
+
+func GdipDeleteCustomLineCap
+  GpStatus
+  customCap GpCustomLineCap*
+
+func GdipCloneCustomLineCap
+  GpStatus
+  customCap GpCustomLineCap*
+  clonedCap GpCustomLineCap**
+
+func GdipGetCustomLineCapType
+  GpStatus
+  customCap GpCustomLineCap*
+  capType CustomLineCapType*
+
+func GdipSetCustomLineCapStrokeCaps
+  GpStatus
+  customCap GpCustomLineCap*
+  startCap GpLineCap
+  endCap GpLineCap
+
+func GdipGetCustomLineCapStrokeCaps
+  GpStatus
+  customCap GpCustomLineCap*
+  startCap GpLineCap*
+  endCap GpLineCap*
+
+func GdipSetCustomLineCapStrokeJoin
+  GpStatus
+  customCap GpCustomLineCap*
+  lineJoin GpLineJoin
+
+func GdipGetCustomLineCapStrokeJoin
+  GpStatus
+  customCap GpCustomLineCap*
+  lineJoin GpLineJoin*
+
+func GdipSetCustomLineCapBaseCap
+  GpStatus
+  customCap GpCustomLineCap*
+  baseCap GpLineCap
+
+func GdipGetCustomLineCapBaseCap
+  GpStatus
+  customCap GpCustomLineCap*
+  baseCap GpLineCap*
+
+func GdipSetCustomLineCapBaseInset
+  GpStatus
+  customCap GpCustomLineCap*
+  inset REAL
+
+func GdipGetCustomLineCapBaseInset
+  GpStatus
+  customCap GpCustomLineCap*
+  inset REAL*
+
+func GdipSetCustomLineCapWidthScale
+  GpStatus
+  customCap GpCustomLineCap*
+  widthScale REAL
+
+func GdipGetCustomLineCapWidthScale
+  GpStatus
+  customCap GpCustomLineCap*
+  widthScale REAL*
+
+func GdipCreateAdjustableArrowCap
+  GpStatus
+  height REAL
+  width REAL
+  isFilled BOOL
+  cap GpAdjustableArrowCap**
+
+func GdipSetAdjustableArrowCapHeight
+  GpStatus
+  cap GpAdjustableArrowCap*
+  height REAL
+
+func GdipGetAdjustableArrowCapHeight
+  GpStatus
+  cap GpAdjustableArrowCap*
+  height REAL*
+
+func GdipSetAdjustableArrowCapWidth
+  GpStatus
+  cap GpAdjustableArrowCap*
+  width REAL
+
+func GdipGetAdjustableArrowCapWidth
+  GpStatus
+  cap GpAdjustableArrowCap*
+  width REAL*
+
+func GdipSetAdjustableArrowCapMiddleInset
+  GpStatus
+  cap GpAdjustableArrowCap*
+  middleInset REAL
+
+func GdipGetAdjustableArrowCapMiddleInset
+  GpStatus
+  cap GpAdjustableArrowCap*
+  middleInset REAL*
+
+func GdipSetAdjustableArrowCapFillState
+  GpStatus
+  cap GpAdjustableArrowCap*
+  fillState BOOL
+
+func GdipGetAdjustableArrowCapFillState
+  GpStatus
+  cap GpAdjustableArrowCap*
+  fillState BOOL*
+
+func GdipLoadImageFromStream
+  GpStatus
+  stream IStream*
+  image GpImage**
+
+func GdipLoadImageFromFile
+  GpStatus
+  filename "GDIPCONST WCHAR*"
+  image GpImage**
+
+func GdipLoadImageFromStreamICM
+  GpStatus
+  stream IStream*
+  image GpImage**
+
+func GdipLoadImageFromFileICM
+  GpStatus
+  filename "GDIPCONST WCHAR*"
+  image GpImage**
+
+func GdipCloneImage
+  GpStatus
+  image GpImage*
+  cloneImage GpImage**
+
+func GdipDisposeImage
+  GpStatus
+  image GpImage*
+
+func GdipSaveImageToFile
+  GpStatus
+  image GpImage*
+  filename "GDIPCONST WCHAR*"
+  clsidEncoder "GDIPCONST CLSID*"
+  encoderParams "GDIPCONST EncoderParameters*"
+
+func GdipSaveImageToStream
+  GpStatus
+  image GpImage*
+  stream IStream*
+  clsidEncoder "GDIPCONST CLSID*"
+  encoderParams "GDIPCONST EncoderParameters*"
+
+func GdipSaveAdd
+  GpStatus
+  image GpImage*
+  encoderParams "GDIPCONST EncoderParameters*"
+
+func GdipSaveAddImage
+  GpStatus
+  image GpImage*
+  newImage GpImage*
+  encoderParams "GDIPCONST EncoderParameters*"
+
+func GdipGetImageGraphicsContext
+  GpStatus
+  image GpImage*
+  graphics GpGraphics**
+
+func GdipGetImageBounds
+  GpStatus
+  image GpImage*
+  srcRect GpRectF*
+  srcUnit GpUnit*
+
+func GdipGetImageDimension
+  GpStatus
+  image GpImage*
+  width REAL*
+  height REAL*
+
+func GdipGetImageType
+  GpStatus
+  image GpImage*
+  type ImageType*
+
+func GdipGetImageWidth
+  GpStatus
+  image GpImage*
+  width UINT*
+
+func GdipGetImageHeight
+  GpStatus
+  image GpImage*
+  height UINT*
+
+func GdipGetImageHorizontalResolution
+  GpStatus
+  image GpImage*
+  resolution REAL*
+
+func GdipGetImageVerticalResolution
+  GpStatus
+  image GpImage*
+  resolution REAL*
+
+func GdipGetImageFlags
+  GpStatus
+  image GpImage*
+  flags UINT*
+
+func GdipGetImageRawFormat
+  GpStatus
+  image GpImage*
+  format GUID*
+
+func GdipGetImagePixelFormat
+  GpStatus
+  image GpImage*
+  format PixelFormat*
+
+func GdipGetImageThumbnail
+  GpStatus
+  image GpImage*
+  thumbWidth UINT
+  thumbHeight UINT
+  thumbImage GpImage**
+  callback GetThumbnailImageAbort
+  callbackData VOID*
+
+func GdipGetEncoderParameterListSize
+  GpStatus
+  image GpImage*
+  clsidEncoder "GDIPCONST CLSID*"
+  size UINT*
+
+func GdipGetEncoderParameterList
+  GpStatus
+  image GpImage*
+  clsidEncoder "GDIPCONST CLSID*"
+  size UINT
+  buffer EncoderParameters*
+
+func GdipImageGetFrameDimensionsCount
+  GpStatus
+  image GpImage*
+  count UINT*
+
+func GdipImageGetFrameDimensionsList
+  GpStatus
+  image GpImage*
+  dimensionIDs GUID* postCount=count
+  count UINT
+
+func GdipImageGetFrameCount
+  GpStatus
+  image GpImage*
+  dimensionID "GDIPCONST GUID*"
+  count UINT*
+
+func GdipImageSelectActiveFrame
+  GpStatus
+  image GpImage*
+  dimensionID "GDIPCONST GUID*"
+  frameIndex UINT
+
+func GdipImageRotateFlip
+  GpStatus
+  image GpImage*
+  rfType RotateFlipType
+
+func GdipGetImagePalette
+  GpStatus
+  image GpImage*
+  palette ColorPalette*
+  size INT
+
+func GdipSetImagePalette
+  GpStatus
+  image GpImage*
+  palette "GDIPCONST ColorPalette*"
+
+func GdipGetImagePaletteSize
+  GpStatus
+  image GpImage*
+  size INT*
+
+func GdipGetPropertyCount
+  GpStatus
+  image GpImage*
+  numOfProperty UINT*
+
+func GdipGetPropertyIdList
+  GpStatus
+  image GpImage*
+  numOfProperty UINT
+  list PROPID*
+
+func GdipGetPropertyItemSize
+  GpStatus
+  image GpImage*
+  propId PROPID
+  size UINT*
+
+func GdipGetPropertyItem
+  GpStatus
+  image GpImage*
+  propId PROPID
+  buffer PropertyItem*
+
+func GdipGetPropertySize
+  GpStatus
+  image GpImage*
+  totalBufferSize UINT*
+  numProperties UINT*
+
+func GdipGetAllPropertyItems
+  GpStatus
+  image GpImage*
+  totalBufferSize UINT
+  numProperties UINT
+  allItems PropertyItem* postCount=numProperties
+
+func GdipRemovePropertyItem
+  GpStatus
+  image GpImage*
+  propId PROPID
+
+func GdipSetPropertyItem
+  GpStatus
+  image GpImage*
+  item "GDIPCONST PropertyItem*"
+
+func GdipFindFirstImageItem ordinal=610
+  GpStatus
+  image GpImage*
+  item ImageItemData*
+
+func GdipFindNextImageItem ordinal=611
+  GpStatus
+  image GpImage*
+  item ImageItemData*
+
+func GdipGetImageItemData ordinal=612
+  GpStatus
+  image GpImage*
+  item ImageItemData*
+
+func GdipImageForceValidation
+  GpStatus
+  image GpImage*
+
+func GdipCreateBitmapFromStream
+  GpStatus
+  stream IStream*
+  bitmap GpBitmap**
+
+func GdipCreateBitmapFromFile
+  GpStatus
+  filename "GDIPCONST WCHAR*"
+  bitmap GpBitmap**
+
+func GdipCreateBitmapFromStreamICM
+  GpStatus
+  stream IStream*
+  bitmap GpBitmap**
+
+func GdipCreateBitmapFromFileICM
+  GpStatus
+  filename "GDIPCONST WCHAR*"
+  bitmap GpBitmap**
+
+func GdipCreateBitmapFromScan0
+  GpStatus
+  width INT
+  height INT
+  stride INT
+  format PixelFormat
+  scan0 BYTE*
+  bitmap GpBitmap**
+
+func GdipCreateBitmapFromGraphics
+  GpStatus
+  width INT
+  height INT
+  target GpGraphics*
+  bitmap GpBitmap**
+
+func GdipCreateBitmapFromDirectDrawSurface
+  GpStatus
+  surface IDirectDrawSurface7*
+  bitmap GpBitmap**
+
+func GdipCreateBitmapFromGdiDib
+  GpStatus
+  gdiBitmapInfo "GDIPCONST BITMAPINFO*"
+  gdiBitmapData VOID*
+  bitmap GpBitmap**
+
+func GdipCreateBitmapFromHBITMAP
+  GpStatus
+  hbm HBITMAP
+  hpal HPALETTE
+  bitmap GpBitmap**
+
+func GdipCreateHBITMAPFromBitmap
+  GpStatus
+  bitmap GpBitmap*
+  hbmReturn HBITMAP*
+  background ARGB
+
+func GdipCreateBitmapFromHICON
+  GpStatus
+  hicon HICON
+  bitmap GpBitmap**
+
+func GdipCreateHICONFromBitmap
+  GpStatus
+  bitmap GpBitmap*
+  hbmReturn HICON*
+
+func GdipCreateBitmapFromResource
+  GpStatus
+  hInstance HINSTANCE
+  lpBitmapName "GDIPCONST WCHAR*"
+  bitmap GpBitmap**
+
+func GdipCloneBitmapArea
+  GpStatus
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+  format PixelFormat
+  srcBitmap GpBitmap*
+  dstBitmap GpBitmap**
+
+func GdipCloneBitmapAreaI
+  GpStatus
+  x INT
+  y INT
+  width INT
+  height INT
+  format PixelFormat
+  srcBitmap GpBitmap*
+  dstBitmap GpBitmap**
+
+func GdipBitmapLockBits
+  GpStatus
+  bitmap GpBitmap*
+  rect "GDIPCONST GpRect*"
+  flags [ImageLockMode]
+  format PixelFormat
+  lockedBitmapData BitmapData*
+
+func GdipBitmapUnlockBits
+  GpStatus
+  bitmap GpBitmap*
+  lockedBitmapData BitmapData*
+
+func GdipBitmapGetPixel
+  GpStatus
+  bitmap GpBitmap*
+  x INT
+  y INT
+  color ARGB*
+
+func GdipBitmapSetPixel
+  GpStatus
+  bitmap GpBitmap*
+  x INT
+  y INT
+  color ARGB
+
+func GdipImageSetAbort ordinal=624
+  GpStatus
+  pImage GpImage*
+  pIAbort GdiplusAbort*
+
+func GdipGraphicsSetAbort ordinal=625
+  GpStatus
+  pGraphics GpGraphics*
+  pIAbort GdiplusAbort*
+
+func GdipBitmapConvertFormat ordinal=622
+  GpStatus
+  pInputBitmap GpBitmap*
+  format PixelFormat
+  dithertype DitherType
+  palettetype PaletteType
+  palette ColorPalette*
+  alphaThresholdPercent REAL
+
+func GdipInitializePalette ordinal=623
+  GpStatus
+  palette ColorPalette*
+  palettetype PaletteType
+  optimalColors INT
+  useTransparentColor BOOL
+  bitmap GpBitmap*
+
+func GdipBitmapApplyEffect ordinal=619
+  GpStatus
+  bitmap GpBitmap*
+  effect CGpEffect*
+  roi RECT*
+  useAuxData BOOL
+  auxData VOID**
+  auxDataSize INT*
+
+func GdipBitmapCreateApplyEffect ordinal=618
+  GpStatus
+  inputBitmaps GpBitmap**
+  numInputs INT
+  effect CGpEffect*
+  roi RECT*
+  outputRect RECT*
+  outputBitmap GpBitmap**
+  useAuxData BOOL
+  auxData VOID**
+  auxDataSize INT*
+
+func GdipBitmapGetHistogram ordinal=620
+  GpStatus
+  bitmap GpBitmap*
+  format HistogramFormat
+  NumberOfEntries UINT
+  channel0 UINT* postCount=NumberOfEntries
+  channel1 UINT* postCount=NumberOfEntries
+  channel2 UINT* postCount=NumberOfEntries
+  channel3 UINT* postCount=NumberOfEntries
+
+func GdipBitmapGetHistogramSize ordinal=621
+  GpStatus
+  format HistogramFormat
+  NumberOfEntries UINT*
+
+func GdipBitmapSetResolution
+  GpStatus
+  bitmap GpBitmap*
+  xdpi REAL
+  ydpi REAL
+
+func GdipCreateImageAttributes
+  GpStatus
+  imageattr GpImageAttributes**
+
+func GdipCloneImageAttributes
+  GpStatus
+  imageattr "GDIPCONST GpImageAttributes*"
+  cloneImageattr GpImageAttributes**
+
+func GdipDisposeImageAttributes
+  GpStatus
+  imageattr GpImageAttributes*
+
+func GdipSetImageAttributesToIdentity
+  GpStatus
+  imageattr GpImageAttributes*
+  type ColorAdjustType
+
+func GdipResetImageAttributes
+  GpStatus
+  imageattr GpImageAttributes*
+  type ColorAdjustType
+
+func GdipSetImageAttributesColorMatrix
+  GpStatus
+  imageattr GpImageAttributes*
+  type ColorAdjustType
+  enableFlag BOOL
+  colorMatrix "GDIPCONST ColorMatrix*"
+  grayMatrix "GDIPCONST ColorMatrix*"
+  flags ColorMatrixFlags
+
+func GdipSetImageAttributesThreshold
+  GpStatus
+  imageattr GpImageAttributes*
+  type ColorAdjustType
+  enableFlag BOOL
+  threshold REAL
+
+func GdipSetImageAttributesGamma
+  GpStatus
+  imageattr GpImageAttributes*
+  type ColorAdjustType
+  enableFlag BOOL
+  gamma REAL
+
+func GdipSetImageAttributesNoOp
+  GpStatus
+  imageattr GpImageAttributes*
+  type ColorAdjustType
+  enableFlag BOOL
+
+func GdipSetImageAttributesColorKeys
+  GpStatus
+  imageattr GpImageAttributes*
+  type ColorAdjustType
+  enableFlag BOOL
+  colorLow ARGB
+  colorHigh ARGB
+
+func GdipSetImageAttributesOutputChannel
+  GpStatus
+  imageattr GpImageAttributes*
+  type ColorAdjustType
+  enableFlag BOOL
+  channelFlags ColorChannelFlags
+
+func GdipSetImageAttributesOutputChannelColorProfile
+  GpStatus
+  imageattr GpImageAttributes*
+  type ColorAdjustType
+  enableFlag BOOL
+  colorProfileFilename "GDIPCONST WCHAR*"
+
+func GdipSetImageAttributesRemapTable
+  GpStatus
+  imageattr GpImageAttributes*
+  type ColorAdjustType
+  enableFlag BOOL
+  mapSize UINT
+  map "GDIPCONST ColorMap*"
+
+func GdipSetImageAttributesWrapMode
+  GpStatus
+  imageAttr GpImageAttributes*
+  wrap GpWrapMode display=WrapMode
+  argb ARGB
+  clamp BOOL
+
+func GdipSetImageAttributesICMMode
+  GpStatus
+  imageAttr GpImageAttributes*
+  on BOOL
+
+func GdipGetImageAttributesAdjustedPalette
+  GpStatus
+  imageAttr GpImageAttributes*
+  colorPalette ColorPalette*
+  colorAdjustType ColorAdjustType
+
+func GdipFlush
+  GpStatus
+  graphics GpGraphics*
+  intention GpFlushIntention
+
+func GdipCreateFromHDC
+  GpStatus
+  hdc HDC
+  graphics GpGraphics**
+
+func GdipCreateFromHDC2
+  GpStatus
+  hdc HDC
+  hDevice HANDLE
+  graphics GpGraphics**
+
+func GdipCreateFromHWND
+  GpStatus
+  hwnd HWND
+  graphics GpGraphics**
+
+func GdipCreateFromHWNDICM
+  GpStatus
+  hwnd HWND
+  graphics GpGraphics**
+
+func GdipDeleteGraphics
+  GpStatus
+  graphics GpGraphics*
+
+func GdipGetDC
+  GpStatus
+  graphics GpGraphics*
+  hdc HDC*
+
+func GdipReleaseDC
+  GpStatus
+  graphics GpGraphics*
+  hdc HDC
+
+func GdipSetCompositingMode
+  GpStatus
+  graphics GpGraphics*
+  compositingMode CompositingMode
+
+func GdipGetCompositingMode
+  GpStatus
+  graphics GpGraphics*
+  compositingMode CompositingMode*
+
+func GdipSetRenderingOrigin
+  GpStatus
+  graphics GpGraphics*
+  x INT
+  y INT
+
+func GdipGetRenderingOrigin
+  GpStatus
+  graphics GpGraphics*
+  x INT*
+  y INT*
+
+func GdipSetCompositingQuality
+  GpStatus
+  graphics GpGraphics*
+  compositingQuality CompositingQuality
+
+func GdipGetCompositingQuality
+  GpStatus
+  graphics GpGraphics*
+  compositingQuality CompositingQuality*
+
+func GdipSetSmoothingMode
+  GpStatus
+  graphics GpGraphics*
+  smoothingMode SmoothingMode
+
+func GdipGetSmoothingMode
+  GpStatus
+  graphics GpGraphics*
+  smoothingMode SmoothingMode*
+
+func GdipSetPixelOffsetMode
+  GpStatus
+  graphics GpGraphics*
+  pixelOffsetMode PixelOffsetMode
+
+func GdipGetPixelOffsetMode
+  GpStatus
+  graphics GpGraphics*
+  pixelOffsetMode PixelOffsetMode*
+
+func GdipSetTextRenderingHint
+  GpStatus
+  graphics GpGraphics*
+  mode TextRenderingHint
+
+func GdipGetTextRenderingHint
+  GpStatus
+  graphics GpGraphics*
+  mode TextRenderingHint*
+
+func GdipSetTextContrast
+  GpStatus
+  graphics GpGraphics*
+  contrast UINT
+
+func GdipGetTextContrast
+  GpStatus
+  graphics GpGraphics*
+  contrast UINT*
+
+func GdipSetInterpolationMode
+  GpStatus
+  graphics GpGraphics*
+  interpolationMode InterpolationMode
+
+func GdipGetInterpolationMode
+  GpStatus
+  graphics GpGraphics*
+  interpolationMode InterpolationMode*
+
+func GdipSetWorldTransform
+  GpStatus
+  graphics GpGraphics*
+  matrix GpMatrix*
+
+func GdipResetWorldTransform
+  GpStatus
+  graphics GpGraphics*
+
+func GdipMultiplyWorldTransform
+  GpStatus
+  graphics GpGraphics*
+  matrix "GDIPCONST GpMatrix*"
+  order GpMatrixOrder
+
+func GdipTranslateWorldTransform
+  GpStatus
+  graphics GpGraphics*
+  dx REAL
+  dy REAL
+  order GpMatrixOrder
+
+func GdipScaleWorldTransform
+  GpStatus
+  graphics GpGraphics*
+  sx REAL
+  sy REAL
+  order GpMatrixOrder
+
+func GdipRotateWorldTransform
+  GpStatus
+  graphics GpGraphics*
+  angle REAL
+  order GpMatrixOrder
+
+func GdipGetWorldTransform
+  GpStatus
+  graphics GpGraphics*
+  matrix GpMatrix*
+
+func GdipResetPageTransform
+  GpStatus
+  graphics GpGraphics*
+
+func GdipGetPageUnit
+  GpStatus
+  graphics GpGraphics*
+  unit GpUnit*
+
+func GdipGetPageScale
+  GpStatus
+  graphics GpGraphics*
+  scale REAL*
+
+func GdipSetPageUnit
+  GpStatus
+  graphics GpGraphics*
+  unit GpUnit
+
+func GdipSetPageScale
+  GpStatus
+  graphics GpGraphics*
+  scale REAL
+
+func GdipGetDpiX
+  GpStatus
+  graphics GpGraphics*
+  dpi REAL*
+
+func GdipGetDpiY
+  GpStatus
+  graphics GpGraphics*
+  dpi REAL*
+
+func GdipTransformPoints
+  GpStatus
+  graphics GpGraphics*
+  destSpace GpCoordinateSpace
+  srcSpace GpCoordinateSpace
+  points GpPointF* count=count
+  count INT
+
+func GdipTransformPointsI
+  GpStatus
+  graphics GpGraphics*
+  destSpace GpCoordinateSpace
+  srcSpace GpCoordinateSpace
+  points GpPoint* count=count
+  count INT
+
+func GdipGetNearestColor
+  GpStatus
+  graphics GpGraphics*
+  argb ARGB*
+
+func GdipCreateHalftonePalette
+  success NotEqual=0
+  HPALETTE
+
+func GdipDrawLine
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x1 REAL
+  y1 REAL
+  x2 REAL
+  y2 REAL
+
+func GdipDrawLineI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x1 INT
+  y1 INT
+  x2 INT
+  y2 INT
+
+func GdipDrawLines
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipDrawLinesI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipDrawArc
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+  startAngle REAL
+  sweepAngle REAL
+
+func GdipDrawArcI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x INT
+  y INT
+  width INT
+  height INT
+  startAngle REAL
+  sweepAngle REAL
+
+func GdipDrawBezier
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x1 REAL
+  y1 REAL
+  x2 REAL
+  y2 REAL
+  x3 REAL
+  y3 REAL
+  x4 REAL
+  y4 REAL
+
+func GdipDrawBezierI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x1 INT
+  y1 INT
+  x2 INT
+  y2 INT
+  x3 INT
+  y3 INT
+  x4 INT
+  y4 INT
+
+func GdipDrawBeziers
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipDrawBeziersI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipDrawRectangle
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+
+func GdipDrawRectangleI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x INT
+  y INT
+  width INT
+  height INT
+
+func GdipDrawRectangles
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  rects "GDIPCONST GpRectF*" count=count
+  count INT
+
+func GdipDrawRectanglesI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  rects "GDIPCONST GpRect*" count=count
+  count INT
+
+func GdipDrawEllipse
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+
+func GdipDrawEllipseI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x INT
+  y INT
+  width INT
+  height INT
+
+func GdipDrawPie
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+  startAngle REAL
+  sweepAngle REAL
+
+func GdipDrawPieI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  x INT
+  y INT
+  width INT
+  height INT
+  startAngle REAL
+  sweepAngle REAL
+
+func GdipDrawPolygon
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipDrawPolygonI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipDrawPath
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  path GpPath*
+
+func GdipDrawCurve
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipDrawCurveI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipDrawCurve2
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+  tension REAL
+
+func GdipDrawCurve2I
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+  tension REAL
+
+func GdipDrawCurve3
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+  offset INT
+  numberOfSegments INT
+  tension REAL
+
+func GdipDrawCurve3I
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+  offset INT
+  numberOfSegments INT
+  tension REAL
+
+func GdipDrawClosedCurve
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipDrawClosedCurveI
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipDrawClosedCurve2
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+  tension REAL
+
+func GdipDrawClosedCurve2I
+  GpStatus
+  graphics GpGraphics*
+  pen GpPen*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+  tension REAL
+
+func GdipGraphicsClear
+  GpStatus
+  graphics GpGraphics*
+  color ARGB
+
+func GdipFillRectangle
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+
+func GdipFillRectangleI
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  x INT
+  y INT
+  width INT
+  height INT
+
+func GdipFillRectangles
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  rects "GDIPCONST GpRectF*" count=count
+  count INT
+
+func GdipFillRectanglesI
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  rects "GDIPCONST GpRect*" count=count
+  count INT
+
+func GdipFillPolygon
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+  fillMode GpFillMode
+
+func GdipFillPolygonI
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+  fillMode GpFillMode
+
+func GdipFillPolygon2
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipFillPolygon2I
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipFillEllipse
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+
+func GdipFillEllipseI
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  x INT
+  y INT
+  width INT
+  height INT
+
+func GdipFillPie
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+  startAngle REAL
+  sweepAngle REAL
+
+func GdipFillPieI
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  x INT
+  y INT
+  width INT
+  height INT
+  startAngle REAL
+  sweepAngle REAL
+
+func GdipFillPath
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  path GpPath*
+
+func GdipFillClosedCurve
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipFillClosedCurveI
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipFillClosedCurve2
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+  tension REAL
+  fillMode GpFillMode
+
+func GdipFillClosedCurve2I
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+  tension REAL
+  fillMode GpFillMode
+
+func GdipFillRegion
+  GpStatus
+  graphics GpGraphics*
+  brush GpBrush*
+  region GpRegion*
+
+func GdipDrawImageFX ordinal=626
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  source GpRectF*
+  xForm GpMatrix*
+  effect CGpEffect*
+  imageAttributes GpImageAttributes*
+  srcUnit GpUnit
+
+func GdipDrawImage
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  x REAL
+  y REAL
+
+func GdipDrawImageI
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  x INT
+  y INT
+
+func GdipDrawImageRect
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+
+func GdipDrawImageRectI
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  x INT
+  y INT
+  width INT
+  height INT
+
+func GdipDrawImagePoints
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  dstpoints "GDIPCONST GpPointF*" count=count
+  count INT
+
+func GdipDrawImagePointsI
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  dstpoints "GDIPCONST GpPoint*" count=count
+  count INT
+
+func GdipDrawImagePointRect
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  x REAL
+  y REAL
+  srcx REAL
+  srcy REAL
+  srcwidth REAL
+  srcheight REAL
+  srcUnit GpUnit
+
+func GdipDrawImagePointRectI
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  x INT
+  y INT
+  srcx INT
+  srcy INT
+  srcwidth INT
+  srcheight INT
+  srcUnit GpUnit
+
+func GdipDrawImageRectRect
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  dstx REAL
+  dsty REAL
+  dstwidth REAL
+  dstheight REAL
+  srcx REAL
+  srcy REAL
+  srcwidth REAL
+  srcheight REAL
+  srcUnit GpUnit
+  imageAttributes "GDIPCONST GpImageAttributes*"
+  callback DrawImageAbort
+  callbackData VOID*
+
+func GdipDrawImageRectRectI
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  dstx INT
+  dsty INT
+  dstwidth INT
+  dstheight INT
+  srcx INT
+  srcy INT
+  srcwidth INT
+  srcheight INT
+  srcUnit GpUnit
+  imageAttributes "GDIPCONST GpImageAttributes*"
+  callback DrawImageAbort
+  callbackData VOID*
+
+func GdipDrawImagePointsRect
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  points "GDIPCONST GpPointF*" count=count
+  count INT
+  srcx REAL
+  srcy REAL
+  srcwidth REAL
+  srcheight REAL
+  srcUnit GpUnit
+  imageAttributes "GDIPCONST GpImageAttributes*"
+  callback DrawImageAbort
+  callbackData VOID*
+
+func GdipDrawImagePointsRectI
+  GpStatus
+  graphics GpGraphics*
+  image GpImage*
+  points "GDIPCONST GpPoint*" count=count
+  count INT
+  srcx INT
+  srcy INT
+  srcwidth INT
+  srcheight INT
+  srcUnit GpUnit
+  imageAttributes "GDIPCONST GpImageAttributes*"
+  callback DrawImageAbort
+  callbackData VOID*
+
+func GdipEnumerateMetafileDestPoint
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipEnumerateMetafileDestPointI
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipEnumerateMetafileDestRect
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipEnumerateMetafileDestRectI
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipEnumerateMetafileDestPoints
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  destPoints "GDIPCONST PointF*" count=count
+  count INT
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipEnumerateMetafileDestPointsI
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  destPoints "GDIPCONST Point*" count=count
+  count INT
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipEnumerateMetafileSrcRectDestPoint
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  srcUnit Unit
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipEnumerateMetafileSrcRectDestPointI
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  srcUnit Unit
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipEnumerateMetafileSrcRectDestRect
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  srcUnit Unit
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipEnumerateMetafileSrcRectDestRectI
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  srcUnit Unit
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipEnumerateMetafileSrcRectDestPoints
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  destPoints "GDIPCONST PointF*" count=count
+  count INT
+  srcUnit Unit
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipEnumerateMetafileSrcRectDestPointsI
+  GpStatus
+  graphics GpGraphics*
+  metafile "GDIPCONST GpMetafile*"
+  destPoints "GDIPCONST Point*" count=count
+  count INT
+  srcUnit Unit
+  callback EnumerateMetafileProc
+  callbackData VOID*
+  imageAttributes "GDIPCONST GpImageAttributes*"
+
+func GdipPlayMetafileRecord
+  GpStatus
+  metafile "GDIPCONST GpMetafile*"
+  recordType EmfPlusRecordType
+  flags UINT
+  dataSize UINT
+  data "GDIPCONST BYTE*" length=dataSize
+
+func GdipSetClipGraphics
+  GpStatus
+  graphics GpGraphics*
+  srcgraphics GpGraphics*
+  combineMode CombineMode
+
+func GdipSetClipRect
+  GpStatus
+  graphics GpGraphics*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+  combineMode CombineMode
+
+func GdipSetClipRectI
+  GpStatus
+  graphics GpGraphics*
+  x INT
+  y INT
+  width INT
+  height INT
+  combineMode CombineMode
+
+func GdipSetClipPath
+  GpStatus
+  graphics GpGraphics*
+  path GpPath*
+  combineMode CombineMode
+
+func GdipSetClipRegion
+  GpStatus
+  graphics GpGraphics*
+  region GpRegion*
+  combineMode CombineMode
+
+func GdipSetClipHrgn
+  GpStatus
+  graphics GpGraphics*
+  hRgn HRGN
+  combineMode CombineMode
+
+func GdipResetClip
+  GpStatus
+  graphics GpGraphics*
+
+func GdipTranslateClip
+  GpStatus
+  graphics GpGraphics*
+  dx REAL
+  dy REAL
+
+func GdipTranslateClipI
+  GpStatus
+  graphics GpGraphics*
+  dx INT
+  dy INT
+
+func GdipGetClip
+  GpStatus
+  graphics GpGraphics*
+  region GpRegion*
+
+func GdipGetClipBounds
+  GpStatus
+  graphics GpGraphics*
+  rect GpRectF*
+
+func GdipGetClipBoundsI
+  GpStatus
+  graphics GpGraphics*
+  rect GpRect*
+
+func GdipIsClipEmpty
+  GpStatus
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipGetVisibleClipBounds
+  GpStatus
+  graphics GpGraphics*
+  rect GpRectF*
+
+func GdipGetVisibleClipBoundsI
+  GpStatus
+  graphics GpGraphics*
+  rect GpRect*
+
+func GdipIsVisibleClipEmpty
+  GpStatus
+  graphics GpGraphics*
+  result BOOL*
+
+func GdipIsVisiblePoint
+  GpStatus
+  graphics GpGraphics*
+  x REAL
+  y REAL
+  result BOOL*
+
+func GdipIsVisiblePointI
+  GpStatus
+  graphics GpGraphics*
+  x INT
+  y INT
+  result BOOL*
+
+func GdipIsVisibleRect
+  GpStatus
+  graphics GpGraphics*
+  x REAL
+  y REAL
+  width REAL
+  height REAL
+  result BOOL*
+
+func GdipIsVisibleRectI
+  GpStatus
+  graphics GpGraphics*
+  x INT
+  y INT
+  width INT
+  height INT
+  result BOOL*
+
+func GdipSaveGraphics
+  GpStatus
+  graphics GpGraphics*
+  state GraphicsState*
+
+func GdipRestoreGraphics
+  GpStatus
+  graphics GpGraphics*
+  state GraphicsState
+
+func GdipBeginContainer
+  GpStatus
+  graphics GpGraphics*
+  dstrect "GDIPCONST GpRectF*"
+  srcrect "GDIPCONST GpRectF*"
+  unit GpUnit
+  state GraphicsContainer*
+
+func GdipBeginContainerI
+  GpStatus
+  graphics GpGraphics*
+  dstrect "GDIPCONST GpRect*"
+  srcrect "GDIPCONST GpRect*"
+  unit GpUnit
+  state GraphicsContainer*
+
+func GdipBeginContainer2
+  GpStatus
+  graphics GpGraphics*
+  state GraphicsContainer*
+
+func GdipEndContainer
+  GpStatus
+  graphics GpGraphics*
+  state GraphicsContainer
+
+func GdipGetMetafileHeaderFromWmf
+  GpStatus
+  hWmf HMETAFILE
+  wmfPlaceableFileHeader "GDIPCONST WmfPlaceableFileHeader*"
+  header MetafileHeader*
+
+func GdipGetMetafileHeaderFromEmf
+  GpStatus
+  hEmf HENHMETAFILE
+  header MetafileHeader*
+
+func GdipGetMetafileHeaderFromFile
+  GpStatus
+  filename "GDIPCONST WCHAR*"
+  header MetafileHeader*
+
+func GdipGetMetafileHeaderFromStream
+  GpStatus
+  stream IStream*
+  header MetafileHeader*
+
+func GdipGetMetafileHeaderFromMetafile
+  GpStatus
+  metafile GpMetafile*
+  header MetafileHeader*
+
+func GdipGetHemfFromMetafile
+  GpStatus
+  metafile GpMetafile*
+  hEmf HENHMETAFILE*
+
+func GdipCreateStreamOnFile
+  GpStatus
+  filename "GDIPCONST WCHAR*"
+  access UINT
+  stream IStream**
+
+func GdipCreateMetafileFromWmf
+  GpStatus
+  hWmf HMETAFILE
+  deleteWmf BOOL
+  wmfPlaceableFileHeader "GDIPCONST WmfPlaceableFileHeader*"
+  metafile GpMetafile**
+
+func GdipCreateMetafileFromEmf
+  GpStatus
+  hEmf HENHMETAFILE
+  deleteEmf BOOL
+  metafile GpMetafile**
+
+func GdipCreateMetafileFromFile
+  GpStatus
+  file "GDIPCONST WCHAR*"
+  metafile GpMetafile**
+
+func GdipCreateMetafileFromWmfFile
+  GpStatus
+  file "GDIPCONST WCHAR*"
+  wmfPlaceableFileHeader "GDIPCONST WmfPlaceableFileHeader*"
+  metafile GpMetafile**
+
+func GdipCreateMetafileFromStream
+  GpStatus
+  stream IStream*
+  metafile GpMetafile**
+
+func GdipRecordMetafile
+  GpStatus
+  referenceHdc HDC
+  type EmfType
+  frameRect "GDIPCONST GpRectF*"
+  frameUnit MetafileFrameUnit
+  description "GDIPCONST WCHAR*"
+  metafile GpMetafile**
+
+func GdipRecordMetafileI
+  GpStatus
+  referenceHdc HDC
+  type EmfType
+  frameRect "GDIPCONST GpRect*"
+  frameUnit MetafileFrameUnit
+  description "GDIPCONST WCHAR*"
+  metafile GpMetafile**
+
+func GdipRecordMetafileFileName
+  GpStatus
+  fileName "GDIPCONST WCHAR*"
+  referenceHdc HDC
+  type EmfType
+  frameRect "GDIPCONST GpRectF*"
+  frameUnit MetafileFrameUnit
+  description "GDIPCONST WCHAR*"
+  metafile GpMetafile**
+
+func GdipRecordMetafileFileNameI
+  GpStatus
+  fileName "GDIPCONST WCHAR*"
+  referenceHdc HDC
+  type EmfType
+  frameRect "GDIPCONST GpRect*"
+  frameUnit MetafileFrameUnit
+  description "GDIPCONST WCHAR*"
+  metafile GpMetafile**
+
+func GdipRecordMetafileStream
+  GpStatus
+  stream IStream*
+  referenceHdc HDC
+  type EmfType
+  frameRect "GDIPCONST GpRectF*"
+  frameUnit MetafileFrameUnit
+  description "GDIPCONST WCHAR*"
+  metafile GpMetafile**
+
+func GdipRecordMetafileStreamI
+  GpStatus
+  stream IStream*
+  referenceHdc HDC
+  type EmfType
+  frameRect "GDIPCONST GpRect*"
+  frameUnit MetafileFrameUnit
+  description "GDIPCONST WCHAR*"
+  metafile GpMetafile**
+
+func GdipSetMetafileDownLevelRasterizationLimit
+  GpStatus
+  metafile GpMetafile*
+  metafileRasterizationLimitDpi UINT
+
+func GdipGetMetafileDownLevelRasterizationLimit
+  GpStatus
+  metafile "GDIPCONST GpMetafile*"
+  metafileRasterizationLimitDpi UINT*
+
+func GdipGetImageDecodersSize
+  GpStatus
+  numDecoders UINT*
+  size UINT*
+
+func GdipGetImageDecoders
+  GpStatus
+  numDecoders UINT
+  size UINT
+  decoders ImageCodecInfo* postCount=numDecoders
+
+func GdipGetImageEncodersSize
+  GpStatus
+  numEncoders UINT*
+  size UINT*
+
+func GdipGetImageEncoders
+  GpStatus
+  numEncoders UINT
+  size UINT
+  encoders ImageCodecInfo* postCount=numEncoders
+
+func GdipComment
+  GpStatus
+  graphics GpGraphics*
+  sizeData UINT
+  data "GDIPCONST BYTE*" length=sizeData
+
+func GdipCreateFontFamilyFromName
+  GpStatus
+  name "GDIPCONST WCHAR*"
+  fontCollection GpFontCollection*
+  FontFamily GpFontFamily**
+
+func GdipDeleteFontFamily
+  GpStatus
+  FontFamily GpFontFamily*
+
+func GdipCloneFontFamily
+  GpStatus
+  FontFamily GpFontFamily*
+  clonedFontFamily GpFontFamily**
+
+func GdipGetGenericFontFamilySansSerif
+  GpStatus
+  nativeFamily GpFontFamily**
+
+func GdipGetGenericFontFamilySerif
+  GpStatus
+  nativeFamily GpFontFamily**
+
+func GdipGetGenericFontFamilyMonospace
+  GpStatus
+  nativeFamily GpFontFamily**
+
+func GdipGetFamilyName
+  GpStatus
+  family "GDIPCONST GpFontFamily*"
+  name LPWSTR
+  language LANGID
+
+func GdipIsStyleAvailable
+  GpStatus
+  family "GDIPCONST GpFontFamily*"
+  style INT
+  IsStyleAvailable BOOL*
+
+func GdipFontCollectionEnumerable
+  GpStatus
+  fontCollection GpFontCollection*
+  graphics GpGraphics*
+  numFound INT*
+
+func GdipFontCollectionEnumerate
+  GpStatus
+  fontCollection GpFontCollection*
+  numSought INT
+  gpfamilies "GpFontFamily* []" postCount=numFound
+  numFound INT*
+  graphics GpGraphics*
+
+func GdipGetEmHeight
+  GpStatus
+  family "GDIPCONST GpFontFamily*"
+  style [FontStyle]
+  EmHeight UINT16*
+
+func GdipGetCellAscent
+  GpStatus
+  family "GDIPCONST GpFontFamily*"
+  style INT
+  CellAscent UINT16*
+
+func GdipGetCellDescent
+  GpStatus
+  family "GDIPCONST GpFontFamily*"
+  style INT
+  CellDescent UINT16*
+
+func GdipGetLineSpacing
+  GpStatus
+  family "GDIPCONST GpFontFamily*"
+  style [FontStyle]
+  LineSpacing UINT16*
+
+func GdipCreateFontFromDC
+  GpStatus
+  hdc HDC
+  font GpFont**
+
+func GdipCreateFontFromLogfont bothCharset
+  GpStatus
+  hdc HDC
+  logfont "GDIPCONST LOGFONT*"
+  font GpFont**
+
+func GdipCreateFont
+  GpStatus
+  fontFamily "GDIPCONST GpFontFamily*"
+  emSize REAL
+  style [FontStyle]
+  unit Unit
+  font GpFont**
+
+func GdipCloneFont
+  GpStatus
+  font GpFont*
+  cloneFont GpFont**
+
+func GdipDeleteFont
+  GpStatus
+  font GpFont*
+
+func GdipGetFamily
+  GpStatus
+  font GpFont*
+  family GpFontFamily**
+
+func GdipGetFontStyle
+  GpStatus
+  font GpFont*
+  style [FontStyle*]
+
+func GdipGetFontSize
+  GpStatus
+  font GpFont*
+  size REAL*
+
+func GdipGetFontUnit
+  GpStatus
+  font GpFont*
+  unit Unit*
+
+func GdipGetFontHeight
+  GpStatus
+  font "GDIPCONST GpFont*"
+  graphics "GDIPCONST GpGraphics*"
+  height REAL*
+
+func GdipGetFontHeightGivenDPI
+  GpStatus
+  font "GDIPCONST GpFont*"
+  dpi REAL
+  height REAL*
+
+func GdipGetLogFont bothCharset
+  GpStatus
+  font GpFont*
+  graphics GpGraphics*
+  logfont LOGFONT*
+
+func GdipNewInstalledFontCollection
+  GpStatus
+  fontCollection GpFontCollection**
+
+func GdipNewPrivateFontCollection
+  GpStatus
+  fontCollection GpFontCollection**
+
+func GdipDeletePrivateFontCollection
+  GpStatus
+  fontCollection GpFontCollection**
+
+func GdipGetFontCollectionFamilyCount
+  GpStatus
+  fontCollection GpFontCollection*
+  numFound INT*
+
+func GdipGetFontCollectionFamilyList
+  GpStatus
+  fontCollection GpFontCollection*
+  numSought INT
+  gpfamilies "GpFontFamily* []" postCount=numFound
+  numFound INT*
+
+func GdipPrivateAddFontFile
+  GpStatus
+  fontCollection GpFontCollection*
+  filename "GDIPCONST WCHAR*"
+
+func GdipPrivateAddMemoryFont
+  GpStatus
+  fontCollection GpFontCollection*
+  memory "GDIPCONST void*" length=length
+  length INT
+
+func GdipDrawString
+  GpStatus
+  graphics GpGraphics*
+  string "GDIPCONST WCHAR*"
+  length INT
+  font "GDIPCONST GpFont*"
+  layoutRect "GDIPCONST RectF*"
+  stringFormat "GDIPCONST GpStringFormat*"
+  brush "GDIPCONST GpBrush*"
+
+func GdipMeasureString
+  GpStatus
+  graphics GpGraphics*
+  string "GDIPCONST WCHAR*"
+  length INT
+  font "GDIPCONST GpFont*"
+  layoutRect "GDIPCONST RectF*"
+  stringFormat "GDIPCONST GpStringFormat*"
+  boundingBox RectF*
+  codepointsFitted INT*
+  linesFilled INT*
+
+func GdipMeasureCharacterRanges
+  GpStatus
+  graphics GpGraphics*
+  string "GDIPCONST WCHAR*"
+  length INT
+  font "GDIPCONST GpFont*"
+  stringFormat "GDIPCONST GpStringFormat*"
+  regionCount INT
+  regions GpRegion** postCount=regionCount
+
+func GdipDrawDriverString
+  GpStatus
+  graphics GpGraphics*
+  text "GDIPCONST UINT16*"
+  length INT
+  font "GDIPCONST GpFont*"
+  brush "GDIPCONST GpBrush*"
+  positions "GDIPCONST PointF*"
+  flags [DriverStringOptions]
+  matrix "GDIPCONST GpMatrix*"
+
+func GdipMeasureDriverString
+  GpStatus
+  graphics GpGraphics*
+  text "GDIPCONST UINT16*"
+  length INT
+  font "GDIPCONST GpFont*"
+  positions "GDIPCONST PointF*"
+  flags [DriverStringOptions]
+  matrix "GDIPCONST GpMatrix*"
+  boundingBox RectF*
+
+func GdipCreateStringFormat
+  GpStatus
+  formatAttributes [StringFormatFlags]
+  language LANGID
+  format GpStringFormat**
+
+func GdipStringFormatGetGenericDefault
+  GpStatus
+  format GpStringFormat**
+
+func GdipStringFormatGetGenericTypographic
+  GpStatus
+  format GpStringFormat**
+
+func GdipDeleteStringFormat
+  GpStatus
+  format GpStringFormat*
+
+func GdipCloneStringFormat
+  GpStatus
+  format "GDIPCONST GpStringFormat*"
+  newFormat GpStringFormat**
+
+func GdipSetStringFormatFlags
+  GpStatus
+  format GpStringFormat*
+  flags [StringFormatFlags]
+
+func GdipGetStringFormatFlags
+  GpStatus
+  format "GDIPCONST GpStringFormat*"
+  flags [StringFormatFlags*]
+
+func GdipSetStringFormatAlign
+  GpStatus
+  format GpStringFormat*
+  align StringAlignment
+
+func GdipGetStringFormatAlign
+  GpStatus
+  format "GDIPCONST GpStringFormat*"
+  align StringAlignment*
+
+func GdipSetStringFormatLineAlign
+  GpStatus
+  format GpStringFormat*
+  align StringAlignment
+
+func GdipGetStringFormatLineAlign
+  GpStatus
+  format "GDIPCONST GpStringFormat*"
+  align StringAlignment*
+
+func GdipSetStringFormatTrimming
+  GpStatus
+  format GpStringFormat*
+  trimming StringTrimming
+
+func GdipGetStringFormatTrimming
+  GpStatus
+  format "GDIPCONST GpStringFormat*"
+  trimming StringTrimming*
+
+func GdipSetStringFormatHotkeyPrefix
+  GpStatus
+  format GpStringFormat*
+  hotkeyPrefix [HotkeyPrefix]
+
+func GdipGetStringFormatHotkeyPrefix
+  GpStatus
+  format "GDIPCONST GpStringFormat*"
+  hotkeyPrefix [HotkeyPrefix*]
+
+func GdipSetStringFormatTabStops
+  GpStatus
+  format GpStringFormat*
+  firstTabOffset REAL
+  count INT
+  tabStops "GDIPCONST REAL*" count=count
+
+func GdipGetStringFormatTabStops
+  GpStatus
+  format "GDIPCONST GpStringFormat*"
+  count INT
+  firstTabOffset REAL*
+  tabStops REAL* postCount=count
+
+func GdipGetStringFormatTabStopCount
+  GpStatus
+  format "GDIPCONST GpStringFormat*"
+  count INT*
+
+func GdipSetStringFormatDigitSubstitution
+  GpStatus
+  format GpStringFormat*
+  language LANGID
+  substitute StringDigitSubstitute
+
+func GdipGetStringFormatDigitSubstitution
+  GpStatus
+  format "GDIPCONST GpStringFormat*"
+  language LANGID*
+  substitute StringDigitSubstitute*
+
+func GdipGetStringFormatMeasurableCharacterRangeCount
+  GpStatus
+  format "GDIPCONST GpStringFormat*"
+  count INT*
+
+func GdipSetStringFormatMeasurableCharacterRanges
+  GpStatus
+  format GpStringFormat*
+  rangeCount INT
+  ranges "GDIPCONST CharacterRange*" count=rangeCount
+
+func GdipCreateCachedBitmap
+  GpStatus
+  bitmap GpBitmap*
+  graphics GpGraphics*
+  cachedBitmap GpCachedBitmap**
+
+func GdipDeleteCachedBitmap
+  GpStatus
+  cachedBitmap GpCachedBitmap*
+
+func GdipDrawCachedBitmap
+  GpStatus
+  graphics GpGraphics*
+  cachedBitmap GpCachedBitmap*
+  x INT
+  y INT
+
+func GdipEmfToWmfBits
+  success NotEqual=0
+  UINT
+  hemf HENHMETAFILE
+  cbData16 UINT
+  pData16 LPBYTE
+  iMapMode INT
+  eFlags INT
+
+func GdipSetImageAttributesCachedBackground
+  GpStatus
+  imageattr GpImageAttributes*
+  enableFlag BOOL
+
+func GdipTestControl
+  GpStatus
+  control GpTestControlEnum
+  param void*
+
+func GdiplusNotificationHook
+  GpStatus
+  token ULONG_PTR*
+
+func GdiplusNotificationUnhook
+  VOID
+  token ULONG_PTR
+
+func GdipConvertToEmfPlus ordinal=627
+  GpStatus
+  refGraphics "const GpGraphics*"
+  metafile GpMetafile*
+  conversionFailureFlag INT*
+  emfType EmfType
+  description "const WCHAR*"
+  out_metafile GpMetafile**
+
+func GdipConvertToEmfPlusToFile ordinal=628
+  GpStatus
+  refGraphics "const GpGraphics*"
+  metafile GpMetafile*
+  conversionFailureFlag INT*
+  filename "const WCHAR*"
+  emfType EmfType
+  description "const WCHAR*"
+  out_metafile GpMetafile**
+
+func GdipConvertToEmfPlusToStream ordinal=629
+  GpStatus
+  refGraphics "const GpGraphics*"
+  metafile GpMetafile*
+  conversionFailureFlag INT*
+  stream IStream*
+  emfType EmfType
+  description "const WCHAR*"
+  out_metafile GpMetafile**
+

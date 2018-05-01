@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IHandlerActivationHost base=IUnknown id={35094a87-8bb1-4237-96c6-c417eebdb078} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func BeforeCoCreateInstance
+    HRESULT
+    clsidHandler REFCLSID
+    itemsBeingActivated IShellItemArray*
+    handlerInfo IHandlerInfo*
+
+  func BeforeCreateProcess
+    HRESULT
+    applicationPath LPCWSTR
+    commandLine LPCWSTR
+    handlerInfo IHandlerInfo*
+
+

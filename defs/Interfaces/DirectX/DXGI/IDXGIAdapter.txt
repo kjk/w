@@ -1,0 +1,18 @@
+include Interfaces\DirectX\DXGI\IDXGIObject.txt
+
+ingterface IDXGIAdapter base=IDXGIObject id={2411e7e1-12ac-4ccf-bd14-9798e8534dc0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func EnumOutputs
+    HRESULT
+    Output UINT
+    ppOutput IDXGIOutput**
+
+  func GetDesc
+    HRESULT
+    pDesc DXGI_ADAPTER_DESC*
+
+  func CheckInterfaceSupport
+    HRESULT
+    InterfaceName REFGUID
+    pUMDVersion LARGE_INTEGER*
+
+

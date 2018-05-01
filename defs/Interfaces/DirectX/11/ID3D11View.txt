@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+
+ingterface ID3D11View base=ID3D11DeviceChild id={839d1216-bb2e-412b-b7f4-a9dbebe08ed1} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Resource"
+  func GetResource
+    void
+    ppResource ID3D11Resource**
+
+

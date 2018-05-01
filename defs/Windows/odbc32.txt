@@ -1,0 +1,1061 @@
+include Headers\odbc.h.txt
+
+dll ODBC32.DLL callingConvention=STDCALL onlineHelp=MSDN
+category "Data Access and Storage/Windows Data Access Components/Microsoft Open Database Connectivity (ODBC)/ODBC"
+alias SQLSMALLINT short
+
+pointer SQLSMALLINT* SQLSMALLINT
+
+alias SQLUSMALLINT "unsigned short"
+
+pointer SQLUSMALLINT* SQLUSMALLINT
+
+alias SQLPOINTER void*
+
+pointer SQLPOINTER* SQLPOINTER
+
+alias SQLINTEGER long
+
+pointer SQLINTEGER* SQLINTEGER
+
+alias SQLLEN INT_PTR
+
+pointer SQLLEN* SQLLEN
+
+alias SQLULEN UINT_PTR
+
+pointer SQLULEN* SQLULEN
+
+alias SQLSETPOSIROW UINT_PTR
+
+alias SQLHWND HWND
+
+alias SQLHANDLE void*
+
+pointer SQLHANDLE* SQLHANDLE
+
+alias SQLHENV SQLHANDLE
+
+pointer SQLHENV* SQLHENV
+
+alias SQLHDBC SQLHANDLE
+
+pointer SQLHDBC* SQLHDBC
+
+alias SQLHSTMT SQLHANDLE
+
+pointer SQLHSTMT* SQLHSTMT
+
+alias SQLHDESC SQLHANDLE
+
+alias SQLCHAR "unsigned char"
+
+alias SQLCHAR* LPSTR
+
+alias SQLTCHAR TCHAR
+
+pointer SQLTCHAR* LPTSTR
+
+enum [SQL_DRIVER_COMPLETION] SQLUSMALLINT display=SQLUSMALLINT
+  SQL_DRIVER_NOPROMPT          0
+  SQL_DRIVER_COMPLETE          1
+  SQL_DRIVER_PROMPT            2
+  SQL_DRIVER_COMPLETE_REQUIRED 3
+
+enum [SQL_ENDTRAN_OPTION] SQLSMALLINT display=SQLSMALLINT
+  SQL_COMMIT   0
+  SQL_ROLLBACK 1
+
+enum [SQL_FETCH_TYPE] SQLSMALLINT display=SQLSMALLINT
+  SQL_FETCH_NEXT     1
+  SQL_FETCH_FIRST    2
+  SQL_FETCH_LAST     3
+  SQL_FETCH_PRIOR    4
+  SQL_FETCH_ABSOLUTE 5
+  SQL_FETCH_RELATIVE 6
+
+enum [SQL_HANDLE_TYPE] SQLSMALLINT display=SQLSMALLINT
+  SQL_HANDLE_ENV  1
+  SQL_HANDLE_DBC  2
+  SQL_HANDLE_STMT 3
+  SQL_HANDLE_DESC 4
+
+enum [SQL_FREESTMT_OPTION] SQLUSMALLINT display=SQLUSMALLINT
+  SQL_CLOSE        0
+  SQL_DROP         1
+  SQL_UNBIND       2
+  SQL_RESET_PARAMS 3
+
+func SQLAllocConnect ordinal=1
+  SQLRETURN
+  EnvironmentHandle SQLHENV
+  ConnectionHandle SQLHDBC*
+
+func SQLAllocEnv ordinal=2
+  SQLRETURN
+  EnvironmentHandle SQLHENV*
+
+func SQLAllocHandle ordinal=24
+  SQLRETURN
+  HandleType [SQL_HANDLE_TYPE]
+  InputHandle SQLHANDLE
+  OutputHandlePtr SQLHANDLE*
+
+func SQLAllocStmt ordinal=3
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  StatementHandle SQLHSTMT*
+
+func SQLBindCol ordinal=4
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ColumnNumber SQLUSMALLINT
+  TargetType SQLSMALLINT
+  TargetValuePtr SQLPOINTER
+  BufferLength SQLLEN
+  StrLen_or_Ind SQLLEN*
+
+func SQLBindParam ordinal=25
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ParameterNumber SQLUSMALLINT
+  ValueType SQLSMALLINT
+  ParameterType SQLSMALLINT
+  LengthPrecision SQLULEN
+  ParameterScale SQLSMALLINT
+  ParameterValue SQLPOINTER
+  StrLen_or_IndPtr SQLLEN*
+
+func SQLBindParameter ordinal=72
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ParameterNumber SQLUSMALLINT
+  InputOutputType SQLSMALLINT
+  ValueType SQLSMALLINT
+  ParameterType SQLSMALLINT
+  ColumnSize SQLULEN
+  DecimalDigits SQLSMALLINT
+  ParameterValuePtr SQLPOINTER
+  BufferLength SQLLEN
+  StrLen_or_IndPtr SQLLEN*
+
+func SQLBrowseConnect ordinal=55
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  InConnectionString SQLCHAR*
+  StringLength1 SQLSMALLINT
+  OutConnectionString SQLCHAR* outputOnly
+  BufferLength SQLSMALLINT
+  StringLength2Ptr SQLSMALLINT*
+
+func SQLBrowseConnect bothCharset ordinalA=255 ordinalW=155
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  InConnectionString SQLTCHAR*
+  StringLength1 SQLSMALLINT
+  OutConnectionString SQLTCHAR* outputOnly
+  BufferLength SQLSMALLINT
+  StringLength2Ptr SQLSMALLINT*
+
+func SQLBulkOperations ordinal=78
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  Operation SQLUSMALLINT
+
+func SQLCancel ordinal=5
+  SQLRETURN
+  StatementHandle SQLHSTMT
+
+func SQLCancelHandle
+  SQLRETURN
+  HandleType [SQL_HANDLE_TYPE]
+  Handle SQLHANDLE
+
+func SQLCloseCursor ordinal=26
+  SQLRETURN
+  StatementHandle SQLHSTMT
+
+func SQLColAttribute ordinal=27
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ColumnNumber SQLUSMALLINT
+  FieldIdentifier SQLUSMALLINT
+  CharacterAttributePtr SQLPOINTER
+  BufferLength SQLSMALLINT
+  StringLengthPtr SQLSMALLINT*
+  NumericAttributePtr SQLLEN*
+
+func SQLColAttribute bothCharset ordinalA=227 ordinalW=127
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ColumnNumber SQLUSMALLINT
+  FieldIdentifier SQLUSMALLINT
+  CharacterAttributePtr SQLPOINTER
+  BufferLength SQLSMALLINT
+  StringLengthPtr SQLSMALLINT*
+  NumericAttributePtr SQLLEN*
+
+func SQLColAttributes ordinal=6
+  SQLRETURN
+  hstmt SQLHSTMT
+  icol SQLUSMALLINT
+  fDescType SQLUSMALLINT
+  rgbDesc SQLPOINTER
+  cbDescMax SQLSMALLINT
+  pcbDesc SQLSMALLINT*
+  pfDesc SQLLEN*
+
+func SQLColAttributes bothCharset ordinalA=206 ordinalW=106
+  SQLRETURN
+  hstmt SQLHSTMT
+  icol SQLUSMALLINT
+  fDescType SQLUSMALLINT
+  rgbDesc SQLPOINTER
+  cbDescMax SQLSMALLINT
+  pcbDesc SQLSMALLINT*
+  pfDesc SQLLEN*
+
+func SQLColumnPrivileges ordinal=56
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLCHAR*
+  NameLength3 SQLSMALLINT
+  ColumnName SQLCHAR*
+  NameLength4 SQLSMALLINT
+
+func SQLColumnPrivileges bothCharset ordinalA=256 ordinalW=156
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLTCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLTCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLTCHAR*
+  NameLength3 SQLSMALLINT
+  ColumnName SQLTCHAR*
+  NameLength4 SQLSMALLINT
+
+func SQLColumns ordinal=40
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLCHAR*
+  NameLength3 SQLSMALLINT
+  ColumnName SQLCHAR*
+  NameLength4 SQLSMALLINT
+
+func SQLColumns bothCharset ordinalA=240 ordinalW=140
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLTCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLTCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLTCHAR*
+  NameLength3 SQLSMALLINT
+  ColumnName SQLTCHAR*
+  NameLength4 SQLSMALLINT
+
+func SQLCompleteAsync
+  SQLRETURN
+  HandleType SQLSMALLINT
+  Handle SQLHANDLE
+  AsyncRetCodePtr RETCODE*
+
+func SQLConnect ordinal=7
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  ServerName SQLCHAR*
+  NameLength1 SQLSMALLINT
+  UserName SQLCHAR*
+  NameLength2 SQLSMALLINT
+  Authentication SQLCHAR*
+  NameLength3 SQLSMALLINT
+
+func SQLConnect bothCharset ordinalA=207 ordinalW=107
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  ServerName SQLTCHAR*
+  NameLength1 SQLSMALLINT
+  UserName SQLTCHAR*
+  NameLength2 SQLSMALLINT
+  Authentication SQLTCHAR*
+  NameLength3 SQLSMALLINT
+
+func SQLCopyDesc ordinal=28
+  SQLRETURN
+  SourceDescHandle SQLHDESC
+  TargetDescHandle SQLHDESC
+
+func SQLDataSources ordinal=57
+  SQLRETURN
+  EnvironmentHandle SQLHENV
+  Direction SQLUSMALLINT
+  ServerName SQLCHAR*
+  BufferLength1 SQLSMALLINT
+  NameLength1Ptr SQLSMALLINT*
+  Description SQLCHAR*
+  BufferLength2 SQLSMALLINT
+  NameLength2Ptr SQLSMALLINT*
+
+func SQLDataSources bothCharset ordinalA=257 ordinalW=157
+  SQLRETURN
+  EnvironmentHandle SQLHENV
+  Direction SQLUSMALLINT
+  ServerName SQLTCHAR*
+  BufferLength1 SQLSMALLINT
+  NameLength1Ptr SQLSMALLINT*
+  Description SQLTCHAR*
+  BufferLength2 SQLSMALLINT
+  NameLength2Ptr SQLSMALLINT*
+
+func SQLDescribeCol ordinal=8
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ColumnNumber SQLUSMALLINT
+  ColumnName SQLCHAR*
+  BufferLength SQLSMALLINT
+  NameLengthPtr SQLSMALLINT*
+  DataTypePtr SQLSMALLINT*
+  ColumnSizePtr SQLULEN*
+  DecimalDigitsPtr SQLSMALLINT*
+  NullablePtr SQLSMALLINT*
+
+func SQLDescribeCol bothCharset ordinalA=208 ordinalW=108
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ColumnNumber SQLUSMALLINT
+  ColumnName SQLTCHAR*
+  BufferLength SQLSMALLINT
+  NameLengthPtr SQLSMALLINT*
+  DataTypePtr SQLSMALLINT*
+  ColumnSizePtr SQLULEN*
+  DecimalDigitsPtr SQLSMALLINT*
+  NullablePtr SQLSMALLINT*
+
+func SQLDescribeParam ordinal=58
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ParameterNumber SQLUSMALLINT
+  DataTypePtr SQLSMALLINT*
+  ParameterSizePtr SQLULEN*
+  DecimalDigitsPtr SQLSMALLINT*
+  NullablePtr SQLSMALLINT*
+
+func SQLDisconnect ordinal=9
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+
+func SQLDriverConnect ordinal=41
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  WindowHandle SQLHWND
+  InConnectionString SQLCHAR*
+  StringLength1 SQLSMALLINT
+  OutConnectionString SQLCHAR* outputOnly
+  BufferLength SQLSMALLINT
+  StringLength2Ptr SQLSMALLINT*
+  DriverCompletion [SQL_DRIVER_COMPLETION]
+
+func SQLDriverConnect bothCharset ordinalA=241 ordinalW=141
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  WindowHandle SQLHWND
+  InConnectionString SQLTCHAR*
+  StringLength1 SQLSMALLINT
+  OutConnectionString SQLTCHAR* outputOnly
+  BufferLength SQLSMALLINT
+  StringLength2Ptr SQLSMALLINT*
+  DriverCompletion [SQL_DRIVER_COMPLETION]
+
+func SQLDrivers ordinal=71
+  SQLRETURN
+  EnvironmentHandle SQLHENV
+  Direction SQLUSMALLINT
+  DriverDescription SQLCHAR*
+  BufferLength1 SQLSMALLINT
+  DescriptionLengthPtr SQLSMALLINT*
+  DriverAttributes SQLCHAR*
+  BufferLength2 SQLSMALLINT
+  AttributesLengthPtr SQLSMALLINT*
+
+func SQLDrivers bothCharset ordinalA=271 ordinalW=171
+  SQLRETURN
+  EnvironmentHandle SQLHENV
+  Direction SQLUSMALLINT
+  DriverDescription SQLTCHAR*
+  BufferLength1 SQLSMALLINT
+  DescriptionLengthPtr SQLSMALLINT*
+  DriverAttributes SQLTCHAR*
+  BufferLength2 SQLSMALLINT
+  AttributesLengthPtr SQLSMALLINT*
+
+func SQLEndTran ordinal=29
+  SQLRETURN
+  HandleType [SQL_HANDLE_TYPE]
+  Handle SQLHANDLE
+  CompletionType [SQL_ENDTRAN_OPTION]
+
+func SQLError ordinal=10
+  SQLRETURN
+  EnvironmentHandle SQLHENV
+  ConnectionHandle SQLHDBC
+  StatementHandle SQLHSTMT
+  SQLState SQLCHAR*
+  NativeError SQLINTEGER*
+  MessageText SQLCHAR*
+  BufferLength SQLSMALLINT
+  TextLength SQLSMALLINT*
+
+func SQLError bothCharset ordinalA=210 ordinalW=110
+  SQLRETURN
+  EnvironmentHandle SQLHENV
+  ConnectionHandle SQLHDBC
+  StatementHandle SQLHSTMT
+  SQLState SQLTCHAR*
+  NativeError SQLINTEGER*
+  MessageText SQLTCHAR*
+  BufferLength SQLSMALLINT
+  TextLength SQLSMALLINT*
+
+func SQLExecDirect ordinal=11
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  StatementText SQLCHAR*
+  TextLength SQLINTEGER
+
+func SQLExecDirect bothCharset ordinalA=211 ordinalW=111
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  StatementText SQLTCHAR*
+  TextLength SQLINTEGER
+
+func SQLExecute ordinal=12
+  SQLRETURN
+  StatementHandle SQLHSTMT
+
+func SQLExtendedFetch ordinal=59
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  FetchOrientation SQLUSMALLINT
+  FetchOffset SQLLEN
+  RowCountPtr SQLULEN*
+  RowStatusArray SQLUSMALLINT*
+
+func SQLFetch ordinal=13
+  SQLRETURN
+  StatementHandle SQLHSTMT
+
+func SQLFetchScroll ordinal=30
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  FetchOrientation [SQL_FETCH_TYPE]
+  FetchOffset SQLLEN
+
+func SQLForeignKeys ordinal=60
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  PKCatalogName SQLCHAR*
+  NameLength1 SQLSMALLINT
+  PKSchemaName SQLCHAR*
+  NameLength2 SQLSMALLINT
+  PKTableName SQLCHAR*
+  NameLength3 SQLSMALLINT
+  FKCatalogName SQLCHAR*
+  NameLength4 SQLSMALLINT
+  FKSchemaName SQLCHAR*
+  NameLength5 SQLSMALLINT
+  FKTableName SQLCHAR*
+  NameLength6 SQLSMALLINT
+
+func SQLForeignKeys bothCharset ordinalA=260 ordinalW=160
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  PKCatalogName SQLTCHAR*
+  NameLength1 SQLSMALLINT
+  PKSchemaName SQLTCHAR*
+  NameLength2 SQLSMALLINT
+  PKTableName SQLTCHAR*
+  NameLength3 SQLSMALLINT
+  FKCatalogName SQLTCHAR*
+  NameLength4 SQLSMALLINT
+  FKSchemaName SQLTCHAR*
+  NameLength5 SQLSMALLINT
+  FKTableName SQLTCHAR*
+  NameLength6 SQLSMALLINT
+
+func SQLFreeConnect ordinal=14
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+
+func SQLFreeEnv ordinal=15
+  SQLRETURN
+  EnvironmentHandle SQLHENV
+
+func SQLFreeHandle ordinal=31
+  SQLRETURN
+  HandleType [SQL_HANDLE_TYPE]
+  Handle SQLHANDLE
+
+func SQLFreeStmt ordinal=16
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  Option [SQL_FREESTMT_OPTION]
+
+func SQLGetConnectAttr ordinal=32
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  Attribute SQLINTEGER
+  ValuePtr SQLPOINTER
+  BufferLength SQLINTEGER
+  StringLengthPtr SQLINTEGER*
+
+func SQLGetConnectAttr bothCharset ordinalA=232 ordinalW=132
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  Attribute SQLINTEGER
+  ValuePtr SQLPOINTER
+  BufferLength SQLINTEGER
+  StringLengthPtr SQLINTEGER*
+
+func SQLGetConnectOption ordinal=42
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  Option SQLUSMALLINT
+  Value SQLPOINTER
+
+func SQLGetConnectOption bothCharset ordinalA=242 ordinalW=142
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  Option SQLUSMALLINT
+  Value SQLPOINTER
+
+func SQLGetCursorName ordinal=17
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CursorName SQLCHAR*
+  BufferLength SQLSMALLINT
+  NameLengthPtr SQLSMALLINT*
+
+func SQLGetCursorName bothCharset ordinalA=217 ordinalW=117
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CursorName SQLTCHAR*
+  BufferLength SQLSMALLINT
+  NameLengthPtr SQLSMALLINT*
+
+func SQLGetData ordinal=43
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  Col_or_Param_Num SQLUSMALLINT
+  TargetType SQLSMALLINT
+  TargetValuePtr SQLPOINTER
+  BufferLength SQLLEN
+  StrLen_or_IndPtr SQLLEN*
+
+func SQLGetDescField ordinal=33
+  SQLRETURN
+  DescriptorHandle SQLHDESC
+  RecNumber SQLSMALLINT
+  FieldIdentifier SQLSMALLINT
+  ValuePtr SQLPOINTER
+  BufferLength SQLINTEGER
+  StringLengthPtr SQLINTEGER*
+
+func SQLGetDescField bothCharset ordinalA=233 ordinalW=133
+  SQLRETURN
+  DescriptorHandle SQLHDESC
+  RecNumber SQLSMALLINT
+  FieldIdentifier SQLSMALLINT
+  ValuePtr SQLPOINTER
+  BufferLength SQLINTEGER
+  StringLengthPtr SQLINTEGER*
+
+func SQLGetDescRec ordinal=34
+  SQLRETURN
+  DescriptorHandle SQLHDESC
+  RecNumber SQLSMALLINT
+  Name SQLCHAR*
+  BufferLength SQLSMALLINT
+  StringLengthPtr SQLSMALLINT*
+  TypePtr SQLSMALLINT*
+  SubTypePtr SQLSMALLINT*
+  LengthPtr SQLLEN*
+  PrecisionPtr SQLSMALLINT*
+  ScalePtr SQLSMALLINT*
+  NullablePtr SQLSMALLINT*
+
+func SQLGetDescRec bothCharset ordinalA=234 ordinalW=134
+  SQLRETURN
+  DescriptorHandle SQLHDESC
+  RecNumber SQLSMALLINT
+  Name SQLTCHAR*
+  BufferLength SQLSMALLINT
+  StringLengthPtr SQLSMALLINT*
+  TypePtr SQLSMALLINT*
+  SubTypePtr SQLSMALLINT*
+  LengthPtr SQLLEN*
+  PrecisionPtr SQLSMALLINT*
+  ScalePtr SQLSMALLINT*
+  NullablePtr SQLSMALLINT*
+
+func SQLGetDiagField ordinal=35
+  SQLRETURN
+  HandleType [SQL_HANDLE_TYPE]
+  Handle SQLHANDLE
+  RecNumber SQLSMALLINT
+  DiagIdentifier SQLSMALLINT
+  DiagInfoPtr SQLPOINTER
+  BufferLength SQLSMALLINT
+  StringLengthPtr SQLSMALLINT*
+
+func SQLGetDiagField bothCharset ordinalA=235 ordinalW=135
+  SQLRETURN
+  HandleType [SQL_HANDLE_TYPE]
+  Handle SQLHANDLE
+  RecNumber SQLSMALLINT
+  DiagIdentifier SQLSMALLINT
+  DiagInfoPtr SQLPOINTER
+  BufferLength SQLSMALLINT
+  StringLengthPtr SQLSMALLINT*
+
+func SQLGetDiagRec ordinal=36
+  SQLRETURN
+  HandleType [SQL_HANDLE_TYPE]
+  Handle SQLHANDLE
+  RecNumber SQLSMALLINT
+  SQLState SQLCHAR* outputOnly
+  NativeErrorPtr SQLINTEGER*
+  MessageText SQLCHAR* outputOnly
+  BufferLength SQLSMALLINT
+  TextLengthPtr SQLSMALLINT*
+
+func SQLGetDiagRec bothCharset ordinalA=236 ordinalW=136
+  SQLRETURN
+  HandleType [SQL_HANDLE_TYPE]
+  Handle SQLHANDLE
+  RecNumber SQLSMALLINT
+  SQLState SQLTCHAR*
+  NativeErrorPtr SQLINTEGER*
+  MessageText SQLTCHAR*
+  BufferLength SQLSMALLINT
+  TextLengthPtr SQLSMALLINT*
+
+func SQLGetEnvAttr ordinal=37
+  SQLRETURN
+  EnvironmentHandle SQLHENV
+  Attribute SQLINTEGER
+  ValuePtr SQLPOINTER
+  BufferLength SQLINTEGER
+  StringLengthPtr SQLINTEGER*
+
+func SQLGetFunctions ordinal=44
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  FunctionId SQLUSMALLINT
+  SupportedPtr SQLUSMALLINT*
+
+func SQLGetInfo ordinal=45
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  InfoType SQLUSMALLINT
+  InfoValuePtr SQLPOINTER
+  BufferLength SQLSMALLINT
+  StringLengthPtr SQLSMALLINT*
+
+func SQLGetInfo bothCharset ordinalA=245 ordinalW=145
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  InfoType SQLUSMALLINT
+  InfoValuePtr SQLPOINTER
+  BufferLength SQLSMALLINT
+  StringLengthPtr SQLSMALLINT*
+
+func SQLGetStmtAttr ordinal=38
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  Attribute SQLINTEGER
+  ValuePtr SQLPOINTER
+  BufferLength SQLINTEGER
+  StringLengthPtr SQLINTEGER*
+
+func SQLGetStmtAttr bothCharset ordinalA=238 ordinalW=138
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  Attribute SQLINTEGER
+  ValuePtr SQLPOINTER
+  BufferLength SQLINTEGER
+  StringLengthPtr SQLINTEGER*
+
+func SQLGetStmtOption ordinal=46
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  Option SQLUSMALLINT
+  Value SQLPOINTER
+
+func SQLGetTypeInfo ordinal=4
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  DataType SQLSMALLINT
+
+func SQLGetTypeInfo bothCharset ordinalA=247 ordinalW=147
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  DataType SQLSMALLINT
+
+func SQLMoreResults ordinal=61
+  SQLRETURN
+  StatementHandle SQLHSTMT
+
+func SQLNativeSql ordinal=62
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  InStatementText SQLCHAR*
+  TextLength1 SQLINTEGER
+  OutStatementText SQLCHAR* outputOnly
+  BufferLength SQLINTEGER
+  TextLength2Ptr SQLINTEGER*
+
+func SQLNativeSql bothCharset ordinalA=262 ordinalW=162
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  InStatementText SQLTCHAR*
+  TextLength1 SQLINTEGER
+  OutStatementText SQLTCHAR* outputOnly
+  BufferLength SQLINTEGER
+  TextLength2Ptr SQLINTEGER*
+
+func SQLNumParams ordinal=63
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ParameterCountPtr SQLSMALLINT*
+
+func SQLNumResultCols ordinal=18
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ColumnCountPtr SQLSMALLINT*
+
+func SQLParamData ordinal=48
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ValuePtrPtr SQLPOINTER*
+
+func SQLParamOptions ordinal=64
+  SQLRETURN
+  hstmt SQLHSTMT
+  crow SQLULEN
+  pirow SQLULEN*
+
+func SQLPrepare ordinal=19
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  StatementText SQLCHAR*
+  TextLength SQLINTEGER
+
+func SQLPrepare bothCharset ordinalA=219 ordinalW=119
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  StatementText SQLTCHAR*
+  TextLength SQLINTEGER
+
+func SQLPrimaryKeys ordinal=65
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLCHAR*
+  NameLength3 SQLSMALLINT
+
+func SQLPrimaryKeys bothCharset ordinalA=265 ordinalW=165
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLTCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLTCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLTCHAR*
+  NameLength3 SQLSMALLINT
+
+func SQLProcedureColumns ordinal=66
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLCHAR*
+  NameLength2 SQLSMALLINT
+  ProcName SQLCHAR*
+  NameLength3 SQLSMALLINT
+  ColumnName SQLCHAR*
+  NameLength4 SQLSMALLINT
+
+func SQLProcedureColumns bothCharset ordinalA=266 ordinalW=166
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLTCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLTCHAR*
+  NameLength2 SQLSMALLINT
+  ProcName SQLTCHAR*
+  NameLength3 SQLSMALLINT
+  ColumnName SQLTCHAR*
+  NameLength4 SQLSMALLINT
+
+func SQLProcedures ordinal=67
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLCHAR*
+  NameLength2 SQLSMALLINT
+  ProcName SQLCHAR*
+  NameLength3 SQLSMALLINT
+
+func SQLProcedures bothCharset ordinalA=267 ordinalW=167
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLTCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLTCHAR*
+  NameLength2 SQLSMALLINT
+  ProcName SQLTCHAR*
+  NameLength3 SQLSMALLINT
+
+func SQLPutData ordinal=49
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  DataPtr SQLPOINTER
+  StrLen_or_Ind SQLLEN
+
+func SQLRowCount ordinal=20
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  RowCountPtr SQLLEN*
+
+func SQLSetConnectAttr ordinal=39
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  Attribute SQLINTEGER
+  ValuePtr SQLPOINTER
+  StringLength SQLINTEGER
+
+func SQLSetConnectAttr bothCharset ordinalA=239 ordinalW=139
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  Attribute SQLINTEGER
+  ValuePtr SQLPOINTER
+  StringLength SQLINTEGER
+
+func SQLSetConnectOption ordinal=50
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  Option SQLUSMALLINT
+  Value SQLULEN
+
+func SQLSetConnectOption bothCharset ordinalA=250 ordinalW=150
+  SQLRETURN
+  ConnectionHandle SQLHDBC
+  Option SQLUSMALLINT
+  Value SQLULEN
+
+func SQLSetCursorName ordinal=21
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CursorName SQLCHAR*
+  NameLength SQLSMALLINT
+
+func SQLSetCursorName bothCharset ordinalA=221 ordinalW=121
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CursorName SQLTCHAR*
+  NameLength SQLSMALLINT
+
+func SQLSetDescField ordinal=73
+  SQLRETURN
+  DescriptorHandle SQLHDESC
+  RecNumber SQLSMALLINT
+  FieldIdentifier SQLSMALLINT
+  ValuePtr SQLPOINTER
+  BufferLength SQLINTEGER
+
+func SQLSetDescField bothCharset ordinalA=273 ordinalW=173
+  SQLRETURN
+  DescriptorHandle SQLHDESC
+  RecNumber SQLSMALLINT
+  FieldIdentifier SQLSMALLINT
+  ValuePtr SQLPOINTER
+  BufferLength SQLINTEGER
+
+func SQLSetDescRec ordinal=74
+  SQLRETURN
+  DescriptorHandle SQLHDESC
+  RecNumber SQLSMALLINT
+  Type SQLSMALLINT
+  SubType SQLSMALLINT
+  Length SQLLEN
+  Precision SQLSMALLINT
+  Scale SQLSMALLINT
+  DataPtr SQLPOINTER
+  StringLengthPtr SQLLEN*
+  IndicatorPtr SQLLEN*
+
+func SQLSetEnvAttr ordinal=75
+  SQLRETURN
+  EnvironmentHandle SQLHENV
+  Attribute SQLINTEGER
+  ValuePtr SQLPOINTER
+  StringLength SQLINTEGER
+
+func SQLSetParam ordinal=22
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  ParameterNumber SQLUSMALLINT
+  ValueType SQLSMALLINT
+  ParameterType SQLSMALLINT
+  LengthPrecision SQLULEN
+  ParameterScale SQLSMALLINT
+  ParameterValue SQLPOINTER
+  StrLen_or_Ind SQLLEN*
+
+func SQLSetPos ordinal=68
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  RowNumber SQLSETPOSIROW
+  Operation SQLUSMALLINT
+  LockType SQLUSMALLINT
+
+func SQLSetScrollOptions ordinal=69
+  SQLRETURN
+  hstmt SQLHSTMT
+  fConcurrency SQLUSMALLINT
+  crowKeyset SQLLEN
+  crowRowset SQLUSMALLINT
+
+func SQLSetStmtAttr ordinal=76
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  Attribute SQLINTEGER
+  ValuePtr SQLPOINTER
+  StringLength SQLINTEGER
+
+func SQLSetStmtAttr bothCharset ordinalA=276 ordinalW=176
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  Attribute SQLINTEGER
+  ValuePtr SQLPOINTER
+  StringLength SQLINTEGER
+
+func SQLSetStmtOption ordinal=51
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  Option SQLUSMALLINT
+  Value SQLULEN
+
+func SQLSpecialColumns ordinal=52
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  IdentifierType SQLSMALLINT
+  CatalogName SQLCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLCHAR*
+  NameLength3 SQLSMALLINT
+  Scope SQLSMALLINT
+  Nullable SQLSMALLINT
+
+func SQLSpecialColumns bothCharset ordinalA=252 ordinalW=152
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  IdentifierType SQLSMALLINT
+  CatalogName SQLTCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLTCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLTCHAR*
+  NameLength3 SQLSMALLINT
+  Scope SQLSMALLINT
+  Nullable SQLSMALLINT
+
+func SQLStatistics ordinal=53
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLCHAR*
+  NameLength3 SQLSMALLINT
+  Unique SQLUSMALLINT
+  Reserved SQLUSMALLINT
+
+func SQLStatistics bothCharset ordinalA=253 ordinalW=153
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLTCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLTCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLTCHAR*
+  NameLength3 SQLSMALLINT
+  Unique SQLUSMALLINT
+  Reserved SQLUSMALLINT
+
+func SQLTablePrivileges ordinal=70
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLCHAR*
+  NameLength3 SQLSMALLINT
+
+func SQLTablePrivileges bothCharset ordinalA=270 ordinalW=170
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLTCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLTCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLTCHAR*
+  NameLength3 SQLSMALLINT
+
+func SQLTables ordinal=54
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLCHAR*
+  NameLength3 SQLSMALLINT
+  TableType SQLCHAR*
+  NameLength4 SQLSMALLINT
+
+func SQLTables bothCharset ordinalA=254 ordinalW=154
+  SQLRETURN
+  StatementHandle SQLHSTMT
+  CatalogName SQLTCHAR*
+  NameLength1 SQLSMALLINT
+  SchemaName SQLTCHAR*
+  NameLength2 SQLSMALLINT
+  TableName SQLTCHAR*
+  NameLength3 SQLSMALLINT
+  TableType SQLTCHAR*
+  NameLength4 SQLSMALLINT
+
+func SQLTransact ordinal=23
+  SQLRETURN
+  EnvironmentHandle SQLHENV
+  ConnectionHandle SQLHDBC
+  CompletionType SQLUSMALLINT
+

@@ -1,0 +1,97 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrControl base=IUnknown id={9B63616C-36B2-46BC-959F-C1593952D19B} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func StartHandlerSync
+    HRESULT
+    pszHandlerID LPCWSTR
+    hwndOwner HWND
+    punk IUnknown*
+    nSyncControlFlags SYNCMGR_SYNC_CONTROL_FLAGS
+    pResult ISyncMgrSyncResult*
+
+  func StartItemSync
+    HRESULT
+    pszHandlerID LPCWSTR
+    ppszItemIDs LPCWSTR*
+    cItems ULONG
+    hwndOwner HWND
+    punk IUnknown*
+    nSyncControlFlags SYNCMGR_SYNC_CONTROL_FLAGS
+    pResult ISyncMgrSyncResult*
+
+  func StartSyncAll
+    HRESULT
+    hwndOwner HWND
+
+  func StopHandlerSync
+    HRESULT
+    pszHandlerID LPCWSTR
+
+  func StopItemSync
+    HRESULT
+    pszHandlerID LPCWSTR
+    ppszItemIDs LPCWSTR*
+    cItems ULONG
+
+  func StopSyncAll
+    HRESULT
+
+  func UpdateHandlerCollection
+    HRESULT
+    rclsidCollectionID REFCLSID
+    nControlFlags SYNCMGR_CONTROL_FLAGS
+
+  func UpdateHandler
+    HRESULT
+    pszHandlerID LPCWSTR
+    nControlFlags SYNCMGR_CONTROL_FLAGS
+
+  func UpdateItem
+    HRESULT
+    pszHandlerID LPCWSTR
+    pszItemID LPCWSTR
+    nControlFlags SYNCMGR_CONTROL_FLAGS
+
+  func UpdateEvents
+    HRESULT
+    pszHandlerID LPCWSTR
+    pszItemID LPCWSTR
+    nControlFlags SYNCMGR_CONTROL_FLAGS
+
+  func UpdateConflict
+    HRESULT
+    pszHandlerID LPCWSTR
+    pszItemID LPCWSTR
+    pConflict ISyncMgrConflict*
+    nReason SYNCMGR_UPDATE_REASON
+
+  func UpdateConflicts
+    HRESULT
+    pszHandlerID LPCWSTR
+    pszItemID LPCWSTR
+    nControlFlags SYNCMGR_CONTROL_FLAGS
+
+  func ActivateHandler
+    HRESULT
+    fActivate BOOL
+    pszHandlerID LPCWSTR
+    hwndOwner HWND
+    nControlFlags SYNCMGR_CONTROL_FLAGS
+
+  func EnableHandler
+    HRESULT
+    fEnable BOOL
+    pszHandlerID LPCWSTR
+    hwndOwner HWND
+    nControlFlags SYNCMGR_CONTROL_FLAGS
+
+  func EnableItem
+    HRESULT
+    fEnable BOOL
+    pszHandlerID LPCWSTR
+    pszItemID LPCWSTR
+    hwndOwner HWND
+    nControlFlags SYNCMGR_CONTROL_FLAGS
+
+

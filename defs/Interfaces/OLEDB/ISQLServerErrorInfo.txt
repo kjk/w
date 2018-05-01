@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ISQLServerErrorInfo base=IUnknown id={5CF4CA12-EF21-11d0-97E7-00C04FC2AD98} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func GetErrorInfo
+    [OLEDB_HRESULT]
+    ppErrorInfo SSERRORINFO**
+    ppStringsBuffer OLECHAR**
+
+

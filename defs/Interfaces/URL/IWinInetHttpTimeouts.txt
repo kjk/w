@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IWinInetHttpTimeouts base=IUnknown id={F286FA56-C1FD-4270-8E67-B3EB790A81E8} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetRequestTimeouts
+    HRESULT
+    pdwConnectTimeout DWORD*
+    pdwSendTimeout DWORD*
+    pdwReceiveTimeout DWORD*
+
+

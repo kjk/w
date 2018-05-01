@@ -1,0 +1,12 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1TransformNode.txt
+
+ingterface ID2D1OffsetTransform base=ID2D1TransformNode id={3fe6adea-7643-4f53-bd14-a0ce63f24042} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetOffset
+    void
+    offset D2D1_POINT_2L
+
+  func GetOffset
+    D2D1_POINT_2L
+
+

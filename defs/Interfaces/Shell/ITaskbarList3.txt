@@ -1,0 +1,68 @@
+include Interfaces\Shell\ITaskbarList2.txt
+
+ingterface ITaskbarList3 base=ITaskbarList2 id={ea1afb91-9e28-4b86-90e9-9e9f8a5eefaf} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetProgressValue
+    HRESULT
+    hwnd HWND
+    ullCompleted ULONGLONG
+    ullTotal ULONGLONG
+
+  func SetProgressState
+    HRESULT
+    hwnd HWND
+    tbpFlags TBPFLAG
+
+  func RegisterTab
+    HRESULT
+    hwndTab HWND
+    hwndMDI HWND
+
+  func UnregisterTab
+    HRESULT
+    hwndTab HWND
+
+  func SetTabOrder
+    HRESULT
+    hwndTab HWND
+    hwndInsertBefore HWND
+
+  func SetTabActive
+    HRESULT
+    hwndTab HWND
+    hwndMDI HWND
+    dwReserved DWORD
+
+  func ThumbBarAddButtons
+    HRESULT
+    hwnd HWND
+    cButtons UINT
+    pButton LPTHUMBBUTTON
+
+  func ThumbBarUpdateButtons
+    HRESULT
+    hwnd HWND
+    cButtons UINT
+    pButton LPTHUMBBUTTON
+
+  func ThumbBarSetImageList
+    HRESULT
+    hwnd HWND
+    himl HIMAGELIST
+
+  func SetOverlayIcon
+    HRESULT
+    hwnd HWND
+    hIcon HICON
+    pszDescription LPCWSTR
+
+  func SetThumbnailTooltip
+    HRESULT
+    hwnd HWND
+    pszTip LPCWSTR
+
+  func SetThumbnailClip
+    HRESULT
+    hwnd HWND
+    prcClip RECT*
+
+

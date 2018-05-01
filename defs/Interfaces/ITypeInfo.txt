@@ -1,0 +1,110 @@
+include Interfaces\IUnknown.txt
+
+ingterface ITypeInfo base=IUnknown id={00020401-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Type Description"
+  func GetTypeAttr
+    HRESULT
+    ppTypeAttr TYPEATTR** outputOnly
+
+  func GetTypeComp
+    HRESULT
+    ppTComp ITypeComp** outputOnly
+
+  func GetFuncDesc
+    HRESULT
+    index UINT
+    ppFuncDesc FUNCDESC**
+
+  func GetVarDesc
+    HRESULT
+    index UINT
+    ppVarDesc VARDESC**
+
+  func GetNames
+    HRESULT
+    memid MEMBERID
+    rgBstrNames BSTR* postCount=pcNames
+    cMaxNames UINT
+    pcNames UINT*
+
+  func GetRefTypeOfImplType
+    HRESULT
+    index UINT
+    pRefType HREFTYPE*
+
+  func GetImplTypeFlags
+    HRESULT
+    index UINT
+    pImplTypeFlags IMPLTYPEFLAGS*
+
+  func GetIDsOfNames
+    HRESULT
+    rgszNames LPOLESTR* count=cNames
+    cNames UINT
+    pMemId MEMBERID* postCount=cNames
+
+  func Invoke
+    HRESULT
+    pvInstance PVOID
+    memid MEMBERID
+    wFlags [InvokeFlags]
+    pDispParams DISPPARAMS*
+    pVarResult VARIANT*
+    pExcepInfo EXCEPINFO*
+    puArgErr UINT*
+
+  func GetDocumentation
+    HRESULT
+    memid MEMBERID
+    pBstrName BSTR*
+    pBstrDocString BSTR*
+    pdwHelpContext DWORD*
+    pBstrHelpFile BSTR*
+
+  func GetDllEntry
+    HRESULT
+    memid MEMBERID
+    invKind INVOKEKIND
+    pBstrDllName BSTR*
+    pBstrName BSTR*
+    pwOrdinal WORD*
+
+  func GetRefTypeInfo
+    HRESULT
+    hRefType HREFTYPE
+    ppTInfo ITypeInfo**
+
+  func AddressOfMember
+    HRESULT
+    memid MEMBERID
+    invKind INVOKEKIND
+    ppv PVOID*
+
+  func CreateInstance
+    HRESULT
+    pUnkOuter IUnknown*
+    riid REFIID
+    ppvObj PVOID* interfaceId=riid
+
+  func GetMops
+    HRESULT
+    memid MEMBERID
+    pBstrMops BSTR*
+
+  func GetContainingTypeLib
+    HRESULT
+    ppTLib ITypeLib**
+    pIndex UINT*
+
+  func ReleaseTypeAttr
+    void
+    pTypeAttr TYPEATTR*
+
+  func ReleaseFuncDesc
+    void
+    pFuncDesc FUNCDESC*
+
+  func ReleaseVarDesc
+    void
+    pVarDesc VARDESC*
+
+

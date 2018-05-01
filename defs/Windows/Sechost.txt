@@ -1,0 +1,253 @@
+include Headers\windows.h.txt
+
+dll Sechost.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+sourceModule Advapi32.dll include=Windows\Advapi32.xml
+func AuditComputeEffectivePolicyBySid
+
+func AuditFree
+
+func AuditQuerySystemPolicy
+
+func AuditSetSystemPolicy
+
+func ChangeServiceConfig2A
+
+func ChangeServiceConfig2W
+
+func ChangeServiceConfigA
+
+func ChangeServiceConfigW
+
+func CloseServiceHandle
+
+func ControlService
+
+func ControlServiceExA
+
+func ControlServiceExW
+
+func ConvertSecurityDescriptorToStringSecurityDescriptorW
+
+func ConvertSidToStringSidW
+
+func ConvertStringSecurityDescriptorToSecurityDescriptorW
+
+func ConvertStringSidToSidW
+
+func CreateServiceA
+
+func CreateServiceW
+
+func CredDeleteA
+
+func CredDeleteW
+
+func CredEnumerateA
+
+func CredEnumerateW
+
+func CredFindBestCredentialA
+
+func CredFindBestCredentialW
+
+func CredFree
+
+func CredGetSessionTypes
+
+func CredGetTargetInfoA
+
+func CredGetTargetInfoW
+
+func CredIsMarshaledCredentialW
+
+func CredIsProtectedA
+
+func CredIsProtectedW
+
+func CredMarshalCredentialA
+
+func CredMarshalCredentialW
+
+func CredProtectA
+
+func CredProtectW
+
+func CredReadA
+
+func CredReadDomainCredentialsA
+
+func CredReadDomainCredentialsW
+
+func CredReadW
+
+func CredUnmarshalCredentialA
+
+func CredUnmarshalCredentialW
+
+func CredUnprotectA
+
+func CredUnprotectW
+
+func CredWriteA
+
+func CredWriteDomainCredentialsA
+
+func CredWriteDomainCredentialsW
+
+func CredWriteW
+
+func DeleteService
+
+func EnumDependentServicesW
+
+func EnumServicesStatusExW
+
+func LsaAddAccountRights
+
+func LsaClose
+
+func LsaEnumerateAccountRights
+
+func LsaEnumerateAccountsWithUserRight
+
+func LsaFreeMemory
+
+func LsaLookupNames2
+
+func LsaLookupSids
+
+func LsaLookupSids2
+
+func LsaOpenPolicy
+
+func LsaOpenSecret
+
+func LsaQueryInformationPolicy
+
+func LsaQuerySecret
+
+func LsaRemoveAccountRights
+
+func LsaRetrievePrivateData
+
+func LsaSetInformationPolicy
+
+func LsaSetSecret
+
+func LsaStorePrivateData
+
+func NotifyServiceStatusChange
+
+func NotifyServiceStatusChangeA
+
+func NotifyServiceStatusChangeW
+
+func OpenSCManagerA
+
+func OpenSCManagerW
+
+func OpenServiceA
+
+func OpenServiceW
+
+func QueryServiceConfig2A
+
+func QueryServiceConfig2W
+
+func QueryServiceConfigA
+
+func QueryServiceConfigW
+
+func QueryServiceDynamicInformation
+
+func QueryServiceObjectSecurity
+
+func QueryServiceStatus
+
+func QueryServiceStatusEx
+
+func RegisterServiceCtrlHandlerA
+
+func RegisterServiceCtrlHandlerExA
+
+func RegisterServiceCtrlHandlerExW
+
+func RegisterServiceCtrlHandlerW
+
+func SetServiceObjectSecurity
+
+func SetServiceStatus
+
+func StartServiceA
+
+func StartServiceCtrlDispatcherA
+
+func StartServiceCtrlDispatcherW
+
+func StartServiceW
+
+category "Security and Identity/Authorization/Basic Access Control"
+category "Security and Identity/Authentication/Local Security Authority (LSA)"
+alias LSA_LOOKUP_HANDLE PVOID
+
+pointer PLSA_LOOKUP_HANDLE LSA_LOOKUP_HANDLE
+
+enum LSA_LOOKUP_DOMAIN_INFO_CLASS UINT
+  AccountDomainInformation 5
+  DnsDomainInformation     12
+
+func LookupAccountNameLocal bothCharset
+  BOOL
+  lpAccountName LPCTSTR
+  Sid PSID postLength=cbSid
+  cbSid LPDWORD
+  ReferencedDomainName LPTSTR outputOnly
+  cchReferencedDomainName LPDWORD
+  peUse PSID_NAME_USE
+
+func LookupAccountSidLocal bothCharset
+  BOOL
+  lpSid PSID
+  lpName LPTSTR outputOnly
+  cchName LPDWORD
+  lpReferencedDomainName LPTSTR outputOnly
+  cchReferencedDomainName LPDWORD
+  peUse PSID_NAME_USE
+
+func LsaLookupClose
+  NTSTATUS
+  ObjectHandle LSA_LOOKUP_HANDLE
+
+func LsaLookupFreeMemory
+  NTSTATUS
+  Buffer PVOID
+
+func LsaLookupGetDomainInfo
+  NTSTATUS
+  PolicyHandle LSA_LOOKUP_HANDLE
+  DomainInfoClass LSA_LOOKUP_DOMAIN_INFO_CLASS
+  DomainInfo PVOID*
+
+func LsaLookupOpenLocalPolicy
+  NTSTATUS
+  ObjectAttributes PLSA_OBJECT_ATTRIBUTES
+  AccessMask ACCESS_MASK
+  PolicyHandle PLSA_LOOKUP_HANDLE
+
+func LsaLookupTranslateNames
+  NTSTATUS
+  PolicyHandle LSA_LOOKUP_HANDLE
+  Flags ULONG
+  Count ULONG
+  Names PLSA_UNICODE_STRING count=Count
+  ReferencedDomains PLSA_REFERENCED_DOMAIN_LIST*
+  Sids PLSA_TRANSLATED_SID2* derefPostCount=Count
+
+func LsaLookupTranslateSids
+  NTSTATUS
+  PolicyHandle LSA_LOOKUP_HANDLE
+  Count ULONG
+  Sids PSID* count=Count
+  ReferencedDomains PLSA_REFERENCED_DOMAIN_LIST*
+  Names PLSA_TRANSLATED_NAME* derefPostCount=Count
+

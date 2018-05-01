@@ -1,0 +1,1776 @@
+include Headers\windows.h.txt
+include Headers\setup.h.txt
+include Headers\gdi.h.txt
+include Headers\registry.h.txt
+
+dll CfgMgr32.dll callingConvention=STDCALL onlineHelp=MSDN
+category "Windows Driver Kit/Device and Driver Installation/PnP Configuration Manager/Public"
+category "Windows Driver Kit/Device and Driver Installation/PnP Configuration Manager/Private"
+category "Windows Driver Kit/Device and Driver Installation/PnP Configuration Manager/Obsolete"
+category "Windows Driver Kit/Device and Driver Installation/PnP Configuration Manager/Power Schemes"
+category "Windows Driver Kit/Device and Driver Installation/PnP Configuration Manager/Private"
+alias DEVINSTID TCHAR*
+
+alias LOG_CONF DWORD_PTR
+
+pointer PLOG_CONF LOG_CONF
+
+alias DEVINST DWORD
+
+pointer PDEVINST DWORD
+
+alias RES_DES DWORD_PTR
+
+pointer PRES_DES RES_DES
+
+alias HMACHINE HANDLE
+
+pointer PHMACHINE HMACHINE
+
+alias CONFLICT_LIST ULONG_PTR
+
+pointer PCONFLICT_LIST CONFLICT_LIST
+
+alias RANGE_LIST DWORD_PTR
+
+pointer PRANGE_LIST RANGE_LIST
+
+alias DEVNODE DWORD
+
+alias RANGE_ELEMENT DWORD_PTR
+
+pointer PRANGE_ELEMENT RANGE_ELEMENT
+
+alias PCM_NOTIFY_CALLBACK LPVOID
+
+alias HCMNOTIFICATION HANDLE
+
+pointer PHCMNOTIFICATION HCMNOTIFICATION
+
+array "WCHAR [MAX_DEVICE_ID_LEN]" base=WCHAR count=200
+
+flag PRIORITY ULONG
+  LCPRI_FORCECONFIG    0x00000000
+  LCPRI_BOOTCONFIG     0x00000001
+  LCPRI_DESIRED        0x00002000
+  LCPRI_NORMAL         0x00003000
+  LCPRI_LASTBESTCONFIG 0x00003FFF
+  LCPRI_SUBOPTIMAL     0x00005000
+  LCPRI_LASTSOFTCONFIG 0x00007FFF
+  LCPRI_RESTART        0x00008000
+  LCPRI_REBOOT         0x00009000
+  LCPRI_POWEROFF       0x0000A000
+  LCPRI_HARDRECONFIG   0x0000C000
+  LCPRI_HARDWIRED      0x0000E000
+  LCPRI_IMPOSSIBLE     0x0000F000
+  LCPRI_DISABLED       0x0000FFFF
+
+pointer PPRIORITY PRIORITY
+
+flag RESOURCEID ULONG display=ULONG
+  ResType_None          0x00000000
+  ResType_Mem           0x00000001
+  ResType_IO            0x00000002
+  ResType_DMA           0x00000003
+  ResType_IRQ           0x00000004
+  ResType_DoNotUse      0x00000005
+  ResType_BusNumber     0x00000006
+  ResType_MemLarge      0x00000007
+  ResType_Ignored_Bit   0x00008000
+  ResType_Reserved      0x00008000
+  ResType_DevicePrivate 0x00008001
+  ResType_PcCardConfig  0x00008002
+  ResType_MfCardConfig  0x00008003
+  ResType_Connection    0x00008004
+  ResType_ClassSpecific 0x0000FFFF
+
+pointer PRESOURCEID RESOURCEID
+
+enum CONFIGRET DWORD
+  success Equal=0
+  CR_SUCCESS                  0x00000000
+  CR_DEFAULT                  0x00000001
+  CR_OUT_OF_MEMORY            0x00000002
+  CR_INVALID_POINTER          0x00000003
+  CR_INVALID_FLAG             0x00000004
+  CR_INVALID_DEVNODE          0x00000005
+  CR_INVALID_RES_DES          0x00000006
+  CR_INVALID_LOG_CONF         0x00000007
+  CR_INVALID_ARBITRATOR       0x00000008
+  CR_INVALID_NODELIST         0x00000009
+  CR_DEVNODE_HAS_REQS         0x0000000A
+  CR_INVALID_RESOURCEID       0x0000000B
+  CR_DLVXD_NOT_FOUND          0x0000000C
+  CR_NO_SUCH_DEVNODE          0x0000000D
+  CR_NO_MORE_LOG_CONF         0x0000000E
+  CR_NO_MORE_RES_DES          0x0000000F
+  CR_ALREADY_SUCH_DEVNODE     0x00000010
+  CR_INVALID_RANGE_LIST       0x00000011
+  CR_INVALID_RANGE            0x00000012
+  CR_FAILURE                  0x00000013
+  CR_NO_SUCH_LOGICAL_DEV      0x00000014
+  CR_CREATE_BLOCKED           0x00000015
+  CR_NOT_SYSTEM_VM            0x00000016
+  CR_REMOVE_VETOED            0x00000017
+  CR_APM_VETOED               0x00000018
+  CR_INVALID_LOAD_TYPE        0x00000019
+  CR_BUFFER_SMALL             0x0000001A
+  CR_NO_ARBITRATOR            0x0000001B
+  CR_NO_REGISTRY_HANDLE       0x0000001C
+  CR_REGISTRY_ERROR           0x0000001D
+  CR_INVALID_DEVICE_ID        0x0000001E
+  CR_INVALID_DATA             0x0000001F
+  CR_INVALID_API              0x00000020
+  CR_DEVLOADER_NOT_READY      0x00000021
+  CR_NEED_RESTART             0x00000022
+  CR_NO_MORE_HW_PROFILES      0x00000023
+  CR_DEVICE_NOT_THERE         0x00000024
+  CR_NO_SUCH_VALUE            0x00000025
+  CR_WRONG_TYPE               0x00000026
+  CR_INVALID_PRIORITY         0x00000027
+  CR_NOT_DISABLEABLE          0x00000028
+  CR_FREE_RESOURCES           0x00000029
+  CR_QUERY_VETOED             0x0000002A
+  CR_CANT_SHARE_IRQ           0x0000002B
+  CR_NO_DEPENDENT             0x0000002C
+  CR_SAME_RESOURCES           0x0000002D
+  CR_NO_SUCH_REGISTRY_KEY     0x0000002E
+  CR_INVALID_MACHINENAME      0x0000002F
+  CR_REMOTE_COMM_FAILURE      0x00000030
+  CR_MACHINE_UNAVAILABLE      0x00000031
+  CR_NO_CM_SERVICES           0x00000032
+  CR_ACCESS_DENIED            0x00000033
+  CR_CALL_NOT_IMPLEMENTED     0x00000034
+  CR_INVALID_PROPERTY         0x00000035
+  CR_DEVICE_INTERFACE_ACTIVE  0x00000036
+  CR_NO_SUCH_DEVICE_INTERFACE 0x00000037
+  CR_INVALID_REFERENCE_STRING 0x00000038
+  CR_INVALID_CONFLICT_LIST    0x00000039
+  CR_INVALID_INDEX            0x0000003A
+  CR_INVALID_STRUCTURE_SIZE   0x0000003B
+
+flag [CM_CDMASK] ULONG display=ULONG
+  CM_CDMASK_DEVINST     0x00000001
+  CM_CDMASK_RESDES      0x00000002
+  CM_CDMASK_FLAGS       0x00000004
+  CM_CDMASK_DESCRIPTION 0x00000008
+
+flag [CM_CDFLAGS] ULONG display=ULONG
+  CM_CDFLAGS_DRIVER     0x00000001
+  CM_CDFLAGS_ROOT_OWNED 0x00000002
+  CM_CDFLAGS_RESERVED   0x00000004
+
+struct CONFLICT_DETAILS
+  CD_ulSize ULONG
+  CD_ulMask [CM_CDMASK]
+  CD_dnDevInst DEVINST
+  CD_rdResDes RES_DES
+  CD_ulFlags [CM_CDFLAGS]
+  CD_szDescription "TCHAR [MAX_PATH]"
+
+pointer PCONFLICT_DETAILS CONFLICT_DETAILS
+
+flag [CM_Locate_DevNode_Flags] ULONG display=ULONG
+  CM_LOCATE_DEVNODE_NORMAL       0x00000000
+  CM_LOCATE_DEVNODE_PHANTOM      0x00000001
+  CM_LOCATE_DEVNODE_CANCELREMOVE 0x00000002
+  CM_LOCATE_DEVNODE_NOVALIDATION 0x00000004
+  CM_LOCATE_DEVNODE_BITS         0x00000007
+
+flag [CsConfigFlags] ULONG display=ULONG
+  CSCONFIGFLAG_DISABLED      0x00000001
+  CSCONFIGFLAG_DO_NOT_CREATE 0x00000002
+  CSCONFIGFLAG_DO_NOT_START  0x00000004
+  CSCONFIGFLAG_BITS          0x00000007
+
+pointer [CsConfigFlags*] [CsConfigFlags] display=PULONG
+
+enum [LogicalConfigFlags] ULONG display=ULONG
+  BASIC_LOG_CONF       0x00000000
+  FILTERED_LOG_CONF    0x00000001
+  ALLOC_LOG_CONF       0x00000002
+  BOOT_LOG_CONF        0x00000003
+  FORCED_LOG_CONF      0x00000004
+  OVERRIDE_LOG_CONF    0x00000005
+  PRIORITY_EQUAL_FIRST 0x00000008
+
+enum [CmProblemNumber] ULONG display=ULONG
+  CM_PROB_NOT_CONFIGURED             0x00000001
+  CM_PROB_DEVLOADER_FAILED           0x00000002
+  CM_PROB_OUT_OF_MEMORY              0x00000003
+  CM_PROB_ENTRY_IS_WRONG_TYPE        0x00000004
+  CM_PROB_LACKED_ARBITRATOR          0x00000005
+  CM_PROB_BOOT_CONFIG_CONFLICT       0x00000006
+  CM_PROB_FAILED_FILTER              0x00000007
+  CM_PROB_DEVLOADER_NOT_FOUND        0x00000008
+  CM_PROB_INVALID_DATA               0x00000009
+  CM_PROB_FAILED_START               0x0000000A
+  CM_PROB_LIAR                       0x0000000B
+  CM_PROB_NORMAL_CONFLICT            0x0000000C
+  CM_PROB_NOT_VERIFIED               0x0000000D
+  CM_PROB_NEED_RESTART               0x0000000E
+  CM_PROB_REENUMERATION              0x0000000F
+  CM_PROB_PARTIAL_LOG_CONF           0x00000010
+  CM_PROB_UNKNOWN_RESOURCE           0x00000011
+  CM_PROB_REINSTALL                  0x00000012
+  CM_PROB_REGISTRY                   0x00000013
+  CM_PROB_VXDLDR                     0x00000014
+  CM_PROB_WILL_BE_REMOVED            0x00000015
+  CM_PROB_DISABLED                   0x00000016
+  CM_PROB_DEVLOADER_NOT_READY        0x00000017
+  CM_PROB_DEVICE_NOT_THERE           0x00000018
+  CM_PROB_MOVED                      0x00000019
+  CM_PROB_TOO_EARLY                  0x0000001A
+  CM_PROB_NO_VALID_LOG_CONF          0x0000001B
+  CM_PROB_FAILED_INSTALL             0x0000001C
+  CM_PROB_HARDWARE_DISABLED          0x0000001D
+  CM_PROB_CANT_SHARE_IRQ             0x0000001E
+  CM_PROB_FAILED_ADD                 0x0000001F
+  CM_PROB_DISABLED_SERVICE           0x00000020
+  CM_PROB_TRANSLATION_FAILED         0x00000021
+  CM_PROB_NO_SOFTCONFIG              0x00000022
+  CM_PROB_BIOS_TABLE                 0x00000023
+  CM_PROB_IRQ_TRANSLATION_FAILED     0x00000024
+  CM_PROB_FAILED_DRIVER_ENTRY        0x00000025
+  CM_PROB_DRIVER_FAILED_PRIOR_UNLOAD 0x00000026
+  CM_PROB_DRIVER_FAILED_LOAD         0x00000027
+  CM_PROB_DRIVER_SERVICE_KEY_INVALID 0x00000028
+  CM_PROB_LEGACY_SERVICE_NO_DEVICES  0x00000029
+  CM_PROB_DUPLICATE_DEVICE           0x0000002A
+  CM_PROB_FAILED_POST_START          0x0000002B
+  CM_PROB_HALTED                     0x0000002C
+  CM_PROB_PHANTOM                    0x0000002D
+  CM_PROB_SYSTEM_SHUTDOWN            0x0000002E
+  CM_PROB_HELD_FOR_EJECT             0x0000002F
+  CM_PROB_DRIVER_BLOCKED             0x00000030
+  CM_PROB_REGISTRY_TOO_LARGE         0x00000031
+  CM_PROB_SETPROPERTIES_FAILED       0x00000032
+  CM_PROB_WAITING_ON_DEPENDENCY      0x00000033
+  CM_PROB_UNSIGNED_DRIVER            0x00000034
+
+pointer [CmProblemNumber*] [CmProblemNumber] display=PULONG
+
+enum PPNP_VETO_TYPE UINT
+  PNP_VetoTypeUnknown          0
+  PNP_VetoLegacyDevice         1
+  PNP_VetoPendingClose         2
+  PNP_VetoWindowsApp           3
+  PNP_VetoWindowsService       4
+  PNP_VetoOutstandingOpen      5
+  PNP_VetoDevice               6
+  PNP_VetoDriver               7
+  PNP_VetoIllegalDeviceRequest 8
+  PNP_VetoInsufficientPower    9
+  PNP_VetoNonDisableable       10
+  PNP_VetoLegacyDriver         11
+  PNP_VetoInsufficientRights   12
+
+flag [CM_ADD_RANGE_FLAGS] ULONG display=ULONG
+  CM_ADD_RANGE_ADDIFCONFLICT      0x00000000
+  CM_ADD_RANGE_DONOTADDIFCONFLICT 0x00000001
+
+flag [CM_ADD_ID_FLAGS] ULONG display=ULONG
+  CM_ADD_ID_HARDWARE   0x00000000
+  CM_ADD_ID_COMPATIBLE 0x00000001
+
+flag [CM_ENUMERATE_CLASSES_FLAGS] ULONG display=ULONG
+  CM_ENUMERATE_CLASSES_INSTALLER 0x00000000
+  CM_ENUMERATE_CLASSES_INTERFACE 0x00000001
+
+enum [CM_DRP] ULONG display=ULONG
+  CM_DRP_DEVICEDESC                  0x00000001
+  CM_DRP_HARDWAREID                  0x00000002
+  CM_DRP_COMPATIBLEIDS               0x00000003
+  CM_DRP_UNUSED0                     0x00000004
+  CM_DRP_SERVICE                     0x00000005
+  CM_DRP_UNUSED1                     0x00000006
+  CM_DRP_UNUSED2                     0x00000007
+  CM_DRP_CLASS                       0x00000008
+  CM_DRP_CLASSGUID                   0x00000009
+  CM_DRP_DRIVER                      0x0000000A
+  CM_DRP_CONFIGFLAGS                 0x0000000B
+  CM_DRP_MFG                         0x0000000C
+  CM_DRP_FRIENDLYNAME                0x0000000D
+  CM_DRP_LOCATION_INFORMATION        0x0000000E
+  CM_DRP_PHYSICAL_DEVICE_OBJECT_NAME 0x0000000F
+  CM_DRP_CAPABILITIES                0x00000010
+  CM_DRP_UI_NUMBER                   0x00000011
+  CM_DRP_UPPERFILTERS                0x00000012
+  CM_DRP_LOWERFILTERS                0x00000013
+  CM_DRP_BUSTYPEGUID                 0x00000014
+  CM_DRP_LEGACYBUSTYPE               0x00000015
+  CM_DRP_BUSNUMBER                   0x00000016
+  CM_DRP_ENUMERATOR_NAME             0x00000017
+  CM_DRP_SECURITY                    0x00000018
+  CM_DRP_SECURITY_SDS                0x00000019
+  CM_DRP_DEVTYPE                     0x0000001A
+  CM_DRP_EXCLUSIVE                   0x0000001B
+  CM_DRP_CHARACTERISTICS             0x0000001C
+  CM_DRP_ADDRESS                     0x0000001D
+  CM_DRP_UI_NUMBER_DESC_FORMAT       0x0000001E
+  CM_DRP_DEVICE_POWER_DATA           0x0000001F
+  CM_DRP_REMOVAL_POLICY              0x00000020
+  CM_DRP_REMOVAL_POLICY_HW_DEFAULT   0x00000021
+  CM_DRP_REMOVAL_POLICY_OVERRIDE     0x00000022
+  CM_DRP_INSTALL_STATE               0x00000023
+  CM_DRP_LOCATION_PATHS              0x00000024
+  CM_DRP_BASE_CONTAINERID            0x00000025
+
+enum [CM_CRP] ULONG display=ULONG
+  CM_CRP_UPPERFILTERS    0x00000012
+  CM_CRP_LOWERFILTERS    0x00000013
+  CM_CRP_SECURITY        0x00000018
+  CM_CRP_SECURITY_SDS    0x00000019
+  CM_CRP_DEVTYPE         0x0000001A
+  CM_CRP_EXCLUSIVE       0x0000001B
+  CM_CRP_CHARACTERISTICS 0x0000001C
+
+flag [CM_GETIDLIST_FLAGS] ULONG display=ULONG
+  CM_GETIDLIST_FILTER_NONE               0x00000000
+  CM_GETIDLIST_FILTER_ENUMERATOR         0x00000001
+  CM_GETIDLIST_FILTER_SERVICE            0x00000002
+  CM_GETIDLIST_FILTER_EJECTRELATIONS     0x00000004
+  CM_GETIDLIST_FILTER_REMOVALRELATIONS   0x00000008
+  CM_GETIDLIST_FILTER_POWERRELATIONS     0x00000010
+  CM_GETIDLIST_FILTER_BUSRELATIONS       0x00000020
+  CM_GETIDLIST_FILTER_TRANSPORTRELATIONS 0x00000080
+  CM_GETIDLIST_FILTER_PRESENT            0x00000100
+  CM_GETIDLIST_FILTER_CLASS              0x00000200
+  CM_GETIDLIST_DONOTGENERATE             0x10000040
+
+flag [CM_GET_DEVICE_INTERFACE_LIST_FLAGS] ULONG display=ULONG
+  CM_GET_DEVICE_INTERFACE_LIST_PRESENT     0x00000000
+  CM_GET_DEVICE_INTERFACE_LIST_ALL_DEVICES 0x00000001
+
+flag [CM_REENUMERATE_FLAGS] ULONG display=ULONG
+  CM_REENUMERATE_NORMAL             0x00000000
+  CM_REENUMERATE_SYNCHRONOUS        0x00000001
+  CM_REENUMERATE_RETRY_INSTALLATION 0x00000002
+  CM_REENUMERATE_ASYNCHRONOUS       0x00000004
+
+flag [CM_SET_DEVNODE_PROBLEM_FLAGS] ULONG display=ULONG
+  CM_SET_DEVNODE_PROBLEM_NORMAL   0x00000000
+  CM_SET_DEVNODE_PROBLEM_OVERRIDE 0x00000001
+
+flag [CM_SETUP_DEVNODE_FLAGS] ULONG display=ULONG
+  CM_SETUP_DEVNODE_READY 0x00000000
+  CM_SETUP_DEVNODE_RESET 0x00000004
+
+flag [CM_CREATE_DEVNODE_FLAGS] ULONG display=ULONG
+  CM_CREATE_DEVNODE_NORMAL          0x00000000
+  CM_CREATE_DEVNODE_NO_WAIT_INSTALL 0x00000001
+  CM_CREATE_DEVNODE_PHANTOM         0x00000002
+  CM_CREATE_DEVNODE_GENERATE_ID     0x00000004
+  CM_CREATE_DEVNODE_DO_NOT_INSTALL  0x00000008
+
+flag [CM_DELETE_CLASS_FLAGS] ULONG display=ULONG
+  CM_DELETE_CLASS_ONLY      0x00000000
+  CM_DELETE_CLASS_SUBKEYS   0x00000001
+  CM_DELETE_CLASS_INTERFACE 0x00000002
+
+flag [CM_DISABLE_FLAGS] ULONG display=ULONG
+  CM_DISABLE_POLITE    0x00000000
+  CM_DISABLE_ABSOLUTE  0x00000001
+  CM_DISABLE_HARDWARE  0x00000002
+  CM_DISABLE_UI_NOT_OK 0x00000004
+
+flag [CM_CLASS_PROPERTY_FLAGS] ULONG display=ULONG
+  CM_CLASS_PROPERTY_INSTALLER 0x00000000
+  CM_CLASS_PROPERTY_INTERFACE 0x00000001
+
+flag [CM_CUSTOMDEVPROP_FLAGS] ULONG display=ULONG
+  CM_CUSTOMDEVPROP_MERGE_MULTISZ 0x00000001
+
+enum REGDISPOSITION UINT
+  RegDisposition_OpenAlways   0x00000000
+  RegDisposition_OpenExisting 0x00000001
+
+flag [CM_OPEN_CLASS_KEY_FLAGS] ULONG display=ULONG
+  CM_OPEN_CLASS_KEY_INSTALLER 0x00000000
+  CM_OPEN_CLASS_KEY_INTERFACE 0x00000001
+
+flag [CM_REGISTRY_FLAGS] ULONG display=ULONG
+  CM_REGISTRY_HARDWARE 0x00000000
+  CM_REGISTRY_SOFTWARE 0x00000001
+  CM_REGISTRY_USER     0x00000100
+  CM_REGISTRY_CONFIG   0x00000200
+
+flag [CM_QUERY_ARBITRATOR_FLAGS] ULONG display=ULONG
+  CM_QUERY_ARBITRATOR_RAW        0x00000000
+  CM_QUERY_ARBITRATOR_TRANSLATED 0x00000001
+
+flag [CM_REGISTER_DEVICE_DRIVER_FLAGS] ULONG display=ULONG
+  CM_REGISTER_DEVICE_DRIVER_STATIC      0x00000000
+  CM_REGISTER_DEVICE_DRIVER_DISABLEABLE 0x00000001
+  CM_REGISTER_DEVICE_DRIVER_REMOVABLE   0x00000002
+
+flag [CM_DETECT_FLAGS] ULONG display=ULONG
+  CM_DETECT_NEW_PROFILE       0x00000001
+  CM_DETECT_CRASHED           0x00000002
+  CM_DETECT_HWPROF_FIRST_BOOT 0x00000004
+  CM_DETECT_RUN               0x80000000
+
+flag [CM_SET_HW_PROF_FLAGS] ULONG display=ULONG
+  CM_SET_HW_PROF_FLAGS_UI_NOT_OK 0x00000001
+
+flag [CM_REMOVE_FLAGS] ULONG display=ULONG
+  CM_REMOVE_UI_OK      0x00000000
+  CM_REMOVE_UI_NOT_OK  0x00000001
+  CM_REMOVE_NO_RESTART 0x00000002
+
+flag [CM_HWPI_FLAGS] DWORD display=DWORD
+  CM_HWPI_NOT_DOCKABLE 0x00000000
+  CM_HWPI_UNDOCKED     0x00000001
+  CM_HWPI_DOCKED       0x00000002
+
+struct HWPROFILEINFO
+  HWPI_ulHWProfile ULONG
+  HWPI_szFriendlyName "TCHAR [MAX_PROFILE_LEN]"
+  HWPI_dwFlags [CM_HWPI_FLAGS]
+
+pointer PHWPROFILEINFO HWPROFILEINFO
+
+enum CM_NOTIFY_FILTER_TYPE UINT
+  CM_NOTIFY_FILTER_TYPE_DEVICEINTERFACE 0
+  CM_NOTIFY_FILTER_TYPE_DEVICEHANDLE    1
+  CM_NOTIFY_FILTER_TYPE_DEVICEINSTANCE  2
+
+flag [CM_NOTIFY_FILTER_FLAGS] DWORD display=DWORD
+  CM_NOTIFY_FILTER_FLAG_ALL_INTERFACE_CLASSES 0x00000001
+  CM_NOTIFY_FILTER_FLAG_ALL_DEVICE_INSTANCES  0x00000002
+
+struct [CM_NOTIFY_FILTER_u_s1] display=struct
+  ClassGuid GUID
+
+struct [CM_NOTIFY_FILTER_u_s2] display=struct
+  hTarget HANDLE
+
+struct [CM_NOTIFY_FILTER_u_s3] display=struct
+  InstanceId "WCHAR [MAX_DEVICE_ID_LEN]"
+
+union [CM_NOTIFY_FILTER_u] display=union
+  DeviceInterface [CM_NOTIFY_FILTER_u_s1]
+  DeviceHandle [CM_NOTIFY_FILTER_u_s2]
+  DeviceInstance [CM_NOTIFY_FILTER_u_s3]
+
+struct CM_NOTIFY_FILTER
+  cbSize DWORD
+  Flags [CM_NOTIFY_FILTER_FLAGS]
+  FilterType CM_NOTIFY_FILTER_TYPE
+  Reserved DWORD
+  u [CM_NOTIFY_FILTER_u]
+
+pointer PCM_NOTIFY_FILTER CM_NOTIFY_FILTER
+
+flag [DN_FLAGS] ULONG display=ULONG
+  DN_ROOT_ENUMERATED       0x00000001
+  DN_DRIVER_LOADED         0x00000002
+  DN_ENUM_LOADED           0x00000004
+  DN_STARTED               0x00000008
+  DN_MANUAL                0x00000010
+  DN_NEED_TO_ENUM          0x00000020
+  DN_DRIVER_BLOCKED        0x00000040
+  DN_HARDWARE_ENUM         0x00000080
+  DN_NEED_RESTART          0x00000100
+  DN_CHILD_WITH_INVALID_ID 0x00000200
+  DN_HAS_PROBLEM           0x00000400
+  DN_FILTERED              0x00000800
+  DN_LEGACY_DRIVER         0x00001000
+  DN_DISABLEABLE           0x00002000
+  DN_REMOVABLE             0x00004000
+  DN_PRIVATE_PROBLEM       0x00008000
+  DN_MF_PARENT             0x00010000
+  DN_MF_CHILD              0x00020000
+  DN_WILL_BE_REMOVED       0x00040000
+  DN_NOT_FIRST_TIMEE       0x00080000
+  DN_STOP_FREE_RES         0x00100000
+  DN_REBAL_CANDIDATE       0x00200000
+  DN_BAD_PARTIAL           0x00400000
+  DN_NT_ENUMERATOR         0x00800000
+  DN_NT_DRIVER             0x01000000
+  DN_DEVICE_DISCONNECTED   0x02000000
+  DN_ARM_WAKEUP            0x04000000
+  DN_APM_ENUMERATOR        0x08000000
+  DN_APM_DRIVER            0x10000000
+  DN_SILENT_INSTALL        0x20000000
+  DN_NO_SHOW_IN_DM         0x40000000
+  DN_BOOT_LOG_PROB         0x80000000
+
+pointer [DN_FLAGS*] [DN_FLAGS] display=PULONG
+
+func CM_Add_Empty_Log_Conf
+  CONFIGRET
+  plcLogConf PLOG_CONF
+  dnDevInst DEVINST
+  Priority PRIORITY
+  ulFlags [LogicalConfigFlags]
+
+func CM_Add_Empty_Log_Conf_Ex
+  CONFIGRET
+  plcLogConf PLOG_CONF
+  dnDevInst DEVINST
+  Priority PRIORITY
+  ulFlags [LogicalConfigFlags]
+  hMachine HMACHINE
+
+func CM_Add_ID bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  pszID PTSTR
+  ulFlags [CM_ADD_ID_FLAGS]
+
+func CM_Add_ID_Ex bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  pszID PTSTR
+  ulFlags [CM_ADD_ID_FLAGS]
+  hMachine HMACHINE
+
+func CM_Add_Res_Des
+  CONFIGRET
+  prdResDes PRES_DES
+  lcLogConf LOG_CONF
+  ResourceID RESOURCEID
+  ResourceData PCVOID length=ResourceLen
+  ResourceLen ULONG
+  ulFlags ULONG
+
+func CM_Add_Res_Des_Ex
+  CONFIGRET
+  prdResDes PRES_DES
+  lcLogConf LOG_CONF
+  ResourceID RESOURCEID
+  ResourceData PCVOID length=ResourceLen
+  ResourceLen ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Connect_Machine bothCharset
+  CONFIGRET
+  UNCServerName PCTSTR
+  phMachine PHMACHINE
+
+func CM_Delete_Class_Key
+  CONFIGRET
+  ClassGuid LPGUID
+  ulFlags [CM_DELETE_CLASS_FLAGS]
+
+func CM_Delete_Device_Interface_Key bothCharset
+  CONFIGRET
+  pszDeviceInterface LPCTSTR
+  ulFlags ULONG
+
+func CM_Delete_DevNode_Key
+  CONFIGRET
+  dnDevNode DEVNODE
+  ulHardwareProfile ULONG
+  ulFlags ULONG
+
+func CM_Disable_DevNode
+  CONFIGRET
+  dnDevInst DEVINST
+  ulFlags [CM_DISABLE_FLAGS]
+
+func CM_Disconnect_Machine
+  CONFIGRET
+  hMachine HMACHINE
+
+func CM_Enable_DevNode
+  CONFIGRET
+  dnDevInst DEVINST
+  ulFlags ULONG
+
+func CM_Enumerate_Classes
+  CONFIGRET
+  ulClassIndex ULONG
+  ClassGuid LPGUID
+  ulFlags [CM_ENUMERATE_CLASSES_FLAGS]
+
+func CM_Enumerate_Classes_Ex
+  CONFIGRET
+  ulClassIndex ULONG
+  ClassGuid LPGUID outputOnly
+  ulFlags [CM_ENUMERATE_CLASSES_FLAGS]
+  hMachine HMACHINE
+
+func CM_Enumerate_Enumerators bothCharset
+  CONFIGRET
+  ulEnumIndex ULONG
+  Buffer PTCHAR outputOnly
+  pulLength PULONG
+  ulFlags ULONG
+
+func CM_Enumerate_Enumerators_Ex bothCharset
+  CONFIGRET
+  ulEnumIndex ULONG
+  Buffer PTCHAR outputOnly
+  pulLength PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Free_Log_Conf
+  CONFIGRET
+  lcLogConfToBeFreed LOG_CONF
+  ulFlags ULONG
+
+func CM_Free_Log_Conf_Ex
+  CONFIGRET
+  lcLogConfToBeFreed LOG_CONF
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Free_Log_Conf_Handle
+  CONFIGRET
+  lcLogConf LOG_CONF
+
+func CM_Free_Res_Des
+  CONFIGRET
+  prdResDes PRES_DES
+  rdResDes RES_DES
+  ulFlags ULONG
+
+func CM_Free_Res_Des_Ex
+  CONFIGRET
+  prdResDes PRES_DES
+  rdResDes RES_DES
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Free_Res_Des_Handle
+  CONFIGRET
+  rdResDes RES_DES
+
+func CM_Free_Resource_Conflict_Handle
+  CONFIGRET
+  clConflictList CONFLICT_LIST
+
+func CM_Get_Child
+  CONFIGRET
+  pdnDevInst PDEVINST
+  dnDevInst DEVINST
+  ulFlags ULONG
+
+func CM_Get_Child_Ex
+  CONFIGRET
+  pdnDevInst PDEVINST
+  dnDevInst DEVINST
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Class_PropertyW
+  CONFIGRET
+  ClassGUID LPCGUID
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE*
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize PULONG
+  ulFlags ULONG
+
+func CM_Get_Class_Property_Keys
+  CONFIGRET
+  ClassGUID LPCGUID
+  PropertyKeyArray DEVPROPKEY* postCount=PropertyKeyCount
+  PropertyKeyCount PULONG
+  ulFlags [CM_CLASS_PROPERTY_FLAGS]
+
+func CM_Get_Class_Registry_Property bothCharset
+  CONFIGRET
+  ClassGuid LPGUID
+  ulProperty [CM_CRP]
+  pulRegDataType PULONG
+  Buffer PVOID postLength=pulLength
+  pulLength PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Depth
+  CONFIGRET
+  pulDepth PULONG
+  dnDevInst DEVINST
+  ulFlags ULONG
+
+func CM_Get_Depth_Ex
+  CONFIGRET
+  pulDepth PULONG
+  dnDevInst DEVINST
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Device_ID bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  Buffer PTCHAR outputOnly
+  BufferLen ULONG
+  ulFlags ULONG
+
+func CM_Get_Device_ID_Ex bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  Buffer PTCHAR outputOnly
+  BufferLen ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Device_ID_List bothCharset
+  CONFIGRET
+  pszFilter PCTSTR
+  Buffer PTCHAR outputOnly
+  BufferLen ULONG
+  ulFlags [CM_GETIDLIST_FLAGS]
+
+func CM_Get_Device_ID_List_Ex bothCharset
+  CONFIGRET
+  pszFilter PCTSTR
+  Buffer PTCHAR outputOnly
+  BufferLen ULONG
+  ulFlags [CM_GETIDLIST_FLAGS]
+  hMachine HMACHINE
+
+func CM_Get_Device_ID_List_Size bothCharset
+  CONFIGRET
+  pulLen PULONG
+  pszFilter PCTSTR
+  ulFlags [CM_GETIDLIST_FLAGS]
+
+func CM_Get_Device_ID_List_Size_Ex bothCharset
+  CONFIGRET
+  pulLen PULONG
+  pszFilter PCTSTR
+  ulFlags [CM_GETIDLIST_FLAGS]
+  hMachine HMACHINE
+
+func CM_Get_Device_ID_Size
+  CONFIGRET
+  pulLen PULONG
+  dnDevInst DEVINST
+  ulFlags ULONG
+
+func CM_Get_Device_ID_Size_Ex
+  CONFIGRET
+  pulLen PULONG
+  dnDevInst DEVINST
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Device_Interface_List bothCharset
+  CONFIGRET
+  InterfaceClassGuid LPGUID
+  pDeviceID DEVINSTID
+  Buffer PTCHAR outputOnly
+  BufferLen ULONG
+  ulFlags [CM_GET_DEVICE_INTERFACE_LIST_FLAGS]
+
+func CM_Get_Device_Interface_List_Size bothCharset
+  CONFIGRET
+  pulLen PULONG
+  InterfaceClassGuid LPGUID
+  pDeviceID DEVINSTID
+  ulFlags [CM_GET_DEVICE_INTERFACE_LIST_FLAGS]
+
+func CM_Get_Device_Interface_PropertyW
+  CONFIGRET
+  pszDeviceInterface LPCWSTR
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE*
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize PULONG
+  ulFlags ULONG
+
+func CM_Get_Device_Interface_Property_KeysW
+  CONFIGRET
+  pszDeviceInterface LPCWSTR
+  PropertyKeyArray DEVPROPKEY* postCount=PropertyKeyCount
+  PropertyKeyCount PULONG
+  ulFlags ULONG
+
+func CM_Get_DevNode_PropertyW
+  CONFIGRET
+  dnDevInst DEVINST
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE*
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize PULONG
+  ulFlags ULONG
+
+func CM_Get_DevNode_Property_Keys
+  CONFIGRET
+  dnDevInst DEVINST
+  PropertyKeyArray DEVPROPKEY* postCount=PropertyKeyCount
+  PropertyKeyCount PULONG
+  ulFlags ULONG
+
+func CM_Get_DevNode_Registry_Property bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  ulProperty [CM_DRP]
+  pulRegDataType PULONG
+  Buffer PVOID postLength=pulLength
+  pulLength PULONG
+  ulFlags ULONG
+
+func CM_Get_DevNode_Status
+  CONFIGRET
+  pulStatus [DN_FLAGS*]
+  pulProblemNumber [CmProblemNumber*]
+  dnDevInst DEVINST
+  ulFlags ULONG
+
+func CM_Get_DevNode_Status_Ex
+  CONFIGRET
+  pulStatus [DN_FLAGS*]
+  pulProblemNumber [CmProblemNumber*]
+  dnDevInst DEVINST
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_First_Log_Conf
+  CONFIGRET
+  plcLogConf PLOG_CONF
+  dnDevInst DEVINST
+  ulFlags [LogicalConfigFlags]
+
+func CM_Get_First_Log_Conf_Ex
+  CONFIGRET
+  plcLogConf PLOG_CONF
+  dnDevInst DEVINST
+  ulFlags [LogicalConfigFlags]
+  hMachine HMACHINE
+
+func CM_Get_HW_Prof_Flags bothCharset
+  CONFIGRET
+  pDeviceID DEVINSTID
+  pulValue [CsConfigFlags*]
+  ulFlags ULONG
+
+func CM_Get_HW_Prof_Flags_Ex bothCharset
+  CONFIGRET
+  pDeviceID DEVINSTID
+  ulHardwareProfile ULONG
+  pulValue [CsConfigFlags*]
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Log_Conf_Priority
+  CONFIGRET
+  lcLogConf LOG_CONF
+  pPriority PPRIORITY
+  ulFlags ULONG
+
+func CM_Get_Log_Conf_Priority_Ex
+  CONFIGRET
+  lcLogConf LOG_CONF
+  pPriority PPRIORITY
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Next_Log_Conf
+  CONFIGRET
+  plcLogConf PLOG_CONF
+  lcLogConf LOG_CONF
+  ulFlags ULONG
+
+func CM_Get_Next_Log_Conf_Ex
+  CONFIGRET
+  plcLogConf PLOG_CONF
+  lcLogConf LOG_CONF
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Next_Res_Des
+  CONFIGRET
+  prdResDes PRES_DES
+  rdResDes RES_DES
+  ForResource RESOURCEID
+  pResourceID PRESOURCEID
+  ulFlags ULONG
+
+func CM_Get_Next_Res_Des_Ex
+  CONFIGRET
+  prdResDes PRES_DES
+  rdResDes RES_DES
+  ForResource RESOURCEID
+  pResourceID PRESOURCEID
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Parent
+  CONFIGRET
+  pdnDevInst PDEVINST
+  dnDevInst DEVINST
+  ulFlags ULONG
+
+func CM_Get_Parent_Ex
+  CONFIGRET
+  pdnDevInst PDEVINST
+  dnDevInst DEVINST
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Res_Des_Data
+  CONFIGRET
+  rdResDes RES_DES
+  Buffer PVOID
+  BufferLen ULONG
+  ulFlags ULONG
+
+func CM_Get_Res_Des_Data_Ex
+  CONFIGRET
+  rdResDes RES_DES
+  Buffer PVOID
+  BufferLen ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Res_Des_Data_Size
+  CONFIGRET
+  pulSize PULONG
+  rdResDes RES_DES
+  ulFlags ULONG
+
+func CM_Get_Res_Des_Data_Size_Ex
+  CONFIGRET
+  pulSize PULONG
+  rdResDes RES_DES
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Resource_Conflict_Count
+  CONFIGRET
+  clConflictList CONFLICT_LIST
+  pulCount PULONG
+
+func CM_Get_Resource_Conflict_Details bothCharset
+  CONFIGRET
+  clConflictList CONFLICT_LIST
+  ulIndex ULONG
+  pConflictDetails PCONFLICT_DETAILS
+
+func CM_Get_Sibling
+  CONFIGRET
+  pdnDevInst PDEVINST
+  DevInst DEVINST
+  ulFlags ULONG
+
+func CM_Get_Sibling_Ex
+  CONFIGRET
+  pdnDevInst PDEVINST
+  DevInst DEVINST
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Version
+  CONFIGRET
+
+func CM_Get_Version_Ex
+  CONFIGRET
+  hMachine HMACHINE
+
+func CM_Is_Dock_Station_Present
+  CONFIGRET
+  pbPresent PBOOL
+
+func CM_Is_Dock_Station_Present_Ex
+  CONFIGRET
+  pbPresent PBOOL
+  hMachine HMACHINE
+
+func CM_Is_Version_Available
+  CONFIGRET
+  wVersion WORD
+
+func CM_Is_Version_Available_Ex
+  CONFIGRET
+  wVersion WORD
+  hMachine HMACHINE
+
+func CM_Locate_DevNode bothCharset
+  CONFIGRET
+  pdnDevInst PDEVINST
+  pDeviceID DEVINSTID
+  ulFlags [CM_Locate_DevNode_Flags]
+
+func CM_Locate_DevNode_Ex bothCharset
+  CONFIGRET
+  pdnDevInst PDEVINST
+  pDeviceID DEVINSTID
+  ulFlags [CM_Locate_DevNode_Flags]
+  hMachine HMACHINE
+
+func CM_Modify_Res_Des
+  CONFIGRET
+  prdResDes PRES_DES
+  rdResDes RES_DES
+  ResourceID RESOURCEID
+  ResourceData PCVOID length=ResourceLen
+  ResourceLen ULONG
+  ulFlags ULONG
+
+func CM_Modify_Res_Des_Ex
+  CONFIGRET
+  prdResDes PRES_DES
+  rdResDes RES_DES
+  ResourceID RESOURCEID
+  ResourceData PCVOID length=ResourceLen
+  ResourceLen ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Open_Class_Key bothCharset
+  CONFIGRET
+  ClassGuid LPGUID
+  pszClassName LPCTSTR
+  samDesired REGSAM
+  Disposition REGDISPOSITION
+  phkClass PHKEY
+  ulFlags [CM_OPEN_CLASS_KEY_FLAGS]
+
+func CM_Open_Device_Interface_Key bothCharset
+  CONFIGRET
+  pszDeviceInterface LPCTSTR
+  samDesired REGSAM
+  Disposition REGDISPOSITION
+  phkDeviceInterface PHKEY
+  ulFlags ULONG
+
+func CM_Open_DevNode_Key
+  CONFIGRET
+  dnDevNode DEVINST
+  samDesired REGSAM
+  ulHardwareProfile ULONG
+  Disposition REGDISPOSITION
+  phkDevice PHKEY
+  ulFlags [CM_REGISTRY_FLAGS]
+
+func CM_Query_And_Remove_SubTree bothCharset
+  CONFIGRET
+  dnAncestor DEVINST
+  pVetoType PPNP_VETO_TYPE
+  pszVetoName LPTSTR
+  ulNameLength ULONG
+  ulFlags [CM_REMOVE_FLAGS]
+
+func CM_Query_And_Remove_SubTree_Ex bothCharset
+  CONFIGRET
+  dnAncestor DEVINST
+  pVetoType PPNP_VETO_TYPE
+  pszVetoName LPTSTR
+  ulNameLength ULONG
+  ulFlags [CM_REMOVE_FLAGS]
+
+func CM_Query_Resource_Conflict_List
+  CONFIGRET
+  pclConflictList PCONFLICT_LIST
+  dnDevInst DEVINST
+  ResourceID RESOURCEID
+  ResourceData PCVOID length=ResourceLen
+  ResourceLen ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Reenumerate_DevNode
+  CONFIGRET
+  dnDevInst DEVINST
+  ulFlags [CM_REENUMERATE_FLAGS]
+
+func CM_Reenumerate_DevNode_Ex
+  CONFIGRET
+  dnDevInst DEVINST
+  ulFlags [CM_REENUMERATE_FLAGS]
+  hMachine HMACHINE
+
+func CM_Register_Notification
+  CONFIGRET
+  pFilter PCM_NOTIFY_FILTER
+  pContext PVOID
+  pCallback PCM_NOTIFY_CALLBACK
+  pNotifyContext PHCMNOTIFICATION
+
+func CM_Request_Device_Eject bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  pVetoType PPNP_VETO_TYPE
+  pszVetoName LPTSTR
+  ulNameLength ULONG
+  ulFlags ULONG
+
+func CM_Request_Device_Eject_Ex bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  pVetoType PPNP_VETO_TYPE
+  pszVetoName LPTSTR
+  ulNameLength ULONG
+  ulFlags ULONG
+
+func CM_Request_Eject_PC
+  CONFIGRET
+
+func CM_Request_Eject_PC_Ex
+  CONFIGRET
+  hMachine HMACHINE
+
+func CM_Set_Class_PropertyW
+  CONFIGRET
+  ClassGUID LPCGUID
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE
+  PropertyBuffer "CONST PBYTE" length=PropertyBufferSize
+  PropertyBufferSize ULONG
+  ulFlags ULONG
+
+func CM_Set_Class_Registry_Property bothCharset
+  CONFIGRET
+  ClassGuid LPGUID
+  ulProperty [CM_CRP]
+  Buffer PCVOID length=ulLength
+  ulLength ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Set_Device_Interface_PropertyW
+  CONFIGRET
+  pszDeviceInterface LPCWSTR
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE
+  PropertyBuffer "CONST PBYTE" length=PropertyBufferSize
+  PropertyBufferSize ULONG
+  ulFlags ULONG
+
+func CM_Set_DevNode_Problem
+  CONFIGRET
+  dnDevInst DEVINST
+  ulProblem [CmProblemNumber]
+  ulFlags [CM_SET_DEVNODE_PROBLEM_FLAGS]
+
+func CM_Set_DevNode_Problem_Ex
+  CONFIGRET
+  dnDevInst DEVINST
+  ulProblem [CmProblemNumber]
+  ulFlags [CM_SET_DEVNODE_PROBLEM_FLAGS]
+  hMachine HMACHINE
+
+func CM_Set_DevNode_PropertyW
+  CONFIGRET
+  dnDevInst DEVINST
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE
+  PropertyBuffer "CONST PBYTE" length=PropertyBufferSize
+  PropertyBufferSize ULONG
+  ulFlags ULONG
+
+func CM_Set_DevNode_Registry_Property bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  ulProperty [CM_DRP]
+  Buffer PCVOID length=ulLength
+  ulLength ULONG
+  ulFlags ULONG
+
+func CM_Setup_DevNode
+  CONFIGRET
+  dnDevInst DEVINST
+  ulFlags [CM_SETUP_DEVNODE_FLAGS]
+
+func CM_Uninstall_DevNode
+  CONFIGRET
+  dnDevInst DEVNODE
+  ulFlags ULONG
+
+func CM_Unregister_Notification
+  CONFIGRET
+  NotifyContext HCMNOTIFICATION
+
+func CM_WaitNoPendingInstallEvents
+  [WAIT_RESULT]
+  dwTimeout DWORD
+
+func CMP_WaitNoPendingInstallEvents
+  [WAIT_RESULT]
+  dwTimeout DWORD
+
+func CM_Add_Range
+  CONFIGRET
+  ullStartValue DWORDLONG
+  ullEndValue DWORDLONG
+  rlh RANGE_LIST
+  ulFlags [CM_ADD_RANGE_FLAGS]
+
+func CM_Create_DevNode bothCharset
+  CONFIGRET
+  pdnDevInst PDEVINST
+  pDeviceID DEVINSTID
+  dnParent DEVINST
+  ulFlags [CM_CREATE_DEVNODE_FLAGS]
+
+func CM_Create_DevNode_Ex bothCharset
+  CONFIGRET
+  pdnDevInst PDEVINST
+  pDeviceID DEVINSTID
+  dnParent DEVINST
+  ulFlags [CM_CREATE_DEVNODE_FLAGS]
+  hMachine HMACHINE
+
+func CM_Create_Range_List
+  CONFIGRET
+  prlh PRANGE_LIST
+  ulFlags ULONG
+
+func CM_Delete_Class_Key_Ex
+  CONFIGRET
+  ClassGuid LPGUID
+  ulFlags [CM_DELETE_CLASS_FLAGS]
+  hMachine HMACHINE
+
+func CM_Delete_DevNode_Key_Ex
+  CONFIGRET
+  dnDevNode DEVNODE
+  ulHardwareProfile ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Delete_Range
+  CONFIGRET
+  ullStartValue DWORDLONG
+  ullEndValue DWORDLONG
+  rlh RANGE_LIST
+  ulFlags ULONG
+
+func CM_Disable_DevNode_Ex
+  CONFIGRET
+  dnDevInst DEVINST
+  ulFlags [CM_DISABLE_FLAGS]
+  hMachine HMACHINE
+
+func CM_Dup_Range_List
+  CONFIGRET
+  rlhOld RANGE_LIST
+  rlhNew RANGE_LIST
+  ulFlags ULONG
+
+func CM_Enable_DevNode_Ex
+  CONFIGRET
+  dnDevInst DEVINST
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Find_Range
+  CONFIGRET
+  pullStart PDWORDLONG
+  ullStart DWORDLONG
+  ulLength ULONG
+  ullAlignment DWORDLONG
+  ullEnd DWORDLONG
+  rlh RANGE_LIST
+  ulFlags ULONG
+
+func CM_First_Range
+  CONFIGRET
+  rlh RANGE_LIST
+  pullStart PDWORDLONG
+  pullEnd PDWORDLONG
+  preElement PRANGE_ELEMENT
+  ulFlags ULONG
+
+func CM_Free_Range_List
+  CONFIGRET
+  rlh RANGE_LIST
+  ulFlags ULONG
+
+func CM_Get_Class_Key_Name bothCharset
+  CONFIGRET
+  ClassGuid LPGUID
+  pszKeyName LPTSTR outputOnly
+  pulLength PULONG
+  ulFlags ULONG
+
+func CM_Get_Class_Key_Name_Ex bothCharset
+  CONFIGRET
+  ClassGuid LPGUID
+  pszKeyName LPTSTR outputOnly
+  pulLength PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Class_Name bothCharset
+  CONFIGRET
+  ClassGuid LPGUID
+  Buffer PTSTR outputOnly
+  pulLength PULONG
+  ulFlags ULONG
+
+func CM_Get_Class_Name_Ex bothCharset
+  CONFIGRET
+  ClassGuid LPGUID
+  Buffer PTSTR outputOnly
+  pulLength PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Device_Interface_Alias bothCharset
+  CONFIGRET
+  pszDeviceInterface LPCTSTR
+  AliasInterfaceGuid LPGUID
+  pszAliasDeviceInterface LPTSTR outputOnly
+  pulLength PULONG
+  ulFlags ULONG
+
+func CM_Get_Device_Interface_Alias_Ex bothCharset
+  CONFIGRET
+  pszDeviceInterface LPCTSTR
+  AliasInterfaceGuid LPGUID
+  pszAliasDeviceInterface LPTSTR outputOnly
+  pulLength PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Device_Interface_List_Ex bothCharset
+  CONFIGRET
+  InterfaceClassGuid LPGUID
+  pDeviceID DEVINSTID
+  Buffer PTCHAR
+  BufferLen ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Device_Interface_List_Size_Ex bothCharset
+  CONFIGRET
+  pulLen PULONG
+  InterfaceClassGuid LPGUID
+  pDeviceID DEVINSTID
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_DevNode_Custom_Property bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  pszCustomPropertyName PCTSTR
+  pulRegDataType PULONG
+  Buffer PVOID postLength=pulLength
+  pulLength PULONG
+  ulFlags [CM_CUSTOMDEVPROP_FLAGS]
+
+func CM_Get_DevNode_Custom_Property_ExW
+  CONFIGRET
+  dnDevInst DEVINST
+  pszCustomPropertyName PCTSTR
+  pulRegDataType PULONG
+  Buffer PVOID postLength=pulLength
+  pulLength PULONG
+  ulFlags [CM_CUSTOMDEVPROP_FLAGS]
+  hMachine HMACHINE
+
+func CM_Get_DevNode_Registry_Property_Ex bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  ulProperty [CM_DRP]
+  pulRegDataType PULONG
+  Buffer PVOID postLength=pulLength
+  pulLength PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Global_State
+  CONFIGRET
+  pulState PULONG
+  ulFlags ULONG
+
+func CM_Get_Global_State_Ex
+  CONFIGRET
+  pulState PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Hardware_Profile_Info bothCharset
+  CONFIGRET
+  ulIndex ULONG
+  pHWProfileInfo PHWPROFILEINFO
+  ulFlags ULONG
+
+func CM_Get_Hardware_Profile_Info_Ex bothCharset
+  CONFIGRET
+  ulIndex ULONG
+  pHWProfileInfo PHWPROFILEINFO
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Intersect_Range_List
+  CONFIGRET
+  rlhOld1 RANGE_LIST
+  rlhOld2 RANGE_LIST
+  rlhNew RANGE_LIST
+  ulFlags ULONG
+
+func CM_Invert_Range_List
+  CONFIGRET
+  rlhOld RANGE_LIST
+  rlhNew RANGE_LIST
+  ullMaxValue DWORDLONG
+  ulFlags ULONG
+
+func CM_Merge_Range_List
+  CONFIGRET
+  rlhOld1 RANGE_LIST
+  rlhOld2 RANGE_LIST
+  rlhNew RANGE_LIST
+  ulFlags ULONG
+
+func CM_Move_DevNode
+  CONFIGRET
+  dnFromDevInst DEVINST
+  dnToDevInst DEVINST
+  ulFlags ULONG
+
+func CM_Move_DevNode_Ex
+  CONFIGRET
+  dnFromDevInst DEVINST
+  dnToDevInst DEVINST
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Next_Range
+  CONFIGRET
+  preElement PRANGE_ELEMENT
+  pullStart PDWORDLONG
+  pullEnd PDWORDLONG
+  ulFlags ULONG
+
+func CM_Open_Class_Key_Ex bothCharset
+  CONFIGRET
+  ClassGuid LPGUID
+  pszClassName LPCTSTR
+  samDesired REGSAM
+  Disposition REGDISPOSITION
+  phkClass PHKEY
+  ulFlags [CM_OPEN_CLASS_KEY_FLAGS]
+  hMachine HMACHINE
+
+func CM_Open_DevNode_Key_Ex
+  CONFIGRET
+  dnDevNode DEVINST
+  samDesired REGSAM
+  ulHardwareProfile ULONG
+  Disposition REGDISPOSITION
+  phkDevice PHKEY
+  ulFlags [CM_REGISTRY_FLAGS]
+  hMachine HMACHINE
+
+func CM_Query_Arbitrator_Free_Data
+  CONFIGRET
+  pData PVOID
+  DataLen ULONG
+  dnDevInst DEVINST
+  ResourceID RESOURCEID
+  ulFlags [CM_QUERY_ARBITRATOR_FLAGS]
+
+func CM_Query_Arbitrator_Free_Data_Ex
+  CONFIGRET
+  pData PVOID
+  DataLen ULONG
+  dnDevInst DEVINST
+  ResourceID RESOURCEID
+  ulFlags [CM_QUERY_ARBITRATOR_FLAGS]
+  hMachine HMACHINE
+
+func CM_Query_Arbitrator_Free_Size
+  CONFIGRET
+  pulSize PULONG
+  dnDevInst DEVINST
+  ResourceID RESOURCEID
+  ulFlags [CM_QUERY_ARBITRATOR_FLAGS]
+
+func CM_Query_Arbitrator_Free_Size_Ex
+  CONFIGRET
+  pulSize PULONG
+  dnDevInst DEVINST
+  ResourceID RESOURCEID
+  ulFlags [CM_QUERY_ARBITRATOR_FLAGS]
+  hMachine HMACHINE
+
+func CM_Query_Remove_SubTree
+  CONFIGRET
+  dnAncestor DEVINST
+  ulFlags ULONG
+
+func CM_Query_Remove_SubTree_Ex
+  CONFIGRET
+  dnAncestor DEVINST
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Register_Device_Driver
+  CONFIGRET
+  dnDevInst DEVINST
+  ulFlags [CM_REGISTER_DEVICE_DRIVER_FLAGS]
+
+func CM_Register_Device_Driver_Ex
+  CONFIGRET
+  dnDevInst DEVINST
+  ulFlags [CM_REGISTER_DEVICE_DRIVER_FLAGS]
+  hMachine HMACHINE
+
+func CM_Register_Device_Interface bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  InterfaceClassGuid LPGUID
+  pszReference LPCTSTR
+  pszDeviceInterface LPTSTR
+  pulLength PULONG
+  ulFlags ULONG
+
+func CM_Register_Device_Interface_Ex bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  InterfaceClassGuid LPGUID
+  pszReference LPCTSTR
+  pszDeviceInterface LPTSTR
+  pulLength PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Run_Detection
+  CONFIGRET
+  ulFlags [CM_DETECT_FLAGS]
+
+func CM_Run_Detection_Ex
+  CONFIGRET
+  ulFlags [CM_DETECT_FLAGS]
+  hMachine HMACHINE
+
+func CM_Set_DevNode_Registry_Property_Ex bothCharset
+  CONFIGRET
+  dnDevInst DEVINST
+  ulProperty [CM_DRP]
+  Buffer PCVOID length=ulLength
+  ulLength ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Set_HW_Prof
+  CONFIGRET
+  ulHardwareProfile ULONG
+  ulFlags ULONG
+
+func CM_Set_HW_Prof_Ex
+  CONFIGRET
+  ulHardwareProfile ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Set_HW_Prof_Flags bothCharset
+  CONFIGRET
+  pDeviceID DEVINSTID
+  ulConfig ULONG
+  ulValue ULONG
+  ulFlags [CM_SET_HW_PROF_FLAGS]
+
+func CM_Set_HW_Prof_Flags_Ex bothCharset
+  CONFIGRET
+  pDeviceID DEVINSTID
+  ulConfig ULONG
+  ulValue ULONG
+  ulFlags [CM_SET_HW_PROF_FLAGS]
+  hMachine HMACHINE
+
+func CM_Setup_DevNode_Ex
+  CONFIGRET
+  dnDevInst DEVINST
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Test_Range_Available
+  CONFIGRET
+  ullStartValue DWORDLONG
+  ullEndValue DWORDLONG
+  rlh RANGE_LIST
+  ulFlags ULONG
+
+func CM_Uninstall_DevNode_Ex
+  CONFIGRET
+  dnDevInst DEVNODE
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Unregister_Device_Interface bothCharset
+  CONFIGRET
+  pszDeviceInterface LPCTSTR
+  ulFlags ULONG
+
+func CM_Unregister_Device_Interface_Ex bothCharset
+  CONFIGRET
+  pszDeviceInterface LPCTSTR
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Detect_Resource_Conflict
+  CONFIGRET
+  dnDevInst DEVINST
+  ResourceID RESOURCEID
+  ResourceData PCVOID length=ResourceLen
+  ResourceLen ULONG
+  pbConflictDetected PBOOL
+  ulFlags ULONG
+
+func CM_Detect_Resource_Conflict_Ex
+  CONFIGRET
+  dnDevInst DEVINST
+  ResourceID RESOURCEID
+  ResourceData PCVOID length=ResourceLen
+  ResourceLen ULONG
+  pbConflictDetected PBOOL
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Remove_SubTree
+  CONFIGRET
+  dnAncestor DEVINST
+  ulFlags ULONG
+
+func CM_Remove_SubTree_Ex
+  CONFIGRET
+  dnAncestor DEVINST
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_RestoreAll_DefaultPowerSchemes
+  CONFIGRET
+  Error PDWORD
+
+func CM_Restore_DefaultPowerScheme
+  CONFIGRET
+  SchemeGuid "CONST GUID*"
+  Error PDWORD
+
+func CM_Set_ActiveScheme
+  CONFIGRET
+  SchemeGuid "CONST GUID*"
+  Error PDWORD
+
+func CM_Apply_PowerScheme
+  CONFIGRET
+
+func CM_Delete_PowerScheme
+  CONFIGRET
+  SchemeGuid "CONST GUID*"
+  Error PDWORD
+
+func CM_Duplicate_PowerScheme
+  CONFIGRET
+  SourceSchemeGuid "CONST GUID*"
+  DestinationSchemeGuid GUID**
+  Error PDWORD
+
+func CM_Import_PowerScheme
+  CONFIGRET
+  ImportFileNamePath LPCWSTR
+  DestinationSchemeGuid GUID**
+  Error PDWORD
+
+func CM_Write_UserPowerKey
+  CONFIGRET
+  SchemeGuid "CONST GUID*"
+  SubGroupOfPowerSettingsGuid "CONST GUID*"
+  PowerSettingGuid "CONST GUID*"
+  AccessFlags ULONG
+  Type ULONG
+  Buffer UCHAR* length=BufferSize
+  BufferSize DWORD
+  Error PDWORD
+
+func CM_Set_Class_Property_ExW
+  CONFIGRET
+  ClassGUID LPCGUID
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE
+  PropertyBuffer "CONST PBYTE" length=PropertyBufferSize
+  PropertyBufferSize ULONG
+  ulFlags [CM_CLASS_PROPERTY_FLAGS]
+  hMachine HMACHINE
+
+func CM_Set_DevNode_Property_ExW
+  CONFIGRET
+  dnDevInst DEVINST
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE
+  PropertyBuffer "CONST PBYTE" length=PropertyBufferSize
+  PropertyBufferSize ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Set_Device_Interface_Property_ExW
+  CONFIGRET
+  pszDeviceInterface LPCWSTR
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE
+  PropertyBuffer "CONST PBYTE" length=PropertyBufferSize
+  PropertyBufferSize ULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Delete_Device_Interface_Key_Ex bothCharset
+  CONFIGRET
+  pszDeviceInterface LPCTSTR
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Class_Property_ExW
+  CONFIGRET
+  ClassGUID LPCGUID
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE*
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize PULONG
+  ulFlags [CM_CLASS_PROPERTY_FLAGS]
+  hMachine HMACHINE
+
+func CM_Get_Class_Property_Keys_Ex
+  CONFIGRET
+  ClassGUID LPCGUID
+  PropertyKeyArray DEVPROPKEY* postCount=PropertyKeyCount
+  PropertyKeyCount PULONG
+  ulFlags [CM_CLASS_PROPERTY_FLAGS]
+  hMachine HMACHINE
+
+func CM_Get_DevNode_Property_ExW
+  CONFIGRET
+  dnDevInst DEVINST
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE*
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_DevNode_Property_Keys_Ex
+  CONFIGRET
+  dnDevInst DEVINST
+  PropertyKeyArray DEVPROPKEY* postCount=PropertyKeyCount
+  PropertyKeyCount PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Device_Interface_Property_ExW
+  CONFIGRET
+  pszDeviceInterface LPCWSTR
+  PropertyKey "CONST DEVPROPKEY*"
+  PropertyType DEVPROPTYPE*
+  PropertyBuffer PBYTE postLength=PropertyBufferSize
+  PropertyBufferSize PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Get_Device_Interface_Property_Keys_ExW
+  CONFIGRET
+  pszDeviceInterface LPCWSTR
+  PropertyKeyArray DEVPROPKEY* postCount=PropertyKeyCount
+  PropertyKeyCount PULONG
+  ulFlags ULONG
+  hMachine HMACHINE
+
+func CM_Open_Device_Interface_Key_Ex bothCharset
+  CONFIGRET
+  pszDeviceInterface LPCTSTR
+  samDesired REGSAM
+  Disposition REGDISPOSITION
+  phkDeviceInterface PHKEY
+  ulFlags ULONG
+  hMachine HMACHINE
+

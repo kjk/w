@@ -1,0 +1,124 @@
+include Headers\windows.h.txt
+
+dll Certadm.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Security and Identity/Cryptography/Certificate Services Backup and Restore"
+alias HCSBC LPVOID
+
+pointer HCSBC* HCSBC
+
+struct CSEDB_RSTMAP
+  pwszDatabaseName WCHAR*
+  pwszNewDatabaseName WCHAR*
+
+pointer "CSEDB_RSTMAP []" CSEDB_RSTMAP
+
+func CertSrvBackupClose ordinal=5
+  HRESULT
+  hbc HCSBC
+
+func CertSrvBackupEnd ordinal=6
+  HRESULT
+  hbc HCSBC
+
+func CertSrvBackupFree ordinal=15
+  void
+  pv VOID*
+
+func CertSrvBackupGetBackupLogsW ordinal=7
+  HRESULT
+  hbc HCSBC
+  ppwszzBackupLogFiles WCHAR**
+  pcbSize DWORD*
+
+func CertSrvBackupGetDatabaseNamesW ordinal=8
+  HRESULT
+  hbc HCSBC
+  ppwszzAttachmentInformation WCHAR**
+  pcbSize DWORD*
+
+func CertSrvBackupGetDynamicFileListW ordinal=14
+  HRESULT
+  hbc HCSBC
+  ppwszzFileList WCHAR**
+  pcbSize DWORD*
+
+func CertSrvBackupOpenFileW ordinal=9
+  HRESULT
+  hbc HCSBC
+  pwszAttachmentName "const WCHAR*"
+  cbReadHintSize DWORD
+  pliFileSize LARGE_INTEGER*
+
+func CertSrvBackupPrepareW ordinal=10
+  HRESULT
+  pwszServerName "const WCHAR*"
+  grbitJet ULONG
+  dwBackupFlags ULONG
+  phbc HCSBC*
+
+func CertSrvBackupRead ordinal=11
+  HRESULT
+  hbc HCSBC
+  pvBuffer VOID*
+  cbBuffer DWORD
+  pcbRead DWORD*
+
+func CertSrvBackupTruncateLogs ordinal=12
+  HRESULT
+  hbc HCSBC
+
+func CertSrvIsServerOnlineW ordinal=13
+  HRESULT
+  pwszServerName "const WCHAR*"
+  pfServerOnline BOOL*
+
+func CertSrvRestoreEnd ordinal=21
+  HRESULT
+  hbc HCSBC
+
+func CertSrvRestoreGetDatabaseLocationsW ordinal=17
+  HRESULT
+  hbc HCSBC
+  ppwszzDatabaseLocationList WCHAR**
+  pcbSize DWORD*
+
+func CertSrvRestorePrepareW ordinal=18
+  HRESULT
+  pwszServerName "const WCHAR*"
+  dwRestoreFlags ULONG
+  phbc HCSBC*
+
+func CertSrvRestoreRegisterW ordinal=19
+  HRESULT
+  hbc HCSBC
+  pwszCheckPointFilePath "const WCHAR*"
+  pwszLogPath "const WCHAR*"
+  rgrstmap "CSEDB_RSTMAP []" count=crstmap
+  crstmap LONG
+  pwszBackupLogPath "const WCHAR*"
+  genLow ULONG
+  genHigh ULONG
+
+func CertSrvRestoreRegisterComplete ordinal=20
+  HRESULT
+  hbc HCSBC
+  hrRestoreState HRESULT
+
+func CertSrvRestoreRegisterThroughFile ordinal=22
+  HRESULT
+  hbc HCSBC
+  pwszCheckPointFilePath "const WCHAR*"
+  pwszLogPath "const WCHAR*"
+  rgrstmap "CSEDB_RSTMAP []" count=crstmap
+  crstmap LONG
+  pwszBackupLogPath "const WCHAR*"
+  genLow ULONG
+  genHigh ULONG
+
+func CertSrvServerControlW ordinal=16
+  HRESULT
+  pwszServerName "const WCHAR*"
+  dwControlFlags DWORD
+  pcbOut DWORD*
+  ppbOut BYTE**
+

@@ -1,0 +1,45 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBindCtx base=IUnknown id={0000000e-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func RegisterObjectBound
+    HRESULT
+    punk IUnknown*
+
+  func RevokeObjectBound
+    HRESULT
+    punk IUnknown*
+
+  func ReleaseBoundObjects
+    HRESULT
+
+  func SetBindOptions
+    HRESULT
+    pbindopts BIND_OPTS*
+
+  func GetBindOptions
+    HRESULT
+    pbindopts BIND_OPTS*
+
+  func GetRunningObjectTable
+    HRESULT
+    pprot IRunningObjectTable**
+
+  func RegisterObjectParam
+    HRESULT
+    pszKey LPOLESTR
+    punk IUnknown*
+
+  func GetObjectParam
+    HRESULT
+    pszKey LPOLESTR
+    ppunk IUnknown**
+
+  func EnumObjectParam
+    HRESULT
+    ppenum IEnumString**
+
+  func RevokeObjectParam
+    HRESULT
+    pszKey LPOLESTR
+
+

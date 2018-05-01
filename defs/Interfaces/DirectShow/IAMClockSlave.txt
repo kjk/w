@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMClockSlave base=IUnknown id={9FD52741-176D-4b36-8F51-CA8F933223BE} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetErrorTolerance
+    HRESULT
+    dwTolerance DWORD
+
+  func GetErrorTolerance
+    HRESULT
+    pdwTolerance DWORD*
+
+

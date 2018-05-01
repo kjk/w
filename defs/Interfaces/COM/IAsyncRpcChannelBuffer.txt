@@ -1,0 +1,21 @@
+include Interfaces\COM\IRpcChannelBuffer2.txt
+
+ingterface IAsyncRpcChannelBuffer base=IRpcChannelBuffer2 id={a5029fb6-3c34-11d1-9c99-00c04fb998aa} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func Send
+    HRESULT
+    pMsg RPCOLEMESSAGE*
+    pSync ISynchronize*
+    pulStatus ULONG*
+
+  func Receive
+    HRESULT
+    pMsg RPCOLEMESSAGE*
+    pulStatus ULONG*
+
+  func GetDestCtxEx
+    HRESULT
+    pMsg RPCOLEMESSAGE*
+    pdwDestContext DWORD*
+    ppvDestContext void**
+
+

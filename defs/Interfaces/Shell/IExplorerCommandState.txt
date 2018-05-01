@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IExplorerCommandState base=IUnknown id={bddacb60-7657-47ae-8445-d23e1acf82ae} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetState
+    HRESULT
+    psiItemArray IShellItemArray*
+    fOkToBeSlow BOOL
+    pCmdState EXPCMDSTATE*
+
+

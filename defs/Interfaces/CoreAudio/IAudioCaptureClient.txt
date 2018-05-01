@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioCaptureClient base=IUnknown id={C8ADBD64-E71E-48a0-A4DE-185C395CD317} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func GetBuffer
+    [AUDCLNT_HRESULT]
+    ppData BYTE**
+    pNumFramesToRead UINT32*
+    pdwFlags DWORD*
+    pu64DevicePosition UINT64*
+    pu64QPCPosition UINT64*
+
+  func ReleaseBuffer
+    [AUDCLNT_HRESULT]
+    NumFramesRead UINT32
+
+  func GetNextPacketSize
+    [AUDCLNT_HRESULT]
+    pNumFramesInNextPacket UINT32*
+
+

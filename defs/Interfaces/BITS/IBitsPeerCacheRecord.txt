@@ -1,0 +1,32 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBitsPeerCacheRecord base=IUnknown id={659cdeaf-489e-11d9-a9cd-000d56965251} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func GetId
+    HRESULT
+    pVal GUID*
+
+  func GetOriginUrl
+    HRESULT
+    pVal LPWSTR*
+
+  func GetFileSize
+    HRESULT
+    pVal UINT64*
+
+  func GetFileModificationTime
+    HRESULT
+    pVal FILETIME*
+
+  func GetLastAccessTime
+    HRESULT
+    pVal FILETIME*
+
+  func IsFileValidated
+    HRESULT
+
+  func GetFileRanges
+    HRESULT
+    pRangeCount DWORD*
+    ppRanges BG_FILE_RANGE**
+
+

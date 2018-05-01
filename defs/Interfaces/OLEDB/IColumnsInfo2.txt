@@ -1,0 +1,15 @@
+include Interfaces\OLEDB\IColumnsInfo.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IColumnsInfo2 base=IColumnsInfo id={0c733ab8-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func GetRestrictedColumnInfo
+    [OLEDB_HRESULT]
+    cColumnIDMasks DBORDINAL
+    rgColumnIDMasks "const DBID []" count=cColumnIDMasks
+    dwFlags DWORD
+    pcColumns DBORDINAL*
+    prgColumnIDs DBID** derefPostCount=pcColumns
+    prgColumnInfo DBCOLUMNINFO** derefPostCount=pcColumns
+    ppStringsBuffer OLECHAR**
+
+

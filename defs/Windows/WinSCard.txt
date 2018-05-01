@@ -1,0 +1,344 @@
+include Headers\scard.h.txt
+
+dll WinSCard.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Authentication/Smart Card"
+array "BYTE [36]" base=BYTE count=36
+
+flag [SCARD_STATE] DWORD display=DWORD
+  SCARD_STATE_UNAWARE     0x00000000
+  SCARD_STATE_IGNORE      0x00000001
+  SCARD_STATE_CHANGED     0x00000002
+  SCARD_STATE_UNKNOWN     0x00000004
+  SCARD_STATE_UNAVAILABLE 0x00000008
+  SCARD_STATE_EMPTY       0x00000010
+  SCARD_STATE_PRESENT     0x00000020
+  SCARD_STATE_ATRMATCH    0x00000040
+  SCARD_STATE_EXCLUSIVE   0x00000080
+  SCARD_STATE_INUSE       0x00000100
+  SCARD_STATE_MUTE        0x00000200
+  SCARD_STATE_UNPOWERED   0x00000400
+
+struct SCARD_READERSTATE
+  szReader LPCTSTR
+  pvUserData LPVOID
+  dwCurrentState [SCARD_STATE]
+  dwEventState [SCARD_STATE]
+  cbAtr DWORD
+  rgbAtr "BYTE [36]" count=cbAtr
+
+pointer LPSCARD_READERSTATE SCARD_READERSTATE
+
+struct SCARD_ATRMASK
+  cbAtr DWORD
+  rgbAtr "BYTE [36]" count=cbAtr
+  rgbMask "BYTE [36]" count=cbAtr
+
+pointer LPSCARD_ATRMASK SCARD_ATRMASK
+
+struct SCARD_IO_REQUEST
+  dwProtocol DWORD
+  cbPciLength DWORD
+
+pointer LPSCARD_IO_REQUEST SCARD_IO_REQUEST
+
+pointer LPCSCARD_IO_REQUEST SCARD_IO_REQUEST
+
+enum [SCardScope] DWORD display=DWORD
+  SCARD_SCOPE_USER     0
+  SCARD_SCOPE_TERMINAL 1
+  SCARD_SCOPE_SYSTEM   2
+
+enum [SCARD_AUDIT_CHV] DWORD display=DWORD
+  SCARD_AUDIT_CHV_FAILURE 0x0
+  SCARD_AUDIT_CHV_SUCCESS 0x1
+
+func SCardAccessStartedEvent
+  success NotEqual=0
+  HANDLE
+
+func SCardAddReaderToGroup bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szReaderName LPCTSTR
+  szGroupName LPCTSTR
+
+func SCardAudit
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  dwEvent [SCARD_AUDIT_CHV]
+
+func SCardBeginTransaction
+  [SCARD_ERROR]
+  hCard SCARDHANDLE
+
+func SCardCancel
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+
+func SCardConnect bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szReader LPCTSTR
+  dwShareMode DWORD
+  dwPreferredProtocols DWORD
+  phCard LPSCARDHANDLE
+  pdwActiveProtocol LPDWORD
+
+func SCardControl
+  [SCARD_ERROR]
+  hCard SCARDHANDLE
+  dwControlCode DWORD
+  lpInBuffer LPCVOID
+  nInBufferSize DWORD
+  lpOutBuffer LPVOID
+  nOutBufferSize DWORD
+  lpBytesReturned LPDWORD
+
+func SCardDisconnect
+  [SCARD_ERROR]
+  hCard SCARDHANDLE
+  dwDisposition DWORD
+
+func SCardEndTransaction
+  [SCARD_ERROR]
+  hCard SCARDHANDLE
+  dwDisposition DWORD
+
+func SCardEstablishContext
+  [SCARD_ERROR]
+  dwScope [SCardScope]
+  pvReserved1 LPCVOID
+  pvReserved2 LPCVOID
+  phContext LPSCARDCONTEXT
+
+func SCardForgetCardType bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szCardName LPCTSTR
+
+func SCardForgetReader bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szReaderName LPCTSTR
+
+func SCardForgetReaderGroup bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szGroupName LPCTSTR
+
+func SCardFreeMemory
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  pvMem LPCVOID
+
+func SCardGetAttrib
+  [SCARD_ERROR]
+  hCard SCARDHANDLE
+  dwAttrId DWORD
+  pbAttr LPBYTE
+  pcbAttrLen LPDWORD
+
+func SCardGetCardTypeProviderName bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szCardName LPCTSTR
+  dwProviderId DWORD
+  szProvider LPTSTR
+  pcchProvider LPDWORD*
+
+func SCardGetDeviceTypeId bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szReaderName LPCTSTR
+  pdwDeviceTypeId LPDWORD
+
+func SCardGetProviderId bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szCard LPCTSTR
+  pguidProviderId LPGUID
+
+func SCardGetReaderDeviceInstanceId bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szReaderName LPCTSTR
+  szDeviceInstanceId LPTSTR
+  cchDeviceInstanceId LPDWORD
+
+func SCardGetReaderIcon bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szReaderName LPCTSTR
+  pbIcon LPBYTE
+  pcbIcon LPDWORD
+
+func SCardGetStatusChange bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  dwTimeout DWORD
+  rgReaderStates LPSCARD_READERSTATE count=cReaders
+  cReaders DWORD
+
+func SCardGetTransmitCount
+  [SCARD_ERROR]
+  hCard SCARDHANDLE
+  pcTransmitCount LPDWORD
+
+func SCardIntroduceCardType bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szCardName LPCTSTR
+  pguidPrimaryProvider LPCGUID
+  rgguidInterfaces LPCGUID count=dwInterfaceCount
+  dwInterfaceCount DWORD
+  pbAtr LPCBYTE
+  pbAtrMask LPCBYTE
+  cbAtrLen DWORD
+
+func SCardIntroduceReader bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szReaderName LPCTSTR
+  szDeviceName LPCTSTR
+
+func SCardIntroduceReaderGroup bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szGroupName LPCTSTR
+
+func SCardIsValidContext
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+
+func SCardListCards bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  pbAtr LPCBYTE
+  rgguidInterfaces LPCGUID count=cguidInterfaceCount
+  cguidInterfaceCount DWORD
+  mszCards LPTSTR
+  pcchCards LPDWORD
+
+func SCardListInterfaces bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szCard LPCTSTR
+  pguidInterfaces LPGUID
+  pcguidInterfaces LPDWORD
+
+func SCardListReaderGroups bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  mszGroups LPTSTR
+  pcchGroups LPDWORD
+
+func SCardListReaders bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  mszGroups LPCTSTR
+  mszReaders LPTSTR
+  pcchReaders LPDWORD
+
+func SCardListReadersWithDeviceInstanceId bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szDeviceInstanceId LPCTSTR
+  mszReaders LPTSTR
+  pcchReaders LPDWORD
+
+func SCardLocateCards bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  mszCards LPCTSTR
+  rgReaderStates LPSCARD_READERSTATE count=cReaders
+  cReaders DWORD
+
+func SCardLocateCardsByATR bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  rgAtrMasks LPSCARD_ATRMASK count=cAtrs
+  cAtrs DWORD
+  rgReaderStates LPSCARD_READERSTATE count=cReaders
+  cReaders DWORD
+
+func SCardReadCache bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  CardIdentifier UUID*
+  FreshnessCounter DWORD
+  LookupName LPTSTR
+  Data PBYTE
+  DataLen DWORD*
+
+func SCardReconnect
+  [SCARD_ERROR]
+  hCard SCARDHANDLE
+  dwShareMode DWORD
+  dwPreferredProtocols DWORD
+  dwInitialization DWORD
+  pdwActiveProtocol LPDWORD
+
+func SCardReleaseContext
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+
+func SCardReleaseStartedEvent
+  void
+
+func SCardRemoveReaderFromGroup bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szReaderName LPCTSTR
+  szGroupName LPCTSTR
+
+func SCardSetAttrib
+  [SCARD_ERROR]
+  hCard SCARDHANDLE
+  dwAttrId DWORD
+  pbAttr LPCBYTE
+  cbAttrLen DWORD
+
+func SCardSetCardTypeProviderName bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  szCardName LPCTSTR
+  dwProviderId DWORD
+  szProvider LPCTSTR
+
+func SCardState
+  [SCARD_ERROR]
+  hCard SCARDHANDLE
+  pdwState LPDWORD
+  pdwProtocol LPDWORD
+  pbAtr LPBYTE
+  pcbAtrLen LPDWORD
+
+func SCardStatus bothCharset
+  [SCARD_ERROR]
+  hCard SCARDHANDLE
+  szReaderName LPTSTR
+  pcchReaderLen LPDWORD
+  pdwState LPDWORD
+  pdwProtocol LPDWORD
+  pbAtr LPBYTE
+  pcbAtrLen LPDWORD
+
+func SCardTransmit
+  [SCARD_ERROR]
+  hCard SCARDHANDLE
+  pioSendPci LPCSCARD_IO_REQUEST
+  pbSendBuffer LPCBYTE
+  cbSendLength DWORD
+  pioRecvPci LPSCARD_IO_REQUEST
+  pbRecvBuffer LPBYTE
+  pcbRecvLength LPDWORD
+
+func SCardWriteCache bothCharset
+  [SCARD_ERROR]
+  hContext SCARDCONTEXT
+  CardIdentifier UUID*
+  FreshnessCounter DWORD
+  LookupName LPTSTR
+  Data PBYTE
+  DataLen DWORD
+

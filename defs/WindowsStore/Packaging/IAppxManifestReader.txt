@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxManifestReader base=IUnknown id={4e1bd148-55a0-4480-a3d1-15544710637c} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetPackageId
+    HRESULT
+    packageId IAppxManifestPackageId**
+
+  func GetProperties
+    HRESULT
+    packageProperties IAppxManifestProperties**
+
+  func GetPackageDependencies
+    HRESULT
+    dependencies IAppxManifestPackageDependenciesEnumerator**
+
+  func GetCapabilities
+    HRESULT
+    capabilities APPX_CAPABILITIES*
+
+  func GetResources
+    HRESULT
+    resources IAppxManifestResourcesEnumerator**
+
+  func GetDeviceCapabilities
+    HRESULT
+    deviceCapabilities IAppxManifestDeviceCapabilitiesEnumerator**
+
+  func GetPrerequisite
+    HRESULT
+    name LPCWSTR
+    value UINT64*
+
+  func GetApplications
+    HRESULT
+    applications IAppxManifestApplicationsEnumerator**
+
+  func GetStream
+    HRESULT
+    manifestStream IStream**
+
+

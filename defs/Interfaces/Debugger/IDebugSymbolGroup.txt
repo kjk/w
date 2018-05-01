@@ -1,0 +1,56 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDebugSymbolGroup base=IUnknown id={f2528316-0f1a-4431-aeed-11d096e1e2ab} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Other COM Interfaces"
+  func GetNumberSymbols
+    HRESULT
+    Number PULONG
+
+  func AddSymbol
+    HRESULT
+    Name PCSTR
+    Index PULONG
+
+  func RemoveSymbolByName
+    HRESULT
+    Name PCSTR
+
+  func RemoveSymbolByIndex
+    HRESULT
+    Index ULONG
+
+  func GetSymbolName
+    HRESULT
+    Index ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+
+  func GetSymbolParameters
+    HRESULT
+    Start ULONG
+    Count ULONG
+    Params PDEBUG_SYMBOL_PARAMETERS postCount=Count
+
+  func ExpandSymbol
+    HRESULT
+    Index ULONG
+    Expand BOOL
+
+  func OutputSymbols
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Flags [DEBUG_OUTPUT_SYMBOLS_FLAGS]
+    Start ULONG
+    Count ULONG
+
+  func WriteSymbol
+    HRESULT
+    Index ULONG
+    Value PCSTR
+
+  func OutputAsType
+    HRESULT
+    Index ULONG
+    Type PCSTR
+
+

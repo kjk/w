@@ -1,0 +1,177 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemServices base=IDispatch id={76A6415C-CB41-11d1-8B02-00600806D9B6} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func Get
+    WBEMSTATUS
+    strObjectPath BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemObject ISWbemObject**
+
+  func GetAsync
+    WBEMSTATUS
+    objWbemSink IDispatch*
+    strObjectPath BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemAsyncContext IDispatch*
+
+  func Delete
+    WBEMSTATUS
+    strObjectPath BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+
+  func DeleteAsync
+    WBEMSTATUS
+    objWbemSink IDispatch*
+    strObjectPath BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemAsyncContext IDispatch*
+
+  func InstancesOf
+    WBEMSTATUS
+    strClass BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemObjectSet ISWbemObjectSet**
+
+  func InstancesOfAsync
+    WBEMSTATUS
+    objWbemSink IDispatch*
+    strClass BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemAsyncContext IDispatch*
+
+  func SubclassesOf
+    WBEMSTATUS
+    strSuperclass BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemObjectSet ISWbemObjectSet**
+
+  func SubclassesOfAsync
+    WBEMSTATUS
+    objWbemSink IDispatch*
+    strSuperclass BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemAsyncContext IDispatch*
+
+  func ExecQuery
+    WBEMSTATUS
+    strQuery BSTR
+    strQueryLanguage BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemObjectSet ISWbemObjectSet**
+
+  func ExecQueryAsync
+    WBEMSTATUS
+    objWbemSink IDispatch*
+    strQuery BSTR
+    strQueryLanguage BSTR
+    lFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemAsyncContext IDispatch*
+
+  func AssociatorsOf
+    WBEMSTATUS
+    strObjectPath BSTR
+    strAssocClass BSTR
+    strResultClass BSTR
+    strResultRole BSTR
+    strRole BSTR
+    bClassesOnly VARIANT_BOOL
+    bSchemaOnly VARIANT_BOOL
+    strRequiredAssocQualifier BSTR
+    strRequiredQualifier BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemObjectSet ISWbemObjectSet**
+
+  func AssociatorsOfAsync
+    WBEMSTATUS
+    objWbemSink IDispatch*
+    strObjectPath BSTR
+    strAssocClass BSTR
+    strResultClass BSTR
+    strResultRole BSTR
+    strRole BSTR
+    bClassesOnly VARIANT_BOOL
+    bSchemaOnly VARIANT_BOOL
+    strRequiredAssocQualifier BSTR
+    strRequiredQualifier BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemAsyncContext IDispatch*
+
+  func ReferencesTo
+    WBEMSTATUS
+    strObjectPath BSTR
+    strResultClass BSTR
+    strRole BSTR
+    bClassesOnly VARIANT_BOOL
+    bSchemaOnly VARIANT_BOOL
+    strRequiredQualifier BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemObjectSet ISWbemObjectSet**
+
+  func ReferencesToAsync
+    WBEMSTATUS
+    objWbemSink IDispatch*
+    strObjectPath BSTR
+    strResultClass BSTR
+    strRole BSTR
+    bClassesOnly VARIANT_BOOL
+    bSchemaOnly VARIANT_BOOL
+    strRequiredQualifier BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemAsyncContext IDispatch*
+
+  func ExecNotificationQuery
+    WBEMSTATUS
+    strQuery BSTR
+    strQueryLanguage BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemEventSource ISWbemEventSource**
+
+  func ExecNotificationQueryAsync
+    WBEMSTATUS
+    objWbemSink IDispatch*
+    strQuery BSTR
+    strQueryLanguage BSTR
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemAsyncContext IDispatch*
+
+  func ExecMethod
+    WBEMSTATUS
+    strObjectPath BSTR
+    strMethodName BSTR
+    objWbemInParameters IDispatch*
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemOutParameters ISWbemObject**
+
+  func ExecMethodAsync
+    WBEMSTATUS
+    objWbemSink IDispatch*
+    strObjectPath BSTR
+    strMethodName BSTR
+    objWbemInParameters IDispatch*
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemAsyncContext IDispatch*
+
+  func get_Security_
+    WBEMSTATUS
+    objWbemSecurity ISWbemSecurity**
+
+

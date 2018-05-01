@@ -1,0 +1,24 @@
+include Interfaces\Debugger\IDebugSystemObjects.txt
+
+ingterface IDebugSystemObjects2 base=IDebugSystemObjects id={0ae9f5ff-1852-4679-b055-494bee6407ee} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetCurrentProcessUpTime
+    HRESULT
+    UpTime PULONG
+
+  func GetImplicitThreadDataOffset
+    HRESULT
+    Offset PULONG64
+
+  func SetImplicitThreadDataOffset
+    HRESULT
+    Offset ULONG64
+
+  func GetImplicitProcessDataOffset
+    HRESULT
+    Offset PULONG64
+
+  func SetImplicitProcessDataOffset
+    HRESULT
+    Offset ULONG64
+
+

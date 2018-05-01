@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface AsyncIMultiQI base=IUnknown id={000e0020-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func Begin_QueryMultipleInterfaces
+    HRESULT
+    cMQIs ULONG
+    pMQIs MULTI_QI* count=cMQIs
+
+  func Finish_QueryMultipleInterfaces
+    HRESULT
+    pMQIs MULTI_QI*
+
+

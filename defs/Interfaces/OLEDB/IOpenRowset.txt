@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IOpenRowset base=IUnknown id={0c733a69-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func OpenRowset
+    [OLEDB_HRESULT]
+    pUnkOuter IUnknown*
+    pTableID DBID*
+    pIndexID DBID*
+    riid REFIID
+    cPropertySets ULONG
+    rgPropertySets "DBPROPSET []" count=cPropertySets
+    ppRowset IUnknown** interfaceId=riid
+
+

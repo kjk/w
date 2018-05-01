@@ -1,0 +1,13 @@
+include Headers\windows.h.txt
+
+dll Windows.UI.Xaml.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Additional Resources/Windows Runtime C++"
+interface IViewObjectPresentNotifySite
+
+interface Windows::UI::Xaml::Hosting::IXamlUIPresenter
+
+func CreateXamlUIPresenter
+  HRESULT
+  pPresentSite IViewObjectPresentNotifySite*
+  ppPresenter Windows::UI::Xaml::Hosting::IXamlUIPresenter**
+

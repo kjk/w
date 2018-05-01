@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPreviousVersionsInfo base=IUnknown id={76e54780-ad74-48e3-a695-3ba9a0aff10d} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func AreSnapshotsAvailable
+    HRESULT
+    pszPath LPCWSTR
+    fOkToBeSlow BOOL
+    pfAvailable BOOL*
+
+

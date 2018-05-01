@@ -1,0 +1,169 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemDateTime base=IDispatch id={5E97458A-CF77-11d3-B38F-00105A1F473A} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func get_Value
+    WBEMSTATUS
+    strValue BSTR*
+
+  func put_Value
+    WBEMSTATUS
+    strValue BSTR
+
+  func get_Year
+    WBEMSTATUS
+    iYear long*
+
+  func put_Year
+    WBEMSTATUS
+    iYear long
+
+  func get_YearSpecified
+    WBEMSTATUS
+    bYearSpecified VARIANT_BOOL*
+
+  func put_YearSpecified
+    WBEMSTATUS
+    bYearSpecified VARIANT_BOOL
+
+  func get_Month
+    WBEMSTATUS
+    iMonth long*
+
+  func put_Month
+    WBEMSTATUS
+    iMonth long
+
+  func get_MonthSpecified
+    WBEMSTATUS
+    bMonthSpecified VARIANT_BOOL*
+
+  func put_MonthSpecified
+    WBEMSTATUS
+    bMonthSpecified VARIANT_BOOL
+
+  func get_Day
+    WBEMSTATUS
+    iDay long*
+
+  func put_Day
+    WBEMSTATUS
+    iDay long
+
+  func get_DaySpecified
+    WBEMSTATUS
+    bDaySpecified VARIANT_BOOL*
+
+  func put_DaySpecified
+    WBEMSTATUS
+    bDaySpecified VARIANT_BOOL
+
+  func get_Hours
+    WBEMSTATUS
+    iHours long*
+
+  func put_Hours
+    WBEMSTATUS
+    iHours long
+
+  func get_HoursSpecified
+    WBEMSTATUS
+    bHoursSpecified VARIANT_BOOL*
+
+  func put_HoursSpecified
+    WBEMSTATUS
+    bHoursSpecified VARIANT_BOOL
+
+  func get_Minutes
+    WBEMSTATUS
+    iMinutes long*
+
+  func put_Minutes
+    WBEMSTATUS
+    iMinutes long
+
+  func get_MinutesSpecified
+    WBEMSTATUS
+    bMinutesSpecified VARIANT_BOOL*
+
+  func put_MinutesSpecified
+    WBEMSTATUS
+    bMinutesSpecified VARIANT_BOOL
+
+  func get_Seconds
+    WBEMSTATUS
+    iSeconds long*
+
+  func put_Seconds
+    WBEMSTATUS
+    iSeconds long
+
+  func get_SecondsSpecified
+    WBEMSTATUS
+    bSecondsSpecified VARIANT_BOOL*
+
+  func put_SecondsSpecified
+    WBEMSTATUS
+    bSecondsSpecified VARIANT_BOOL
+
+  func get_Microseconds
+    WBEMSTATUS
+    iMicroseconds long*
+
+  func put_Microseconds
+    WBEMSTATUS
+    iMicroseconds long
+
+  func get_MicrosecondsSpecified
+    WBEMSTATUS
+    bMicrosecondsSpecified VARIANT_BOOL*
+
+  func put_MicrosecondsSpecified
+    WBEMSTATUS
+    bMicrosecondsSpecified VARIANT_BOOL
+
+  func get_UTC
+    WBEMSTATUS
+    iUTC long*
+
+  func put_UTC
+    WBEMSTATUS
+    iUTC long
+
+  func get_UTCSpecified
+    WBEMSTATUS
+    bUTCSpecified VARIANT_BOOL*
+
+  func put_UTCSpecified
+    WBEMSTATUS
+    bUTCSpecified VARIANT_BOOL
+
+  func get_IsInterval
+    WBEMSTATUS
+    bIsInterval VARIANT_BOOL*
+
+  func put_IsInterval
+    WBEMSTATUS
+    bIsInterval VARIANT_BOOL
+
+  func GetVarDate
+    WBEMSTATUS
+    bIsLocal VARIANT_BOOL
+    dVarDate DATE*
+
+  func SetVarDate
+    WBEMSTATUS
+    dVarDate DATE
+    bIsLocal VARIANT_BOOL
+
+  func GetFileTime
+    WBEMSTATUS
+    bIsLocal VARIANT_BOOL
+    strFileTime BSTR*
+
+  func SetFileTime
+    WBEMSTATUS
+    strFileTime BSTR
+    bIsLocal VARIANT_BOOL
+
+

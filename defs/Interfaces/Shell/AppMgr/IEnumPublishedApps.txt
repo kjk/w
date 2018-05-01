@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\AppMgr\AppMgr.h.txt
+
+ingterface IEnumPublishedApps base=IUnknown id={0B124F8C-91F0-11D1-B8B5-006008059382} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Application Manager"
+  func Next
+    HRESULT
+    pia IPublishedApp**
+
+  func Reset
+    HRESULT
+
+

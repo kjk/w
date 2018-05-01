@@ -1,0 +1,53 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemHiPerfProvider base=IUnknown id={49353c93-516b-11d1-aea6-00c04fb68820} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func QueryInstances
+    WBEMSTATUS
+    pNamespace IWbemServices*
+    wszClass WCHAR*
+    lFlags long
+    pCtx IWbemContext*
+    pSink IWbemObjectSink*
+
+  func CreateRefresher
+    WBEMSTATUS
+    pNamespace IWbemServices*
+    lFlags long
+    ppRefresher IWbemRefresher**
+
+  func CreateRefreshableObject
+    WBEMSTATUS
+    pNamespace IWbemServices*
+    pTemplate IWbemObjectAccess*
+    pRefresher IWbemRefresher*
+    lFlags long
+    pContext IWbemContext*
+    ppRefreshable IWbemObjectAccess**
+    plId long*
+
+  func StopRefreshing
+    WBEMSTATUS
+    pRefresher IWbemRefresher*
+    lId long
+    lFlags long
+
+  func CreateRefreshableEnum
+    WBEMSTATUS
+    pNamespace IWbemServices*
+    wszClass LPCWSTR
+    pRefresher IWbemRefresher*
+    lFlags long
+    pContext IWbemContext*
+    pHiPerfEnum IWbemHiPerfEnum*
+    plId long*
+
+  func GetObjects
+    WBEMSTATUS
+    pNamespace IWbemServices*
+    lNumObjects long
+    apObj IWbemObjectAccess**
+    lFlags long
+    pContext IWbemContext*
+
+

@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\AppMgr\AppMgr.h.txt
+
+ingterface IShellApp base=IUnknown id={A3E14960-935F-11D1-B8B8-006008059382} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Application Manager"
+  func GetAppInfo
+    HRESULT
+    pai PAPPINFODATA
+
+  func GetPossibleActions
+    HRESULT
+    pdwActions DWORD*
+
+  func GetSlowAppInfo
+    HRESULT
+    psaid PSLOWAPPINFO
+
+  func GetCachedSlowAppInfo
+    HRESULT
+    psaid PSLOWAPPINFO
+
+  func IsInstalled
+    HRESULT
+
+

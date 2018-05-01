@@ -1,0 +1,18 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11AuthenticatedChannel base=ID3D11DeviceChild id={3015A308-DCBD-47aa-A747-192486D14D4A} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Microsoft Media Foundation/Direct3D 11 Video"
+  func GetCertificateSize
+    HRESULT
+    pCertificateSize UINT*
+
+  func GetCertificate
+    HRESULT
+    CertificateSize UINT
+    pCertificate BYTE*
+
+  func GetChannelHandle
+    void
+    pChannelHandle HANDLE*
+
+

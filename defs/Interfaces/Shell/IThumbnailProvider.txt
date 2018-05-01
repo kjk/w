@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IThumbnailProvider base=IUnknown id={e357fccd-a995-4576-b01f-234630154e96} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetThumbnail
+    HRESULT
+    cx UINT
+    phbmp HBITMAP*
+    pdwAlpha WTS_ALPHATYPE*
+
+

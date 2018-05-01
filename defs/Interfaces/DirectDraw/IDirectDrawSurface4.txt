@@ -1,0 +1,28 @@
+include Interfaces\DirectDraw\IDirectDrawSurface3.txt
+
+ingterface IDirectDrawSurface4 base=IDirectDrawSurface3 id={0b2b8630-ad35-11d0-8ea6-00609797ea5b} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+  func SetPrivateData
+    [DD_HRESULT]
+    guidTag REFGUID
+    lpData LPVOID length=cbSize
+    cbSize DWORD
+    dwFlags [DDSPD_FLAGS]
+
+  func GetPrivateData
+    [DD_HRESULT]
+    guidTag REFGUID
+    lpBuffer LPVOID postLength=lpcbBufferSize
+    lpcbBufferSize LPDWORD
+
+  func FreePrivateData
+    [DD_HRESULT]
+    guidTag REFGUID
+
+  func GetUniquenessValue
+    [DD_HRESULT]
+    lpValue LPDWORD
+
+  func ChangeUniquenessValue
+    [DD_HRESULT]
+
+

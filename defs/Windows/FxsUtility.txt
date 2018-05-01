@@ -1,0 +1,16 @@
+include Headers\windows.h.txt
+
+dll FxsUtility.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Fax Service/Fax Service Client"
+enum SendToMode UINT
+  SEND_TO_FAX_RECIPIENT_ATTACHMENT 0
+
+func CanSendToFaxRecipient
+  BOOL
+
+func SendToFaxRecipient
+  success Equal=0
+  DWORD
+  sndMode SendToMode
+  lpFileName LPCWSTR
+

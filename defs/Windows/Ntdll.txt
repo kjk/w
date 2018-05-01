@@ -1,0 +1,8783 @@
+include Headers\events.h.txt
+include Headers\power.h.txt
+include Headers\registry.h.txt
+include Headers\native.h.txt
+include Headers\sockets.h.txt
+include Headers\ioctl.h.txt
+
+dll Ntdll.dll callingConvention=STDCALL onlineHelp=MSDN
+sourceModule msvcrt.dll copy=True include=Windows\msvcrxx.xml
+func __isascii
+
+func __iscsym
+
+func __iscsymf
+
+func __toascii
+
+func _atoi64
+
+func _i64toa
+
+func _i64toa_s
+
+func _i64tow
+
+func _i64tow_s
+
+func _itoa
+
+func _itoa_s
+
+func _itow
+
+func _itow_s
+
+func _lfind
+
+func _ltoa
+
+func _ltoa_s
+
+func _ltow
+
+func _ltow_s
+
+func _makepath_s
+
+func _memccpy
+
+func _memicmp
+
+func _snprintf
+
+func _snprintf_s
+
+func _snscanf_s
+
+func _snwprintf
+
+func _snwprintf_s
+
+func _snwscanf_s
+
+func _splitpath
+
+func _splitpath_s
+
+func _strcmpi
+
+func _stricmp
+
+func _strlwr
+
+func _strnicmp
+
+func _strnset_s
+
+func _strset_s
+
+func _strupr
+
+func _swprintf
+
+func _ui64toa
+
+func _ui64toa_s
+
+func _ui64tow
+
+func _ui64tow_s
+
+func _ultoa
+
+func _ultoa_s
+
+func _ultow
+
+func _ultow_s
+
+func _vscwprintf
+
+func _vsnprintf
+
+func _vsnprintf_s
+
+func _vsnwprintf
+
+func _vsnwprintf_s
+
+func _vswprintf
+
+func _wcsicmp
+
+func _wcslwr
+
+func _wcsnicmp
+
+func _wcsnset_s
+
+func _wcsset_s
+
+func _wcstoui64
+
+func _wcsupr
+
+func _wmakepath_s
+
+func _wsplitpath_s
+
+func _wtoi
+
+func _wtoi64
+
+func _wtol
+
+func abs
+
+func atan
+
+func atoi
+
+func atol
+
+func bsearch
+
+func ceil
+
+func cos
+
+func fabs
+
+func floor
+
+func isalnum
+
+func isalpha
+
+func iscntrl
+
+func isdigit
+
+func isgraph
+
+func islower
+
+func isprint
+
+func ispunct
+
+func isspace
+
+func isupper
+
+func iswalpha
+
+func iswctype
+
+func iswdigit
+
+func iswlower
+
+func iswspace
+
+func iswxdigit
+
+func isxdigit
+
+func labs
+
+func log
+
+func mbstowcs
+
+func memchr
+
+func memcmp
+
+func memcpy
+
+func memcpy_s
+
+func memmove
+
+func memmove_s
+
+func memset
+
+func pow
+
+func qsort
+
+func sin
+
+func sprintf
+
+func sprintf_s
+
+func sqrt
+
+func sscanf
+
+func sscanf_s
+
+func strcat
+
+func strcat_s
+
+func strchr
+
+func strcmp
+
+func strcpy
+
+func strcpy_s
+
+func strcspn
+
+func strlen
+
+func strncat
+
+func strncat_s
+
+func strncmp
+
+func strncpy
+
+func strncpy_s
+
+func strnlen
+
+func strpbrk
+
+func strrchr
+
+func strspn
+
+func strstr
+
+func strtok_s
+
+func strtol
+
+func strtoul
+
+func swprintf
+
+func swprintf_s
+
+func swscanf_s
+
+func tan
+
+func tolower
+
+func toupper
+
+func towlower
+
+func vsprintf
+
+func vsprintf_s
+
+func vswprintf_s
+
+func wcscat
+
+func wcscat_s
+
+func wcschr
+
+func wcscmp
+
+func wcscpy
+
+func wcscpy_s
+
+func wcscspn
+
+func wcslen
+
+func wcsncat
+
+func wcsncat_s
+
+func wcsncmp
+
+func wcsncpy
+
+func wcsncpy_s
+
+func wcsnlen
+
+func wcspbrk
+
+func wcsrchr
+
+func wcsspn
+
+func wcsstr
+
+func wcstol
+
+func wcstombs
+
+func wcstoul
+
+category "NT Native"
+category "NT Native/Synchronization"
+category "NT Native/Registry"
+category "NT Native/Atoms"
+category "NT Native/Locale"
+category "NT Native/Client-Server (CSR)"
+category "NT Native/Debugging (DBG)"
+category "NT Native/Loader (LDR)"
+category "NT Native/Authorization"
+category "NT Native/Processes and Threads"
+category "NT Native/Processes and Threads/Environment"
+category "NT Native/Memory Management"
+category "NT Native/File Systems"
+category "NT Native/Sections"
+category "NT Native/Local Inter-Process Communication (LPC)"
+category "NT Native/Drivers"
+category "NT Native/Profiling"
+category "NT Native/Basic Debugging"
+category "NT Native/Time"
+category "NT Native/Miscellaneous"
+category "NT Native/Objects"
+category "Undocumented (UnDoc'd)" onlineHelp=UnDoc'd-ntdll
+category "Additional Resources/System/DLL Load Notification"
+category "Additional Resources/System/Run-time Library"
+category "Additional Resources/System/Winternl"
+category "NT Native/Runtime Library Routines (RTL)/Structured Exception Handling"
+category "System Services/Synchronization/Singly-linked List"
+category "NT Native/Kernel Transaction Manager (KTM)/Transaction Manager Object"
+category "NT Native/Kernel Transaction Manager (KTM)/Transaction Object"
+category "NT Native/Kernel Transaction Manager (KTM)/Enlistment Object"
+category "NT Native/Kernel Transaction Manager (KTM)/Resource Manager Object"
+category "NT Native/Runtime Library Routines (RTL)/AVL and Splay Trees"
+category "NT Native/Runtime Library Routines (RTL)/RB Trees"
+category "NT Native/Runtime Library Routines (RTL)/Hash Tables"
+category "NT Native/Runtime Library Routines (RTL)/Critical Sections"
+category "NT Native/Runtime Library Routines (RTL)/Resources"
+category "NT Native/Runtime Library Routines (RTL)/Slim Reader-Writer Locks"
+category "NT Native/Runtime Library Routines (RTL)/Condition Variables"
+category "NT Native/Runtime Library Routines (RTL)/Barriers"
+category "NT Native/Runtime Library Routines (RTL)/Strings"
+category "NT Native/Runtime Library Routines (RTL)/Prefix"
+category "NT Native/Runtime Library Routines (RTL)/Compression"
+category "NT Native/Runtime Library Routines (RTL)/Locale"
+category "NT Native/Runtime Library Routines (RTL)/Process Environment Block (PEB)"
+category "NT Native/Runtime Library Routines (RTL)/Processes"
+category "NT Native/Runtime Library Routines (RTL)/Threads"
+category "NT Native/Runtime Library Routines (RTL)/Images"
+category "NT Native/Runtime Library Routines (RTL)/Memory"
+category "NT Native/Runtime Library Routines (RTL)/Environment"
+category "NT Native/Runtime Library Routines (RTL)/Directory and Paths"
+category "NT Native/Runtime Library Routines (RTL)/Heaps"
+category "NT Native/Runtime Library Routines (RTL)/Memory Zones"
+category "NT Native/Runtime Library Routines (RTL)/Memory Block Lookaside Lists"
+category "NT Native/Runtime Library Routines (RTL)/Transactions"
+category "NT Native/Runtime Library Routines (RTL)/Locally Unique Identifier (LUID)"
+category "NT Native/Runtime Library Routines (RTL)/Debugging"
+category "NT Native/Runtime Library Routines (RTL)/Messages"
+category "NT Native/Runtime Library Routines (RTL)/Errors"
+category "NT Native/Runtime Library Routines (RTL)/Windows Error Reporting"
+category "NT Native/Runtime Library Routines (RTL)/Vectored Exception Handlers"
+category "NT Native/Runtime Library Routines (RTL)/Random"
+category "NT Native/Runtime Library Routines (RTL)/Integer Conversion"
+category "NT Native/Runtime Library Routines (RTL)/IPv4-IPv6 Conversion"
+category "NT Native/Runtime Library Routines (RTL)/Time"
+category "NT Native/Runtime Library Routines (RTL)/Time Zones"
+category "NT Native/Runtime Library Routines (RTL)/Bitmaps"
+category "NT Native/Runtime Library Routines (RTL)/Handle Tables"
+category "NT Native/Runtime Library Routines (RTL)/Atom Tables"
+category "NT Native/Runtime Library Routines (RTL)/Security Identifier (SID)"
+category "NT Native/Runtime Library Routines (RTL)/Security Descriptors"
+category "NT Native/Runtime Library Routines (RTL)/Access Masks"
+category "NT Native/Runtime Library Routines (RTL)/Access Control List (ACL)"
+category "NT Native/Runtime Library Routines (RTL)/Security Objects"
+category "NT Native/Runtime Library Routines (RTL)/Security"
+category "NT Native/Runtime Library Routines (RTL)/Private Namespaces"
+category "NT Native/Runtime Library Routines (RTL)/Version"
+category "NT Native/Runtime Library Routines (RTL)/Thread Pool"
+category "NT Native/Runtime Library Routines (RTL)/Registry"
+category "NT Native/Runtime Library Routines (RTL)/Thread Profiling"
+category "NT Native/Runtime Library Routines (RTL)/Miscellaneous"
+category "NT Native/Runtime Library Routines (RTL)/Large Integer"
+category "NT Native/Runtime Library Routines (RTL)/Activation Context"
+category "NT Native/Runtime Library Routines (RTL)/One-time Initialization"
+arch 32
+array GDI_HANDLE_BUFFER base=ULONG count=34
+
+arch off
+arch 64
+array GDI_HANDLE_BUFFER base=ULONG count=60
+
+arch off
+arch 32
+struct TEB
+  NtTib NT_TIB
+  EnvironmentPointer PVOID
+  ClientId CLIENT_ID
+  ActiveRpcHandle PVOID
+  ThreadLocalStoragePointer PVOID
+  ProcessEnvironmentBlock PPEB
+  LastErrorValue ULONG
+  CountOfOwnedCriticalSections ULONG
+  CsrClientThread PVOID
+  Win32ThreadInfo PVOID
+  User32Reserved "ULONG [26]"
+  UserReserved "ULONG [5]"
+  WOW32Reserved PVOID
+  CurrentLocale LCID
+  FpSoftwareStatusRegister ULONG
+  SystemReserved1 "PVOID [54]"
+  ExceptionCode NTSTATUS
+  ActivationContextStackPointer PVOID
+  SpareBytes "UCHAR [36]"
+  TxFsContext ULONG
+  GdiTebBatch GDI_TEB_BATCH
+  RealClientId CLIENT_ID
+  GdiCachedProcessHandle HANDLE
+  GdiClientPID ULONG
+  GdiClientTID ULONG
+  GdiThreadLocalInfo PVOID
+  Win32ClientInfo "ULONG_PTR [62]"
+  glDispatchTable "PVOID [233]"
+  glReserved1 "ULONG_PTR [29]"
+  glReserved2 PVOID
+  glSectionInfo PVOID
+  glSection PVOID
+  glTable PVOID
+  glCurrentRC PVOID
+  glContext PVOID
+  LastStatusValue NTSTATUS
+  StaticUnicodeString UNICODE_STRING
+  StaticUnicodeBuffer "WCHAR [261]"
+  DeallocationStack PVOID
+  TlsSlots "PVOID [64]"
+  TlsLinks LIST_ENTRY
+  Vdm PVOID
+  ReservedForNtRpc PVOID
+  DbgSsReserved "PVOID [2]"
+  HardErrorMode ULONG
+  Instrumentation "PVOID [9]"
+  ActivityId GUID
+  SubProcessTag PVOID
+  EtwLocalData PVOID
+  EtwTraceData PVOID
+  WinSockData PVOID
+  GdiBatchCount ULONG
+   [TEB_u1]
+  GuaranteedStackBytes ULONG
+  ReservedForPerf PVOID
+  ReservedForOle PVOID
+  WaitingOnLoaderLock ULONG
+  SavedPriorityState PVOID
+  SoftPatchPtr1 ULONG_PTR
+  ThreadPoolData PVOID
+  TlsExpansionSlots PVOID*
+  MuiGeneration ULONG
+  IsImpersonating ULONG
+  NlsCache PVOID
+  pShimData PVOID
+  HeapVirtualAffinity ULONG
+  CurrentTransactionHandle HANDLE
+  ActiveFrame PTEB_ACTIVE_FRAME
+  FlsData PVOID
+  PreferredLanguages PVOID
+  UserPrefLanguages PVOID
+  MergedPrefLanguages PVOID
+  MuiImpersonation ULONG
+  CrossTebFlags USHORT
+  SameTebFlags USHORT
+  TxnScopeEnterCallback PVOID
+  TxnScopeExitCallback PVOID
+  TxnScopeContext PVOID
+  LockCount ULONG
+  SpareUlong0 ULONG
+  ResourceRetValue PVOID
+  ReservedForWdf PVOID
+
+arch off
+arch 64
+struct TEB
+  NtTib NT_TIB
+  EnvironmentPointer PVOID
+  ClientId CLIENT_ID
+  ActiveRpcHandle PVOID
+  ThreadLocalStoragePointer PVOID
+  ProcessEnvironmentBlock PPEB
+  LastErrorValue ULONG
+  CountOfOwnedCriticalSections ULONG
+  CsrClientThread PVOID
+  Win32ThreadInfo PVOID
+  User32Reserved "ULONG [26]"
+  UserReserved "ULONG [5]"
+  WOW32Reserved PVOID
+  CurrentLocale LCID
+  FpSoftwareStatusRegister ULONG
+  SystemReserved1 "PVOID [54]"
+  ExceptionCode NTSTATUS
+  ActivationContextStackPointer PVOID
+  SpareBytes "UCHAR [24]"
+  TxFsContext ULONG
+  GdiTebBatch GDI_TEB_BATCH
+  RealClientId CLIENT_ID
+  GdiCachedProcessHandle HANDLE
+  GdiClientPID ULONG
+  GdiClientTID ULONG
+  GdiThreadLocalInfo PVOID
+  Win32ClientInfo "ULONG_PTR [62]"
+  glDispatchTable "PVOID [233]"
+  glReserved1 "ULONG_PTR [29]"
+  glReserved2 PVOID
+  glSectionInfo PVOID
+  glSection PVOID
+  glTable PVOID
+  glCurrentRC PVOID
+  glContext PVOID
+  LastStatusValue NTSTATUS
+  StaticUnicodeString UNICODE_STRING
+  StaticUnicodeBuffer "WCHAR [261]"
+  DeallocationStack PVOID
+  TlsSlots "PVOID [64]"
+  TlsLinks LIST_ENTRY
+  Vdm PVOID
+  ReservedForNtRpc PVOID
+  DbgSsReserved "PVOID [2]"
+  HardErrorMode ULONG
+  Instrumentation "PVOID [11]"
+  ActivityId GUID
+  SubProcessTag PVOID
+  EtwLocalData PVOID
+  EtwTraceData PVOID
+  WinSockData PVOID
+  GdiBatchCount ULONG
+   [TEB_u1]
+  GuaranteedStackBytes ULONG
+  ReservedForPerf PVOID
+  ReservedForOle PVOID
+  WaitingOnLoaderLock ULONG
+  SavedPriorityState PVOID
+  SoftPatchPtr1 ULONG_PTR
+  ThreadPoolData PVOID
+  TlsExpansionSlots PVOID*
+  DeallocationBStore PVOID
+  BStoreLimit PVOID
+  MuiGeneration ULONG
+  IsImpersonating ULONG
+  NlsCache PVOID
+  pShimData PVOID
+  HeapVirtualAffinity ULONG
+  CurrentTransactionHandle HANDLE
+  ActiveFrame PTEB_ACTIVE_FRAME
+  FlsData PVOID
+  PreferredLanguages PVOID
+  UserPrefLanguages PVOID
+  MergedPrefLanguages PVOID
+  MuiImpersonation ULONG
+  CrossTebFlags USHORT
+  SameTebFlags USHORT
+  TxnScopeEnterCallback PVOID
+  TxnScopeExitCallback PVOID
+  TxnScopeContext PVOID
+  LockCount ULONG
+  SpareUlong0 ULONG
+  ResourceRetValue PVOID
+  ReservedForWdf PVOID
+
+arch off
+alias CSR_API_MESSAGE* LPVOID
+
+alias PPLUGPLAY_EVENT_BLOCK LPVOID
+
+alias PDBGUI_WAIT_STATE_CHANGE LPVOID
+
+alias PIO_RESOURCE_DESCRIPTOR LPVOID
+
+alias PCM_PARTIAL_RESOURCE_DESCRIPTOR LPVOID
+
+alias PRTL_BALANCED_NODE LPVOID
+
+alias PRTL_TRACE_DATABASE LPVOID
+
+alias PRTL_TRACE_BLOCK LPVOID
+
+pointer PRTL_TRACE_BLOCK* PRTL_TRACE_BLOCK
+
+alias PRTL_TRACE_ENUM LPVOID
+
+alias RTL_ATOM USHORT
+
+pointer PRTL_ATOM RTL_ATOM
+
+alias CSHORT short
+
+alias CLONG ULONG
+
+alias PCCH CHAR*
+
+alias PCH CHAR*
+
+alias PCSZ char*
+
+alias PTHREAD_START_ROUTINE LPVOID
+
+alias WORKERCALLBACKFUNC LPVOID
+
+alias WAITORTIMERCALLBACKFUNC LPVOID
+
+alias LPC_SIZE_T SIZE_T
+
+alias LPC_PVOID PVOID
+
+alias LPC_HANDLE HANDLE
+
+alias PTIMER_APC_ROUTINE LPVOID
+
+alias PHEAP_ENUMERATION_ROUTINE LPVOID
+
+alias PRTL_HEAP_COMMIT_ROUTINE LPVOID
+
+alias PRTL_AVL_COMPARE_ROUTINE LPVOID
+
+alias PRTL_AVL_ALLOCATE_ROUTINE LPVOID
+
+alias PRTL_AVL_FREE_ROUTINE LPVOID
+
+alias PRTL_SECURE_MEMORY_CACHE_CALLBACK LPVOID
+
+alias PRTL_QUERY_REGISTRY_ROUTINE LPVOID
+
+alias PRTL_GENERIC_COMPARE_ROUTINE LPVOID
+
+alias PRTL_GENERIC_ALLOCATE_ROUTINE LPVOID
+
+alias PRTL_GENERIC_FREE_ROUTINE LPVOID
+
+alias PEXCEPTION_ROUTINE LPVOID
+
+pointer "HANDLE []" HANDLE
+
+alias PRTL_TRACE_HASH_FUNCTION LPVOID
+
+alias PLDR_DLL_NOTIFICATION_FUNCTION LPVOID
+
+alias PWCH PWCHAR
+
+alias PCWCH PWCHAR
+
+alias CCHAR UINT8
+
+alias PRTL_RUN_ONCE_INIT_FN LPVOID
+
+alias PRTL_AVL_MATCH_FUNCTION LPVOID
+
+alias LOGICAL BOOL
+
+alias PRTL_BARRIER LPVOID
+
+alias PRTLP_CURDIR_REF LPVOID
+
+alias SID_HASH_ENTRY ULONG_PTR
+
+alias PLDR_CALLBACK LPVOID
+
+array "SIZE_T [2]" base=SIZE_T count=2
+
+array "UCHAR [32]" base=UCHAR count=32
+
+array "UCHAR [36]" base=UCHAR count=36
+
+array "UCHAR [MAXIMUM_LEADBYTES]" base=UCHAR count=12
+
+array "WCHAR [4]" base=WCHAR count=4
+
+array "WCHAR [8]" base=WCHAR count=8
+
+array "WCHAR [261]" base=WCHAR count=261
+
+array "ULONG [ANYSIZE_ARRAY]" base=ULONG count=1
+
+array "ULONG [3]" base=ULONG count=3
+
+array "ULONG [5]" base=ULONG count=5
+
+array "ULONG [26]" base=ULONG count=26
+
+array "ULONG [32]" base=ULONG count=32
+
+array "ULONG [GDI_BATCH_BUFFER_SIZE]" base=ULONG count=310
+
+array "PVOID [2]" base=PVOID count=2
+
+array "PVOID [4]" base=PVOID count=4
+
+array "PVOID [9]" base=PVOID count=9
+
+array "PVOID [11]" base=PVOID count=11
+
+array "PVOID [16]" base=PVOID count=16
+
+array "PVOID [54]" base=PVOID count=54
+
+array "PVOID [64]" base=PVOID count=64
+
+array "PVOID [233]" base=PVOID count=233
+
+array "ULONG_PTR [1]" base=ULONG_PTR count=1
+
+array "ULONG_PTR [29]" base=ULONG_PTR count=29
+
+array "ULONG_PTR [62]" base=ULONG_PTR count=62
+
+array "GUID [1]" base=GUID count=1
+
+array "SID_HASH_ENTRY [SID_HASH_SIZE]" base=SID_HASH_ENTRY count=32
+
+alias [NTSTATUS_ULONG] NTSTATUS display=ULONG
+
+flag [RTL_DEBUG_QUERY_FLAGS] ULONG display=ULONG
+  RTL_DEBUG_QUERY_MODULES          0x01
+  RTL_DEBUG_QUERY_BACKTRACES       0x02
+  RTL_DEBUG_QUERY_HEAPS            0x04
+  RTL_DEBUG_QUERY_HEAP_TAGS        0x08
+  RTL_DEBUG_QUERY_HEAP_BLOCKS      0x10
+  RTL_DEBUG_QUERY_LOCKS            0x20
+  RTL_DEBUG_QUERY_MODULES32        0x40
+  RTL_DEBUG_QUERY_VERIFIER_OPTIONS 0x80
+  RTL_DEBUG_QUERY_MODULESEX        0x100
+  RTL_DEBUG_QUERY_HEAP_ENTRIES_EX  0x200
+  RTL_DEBUG_QUERY_CS_OWNER         0x400
+  RTL_DEBUG_QUERY_NONINVASIVE      0x80000000
+
+struct CURDIR
+  DosPath UNICODE_STRING
+  Handle HANDLE
+
+pointer CURDIR* CURDIR
+
+struct CSR_CAPTURE_BUFFER
+  Size ULONG
+  PreviousCaptureBuffer LPVOID display=CSR_CAPTURE_BUFFER*
+  PointerCount ULONG
+  BufferEnd ULONG_PTR
+  PointerArray "ULONG_PTR [1]" count=PointerCount
+
+pointer CSR_CAPTURE_BUFFER* CSR_CAPTURE_BUFFER
+
+flag [LDRP_FLAGS] ULONG display=ULONG
+  LDRP_STATIC_LINK               0x00000002
+  LDRP_IMAGE_DLL                 0x00000004
+  LDRP_LOAD_IN_PROGRESS          0x00001000
+  LDRP_UNLOAD_IN_PROGRESS        0x00002000
+  LDRP_ENTRY_PROCESSED           0x00004000
+  LDRP_ENTRY_INSERTED            0x00008000
+  LDRP_CURRENT_LOAD              0x00010000
+  LDRP_FAILED_BUILTIN_LOAD       0x00020000
+  LDRP_DONT_CALL_FOR_THREADS     0x00040000
+  LDRP_PROCESS_ATTACH_CALLED     0x00080000
+  LDRP_DEBUG_SYMBOLS_LOADED      0x00100000
+  LDRP_IMAGE_NOT_AT_BASE         0x00200000
+  LDRP_COR_IMAGE                 0x00400000
+  LDR_COR_OWNS_UNMAP             0x00800000
+  LDRP_SYSTEM_MAPPED             0x01000000
+  LDRP_IMAGE_VERIFYING           0x02000000
+  LDRP_DRIVER_DEPENDENT_DLL      0x04000000
+  LDRP_ENTRY_NATIVE              0x08000000
+  LDRP_REDIRECTED                0x10000000
+  LDRP_NON_PAGED_DEBUG_INFO      0x20000000
+  LDRP_MM_LOADED                 0x40000000
+  LDRP_COMPAT_DATABASE_PROCESSED 0x80000000
+
+struct [LDR_DATA_TABLE_ENTRY_u1_s] display=struct
+  SectionPointer PVOID
+  CheckSum ULONG
+
+union [LDR_DATA_TABLE_ENTRY_u1] display=union
+  HashLinks LIST_ENTRY
+   [LDR_DATA_TABLE_ENTRY_u1_s]
+
+union [LDR_DATA_TABLE_ENTRY_u2] display=union
+  TimeDateStamp ULONG
+  LoadedImports PVOID
+
+struct LDR_DATA_TABLE_ENTRY
+  InLoadOrderLinks LIST_ENTRY
+  InMemoryOrderModuleList LIST_ENTRY
+  InInitializationOrderModuleList LIST_ENTRY
+  DllBase PVOID
+  EntryPoint PVOID
+  SizeOfImage ULONG
+  FullDllName UNICODE_STRING
+  BaseDllName UNICODE_STRING
+  Flags [LDRP_FLAGS]
+  LoadCount USHORT
+  TlsIndex USHORT
+   [LDR_DATA_TABLE_ENTRY_u1]
+   [LDR_DATA_TABLE_ENTRY_u2]
+  EntryPointActivationContext PVOID
+  PatchInformation PVOID
+
+pointer PLDR_DATA_TABLE_ENTRY LDR_DATA_TABLE_ENTRY
+
+pointer PLDR_DATA_TABLE_ENTRY* PLDR_DATA_TABLE_ENTRY
+
+struct IMAGE_BASE_RELOCATION
+  VirtualAddress ULONG
+  SizeOfBlock ULONG
+
+pointer PIMAGE_BASE_RELOCATION IMAGE_BASE_RELOCATION
+
+enum KPROFILE_SOURCE UINT
+  ProfileTime                 0
+  ProfileAlignmentFixup       1
+  ProfileTotalIssues          2
+  ProfilePipelineDry          3
+  ProfileLoadInstructions     4
+  ProfilePipelineFrozen       5
+  ProfileBranchInstructions   6
+  ProfileTotalNonissues       7
+  ProfileDcacheMisses         8
+  ProfileIcacheMisses         9
+  ProfileCacheMisses          10
+  ProfileBranchMispredictions 11
+  ProfileStoreInstructions    12
+  ProfileFpInstructions       13
+  ProfileIntegerInstructions  14
+  Profile2Issue               15
+  Profile3Issue               16
+  Profile4Issue               17
+  ProfileSpecialInstructions  18
+  ProfileTotalCycles          19
+  ProfileIcacheIssues         20
+  ProfileDcacheAccesses       21
+  ProfileMemoryBarrierCycles  22
+  ProfileLoadLinkedIssues     23
+
+struct RTL_DRIVE_LETTER_CURDIR
+  Flags USHORT
+  Length USHORT
+  TimeStamp ULONG
+  DosPath UNICODE_STRING
+
+array "RTL_DRIVE_LETTER_CURDIR [32]" base=RTL_DRIVE_LETTER_CURDIR count=32
+
+enum [RTL_USER_PROCESS_PARAMETERS_FLAGS] ULONG display=ULONG
+  RTL_USER_PROCESS_PARAMETERS_NORMALIZED          0x01
+  RTL_USER_PROCESS_PARAMETERS_PROFILE_USER        0x02
+  RTL_USER_PROCESS_PARAMETERS_PROFILE_SERVER      0x04
+  RTL_USER_PROCESS_PARAMETERS_PROFILE_KERNEL      0x08
+  RTL_USER_PROCESS_PARAMETERS_UNKNOWN             0x10
+  RTL_USER_PROCESS_PARAMETERS_RESERVE_1MB         0x20
+  RTL_USER_PROCESS_PARAMETERS_DISABLE_HEAP_CHECKS 0x100
+  RTL_USER_PROCESS_PARAMETERS_PROCESS_OR_1        0x200
+  RTL_USER_PROCESS_PARAMETERS_PROCESS_OR_2        0x400
+  RTL_USER_PROCESS_PARAMETERS_PRIVATE_DLL_PATH    0x1000
+  RTL_USER_PROCESS_PARAMETERS_LOCAL_DLL_PATH      0x2000
+  RTL_USER_PROCESS_PARAMETERS_NX                  0x20000
+
+struct RTL_USER_PROCESS_PARAMETERS
+  MaximumLength ULONG
+  Length ULONG
+  Flags [RTL_USER_PROCESS_PARAMETERS_FLAGS]
+  DebugFlags ULONG
+  ConsoleHandle HANDLE
+  ConsoleFlags ULONG
+  StandardInput HANDLE
+  StandardOutput HANDLE
+  StandardError HANDLE
+  CurrentDirectory CURDIR
+  DllPath UNICODE_STRING
+  ImagePathName UNICODE_STRING
+  CommandLine UNICODE_STRING
+  Environment PWSTR
+  StartingX ULONG
+  StartingY ULONG
+  CountX ULONG
+  CountY ULONG
+  CountCharsX ULONG
+  CountCharsY ULONG
+  FillAttribute ULONG
+  WindowFlags [STARTUPINFO_Flags] display=ULONG
+  ShowWindowFlags [ShowWindowCmd] display=ULONG
+  WindowTitle UNICODE_STRING
+  DesktopInfo UNICODE_STRING
+  ShellInfo UNICODE_STRING
+  RuntimeData UNICODE_STRING
+  CurrentDirectories "RTL_DRIVE_LETTER_CURDIR [32]"
+
+pointer RTL_USER_PROCESS_PARAMETERS* RTL_USER_PROCESS_PARAMETERS
+
+pointer PRTL_USER_PROCESS_PARAMETERS RTL_USER_PROCESS_PARAMETERS
+
+pointer PRTL_USER_PROCESS_PARAMETERS* PRTL_USER_PROCESS_PARAMETERS
+
+struct SECTION_IMAGE_INFORMATION
+  TransferAddress PVOID
+  ZeroBits ULONG
+  MaximumStackSize SIZE_T
+  CommittedStackSize SIZE_T
+  SubSystemType [IMAGE_SUBSYSTEM_ULONG]
+  SubSystemMinorVersion WORD
+  SubSystemMajorVersion WORD
+  GpValue ULONG
+  ImageCharacteristics [IMAGE_FILE_CHARACTERISTICS]
+  DllCharacteristics [IMAGE_FILE_MACHINE]
+  Machine WORD
+  ImageContainsCode BOOLEAN
+  ImageFlags UCHAR
+  LoaderFlags ULONG
+  ImageFileSize ULONG
+  CheckSum ULONG
+
+struct RTL_USER_PROCESS_INFORMATION
+  Size ULONG
+  ProcessHandle HANDLE
+  ThreadHandle HANDLE
+  ClientId CLIENT_ID
+  ImageInformation SECTION_IMAGE_INFORMATION
+
+pointer PRTL_USER_PROCESS_INFORMATION RTL_USER_PROCESS_INFORMATION
+
+struct [INITIAL_TEB_s] display=struct
+  OldStackBase PVOID
+  OldStackLimit PVOID
+
+struct INITIAL_TEB
+  OldInitialTeb [INITIAL_TEB_s]
+  StackBase PVOID
+  StackLimit PVOID
+  StackAllocationBase PVOID
+
+pointer PINITIAL_TEB INITIAL_TEB
+
+enum RTL_PATH_TYPE UINT
+  RtlPathTypeUnknown         0
+  RtlPathTypeUncAbsolute     1
+  RtlPathTypeDriveAbsolute   2
+  RtlPathTypeDriveRelative   3
+  RtlPathTypeRooted          4
+  RtlPathTypeRelative        5
+  RtlPathTypeLocalDevice     6
+  RtlPathTypeRootLocalDevice 7
+
+pointer RTL_PATH_TYPE* RTL_PATH_TYPE
+
+struct RTL_PROCESS_VERIFIER_OPTIONS
+  SizeStruct ULONG
+  Option ULONG
+  OptionData "UCHAR [1]"
+
+pointer PRTL_PROCESS_VERIFIER_OPTIONS RTL_PROCESS_VERIFIER_OPTIONS
+
+struct RTL_PROCESS_LOCK_INFORMATION
+  Address PVOID
+  Type USHORT
+  CreatorBackTraceIndex USHORT
+  OwnerThreadId ULONG
+  ActiveCount ULONG
+  ContentionCount ULONG
+  EntryCount ULONG
+  RecursionCount ULONG
+  NumberOfSharedWaiters ULONG
+  NumberOfExclusiveWaiters ULONG
+
+array "RTL_PROCESS_LOCK_INFORMATION [1]" base=RTL_PROCESS_LOCK_INFORMATION count=1
+
+struct RTL_PROCESS_LOCKS
+  NumberOfLocks ULONG
+  Locks "RTL_PROCESS_LOCK_INFORMATION [1]" count=NumberOfLocks
+
+pointer PRTL_PROCESS_LOCKS RTL_PROCESS_LOCKS
+
+struct RTL_HEAP_INFORMATION
+  BaseAddress PVOID
+  Flags ULONG
+  EntryOverhead USHORT
+  CreatorBackTraceIndex USHORT
+  BytesAllocated ULONG
+  BytesCommitted ULONG
+  NumberOfTags ULONG
+  NumberOfEntries ULONG
+  NumberOfPseudoTags ULONG
+  PseudoTagGranularity ULONG
+  Reserved "ULONG [4]"
+  Tags PVOID
+  Entries PVOID
+
+array "RTL_HEAP_INFORMATION [1]" base=RTL_HEAP_INFORMATION count=1
+
+struct RTL_PROCESS_HEAPS
+  NumberOfHeaps ULONG
+  Heaps "RTL_HEAP_INFORMATION [1]" count=NumberOfHeaps
+
+pointer PRTL_PROCESS_HEAPS RTL_PROCESS_HEAPS
+
+struct RTL_PROCESS_BACKTRACE_INFORMATION
+  SymbolicBackTrace PVOID
+  TraceCount ULONG
+  Index USHORT
+  Depth USHORT
+  BackTrace "PVOID [16]"
+
+array "RTL_PROCESS_BACKTRACE_INFORMATION [1]" base=RTL_PROCESS_BACKTRACE_INFORMATION count=1
+
+struct RTL_PROCESS_BACKTRACES
+  CommittedMemory ULONG
+  ReservedMemory ULONG
+  NumberOfBackTraceLookups ULONG
+  NumberOfBackTraces ULONG
+  BackTraces "RTL_PROCESS_BACKTRACE_INFORMATION [1]" count=NumberOfBackTraces
+
+pointer PRTL_PROCESS_BACKTRACES RTL_PROCESS_BACKTRACES
+
+struct RTL_PROCESS_MODULE_INFORMATION
+  Section ULONG
+  MappedBase PVOID
+  ImageBase PVOID
+  ImageSize ULONG
+  Flags ULONG
+  LoadOrderIndex USHORT
+  InitOrderIndex USHORT
+  LoadCount USHORT
+  OffsetToFileName USHORT
+  FullPathName "CHAR [256]"
+
+array "RTL_PROCESS_MODULE_INFORMATION [1]" base=RTL_PROCESS_MODULE_INFORMATION count=1
+
+struct RTL_PROCESS_MODULES
+  NumberOfModules ULONG
+  Modules "RTL_PROCESS_MODULE_INFORMATION [1]" count=NumberOfModules
+
+pointer PRTL_PROCESS_MODULES RTL_PROCESS_MODULES
+
+struct RTL_PROCESS_MODULE_INFORMATION_EX
+  NextOffset ULONG
+  BaseInfo RTL_PROCESS_MODULE_INFORMATION
+  ImageCheckSum ULONG
+  TimeDateStamp ULONG
+  DefaultBase PVOID
+
+pointer PRTL_PROCESS_MODULE_INFORMATION_EX RTL_PROCESS_MODULE_INFORMATION_EX
+
+union [RTL_DEBUG_INFORMATION_u] display=union
+  Modules PRTL_PROCESS_MODULES
+  ModulesEx PRTL_PROCESS_MODULE_INFORMATION_EX
+
+struct RTL_DEBUG_INFORMATION
+  SectionHandleClient HANDLE
+  ViewBaseClient PVOID
+  ViewBaseTarget PVOID
+  ViewBaseDelta ULONG
+  EventPairClient HANDLE
+  EventPairTarget PVOID
+  TargetProcessId HANDLE
+  TargetThreadHandle HANDLE
+  Flags [RTL_DEBUG_QUERY_FLAGS]
+  OffsetFree ULONG_PTR
+  CommitSize ULONG_PTR
+  ViewSize ULONG_PTR
+   [RTL_DEBUG_INFORMATION_u]
+  BackTraces PRTL_PROCESS_BACKTRACES
+  Heaps PRTL_PROCESS_HEAPS
+  Locks PRTL_PROCESS_LOCKS
+  SpecificHeap HANDLE
+  TargetProcessHandle HANDLE
+  VerifierOptions PRTL_PROCESS_VERIFIER_OPTIONS
+  ProcessHeap HANDLE
+  CriticalSectionHandle HANDLE
+  CriticalSectionOwnerThread HANDLE
+  Reserved "PVOID [4]"
+
+pointer PRTL_DEBUG_INFORMATION RTL_DEBUG_INFORMATION
+
+struct RTL_BITMAP
+  SizeOfBitMap ULONG
+  Buffer PULONG
+
+pointer PRTL_BITMAP RTL_BITMAP
+
+struct RTL_RANGE_LIST
+  ListHead LIST_ENTRY
+  Flags ULONG
+  Count ULONG
+  Stamp ULONG
+
+pointer PRTL_RANGE_LIST RTL_RANGE_LIST
+
+alias [LPVOID|PRTL_SPLAY_LINKS] LPVOID display=PRTL_SPLAY_LINKS
+
+struct RTL_SPLAY_LINKS
+  Parent [LPVOID|PRTL_SPLAY_LINKS]
+  LeftChild [LPVOID|PRTL_SPLAY_LINKS]
+  RightChild [LPVOID|PRTL_SPLAY_LINKS]
+
+pointer PRTL_SPLAY_LINKS RTL_SPLAY_LINKS
+
+pointer PRTL_SPLAY_LINKS* PRTL_SPLAY_LINKS
+
+struct RTL_GENERIC_TABLE
+  TableRoot PRTL_SPLAY_LINKS
+  InsertOrderList LIST_ENTRY
+  OrderedPointer PLIST_ENTRY
+  WhichOrderedElement ULONG
+  NumberGenericTableElements ULONG
+  CompareRoutine PRTL_GENERIC_COMPARE_ROUTINE
+  AllocateRoutine PRTL_GENERIC_ALLOCATE_ROUTINE
+  FreeRoutine PRTL_GENERIC_FREE_ROUTINE
+  TableContext PVOID
+
+pointer PRTL_GENERIC_TABLE RTL_GENERIC_TABLE
+
+enum TABLE_SEARCH_RESULT UINT
+  TableEmptyTree     0
+  TableFoundNode     1
+  TableInsertAsLeft  2
+  TableInsertAsRight 3
+
+pointer TABLE_SEARCH_RESULT* TABLE_SEARCH_RESULT
+
+union RTL_HANDLE_TABLE_ENTRY
+  Flags ULONG
+  NextFree LPVOID display=PRTL_HANDLE_TABLE_ENTRY
+
+pointer PRTL_HANDLE_TABLE_ENTRY RTL_HANDLE_TABLE_ENTRY
+
+pointer PRTL_HANDLE_TABLE_ENTRY* PRTL_HANDLE_TABLE_ENTRY
+
+struct RTL_HANDLE_TABLE
+  MaximumNumberOfHandles ULONG
+  SizeOfHandleTableEntry ULONG
+  Reserved "ULONG [2]"
+  FreeHandles PRTL_HANDLE_TABLE_ENTRY
+  CommittedHandles PRTL_HANDLE_TABLE_ENTRY
+  UnCommittedHandles PRTL_HANDLE_TABLE_ENTRY
+  MaxReservedHandles PRTL_HANDLE_TABLE_ENTRY
+
+pointer PRTL_HANDLE_TABLE RTL_HANDLE_TABLE
+
+struct RTL_MESSAGE_RESOURCE_ENTRY
+  Length USHORT
+  Flags USHORT
+  Text "CHAR [1]"
+
+pointer PRTL_MESSAGE_RESOURCE_ENTRY RTL_MESSAGE_RESOURCE_ENTRY
+
+pointer PRTL_MESSAGE_RESOURCE_ENTRY* PRTL_MESSAGE_RESOURCE_ENTRY
+
+flag [RTL_QUERY_REGISTRY_FLAGS] ULONG display=ULONG
+  RTL_QUERY_REGISTRY_SUBKEY   0x00000001
+  RTL_QUERY_REGISTRY_TOPKEY   0x00000002
+  RTL_QUERY_REGISTRY_REQUIRED 0x00000004
+  RTL_QUERY_REGISTRY_NOVALUE  0x00000008
+  RTL_QUERY_REGISTRY_NOEXPAND 0x00000010
+  RTL_QUERY_REGISTRY_DIRECT   0x00000020
+  RTL_QUERY_REGISTRY_DELETE   0x00000040
+
+struct RTL_QUERY_REGISTRY_TABLE
+  QueryRoutine PRTL_QUERY_REGISTRY_ROUTINE
+  Flags [RTL_QUERY_REGISTRY_FLAGS]
+  Name PWSTR
+  EntryContext PVOID
+  DefaultType ULONG
+  DefaultData PVOID
+  DefaultLength ULONG
+
+pointer PRTL_QUERY_REGISTRY_TABLE RTL_QUERY_REGISTRY_TABLE
+
+struct CPTABLEINFO
+  CodePage USHORT
+  MaximumCharacterSize USHORT
+  DefaultChar USHORT
+  UniDefaultChar USHORT
+  TransDefaultChar USHORT
+  TransUniDefaultChar USHORT
+  DBCSCodePage USHORT
+  LeadByte "UCHAR [MAXIMUM_LEADBYTES]"
+  MultiByteTable PUSHORT
+  WideCharTable PVOID
+  DBCSRanges PUSHORT
+  DBCSOffsets PUSHORT
+
+pointer PCPTABLEINFO CPTABLEINFO
+
+struct NLSTABLEINFO
+  OemTableInfo CPTABLEINFO
+  AnsiTableInfo CPTABLEINFO
+  UpperCaseTable PUSHORT
+  LowerCaseTable PUSHORT
+
+pointer PNLSTABLEINFO NLSTABLEINFO
+
+struct RTL_SYSTEM_TIME
+  wYear WORD
+  wMonth WORD
+  wDayOfWeek WORD
+  wDay WORD
+  wHour WORD
+  wMinute WORD
+  wSecond WORD
+  wMilliseconds WORD
+
+struct RTL_TIME_ZONE_INFORMATION
+  Bias LONG
+  StandardName "WCHAR [32]"
+  StandardDate RTL_SYSTEM_TIME
+  StandardBias LONG
+  DaylightName "WCHAR [32]"
+  DaylightDate RTL_SYSTEM_TIME
+  DaylightBias LONG
+
+pointer PRTL_TIME_ZONE_INFORMATION RTL_TIME_ZONE_INFORMATION
+
+struct TIME_FIELDS
+  Year CSHORT
+  Month CSHORT
+  Day CSHORT
+  Hour CSHORT
+  Minute CSHORT
+  Second CSHORT
+  Milliseconds CSHORT
+  Weekday CSHORT
+
+pointer PTIME_FIELDS TIME_FIELDS
+
+enum NT_PRODUCT_TYPE UINT
+  NtProductWinNt    1
+  NtProductLanManNt 2
+  NtProductServer   3
+
+pointer PNT_PRODUCT_TYPE NT_PRODUCT_TYPE
+
+struct RTL_BALANCED_LINKS
+  Parent LPVOID display=PRTL_BALANCED_LINKS
+  LeftChild LPVOID display=PRTL_BALANCED_LINKS
+  RightChild LPVOID display=PRTL_BALANCED_LINKS
+  Balance CHAR
+  Reserved "UCHAR [3]"
+
+pointer PRTL_BALANCED_LINKS RTL_BALANCED_LINKS
+
+struct RTL_AVL_TABLE
+  BalancedRoot RTL_BALANCED_LINKS
+  OrderedPointer PVOID
+  WhichOrderedElement ULONG
+  NumberGenericTableElements ULONG
+  DepthOfTree ULONG
+  RestartKey PRTL_BALANCED_LINKS
+  DeleteCount ULONG
+  CompareRoutine PRTL_AVL_COMPARE_ROUTINE
+  AllocateRoutine PRTL_AVL_ALLOCATE_ROUTINE
+  FreeRoutine PRTL_AVL_FREE_ROUTINE
+  TableContext PVOID
+
+pointer PRTL_AVL_TABLE RTL_AVL_TABLE
+
+struct COMPRESSED_DATA_INFO
+  CompressionFormatAndEngine USHORT
+  CompressionUnitShift UCHAR
+  ChunkShift UCHAR
+  ClusterShift UCHAR
+  Reserved UCHAR
+  NumberOfChunks USHORT
+  CompressedChunkSizes "ULONG [ANYSIZE_ARRAY]" count=NumberOfChunks
+
+pointer PCOMPRESSED_DATA_INFO COMPRESSED_DATA_INFO
+
+struct GENERATE_NAME_CONTEXT
+  Checksum USHORT
+  CheckSumInserted BOOLEAN
+  NameLength UCHAR
+  NameBuffer "WCHAR [8]"
+  ExtensionLength ULONG
+  ExtensionBuffer "WCHAR [4]"
+  LastIndexValue ULONG
+
+pointer PGENERATE_NAME_CONTEXT GENERATE_NAME_CONTEXT
+
+struct RTL_HEAP_PARAMETERS
+  Length ULONG
+  SegmentReserve SIZE_T
+  SegmentCommit SIZE_T
+  DeCommitFreeBlockThreshold SIZE_T
+  DeCommitTotalFreeThreshold SIZE_T
+  MaximumAllocationSize SIZE_T
+  VirtualMemoryThreshold SIZE_T
+  InitialCommit SIZE_T
+  InitialReserve SIZE_T
+  CommitRoutine PRTL_HEAP_COMMIT_ROUTINE
+  Reserved "SIZE_T [2]"
+
+pointer PRTL_HEAP_PARAMETERS RTL_HEAP_PARAMETERS
+
+struct RTL_HEAP_TAG_INFO
+  NumberOfAllocations ULONG
+  NumberOfFrees ULONG
+  BytesAllocated ULONG
+
+pointer PRTL_HEAP_TAG_INFO RTL_HEAP_TAG_INFO
+
+struct RTL_HEAP_USAGE_ENTRY
+  Next LPVOID display=PRTL_HEAP_USAGE_ENTRY
+
+pointer PRTL_HEAP_USAGE_ENTRY RTL_HEAP_USAGE_ENTRY
+
+struct RTL_HEAP_USAGE
+  Length ULONG
+  BytesAllocated ULONG
+  BytesCommitted ULONG
+  BytesReserved ULONG
+  BytesReservedMaximum ULONG
+  Entries PRTL_HEAP_USAGE_ENTRY
+  AddedEntries PRTL_HEAP_USAGE_ENTRY
+  RemovedEntries PRTL_HEAP_USAGE_ENTRY
+  Reserved "UCHAR [32]"
+
+pointer PRTL_HEAP_USAGE RTL_HEAP_USAGE
+
+union [IO_STATUS_BLOCK_u] display=union
+  Status NTSTATUS
+  Pointer PVOID
+
+struct IO_STATUS_BLOCK
+   [IO_STATUS_BLOCK_u]
+  Information ULONG_PTR
+
+pointer PIO_STATUS_BLOCK IO_STATUS_BLOCK
+
+struct KEY_VALUE_ENTRY
+  ValueName PUNICODE_STRING
+  DataLength ULONG
+  DataOffset ULONG
+  Type ULONG
+
+pointer PKEY_VALUE_ENTRY KEY_VALUE_ENTRY
+
+struct EFI_DRIVER_ENTRY
+  Version ULONG
+  Length ULONG
+  Id ULONG
+  Attributes ULONG
+  FriendlyNameOffset ULONG
+  DriverFilePathOffset ULONG
+
+pointer PEFI_DRIVER_ENTRY EFI_DRIVER_ENTRY
+
+alias [FILE_ATTRIBUTES_ULONG] [FileAttributes] display=ULONG
+
+struct FILE_BASIC_INFORMATION
+  CreationTime LARGE_INTEGER
+  LastAccessTime LARGE_INTEGER
+  LastWriteTime LARGE_INTEGER
+  ChangeTime LARGE_INTEGER
+  FileAttributes [FILE_ATTRIBUTES_ULONG]
+
+pointer PFILE_BASIC_INFORMATION FILE_BASIC_INFORMATION
+
+struct FILE_NETWORK_OPEN_INFORMATION
+  CreationTime LARGE_INTEGER
+  LastAccessTime LARGE_INTEGER
+  LastWriteTime LARGE_INTEGER
+  ChangeTime LARGE_INTEGER
+  AllocationSize LARGE_INTEGER
+  EndOfFile LARGE_INTEGER
+  FileAttributes ULONG
+
+pointer PFILE_NETWORK_OPEN_INFORMATION FILE_NETWORK_OPEN_INFORMATION
+
+struct BOOT_ENTRY
+  Version ULONG
+  Length ULONG
+  Id ULONG
+  Attributes ULONG
+  FriendlyNameOffset ULONG
+  BootFilePathOffset ULONG
+  OsOptionsLength ULONG
+  OsOptions "CHAR [1]"
+
+pointer PBOOT_ENTRY BOOT_ENTRY
+
+struct BOOT_OPTIONS
+  Version ULONG
+  Length ULONG
+  Timeout ULONG
+  CurrentBootEntryId ULONG
+  NextBootEntryId ULONG
+  HeadlessRedirection "WCHAR [1]"
+
+pointer PBOOT_OPTIONS BOOT_OPTIONS
+
+struct FILE_PATH
+  Version ULONG
+  Length ULONG
+  Type ULONG
+  FilePath "CHAR [1]"
+
+pointer PFILE_PATH FILE_PATH
+
+struct LDR_RESOURCE_INFO
+  Type ULONG_PTR
+  Name ULONG_PTR
+  Language ULONG
+
+pointer PLDR_RESOURCE_INFO LDR_RESOURCE_INFO
+
+struct PORT_VIEW
+  Length ULONG
+  SectionHandle LPC_HANDLE
+  SectionOffset ULONG
+  ViewSize LPC_SIZE_T
+  ViewBase LPC_PVOID
+  ViewRemoteBase LPC_PVOID
+
+pointer PPORT_VIEW PORT_VIEW
+
+struct REMOTE_PORT_VIEW
+  Length ULONG
+  ViewSize LPC_SIZE_T
+  ViewBase LPC_PVOID
+
+pointer PREMOTE_PORT_VIEW REMOTE_PORT_VIEW
+
+struct JOB_SET_ARRAY
+  JobHandle HANDLE
+  MemberLevel DWORD
+  Flags DWORD
+
+pointer PJOB_SET_ARRAY JOB_SET_ARRAY
+
+struct TOKEN_USER
+  User SID_AND_ATTRIBUTES
+
+pointer PTOKEN_USER TOKEN_USER
+
+struct TOKEN_OWNER
+  Owner PSID
+
+pointer PTOKEN_OWNER TOKEN_OWNER
+
+struct TOKEN_PRIMARY_GROUP
+  PrimaryGroup PSID
+
+pointer PTOKEN_PRIMARY_GROUP TOKEN_PRIMARY_GROUP
+
+struct TOKEN_DEFAULT_DACL
+  DefaultDacl PACL
+
+pointer PTOKEN_DEFAULT_DACL TOKEN_DEFAULT_DACL
+
+struct IMAGE_RESOURCE_DATA_ENTRY
+  OffsetToData DWORD
+  Size DWORD
+  CodePage [CodePageEnum] display=DWORD
+  Reserved DWORD
+
+pointer PIMAGE_RESOURCE_DATA_ENTRY IMAGE_RESOURCE_DATA_ENTRY
+
+pointer PIMAGE_RESOURCE_DATA_ENTRY* PIMAGE_RESOURCE_DATA_ENTRY
+
+struct IMAGE_RESOURCE_DIRECTORY
+  Characteristics DWORD
+  TimeDateStamp DWORD
+  MajorVersion WORD
+  MinorVersion WORD
+  NumberOfNamedEntries WORD
+  NumberOfIdEntries WORD
+
+pointer PIMAGE_RESOURCE_DIRECTORY IMAGE_RESOURCE_DIRECTORY
+
+pointer PIMAGE_RESOURCE_DIRECTORY* PIMAGE_RESOURCE_DIRECTORY
+
+enum KEY_INFORMATION_CLASS UINT
+  KeyBasicInformation          0
+  KeyNodeInformation           1
+  KeyFullInformation           2
+  KeyNameInformation           3
+  KeyCachedInformation         4
+  KeyFlagsInformation          5
+  KeyVirtualizationInformation 6
+  KeyHandleTagsInformation     7
+
+enum KEY_VALUE_INFORMATION_CLASS UINT
+  KeyValueBasicInformation          0
+  KeyValueFullInformation           1
+  KeyValuePartialInformation        2
+  KeyValueFullInformationAlign64    3
+  KeyValuePartialInformationAlign64 4
+
+enum PLUGPLAY_CONTROL_CLASS UINT
+  PlugPlayControlEnumerateDevice         0
+  PlugPlayControlRegisterNewDevice       1
+  PlugPlayControlDeregisterDevice        2
+  PlugPlayControlInitializeDevice        3
+  PlugPlayControlStartDevice             4
+  PlugPlayControlUnlockDevice            5
+  PlugPlayControlQueryAndRemoveDevice    6
+  PlugPlayControlUserResponse            7
+  PlugPlayControlGenerateLegacyDevice    8
+  PlugPlayControlGetInterfaceDeviceList  9
+  PlugPlayControlProperty                10
+  PlugPlayControlDeviceClassAssociation  11
+  PlugPlayControlGetRelatedDevice        12
+  PlugPlayControlGetInterfaceDeviceAlias 13
+  PlugPlayControlDeviceStatus            14
+  PlugPlayControlGetDeviceDepth          15
+  PlugPlayControlQueryDeviceRelations    16
+  PlugPlayControlTargetDeviceRelation    17
+  PlugPlayControlQueryConflictList       18
+  PlugPlayControlRetrieveDock            19
+  PlugPlayControlResetDevice             20
+  PlugPlayControlHaltDevice              21
+  PlugPlayControlGetBlockedDriverList    22
+
+enum KEY_SET_INFORMATION_CLASS UINT
+  KeyWriteTimeInformation         0
+  KeyWow64FlagsInformation        1
+  KeyControlFlagsInformation      2
+  KeySetVirtualizationInformation 3
+  KeySetDebugInformation          4
+  KeySetHandleTagsInformation     5
+
+enum DEBUGOBJECTINFOCLASS UINT
+  DebugObjectUnusedInformation            0
+  DebugObjectKillProcessOnExitInformation 1
+
+enum TIMER_TYPE UINT
+  NotificationTimer    0
+  SynchronizationTimer 1
+
+enum EVENT_INFORMATION_CLASS UINT
+  EventBasicInformation 0
+
+enum ATOM_INFORMATION_CLASS UINT
+  AtomBasicInformation 0
+  AtomTableInformation 1
+
+enum MUTANT_INFORMATION_CLASS UINT
+  MutantBasicInformation 0
+  MutantOwnerInformation 1
+
+enum SEMAPHORE_INFORMATION_CLASS UINT
+  SemaphoreBasicInformation 0
+
+enum TIMER_INFORMATION_CLASS UINT
+  TimerBasicInformation 0
+
+enum SHUTDOWN_ACTION UINT
+  ShutdownNoReboot 0
+  ShutdownReboot   1
+  ShutdownPowerOff 2
+
+enum FILE_INFORMATION_CLASS UINT
+  FileDirectoryInformation                1
+  FileFullDirectoryInformation            2
+  FileBothDirectoryInformation            3
+  FileBasicInformation                    4
+  FileStandardInformation                 5
+  FileInternalInformation                 6
+  FileEaInformation                       7
+  FileAccessInformation                   8
+  FileNameInformation                     9
+  FileRenameInformation                   10
+  FileLinkInformation                     11
+  FileNamesInformation                    12
+  FileDispositionInformation              13
+  FilePositionInformation                 14
+  FileFullEaInformation                   15
+  FileModeInformation                     16
+  FileAlignmentInformation                17
+  FileAllInformation                      18
+  FileAllocationInformation               19
+  FileEndOfFileInformation                20
+  FileAlternateNameInformation            21
+  FileStreamInformation                   22
+  FilePipeInformation                     23
+  FilePipeLocalInformation                24
+  FilePipeRemoteInformation               25
+  FileMailslotQueryInformation            26
+  FileMailslotSetInformation              27
+  FileCompressionInformation              28
+  FileObjectIdInformation                 29
+  FileCompletionInformation               30
+  FileMoveClusterInformation              31
+  FileQuotaInformation                    32
+  FileReparsePointInformation             33
+  FileNetworkOpenInformation              34
+  FileAttributeTagInformation             35
+  FileTrackingInformation                 36
+  FileIdBothDirectoryInformation          37
+  FileIdFullDirectoryInformation          38
+  FileValidDataLengthInformation          39
+  FileShortNameInformation                40
+  FileIoCompletionNotificationInformation 41
+  FileIoStatusBlockRangeInformation       42
+  FileIoPriorityHintInformation           43
+  FileSfioReserveInformation              44
+  FileSfioVolumeInformation               45
+  FileHardLinkInformation                 46
+  FileProcessIdsUsingFileInformation      47
+  FileNormalizedNameInformation           48
+  FileNetworkPhysicalNameInformation      49
+  FileIdGlobalTxDirectoryInformation      50
+  FileIsRemoteDeviceInformation           51
+  FileAttributeCacheInformation           52
+  FileNumaNodeInformation                 53
+  FileStandardLinkInformation             54
+  FileRemoteProtocolInformation           55
+  FileRenameInformationBypassAccessCheck  56
+  FileLinkInformationBypassAccessCheck    57
+  FileIntegrityStreamInformation          58
+  FileVolumeNameInformation               59
+
+enum IO_COMPLETION_INFORMATION_CLASS UINT
+  IoCompletionBasicInformation 0
+
+enum FS_INFORMATION_CLASS UINT
+  FileFsVolumeInformation      1
+  FileFsLabelInformation       2
+  FileFsSizeInformation        3
+  FileFsDeviceInformation      4
+  FileFsAttributeInformation   5
+  FileFsControlInformation     6
+  FileFsFullSizeInformation    7
+  FileFsObjectIdInformation    8
+  FileFsDriverPathInformation  9
+  FileFsVolumeFlagsInformation 10
+  FileFsSectorSizeInformation  11
+
+enum SYSDBG_COMMAND UINT
+  SysDbgQueryModuleInformation 0
+  SysDbgQueryTraceInformation  1
+  SysDbgSetTracepoint          2
+  SysDbgSetSpecialCall         3
+  SysDbgClearSpecialCalls      4
+  SysDbgQuerySpecialCalls      5
+  SysDbgBreakPoint             6
+  SysDbgQueryVersion           7
+  SysDbgReadVirtual            8
+  SysDbgWriteVirtual           9
+  SysDbgReadPhysical           10
+  SysDbgWritePhysical          11
+  SysDbgReadControlSpace       12
+  SysDbgWriteControlSpace      13
+  SysDbgReadIoSpace            14
+  SysDbgWriteIoSpace           15
+  SysDbgReadMsr                16
+  SysDbgWriteMsr               17
+  SysDbgReadBusData            18
+  SysDbgWriteBusData           19
+  SysDbgCheckLowMemory         20
+  SysDbgEnableKernelDebugger   21
+  SysDbgDisableKernelDebugger  22
+  SysDbgGetAutoKdEnable        23
+  SysDbgSetAutoKdEnable        24
+  SysDbgGetPrintBufferSize     25
+  SysDbgSetPrintBufferSize     26
+  SysDbgGetKdUmExceptionEnable 27
+  SysDbgSetKdUmExceptionEnable 28
+  SysDbgGetTriageDump          29
+  SysDbgGetKdBlockEnable       30
+  SysDbgSetKdBlockEnable       31
+  SysDbgRegisterForUmBreakInfo 32
+  SysDbgGetUmBreakPid          33
+  SysDbgClearUmBreakPid        34
+  SysDbgGetUmAttachPid         35
+  SysDbgClearUmAttachPid       36
+
+enum PORT_INFORMATION_CLASS UINT
+  PortBasicInformation 0
+  PortDumpInformation  1
+
+enum SECTION_INHERIT UINT
+  ViewShare 1
+  ViewUnmap 2
+
+enum SECTION_INFORMATION_CLASS UINT
+  SectionBasicInformation      0
+  SectionImageInformation      1
+  SectionRelocationInformation 2
+
+enum MEMORY_INFORMATION_CLASS UINT
+  MemoryBasicInformation          0
+  MemoryWorkingSetInformation     1
+  MemoryMappedFilenameInformation 2
+  MemoryRegionInformation         3
+  MemoryWorkingSetExInformation   4
+
+enum OBJECT_INFORMATION_CLASS UINT
+  ObjectBasicInformation      0
+  ObjectNameInformation       1
+  ObjectTypeInformation       2
+  ObjectAllTypesInformation   3
+  ObjectHandleFlagInformation 4
+  ObjectSessionInformation    5
+
+enum WAIT_TYPE UINT
+  WaitAll 0
+  WaitAny 1
+
+enum APPHELPCACHESERVICECLASS UINT
+  ApphelpCacheServiceLookup 0
+  ApphelpCacheServiceRemove 1
+  ApphelpCacheServiceUpdate 2
+  ApphelpCacheServiceFlush  3
+  ApphelpCacheServiceDump   4
+
+enum SYSTEM_INFORMATION_CLASS UINT
+  SystemBasicInformation                        0
+  SystemProcessorInformation                    1
+  SystemPerformanceInformation                  2
+  SystemTimeOfDayInformation                    3
+  SystemPathInformation                         4
+  SystemProcessInformation                      5
+  SystemCallCountInformation                    6
+  SystemDeviceInformation                       7
+  SystemProcessorPerformanceInformation         8
+  SystemFlagsInformation                        9
+  SystemCallTimeInformation                     10
+  SystemModuleInformation                       11
+  SystemLocksInformation                        12
+  SystemStackTraceInformation                   13
+  SystemPagedPoolInformation                    14
+  SystemNonPagedPoolInformation                 15
+  SystemHandleInformation                       16
+  SystemObjectInformation                       17
+  SystemPageFileInformation                     18
+  SystemVdmInstemulInformation                  19
+  SystemVdmBopInformation                       20
+  SystemFileCacheInformation                    21
+  SystemPoolTagInformation                      22
+  SystemInterruptInformation                    23
+  SystemDpcBehaviorInformation                  24
+  SystemFullMemoryInformation                   25
+  SystemLoadGdiDriverInformation                26
+  SystemUnloadGdiDriverInformation              27
+  SystemTimeAdjustmentInformation               28
+  SystemSummaryMemoryInformation                29
+  SystemMirrorMemoryInformation                 30
+  SystemPerformanceTraceInformation             31
+  SystemObsolete0                               32
+  SystemExceptionInformation                    33
+  SystemCrashDumpStateInformation               34
+  SystemKernelDebuggerInformation               35
+  SystemContextSwitchInformation                36
+  SystemRegistryQuotaInformation                37
+  SystemExtendServiceTableInformation           38
+  SystemPrioritySeperation                      39
+  SystemVerifierAddDriverInformation            40
+  SystemVerifierRemoveDriverInformation         41
+  SystemProcessorIdleInformation                42
+  SystemLegacyDriverInformation                 43
+  SystemCurrentTimeZoneInformation              44
+  SystemLookasideInformation                    45
+  SystemTimeSlipNotification                    46
+  SystemSessionCreate                           47
+  SystemSessionDetach                           48
+  SystemSessionInformation                      49
+  SystemRangeStartInformation                   50
+  SystemVerifierInformation                     51
+  SystemVerifierThunkExtend                     52
+  SystemSessionProcessInformation               53
+  SystemLoadGdiDriverInSystemSpace              54
+  SystemNumaProcessorMap                        55
+  SystemPrefetcherInformation                   56
+  SystemExtendedProcessInformation              57
+  SystemRecommendedSharedDataAlignment          58
+  SystemComPlusPackage                          59
+  SystemNumaAvailableMemory                     60
+  SystemProcessorPowerInformation               61
+  SystemEmulationBasicInformation               62
+  SystemEmulationProcessorInformation           63
+  SystemExtendedHandleInformation               64
+  SystemLostDelayedWriteInformation             65
+  SystemBigPoolInformation                      66
+  SystemSessionPoolTagInformation               67
+  SystemSessionMappedViewInformation            68
+  SystemHotpatchInformation                     69
+  SystemObjectSecurityMode                      70
+  SystemWatchdogTimerHandler                    71
+  SystemWatchdogTimerInformation                72
+  SystemLogicalProcessorInformation             73
+  SystemWow64SharedInformationObsolete          74
+  SystemRegisterFirmwareTableInformationHandler 75
+  SystemFirmwareTableInformation                76
+  SystemModuleInformationEx                     77
+  SystemVerifierTriageInformation               78
+  SystemSuperfetchInformation                   79
+  SystemMemoryListInformation                   80
+  SystemFileCacheInformationEx                  81
+  SystemThreadPriorityClientIdInformation       82
+  SystemProcessorIdleCycleTimeInformation       83
+  SystemVerifierCancellationInformation         84
+  SystemProcessorPowerInformationEx             85
+  SystemRefTraceInformation                     86
+  SystemSpecialPoolInformation                  87
+  SystemProcessIdInformation                    88
+  SystemErrorPortInformation                    89
+  SystemBootEnvironmentInformation              90
+  SystemHypervisorInformation                   91
+  SystemVerifierInformationEx                   92
+  SystemTimeZoneInformation                     93
+  SystemImageFileExecutionOptionsInformation    94
+  SystemCoverageInformation                     95
+  SystemPrefetchPatchInformation                96
+  SystemVerifierFaultsInformation               97
+  SystemSystemPartitionInformation              98
+  SystemSystemDiskInformation                   99
+  SystemProcessorPerformanceDistribution        100
+  SystemNumaProximityNodeInformation            101
+  SystemDynamicTimeZoneInformation              102
+  SystemCodeIntegrityInformation                103
+  SystemProcessorMicrocodeUpdateInformation     104
+  SystemProcessorBrandString                    105
+  SystemVirtualAddressInformation               106
+  SystemLogicalProcessorAndGroupInformation     107
+  SystemProcessorCycleTimeInformation           108
+  SystemStoreInformation                        109
+  SystemRegistryAppendString                    110
+  SystemAitSamplingValue                        111
+  SystemVhdBootInformation                      112
+  SystemCpuQuotaInformation                     113
+  SystemNativeBasicInformation                  114
+  SystemErrorPortTimeouts                       115
+  SystemLowPriorityIoInformation                116
+  SystemBootEntropyInformation                  117
+  SystemVerifierCountersInformation             118
+  SystemPagedPoolInformationEx                  119
+  SystemSystemPtesInformationEx                 120
+  SystemNodeDistanceInformation                 121
+  SystemAcpiAuditInformation                    122
+  SystemBasicPerformanceInformation             123
+  SystemQueryPerformanceCounterInformation      124
+  SystemSessionBigPoolInformation               125
+  SystemBootGraphicsInformation                 126
+  SystemScrubPhysicalMemoryInformation          127
+  SystemBadPageInformation                      128
+  SystemProcessorProfileControlArea             129
+  SystemCombinePhysicalMemoryInformation        130
+  SystemEntropyInterruptTimingCallback          131
+  SystemConsoleInformation                      132
+  SystemPlatformBinaryInformation               133
+  SystemThrottleNotificationInformation         134
+  SystemHypervisorProcessorCountInformation     135
+  SystemDeviceDataInformation                   136
+  SystemDeviceDataEnumerationInformation        137
+  SystemMemoryTopologyInformation               138
+  SystemMemoryChannelInformation                139
+  SystemBootLogoInformation                     140
+
+enum [NtCreateDisposition] ULONG display=ULONG
+  FILE_SUPERSEDE    0x00000000
+  FILE_OPEN         0x00000001
+  FILE_CREATE       0x00000002
+  FILE_OPEN_IF      0x00000003
+  FILE_OVERWRITE    0x00000004
+  FILE_OVERWRITE_IF 0x00000005
+
+flag [NtCreateOptions] ULONG display=ULONG
+  FILE_DIRECTORY_FILE            0x00000001
+  FILE_WRITE_THROUGH             0x00000002
+  FILE_SEQUENTIAL_ONLY           0x00000004
+  FILE_NO_INTERMEDIATE_BUFFERING 0x00000008
+  FILE_SYNCHRONOUS_IO_ALERT      0x00000010
+  FILE_SYNCHRONOUS_IO_NONALERT   0x00000020
+  FILE_NON_DIRECTORY_FILE        0x00000040
+  FILE_CREATE_TREE_CONNECTION    0x00000080
+  FILE_COMPLETE_IF_OPLOCKED      0x00000100
+  FILE_NO_EA_KNOWLEDGE           0x00000200
+  FILE_OPEN_FOR_RECOVERY         0x00000400
+  FILE_RANDOM_ACCESS             0x00000800
+  FILE_DELETE_ON_CLOSE           0x00001000
+  FILE_OPEN_BY_FILE_ID           0x00002000
+  FILE_OPEN_FOR_BACKUP_INTENT    0x00004000
+  FILE_NO_COMPRESSION            0x00008000
+  FILE_RESERVE_OPFILTER          0x00100000
+  FILE_OPEN_REPARSE_POINT        0x00200000
+  FILE_OPEN_NO_RECALL            0x00400000
+  FILE_OPEN_FOR_FREE_SPACE_QUERY 0x00800000
+
+struct PEB_LDR_DATA
+  Length ULONG
+  Initialized BOOLEAN
+  SsHandle HANDLE
+  InLoadOrderModuleList LIST_ENTRY
+  InMemoryOrderModuleList LIST_ENTRY
+  InInitializationOrderModuleList LIST_ENTRY
+  EntryInProgress PVOID
+  ShutdownInProgress BOOLEAN
+  ShutdownThreadId HANDLE
+
+pointer PPEB_LDR_DATA PEB_LDR_DATA
+
+union [PEB_u1] display=union
+  CrossProcessFlags ULONG
+  EnvironmentUpdateCount ULONG
+
+union [PEB_u2] display=union
+  KernelCallbackTable PVOID
+  UserSharedInfoPtr PVOID
+
+struct PEB
+  InheritedAddressSpace BOOLEAN
+  ReadImageFileExecOptions BOOLEAN
+  BeingDebugged BOOLEAN
+  BitField BOOLEAN
+  Mutant HANDLE
+  ImageBaseAddress HMODULE
+  Ldr PPEB_LDR_DATA
+  ProcessParameters RTL_USER_PROCESS_PARAMETERS*
+  SubSystemData PVOID
+  ProcessHeap HANDLE
+  FastPebLock PRTL_CRITICAL_SECTION
+  AtlThunkSListPtr PVOID
+  IFEOKey PVOID
+   [PEB_u1]
+   [PEB_u2]
+  SystemReserved "ULONG [1]"
+  AtlThunkSListPtr32 ULONG
+  ApiSetMap PVOID
+  TlsExpansionCounter ULONG
+  TlsBitmap PRTL_BITMAP
+  TlsBitmapBits "ULONG [2]"
+  ReadOnlySharedMemoryBase PVOID
+  HotpatchInformation PVOID
+  ReadOnlyStaticServerData PVOID*
+  AnsiCodePageData PVOID
+  OemCodePageData PVOID
+  UnicodeCaseTableData PVOID
+  NumberOfProcessors ULONG
+  NtGlobalFlag ULONG
+  CriticalSectionTimeout LARGE_INTEGER
+  HeapSegmentReserve SIZE_T
+  HeapSegmentCommit SIZE_T
+  HeapDeCommitTotalFreeThreshold SIZE_T
+  HeapDeCommitFreeBlockThreshold SIZE_T
+  NumberOfHeaps ULONG
+  MaximumNumberOfHeaps ULONG
+  ProcessHeaps PVOID*
+  GdiSharedHandleTable PVOID
+  ProcessStarterHelper PVOID
+  GdiDCAttributeList ULONG
+  LoaderLock PRTL_CRITICAL_SECTION
+  OSMajorVersion ULONG
+  OSMinorVersion ULONG
+  OSBuildNumber USHORT
+  OSCSDVersion USHORT
+  OSPlatformId ULONG
+  ImageSubsystem [IMAGE_SUBSYSTEM_ULONG]
+  ImageSubsystemMajorVersion ULONG
+  ImageSubsystemMinorVersion ULONG
+  ImageProcessAffinityMask ULONG_PTR
+  GdiHandleBuffer GDI_HANDLE_BUFFER
+  PostProcessInitRoutine PVOID
+  TlsExpansionBitmap PRTL_BITMAP
+  TlsExpansionBitmapBits "ULONG [32]"
+  SessionId ULONG
+  AppCompatFlags ULARGE_INTEGER
+  AppCompatFlagsUser ULARGE_INTEGER
+  pShimData PVOID
+  AppCompatInfo PVOID
+  CSDVersion UNICODE_STRING
+  ActivationContextData PVOID
+  ProcessAssemblyStorageMap PVOID
+  SystemDefaultActivationContextData PVOID
+  SystemAssemblyStorageMap PVOID
+  MinimumStackCommit SIZE_T
+  FlsCallback PVOID*
+  FlsListHead LIST_ENTRY
+  FlsBitmap PVOID
+  FlsBitmapBits "ULONG [4]"
+  FlsHighIndex ULONG
+  WerRegistrationData PVOID
+  WerShipAssertPtr PVOID
+  pContextData PVOID
+  pImageHeaderHash PVOID
+  TracingFlags ULONG
+
+pointer PPEB PEB
+
+struct EXCEPTION_REGISTRATION_RECORD
+  Next LPVOID display=EXCEPTION_REGISTRATION_RECORD*
+  Handler PEXCEPTION_ROUTINE
+
+pointer EXCEPTION_REGISTRATION_RECORD* EXCEPTION_REGISTRATION_RECORD
+
+union [NT_TIB_u] display=union
+  FiberData PVOID
+  Version DWORD
+
+struct NT_TIB
+  ExceptionList EXCEPTION_REGISTRATION_RECORD*
+  StackBase PVOID
+  StackLimit PVOID
+  SubSystemTib PVOID
+   [NT_TIB_u]
+  ArbitraryUserPointer PVOID
+  Self LPVOID display=NT_TIB*
+
+struct GDI_TEB_BATCH
+  Offset ULONG
+  HDC HANDLE
+  Buffer "ULONG [GDI_BATCH_BUFFER_SIZE]"
+
+struct TEB_ACTIVE_FRAME_CONTEXT
+  Flags ULONG
+  FrameName PSTR
+
+pointer PTEB_ACTIVE_FRAME_CONTEXT TEB_ACTIVE_FRAME_CONTEXT
+
+struct TEB_ACTIVE_FRAME
+  Flags ULONG
+  Previous LPVOID display=PTEB_ACTIVE_FRAME
+  Context PTEB_ACTIVE_FRAME_CONTEXT
+
+pointer PTEB_ACTIVE_FRAME TEB_ACTIVE_FRAME
+
+struct [TEB_u1_s] display=struct
+  ReservedPad0 UCHAR
+  ReservedPad2 UCHAR
+  ReservedPad2 UCHAR
+  IdealProcessor UCHAR
+
+union [TEB_u1] display=union
+  CurrentIdealProcessor PROCESSOR_NUMBER
+  IdealProcessorValue ULONG
+   [TEB_u1_s]
+
+pointer PTEB TEB
+
+pointer PTEB* PTEB
+
+struct RTL_ATOM_TABLE_ENTRY
+  HashLink LPVOID display=RTL_ATOM_TABLE_ENTRY*
+  HandleIndex USHORT
+  Atom USHORT
+  ReferenceCount USHORT
+  Flags UCHAR
+  NameLength UCHAR
+  Name "WCHAR [1]" count=NameLength
+
+pointer PRTL_ATOM_TABLE_ENTRY RTL_ATOM_TABLE_ENTRY
+
+array "PRTL_ATOM_TABLE_ENTRY [1]" base=PRTL_ATOM_TABLE_ENTRY count=1
+
+struct RTL_ATOM_TABLE
+  Signature ULONG
+  CriticalSection RTL_CRITICAL_SECTION
+  RtlHandleTable RTL_HANDLE_TABLE
+  NumberOfBuckets ULONG
+  Buckets "PRTL_ATOM_TABLE_ENTRY [1]" count=NumberOfBuckets
+
+pointer PRTL_ATOM_TABLE RTL_ATOM_TABLE
+
+pointer PRTL_ATOM_TABLE* PRTL_ATOM_TABLE
+
+enum LPC_TYPE USHORT display=USHORT
+  LPC_NEW_MESSAGE        0
+  LPC_REQUEST            1
+  LPC_REPLY              2
+  LPC_DATAGRAM           3
+  LPC_LOST_REPLY         4
+  LPC_PORT_CLOSED        5
+  LPC_CLIENT_DIED        6
+  LPC_EXCEPTION          7
+  LPC_DEBUG_EVENT        8
+  LPC_ERROR_EVENT        9
+  LPC_CONNECTION_REQUEST 10
+  LPC_CONNECTION_REFUSED 11
+
+struct PORT_MESSAGE
+  DataSize USHORT
+  MessageSize USHORT
+  MessageType LPC_TYPE
+  VirtualRangesOffset USHORT
+  ClientId CLIENT_ID
+  MessageId ULONG
+  SectionSize ULONG
+
+pointer PPORT_MESSAGE PORT_MESSAGE
+
+flag [ElevationFlags] DWORD display=DWORD
+  ELEVATION_UAC_ENABLED                 0x1
+  ELEVATION_VIRTUALIZATION_ENABLED      0x2
+  ELEVATION_INSTALLER_DETECTION_ENABLED 0x4
+
+pointer [ElevationFlags*] [ElevationFlags] display=DWORD*
+
+struct THREADEX_DATA
+  cbSize SIZE_T
+  Unknown1 UINT_PTR
+  cbClientId SIZE_T
+  ClientId PCLIENT_ID
+  Unknown2 UINT_PTR
+  Unknown3 UINT_PTR
+  cbppTEB SIZE_T
+  ppTeb PTEB* outputOnly
+  Unknown4 UINT_PTR
+
+pointer PTHREADEX_DATA THREADEX_DATA
+
+flag [REG_NOTIFY_CHANGE_FLAGS] ULONG display=ULONG
+  REG_NOTIFY_CHANGE_NAME       0x00000001
+  REG_NOTIFY_CHANGE_ATTRIBUTES 0x00000002
+  REG_NOTIFY_CHANGE_LAST_SET   0x00000004
+  REG_NOTIFY_CHANGE_SECURITY   0x00000008
+
+struct RTL_UNLOAD_EVENT_TRACE
+  BaseAddress PVOID
+  SizeOfImage SIZE_T
+  Sequence ULONG
+  TimeDateStamp ULONG
+  CheckSum ULONG
+  ImageName "WCHAR [32]"
+
+array "RTL_UNLOAD_EVENT_TRACE [RTL_UNLOAD_EVENT_TRACE_NUMBER]" base=RTL_UNLOAD_EVENT_TRACE count=64 display=PRTL_UNLOAD_EVENT_TRACE
+
+flag [LDR_LOCK_LOADER_LOCK_FLAG] ULONG display=ULONG
+  LDR_LOCK_LOADER_LOCK_FLAG_RAISE_ON_ERRORS 0x00000001
+  LDR_LOCK_LOADER_LOCK_FLAG_TRY_ONLY        0x00000002
+
+flag [LDR_UNLOCK_LOADER_LOCK_FLAG] ULONG display=ULONG
+  LDR_UNLOCK_LOADER_LOCK_FLAG_RAISE_ON_ERRORS 0x00000001
+
+enum [LDR_LOCK_LOADER_LOCK_DISPOSITION] ULONG display=ULONG
+  LDR_LOCK_LOADER_LOCK_DISPOSITION_INVALID           0
+  LDR_LOCK_LOADER_LOCK_DISPOSITION_LOCK_ACQUIRED     1
+  LDR_LOCK_LOADER_LOCK_DISPOSITION_LOCK_NOT_ACQUIRED 2
+
+pointer [LDR_LOCK_LOADER_LOCK_DISPOSITION*] [LDR_LOCK_LOADER_LOCK_DISPOSITION] display=PULONG
+
+flag [LDR_ADDREF_DLL_FLAGS] ULONG display=ULONG
+  LDR_ADDREF_DLL_PIN 0x00000001
+
+flag [LDR_GET_DLL_HANDLE_EX_FLAGS] ULONG display=ULONG
+  LDR_GET_DLL_HANDLE_EX_UNCHANGED_REFCOUNT 0x00000001
+  LDR_GET_DLL_HANDLE_EX_PIN                0x00000002
+
+alias [NT_WAIT_RESULT] NTSTATUS display=NTSTATUS
+  success NotEqual=0xFFFFFFFF
+
+alias [REGISTRY_ACCESS_MASK] REGSAM display=ACCESS_MASK
+
+flag [EVENT_ACCESS_MASK] ACCESS_MASK display=DWORD
+  EVENT_QUERY_STATE  0x0001
+  EVENT_MODIFY_STATE 0x0002
+  EVENT_ALL_ACCESS   0x001F0003
+
+flag [SEMAPHORE_ACCESS_MASK] ACCESS_MASK display=DWORD
+  SEMAPHORE_QUERY_STATE  0x0001
+  SEMAPHORE_MODIFY_STATE 0x0002
+  SEMAPHORE_ALL_ACCESS   0x001F0003
+
+flag [MUTANT_ACCESS_MASK] ACCESS_MASK display=DWORD
+  MUTANT_QUERY_STATE 0x0001
+  MUTANT_ALL_ACCESS  0x001F0001
+
+flag [IO_COMPLETION_ACCESS_MASK] ACCESS_MASK display=DWORD
+  IO_COMPLETION_QUERY_STATE  0x0001
+  IO_COMPLETION_MODIFY_STATE 0x0002
+  IO_COMPLETION_ALL_ACCESS   0x001F0003
+
+flag [SECTION_ACCESS_MASK] ACCESS_MASK display=DWORD
+  SECTION_QUERY                0x0001
+  SECTION_MAP_WRITE            0x0002
+  SECTION_MAP_READ             0x0004
+  SECTION_MAP_EXECUTE          0x0008
+  SECTION_EXTEND_SIZE          0x0010
+  SECTION_MAP_EXECUTE_EXPLICIT 0x0020
+  SECTION_ALL_ACCESS           0xF001F
+
+flag [DIRECTORY_ACCESS_MASK] ACCESS_MASK display=DWORD
+  DIRECTORY_QUERY               0x0001
+  DIRECTORY_TRAVERSE            0x0002
+  DIRECTORY_CREATE_OBJECT       0x0004
+  DIRECTORY_CREATE_SUBDIRECTORY 0x0008
+  DIRECTORY_ALL_ACCESS          0x000F000F
+
+flag [DEBUG_OBJECT_ACCESS_MASK] ACCESS_MASK display=DWORD
+  DEBUG_OBJECT_WAIT_STATE_CHANGE  0x0001
+  DEBUG_OBJECT_ADD_REMOVE_PROCESS 0x0002
+  DEBUG_OBJECT_SET_INFORMATION    0x0004
+  DEBUG_OBJECT_ALL_ACCESS         0x1F000F
+
+flag [PIPE_ACCESS_MASK] ACCESS_MASK display=DWORD
+  FILE_READ_DATA            0x0001
+  FILE_WRITE_DATA           0x0002
+  FILE_CREATE_PIPE_INSTANCE 0x0004
+  FILE_READ_EA              0x0008
+  FILE_WRITE_EA             0x0010
+  FILE_EXECUTE              0x0020
+  FILE_DELETE_CHILD         0x0040
+  FILE_READ_ATTRIBUTES      0x0080
+  FILE_WRITE_ATTRIBUTES     0x0100
+  FILE_GENERIC_READ         0x00120089
+  FILE_GENERIC_EXECUTE      0x001200A0
+  FILE_GENERIC_WRITE        0x00120116
+  FILE_ALL_ACCESS           0x001f01ff
+
+flag [SECTION_ALLOCATION] ULONG display=ULONG
+  SEC_IMAGE        0x01000000
+  SEC_RESERVE      0x04000000
+  SEC_COMMIT       0x08000000
+  SEC_NOCACHE      0x10000000
+  SEC_WRITECOMBINE 0x40000000
+  SEC_LARGE_PAGES  0x80000000
+
+flag [RTL_APE_FLAGS] ULONG display=ULONG
+  RTL_APE_IGNORE_FORWARD_SLASHES 0x1
+  RTL_APE_USE_FIRST_SLASH        0x2
+
+struct RTL_BUFFER
+  Buffer PUCHAR
+  StaticBuffer PUCHAR
+  Size SIZE_T
+  StaticSize SIZE_T
+  ReservedForAllocatedSize SIZE_T
+  ReservedForIMalloc PVOID
+
+pointer PRTL_BUFFER RTL_BUFFER
+
+struct RTL_UNICODE_STRING_BUFFER
+  String UNICODE_STRING
+  ByteBuffer RTL_BUFFER
+  MinimumStaticBufferForTerminalNul "UCHAR [2]"
+
+pointer PRTL_UNICODE_STRING_BUFFER RTL_UNICODE_STRING_BUFFER
+
+flag [FLUSH_FLAGS] ULONG display=ULONG
+  FLUSH_FLAGS_FILE_DATA_ONLY 0x00000001
+  FLUSH_FLAGS_NO_SYNC        0x00000002
+
+enum TRANSACTIONMANAGER_INFORMATION_CLASS UINT
+  TransactionManagerBasicInformation    0
+  TransactionManagerLogInformation      1
+  TransactionManagerLogPathInformation  2
+  TransactionManagerRecoveryInformation 4
+
+enum TRANSACTION_INFORMATION_CLASS UINT
+  TransactionBasicInformation              0
+  TransactionPropertiesInformation         1
+  TransactionEnlistmentInformation         2
+  TransactionSuperiorEnlistmentInformation 3
+
+enum ENLISTMENT_INFORMATION_CLASS UINT
+  EnlistmentBasicInformation    0
+  EnlistmentRecoveryInformation 1
+  EnlistmentCrmInformation      2
+
+enum RESOURCEMANAGER_INFORMATION_CLASS UINT
+  ResourceManagerBasicInformation      0
+  ResourceManagerCompletionInformation 1
+
+enum KTMOBJECT_TYPE UINT
+  KTMOBJECT_TRANSACTION         0
+  KTMOBJECT_TRANSACTION_MANAGER 1
+  KTMOBJECT_RESOURCE_MANAGER    2
+  KTMOBJECT_ENLISTMENT          3
+  KTMOBJECT_INVALID             4
+
+struct KTMOBJECT_CURSOR
+  LastQuery GUID
+  ObjectIdCount ULONG
+  ObjectIds "GUID [1]" count=ObjectIdCount
+
+pointer PKTMOBJECT_CURSOR KTMOBJECT_CURSOR
+
+struct RTL_RUN_ONCE
+  Ptr PVOID
+
+pointer PRTL_RUN_ONCE RTL_RUN_ONCE
+
+struct RTL_BITMAP_RUN
+  StartingIndex ULONG
+  NumberOfBits ULONG
+
+pointer PRTL_BITMAP_RUN RTL_BITMAP_RUN
+
+alias [XSTATE_MASK_ULONG64] [XSTATE_MASK] display=ULONG64
+
+flag [RTL_RESOURCE_FLAG] ULONG display=ULONG
+  RTL_RESOURCE_FLAG_LONG_TERM 0x00000001
+
+struct RTL_RESOURCE
+  CriticalSection RTL_CRITICAL_SECTION
+  SharedSemaphore HANDLE
+  NumberOfWaitingShared ULONG
+  ExclusiveSemaphore HANDLE
+  NumberOfWaitingExclusive ULONG
+  NumberOfActive LONG
+  ExclusiveOwnerThread HANDLE
+  Flags [RTL_RESOURCE_FLAG]
+  DebugInfo PRTL_RESOURCE_DEBUG
+
+pointer PRTL_RESOURCE RTL_RESOURCE
+
+struct RTL_RB_TREE
+  Root PRTL_BALANCED_NODE
+  Min PRTL_BALANCED_NODE
+
+pointer PRTL_RB_TREE RTL_RB_TREE
+
+struct RTL_DYNAMIC_HASH_TABLE
+  Flags ULONG
+  Shift ULONG
+  TableSize ULONG
+  Pivot ULONG
+  DivisorMask ULONG
+  NumEntries ULONG
+  NonEmptyBuckets ULONG
+  NumEnumerators ULONG
+  Directory PVOID
+
+pointer PRTL_DYNAMIC_HASH_TABLE RTL_DYNAMIC_HASH_TABLE
+
+pointer PRTL_DYNAMIC_HASH_TABLE* PRTL_DYNAMIC_HASH_TABLE
+
+struct RTL_DYNAMIC_HASH_TABLE_ENTRY
+  Linkage LIST_ENTRY
+  Signature ULONG_PTR
+
+pointer PRTL_DYNAMIC_HASH_TABLE_ENTRY RTL_DYNAMIC_HASH_TABLE_ENTRY
+
+struct RTL_DYNAMIC_HASH_TABLE_CONTEXT
+  ChainHead PLIST_ENTRY
+  PrevLinkage PLIST_ENTRY
+  Signature ULONG_PTR
+
+pointer PRTL_DYNAMIC_HASH_TABLE_CONTEXT RTL_DYNAMIC_HASH_TABLE_CONTEXT
+
+struct RTL_DYNAMIC_HASH_TABLE_ENUMERATOR
+  HashEntry RTL_DYNAMIC_HASH_TABLE_ENTRY
+  ChainHead PLIST_ENTRY
+  BucketIndex ULONG
+
+pointer PRTL_DYNAMIC_HASH_TABLE_ENUMERATOR RTL_DYNAMIC_HASH_TABLE_ENUMERATOR
+
+struct RTL_SRWLOCK
+  Ptr PVOID
+
+pointer PRTL_SRWLOCK RTL_SRWLOCK
+
+struct RTL_CONDITION_VARIABLE
+  Ptr PVOID
+
+pointer PRTL_CONDITION_VARIABLE RTL_CONDITION_VARIABLE
+
+struct PREFIX_TABLE_ENTRY
+  NodeTypeCode CSHORT
+  NameLength CSHORT
+  NextPrefixTree LPVOID display=PREFIX_TABLE_ENTRY*
+  Links RTL_SPLAY_LINKS
+  Prefix PSTRING
+
+pointer PPREFIX_TABLE_ENTRY PREFIX_TABLE_ENTRY
+
+struct PREFIX_TABLE
+  NodeTypeCode CSHORT
+  NameLength CSHORT
+  NextPrefixTree PPREFIX_TABLE_ENTRY
+
+pointer PPREFIX_TABLE PREFIX_TABLE
+
+struct RTLP_PROCESS_REFLECTION_REFLECTION_INFORMATION
+  ReflectionProcessHandle HANDLE
+  ReflectionThreadHandle HANDLE
+  ReflectionClientId CLIENT_ID
+
+pointer PRTLP_PROCESS_REFLECTION_REFLECTION_INFORMATION RTLP_PROCESS_REFLECTION_REFLECTION_INFORMATION
+
+struct RTL_RELATIVE_NAME_U
+  RelativeName UNICODE_STRING
+  ContainingDirectory HANDLE
+  CurDirRef PRTLP_CURDIR_REF
+
+pointer PRTL_RELATIVE_NAME_U RTL_RELATIVE_NAME_U
+
+struct PARSE_MESSAGE_CONTEXT
+  fFlags ULONG
+  cwSavColumn ULONG
+  iwSrc SIZE_T
+  iwDst SIZE_T
+  iwDstSpace SIZE_T
+  lpvArgStart va_list
+
+pointer PPARSE_MESSAGE_CONTEXT PARSE_MESSAGE_CONTEXT
+
+struct UNICODE_PREFIX_TABLE_ENTRY
+  NodeTypeCode CSHORT
+  NameLength CSHORT
+  NextPrefixTree LPVOID display=UNICODE_PREFIX_TABLE_ENTRY*
+  CaseMatch LPVOID display=UNICODE_PREFIX_TABLE_ENTRY*
+  Links RTL_SPLAY_LINKS
+  Prefix PUNICODE_STRING
+
+pointer PUNICODE_PREFIX_TABLE_ENTRY UNICODE_PREFIX_TABLE_ENTRY
+
+struct UNICODE_PREFIX_TABLE
+  NodeTypeCode CSHORT
+  NameLength CSHORT
+  NextPrefixTree PUNICODE_PREFIX_TABLE_ENTRY
+  LastNextEntry PUNICODE_PREFIX_TABLE_ENTRY
+
+pointer PUNICODE_PREFIX_TABLE UNICODE_PREFIX_TABLE
+
+struct SID_AND_ATTRIBUTES_HASH
+  SidCount DWORD
+  SidAttr PSID_AND_ATTRIBUTES
+  Hash "SID_HASH_ENTRY [SID_HASH_SIZE]"
+
+pointer PSID_AND_ATTRIBUTES_HASH SID_AND_ATTRIBUTES_HASH
+
+flag [RTL_DUPLICATE_UNICODE_STRING_FLAGS] ULONG display=ULONG
+  RTL_DUPLICATE_UNICODE_STRING_NULL_TERMINATE       0x00000001
+  RTL_DUPLICATE_UNICODE_STRING_ALLOCATE_NULL_STRING 0x00000002
+
+enum [HASH_STRING_ALGORITHM] ULONG display=ULONG
+  HASH_STRING_ALGORITHM_DEFAULT 0
+  HASH_STRING_ALGORITHM_X65599  1
+  HASH_STRING_ALGORITHM_INVALID 0xffffffff
+
+flag [RTL_FIND_CHAR_IN_UNICODE_STRING_FLAGS] ULONG display=ULONG
+  RTL_FIND_CHAR_IN_UNICODE_STRING_START_AT_END        0x00000001
+  RTL_FIND_CHAR_IN_UNICODE_STRING_COMPLEMENT_CHAR_SET 0x00000002
+  RTL_FIND_CHAR_IN_UNICODE_STRING_CASE_INSENSITIVE    0x00000004
+
+flag [RTL_CLONE_PROCESS_FLAGS] ULONG display=ULONG
+  RTL_CLONE_PROCESS_FLAGS_CREATE_SUSPENDED 0x00000001
+  RTL_CLONE_PROCESS_FLAGS_INHERIT_HANDLES  0x00000002
+  RTL_CLONE_PROCESS_FLAGS_NO_SYNCHRONIZE   0x00000004
+
+flag [RTL_IMAGE_NT_HEADER_EX_FLAGS] ULONG display=ULONG
+  RTL_IMAGE_NT_HEADER_EX_FLAG_NO_RANGE_CHECK 0x00000001
+
+flag [RTL_CREATE_ENVIRONMENT_EX_FLAGS] ULONG display=ULONG
+  RTL_CREATE_ENVIRONMENT_TRANSLATE          0x1
+  RTL_CREATE_ENVIRONMENT_TRANSLATE_FROM_OEM 0x2
+  RTL_CREATE_ENVIRONMENT_EMPTY              0x4
+
+flag [RTL_DOS_SEARCH_PATH_FLAG] ULONG display=ULONG
+  RTL_DOS_SEARCH_PATH_FLAG_APPLY_ISOLATION_REDIRECTION                                               0x00000001
+  RTL_DOS_SEARCH_PATH_FLAG_DISALLOW_DOT_RELATIVE_PATH_SEARCH                                         0x00000002
+  RTL_DOS_SEARCH_PATH_FLAG_APPLY_DEFAULT_EXTENSION_WHEN_NOT_RELATIVE_PATH_EVEN_IF_FILE_HAS_EXTENSION 0x00000004
+
+flag [RTL_ERRORMODE_FLAGS] ULONG display=ULONG
+  RTL_ERRORMODE_NOGPFAULTERRORBOX  0x0020
+  RTL_ERRORMODE_NOOPENFILEERRORBOX 0x0040
+
+pointer [RTL_ERRORMODE_FLAGS*] [RTL_ERRORMODE_FLAGS] display=PULONG
+
+flag [RTL_ACQUIRE_PRIVILEGE_FLAGS] ULONG display=ULONG
+  RTL_ACQUIRE_PRIVILEGE_REVERT  0x00000001
+  RTL_ACQUIRE_PRIVILEGE_PROCESS 0x00000002
+
+flag [RTL_REGISTRY_RELATIVE_TO] ULONG display=ULONG
+  RTL_REGISTRY_ABSOLUTE   0
+  RTL_REGISTRY_SERVICES   1
+  RTL_REGISTRY_CONTROL    2
+  RTL_REGISTRY_WINDOWS_NT 3
+  RTL_REGISTRY_DEVICEMAP  4
+  RTL_REGISTRY_USER       5
+  RTL_REGISTRY_HANDLE     0x40000000
+  RTL_REGISTRY_OPTIONAL   0x80000000
+
+flag [RTL_RUN_ONCE_FLAGS] ULONG display=ULONG
+  RTL_RUN_ONCE_CHECK_ONLY  0x00000001
+  RTL_RUN_ONCE_ASYNC       0x00000002
+  RTL_RUN_ONCE_INIT_FAILED 0x00000004
+
+alias [ACE_FLAGS_ULONG] [AceFlags] display=ULONG
+
+alias [IMAGE_FILE_CHARACTERISTICS_SHORT] [IMAGE_FILE_CHARACTERISTICS] display=SHORT
+
+pointer [IMAGE_FILE_CHARACTERISTICS_SHORT*] [IMAGE_FILE_CHARACTERISTICS_SHORT] display=PUSHORT
+
+func NtClearEvent
+  NTSTATUS
+  EventHandle HANDLE
+
+func NtCreateEvent
+  NTSTATUS
+  EventHandle PHANDLE
+  DesiredAccess [EVENT_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  EventType EVENT_TYPE
+  InitialState BOOLEAN
+
+func NtCreateEventPair
+  NTSTATUS
+  EventPairHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtCreateKeyedEvent
+  NTSTATUS
+  KeyedEventHandle PHANDLE
+  DesiredAccess [EVENT_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  Flags ULONG
+
+func NtCreateMutant
+  NTSTATUS
+  MutantHandle PHANDLE
+  DesiredAccess [MUTANT_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  InitialOwner BOOLEAN
+
+func NtCreateSemaphore
+  NTSTATUS
+  SemaphoreHandle PHANDLE
+  DesiredAccess [SEMAPHORE_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  InitialCount LONG
+  MaximumCount LONG
+
+func NtCreateTimer
+  NTSTATUS
+  TimerHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+  TimerType TIMER_TYPE
+
+func NtOpenEvent
+  NTSTATUS
+  EventHandle PHANDLE
+  DesiredAccess [EVENT_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtOpenKeyedEvent
+  NTSTATUS
+  EventHandle PHANDLE
+  DesiredAccess [EVENT_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtOpenEventPair
+  NTSTATUS
+  EventPairHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtOpenMutant
+  NTSTATUS
+  MutantHandle PHANDLE
+  DesiredAccess [MUTANT_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtOpenSemaphore
+  NTSTATUS
+  SemaphoreHandle PHANDLE
+  DesiredAcces [SEMAPHORE_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtOpenTimer
+  NTSTATUS
+  TimerHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtPulseEvent
+  NTSTATUS
+  EventHandle HANDLE
+  PulseCount PLONG
+
+func NtQueryEvent
+  NTSTATUS
+  EventHandle HANDLE
+  EventInformationClass EVENT_INFORMATION_CLASS
+  EventInformation PVOID postLength=EventInformationLength
+  EventInformationLength ULONG
+  ReturnLength PULONG
+
+func NtQueryMutant
+  NTSTATUS
+  MutantHandle HANDLE
+  MutantInformationClass MUTANT_INFORMATION_CLASS
+  MutantInformation PVOID postLength=Length
+  Length ULONG
+  ResultLength PULONG
+
+func NtQuerySemaphore
+  NTSTATUS
+  SemaphoreHandle HANDLE
+  SemaphoreInformationClass SEMAPHORE_INFORMATION_CLASS
+  SemaphoreInformation PVOID postLength=Length
+  Length ULONG
+  ReturnLength PULONG
+
+func NtQueryTimer
+  NTSTATUS
+  TimerHandle HANDLE
+  TimerInformationClass TIMER_INFORMATION_CLASS
+  TimerInformation PVOID postLength=Length
+  Length ULONG
+  ResultLength PULONG
+
+func NtReleaseMutant
+  NTSTATUS
+  MutantHandle HANDLE
+  ReleaseCount PLONG
+
+func NtReleaseKeyedEvent
+  NTSTATUS
+  EventHandle HANDLE
+  Key PVOID
+  Alertable BOOLEAN
+  Timeout PLARGE_INTEGER
+
+func NtReleaseSemaphore
+  NTSTATUS
+  SemaphoreHandle HANDLE
+  ReleaseCount LONG
+  PreviousCount PLONG
+
+func NtResetEvent
+  NTSTATUS
+  EventHandle HANDLE
+  NumberOfWaitingThreads PLONG
+
+func NtSetEvent
+  NTSTATUS
+  EventHandle HANDLE
+  PreviousState PLONG
+
+func NtSetEventBoostPriority
+  NTSTATUS
+  EventHandle HANDLE
+
+func NtSetHighEventPair
+  NTSTATUS
+  EventPairHandle HANDLE
+
+func NtSetHighWaitLowEventPair
+  NTSTATUS
+  EventPairHandle HANDLE
+
+func NtSetLowEventPair
+  NTSTATUS
+  EventPair HANDLE
+
+func NtSetLowWaitHighEventPair
+  NTSTATUS
+  EventPair HANDLE
+
+func NtSetTimer
+  NTSTATUS
+  TimerHandle HANDLE
+  DueTime PLARGE_INTEGER
+  TimerApcRoutine PTIMER_APC_ROUTINE
+  TimerContext PVOID
+  WakeTimer BOOLEAN
+  Period LONG
+  PreviousState PBOOLEAN
+
+func NtCancelTimer
+  NTSTATUS
+  TimerHandle HANDLE
+  CurrentState PBOOLEAN
+
+func NtWaitForKeyedEvent
+  NTSTATUS
+  EventHandle HANDLE
+  Key PVOID
+  Alertable BOOLEAN
+  Timeout PLARGE_INTEGER
+
+func NtWaitHighEventPair
+  NTSTATUS
+  EventPairHandle HANDLE
+
+func NtWaitLowEventPair
+  NTSTATUS
+  EventPairHandle HANDLE
+
+func NtTraceEvent
+  NTSTATUS
+  TraceHandle ULONG
+  Flags ULONG
+  TraceHeaderLength ULONG
+  TraceHeader PEVENT_TRACE_HEADER
+
+func NtSignalAndWaitForSingleObject
+  [NT_WAIT_RESULT]
+  SignalObject HANDLE
+  WaitObject HANDLE
+  Alertable BOOLEAN
+  Time PLARGE_INTEGER
+
+func NtWaitForMultipleObjects
+  [NT_WAIT_RESULT]
+  Count ULONG
+  Object "HANDLE []" count=Count
+  WaitType WAIT_TYPE
+  Alertable BOOLEAN
+  Time PLARGE_INTEGER
+
+func NtWaitForMultipleObjects32
+  [NT_WAIT_RESULT]
+  ObjectCount ULONG
+  Handles PLONG count=ObjectCount
+  WaitType WAIT_TYPE
+  Alertable BOOLEAN
+  TimeOut PLARGE_INTEGER
+
+func NtWaitForSingleObject
+  [NT_WAIT_RESULT]
+  Object HANDLE
+  Alertable BOOLEAN
+  Time PLARGE_INTEGER
+
+func NtCompressKey
+  NTSTATUS
+  Key HANDLE
+
+func NtCreateKey
+  NTSTATUS
+  KeyHandle PHANDLE
+  DesiredAccess [REGISTRY_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  TitleIndex ULONG
+  Class PUNICODE_STRING
+  CreateOptions ULONG
+  Disposition [RegDisposition-PULONG]
+
+func NtCreateKeyTransacted
+  NTSTATUS
+  KeyHandle PHANDLE
+  DesiredAccess [REGISTRY_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  TitleIndex ULONG
+  Class PUNICODE_STRING
+  CreateOptions ULONG
+  TransactionHandle HANDLE
+  Disposition [RegDisposition-PULONG]
+
+func NtDeleteKey
+  NTSTATUS
+  KeyHandle HANDLE
+
+func NtDeleteValueKey
+  NTSTATUS
+  KeyHandle HANDLE
+  ValueName PUNICODE_STRING
+
+func NtEnumerateKey
+  NTSTATUS
+  KeyHandle HANDLE
+  Index ULONG
+  KeyInformationClass KEY_INFORMATION_CLASS
+  KeyInformation PVOID postLength=ResultLength
+  Length ULONG
+  ResultLength PULONG
+
+func NtEnumerateValueKey
+  NTSTATUS
+  KeyHandle HANDLE
+  Index ULONG
+  KeyValueInformationClass KEY_VALUE_INFORMATION_CLASS
+  KeyValueInformation PVOID
+  Length ULONG
+  ResultLength PULONG
+
+func NtFlushKey
+  NTSTATUS
+  KeyHandle HANDLE
+
+func NtInitializeRegistry
+  NTSTATUS
+  Flag USHORT
+
+func NtLoadKey
+  NTSTATUS
+  KeyObjectAttributes POBJECT_ATTRIBUTES
+  FileObjectAttributes POBJECT_ATTRIBUTES
+
+func NtLoadKey2
+  NTSTATUS
+  KeyObjectAttributes POBJECT_ATTRIBUTES
+  FileObjectAttributes POBJECT_ATTRIBUTES
+  Flags ULONG
+
+func NtLockRegistryKey
+  NTSTATUS
+  KeyHandle HANDLE
+
+func NtNotifyChangeKey
+  NTSTATUS
+  KeyHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  IoStatusBlock PIO_STATUS_BLOCK
+  CompletionFilter [REG_NOTIFY_CHANGE_FLAGS]
+  Asynchroneous BOOLEAN
+  ChangeBuffer PVOID
+  Length ULONG
+  WatchSubtree BOOLEAN
+
+func NtNotifyChangeMultipleKeys
+  NTSTATUS
+  MasterKeyHandle HANDLE
+  Count ULONG
+  SubordinateObjects "OBJECT_ATTRIBUTES []" count=Count
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  IoStatusBlock PIO_STATUS_BLOCK
+  CompletionFilter [REG_NOTIFY_CHANGE_FLAGS]
+  WatchTree BOOLEAN
+  Buffer PVOID
+  Length ULONG
+  Asynchronous BOOLEAN
+
+func NtOpenKey
+  NTSTATUS
+  KeyHandle PHANDLE
+  DesiredAccess [REGISTRY_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtOpenKeyEx
+  NTSTATUS
+  KeyHandle PHANDLE
+  DesiredAccess [REGISTRY_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  OpenOptions ULONG
+
+func NtOpenKeyTransacted
+  NTSTATUS
+  KeyHandle PHANDLE
+  DesiredAccess [REGISTRY_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  TransactionHandle HANDLE
+
+func NtOpenKeyTransactedEx
+  NTSTATUS
+  KeyHandle PHANDLE
+  DesiredAccess [REGISTRY_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  OpenOptions ULONG
+  TransactionHandle HANDLE
+
+func NtQueryKey
+  NTSTATUS
+  KeyHandle HANDLE
+  KeyInformationClass KEY_INFORMATION_CLASS
+  KeyInformation PVOID postLength=Length
+  Length ULONG
+  ResultLength PULONG
+
+func NtQueryMultipleValueKey
+  NTSTATUS
+  KeyHandle HANDLE
+  ValueList PKEY_VALUE_ENTRY
+  NumberOfValues ULONG
+  Buffer PVOID postLength=Length
+  Length PULONG
+  ReturnLength PULONG
+
+func NtQueryOpenSubKeys
+  NTSTATUS
+  TargetKey POBJECT_ATTRIBUTES
+  HandleCount PULONG
+
+func NtQueryOpenSubKeysEx
+  NTSTATUS
+  TargetKey POBJECT_ATTRIBUTES
+  BufferLength ULONG
+  Buffer PVOID postLength=BufferLength
+  RequiredSize PULONG
+
+func NtQueryValueKey
+  NTSTATUS
+  KeyHandle HANDLE
+  ValueName PUNICODE_STRING
+  KeyValueInformationClass KEY_VALUE_INFORMATION_CLASS
+  KeyValueInformation PVOID postLength=ResultLength
+  Length ULONG
+  ResultLength PULONG
+
+func NtRenameKey
+  NTSTATUS
+  KeyHandle HANDLE
+  ReplacementName PUNICODE_STRING
+
+func NtReplaceKey
+  NTSTATUS
+  ObjectAttributes POBJECT_ATTRIBUTES
+  Key HANDLE
+  ReplacedObjectAttributes POBJECT_ATTRIBUTES
+
+func NtRestoreKey
+  NTSTATUS
+  KeyHandle HANDLE
+  FileHandle HANDLE
+  RestoreFlags ULONG
+
+func NtSaveKey
+  NTSTATUS
+  KeyHandle HANDLE
+  FileHandle HANDLE
+
+func NtSaveKeyEx
+  NTSTATUS
+  KeyHandle HANDLE
+  FileHandle HANDLE
+  Flags ULONG
+
+func NtSaveMergedKeys
+  NTSTATUS
+  HighPrecedenceKeyHandle HANDLE
+  LowPrecedenceKeyHandle HANDLE
+  FileHandle HANDLE
+
+func NtSetInformationKey
+  NTSTATUS
+  KeyHandle HANDLE
+  KeyInformationClass KEY_SET_INFORMATION_CLASS
+  KeyInformation PVOID length=KeyInformationLength
+  KeyInformationLength ULONG
+
+func NtSetValueKey
+  NTSTATUS
+  KeyHandle HANDLE
+  ValueName PUNICODE_STRING
+  TitleIndex ULONG
+  Type ULONG
+  Data PVOID length=DataSize
+  DataSize ULONG
+
+func NtUnloadKey
+  NTSTATUS
+  KeyObjectAttributes POBJECT_ATTRIBUTES
+
+func NtUnloadKey2
+  NTSTATUS
+  TargetKey POBJECT_ATTRIBUTES
+  Flags ULONG
+
+func NtUnloadKeyEx
+  NTSTATUS
+  TargetKey POBJECT_ATTRIBUTES
+  Event HANDLE
+
+func NtCompactKeys
+  NTSTATUS
+  NrOfKeys ULONG
+  KeysArray HANDLE
+
+func NtFreezeRegistry
+  NTSTATUS
+  TimeOutInSeconds USHORT
+
+func NtThawRegistry
+  NTSTATUS
+
+func NtAddAtom
+  NTSTATUS
+  AtomName PWSTR
+  AtomNameLength ULONG
+  Atom PRTL_ATOM
+
+func NtDeleteAtom
+  NTSTATUS
+  Atom RTL_ATOM
+
+func NtFindAtom
+  NTSTATUS
+  AtomName PWSTR
+  AtomNameLength ULONG
+  Atom PRTL_ATOM
+
+func NtQueryInformationAtom
+  NTSTATUS
+  Atom RTL_ATOM
+  AtomInformationClass ATOM_INFORMATION_CLASS
+  AtomInformation PVOID postLength=AtomInformationLength
+  AtomInformationLength ULONG
+  ReturnLength PULONG
+
+func NtQueryDefaultLocale
+  NTSTATUS
+  UserProfile BOOLEAN
+  DefaultLocaleId PLCID
+
+func NtQueryDefaultUILanguage
+  NTSTATUS
+  LanguageId LANGID*
+
+func NtQueryInstallUILanguage
+  NTSTATUS
+  LanguageId LANGID*
+
+func NtSetDefaultLocale
+  NTSTATUS
+  UserProfile BOOLEAN
+  DefaultLocaleId LCID
+
+func NtSetDefaultUILanguage
+  NTSTATUS
+  LanguageId LANGID
+
+func CsrAllocateCaptureBuffer
+  success NotEqual=0
+  PVOID
+  ArgumentCount ULONG
+  BufferSize ULONG
+
+func CsrAllocateMessagePointer
+  success NotEqual=0
+  ULONG
+  CaptureBuffer CSR_CAPTURE_BUFFER*
+  MessageLength ULONG
+  CaptureData PVOID*
+
+func CsrCaptureMessageBuffer
+  VOID
+  CaptureBuffer CSR_CAPTURE_BUFFER*
+  MessageString PVOID
+  StringLength ULONG
+  CapturedData PVOID*
+
+func CsrClientConnectToServer
+  NTSTATUS
+  ObjectDirectory PWSTR
+  ServerId ULONG
+  ConnectionInfo PVOID
+  ConnectionInfoSize PULONG
+  ServerToServerCall PBOOLEAN
+
+func CsrClientCallServer
+  NTSTATUS
+  Request CSR_API_MESSAGE*
+  CaptureBuffer CSR_CAPTURE_BUFFER*
+  ApiNumber ULONG
+  RequestLength ULONG
+
+func CsrIdentifyAlertableThread
+  NTSTATUS
+
+func CsrFreeCaptureBuffer
+  VOID
+  CaptureBuffer CSR_CAPTURE_BUFFER*
+
+func CsrGetProcessId
+  success NotEqual=0
+  HANDLE
+
+func CsrNewThread
+  NTSTATUS
+
+func CsrSetPriorityClass
+  NTSTATUS
+  Process HANDLE
+  PriorityClass PULONG
+
+func CsrProbeForRead
+  VOID
+  Address PVOID
+  Length ULONG
+  Alignment ULONG
+
+func CsrProbeForWrite
+  VOID
+  Address PVOID
+  Length ULONG
+  Alignment ULONG
+
+func DbgUserBreakPoint
+  VOID
+
+func DbgPrint varArgs
+  [NTSTATUS_ULONG]
+  Format PCCH
+
+func DbgPrintEx varArgs
+  [NTSTATUS_ULONG]
+  ComponentId ULONG
+  Level ULONG
+  Format PCCH
+
+func DbgPrompt
+  [NTSTATUS_ULONG]
+  Prompt PCCH
+  Response PCH
+  MaximumResponseLength ULONG
+
+func DbgBreakPoint
+  VOID
+
+func DbgLoadImageSymbols
+  NTSTATUS
+  Name PANSI_STRING
+  Base PVOID
+  ProcessId ULONG_PTR
+
+func DbgUnLoadImageSymbols
+  VOID
+  Name PANSI_STRING
+  Base PVOID
+  ProcessId ULONG_PTR
+
+func DbgBreakPointWithStatus
+  VOID
+  Status ULONG
+
+func DbgUiConnectToDbg
+  NTSTATUS
+
+func DbgUiContinue
+  NTSTATUS
+  ClientId PCLIENT_ID
+  ContinueStatus NTSTATUS
+
+func DbgUiDebugActiveProcess
+  NTSTATUS
+  Process HANDLE
+
+func DbgUiStopDebugging
+  NTSTATUS
+  Process HANDLE
+
+func DbgUiWaitStateChange
+  NTSTATUS
+  DbgUiWaitStateCange PDBGUI_WAIT_STATE_CHANGE
+  TimeOut PLARGE_INTEGER
+
+func DbgUiConvertStateChangeStructure
+  NTSTATUS
+  WaitStateChange PDBGUI_WAIT_STATE_CHANGE
+  DebugEvent PVOID
+
+func DbgUiRemoteBreakin
+  VOID
+
+func DbgUiIssueRemoteBreakin
+  NTSTATUS
+  Process HANDLE
+
+func DbgUiGetThreadDebugObject
+  success NotEqual=0
+  HANDLE
+
+func vDbgPrintEx
+  [NTSTATUS_ULONG]
+  ComponentId ULONG
+  Level ULONG
+  Format PCH
+  arglist va_list
+
+func vDbgPrintExWithPrefix
+  [NTSTATUS_ULONG]
+  Prefix PCH
+  ComponentId ULONG
+  Level ULONG
+  Format PCH
+  arglist va_list
+
+func DbgQueryDebugFilterState
+  NTSTATUS
+  ComponentId ULONG
+  Level ULONG
+
+func DbgSetDebugFilterState
+  NTSTATUS
+  ComponentId ULONG
+  Level ULONG
+  State BOOLEAN
+
+func LdrAccessResource
+  NTSTATUS
+  BaseAddress [HMODULE-PVOID]
+  ResourceDataEntry PIMAGE_RESOURCE_DATA_ENTRY
+  Resource PVOID*
+  Size PULONG
+
+func LdrFindResource_U
+  NTSTATUS
+  BaseAddress [HMODULE-PVOID]
+  ResourceInfo PLDR_RESOURCE_INFO
+  Level ULONG
+  ResourceDataEntry PIMAGE_RESOURCE_DATA_ENTRY*
+
+func LdrFindResourceDirectory_U
+  NTSTATUS
+  BaseAddress [HMODULE-PVOID]
+  ResourceInfo PLDR_RESOURCE_INFO
+  Level ULONG
+  ResourceDirectory PIMAGE_RESOURCE_DIRECTORY*
+
+func LdrUnloadAlternateResourceModule
+  BOOLEAN
+  BaseAddress [HMODULE-PVOID]
+
+func LdrRelocateImage
+  [NTSTATUS_ULONG]
+  NewBase PVOID
+  LoaderName PUCHAR
+  Success ULONG
+  Conflict ULONG
+  Invalid ULONG
+
+func LdrLockLoaderLock
+  NTSTATUS
+  Flags [LDR_LOCK_LOADER_LOCK_FLAG]
+  Disposition [LDR_LOCK_LOADER_LOCK_DISPOSITION*]
+  Cookie PULONG
+
+func LdrUnlockLoaderLock
+  NTSTATUS
+  Flags [LDR_UNLOCK_LOADER_LOCK_FLAG]
+  Cookie ULONG
+
+func LdrVerifyMappedImageMatchesChecksum
+  BOOLEAN
+  BaseAddress [HMODULE-PVOID]
+  NumberOfBytes ULONG
+  FileLength ULONG
+
+func LdrAddRefDll
+  NTSTATUS
+  Flags [LDR_ADDREF_DLL_FLAGS]
+  BaseAddress [HMODULE-PVOID]
+
+func LdrDisableThreadCalloutsForDll
+  NTSTATUS
+  BaseAddress [HMODULE-PVOID]
+
+func LdrGetDllHandle
+  NTSTATUS
+  DllPath PWSTR
+  DllCharacteristics PULONG
+  DllName PUNICODE_STRING
+  DllHandle HMODULE* outputOnly
+
+func LdrGetDllHandleEx
+  NTSTATUS
+  Flags [LDR_GET_DLL_HANDLE_EX_FLAGS]
+  DllPath PWSTR
+  DllCharacteristics PULONG
+  DllName PUNICODE_STRING
+  DllHandle HMODULE* outputOnly
+
+func LdrFindEntryForAddress
+  NTSTATUS
+  Address PVOID
+  Module PLDR_DATA_TABLE_ENTRY*
+
+func LdrGetProcedureAddress
+  NTSTATUS
+  BaseAddress HMODULE
+  Name PANSI_STRING
+  Ordinal ULONG
+  ProcedureAddress PVOID*
+
+func LdrInitializeThunk
+  VOID
+  Unknown1 ULONG
+  Unknown2 ULONG
+  Unknown3 ULONG
+  Unknown4 ULONG
+
+func LdrLoadDll
+  NTSTATUS
+  SearchPath PWSTR
+  DllCharacteristics [IMAGE_FILE_CHARACTERISTICS_ULONG*]
+  Name PUNICODE_STRING
+  BaseAddress [HMODULE-PVOID*]
+
+func LdrProcessRelocationBlock
+  success NotEqual=0
+  PIMAGE_BASE_RELOCATION
+  Address ULONG_PTR
+  Count ULONG
+  TypeOffset PUSHORT
+  Delta LONG_PTR
+
+func LdrQueryImageFileExecutionOptions
+  NTSTATUS
+  SubKey PUNICODE_STRING
+  ValueName PCWSTR
+  ValueSize ULONG
+  Buffer PVOID postLength=BufferSize
+  BufferSize ULONG
+  RetunedLength PULONG
+
+func LdrQueryProcessModuleInformation
+  NTSTATUS
+  ModuleInformation PRTL_PROCESS_MODULES
+  Size ULONG
+  ReturnedSize PULONG
+
+func LdrShutdownThread
+  NTSTATUS
+
+func LdrUnloadDll
+  NTSTATUS
+  BaseAddress [HMODULE-PVOID]
+
+func LdrVerifyImageMatchesChecksum
+  NTSTATUS
+  FileHandle HANDLE
+  Callback PLDR_CALLBACK
+  CallbackContext PVOID
+  ImageCharacteristics [IMAGE_FILE_CHARACTERISTICS_SHORT]
+
+func LdrRelocateImageWithBias
+  [NTSTATUS_ULONG]
+  NewAddress PVOID
+  AdditionalBias LONGLONG
+  LoaderName PCCH
+  Success ULONG
+  Conflict ULONG
+  Invalid ULONG
+
+func LdrResFindResourceDirectory
+  NTSTATUS
+  BaseAddress [HMODULE-PVOID]
+  Unknown1 PVOID
+  Unknown2 PVOID
+  ResourceDirectory PVOID*
+  Unknown3 PVOID
+  Unknown4 PVOID
+  Unknown5 PVOID
+
+func NtAccessCheck
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  ClientToken HANDLE
+  DesiredAccess ACCESS_MASK
+  GenericMapping PGENERIC_MAPPING
+  PrivilegeSet PPRIVILEGE_SET
+  ReturnLength PULONG
+  GrantedAccess PACCESS_MASK
+  AccessStatus PNTSTATUS
+
+func NtAccessCheckByType
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  PrincipalSelfSid PSID
+  ClientToken HANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeLength ULONG
+  GenericMapping PGENERIC_MAPPING
+  PrivilegeSet PPRIVILEGE_SET
+  PrivilegeSetLength ULONG
+  GrantedAccess PACCESS_MASK
+  AccessStatus PNTSTATUS
+
+func NtAccessCheckByTypeResultList
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  PrincipalSelfSid PSID
+  ClientToken HANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeLength ULONG
+  GenericMapping PGENERIC_MAPPING
+  PrivilegeSet PPRIVILEGE_SET
+  PrivilegeSetLength ULONG
+  GrantedAccess PACCESS_MASK
+  AccessStatus PNTSTATUS
+
+func NtAccessCheckAndAuditAlarm
+  NTSTATUS
+  SubsystemName PUNICODE_STRING
+  HandleId PVOID
+  ObjectTypeName PUNICODE_STRING
+  ObjectName PUNICODE_STRING
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  DesiredAccess ACCESS_MASK
+  GenericMapping PGENERIC_MAPPING
+  ObjectCreation BOOLEAN
+  GrantedAccess PACCESS_MASK
+  AccessStatus PNTSTATUS
+  GenerateOnClose PBOOLEAN
+
+func NtOpenThreadToken
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  DesiredAccess [TOKEN_ACCESS_MASK]
+  OpenAsSelf BOOLEAN
+  TokenHandle PHANDLE
+
+func NtOpenThreadTokenEx
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  DesiredAccess [TOKEN_ACCESS_MASK]
+  OpenAsSelf BOOLEAN
+  HandleAttributes ULONG
+  TokenHandle PHANDLE
+
+func NtAdjustGroupsToken
+  NTSTATUS
+  TokenHandle HANDLE
+  ResetToDefault BOOLEAN
+  NewState PTOKEN_GROUPS
+  BufferLength ULONG
+  PreviousState PTOKEN_GROUPS
+  ReturnLength PULONG
+
+func NtAdjustPrivilegesToken
+  NTSTATUS
+  TokenHandle HANDLE
+  DisableAllPrivileges BOOLEAN
+  NewState PTOKEN_PRIVILEGES
+  BufferLength ULONG
+  PreviousState PTOKEN_PRIVILEGES
+  ReturnLength PULONG
+
+func NtCompareTokens
+  NTSTATUS
+  FirstTokenHandle HANDLE
+  SecondTokenHandle HANDLE
+  Equal PBOOLEAN
+
+func NtCreateToken
+  NTSTATUS
+  TokenHandle PHANDLE
+  DesiredAccess [TOKEN_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  TokenType TOKEN_TYPE
+  AuthenticationId PLUID
+  ExpirationTime PLARGE_INTEGER
+  TokenUser PTOKEN_USER
+  TokenGroups PTOKEN_GROUPS
+  TokenPrivileges PTOKEN_PRIVILEGES
+  TokenOwner PTOKEN_OWNER
+  TokenPrimaryGroup PTOKEN_PRIMARY_GROUP
+  TokenDefaultDacl PTOKEN_DEFAULT_DACL
+  TokenSource PTOKEN_SOURCE
+
+func NtDuplicateToken
+  NTSTATUS
+  ExistingTokenHandle HANDLE
+  DesiredAccess [TOKEN_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  EffectiveOnly BOOLEAN
+  TokenType TOKEN_TYPE
+  NewTokenHandle PHANDLE
+
+func NtImpersonateAnonymousToken
+  NTSTATUS
+  Thread HANDLE
+
+func NtOpenObjectAuditAlarm
+  NTSTATUS
+  SubsystemName PUNICODE_STRING
+  HandleId PVOID
+  ObjectTypeName PUNICODE_STRING
+  ObjectName PUNICODE_STRING
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  ClientToken HANDLE
+  DesiredAccess ULONG
+  GrantedAccess ULONG
+  Privileges PPRIVILEGE_SET
+  ObjectCreation BOOLEAN
+  AccessGranted BOOLEAN
+  GenerateOnClose PBOOLEAN
+
+func NtCloseObjectAuditAlarm
+  NTSTATUS
+  SubsystemName PUNICODE_STRING
+  HandleId PVOID
+  GenerateOnClose BOOLEAN
+
+func NtDeleteObjectAuditAlarm
+  NTSTATUS
+  SubsystemName PUNICODE_STRING
+  HandleId PVOID
+  GenerateOnClose BOOLEAN
+
+func NtOpenProcessToken
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  DesiredAccess [TOKEN_ACCESS_MASK]
+  TokenHandle PHANDLE
+
+func NtOpenProcessTokenEx
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  DesiredAccess [TOKEN_ACCESS_MASK]
+  HandleAttributes ULONG
+  TokenHandle PHANDLE
+
+func NtPrivilegeCheck
+  NTSTATUS
+  ClientToken HANDLE
+  RequiredPrivileges PPRIVILEGE_SET
+  Result PBOOLEAN
+
+func NtPrivilegedServiceAuditAlarm
+  NTSTATUS
+  SubsystemName PUNICODE_STRING
+  ServiceName PUNICODE_STRING
+  ClientToken HANDLE
+  Privileges PPRIVILEGE_SET
+  AccessGranted BOOLEAN
+
+func NtPrivilegeObjectAuditAlarm
+  NTSTATUS
+  SubsystemName PUNICODE_STRING
+  HandleId PVOID
+  ClientToken HANDLE
+  DesiredAccess ULONG
+  Privileges PPRIVILEGE_SET
+  AccessGranted BOOLEAN
+
+func NtQueryInformationToken
+  NTSTATUS
+  TokenHandle HANDLE
+  TokenInformationClass TOKEN_INFORMATION_CLASS
+  TokenInformation PVOID postLength=TokenInformationLength
+  TokenInformationLength ULONG
+  ReturnLength PULONG
+
+func NtAccessCheckByTypeAndAuditAlarm
+  NTSTATUS
+  SubsystemName PUNICODE_STRING
+  HandleId HANDLE
+  ObjectTypeName PUNICODE_STRING
+  ObjectName PUNICODE_STRING
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  PrincipalSelfSid PSID
+  DesiredAccess ACCESS_MASK
+  AuditType AUDIT_EVENT_TYPE
+  Flags ULONG
+  ObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeLength ULONG
+  GenericMapping PGENERIC_MAPPING
+  ObjectCreation BOOLEAN
+  GrantedAccess PACCESS_MASK
+  AccessStatus PNTSTATUS
+  GenerateOnClose PBOOLEAN
+
+func NtAccessCheckByTypeResultListAndAuditAlarm
+  NTSTATUS
+  SubsystemName PUNICODE_STRING
+  HandleId HANDLE
+  ObjectTypeName PUNICODE_STRING
+  ObjectName PUNICODE_STRING
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  PrincipalSelfSid PSID
+  DesiredAccess ACCESS_MASK
+  AuditType AUDIT_EVENT_TYPE
+  Flags ULONG
+  ObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeLength ULONG
+  GenericMapping PGENERIC_MAPPING
+  ObjectCreation BOOLEAN
+  GrantedAccess PACCESS_MASK
+  AccessStatus PNTSTATUS
+  GenerateOnClose PBOOLEAN
+
+func NtAccessCheckByTypeResultListAndAuditAlarmByHandle
+  NTSTATUS
+  SubsystemName PUNICODE_STRING
+  HandleId HANDLE
+  ClientToken HANDLE
+  ObjectTypeName PUNICODE_STRING
+  ObjectName PUNICODE_STRING
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  PrincipalSelfSid PSID
+  DesiredAccess ACCESS_MASK
+  AuditType AUDIT_EVENT_TYPE
+  Flags ULONG
+  ObjectTypeList POBJECT_TYPE_LIST
+  ObjectTypeLength ULONG
+  GenericMapping PGENERIC_MAPPING
+  ObjectCreation BOOLEAN
+  GrantedAccess PACCESS_MASK
+  AccessStatus PNTSTATUS
+  GenerateOnClose PBOOLEAN
+
+func NtSetInformationToken
+  NTSTATUS
+  TokenHandle HANDLE
+  TokenInformationClass TOKEN_INFORMATION_CLASS
+  TokenInformation PVOID length=TokenInformationLength
+  TokenInformationLength ULONG
+
+func NtImpersonateThread
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  ThreadToImpersonate HANDLE
+  SecurityQualityOfService PSECURITY_QUALITY_OF_SERVICE
+
+func NtCreateProcess
+  NTSTATUS
+  ProcessHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+  ParentProcess HANDLE
+  InheritObjectTable BOOLEAN
+  SectionHandle HANDLE
+  DebugPort HANDLE
+  ExceptionPort HANDLE
+
+func NtCreateProcessEx
+  NTSTATUS
+  ProcessHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+  ParentProcess HANDLE
+  Flags ULONG
+  SectionHandle HANDLE
+  DebugPort HANDLE
+  ExceptionPort HANDLE
+  InJob BOOLEAN
+
+func NtCreateThread
+  NTSTATUS
+  ThreadHandle PHANDLE
+  DesiredAccess [THREAD_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  ProcessHandle [ProcessHandle]
+  ClientId PCLIENT_ID
+  ThreadContext PCONTEXT
+  UserStack PINITIAL_TEB
+  CreateSuspended BOOLEAN
+
+func NtCreateThreadEx
+  NTSTATUS
+  ThreadHandle PHANDLE
+  DesiredAccess [THREAD_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  ProcessHandle [ProcessHandle]
+  StartAddress PTHREAD_START_ROUTINE
+  Parameter PVOID
+  CreateSuspended BOOLEAN
+  StackZeroBits ULONG
+  StackCommit SIZE_T
+  StackReserve SIZE_T
+  pThreadExData PTHREADEX_DATA
+
+func NtOpenJobObject
+  NTSTATUS
+  JobHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtAssignProcessToJobObject
+  NTSTATUS
+  JobHandle HANDLE
+  ProcessHandle [ProcessHandle]
+
+func NtCreateJobObject
+  NTSTATUS
+  JobHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtCreateJobSet
+  NTSTATUS
+  NumJob ULONG
+  UserJobSet PJOB_SET_ARRAY
+  Flags ULONG
+
+func NtQueryInformationJobObject
+  NTSTATUS
+  JobHandle HANDLE
+  JobInformationClass JOBOBJECTINFOCLASS
+  JobInformation PVOID postLength=JobInformationLength
+  JobInformationLength ULONG
+  ReturnLength PULONG
+
+func NtQueryInformationProcess
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  ProcessInformationClass PROCESSINFOCLASS
+  ProcessInformation PVOID postLength=ProcessInformationLength
+  ProcessInformationLength ULONG
+  ReturnLength PULONG
+
+func NtQueryInformationThread
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  ThreadInformationClass THREADINFOCLASS
+  ThreadInformation PVOID postLength=ThreadInformationLength
+  ThreadInformationLength ULONG
+  ReturnLength PULONG
+
+func NtSetInformationJobObject
+  NTSTATUS
+  JobHandle HANDLE
+  JobInformationClass JOBOBJECTINFOCLASS
+  JobInformation PVOID length=JobInformationLength
+  JobInformationLength ULONG
+
+func NtSetInformationProcess
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  ProcessInformationClass PROCESSINFOCLASS
+  ProcessInformation PVOID length=ProcessInformationLength
+  ProcessInformationLength ULONG
+
+func NtSetInformationThread
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  ThreadInformationClass THREADINFOCLASS
+  ThreadInformation PVOID length=ThreadInformationLength
+  ThreadInformationLength ULONG
+
+func NtSuspendProcess
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+
+func NtSuspendThread
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  PreviousSuspendCount PULONG
+
+func NtTerminateThread
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  ExitStatus NTSTATUS
+
+func NtTerminateJobObject
+  NTSTATUS
+  JobHandle HANDLE
+  ExitStatus NTSTATUS
+
+func NtIsProcessInJob
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  JobHandle HANDLE
+
+func NtOpenProcess
+  NTSTATUS
+  ProcessHandle PHANDLE
+  DesiredAccess [PROCESS_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  ClientId PCLIENT_ID
+
+func NtOpenThread
+  NTSTATUS
+  ThreadHandle PHANDLE
+  DesiredAccess [THREAD_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  ClientId PCLIENT_ID
+
+func NtResumeThread
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  SuspendCount PULONG
+
+func NtResumeProcess
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+
+func NtDelayExecution
+  NTSTATUS
+  Alertable BOOLEAN
+  DelayInterval PLARGE_INTEGER
+
+func NtYieldExecution
+  NTSTATUS
+
+func NtAlertResumeThread
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  SuspendCount PULONG
+
+func NtAlertThread
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+
+func NtQueueApcThread
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  ApcRoutine PIO_APC_ROUTINE
+  ApcRoutineContext PVOID
+  ApcStatusBlock PIO_STATUS_BLOCK
+  ApcReserved ULONG
+
+func NtCurrentTeb
+  success NotEqual=0
+  PTEB
+
+func NtSetHighWaitLowThread
+  NTSTATUS
+
+func NtSetLowWaitHighThread
+  NTSTATUS
+
+func NtGetCurrentProcessorNumber
+  ULONG
+
+func NtTestAlert
+  NTSTATUS
+
+func NtCreateUserProcess
+  NTSTATUS
+  ProcessHandle PHANDLE
+  ThreadHandle PHANDLE
+  ProcessDesiredAccess [PROCESS_ACCESS_MASK]
+  ThreadDesiredAccess [THREAD_ACCESS_MASK]
+  ProcessObjectAttributes POBJECT_ATTRIBUTES
+  ThreadObjectAttributes POBJECT_ATTRIBUTES
+  CreateProcessFlags ULONG
+  CreateThreadFlags ULONG
+  ProcessParameters PRTL_USER_PROCESS_PARAMETERS
+  Unknown PVOID
+  AttributeList PVOID
+
+func NtEnumerateSystemEnvironmentValuesEx
+  NTSTATUS
+  InformationClass ULONG
+  Buffer PVOID
+  BufferLength ULONG
+
+func NtQuerySystemEnvironmentValue
+  NTSTATUS
+  Name PUNICODE_STRING
+  Value PWSTR
+  Length ULONG
+  ReturnLength PULONG
+
+func NtQuerySystemEnvironmentValueEx
+  NTSTATUS
+  VariableName PUNICODE_STRING
+  VendorGuid LPGUID
+  Value PVOID
+  ReturnLength PULONG
+  Attributes PULONG
+
+func NtSetSystemEnvironmentValue
+  NTSTATUS
+  VariableName PUNICODE_STRING
+  Value PUNICODE_STRING
+
+func NtSetSystemEnvironmentValueEx
+  NTSTATUS
+  VariableName PUNICODE_STRING
+  VendorGuid LPGUID
+
+func NtAllocateVirtualMemory
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID*
+  ZeroBits ULONG_PTR
+  RegionSize PSIZE_T
+  AllocationType [MemoryAllocationFlags] display=ULONG
+  Protect [NtProtectionFlags]
+
+func NtFlushVirtualMemory
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID*
+  RegionSize PSIZE_T
+  IoStatus PIO_STATUS_BLOCK
+
+func NtFreeVirtualMemory
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID*
+  RegionSize PSIZE_T
+  FreeType [MemoryAllocationFlags] display=ULONG
+
+func NtLockVirtualMemory
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID
+  NumberOfBytesToLock SIZE_T
+  NumberOfBytesLocked PSIZE_T
+
+func NtProtectVirtualMemory
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID*
+  NumberOfBytesToProtect SIZE_T*
+  NewAccessProtection [NtProtectionFlags]
+  OldAccessProtection [NtProtectionFlags*]
+
+func NtQueryVirtualMemory
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  Address PVOID
+  VirtualMemoryInformationClass MEMORY_INFORMATION_CLASS
+  VirtualMemoryInformation PVOID postLength=Length
+  Length SIZE_T
+  ResultLength PSIZE_T
+
+func NtReadVirtualMemory
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID
+  Buffer PVOID postLength=NumberOfBytesRead
+  NumberOfBytesToRead SIZE_T
+  NumberOfBytesRead PSIZE_T
+
+func NtUnlockVirtualMemory
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID
+  NumberOfBytesToUnlock SIZE_T
+  NumberOfBytesUnlocked PSIZE_T
+
+func NtWriteVirtualMemory
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID
+  Buffer PVOID length=NumberOfBytesToWrite
+  NumberOfBytesToWrite SIZE_T
+  NumberOfBytesWritten PSIZE_T
+
+func NtAllocateUserPhysicalPages
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  NumberOfPages PULONG_PTR
+  UserPfnArray PULONG_PTR
+
+func NtFreeUserPhysicalPages
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  NumberOfPages PULONG_PTR
+  UserPfnArray PULONG_PTR
+
+func NtMapUserPhysicalPages
+  NTSTATUS
+  VirtualAddresses PVOID
+  NumberOfPages ULONG_PTR
+  UserPfnArray PULONG_PTR
+
+func NtMapUserPhysicalPagesScatter
+  NTSTATUS
+  VirtualAddresses PVOID*
+  NumberOfPages ULONG_PTR
+  UserPfnArray PULONG_PTR
+
+func NtGetWriteWatch
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  Flags ULONG
+  BaseAddress PVOID
+  RegionSize SIZE_T
+  UserAddressArray PVOID* postCount=EntriesInUserAddressArray
+  EntriesInUserAddressArray PULONG_PTR
+  Granularity PULONG
+
+func NtResetWriteWatch
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID
+  RegionSize SIZE_T
+
+func NtCancelIoFile
+  NTSTATUS
+  FileHandle HANDLE
+  IoStatusBlock PIO_STATUS_BLOCK
+
+func NtCreateFile
+  NTSTATUS
+  FileHandle PHANDLE
+  DesiredAccess [FILE_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  IoStatusBlock PIO_STATUS_BLOCK
+  AllocationSize PLARGE_INTEGER
+  FileAttributes [FILE_ATTRIBUTES_ULONG]
+  ShareAccess [FILE_SHARE_MODE] display=ULONG
+  CreateDisposition [NtCreateDisposition]
+  CreateOptions [NtCreateOptions]
+  EaBuffer PVOID length=EaLength
+  EaLength ULONG
+
+func NtCreateIoCompletion
+  NTSTATUS
+  IoCompletionHandle PHANDLE
+  DesiredAccess [IO_COMPLETION_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  NumberOfConcurrentThreads ULONG
+
+func NtOpenFile
+  NTSTATUS
+  FileHandle PHANDLE
+  DesiredAccess [FILE_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  IoStatusBlock PIO_STATUS_BLOCK
+  ShareAccess [FILE_SHARE_MODE] display=ULONG
+  OpenOptions [NtCreateOptions]
+
+func NtOpenIoCompletion
+  NTSTATUS
+  CompetionPort PHANDLE
+  DesiredAccess [IO_COMPLETION_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtQueryIoCompletion
+  NTSTATUS
+  IoCompletionHandle HANDLE
+  IoCompletionInformationClass IO_COMPLETION_INFORMATION_CLASS
+  IoCompletionInformation PVOID postLength=IoCompletionInformationLength
+  IoCompletionInformationLength ULONG
+  ResultLength PULONG
+
+func NtRemoveIoCompletion
+  NTSTATUS
+  IoCompletionHandle HANDLE
+  CompletionKey PVOID*
+  CompletionContext PVOID*
+  IoStatusBlock PIO_STATUS_BLOCK
+  Timeout PLARGE_INTEGER
+
+func NtSetIoCompletion
+  NTSTATUS
+  IoCompletionPortHandle HANDLE
+  CompletionKey PVOID
+  CompletionContext PVOID
+  CompletionStatus NTSTATUS
+  CompletionInformation ULONG
+
+func NtCreateSymbolicLinkObject
+  NTSTATUS
+  SymbolicLinkHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+  Name PUNICODE_STRING
+
+func NtOpenSymbolicLinkObject
+  NTSTATUS
+  SymbolicLinkHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtQuerySymbolicLinkObject
+  NTSTATUS
+  SymLinkObjHandle HANDLE
+  LinkTarget PUNICODE_STRING
+  DataWritten PULONG
+
+func NtDeleteFile
+  NTSTATUS
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtQueryFullAttributesFile
+  NTSTATUS
+  ObjectAttributes POBJECT_ATTRIBUTES
+  FileInformation PFILE_NETWORK_OPEN_INFORMATION
+
+func NtQueryInformationFile
+  NTSTATUS
+  FileHandle HANDLE
+  IoStatusBlock PIO_STATUS_BLOCK
+  FileInformation PVOID postLength=Length
+  Length ULONG
+  FileInformationClass FILE_INFORMATION_CLASS
+
+func NtLockFile
+  NTSTATUS
+  FileHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  IoStatusBlock PIO_STATUS_BLOCK
+  ByteOffset PLARGE_INTEGER
+  Length PLARGE_INTEGER
+  Key ULONG
+  FailImmediatedly BOOLEAN
+  ExclusiveLock BOOLEAN
+
+func NtUnlockFile
+  NTSTATUS
+  FileHandle HANDLE
+  IoStatusBlock PIO_STATUS_BLOCK
+  ByteOffset PLARGE_INTEGER
+  Lenght PLARGE_INTEGER
+  Key ULONG
+
+func NtWriteFile
+  NTSTATUS
+  FileHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  IoStatusBlock PIO_STATUS_BLOCK
+  Buffer PVOID length=Length
+  Length ULONG
+  ByteOffset PLARGE_INTEGER
+  Key PULONG
+
+func NtWriteFileGather
+  NTSTATUS
+  FileHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  IoStatusBlock PIO_STATUS_BLOCK
+  BufferDescription FILE_SEGMENT_ELEMENT[]
+  BufferLength ULONG
+  ByteOffset PLARGE_INTEGER
+  Key PULONG
+
+func NtReadFile
+  NTSTATUS
+  FileHandle HANDLE
+  Event HANDLE
+  UserApcRoutine PIO_APC_ROUTINE
+  UserApcContext PVOID
+  IoStatusBlock PIO_STATUS_BLOCK
+  Buffer PVOID
+  BufferLength ULONG
+  ByteOffset PLARGE_INTEGER
+  Key PULONG
+
+func NtReadFileScatter
+  NTSTATUS
+  FileHandle HANDLE
+  Event HANDLE
+  UserApcRoutine PIO_APC_ROUTINE
+  UserApcContext PVOID
+  UserIoStatusBlock PIO_STATUS_BLOCK
+  BufferDescription FILE_SEGMENT_ELEMENT[]
+  BufferLength ULONG
+  ByteOffset PLARGE_INTEGER
+  Key PULONG
+
+func NtFlushBuffersFile
+  NTSTATUS
+  FileHandle HANDLE
+  IoStatusBlock PIO_STATUS_BLOCK
+
+func NtFlushBuffersFileEx
+  NTSTATUS
+  FileHandle HANDLE
+  Flags [FLUSH_FLAGS]
+  IoStatusBlock PIO_STATUS_BLOCK
+
+func NtSetInformationFile
+  NTSTATUS
+  FileHandle HANDLE
+  IoStatusBlock PIO_STATUS_BLOCK
+  FileInformation PVOID length=Length
+  Length ULONG
+  FileInformationClass FILE_INFORMATION_CLASS
+
+func NtQueryAttributesFile
+  NTSTATUS
+  ObjectAttributes POBJECT_ATTRIBUTES
+  FileInformation PFILE_BASIC_INFORMATION
+
+func NtQueryEaFile
+  NTSTATUS
+  FileHandle HANDLE
+  IoStatusBlock PIO_STATUS_BLOCK
+  Buffer PVOID
+  Length ULONG
+  ReturnSingleEntry BOOLEAN
+  EaList PVOID postLength=EaListLength
+  EaListLength ULONG
+  EaIndex PULONG
+  RestartScan BOOLEAN
+
+func NtSetEaFile
+  NTSTATUS
+  FileHandle HANDLE
+  IoStatusBlock PIO_STATUS_BLOCK
+  EaBuffer PVOID
+  EaBufferSize ULONG
+
+func NtQueryQuotaInformationFile
+  NTSTATUS
+  FileHandle HANDLE
+  IoStatusBlock PIO_STATUS_BLOCK
+  Buffer PVOID postLength=Length
+  Length ULONG
+  ReturnSingleEntry BOOLEAN
+  SidList PVOID postLength=SidListLength
+  SidListLength ULONG
+  StartSid PSID
+  RestartScan BOOLEAN
+
+func NtSetQuotaInformationFile
+  NTSTATUS
+  FileHandle HANDLE
+  IoStatusBlock PIO_STATUS_BLOCK
+  Buffer PVOID
+  BufferLength ULONG
+
+func NtCreatePagingFile
+  NTSTATUS
+  FileName PUNICODE_STRING
+  InitialSize PLARGE_INTEGER
+  MaxiumSize PLARGE_INTEGER
+  Reserved ULONG
+
+func NtTranslateFilePath
+  NTSTATUS
+  InputFilePath PFILE_PATH
+  OutputType ULONG
+  OutputFilePath PFILE_PATH
+  OutputFilePathLength ULONG
+
+func NtCreateDirectoryObject
+  NTSTATUS
+  DirectoryHandle PHANDLE
+  DesiredAccess [DIRECTORY_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtOpenDirectoryObject
+  NTSTATUS
+  FileHandle PHANDLE
+  DesiredAccess [DIRECTORY_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtQueryDirectoryObject
+  NTSTATUS
+  DirectoryHandle HANDLE
+  Buffer PVOID postLength=BufferLength
+  BufferLength ULONG
+  ReturnSingleEntry BOOLEAN
+  RestartScan BOOLEAN
+  Context PULONG
+  ReturnLength PULONG
+
+func NtNotifyChangeDirectoryFile
+  NTSTATUS
+  FileHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  IoStatusBlock PIO_STATUS_BLOCK
+  Buffer PVOID
+  BufferSize ULONG
+  CompletionFilter [FILE_NOTIFY_CHANGE_FLAGS] display=ULONG
+  WatchTree BOOLEAN
+
+func NtQueryDirectoryFile
+  NTSTATUS
+  FileHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  IoStatusBlock PIO_STATUS_BLOCK
+  FileInformation PVOID postLength=Length
+  Length ULONG
+  FileInformationClass FILE_INFORMATION_CLASS
+  ReturnSingleEntry BOOLEAN
+  FileName PUNICODE_STRING
+  RestartScan BOOLEAN
+
+func NtQueryOleDirectoryFile
+  NTSTATUS
+  FileHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  IoStatusBlock PIO_STATUS_BLOCK
+  FileInformation PVOID
+  Length ULONG
+  FileInformationClass FILE_INFORMATION_CLASS
+  ReturnSingleEntry BOOLEAN
+  FileMask PUNICODE_STRING
+  RestartScan BOOLEAN
+
+func NtQueryVolumeInformationFile
+  NTSTATUS
+  FileHandle HANDLE
+  IoStatusBlock PIO_STATUS_BLOCK
+  FsInformation PVOID postLength=Length
+  Length ULONG
+  FsInformationClass FS_INFORMATION_CLASS
+
+func NtSetVolumeInformationFile
+  NTSTATUS
+  FileHandle HANDLE
+  IoStatusBlock PIO_STATUS_BLOCK
+  FsInformation PVOID
+  Length ULONG
+  FsInformationClass FS_INFORMATION_CLASS
+
+func NtCreateSection
+  NTSTATUS
+  SectionHandle PHANDLE
+  DesiredAccess [SECTION_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  MaximumSize PLARGE_INTEGER
+  SectionPageProtection [NtProtectionFlags]
+  AllocationAttributes [SECTION_ALLOCATION]
+  FileHandle HANDLE
+
+func NtExtendSection
+  NTSTATUS
+  SectionHandle HANDLE
+  NewMaximumSize PLARGE_INTEGER
+
+func NtMapViewOfSection
+  NTSTATUS
+  SectionHandle HANDLE
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID*
+  ZeroBits ULONG_PTR
+  CommitSize SIZE_T
+  SectionOffset PLARGE_INTEGER
+  ViewSize PSIZE_T
+  InheritDisposition SECTION_INHERIT
+  AllocationType [MemoryAllocationFlags] display=ULONG
+  AccessProtection [NtProtectionFlags]
+
+func NtOpenSection
+  NTSTATUS
+  SectionHandle PHANDLE
+  DesiredAccess [SECTION_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtQuerySection
+  NTSTATUS
+  SectionHandle HANDLE
+  SectionInformationClass SECTION_INFORMATION_CLASS
+  SectionInformation PVOID postLength=Length
+  Length SIZE_T
+  ResultLength PSIZE_T
+
+func NtUnmapViewOfSection
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID
+
+func NtAcceptConnectPort
+  NTSTATUS
+  PortHandle PHANDLE
+  PortContext PVOID
+  ConnectionRequest PPORT_MESSAGE
+  AcceptConnection BOOLEAN
+  ServerView PPORT_VIEW
+  ClientView PREMOTE_PORT_VIEW
+
+func NtCompleteConnectPort
+  NTSTATUS
+  PortHandle HANDLE
+
+func NtConnectPort
+  NTSTATUS
+  PortHandle PHANDLE
+  PortName PUNICODE_STRING
+  SecurityQos PSECURITY_QUALITY_OF_SERVICE
+  ClientView PPORT_VIEW
+  ServerView PREMOTE_PORT_VIEW
+  MaxMessageLength PULONG
+  ConnectionInformation PVOID length=ConnectionInformationLength
+  ConnectionInformationLength PULONG
+
+func NtCreatePort
+  NTSTATUS
+  PortHandle PHANDLE
+  ObjectAttributes POBJECT_ATTRIBUTES
+  MaxConnectionInfoLength ULONG
+  MaxMessageLength ULONG
+  MaxPoolUsage ULONG
+
+func NtCreateWaitablePort
+  NTSTATUS
+  PortHandle PHANDLE
+  ObjectAttributes POBJECT_ATTRIBUTES
+  MaxConnectInfoLength ULONG
+  MaxDataLength ULONG
+  NPMessageQueueSize ULONG
+
+func NtImpersonateClientOfPort
+  NTSTATUS
+  PortHandle HANDLE
+  ClientMessage PPORT_MESSAGE
+
+func NtListenPort
+  NTSTATUS
+  PortHandle HANDLE
+  ConnectionRequest PPORT_MESSAGE
+
+func NtQueryInformationPort
+  NTSTATUS
+  PortHandle HANDLE
+  PortInformationClass PORT_INFORMATION_CLASS
+  PortInformation PVOID postLength=PortInformationLength
+  PortInformationLength ULONG
+  ReturnLength PULONG
+
+func NtQueryPortInformationProcess
+  NTSTATUS
+
+func NtReadRequestData
+  NTSTATUS
+  PortHandle HANDLE
+  Message PPORT_MESSAGE
+  Index ULONG
+  Buffer PVOID
+  BufferLength ULONG
+  ReturnLength PULONG
+
+func NtReplyPort
+  NTSTATUS
+  PortHandle HANDLE
+  LpcReply PPORT_MESSAGE
+
+func NtReplyWaitReceivePort
+  NTSTATUS
+  PortHandle HANDLE
+  PortContext PVOID*
+  ReplyMessage PPORT_MESSAGE
+  ReceiveMessage PPORT_MESSAGE
+
+func NtReplyWaitReceivePortEx
+  NTSTATUS
+  PortHandle HANDLE
+  PortContext PVOID*
+  ReplyMessage PPORT_MESSAGE
+  ReceiveMessage PPORT_MESSAGE
+  Timeout PLARGE_INTEGER
+
+func NtReplyWaitReplyPort
+  NTSTATUS
+  PortHandle HANDLE
+  ReplyMessage PPORT_MESSAGE
+
+func NtRequestPort
+  NTSTATUS
+  PortHandle HANDLE
+  LpcMessage PPORT_MESSAGE
+
+func NtRequestWaitReplyPort
+  NTSTATUS
+  PortHandle HANDLE
+  LpcReply PPORT_MESSAGE
+  LpcRequest PPORT_MESSAGE
+
+func NtSecureConnectPort
+  NTSTATUS
+  PortHandle PHANDLE
+  PortName PUNICODE_STRING
+  SecurityQos PSECURITY_QUALITY_OF_SERVICE
+  ClientView PPORT_VIEW
+  Sid PSID
+  ServerView PREMOTE_PORT_VIEW
+  MaxMessageLength PULONG
+  ConnectionInformation PVOID
+  ConnectionInformationLength PULONG
+
+func NtWriteRequestData
+  NTSTATUS
+  PortHandle HANDLE
+  Message PPORT_MESSAGE
+  Index ULONG
+  Buffer PVOID
+  BufferLength ULONG
+  ReturnLength PULONG
+
+func NtSetDefaultHardErrorPort
+  NTSTATUS
+  PortHandle HANDLE
+
+func NtRegisterThreadTerminatePort
+  NTSTATUS
+  TerminationPort HANDLE
+
+func NtAddBootEntry
+  NTSTATUS
+  BootEntry PBOOT_ENTRY
+  Id ULONG
+
+func NtAddDriverEntry
+  NTSTATUS
+  BootEntry PEFI_DRIVER_ENTRY
+  Id ULONG
+
+func NtDeleteDriverEntry
+  NTSTATUS
+  Id ULONG
+
+func NtDeleteBootEntry
+  NTSTATUS
+  Id ULONG
+
+func NtEnumerateBootEntries
+  NTSTATUS
+  Buffer PVOID
+  BufferLength PULONG
+
+func NtEnumerateDriverEntries
+  NTSTATUS
+  Buffer PVOID
+  BufferLength PULONG
+
+func NtLoadDriver
+  NTSTATUS
+  DriverServiceName PUNICODE_STRING
+
+func NtModifyBootEntry
+  NTSTATUS
+  BootEntry PBOOT_ENTRY
+
+func NtModifyDriverEntry
+  NTSTATUS
+  DriverEntry PEFI_DRIVER_ENTRY
+
+func NtQueryDriverEntryOrder
+  NTSTATUS
+  Ids PULONG
+  Count PULONG
+
+func NtQueryBootEntryOrder
+  NTSTATUS
+  Ids PULONG
+  Count PULONG
+
+func NtQueryBootOptions
+  NTSTATUS
+  BootOptions PBOOT_OPTIONS
+  BootOptionsLength PULONG
+
+func NtSetBootEntryOrder
+  NTSTATUS
+  Ids PULONG
+  Count PULONG
+
+func NtSetBootOptions
+  NTSTATUS
+  BootOptions PBOOT_OPTIONS
+  FieldsToChange ULONG
+
+func NtSetDriverEntryOrder
+  NTSTATUS
+  Ids PULONG
+  Count PULONG
+
+func NtUnloadDriver
+  NTSTATUS
+  DriverServiceName PUNICODE_STRING
+
+func NtCreateProfile
+  NTSTATUS
+  ProfileHandle PHANDLE
+  Process HANDLE
+  ImageBase PVOID
+  ImageSize ULONG
+  BucketSize ULONG
+  Buffer PVOID
+  BufferSize ULONG
+  ProfileSource KPROFILE_SOURCE
+  Affinity KAFFINITY
+
+func NtQueryIntervalProfile
+  NTSTATUS
+  ProfileSource KPROFILE_SOURCE
+  Interval PULONG
+
+func NtSetIntervalProfile
+  NTSTATUS
+  Interval ULONG
+  Source KPROFILE_SOURCE
+
+func NtStartProfile
+  NTSTATUS
+  ProfileHandle HANDLE
+
+func NtStopProfile
+  NTSTATUS
+  ProfileHandle HANDLE
+
+func NtDebugActiveProcess
+  NTSTATUS
+  Process HANDLE
+  DebugObject HANDLE
+
+func NtDebugContinue
+  NTSTATUS
+  DebugObject HANDLE
+  AppClientId PCLIENT_ID
+  ContinueStatus NTSTATUS
+
+func NtWaitForDebugEvent
+  NTSTATUS
+  DebugObject HANDLE
+  Alertable BOOLEAN
+  Timeout PLARGE_INTEGER
+  StateChange PDBGUI_WAIT_STATE_CHANGE
+
+func NtRemoveProcessDebug
+  NTSTATUS
+  Process HANDLE
+  DebugObject HANDLE
+
+func NtSetInformationDebugObject
+  NTSTATUS
+  DebugObject HANDLE
+  InformationClass DEBUGOBJECTINFOCLASS
+  Information PVOID length=InformationLength
+  InformationLength ULONG
+  ReturnLength PULONG
+
+func NtCreateDebugObject
+  NTSTATUS
+  DebugHandle PHANDLE
+  DesiredAccess [DEBUG_OBJECT_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  KillProcessOnExit BOOLEAN
+
+func NtGetContextThread
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  pContext PCONTEXT
+
+func NtSetContextThread
+  NTSTATUS
+  ThreadHandle [ThreadHandle]
+  Context PCONTEXT
+
+func NtContinue
+  NTSTATUS
+  ThreadContext PCONTEXT
+  RaiseAlert BOOLEAN
+
+func NtFlushInstructionCache
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  BaseAddress PVOID
+  NumberOfBytesToFlush ULONG
+
+func NtFlushWriteBuffer
+  NTSTATUS
+
+func NtSystemDebugControl
+  NTSTATUS
+  ControlCode SYSDBG_COMMAND
+  InputBuffer PVOID
+  InputBufferLength ULONG
+  OutputBuffer PVOID
+  OutputBufferLength ULONG
+  ReturnLength PULONG
+
+func NtQuerySystemTime
+  NTSTATUS
+  SystemTime PLARGE_INTEGER
+
+func NtSetSystemTime
+  NTSTATUS
+  SystemTime PLARGE_INTEGER
+  PreviousTime PLARGE_INTEGER
+
+func NtGetTickCount
+  ULONG
+
+func NtAllocateLocallyUniqueId
+  NTSTATUS
+  LocallyUniqueId LUID*
+
+func NtAllocateUuids
+  NTSTATUS
+  Time PULARGE_INTEGER
+  Range PULONG
+  Sequence PULONG
+  Seed PUCHAR
+
+func NtSetUuidSeed
+  NTSTATUS
+  UuidSeed PUCHAR
+
+func NtQueryDebugFilterState
+  NTSTATUS
+  ComponentId ULONG
+  Level ULONG
+
+func NtSetDebugFilterState
+  NTSTATUS
+  ComponentId ULONG
+  Level ULONG
+  State BOOLEAN
+
+func NtApphelpCacheControl
+  NTSTATUS
+  Service APPHELPCACHESERVICECLASS
+  ServiceData PVOID
+
+func NtAreMappedFilesTheSame
+  NTSTATUS
+  File1MappedAsAnImage PVOID
+  File2MappedAsFile PVOID
+
+func NtShutdownSystem
+  NTSTATUS
+  Action SHUTDOWN_ACTION
+
+func NtPowerInformation
+  NTSTATUS
+  PowerInformationLevel POWER_INFORMATION_LEVEL
+  InputBuffer PVOID
+  InputBufferLength ULONG
+  OutputBuffer PVOID
+  OutputBufferLength ULONG
+
+func NtSetSystemPowerState
+  NTSTATUS
+  SystemAction POWER_ACTION
+  MinSystemState SYSTEM_POWER_STATE
+  Flags ULONG
+
+func NtDisplayString
+  NTSTATUS
+  DisplayString PUNICODE_STRING
+
+func NtInitiatePowerAction
+  NTSTATUS
+  SystemAction POWER_ACTION
+  MinSystemState SYSTEM_POWER_STATE
+  Flags ULONG
+  Asynchronous BOOLEAN
+
+func NtQueryPerformanceCounter
+  NTSTATUS
+  PerformanceCounter PLARGE_INTEGER
+  PerformanceFrequency PLARGE_INTEGER
+
+func NtQueryTimerResolution
+  NTSTATUS
+  MinimumResolution PULONG
+  MaximumResolution PULONG
+  CurrentResolution PULONG
+
+func NtCreateMailslotFile
+  NTSTATUS
+  MailSlotFileHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+  IoStatusBlock PIO_STATUS_BLOCK
+  FileAttributes ULONG
+  ShareAccess [FILE_SHARE_MODE] display=ULONG
+  MaxMessageSize ULONG
+  TimeOut PLARGE_INTEGER
+
+func NtCreateNamedPipeFile
+  NTSTATUS
+  NamedPipeFileHandle PHANDLE
+  DesiredAccess [PIPE_ACCESS_MASK]
+  ObjectAttributes POBJECT_ATTRIBUTES
+  IoStatusBlock PIO_STATUS_BLOCK
+  ShareAccess [FILE_SHARE_MODE] display=ULONG
+  CreateDisposition [NtCreateDisposition]
+  CreateOptions [NtCreateOptions]
+  WriteModeMessage ULONG
+  ReadModeMessage ULONG
+  NonBlocking ULONG
+  MaxInstances ULONG
+  InBufferSize ULONG
+  OutBufferSize ULONG
+  DefaultTimeOut PLARGE_INTEGER
+
+func NtDeviceIoControlFile
+  NTSTATUS
+  DeviceHandle HANDLE
+  Event HANDLE
+  UserApcRoutine PIO_APC_ROUTINE
+  UserApcContext PVOID
+  IoStatusBlock PIO_STATUS_BLOCK
+  IoControlCode [IOCTL] display=ULONG
+  InputBuffer PVOID length=InputBufferSize
+  InputBufferSize ULONG
+  OutputBuffer PVOID postLength=OutputBufferSize
+  OutputBufferSize ULONG
+
+func NtFsControlFile
+  NTSTATUS
+  DeviceHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  IoStatusBlock PIO_STATUS_BLOCK
+  IoControlCode ULONG
+  InputBuffer PVOID length=InputBufferSize
+  InputBufferSize ULONG
+  OutputBuffer PVOID postLength=OutputBufferSize
+  OutputBufferSize ULONG
+
+func NtPlugPlayControl
+  NTSTATUS
+  PlugPlayControlClass PLUGPLAY_CONTROL_CLASS
+  Buffer PVOID
+  BufferSize ULONG
+
+func NtGetPlugPlayEvent
+  NTSTATUS
+  Reserved1 ULONG
+  Reserved2 ULONG
+  Buffer PPLUGPLAY_EVENT_BLOCK
+  BufferSize ULONG
+
+func NtLockProductActivationKeys
+  NTSTATUS
+  pPrivateVer PULONG
+  pSafeMode PULONG
+
+func NtSetTimerResolution
+  NTSTATUS
+  DesiredResolution ULONG
+  SetResolution BOOLEAN
+  CurrentResolution PULONG
+
+func NtQuerySystemInformation
+  NTSTATUS
+  SystemInformationClass SYSTEM_INFORMATION_CLASS
+  SystemInformation PVOID postLength=Length
+  Length ULONG
+  ResultLength PULONG
+
+func NtSetSystemInformation
+  NTSTATUS
+  SystemInformationClass SYSTEM_INFORMATION_CLASS
+  SystemInformation PVOID
+  SystemInformationLength ULONG
+
+func NtRaiseHardError
+  NTSTATUS
+  ErrorStatus NTSTATUS
+  NumberOfParameters ULONG
+  UnicodeStringParameterMask ULONG
+  Parameters PULONG_PTR
+  ValidResponseOptions ULONG
+  Response PULONG
+
+func NtClose
+  NTSTATUS
+  Handle HANDLE
+
+func NtDuplicateObject
+  NTSTATUS
+  SourceProcessHandle [ProcessHandle]
+  SourceHandle HANDLE
+  TargetProcessHandle [ProcessHandle]
+  TargetHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  HandleAttributes ULONG
+  Options ULONG
+
+func NtMakePermanentObject
+  NTSTATUS
+  Object HANDLE
+
+func NtMakeTemporaryObject
+  NTSTATUS
+  Handle HANDLE
+
+func NtQueryObject
+  NTSTATUS
+  ObjectHandle HANDLE
+  ObjectInformationClass OBJECT_INFORMATION_CLASS
+  ObjectInformation PVOID postLength=Length
+  Length ULONG
+  ResultLength PULONG
+
+func NtQuerySecurityObject
+  NTSTATUS
+  Handle HANDLE
+  SecurityInformation SECURITY_INFORMATION
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  Length ULONG
+  ResultLength PULONG
+
+func NtSetInformationObject
+  NTSTATUS
+  ObjectHandle HANDLE
+  ObjectInformationClass OBJECT_INFORMATION_CLASS
+  ObjectInformation PVOID length=Length
+  Length ULONG
+
+func NtSetSecurityObject
+  NTSTATUS
+  Handle HANDLE
+  SecurityInformation SECURITY_INFORMATION
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+
+func RtlAppendPathElement
+  NTSTATUS
+  flags [RTL_APE_FLAGS]
+  pStrBuffer PRTL_UNICODE_STRING_BUFFER
+  pAddend PCUNICODE_STRING
+
+func RtlCopyMappedMemory
+  NTSTATUS
+  pDest void*
+  pSrc "const void*"
+  bytesToCopy SIZE_T
+
+func RtlDumpResource
+  VOID
+  pResource PRTL_RESOURCE
+
+func RtlGetLengthWithoutLastFullDosOrNtPathElement
+  NTSTATUS
+  flags ULONG
+  pStr PUNICODE_STRING
+  pOutLen PULONG
+
+func RtlMultiAppendUnicodeStringBuffer
+  NTSTATUS
+  pStrBuffer PRTL_UNICODE_STRING_BUFFER
+  numAddends ULONG
+  pAddends PCUNICODE_STRING count=numAddends
+
+func RtlTraceDatabaseAdd
+  BOOLEAN
+  pDatabase PRTL_TRACE_DATABASE
+  numFrames ULONG
+  ppFrames PVOID*
+  ppBlock PRTL_TRACE_BLOCK*
+
+func RtlTraceDatabaseCreate
+  success NotEqual=0
+  PRTL_TRACE_DATABASE
+  buckets ULONG
+  maximumSize SIZE_T
+  flags ULONG
+  tag ULONG
+  pfnHash PRTL_TRACE_HASH_FUNCTION
+
+func RtlTraceDatabaseDestroy
+  BOOLEAN
+  pDatabase PRTL_TRACE_DATABASE
+
+func RtlTraceDatabaseEnumerate
+  BOOLEAN
+  pDatabase PRTL_TRACE_DATABASE
+  pEnumData PRTL_TRACE_ENUM
+  ppBlock PRTL_TRACE_BLOCK*
+
+func RtlTraceDatabaseFind
+  BOOLEAN
+  pDatabase PRTL_TRACE_DATABASE
+  numFrames ULONG
+  ppFrames PVOID*
+  ppBlock PRTL_TRACE_BLOCK*
+
+func RtlTraceDatabaseLock
+  BOOLEAN
+  pDatabase PRTL_TRACE_DATABASE
+
+func RtlTraceDatabaseUnlock
+  BOOLEAN
+  pDatabase PRTL_TRACE_DATABASE
+
+func RtlTraceDatabaseValidate
+  BOOLEAN
+  pDatabase PRTL_TRACE_DATABASE
+
+func RtlpEnsureBufferSize
+  NTSTATUS
+  flags ULONG
+  pBuffer PRTL_BUFFER
+  requiredSize SIZE_T
+
+func LdrRegisterDllNotification
+  NTSTATUS
+  Flags ULONG
+  NotificationFunction PLDR_DLL_NOTIFICATION_FUNCTION
+  Context PVOID
+  Cookie PVOID*
+
+func LdrUnregisterDllNotification
+  NTSTATUS
+  Cookie PVOID
+
+func RtlExtendedIntegerMultiply
+  LARGE_INTEGER
+  Multiplicand LARGE_INTEGER
+  Multiplier LONG
+
+func RtlExtendedLargeIntegerDivide
+  LARGE_INTEGER
+  Dividend LARGE_INTEGER
+  Divisor ULONG
+  Remainder PULONG
+
+func RtlAddGrowableFunctionTable
+  NTSTATUS
+  DynamicTable PVOID*
+  FunctionTable PRUNTIME_FUNCTION
+  EntryCount ULONG
+  MaximumEntryCount ULONG
+  RangeBase ULONG_PTR
+  RangeEnd ULONG_PTR
+
+func RtlDeleteGrowableFunctionTable
+  VOID
+  DynamicTable PVOID
+
+func RtlGrowFunctionTable
+  VOID
+  DynamicTable PVOID
+  NewEntryCount ULONG
+
+func RtlGetFunctionTableListHead
+  success NotEqual=0
+  PLIST_ENTRY
+
+func RtlSetUnhandledExceptionFilter
+  success NotEqual=0
+  PVOID
+  TopLevelExceptionFilter PVOID
+
+func RtlDispatchException
+  BOOLEAN
+  ExceptionRecord PEXCEPTION_RECORD
+  Context PCONTEXT
+
+func RtlRaiseStatus
+  VOID
+  Status NTSTATUS
+
+func RtlUnhandledExceptionFilter
+  success NotEqual=0
+  LONG
+  ExceptionInfo EXCEPTION_POINTERS*
+
+func RtlWalkFrameChain
+  success NotEqual=0
+  ULONG
+  Callers PVOID*
+  Count ULONG
+  Flags ULONG
+
+func RtlLogStackBackTrace
+  success NotEqual=0
+  USHORT
+
+func RtlFirstEntrySList
+  success NotEqual=0
+  PSLIST_ENTRY
+  ListHead PSLIST_HEADER
+
+func RtlInitializeSListHead
+  void
+  ListHead PSLIST_HEADER
+
+func RtlInterlockedFlushSList
+  success NotEqual=0
+  PSLIST_ENTRY
+  ListHead PSLIST_HEADER
+
+func RtlInterlockedPopEntrySList
+  success NotEqual=0
+  PSLIST_ENTRY
+  ListHead PSLIST_HEADER
+
+func RtlInterlockedPushEntrySList
+  PSLIST_ENTRY
+  ListHead PSLIST_HEADER
+  ListEntry PSLIST_ENTRY
+
+func RtlQueryDepthSList
+  WORD
+  ListHead PSLIST_HEADER
+
+func NtCreateTransactionManager
+  NTSTATUS
+  TmHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+  LogFileName PUNICODE_STRING
+  CreateOptions ULONG
+  CommitStrength ULONG
+
+func NtOpenTransactionManager
+  NTSTATUS
+  TmHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+  LogFileName PUNICODE_STRING
+  TmIdentity LPGUID
+  OpenOptions ULONG
+
+func NtQueryInformationTransactionManager
+  NTSTATUS
+  TransactionManagerHandle HANDLE
+  TransactionManagerInformationClass TRANSACTIONMANAGER_INFORMATION_CLASS
+  TransactionManagerInformation PVOID postLength=ReturnLength
+  TransactionManagerInformationLength ULONG
+  ReturnLength PULONG
+
+func NtRecoverTransactionManager
+  NTSTATUS
+  TransactionManagerHandle HANDLE
+
+func NtRenameTransactionManager
+  NTSTATUS
+  LogFileName PUNICODE_STRING
+  ExistingTransactionManagerGuid LPGUID
+
+func NtRollforwardTransactionManager
+  NTSTATUS
+  TransactionManagerHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func NtSetInformationTransactionManager
+  NTSTATUS
+  TransactionManagerHandle HANDLE
+  TransactionManagerInformationClass TRANSACTIONMANAGER_INFORMATION_CLASS
+  TransactionManagerInformation PVOID length=TransactionManagerInformationLength
+  TransactionManagerInformationLength ULONG
+
+func NtCommitTransaction
+  NTSTATUS
+  TransactionHandle HANDLE
+  Wait BOOLEAN
+
+func NtCreateTransaction
+  NTSTATUS
+  TransactionHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+  Uow LPGUID
+  TmHandle HANDLE
+  CreateOptions ULONG
+  IsolationLevel ULONG
+  IsolationFlags ULONG
+  Timeout PLARGE_INTEGER
+  Description PUNICODE_STRING
+
+func NtEnumerateTransactionObject
+  NTSTATUS
+  RootObjectHandle HANDLE
+  QueryType KTMOBJECT_TYPE
+  ObjectCursor PKTMOBJECT_CURSOR
+  ObjectCursorLength ULONG
+  ReturnLength PULONG
+
+func NtOpenTransaction
+  NTSTATUS
+  TransactionHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+  Uow LPGUID
+  TmHandle HANDLE
+
+func NtQueryInformationTransaction
+  NTSTATUS
+  TransactionHandle HANDLE
+  TransactionInformationClass TRANSACTION_INFORMATION_CLASS
+  TransactionInformation PVOID postLength=ReturnLength
+  TransactionInformationLength ULONG
+  ReturnLength PULONG
+
+func NtRollbackTransaction
+  NTSTATUS
+  TransactionHandle HANDLE
+  Wait BOOLEAN
+
+func NtSetInformationTransaction
+  NTSTATUS
+  TransactionHandle HANDLE
+  TransactionInformationClass TRANSACTION_INFORMATION_CLASS
+  TransactionInformation PVOID length=TransactionInformationLength
+  TransactionInformationLength ULONG
+
+func NtFreezeTransactions
+  NTSTATUS
+  FreezeTimeout PLARGE_INTEGER
+  ThawTimeout PLARGE_INTEGER
+
+func NtThawTransactions
+  NTSTATUS
+
+func NtCommitComplete
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func NtCommitEnlistment
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func NtCreateEnlistment
+  NTSTATUS
+  EnlistmentHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  ResourceManagerHandle HANDLE
+  TransactionHandle HANDLE
+  ObjectAttributes POBJECT_ATTRIBUTES
+  CreateOptions ULONG
+  NotificationMask NOTIFICATION_MASK
+  EnlistmentKey PVOID
+
+func NtOpenEnlistment
+  NTSTATUS
+  EnlistmentHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  RmHandle HANDLE
+  EnlistmentGuid LPGUID
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtPrepareComplete
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func NtPrePrepareComplete
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func NtPrepareEnlistment
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func NtPrePrepareEnlistment
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func NtQueryInformationEnlistment
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  EnlistmentInformationClass ENLISTMENT_INFORMATION_CLASS
+  EnlistmentInformation PVOID postLength=ReturnLength
+  EnlistmentInformationLength ULONG
+  ReturnLength PULONG
+
+func NtReadOnlyEnlistment
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func NtRecoverEnlistment
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  EnlistmentKey PVOID
+
+func NtRollbackComplete
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func NtRollbackEnlistment
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func NtSetInformationEnlistment
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  EnlistmentInformationClass ENLISTMENT_INFORMATION_CLASS
+  EnlistmentInformation PVOID length=EnlistmentInformationLength
+  EnlistmentInformationLength ULONG
+
+func NtSinglePhaseReject
+  NTSTATUS
+  EnlistmentHandle HANDLE
+  TmVirtualClock PLARGE_INTEGER
+
+func NtCreateResourceManager
+  NTSTATUS
+  ResourceManagerHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  TmHandle HANDLE
+  ResourceManagerGuid LPGUID
+  ObjectAttributes POBJECT_ATTRIBUTES
+  CreateOptions ULONG
+  Description PUNICODE_STRING
+
+func NtGetNotificationResourceManager
+  NTSTATUS
+  ResourceManagerHandle HANDLE
+  TransactionNotification PTRANSACTION_NOTIFICATION
+  NotificationLength ULONG
+  Timeout PLARGE_INTEGER
+  ReturnLength PULONG
+  Asynchronous ULONG
+  AsynchronousContext ULONG_PTR
+
+func NtOpenResourceManager
+  NTSTATUS
+  ResourceManagerHandle PHANDLE
+  DesiredAccess ACCESS_MASK
+  TmHandle HANDLE
+  ResourceManagerGuid LPGUID
+  ObjectAttributes POBJECT_ATTRIBUTES
+
+func NtQueryInformationResourceManager
+  NTSTATUS
+  ResourceManagerHandle HANDLE
+  ResourceManagerInformationClass RESOURCEMANAGER_INFORMATION_CLASS
+  ResourceManagerInformation PVOID postLength=ReturnLength
+  ResourceManagerInformationLength ULONG
+  ReturnLength PULONG
+
+func NtRecoverResourceManager
+  NTSTATUS
+  ResourceManagerHandle HANDLE
+
+func NtSetInformationResourceManager
+  NTSTATUS
+  ResourceManagerHandle HANDLE
+  ResourceManagerInformationClass RESOURCEMANAGER_INFORMATION_CLASS
+  ResourceManagerInformation PVOID length=ResourceManagerInformationLength
+  ResourceManagerInformationLength ULONG
+
+func RtlInitializeGenericTableAvl
+  VOID
+  Table PRTL_AVL_TABLE
+  CompareRoutine PRTL_AVL_COMPARE_ROUTINE
+  AllocateRoutine PRTL_AVL_ALLOCATE_ROUTINE
+  FreeRoutine PRTL_AVL_FREE_ROUTINE
+  TableContext PVOID
+
+func RtlInsertElementGenericTableAvl
+  success NotEqual=0
+  PVOID
+  Table PRTL_AVL_TABLE
+  Buffer PVOID
+  BufferSize CLONG
+  NewElement PBOOLEAN
+
+func RtlInsertElementGenericTableFullAvl
+  success NotEqual=0
+  PVOID
+  Table PRTL_AVL_TABLE
+  Buffer PVOID
+  BufferSize CLONG
+  NewElement PBOOLEAN
+  NodeOrParent PVOID
+  SearchResult TABLE_SEARCH_RESULT
+
+func RtlDeleteElementGenericTableAvl
+  BOOLEAN
+  Table PRTL_AVL_TABLE
+  Buffer PVOID
+
+func RtlLookupElementGenericTableAvl
+  PVOID
+  Table PRTL_AVL_TABLE
+  Buffer PVOID
+
+func RtlLookupElementGenericTableFullAvl
+  PVOID
+  Table PRTL_AVL_TABLE
+  Buffer PVOID
+  NodeOrParent PVOID*
+  SearchResult TABLE_SEARCH_RESULT*
+
+func RtlEnumerateGenericTableAvl
+  success NotEqual=0
+  PVOID
+  Table PRTL_AVL_TABLE
+  Restart BOOLEAN
+
+func RtlEnumerateGenericTableWithoutSplayingAvl
+  success NotEqual=0
+  PVOID
+  Table PRTL_AVL_TABLE
+  RestartKey PVOID*
+
+func RtlLookupFirstMatchingElementGenericTableAvl
+  success NotEqual=0
+  PVOID
+  Table PRTL_AVL_TABLE
+  Buffer PVOID
+  RestartKey PVOID*
+
+func RtlEnumerateGenericTableLikeADirectory
+  success NotEqual=0
+  PVOID
+  Table PRTL_AVL_TABLE
+  MatchFunction PRTL_AVL_MATCH_FUNCTION
+  MatchData PVOID
+  NextFlag ULONG
+  RestartKey PVOID*
+  DeleteCount PULONG
+  Buffer PVOID
+
+func RtlGetElementGenericTableAvl
+  success NotEqual=0
+  PVOID
+  Table PRTL_AVL_TABLE
+  I ULONG
+
+func RtlNumberGenericTableElementsAvl
+  success NotEqual=0
+  ULONG
+  Table PRTL_AVL_TABLE
+
+func RtlIsGenericTableEmptyAvl
+  BOOLEAN
+  Table PRTL_AVL_TABLE
+
+func RtlSplay
+  success NotEqual=0
+  PRTL_SPLAY_LINKS
+  Links PRTL_SPLAY_LINKS
+
+func RtlDelete
+  success NotEqual=0
+  PRTL_SPLAY_LINKS
+  Links PRTL_SPLAY_LINKS
+
+func RtlDeleteNoSplay
+  VOID
+  Links PRTL_SPLAY_LINKS
+  Root PRTL_SPLAY_LINKS*
+
+func RtlSubtreeSuccessor
+  success NotEqual=0
+  PRTL_SPLAY_LINKS
+  Links PRTL_SPLAY_LINKS
+
+func RtlSubtreePredecessor
+  success NotEqual=0
+  PRTL_SPLAY_LINKS
+  Links PRTL_SPLAY_LINKS
+
+func RtlRealSuccessor
+  success NotEqual=0
+  PRTL_SPLAY_LINKS
+  Links PRTL_SPLAY_LINKS
+
+func RtlRealPredecessor
+  success NotEqual=0
+  PRTL_SPLAY_LINKS
+  Links PRTL_SPLAY_LINKS
+
+func RtlInitializeGenericTable
+  VOID
+  Table PRTL_GENERIC_TABLE
+  CompareRoutine PRTL_GENERIC_COMPARE_ROUTINE
+  AllocateRoutine PRTL_GENERIC_ALLOCATE_ROUTINE
+  FreeRoutine PRTL_GENERIC_FREE_ROUTINE
+  TableContext PVOID
+
+func RtlInsertElementGenericTable
+  success NotEqual=0
+  PVOID
+  Table PRTL_GENERIC_TABLE
+  Buffer PVOID
+  BufferSize ULONG
+  NewElement PBOOLEAN
+
+func RtlInsertElementGenericTableFull
+  success NotEqual=0
+  PVOID
+  Table PRTL_GENERIC_TABLE
+  Buffer PVOID
+  BufferSize ULONG
+  NewElement PBOOLEAN
+  NodeOrParent PVOID
+  SearchResult TABLE_SEARCH_RESULT
+
+func RtlDeleteElementGenericTable
+  BOOLEAN
+  Table PRTL_GENERIC_TABLE
+  Buffer PVOID
+
+func RtlLookupElementGenericTable
+  PVOID
+  Table PRTL_GENERIC_TABLE
+  Buffer PVOID
+
+func RtlLookupElementGenericTableFull
+  PVOID
+  Table PRTL_GENERIC_TABLE
+  Buffer PVOID
+  NodeOrParent PVOID*
+  SearchResult TABLE_SEARCH_RESULT*
+
+func RtlEnumerateGenericTable
+  success NotEqual=0
+  PVOID
+  Table PRTL_GENERIC_TABLE
+  Restart BOOLEAN
+
+func RtlEnumerateGenericTableWithoutSplaying
+  success NotEqual=0
+  PVOID
+  Table PRTL_GENERIC_TABLE
+  RestartKey PVOID*
+
+func RtlGetElementGenericTable
+  success NotEqual=0
+  PVOID
+  Table PRTL_GENERIC_TABLE
+  I ULONG
+
+func RtlNumberGenericTableElements
+  success NotEqual=0
+  ULONG
+  Table PRTL_GENERIC_TABLE
+
+func RtlIsGenericTableEmpty
+  BOOLEAN
+  Table PRTL_GENERIC_TABLE
+
+func RtlRbInsertNodeEx
+  VOID
+  Tree PRTL_RB_TREE
+  Parent PRTL_BALANCED_NODE
+  Right BOOLEAN
+  Node PRTL_BALANCED_NODE
+
+func RtlRbRemoveNode
+  VOID
+  Tree PRTL_RB_TREE
+  Node PRTL_BALANCED_NODE
+
+func RtlCreateHashTable
+  BOOLEAN
+  HashTable PRTL_DYNAMIC_HASH_TABLE*
+  Shift ULONG
+  Flags ULONG
+
+func RtlDeleteHashTable
+  VOID
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+
+func RtlInsertEntryHashTable
+  BOOLEAN
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+  Entry PRTL_DYNAMIC_HASH_TABLE_ENTRY
+  Signature ULONG_PTR
+  Context PRTL_DYNAMIC_HASH_TABLE_CONTEXT
+
+func RtlRemoveEntryHashTable
+  BOOLEAN
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+  Entry PRTL_DYNAMIC_HASH_TABLE_ENTRY
+  Context PRTL_DYNAMIC_HASH_TABLE_CONTEXT
+
+func RtlLookupEntryHashTable
+  success NotEqual=0
+  PRTL_DYNAMIC_HASH_TABLE_ENTRY
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+  Signature ULONG_PTR
+  Context PRTL_DYNAMIC_HASH_TABLE_CONTEXT
+
+func RtlGetNextEntryHashTable
+  success NotEqual=0
+  PRTL_DYNAMIC_HASH_TABLE_ENTRY
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+  Context PRTL_DYNAMIC_HASH_TABLE_CONTEXT
+
+func RtlInitEnumerationHashTable
+  BOOLEAN
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+  Enumerator PRTL_DYNAMIC_HASH_TABLE_ENUMERATOR
+
+func RtlEnumerateEntryHashTable
+  success NotEqual=0
+  PRTL_DYNAMIC_HASH_TABLE_ENTRY
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+  Enumerator PRTL_DYNAMIC_HASH_TABLE_ENUMERATOR
+
+func RtlEndEnumerationHashTable
+  VOID
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+  Enumerator PRTL_DYNAMIC_HASH_TABLE_ENUMERATOR
+
+func RtlInitWeakEnumerationHashTable
+  BOOLEAN
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+  Enumerator PRTL_DYNAMIC_HASH_TABLE_ENUMERATOR
+
+func RtlWeaklyEnumerateEntryHashTable
+  success NotEqual=0
+  PRTL_DYNAMIC_HASH_TABLE_ENTRY
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+  Enumerator PRTL_DYNAMIC_HASH_TABLE_ENUMERATOR
+
+func RtlEndWeakEnumerationHashTable
+  VOID
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+  Enumerator PRTL_DYNAMIC_HASH_TABLE_ENUMERATOR
+
+func RtlExpandHashTable
+  BOOLEAN
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+
+func RtlContractHashTable
+  BOOLEAN
+  HashTable PRTL_DYNAMIC_HASH_TABLE
+
+func RtlInitializeCriticalSection
+  NTSTATUS
+  CriticalSection PRTL_CRITICAL_SECTION
+
+func RtlInitializeCriticalSectionAndSpinCount
+  NTSTATUS
+  CriticalSection PRTL_CRITICAL_SECTION
+  SpinCount ULONG
+
+func RtlDeleteCriticalSection
+  NTSTATUS
+  CriticalSection PRTL_CRITICAL_SECTION
+
+func RtlEnterCriticalSection
+  NTSTATUS
+  CriticalSection PRTL_CRITICAL_SECTION
+
+func RtlLeaveCriticalSection
+  NTSTATUS
+  CriticalSection PRTL_CRITICAL_SECTION
+
+func RtlTryEnterCriticalSection
+  BOOLEAN
+  CriticalSection PRTL_CRITICAL_SECTION
+
+func RtlIsCriticalSectionLocked
+  LOGICAL
+  CriticalSection PRTL_CRITICAL_SECTION
+
+func RtlIsCriticalSectionLockedByThread
+  LOGICAL
+  CriticalSection PRTL_CRITICAL_SECTION
+
+func RtlGetCriticalSectionRecursionCount
+  success NotEqual=0
+  ULONG
+  CriticalSection PRTL_CRITICAL_SECTION
+
+func RtlSetCriticalSectionSpinCount
+  success NotEqual=0
+  ULONG
+  CriticalSection PRTL_CRITICAL_SECTION
+  SpinCount ULONG
+
+func RtlQueryCriticalSectionOwner
+  success NotEqual=0
+  HANDLE
+  EventHandle HANDLE
+
+func RtlCheckForOrphanedCriticalSections
+  VOID
+  hThread HANDLE
+
+func RtlpUnWaitCriticalSection
+  VOID
+  CriticalSection PRTL_CRITICAL_SECTION
+
+func RtlpWaitForCriticalSection
+  NTSTATUS
+  CriticalSection PRTL_CRITICAL_SECTION
+
+func RtlInitializeResource
+  VOID
+  pResource PRTL_RESOURCE
+
+func RtlDeleteResource
+  VOID
+  pResource PRTL_RESOURCE
+
+func RtlAcquireResourceShared
+  BOOLEAN
+  pResource PRTL_RESOURCE
+  bWaitForAccess BOOLEAN
+
+func RtlAcquireResourceExclusive
+  BOOLEAN
+  pResource PRTL_RESOURCE
+  bWaitForAccess BOOLEAN
+
+func RtlReleaseResource
+  VOID
+  pResource PRTL_RESOURCE
+
+func RtlConvertSharedToExclusive
+  VOID
+  Resource PRTL_RESOURCE
+
+func RtlConvertExclusiveToShared
+  VOID
+  Resource PRTL_RESOURCE
+
+func RtlInitializeSRWLock
+  VOID
+  SRWLock PRTL_SRWLOCK
+
+func RtlAcquireSRWLockExclusive
+  VOID
+  SRWLock PRTL_SRWLOCK
+
+func RtlAcquireSRWLockShared
+  VOID
+  SRWLock PRTL_SRWLOCK
+
+func RtlReleaseSRWLockExclusive
+  VOID
+  SRWLock PRTL_SRWLOCK
+
+func RtlReleaseSRWLockShared
+  VOID
+  SRWLock PRTL_SRWLOCK
+
+func RtlTryAcquireSRWLockExclusive
+  BOOLEAN
+  SRWLock PRTL_SRWLOCK
+
+func RtlTryAcquireSRWLockShared
+  BOOLEAN
+  SRWLock PRTL_SRWLOCK
+
+func RtlAcquireReleaseSRWLockExclusive
+  VOID
+  SRWLock PRTL_SRWLOCK
+
+func RtlInitializeConditionVariable
+  VOID
+  ConditionVariable PRTL_CONDITION_VARIABLE
+
+func RtlSleepConditionVariableCS
+  NTSTATUS
+  ConditionVariable PRTL_CONDITION_VARIABLE
+  CriticalSection PRTL_CRITICAL_SECTION
+  Timeout PLARGE_INTEGER
+
+func RtlSleepConditionVariableSRW
+  NTSTATUS
+  ConditionVariable PRTL_CONDITION_VARIABLE
+  SRWLock PRTL_SRWLOCK
+  Timeout PLARGE_INTEGER
+  Flags ULONG
+
+func RtlWakeConditionVariable
+  VOID
+  ConditionVariable PRTL_CONDITION_VARIABLE
+
+func RtlWakeAllConditionVariable
+  VOID
+  ConditionVariable PRTL_CONDITION_VARIABLE
+
+func RtlInitBarrier
+  NTSTATUS
+  Barrier PRTL_BARRIER
+  TotalThreads ULONG
+  SpinCount ULONG
+
+func RtlDeleteBarrier
+  NTSTATUS
+  Barrier PRTL_BARRIER
+
+func RtlBarrier
+  BOOLEAN
+  Barrier PRTL_BARRIER
+  Flags ULONG
+
+func RtlBarrierForDelete
+  BOOLEAN
+  Barrier PRTL_BARRIER
+  Flags ULONG
+
+func RtlInitString
+  VOID
+  DestinationString PSTRING
+  SourceString PCSZ
+
+func RtlInitAnsiString
+  VOID
+  DestinationString PANSI_STRING
+  SourceString PCSZ
+
+func RtlInitAnsiStringEx
+  NTSTATUS
+  DestinationString PANSI_STRING
+  SourceString PCSZ
+
+func RtlFreeAnsiString
+  VOID
+  AnsiString PANSI_STRING
+
+func RtlFreeOemString
+  VOID
+  OemString POEM_STRING
+
+func RtlCopyString
+  VOID
+  DestinationString PSTRING
+  SourceString "const STRING*"
+
+func RtlUpperChar
+  CHAR
+  Source CHAR
+
+func RtlCompareString
+  LONG
+  String1 "const STRING*"
+  String2 "const STRING*"
+  CaseInSensitive BOOLEAN
+
+func RtlEqualString
+  BOOLEAN
+  String1 "const STRING*"
+  String2 "const STRING*"
+  CaseInSensitive BOOLEAN
+
+func RtlPrefixString
+  BOOLEAN
+  String1 PCANSI_STRING
+  String2 PCANSI_STRING
+  CaseInsensitive BOOLEAN
+
+func RtlAppendStringToString
+  NTSTATUS
+  Destination PSTRING
+  Source "const STRING*"
+
+func RtlAppendAsciizToString
+  NTSTATUS
+  Destination PSTRING
+  Source PSTR
+
+func RtlUpperString
+  VOID
+  DestinationString PSTRING
+  SourceString "const STRING*"
+
+func RtlInitUnicodeString
+  VOID
+  DestinationString PUNICODE_STRING
+  SourceString PCWSTR
+
+func RtlInitUnicodeStringEx
+  NTSTATUS
+  DestinationString PUNICODE_STRING
+  SourceString PCWSTR
+
+func RtlCreateUnicodeString
+  BOOLEAN
+  DestinationString PUNICODE_STRING
+  SourceString PCWSTR
+
+func RtlCreateUnicodeStringFromAsciiz
+  BOOLEAN
+  Destination PUNICODE_STRING
+  Source PCSZ
+
+func RtlFreeUnicodeString
+  VOID
+  UnicodeString PUNICODE_STRING
+
+func RtlDuplicateUnicodeString
+  NTSTATUS
+  Flags [RTL_DUPLICATE_UNICODE_STRING_FLAGS]
+  SourceString PCUNICODE_STRING
+  DestinationString PUNICODE_STRING
+
+func RtlCopyUnicodeString
+  VOID
+  DestinationString PUNICODE_STRING
+  SourceString PCUNICODE_STRING
+
+func RtlUpcaseUnicodeChar
+  WCHAR
+  Source WCHAR
+
+func RtlDowncaseUnicodeChar
+  WCHAR
+  Source WCHAR
+
+func RtlCompareUnicodeString
+  LONG
+  String1 PCUNICODE_STRING
+  String2 PCUNICODE_STRING
+  CaseInsensitive BOOLEAN
+
+func RtlCompareUnicodeStrings
+  success NotEqual=0
+  LONG
+  String1 PWCH
+  String1Length SIZE_T
+  String2 PWCH
+  String2Length SIZE_T
+  CaseInSensitive BOOLEAN
+
+func RtlEqualUnicodeString
+  BOOLEAN
+  String1 PCUNICODE_STRING
+  String2 PCUNICODE_STRING
+  CaseInsensitive BOOLEAN
+
+func RtlHashUnicodeString
+  NTSTATUS
+  String "CONST UNICODE_STRING*"
+  CaseInSensitive BOOLEAN
+  HashAlgorithm [HASH_STRING_ALGORITHM]
+  HashValue PULONG
+
+func RtlValidateUnicodeString
+  NTSTATUS
+  Flags ULONG
+  String PCUNICODE_STRING
+
+func RtlPrefixUnicodeString
+  BOOLEAN
+  String1 PCUNICODE_STRING
+  String2 PCUNICODE_STRING
+  CaseInsensitive BOOLEAN
+
+func RtlFindCharInUnicodeString
+  NTSTATUS
+  Flags [RTL_FIND_CHAR_IN_UNICODE_STRING_FLAGS]
+  SearchString PUNICODE_STRING
+  MatchString PCUNICODE_STRING
+  Position PUSHORT
+
+func RtlAppendUnicodeStringToString
+  NTSTATUS
+  Destination PUNICODE_STRING
+  Source PCUNICODE_STRING
+
+func RtlAppendUnicodeToString
+  NTSTATUS
+  Destination PUNICODE_STRING
+  Source PCWSTR
+
+func RtlUpcaseUnicodeString
+  NTSTATUS
+  DestinationString PUNICODE_STRING
+  SourceString PCUNICODE_STRING
+  AllocateDestinationString BOOLEAN
+
+func RtlDowncaseUnicodeString
+  NTSTATUS
+  UniDest PUNICODE_STRING
+  UniSource PCUNICODE_STRING
+  AllocateDestinationString BOOLEAN
+
+func RtlEraseUnicodeString
+  VOID
+  String PUNICODE_STRING
+
+func RtlAnsiStringToUnicodeString
+  NTSTATUS
+  DestinationString PUNICODE_STRING
+  SourceString PCANSI_STRING
+  AllocateDestinationString BOOLEAN
+
+func RtlUnicodeStringToAnsiString
+  NTSTATUS
+  DestinationString PANSI_STRING
+  SourceString PCUNICODE_STRING
+  AllocateDestinationString BOOLEAN
+
+func RtlAnsiCharToUnicodeChar
+  WCHAR
+  SourceCharacter PUCHAR*
+
+func RtlUpcaseUnicodeStringToAnsiString
+  NTSTATUS
+  DestinationString PANSI_STRING
+  SourceString PUNICODE_STRING
+  AllocateDestinationString BOOLEAN
+
+func RtlOemStringToUnicodeString
+  NTSTATUS
+  DestinationString PUNICODE_STRING
+  SourceString PCOEM_STRING
+  AllocateDestinationString BOOLEAN
+
+func RtlUnicodeStringToOemString
+  NTSTATUS
+  DestinationString POEM_STRING
+  SourceString PCUNICODE_STRING
+  AllocateDestinationString BOOLEAN
+
+func RtlUpcaseUnicodeStringToOemString
+  NTSTATUS
+  DestinationString POEM_STRING
+  SourceString PCUNICODE_STRING
+  AllocateDestinationString BOOLEAN
+
+func RtlUnicodeStringToCountedOemString
+  NTSTATUS
+  DestinationString POEM_STRING
+  SourceString PCUNICODE_STRING
+  AllocateDestinationString BOOLEAN
+
+func RtlUpcaseUnicodeStringToCountedOemString
+  NTSTATUS
+  DestinationString POEM_STRING
+  SourceString PCUNICODE_STRING
+  AllocateDestinationString BOOLEAN
+
+func RtlMultiByteToUnicodeN
+  NTSTATUS
+  UnicodeString PWCHAR outputOnly
+  UnicodeSize ULONG
+  ResultSize PULONG
+  MbString PCSTR
+  MbSize ULONG
+
+func RtlMultiByteToUnicodeSize
+  NTSTATUS
+  UnicodeSize PULONG
+  MbString PCSTR
+  MbSize ULONG
+
+func RtlUnicodeToMultiByteN
+  NTSTATUS
+  MbString PCHAR outputOnly
+  MbSize ULONG
+  ResultSize PULONG
+  UnicodeString PWCHAR
+  UnicodeSize ULONG
+
+func RtlUnicodeToMultiByteSize
+  NTSTATUS
+  MbSize PULONG
+  UnicodeString PWCHAR
+  UnicodeSize ULONG
+
+func RtlUpcaseUnicodeToMultiByteN
+  NTSTATUS
+  MbString PCHAR outputOnly
+  MbSize ULONG
+  ResultSize PULONG
+  UnicodeString PWCHAR
+  UnicodeSize ULONG
+
+func RtlOemToUnicodeN
+  NTSTATUS
+  UnicodeString PWSTR
+  MaxBytesInUnicodeString ULONG
+  BytesInUnicodeString PULONG
+  OemString PCHAR
+  BytesInOemString ULONG
+
+func RtlUnicodeToOemN
+  NTSTATUS
+  OemString PCHAR
+  OemSize ULONG
+  ResultSize PULONG
+  UnicodeString PWCHAR
+  UnicodeSize ULONG
+
+func RtlUpcaseUnicodeToOemN
+  NTSTATUS
+  OemString PCHAR
+  OemSize ULONG
+  ResultSize PULONG
+  UnicodeString PWCHAR
+  UnicodeSize ULONG
+
+func RtlConsoleMultiByteToUnicodeN
+  NTSTATUS
+  UnicodeString PWCH
+  MaxBytesInUnicodeString ULONG
+  BytesInUnicodeString PULONG
+  MultiByteString PCH
+  BytesInMultiByteString ULONG
+  pdwSpecialChar PULONG
+
+func RtlUTF8ToUnicodeN
+  NTSTATUS
+  UnicodeStringDestination PWSTR
+  UnicodeStringMaxByteCount ULONG
+  UnicodeStringActualByteCount PULONG
+  UTF8StringSource PCCH
+  UTF8StringByteCount ULONG
+
+func RtlUnicodeToUTF8N
+  NTSTATUS
+  UTF8StringDestination PCHAR
+  UTF8StringMaxByteCount ULONG
+  UTF8StringActualByteCount PULONG
+  UnicodeStringSource PCWCH
+  UnicodeStringByteCount ULONG
+
+func RtlCustomCPToUnicodeN
+  NTSTATUS
+  CustomCP PCPTABLEINFO
+  UnicodeString PWCH
+  MaxBytesInUnicodeString ULONG
+  BytesInUnicodeString PULONG
+  CustomCPString PCH
+  BytesInCustomCPString ULONG
+
+func RtlUnicodeToCustomCPN
+  NTSTATUS
+  CustomCP PCPTABLEINFO
+  CustomCPString PCH
+  MaxBytesInCustomCPString ULONG
+  BytesInCustomCPString PULONG
+  UnicodeString PWCH
+  BytesInUnicodeString ULONG
+
+func RtlUpcaseUnicodeToCustomCPN
+  NTSTATUS
+  CustomCP PCPTABLEINFO
+  CustomCPString PCH
+  MaxBytesInCustomCPString ULONG
+  BytesInCustomCPString PULONG
+  UnicodeString PWCH
+  BytesInUnicodeString ULONG
+
+func RtlInitCodePageTable
+  VOID
+  TableBase PUSHORT
+  CodePageTable PCPTABLEINFO
+
+func RtlInitNlsTables
+  VOID
+  AnsiTableBase PUSHORT
+  OemTableBase PUSHORT
+  CaseTableBase PUSHORT
+  NlsTable PNLSTABLEINFO
+
+func RtlResetRtlTranslations
+  VOID
+  NlsTable PNLSTABLEINFO
+
+func RtlIsTextUnicode
+  BOOLEAN
+  Buffer PVOID length=Length
+  Length INT
+  Flags [IsTextUnicodeFlags*]
+
+func RtlNormalizeString
+  NTSTATUS
+  NormForm ULONG
+  SourceString PCWSTR
+  SourceStringLength LONG
+  DestinationString PWSTR
+  DestinationStringLength PLONG
+
+func RtlIsNormalizedString
+  NTSTATUS
+  NormForm ULONG
+  SourceString PCWSTR
+  SourceStringLength LONG
+  Normalized PBOOLEAN
+
+func RtlIsNameInExpression
+  BOOLEAN
+  Expression PUNICODE_STRING
+  Name PUNICODE_STRING
+  IgnoreCase BOOLEAN
+  UpcaseTable PWCH
+
+func RtlEqualDomainName
+  BOOLEAN
+  String1 PUNICODE_STRING
+  String2 PUNICODE_STRING
+
+func RtlEqualComputerName
+  BOOLEAN
+  String1 PUNICODE_STRING
+  String2 PUNICODE_STRING
+
+func RtlDnsHostNameToComputerName
+  NTSTATUS
+  ComputerNameString PUNICODE_STRING
+  DnsHostNameString PCUNICODE_STRING
+  AllocateComputerNameString BOOLEAN
+
+func RtlStringFromGUID
+  NTSTATUS
+  Guid REFGUID
+  GuidString PUNICODE_STRING
+
+func RtlGUIDFromString
+  NTSTATUS
+  GuidString PCUNICODE_STRING
+  Guid GUID*
+
+func RtlCompareAltitudes
+  success NotEqual=0
+  LONG
+  Altitude1 PUNICODE_STRING
+  Altitude2 PUNICODE_STRING
+
+func RtlxUnicodeStringToAnsiSize
+  success NotEqual=0
+  ULONG
+  UnicodeString PCUNICODE_STRING
+
+func RtlxUnicodeStringToOemSize
+  success NotEqual=0
+  ULONG
+  UnicodeString PCUNICODE_STRING
+
+func RtlxOemStringToUnicodeSize
+  success NotEqual=0
+  ULONG
+  OemString PCOEM_STRING
+
+func RtlxAnsiStringToUnicodeSize
+  success NotEqual=0
+  ULONG
+  AnsiString PCANSI_STRING
+
+func RtlGetDefaultCodePage
+  VOID
+  AnsiCodePage PUSHORT
+  OemCodePage PUSHORT
+
+func RtlAnsiStringToUnicodeSize
+  ULONG
+  AnsiString PANSI_STRING
+
+func RtlUnicodeStringToAnsiSize
+  ULONG
+  UnicodeString PUNICODE_STRING
+
+func RtlOemStringToCountedUnicodeString
+  NTSTATUS
+  DestinationString PUNICODE_STRING
+  SourceString PCOEM_STRING
+  AllocateDestinationString BOOLEAN
+
+func PfxInitialize
+  VOID
+  PrefixTable PPREFIX_TABLE
+
+func PfxInsertPrefix
+  BOOLEAN
+  PrefixTable PPREFIX_TABLE
+  Prefix PSTRING
+  PrefixTableEntry PPREFIX_TABLE_ENTRY
+
+func PfxRemovePrefix
+  VOID
+  PrefixTable PPREFIX_TABLE
+  PrefixTableEntry PPREFIX_TABLE_ENTRY
+
+func PfxFindPrefix
+  success NotEqual=0
+  PPREFIX_TABLE_ENTRY
+  PrefixTable PPREFIX_TABLE
+  FullName PSTRING
+
+func RtlInitializeUnicodePrefix
+  VOID
+  PrefixTable PUNICODE_PREFIX_TABLE
+
+func RtlInsertUnicodePrefix
+  BOOLEAN
+  PrefixTable PUNICODE_PREFIX_TABLE
+  Prefix PUNICODE_STRING
+  PrefixTableEntry PUNICODE_PREFIX_TABLE_ENTRY
+
+func RtlRemoveUnicodePrefix
+  VOID
+  PrefixTable PUNICODE_PREFIX_TABLE
+  PrefixTableEntry PUNICODE_PREFIX_TABLE_ENTRY
+
+func RtlFindUnicodePrefix
+  success NotEqual=0
+  PUNICODE_PREFIX_TABLE_ENTRY
+  PrefixTable PUNICODE_PREFIX_TABLE
+  FullName PUNICODE_STRING
+  CaseInsensitiveIndex ULONG
+
+func RtlNextUnicodePrefix
+  success NotEqual=0
+  PUNICODE_PREFIX_TABLE_ENTRY
+  PrefixTable PUNICODE_PREFIX_TABLE
+  Restart BOOLEAN
+
+func RtlGetCompressionWorkSpaceSize
+  NTSTATUS
+  CompressionFormatAndEngine USHORT
+  CompressBufferWorkSpaceSize PULONG
+  CompressFragmentWorkSpaceSize PULONG
+
+func RtlCompressBuffer
+  NTSTATUS
+  CompressionFormatAndEngine USHORT
+  UncompressedBuffer PUCHAR
+  UncompressedBufferSize ULONG
+  CompressedBuffer PUCHAR
+  CompressedBufferSize ULONG
+  UncompressedChunkSize ULONG
+  FinalCompressedSize PULONG
+  WorkSpace PVOID
+
+func RtlDecompressBuffer
+  NTSTATUS
+  CompressionFormat USHORT
+  UncompressedBuffer PUCHAR
+  UncompressedBufferSize ULONG
+  CompressedBuffer PUCHAR
+  CompressedBufferSize ULONG
+  FinalUncompressedSize PULONG
+
+func RtlDecompressBufferEx
+  NTSTATUS
+  CompressionFormat USHORT
+  UncompressedBuffer PUCHAR
+  UncompressedBufferSize ULONG
+  CompressedBuffer PUCHAR
+  CompressedBufferSize ULONG
+  FinalUncompressedSize PULONG
+  WorkSpace PVOID
+
+func RtlDecompressFragment
+  NTSTATUS
+  CompressionFormat USHORT
+  UncompressedFragment PUCHAR
+  UncompressedFragmentSize ULONG
+  CompressedBuffer PUCHAR
+  CompressedBufferSize ULONG
+  FragmentOffset ULONG
+  FinalUncompressedSize PULONG
+  WorkSpace PVOID
+
+func RtlDescribeChunk
+  NTSTATUS
+  CompressionFormat USHORT
+  CompressedBuffer PUCHAR*
+  EndOfCompressedBufferPlus1 PUCHAR
+  ChunkBuffer PUCHAR*
+  ChunkSize PULONG
+
+func RtlReserveChunk
+  NTSTATUS
+  CompressionFormat USHORT
+  CompressedBuffer PUCHAR*
+  EndOfCompressedBufferPlus1 PUCHAR
+  ChunkBuffer PUCHAR*
+  ChunkSize ULONG
+
+func RtlDecompressChunks
+  NTSTATUS
+  UncompressedBuffer PUCHAR
+  UncompressedBufferSize ULONG
+  CompressedBuffer PUCHAR
+  CompressedBufferSize ULONG
+  CompressedTail PUCHAR
+  CompressedTailSize ULONG
+  CompressedDataInfo PCOMPRESSED_DATA_INFO
+
+func RtlCompressChunks
+  NTSTATUS
+  UncompressedBuffer PUCHAR
+  UncompressedBufferSize ULONG
+  CompressedBuffer PUCHAR
+  CompressedBufferSize ULONG
+  CompressedDataInfo PCOMPRESSED_DATA_INFO
+  CompressedDataInfoLength ULONG
+  WorkSpace PVOID
+
+func RtlConvertLCIDToString
+  NTSTATUS
+  LcidValue LCID
+  Base ULONG
+  Padding ULONG
+  pResultBuf PWSTR
+  Size ULONG
+
+func RtlIsValidLocaleName
+  BOOLEAN
+  LocaleName PWSTR
+  Flags ULONG
+
+func RtlGetParentLocaleName
+  NTSTATUS
+  LocaleName PWSTR
+  ParentLocaleName PUNICODE_STRING
+  Flags ULONG
+  AllocateDestinationString BOOLEAN
+
+func RtlLcidToLocaleName
+  NTSTATUS
+  lcid LCID
+  LocaleName PUNICODE_STRING
+  Flags ULONG
+  AllocateDestinationString BOOLEAN
+
+func RtlLocaleNameToLcid
+  NTSTATUS
+  LocaleName PWSTR
+  lcid PLCID
+  Flags ULONG
+
+func RtlLCIDToCultureName
+  BOOLEAN
+  Lcid LCID
+  String PUNICODE_STRING
+
+func RtlCultureNameToLCID
+  BOOLEAN
+  String PUNICODE_STRING
+  Lcid PLCID
+
+func RtlCleanUpTEBLangLists
+  VOID
+
+func RtlGetLocaleFileMappingAddress
+  NTSTATUS
+  BaseAddress PVOID*
+  DefaultLocaleId PLCID
+  DefaultCasingTableSize PLARGE_INTEGER
+
+func RtlAcquirePebLock
+  VOID
+
+func RtlReleasePebLock
+  VOID
+
+func RtlTryAcquirePebLock
+  LOGICAL
+
+func RtlAllocateFromPeb
+  NTSTATUS
+  Size ULONG
+  Block PVOID*
+
+func RtlFreeToPeb
+  NTSTATUS
+  Block PVOID
+  Size ULONG
+
+func RtlGetCurrentPeb
+  success NotEqual=0
+  PPEB
+
+func RtlCreateProcessParameters
+  NTSTATUS
+  ProcessParameters PRTL_USER_PROCESS_PARAMETERS*
+  ImagePathName PUNICODE_STRING
+  DllPath PUNICODE_STRING
+  CurrentDirectory PUNICODE_STRING
+  CommandLine PUNICODE_STRING
+  Environment PWSTR
+  WindowTitle PUNICODE_STRING
+  DesktopInfo PUNICODE_STRING
+  ShellInfo PUNICODE_STRING
+  RuntimeInfo PUNICODE_STRING
+
+func RtlCreateProcessParametersEx
+  NTSTATUS
+  pProcessParameters PRTL_USER_PROCESS_PARAMETERS*
+  ImagePathName PUNICODE_STRING
+  DllPath PUNICODE_STRING
+  CurrentDirectory PUNICODE_STRING
+  CommandLine PUNICODE_STRING
+  Environment PVOID
+  WindowTitle PUNICODE_STRING
+  DesktopInfo PUNICODE_STRING
+  ShellInfo PUNICODE_STRING
+  RuntimeData PUNICODE_STRING
+  Flags ULONG
+
+func RtlDestroyProcessParameters
+  NTSTATUS
+  ProcessParameters PRTL_USER_PROCESS_PARAMETERS
+
+func RtlNormalizeProcessParams
+  success NotEqual=0
+  PRTL_USER_PROCESS_PARAMETERS
+  ProcessParameters PRTL_USER_PROCESS_PARAMETERS
+
+func RtlDeNormalizeProcessParams
+  success NotEqual=0
+  PRTL_USER_PROCESS_PARAMETERS
+  ProcessParameters PRTL_USER_PROCESS_PARAMETERS
+
+func RtlCreateUserProcess
+  NTSTATUS
+  ImageFileName PUNICODE_STRING
+  Attributes ULONG
+  ProcessParameters PRTL_USER_PROCESS_PARAMETERS
+  ProcessSecutityDescriptor PSECURITY_DESCRIPTOR
+  ThreadSecurityDescriptor PSECURITY_DESCRIPTOR
+  ParentProcess HANDLE
+  CurrentDirectory BOOLEAN
+  DebugPort HANDLE
+  ExceptionPort HANDLE
+  ProcessInfo PRTL_USER_PROCESS_INFORMATION
+
+func RtlExitUserProcess
+  VOID
+  ExitStatus NTSTATUS
+
+func RtlCloneUserProcess
+  NTSTATUS
+  ProcessFlags [RTL_CLONE_PROCESS_FLAGS]
+  ProcessSecurityDescriptor PSECURITY_DESCRIPTOR
+  ThreadSecurityDescriptor PSECURITY_DESCRIPTOR
+  DebugPort HANDLE
+  ProcessInformation PRTL_USER_PROCESS_INFORMATION
+
+func RtlUpdateClonedCriticalSection
+  VOID
+  CriticalSection PRTL_CRITICAL_SECTION
+
+func RtlUpdateClonedSRWLock
+  VOID
+  SRWLock PRTL_SRWLOCK
+  Shared LOGICAL
+
+func RtlCreateProcessReflection
+  NTSTATUS
+  ProcessHandle HANDLE
+  Flags ULONG
+  StartRoutine PVOID
+  StartContext PVOID
+  EventHandle HANDLE
+  ReflectionInformation PRTLP_PROCESS_REFLECTION_REFLECTION_INFORMATION
+
+func RtlSetProcessIsCritical
+  VOID
+  NewValue BOOLEAN
+  OldValue PBOOLEAN
+  IsWinlogon BOOLEAN
+
+func RtlSetThreadIsCritical
+  NTSTATUS
+  NewValue BOOLEAN
+  OldValue PBOOLEAN
+  CheckFlag BOOLEAN
+
+func RtlCreateUserThread
+  NTSTATUS
+  ProcessHandle [ProcessHandle]
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  CreateSuspended BOOLEAN
+  StackZeroBits ULONG
+  StackReserve SIZE_T
+  StackCommit SIZE_T
+  StartAddress PTHREAD_START_ROUTINE
+  Parameter PVOID
+  ThreadHandle PHANDLE
+  ClientId PCLIENT_ID
+
+func RtlExitUserThread
+  VOID
+  Status NTSTATUS
+
+func RtlCreateUserStack
+  NTSTATUS
+  CommittedStackSize SIZE_T
+  MaximumStackSize SIZE_T
+  ZeroBits ULONG_PTR
+  PageSize SIZE_T
+  ReserveAlignment ULONG_PTR
+  InitialTeb PINITIAL_TEB
+
+func RtlInitializeContext
+  VOID
+  ProcessHandle [ProcessHandle]
+  ThreadContext PCONTEXT
+  ThreadStartParam PVOID
+  ThreadStartAddress PTHREAD_START_ROUTINE
+  InitialTeb PINITIAL_TEB
+
+func RtlRemoteCall
+  NTSTATUS
+  Process HANDLE
+  Thread HANDLE
+  CallSite PVOID
+  ArgumentCount ULONG
+  Arguments PULONG
+  PassContext BOOLEAN
+  AlreadySuspended BOOLEAN
+
+func RtlWow64GetThreadContext
+  NTSTATUS
+  ThreadHandle HANDLE
+  ThreadContext PWOW64_CONTEXT
+
+func RtlWow64SetThreadContext
+  NTSTATUS
+  ThreadHandle HANDLE
+  ThreadContext PWOW64_CONTEXT
+
+func RtlLockCurrentThread
+  NTSTATUS
+
+func RtlUnlockCurrentThread
+  NTSTATUS
+
+func RtlPcToFileHeader
+  success NotEqual=0
+  PVOID
+  PcValue PVOID
+  BaseOfImage PVOID*
+
+func RtlImageNtHeader
+  success NotEqual=0
+  PIMAGE_NT_HEADERS
+  BaseAddress [HMODULE-PVOID]
+
+func RtlImageNtHeaderEx
+  NTSTATUS
+  Flags [RTL_IMAGE_NT_HEADER_EX_FLAGS]
+  BaseAddress [HMODULE-PVOID]
+  Size ULONGLONG
+  NtHeader PIMAGE_NT_HEADERS*
+
+func RtlAddressInSectionTable
+  success NotEqual=0
+  PVOID
+  NtHeaders PIMAGE_NT_HEADERS
+  BaseOfImage PVOID
+  VirtualAddress ULONG
+
+func RtlSectionTableFromVirtualAddress
+  success NotEqual=0
+  PIMAGE_SECTION_HEADER
+  NtHeaders PIMAGE_NT_HEADERS
+  BaseOfImage PVOID
+  VirtualAddress ULONG
+
+func RtlImageDirectoryEntryToData
+  success NotEqual=0
+  PVOID
+  BaseAddress [HMODULE-PVOID]
+  MappedAsImage BOOLEAN
+  Directory USHORT
+  Size PULONG
+
+func RtlImageRvaToSection
+  success NotEqual=0
+  PIMAGE_SECTION_HEADER
+  NtHeader PIMAGE_NT_HEADERS
+  BaseAddress PVOID
+  Rva ULONG
+
+func RtlImageRvaToVa
+  success NotEqual=0
+  PVOID
+  NtHeader PIMAGE_NT_HEADERS
+  BaseAddress PVOID
+  Rva ULONG
+  SectionHeader PIMAGE_SECTION_HEADER*
+
+func RtlCompareMemoryUlong
+  success NotEqual=0
+  SIZE_T
+  Source PVOID
+  Length SIZE_T
+  Pattern ULONG
+
+func RtlFillMemoryUlong
+  VOID
+  Destination PVOID
+  Length ULONG
+  Fill ULONG
+
+func RtlFillMemoryUlonglong
+  VOID
+  Destination PVOID
+  Length SIZE_T
+  Pattern ULONGLONG
+
+func RtlCompareMemory
+  SIZE_T
+  Source1 "const VOID*"
+  Source2 "const VOID*"
+  Length SIZE_T
+
+func RtlCopyMemory
+  VOID
+  Destination VOID*
+  Source "const VOID*"
+  Length SIZE_T
+
+func RtlMoveMemory
+  VOID
+  Destination VOID*
+  Source "const VOID*"
+  Length SIZE_T
+
+func RtlZeroMemory
+  VOID
+  Destination VOID*
+  Length SIZE_T
+
+func RtlCreateEnvironment
+  NTSTATUS
+  Inherit BOOLEAN
+  Environment PWSTR*
+
+func RtlCreateEnvironmentEx
+  NTSTATUS
+  SourceEnv PVOID
+  Environment PVOID*
+  Flags [RTL_CREATE_ENVIRONMENT_EX_FLAGS]
+
+func RtlDestroyEnvironment
+  VOID
+  Environment PWSTR
+
+func RtlSetCurrentEnvironment
+  VOID
+  NewEnvironment PVOID
+  OldEnvironment PVOID*
+
+func RtlSetEnvironmentVar
+  NTSTATUS
+  Environment PWSTR*
+  Name PWSTR
+  NameLength SIZE_T
+  Value PWSTR
+  ValueLength SIZE_T
+
+func RtlSetEnvironmentVariable
+  NTSTATUS
+  Environment PWSTR*
+  Name PUNICODE_STRING
+  Value PUNICODE_STRING
+
+func RtlQueryEnvironmentVariable
+  NTSTATUS
+  Environment PVOID
+  Name PWSTR
+  NameLength SIZE_T
+  Value PWSTR outputOnly
+  ValueLength SIZE_T
+  ReturnLength PSIZE_T
+
+func RtlQueryEnvironmentVariable_U
+  NTSTATUS
+  Environment PWSTR
+  Name PUNICODE_STRING
+  Value PUNICODE_STRING
+
+func RtlExpandEnvironmentStrings
+  NTSTATUS
+  Environment PVOID
+  Src PWSTR
+  SrcLength SIZE_T
+  Dst PWSTR
+  DstLength SIZE_T
+  ReturnLength PSIZE_T
+
+func RtlExpandEnvironmentStrings_U
+  NTSTATUS
+  Environment PWSTR
+  Source PUNICODE_STRING
+  Destination PUNICODE_STRING
+  Length PULONG
+
+func RtlSetEnvironmentStrings
+  NTSTATUS
+  NewEnvironment PWCHAR
+  NewEnvironmentSize SIZE_T
+
+func RtlGenerate8dot3Name
+  VOID
+  Name PUNICODE_STRING
+  AllowExtendedCharacters BOOLEAN
+  Context PGENERATE_NAME_CONTEXT
+  Name8dot3 PUNICODE_STRING
+
+func RtlDetermineDosPathNameType_U
+  success NotEqual=0
+  RTL_PATH_TYPE
+  Path PCWSTR
+
+func RtlIsDosDeviceName_U
+  success NotEqual=0
+  ULONG
+  Name PWSTR
+
+func RtlIsDosDeviceName_Ustr
+  success NotEqual=0
+  ULONG
+  Name PUNICODE_STRING
+
+func RtlGetFullPathName_U
+  success NotEqual=0
+  ULONG
+  FileName PCWSTR
+  Size ULONG
+  Buffer PWSTR outputOnly
+  ShortName PWSTR* outputOnly
+
+func RtlGetFullPathName_UEx
+  NTSTATUS
+  FileName PWSTR
+  BufferLength ULONG
+  Buffer PWSTR
+  FilePart PWSTR*
+  InputPathType RTL_PATH_TYPE*
+
+func RtlGetFullPathName_UstrEx
+  NTSTATUS
+  FileName PUNICODE_STRING
+  StaticString PUNICODE_STRING
+  DynamicString PUNICODE_STRING
+  StringUsed PUNICODE_STRING*
+  FilePartPrefixCch SIZE_T*
+  NameInvalid PBOOLEAN
+  InputPathType RTL_PATH_TYPE*
+  BytesRequired SIZE_T*
+
+func RtlGetCurrentDirectory_U
+  success NotEqual=0
+  ULONG
+  MaximumLength ULONG
+  Buffer PWSTR outputOnly
+
+func RtlSetCurrentDirectory_U
+  NTSTATUS
+  name PUNICODE_STRING
+
+func RtlGetLongestNtPathLength
+  success NotEqual=0
+  ULONG
+
+func RtlDosPathNameToNtPathName_U
+  BOOLEAN
+  DosPathName PCWSTR
+  NtPathName PUNICODE_STRING
+  NtFileNamePart PCWSTR*
+  DirectoryInfo CURDIR*
+
+func RtlDosPathNameToNtPathName_U_WithStatus
+  NTSTATUS
+  DosFileName PWSTR
+  NtFileName PUNICODE_STRING
+  FilePart PWSTR*
+  RelativeName PRTL_RELATIVE_NAME_U
+
+func RtlDosPathNameToRelativeNtPathName_U
+  BOOLEAN
+  DosFileName PWSTR
+  NtFileName PUNICODE_STRING
+  FilePart PWSTR*
+  RelativeName PRTL_RELATIVE_NAME_U
+
+func RtlDosPathNameToRelativeNtPathName_U_WithStatus
+  NTSTATUS
+  DosFileName PWSTR
+  NtFileName PUNICODE_STRING
+  FilePart PWSTR*
+  RelativeName PRTL_RELATIVE_NAME_U
+
+func RtlReleaseRelativeName
+  VOID
+  RelativeName PRTL_RELATIVE_NAME_U
+
+func RtlDosSearchPath_U
+  success NotEqual=0
+  ULONG
+  Path PCWSTR
+  FileName PCWSTR
+  Extension PCWSTR
+  BufferSize ULONG
+  Buffer PWSTR
+  PartName PWSTR*
+
+func RtlDosSearchPath_Ustr
+  NTSTATUS
+  Flags [RTL_DOS_SEARCH_PATH_FLAG]
+  Path PUNICODE_STRING
+  FileName PUNICODE_STRING
+  DefaultExtension PUNICODE_STRING
+  StaticString PUNICODE_STRING
+  DynamicString PUNICODE_STRING
+  FullFileNameOut PCUNICODE_STRING*
+  FilePartPrefixCch SIZE_T*
+  BytesRequired SIZE_T*
+
+func RtlDoesFileExists_U
+  BOOLEAN
+  FileName PCWSTR
+
+func RtlDoesFileExists_UstrEx
+  BOOLEAN
+  FileName PCUNICODE_STRING
+  SucceedIfBusy BOOLEAN
+
+func RtlDetermineDosPathNameType_Ustr
+  success NotEqual=0
+  ULONG
+  Path PCUNICODE_STRING
+
+func RtlGetFullPathName_Ustr
+  success NotEqual=0
+  ULONG
+  FileName PUNICODE_STRING
+  Size ULONG
+  Buffer PWSTR
+  ShortName PWSTR*
+  InvalidName PBOOLEAN
+  PathType RTL_PATH_TYPE*
+
+func RtlIsNameLegalDOS8Dot3
+  BOOLEAN
+  Name PCUNICODE_STRING
+  OemName POEM_STRING
+  NameContainsSpaces PBOOLEAN
+
+func RtlDosApplyFileIsolationRedirection_Ustr
+  NTSTATUS
+  Unknown BOOLEAN
+  OriginalName PUNICODE_STRING
+  Extension PUNICODE_STRING
+  RedirectedName PUNICODE_STRING
+  RedirectedName2 PUNICODE_STRING
+  OriginalName2 PUNICODE_STRING*
+  Unknown1 PVOID
+  Unknown2 PVOID
+  Unknown3 PVOID
+
+func RtlCreateHeap
+  success NotEqual=0
+  PVOID
+  Flags [HEAP_FLAGS_ULONG]
+  BaseAddress PVOID
+  SizeToReserve SIZE_T
+  SizeToCommit SIZE_T
+  Lock PVOID
+  Parameters PRTL_HEAP_PARAMETERS
+
+func RtlDestroyHeap
+  success Equal=0
+  PVOID
+  HeapHandle PVOID
+
+func RtlAllocateHeap
+  success NotEqual=0
+  PVOID
+  HeapHandle PVOID
+  Flags [HEAP_FLAGS_ULONG]
+  Size SIZE_T
+
+func RtlFreeHeap
+  BOOLEAN
+  HeapHandle PVOID
+  Flags [HEAP_FLAGS_ULONG]
+  HeapBase PVOID
+
+func RtlSizeHeap
+  success NotEqual=0
+  SIZE_T
+  HeapHandle PVOID
+  Flags [HEAP_FLAGS_ULONG]
+  MemoryPointer PVOID
+
+func RtlZeroHeap
+  NTSTATUS
+  HeapHandle PVOID
+  Flags ULONG
+
+func RtlProtectHeap
+  success NotEqual=0
+  PVOID
+  HeapHandle PVOID
+  Protect BOOLEAN
+
+func RtlLockHeap
+  BOOLEAN
+  HeapHandle PVOID
+
+func RtlUnlockHeap
+  BOOLEAN
+  HeapHandle PVOID
+
+func RtlReAllocateHeap
+  success NotEqual=0
+  PVOID
+  HeapHandle PVOID
+  Flags [HEAP_FLAGS_ULONG]
+  Ptr PVOID
+  Size SIZE_T
+
+func RtlGetUserInfoHeap
+  BOOLEAN
+  HeapHandle PVOID
+  Flags ULONG
+  BaseAddress PVOID
+  UserValue PVOID*
+  UserFlags PULONG
+
+func RtlSetUserValueHeap
+  BOOLEAN
+  HeapHandle PVOID
+  Flags ULONG
+  BaseAddress PVOID
+  UserValue PVOID
+
+func RtlSetUserFlagsHeap
+  BOOLEAN
+  HeapHandle PVOID
+  Flags ULONG
+  BaseAddress PVOID
+  UserFlags ULONG
+
+func RtlCreateTagHeap
+  success NotEqual=0
+  ULONG
+  HeapHandle PVOID
+  Flags ULONG
+  TagName PWSTR
+  TagSubName PWSTR
+
+func RtlQueryTagHeap
+  success NotEqual=0
+  PWSTR
+  HeapHandle PVOID
+  Flags ULONG
+  TagIndex USHORT
+  ResetCounters BOOLEAN
+  HeapTagInfo PRTL_HEAP_TAG_INFO
+
+func RtlExtendHeap
+  success NotEqual=0
+  ULONG
+  HeapHandle PVOID
+  Flags [HEAP_FLAGS_ULONG]
+  Base PVOID
+  Size SIZE_T
+
+func RtlCompactHeap
+  success NotEqual=0
+  ULONG
+  HeapHandle PVOID
+  Flags [HEAP_FLAGS_ULONG]
+
+func RtlValidateHeap
+  BOOLEAN
+  HeapHandle PVOID
+  Flags [HEAP_FLAGS_ULONG]
+  BaseAddress PVOID
+
+func RtlValidateProcessHeaps
+  BOOLEAN
+
+func RtlGetProcessHeaps
+  success NotEqual=0
+  ULONG
+  HeapCount ULONG
+  HeapArray HANDLE* postCount=Return
+
+func RtlEnumProcessHeaps
+  NTSTATUS
+  HeapEnumerationRoutine PHEAP_ENUMERATION_ROUTINE
+  Param PVOID
+
+func RtlUsageHeap
+  NTSTATUS
+  HeapHandle PVOID
+  Flags [HEAP_FLAGS_ULONG]
+  Usage PRTL_HEAP_USAGE
+
+func RtlWalkHeap
+  NTSTATUS
+  HeapHandle PVOID
+  HeapEntry PVOID
+
+func RtlQueryHeapInformation
+  NTSTATUS
+  HeapHandle PVOID
+  HeapInformationClass HEAP_INFORMATION_CLASS
+  HeapInformation PVOID
+  HeapInformationLength SIZE_T
+  ReturnLength PSIZE_T
+
+func RtlSetHeapInformation
+  NTSTATUS
+  HeapHandle PVOID
+  HeapInformationClass HEAP_INFORMATION_CLASS
+  HeapInformation PVOID
+  HeapInformationLength SIZE_T
+
+func RtlMultipleAllocateHeap
+  success NotEqual=0
+  ULONG
+  HeapHandle PVOID
+  Flags ULONG
+  Size SIZE_T
+  Count ULONG
+  Array PVOID*
+
+func RtlMultipleFreeHeap
+  success NotEqual=0
+  ULONG
+  HeapHandle PVOID
+  Flags ULONG
+  Count ULONG
+  Array PVOID*
+
+func RtlDetectHeapLeaks
+  VOID
+
+func RtlCreateMemoryZone
+  NTSTATUS
+  MemoryZone PVOID*
+  InitialSize SIZE_T
+  Flags ULONG
+
+func RtlDestroyMemoryZone
+  NTSTATUS
+  MemoryZone PVOID
+
+func RtlAllocateMemoryZone
+  NTSTATUS
+  MemoryZone PVOID
+  BlockSize SIZE_T
+  Block PVOID*
+
+func RtlResetMemoryZone
+  NTSTATUS
+  MemoryZone PVOID
+
+func RtlLockMemoryZone
+  NTSTATUS
+  MemoryZone PVOID
+
+func RtlUnlockMemoryZone
+  NTSTATUS
+  MemoryZone PVOID
+
+func RtlCreateMemoryBlockLookaside
+  NTSTATUS
+  MemoryBlockLookaside PVOID*
+  Flags ULONG
+  InitialSize ULONG
+  MinimumBlockSize ULONG
+  MaximumBlockSize ULONG
+
+func RtlDestroyMemoryBlockLookaside
+  NTSTATUS
+  MemoryBlockLookaside PVOID
+
+func RtlAllocateMemoryBlockLookaside
+  NTSTATUS
+  MemoryBlockLookaside PVOID
+  BlockSize ULONG
+  Block PVOID*
+
+func RtlFreeMemoryBlockLookaside
+  NTSTATUS
+  MemoryBlockLookaside PVOID
+  Block PVOID
+
+func RtlExtendMemoryBlockLookaside
+  NTSTATUS
+  MemoryBlockLookaside PVOID
+  Increment ULONG
+
+func RtlResetMemoryBlockLookaside
+  NTSTATUS
+  MemoryBlockLookaside PVOID
+
+func RtlLockMemoryBlockLookaside
+  NTSTATUS
+  MemoryBlockLookaside PVOID
+
+func RtlUnlockMemoryBlockLookaside
+  NTSTATUS
+  MemoryBlockLookaside PVOID
+
+func RtlGetCurrentTransaction
+  success NotEqual=0
+  HANDLE
+
+func RtlSetCurrentTransaction
+  LOGICAL
+  TransactionHandle HANDLE
+
+func RtlCopyLuid
+  VOID
+  LuidDest PLUID
+  LuidSrc PLUID
+
+func RtlCopyLuidAndAttributesArray
+  VOID
+  Count ULONG
+  Src PLUID_AND_ATTRIBUTES count=Count
+  Dest PLUID_AND_ATTRIBUTES
+
+func RtlCreateQueryDebugBuffer
+  success NotEqual=0
+  PRTL_DEBUG_INFORMATION
+  Size ULONG
+  EventPair BOOLEAN
+
+func RtlDestroyQueryDebugBuffer
+  NTSTATUS
+  DebugBuffer PRTL_DEBUG_INFORMATION
+
+func RtlCommitDebugInfo
+  success NotEqual=0
+  PVOID
+  Buffer PRTL_DEBUG_INFORMATION
+  Size SIZE_T
+
+func RtlDeCommitDebugInfo
+  VOID
+  Buffer PRTL_DEBUG_INFORMATION
+  p PVOID
+  Size SIZE_T
+
+func RtlQueryProcessDebugInformation
+  NTSTATUS
+  ProcessId ULONG
+  DebugInfoClassMask [RTL_DEBUG_QUERY_FLAGS]
+  DebugBuffer PRTL_DEBUG_INFORMATION
+
+func RtlFindMessage
+  NTSTATUS
+  BaseAddress PVOID
+  Type ULONG
+  Language ULONG
+  MessageId ULONG
+  MessageResourceEntry PRTL_MESSAGE_RESOURCE_ENTRY*
+
+func RtlFormatMessage
+  NTSTATUS
+  MessageFormat PWSTR
+  MaximumWidth ULONG
+  IgnoreInserts BOOLEAN
+  ArgumentsAreAnsi BOOLEAN
+  ArgumentsAreAnArray BOOLEAN
+  Arguments va_list*
+  Buffer PWSTR
+  Length ULONG
+  ReturnLength PULONG
+
+func RtlFormatMessageEx
+  NTSTATUS
+  MessageFormat PWSTR
+  MaximumWidth ULONG
+  IgnoreInserts BOOLEAN
+  ArgumentsAreAnsi BOOLEAN
+  ArgumentsAreAnArray BOOLEAN
+  Arguments va_list*
+  Buffer PWSTR
+  Length ULONG
+  ReturnLength PULONG
+  ParseContext PPARSE_MESSAGE_CONTEXT
+
+func RtlNtStatusToDosError
+  [ERROR_CODE_ULONG]
+  Status NTSTATUS
+
+func RtlNtStatusToDosErrorNoTeb
+  [ERROR_CODE_ULONG]
+  Status NTSTATUS
+
+func RtlGetLastNtStatus
+  NTSTATUS
+
+func RtlGetLastWin32Error
+  [ERROR_CODE]
+
+func RtlSetLastWin32ErrorAndNtStatusFromNtStatus
+  VOID
+  Status NTSTATUS
+
+func RtlSetLastWin32Error
+  void
+  err [ERROR_CODE]
+
+func RtlRestoreLastWin32Error
+  VOID
+  Win32Error LONG
+
+func RtlGetThreadErrorMode
+  [RTL_ERRORMODE_FLAGS]
+
+func RtlSetThreadErrorMode
+  NTSTATUS
+  NewMode [RTL_ERRORMODE_FLAGS]
+  OldMode [RTL_ERRORMODE_FLAGS*]
+
+func RtlReportException
+  NTSTATUS
+  ExceptionRecord PEXCEPTION_RECORD
+  ContextRecord PCONTEXT
+  Flags ULONG
+
+func RtlWerpReportException
+  NTSTATUS
+  ProcessId ULONG
+  CrashReportSharedMem HANDLE
+  Flags ULONG
+  CrashVerticalProcessHandle PHANDLE
+
+func RtlReportSilentProcessExit
+  NTSTATUS
+  ProcessHandle HANDLE
+  ExitStatus NTSTATUS
+
+func RtlAddVectoredExceptionHandler
+  success NotEqual=0
+  PVOID
+  FirstHandler ULONG
+  VectoredHandler PVECTORED_EXCEPTION_HANDLER
+
+func RtlRemoveVectoredExceptionHandler
+  success NotEqual=0
+  ULONG
+  Handle PVOID
+
+func RtlAddVectoredContinueHandler
+  success NotEqual=0
+  PVOID
+  First ULONG
+  Handler PVECTORED_EXCEPTION_HANDLER
+
+func RtlRemoveVectoredContinueHandler
+  success NotEqual=0
+  ULONG
+  Handle PVOID
+
+func RtlUniform
+  ULONG
+  Seed PULONG
+
+func RtlRandom
+  success NotEqual=0
+  ULONG
+  Seed PULONG
+
+func RtlRandomEx
+  success NotEqual=0
+  ULONG
+  Seed PULONG
+
+func RtlComputeImportTableHash
+  NTSTATUS
+  hFile HANDLE
+  Hash PCHAR
+  ImportTableHashRevision ULONG
+
+func RtlIntegerToChar
+  NTSTATUS
+  Value ULONG
+  Base ULONG
+  Length ULONG
+  String PCHAR
+
+func RtlCharToInteger
+  NTSTATUS
+  String PCSZ
+  Base ULONG
+  Value PULONG
+
+func RtlIntegerToUnicodeString
+  NTSTATUS
+  Value ULONG
+  Base ULONG
+  String PUNICODE_STRING
+
+func RtlInt64ToUnicodeString
+  NTSTATUS
+  Value ULONGLONG
+  Base ULONG
+  String PUNICODE_STRING
+
+func RtlUnicodeStringToInteger
+  NTSTATUS
+  String PCUNICODE_STRING
+  Base ULONG
+  Value PULONG
+
+func RtlIntegerToUnicode
+  NTSTATUS
+  Value ULONG
+  Base ULONG
+  Length ULONG
+  String LPWSTR
+
+func RtlIpv4AddressToString bothCharset
+  success NotEqual=0
+  LPTSTR
+  Addr "const IN_ADDR*"
+  S LPTSTR
+
+func RtlIpv4AddressToStringEx bothCharset
+  NTSTATUS
+  Address "const IN_ADDR*"
+  Port USHORT
+  AddressString LPTSTR outputOnly
+  AddressStringLength PULONG
+
+func RtlIpv6AddressToString bothCharset
+  success Equal=0
+  LPTSTR
+  Addr "const IN6_ADDR*"
+  S LPTSTR
+
+func RtlIpv6AddressToStringEx bothCharset
+  NTSTATUS
+  Address "const IN6_ADDR*"
+  ScopeId ULONG
+  Port USHORT
+  AddressString LPTSTR
+  AddressStringLength PULONG
+
+func RtlIpv4StringToAddress bothCharset
+  NTSTATUS
+  String PCTSTR
+  Strict BOOLEAN
+  Terminator LPTSTR*
+  Addr IN_ADDR*
+
+func RtlIpv4StringToAddressEx bothCharset
+  NTSTATUS
+  AddressString PCTSTR
+  Strict BOOLEAN
+  Address IN_ADDR*
+  Port PUSHORT
+
+func RtlIpv6StringToAddress bothCharset
+  NTSTATUS
+  String PCTSTR
+  Terminator PCTSTR*
+  Addr IN6_ADDR*
+
+func RtlIpv6StringToAddressEx bothCharset
+  NTSTATUS
+  AddressString PCTSTR
+  Address IN6_ADDR*
+  ScopeId PULONG
+  Port PUSHORT
+
+func RtlCutoverTimeToSystemTime
+  BOOLEAN
+  CutoverTime PTIME_FIELDS
+  SystemTime PLARGE_INTEGER
+  CurrentSystemTime PLARGE_INTEGER
+  ThisYear BOOLEAN
+
+func RtlSystemTimeToLocalTime
+  NTSTATUS
+  SystemTime PLARGE_INTEGER
+  LocalTime PLARGE_INTEGER
+
+func RtlLocalTimeToSystemTime
+  NTSTATUS
+  LocalTime PLARGE_INTEGER
+  SystemTime PLARGE_INTEGER
+
+func RtlTimeToElapsedTimeFields
+  VOID
+  Time PLARGE_INTEGER
+  TimeFields PTIME_FIELDS
+
+func RtlTimeToTimeFields
+  VOID
+  Time PLARGE_INTEGER
+  TimeFields PTIME_FIELDS
+
+func RtlTimeFieldsToTime
+  BOOLEAN
+  TimeFields PTIME_FIELDS
+  Time PLARGE_INTEGER
+
+func RtlTimeToSecondsSince1980
+  BOOLEAN
+  Time PLARGE_INTEGER
+  ElapsedSeconds PULONG
+
+func RtlSecondsSince1980ToTime
+  VOID
+  ElapsedSeconds ULONG
+  Time PLARGE_INTEGER
+
+func RtlTimeToSecondsSince1970
+  BOOLEAN
+  Time PLARGE_INTEGER
+  SecondsSince1970 PULONG
+
+func RtlSecondsSince1970ToTime
+  VOID
+  SecondsSince1970 ULONG
+  Time PLARGE_INTEGER
+
+func RtlQueryTimeZoneInformation
+  NTSTATUS
+  TimeZoneInformation PRTL_TIME_ZONE_INFORMATION
+
+func RtlSetTimeZoneInformation
+  NTSTATUS
+  TimeZoneInformation PRTL_TIME_ZONE_INFORMATION
+
+func RtlInitializeBitMap
+  VOID
+  BitMapHeader PRTL_BITMAP
+  BitMapBuffer PULONG
+  SizeOfBitMap ULONG
+
+func RtlClearBit
+  VOID
+  BitMapHeader PRTL_BITMAP
+  BitNumber ULONG
+
+func RtlSetBit
+  VOID
+  BitMapHeader PRTL_BITMAP
+  BitNumber ULONG
+
+func RtlTestBit
+  BOOLEAN
+  BitMapHeader PRTL_BITMAP
+  BitNumber ULONG
+
+func RtlClearAllBits
+  VOID
+  BitMapHeader PRTL_BITMAP
+
+func RtlSetAllBits
+  VOID
+  BitMapHeader PRTL_BITMAP
+
+func RtlFindClearBits
+  ULONG
+  BitMapHeader PRTL_BITMAP
+  NumberToFind ULONG
+  HintIndex ULONG
+
+func RtlFindClearBitsAndSet
+  ULONG
+  BitMapHeader PRTL_BITMAP
+  NumberToFind ULONG
+  HintIndex ULONG
+
+func RtlFindSetBitsAndClear
+  ULONG
+  BitMapHeader PRTL_BITMAP
+  NumberToFind ULONG
+  HintIndex ULONG
+
+func RtlClearBits
+  VOID
+  BitMapHeader PRTL_BITMAP
+  StartingIndex ULONG
+  NumberToClear ULONG
+
+func RtlSetBits
+  VOID
+  BitMapHeader PRTL_BITMAP
+  StartingIndex ULONG
+  NumberToSet ULONG
+
+func RtlFindClearRuns
+  ULONG
+  BitMapHeader PRTL_BITMAP
+  RunArray PRTL_BITMAP_RUN
+  SizeOfRunArray ULONG
+  LocateLongestRuns BOOLEAN
+
+func RtlFindLongestRunClear
+  ULONG
+  BitMapHeader PRTL_BITMAP
+  StartingIndex PULONG
+
+func RtlFindFirstRunClear
+  ULONG
+  BitMapHeader PRTL_BITMAP
+  StartingIndex PULONG
+
+func RtlNumberOfClearBits
+  ULONG
+  BitMapHeader PRTL_BITMAP
+
+func RtlNumberOfSetBits
+  ULONG
+  BitMapHeader PRTL_BITMAP
+
+func RtlAreBitsClear
+  BOOLEAN
+  BitMapHeader PRTL_BITMAP
+  StartingIndex ULONG
+  Length ULONG
+
+func RtlAreBitsSet
+  BOOLEAN
+  BitMapHeader PRTL_BITMAP
+  StartingIndex ULONG
+  Length ULONG
+
+func RtlFindNextForwardRunClear
+  ULONG
+  BitMapHeader PRTL_BITMAP
+  FromIndex ULONG
+  StartingRunIndex PULONG
+
+func RtlFindLastBackwardRunClear
+  ULONG
+  BitMapHeader PRTL_BITMAP
+  FromIndex ULONG
+  StartingRunIndex PULONG
+
+func RtlInterlockedClearBitRun
+  VOID
+  BitMapHeader PRTL_BITMAP
+  StartingIndex ULONG
+  NumberToClear ULONG
+
+func RtlInterlockedSetBitRun
+  VOID
+  BitMapHeader PRTL_BITMAP
+  StartingIndex ULONG
+  NumberToSet ULONG
+
+func RtlFindLeastSignificantBit
+  CCHAR
+  Set ULONGLONG
+
+func RtlFindMostSignificantBit
+  CCHAR
+  Set ULONGLONG
+
+func RtlFindSetBits
+  ULONG
+  BitMapHeader PRTL_BITMAP
+  NumberToFind ULONG
+  HintIndex ULONG
+
+func RtlNumberOfSetBitsUlongPtr
+  ULONG
+  Target ULONG_PTR
+
+func RtlInitializeHandleTable
+  VOID
+  TableSize ULONG
+  HandleSize ULONG
+  HandleTable PRTL_HANDLE_TABLE
+
+func RtlDestroyHandleTable
+  VOID
+  HandleTable PRTL_HANDLE_TABLE
+
+func RtlAllocateHandle
+  success NotEqual=0
+  PRTL_HANDLE_TABLE_ENTRY
+  HandleTable PRTL_HANDLE_TABLE
+  Index PULONG
+
+func RtlFreeHandle
+  BOOLEAN
+  HandleTable PRTL_HANDLE_TABLE
+  Handle PRTL_HANDLE_TABLE_ENTRY
+
+func RtlIsValidHandle
+  BOOLEAN
+  HandleTable PRTL_HANDLE_TABLE
+  Handle PRTL_HANDLE_TABLE_ENTRY
+
+func RtlIsValidIndexHandle
+  BOOLEAN
+  HandleTable PRTL_HANDLE_TABLE
+  Index ULONG
+  Handle PRTL_HANDLE_TABLE_ENTRY*
+
+func RtlCreateAtomTable
+  NTSTATUS
+  TableSize ULONG
+  AtomTable PRTL_ATOM_TABLE*
+
+func RtlDestroyAtomTable
+  NTSTATUS
+  AtomTable PRTL_ATOM_TABLE
+
+func RtlEmptyAtomTable
+  NTSTATUS
+  AtomTableHandle PVOID
+  IncludePinnedAtoms BOOLEAN
+
+func RtlAddAtomToAtomTable
+  NTSTATUS
+  AtomTable PRTL_ATOM_TABLE
+  AtomName PWSTR
+  Atom PRTL_ATOM
+
+func RtlLookupAtomInAtomTable
+  NTSTATUS
+  AtomTable PRTL_ATOM_TABLE
+  AtomName PWSTR
+  Atom PRTL_ATOM
+
+func RtlDeleteAtomFromAtomTable
+  NTSTATUS
+  AtomTable PRTL_ATOM_TABLE
+  Atom RTL_ATOM
+
+func RtlPinAtomInAtomTable
+  NTSTATUS
+  AtomTable PRTL_ATOM_TABLE
+  Atom RTL_ATOM
+
+func RtlQueryAtomInAtomTable
+  NTSTATUS
+  AtomTable PRTL_ATOM_TABLE
+  Atom RTL_ATOM
+  RefCount PULONG
+  PinCount PULONG
+  AtomName PWSTR outputOnly
+  NameLength PULONG
+
+func RtlGetIntegerAtom
+  BOOLEAN
+  AtomName PWSTR
+  IntegerAtom PUSHORT
+
+func RtlValidSid
+  BOOLEAN
+  Sid PSID
+
+func RtlEqualSid
+  BOOLEAN
+  Sid1 PSID
+  Sid2 PSID
+
+func RtlLengthRequiredSid
+  success NotEqual=0
+  ULONG
+  SubAuthorityCount ULONG
+
+func RtlFreeSid
+  success Equal=0
+  PVOID
+  Sid PSID
+
+func RtlAllocateAndInitializeSid
+  NTSTATUS
+  IdentifierAuthority PSID_IDENTIFIER_AUTHORITY
+  SubAuthorityCount UCHAR
+  SubAuthority0 ULONG
+  SubAuthority1 ULONG
+  SubAuthority2 ULONG
+  SubAuthority3 ULONG
+  SubAuthority4 ULONG
+  SubAuthority5 ULONG
+  SubAuthority6 ULONG
+  SubAuthority7 ULONG
+  Sid PSID*
+
+func RtlInitializeSid
+  NTSTATUS
+  Sid PSID
+  IdentifierAuthority PSID_IDENTIFIER_AUTHORITY
+  SubAuthorityCount UCHAR
+
+func RtlIdentifierAuthoritySid
+  success NotEqual=0
+  PSID_IDENTIFIER_AUTHORITY
+  Sid PSID
+
+func RtlSubAuthoritySid
+  success NotEqual=0
+  PULONG
+  Sid PSID
+  SubAuthority ULONG
+
+func RtlSubAuthorityCountSid
+  success NotEqual=0
+  PUCHAR
+  Sid PSID
+
+func RtlLengthSid
+  success NotEqual=0
+  ULONG
+  Sid PSID
+
+func RtlCopySid
+  NTSTATUS
+  Length ULONG
+  Destination PSID
+  Source PSID
+
+func RtlCreateServiceSid
+  NTSTATUS
+  ServiceName PUNICODE_STRING
+  ServiceSid PSID
+  ServiceSidLength PULONG
+
+func RtlSidDominates
+  NTSTATUS
+  Sid1 PSID
+  Sid2 PSID
+  pbDominate PBOOLEAN
+
+func RtlSidEqualLevel
+  NTSTATUS
+  Sid1 PSID
+  Sid2 PSID
+  pbEqual PBOOLEAN
+
+func RtlSidIsHigherLevel
+  NTSTATUS
+  Sid1 PSID
+  Sid2 PSID
+  pbHigher PBOOLEAN
+
+func RtlCreateVirtualAccountSid
+  NTSTATUS
+  Name PUNICODE_STRING
+  BaseSubAuthority ULONG
+  Sid PSID
+  SidLength PULONG
+
+func RtlReplaceSidInSd
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  OldSid PSID
+  NewSid PSID
+  NumChanges ULONG*
+
+func RtlConvertSidToUnicodeString
+  NTSTATUS
+  DestinationString PUNICODE_STRING
+  Sid PSID
+  AllocateDestinationString BOOLEAN
+
+func RtlSidHashInitialize
+  NTSTATUS
+  SidAttr PSID_AND_ATTRIBUTES
+  SidCount ULONG
+  SidAttrHash PSID_AND_ATTRIBUTES_HASH
+
+func RtlSidHashLookup
+  success NotEqual=0
+  PSID_AND_ATTRIBUTES
+  SidAttrHash PSID_AND_ATTRIBUTES_HASH
+  Sid PSID
+
+func RtlCopySidAndAttributesArray
+  NTSTATUS
+  Count ULONG
+  Src PSID_AND_ATTRIBUTES count=Count
+  SidAreaSize ULONG
+  Dest PSID_AND_ATTRIBUTES
+  SidArea PVOID
+  RemainingSidArea PVOID*
+  RemainingSidAreaSize PULONG
+
+func RtlCreateSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  Revision ULONG
+
+func RtlValidSecurityDescriptor
+  BOOLEAN
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+
+func RtlLengthSecurityDescriptor
+  ULONG
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+
+func RtlValidRelativeSecurityDescriptor
+  BOOLEAN
+  SecurityDescriptorInput PSECURITY_DESCRIPTOR_RELATIVE
+  SecurityDescriptorLength ULONG
+  RequiredInformation SECURITY_INFORMATION
+
+func RtlGetControlSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  Control PSECURITY_DESCRIPTOR_CONTROL
+  Revision PULONG
+
+func RtlSetControlSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  ControlBitsOfInterest SECURITY_DESCRIPTOR_CONTROL
+  ControlBitsToSet SECURITY_DESCRIPTOR_CONTROL
+
+func RtlSetAttributesSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  Control SECURITY_DESCRIPTOR_CONTROL
+  Revision PULONG
+
+func RtlGetSecurityDescriptorRMControl
+  BOOLEAN
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  RMControl PUCHAR
+
+func RtlSetSecurityDescriptorRMControl
+  VOID
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  RMControl PUCHAR
+
+func RtlSetDaclSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  DaclPresent BOOLEAN
+  Dacl PACL
+  DaclDefaulted BOOLEAN
+
+func RtlGetDaclSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  DaclPresent PBOOLEAN
+  Dacl PACL*
+  DaclDefaulted PBOOLEAN
+
+func RtlSetSaclSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  SaclPresent BOOLEAN
+  Sacl PACL
+  SaclDefaulted BOOLEAN
+
+func RtlGetSaclSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  SaclPresent PBOOLEAN
+  Sacl PACL*
+  SaclDefaulted PBOOLEAN
+
+func RtlSetOwnerSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  Owner PSID
+  OwnerDefaulted BOOLEAN
+
+func RtlGetOwnerSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  Owner PSID*
+  OwnerDefaulted PBOOLEAN
+
+func RtlSetGroupSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  Group PSID
+  GroupDefaulted BOOLEAN
+
+func RtlGetGroupSecurityDescriptor
+  NTSTATUS
+  SecurityDescriptor PSECURITY_DESCRIPTOR
+  Group PSID*
+  GroupDefaulted PBOOLEAN
+
+func RtlMakeSelfRelativeSD
+  NTSTATUS
+  AbsoluteSD PSECURITY_DESCRIPTOR
+  SelfRelativeSD PSECURITY_DESCRIPTOR_RELATIVE
+  BufferLength PULONG
+
+func RtlAbsoluteToSelfRelativeSD
+  NTSTATUS
+  AbsoluteSecurityDescriptor PSECURITY_DESCRIPTOR
+  SelfRelativeSecurityDescriptor PSECURITY_DESCRIPTOR_RELATIVE
+  BufferLength PULONG
+
+func RtlSelfRelativeToAbsoluteSD
+  NTSTATUS
+  SelfRelativeSD PSECURITY_DESCRIPTOR_RELATIVE
+  AbsoluteSD PSECURITY_DESCRIPTOR
+  AbsoluteSDSize PULONG
+  Dacl PACL
+  DaclSize PULONG
+  Sacl PACL
+  SaclSize PULONG
+  Owner PSID
+  OwnerSize PULONG
+  PrimaryGroup PSID
+  PrimaryGroupSize PULONG
+
+func RtlSelfRelativeToAbsoluteSD2
+  NTSTATUS
+  SelfRelativeSD PSECURITY_DESCRIPTOR_RELATIVE
+  BufferSize PULONG
+
+func RtlCopySecurityDescriptor
+  NTSTATUS
+  pSourceSecurityDescriptor PSECURITY_DESCRIPTOR
+  pDestinationSecurityDescriptor PSECURITY_DESCRIPTOR
+
+func RtlCreateSecurityDescriptorRelative
+  NTSTATUS
+  SecurityDescriptor PISECURITY_DESCRIPTOR_RELATIVE
+  Revision ULONG
+
+func RtlAreAllAccessesGranted
+  BOOLEAN
+  GrantedAccess ACCESS_MASK
+  DesiredAccess ACCESS_MASK
+
+func RtlAreAnyAccessesGranted
+  BOOLEAN
+  GrantedAccess ACCESS_MASK
+  DesiredAccess ACCESS_MASK
+
+func RtlMapGenericMask
+  VOID
+  AccessMask PACCESS_MASK
+  GenericMapping PGENERIC_MAPPING
+
+func RtlCreateAcl
+  NTSTATUS
+  Acl PACL
+  AclSize ULONG
+  AclRevision ULONG
+
+func RtlValidAcl
+  BOOLEAN
+  Acl PACL
+
+func RtlQueryInformationAcl
+  NTSTATUS
+  Acl PACL
+  Information PVOID postLength=InformationLength
+  InformationLength ULONG
+  InformationClass ACL_INFORMATION_CLASS
+
+func RtlSetInformationAcl
+  NTSTATUS
+  Acl PACL
+  Information PVOID
+  InformationLength ULONG
+  InformationClass ACL_INFORMATION_CLASS
+
+func RtlAddAce
+  NTSTATUS
+  Acl PACL
+  AceRevision ULONG
+  StartingAceIndex ULONG
+  AceList PVOID
+  AceListLength ULONG
+
+func RtlDeleteAce
+  NTSTATUS
+  Acl PACL
+  AceIndex ULONG
+
+func RtlGetAce
+  NTSTATUS
+  Acl PACL
+  AceIndex ULONG
+  Ace PACE*
+
+func RtlFirstFreeAce
+  BOOLEAN
+  Acl PACL
+  Ace PACE*
+
+func RtlFindAceByType
+  success NotEqual=0
+  PVOID
+  pAcl PACL
+  AceType [ACE_TYPE|UCHAR]
+  pIndex PULONG
+
+func RtlOwnerAcesPresent
+  BOOLEAN
+  pAcl PACL
+
+func RtlAddAccessAllowedAce
+  NTSTATUS
+  Acl PACL
+  AceRevision ULONG
+  AccessMask ACCESS_MASK
+  Sid PSID
+
+func RtlAddAccessAllowedAceEx
+  NTSTATUS
+  pAcl PACL
+  AceRevision ULONG
+  AceFlags [ACE_FLAGS_ULONG]
+  AccessMask ACCESS_MASK
+  Sid PSID
+
+func RtlAddAccessDeniedAce
+  NTSTATUS
+  Acl PACL
+  Revision ULONG
+  AccessMask ACCESS_MASK
+  Sid PSID
+
+func RtlAddAccessDeniedAceEx
+  NTSTATUS
+  Acl PACL
+  Revision ULONG
+  Flags ULONG
+  AccessMask ACCESS_MASK
+  Sid PSID
+
+func RtlAddAuditAccessAce
+  NTSTATUS
+  Acl PACL
+  Revision ULONG
+  AccessMask ACCESS_MASK
+  Sid PSID
+  Success BOOLEAN
+  Failure BOOLEAN
+
+func RtlAddAuditAccessAceEx
+  NTSTATUS
+  Acl PACL
+  Revision ULONG
+  Flags ULONG
+  AccessMask ACCESS_MASK
+  Sid PSID
+  Success BOOLEAN
+  Failure BOOLEAN
+
+func RtlAddAccessAllowedObjectAce
+  NTSTATUS
+  pAcl PACL
+  dwAceRevision ULONG
+  AceFlags [ACE_FLAGS_ULONG]
+  AccessMask ACCESS_MASK
+  ObjectTypeGuid GUID*
+  InheritedObjectTypeGuid GUID*
+  pSid PSID
+
+func RtlAddAccessDeniedObjectAce
+  NTSTATUS
+  pAcl PACL
+  dwAceRevision ULONG
+  AceFlags [ACE_FLAGS_ULONG]
+  AccessMask ACCESS_MASK
+  ObjectTypeGuid GUID*
+  InheritedObjectTypeGuid GUID*
+  pSid PSID
+
+func RtlAddAuditAccessObjectAce
+  NTSTATUS
+  Acl PACL
+  Revision ULONG
+  Flags ULONG
+  AccessMask ACCESS_MASK
+  ObjectTypeGuid GUID*
+  InheritedObjectTypeGuid GUID*
+  Sid PSID
+  Success BOOLEAN
+  Failure BOOLEAN
+
+func RtlAddCompoundAce
+  NTSTATUS
+  Acl PACL
+  AceRevision ULONG
+  AceType [ACE_TYPE|UCHAR]
+  AccessMask ACCESS_MASK
+  ServerSid PSID
+  ClientSid PSID
+
+func RtlAddMandatoryAce
+  NTSTATUS
+  Acl PACL
+  Revision ULONG
+  Flags ULONG
+  MandatoryFlags ULONG
+  AceType [ACE_TYPE|UCHAR]
+  LabelSid PSID
+
+func RtlNewSecurityObject
+  NTSTATUS
+  ParentDescriptor PSECURITY_DESCRIPTOR
+  CreatorDescriptor PSECURITY_DESCRIPTOR
+  NewDescriptor PSECURITY_DESCRIPTOR*
+  IsDirectoryObject BOOLEAN
+  Token HANDLE
+  GenericMapping PGENERIC_MAPPING
+
+func RtlNewSecurityObjectEx
+  NTSTATUS
+  ParentDescriptor PSECURITY_DESCRIPTOR
+  CreatorDescriptor PSECURITY_DESCRIPTOR
+  NewDescriptor PSECURITY_DESCRIPTOR*
+  ObjectType GUID*
+  IsDirectoryObject BOOLEAN
+  AutoInheritFlags ULONG
+  Token HANDLE
+  GenericMapping PGENERIC_MAPPING
+
+func RtlNewSecurityObjectWithMultipleInheritance
+  NTSTATUS
+  ParentDescriptor PSECURITY_DESCRIPTOR
+  CreatorDescriptor PSECURITY_DESCRIPTOR
+  NewDescriptor PSECURITY_DESCRIPTOR*
+  ObjectType GUID** count=GuidCount
+  GuidCount ULONG
+  IsDirectoryObject BOOLEAN
+  AutoInheritFlags ULONG
+  Token HANDLE
+  GenericMapping PGENERIC_MAPPING
+
+func RtlDeleteSecurityObject
+  NTSTATUS
+  ObjectDescriptor PSECURITY_DESCRIPTOR*
+
+func RtlQuerySecurityObject
+  NTSTATUS
+  ObjectDescriptor PSECURITY_DESCRIPTOR
+  SecurityInformation SECURITY_INFORMATION
+  ResultantDescriptor PSECURITY_DESCRIPTOR
+  DescriptorLength ULONG postLength=ReturnLength
+  ReturnLength PULONG
+
+func RtlSetSecurityObject
+  NTSTATUS
+  SecurityInformation SECURITY_INFORMATION
+  ModificationDescriptor PSECURITY_DESCRIPTOR
+  ObjectsSecurityDescriptor PSECURITY_DESCRIPTOR*
+  GenericMapping PGENERIC_MAPPING
+  Token HANDLE
+
+func RtlSetSecurityObjectEx
+  NTSTATUS
+  SecurityInformation SECURITY_INFORMATION
+  ModificationDescriptor PSECURITY_DESCRIPTOR
+  ObjectsSecurityDescriptor PSECURITY_DESCRIPTOR*
+  AutoInheritFlags ULONG
+  GenericMapping PGENERIC_MAPPING
+  Token HANDLE
+
+func RtlConvertToAutoInheritSecurityObject
+  NTSTATUS
+  ParentDescriptor PSECURITY_DESCRIPTOR
+  CurrentSecurityDescriptor PSECURITY_DESCRIPTOR
+  NewSecurityDescriptor PSECURITY_DESCRIPTOR*
+  ObjectType GUID*
+  IsDirectoryObject BOOLEAN
+  GenericMapping PGENERIC_MAPPING
+
+func RtlNewInstanceSecurityObject
+  NTSTATUS
+  ParentDescriptorChanged BOOLEAN
+  CreatorDescriptorChanged BOOLEAN
+  OldClientTokenModifiedId PLUID
+  NewClientTokenModifiedId PLUID
+  ParentDescriptor PSECURITY_DESCRIPTOR
+  CreatorDescriptor PSECURITY_DESCRIPTOR
+  NewDescriptor PSECURITY_DESCRIPTOR*
+  IsDirectoryObject BOOLEAN
+  Token HANDLE
+  GenericMapping PGENERIC_MAPPING
+
+func RtlRunEncodeUnicodeString
+  VOID
+  Seed PUCHAR
+  String PUNICODE_STRING
+
+func RtlRunDecodeUnicodeString
+  VOID
+  Seed UCHAR
+  String PUNICODE_STRING
+
+func RtlImpersonateSelf
+  NTSTATUS
+  ImpersonationLevel SECURITY_IMPERSONATION_LEVEL
+
+func RtlImpersonateSelfEx
+  NTSTATUS
+  ImpersonationLevel SECURITY_IMPERSONATION_LEVEL
+  AdditionalAccess ACCESS_MASK
+  ThreadToken PHANDLE
+
+func RtlAdjustPrivilege
+  NTSTATUS
+  Privilege ULONG
+  NewValue BOOLEAN
+  ForThread BOOLEAN
+  OldValue PBOOLEAN
+
+func RtlAcquirePrivilege
+  NTSTATUS
+  Privilege PULONG
+  NumPriv ULONG
+  Flags [RTL_ACQUIRE_PRIVILEGE_FLAGS]
+  ReturnedState PVOID*
+
+func RtlReleasePrivilege
+  VOID
+  ReturnedState PVOID
+
+func RtlRemovePrivileges
+  NTSTATUS
+  hToken HANDLE
+  PrivilegesToKeep PULONG
+  PrivilegeCount ULONG
+
+func RtlCreateBoundaryDescriptor
+  success NotEqual=0
+  PVOID
+  Name PUNICODE_STRING
+  Flags ULONG
+
+func RtlDeleteBoundaryDescriptor
+  VOID
+  BoundaryDescriptor PVOID
+
+func RtlAddSIDToBoundaryDescriptor
+  NTSTATUS
+  BoundaryDescriptor PVOID*
+  RequiredSid PSID
+
+func RtlAddIntegrityLabelToBoundaryDescriptor
+  NTSTATUS
+  BoundaryDescriptor PVOID*
+  IntegrityLabel PSID
+
+func RtlGetVersion
+  NTSTATUS
+  lpVersionInformation PRTL_OSVERSIONINFOW
+
+func RtlVerifyVersionInfo
+  NTSTATUS
+  VersionInfo PRTL_OSVERSIONINFOEXW
+  TypeMask [NtVerType] display=ULONG
+  ConditionMask ULONGLONG
+
+func RtlGetNtGlobalFlags
+  success NotEqual=0
+  ULONG
+
+func RtlGetNtProductType
+  BOOLEAN
+  ProductType PNT_PRODUCT_TYPE
+
+func RtlGetNtVersionNumbers
+  VOID
+  pNtMajorVersion PULONG
+  pNtMinorVersion PULONG
+  pNtBuildNumber PULONG
+
+func RtlRegisterWait
+  NTSTATUS
+  phNewWaitObject PHANDLE
+  hObject HANDLE
+  Callback WAITORTIMERCALLBACKFUNC
+  pvContext PVOID
+  ulMilliseconds ULONG
+  ulFlags ULONG
+
+func RtlDeregisterWait
+  NTSTATUS
+  hWaitHandle HANDLE
+
+func RtlDeregisterWaitEx
+  NTSTATUS
+  hWaitHandle HANDLE
+  hCompletionEvent HANDLE
+
+func RtlQueueWorkItem
+  NTSTATUS
+  Function WORKERCALLBACKFUNC
+  Context PVOID
+  Flags ULONG
+
+func RtlSetIoCompletionCallback
+  NTSTATUS
+  FileHandle HANDLE
+  Callback PIO_APC_ROUTINE
+  Flags ULONG
+
+func RtlCreateTimerQueue
+  NTSTATUS
+  TimerQueue PHANDLE
+
+func RtlCreateTimer
+  NTSTATUS
+  TimerQueue HANDLE
+  phNewTimer PHANDLE
+  Callback WAITORTIMERCALLBACKFUNC
+  Parameter PVOID
+  DueTime ULONG
+  Period ULONG
+  Flags ULONG
+
+func RtlUpdateTimer
+  NTSTATUS
+  TimerQueue HANDLE
+  Timer HANDLE
+  DueTime ULONG
+  Period ULONG
+
+func RtlDeleteTimer
+  NTSTATUS
+  TimerQueue HANDLE
+  Timer HANDLE
+  CompletionEvent HANDLE
+
+func RtlDeleteTimerQueue
+  NTSTATUS
+  TimerQueue HANDLE
+
+func RtlDeleteTimerQueueEx
+  NTSTATUS
+  TimerQueue HANDLE
+  CompletionEvent HANDLE
+
+func RtlFormatCurrentUserKeyPath
+  NTSTATUS
+  KeyPath PUNICODE_STRING
+
+func RtlOpenCurrentUser
+  NTSTATUS
+  DesiredAccess ACCESS_MASK
+  KeyHandle PHANDLE
+
+func RtlCreateRegistryKey
+  NTSTATUS
+  RelativeTo [RTL_REGISTRY_RELATIVE_TO]
+  Path PWSTR
+
+func RtlCheckRegistryKey
+  NTSTATUS
+  RelativeTo [RTL_REGISTRY_RELATIVE_TO]
+  Path PWSTR
+
+func RtlQueryRegistryValues
+  NTSTATUS
+  RelativeTo [RTL_REGISTRY_RELATIVE_TO]
+  Path PCWSTR
+  QueryTable PRTL_QUERY_REGISTRY_TABLE
+  Context PVOID
+  Environment PVOID
+
+func RtlWriteRegistryValue
+  NTSTATUS
+  RelativeTo [RTL_REGISTRY_RELATIVE_TO]
+  Path PCWSTR
+  ValueName PCWSTR
+  ValueType ULONG
+  ValueData PVOID
+  ValueLength ULONG
+
+func RtlDeleteRegistryValue
+  NTSTATUS
+  RelativeTo [RTL_REGISTRY_RELATIVE_TO]
+  Path PCWSTR
+  ValueName PCWSTR
+
+func RtlEnableThreadProfiling
+  NTSTATUS
+  ThreadHandle HANDLE
+  Flags ULONG
+  HardwareCounters ULONG64
+  PerformanceDataHandle PVOID*
+
+func RtlDisableThreadProfiling
+  NTSTATUS
+  PerformanceDataHandle PVOID
+
+func RtlQueryThreadProfiling
+  NTSTATUS
+  ThreadHandle HANDLE
+  Enabled PBOOLEAN
+
+func RtlReadThreadProfilingData
+  NTSTATUS
+  PerformanceDataHandle HANDLE
+  Flags ULONG
+  PerformanceData PPERFORMANCE_DATA
+
+func RtlComputePrivatizedDllName_U
+  NTSTATUS
+  DllName PUNICODE_STRING
+  RealName PUNICODE_STRING
+  LocalName PUNICODE_STRING
+
+func RtlFreeRangeList
+  VOID
+  RangeList PRTL_RANGE_LIST
+
+func RtlpNtOpenKey
+  NTSTATUS
+  KeyHandle HANDLE
+  DesiredAccess ACCESS_MASK
+  ObjectAttributes POBJECT_ATTRIBUTES
+  Unused ULONG
+
+func RtlRegisterSecureMemoryCacheCallback
+  NTSTATUS
+  Callback PRTL_SECURE_MEMORY_CACHE_CALLBACK
+
+func RtlFlushSecureMemoryCache
+  BOOLEAN
+  MemoryCache PVOID
+  MemoryLength SIZE_T
+
+func RtlCaptureStackBackTrace
+  USHORT
+  FramesToSkip ULONG
+  FramesToCapture ULONG
+  BackTrace PVOID*
+  BackTraceHash PULONG
+
+func RtlAssert
+  VOID
+  FailedAssertion PVOID
+  FileName PVOID
+  LineNumber ULONG
+  Message PCHAR
+
+func RtlCaptureContext
+  VOID
+  ContextRecord PCONTEXT
+
+func RtlDebugCreateHeap
+  success NotEqual=0
+  PVOID
+  Flags [HEAP_FLAGS_ULONG]
+  BaseAddress PVOID
+  SizeToReserve SIZE_T
+  SizeToCommit SIZE_T
+  Lock PVOID
+  Parameters PRTL_HEAP_PARAMETERS
+
+func RtlGetCallersAddress
+  success NotEqual=0
+  PVOID
+  CallersAddress PVOID*
+  CallersCaller PVOID*
+
+func RtlCmDecodeMemIoResource
+  ULONGLONG
+  Descriptor PCM_PARTIAL_RESOURCE_DESCRIPTOR
+  Start PULONGLONG
+
+func RtlCmEncodeMemIoResource
+  NTSTATUS
+  Descriptor PCM_PARTIAL_RESOURCE_DESCRIPTOR
+  Type UCHAR
+  Length ULONGLONG
+  Start ULONGLONG
+
+func RtlEnlargedIntegerMultiply
+  LARGE_INTEGER
+  Multiplicand LONG
+  Multiplier LONG
+
+func RtlEnlargedUnsignedDivide
+  ULONG
+  Dividend ULARGE_INTEGER
+  Divisor ULONG
+  Remainder PULONG
+
+func RtlEnlargedUnsignedMultiply
+  LARGE_INTEGER
+  Multiplicand ULONG
+  Multiplier ULONG
+
+func RtlExtendedMagicDivide
+  LARGE_INTEGER
+  Dividend LARGE_INTEGER
+  MagicDivisor LARGE_INTEGER
+  ShiftCount CCHAR
+
+func RtlFillMemory
+  VOID
+  Destination VOID*
+  Length SIZE_T
+  Fill UCHAR
+
+func RtlGetEnabledExtendedFeatures
+  [XSTATE_MASK_ULONG64]
+  FeatureMask [XSTATE_MASK_ULONG64]
+
+func RtlIoDecodeMemIoResource
+  ULONGLONG
+  Descriptor PIO_RESOURCE_DESCRIPTOR
+  Alignment PULONGLONG
+  MinimumAddress PULONGLONG
+  MaximumAddress PULONGLONG
+
+func RtlIoEncodeMemIoResource
+  NTSTATUS
+  Descriptor PIO_RESOURCE_DESCRIPTOR
+  Type UCHAR
+  Length ULONGLONG
+  Alignment ULONGLONG
+  MinimumAddress ULONGLONG
+  MaximumAddress ULONGLONG
+
+func RtlUlongByteSwap
+  ULONG
+  Source ULONG
+
+func RtlUlonglongByteSwap
+  ULONGLONG
+  Source ULONGLONG
+
+func RtlUshortByteSwap
+  USHORT
+  Source USHORT
+
+func RtlGetCurrentProcessorNumber
+  success NotEqual=0
+  ULONG
+
+func RtlComputeCrc32
+  success NotEqual=0
+  ULONG
+  PartialCrc USHORT
+  Buffer PUCHAR
+  Length ULONG
+
+func RtlEncodePointer
+  PVOID
+  Pointer PVOID
+
+func RtlDecodePointer
+  PVOID
+  Pointer PVOID
+
+func RtlEncodeSystemPointer
+  success NotEqual=0
+  PVOID
+  Pointer PVOID
+
+func RtlDecodeSystemPointer
+  success NotEqual=0
+  PVOID
+  Pointer PVOID
+
+func RtlIsThreadWithinLoaderCallout
+  BOOLEAN
+
+func RtlQueryElevationFlags
+  NTSTATUS
+  pFlags [ElevationFlags*]
+
+func RtlRegisterThreadWithCsrss
+  NTSTATUS
+
+func RtlLockModuleSection
+  NTSTATUS
+  Address PVOID
+
+func RtlUnlockModuleSection
+  NTSTATUS
+  Address PVOID
+
+func RtlGetUnloadEventTrace
+  "RTL_UNLOAD_EVENT_TRACE [RTL_UNLOAD_EVENT_TRACE_NUMBER]"
+
+func RtlGetUnloadEventTraceEx
+  VOID
+  ElementSize PULONG*
+  ElementCount PULONG*
+  EventTrace PVOID*
+
+func RtlQueryPerformanceCounter
+  LOGICAL
+  PerformanceCounter PLARGE_INTEGER
+
+func RtlQueryPerformanceFrequency
+  LOGICAL
+  PerformanceFrequency PLARGE_INTEGER
+
+func RtlEqualPrefixSid
+  BOOLEAN
+  Sid1 PSID
+  Sid2 PSID
+
+func RtlConvertLongToLargeInteger
+  LARGE_INTEGER
+  SignedInteger LONG
+
+func RtlConvertUlongToLargeInteger
+  LARGE_INTEGER
+  UnsignedInteger ULONG
+
+func RtlLargeIntegerAdd
+  LARGE_INTEGER
+  Addend1 LARGE_INTEGER
+  Addend2 LARGE_INTEGER
+
+func RtlLargeIntegerArithmeticShift
+  LARGE_INTEGER
+  LargeInteger LARGE_INTEGER
+  ShiftCount CCHAR
+
+func RtlLargeIntegerDivide
+  LARGE_INTEGER
+  Dividend LARGE_INTEGER
+  Divisor LARGE_INTEGER
+  Remainder PLARGE_INTEGER
+
+func RtlLargeIntegerNegate
+  LARGE_INTEGER
+  Subtrahend LARGE_INTEGER
+
+func RtlLargeIntegerShiftLeft
+  LARGE_INTEGER
+  LargeInteger LARGE_INTEGER
+  ShiftCount CCHAR
+
+func RtlLargeIntegerShiftRight
+  LARGE_INTEGER
+  LargeInteger LARGE_INTEGER
+  ShiftCount CCHAR
+
+func RtlLargeIntegerSubtract
+  LARGE_INTEGER
+  Minuend LARGE_INTEGER
+  Subtrahend LARGE_INTEGER
+
+func RtlLargeIntegerToChar
+  NTSTATUS
+  Value PLARGE_INTEGER
+  Base ULONG
+  Length ULONG
+  String PCHAR
+
+func RtlActivateActivationContext
+  NTSTATUS
+  Unknown ULONG
+  Handle HANDLE
+  Cookie PULONG_PTR
+
+func RtlAddRefActivationContext
+  VOID
+  Context PVOID
+
+func RtlAllocateActivationContextStack
+  NTSTATUS
+  Context PVOID*
+
+func RtlCreateActivationContext
+  NTSTATUS
+  dwFlags DWORD
+  ActivationContextData PVOID
+  ExtraBytes ULONG
+  NotificationRoutine PVOID
+  NotificationContext PVOID
+  ActCtx PHANDLE
+
+func RtlDeactivateActivationContext
+  LONG
+  dwFlags DWORD
+  ulCookie ULONG_PTR
+
+func RtlFindActivationContextSectionString
+  NTSTATUS
+  dwFlags [FIND_ACTCTX_SECTION_FLAGS] display=ULONG
+  ExtensionGuid "const GUID*"
+  SectionType [ACTIVATION_CONTEXT_SECTION]
+  SectionName PUNICODE_STRING
+  ReturnedData PVOID
+
+func RtlGetActiveActivationContext
+  NTSTATUS
+  Context PVOID*
+
+func RtlQueryInformationActivationContext
+  NTSTATUS
+  dwFlags DWORD
+  Context PVOID
+  pvSubInstance PVOID
+  ulInfoClass ULONG
+  pvBuffer PVOID
+  cbBuffer SIZE_T
+  pcbWrittenOrRequired SIZE_T*
+
+func RtlReleaseActivationContext
+  VOID
+  Context PVOID*
+
+func RtlZombifyActivationContext
+  NTSTATUS
+  Context PVOID
+
+func RtlRunOnceBeginInitialize
+  NTSTATUS
+  RunOnce PRTL_RUN_ONCE
+  Flags [RTL_RUN_ONCE_FLAGS]
+  Context PVOID*
+
+func RtlRunOnceComplete
+  NTSTATUS
+  RunOnce PRTL_RUN_ONCE
+  Flags [RTL_RUN_ONCE_FLAGS]
+  Context PVOID
+
+func RtlRunOnceExecuteOnce
+  NTSTATUS
+  RunOnce PRTL_RUN_ONCE
+  InitFn PRTL_RUN_ONCE_INIT_FN
+  Parameter PVOID
+  Context PVOID*
+
+func RtlRunOnceInitialize
+  VOID
+  RunOnce PRTL_RUN_ONCE
+

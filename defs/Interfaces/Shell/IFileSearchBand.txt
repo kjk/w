@@ -1,0 +1,26 @@
+include Interfaces\IDispatch.txt
+
+ingterface IFileSearchBand base=IDispatch id={2D91EEA1-9932-11d2-BE86-00A0C9A83DA1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetFocus
+    HRESULT
+
+  func SetSearchParameters
+    HRESULT
+    pbstrSearchID BSTR*
+    bNavToResults VARIANT_BOOL
+    pvarScope VARIANT*
+    pvarQueryFile VARIANT*
+
+  func get_SearchID
+    HRESULT
+    pbstrSearchID BSTR*
+
+  func get_Scope
+    HRESULT
+    pvarScope VARIANT*
+
+  func get_QueryFile
+    HRESULT
+    pvarFile VARIANT*
+
+

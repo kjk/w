@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface IEnumSyncMgrConflict base=IUnknown id={82705914-dda3-4893-ba99-49de6c8c8036} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func Next
+    HRESULT
+    celt ULONG
+    rgelt ISyncMgrConflict** postCount=celt
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppenum IEnumSyncMgrConflict**
+
+

@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDocHostShowUI base=IUnknown id={c4d244b0-d43e-11cf-893b-00aa00bdce1a} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/Advanced Hosting Interfaces"
+  func ShowMessage
+    HRESULT
+    hwnd HWND
+    lpstrText LPOLESTR
+    lpstrCaption LPOLESTR
+    dwType DWORD
+    lpstrHelpFile LPOLESTR
+    dwHelpContext DWORD
+    plResult LRESULT*
+
+  func ShowHelp
+    HRESULT
+    hwnd HWND
+    pszHelpFile LPOLESTR
+    uCommand UINT
+    dwData DWORD
+    ptMouse POINT
+    pDispatchObjectHit IDispatch*
+
+

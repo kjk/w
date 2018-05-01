@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IClockVector base=IUnknown id={14b2274a-8698-4cc6-9333-f89bd1d47bc4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetClockVectorElements
+    HRESULT
+    riid REFIID
+    ppiEnumClockVector void** interfaceId=riid
+
+  func GetClockVectorElementCount
+    HRESULT
+    pdwCount DWORD*
+
+

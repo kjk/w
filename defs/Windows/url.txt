@@ -1,0 +1,32 @@
+include Headers\windows.h.txt
+
+dll url.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Environment Development/Windows Shell"
+func InetIsOffline
+  BOOL
+  dwFlags DWORD
+
+func MIMEAssociationDialog bothCharset
+  HRESULT
+  hwndParent HWND
+  dwInFlags DWORD
+  pcszFile LPCTSTR
+  pcszMIMEContentType LPCTSTR
+  pszAppBuf LPTSTR
+  ucAppBufLen UINT
+
+func TranslateURL bothCharset
+  HRESULT
+  pcszURL LPCSTR
+  dwInFlags DWORD
+  ppszTranslatedURL LPSTR*
+
+func URLAssociationDialog bothCharset
+  HRESULT
+  hwndParent HWND
+  dwInFlags DWORD
+  pcszFile LPCTSTR
+  pcszURL LPCTSTR
+  pszAppBuf LPTSTR
+  ucAppBufLen UINT
+

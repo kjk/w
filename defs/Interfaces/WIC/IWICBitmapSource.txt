@@ -1,0 +1,30 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICBitmapSource base=IUnknown id={00000120-a8f2-4877-ba0a-fd2b6645fb94} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetSize
+    [WIC_HRESULT]
+    puiWidth UINT*
+    puiHeight UINT*
+
+  func GetPixelFormat
+    [WIC_HRESULT]
+    pPixelFormat WICPixelFormatGUID*
+
+  func GetResolution
+    [WIC_HRESULT]
+    pDpiX double*
+    pDpiY double*
+
+  func CopyPalette
+    [WIC_HRESULT]
+    pIPalette IWICPalette*
+
+  func CopyPixels
+    [WIC_HRESULT]
+    prc "const WICRect*"
+    cbStride UINT
+    cbBufferSize UINT
+    pbBuffer BYTE*
+
+

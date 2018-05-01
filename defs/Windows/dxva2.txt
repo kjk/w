@@ -1,0 +1,280 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+
+dll dxva2.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Graphics and Gaming/Legacy Graphics/Monitor Configuration"
+category "Audio and Video/Microsoft Media Foundation"
+interface IDirect3DDevice9
+
+interface IDirect3DDevice9Ex
+
+interface IDirect3DDeviceManager9
+
+interface IDXVAHD_Device
+
+array "WCHAR [PHYSICAL_MONITOR_DESCRIPTION_SIZE]" base=WCHAR count=128
+
+struct PHYSICAL_MONITOR
+  hPhysicalMonitor HANDLE
+  szPhysicalMonitorDescription "WCHAR [PHYSICAL_MONITOR_DESCRIPTION_SIZE]"
+
+pointer LPPHYSICAL_MONITOR PHYSICAL_MONITOR
+
+enum MC_COLOR_TEMPERATURE UINT
+  MC_COLOR_TEMPERATURE_UNKNOWN 0
+  MC_COLOR_TEMPERATURE_4000K   1
+  MC_COLOR_TEMPERATURE_5000K   2
+  MC_COLOR_TEMPERATURE_6500K   3
+  MC_COLOR_TEMPERATURE_7500K   4
+  MC_COLOR_TEMPERATURE_8200K   5
+  MC_COLOR_TEMPERATURE_9300K   6
+  MC_COLOR_TEMPERATURE_10000K  7
+  MC_COLOR_TEMPERATURE_11500K  8
+
+pointer LPMC_COLOR_TEMPERATURE MC_COLOR_TEMPERATURE
+
+enum MC_POSITION_TYPE UINT
+  MC_HORIZONTAL_POSITION 0
+  MC_VERTICAL_POSITION   1
+
+enum MC_SIZE_TYPE UINT
+  MC_WIDTH  0
+  MC_HEIGHT 1
+
+enum MC_DRIVE_TYPE UINT
+  MC_RED_DRIVE   0
+  MC_GREEN_DRIVE 1
+  MC_BLUE_DRIVE  2
+
+enum MC_GAIN_TYPE UINT
+  MC_RED_GAIN   0
+  MC_GREEN_GAIN 1
+  MC_BLUE_GAIN  2
+
+enum MC_DISPLAY_TECHNOLOGY_TYPE UINT
+  MC_SHADOW_MASK_CATHODE_RAY_TUBE    0
+  MC_APERTURE_GRILL_CATHODE_RAY_TUBE 1
+  MC_THIN_FILM_TRANSISTOR            2
+  MC_LIQUID_CRYSTAL_ON_SILICON       3
+  MC_PLASMA                          4
+  MC_ORGANIC_LIGHT_EMITTING_DIODE    5
+  MC_ELECTROLUMINESCENT              6
+  MC_MICROELECTROMECHANICAL          7
+  MC_FIELD_EMISSION_DEVICE           8
+
+pointer LPMC_DISPLAY_TECHNOLOGY_TYPE MC_DISPLAY_TECHNOLOGY_TYPE
+
+enum MC_VCP_CODE_TYPE UINT
+  MC_MOMENTARY     0
+  MC_SET_PARAMETER 1
+
+pointer LPMC_VCP_CODE_TYPE MC_VCP_CODE_TYPE
+
+struct MC_TIMING_REPORT pack=1
+  dwHorizontalFrequencyInHZ DWORD
+  dwVerticalFrequencyInHZ DWORD
+  bTimingStatusByte BYTE
+
+pointer LPMC_TIMING_REPORT MC_TIMING_REPORT
+
+func DegaussMonitor
+  BOOL
+  hMonitor HANDLE
+
+func GetMonitorBrightness
+  BOOL
+  hMonitor HANDLE
+  pdwMinimumBrightness LPDWORD
+  pdwCurrentBrightness LPDWORD
+  pdwMaximumBrightness LPDWORD
+
+func GetMonitorCapabilities
+  BOOL
+  hMonitor HANDLE
+  pdwMonitorCapabilities LPDWORD
+  pdwSupportedColorTemperatures LPDWORD
+
+func GetMonitorColorTemperature
+  BOOL
+  hMonitor HANDLE
+  pctCurrentColorTemperature LPMC_COLOR_TEMPERATURE
+
+func GetMonitorContrast
+  BOOL
+  hMonitor HANDLE
+  pdwMinimumContrast LPDWORD
+  pdwCurrentContrast LPDWORD
+  pdwMaximumContrast LPDWORD
+
+func GetMonitorDisplayAreaPosition
+  BOOL
+  hMonitor HANDLE
+  ptPositionType MC_POSITION_TYPE
+  pdwMinimumPosition LPDWORD
+  pdwCurrentPosition LPDWORD
+  pdwMaximumPosition LPDWORD
+
+func GetMonitorDisplayAreaSize
+  BOOL
+  hMonitor HANDLE
+  stSizeType MC_SIZE_TYPE
+  pdwMinimumWidthOrHeight LPDWORD
+  pdwCurrentWidthOrHeight LPDWORD
+  pdwMaximumWidthOrHeight LPDWORD
+
+func GetMonitorRedGreenOrBlueDrive
+  BOOL
+  hMonitor HANDLE
+  dtDriveType MC_DRIVE_TYPE
+  pdwMinimumDrive LPDWORD
+  pdwCurrentDrive LPDWORD
+  pdwMaximumDrive LPDWORD
+
+func GetMonitorRedGreenOrBlueGain
+  BOOL
+  hMonitor HANDLE
+  gtGainType MC_GAIN_TYPE
+  pdwMinimumGain LPDWORD
+  pdwCurrentGain LPDWORD
+  pdwMaximumGain LPDWORD
+
+func GetMonitorTechnologyType
+  BOOL
+  hMonitor HANDLE
+  pdtyDisplayTechnologyType LPMC_DISPLAY_TECHNOLOGY_TYPE
+
+func RestoreMonitorFactoryColorDefaults
+  BOOL
+  hMonitor HANDLE
+
+func RestoreMonitorFactoryDefaults
+  BOOL
+  hMonitor HANDLE
+
+func SaveCurrentMonitorSettings
+  BOOL
+  hMonitor HANDLE
+
+func SetMonitorBrightness
+  BOOL
+  hMonitor HANDLE
+  dwNewBrightness DWORD
+
+func SetMonitorColorTemperature
+  BOOL
+  hMonitor HANDLE
+  ctCurrentColorTemperature MC_COLOR_TEMPERATURE
+
+func SetMonitorContrast
+  BOOL
+  hMonitor HANDLE
+  dwNewContrast DWORD
+
+func SetMonitorDisplayAreaPosition
+  BOOL
+  hMonitor HANDLE
+  ptPositionType MC_POSITION_TYPE
+  dwNewPosition DWORD
+
+func SetMonitorDisplayAreaSize
+  BOOL
+  hMonitor HANDLE
+  stSizeType MC_SIZE_TYPE
+  dwNewDisplayAreaWidthOrHeight DWORD
+
+func SetMonitorRedGreenOrBlueDrive
+  BOOL
+  hMonitor HANDLE
+  dtDriveType MC_DRIVE_TYPE
+  dwNewDrive DWORD
+
+func SetMonitorRedGreenOrBlueGain
+  BOOL
+  hMonitor HANDLE
+  gtGainType MC_GAIN_TYPE
+  dwNewGain DWORD
+
+func CapabilitiesRequestAndCapabilitiesReply
+  BOOL
+  hMonitor HANDLE
+  pszASCIICapabilitiesString LPSTR
+  dwCapabilitiesStringLengthInCharacters DWORD
+
+func GetCapabilitiesStringLength
+  BOOL
+  hMonitor HANDLE
+  pdwCapabilitiesStringLengthInCharacters LPDWORD
+
+func GetTimingReport
+  BOOL
+  hMonitor HANDLE
+  pmtrMonitorTimingReport LPMC_TIMING_REPORT
+
+func GetVCPFeatureAndVCPFeatureReply
+  BOOL
+  hMonitor HANDLE
+  bVCPCode BYTE
+  pvct LPMC_VCP_CODE_TYPE
+  pdwCurrentValue LPDWORD
+  pdwMaximumValue LPDWORD
+
+func SaveCurrentSettings
+  BOOL
+  hMonitor HANDLE
+
+func SetVCPFeature
+  BOOL
+  hMonitor HANDLE
+  bVCPCode BYTE
+  dwNewValue DWORD
+
+func DestroyPhysicalMonitor
+  BOOL
+  hMonitor HANDLE
+
+func DestroyPhysicalMonitors
+  BOOL
+  dwPhysicalMonitorArraySize DWORD
+  pPhysicalMonitorArray LPPHYSICAL_MONITOR
+
+func GetNumberOfPhysicalMonitorsFromHMONITOR
+  BOOL
+  hMonitor HMONITOR
+  pdwNumberOfPhysicalMonitors LPDWORD
+
+func GetNumberOfPhysicalMonitorsFromIDirect3DDevice9
+  BOOL
+  pDirect3DDevice9 IDirect3DDevice9*
+  pdwNumberOfPhysicalMonitors LPDWORD
+
+func GetPhysicalMonitorsFromHMONITOR
+  BOOL
+  hMonitor HMONITOR
+  dwPhysicalMonitorArraySize DWORD
+  pPhysicalMonitorArray LPPHYSICAL_MONITOR
+
+func GetPhysicalMonitorsFromIDirect3DDevice9
+  BOOL
+  pDirect3DDevice9 IDirect3DDevice9*
+  dwPhysicalMonitorArraySize DWORD
+  pPhysicalMonitorArray LPPHYSICAL_MONITOR
+
+func DXVA2CreateDirect3DDeviceManager9
+  HRESULT
+  pResetToken UINT*
+  ppDXVAManager IDirect3DDeviceManager9**
+
+func DXVA2CreateVideoService
+  HRESULT
+  pDD IDirect3DDevice9*
+  riid REFIID
+  ppService void** interfaceId=riid
+
+func DXVAHD_CreateDevice
+  HRESULT
+  pD3DDevice IDirect3DDevice9Ex*
+  pContentDesc "const DXVAHD_CONTENT_DESC*"
+  Usage DXVAHD_DEVICE_USAGE
+  pPlugin PDXVAHDSW_Plugin
+  ppDevice IDXVAHD_Device**
+

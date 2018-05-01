@@ -1,0 +1,130 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncKnowledge base=IUnknown id={615bbb53-c945-4203-bf4b-2cb65919a0aa} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetOwnerReplicaId
+    HRESULT
+    pbReplicaId BYTE*
+    pcbIdSize DWORD*
+
+  func Serialize
+    HRESULT
+    fSerializeReplicaKeyMap BOOL
+    pbKnowledge BYTE*
+    pcbKnowledge DWORD*
+
+  func SetLocalTickCount
+    HRESULT
+    ullTickCount ULONGLONG
+
+  func ContainsChange
+    HRESULT
+    pbVersionOwnerReplicaId "const BYTE*"
+    pgidItemId "const BYTE*"
+    pSyncVersion "const SYNC_VERSION*"
+
+  func ContainsChangeUnit
+    HRESULT
+    pbVersionOwnerReplicaId "const BYTE*"
+    pbItemId "const BYTE*"
+    pbChangeUnitId "const BYTE*"
+    pSyncVersion "const SYNC_VERSION*"
+
+  func GetScopeVector
+    HRESULT
+    riid REFIID
+    ppUnk void** interfaceId=riid
+
+  func GetReplicaKeyMap
+    HRESULT
+    ppReplicaKeyMap IReplicaKeyMap**
+
+  func Clone
+    HRESULT
+    ppClonedKnowledge ISyncKnowledge**
+
+  func ConvertVersion
+    HRESULT
+    pKnowledgeIn ISyncKnowledge*
+    pbCurrentOwnerId "const BYTE*"
+    pVersionIn "const SYNC_VERSION*"
+    pbNewOwnerId BYTE*
+    pcbIdSize DWORD*
+    pVersionOut SYNC_VERSION*
+
+  func MapRemoteToLocal
+    HRESULT
+    pRemoteKnowledge ISyncKnowledge*
+    ppMappedKnowledge ISyncKnowledge**
+
+  func Union
+    HRESULT
+    pKnowledge ISyncKnowledge*
+
+  func ProjectOntoItem
+    HRESULT
+    pbItemId "const BYTE*"
+    ppKnowledgeOut ISyncKnowledge**
+
+  func ProjectOntoChangeUnit
+    HRESULT
+    pbItemId "const BYTE*"
+    pbChangeUnitId "const BYTE*"
+    ppKnowledgeOut ISyncKnowledge**
+
+  func ProjectOntoRange
+    HRESULT
+    psrngSyncRange "const SYNC_RANGE*"
+    ppKnowledgeOut ISyncKnowledge**
+
+  func ExcludeItem
+    HRESULT
+    pbItemId "const BYTE*"
+
+  func ExcludeChangeUnit
+    HRESULT
+    pbItemId "const BYTE*"
+    pbChangeUnitId "const BYTE*"
+
+  func ContainsKnowledge
+    HRESULT
+    pKnowledge ISyncKnowledge*
+
+  func FindMinTickCountForReplica
+    HRESULT
+    pbReplicaId "const BYTE*"
+    pullReplicaTickCount ULONGLONG*
+
+  func GetRangeExceptions
+    HRESULT
+    riid REFIID
+    ppUnk void** interfaceId=riid
+
+  func GetSingleItemExceptions
+    HRESULT
+    riid REFIID
+    ppUnk void** interfaceId=riid
+
+  func GetChangeUnitExceptions
+    HRESULT
+    riid REFIID
+    ppUnk void** interfaceId=riid
+
+  func FindClockVectorForItem
+    HRESULT
+    pbItemId "const BYTE*"
+    riid REFIID
+    ppUnk void** interfaceId=riid
+
+  func FindClockVectorForChangeUnit
+    HRESULT
+    pbItemId "const BYTE*"
+    pbChangeUnitId "const BYTE*"
+    riid REFIID
+    ppUnk void** interfaceId=riid
+
+  func GetVersion
+    HRESULT
+    pdwVersion DWORD*
+
+

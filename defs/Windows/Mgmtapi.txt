@@ -1,0 +1,69 @@
+include Headers\windows.h.txt
+include Headers\snmp.h.txt
+
+dll Mgmtapi.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Simple Network Management Protocol (SNMP)"
+func SnmpMgrClose
+  BOOL
+  session LPSNMP_MGR_SESSION
+
+func SnmpMgrCtl
+  BOOL
+  session LPSNMP_MGR_SESSION
+  dwCtlCode DWORD
+  lpvInBuffer LPVOID
+  cbInBuffer DWORD
+  lpvOutBuffer LPVOID
+  cbOutBuffer DWORD
+  lpcbBytesReturned LPDWORD
+
+func SnmpMgrGetTrap
+  BOOL
+  enterprise AsnObjectIdentifier*
+  IPAddress AsnNetworkAddress*
+  genericTrap AsnInteger*
+  specificTrap AsnInteger*
+  timeStamp AsnTimeticks*
+  variableBindings SnmpVarBindList*
+
+func SnmpMgrGetTrapEx
+  BOOL
+  enterprise AsnObjectIdentifier*
+  agentAddress AsnNetworkAddress*
+  sourceAddress AsnNetworkAddress*
+  genericTrap AsnInteger*
+  specificTrap AsnInteger*
+  community AsnOctetString*
+  timeStamp AsnTimeticks*
+  variableBindings SnmpVarBindList*
+
+func SnmpMgrOidToStr
+  BOOL
+  oid AsnObjectIdentifier*
+  string LPSTR*
+
+func SnmpMgrOpen
+  success NotEqual=0
+  LPSNMP_MGR_SESSION
+  lpAgentAddress LPSTR
+  lpAgentCommunity LPSTR
+  nTimeOut INT
+  nRetries INT
+
+func SnmpMgrRequest
+  SNMPAPI
+  session LPSNMP_MGR_SESSION
+  requestType BYTE
+  variableBindings SnmpVarBindList*
+  errorStatus AsnInteger*
+  errorIndex AsnInteger*
+
+func SnmpMgrStrToOid
+  BOOL
+  string LPSTR
+  oid AsnObjectIdentifier*
+
+func SnmpMgrTrapListen
+  BOOL
+  phTrapAvailable HANDLE*
+

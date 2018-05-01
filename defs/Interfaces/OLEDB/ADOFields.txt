@@ -1,0 +1,23 @@
+include Interfaces\OLEDB\Fields20.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ADOFields base=Fields20 id={00001564-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func Append
+    [OLEDB_HRESULT]
+    Name BSTR
+    Type DataTypeEnum
+    DefinedSize long
+    Attrib FieldAttributeEnum
+    FieldValue VARIANT
+
+  func Update
+    [OLEDB_HRESULT]
+
+  func Resync
+    [OLEDB_HRESULT]
+    ResyncValues ResyncEnum
+
+  func CancelUpdate
+    [OLEDB_HRESULT]
+
+

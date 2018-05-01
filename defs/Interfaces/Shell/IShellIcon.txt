@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellIcon base=IUnknown id={000214E5-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetIconOf
+    HRESULT
+    pidl PCUITEMID_CHILD
+    flags [GIL_INPUT_FLAGS]
+    pIconIndex int*
+
+

@@ -1,0 +1,221 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDebugClient base=IUnknown id={27fe5639-8407-4f47-8364-ee118fb08ac8} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func AttachKernel
+    HRESULT
+    Flags [DEBUG_ATTACH_KERNEL_FLAGS]
+    ConnectOptions PCSTR
+
+  func GetKernelConnectionOptions
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    OptionsSize PULONG
+
+  func SetKernelConnectionOptions
+    HRESULT
+    Options PCSTR
+
+  func StartProcessServer
+    HRESULT
+    Flags [DEBUG_CLASS]
+    Options PCSTR
+    Reserved PVOID
+
+  func ConnectProcessServer
+    HRESULT
+    RemoteOptions PCSTR
+    Server PULONG64
+
+  func DisconnectProcessServer
+    HRESULT
+    Server ULONG64
+
+  func GetRunningProcessSystemIds
+    HRESULT
+    Server ULONG64
+    Ids PULONG postCount=ActualCount
+    Count ULONG
+    ActualCount PULONG
+
+  func GetRunningProcessSystemIdByExecutableName
+    HRESULT
+    Server ULONG64
+    ExeName PCSTR
+    Flags [DEBUG_GET_PROC_FLAGS]
+    Id PULONG
+
+  func GetRunningProcessDescription
+    HRESULT
+    Server ULONG64
+    SystemId ULONG
+    Flags [DEBUG_PROC_DESC_FLAGS]
+    ExeName PSTR
+    ExeNameSize ULONG
+    ActualExeNameSize PULONG
+    Description PSTR
+    DescriptionSize ULONG
+    ActualDescriptionSize PULONG
+
+  func AttachProcess
+    HRESULT
+    Server ULONG64
+    ProcessId ULONG
+    AttachFlags [DEBUG_ATTACH_PROC_FLAGS]
+
+  func CreateProcess
+    HRESULT
+    Server ULONG64
+    CommandLine PSTR
+    CreateFlags [DEBUG_CREATE_PROCESS_FLAGS]
+
+  func CreateProcessAndAttach
+    HRESULT
+    Server ULONG64
+    CommandLine PSTR
+    CreateFlags [DEBUG_CREATE_PROCESS_FLAGS]
+    ProcessId ULONG
+    AttachFlags [DEBUG_ATTACH_PROC_FLAGS]
+
+  func GetProcessOptions
+    HRESULT
+    Options PULONG
+
+  func AddProcessOptions
+    HRESULT
+    Options ULONG
+
+  func RemoveProcessOptions
+    HRESULT
+    Options ULONG
+
+  func SetProcessOptions
+    HRESULT
+    Options ULONG
+
+  func OpenDumpFile
+    HRESULT
+    DumpFile PCSTR
+
+  func WriteDumpFile
+    HRESULT
+    DumpFile PCSTR
+    Qualifier ULONG
+
+  func ConnectSession
+    HRESULT
+    Flags [DEBUG_CONNECT_SESSION_FLAGS]
+    HistoryLimit ULONG
+
+  func StartServer
+    HRESULT
+    Options PCSTR
+
+  func OutputServers
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Machine PCSTR
+    Flags [DEBUG_SERVERS_FLAGS]
+
+  func TerminateProcesses
+    HRESULT
+
+  func DetachProcesses
+    HRESULT
+
+  func EndSession
+    HRESULT
+    Flags [DEBUG_END_TYPE]
+
+  func GetExitCode
+    HRESULT
+    Code PULONG
+
+  func DispatchCallbacks
+    HRESULT
+    Timeout [DEBUG_TIMEOUT]
+
+  func ExitDispatch
+    HRESULT
+    Client PDEBUG_CLIENT
+
+  func CreateClient
+    HRESULT
+    Client PDEBUG_CLIENT*
+
+  func GetInputCallbacks
+    HRESULT
+    Callbacks PDEBUG_INPUT_CALLBACKS*
+
+  func SetInputCallbacks
+    HRESULT
+    Callbacks PDEBUG_INPUT_CALLBACKS
+
+  func GetOutputCallbacks
+    HRESULT
+    Callbacks PDEBUG_OUTPUT_CALLBACKS*
+
+  func SetOutputCallbacks
+    HRESULT
+    Callbacks PDEBUG_OUTPUT_CALLBACKS
+
+  func GetOutputMask
+    HRESULT
+    Mask [PDEBUG_OUTPUT_FLAGS]
+
+  func SetOutputMask
+    HRESULT
+    Mask [DEBUG_OUTPUT_FLAGS]
+
+  func GetOtherOutputMask
+    HRESULT
+    Client PDEBUG_CLIENT
+    Mask [PDEBUG_OUTPUT_FLAGS]
+
+  func SetOtherOutputMask
+    HRESULT
+    Client PDEBUG_CLIENT
+    Mask [DEBUG_OUTPUT_FLAGS]
+
+  func GetOutputWidth
+    HRESULT
+    Columns PULONG
+
+  func SetOutputWidth
+    HRESULT
+    Columns ULONG
+
+  func GetOutputLinePrefix
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    PrefixSize PULONG
+
+  func SetOutputLinePrefix
+    HRESULT
+    Prefix PCSTR
+
+  func GetIdentity
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    IdentitySize PULONG
+
+  func OutputIdentity
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Flags ULONG
+    Format PCSTR
+
+  func GetEventCallbacks
+    HRESULT
+    Callbacks PDEBUG_EVENT_CALLBACKS*
+
+  func SetEventCallbacks
+    HRESULT
+    Callbacks PDEBUG_EVENT_CALLBACKS
+
+  func FlushCallbacks
+    HRESULT
+
+

@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRImagePresenter base=IUnknown id={CE704FE7-E71E-41fb-BAA2-C4403E1182F5} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func StartPresenting
+    HRESULT
+    dwUserID DWORD_PTR
+
+  func StopPresenting
+    HRESULT
+    dwUserID DWORD_PTR
+
+  func PresentImage
+    HRESULT
+    dwUserID DWORD_PTR
+    lpPresInfo VMRPRESENTATIONINFO*
+
+

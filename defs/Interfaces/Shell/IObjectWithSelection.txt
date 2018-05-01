@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IObjectWithSelection base=IUnknown id={1c9cd5bb-98e9-4491-a60f-31aacc72b83c} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetSelection
+    HRESULT
+    psia IShellItemArray*
+
+  func GetSelection
+    HRESULT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

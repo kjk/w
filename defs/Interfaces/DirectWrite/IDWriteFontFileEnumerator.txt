@@ -1,0 +1,13 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteFontFileEnumerator base=IUnknown id={72755049-5ff7-435d-8348-4be97cfa6c7c} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func MoveNext
+    HRESULT
+    hasCurrentFile BOOL*
+
+  func GetCurrentFontFile
+    HRESULT
+    fontFile IDWriteFontFile**
+
+

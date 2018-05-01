@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+
+ingterface IConfigInterleaving base=IUnknown id={BEE3D220-157B-11d0-BD23-00A0C911CE86} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func put_Mode
+    HRESULT
+    mode InterleavingMode
+
+  func get_Mode
+    HRESULT
+    pMode InterleavingMode*
+
+  func put_Interleaving
+    HRESULT
+    prtInterleave "const REFERENCE_TIME*"
+    prtPreroll "const REFERENCE_TIME*"
+
+  func get_Interleaving
+    HRESULT
+    prtInterleave REFERENCE_TIME*
+    prtPreroll REFERENCE_TIME*
+
+

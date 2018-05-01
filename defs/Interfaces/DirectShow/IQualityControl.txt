@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IQualityControl base=IUnknown id={56a868a5-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Notify
+    HRESULT
+    pSelf IBaseFilter*
+    q Quality
+
+  func SetSink
+    HRESULT
+    piqc IQualityControl*
+
+

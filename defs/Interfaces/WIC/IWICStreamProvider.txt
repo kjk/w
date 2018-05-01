@@ -1,0 +1,20 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICStreamProvider base=IUnknown id={449494BC-B468-4927-96D7-BA90D31AB505} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetStream
+    [WIC_HRESULT]
+    ppIStream IStream**
+
+  func GetPersistOptions
+    [WIC_HRESULT]
+    pdwPersistOptions DWORD*
+
+  func GetPreferredVendorGUID
+    [WIC_HRESULT]
+    pguidPreferredVendor GUID*
+
+  func RefreshStream
+    [WIC_HRESULT]
+
+

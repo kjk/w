@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMTimecodeDisplay base=IUnknown id={9B496CE2-811B-11cf-8C77-00AA006B6814} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetTCDisplayEnable
+    HRESULT
+    pState long*
+
+  func SetTCDisplayEnable
+    HRESULT
+    State long
+
+  func GetTCDisplay
+    HRESULT
+    Param long
+    pValue long*
+
+  func SetTCDisplay
+    HRESULT
+    Param long
+    Value long
+
+

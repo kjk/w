@@ -1,0 +1,9 @@
+include Interfaces\BITS\IBackgroundCopyFile3.txt
+
+ingterface IBackgroundCopyFile4 base=IBackgroundCopyFile3 id={ef7e0655-7888-4960-b0e5-730846e03492} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func GetPeerDownloadStats
+    HRESULT
+    pFromOrigin PUINT64
+    pFromPeers PUINT64
+
+

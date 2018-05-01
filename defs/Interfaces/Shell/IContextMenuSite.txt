@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IContextMenuSite base=IUnknown id={0811AEBE-0B87-4C54-9E72-548CF649016B} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func DoContextMenuPopup
+    HRESULT
+    punkContextMenu IUnknown*
+    fFlags UINT
+    pt POINT
+
+

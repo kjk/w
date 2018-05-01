@@ -1,0 +1,54 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellItemResources base=IUnknown id={ff5693be-2ce0-4d48-b5c5-40817d1acdb9} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetAttributes
+    HRESULT
+    pdwAttributes [FILE_ATTRIBUTE*]
+
+  func GetSize
+    HRESULT
+    pullSize ULONGLONG*
+
+  func GetTimes
+    HRESULT
+    pftCreation FILETIME*
+    pftWrite FILETIME*
+    pftAccess FILETIME*
+
+  func SetTimes
+    HRESULT
+    pftCreation "const FILETIME*"
+    pftWrite "const FILETIME*"
+    pftAccess "const FILETIME*"
+
+  func GetResourceDescription
+    HRESULT
+    pcsir "const SHELL_ITEM_RESOURCE*"
+    ppszDescription LPWSTR*
+
+  func EnumResources
+    HRESULT
+    ppenumr IEnumResources**
+
+  func SupportsResource
+    HRESULT
+    pcsir "const SHELL_ITEM_RESOURCE*"
+
+  func OpenResource
+    HRESULT
+    pcsir "const SHELL_ITEM_RESOURCE*"
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func CreateResource
+    HRESULT
+    pcsir "const SHELL_ITEM_RESOURCE*"
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func MarkForDelete
+    HRESULT
+
+  pointer [FILE_ATTRIBUTE*] [FileAttributes] display=DWORD*
+
+

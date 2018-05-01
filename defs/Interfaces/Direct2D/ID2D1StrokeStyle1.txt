@@ -1,0 +1,8 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1StrokeStyle.txt
+
+ingterface ID2D1StrokeStyle1 base=ID2D1StrokeStyle id={10a72a66-e91c-43f4-993f-ddf4b82b0b4a} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetStrokeTransformType
+    D2D1_STROKE_TRANSFORM_TYPE
+
+

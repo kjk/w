@@ -1,0 +1,48 @@
+include Interfaces\IDispatch.txt
+
+ingterface IMediaPosition base=IDispatch id={56a868b2-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func get_Duration
+    HRESULT
+    plength REFTIME*
+
+  func put_CurrentPosition
+    HRESULT
+    llTime REFTIME
+
+  func get_CurrentPosition
+    HRESULT
+    pllTime REFTIME*
+
+  func get_StopTime
+    HRESULT
+    pllTime REFTIME*
+
+  func put_StopTime
+    HRESULT
+    llTime REFTIME
+
+  func get_PrerollTime
+    HRESULT
+    pllTime REFTIME*
+
+  func put_PrerollTime
+    HRESULT
+    llTime REFTIME
+
+  func put_Rate
+    HRESULT
+    dRate double
+
+  func get_Rate
+    HRESULT
+    pdRate double*
+
+  func CanSeekForward
+    HRESULT
+    pCanSeekForward LONG*
+
+  func CanSeekBackward
+    HRESULT
+    pCanSeekBackward LONG*
+
+

@@ -1,0 +1,5 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemSinkEvents base=IDispatch id={75718CA0-F029-11d1-A1AC-00C04FB6C223} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+

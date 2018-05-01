@@ -1,0 +1,64 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPropertyStorage base=IUnknown id={00000138-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Structured Storage/Interfaces"
+  func ReadMultiple
+    HRESULT
+    cpspec ULONG
+    rgpspec "const PROPSPEC []" count=cpspec
+    rgpropvar "PROPVARIANT []" postCount=cpspec
+
+  func WriteMultiple
+    HRESULT
+    cpspec ULONG
+    rgpspec "const PROPSPEC []" count=cpspec
+    rgpropvar "const PROPVARIANT []" count=cpspec
+    propidNameFirst PROPID
+
+  func DeleteMultiple
+    HRESULT
+    cpspec ULONG
+    rgpspec "const PROPSPEC []" count=cpspec
+
+  func ReadPropertyNames
+    HRESULT
+    cpropid ULONG
+    rgpropid "const PROPID []" count=cpropid
+    rglpwstrName "LPOLESTR []" postCount=cpropid
+
+  func WritePropertyNames
+    HRESULT
+    cpropid ULONG
+    rgpropid "const PROPID []" count=cpropid
+    rglpwstrName "const LPOLESTR []" count=cpropid
+
+  func DeletePropertyNames
+    HRESULT
+    cpropid ULONG
+    rgpropid "const PROPID []" count=cpropid
+
+  func Commit
+    HRESULT
+    grfCommitFlags STGC
+
+  func Revert
+    HRESULT
+
+  func Enum
+    HRESULT
+    ppenum IEnumSTATPROPSTG**
+
+  func SetTimes
+    HRESULT
+    pctime "const FILETIME*"
+    patime "const FILETIME*"
+    pmtime "const FILETIME*"
+
+  func SetClass
+    HRESULT
+    clsid REFCLSID
+
+  func Stat
+    HRESULT
+    pstatpsstg STATPROPSETSTG*
+
+

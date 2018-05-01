@@ -1,0 +1,45 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\DirectX\10\ID3D10EffectVariable.txt
+
+ingterface ID3D10EffectMatrixVariable base=ID3D10EffectVariable id={50666C24-B82F-4eed-A172-5B6E7E8522E0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func SetMatrix
+    HRESULT
+    pData float*
+
+  func GetMatrix
+    HRESULT
+    pData float*
+
+  func SetMatrixArray
+    HRESULT
+    pData float* count=Count
+    Offset UINT
+    Count UINT
+
+  func GetMatrixArray
+    HRESULT
+    pData float* count=Count
+    Offset UINT
+    Count UINT
+
+  func SetMatrixTranspose
+    HRESULT
+    pData float*
+
+  func GetMatrixTranspose
+    HRESULT
+    pData float*
+
+  func SetMatrixTransposeArray
+    HRESULT
+    pData float* count=Count
+    Offset UINT
+    Count UINT
+
+  func GetMatrixTransposeArray
+    HRESULT
+    pData float* count=Count
+    Offset UINT
+    Count UINT
+
+

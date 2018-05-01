@@ -1,0 +1,30 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+include Headers\security.h.txt
+
+dll Aclui.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Authorization/Access Control Editor"
+enum SI_PAGE_TYPE UINT
+  SI_PAGE_PERM          0
+  SI_PAGE_ADVPERM       1
+  SI_PAGE_AUDIT         2
+  SI_PAGE_OWNER         3
+  SI_PAGE_EFFECTIVE     4
+  SI_PAGE_TAKEOWNERSHIP 5
+
+func CreateSecurityPage ordinal=1
+  success NotEqual=0
+  HPROPSHEETPAGE
+  psi LPSECURITYINFO
+
+func EditSecurity ordinal=2
+  BOOL
+  hwndOwner HWND
+  psi LPSECURITYINFO
+
+func EditSecurityAdvanced ordinal=3
+  HRESULT
+  hwndOwner HWND
+  psi LPSECURITYINFO
+  uSIPage SI_PAGE_TYPE
+

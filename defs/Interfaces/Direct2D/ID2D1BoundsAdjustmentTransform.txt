@@ -1,0 +1,13 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1TransformNode.txt
+
+ingterface ID2D1BoundsAdjustmentTransform base=ID2D1TransformNode id={90f732e2-5092-4606-a819-8651970baccd} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetOutputBounds
+    void
+    outputBounds "CONST D2D1_RECT_L*"
+
+  func GetOutputBounds
+    void
+    outputBounds D2D1_RECT_L*
+
+

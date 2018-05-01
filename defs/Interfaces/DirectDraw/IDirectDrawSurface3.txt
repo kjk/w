@@ -1,0 +1,9 @@
+include Interfaces\DirectDraw\IDirectDrawSurface2.txt
+
+ingterface IDirectDrawSurface3 base=IDirectDrawSurface2 id={da044e00-69b2-11d0-a1d5-00aa00b8dfbb} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+  func SetSurfaceDesc
+    [DD_HRESULT]
+    lpDDsd2 LPDDSURFACEDESC
+    dwFlags DWORD
+
+

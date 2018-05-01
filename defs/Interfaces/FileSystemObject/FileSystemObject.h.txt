@@ -1,0 +1,75 @@
+include Headers\windows.h.txt
+
+header
+interface IDictionary
+
+interface IDrive
+
+interface IDriveCollection
+
+interface IFile
+
+interface IFileCollection
+
+interface IFileSystem
+
+interface IFileSystem3
+
+interface IFolder
+
+interface IFolderCollection
+
+interface IScriptEncoder
+
+interface ITextStream
+
+enum CompareMethod UINT
+  BinaryCompare   0
+  TextCompare     1
+  DatabaseCompare 2
+
+pointer CompareMethod* CompareMethod
+
+enum IOMode UINT
+  ForReading   1
+  ForWriting   2
+  ForAppending 8
+
+enum Tristate UINT
+  TristateUseDefault -2
+  TristateTrue       -1
+  TristateFalse      0
+
+flag FileAttribute UINT
+  Normal     0
+  ReadOnly   1
+  Hidden     2
+  System     4
+  Volume     8
+  Directory  16
+  Archive    32
+  Alias      1024
+  Compressed 2048
+
+pointer FileAttribute* FileAttribute
+
+enum SpecialFolderConst UINT
+  WindowsFolder   0
+  SystemFolder    1
+  TemporaryFolder 2
+
+enum DriveTypeConst UINT
+  UnknownType 0
+  Removable   1
+  Fixed       2
+  Remote      3
+  CDRom       4
+  RamDisk     5
+
+pointer DriveTypeConst* DriveTypeConst
+
+enum StandardStreamTypes UINT
+  StdIn  0
+  StdOut 1
+  StdErr 2
+

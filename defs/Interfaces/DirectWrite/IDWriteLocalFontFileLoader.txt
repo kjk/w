@@ -1,0 +1,24 @@
+include Headers\dwrite.h.txt
+include Interfaces\DirectWrite\IDWriteFontFileLoader.txt
+
+ingterface IDWriteLocalFontFileLoader base=IDWriteFontFileLoader id={b2d9f3ec-c9fe-4a11-a2ec-d86208f7c0a2} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func GetFilePathLengthFromKey
+    HRESULT
+    fontFileReferenceKey "void const*"
+    fontFileReferenceKeySize UINT32
+    filePathLength UINT32*
+
+  func GetFilePathFromKey
+    HRESULT
+    fontFileReferenceKey "void const*" length=fontFileReferenceKeySize
+    fontFileReferenceKeySize UINT32
+    filePath WCHAR*
+    filePathSize UINT32
+
+  func GetLastWriteTimeFromKey
+    HRESULT
+    fontFileReferenceKey "void const*"
+    fontFileReferenceKeySize UINT32
+    lastWriteTime FILETIME*
+
+

@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ADOConnectionConstruction15 base=IUnknown id={00000516-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_DSO
+    [OLEDB_HRESULT]
+    ppDSO IUnknown**
+
+  func get_Session
+    [OLEDB_HRESULT]
+    ppSession IUnknown**
+
+  func WrapDSOandSession
+    [OLEDB_HRESULT]
+    pDSO IUnknown*
+    pSession IUnknown*
+
+

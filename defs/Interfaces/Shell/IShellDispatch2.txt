@@ -1,0 +1,57 @@
+include Interfaces\Shell\IShellDispatch.txt
+
+ingterface IShellDispatch2 base=IShellDispatch id={A4C6892C-3BA9-11d2-9DEA-00C04FB16162} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func IsRestricted
+    HRESULT
+    Group BSTR
+    Restriction BSTR
+    plRestrictValue long*
+
+  func ShellExecute
+    HRESULT
+    File BSTR
+    vArgs VARIANT
+    vDir VARIANT
+    vOperation VARIANT
+    vShow VARIANT
+
+  func FindPrinter
+    HRESULT
+    name BSTR
+    location BSTR
+    model BSTR
+
+  func GetSystemInformation
+    HRESULT
+    name BSTR
+    pv VARIANT*
+
+  func ServiceStart
+    HRESULT
+    ServiceName BSTR
+    Persistent VARIANT
+    pSuccess VARIANT*
+
+  func ServiceStop
+    HRESULT
+    ServiceName BSTR
+    Persistent VARIANT
+    pSuccess VARIANT*
+
+  func IsServiceRunning
+    HRESULT
+    ServiceName BSTR
+    pRunning VARIANT*
+
+  func CanStartStopService
+    HRESULT
+    ServiceName BSTR
+    pCanStartStop VARIANT*
+
+  func ShowBrowserBar
+    HRESULT
+    bstrClsid BSTR
+    bShow VARIANT
+    pSuccess VARIANT*
+
+

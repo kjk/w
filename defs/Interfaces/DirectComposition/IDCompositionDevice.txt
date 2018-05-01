@@ -1,0 +1,115 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDCompositionDevice base=IUnknown id={C37EA93A-E7AA-450D-B16F-9746CB0407F3} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func Commit
+    HRESULT
+
+  func WaitForCommitCompletion
+    HRESULT
+
+  func GetFrameStatistics
+    HRESULT
+    statistics DCOMPOSITION_FRAME_STATISTICS*
+
+  func CreateTargetForHwnd
+    HRESULT
+    hwnd HWND
+    topmost BOOL
+    target IDCompositionTarget**
+
+  func CreateVisual
+    HRESULT
+    visual IDCompositionVisual**
+
+  func CreateSurface
+    HRESULT
+    width UINT
+    height UINT
+    pixelFormat DXGI_FORMAT
+    alphaMode DXGI_ALPHA_MODE
+    surface IDCompositionSurface**
+
+  func CreateVirtualSurface
+    HRESULT
+    initialWidth UINT
+    initialHeight UINT
+    pixelFormat DXGI_FORMAT
+    alphaMode DXGI_ALPHA_MODE
+    virtualSurface IDCompositionVirtualSurface**
+
+  func CreateSurfaceFromHandle
+    HRESULT
+    handle HANDLE
+    surface IUnknown**
+
+  func CreateSurfaceFromHwnd
+    HRESULT
+    hwnd HWND
+    surface IUnknown**
+
+  func CreateTranslateTransform
+    HRESULT
+    translateTransform IDCompositionTranslateTransform**
+
+  func CreateScaleTransform
+    HRESULT
+    scaleTransform IDCompositionScaleTransform**
+
+  func CreateRotateTransform
+    HRESULT
+    rotateTransform IDCompositionRotateTransform**
+
+  func CreateSkewTransform
+    HRESULT
+    skewTransform IDCompositionSkewTransform**
+
+  func CreateMatrixTransform
+    HRESULT
+    matrixTransform IDCompositionMatrixTransform**
+
+  func CreateTransformGroup
+    HRESULT
+    transforms IDCompositionTransform**
+    elements UINT
+    transformGroup IDCompositionTransform**
+
+  func CreateTranslateTransform3D
+    HRESULT
+    translateTransform3D IDCompositionTranslateTransform3D**
+
+  func CreateScaleTransform3D
+    HRESULT
+    scaleTransform3D IDCompositionScaleTransform3D**
+
+  func CreateRotateTransform3D
+    HRESULT
+    rotateTransform3D IDCompositionRotateTransform3D**
+
+  func CreateMatrixTransform3D
+    HRESULT
+    matrixTransform3D IDCompositionMatrixTransform3D**
+
+  func CreateTransform3DGroup
+    HRESULT
+    transforms3D IDCompositionTransform3D**
+    elements UINT
+    transform3DGroup IDCompositionTransform3D**
+
+  func CreateEffectGroup
+    HRESULT
+    effectGroup IDCompositionEffectGroup**
+
+  func CreateRectangleClip
+    HRESULT
+    clip IDCompositionRectangleClip**
+
+  func CreateAnimation
+    HRESULT
+    animation IDCompositionAnimation**
+
+  func CheckDeviceState
+    HRESULT
+    pfValid BOOL*
+
+

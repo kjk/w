@@ -1,0 +1,4 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+
+ingterface ID3D11InputLayout base=ID3D11DeviceChild id={e4819ddc-4cf0-4025-bd26-5de82a3e07b7} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+

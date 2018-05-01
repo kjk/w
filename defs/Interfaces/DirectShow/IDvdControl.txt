@@ -1,0 +1,135 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDvdControl base=IUnknown id={A70EFE61-E2A3-11d0-A9BE-00AA0061BE93} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func TitlePlay
+    HRESULT
+    ulTitle ULONG
+
+  func ChapterPlay
+    HRESULT
+    ulTitle ULONG
+    ulChapter ULONG
+
+  func TimePlay
+    HRESULT
+    ulTitle ULONG
+    bcdTime ULONG
+
+  func StopForResume
+    HRESULT
+
+  func GoUp
+    HRESULT
+
+  func TimeSearch
+    HRESULT
+    bcdTime ULONG
+
+  func ChapterSearch
+    HRESULT
+    ulChapter ULONG
+
+  func PrevPGSearch
+    HRESULT
+
+  func TopPGSearch
+    HRESULT
+
+  func NextPGSearch
+    HRESULT
+
+  func ForwardScan
+    HRESULT
+    dwSpeed double
+
+  func BackwardScan
+    HRESULT
+    dwSpeed double
+
+  func MenuCall
+    HRESULT
+    MenuID DVD_MENU_ID
+
+  func Resume
+    HRESULT
+
+  func UpperButtonSelect
+    HRESULT
+
+  func LowerButtonSelect
+    HRESULT
+
+  func LeftButtonSelect
+    HRESULT
+
+  func RightButtonSelect
+    HRESULT
+
+  func ButtonActivate
+    HRESULT
+
+  func ButtonSelectAndActivate
+    HRESULT
+    ulButton ULONG
+
+  func StillOff
+    HRESULT
+
+  func PauseOn
+    HRESULT
+
+  func PauseOff
+    HRESULT
+
+  func MenuLanguageSelect
+    HRESULT
+    Language LCID
+
+  func AudioStreamChange
+    HRESULT
+    ulAudio ULONG
+
+  func SubpictureStreamChange
+    HRESULT
+    ulSubPicture ULONG
+    bDisplay BOOL
+
+  func AngleChange
+    HRESULT
+    ulAngle ULONG
+
+  func ParentalLevelSelect
+    HRESULT
+    ulParentalLevel ULONG
+
+  func ParentalCountrySelect
+    HRESULT
+    wCountry WORD
+
+  func KaraokeAudioPresentationModeChange
+    HRESULT
+    ulMode ULONG
+
+  func VideoModePreferrence
+    HRESULT
+    ulPreferredDisplayMode ULONG
+
+  func SetRoot
+    HRESULT
+    pszPath LPCWSTR
+
+  func MouseActivate
+    HRESULT
+    point POINT
+
+  func MouseSelect
+    HRESULT
+    point POINT
+
+  func ChapterPlayAutoStop
+    HRESULT
+    ulTitle ULONG
+    ulChapter ULONG
+    ulChaptersToPlay ULONG
+
+

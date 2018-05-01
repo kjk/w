@@ -1,0 +1,36 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IMDDataset base=IUnknown id={a07cccd1-8148-11d0-87bb-00c04fc33942} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func FreeAxisInfo
+    [OLEDB_HRESULT]
+    cAxes DBCOUNTITEM
+    rgAxisInfo MDAXISINFO* derefCount=cAxes
+
+  func GetAxisInfo
+    [OLEDB_HRESULT]
+    pcAxes DBCOUNTITEM*
+    prgAxisInfo MDAXISINFO** postCount=pcAxes
+
+  func GetAxisRowset
+    [OLEDB_HRESULT]
+    pUnkOuter IUnknown*
+    iAxis DBCOUNTITEM
+    riid REFIID
+    cPropertySets ULONG
+    rgPropertySets "DBPROPSET []" count=cPropertySets
+    ppRowset IUnknown** interfaceId=riid
+
+  func GetCellData
+    [OLEDB_HRESULT]
+    hAccessor HACCESSOR
+    ulStartCell DBORDINAL
+    ulEndCell DBORDINAL
+    pData void*
+
+  func GetSpecification
+    [OLEDB_HRESULT]
+    riid REFIID
+    ppSpecification IUnknown** interfaceId=riid
+
+

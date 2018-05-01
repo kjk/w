@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISurrogateService base=IUnknown id={000001d4-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Init
+    HRESULT
+    rguidProcessID REFGUID
+    pProcessLock IProcessLock*
+    pfApplicationAware BOOL*
+
+  func ApplicationLaunch
+    HRESULT
+    rguidApplID REFGUID
+    appType ApplicationType
+
+  func ApplicationFree
+    HRESULT
+    rguidApplID REFGUID
+
+  func CatalogRefresh
+    HRESULT
+    ulReserved ULONG
+
+  func ProcessShutdown
+    HRESULT
+    shutdownType ShutdownType
+
+

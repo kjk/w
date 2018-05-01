@@ -1,0 +1,96 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Resource.txt
+
+ingterface ID2D1Geometry base=ID2D1Resource id={2cd906a1-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetBounds
+    [D2D_HRESULT]
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    bounds D2D1_RECT_F*
+
+  func GetWidenedBounds
+    [D2D_HRESULT]
+    strokeWidth FLOAT
+    strokeStyle ID2D1StrokeStyle*
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    bounds D2D1_RECT_F*
+
+  func StrokeContainsPoint
+    [D2D_HRESULT]
+    point D2D1_POINT_2F
+    strokeWidth FLOAT
+    strokeStyle ID2D1StrokeStyle*
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    contains BOOL*
+
+  func FillContainsPoint
+    [D2D_HRESULT]
+    point D2D1_POINT_2F
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    contains BOOL*
+
+  func CompareWithGeometry
+    [D2D_HRESULT]
+    inputGeometry ID2D1Geometry*
+    inputGeometryTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    relation D2D1_GEOMETRY_RELATION*
+
+  func Simplify
+    [D2D_HRESULT]
+    simplificationOption D2D1_GEOMETRY_SIMPLIFICATION_OPTION
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    geometrySink ID2D1SimplifiedGeometrySink*
+
+  func Tessellate
+    [D2D_HRESULT]
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    tessellationSink ID2D1TessellationSink*
+
+  func CombineWithGeometry
+    [D2D_HRESULT]
+    inputGeometry ID2D1Geometry*
+    combineMode D2D1_COMBINE_MODE
+    inputGeometryTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    geometrySink ID2D1SimplifiedGeometrySink*
+
+  func Outline
+    [D2D_HRESULT]
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    geometrySink ID2D1SimplifiedGeometrySink*
+
+  func ComputeArea
+    [D2D_HRESULT]
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    area FLOAT*
+
+  func ComputeLength
+    [D2D_HRESULT]
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    length FLOAT*
+
+  func ComputePointAtLength
+    [D2D_HRESULT]
+    length FLOAT
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    point D2D1_POINT_2F*
+    unitTangentVector D2D1_POINT_2F*
+
+  func Widen
+    [D2D_HRESULT]
+    strokeWidth FLOAT
+    strokeStyle ID2D1StrokeStyle*
+    worldTransform "CONST D2D1_MATRIX_3X2_F*"
+    flatteningTolerance FLOAT
+    geometrySink ID2D1SimplifiedGeometrySink*
+
+

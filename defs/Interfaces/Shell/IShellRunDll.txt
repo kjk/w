@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellRunDll base=IUnknown id={fce4bde0-4b68-4b80-8e9c-7426315a7388} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Run
+    HRESULT
+    pszArgs LPCWSTR
+
+

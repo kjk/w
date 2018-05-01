@@ -1,0 +1,33 @@
+include Interfaces\COM\IOleInPlaceUIWindow.txt
+include Headers\gdi.h.txt
+
+ingterface IOleInPlaceFrame base=IOleInPlaceUIWindow id={00000116-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func InsertMenus
+    HRESULT
+    hmenuShared HMENU
+    lpMenuWidths LPOLEMENUGROUPWIDTHS
+
+  func SetMenu
+    HRESULT
+    hmenuShared HMENU
+    holemenu HOLEMENU
+    hwndActiveObject HWND
+
+  func RemoveMenus
+    HRESULT
+    hmenuShared HMENU
+
+  func SetStatusText
+    HRESULT
+    pszStatusText LPCOLESTR
+
+  func EnableModeless
+    HRESULT
+    fEnable BOOL
+
+  func TranslateAccelerator
+    HRESULT
+    lpmsg LPMSG
+    wID WORD
+
+

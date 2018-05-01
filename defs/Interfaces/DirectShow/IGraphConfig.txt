@@ -1,0 +1,57 @@
+include Interfaces\IUnknown.txt
+
+ingterface IGraphConfig base=IUnknown id={03A1EB8E-32BF-4245-8502-114D08A9CB88} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Reconnect
+    HRESULT
+    pOutputPin IPin*
+    pInputPin IPin*
+    pmtFirstConnection "const AM_MEDIA_TYPE*"
+    pUsingFilter IBaseFilter*
+    hAbortEvent HANDLE
+    dwFlags DWORD
+
+  func Reconfigure
+    HRESULT
+    pCallback IGraphConfigCallback*
+    pvContext PVOID
+    dwFlags DWORD
+    hAbortEvent HANDLE
+
+  func AddFilterToCache
+    HRESULT
+    pFilter IBaseFilter*
+
+  func EnumCacheFilter
+    HRESULT
+    pEnum IEnumFilters**
+
+  func RemoveFilterFromCache
+    HRESULT
+    pFilter IBaseFilter*
+
+  func GetStartTime
+    HRESULT
+    prtStart REFERENCE_TIME*
+
+  func PushThroughData
+    HRESULT
+    pOutputPin IPin*
+    pConnection IPinConnection*
+    hEventAbort HANDLE
+
+  func SetFilterFlags
+    HRESULT
+    pFilter IBaseFilter*
+    dwFlags DWORD
+
+  func GetFilterFlags
+    HRESULT
+    pFilter IBaseFilter*
+    pdwFlags DWORD*
+
+  func RemoveFilterEx
+    HRESULT
+    pFilter IBaseFilter*
+    Flags DWORD
+
+

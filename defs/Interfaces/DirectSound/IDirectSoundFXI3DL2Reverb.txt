@@ -1,0 +1,28 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundFXI3DL2Reverb base=IUnknown id={4b166a6a-0d66-43f3-80e3-ee6280dee1a4} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func SetAllParameters
+    [DS_HRESULT]
+    pcDsFxI3DL2Reverb LPCDSFXI3DL2Reverb
+
+  func GetAllParameters
+    [DS_HRESULT]
+    pDsFxI3DL2Reverb LPDSFXI3DL2Reverb
+
+  func SetPreset
+    [DS_HRESULT]
+    dwPreset DWORD
+
+  func GetPreset
+    [DS_HRESULT]
+    pdwPreset LPDWORD
+
+  func SetQuality
+    [DS_HRESULT]
+    lQuality LONG
+
+  func GetQuality
+    [DS_HRESULT]
+    plQuality LONG*
+
+

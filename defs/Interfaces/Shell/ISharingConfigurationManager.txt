@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISharingConfigurationManager base=IUnknown id={B4CD448A-9C86-4466-9201-2E62105B87AE} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func CreateShare
+    HRESULT
+    dsid DEF_SHARE_ID
+    role SHARE_ROLE
+
+  func DeleteShare
+    HRESULT
+    dsid DEF_SHARE_ID
+
+  func ShareExists
+    HRESULT
+    dsid DEF_SHARE_ID
+
+  func GetSharePermissions
+    HRESULT
+    dsid DEF_SHARE_ID
+    pRole SHARE_ROLE*
+
+  func SharePrinters
+    HRESULT
+
+  func StopSharingPrinters
+    HRESULT
+
+  func ArePrintersShared
+    HRESULT
+
+

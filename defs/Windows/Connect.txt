@@ -1,0 +1,63 @@
+include Headers\windows.h.txt
+
+dll Connect.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Networking/Get Connected Wizard"
+func CreateVPNConnection
+  HRESULT
+  hwndParent HWND
+  dwWizardType DWORD
+  dwContextFlags DWORD
+  dwUserFlags DWORD
+  hUserContext HANDLE
+  pszCommandLine LPWSTR
+
+func GetInternetConnected
+  HRESULT
+  hwndParent HWND
+  dwWizardType DWORD
+  dwContextFlags DWORD
+  dwUserFlags DWORD
+  hUserContext HANDLE
+  pszCommandLine LPWSTR
+
+func GetNetworkConnected
+  HRESULT
+  hwndParent HWND
+  dwWizardType DWORD
+  dwContextFlags DWORD
+  dwUserFlags DWORD
+  hUserContext HANDLE
+  pszCommandLine LPWSTR
+
+func GetVPNConnected
+  HRESULT
+  hwndParent HWND
+  dwWizardType DWORD
+  dwContextFlags DWORD
+  dwUserFlags DWORD
+  hUserContext HANDLE
+  pszCommandLine LPWSTR
+
+func IsInternetConnected
+  HRESULT
+
+func RegisterPageWithPage
+  HRESULT
+  pguidParentPage GUID*
+  pguidChildPage GUID*
+  pszChildModuleFileName LPWSTR
+  pszFriendlyName LPWSTR
+  dwBehaviorFlags DWORD
+  dwUserFlags DWORD
+  pszCommandLine LPWSTR
+
+func UnregisterPage
+  HRESULT
+  pguidPage GUID*
+  fUnregisterFromCOM BOOL
+
+func UnregisterPagesLink
+  HRESULT
+  pguidParentPage GUID*
+  pguidChildPage GUID*
+

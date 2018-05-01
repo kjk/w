@@ -1,0 +1,165 @@
+include Interfaces\Debugger\IDebugClient4.txt
+
+ingterface IDebugClient5 base=IDebugClient4 id={e3acb9d7-7ec2-4f0c-a0da-e81e0cbbe628} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func AttachKernelWide
+    HRESULT
+    Flags [DEBUG_ATTACH_KERNEL_FLAGS]
+    ConnectOptions PCWSTR
+
+  func GetKernelConnectionOptionsWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    OptionsSize PULONG
+
+  func SetKernelConnectionOptionsWide
+    HRESULT
+    Options PCWSTR
+
+  func StartProcessServerWide
+    HRESULT
+    Flags [DEBUG_CLASS]
+    Options PCWSTR
+    Reserved PVOID
+
+  func ConnectProcessServerWide
+    HRESULT
+    RemoteOptions PCWSTR
+    Server PULONG64
+
+  func StartServerWide
+    HRESULT
+    Options PCWSTR
+
+  func OutputServersWide
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Machine PCWSTR
+    Flags [DEBUG_SERVERS_FLAGS]
+
+  func GetOutputCallbacksWide
+    HRESULT
+    Callbacks PDEBUG_OUTPUT_CALLBACKS_WIDE*
+
+  func SetOutputCallbacksWide
+    HRESULT
+    Callbacks PDEBUG_OUTPUT_CALLBACKS_WIDE
+
+  func GetOutputLinePrefixWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    PrefixSize PULONG
+
+  func SetOutputLinePrefixWide
+    HRESULT
+    Prefix PCWSTR
+
+  func GetIdentityWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    IdentitySize PULONG
+
+  func OutputIdentityWide
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Flags ULONG
+    Format PCWSTR
+
+  func GetEventCallbacksWide
+    HRESULT
+    Callbacks PDEBUG_EVENT_CALLBACKS_WIDE*
+
+  func SetEventCallbacksWide
+    HRESULT
+    Callbacks PDEBUG_EVENT_CALLBACKS_WIDE
+
+  func CreateProcess2
+    HRESULT
+    Server ULONG64
+    CommandLine PSTR
+    OptionsBuffer PVOID
+    OptionsBufferSize ULONG
+    InitialDirectory PCSTR
+    Environment PCSTR
+
+  func CreateProcess2Wide
+    HRESULT
+    Server ULONG64
+    CommandLine PWSTR
+    OptionsBuffer PVOID
+    OptionsBufferSize ULONG
+    InitialDirectory PCWSTR
+    Environment PCWSTR
+
+  func CreateProcessAndAttach2
+    HRESULT
+    Server ULONG64
+    CommandLine PSTR
+    OptionsBuffer PVOID
+    OptionsBufferSize ULONG
+    InitialDirectory PCSTR
+    Environment PCSTR
+    ProcessId ULONG
+    AttachFlags [DEBUG_ATTACH_PROC_FLAGS]
+
+  func CreateProcessAndAttach2Wide
+    HRESULT
+    Server ULONG64
+    CommandLine PWSTR
+    OptionsBuffer PVOID
+    OptionsBufferSize ULONG
+    InitialDirectory PCWSTR
+    Environment PCWSTR
+    ProcessId ULONG
+    AttachFlags [DEBUG_ATTACH_PROC_FLAGS]
+
+  func PushOutputLinePrefix
+    HRESULT
+    NewPrefix PCSTR
+    Handle PULONG64
+
+  func PushOutputLinePrefixWide
+    HRESULT
+    NewPrefix PCWSTR
+    Handle PULONG64
+
+  func PopOutputLinePrefix
+    HRESULT
+    Handle ULONG64
+
+  func GetNumberInputCallbacks
+    HRESULT
+    Count PULONG
+
+  func GetNumberOutputCallbacks
+    HRESULT
+    Count PULONG
+
+  func GetNumberEventCallbacks
+    HRESULT
+    EventFlags ULONG
+    Count PULONG
+
+  func GetQuitLockString
+    HRESULT
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    StringSize PULONG
+
+  func SetQuitLockString
+    HRESULT
+    String PCSTR
+
+  func GetQuitLockStringWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    StringSize PULONG
+
+  func SetQuitLockStringWide
+    HRESULT
+    String PCWSTR
+
+

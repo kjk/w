@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IEnumChangeUnitExceptions base=IUnknown id={3074e802-9319-4420-be21-1022e2e21da8} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func Next
+    HRESULT
+    cExceptions ULONG
+    ppChangeUnitException IChangeUnitException** postCount=pcFetched
+    pcFetched ULONG*
+
+  func Skip
+    HRESULT
+    cExceptions ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppEnum IEnumChangeUnitExceptions**
+
+

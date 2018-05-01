@@ -1,0 +1,7 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumReadyCallback base=IUnknown id={61E00D45-8FFF-4e60-924E-6537B61612DD} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func EnumReady
+    HRESULT
+
+

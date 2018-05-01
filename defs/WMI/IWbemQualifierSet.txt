@@ -1,0 +1,41 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemQualifierSet base=IUnknown id={dc12a680-737f-11cf-884d-00aa004b2e24} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func Get
+    WBEMSTATUS
+    wszName LPCWSTR
+    lFlags long
+    pVal VARIANT*
+    plFlavor long*
+
+  func Put
+    WBEMSTATUS
+    wszName LPCWSTR
+    pVal VARIANT*
+    lFlavor long
+
+  func Delete
+    WBEMSTATUS
+    wszName LPCWSTR
+
+  func GetNames
+    WBEMSTATUS
+    lFlags long
+    pNames SAFEARRAY**
+
+  func BeginEnumeration
+    WBEMSTATUS
+    lFlags long
+
+  func Next
+    WBEMSTATUS
+    lFlags long
+    pstrName BSTR*
+    pVal VARIANT*
+    plFlavor long*
+
+  func EndEnumeration
+    WBEMSTATUS
+
+

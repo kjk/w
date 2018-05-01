@@ -1,0 +1,30 @@
+include Interfaces\DirectX\DXGI\IDXGIObject.txt
+
+ingterface IDXGIDevice base=IDXGIObject id={54ec77fa-1377-44e6-8c32-88fd5f44c84c} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func GetAdapter
+    HRESULT
+    pAdapter IDXGIAdapter**
+
+  func CreateSurface
+    HRESULT
+    pDesc "const DXGI_SURFACE_DESC*"
+    NumSurfaces UINT
+    Usage DXGI_USAGE
+    pSharedResource "const DXGI_SHARED_RESOURCE*"
+    ppSurface IDXGISurface**
+
+  func QueryResourceResidency
+    HRESULT
+    ppResources IUnknown*const* count=NumResources
+    pResidencyStatus DXGI_RESIDENCY* postCount=NumResources
+    NumResources UINT
+
+  func SetGPUThreadPriority
+    HRESULT
+    Priority INT
+
+  func GetGPUThreadPriority
+    HRESULT
+    pPriority INT*
+
+

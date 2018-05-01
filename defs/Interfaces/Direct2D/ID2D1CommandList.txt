@@ -1,0 +1,12 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Image.txt
+
+ingterface ID2D1CommandList base=ID2D1Image id={b4f34a19-2383-4d76-94f6-ec343657c3dc} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func Stream
+    [D2D_HRESULT]
+    sink ID2D1CommandSink*
+
+  func Close
+    [D2D_HRESULT]
+
+

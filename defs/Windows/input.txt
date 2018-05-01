@@ -1,0 +1,110 @@
+include Headers\windows.h.txt
+include Headers\registry.h.txt
+
+dll input.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Windows Application UI Development/User Interaction/Text Services Framework"
+flag [LOTP_TYPE] DWORD display=DWORD
+  LOTP_INPUTPROCESSOR 1
+  LOTP_KEYBOARDLAYOUT 2
+
+struct LAYOUTORTIPPROFILE
+  dwProfileType [LOTP_TYPE]
+  langid LANGID
+  clsid CLSID
+  guidProfile GUID
+  catid GUID
+  dwSubstituteLayout DWORD
+  dwFlags DWORD
+  szId "WCHAR [MAX_PATH]"
+
+pointer LAYOUTORTIPPROFILE* LAYOUTORTIPPROFILE
+
+flag [LAYOUTORTIP_Flags] DWORD display=DWORD
+  LOT_DEFAULT  0x0001
+  LOT_DISABLED 0x0002
+
+struct LAYOUTORTIP
+  dwFlags [LAYOUTORTIP_Flags]
+  szId "WCHAR [MAX_PATH]"
+  szName "WCHAR [MAX_PATH]"
+
+pointer LAYOUTORTIP* LAYOUTORTIP
+
+flag [IlotFlags] DWORD display=DWORD
+  ILOT_UNINSTALL               0x00000001
+  ILOT_DEFPROFILE              0x00000002
+  ILOT_DEFUSER4                0x00000004
+  ILOT_SYSLOCALE               0x00000008
+  ILOT_NOLOCALETOENUMERATE     0x00000010
+  ILOT_NOAPPLYTOCURRENTSESSION 0x00000020
+  ILOT_CLEANINSTALL            0x00000040
+  ILOT_DISABLED                0x00000080
+
+flag [SdlotFlags] DWORD display=DWORD
+  SDLOT_NOAPPLYTOCURRENTSESSION 0x00000001
+  SDLOT_APPLYTOCURRENTTHREAD    0x00000002
+
+func EnumEnabledLayoutOrTip
+  success NotEqual=0
+  UINT
+  pszUserSidString LPCWSTR
+  pLayoutOrTipProfile LAYOUTORTIPPROFILE*
+  uBufLength UINT
+
+func EnumLayoutOrTipForSetup
+  success NotEqual=0
+  UINT
+  uBufLength UINT
+  pLayoutOrTip LAYOUTORTIP*
+  uBufLength UINT
+  dwFlags DWORD
+
+func InstallLayoutOrTip
+  BOOL
+  psz LPCWSTR
+  dwFlags [IlotFlags]
+
+func InstallLayoutOrTipUserReg
+  BOOL
+  pszUserReg LPCWSTR
+  pszSystemReg LPCWSTR
+  pszSoftwareReg LPCWSTR
+  psz LPCWSTR
+  dwFlags [IlotFlags]
+
+func QueryLayoutOrTipString
+  HRESULT
+  psz LPCWSTR
+  dwFlags DWORD
+
+func QueryLayoutOrTipStringUserReg
+  HRESULT
+  pszUserReg LPCWSTR
+  pszSystemReg LPCWSTR
+  pszSoftwareReg LPCWSTR
+  psz LPCWSTR
+  dwFlags DWORD
+
+func SaveDefaultUserInputSettings
+  BOOL
+  hwndParent HWND
+  hSourceRegKey HKEY
+
+func SaveSystemAcctInputSettings
+  BOOL
+  hwndParent HWND
+  hSourceRegKey HKEY
+
+func SetDefaultLayoutOrTip
+  BOOL
+  psz LPCWSTR
+  dwFlags [SdlotFlags]
+
+func SetDefaultLayoutOrTipUserReg
+  BOOL
+  pszUserReg LPCWSTR
+  pszSystemReg LPCWSTR
+  pszSoftwareReg LPCWSTR
+  psz LPCWSTR
+  dwFlags [SdlotFlags]
+

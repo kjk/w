@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IExternalConnection base=IUnknown id={00000019-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func AddConnection
+    DWORD
+    extconn EXTCONN
+    reserved DWORD
+
+  func ReleaseConnection
+    DWORD
+    extconn EXTCONN
+    reserved DWORD
+    fLastReleaseCloses BOOL
+
+  flag EXTCONN DWORD display=DWORD
+    EXTCONN_STRONG   0x1
+    EXTCONN_WEAK     0x2
+    EXTCONN_CALLABLE 0x4
+
+

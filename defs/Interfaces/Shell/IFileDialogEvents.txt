@@ -1,0 +1,37 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFileDialogEvents base=IUnknown id={973510db-7d7f-452b-8975-74a85828d354} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnFileOk
+    HRESULT
+    pfd IFileDialog*
+
+  func OnFolderChanging
+    HRESULT
+    pfd IFileDialog*
+    psiFolder IShellItem*
+
+  func OnFolderChange
+    HRESULT
+    pfd IFileDialog*
+
+  func OnSelectionChange
+    HRESULT
+    pfd IFileDialog*
+
+  func OnShareViolation
+    HRESULT
+    pfd IFileDialog*
+    psi IShellItem*
+    pResponse FDE_SHAREVIOLATION_RESPONSE*
+
+  func OnTypeChange
+    HRESULT
+    pfd IFileDialog*
+
+  func OnOverwrite
+    HRESULT
+    pfd IFileDialog*
+    psi IShellItem*
+    pResponse FDE_OVERWRITE_RESPONSE*
+
+

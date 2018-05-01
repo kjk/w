@@ -1,0 +1,406 @@
+include Headers\windows.h.txt
+
+dll Wevtapi.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Diagnostics/Windows Events/Windows Event Log"
+alias PEVT_VARIANT LPVOID
+
+alias EVT_HANDLE HANDLE
+
+pointer EVT_HANDLE* EVT_HANDLE
+
+alias EVT_SUBSCRIBE_CALLBACK LPVOID
+
+alias EVT_OBJECT_ARRAY_PROPERTY_HANDLE HANDLE
+
+enum EVT_CHANNEL_CONFIG_PROPERTY_ID UINT
+  EvtChannelConfigEnabled               0
+  EvtChannelConfigIsolation             1
+  EvtChannelConfigType                  2
+  EvtChannelConfigOwningPublisher       3
+  EvtChannelConfigClassicEventlog       4
+  EvtChannelConfigAccess                5
+  EvtChannelLoggingConfigRetention      6
+  EvtChannelLoggingConfigAutoBackup     7
+  EvtChannelLoggingConfigMaxSize        8
+  EvtChannelLoggingConfigLogFilePath    9
+  EvtChannelPublishingConfigLevel       10
+  EvtChannelPublishingConfigKeywords    11
+  EvtChannelPublishingConfigControlGuid 12
+  EvtChannelPublishingConfigBufferSize  13
+  EvtChannelPublishingConfigMinBuffers  14
+  EvtChannelPublishingConfigMaxBuffers  15
+  EvtChannelPublishingConfigLatency     16
+  EvtChannelPublishingConfigClockType   17
+  EvtChannelPublishingConfigSidType     18
+  EvtChannelPublisherList               19
+  EvtChannelPublishingConfigFileMax     20
+
+enum EVT_PUBLISHER_METADATA_PROPERTY_ID UINT
+  EvtPublisherMetadataPublisherGuid             0
+  EvtPublisherMetadataResourceFilePath          1
+  EvtPublisherMetadataParameterFilePath         2
+  EvtPublisherMetadataMessageFilePath           3
+  EvtPublisherMetadataHelpLink                  4
+  EvtPublisherMetadataPublisherMessageID        5
+  EvtPublisherMetadataChannelReferences         6
+  EvtPublisherMetadataChannelReferencePath      7
+  EvtPublisherMetadataChannelReferenceIndex     8
+  EvtPublisherMetadataChannelReferenceID        9
+  EvtPublisherMetadataChannelReferenceFlags     10
+  EvtPublisherMetadataChannelReferenceMessageID 11
+  EvtPublisherMetadataLevels                    12
+  EvtPublisherMetadataLevelName                 13
+  EvtPublisherMetadataLevelValue                14
+  EvtPublisherMetadataLevelMessageID            15
+  EvtPublisherMetadataTasks                     16
+  EvtPublisherMetadataTaskName                  17
+  EvtPublisherMetadataTaskEventGuid             18
+  EvtPublisherMetadataTaskValue                 19
+  EvtPublisherMetadataTaskMessageID             20
+  EvtPublisherMetadataOpcodes                   21
+  EvtPublisherMetadataOpcodeName                22
+  EvtPublisherMetadataOpcodeValue               23
+  EvtPublisherMetadataOpcodeMessageID           24
+  EvtPublisherMetadataKeywords                  25
+  EvtPublisherMetadataKeywordName               26
+  EvtPublisherMetadataKeywordValue              27
+  EvtPublisherMetadataKeywordMessageID          28
+
+enum [EvtFormatMessageFlags] DWORD display=DWORD
+  EvtFormatMessageEvent    1
+  EvtFormatMessageLevel    2
+  EvtFormatMessageTask     3
+  EvtFormatMessageOpcode   4
+  EvtFormatMessageKeyword  5
+  EvtFormatMessageChannel  6
+  EvtFormatMessageProvider 7
+  EvtFormatMessageId       8
+  EvtFormatMessageXml      9
+
+flag [EvtOpenFlags] DWORD display=DWORD
+  EvtOpenChannelPath 0x1
+  EvtOpenFilePath    0x2
+
+enum EVT_LOG_PROPERTY_ID UINT
+  EvtLogCreationTime       0
+  EvtLogLastAccessTime     1
+  EvtLogLastWriteTime      2
+  EvtLogFileSize           3
+  EvtLogAttributes         4
+  EvtLogNumberOfLogRecords 5
+  EvtLogOldestRecordNumber 6
+  EvtLogFull               7
+
+enum [EvtRenderFlags] DWORD display=DWORD
+  EvtRenderEventValues 0
+  EvtRenderEventXml    1
+  EvtRenderBookmark    2
+
+flag [EvtQueryFlags] DWORD display=DWORD
+  EvtQueryChannelPath         0x1
+  EvtQueryFilePath            0x2
+  EvtQueryForwardDirection    0x100
+  EvtQueryReverseDirection    0x200
+  EvtQueryTolerateQueryErrors 0x1000
+
+enum [EvtRenderContextFlags] DWORD display=DWORD
+  EvtRenderContextValues 0
+  EvtRenderContextSystem 1
+  EvtRenderContextUser   2
+
+enum EVT_QUERY_PROPERTY_ID UINT
+  EvtQueryNames    0
+  EvtQueryStatuses 1
+
+flag [EvtSubscribeFlags] DWORD display=DWORD
+  EvtSubscribeToFutureEvents      1
+  EvtSubscribeStartAtOldestRecord 2
+  EvtSubscribeStartAfterBookmark  3
+  EvtSubscribeTolerateQueryErrors 0x1000
+  EvtSubscribeStrict              0x10000
+
+enum EVT_EVENT_PROPERTY_ID UINT
+  EvtEventQueryIDs 0
+  EvtEventPath     1
+
+flag [EvtSeekFlags] DWORD display=DWORD
+  EvtSeekRelativeToFirst    1
+  EvtSeekRelativeToLast     2
+  EvtSeekRelativeToCurrent  3
+  EvtSeekRelativeToBookmark 4
+  EvtSeekStrict             0x10000
+
+flag [EvtExportLogFlags] DWORD display=DWORD
+  EvtExportLogChannelPath         0x1
+  EvtExportLogFilePath            0x2
+  EvtExportLogTolerateQueryErrors 0x1000
+
+enum EVT_LOGIN_CLASS UINT
+  EvtRpcLogin 1
+
+enum EVT_EVENT_METADATA_PROPERTY_ID UINT
+  EventMetadataEventID        0
+  EventMetadataEventVersion   1
+  EventMetadataEventChannel   2
+  EventMetadataEventLevel     3
+  EventMetadataEventOpcode    4
+  EventMetadataEventTask      5
+  EventMetadataEventKeyword   6
+  EventMetadataEventMessageID 7
+  EventMetadataEventTemplate  8
+
+func EvtOpenSession
+  success NotEqual=0
+  EVT_HANDLE
+  LoginClass EVT_LOGIN_CLASS
+  Login PVOID
+  Timeout DWORD
+  Flags DWORD
+
+func EvtClose
+  BOOL
+  Object EVT_HANDLE
+
+func EvtGetExtendedStatus
+  BOOL
+  BufferSize DWORD
+  Buffer LPWSTR
+  BufferUsed PDWORD
+
+func EvtGetQueryInfo
+  BOOL
+  QueryOrSubscription EVT_HANDLE
+  PropertyId EVT_QUERY_PROPERTY_ID
+  PropertyValueBufferSize DWORD
+  PropertyValueBuffer PEVT_VARIANT postLength=PropertyValueBufferUsed
+  PropertyValueBufferUsed PDWORD
+
+func EvtQuery
+  success NotEqual=0
+  EVT_HANDLE
+  Session EVT_HANDLE
+  Path LPCWSTR
+  Query LPCWSTR
+  Flags [EvtQueryFlags]
+
+func EvtNext
+  BOOL
+  ResultSet EVT_HANDLE
+  EventArraySize DWORD
+  EventArray EVT_HANDLE*
+  Timeout [WaitTimeout]
+  Flags DWORD
+  Returned PDWORD
+
+func EvtSeek
+  BOOL
+  ResultSet EVT_HANDLE
+  Position LONGLONG
+  Bookmark EVT_HANDLE
+  Timeout DWORD
+  Flags [EvtSeekFlags]
+
+func EvtSubscribe
+  success NotEqual=0
+  EVT_HANDLE
+  Session EVT_HANDLE
+  SignalEvent HANDLE
+  ChannelPath LPCWSTR
+  Query LPCWSTR
+  Bookmark EVT_HANDLE
+  context PVOID
+  Callback EVT_SUBSCRIBE_CALLBACK
+  Flags [EvtSubscribeFlags]
+
+func EvtCreateBookmark
+  success NotEqual=0
+  EVT_HANDLE
+  BookmarkXml LPCWSTR
+
+func EvtUpdateBookmark
+  BOOL
+  Bookmark EVT_HANDLE
+  Event EVT_HANDLE
+
+func EvtGetEventInfo
+  BOOL
+  Event EVT_HANDLE
+  PropertyId EVT_EVENT_PROPERTY_ID
+  PropertyValueBufferSize DWORD
+  PropertyValueBuffer PEVT_VARIANT postLength=PropertyValueBufferUsed
+  PropertyValueBufferUsed PDWORD
+
+func EvtCreateRenderContext
+  success NotEqual=0
+  EVT_HANDLE
+  ValuePathsCount DWORD
+  ValuePaths LPCWSTR* count=ValuePathsCount
+  Flags [EvtRenderContextFlags]
+
+func EvtRender
+  BOOL
+  Context EVT_HANDLE
+  Fragment EVT_HANDLE
+  Flags [EvtRenderFlags]
+  BufferSize DWORD
+  Buffer PVOID postLength=BufferUsed
+  BufferUsed PDWORD
+  PropertyCount PDWORD
+
+func EvtFormatMessage
+  BOOL
+  PublisherMetadata EVT_HANDLE
+  Event EVT_HANDLE
+  MessageId DWORD
+  ValueCount DWORD
+  Values PEVT_VARIANT count=ValueCount
+  Flags [EvtFormatMessageFlags]
+  BufferSize DWORD
+  Buffer LPWSTR
+  BufferUsed PDWORD
+
+func EvtOpenLog
+  success NotEqual=0
+  EVT_HANDLE
+  Session EVT_HANDLE
+  Path LPCWSTR
+  Flags [EvtOpenFlags]
+
+func EvtGetLogInfo
+  BOOL
+  Log EVT_HANDLE
+  PropertyId EVT_LOG_PROPERTY_ID
+  PropertyValueBufferSize DWORD
+  PropertyValueBuffer PEVT_VARIANT postLength=PropertyValueBufferUsed
+  PropertyValueBufferUsed PDWORD
+
+func EvtClearLog
+  BOOL
+  Session EVT_HANDLE
+  ChannelPath LPCWSTR
+  TargetFilePath LPCWSTR
+  Flags DWORD
+
+func EvtExportLog
+  BOOL
+  Session EVT_HANDLE
+  Path LPCWSTR
+  Query LPCWSTR
+  TargetFilePath LPCWSTR
+  Flags [EvtExportLogFlags]
+
+func EvtArchiveExportedLog
+  BOOL
+  Session EVT_HANDLE
+  LogFilePath LPCWSTR
+  Locale LCID
+  Flags DWORD
+
+func EvtOpenChannelEnum
+  success NotEqual=0
+  EVT_HANDLE
+  Session EVT_HANDLE
+  Flags DWORD
+
+func EvtNextChannelPath
+  BOOL
+  ChannelEnum EVT_HANDLE
+  ChannelPathBufferSize DWORD
+  ChannelPathBuffer LPWSTR
+  ChannelPathBufferUsed PDWORD
+
+func EvtOpenChannelConfig
+  success NotEqual=0
+  EVT_HANDLE
+  Session EVT_HANDLE
+  ChannelPath LPCWSTR
+  Flags DWORD
+
+func EvtSaveChannelConfig
+  BOOL
+  ChannelConfig EVT_HANDLE
+  Flags DWORD
+
+func EvtSetChannelConfigProperty
+  BOOL
+  ChannelConfig EVT_HANDLE
+  PropertyId EVT_CHANNEL_CONFIG_PROPERTY_ID
+  Flags DWORD
+  PropertyValue PEVT_VARIANT
+
+func EvtGetChannelConfigProperty
+  BOOL
+  ChannelConfig EVT_HANDLE
+  PropertyId EVT_CHANNEL_CONFIG_PROPERTY_ID
+  Flags DWORD
+  PropertyValueBufferSize DWORD
+  PropertyValueBuffer PEVT_VARIANT postLength=PropertyValueBufferUsed
+  PropertyValueBufferUsed PDWORD
+
+func EvtNextPublisherId
+  BOOL
+  PublisherEnum EVT_HANDLE
+  PublisherIdBufferSize DWORD
+  PublisherIdBuffer LPWSTR
+  PublisherIdBufferUsed PDWORD
+
+func EvtOpenPublisherEnum
+  success NotEqual=0
+  EVT_HANDLE
+  Session EVT_HANDLE
+  Flags DWORD
+
+func EvtOpenPublisherMetadata
+  success NotEqual=0
+  EVT_HANDLE
+  Session EVT_HANDLE
+  PublisherIdentity LPCWSTR
+  LogFilePath LPCWSTR
+  Locale LCID
+  Flags DWORD
+
+func EvtGetPublisherMetadataProperty
+  BOOL
+  PublisherMetadata EVT_HANDLE
+  PropertyId EVT_PUBLISHER_METADATA_PROPERTY_ID
+  Flags DWORD
+  PublisherMetadataPropertyBufferSize DWORD
+  PublisherMetadataPropertyBuffer PEVT_VARIANT postLength=PublisherMetadataPropertyBufferUsed
+  PublisherMetadataPropertyBufferUsed PDWORD
+
+func EvtOpenEventMetadataEnum
+  success NotEqual=0
+  EVT_HANDLE
+  PublisherMetadata EVT_HANDLE
+  Flags DWORD
+
+func EvtNextEventMetadata
+  success NotEqual=0
+  EVT_HANDLE
+  EventMetadataEnum EVT_HANDLE
+  Flags DWORD
+
+func EvtGetEventMetadataProperty
+  BOOL
+  EventMetadata EVT_HANDLE
+  PropertyId EVT_EVENT_METADATA_PROPERTY_ID
+  Flags DWORD
+  EventMetadataPropertyBufferSize DWORD
+  EventMetadataPropertyBuffer PEVT_VARIANT
+  EventMetadataPropertyBufferUsed PDWORD
+
+func EvtGetObjectArraySize
+  BOOL
+  ObjectArray EVT_OBJECT_ARRAY_PROPERTY_HANDLE
+  ObjectArraySize PDWORD
+
+func EvtGetObjectArrayProperty
+  BOOL
+  ObjectArray EVT_OBJECT_ARRAY_PROPERTY_HANDLE
+  PropertyId DWORD
+  ArrayIndex DWORD
+  Flags DWORD
+  PropertyValueBufferSize DWORD
+  PropertyValueBuffer PEVT_VARIANT postLength=PropertyValueBufferUsed
+  PropertyValueBufferUsed PDWORD
+

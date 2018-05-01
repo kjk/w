@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISynchronizeContainer base=IUnknown id={00000033-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func AddSynchronize
+    HRESULT
+    pSync ISynchronize*
+
+  func WaitMultiple
+    HRESULT
+    dwFlags DWORD
+    dwTimeOut DWORD
+    ppSync ISynchronize**
+
+

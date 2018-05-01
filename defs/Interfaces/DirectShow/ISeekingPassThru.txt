@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISeekingPassThru base=IUnknown id={36b73883-c2c8-11cf-8b46-00805f6cef60} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Init
+    HRESULT
+    bSupportRendering BOOL
+    pPin IPin*
+
+

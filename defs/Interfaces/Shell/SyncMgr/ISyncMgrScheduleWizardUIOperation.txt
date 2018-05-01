@@ -1,0 +1,9 @@
+include Interfaces\Shell\SyncMgr\ISyncMgrUIOperation.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrScheduleWizardUIOperation base=ISyncMgrUIOperation id={459a6c84-21d2-4ddc-8a53-f023a46066f2} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func InitWizard
+    HRESULT
+    pszHandlerID LPCWSTR
+
+

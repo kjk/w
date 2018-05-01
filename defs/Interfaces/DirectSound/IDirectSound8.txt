@@ -1,0 +1,8 @@
+include Interfaces\DirectSound\IDirectSound.txt
+
+ingterface IDirectSound8 base=IDirectSound id={c50a7e93-f395-4834-9ef6-7fa99de50966} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func VerifyCertification
+    [DS_HRESULT]
+    pdwCertified LPDWORD
+
+

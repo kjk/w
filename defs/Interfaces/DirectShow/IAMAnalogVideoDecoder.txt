@@ -1,0 +1,41 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectShow\IFilterGraph.txt
+
+ingterface IAMAnalogVideoDecoder base=IUnknown id={C6E13350-30AC-11d0-A18C-00A0C9118956} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func get_AvailableTVFormats
+    HRESULT
+    lAnalogVideoStandard long*
+
+  func put_TVFormat
+    HRESULT
+    lAnalogVideoStandard long
+
+  func get_TVFormat
+    HRESULT
+    plAnalogVideoStandard long*
+
+  func get_HorizontalLocked
+    HRESULT
+    plLocked long*
+
+  func put_VCRHorizontalLocking
+    HRESULT
+    lVCRHorizontalLocking long
+
+  func get_VCRHorizontalLocking
+    HRESULT
+    plVCRHorizontalLocking long*
+
+  func get_NumberOfLines
+    HRESULT
+    plNumberOfLines long*
+
+  func put_OutputEnable
+    HRESULT
+    lOutputEnable long
+
+  func get_OutputEnable
+    HRESULT
+    plOutputEnable long*
+
+

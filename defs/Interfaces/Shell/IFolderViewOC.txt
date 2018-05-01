@@ -1,0 +1,8 @@
+include Interfaces\IDispatch.txt
+
+ingterface IFolderViewOC base=IDispatch id={9BA05970-F6A8-11CF-A442-00A0C90A8F39} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetFolderView
+    HRESULT
+    pdisp IDispatch*
+
+

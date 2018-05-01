@@ -1,0 +1,50 @@
+include Interfaces\WindowsSync\ISyncProvider.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IKnowledgeSyncProvider base=ISyncProvider id={43434a49-8da4-47f2-8172-ad7b8b024978} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func BeginSession
+    HRESULT
+    role SYNC_PROVIDER_ROLE
+    pSessionState ISyncSessionState*
+
+  func GetSyncBatchParameters
+    HRESULT
+    ppSyncKnowledge ISyncKnowledge**
+    pdwRequestedBatchSize DWORD*
+
+  func GetChangeBatch
+    HRESULT
+    dwBatchSize DWORD
+    pSyncKnowledge ISyncKnowledge*
+    ppSyncChangeBatch ISyncChangeBatch**
+    ppUnkDataRetriever IUnknown**
+
+  func GetFullEnumerationChangeBatch
+    HRESULT
+    dwBatchSize DWORD
+    pbLowerEnumerationBound "const BYTE*"
+    pSyncKnowledge ISyncKnowledge*
+    ppSyncChangeBatch ISyncFullEnumerationChangeBatch**
+    ppUnkDataRetriever IUnknown**
+
+  func ProcessChangeBatch
+    HRESULT
+    resolutionPolicy CONFLICT_RESOLUTION_POLICY
+    pSourceChangeBatch ISyncChangeBatch*
+    pUnkDataRetriever IUnknown*
+    pCallback ISyncCallback*
+    pSyncSessionStatistics SYNC_SESSION_STATISTICS*
+
+  func ProcessFullEnumerationChangeBatch
+    HRESULT
+    resolutionPolicy CONFLICT_RESOLUTION_POLICY
+    pSourceChangeBatch ISyncFullEnumerationChangeBatch*
+    pUnkDataRetriever IUnknown*
+    pCallback ISyncCallback*
+    pSyncSessionStatistics SYNC_SESSION_STATISTICS*
+
+  func EndSession
+    HRESULT
+    pSessionState ISyncSessionState*
+
+

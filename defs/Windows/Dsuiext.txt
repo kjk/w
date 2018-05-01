@@ -1,0 +1,44 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+include Headers\shell.h.txt
+
+dll Dsuiext.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Directory, Identity, and Access Services/Directory Services/Directories/Active Directory Domain Services/Display"
+struct DSBROWSEINFO
+  cbStruct DWORD
+  hwndOwner HWND
+  pszCaption LPCTSTR
+  pszTitle LPCTSTR
+  pszRoot LPCWSTR
+  pszPath LPWSTR
+  cchPath ULONG
+  dwFlags DWORD
+  pfnCallback BFFCALLBACK
+  lParam LPARAM
+  dwReturnFormat DWORD
+  pUserName LPCWSTR
+  pPassword LPCWSTR
+  pszObjectClass LPWSTR
+  cchObjectClass ULONG
+
+pointer PDSBROWSEINFO DSBROWSEINFO
+
+func DsBrowseForContainer bothCharset ordinalA=9 ordinalW=10
+  success NotEqual=0
+  int
+  pInfo PDSBROWSEINFO
+
+func DsGetFriendlyClassName ordinal=259
+  HRESULT
+  pszObjectClass LPWSTR
+  pszBuffer LPWSTR
+  cchBuffer INT
+
+func DsGetIcon ordinal=257
+  success NotEqual=0
+  HICON
+  dwFlags DWORD
+  pszObjectClass LPWSTR
+  cxImage INT
+  cyImage INT
+

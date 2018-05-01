@@ -1,0 +1,4 @@
+include Interfaces\COM\IOleCommandTarget.txt
+
+ingterface IUrlHistoryNotify base=IOleCommandTarget id={BC40BEC1-C493-11d0-831B-00C04FD5AE38} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+

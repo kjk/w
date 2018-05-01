@@ -1,0 +1,52 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundCaptureBuffer base=IUnknown id={b0210782-89cd-11d0-af08-00a0c925cd16} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func GetCaps
+    [DS_HRESULT]
+    pDSCBCaps LPDSCBCAPS
+
+  func GetCurrentPosition
+    [DS_HRESULT]
+    pdwCapturePosition LPDWORD
+    pdwReadPosition LPDWORD
+
+  func GetFormat
+    [DS_HRESULT]
+    pwfxFormat LPWAVEFORMATEX
+    dwSizeAllocated DWORD
+    pdwSizeWritten LPDWORD
+
+  func GetStatus
+    [DS_HRESULT]
+    pdwStatus LPDWORD
+
+  func Initialize
+    [DS_HRESULT]
+    pDirectSoundCapture LPDIRECTSOUNDCAPTURE
+    pcDSCBufferDesc LPCDSCBUFFERDESC
+
+  func Lock
+    [DS_HRESULT]
+    dwOffset DWORD
+    dwBytes DWORD
+    ppvAudioPtr1 LPVOID*
+    pdwAudioBytes1 LPDWORD
+    ppvAudioPtr2 LPVOID*
+    pdwAudioBytes2 LPDWORD
+    dwFlags DWORD
+
+  func Start
+    [DS_HRESULT]
+    dwFlags DWORD
+
+  func Stop
+    [DS_HRESULT]
+
+  func Unlock
+    [DS_HRESULT]
+    pvAudioPtr1 LPVOID
+    dwAudioBytes1 DWORD
+    pvAudioPtr2 LPVOID
+    dwAudioBytes2 DWORD
+
+

@@ -1,0 +1,5 @@
+include WMI\ISWbemObject.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemLastError base=ISWbemObject id={D962DB84-D4BB-11d1-8B09-00600806D9B6} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+

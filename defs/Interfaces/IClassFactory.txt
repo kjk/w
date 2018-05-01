@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IClassFactory base=IUnknown id={00000001-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func CreateInstance
+    HRESULT
+    pUnkOuter IUnknown*
+    riid REFIID
+    ppvObject void** interfaceId=riid
+
+  func LockServer
+    HRESULT
+    fLock BOOL
+
+

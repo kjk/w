@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundFXChorus base=IUnknown id={880842e3-145f-43e6-a934-a71806e50547} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func SetAllParameters
+    [DS_HRESULT]
+    pcDsFxChorus LPCDSFXChorus
+
+  func GetAllParameters
+    [DS_HRESULT]
+    pDsFxChorus LPDSFXChorus
+
+

@@ -1,0 +1,19 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1ConcreteTransform.txt
+
+ingterface ID2D1BorderTransform base=ID2D1ConcreteTransform id={4998735c-3a19-473c-9781-656847e3a347} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetExtendModeX
+    void
+    extendMode D2D1_EXTEND_MODE
+
+  func SetExtendModeY
+    void
+    extendMode D2D1_EXTEND_MODE
+
+  func GetExtendModeX
+    D2D1_EXTEND_MODE
+
+  func GetExtendModeY
+    D2D1_EXTEND_MODE
+
+

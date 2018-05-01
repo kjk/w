@@ -1,0 +1,36 @@
+include Interfaces\Debugger\IDebugClient.txt
+
+ingterface IDebugClient2 base=IDebugClient id={edbed635-372e-4dab-bbfe-ed0d2f63be81} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func WriteDumpFile2
+    HRESULT
+    DumpFile PCSTR
+    Qualifier ULONG
+    FormatFlags [DEBUG_FORMAT_FLAGS]
+    Comment PCSTR
+
+  func AddDumpInformationFile
+    HRESULT
+    InfoFile PCSTR
+    Type ULONG
+
+  func EndProcessServer
+    HRESULT
+    Server ULONG64
+
+  func WaitForProcessServerEnd
+    HRESULT
+    Timeout [DEBUG_TIMEOUT]
+
+  func IsKernelDebuggerEnabled
+    HRESULT
+
+  func TerminateCurrentProcess
+    HRESULT
+
+  func DetachCurrentProcess
+    HRESULT
+
+  func AbandonCurrentProcess
+    HRESULT
+
+

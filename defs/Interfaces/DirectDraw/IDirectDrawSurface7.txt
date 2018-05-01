@@ -1,0 +1,20 @@
+include Interfaces\DirectDraw\IDirectDrawSurface4.txt
+
+ingterface IDirectDrawSurface7 base=IDirectDrawSurface4 id={06675a80-3b9b-11d2-b92f-00609797ea5b} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+  func SetPriority
+    [DD_HRESULT]
+    dwPriority DWORD
+
+  func GetPriority
+    [DD_HRESULT]
+    lpdwPriority LPDWORD
+
+  func SetLOD
+    [DD_HRESULT]
+    dwMaxLOD DWORD
+
+  func GetLOD
+    [DD_HRESULT]
+    lpdwMaxLOD LPDWORD
+
+

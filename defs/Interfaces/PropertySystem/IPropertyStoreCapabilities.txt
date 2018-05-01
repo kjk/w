@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyStoreCapabilities base=IUnknown id={c8e2d566-186e-4d49-bf41-6909ead56acc} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func IsPropertyWritable
+    HRESULT
+    key REFPROPERTYKEY
+
+

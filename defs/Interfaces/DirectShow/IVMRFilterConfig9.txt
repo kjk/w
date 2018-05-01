@@ -1,0 +1,32 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRFilterConfig9 base=IUnknown id={5a804648-4f66-4867-9c43-4f5c822cf1b8} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetImageCompositor
+    HRESULT
+    lpVMRImgCompositor IVMRImageCompositor9*
+
+  func SetNumberOfStreams
+    HRESULT
+    dwMaxStreams DWORD
+
+  func GetNumberOfStreams
+    HRESULT
+    pdwMaxStreams DWORD*
+
+  func SetRenderingPrefs
+    HRESULT
+    dwRenderFlags DWORD
+
+  func GetRenderingPrefs
+    HRESULT
+    pdwRenderFlags DWORD*
+
+  func SetRenderingMode
+    HRESULT
+    Mode DWORD
+
+  func GetRenderingMode
+    HRESULT
+    pMode DWORD*
+
+

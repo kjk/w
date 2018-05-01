@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+
+ingterface ILayoutStorage base=IUnknown id={0e6d4d90-6738-11cf-9608-00aa00680db4} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Structured Storage/Interfaces"
+  func LayoutScript
+    HRESULT
+    pStorageLayout StorageLayout*
+    nEntries DWORD
+    glfInterleavedFlag DWORD
+
+  func BeginMonitor
+    HRESULT
+
+  func EndMonitor
+    HRESULT
+
+  func ReLayoutDocfile
+    HRESULT
+    pwcsNewDfName OLECHAR*
+
+  func ReLayoutDocfileOnILockBytes
+    HRESULT
+    pILockBytes ILockBytes*
+
+

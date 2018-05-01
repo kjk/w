@@ -1,0 +1,15 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Transform.txt
+
+ingterface ID2D1SourceTransform base=ID2D1Transform id={db1800dd-0c34-4cf9-be90-31cc0a5653e1} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetRenderInfo
+    [D2D_HRESULT]
+    renderInfo ID2D1RenderInfo*
+
+  func Draw
+    [D2D_HRESULT]
+    target ID2D1Bitmap1*
+    drawRect "CONST D2D1_RECT_L*"
+    targetOrigin D2D1_POINT_2U
+
+

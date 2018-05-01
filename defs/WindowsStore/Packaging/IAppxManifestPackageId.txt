@@ -1,0 +1,38 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxManifestPackageId base=IUnknown id={283ce2d7-7153-4a91-9649-7a0f7240945f} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetName
+    HRESULT
+    name LPWSTR*
+
+  func GetArchitecture
+    HRESULT
+    architecture APPX_PACKAGE_ARCHITECTURE*
+
+  func GetPublisher
+    HRESULT
+    publisher LPWSTR*
+
+  func GetVersion
+    HRESULT
+    packageVersion UINT64*
+
+  func GetResourceId
+    HRESULT
+    resourceId LPWSTR*
+
+  func ComparePublisher
+    HRESULT
+    other LPCWSTR
+    isSame BOOL*
+
+  func GetPackageFullName
+    HRESULT
+    packageFullName LPWSTR*
+
+  func GetPackageFamilyName
+    HRESULT
+    packageFamilyName LPWSTR*
+
+

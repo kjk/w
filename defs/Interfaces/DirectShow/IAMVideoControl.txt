@@ -1,0 +1,39 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMVideoControl base=IUnknown id={6a2e0670-28e4-11d0-a18c-00a0c9118956} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetCaps
+    HRESULT
+    pPin IPin*
+    pCapsFlags long*
+
+  func SetMode
+    HRESULT
+    pPin IPin*
+    Mode long
+
+  func GetMode
+    HRESULT
+    pPin IPin*
+    Mode long*
+
+  func GetCurrentActualFrameRate
+    HRESULT
+    pPin IPin*
+    ActualFrameRate LONGLONG*
+
+  func GetMaxAvailableFrameRate
+    HRESULT
+    pPin IPin*
+    iIndex long
+    Dimensions SIZE
+    MaxAvailableFrameRate LONGLONG*
+
+  func GetFrameRateList
+    HRESULT
+    pPin IPin*
+    iIndex long
+    Dimensions SIZE
+    ListSize long*
+    FrameRates LONGLONG**
+
+

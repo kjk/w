@@ -1,0 +1,33 @@
+include Interfaces\DirectX\11\ID3D11Device.txt
+include Interfaces\DirectX\11\ID3D11DeviceContext.txt
+include Interfaces\DirectX\DXGI\IDXGIAdapter.txt
+
+dll d3d11.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+func D3D11CreateDevice
+  HRESULT
+  pAdapter IDXGIAdapter*
+  DriverType D3D_DRIVER_TYPE
+  Software HMODULE
+  Flags D3D11_CREATE_DEVICE_FLAG
+  pFeatureLevels "const D3D_FEATURE_LEVEL*" count=FeatureLevels
+  FeatureLevels UINT
+  SDKVersion UINT
+  ppDevice ID3D11Device**
+  pFeatureLevel D3D_FEATURE_LEVEL*
+  ppImmediateContext ID3D11DeviceContext**
+
+func D3D11CreateDeviceAndSwapChain
+  HRESULT
+  pAdapter IDXGIAdapter*
+  DriverType D3D_DRIVER_TYPE
+  Software HMODULE
+  Flags D3D11_CREATE_DEVICE_FLAG
+  pFeatureLevels "const D3D_FEATURE_LEVEL*" count=FeatureLevels
+  FeatureLevels UINT
+  SDKVersion UINT
+  pSwapChainDesc "const DXGI_SWAP_CHAIN_DESC*"
+  ppSwapChain IDXGISwapChain**
+  ppDevice ID3D11Device**
+  pFeatureLevel D3D_FEATURE_LEVEL*
+  ppImmediateContext ID3D11DeviceContext**
+

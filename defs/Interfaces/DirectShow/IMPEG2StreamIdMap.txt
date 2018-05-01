@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IMPEG2StreamIdMap base=IUnknown id={D0E04C47-25B8-4369-925A-362A01D95444} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func MapStreamId
+    HRESULT
+    ulStreamId ULONG
+    MediaSampleContent DWORD
+    ulSubstreamFilterValue ULONG
+    iDataOffset int
+
+  func UnmapStreamId
+    HRESULT
+    culStreamId ULONG
+    pulStreamId ULONG*
+
+  func EnumStreamIdMap
+    HRESULT
+    ppIEnumStreamIdMap IEnumStreamIdMap**
+
+

@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include Headers\ddraw.h.txt
+
+ingterface IDirectDrawGammaControl base=IUnknown id={69c11c3e-b46b-11d1-ad7a-00c04fc29b4e} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+  func GetGammaRamp
+    [DD_HRESULT]
+    dwFlags DWORD
+    lpRampData LPDDGAMMARAMP
+
+  func SetGammaRamp
+    [DD_HRESULT]
+    dwFlags [DDSGR_FLAGS]
+    lpRampData LPDDGAMMARAMP
+
+

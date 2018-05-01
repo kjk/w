@@ -1,0 +1,500 @@
+include Headers\windows.h.txt
+include Headers\rpc.h.txt
+
+dll NtDsAPI.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Directory, Identity, and Access Services/Directory Services/Directories/Active Directory Domain Services/Domain Controller and Replication Management"
+alias LPCWCH* WCHAR**
+
+enum [ScheduleType] DWORD display=DWORD
+  SCHEDULE_INTERVAL  0
+  SCHEDULE_BANDWIDTH 1
+  SCHEDULE_PRIORITY  2
+
+struct SCHEDULE_HEADER
+  Type [ScheduleType]
+  Offset ULONG
+
+array "SCHEDULE_HEADER [1]" base=SCHEDULE_HEADER count=1
+
+struct SCHEDULE
+  Size ULONG
+  Bandwidth ULONG
+  NumberOfSchedules ULONG
+  Schedules "SCHEDULE_HEADER [1]" count=NumberOfSchedules
+
+pointer "const PSCHEDULE" SCHEDULE
+
+struct DS_NAME_RESULT_ITEM
+  status DWORD
+  pDomain LPTSTR
+  pName LPTSTR
+
+pointer PDS_NAME_RESULT_ITEM DS_NAME_RESULT_ITEM
+
+struct DS_NAME_RESULT
+  cItems DWORD
+  rItems PDS_NAME_RESULT_ITEM
+
+pointer DS_NAME_RESULT* DS_NAME_RESULT
+
+pointer PDS_NAME_RESULT DS_NAME_RESULT
+
+pointer PDS_NAME_RESULT* PDS_NAME_RESULT
+
+struct DS_SCHEMA_GUID_MAP
+  guid GUID
+  guidType DWORD
+  pName LPTSTR
+
+pointer DS_SCHEMA_GUID_MAP* DS_SCHEMA_GUID_MAP
+
+pointer PDS_SCHEMA_GUID_MAP DS_SCHEMA_GUID_MAP
+
+pointer DS_SCHEMA_GUID_MAP** DS_SCHEMA_GUID_MAP*
+
+struct DS_SITE_COST_INFO
+  errorCode DWORD
+  cost DWORD
+
+pointer PDS_SITE_COST_INFO DS_SITE_COST_INFO
+
+pointer PDS_SITE_COST_INFO* PDS_SITE_COST_INFO
+
+enum DS_REPSYNCALL_ERROR UINT
+  DS_REPSYNCALL_WIN32_ERROR_CONTACTING_SERVER 0
+  DS_REPSYNCALL_WIN32_ERROR_REPLICATING       1
+  DS_REPSYNCALL_SERVER_UNREACHABLE            2
+
+struct DS_REPSYNCALL_ERRINFO
+  pszSvrId LPTSTR
+  error DS_REPSYNCALL_ERROR
+  dwWin32Err DWORD
+  pszSrcId LPTSTR
+
+pointer PDS_REPSYNCALL_ERRINFO DS_REPSYNCALL_ERRINFO
+
+pointer PDS_REPSYNCALL_ERRINFO* PDS_REPSYNCALL_ERRINFO
+
+pointer PDS_REPSYNCALL_ERRINFO** PDS_REPSYNCALL_ERRINFO*
+
+flag DS_NAME_FLAGS DWORD
+  DS_NAME_NO_FLAGS              0
+  DS_NAME_FLAG_SYNTACTICAL_ONLY 0x1
+  DS_NAME_FLAG_EVAL_AT_DC       0x2
+  DS_NAME_FLAG_GCVERIFY         0x4
+  DS_NAME_FLAG_TRUST_REFERRAL   0x8
+
+enum DS_NAME_FORMAT UINT
+  DS_UNKNOWN_NAME            0
+  DS_FQDN_1779_NAME          1
+  DS_NT4_ACCOUNT_NAME        2
+  DS_DISPLAY_NAME            3
+  DS_DOMAIN_SIMPLE_NAME      4
+  DS_ENTERPRISE_SIMPLE_NAME  5
+  DS_UNIQUE_ID_NAME          6
+  DS_CANONICAL_NAME          7
+  DS_USER_PRINCIPAL_NAME     8
+  DS_CANONICAL_NAME_EX       9
+  DS_SERVICE_PRINCIPAL_NAME  10
+  DS_SID_OR_SID_HISTORY_NAME 11
+  DS_DNS_DOMAIN_NAME         12
+
+enum DS_MANGLE_FOR UINT
+  DS_MANGLE_UNKNOWN                      0
+  DS_MANGLE_OBJECT_RDN_FOR_DELETION      1
+  DS_MANGLE_OBJECT_RDN_FOR_NAME_CONFLICT 2
+
+pointer DS_MANGLE_FOR* DS_MANGLE_FOR
+
+enum DS_SPN_NAME_TYPE UINT
+  DS_SPN_DNS_HOST  0
+  DS_SPN_DN_HOST   1
+  DS_SPN_NB_HOST   2
+  DS_SPN_DOMAIN    3
+  DS_SPN_NB_DOMAIN 4
+  DS_SPN_SERVICE   5
+
+enum DS_KCC_TASKID UINT
+  DS_KCC_TASKID_UPDATE_TOPOLOGY 0
+
+enum DS_REPL_INFO_TYPE UINT
+  DS_REPL_INFO_NEIGHBORS                 0
+  DS_REPL_INFO_CURSORS_FOR_NC            1
+  DS_REPL_INFO_METADATA_FOR_OBJ          2
+  DS_REPL_INFO_KCC_DSA_CONNECT_FAILURES  3
+  DS_REPL_INFO_KCC_DSA_LINK_FAILURES     4
+  DS_REPL_INFO_PENDING_OPS               5
+  DS_REPL_INFO_METADATA_FOR_ATTR_VALUE   6
+  DS_REPL_INFO_CURSORS_2_FOR_NC          7
+  DS_REPL_INFO_CURSORS_3_FOR_NC          8
+  DS_REPL_INFO_METADATA_2_FOR_OBJ        9
+  DS_REPL_INFO_METADATA_2_FOR_ATTR_VALUE 10
+
+enum DS_SPN_WRITE_OP UINT
+  DS_SPN_ADD_SPN_OP     0
+  DS_SPN_REPLACE_SPN_OP 1
+  DS_SPN_DELETE_SPN_OP  2
+
+func DsAddSidHistory bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  Flags DWORD
+  SrcDomain LPCTSTR
+  SrcPrincipal LPCTSTR
+  SrcDomainController LPCTSTR
+  SrcDomainCreds RPC_AUTH_IDENTITY_HANDLE
+  DstDomain LPCTSTR
+  DstPrincipal LPCTSTR
+
+func DsBind bothCharset
+  [ERROR_CODE]
+  DomainControllerName LPCTSTR
+  DnsDomainName LPCTSTR
+  phDS HANDLE*
+
+func DsBindingSetTimeout
+  [ERROR_CODE]
+  hDS HANDLE
+  cTimeoutSecs ULONG
+
+func DsBindToISTG bothCharset
+  [ERROR_CODE]
+  SiteName LPCTSTR
+  phDS HANDLE*
+
+func DsBindWithCred bothCharset
+  [ERROR_CODE]
+  DomainControllerName LPCTSTR
+  DnsDomainName LPCTSTR
+  AuthIdentity RPC_AUTH_IDENTITY_HANDLE
+  phDS HANDLE*
+
+func DsBindWithSpn bothCharset
+  [ERROR_CODE]
+  DomainControllerName LPCTSTR
+  DnsDomainName LPCTSTR
+  AuthIdentity RPC_AUTH_IDENTITY_HANDLE
+  ServicePrincipalName LPCTSTR
+  phDS HANDLE*
+
+func DsBindWithSpnEx bothCharset
+  [ERROR_CODE]
+  DomainControllerName LPCTSTR
+  DnsDomainName LPCTSTR
+  AuthIdentity RPC_AUTH_IDENTITY_HANDLE
+  ServicePrincipalName LPCTSTR
+  BindFlags DWORD
+  phDS HANDLE*
+
+func DsClientMakeSpnForTargetServer bothCharset
+  [ERROR_CODE]
+  ServiceClass LPCTSTR
+  ServiceName LPCTSTR
+  pcSpnLength DWORD*
+  pszSpn LPTSTR
+
+func DsCrackNames bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  flags DS_NAME_FLAGS
+  formatOffered DS_NAME_FORMAT
+  formatDesired DS_NAME_FORMAT
+  cNames DWORD
+  rpNames LPCTSTR* count=cNames
+  ppResult PDS_NAME_RESULT*
+
+func DsCrackSpn bothCharset
+  [ERROR_CODE]
+  pszSPN LPCTSTR
+  pcServiceClass DWORD*
+  ServiceClass LPTSTR
+  pcServiceName DWORD*
+  ServiceName LPTSTR
+  pcInstanceName DWORD*
+  InstanceName LPTSTR
+  pInstancePort USHORT*
+
+func DsCrackUnquotedMangledRdn bothCharset
+  BOOL
+  pszRDN LPCTSTR
+  cchRDN DWORD
+  pGuid GUID*
+  peDsMangleFor DS_MANGLE_FOR*
+
+func DsFreeDomainControllerInfo bothCharset
+  void
+  InfoLevel DWORD
+  cInfo DWORD
+  pInfo VOID*
+
+func DsFreeNameResult bothCharset
+  void
+  pResult DS_NAME_RESULT*
+
+func DsFreePasswordCredentials
+  void
+  AuthIdentity RPC_AUTH_IDENTITY_HANDLE
+
+func DsFreeSchemaGuidMap bothCharset
+  void
+  pGuidMap PDS_SCHEMA_GUID_MAP
+
+func DsFreeSpnArray bothCharset
+  void
+  cSpn DWORD
+  rpszSpn LPTSTR*
+
+func DsGetDomainControllerInfo bothCharset
+  [ERROR_CODE]
+  hDs HANDLE
+  DomainName LPTSTR
+  InfoLevel DWORD
+  pcOut DWORD*
+  ppInfo VOID**
+
+func DsGetRdnW
+  [ERROR_CODE]
+  ppDN LPCWCH*
+  pcDN DWORD*
+  ppKey LPCWCH*
+  pcKey DWORD*
+  ppVal LPCWCH*
+  pcVal DWORD*
+
+func DsGetSpn bothCharset
+  [ERROR_CODE]
+  ServiceType DS_SPN_NAME_TYPE
+  ServiceClass LPCTSTR
+  ServiceName LPCTSTR
+  InstancePort USHORT
+  cInstanceNames USHORT
+  pInstanceNames LPCTSTR* count=cInstanceNames
+  pInstancePorts "const USHORT*" count=cInstanceNames
+  pcSpn DWORD*
+  prpszSpn LPTSTR** derefPostCount=pcSpn
+
+func DsInheritSecurityIdentity bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  Flags DWORD
+  SrcPrincipal LPCTSTR
+  DstPrincipal LPCTSTR
+
+func DsIsMangledDn bothCharset
+  BOOL
+  pszDn LPCTSTR
+  eDsMangleFor DS_MANGLE_FOR
+
+func DsIsMangledRdnValue bothCharset
+  BOOL
+  pszRdn LPCTSTR
+  cRdn DWORD
+  eDsMangleForDesired DS_MANGLE_FOR
+
+func DsListDomainsInSite bothCharset
+  [ERROR_CODE]
+  hDs HANDLE
+  site LPTSTR
+  ppDomains PDS_NAME_RESULT*
+
+func DsListInfoForServer bothCharset
+  [ERROR_CODE]
+  hDs HANDLE
+  server LPTSTR
+  ppInfo PDS_NAME_RESULT*
+
+func DsListRoles bothCharset
+  [ERROR_CODE]
+  hDs HANDLE
+  ppRoles PDS_NAME_RESULT*
+
+func DsListServersForDomainInSite bothCharset
+  [ERROR_CODE]
+  hDs HANDLE
+  domain LPTSTR
+  site LPTSTR
+  ppServers PDS_NAME_RESULT*
+
+func DsListServersInSite bothCharset
+  [ERROR_CODE]
+  hDs HANDLE
+  site LPTSTR
+  ppServers PDS_NAME_RESULT*
+
+func DsListSites bothCharset
+  [ERROR_CODE]
+  hDs HANDLE
+  ppSites PDS_NAME_RESULT*
+
+func DsMakePasswordCredentials bothCharset
+  [ERROR_CODE]
+  User LPCTSTR
+  Domain LPCTSTR
+  Password LPCTSTR
+  pAuthIdentity RPC_AUTH_IDENTITY_HANDLE*
+
+func DsMakeSpn bothCharset
+  [ERROR_CODE]
+  ServiceClass LPCTSTR
+  ServiceName LPCTSTR
+  InstanceName LPCTSTR
+  InstancePort USHORT
+  Referrer LPCTSTR
+  pcSpnLength DWORD*
+  pszSpn LPTSTR
+
+func DsMapSchemaGuids bothCharset
+  [ERROR_CODE]
+  hDs HANDLE
+  cGuids DWORD
+  rGuids GUID* count=cGuids
+  ppGuidMap DS_SCHEMA_GUID_MAP**
+
+func DsQuerySitesByCost bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  pwszFromSite LPTSTR
+  rgwszToSites LPTSTR* count=cToSites
+  cToSites DWORD
+  dwFlags DWORD
+  prgSiteInfo PDS_SITE_COST_INFO* derefPostCount=cToSites
+
+func DsQuerySitesFree
+  void
+  rgSiteInfo PDS_SITE_COST_INFO
+
+func DsQuoteRdnValue bothCharset
+  [ERROR_CODE]
+  cUnquotedRdnValueLength DWORD
+  psUnquotedRdnValue LPCTCH
+  pcQuotedRdnValueLength DWORD*
+  psQuotedRdnValue LPTCH
+
+func DsRemoveDsDomain bothCharset
+  [ERROR_CODE]
+  hDs HANDLE
+  DomainDN LPTSTR
+
+func DsRemoveDsServer bothCharset
+  [ERROR_CODE]
+  hDs HANDLE
+  ServerDN LPTSTR
+  DomainDN LPTSTR
+  fLastDcInDomain BOOL*
+  fCommit BOOL
+
+func DsReplicaAdd bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  NameContext LPCTSTR
+  SourceDsaDn LPCTSTR
+  TransportDn LPCTSTR
+  SourceDsaAddress LPCTSTR
+  pSchedule "const PSCHEDULE"
+  Options DWORD
+
+func DsReplicaConsistencyCheck
+  [ERROR_CODE]
+  hDS HANDLE
+  TaskID DS_KCC_TASKID
+  dwFlags DWORD
+
+func DsReplicaDel bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  NameContext LPCTSTR
+  DsaSrc LPCTSTR
+  Options ULONG
+
+func DsReplicaFreeInfo
+  void
+  InfoType DS_REPL_INFO_TYPE
+  pInfo VOID*
+
+func DsReplicaGetInfoW
+  [ERROR_CODE]
+  hDS HANDLE
+  InfoType DS_REPL_INFO_TYPE
+  pszObject LPCWSTR
+  puuidForSourceDsaObjGuid UUID*
+  ppInfo VOID**
+
+func DsReplicaGetInfo2W
+  [ERROR_CODE]
+  hDS HANDLE
+  InfoType DS_REPL_INFO_TYPE
+  pszObject LPCWSTR
+  puuidForSourceDsaObjGuid UUID*
+  pszAttributeName LPCWSTR
+  pszValue LPCWSTR
+  dwFlags DWORD
+  dwEnumerationContext DWORD
+  ppInfo VOID**
+
+func DsReplicaModify bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  NameContext LPCTSTR
+  pUuidSourceDsa "const UUID*"
+  TransportDn LPCTSTR
+  SourceDsaAddress LPCTSTR
+  pSchedule "const PSCHEDULE"
+  ReplicaFlags DWORD
+  ModifyFields DWORD
+  Options DWORD
+
+func DsReplicaSync bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  NameContext LPCTSTR
+  pUuidDsaSrc "const UUID*"
+  Options ULONG
+
+func DsReplicaSyncAll bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  pszNameContext LPTSTR
+  ulFlags ULONG
+  pCallbackData LPVOID
+  pErrors PDS_REPSYNCALL_ERRINFO**
+
+func DsReplicaUpdateRefs bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  NameContext LPCTSTR
+  DsaDest LPCTSTR
+  pUuidDsaDest "const UUID*"
+  Options ULONG
+
+func DsReplicaVerifyObjects bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  NameContext LPCTSTR
+  pUuidDsaSrc "const UUID*"
+  ulOptions ULONG
+
+func DsServerRegisterSpn bothCharset
+  [ERROR_CODE]
+  Operation DS_SPN_WRITE_OP
+  ServiceClass LPCTSTR
+  UserObjectDN LPCTSTR
+
+func DsUnBind bothCharset
+  [ERROR_CODE]
+  phDS HANDLE*
+
+func DsUnquoteRdnValue bothCharset
+  [ERROR_CODE]
+  cQuotedRdnValueLength DWORD
+  psQuotedRdnValue LPCTCH
+  pcUnquotedRdnValueLength DWORD*
+  psUnquotedRdnValue LPTCH
+
+func DsWriteAccountSpn bothCharset
+  [ERROR_CODE]
+  hDS HANDLE
+  Operation DS_SPN_WRITE_OP
+  pszAccount LPCTSTR
+  cSpn DWORD
+  rpszSpn LPCTSTR* count=cSpn
+

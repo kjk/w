@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface ID3DUserDefinedAnnotation base=IUnknown id={b2daad8b-03d4-4dbf-95eb-32ab4b63d0ab} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/Common Version"
+  func BeginEvent
+    success NotEqual=0
+    INT
+    Name LPCWSTR
+
+  func EndEvent
+    success NotEqual=0
+    INT
+
+  func SetMarker
+    void
+    Name LPCWSTR
+
+  func GetStatus
+    BOOL
+
+

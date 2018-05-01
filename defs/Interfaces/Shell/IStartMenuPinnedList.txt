@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IStartMenuPinnedList base=IUnknown id={4CD19ADA-25A5-4A32-B3B7-347BEE5BE36B} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func RemoveFromList
+    HRESULT
+    pitem IShellItem*
+
+

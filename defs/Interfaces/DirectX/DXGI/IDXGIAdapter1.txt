@@ -1,0 +1,8 @@
+include Interfaces\DirectX\DXGI\IDXGIAdapter.txt
+
+ingterface IDXGIAdapter1 base=IDXGIAdapter id={29038f61-3839-4626-91fd-086879011a05} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func GetDesc1
+    HRESULT
+    pDesc DXGI_ADAPTER_DESC1*
+
+

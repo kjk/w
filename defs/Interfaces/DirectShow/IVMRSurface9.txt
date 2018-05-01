@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRSurface9 base=IUnknown id={dfc581a1-6e1f-4c3a-8d0a-5e9792ea2afc} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func IsSurfaceLocked
+    HRESULT
+
+  func LockSurface
+    HRESULT
+    lpSurface BYTE**
+
+  func UnlockSurface
+    HRESULT
+
+  func GetSurface
+    HRESULT
+    lplpSurface IDirect3DSurface9**
+
+

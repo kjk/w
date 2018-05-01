@@ -1,0 +1,12 @@
+include Interfaces\CoreAudio\IAudioEndpointVolume.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioEndpointVolumeEx base=IAudioEndpointVolume id={66E11784-F695-4F28-A505-A7080081A78F} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Endpoint Volume"
+  func GetVolumeRangeChannel
+    [AUDCLNT_HRESULT]
+    iChannel UINT
+    pflVolumeMindB float*
+    pflVolumeMaxdB float*
+    pflVolumeIncrementdB float*
+
+

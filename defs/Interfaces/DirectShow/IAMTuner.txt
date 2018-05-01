@@ -1,0 +1,69 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMTuner base=IUnknown id={211A8761-03AC-11d1-8D13-00AA00BD8339} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func put_Channel
+    HRESULT
+    lChannel long
+    lVideoSubChannel long
+    lAudioSubChannel long
+
+  func get_Channel
+    HRESULT
+    plChannel long*
+    plVideoSubChannel long*
+    plAudioSubChannel long*
+
+  func ChannelMinMax
+    HRESULT
+    lChannelMin long*
+    lChannelMax long*
+
+  func put_CountryCode
+    HRESULT
+    lCountryCode long
+
+  func get_CountryCode
+    HRESULT
+    plCountryCode long*
+
+  func put_TuningSpace
+    HRESULT
+    lTuningSpace long
+
+  func get_TuningSpace
+    HRESULT
+    plTuningSpace long*
+
+  func Logon
+    HRESULT
+    hCurrentUser HANDLE
+
+  func Logout
+    HRESULT
+
+  func SignalPresent
+    HRESULT
+    plSignalStrength long*
+
+  func put_Mode
+    HRESULT
+    lMode AMTunerModeType
+
+  func get_Mode
+    HRESULT
+    plMode AMTunerModeType*
+
+  func GetAvailableModes
+    HRESULT
+    plModes long*
+
+  func RegisterNotificationCallBack
+    HRESULT
+    pNotify IAMTunerNotification*
+    lEvents long
+
+  func UnRegisterNotificationCallBack
+    HRESULT
+    pNotify IAMTunerNotification*
+
+

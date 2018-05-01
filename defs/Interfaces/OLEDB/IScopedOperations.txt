@@ -1,0 +1,44 @@
+include Interfaces\OLEDB\IBindResource.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IScopedOperations base=IBindResource id={0c733ab0-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func Copy
+    [OLEDB_HRESULT]
+    cRows DBCOUNTITEM
+    rgpwszSourceURLs "LPCOLESTR []" count=cRows
+    rgpwszDestURLs "LPCOLESTR []" count=cRows
+    dwCopyFlags DWORD
+    pAuthenticate IAuthenticate*
+    rgdwStatus "DBSTATUS []" postCount=cRows
+    rgpwszNewURLs "LPOLESTR []" count=cRows
+    ppStringsBuffer OLECHAR**
+
+  func Move
+    [OLEDB_HRESULT]
+    cRows DBCOUNTITEM
+    rgpwszSourceURLs "LPCOLESTR []" count=cRows
+    rgpwszDestURLs "LPCOLESTR []" count=cRows
+    dwMoveFlags DWORD
+    pAuthenticate IAuthenticate*
+    rgdwStatus "DBSTATUS []" postCount=cRows
+    rgpwszNewURLs "LPOLESTR []" postCount=cRows
+    ppStringsBuffer OLECHAR** postCount=cRows
+
+  func Delete
+    [OLEDB_HRESULT]
+    cRows DBCOUNTITEM
+    rgpwszURLs "LPCOLESTR []" count=cRows
+    dwDeleteFlags DWORD
+    rgdwStatus "DBSTATUS []" postCount=cRows
+
+  func OpenRowset
+    [OLEDB_HRESULT]
+    pUnkOuter IUnknown*
+    pTableID DBID*
+    pIndexID DBID*
+    riid REFIID
+    cPropertySets ULONG
+    rgPropertySets "DBPROPSET []" count=cPropertySets
+    ppRowset IUnknown** interfaceId=riid
+
+

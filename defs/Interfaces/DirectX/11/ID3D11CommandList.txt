@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+
+ingterface ID3D11CommandList base=ID3D11DeviceChild id={a24bc4d1-769e-43f7-8013-98ff566c18e2} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func GetContextFlags
+    success NotEqual=0
+    UINT
+
+

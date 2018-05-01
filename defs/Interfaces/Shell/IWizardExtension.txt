@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+
+ingterface IWizardExtension base=IUnknown id={c02ea696-86cc-491e-9b23-74394a0444a8} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func AddPages
+    HRESULT
+    aPages HPROPSHEETPAGE*
+    cPages UINT
+    pnPagesAdded UINT*
+
+  func GetFirstPage
+    HRESULT
+    phpage HPROPSHEETPAGE*
+
+  func GetLastPage
+    HRESULT
+    phpage HPROPSHEETPAGE*
+
+

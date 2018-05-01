@@ -1,0 +1,27 @@
+include Interfaces\DirectX\DXGI\IDXGIOutput.txt
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+ingterface IDXGIOutput1 base=IDXGIOutput id={00cddea8-939b-4b83-a340-a685226666cc} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func GetDisplayModeList1
+    HRESULT
+    EnumFormat DXGI_FORMAT
+    Flags UINT
+    pNumModes UINT*
+    pDesc DXGI_MODE_DESC1* postCount=pNumModes
+
+  func FindClosestMatchingMode1
+    HRESULT
+    pModeToMatch "const DXGI_MODE_DESC1*"
+    pClosestMatch DXGI_MODE_DESC1*
+    pConcernedDevice IUnknown*
+
+  func GetDisplaySurfaceData1
+    HRESULT
+    pDestination IDXGIResource*
+
+  func DuplicateOutput
+    HRESULT
+    pDevice IUnknown*
+    ppOutputDuplication IDXGIOutputDuplication**
+
+

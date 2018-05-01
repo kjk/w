@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemDecoupledRegistrar base=IUnknown id={1005cbcf-e64f-4646-bcd3-3a089d8a84b4} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func Register
+    WBEMSTATUS
+    a_Flags long
+    a_Context IWbemContext*
+    a_User LPCWSTR
+    a_Locale LPCWSTR
+    a_Scope LPCWSTR
+    a_Registration LPCWSTR
+    pIUnknown IUnknown*
+
+  func UnRegister
+    WBEMSTATUS
+
+

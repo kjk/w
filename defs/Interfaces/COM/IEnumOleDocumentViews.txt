@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumOleDocumentViews base=IUnknown id={b722bcc8-4e68-101b-a2bc-00aa00404770} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func Next
+    HRESULT
+    cViews ULONG
+    rgpView IOleDocumentView** postCount=cViews
+    pcFetched ULONG*
+
+  func Skip
+    HRESULT
+    cViews ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppEnum IEnumOleDocumentViews**
+
+

@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemEventProvider base=IUnknown id={e245105b-b06e-11d0-ad61-00c04fd8fdff} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func ProvideEvents
+    WBEMSTATUS
+    pSink IWbemObjectSink*
+    lFlags long
+
+

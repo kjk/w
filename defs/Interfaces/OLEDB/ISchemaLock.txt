@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ISchemaLock base=IUnknown id={4C2389FB-2511-11d4-B258-00C04F7971CE} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func GetSchemaLock
+    [OLEDB_HRESULT]
+    pTableID DBID*
+    lmMode LOCKMODE
+    phLockHandle HANDLE*
+    pTableVersion ULONGLONG*
+
+  func ReleaseSchemaLock
+    [OLEDB_HRESULT]
+    hLockHandle HANDLE
+
+

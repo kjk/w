@@ -1,0 +1,9 @@
+include Interfaces\PropertySystem\IPropertyEnumType.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyEnumType2 base=IPropertyEnumType id={9b6e051c-5ddd-4321-9070-fe2acb55e794} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func GetImageReference
+    HRESULT
+    ppszImageRes LPWSTR*
+
+

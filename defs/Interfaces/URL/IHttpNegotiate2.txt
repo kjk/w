@@ -1,0 +1,11 @@
+include Interfaces\URL\IHttpNegotiate.txt
+include Headers\URL.h.txt
+
+ingterface IHttpNegotiate2 base=IHttpNegotiate id={4F9F9FCB-E0F4-48eb-B7AB-FA2EA9365CB4} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetRootSecurityId
+    HRESULT
+    pbSecurityId BYTE* postLength=pcbSecurityId
+    pcbSecurityId DWORD*
+    dwReserved DWORD_PTR
+
+

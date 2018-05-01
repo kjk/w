@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxBlockMapBlock base=IUnknown id={75cf3930-3244-4fe0-a8c8-e0bcb270b889} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetHash
+    HRESULT
+    bufferSize UINT32*
+    buffer BYTE**
+
+  func GetCompressedSize
+    HRESULT
+    size UINT32*
+
+

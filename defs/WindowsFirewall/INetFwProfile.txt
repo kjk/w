@@ -1,0 +1,61 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwProfile base=IDispatch id={174A0DDA-E9F9-449D-993B-21AB667CA456} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall"
+  func get_Type
+    HRESULT
+    type NET_FW_PROFILE_TYPE*
+
+  func get_FirewallEnabled
+    HRESULT
+    enabled VARIANT_BOOL*
+
+  func put_FirewallEnabled
+    HRESULT
+    enabled VARIANT_BOOL
+
+  func get_ExceptionsNotAllowed
+    HRESULT
+    notAllowed VARIANT_BOOL*
+
+  func put_ExceptionsNotAllowed
+    HRESULT
+    notAllowed VARIANT_BOOL
+
+  func get_NotificationsDisabled
+    HRESULT
+    disabled VARIANT_BOOL*
+
+  func put_NotificationsDisabled
+    HRESULT
+    disabled VARIANT_BOOL
+
+  func get_UnicastResponsesToMulticastBroadcastDisabled
+    HRESULT
+    disabled VARIANT_BOOL*
+
+  func put_UnicastResponsesToMulticastBroadcastDisabled
+    HRESULT
+    disabled VARIANT_BOOL
+
+  func get_RemoteAdminSettings
+    HRESULT
+    remoteAdminSettings INetFwRemoteAdminSettings**
+
+  func get_IcmpSettings
+    HRESULT
+    icmpSettings INetFwIcmpSettings**
+
+  func get_GloballyOpenPorts
+    HRESULT
+    openPorts INetFwOpenPorts**
+
+  func get_Services
+    HRESULT
+    services INetFwServices**
+
+  func get_AuthorizedApplications
+    HRESULT
+    apps INetFwAuthorizedApplications**
+
+

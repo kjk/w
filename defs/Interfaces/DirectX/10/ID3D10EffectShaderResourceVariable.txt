@@ -1,0 +1,25 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\DirectX\10\ID3D10EffectVariable.txt
+
+ingterface ID3D10EffectShaderResourceVariable base=ID3D10EffectVariable id={C0A7157B-D872-4b1d-8073-EFC2ACD4B1FC} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func SetResource
+    HRESULT
+    pResource ID3D10ShaderResourceView*
+
+  func GetResource
+    HRESULT
+    ppResource ID3D10ShaderResourceView**
+
+  func SetResourceArray
+    HRESULT
+    ppResources ID3D10ShaderResourceView** count=Count
+    Offset UINT
+    Count UINT
+
+  func GetResourceArray
+    HRESULT
+    ppResources ID3D10ShaderResourceView** count=Count
+    Offset UINT
+    Count UINT
+
+

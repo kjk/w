@@ -1,0 +1,256 @@
+include Interfaces\OLEDB\_ADO.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface Recordset15 base=_ADO id={0000150E-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_AbsolutePosition
+    [OLEDB_HRESULT]
+    pl PositionEnum*
+
+  func put_AbsolutePosition
+    [OLEDB_HRESULT]
+    Position PositionEnum
+
+  func putref_ActiveConnection
+    [OLEDB_HRESULT]
+    pconn IDispatch*
+
+  func put_ActiveConnection
+    [OLEDB_HRESULT]
+    vConn VARIANT
+
+  func get_ActiveConnection
+    [OLEDB_HRESULT]
+    pvar VARIANT*
+
+  func get_BOF
+    [OLEDB_HRESULT]
+    pb VARIANT_BOOL*
+
+  func get_Bookmark
+    [OLEDB_HRESULT]
+    pvBookmark VARIANT*
+
+  func put_Bookmark
+    [OLEDB_HRESULT]
+    vBookmark VARIANT
+
+  func get_CacheSize
+    [OLEDB_HRESULT]
+    pl long*
+
+  func put_CacheSize
+    [OLEDB_HRESULT]
+    CacheSize long
+
+  func get_CursorType
+    [OLEDB_HRESULT]
+    plCursorType CursorTypeEnum*
+
+  func put_CursorType
+    [OLEDB_HRESULT]
+    lCursorType CursorTypeEnum
+
+  func get_EOF
+    [OLEDB_HRESULT]
+    pb VARIANT_BOOL*
+
+  func get_Fields
+    [OLEDB_HRESULT]
+    ppvObject ADOFields**
+
+  func get_LockType
+    [OLEDB_HRESULT]
+    plLockType LockTypeEnum*
+
+  func put_LockType
+    [OLEDB_HRESULT]
+    lLockType LockTypeEnum
+
+  func get_MaxRecords
+    [OLEDB_HRESULT]
+    plMaxRecords long*
+
+  func put_MaxRecords
+    [OLEDB_HRESULT]
+    lMaxRecords long
+
+  func get_RecordCount
+    [OLEDB_HRESULT]
+    pl long*
+
+  func putref_Source
+    [OLEDB_HRESULT]
+    pcmd IDispatch*
+
+  func put_Source
+    [OLEDB_HRESULT]
+    bstrConn BSTR
+
+  func get_Source
+    [OLEDB_HRESULT]
+    pvSource VARIANT*
+
+  func AddNew
+    [OLEDB_HRESULT]
+    FieldList VARIANT
+    Values VARIANT
+
+  func CancelUpdate
+    [OLEDB_HRESULT]
+
+  func Close
+    [OLEDB_HRESULT]
+
+  func Delete
+    [OLEDB_HRESULT]
+    AffectRecords AffectEnum
+
+  func GetRows
+    [OLEDB_HRESULT]
+    Rows GetRowsOptionEnum
+    Start VARIANT
+    Fields VARIANT
+    pvar VARIANT*
+
+  func Move
+    [OLEDB_HRESULT]
+    NumRecords long
+    Start VARIANT
+
+  func MoveNext
+    [OLEDB_HRESULT]
+
+  func MovePrevious
+    [OLEDB_HRESULT]
+
+  func MoveFirst
+    [OLEDB_HRESULT]
+
+  func MoveLast
+    [OLEDB_HRESULT]
+
+  func Open
+    [OLEDB_HRESULT]
+    Source VARIANT
+    ActiveConnection VARIANT
+    CursorType CursorTypeEnum
+    LockType LockTypeEnum
+    Options [ExecuteOptionCommandTypeEnum] display=LONG
+
+  func Requery
+    [OLEDB_HRESULT]
+    Options [ExecuteOptionCommandTypeEnum] display=LONG
+
+  func _xResync
+    [OLEDB_HRESULT]
+    AffectRecords AffectEnum
+
+  func Update
+    [OLEDB_HRESULT]
+    Fields VARIANT
+    Values VARIANT
+
+  func get_AbsolutePage
+    [OLEDB_HRESULT]
+    pl PositionEnum*
+
+  func put_AbsolutePage
+    [OLEDB_HRESULT]
+    Page PositionEnum
+
+  func get_EditMode
+    [OLEDB_HRESULT]
+    pl EditModeEnum*
+
+  func get_Filter
+    [OLEDB_HRESULT]
+    Criteria VARIANT*
+
+  func put_Filter
+    [OLEDB_HRESULT]
+    Criteria VARIANT
+
+  func get_PageCount
+    [OLEDB_HRESULT]
+    pl long*
+
+  func get_PageSize
+    [OLEDB_HRESULT]
+    pl long*
+
+  func put_PageSize
+    [OLEDB_HRESULT]
+    PageSize long
+
+  func get_Sort
+    [OLEDB_HRESULT]
+    Criteria BSTR*
+
+  func put_Sort
+    [OLEDB_HRESULT]
+    Criteria BSTR
+
+  func get_Status
+    [OLEDB_HRESULT]
+    pl RecordStatusEnum*
+
+  func get_State
+    [OLEDB_HRESULT]
+    plObjState LONG*
+
+  func _xClone
+    [OLEDB_HRESULT]
+    ppvObject _ADORecordset**
+
+  func UpdateBatch
+    [OLEDB_HRESULT]
+    AffectRecords AffectEnum
+
+  func CancelBatch
+    [OLEDB_HRESULT]
+    AffectRecords AffectEnum
+
+  func get_CursorLocation
+    [OLEDB_HRESULT]
+    plCursorLoc CursorLocationEnum*
+
+  func put_CursorLocation
+    [OLEDB_HRESULT]
+    lCursorLoc CursorLocationEnum
+
+  func NextRecordset
+    [OLEDB_HRESULT]
+    RecordsAffected VARIANT*
+    ppiRs _ADORecordset**
+
+  func Supports
+    [OLEDB_HRESULT]
+    CursorOptions CursorOptionEnum
+    pb VARIANT_BOOL*
+
+  func get_Collect
+    [OLEDB_HRESULT]
+    Index VARIANT
+    pvar VARIANT*
+
+  func put_Collect
+    [OLEDB_HRESULT]
+    Index VARIANT
+    value VARIANT
+
+  func get_MarshalOptions
+    [OLEDB_HRESULT]
+    peMarshal MarshalOptionsEnum*
+
+  func put_MarshalOptions
+    [OLEDB_HRESULT]
+    eMarshal MarshalOptionsEnum
+
+  func Find
+    [OLEDB_HRESULT]
+    Criteria BSTR
+    SkipRecords long
+    SearchDirection SearchDirectionEnum
+    Start VARIANT
+
+

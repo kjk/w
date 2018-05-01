@@ -1,0 +1,9 @@
+include Interfaces\IDispatch.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface _ADO base=IDispatch id={00000534-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_Properties
+    [OLEDB_HRESULT]
+    ppvObject ADOProperties**
+
+

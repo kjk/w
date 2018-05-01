@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IIPDVDec base=IUnknown id={b8e8bd60-0bfe-11d0-af91-00aa00b67a42} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func get_IPDisplay
+    HRESULT
+    displayPix int*
+
+  func put_IPDisplay
+    HRESULT
+    displayPix int
+
+

@@ -1,0 +1,24 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteGlyphRunAnalysis base=IUnknown id={7d97dbf7-e085-42d4-81e3-6a883bded118} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func GetAlphaTextureBounds
+    HRESULT
+    textureType DWRITE_TEXTURE_TYPE
+    textureBounds RECT*
+
+  func CreateAlphaTexture
+    HRESULT
+    textureType DWRITE_TEXTURE_TYPE
+    textureBounds "RECT const*"
+    alphaValues BYTE*
+    bufferSize UINT32
+
+  func GetAlphaBlendParams
+    HRESULT
+    renderingParams IDWriteRenderingParams*
+    blendGamma FLOAT*
+    blendEnhancedContrast FLOAT*
+    blendClearTypeLevel FLOAT*
+
+

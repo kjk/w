@@ -1,0 +1,16 @@
+include Interfaces\Shell\IDeskBand.txt
+
+ingterface IDeskBand2 base=IDeskBand id={79D16DE4-ABEE-4021-8D9D-9169B261D657} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func CanRenderComposited
+    HRESULT
+    pfCanRenderComposited BOOL*
+
+  func SetCompositionState
+    HRESULT
+    fCompositionEnabled BOOL
+
+  func GetCompositionState
+    HRESULT
+    pfCompositionEnabled BOOL*
+
+

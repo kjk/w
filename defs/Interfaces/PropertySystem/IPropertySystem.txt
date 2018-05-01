@@ -1,0 +1,55 @@
+include Interfaces\IUnknown.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertySystem base=IUnknown id={ca724e8a-c3e6-442b-88a4-6fb0db8035a3} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func GetPropertyDescription
+    HRESULT
+    propkey REFPROPERTYKEY
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetPropertyDescriptionByName
+    HRESULT
+    pszCanonicalName LPCWSTR
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetPropertyDescriptionListFromString
+    HRESULT
+    pszPropList LPCWSTR
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func EnumeratePropertyDescriptions
+    HRESULT
+    filterOn PROPDESC_ENUMFILTER
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func FormatForDisplay
+    HRESULT
+    key REFPROPERTYKEY
+    propvar REFPROPVARIANT
+    pdff PROPDESC_FORMAT_FLAGS
+    pszText LPWSTR
+    cchText DWORD
+
+  func FormatForDisplayAlloc
+    HRESULT
+    key REFPROPERTYKEY
+    propvar REFPROPVARIANT
+    pdff PROPDESC_FORMAT_FLAGS
+    ppszDisplay LPWSTR*
+
+  func RegisterPropertySchema
+    HRESULT
+    pszPath LPCWSTR
+
+  func UnregisterPropertySchema
+    HRESULT
+    pszPath LPCWSTR
+
+  func RefreshPropertySchema
+    HRESULT
+
+

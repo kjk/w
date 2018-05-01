@@ -1,0 +1,67 @@
+include Interfaces\IDispatch.txt
+
+ingterface IShellUIHelper base=IDispatch id={729FE2F8-1EA8-11d1-8F85-00C04FC2FBE1} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Content Extensions/Shell Helper/Interfaces"
+  func ResetFirstBootMode
+    HRESULT
+
+  func ResetSafeMode
+    HRESULT
+
+  func RefreshOfflineDesktop
+    HRESULT
+
+  func AddFavorite
+    HRESULT
+    URL BSTR
+    Title VARIANT*
+
+  func AddChannel
+    HRESULT
+    URL BSTR
+
+  func AddDesktopComponent
+    HRESULT
+    URL BSTR
+    Type BSTR
+    Left VARIANT*
+    Top VARIANT*
+    Width VARIANT*
+    Height VARIANT*
+
+  func IsSubscribed
+    HRESULT
+    URL BSTR
+    pBool VARIANT_BOOL*
+
+  func NavigateAndFind
+    HRESULT
+    URL BSTR
+    strQuery BSTR
+    varTargetFrame VARIANT*
+
+  func ImportExportFavorites
+    HRESULT
+    fImport VARIANT_BOOL
+    strImpExpPath BSTR
+
+  func AutoCompleteSaveForm
+    HRESULT
+    Form VARIANT*
+
+  func AutoScan
+    HRESULT
+    strSearch BSTR
+    strFailureUrl BSTR
+    pvarTargetFrame VARIANT*
+
+  func AutoCompleteAttach
+    HRESULT
+    Reserved VARIANT*
+
+  func ShowBrowserUI
+    HRESULT
+    bstrName BSTR
+    pvarIn VARIANT*
+    pvarOut VARIANT*
+
+

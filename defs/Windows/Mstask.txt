@@ -1,0 +1,16 @@
+include Headers\windows.h.txt
+
+dll Mstask.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Networking/Network Management/Schedule"
+func GetNetScheduleAccountInformation
+  HRESULT
+  pwszServerName LPCWSTR
+  ccAccount DWORD
+  wszAccount "WCHAR []"
+
+func SetNetScheduleAccountInformation
+  HRESULT
+  pwszServerName LPCWSTR
+  pwszAccount LPCWSTR
+  pwszPassword LPCWSTR
+

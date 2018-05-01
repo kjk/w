@@ -1,0 +1,103 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOleObject base=IUnknown id={00000112-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func SetClientSite
+    HRESULT
+    pClientSite IOleClientSite*
+
+  func GetClientSite
+    HRESULT
+    ppClientSite IOleClientSite**
+
+  func SetHostNames
+    HRESULT
+    szContainerApp LPCOLESTR
+    szContainerObj LPCOLESTR
+
+  func Close
+    HRESULT
+    dwSaveOption DWORD
+
+  func SetMoniker
+    HRESULT
+    dwWhichMoniker DWORD
+    pmk IMoniker*
+
+  func GetMoniker
+    HRESULT
+    dwAssign DWORD
+    dwWhichMoniker DWORD
+    ppmk IMoniker**
+
+  func InitFromData
+    HRESULT
+    pDataObject IDataObject*
+    fCreation BOOL
+    dwReserved DWORD
+
+  func GetClipboardData
+    HRESULT
+    dwReserved DWORD
+    ppDataObject IDataObject**
+
+  func DoVerb
+    HRESULT
+    iVerb LONG
+    lpmsg LPMSG
+    pActiveSite IOleClientSite*
+    lindex LONG
+    hwndParent HWND
+    lprcPosRect LPCRECT
+
+  func EnumVerbs
+    HRESULT
+    ppEnumOleVerb IEnumOLEVERB**
+
+  func Update
+    HRESULT
+
+  func IsUpToDate
+    HRESULT
+
+  func GetUserClassID
+    HRESULT
+    pClsid CLSID*
+
+  func GetUserType
+    HRESULT
+    dwFormOfType DWORD
+    pszUserType LPOLESTR*
+
+  func SetExtent
+    HRESULT
+    dwDrawAspect DWORD
+    psizel SIZEL*
+
+  func GetExtent
+    HRESULT
+    dwDrawAspect DWORD
+    psizel SIZEL*
+
+  func Advise
+    HRESULT
+    pAdvSink IAdviseSink*
+    pdwConnection DWORD*
+
+  func Unadvise
+    HRESULT
+    dwConnection DWORD
+
+  func EnumAdvise
+    HRESULT
+    ppenumAdvise IEnumSTATDATA**
+
+  func GetMiscStatus
+    HRESULT
+    dwAspect DVASPECT
+    pdwStatus DWORD*
+
+  func SetColorScheme
+    HRESULT
+    pLogpal LOGPALETTE*
+
+

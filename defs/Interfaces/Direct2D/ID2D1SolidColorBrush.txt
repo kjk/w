@@ -1,0 +1,12 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Brush.txt
+
+ingterface ID2D1SolidColorBrush base=ID2D1Brush id={2cd906a9-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetColor
+    void
+    color "CONST D2D1_COLOR_F*"
+
+  func GetColor
+    D2D1_COLOR_F
+
+

@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFillLockBytes base=IUnknown id={99caf010-415e-11cf-8814-00aa00b569f5} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Structured Storage/Interfaces"
+  func FillAppend
+    HRESULT
+    pv "const void*"
+    cb ULONG
+    pcbWritten ULONG*
+
+  func FillAt
+    HRESULT
+    ulOffset ULARGE_INTEGER
+    pv "const void*"
+    cb ULONG
+    pcbWritten ULONG*
+
+  func SetFillSize
+    HRESULT
+    ulSize ULARGE_INTEGER
+
+  func Terminate
+    HRESULT
+    bCanceled BOOL
+
+

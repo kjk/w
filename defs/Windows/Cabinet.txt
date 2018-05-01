@@ -1,0 +1,359 @@
+include Headers\windows.h.txt
+
+dll Cabinet.dll callingConvention=CDECL errorFunc=GetLastError onlineHelp=MSDN
+category "Additional Resources/Cabinet/File Compression Interface (FCI)"
+category "Additional Resources/Cabinet/File Decompression Interface (FDI)"
+category "Additional Resources/Cabinet/Deprecated"
+category "System Services/Compression"
+alias HFCI void*
+
+alias PFNFCIGETNEXTCABINET LPVOID
+
+alias PFNFCISTATUS LPVOID
+
+alias PFNFCIGETOPENINFO LPVOID
+
+alias PFNFCIFILEPLACED LPVOID
+
+alias PFNFCIALLOC LPVOID
+
+alias PFNFCIFREE LPVOID
+
+alias PFNFCIOPEN LPVOID
+
+alias PFNFCIREAD LPVOID
+
+alias PFNFCIWRITE LPVOID
+
+alias PFNFCICLOSE LPVOID
+
+alias PFNFCISEEK LPVOID
+
+alias PFNFCIDELETE LPVOID
+
+alias PFNFCIGETTEMPFILE LPVOID
+
+alias HFDI void*
+
+alias PFNFDINOTIFY LPVOID
+
+alias PFNFDIDECRYPT LPVOID
+
+alias PFNALLOC LPVOID
+
+alias PFNFREE LPVOID
+
+alias PFNOPEN LPVOID
+
+alias PFNREAD LPVOID
+
+alias PFNWRITE LPVOID
+
+alias PFNCLOSE LPVOID
+
+alias PFNSEEK LPVOID
+
+alias HFILELIST void*
+
+alias COMPRESSOR_HANDLE HANDLE
+
+pointer PCOMPRESSOR_HANDLE COMPRESSOR_HANDLE
+
+alias DECOMPRESSOR_HANDLE COMPRESSOR_HANDLE
+
+pointer PDECOMPRESSOR_HANDLE DECOMPRESSOR_HANDLE
+
+alias PFN_COMPRESS_ALLOCATE LPVOID
+
+alias PFN_COMPRESS_FREE LPVOID
+
+array "char [CB_MAX_DISK_NAME]" base=char count=256
+
+array "char [CB_MAX_CABINET_NAME]" base=char count=256
+
+array "char [CB_MAX_CAB_PATH]" base=char count=256
+
+array "int [cMAX_CAB_FILE_OPEN]" base=int count=2
+
+array "char [cbMAX_LINE * 2]" base=char count=512
+
+flag TCOMP USHORT
+  tcompTYPE_MSZIP   0x0001
+  tcompTYPE_QUANTUM 0x0002
+  tcompTYPE_LZX     0x0003
+
+enum FCIERROR int display=int
+  FCIERR_NONE             0
+  FCIERR_OPEN_SRC         1
+  FCIERR_READ_SRC         2
+  FCIERR_ALLOC_FAIL       3
+  FCIERR_TEMP_FILE        4
+  FCIERR_BAD_COMPR_TYPE   5
+  FCIERR_CAB_FILE         6
+  FCIERR_USER_ABORT       7
+  FCIERR_MCI_FAIL         8
+  FCIERR_CAB_FORMAT_LIMIT 9
+
+enum FDIERROR int display=int
+  FDIERROR_NONE                    0
+  FDIERROR_CABINET_NOT_FOUND       1
+  FDIERROR_NOT_A_CABINET           2
+  FDIERROR_UNKNOWN_CABINET_VERSION 3
+  FDIERROR_CORRUPT_CABINET         4
+  FDIERROR_ALLOC_FAIL              5
+  FDIERROR_BAD_COMPR_TYPE          6
+  FDIERROR_MDI_FAIL                7
+  FDIERROR_TARGET_FILE             8
+  FDIERROR_RESERVE_MISMATCH        9
+  FDIERROR_WRONG_CABINET           10
+  FDIERROR_USER_ABORT              11
+
+struct [ERF_FCI] display=ERF
+  erfOper FCIERROR
+  erfType int
+  fError BOOL
+
+pointer [PERF_FCI] [ERF_FCI] display=PERF
+
+struct [ERF_FDI] display=ERF
+  erfOper FDIERROR
+  erfType int
+  fError BOOL
+
+pointer [PERF_FDI] [ERF_FDI] display=PERF
+
+struct CCAB
+  cb ULONG
+  cbFolderThresh ULONG
+  cbReserveCFHeader UINT
+  cbReserveCFFolder UINT
+  cbReserveCFData UINT
+  iCab int
+  iDisk int
+  fFailOnIncompressible int
+  setID USHORT
+  szDisk "char [CB_MAX_DISK_NAME]"
+  szCab "char [CB_MAX_CABINET_NAME]"
+  szCabPath "char [CB_MAX_CAB_PATH]"
+
+pointer PCCAB CCAB
+
+struct FDICABINETINFO
+  cbCabinet long
+  cFolders USHORT
+  cFiles USHORT
+  setID USHORT
+  iCabinet USHORT
+  fReserve BOOL
+  hasprev BOOL
+  hasnext BOOL
+
+pointer PFDICABINETINFO FDICABINETINFO
+
+alias PSESSION LPVOID
+
+struct CABINETDLLVERSIONINFO
+  cbStruct DWORD
+  dwReserved1 DWORD
+  dwReserved2 DWORD
+  dwFileVersionMS DWORD
+  dwFileVersionLS DWORD
+
+pointer PCABINETDLLVERSIONINFO CABINETDLLVERSIONINFO
+
+flag [COMPRESS_ALGORITHM] DWORD display=DWORD
+  COMPRESS_ALGORITHM_INVALID     0
+  COMPRESS_ALGORITHM_NULL        1
+  COMPRESS_ALGORITHM_MSZIP       2
+  COMPRESS_ALGORITHM_XPRESS      3
+  COMPRESS_ALGORITHM_XPRESS_HUFF 4
+  COMPRESS_ALGORITHM_LZMS        5
+  COMPRESS_RAW                   0x20000000
+
+enum COMPRESS_INFORMATION_CLASS UINT
+  COMPRESS_INFORMATION_CLASS_INVALID    0
+  COMPRESS_INFORMATION_CLASS_BLOCK_SIZE 1
+  COMPRESS_INFORMATION_CLASS_LEVEL      2
+
+struct COMPRESS_ALLOCATION_ROUTINES
+  Allocate PFN_COMPRESS_ALLOCATE
+  Free PFN_COMPRESS_FREE
+  UserContext PVOID
+
+pointer PCOMPRESS_ALLOCATION_ROUTINES COMPRESS_ALLOCATION_ROUTINES
+
+func FCIAddFile
+  BOOL
+  hfci HFCI
+  pszSourceFile LPSTR
+  pszFileName LPSTR
+  fExecute BOOL
+  GetNextCab PFNFCIGETNEXTCABINET
+  pfnProgress PFNFCISTATUS
+  pfnOpenInfo PFNFCIGETOPENINFO
+  typeCompress TCOMP
+
+func FCICreate
+  success NotEqual=0
+  HFCI
+  perf [PERF_FCI]
+  pfnfiledest PFNFCIFILEPLACED
+  pfnalloc PFNFCIALLOC
+  pfnfree PFNFCIFREE
+  pfnopen PFNFCIOPEN
+  pfnread PFNFCIREAD
+  pfnwrite PFNFCIWRITE
+  pfnclose PFNFCICLOSE
+  pfnseek PFNFCISEEK
+  pfndelete PFNFCIDELETE
+  pfnfcigtf PFNFCIGETTEMPFILE
+  pccab PCCAB
+  pv void*
+
+func FCIDestroy
+  BOOL
+  hfci HFCI
+
+func FCIFlushCabinet
+  BOOL
+  hfci HFCI
+  fGetNextCab BOOL
+  GetNextCab PFNFCIGETNEXTCABINET
+  pfnProgress PFNFCISTATUS
+
+func FCIFlushFolder
+  BOOL
+  hfci HFCI
+  GetNextCab PFNFCIGETNEXTCABINET
+  pfnProgress PFNFCISTATUS
+
+func FDICopy
+  BOOL
+  hfdi HFDI
+  pszCabinet LPSTR
+  pszCabPath LPSTR
+  flags INT
+  pfnfdin PFNFDINOTIFY
+  pfnfdid PFNFDIDECRYPT
+  pvUser void*
+
+func FDICreate
+  success NotEqual=0
+  HFDI
+  pfnalloc PFNALLOC
+  pfnfree PFNFREE
+  pfnopen PFNOPEN
+  pfnread PFNREAD
+  pfnwrite PFNWRITE
+  pfnclose PFNCLOSE
+  pfnseek PFNSEEK
+  cpuType int
+  perf [PERF_FDI]
+
+func FDIDestroy
+  BOOL
+  hfdi BOOL
+
+func FDIIsCabinet
+  BOOL
+  hfdi HFDI
+  hf INT_PTR
+  pfdici PFDICABINETINFO
+
+func FDITruncateCabinet
+  BOOL
+  hfdi HFDI
+  pszCabinetName LPSTR*
+  iFolderToDelete USHORT
+
+func DeleteExtractedFiles
+  VOID
+  ps PSESSION
+
+func DllGetVersion
+  VOID
+  pcdvi PCABINETDLLVERSIONINFO
+
+func Extract
+  HRESULT
+  ps PSESSION
+  lpCabName LPCSTR
+
+func GetDllVersion
+  success NotEqual=0
+  LPCSTR
+
+func CloseCompressor
+  BOOL
+  CompressorHandle COMPRESSOR_HANDLE
+
+func CloseDecompressor
+  BOOL
+  DecompressorHandle DECOMPRESSOR_HANDLE
+
+func Compress
+  BOOL
+  CompressorHandle COMPRESSOR_HANDLE
+  UncompressedData PVOID length=UncompressedDataSize
+  UncompressedDataSize SIZE_T
+  CompressedBuffer PVOID postLength=CompressedDataSize
+  CompressedBufferSize SIZE_T
+  CompressedDataSize PSIZE_T
+
+func CreateCompressor
+  BOOL
+  Algorithm [COMPRESS_ALGORITHM]
+  AllocationRoutines PCOMPRESS_ALLOCATION_ROUTINES
+  CompressorHandle PCOMPRESSOR_HANDLE
+
+func CreateDecompressor
+  BOOL
+  Algorithm [COMPRESS_ALGORITHM]
+  AllocationRoutines PCOMPRESS_ALLOCATION_ROUTINES
+  DecompressorHandle PDECOMPRESSOR_HANDLE
+
+func Decompress
+  BOOL
+  DecompressorHandle DECOMPRESSOR_HANDLE
+  CompressedData PVOID length=CompressedDataSize
+  CompressedDataSize SIZE_T
+  UncompressedBuffer PVOID postLength=UncompressedDataSize
+  UncompressedBufferSize SIZE_T
+  UncompressedDataSize PSIZE_T
+
+func QueryCompressorInformation
+  BOOL
+  CompressorHandle COMPRESSOR_HANDLE
+  CompressInformationClass COMPRESS_INFORMATION_CLASS
+  CompressInformation PVOID postLength=CompressInformationSize
+  CompressInformationSize SIZE_T
+
+func QueryDecompressorInformation
+  BOOL
+  DecompressorHandle DECOMPRESSOR_HANDLE
+  CompressInformationClass COMPRESS_INFORMATION_CLASS
+  CompressInformation PVOID postLength=CompressInformationSize
+  CompressInformationSize SIZE_T
+
+func ResetCompressor
+  BOOL
+  CompressorHandle COMPRESSOR_HANDLE
+
+func ResetDecompressor
+  BOOL
+  DecompressorHandle DECOMPRESSOR_HANDLE
+
+func SetCompressorInformation
+  BOOL
+  CompressorHandle COMPRESSOR_HANDLE
+  CompressInformationClass COMPRESS_INFORMATION_CLASS
+  CompressInformation PVOID length=CompressInformationSize
+  CompressInformationSize SIZE_T
+
+func SetDecompressorInformation
+  BOOL
+  DeompressorHandle DECOMPRESSOR_HANDLE
+  CompressInformationClass COMPRESS_INFORMATION_CLASS
+  CompressInformation PVOID length=CompressInformationSize
+  CompressInformationSize SIZE_T
+

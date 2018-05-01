@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAutoCompleteDropDown base=IUnknown id={3CD141F4-3C6A-11d2-BCAA-00C04FD929DB} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetDropDownStatus
+    HRESULT
+    pdwFlags DWORD*
+    ppwszString LPWSTR*
+
+  func ResetEnumerator
+    HRESULT
+
+

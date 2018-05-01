@@ -1,0 +1,103 @@
+include Headers\windows.h.txt
+include Headers\sockets.h.txt
+
+dll Wsock32.dll callingConvention=STDCALL errorFunc=WSAGetLastError onlineHelp=MSDN
+sourceModule Ws2_32.dll copy=True include=Windows\Ws2_32.xml
+func WSAAsyncGetHostByAddr
+
+func WSAAsyncGetHostByName
+
+func WSAAsyncGetProtoByName
+
+func WSAAsyncGetProtoByNumber
+
+func WSAAsyncGetServByName
+
+func WSAAsyncGetServByPort
+
+func WSAAsyncSelect
+
+func WSACancelAsyncRequest
+
+func WSACleanup
+
+func WSAGetLastError
+
+func WSAIsBlocking
+
+func WSASetLastError
+
+func WSAStartup
+
+func accept
+
+func bind
+
+func closesocket
+
+func connect
+
+func gethostbyaddr
+
+func gethostbyname
+
+func gethostname
+
+func getpeername
+
+func getprotobyname
+
+func getprotobynumber
+
+func getservbyname
+
+func getservbyport
+
+func getsockname
+
+func getsockopt
+
+func htonl
+
+func htons
+
+func listen
+
+func ntohl
+
+func ntohs
+
+func recv
+
+func recvfrom
+
+func select
+
+func send
+
+func sendto
+
+func setsockopt
+
+func shutdown
+
+func socket
+
+category "Networking/Windows Sockets 2"
+func inet_addr ordinal=10
+  success NotEqual=0xffffffff
+  [INET_ADDR_OUTPUT]
+  cp "const char*"
+
+func inet_ntoa ordinal=11
+  success NotEqual=0
+  char*
+  in "struct in_addr"
+
+func ioctlsocket ordinal=12
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  cmd [Socket_IOCTL]
+  argp u_long*
+

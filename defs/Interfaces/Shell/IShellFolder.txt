@@ -1,0 +1,74 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellFolder base=IUnknown id={000214E6-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func ParseDisplayName
+    HRESULT
+    hwnd HWND
+    pbc IBindCtx*
+    pszDisplayName LPWSTR
+    pchEaten ULONG*
+    ppidl PIDLIST_RELATIVE*
+    pdwAttributes ULONG*
+
+  func EnumObjects
+    HRESULT
+    hwnd HWND
+    grfFlags SHCONTF
+    ppenumIDList IEnumIDList**
+
+  func BindToObject
+    HRESULT
+    pidl PCUIDLIST_RELATIVE
+    pbc IBindCtx*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func BindToStorage
+    HRESULT
+    pidl PCUIDLIST_RELATIVE
+    pbc IBindCtx*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func CompareIDs
+    HRESULT
+    lParam LPARAM
+    pidl1 PCUIDLIST_RELATIVE
+    pidl2 PCUIDLIST_RELATIVE
+
+  func CreateViewObject
+    HRESULT
+    hwndOwner HWND
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetAttributesOf
+    HRESULT
+    cidl UINT
+    apidl PCUITEMID_CHILD_ARRAY count=cidl
+    rgfInOut SFGAOF*
+
+  func GetUIObjectOf
+    HRESULT
+    hwndOwner HWND
+    cidl UINT
+    apidl PCUITEMID_CHILD_ARRAY count=cidl
+    riid REFIID
+    rgfReserved UINT*
+    ppv void** interfaceId=riid
+
+  func GetDisplayNameOf
+    HRESULT
+    pidl PCUITEMID_CHILD
+    uFlags SHGDNF
+    pName STRRET*
+
+  func SetNameOf
+    HRESULT
+    hwnd HWND
+    pidl PCUITEMID_CHILD
+    pszName LPCWSTR
+    uFlags SHGDNF
+    ppidlOut PITEMID_CHILD*
+
+

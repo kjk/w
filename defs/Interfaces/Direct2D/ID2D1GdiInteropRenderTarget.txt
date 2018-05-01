@@ -1,0 +1,14 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1GdiInteropRenderTarget base=IUnknown id={e0db51c3-6f77-4bae-b3d5-e47509b35838} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetDC
+    [D2D_HRESULT]
+    mode D2D1_DC_INITIALIZE_MODE
+    hdc HDC*
+
+  func ReleaseDC
+    [D2D_HRESULT]
+    update "CONST RECT*"
+
+

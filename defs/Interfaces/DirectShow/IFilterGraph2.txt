@@ -1,0 +1,22 @@
+include Interfaces\DirectShow\IGraphBuilder.txt
+
+ingterface IFilterGraph2 base=IGraphBuilder id={36b73882-c2c8-11cf-8b46-00805f6cef60} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func AddSourceFilterForMoniker
+    HRESULT
+    pMoniker IMoniker*
+    pCtx IBindCtx*
+    lpcwstrFilterName LPCWSTR
+    ppFilter IBaseFilter**
+
+  func ReconnectEx
+    HRESULT
+    ppin IPin*
+    pmt "const AM_MEDIA_TYPE*"
+
+  func RenderEx
+    HRESULT
+    pPinOut IPin*
+    dwFlags DWORD
+    pvContext DWORD*
+
+

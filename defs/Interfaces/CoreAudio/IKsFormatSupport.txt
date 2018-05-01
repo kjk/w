@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IKsFormatSupport base=IUnknown id={3CB4A69D-BB6F-4D2B-95B7-452D2C155DB5} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func IsFormatSupported
+    [AUDCLNT_HRESULT]
+    pKsFormat PKSDATAFORMAT
+    cbFormat DWORD
+    pbSupported BOOL*
+
+  func GetDevicePreferredFormat
+    [AUDCLNT_HRESULT]
+    ppKsFormat PKSDATAFORMAT*
+
+

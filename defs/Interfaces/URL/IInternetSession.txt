@@ -1,0 +1,53 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IInternetSession base=IUnknown id={79eac9e7-baf9-11ce-8c82-00aa004ba90b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func RegisterNameSpace
+    HRESULT
+    pCF IClassFactory*
+    rclsid REFCLSID
+    pwzProtocol LPCWSTR
+    cPatterns ULONG
+    ppwzPatterns "const LPCWSTR*" count=cPatterns
+    dwReserved DWORD
+
+  func UnregisterNameSpace
+    HRESULT
+    pCF IClassFactory*
+    pszProtocol LPCWSTR
+
+  func RegisterMimeFilter
+    HRESULT
+    pCF IClassFactory*
+    rclsid REFCLSID
+    pwzType LPCWSTR
+
+  func UnregisterMimeFilter
+    HRESULT
+    pCF IClassFactory*
+    pwzType LPCWSTR
+
+  func CreateBinding
+    HRESULT
+    pBC LPBC
+    szUrl LPCWSTR
+    pUnkOuter IUnknown*
+    ppUnk IUnknown**
+    ppOInetProt IInternetProtocol**
+    dwOption OIBDG_FLAGS
+
+  func SetSessionOption
+    HRESULT
+    dwOption DWORD
+    pBuffer LPVOID length=dwBufferLength
+    dwBufferLength DWORD
+    dwReserved DWORD
+
+  func GetSessionOption
+    HRESULT
+    dwOption DWORD
+    pBuffer LPVOID postLength=pdwBufferLength
+    pdwBufferLength DWORD*
+    dwReserved DWORD
+
+

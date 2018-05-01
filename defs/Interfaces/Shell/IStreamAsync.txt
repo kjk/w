@@ -1,0 +1,27 @@
+include Interfaces\COM\IStream.txt
+
+ingterface IStreamAsync base=IStream id={fe0b6665-e0ca-49b9-a178-2b5cb48d92a5} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func ReadAsync
+    HRESULT
+    pv void*
+    cb DWORD
+    pcbRead LPDWORD
+    lpOverlapped LPOVERLAPPED
+
+  func WriteAsync
+    HRESULT
+    lpBuffer "const void*"
+    cb DWORD
+    pcbWritten LPDWORD
+    lpOverlapped LPOVERLAPPED
+
+  func OverlappedResult
+    HRESULT
+    lpOverlapped LPOVERLAPPED
+    lpNumberOfBytesTransferred LPDWORD
+    bWait BOOL
+
+  func CancelIo
+    HRESULT
+
+

@@ -1,0 +1,51 @@
+include Headers\windows.h.txt
+
+dll Sisbkup.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Data Access and Storage/Backup"
+func SisCreateBackupStructure
+  BOOL
+  volumeRoot PWCHAR
+  sisBackupStructure PVOID*
+  commonStoreRootPathname PWCHAR*
+  countOfCommonStoreFilesToBackUp PULONG
+  commonStoreFilesToBackUp PWCHAR**
+
+func SisCreateRestoreStructure
+  BOOL
+  volumeRoot PWCHAR
+  sisRestoreStructure PVOID*
+  commonStoreRootPathname PWCHAR*
+  countOfCommonStoreFilesToRestore PULONG
+  commonStoreFilesToRestore PWCHAR**
+
+func SisCSFilesToBackupForLink
+  BOOL
+  sisBackupStructure PVOID
+  reparseData PVOID
+  reparseDataSize ULONG
+  thisFileContext PVOID
+  matchingFileContext PVOID*
+  countOfCommonStoreFilesToBackUp PULONG
+  commonStoreFilesToBackUp PWCHAR**
+
+func SisFreeAllocatedMemory
+  void
+  allocatedSpace PVOID
+
+func SisFreeBackupStructure
+  BOOL
+  sisBackupStructure PVOID
+
+func SisFreeRestoreStructure
+  BOOL
+  sisRestoreStructure PVOID
+
+func SisRestoredLink
+  BOOL
+  sisRestoreStructure PVOID
+  restoredFileName PWCHAR
+  reparseData PVOID
+  reparseDataSize ULONG
+  countOfCommonStoreFilesToRestore PULONG
+  commonStoreFilesToRestore PWCHAR**
+

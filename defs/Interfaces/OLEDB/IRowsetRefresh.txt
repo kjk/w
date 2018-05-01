@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IRowsetRefresh base=IUnknown id={0c733aa9-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func RefreshVisibleData
+    [OLEDB_HRESULT]
+    hChapter HCHAPTER
+    cRows DBCOUNTITEM
+    rghRows "const HROW []" count=cRows
+    fOverWrite BOOL
+    pcRowsRefreshed DBCOUNTITEM*
+    prghRowsRefreshed HROW** derefPostCount=pcRowsRefreshed
+    prgRowStatus DBROWSTATUS** derefPostCount=pcRowsRefreshed
+
+  func GetLastVisibleData
+    [OLEDB_HRESULT]
+    hRow HROW
+    hAccessor HACCESSOR
+    pData void*
+
+

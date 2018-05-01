@@ -1,0 +1,11 @@
+include Headers\dinput.h.txt
+
+dll Dinput8.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Input/DirectInput"
+func DirectInput8Create ordinal=1
+  [DI_HRESULT]
+  hinst HINSTANCE
+  dwVersion DWORD
+  riidltf REFIID
+  ppvOut LPVOID* interfaceId=riidltf
+  punkOuter LPUNKNOWN
+

@@ -1,0 +1,123 @@
+include Interfaces\Shell\IFolderView.txt
+
+ingterface IFolderView2 base=IFolderView id={1af3a467-214f-4298-908e-06b03e0b39f9} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetGroupBy
+    HRESULT
+    key REFPROPERTYKEY
+    fAscending BOOL
+
+  func GetGroupBy
+    HRESULT
+    pkey PROPERTYKEY*
+    pfAscending BOOL*
+
+  func SetViewProperty
+    DEPRECATED_HRESULT
+    pidl PCUITEMID_CHILD
+    propkey REFPROPERTYKEY
+    propvar REFPROPVARIANT
+
+  func GetViewProperty
+    DEPRECATED_HRESULT
+    pidl PCUITEMID_CHILD
+    propkey REFPROPERTYKEY
+    ppropvar PROPVARIANT*
+
+  func SetTileViewProperties
+    DEPRECATED_HRESULT
+    pidl PCUITEMID_CHILD
+    pszPropList LPCWSTR
+
+  func SetExtendedTileViewProperties
+    DEPRECATED_HRESULT
+    pidl PCUITEMID_CHILD
+    pszPropList LPCWSTR
+
+  func SetText
+    HRESULT
+    iType FVTEXTTYPE
+    pwszText LPCWSTR
+
+  func SetCurrentFolderFlags
+    HRESULT
+    dwMask [FOLDERFLAGS_DWORD]
+    dwFlags [FOLDERFLAGS_DWORD]
+
+  func GetCurrentFolderFlags
+    HRESULT
+    pdwFlags [FOLDERFLAGS_DWORD*]
+
+  func GetSortColumnCount
+    HRESULT
+    pcColumns int*
+
+  func SetSortColumns
+    HRESULT
+    rgSortColumns "const SORTCOLUMN*" count=cColumns
+    cColumns int
+
+  func GetSortColumns
+    HRESULT
+    rgSortColumns SORTCOLUMN* postCount=cColumns
+    cColumns int
+
+  func GetItem
+    HRESULT
+    iItem int
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetVisibleItem
+    HRESULT
+    iStart int
+    fPrevious BOOL
+    piItem int*
+
+  func GetSelectedItem
+    HRESULT
+    iStart int
+    piItem int*
+
+  func GetSelection
+    HRESULT
+    fNoneImpliesFolder BOOL
+    ppsia IShellItemArray**
+
+  func GetSelectionState
+    HRESULT
+    pidl PCUITEMID_CHILD
+    pdwFlags DWORD*
+
+  func InvokeVerbOnSelection
+    HRESULT
+    pszVerb LPCSTR
+
+  func SetViewModeAndIconSize
+    HRESULT
+    uViewMode FOLDERVIEWMODE
+    iImageSize int
+
+  func GetViewModeAndIconSize
+    HRESULT
+    puViewMode FOLDERVIEWMODE*
+    piImageSize int*
+
+  func SetGroupSubsetCount
+    HRESULT
+    cVisibleRows UINT
+
+  func GetGroupSubsetCount
+    HRESULT
+    pcVisibleRows UINT*
+
+  func SetRedraw
+    HRESULT
+    fRedrawOn BOOL
+
+  func IsMoveInSameFolder
+    HRESULT
+
+  func DoRename
+    HRESULT
+
+

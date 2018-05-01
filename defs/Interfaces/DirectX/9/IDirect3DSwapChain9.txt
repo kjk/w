@@ -1,0 +1,38 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3DSwapChain9 base=IUnknown id={794950F2-ADFC-458a-905E-10A10B0B503B} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func Present
+    HRESULT
+    pSourceRect "CONST RECT*"
+    pDestRect "CONST RECT*"
+    hDestWindowOverride HWND
+    pDirtyRegion "CONST RGNDATA*"
+    dwFlags DWORD
+
+  func GetFrontBufferData
+    HRESULT
+    pDestSurface IDirect3DSurface9*
+
+  func GetBackBuffer
+    HRESULT
+    iBackBuffer UINT
+    Type D3DBACKBUFFER_TYPE
+    ppBackBuffer IDirect3DSurface9**
+
+  func GetRasterStatus
+    HRESULT
+    pRasterStatus D3DRASTER_STATUS*
+
+  func GetDisplayMode
+    HRESULT
+    pMode D3DDISPLAYMODE*
+
+  func GetDevice
+    HRESULT
+    ppDevice IDirect3DDevice9**
+
+  func GetPresentParameters
+    HRESULT
+    pPresentationParameters D3DPRESENT_PARAMETERS*
+
+

@@ -1,0 +1,10 @@
+include Interfaces\URL\IHttpNegotiate2.txt
+include Headers\URL.h.txt
+
+ingterface IHttpNegotiate3 base=IHttpNegotiate2 id={57b6c80a-34c2-4602-bc26-66a02fc57153} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetSerializedClientCertContext
+    HRESULT
+    ppbCert BYTE** derefPostLength=pcbCert
+    pcbCert DWORD*
+
+

@@ -1,0 +1,14 @@
+include Interfaces\Shell\IPersistFolder2.txt
+
+ingterface IPersistFolder3 base=IPersistFolder2 id={CEF04FDF-FE72-11d2-87A5-00C04F6837CF} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func InitializeEx
+    HRESULT
+    pbc IBindCtx*
+    pidlRoot PCIDLIST_ABSOLUTE
+    ppfti "const PERSIST_FOLDER_TARGET_INFO*"
+
+  func GetFolderTargetInfo
+    HRESULT
+    ppfti PERSIST_FOLDER_TARGET_INFO*
+
+

@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemEventConsumerProvider base=IUnknown id={e246107a-b06e-11d0-ad61-00c04fd8fdff} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func FindConsumer
+    WBEMSTATUS
+    pLogicalConsumer IWbemClassObject*
+    ppConsumer IWbemUnboundObjectSink**
+
+

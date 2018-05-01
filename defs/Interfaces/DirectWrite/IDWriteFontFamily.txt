@@ -1,0 +1,23 @@
+include Headers\dwrite.h.txt
+include Interfaces\DirectWrite\IDWriteFontList.txt
+
+ingterface IDWriteFontFamily base=IDWriteFontList id={da20d8ef-812a-4c43-9802-62ec4abd7add} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func GetFamilyNames
+    HRESULT
+    names IDWriteLocalizedStrings**
+
+  func GetFirstMatchingFont
+    HRESULT
+    weight DWRITE_FONT_WEIGHT
+    stretch DWRITE_FONT_STRETCH
+    style DWRITE_FONT_STYLE
+    matchingFont IDWriteFont**
+
+  func GetMatchingFonts
+    HRESULT
+    weight DWRITE_FONT_WEIGHT
+    stretch DWRITE_FONT_STRETCH
+    style DWRITE_FONT_STYLE
+    matchingFonts IDWriteFontList**
+
+

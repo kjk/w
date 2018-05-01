@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFileIsInUse base=IUnknown id={64a1cbf0-3a1a-4461-9158-376969693950} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetAppName
+    HRESULT
+    ppszName LPWSTR*
+
+  func GetUsage
+    HRESULT
+    pfut FILE_USAGE_TYPE*
+
+  func GetCapabilities
+    HRESULT
+    pdwCapFlags DWORD*
+
+  func GetSwitchToHWND
+    HRESULT
+    phwnd HWND*
+
+  func CloseFile
+    HRESULT
+
+

@@ -1,0 +1,18 @@
+include Interfaces\WIC\IWICBitmapSource.txt
+
+ingterface IWICBitmapFrameDecode base=IWICBitmapSource id={3B16811B-6A43-4ec9-A813-3D930C13B940} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetMetadataQueryReader
+    [WIC_HRESULT]
+    ppIMetadataQueryReader IWICMetadataQueryReader**
+
+  func GetColorContexts
+    [WIC_HRESULT]
+    cCount UINT
+    ppIColorContexts IWICColorContext** postCount=pcActualCount
+    pcActualCount UINT*
+
+  func GetThumbnail
+    [WIC_HRESULT]
+    ppIThumbnail IWICBitmapSource**
+
+

@@ -1,0 +1,30 @@
+include Interfaces\IUnknown.txt
+include Headers\directx.h.txt
+
+ingterface IVMRImageCompositor9 base=IUnknown id={4a5c89eb-df51-4654-ac2a-e48e02bbabf6} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func InitCompositionDevice
+    HRESULT
+    pD3DDevice IUnknown*
+
+  func TermCompositionDevice
+    HRESULT
+    pD3DDevice IUnknown*
+
+  func SetStreamMediaType
+    HRESULT
+    dwStrmID DWORD
+    pmt AM_MEDIA_TYPE*
+    fTexture BOOL
+
+  func CompositeImage
+    HRESULT
+    pD3DDevice IUnknown*
+    pddsRenderTarget IDirect3DSurface9*
+    pmtRenderTarget AM_MEDIA_TYPE*
+    rtStart REFERENCE_TIME
+    rtEnd REFERENCE_TIME
+    dwClrBkGnd D3DCOLOR
+    pVideoStreamInfo VMR9VideoStreamInfo*
+    cStreams UINT
+
+

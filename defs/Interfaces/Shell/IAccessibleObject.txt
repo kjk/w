@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAccessibleObject base=IUnknown id={95A391C5-9ED4-4c28-8401-AB9E06719E11} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetAccessibleName
+    HRESULT
+    pszName LPCWSTR
+
+

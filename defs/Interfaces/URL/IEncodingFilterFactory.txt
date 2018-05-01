@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IEncodingFilterFactory base=IUnknown id={70bdde00-c18e-11d0-a9ce-006097942311} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func FindBestFilter
+    HRESULT
+    pwzCodeIn LPCWSTR
+    pwzCodeOut LPCWSTR
+    info DATAINFO
+    ppDF IDataFilter**
+
+  func GetDefaultFilter
+    HRESULT
+    pwzCodeIn LPCWSTR
+    pwzCodeOut LPCWSTR
+    ppDF IDataFilter**
+
+

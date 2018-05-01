@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+
+ingterface ICustomDestinationList base=IUnknown id={6332debf-87b5-4670-90c0-5e57b408a49e} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetAppID
+    HRESULT
+    pszAppID LPCWSTR
+
+  func BeginList
+    HRESULT
+    pcMinSlots UINT*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func AppendCategory
+    HRESULT
+    pszCategory LPCWSTR
+    poa IObjectArray*
+
+  func AppendKnownCategory
+    HRESULT
+    category KNOWNDESTCATEGORY
+
+  func AddUserTasks
+    HRESULT
+    poa IObjectArray*
+
+  func CommitList
+    HRESULT
+
+  func GetRemovedDestinations
+    HRESULT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func DeleteList
+    HRESULT
+    pszAppID LPCWSTR
+
+  func AbortList
+    HRESULT
+
+

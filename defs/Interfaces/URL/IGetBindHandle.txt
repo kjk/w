@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IGetBindHandle base=IUnknown id={AF0FF408-129D-4b20-91F0-02BD23D88352} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetBindHandle
+    HRESULT
+    enumRequestedHandle BINDHANDLETYPES
+    pRetHandle HANDLE*
+
+

@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IStreamBuilder base=IUnknown id={56a868bf-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Render
+    HRESULT
+    ppinOut IPin*
+    pGraph IGraphBuilder*
+
+  func Backout
+    HRESULT
+    ppinOut IPin*
+    pGraph IGraphBuilder*
+
+

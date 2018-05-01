@@ -1,0 +1,13 @@
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+dll dxgi.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+func CreateDXGIFactory
+  HRESULT
+  riid REFIID
+  ppFactory void** interfaceId=riid
+
+func CreateDXGIFactory1
+  HRESULT
+  riid REFIID
+  ppFactory void** interfaceId=riid
+

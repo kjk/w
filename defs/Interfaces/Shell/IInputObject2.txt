@@ -1,0 +1,8 @@
+include Interfaces\Shell\IInputObject.txt
+
+ingterface IInputObject2 base=IInputObject id={6915C085-510B-44cd-94AF-28DFA56CF92B} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func TranslateAcceleratorGlobal
+    HRESULT
+    pMsg MSG*
+
+

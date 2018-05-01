@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMTimecodeReader base=IUnknown id={9B496CE1-811B-11cf-8C77-00AA006B6814} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetTCRMode
+    HRESULT
+    Param long
+    pValue long*
+
+  func SetTCRMode
+    HRESULT
+    Param long
+    Value long
+
+  func put_VITCLine
+    HRESULT
+    Line long
+
+  func get_VITCLine
+    HRESULT
+    pLine long*
+
+  func GetTimecode
+    HRESULT
+    pTimecodeSample PTIMECODE_SAMPLE
+
+

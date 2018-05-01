@@ -1,0 +1,19 @@
+include Headers\windows.h.txt
+
+dll Wlanui.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Wireless Networking/Native Wifi"
+enum WL_DISPLAY_PAGES UINT
+  WLConnectionPage 0
+  WLSecurityPage   1
+  WLAdvPage        2
+
+func WlanUIEditProfile
+  [ERROR_CODE]
+  dwClientVersion DWORD
+  wstrProfileName LPCWSTR
+  pInterfaceGuid GUID*
+  hWnd HWND
+  wlStartPage WL_DISPLAY_PAGES
+  pReserved PVOID
+  pWlanReasonCode PWLAN_REASON_CODE
+

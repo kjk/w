@@ -1,0 +1,10 @@
+include Interfaces\Shell\IDockingWindow.txt
+
+ingterface IDeskBand base=IDockingWindow id={EB0FE172-1A3A-11D0-89B3-00A0C90A90AC} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetBandInfo
+    HRESULT
+    dwBandID DWORD
+    dwViewMode DWORD
+    pdbi DESKBANDINFO*
+
+

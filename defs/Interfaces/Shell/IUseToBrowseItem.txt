@@ -1,0 +1,4 @@
+include Interfaces\Shell\IRelatedItem.txt
+
+ingterface IUseToBrowseItem base=IRelatedItem id={05edda5c-98a3-4717-8adb-c5e7da991eb1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+

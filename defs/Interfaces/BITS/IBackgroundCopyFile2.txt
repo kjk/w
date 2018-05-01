@@ -1,0 +1,13 @@
+include Interfaces\BITS\IBackgroundCopyFile.txt
+
+ingterface IBackgroundCopyFile2 base=IBackgroundCopyFile id={83e81b93-0873-474d-8a8c-f2018b1a939c} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func GetFileRanges
+    HRESULT
+    RangeCount DWORD*
+    Ranges BG_FILE_RANGE**
+
+  func SetRemoteName
+    HRESULT
+    Val LPCWSTR
+
+

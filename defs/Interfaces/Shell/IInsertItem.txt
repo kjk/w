@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInsertItem base=IUnknown id={D2B57227-3D23-4b95-93C0-492BD454C356} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func InsertItem
+    HRESULT
+    pidl PCUIDLIST_RELATIVE
+
+

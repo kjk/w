@@ -1,0 +1,8 @@
+include Interfaces\DirectX\9\IDirect3D9.txt
+
+dll d3d9.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+func Direct3DCreate9
+  success NotEqual=0
+  IDirect3D9*
+  SDKVersion UINT
+

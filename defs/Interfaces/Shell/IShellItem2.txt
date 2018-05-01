@@ -1,0 +1,75 @@
+include Interfaces\Shell\IShellItem.txt
+
+ingterface IShellItem2 base=IShellItem id={7e9fb0d3-919f-4307-ab2e-9b1860310c93} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetPropertyStore
+    HRESULT
+    flags GETPROPERTYSTOREFLAGS
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetPropertyStoreWithCreateObject
+    HRESULT
+    flags GETPROPERTYSTOREFLAGS
+    punkCreateObject IUnknown*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetPropertyStoreForKeys
+    HRESULT
+    rgKeys "const PROPERTYKEY*" count=cKeys
+    cKeys UINT
+    flags GETPROPERTYSTOREFLAGS
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetPropertyDescriptionList
+    HRESULT
+    keyType REFPROPERTYKEY
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func Update
+    HRESULT
+    pbc IBindCtx*
+
+  func GetProperty
+    HRESULT
+    key REFPROPERTYKEY
+    ppropvar PROPVARIANT*
+
+  func GetCLSID
+    HRESULT
+    key REFPROPERTYKEY
+    pclsid CLSID*
+
+  func GetFileTime
+    HRESULT
+    key REFPROPERTYKEY
+    pft FILETIME*
+
+  func GetInt32
+    HRESULT
+    key REFPROPERTYKEY
+    pi int*
+
+  func GetString
+    HRESULT
+    key REFPROPERTYKEY
+    ppsz LPWSTR*
+
+  func GetUInt32
+    HRESULT
+    key REFPROPERTYKEY
+    pui ULONG*
+
+  func GetUInt64
+    HRESULT
+    key REFPROPERTYKEY
+    pull ULONGLONG*
+
+  func GetBool
+    HRESULT
+    key REFPROPERTYKEY
+    pf BOOL*
+
+

@@ -1,0 +1,574 @@
+include Headers\windows.h.txt
+
+dll hid.dll callingConvention=STDCALL onlineHelp=MSDN
+category "Windows Driver Kit/Device and Driver Technologies/Human Input Devices"
+alias USAGE USHORT
+
+pointer PUSAGE USAGE
+
+pointer PHIDP_INSERT_SCANCODES LPVOID
+
+alias PHIDP_PREPARSED_DATA LPVOID
+
+pointer PHIDP_PREPARSED_DATA* PHIDP_PREPARSED_DATA
+
+alias PDRIVER_OBJECT LPVOID
+
+array "ULONG [10]" base=ULONG count=10
+
+array "USHORT [5]" base=USHORT count=5
+
+array "USHORT [17]" base=USHORT count=17
+
+enum [HIDP_STATUS] UINT displayHex display=NTSTATUS
+  success Equal=0x00110000
+  HIDP_STATUS_SUCCESS                 0x00110000
+  HIDP_STATUS_NULL                    0x80110001
+  HIDP_STATUS_INVALID_PREPARSED_DATA  0xc0110001
+  HIDP_STATUS_INVALID_REPORT_TYPE     0xc0110002
+  HIDP_STATUS_INVALID_REPORT_LENGTH   0xc0110003
+  HIDP_STATUS_USAGE_NOT_FOUND         0xc0110004
+  HIDP_STATUS_VALUE_OUT_OF_RANGE      0xc0110005
+  HIDP_STATUS_BAD_LOG_PHY_VALUES      0xc0110006
+  HIDP_STATUS_BUFFER_TOO_SMALL        0xc0110007
+  HIDP_STATUS_INTERNAL_ERROR          0xc0110008
+  HIDP_STATUS_I8042_TRANS_UNKNOWN     0xc0110009
+  HIDP_STATUS_INCOMPATIBLE_REPORT_ID  0xc011000a
+  HIDP_STATUS_NOT_VALUE_ARRAY         0xc011000b
+  HIDP_STATUS_IS_VALUE_ARRAY          0xc011000c
+  HIDP_STATUS_DATA_INDEX_NOT_FOUND    0xc011000d
+  HIDP_STATUS_DATA_INDEX_OUT_OF_RANGE 0xc011000e
+  HIDP_STATUS_BUTTON_NOT_PRESSED      0xc011000f
+  HIDP_STATUS_REPORT_DOES_NOT_EXIST   0xc0110010
+  HIDP_STATUS_NOT_IMPLEMENTED         0xc0110020
+
+enum HIDP_REPORT_TYPE UINT
+  HidP_Input   0
+  HidP_Output  1
+  HidP_Feature 2
+
+enum HIDP_KEYBOARD_DIRECTION UINT
+  HidP_Keyboard_Break 0
+  HidP_Keyboard_Make  1
+
+struct HIDD_ATTRIBUTES pack=4
+  Size ULONG
+  VendorID USHORT
+  ProductID USHORT
+  VersionNumber USHORT
+
+pointer PHIDD_ATTRIBUTES HIDD_ATTRIBUTES
+
+struct HIDP_LINK_COLLECTION_NODE pack=4
+  LinkUsage USAGE
+  LinkUsagePage USAGE
+  Parent USHORT
+  NumberOfChildren USHORT
+  NextSibling USHORT
+  FirstChild USHORT
+  Reserved ULONG
+  UserContext PVOID
+
+pointer PHIDP_LINK_COLLECTION_NODE HIDP_LINK_COLLECTION_NODE
+
+struct USAGE_AND_PAGE pack=4
+  Usage USAGE
+  UsagePage USAGE
+
+pointer PUSAGE_AND_PAGE USAGE_AND_PAGE
+
+struct HID_MINIDRIVER_REGISTRATION
+  Revision ULONG
+  DriverObject PDRIVER_OBJECT
+  RegistryPath PUNICODE_STRING
+  DeviceExtensionSize ULONG
+  DevicesArePolled BOOLEAN
+  Reserved "UCHAR [3]"
+
+pointer PHID_MINIDRIVER_REGISTRATION HID_MINIDRIVER_REGISTRATION
+
+struct HIDP_UNKNOWN_TOKEN pack=4
+  Token UCHAR
+  Reserved "UCHAR [3]"
+  BitField ULONG
+
+pointer PHIDP_UNKNOWN_TOKEN HIDP_UNKNOWN_TOKEN
+
+struct HIDP_EXTENDED_ATTRIBUTES pack=4
+  NumGlobalUnknowns UCHAR
+  Reserved "UCHAR [3]"
+  GlobalUnknowns PHIDP_UNKNOWN_TOKEN
+  Data "ULONG [1]"
+
+pointer PHIDP_EXTENDED_ATTRIBUTES HIDP_EXTENDED_ATTRIBUTES
+
+union [HIDP_DATA_u] pack=4 display=union
+  RawValue ULONG
+  On BOOLEAN
+
+struct HIDP_DATA pack=4
+  DataIndex USHORT
+  Reserved USHORT
+   [HIDP_DATA_u]
+
+pointer PHIDP_DATA HIDP_DATA
+
+struct HIDP_CAPS pack=4
+  Usage USAGE
+  UsagePage USAGE
+  InputReportByteLength USHORT
+  OutputReportByteLength USHORT
+  FeatureReportByteLength USHORT
+  Reserved "USHORT [17]"
+  NumberLinkCollectionNodes USHORT
+  NumberInputButtonCaps USHORT
+  NumberInputValueCaps USHORT
+  NumberInputDataIndices USHORT
+  NumberOutputButtonCaps USHORT
+  NumberOutputValueCaps USHORT
+  NumberOutputDataIndices USHORT
+  NumberFeatureButtonCaps USHORT
+  NumberFeatureValueCaps USHORT
+  NumberFeatureDataIndices USHORT
+
+pointer PHIDP_CAPS HIDP_CAPS
+
+struct [HIDP_BUTTON_CAPS_s1] pack=4 display=struct
+  UsageMin USAGE
+  UsageMax USAGE
+  StringMin USHORT
+  StringMax USHORT
+  DesignatorMin USHORT
+  DesignatorMax USHORT
+  DataIndexMin USHORT
+  DataIndexMax USHORT
+
+struct [HIDP_BUTTON_CAPS_s2] pack=4 display=struct
+  Usage USAGE
+  Reserved1 USAGE
+  StringIndex USHORT
+  Reserved2 USHORT
+  DesignatorIndex USHORT
+  Reserved3 USHORT
+  DataIndex USHORT
+  Reserved4 USHORT
+
+union [HIDP_BUTTON_CAPS_u] pack=4 display=union
+  Range [HIDP_BUTTON_CAPS_s1]
+  NotRange [HIDP_BUTTON_CAPS_s2]
+
+struct HIDP_BUTTON_CAPS pack=4
+  UsagePage USAGE
+  ReportID UCHAR
+  IsAlias BOOLEAN
+  BitField USHORT
+  LinkCollection USHORT
+  LinkUsage USAGE
+  LinkUsagePage USAGE
+  IsRange BOOLEAN
+  IsStringRange BOOLEAN
+  IsDesignatorRange BOOLEAN
+  IsAbsolute BOOLEAN
+  Reserved "ULONG [10]"
+   [HIDP_BUTTON_CAPS_u]
+
+pointer PHIDP_BUTTON_CAPS HIDP_BUTTON_CAPS
+
+struct [HIDP_VALUE_CAPS_s1] pack=4 display=struct
+  UsageMin USAGE
+  UsageMax USAGE
+  StringMin USHORT
+  StringMax USHORT
+  DesignatorMin USHORT
+  DesignatorMax USHORT
+  DataIndexMin USHORT
+  DataIndexMax USHORT
+
+struct [HIDP_VALUE_CAPS_s2] pack=4 display=struct
+  Usage USAGE
+  Reserved1 USAGE
+  StringIndex USHORT
+  Reserved2 USHORT
+  DesignatorIndex USHORT
+  Reserved3 USHORT
+  DataIndex USHORT
+  Reserved4 USHORT
+
+union [HIDP_VALUE_CAPS_u] pack=4 display=union
+  Range [HIDP_VALUE_CAPS_s1]
+  NotRange [HIDP_VALUE_CAPS_s2]
+
+struct HIDP_VALUE_CAPS pack=4
+  UsagePage USAGE
+  ReportID UCHAR
+  IsAlias BOOLEAN
+  BitField USHORT
+  LinkCollection USHORT
+  LinkUsage USAGE
+  LinkUsagePage USAGE
+  IsRange BOOLEAN
+  IsStringRange BOOLEAN
+  IsDesignatorRange BOOLEAN
+  IsAbsolute BOOLEAN
+  HasNull BOOLEAN
+  Reserved UCHAR
+  BitSize USHORT
+  ReportCount USHORT
+  Reserved2 "USHORT [5]"
+  UnitsExp ULONG
+  Units ULONG
+  LogicalMin LONG
+  LogicalMax LONG
+  PhysicalMin LONG
+  PhysicalMax LONG
+   [HIDP_VALUE_CAPS_u]
+
+pointer PHIDP_VALUE_CAPS HIDP_VALUE_CAPS
+
+struct HIDP_KEYBOARD_MODIFIER_STATE pack=4
+  ul ULONG
+
+pointer PHIDP_KEYBOARD_MODIFIER_STATE HIDP_KEYBOARD_MODIFIER_STATE
+
+struct HIDD_CONFIGURATION pack=4
+  cookie PVOID
+  size ULONG
+  RingBufferSize ULONG
+
+pointer PHIDD_CONFIGURATION HIDD_CONFIGURATION
+
+func HidD_FlushQueue
+  BOOLEAN
+  HidDeviceObject HANDLE
+
+func HidD_FreePreparsedData
+  BOOLEAN
+  PreparsedData PHIDP_PREPARSED_DATA
+
+func HidD_GetAttributes
+  BOOLEAN
+  HidDeviceObject HANDLE
+  Attributes PHIDD_ATTRIBUTES
+
+func HidD_GetFeature
+  BOOLEAN
+  HidDeviceObject HANDLE
+  ReportBuffer PVOID length=ReportBufferLength
+  ReportBufferLength ULONG
+
+func HidD_GetHidGuid
+  void
+  HidGuid LPGUID
+
+func HidD_GetIndexedString
+  BOOLEAN
+  HidDeviceObject HANDLE
+  StringIndex ULONG
+  Buffer PVOID length=BufferLength
+  BufferLength ULONG
+
+func HidD_GetInputReport
+  BOOLEAN
+  HidDeviceObject HANDLE
+  ReportBuffer PVOID length=ReportBufferLength
+  ReportBufferLength ULONG
+
+func HidD_GetManufacturerString
+  BOOLEAN
+  HidDeviceObject HANDLE
+  Buffer PVOID length=BufferLength
+  BufferLength ULONG
+
+func HidD_GetNumInputBuffers
+  BOOLEAN
+  HidDeviceObject HANDLE
+  NumberBuffers PULONG
+
+func HidD_GetPhysicalDescriptor
+  BOOLEAN
+  HidDeviceObject HANDLE
+  Buffer PVOID length=BufferLength
+  BufferLength ULONG
+
+func HidD_GetPreparsedData
+  BOOLEAN
+  HidDeviceObject HANDLE
+  PreparsedData PHIDP_PREPARSED_DATA*
+
+func HidD_GetProductString
+  BOOLEAN
+  HidDeviceObject HANDLE
+  Buffer PVOID length=BufferLength
+  BufferLength ULONG
+
+func HidD_GetSerialNumberString
+  BOOLEAN
+  HidDeviceObject HANDLE
+  Buffer PVOID length=BufferLength
+  BufferLength ULONG
+
+func HidD_SetFeature
+  BOOLEAN
+  HidDeviceObject HANDLE
+  ReportBuffer PVOID length=ReportBufferLength
+  ReportBufferLength ULONG
+
+func HidD_SetNumInputBuffers
+  BOOLEAN
+  HidDeviceObject HANDLE
+  NumberBuffers ULONG
+
+func HidD_SetOutputReport
+  BOOLEAN
+  HidDeviceObject HANDLE
+  ReportBuffer PVOID length=ReportBufferLength
+  ReportBufferLength ULONG
+
+func HidP_GetButtonCaps
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  ButtonCaps PHIDP_BUTTON_CAPS
+  ButtonCapsLength PUSHORT
+  PreparsedData PHIDP_PREPARSED_DATA
+
+func HidP_GetCaps
+  [HIDP_STATUS]
+  PreparsedData PHIDP_PREPARSED_DATA
+  Capabilities PHIDP_CAPS
+
+func HidP_GetData
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  DataList PHIDP_DATA
+  DataLength PULONG
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_GetExtendedAttributes
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  DataIndex USHORT
+  PreparsedData PHIDP_PREPARSED_DATA
+  Attributes PHIDP_EXTENDED_ATTRIBUTES
+  LengthAttributes PULONG
+
+func HidP_GetLinkCollectionNodes
+  [HIDP_STATUS]
+  LinkCollectionNodes PHIDP_LINK_COLLECTION_NODE
+  LinkCollectionNodesLength PULONG
+  PreparsedData PHIDP_PREPARSED_DATA
+
+func HidP_GetScaledUsageValue
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  LinkCollection USHORT
+  Usage USAGE
+  UsageValue PLONG
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_GetSpecificButtonCaps
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  LinkCollection USHORT
+  Usage USAGE
+  ButtonCaps PHIDP_BUTTON_CAPS
+  ButtonCapsLength PUSHORT
+  PreparsedData PHIDP_PREPARSED_DATA
+
+func HidP_GetSpecificValueCaps
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  LinkCollection USHORT
+  Usage USAGE
+  ValueCaps PHIDP_VALUE_CAPS
+  ValueCapsLength PUSHORT
+  PreparsedData PHIDP_PREPARSED_DATA
+
+func HidP_GetUsages
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  LinkCollection USHORT
+  UsageList PUSAGE
+  UsageLength PULONG
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_GetUsagesEx
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  LinkCollection USHORT
+  ButtonList PUSAGE_AND_PAGE
+  UsageLength ULONG*
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_GetUsageValue
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  LinkCollection USHORT
+  Usage USAGE
+  UsageValue PULONG
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_GetUsageValueArray
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  LinkCollection USHORT
+  Usage USAGE
+  UsageValue PCHAR
+  UsageValueByteLength USHORT
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_GetValueCaps
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  ValueCaps PHIDP_VALUE_CAPS
+  ValueCapsLength PUSHORT
+  PreparsedData PHIDP_PREPARSED_DATA
+
+func HidP_InitializeReportForID
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  ReportID UCHAR
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_IsSameUsageAndPage
+  BOOLEAN
+  u1 USAGE_AND_PAGE
+  u2 USAGE_AND_PAGE
+
+func HidP_MaxDataListLength
+  success NotEqual=0
+  ULONG
+  ReportType HIDP_REPORT_TYPE
+  PreparsedData PHIDP_PREPARSED_DATA
+
+func HidP_MaxUsageListLength
+  success NotEqual=0
+  ULONG
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  PreparsedData PHIDP_PREPARSED_DATA
+
+func HidP_SetData
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  DataList PHIDP_DATA
+  DataLength PULONG
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_SetScaledUsageValue
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  LinkCollection USHORT
+  Usage USAGE
+  UsageValue LONG
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_SetUsages
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  LinkCollection USHORT
+  UsageList PUSAGE
+  UsageLength PULONG
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_SetUsageValue
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  LinkCollection USHORT
+  Usage USAGE
+  UsageValue ULONG
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_SetUsageValueArray
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  LinkCollection USHORT
+  Usage USAGE
+  UsageValue PCHAR
+  UsageValueByteLength USHORT
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_TranslateUsagesToI8042ScanCodes
+  [HIDP_STATUS]
+  ChangedUsageList PUSAGE
+  UsageListLength ULONG
+  KeyAction HIDP_KEYBOARD_DIRECTION
+  ModifierState PHIDP_KEYBOARD_MODIFIER_STATE
+  InsertCodesProcedure PHIDP_INSERT_SCANCODES
+  InsertCodesContext PVOID
+
+func HidP_UnsetUsages
+  [HIDP_STATUS]
+  ReportType HIDP_REPORT_TYPE
+  UsagePage USAGE
+  LinkCollection USHORT
+  UsageList PUSAGE
+  UsageLength PULONG
+  PreparsedData PHIDP_PREPARSED_DATA
+  Report PCHAR
+  ReportLength ULONG
+
+func HidP_UsageListDifference
+  [HIDP_STATUS]
+  PreviousUsageList PUSAGE
+  CurrentUsageList PUSAGE
+  BreakUsageList PUSAGE
+  MakeUsageList PUSAGE
+  UsageListLength ULONG
+
+func HidD_GetConfiguration
+  BOOLEAN
+  HidDeviceObject HANDLE
+  Configuration PHIDD_CONFIGURATION
+  ConfigurationLength ULONG
+
+func HidD_SetConfiguration
+  BOOLEAN
+  HidDeviceObject HANDLE
+  Configuration PHIDD_CONFIGURATION
+  ConfigurationLength ULONG
+
+func HidD_GetMsGenreDescriptor
+  BOOLEAN
+  HidDeviceObject HANDLE
+  Buffer PVOID length=BufferLength
+  BufferLength ULONG
+
+func HidD_Hello
+  ULONG
+  Buffer PCHAR
+  BufferLength ULONG
+

@@ -1,0 +1,9 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICDevelopRawNotificationCallback base=IUnknown id={95c75a6e-3e8c-4ec2-85a8-aebcc551e59b} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func Notify
+    [WIC_HRESULT]
+    NotificationMask UINT
+
+

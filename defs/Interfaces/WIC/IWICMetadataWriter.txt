@@ -1,0 +1,26 @@
+include Interfaces\WIC\IWICMetadataReader.txt
+
+ingterface IWICMetadataWriter base=IWICMetadataReader id={F7836E16-3BE0-470B-86BB-160D0AECD7DE} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func SetValue
+    [WIC_HRESULT]
+    pvarSchema "const PROPVARIANT*"
+    pvarId "const PROPVARIANT*"
+    pvarValue "const PROPVARIANT*"
+
+  func SetValueByIndex
+    [WIC_HRESULT]
+    nIndex UINT
+    pvarSchema "const PROPVARIANT*"
+    pvarId "const PROPVARIANT*"
+    pvarValue "const PROPVARIANT*"
+
+  func RemoveValue
+    [WIC_HRESULT]
+    pvarSchema "const PROPVARIANT*"
+    pvarId "const PROPVARIANT*"
+
+  func RemoveValueByIndex
+    [WIC_HRESULT]
+    nIndex UINT
+
+

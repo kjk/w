@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOleClientSite base=IUnknown id={00000118-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func SaveObject
+    HRESULT
+
+  func GetMoniker
+    HRESULT
+    dwAssign DWORD
+    dwWhichMoniker DWORD
+    ppmk IMoniker**
+
+  func GetContainer
+    HRESULT
+    ppContainer IOleContainer**
+
+  func ShowObject
+    HRESULT
+
+  func OnShowWindow
+    HRESULT
+    fShow BOOL
+
+  func RequestNewObjectLayout
+    HRESULT
+
+

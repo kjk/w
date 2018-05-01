@@ -1,0 +1,59 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrSyncCallback base=IUnknown id={884ccd87-b139-4937-a4ba-4f8e19513fbe} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func ReportProgress
+    HRESULT
+    pszItemID LPCWSTR
+    pszProgressText LPCWSTR
+    nStatus SYNCMGR_PROGRESS_STATUS
+    uCurrentStep ULONG
+    uMaxStep ULONG
+    pnCancelRequest SYNCMGR_CANCEL_REQUEST*
+
+  func SetHandlerProgressText
+    HRESULT
+    pszProgressText LPCWSTR
+    pnCancelRequest SYNCMGR_CANCEL_REQUEST*
+
+  func ReportEvent
+    HRESULT
+    pszItemID LPCWSTR
+    nLevel SYNCMGR_EVENT_LEVEL
+    nFlags SYNCMGR_EVENT_FLAGS
+    pszName LPCWSTR
+    pszDescription LPCWSTR
+    pszLinkText LPCWSTR
+    pszLinkReference LPCWSTR
+    pszContext LPCWSTR
+    pguidEventID GUID*
+
+  func CanContinue
+    HRESULT
+    pszItemID LPCWSTR
+
+  func QueryForAdditionalItems
+    HRESULT
+    ppenumItemIDs IEnumString**
+    ppenumPunks IEnumUnknown**
+
+  func AddItemToSession
+    HRESULT
+    pszItemID LPCWSTR
+
+  func AddIUnknownToSession
+    HRESULT
+    punk IUnknown*
+
+  func ProposeItem
+    HRESULT
+    pNewItem ISyncMgrSyncItem*
+
+  func CommitItem
+    HRESULT
+    pszItemID LPCWSTR
+
+  func ReportManualSync
+    HRESULT
+
+

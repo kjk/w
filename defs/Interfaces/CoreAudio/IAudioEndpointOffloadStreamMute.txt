@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioEndpointOffloadStreamMute base=IUnknown id={DFE21355-5EC2-40E0-8D6B-710AC3C00249} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Endpoint Volume"
+  func SetMute
+    [AUDCLNT_HRESULT]
+    bMuted BOOL
+
+  func GetMute
+    [AUDCLNT_HRESULT]
+    pbMuted BOOL*
+
+

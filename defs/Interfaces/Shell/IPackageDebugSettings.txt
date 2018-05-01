@@ -1,0 +1,73 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPackageDebugSettings base=IUnknown id={F27C3930-8029-4AD1-94E3-3DBA417810C1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func EnableDebugging
+    HRESULT
+    packageFullName LPCWSTR
+    debuggerCommandLine LPCWSTR
+    environment PZZWSTR
+
+  func DisableDebugging
+    HRESULT
+    packageFullName LPCWSTR
+
+  func Suspend
+    HRESULT
+    packageFullName LPCWSTR
+
+  func Resume
+    HRESULT
+    packageFullName LPCWSTR
+
+  func TerminateAllProcesses
+    HRESULT
+    packageFullName LPCWSTR
+
+  func SetTargetSessionId
+    HRESULT
+    sessionId ULONG
+
+  func EnumerateBackgroundTasks
+    HRESULT
+    packageFullName LPCWSTR
+    taskCount ULONG*
+    taskIds LPCGUID* derefPostCount=taskCount
+    taskNames LPCWSTR** derefPostCount=taskCount
+
+  func ActivateBackgroundTask
+    HRESULT
+    taskId LPCGUID
+
+  func StartServicing
+    HRESULT
+    packageFullName LPCWSTR
+
+  func StopServicing
+    HRESULT
+    packageFullName LPCWSTR
+
+  func StartSessionRedirection
+    HRESULT
+    packageFullName LPCWSTR
+    sessionId ULONG
+
+  func StopSessionRedirection
+    HRESULT
+    packageFullName LPCWSTR
+
+  func GetPackageExecutionState
+    HRESULT
+    packageFullName LPCWSTR
+    packageExecutionState PACKAGE_EXECUTION_STATE*
+
+  func RegisterForPackageStateChanges
+    HRESULT
+    packageFullName LPCWSTR
+    pPackageExecutionStateChangeNotification IPackageExecutionStateChangeNotification*
+    pdwCookie DWORD*
+
+  func UnregisterForPackageStateChanges
+    HRESULT
+    dwCookie DWORD
+
+

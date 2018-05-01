@@ -1,0 +1,35 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1SimplifiedGeometrySink base=IUnknown id={2cd9069e-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetFillMode
+    void
+    fillMode D2D1_FILL_MODE
+
+  func SetSegmentFlags
+    void
+    vertexFlags D2D1_PATH_SEGMENT
+
+  func BeginFigure
+    void
+    startPoint D2D1_POINT_2F
+    figureBegin D2D1_FIGURE_BEGIN
+
+  func AddLines
+    void
+    points "CONST D2D1_POINT_2F*" count=pointsCount
+    pointsCount UINT32
+
+  func AddBeziers
+    void
+    beziers "CONST D2D1_BEZIER_SEGMENT*" count=beziersCount
+    beziersCount UINT32
+
+  func EndFigure
+    void
+    figureEnd D2D1_FIGURE_END
+
+  func Close
+    [D2D_HRESULT]
+
+

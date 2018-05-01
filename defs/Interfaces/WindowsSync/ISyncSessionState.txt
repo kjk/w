@@ -1,0 +1,40 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncSessionState base=IUnknown id={b8a940fe-9f01-483b-9434-c37d361225d9} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func IsCanceled
+    HRESULT
+    pfIsCanceled BOOL*
+
+  func GetInfoForChangeApplication
+    HRESULT
+    pbChangeApplierInfo BYTE*
+    pcbChangeApplierInfo DWORD*
+
+  func LoadInfoFromChangeApplication
+    HRESULT
+    pbChangeApplierInfo "const BYTE*"
+    cbChangeApplierInfo DWORD
+
+  func GetForgottenKnowledgeRecoveryRangeStart
+    HRESULT
+    pbRangeStart BYTE*
+    pcbRangeStart DWORD*
+
+  func GetForgottenKnowledgeRecoveryRangeEnd
+    HRESULT
+    pbRangeEnd BYTE*
+    pcbRangeEnd DWORD*
+
+  func SetForgottenKnowledgeRecoveryRange
+    HRESULT
+    pRange "const SYNC_RANGE*"
+
+  func OnProgress
+    HRESULT
+    provider SYNC_PROVIDER_ROLE
+    syncStage SYNC_PROGRESS_STAGE
+    dwCompletedWork DWORD
+    dwTotalWork DWORD
+
+

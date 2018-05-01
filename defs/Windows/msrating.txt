@@ -1,0 +1,57 @@
+include Headers\windows.h.txt
+
+dll msrating.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Web Development/Internet Explorer Development/Security and Privacy/Internet Ratings"
+func RatingAccessDeniedDialog bothCharset nameA=RatingAccessDeniedDialog
+  HRESULT
+  hDlg HWND
+  pszUsername LPCTSTR
+  pszContentDescription LPCTSTR
+  pRatingDetails VOID*
+
+func RatingAccessDeniedDialog2 bothCharset nameA=RatingAccessDeniedDialog2
+  HRESULT
+  hDlg HWND
+  pszUsername LPCSTR
+  pRatingDetails VOID*
+
+func RatingCheckUserAccess bothCharset nameA=RatingCheckUserAccess
+  HRESULT
+  pszUsername LPCTSTR
+  pszURL LPCTSTR
+  pszRatingInfo LPCTSTR
+  pData LPBYTE length=cbData
+  cbData DWORD
+  ppRatingDetails VOID**
+
+func RatingEnable bothCharset nameA=RatingEnable
+  HRESULT
+  hwndParent HWND
+  pszUsername LPCSTR
+  fEnable BOOL
+
+func RatingEnabledQuery
+  HRESULT
+
+func RatingFreeDetails
+  HRESULT
+  pRatingDetails VOID*
+
+func RatingObtainCancel
+  HRESULT
+  hRatingObtainQuery HANDLE
+
+func RatingObtainQuery bothCharset nameA=RatingObtainQuery
+  HRESULT
+  pszTargetUrl LPCTSTR
+  dwUserData DWORD
+  dwUserData DWORD
+  hr HRESULT
+  pszRating LPCTSTR
+  phRatingObtainQuery HANDLE*
+
+func RatingSetupUI bothCharset nameA=RatingSetupUI
+  HRESULT
+  hDlg HWND
+  pszUsername LPCSTR
+

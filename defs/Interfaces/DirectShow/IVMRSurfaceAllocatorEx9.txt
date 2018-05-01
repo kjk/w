@@ -1,0 +1,12 @@
+include Interfaces\DirectShow\IVMRSurfaceAllocator9.txt
+
+ingterface IVMRSurfaceAllocatorEx9 base=IVMRSurfaceAllocator9 id={6de9a68a-a928-4522-bf57-655ae3866456} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetSurfaceEx
+    HRESULT
+    dwUserID DWORD_PTR
+    SurfaceIndex DWORD
+    SurfaceFlags DWORD
+    lplpSurface IDirect3DSurface9**
+    lprcDst RECT*
+
+

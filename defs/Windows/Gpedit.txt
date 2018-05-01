@@ -1,0 +1,63 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+
+dll Gpedit.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "System Administration/Group Policy"
+enum GROUP_POLICY_OBJECT_TYPE UINT
+  GPOTypeLocal      0
+  GPOTypeRemote     1
+  GPOTypeDS         2
+  GPOTypeLocalUser  3
+  GPOTypeLocalGroup 4
+
+enum GROUP_POLICY_HINT_TYPE UINT
+  GPHintUnknown            0
+  GPHintMachine            1
+  GPHintSite               2
+  GPHintDomain             3
+  GPHintOrganizationalUnit 4
+
+struct GPOBROWSEINFO
+  dwSize DWORD
+  dwFlags DWORD
+  hwndOwner HWND
+  lpTitle LPOLESTR
+  lpInitialOU LPOLESTR
+  lpDSPath LPOLESTR
+  dwDSPathSize DWORD
+  lpName LPOLESTR
+  dwNameSize DWORD
+  gpoType GROUP_POLICY_OBJECT_TYPE
+  gpoHint GROUP_POLICY_HINT_TYPE
+
+pointer LPGPOBROWSEINFO GPOBROWSEINFO
+
+func BrowseForGPO
+  HRESULT
+  lpBrowseInfo LPGPOBROWSEINFO
+
+func CreateGPOLink
+  HRESULT
+  lpGPO LPOLESTR
+  lpContainer LPOLESTR
+  fHighPriority BOOL
+
+func DeleteAllGPOLinks
+  HRESULT
+  lpContainer LPOLESTR
+
+func DeleteGPOLink
+  HRESULT
+  lpGPO LPOLESTR
+  lpContainer LPOLESTR
+
+func ExportRSoPData
+  HRESULT
+  lpNameSpace LPOLESTR
+  lpFileName LPOLESTR
+
+func ImportRSoPData
+  HRESULT
+  lpNameSpace LPOLESTR
+  lpFileName LPOLESTR
+

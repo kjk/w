@@ -1,0 +1,685 @@
+include Headers\windows.h.txt
+include Headers\power.h.txt
+include Headers\registry.h.txt
+
+dll PowrProf.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "System Services/Power Management"
+alias PWRSCHEMESENUMPROC LPVOID
+
+array "BYTE [3]" base=BYTE count=3
+
+flag [POWER_ACTION] DWORD display=DWORD
+  POWER_ACTION_QUERY_ALLOWED     0x00000001
+  POWER_ACTION_UI_ALLOWED        0x00000002
+  POWER_ACTION_OVERRIDE_APPS     0x00000004
+  POWER_ACTION_PSEUDO_TRANSITION 0x08000000
+  POWER_ACTION_LIGHTEST_FIRST    0x10000000
+  POWER_ACTION_LOCK_CONSOLE      0x20000000
+  POWER_ACTION_DISABLE_WAKES     0x40000000
+  POWER_ACTION_CRITICAL          0x80000000
+
+flag [POWER_LEVEL] DWORD display=DWORD
+  POWER_LEVEL_USER_NOTIFY_TEXT      0x00000001
+  POWER_LEVEL_USER_NOTIFY_SOUND     0x00000002
+  POWER_LEVEL_USER_NOTIFY_EXEC      0x00000004
+  POWER_USER_NOTIFY_BUTTON          0x00000008
+  POWER_USER_NOTIFY_SHUTDOWN        0x00000010
+  POWER_USER_NOTIFY_FORCED_SHUTDOWN 0x00000020
+  POWER_FORCE_TRIGGER_RESET         0x80000000
+
+struct POWER_ACTION_POLICY
+  Action POWER_ACTION
+  Flags [POWER_ACTION]
+  EventCode [POWER_LEVEL]
+
+struct USER_POWER_POLICY
+  Revision ULONG
+  IdleAc POWER_ACTION_POLICY
+  IdleDc POWER_ACTION_POLICY
+  IdleTimeoutAc ULONG
+  IdleTimeoutDc ULONG
+  IdleSensitivityAc UCHAR
+  IdleSensitivityDc UCHAR
+  ThrottlePolicyAc UCHAR
+  ThrottlePolicyDc UCHAR
+  MaxSleepAc SYSTEM_POWER_STATE
+  MaxSleepDc SYSTEM_POWER_STATE
+  Reserved "ULONG [2]"
+  VideoTimeoutAc ULONG
+  VideoTimeoutDc ULONG
+  SpindownTimeoutAc ULONG
+  SpindownTimeoutDc ULONG
+  OptimizeForPowerAc BOOLEAN
+  OptimizeForPowerDc BOOLEAN
+  FanThrottleToleranceAc UCHAR
+  FanThrottleToleranceDc UCHAR
+  ForcedThrottleAc UCHAR
+  ForcedThrottleDc UCHAR
+
+struct MACHINE_POWER_POLICY
+  Revision ULONG
+  MinSleepAc SYSTEM_POWER_STATE
+  MinSleepDc SYSTEM_POWER_STATE
+  ReducedLatencySleepAc SYSTEM_POWER_STATE
+  ReducedLatencySleepDc SYSTEM_POWER_STATE
+  DozeTimeoutAc ULONG
+  DozeTimeoutDc ULONG
+  DozeS4TimeoutAc ULONG
+  DozeS4TimeoutDc ULONG
+  MinThrottleAc UCHAR
+  MinThrottleDc UCHAR
+  pad1 "UCHAR [2]"
+  OverThrottledAc POWER_ACTION_POLICY
+  OverThrottledDc POWER_ACTION_POLICY
+
+struct POWER_POLICY
+  user USER_POWER_POLICY
+  mach MACHINE_POWER_POLICY
+
+pointer PPOWER_POLICY POWER_POLICY
+
+struct SYSTEM_POWER_LEVEL
+  Enable BOOLEAN
+  Spare "BYTE [3]"
+  BatteryLevel DWORD
+  PowerPolicy POWER_ACTION_POLICY
+  MinSystemState SYSTEM_POWER_STATE
+
+array "SYSTEM_POWER_LEVEL [NUM_DISCHARGE_POLICIES]" base=SYSTEM_POWER_LEVEL count=4
+
+struct GLOBAL_USER_POWER_POLICY
+  Revision ULONG
+  PowerButtonAc POWER_ACTION_POLICY
+  PowerButtonDc POWER_ACTION_POLICY
+  SleepButtonAc POWER_ACTION_POLICY
+  SleepButtonDc POWER_ACTION_POLICY
+  LidCloseAc POWER_ACTION_POLICY
+  LidCloseDc POWER_ACTION_POLICY
+  DischargePolicy "SYSTEM_POWER_LEVEL [NUM_DISCHARGE_POLICIES]"
+  GlobalFlags ULONG
+
+struct GLOBAL_MACHINE_POWER_POLICY
+  Revision ULONG
+  LidOpenWakeAc SYSTEM_POWER_STATE
+  LidOpenWakeDc SYSTEM_POWER_STATE
+  BroadcastCapacityResolution ULONG
+
+struct GLOBAL_POWER_POLICY
+  user GLOBAL_USER_POWER_POLICY
+  mach GLOBAL_MACHINE_POWER_POLICY
+
+pointer PGLOBAL_POWER_POLICY GLOBAL_POWER_POLICY
+
+struct PROCESSOR_POWER_POLICY_INFO
+  TimeCheck DWORD
+  DemoteLimit DWORD
+  PromoteLimit DWORD
+  DemotePercent BYTE
+  PromotePercent BYTE
+  Spare "BYTE [2]"
+  Reserved DWORD
+
+array "PROCESSOR_POWER_POLICY_INFO [3]" base=PROCESSOR_POWER_POLICY_INFO count=3
+
+struct PROCESSOR_POWER_POLICY
+  Revision DWORD
+  DynamicThrottle BYTE
+  Spare "BYTE [3]"
+  Reserved DWORD
+  PolicyCount DWORD
+  Policy "PROCESSOR_POWER_POLICY_INFO [3]"
+
+struct MACHINE_PROCESSOR_POWER_POLICY
+  Revision ULONG
+  ProcessorPolicyAc PROCESSOR_POWER_POLICY
+  ProcessorPolicyDc PROCESSOR_POWER_POLICY
+
+pointer PMACHINE_PROCESSOR_POWER_POLICY MACHINE_PROCESSOR_POWER_POLICY
+
+struct BATTERY_REPORTING_SCALE
+  Granularity DWORD
+  Capacity DWORD
+
+array "BATTERY_REPORTING_SCALE [3]" base=BATTERY_REPORTING_SCALE count=3
+
+struct SYSTEM_POWER_CAPABILITIES
+  PowerButtonPresent BOOLEAN
+  SleepButtonPresent BOOLEAN
+  LidPresent BOOLEAN
+  SystemS1 BOOLEAN
+  SystemS2 BOOLEAN
+  SystemS3 BOOLEAN
+  SystemS4 BOOLEAN
+  SystemS5 BOOLEAN
+  HiberFilePresent BOOLEAN
+  FullWake BOOLEAN
+  VideoDimPresent BOOLEAN
+  ApmPresent BOOLEAN
+  UpsPresent BOOLEAN
+  ThermalControl BOOLEAN
+  ProcessorThrottle BOOLEAN
+  ProcessorMinThrottle BYTE
+  ProcessorMaxThrottle BYTE
+  FastSystemS4 BOOLEAN
+  Hiberboot BOOLEAN
+  WakeAlarmPresent BOOLEAN
+  AoAc BOOLEAN
+  DiskSpinDown BOOLEAN
+  spare3 "BYTE [8]"
+  SystemBatteriesPresent BOOLEAN
+  BatteriesAreShortTerm BOOLEAN
+  BatteryScale "BATTERY_REPORTING_SCALE [3]"
+  AcOnLineWake SYSTEM_POWER_STATE
+  SoftLidWake SYSTEM_POWER_STATE
+  RtcWake SYSTEM_POWER_STATE
+  MinDeviceWakeState SYSTEM_POWER_STATE
+  DefaultLowLatencyWake SYSTEM_POWER_STATE
+
+pointer PSYSTEM_POWER_CAPABILITIES SYSTEM_POWER_CAPABILITIES
+
+enum POWER_PLATFORM_ROLE UINT
+  PlatformRoleUnspecified       0
+  PlatformRoleDesktop           1
+  PlatformRoleMobile            2
+  PlatformRoleWorkstation       3
+  PlatformRoleEnterpriseServer  4
+  PlatformRoleSOHOServer        5
+  PlatformRoleAppliancePC       6
+  PlatformRolePerformanceServer 7
+  PlatformRoleSlate             8
+
+enum [POWER_PLATFORM_ROLE_VERSION] ULONG display=ULONG
+  POWER_PLATFORM_ROLE_V1 0x00000001
+  POWER_PLATFORM_ROLE_V2 0x00000002
+
+flag [DEVICEPOWER_FLAGS] ULONG display=ULONG
+  DEVICEPOWER_SET_WAKEENABLED   0x00000001
+  DEVICEPOWER_CLEAR_WAKEENABLED 0x00000002
+
+func CallNtPowerInformation
+  NTSTATUS
+  InformationLevel POWER_INFORMATION_LEVEL
+  lpInputBuffer PVOID length=nInputBufferSize
+  nInputBufferSize ULONG
+  lpOutputBuffer PVOID postLength=nOutputBufferSize
+  nOutputBufferSize ULONG
+
+func DevicePowerClose
+  BOOLEAN
+
+func DevicePowerEnumDevices
+  BOOLEAN
+  QueryIndex ULONG
+  QueryInterpretationFlags ULONG
+  QueryFlags ULONG
+  pReturnBuffer PBYTE
+  pBufferSize PULONG
+
+func DevicePowerOpen
+  BOOLEAN
+  Flags ULONG
+
+func DevicePowerSetDeviceState
+  success NotEqual=0
+  DWORD
+  DeviceDescription LPCWSTR
+  SetFlags [DEVICEPOWER_FLAGS]
+  SetData PCVOID
+
+func GetCurrentPowerPolicies
+  BOOLEAN
+  pGlobalPowerPolicy PGLOBAL_POWER_POLICY
+  pPowerPolicy PPOWER_POLICY
+
+func PowerCanRestoreIndividualDefaultPowerScheme
+  [ERROR_CODE]
+  SchemeGuid "const GUID*"
+
+func PowerCreatePossibleSetting
+  [ERROR_CODE]
+  RootSystemPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  PossibleSettingIndex ULONG
+
+func PowerCreateSetting
+  [ERROR_CODE]
+  RootSystemPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+
+func PowerDeleteScheme
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+
+func PowerDeterminePlatformRole
+  POWER_PLATFORM_ROLE
+
+func PowerDuplicateScheme
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SourceSchemeGuid "const GUID*"
+  DestinationSchemeGuid GUID**
+
+func PowerEnumerate
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  AccessFlags POWER_DATA_ACCESSOR
+  Index ULONG
+  Buffer UCHAR* postLength=BufferSize
+  BufferSize DWORD*
+
+func PowerImportPowerScheme
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  ImportFileNamePath LPCWSTR
+  DestinationSchemeGuid GUID**
+
+func PowerIsSettingRangeDefined
+  BOOLEAN
+  SubKeyGuid "const GUID*"
+  SettingGuid "const GUID*"
+
+func PowerReadACDefaultIndex
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemePersonalityGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  AcDefaultIndex LPDWORD
+
+func PowerReadACValue
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Type [RegType-PULONG]
+  Buffer LPBYTE postLength=BufferSize
+  BufferSize LPDWORD
+
+func PowerReadACValueIndex
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  AcValueIndex LPDWORD
+
+func PowerReadDCDefaultIndex
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemePersonalityGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  DcDefaultIndex LPDWORD
+
+func PowerReadDCValue
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Type [RegType-PULONG]
+  Buffer PUCHAR postLength=BufferSize
+  BufferSize LPDWORD
+
+func PowerReadDCValueIndex
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  DcValueIndex LPDWORD
+
+func PowerReadDescription
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Buffer LPWSTR display=PUCHAR
+  BufferSize LPDWORD
+
+func PowerReadFriendlyName
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Buffer LPWSTR display=PUCHAR
+  BufferSize LPDWORD
+
+func PowerReadIconResourceSpecifier
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Buffer PUCHAR postLength=BufferSize
+  BufferSize LPDWORD
+
+func PowerReadPossibleDescription
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  PossibleSettingIndex ULONG
+  Buffer PUCHAR
+  BufferSize LPDWORD
+
+func PowerReadPossibleFriendlyName
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  PossibleSettingIndex ULONG
+  Buffer PUCHAR
+  BufferSize LPDWORD
+
+func PowerReadPossibleValue
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Type [RegType-PULONG]
+  PossibleSettingIndex ULONG
+  Buffer PUCHAR postLength=BufferSize
+  BufferSize LPDWORD
+
+func PowerReadSettingAttributes
+  [ERROR_CODE]
+  SubGroupGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+
+func PowerReadValueIncrement
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  ValueIncrement LPDWORD
+
+func PowerReadValueMax
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  ValueMaximum LPDWORD
+
+func PowerReadValueMin
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  ValueMinimum LPDWORD
+
+func PowerReadValueUnitsSpecifier
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Buffer LPWSTR display=UCHAR*
+  BufferSize LPDWORD
+
+func PowerRemovePowerSetting
+  [ERROR_CODE]
+  PowerSettingSubKeyGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+
+func PowerReplaceDefaultPowerSchemes
+  [ERROR_CODE]
+
+func PowerRestoreDefaultPowerSchemes
+  [ERROR_CODE]
+
+func PowerRestoreIndividualDefaultPowerScheme
+  [ERROR_CODE]
+  SchemeGuid "const GUID*"
+
+func PowerSetActiveScheme
+  [ERROR_CODE]
+  UserRootPowerKey HKEY
+  SchemeGuid "const GUID*"
+
+func PowerSettingAccessCheck
+  [ERROR_CODE]
+  AccessFlags POWER_DATA_ACCESSOR
+  PowerGuid "const GUID*"
+
+func PowerSettingAccessCheckEx
+  [ERROR_CODE]
+  AccessFlags POWER_DATA_ACCESSOR
+  PowerGuid "const GUID*"
+  AccessType REGSAM
+
+func PowerSettingRegisterNotification
+  [ERROR_CODE]
+  SettingGuid LPCGUID
+  Flags DWORD
+  Recipient HANDLE
+  RegistrationHandle PHPOWERNOTIFY
+
+func PowerSettingUnregisterNotification
+  [ERROR_CODE]
+  RegistrationHandle HPOWERNOTIFY
+
+func PowerWriteACDefaultIndex
+  [ERROR_CODE]
+  RootSystemPowerKey HKEY
+  SchemePersonalityGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  DefaultAcIndex DWORD
+
+func PowerWriteACValueIndex
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  AcValueIndex DWORD
+
+func PowerWriteDCDefaultIndex
+  [ERROR_CODE]
+  RootSystemPowerKey HKEY
+  SchemePersonalityGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  DefaultDcIndex DWORD
+
+func PowerWriteDCValueIndex
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  DcValueIndex DWORD
+
+func PowerWriteDescription
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Buffer UCHAR*
+  BufferSize DWORD
+
+func PowerWriteFriendlyName
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Buffer UCHAR*
+  BufferSize DWORD
+
+func PowerWriteIconResourceSpecifier
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SchemeGuid "const GUID*"
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Buffer UCHAR*
+  BufferSize DWORD
+
+func PowerWritePossibleDescription
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  PossibleSettingIndex ULONG
+  Buffer UCHAR*
+  BufferSize DWORD
+
+func PowerWritePossibleFriendlyName
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  PossibleSettingIndex ULONG
+  Buffer UCHAR*
+  BufferSize DWORD
+
+func PowerWritePossibleValue
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Type ULONG
+  PossibleSettingIndex ULONG
+  Buffer UCHAR*
+  BufferSize DWORD
+
+func PowerWriteSettingAttributes
+  [ERROR_CODE]
+  SubGroupGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Attributes DWORD
+
+func PowerWriteValueIncrement
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  ValueIncrement DWORD
+
+func PowerWriteValueMax
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  ValueMaximum DWORD
+
+func PowerWriteValueMin
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  ValueMinimum DWORD
+
+func PowerWriteValueUnitsSpecifier
+  [ERROR_CODE]
+  RootPowerKey HKEY
+  SubGroupOfPowerSettingsGuid "const GUID*"
+  PowerSettingGuid "const GUID*"
+  Buffer UCHAR*
+  BufferSize DWORD
+
+func CanUserWritePwrScheme
+  BOOLEAN
+
+func DeletePwrScheme
+  BOOLEAN
+  uiIndex UINT
+
+func EnumPwrSchemes
+  BOOLEAN
+  lpfnPwrSchemesEnumProc PWRSCHEMESENUMPROC
+  lParam LPARAM
+
+func GetActivePwrScheme
+  BOOLEAN
+  puiID PUINT
+
+func PowerGetActiveScheme
+  [ERROR_CODE]
+  UserRootPowerKey HKEY
+  ActivePolicyGuid GUID**
+
+func GetPwrDiskSpindownRange
+  BOOLEAN
+  RangeMax PUINT
+  RangeMin PUINT
+
+func IsPwrHibernateAllowed
+  BOOLEAN
+
+func GetPwrCapabilities
+  BOOLEAN
+  lpSystemPowerCapabilities PSYSTEM_POWER_CAPABILITIES
+
+func IsPwrShutdownAllowed
+  BOOLEAN
+
+func IsPwrSuspendAllowed
+  BOOLEAN
+
+func ReadGlobalPwrPolicy
+  BOOLEAN
+  pGlobalPowerPolicy PGLOBAL_POWER_POLICY
+
+func ReadProcessorPwrScheme
+  BOOLEAN
+  uiID UINT
+  pMachineProcessorPowerPolicy PMACHINE_PROCESSOR_POWER_POLICY
+
+func ReadPwrScheme
+  BOOLEAN
+  uiID UINT
+  pPowerPolicy PPOWER_POLICY
+
+func SetActivePwrScheme
+  BOOLEAN
+  uiID UINT
+  lpGlobalPowerPolicy PGLOBAL_POWER_POLICY
+  lpPowerPolicy PPOWER_POLICY
+
+func SetSuspendState
+  BOOLEAN
+  Hibernate BOOLEAN
+  ForceCritical BOOLEAN
+  DisableWakeEvent BOOLEAN
+
+func WriteGlobalPwrPolicy
+  BOOLEAN
+  pGlobalPowerPolicy PGLOBAL_POWER_POLICY
+
+func WriteProcessorPwrScheme
+  BOOLEAN
+  ID UINT
+  pMachineProcessorPowerPolicy PMACHINE_PROCESSOR_POWER_POLICY
+
+func WritePwrScheme
+  BOOLEAN
+  puiID PUINT
+  lpszName LPWSTR
+  lpszDescription LPWSTR
+  pPowerPolicy PPOWER_POLICY
+
+func PowerDeterminePlatformRoleEx
+  POWER_PLATFORM_ROLE
+  Version [POWER_PLATFORM_ROLE_VERSION]
+
+func PowerRegisterSuspendResumeNotification
+  [ERROR_CODE]
+  Flags [POWER_NOTIFICATION_FLAGS]
+  Recipient HANDLE
+  RegistrationHandle PHPOWERNOTIFY
+
+func PowerUnregisterSuspendResumeNotification
+  [ERROR_CODE]
+  RegistrationHandle HPOWERNOTIFY
+

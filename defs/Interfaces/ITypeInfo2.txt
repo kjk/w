@@ -1,0 +1,86 @@
+include Interfaces\ITypeInfo.txt
+
+ingterface ITypeInfo2 base=ITypeInfo id={00020412-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Type Description"
+  func GetTypeKind
+    HRESULT
+    pTypeKind TYPEKIND*
+
+  func GetTypeFlags
+    HRESULT
+    pTypeFlags ULONG*
+
+  func GetFuncIndexOfMemId
+    HRESULT
+    memid MEMBERID
+    invKind INVOKEKIND
+    pFuncIndex UINT*
+
+  func GetVarIndexOfMemId
+    HRESULT
+    memid MEMBERID
+    pVarIndex UINT*
+
+  func GetCustData
+    HRESULT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func GetFuncCustData
+    HRESULT
+    index UINT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func GetParamCustData
+    HRESULT
+    indexFunc UINT
+    indexParam UINT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func GetVarCustData
+    HRESULT
+    index UINT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func GetImplTypeCustData
+    HRESULT
+    index UINT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func GetDocumentation2
+    HRESULT
+    memid MEMBERID
+    lcid LCID
+    pbstrHelpString BSTR*
+    pdwHelpStringContext DWORD*
+    pbstrHelpStringDll BSTR*
+
+  func GetAllCustData
+    HRESULT
+    pCustData CUSTDATA*
+
+  func GetAllFuncCustData
+    HRESULT
+    index UINT
+    pCustData CUSTDATA*
+
+  func GetAllParamCustData
+    HRESULT
+    indexFunc UINT
+    indexParam UINT
+    pCustData CUSTDATA*
+
+  func GetAllVarCustData
+    HRESULT
+    index UINT
+    pCustData CUSTDATA*
+
+  func GetAllImplTypeCustData
+    HRESULT
+    index UINT
+    pCustData CUSTDATA*
+
+

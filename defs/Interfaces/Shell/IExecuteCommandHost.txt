@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IExecuteCommandHost base=IUnknown id={4b6832a2-5f04-4c9d-b89d-727a15d103e7} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetUIMode
+    HRESULT
+    pUIMode EC_HOST_UI_MODE*
+
+

@@ -1,0 +1,19 @@
+include Interfaces\WIC\IWICBitmapSource.txt
+
+ingterface IWICFormatConverter base=IWICBitmapSource id={00000301-a8f2-4877-ba0a-fd2b6645fb94} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func Initialize
+    [WIC_HRESULT]
+    pISource IWICBitmapSource*
+    dstFormat REFWICPixelFormatGUID
+    dither WICBitmapDitherType
+    pIPalette IWICPalette*
+    alphaThresholdPercent double
+    paletteTranslate WICBitmapPaletteType
+
+  func CanConvert
+    [WIC_HRESULT]
+    srcPixelFormat REFWICPixelFormatGUID
+    dstPixelFormat REFWICPixelFormatGUID
+    pfCanConvert BOOL*
+
+

@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IErrorLog base=IUnknown id={3127CA40-446E-11CE-8135-00AA004BB851} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Content Extensions/ActiveX Controls/Interfaces"
+  func AddError
+    HRESULT
+    pszPropName LPCOLESTR
+    pExcepInfo EXCEPINFO*
+
+

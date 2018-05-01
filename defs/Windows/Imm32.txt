@@ -1,0 +1,382 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+
+dll Imm32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Application UI Development/Internationalization for Windows Applications/Input Method Manager"
+alias HIMC HANDLE
+
+alias IMCENUMPROC LPVOID
+
+alias REGISTERWORDENUMPROC LPVOID
+
+array "TCHAR [IMEMENUITEM_STRING_SIZE]" base=TCHAR count=80
+
+array "TCHAR [STYLE_DESCRIPTION_SIZE]" base=TCHAR count=32
+
+struct STYLEBUF
+  dwStyle DWORD
+  szDescription "TCHAR [STYLE_DESCRIPTION_SIZE]"
+
+pointer LPSTYLEBUF STYLEBUF
+
+flag [IMFT] UINT display=UINT
+  IMFT_RADIOCHECK 0x00001
+  IMFT_SEPARATOR  0x00002
+  IMFT_SUBMENU    0x00004
+
+flag [IMFS] UINT display=UINT
+  IMFS_DISABLED 0x00000003
+  IMFS_CHECKED  0x00000008
+  IMFS_HILITE   0x00000080
+  IMFS_DEFAULT  0x00001000
+
+struct IMEMENUITEMINFO
+  cbSize UINT
+  fType [IMFT]
+  fState [IMFS]
+  wID UINT
+  hbmpChecked HBITMAP
+  hbmpUnchecked HBITMAP
+  dwItemData DWORD
+  szString "TCHAR [IMEMENUITEM_STRING_SIZE]"
+  hbmpItem HBITMAP
+
+pointer LPIMEMENUITEMINFO IMEMENUITEMINFO
+
+enum [IME_CAND] DWORD display=DWORD
+  IME_CAND_UNKNOWN 0x0000
+  IME_CAND_READ    0x0001
+  IME_CAND_CODE    0x0002
+  IME_CAND_MEANING 0x0003
+  IME_CAND_RADICAL 0x0004
+  IME_CAND_STROKE  0x0005
+
+struct CANDIDATELIST
+  dwSize DWORD
+  dwStyle [IME_CAND]
+  dwCount DWORD
+  dwSelection DWORD
+  dwPageStart DWORD
+  dwPageSize DWORD
+  dwOffset "DWORD [1]" count=dwCount
+
+pointer LPCANDIDATELIST CANDIDATELIST
+
+struct CANDIDATEFORM
+  dwIndex DWORD
+  dwStyle DWORD
+  ptCurrentPos POINT
+  rcArea RECT
+
+pointer LPCANDIDATEFORM CANDIDATEFORM
+
+struct COMPOSITIONFORM
+  dwStyle DWORD
+  ptCurrentPos POINT
+  rcArea RECT
+
+pointer LPCOMPOSITIONFORM COMPOSITIONFORM
+
+enum [ImmNotifyAction] DWORD display=DWORD
+  NI_OPENCANDIDATE            0x0010
+  NI_CLOSECANDIDATE           0x0011
+  NI_SELECTCANDIDATESTR       0x0012
+  NI_CHANGECANDIDATELIST      0x0013
+  NI_FINALIZECONVERSIONRESULT 0x0014
+  NI_COMPOSITIONSTR           0x0015
+  NI_SETCANDIDATE_PAGESTART   0x0016
+  NI_SETCANDIDATE_PAGESIZE    0x0017
+  NI_IMEMENUSELECTED          0x0018
+
+enum [CompositionString] DWORD display=DWORD
+  CPS_COMPLETE 0x0001
+  CPS_CONVERT  0x0002
+  CPS_REVERT   0x0003
+  CPS_CANCEL   0x0004
+
+enum [ImmGetPropertyIndex] DWORD display=DWORD
+  IGP_GETIMEVERSION -4
+  IGP_PROPERTY      0x00000004
+  IGP_CONVERSION    0x00000008
+  IGP_SENTENCE      0x0000000c
+  IGP_UI            0x00000010
+  IGP_SETCOMPSTR    0x00000014
+  IGP_SELECT        0x00000018
+
+func ImmAssociateContext
+  HIMC
+  hWnd HWND
+  hIMC HIMC
+
+func ImmAssociateContextEx
+  BOOL
+  hWnd HWND
+  hIMC HIMC
+  dwFlags DWORD
+
+func ImmConfigureIME bothCharset
+  BOOL
+  hKL HKL
+  hWnd HWND
+  dwMode DWORD
+  lpData LPVOID
+
+func ImmCreateContext
+  success NotEqual=0
+  HIMC
+
+func ImmDestroyContext
+  BOOL
+  hIMC HIMC
+
+func ImmDisableIME
+  BOOL
+  idThread DWORD
+
+func ImmDisableTextFrameService
+  BOOL
+  idThread DWORD
+
+func ImmEnumInputContext
+  BOOL
+  idThread DWORD
+  lpfn IMCENUMPROC
+  lParam LPARAM
+
+func ImmEnumRegisterWord bothCharset
+  success NotEqual=0
+  UINT
+  hKL HKL
+  lpfnEnumProc REGISTERWORDENUMPROC
+  lpszReading LPCTSTR
+  dwStyle DWORD
+  lpszRegister LPCTSTR
+  lpData LPVOID
+
+func ImmEscape bothCharset
+  success NotEqual=0
+  LRESULT
+  hKL HKL
+  hIMC HIMC
+  uEscape UINT
+  lpData LPVOID
+
+func ImmGetCandidateList bothCharset
+  success NotEqual=0
+  DWORD
+  hIMC HIMC
+  dwIndex DWORD
+  lpCandList LPCANDIDATELIST
+  dwBufLen DWORD
+
+func ImmGetCandidateListCount bothCharset
+  success NotEqual=0
+  DWORD
+  hIMC HIMC
+  lpdwListCount LPDWORD
+
+func ImmGetCandidateWindow
+  BOOL
+  hIMC HIMC
+  dwIndex DWORD
+  lpCandidate LPCANDIDATEFORM
+
+func ImmGetCompositionFont bothCharset
+  BOOL
+  hIMC HIMC
+  lplf LPLOGFONT
+
+func ImmGetCompositionString bothCharset
+  success NotEqual=0
+  LONG
+  hIMC HIMC
+  dwIndex DWORD
+  lpBuf LPVOID
+  dwBufLen DWORD
+
+func ImmGetCompositionWindow
+  BOOL
+  hIMC HIMC
+  lpCompForm LPCOMPOSITIONFORM
+
+func ImmGetContext
+  HIMC
+  hWnd HWND
+
+func ImmGetConversionList bothCharset
+  success NotEqual=0
+  DWORD
+  hKL HKL
+  hIMC HIMC
+  lpSrc LPCTSTR
+  lpDst LPCANDIDATELIST
+  dwBufLen DWORD
+  uFlag UINT
+
+func ImmGetConversionStatus
+  BOOL
+  hIMC HIMC
+  lpfdwConversion LPDWORD
+  lpfdwSentence LPDWORD
+
+func ImmGetDefaultIMEWnd
+  success NotEqual=0
+  HWND
+  hWnd HWND
+
+func ImmGetDescription bothCharset
+  success NotEqual=0
+  UINT
+  hKL HKL
+  lpszDescription LPTSTR
+  uBufLen UINT
+
+func ImmGetGuideLine bothCharset
+  success NotEqual=0
+  DWORD
+  hIMC HIMC
+  dwIndex DWORD
+  lpBuf LPTSTR
+  dwBufLen DWORD
+
+func ImmGetIMEFileName bothCharset
+  success NotEqual=0
+  UINT
+  hKL HKL
+  lpszFileName LPTSTR
+  uBufLen UINT
+
+func ImmGetImeMenuItems bothCharset
+  success NotEqual=0
+  DWORD
+  hIMC HIMC
+  dwFlags DWORD
+  dwType DWORD
+  lpImeParentMenu LPIMEMENUITEMINFO
+  lpImeMenu LPIMEMENUITEMINFO
+  dwSize DWORD
+
+func ImmGetOpenStatus
+  BOOL
+  hIMC HIMC
+
+func ImmGetProperty
+  DWORD
+  hKL HKL
+  fdwIndex [ImmGetPropertyIndex]
+
+func ImmGetRegisterWordStyle bothCharset
+  success NotEqual=0
+  UINT
+  hKL HKL
+  nItem UINT
+  lpStyleBuf LPSTYLEBUF
+
+func ImmGetStatusWindowPos
+  BOOL
+  hIMC HIMC
+  lpptPos LPPOINT
+
+func ImmGetVirtualKey
+  success NotEqual=0
+  UINT
+  hWnd HWND
+
+func ImmInstallIME bothCharset
+  success NotEqual=0
+  HKL
+  lpszIMEFileName LPCTSTR
+  lpszLayoutText LPCTSTR
+
+func ImmIsIME
+  BOOL
+  hKL HKL
+
+func ImmIsUIMessage bothCharset
+  BOOL
+  hWndIME HWND
+  msg UINT
+  wParam WPARAM
+  lParam LPARAM
+
+func ImmNotifyIME
+  BOOL
+  hIMC HIMC
+  dwAction [ImmNotifyAction]
+  dwIndex [CompositionString]
+  dwValue DWORD
+
+func ImmRegisterWord bothCharset
+  BOOL
+  hKL HKL
+  lpszReading LPCTSTR
+  dwStyle DWORD
+  lpszRegister LPCTSTR
+
+func ImmReleaseContext
+  BOOL
+  hWnd HWND
+  hIMC HIMC
+
+func ImmRequestMessage bothCharset
+  success NotEqual=0
+  LRESULT
+  hIMC HIMC
+  wParam WPARAM
+  lParam LPARAM
+
+func ImmSetCandidateWindow
+  BOOL
+  hIMC HIMC
+  lpCandidate LPCANDIDATEFORM
+
+func ImmSetCompositionFont bothCharset
+  BOOL
+  hIMC HIMC
+  lplf LPLOGFONT
+
+func ImmSetCompositionString bothCharset
+  BOOL
+  hIMC HIMC
+  dwIndex DWORD
+  lpComp LPVOID
+  dwCompLen DWORD
+  lpRead LPVOID
+  dwReadLen DWORD
+
+func ImmSetCompositionWindow
+  BOOL
+  hIMC HIMC
+  lpCompForm LPCOMPOSITIONFORM
+
+func ImmSetConversionStatus
+  BOOL
+  hIMC HIMC
+  fdwConversion DWORD
+  fdwSentence DWORD
+
+func ImmSetOpenStatus
+  BOOL
+  hIMC HIMC
+  fOpen BOOL
+
+func ImmSetStatusWindowPos
+  BOOL
+  hIMC HIMC
+  lpptPos LPPOINT
+
+func ImmSimulateHotKey
+  BOOL
+  hWnd HWND
+  dwHotKeyID DWORD
+
+func ImmUnregisterWord bothCharset
+  BOOL
+  hKL HKL
+  lpszReading LPCTSTR
+  dwStyle DWORD
+  lpszUnregister LPCTSTR
+
+func IMMDisableLegacyIME
+  BOOL
+

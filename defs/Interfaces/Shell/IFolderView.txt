@@ -1,0 +1,69 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFolderView base=IUnknown id={cde725b0-ccc9-4519-917e-325d72fab4ce} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetCurrentViewMode
+    HRESULT
+    pViewMode UINT*
+
+  func SetCurrentViewMode
+    HRESULT
+    ViewMode UINT
+
+  func GetFolder
+    HRESULT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func Item
+    HRESULT
+    iItemIndex int
+    ppidl PITEMID_CHILD*
+
+  func ItemCount
+    HRESULT
+    uFlags UINT
+    pcItems int*
+
+  func Items
+    HRESULT
+    uFlags UINT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetSelectionMarkedItem
+    HRESULT
+    piItem int*
+
+  func GetFocusedItem
+    HRESULT
+    piItem int*
+
+  func GetItemPosition
+    HRESULT
+    pidl PCUITEMID_CHILD
+    ppt POINT*
+
+  func GetSpacing
+    HRESULT
+    ppt POINT*
+
+  func GetDefaultSpacing
+    HRESULT
+    ppt POINT*
+
+  func GetAutoArrange
+    HRESULT
+
+  func SelectItem
+    HRESULT
+    iItem int
+    dwFlags DWORD
+
+  func SelectAndPositionItems
+    HRESULT
+    cidl UINT
+    apidl PCUITEMID_CHILD_ARRAY count=cidl
+    apt POINT* count=cidl
+    dwFlags DWORD
+
+

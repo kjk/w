@@ -1,0 +1,10 @@
+include Headers\windows.h.txt
+include Headers\dotnet.h.txt
+
+dll alink.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Microsoft .NET/Unmanaged/ALink"
+func CreateALink
+  HRESULT
+  riid REFIID
+  ppInterface IUnknown** interfaceId=riid
+

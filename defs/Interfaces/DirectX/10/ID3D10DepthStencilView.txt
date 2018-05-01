@@ -1,0 +1,9 @@
+include Interfaces\DirectX\10\ID3D10View.txt
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10DepthStencilView base=ID3D10View id={9B7E4C09-342C-4106-A19F-4F2704F689F0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Resource"
+  func GetDesc
+    void
+    pDesc D3D10_DEPTH_STENCIL_VIEW_DESC*
+
+

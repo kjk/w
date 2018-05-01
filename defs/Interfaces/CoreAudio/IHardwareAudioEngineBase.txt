@@ -1,0 +1,32 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IHardwareAudioEngineBase base=IUnknown id={EDDCE3E4-F3C1-453a-B461-223563CBD886} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetAvailableOffloadConnectorCount
+    [AUDCLNT_HRESULT]
+    _pwstrDeviceId LPWSTR
+    _uConnectorId UINT32
+    _pAvailableConnectorInstanceCount UINT32*
+
+  func GetEngineFormat
+    [AUDCLNT_HRESULT]
+    pDevice IMMDevice*
+    _bRequestDeviceFormat BOOL
+    _ppwfxFormat WAVEFORMATEX**
+
+  func SetEngineDeviceFormat
+    [AUDCLNT_HRESULT]
+    pDevice IMMDevice*
+    _pwfxFormat WAVEFORMATEX*
+
+  func SetGfxState
+    [AUDCLNT_HRESULT]
+    pDevice IMMDevice*
+    _bEnable BOOL
+
+  func GetGfxState
+    [AUDCLNT_HRESULT]
+    pDevice IMMDevice*
+    _pbEnable BOOL*
+
+

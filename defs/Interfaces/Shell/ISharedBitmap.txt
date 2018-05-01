@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISharedBitmap base=IUnknown id={091162a4-bc96-411f-aae8-c5122cd03363} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetSharedBitmap
+    HRESULT
+    phbm HBITMAP*
+
+  func GetSize
+    HRESULT
+    pSize SIZE*
+
+  func GetFormat
+    HRESULT
+    pat WTS_ALPHATYPE*
+
+  func InitializeBitmap
+    HRESULT
+    hbm HBITMAP
+    wtsAT WTS_ALPHATYPE
+
+  func Detach
+    HRESULT
+    phbm HBITMAP*
+
+

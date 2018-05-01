@@ -1,0 +1,56 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISearchFolderItemFactory base=IUnknown id={a0ffbc28-5482-4366-be27-3e81e78e06c2} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetDisplayName
+    HRESULT
+    pszDisplayName LPCWSTR
+
+  func SetFolderTypeID
+    HRESULT
+    ftid FOLDERTYPEID
+
+  func SetFolderLogicalViewMode
+    HRESULT
+    flvm FOLDERLOGICALVIEWMODE
+
+  func SetIconSize
+    HRESULT
+    iIconSize int
+
+  func SetVisibleColumns
+    HRESULT
+    cVisibleColumns UINT
+    rgKey PROPERTYKEY* count=cVisibleColumns
+
+  func SetSortColumns
+    HRESULT
+    cSortColumns UINT
+    rgSortColumns SORTCOLUMN* count=cSortColumns
+
+  func SetGroupColumn
+    HRESULT
+    keyGroup REFPROPERTYKEY
+
+  func SetStacks
+    HRESULT
+    cStackKeys UINT
+    rgStackKeys PROPERTYKEY* count=cStackKeys
+
+  func SetScope
+    HRESULT
+    psiaScope IShellItemArray*
+
+  func SetCondition
+    HRESULT
+    pCondition ICondition*
+
+  func GetShellItem
+    HRESULT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetIDList
+    HRESULT
+    ppidl PIDLIST_ABSOLUTE*
+
+

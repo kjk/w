@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPreviewHandlerFrame base=IUnknown id={fec87aaf-35f9-447a-adb7-20234491401a} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetWindowContext
+    HRESULT
+    pinfo PREVIEWHANDLERFRAMEINFO*
+
+  func TranslateAccelerator
+    HRESULT
+    pmsg MSG*
+
+

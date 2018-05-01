@@ -1,0 +1,22 @@
+include Interfaces\WIC\IWICMetadataHandlerInfo.txt
+
+ingterface IWICMetadataReaderInfo base=IWICMetadataHandlerInfo id={EEBF1F5B-07C1-4447-A3AB-22ACAF78A804} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetPatterns
+    [WIC_HRESULT]
+    guidContainerFormat REFGUID
+    cbSize UINT
+    pPattern WICMetadataPattern* postCount=pcCount
+    pcCount UINT*
+    pcbActual UINT*
+
+  func MatchesPattern
+    [WIC_HRESULT]
+    guidContainerFormat REFGUID
+    pIStream IStream*
+    pfMatches BOOL*
+
+  func CreateInstance
+    [WIC_HRESULT]
+    ppIReader IWICMetadataReader**
+
+

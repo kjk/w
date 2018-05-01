@@ -1,0 +1,60 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID3D10Effect base=IUnknown id={51B0CA8B-EC0B-4519-870D-8EE1CB5017C7} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func IsValid
+    BOOL
+
+  func IsPool
+    BOOL
+
+  func GetDevice
+    HRESULT
+    ppDevice ID3D10Device**
+
+  func GetDesc
+    HRESULT
+    pDesc D3D10_EFFECT_DESC*
+
+  func GetConstantBufferByIndex
+    success NotEqual=0
+    ID3D10EffectConstantBuffer*
+    Index UINT
+
+  func GetConstantBufferByName
+    success NotEqual=0
+    ID3D10EffectConstantBuffer*
+    Name LPCSTR
+
+  func GetVariableByIndex
+    success NotEqual=0
+    ID3D10EffectVariable*
+    Index UINT
+
+  func GetVariableByName
+    success NotEqual=0
+    ID3D10EffectVariable*
+    Name LPCSTR
+
+  func GetVariableBySemantic
+    success NotEqual=0
+    ID3D10EffectVariable*
+    Semantic LPCSTR
+
+  func GetTechniqueByIndex
+    success NotEqual=0
+    ID3D10EffectTechnique*
+    Index UINT
+
+  func GetTechniqueByName
+    success NotEqual=0
+    ID3D10EffectTechnique*
+    Name LPCSTR
+
+  func Optimize
+    HRESULT
+
+  func IsOptimized
+    BOOL
+
+

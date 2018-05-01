@@ -1,0 +1,25 @@
+include Interfaces\COM\IPersist.txt
+
+ingterface IPersistFile base=IPersist id={0000010b-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func IsDirty
+    HRESULT
+
+  func Load
+    HRESULT
+    pszFileName LPCOLESTR
+    dwMode [STGM_FLAGS]
+
+  func Save
+    HRESULT
+    pszFileName LPCOLESTR
+    fRemember BOOL
+
+  func SaveCompleted
+    HRESULT
+    pszFileName LPCOLESTR
+
+  func GetCurFile
+    HRESULT
+    ppszFileName LPOLESTR*
+
+

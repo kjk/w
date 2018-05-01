@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFrameworkInputPaneHandler base=IUnknown id={226C537B-1E76-4D9E-A760-33DB29922F18} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Showing
+    HRESULT
+    prcInputPaneScreenLocation RECT*
+    fEnsureFocusedElementInView BOOL
+
+  func Hiding
+    HRESULT
+    fEnsureFocusedElementInView BOOL
+
+

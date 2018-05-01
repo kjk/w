@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ICoreFragmentInspector base=IUnknown id={f7fcc5fd-ae26-4679-ba16-96aac583c134} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func NextCoreFragments
+    HRESULT
+    requestedCount ULONG
+    ppiCoreFragments ICoreFragment** postCount=requestedCount
+    pFetchedCount ULONG*
+
+  func Reset
+    HRESULT
+
+

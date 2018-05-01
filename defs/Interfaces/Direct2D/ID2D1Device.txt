@@ -1,0 +1,28 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Resource.txt
+
+ingterface ID2D1Device base=ID2D1Resource id={47dd575d-ac05-4cdd-8049-9b02cd16f44c} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func CreateDeviceContext
+    [D2D_HRESULT]
+    options D2D1_DEVICE_CONTEXT_OPTIONS
+    deviceContext ID2D1DeviceContext**
+
+  func CreatePrintControl
+    [D2D_HRESULT]
+    wicFactory IWICImagingFactory*
+    documentTarget IPrintDocumentPackageTarget*
+    printControlProperties "CONST D2D1_PRINT_CONTROL_PROPERTIES*"
+    printControl ID2D1PrintControl**
+
+  func SetMaximumTextureMemory
+    void
+    maximumInBytes UINT64
+
+  func GetMaximumTextureMemory
+    UINT64
+
+  func ClearResources
+    void
+    millisecondsSinceUse UINT32
+
+

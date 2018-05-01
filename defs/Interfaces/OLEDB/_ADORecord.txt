@@ -1,0 +1,98 @@
+include Interfaces\OLEDB\_ADO.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface _ADORecord base=_ADO id={00001562-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func get_ActiveConnection
+    [OLEDB_HRESULT]
+    pvar VARIANT*
+
+  func put_ActiveConnection
+    [OLEDB_HRESULT]
+    bstrConn BSTR
+
+  func putref_ActiveConnection
+    [OLEDB_HRESULT]
+    Con _ADOConnection*
+
+  func get_State
+    [OLEDB_HRESULT]
+    pState ObjectStateEnum*
+
+  func get_Source
+    [OLEDB_HRESULT]
+    pvar VARIANT*
+
+  func put_Source
+    [OLEDB_HRESULT]
+    Source BSTR
+
+  func putref_Source
+    [OLEDB_HRESULT]
+    Source IDispatch*
+
+  func get_Mode
+    [OLEDB_HRESULT]
+    pMode ConnectModeEnum*
+
+  func put_Mode
+    [OLEDB_HRESULT]
+    Mode ConnectModeEnum
+
+  func get_ParentURL
+    [OLEDB_HRESULT]
+    pbstrParentURL BSTR*
+
+  func MoveRecord
+    [OLEDB_HRESULT]
+    Source BSTR
+    Destination BSTR
+    UserName BSTR
+    Password BSTR
+    Options MoveRecordOptionsEnum
+    Async VARIANT_BOOL
+    pbstrNewURL BSTR*
+
+  func CopyRecord
+    [OLEDB_HRESULT]
+    Source BSTR
+    Destination BSTR
+    UserName BSTR
+    Password BSTR
+    Options CopyRecordOptionsEnum
+    Async VARIANT_BOOL
+    pbstrNewURL BSTR*
+
+  func DeleteRecord
+    [OLEDB_HRESULT]
+    Source BSTR
+    Async VARIANT_BOOL
+
+  func Open
+    [OLEDB_HRESULT]
+    Source VARIANT
+    ActiveConnection VARIANT
+    Mode ConnectModeEnum
+    CreateOptions RecordCreateOptionsEnum
+    Options RecordOpenOptionsEnum
+    UserName BSTR
+    Password BSTR
+
+  func Close
+    [OLEDB_HRESULT]
+
+  func get_Fields
+    [OLEDB_HRESULT]
+    ppFlds ADOFields**
+
+  func get_RecordType
+    [OLEDB_HRESULT]
+    pType RecordTypeEnum*
+
+  func GetChildren
+    [OLEDB_HRESULT]
+    ppRSet _ADORecordset**
+
+  func Cancel
+    [OLEDB_HRESULT]
+
+

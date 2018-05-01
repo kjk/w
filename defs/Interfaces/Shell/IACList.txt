@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IACList base=IUnknown id={77A130B0-94FD-11D0-A544-00C04FD7d062} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Expand
+    HRESULT
+    pszExpand LPCWSTR
+
+

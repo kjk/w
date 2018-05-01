@@ -1,0 +1,39 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3DResource9 base=IUnknown id={05EEC05D-8F7D-4362-B999-D1BAF357C704} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func GetDevice
+    HRESULT
+    ppDevice IDirect3DDevice9**
+
+  func SetPrivateData
+    HRESULT
+    refguid REFGUID
+    pData "CONST void*"
+    SizeOfData DWORD
+    Flags DWORD
+
+  func GetPrivateData
+    HRESULT
+    refguid REFGUID
+    pData void*
+    pSizeOfData DWORD*
+
+  func FreePrivateData
+    HRESULT
+    refguid REFGUID
+
+  func SetPriority
+    [D3D9_RESOURCE_PRIORITY]
+    PriorityNew [D3D9_RESOURCE_PRIORITY]
+
+  func GetPriority
+    [D3D9_RESOURCE_PRIORITY]
+
+  func PreLoad
+    void
+
+  func GetType
+    success NotEqual=0
+    D3DRESOURCETYPE
+
+

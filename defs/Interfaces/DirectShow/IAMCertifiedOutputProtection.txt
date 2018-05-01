@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMCertifiedOutputProtection base=IUnknown id={6feded3e-0ff1-4901-a2f1-43f7012c8515} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func KeyExchange
+    HRESULT
+    pRandom GUID*
+    pdwLengthCertGH DWORD*
+
+  func SessionSequenceStart
+    HRESULT
+    pSig AMCOPPSignature*
+
+  func ProtectionCommand
+    HRESULT
+    cmd "const AMCOPPCommand*"
+
+  func ProtectionStatus
+    HRESULT
+    pStatusInput "const AMCOPPStatusInput*"
+    pStatusOutput AMCOPPStatusOutput*
+
+

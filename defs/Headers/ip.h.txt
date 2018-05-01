@@ -1,0 +1,20 @@
+include Headers\windows.h.txt
+
+header
+alias IPAddr ULONG
+
+array "IPAddr [1]" base=IPAddr count=1
+
+flag [IpOptionFlags] UCHAR display=UCHAR
+  IP_FLAG_REVERSE 0x1
+  IP_FLAG_DF      0x2
+
+struct IP_OPTION_INFORMATION
+  Ttl UCHAR
+  Tos UCHAR
+  Flags [IpOptionFlags]
+  OptionsSize UCHAR
+  OptionsData PUCHAR length=OptionsSize
+
+pointer PIP_OPTION_INFORMATION IP_OPTION_INFORMATION
+

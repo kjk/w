@@ -1,0 +1,102 @@
+include Interfaces\Debugger\IDebugRegisters.txt
+
+ingterface IDebugRegisters2 base=IDebugRegisters id={1656afa9-19c6-4e3a-97e7-5dc9160cf9c4} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetDescriptionWide
+    HRESULT
+    Register ULONG
+    NameBuffer PWSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+    Desc PDEBUG_REGISTER_DESCRIPTION
+
+  func GetIndexByNameWide
+    HRESULT
+    Name PCWSTR
+    Index PULONG
+
+  func GetNumberPseudoRegisters
+    HRESULT
+    Number PULONG
+
+  func GetPseudoDescription
+    HRESULT
+    Register ULONG
+    NameBuffer PSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+    TypeModule PULONG64
+    TypeId PULONG
+
+  func GetPseudoDescriptionWide
+    HRESULT
+    Register ULONG
+    NameBuffer PWSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+    TypeModule PULONG64
+    TypeId PULONG
+
+  func GetPseudoIndexByName
+    HRESULT
+    Name PCSTR
+    Index PULONG
+
+  func GetPseudoIndexByNameWide
+    HRESULT
+    Name PCWSTR
+    Index PULONG
+
+  func GetPseudoValues
+    HRESULT
+    Source [DEBUG_REGSRC]
+    Count ULONG
+    Indices PULONG count=Count
+    Start ULONG
+    Values PDEBUG_VALUE postCount=Count
+
+  func SetPseudoValues
+    HRESULT
+    Source [DEBUG_REGSRC]
+    Count ULONG
+    Indices PULONG count=Count
+    Start ULONG
+    Values PDEBUG_VALUE count=Count
+
+  func GetValues2
+    HRESULT
+    Source [DEBUG_REGSRC]
+    Count ULONG
+    Indices PULONG count=Count
+    Start ULONG
+    Values PDEBUG_VALUE postCount=Count
+
+  func SetValues2
+    HRESULT
+    Source [DEBUG_REGSRC]
+    Count ULONG
+    Indices PULONG count=Count
+    Start ULONG
+    Values PDEBUG_VALUE count=Count
+
+  func OutputRegisters2
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Source [DEBUG_REGSRC]
+    Flags [DEBUG_REGISTERS_FLAGS]
+
+  func GetInstructionOffset2
+    HRESULT
+    Source [DEBUG_REGSRC]
+    Offset PULONG64
+
+  func GetStackOffset2
+    HRESULT
+    Source [DEBUG_REGSRC]
+    Offset PULONG64
+
+  func GetFrameOffset2
+    HRESULT
+    Source [DEBUG_REGSRC]
+    Offset PULONG64
+
+

@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IObjectWithCancelEvent base=IUnknown id={F279B885-0AE9-4b85-AC06-DDECF9408941} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetCancelEvent
+    HRESULT
+    phEvent HANDLE*
+
+

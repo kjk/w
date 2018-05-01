@@ -1,0 +1,20 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Resource.txt
+
+ingterface ID2D1Brush base=ID2D1Resource id={2cd906a8-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetOpacity
+    void
+    opacity FLOAT
+
+  func SetTransform
+    void
+    transform "CONST D2D1_MATRIX_3X2_F*"
+
+  func GetOpacity
+    FLOAT
+
+  func GetTransform
+    void
+    transform D2D1_MATRIX_3X2_F*
+
+

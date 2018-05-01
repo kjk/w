@@ -1,0 +1,24 @@
+include Interfaces\CoreAudio\IAudioSessionControl.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioSessionControl2 base=IAudioSessionControl id={bfb7ff88-7239-4fc9-8fa2-07c950be9c6d} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func GetSessionIdentifier
+    [AUDCLNT_HRESULT]
+    pRetVal LPWSTR*
+
+  func GetSessionInstanceIdentifier
+    [AUDCLNT_HRESULT]
+    pRetVal LPWSTR*
+
+  func GetProcessId
+    [AUDCLNT_HRESULT]
+    pRetVal DWORD*
+
+  func IsSystemSoundsSession
+    [AUDCLNT_HRESULT]
+
+  func SetDuckingPreference
+    [AUDCLNT_HRESULT]
+    optOut BOOL
+
+

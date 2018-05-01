@@ -1,0 +1,12 @@
+include Interfaces\DirectShow\IFileSinkFilter.txt
+
+ingterface IFileSinkFilter2 base=IFileSinkFilter id={00855B90-CE1B-11d0-BD4F-00A0C911CE86} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetMode
+    HRESULT
+    dwFlags DWORD
+
+  func GetMode
+    HRESULT
+    pdwFlags DWORD*
+
+

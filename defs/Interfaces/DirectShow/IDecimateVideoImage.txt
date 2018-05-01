@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDecimateVideoImage base=IUnknown id={2e5ea3e0-e924-11d2-b6da-00a0c995e8df} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetDecimationImageSize
+    HRESULT
+    lWidth long
+    lHeight long
+
+  func ResetDecimationImageSize
+    HRESULT
+
+

@@ -1,0 +1,56 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMVideoCompression base=IUnknown id={C6E13343-30AC-11d0-A18C-00A0C9118956} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func put_KeyFrameRate
+    HRESULT
+    KeyFrameRate long
+
+  func get_KeyFrameRate
+    HRESULT
+    pKeyFrameRate long*
+
+  func put_PFramesPerKeyFrame
+    HRESULT
+    PFramesPerKeyFrame long
+
+  func get_PFramesPerKeyFrame
+    HRESULT
+    pPFramesPerKeyFrame long*
+
+  func put_Quality
+    HRESULT
+    Quality double
+
+  func get_Quality
+    HRESULT
+    pQuality double*
+
+  func put_WindowSize
+    HRESULT
+    WindowSize DWORDLONG
+
+  func get_WindowSize
+    HRESULT
+    pWindowSize DWORDLONG*
+
+  func GetInfo
+    HRESULT
+    pszVersion LPWSTR
+    pcbVersion int*
+    pszDescription LPWSTR
+    pcbDescription int*
+    pDefaultKeyFrameRate long*
+    pDefaultPFramesPerKey long*
+    pDefaultQuality double*
+    pCapabilities long*
+
+  func OverrideKeyFrame
+    HRESULT
+    FrameNumber long
+
+  func OverrideFrameSize
+    HRESULT
+    FrameNumber long
+    Size long
+
+

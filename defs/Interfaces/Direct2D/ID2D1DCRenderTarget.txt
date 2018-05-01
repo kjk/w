@@ -1,0 +1,10 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1RenderTarget.txt
+
+ingterface ID2D1DCRenderTarget base=ID2D1RenderTarget id={1c51bc64-de61-46fd-9899-63a5d8f03950} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func BindDC
+    [D2D_HRESULT]
+    hDC "CONST HDC"
+    pSubRect "CONST RECT*"
+
+

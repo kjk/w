@@ -1,0 +1,11 @@
+include Interfaces\DirectInput\IDirectInput2A.txt
+
+ingterface IDirectInput7A base=IDirectInput2A id={9a4cb684-236d-11d3-8e9d-00c04f6844ae} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Input/DirectInput"
+  func CreateDeviceEx
+    [DI_HRESULT]
+    rguid REFGUID
+    riid REFIID
+    ppvObject LPVOID* interfaceId=riid
+    pUnkOuter LPUNKNOWN
+
+

@@ -1,0 +1,86 @@
+include Interfaces\IDispatch.txt
+
+ingterface IShellDispatch base=IDispatch id={D8F015C0-C278-11CE-A49E-444553540000} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func get_Application
+    HRESULT
+    ppid IDispatch**
+
+  func get_Parent
+    HRESULT
+    ppid IDispatch**
+
+  func NameSpace
+    HRESULT
+    vDir VARIANT
+    ppsdf Folder**
+
+  func BrowseForFolder
+    HRESULT
+    Hwnd long
+    Title BSTR
+    Options long
+    RootFolder VARIANT
+    ppsdf Folder**
+
+  func Windows
+    HRESULT
+    ppid IDispatch**
+
+  func Open
+    HRESULT
+    vDir VARIANT
+
+  func Explore
+    HRESULT
+    vDir VARIANT
+
+  func MinimizeAll
+    HRESULT
+
+  func UndoMinimizeALL
+    HRESULT
+
+  func FileRun
+    HRESULT
+
+  func CascadeWindows
+    HRESULT
+
+  func TileVertically
+    HRESULT
+
+  func TileHorizontally
+    HRESULT
+
+  func ShutdownWindows
+    HRESULT
+
+  func Suspend
+    HRESULT
+
+  func EjectPC
+    HRESULT
+
+  func SetTime
+    HRESULT
+
+  func TrayProperties
+    HRESULT
+
+  func Help
+    HRESULT
+
+  func FindFiles
+    HRESULT
+
+  func FindComputer
+    HRESULT
+
+  func RefreshMenu
+    HRESULT
+
+  func ControlPanelItem
+    HRESULT
+    bstrDir BSTR
+
+

@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IReferenceClockTimerControl base=IUnknown id={ebec459c-2eca-4d42-a8af-30df557614b8} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetDefaultTimerResolution
+    HRESULT
+    timerResolution REFERENCE_TIME
+
+  func GetDefaultTimerResolution
+    HRESULT
+    pTimerResolution REFERENCE_TIME*
+
+

@@ -1,0 +1,71 @@
+include Interfaces\IDispatch.txt
+include Interfaces\FileSystemObject\FileSystemObject.h.txt
+
+ingterface IDictionary base=IDispatch id={42C642C1-97E1-11CF-978F-00A02463E06F} errorFunc=HRESULT onlineHelp=MSDN category="Scripting Runtime Library/FileSystemObject"
+  func putref_Item
+    HRESULT
+    Key VARIANT*
+    pRetItem VARIANT*
+
+  func put_Item
+    HRESULT
+    Key VARIANT*
+    pRetItem VARIANT*
+
+  func get_Item
+    HRESULT
+    Key VARIANT*
+    pRetItem VARIANT*
+
+  func Add
+    HRESULT
+    Key VARIANT*
+    Item VARIANT*
+
+  func get_Count
+    HRESULT
+    pCount long*
+
+  func Exists
+    HRESULT
+    Key VARIANT*
+    pExists VARIANT_BOOL*
+
+  func Items
+    HRESULT
+    pItemsArray VARIANT*
+
+  func put_Key
+    HRESULT
+    Key VARIANT*
+    rhs VARIANT*
+
+  func Keys
+    HRESULT
+    pKeysArray VARIANT*
+
+  func Remove
+    HRESULT
+    Key VARIANT*
+
+  func RemoveAll
+    HRESULT
+
+  func put_CompareMode
+    HRESULT
+    pcomp CompareMethod
+
+  func get_CompareMode
+    HRESULT
+    pcomp CompareMethod*
+
+  func _NewEnum
+    HRESULT
+    ppunk IUnknown**
+
+  func get_HashVal
+    HRESULT
+    Key VARIANT*
+    HashVal VARIANT*
+
+

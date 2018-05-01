@@ -1,0 +1,542 @@
+include Headers\multimedia.h.txt
+
+dll dsound.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+interface IDirectSound
+
+interface IDirectSound3DBuffer
+
+interface IDirectSound3DListener
+
+interface IDirectSound8
+
+interface IDirectSoundBuffer
+
+interface IDirectSoundBuffer8
+
+interface IDirectSoundCapture
+
+interface IDirectSoundCaptureBuffer
+
+interface IDirectSoundCaptureBuffer8
+
+interface IDirectSoundCaptureFXAec
+
+interface IDirectSoundCaptureFXNoiseSuppress
+
+interface IDirectSoundFullDuplex
+
+interface IDirectSoundFXChorus
+
+interface IDirectSoundFXCompressor
+
+interface IDirectSoundFXDistortion
+
+interface IDirectSoundFXEcho
+
+interface IDirectSoundFXFlanger
+
+interface IDirectSoundFXGargle
+
+interface IDirectSoundFXI3DL2Reverb
+
+interface IDirectSoundFXParamEq
+
+interface IDirectSoundFXWavesReverb
+
+interface IDirectSoundNotify
+
+interface IKsPropertySet
+
+interface IReferenceClock
+
+alias IDirectSoundCapture8* IDirectSoundCapture*
+
+alias IDirectSoundCapture8** IDirectSoundCapture**
+
+alias LPDIRECTSOUND IDirectSound*
+
+alias LPDIRECTSOUND8 IDirectSound8*
+
+pointer LPDIRECTSOUND8* LPDIRECTSOUND8
+
+alias LPDIRECTSOUNDCAPTURE IDirectSoundCapture*
+
+pointer LPDIRECTSOUNDCAPTURE* LPDIRECTSOUNDCAPTURE
+
+alias LPDIRECTSOUNDCAPTURE8 IDirectSoundCapture8*
+
+pointer LPDIRECTSOUNDCAPTURE8* LPDIRECTSOUNDCAPTURE8
+
+alias LPDIRECTSOUNDFULLDUPLEX IDirectSoundFullDuplex*
+
+pointer LPDIRECTSOUNDFULLDUPLEX* LPDIRECTSOUNDFULLDUPLEX
+
+alias LPDIRECTSOUNDCAPTUREBUFFER8 IDirectSoundCaptureBuffer8*
+
+pointer LPDIRECTSOUNDCAPTUREBUFFER8* LPDIRECTSOUNDCAPTUREBUFFER8
+
+alias LPLPDIRECTSOUNDCAPTUREBUFFER8 IDirectSoundCaptureBuffer8**
+
+alias LPDIRECTSOUNDBUFFER8 IDirectSoundBuffer8*
+
+pointer LPDIRECTSOUNDBUFFER8* LPDIRECTSOUNDBUFFER8
+
+alias LPLPDIRECTSOUNDBUFFER8 IDirectSoundBuffer8**
+
+alias LPDIRECTSOUNDBUFFER IDirectSoundBuffer*
+
+pointer LPDIRECTSOUNDBUFFER* LPDIRECTSOUNDBUFFER
+
+alias LPDIRECTSOUNDCAPTUREBUFFER* IDirectSoundCaptureBuffer**
+
+alias LPDSENUMCALLBACK LPVOID
+
+alias D3DVALUE float
+
+pointer D3DVALUE* D3DVALUE
+
+enum [DS_HRESULT] HRESULT display=HRESULT reset
+  DS_OK                    0x00000000
+  S_FALSE                  1
+  DS_NO_VIRTUALIZATION     0x0878000a
+  DSERR_UNSUPPORTED        0x80004001
+  DSERR_NOINTERFACE        0x80004002
+  E_POINTER                0x80004003
+  E_ABORT                  0x80004004
+  DSERR_GENERIC            0x80004005
+  E_UNEXPECTED             0x8000FFFF
+  DSERR_NOAGGREGATION      0x80040110
+  DSERR_ACCESSDENIED       0x80070005
+  E_HANDLE                 0x80070006
+  DSERR_OUTOFMEMORY        0x8007000e
+  E_OUTOFMEMORY            0x8007000E
+  DSERR_INVALIDPARAM       0x80070057
+  DSERR_ALLOCATED          0x8878000a
+  DSERR_CONTROLUNAVAIL     0x8878001e
+  DSERR_INVALIDCALL        0x88780032
+  DSERR_PRIOLEVELNEEDED    0x88780046
+  DSERR_BADFORMAT          0x88780064
+  DSERR_NODRIVER           0x88780078
+  DSERR_ALREADYINITIALIZED 0x88780082
+  DSERR_BUFFERLOST         0x88780096
+  DSERR_OTHERAPPHASPRIO    0x887800a0
+  DSERR_UNINITIALIZED      0x887800aa
+  DSERR_BUFFERTOOSMALL     0x887800b4
+  DSERR_DS8_REQUIRED       0x887800be
+  DSERR_SENDLOOP           0x887800c8
+  DSERR_BADSENDBUFFERGUID  0x887800d2
+  DSERR_FXUNAVAILABLE      0x887800dc
+  DSERR_OBJECTNOTFOUND     0x88781161
+
+flag [DSCFX_Flags] DWORD display=DWORD
+  DSCFX_LOCHARDWARE 0x00000001
+  DSCFX_LOCSOFTWARE 0x00000002
+
+struct DSCEFFECTDESC
+  dwSize DWORD
+  dwFlags [DSCFX_Flags]
+  guidDSCFXClass GUID
+  guidDSCFXInstance GUID
+  dwReserved1 DWORD
+  dwReserved2 DWORD
+
+pointer LPDSCEFFECTDESC DSCEFFECTDESC
+
+flag [DSCBCAPS_Flags] DWORD display=DWORD
+  DSCBCAPS_CTRLFX     0x00000200
+  DSCBCAPS_WAVEMAPPED 0x80000000
+
+struct DSCBUFFERDESC
+  dwSize DWORD
+  dwFlags [DSCBCAPS_Flags]
+  dwBufferBytes DWORD
+  dwReserved DWORD
+  lpwfxFormat LPWAVEFORMATEX
+  dwFXCount DWORD
+  lpDSCFXDesc LPDSCEFFECTDESC
+
+pointer LPCDSCBUFFERDESC DSCBUFFERDESC
+
+flag [DSBCAPS_Flags] DWORD display=DWORD
+  DSBCAPS_PRIMARYBUFFER       0x00000001
+  DSBCAPS_STATIC              0x00000002
+  DSBCAPS_LOCHARDWARE         0x00000004
+  DSBCAPS_LOCSOFTWARE         0x00000008
+  DSBCAPS_CTRL3D              0x00000010
+  DSBCAPS_CTRLFREQUENCY       0x00000020
+  DSBCAPS_CTRLPAN             0x00000040
+  DSBCAPS_CTRLVOLUME          0x00000080
+  DSBCAPS_CTRLPOSITIONNOTIFY  0x00000100
+  DSBCAPS_CTRLFX              0x00000200
+  DSBCAPS_STICKYFOCUS         0x00004000
+  DSBCAPS_GLOBALFOCUS         0x00008000
+  DSBCAPS_GETCURRENTPOSITION2 0x00010000
+  DSBCAPS_MUTE3DATMAXDISTANCE 0x00020000
+  DSBCAPS_LOCDEFER            0x00040000
+  DSBCAPS_TRUEPLAYPOSITION    0x00080000
+
+struct DSBUFFERDESC
+  dwSize DWORD
+  dwFlags [DSBCAPS_Flags]
+  dwBufferBytes DWORD
+  dwReserved DWORD
+  lpwfxFormat LPWAVEFORMATEX
+  guid3DAlgorithm GUID
+
+pointer LPCDSBUFFERDESC DSBUFFERDESC
+
+flag [DS3DMODE] DWORD display=DWORD
+  DS3DMODE_NORMAL       0x00000000
+  DS3DMODE_HEADRELATIVE 0x00000001
+  DS3DMODE_DISABLE      0x00000002
+
+struct DS3DBUFFER
+  dwSize DWORD
+  vPosition D3DVECTOR
+  vVelocity D3DVECTOR
+  dwInsideConeAngle DWORD
+  dwOutsideConeAngle DWORD
+  vConeOrientation D3DVECTOR
+  lConeOutsideVolume LONG
+  flMinDistance D3DVALUE
+  flMaxDistance D3DVALUE
+  dwMode [DS3DMODE]
+
+pointer LPDS3DBUFFER DS3DBUFFER
+
+pointer LPCDS3DBUFFER DS3DBUFFER
+
+struct DS3DLISTENER
+  dwSize DWORD
+  vPosition D3DVECTOR
+  vVelocity D3DVECTOR
+  vOrientFront D3DVECTOR
+  vOrientTop D3DVECTOR
+  flDistanceFactor D3DVALUE
+  flRolloffFactor D3DVALUE
+  flDopplerFactor D3DVALUE
+
+pointer LPDS3DLISTENER DS3DLISTENER
+
+pointer LPCDS3DLISTENER DS3DLISTENER
+
+struct DSBCAPS
+  dwSize DWORD
+  dwFlags [DSBCAPS_Flags]
+  dwBufferBytes DWORD
+  dwUnlockTransferRate DWORD
+  dwPlayCpuOverhead DWORD
+
+pointer LPDSBCAPS DSBCAPS
+
+struct DSCBCAPS
+  dwSize DWORD
+  dwFlags [DSCBCAPS_Flags]
+  dwBufferBytes DWORD
+  dwReserved DWORD
+
+pointer LPDSCBCAPS DSCBCAPS
+
+flag [DSCFX_AEC_MODE] DWORD display=DWORD
+  DSCFX_AEC_MODE_PASS_THROUGH 0x0
+  DSCFX_AEC_MODE_HALF_DUPLEX  0x1
+  DSCFX_AEC_MODE_FULL_DUPLEX  0x2
+
+struct DSCFXAec
+  fEnable BOOL
+  fNoiseFill BOOL
+  dwMode [DSCFX_AEC_MODE]
+
+pointer LPDSCFXAec DSCFXAec
+
+pointer LPCDSCFXAec DSCFXAec
+
+struct DSCFXNoiseSuppress
+  fEnable BOOL
+
+pointer LPDSCFXNoiseSuppress DSCFXNoiseSuppress
+
+pointer LPCDSCFXNoiseSuppress DSCFXNoiseSuppress
+
+enum [DSFXCHORUS_WAVE] ULONG display=ULONG
+  DSFXCHORUS_WAVE_TRIANGLE 0
+  DSFXCHORUS_WAVE_SIN      1
+
+enum [DSFXCHORUS_PHASE] LONG display=LONG
+  DSFXCHORUS_PHASE_NEG_180 0
+  DSFXCHORUS_PHASE_NEG_90  1
+  DSFXCHORUS_PHASE_ZERO    2
+  DSFXCHORUS_PHASE_90      3
+  DSFXCHORUS_PHASE_180     4
+
+struct DSFXChorus
+  fWetDryMix FLOAT
+  fDepth FLOAT
+  fFeedback FLOAT
+  fFrequency FLOAT
+  lWaveform [DSFXCHORUS_WAVE]
+  fDelay FLOAT
+  lPhase [DSFXCHORUS_PHASE]
+
+pointer LPDSFXChorus DSFXChorus
+
+pointer LPCDSFXChorus DSFXChorus
+
+struct DSFXCompressor
+  fGain FLOAT
+  fAttack FLOAT
+  fRelease FLOAT
+  fThreshold FLOAT
+  fRatio FLOAT
+  fPredelay FLOAT
+
+pointer LPDSFXCompressor DSFXCompressor
+
+pointer LPCDSFXCompressor DSFXCompressor
+
+struct DSFXDistortion
+  fGain FLOAT
+  fEdge FLOAT
+  fPostEQCenterFrequency FLOAT
+  fPostEQBandwidth FLOAT
+  fPreLowpassCutoff FLOAT
+
+pointer LPDSFXDistortion DSFXDistortion
+
+pointer LPCDSFXDistortion DSFXDistortion
+
+struct DSFXEcho
+  fWetDryMix FLOAT
+  fFeedback FLOAT
+  fLeftDelay FLOAT
+  fRightDelay FLOAT
+  lPanDelay LONG
+
+pointer LPDSFXEcho DSFXEcho
+
+pointer LPCDSFXEcho DSFXEcho
+
+enum [DSFXFLANGER_WAVE] LONG display=LONG
+  DSFXFLANGER_WAVE_TRIANGLE 0
+  DSFXFLANGER_WAVE_SIN      1
+
+enum [DSFXFLANGER_PHASE] LONG display=LONG
+  DSFXFLANGER_PHASE_NEG_180 0
+  DSFXFLANGER_PHASE_NEG_90  1
+  DSFXFLANGER_PHASE_ZERO    2
+  DSFXFLANGER_PHASE_90      3
+  DSFXFLANGER_PHASE_180     4
+
+struct DSFXFlanger
+  fWetDryMix FLOAT
+  fDepth FLOAT
+  fFeedback FLOAT
+  fFrequency FLOAT
+  lWaveform [DSFXFLANGER_WAVE]
+  fDelay FLOAT
+  lPhase [DSFXFLANGER_PHASE]
+
+pointer LPDSFXFlanger DSFXFlanger
+
+pointer LPCDSFXFlanger DSFXFlanger
+
+enum [DSFXGARGLE_WAVE] DWORD display=DWORD
+  DSFXGARGLE_WAVE_TRIANGLE 0
+  DSFXGARGLE_WAVE_SQUARE   1
+
+struct DSFXGargle
+  dwRateHz DWORD
+  dwWaveShape [DSFXGARGLE_WAVE]
+
+pointer LPDSFXGargle DSFXGargle
+
+pointer LPCDSFXGargle DSFXGargle
+
+struct DSFXI3DL2Reverb
+  lRoom LONG
+  lRoomHF LONG
+  flRoomRolloffFactor FLOAT
+  flDecayTime FLOAT
+  flDecayHFRatio FLOAT
+  lReflections LONG
+  flReflectionsDelay FLOAT
+  lReverb LONG
+  flReverbDelay FLOAT
+  flDiffusion FLOAT
+  flDensity FLOAT
+  flHFReference FLOAT
+
+pointer LPDSFXI3DL2Reverb DSFXI3DL2Reverb
+
+pointer LPCDSFXI3DL2Reverb DSFXI3DL2Reverb
+
+struct DSFXParamEq
+  fCenter FLOAT
+  fBandwidth FLOAT
+  fGain FLOAT
+
+pointer LPDSFXParamEq DSFXParamEq
+
+pointer LPCDSFXParamEq DSFXParamEq
+
+struct DSFXWavesReverb
+  fInGain FLOAT
+  fReverbMix FLOAT
+  fReverbTime FLOAT
+  fHighFreqRTRatio FLOAT
+
+pointer LPDSFXWavesReverb DSFXWavesReverb
+
+pointer LPCDSFXWavesReverb DSFXWavesReverb
+
+enum [DSBPN_Enum] DWORD display=DWORD
+  DSBPN_OFFSETSTOP 0xFFFFFFFF
+
+struct DSBPOSITIONNOTIFY
+  dwOffset [DSBPN_Enum]
+  hEventNotify HANDLE
+
+pointer LPCDSBPOSITIONNOTIFY DSBPOSITIONNOTIFY
+
+flag [DSCCAPS_Flags] DWORD display=DWORD
+  DSCCAPS_MULTIPLECAPTURE 0x00000001
+  DSCCAPS_EMULDRIVER      0x00000020
+  DSCCAPS_CERTIFIED       0x00000040
+
+struct DSCCAPS
+  dwSize DWORD
+  dwFlags [DSCCAPS_Flags]
+  dwFormats DWORD
+  dwChannels DWORD
+
+pointer LPDSCCAPS DSCCAPS
+
+flag [DSCAPS_Flags] DWORD display=DWORD
+  DSCAPS_PRIMARYMONO     0x00000001
+  DSCAPS_PRIMARYSTEREO   0x00000002
+  DSCAPS_PRIMARY8BIT     0x00000004
+  DSCAPS_PRIMARY16BIT    0x00000008
+  DSCAPS_CONTINUOUSRATE  0x00000010
+  DSCAPS_EMULDRIVER      0x00000020
+  DSCAPS_CERTIFIED       0x00000040
+  DSCAPS_SECONDARYMONO   0x00000100
+  DSCAPS_SECONDARYSTEREO 0x00000200
+  DSCAPS_SECONDARY8BIT   0x00000400
+  DSCAPS_SECONDARY16BIT  0x00000800
+
+struct DSCAPS
+  dwSize DWORD
+  dwFlags [DSCAPS_Flags]
+  dwMinSecondarySampleRate DWORD
+  dwMaxSecondarySampleRate DWORD
+  dwPrimaryBuffers DWORD
+  dwMaxHwMixingAllBuffers DWORD
+  dwMaxHwMixingStaticBuffers DWORD
+  dwMaxHwMixingStreamingBuffers DWORD
+  dwFreeHwMixingAllBuffers DWORD
+  dwFreeHwMixingStaticBuffers DWORD
+  dwFreeHwMixingStreamingBuffers DWORD
+  dwMaxHw3DAllBuffers DWORD
+  dwMaxHw3DStaticBuffers DWORD
+  dwMaxHw3DStreamingBuffers DWORD
+  dwFreeHw3DAllBuffers DWORD
+  dwFreeHw3DStaticBuffers DWORD
+  dwFreeHw3DStreamingBuffers DWORD
+  dwTotalHwMemBytes DWORD
+  dwFreeHwMemBytes DWORD
+  dwMaxContigFreeHwMemBytes DWORD
+  dwUnlockTransferRateHwBuffers DWORD
+  dwPlayCpuOverheadSwBuffers DWORD
+  dwReserved1 DWORD
+  dwReserved2 DWORD
+
+pointer LPDSCAPS DSCAPS
+
+flag [DSSCL_Flags] DWORD display=DWORD
+  DSSCL_NORMAL       0x00000001
+  DSSCL_PRIORITY     0x00000002
+  DSSCL_EXCLUSIVE    0x00000003
+  DSSCL_WRITEPRIMARY 0x00000004
+
+flag [DSSPEAKER_Flags] DWORD display=DWORD
+  DSSPEAKER_DIRECTOUT        0x00000000
+  DSSPEAKER_HEADPHONE        0x00000001
+  DSSPEAKER_MONO             0x00000002
+  DSSPEAKER_QUAD             0x00000003
+  DSSPEAKER_STEREO           0x00000004
+  DSSPEAKER_SURROUND         0x00000005
+  DSSPEAKER_5POINT1_BACK     0x00000006
+  DSSPEAKER_7POINT1_WIDE     0x00000007
+  DSSPEAKER_7POINT1_SURROUND 0x00000008
+  DSSPEAKER_5POINT1_SURROUND 0x00000009
+  DSSPEAKER_GEOMETRY_MIN     0x00050000
+  DSSPEAKER_GEOMETRY_NARROW  0x000A0000
+  DSSPEAKER_GEOMETRY_WIDE    0x00140000
+  DSSPEAKER_GEOMETRY_MAX     0x00B40000
+
+pointer [DSSPEAKER_Flags*] [DSSPEAKER_Flags] display=LPDWORD
+
+flag [DSBPLAY_Flags] DWORD display=DWORD
+  DSBPLAY_LOOPING              0x00000001
+  DSBPLAY_LOCHARDWARE          0x00000002
+  DSBPLAY_LOCSOFTWARE          0x00000004
+  DSBPLAY_TERMINATEBY_TIME     0x00000008
+  DSBPLAY_TERMINATEBY_DISTANCE 0x000000010
+  DSBPLAY_TERMINATEBY_PRIORITY 0x000000020
+
+flag [DSBLOCK_Flags] DWORD display=DWORD
+  DSBLOCK_FROMWRITECURSOR 0x00000001
+  DSBLOCK_ENTIREBUFFER    0x00000002
+
+func DirectSoundCaptureCreate ordinal=6
+  [DS_HRESULT]
+  pcGuidDevice LPCGUID
+  ppDSC LPDIRECTSOUNDCAPTURE*
+  pUnkOuter LPUNKNOWN
+
+func DirectSoundCaptureCreate8 ordinal=12
+  [DS_HRESULT]
+  lpcGUID LPCGUID
+  lplpDSC LPDIRECTSOUNDCAPTURE8*
+  pUnkOuter LPUNKNOWN
+
+func DirectSoundCaptureEnumerate bothCharset ordinalA=7 ordinalW=8
+  [DS_HRESULT]
+  lpDSEnumCallback LPDSENUMCALLBACK
+  lpContext LPVOID
+
+func DirectSoundCreate ordinal=1
+  [DS_HRESULT]
+  pcGuidDevice LPCGUID
+  ppDS LPDIRECTSOUND8*
+  pUnkOuter LPUNKNOWN
+
+func DirectSoundCreate8 ordinal=11
+  [DS_HRESULT]
+  lpcGuidDevice LPCGUID
+  ppDS8 LPDIRECTSOUND8*
+  pUnkOuter LPUNKNOWN
+
+func DirectSoundEnumerate bothCharset ordinalA=2 ordinalW=3
+  [DS_HRESULT]
+  lpDSEnumCallback LPDSENUMCALLBACK
+  lpContext LPVOID
+
+func DirectSoundFullDuplexCreate ordinal=10
+  [DS_HRESULT]
+  pcGuidCaptureDevice LPCGUID
+  pcGuidRenderDevice LPCGUID
+  pcDSCBufferDesc LPCDSCBUFFERDESC
+  pcDSBufferDesc LPCDSBUFFERDESC
+  hWnd HWND
+  dwLevel DWORD
+  ppDSFD LPDIRECTSOUNDFULLDUPLEX*
+  ppDSCBuffer8 LPDIRECTSOUNDCAPTUREBUFFER8*
+  ppDSBuffer8 LPDIRECTSOUNDBUFFER8*
+  pUnkOuter LPUNKNOWN
+
+func GetDeviceID ordinal=9
+  [DS_HRESULT]
+  pGuidSrc LPCGUID
+  pGuidDest LPGUID
+

@@ -1,0 +1,27 @@
+include Interfaces\COM\IPersist.txt
+
+ingterface IPersistStorage base=IPersist id={0000010a-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func IsDirty
+    HRESULT
+
+  func InitNew
+    HRESULT
+    pStg IStorage*
+
+  func Load
+    HRESULT
+    pStg IStorage*
+
+  func Save
+    HRESULT
+    pStgSave IStorage*
+    fSameAsLoad BOOL
+
+  func SaveCompleted
+    HRESULT
+    pStgNew IStorage*
+
+  func HandsOffStorage
+    HRESULT
+
+

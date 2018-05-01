@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+
+ingterface IServerSecurity base=IUnknown id={0000013E-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func QueryBlanket
+    HRESULT
+    pAuthnSvc DWORD*
+    pAuthzSvc DWORD*
+    pServerPrincName OLECHAR**
+    pAuthnLevel DWORD*
+    pImpLevel DWORD*
+    pPrivs void**
+    pCapabilities DWORD*
+
+  func ImpersonateClient
+    HRESULT
+
+  func RevertToSelf
+    HRESULT
+
+  func IsImpersonating
+    BOOL
+
+

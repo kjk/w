@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellChangeNotify base=IUnknown id={D82BE2B1-5764-11D0-A96E-00C04FD705A2} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnChange
+    HRESULT
+    lEvent LONG
+    pidl1 PCIDLIST_ABSOLUTE
+    pidl2 PCIDLIST_ABSOLUTE
+
+

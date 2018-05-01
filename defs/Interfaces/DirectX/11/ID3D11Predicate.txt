@@ -1,0 +1,4 @@
+include Interfaces\DirectX\11\ID3D11Query.txt
+
+ingterface ID3D11Predicate base=ID3D11Query id={9eb576dd-9f77-4d86-81aa-8bab5fe490e2} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+

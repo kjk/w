@@ -1,0 +1,10 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1AnalysisTransform base=IUnknown id={0359dc30-95e6-4568-9055-27720d130e93} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func ProcessAnalysisResults
+    [D2D_HRESULT]
+    analysisData "CONST BYTE*" length=analysisDataCount
+    analysisDataCount UINT32
+
+

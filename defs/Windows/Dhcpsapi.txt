@@ -1,0 +1,2563 @@
+include Headers\windows.h.txt
+
+dll Dhcpsapi.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Dynamic Host Configuration Protocol (DHCP)/DHCP Server Management"
+alias "DHCP_CONST WCHAR*" WCHAR*
+
+alias DHCP_IP_ADDRESS DWORD
+
+pointer LPDHCP_IP_ADDRESS DHCP_IP_ADDRESS
+
+alias DHCP_IP_MASK DWORD
+
+alias DHCP_OPTION_ID DWORD
+
+alias "DHCP_CONST DHCP_IP_ADDRESS" DHCP_IP_ADDRESS
+
+alias "DHCP_CONST LPWSTR" LPWSTR
+
+alias DHCP_RESUME_HANDLE DWORD
+
+pointer DHCP_RESUME_HANDLE* DHCP_RESUME_HANDLE
+
+alias "DHCP_CONST BOOL" BOOL
+
+array "BYTE [MAX_PATTERN_LENGTH]" base=BYTE count=255
+
+flag [DHCP_FIELDS_TO_SET] DWORD display=DWORD
+  Set_APIProtocolSupport      0x00000001
+  Set_DatabaseName            0x00000002
+  Set_DatabasePath            0x00000004
+  Set_BackupPath              0x00000008
+  Set_BackupInterval          0x00000010
+  Set_DatabaseLoggingFlag     0x00000020
+  Set_RestoreFlag             0x00000040
+  Set_DatabaseCleanupInterval 0x00000080
+  Set_DebugFlag               0x00000100
+  Set_PingRetries             0x00000200
+  Set_BootFileTable           0x00000400
+  Set_AuditLogState           0x00000800
+  Set_QuarantineON            0x00001000
+  Set_QuarantineDefFail       0x00002000
+
+flag [DHCP_SERVER_USE_RPC_FLAGS] DWORD display=DWORD
+  DHCP_SERVER_USE_RPC_OVER_TCPIP 0x00000001
+  DHCP_SERVER_USE_RPC_OVER_NP    0x00000002
+  DHCP_SERVER_USE_RPC_OVER_LPC   0x00000004
+  DHCP_SERVER_USE_RPC_OVER_ALL   0x00000007
+
+flag [DHCP_DEBUG_FLAGS] DWORD display=DWORD
+  DEBUG_ADDRESS     0x00000001
+  DEBUG_CLIENT      0x00000002
+  DEBUG_PARAMETERS  0x00000004
+  DEBUG_OPTIONS     0x00000008
+  DEBUG_ERRORS      0x00000010
+  DEBUG_STOC        0x00000020
+  DEBUG_INIT        0x00000040
+  DEBUG_SCAVENGER   0x00000080
+  DEBUG_TIMESTAMP   0x00000100
+  DEBUG_APIS        0x00000200
+  DEBUG_REGISTRY    0x00000400
+  DEBUG_JET         0x00000800
+  DEBUG_THREADPOOL  0x00001000
+  DEBUG_AUDITLOG    0x00002000
+  DEBUG_QUARANTINE  0x00004000
+  DEBUG_MISC        0x00008000
+  DEBUG_MESSAGE     0x00010000
+  DEBUG_API_VERBOSE 0x00020000
+  DEBUG_DNS         0x00040000
+  DEBUG_MSTOC       0x00080000
+  DEBUG_TRACK       0x00100000
+  DEBUG_ROGUE       0x00200000
+  DEBUG_PNP         0x00400000
+  DEBUG_PERF        0x01000000
+  DEBUG_ALLOC       0x02000000
+  DEBUG_PING        0x04000000
+  DEBUG_THREAD      0x08000000
+  DEBUG_TRACE       0x10000000
+  DEBUG_TRACE_CALLS 0x20000000
+  DEBUG_STARTUP_BRK 0x40000000
+  DEBUG_LOG_IN_FILE 0x80000000
+
+flag [CLIENT_TYPE_FLAGS] BYTE display=BYTE
+  CLIENT_TYPE_UNSPECIFIED      0x0
+  CLIENT_TYPE_DHCP             0x1
+  CLIENT_TYPE_BOOTP            0x2
+  CLIENT_TYPE_BOTH             0x3
+  CLIENT_TYPE_RESERVATION_FLAG 0x4
+  CLIENT_TYPE_NONE             0x64
+
+flag [V5_ADDRESS_STATE] BYTE display=BYTE
+  V5_ADDRESS_STATE_OFFERED  0x0
+  V5_ADDRESS_STATE_ACTIVE   0x1
+  V5_ADDRESS_STATE_DECLINED 0x2
+  V5_ADDRESS_STATE_DOOM     0x3
+
+flag [FILTER_STATUS_FLAGS] DWORD display=DWORD
+  FILTER_STATUS_NONE                         0x00000001
+  FILTER_STATUS_FULL_MATCH_IN_ALLOW_LIST     0x00000002
+  FILTER_STATUS_FULL_MATCH_IN_DENY_LIST      0x00000004
+  FILTER_STATUS_WILDCARD_MATCH_IN_ALLOW_LIST 0x00000008
+  FILTER_STATUS_WILDCARD_MATCH_IN_DENY_LIST  0x00000010
+
+struct DHCP_ADDR_PATTERN
+  MatchHWType BOOL
+  HWType BYTE
+  IsWildcard BOOL
+  Length BYTE
+  Pattern "BYTE [MAX_PATTERN_LENGTH]"
+
+pointer DHCP_ADDR_PATTERN* DHCP_ADDR_PATTERN
+
+pointer LPDHCP_ADDR_PATTERN DHCP_ADDR_PATTERN
+
+struct DHCP_IPV6_ADDRESS
+  HighOrderBits ULONGLONG
+  LowOrderBits ULONGLONG
+
+pointer LPDHCP_IPV6_ADDRESS DHCP_IPV6_ADDRESS
+
+struct DHCP_IP_RANGE_V6
+  StartAddress DHCP_IPV6_ADDRESS
+  EndAddress DHCP_IPV6_ADDRESS
+
+pointer DHCP_IP_RANGE_V6* DHCP_IP_RANGE_V6
+
+struct DHCP_BINARY_DATA
+  DataLength DWORD
+  Data BYTE* length=DataLength
+
+alias DHCP_CLIENT_UID DHCP_BINARY_DATA
+
+pointer DHCP_CLIENT_UID* DHCP_CLIENT_UID
+
+struct DHCP_IP_RESERVATION_V6
+  ReservedIpAddress DHCP_IPV6_ADDRESS
+  ReservedForClient DHCP_CLIENT_UID*
+  InterfaceId DWORD
+
+pointer DHCP_IP_RESERVATION_V6* DHCP_IP_RESERVATION_V6
+
+struct DHCP_IP_RANGE
+  StartAddress DHCP_IP_ADDRESS
+  EndAddress DHCP_IP_ADDRESS
+
+pointer DHCP_IP_RANGE* DHCP_IP_RANGE
+
+pointer LPDHCP_IP_RANGE DHCP_IP_RANGE
+
+enum DHCP_OPTION_DATA_TYPE UINT
+  DhcpByteOption             0
+  DhcpWordOption             1
+  DhcpDWordOption            2
+  DhcpDWordDWordOption       3
+  DhcpIpAddressOption        4
+  DhcpStringDataOption       5
+  DhcpBinaryDataOption       6
+  DhcpEncapsulatedDataOption 7
+  DhcpIpv6AddressOption      8
+
+struct DWORD_DWORD
+  DWord1 DWORD
+  DWord2 DWORD
+
+union DHCP_OPTION_ELEMENT_UNION
+  ByteOption BYTE
+  WordOption WORD
+  DWordOption DWORD
+  DWordDWordOption DWORD_DWORD
+  IpAddressOption DHCP_IP_ADDRESS
+  StringDataOption LPWSTR
+  BinaryDataOption DHCP_BINARY_DATA
+  EncapsulatedDataOption DHCP_BINARY_DATA
+  Ipv6AddressDataOption LPWSTR
+
+struct DHCP_OPTION_DATA_ELEMENT
+  OptionType DHCP_OPTION_DATA_TYPE
+  Element DHCP_OPTION_ELEMENT_UNION
+
+pointer LPDHCP_OPTION_DATA_ELEMENT DHCP_OPTION_DATA_ELEMENT
+
+struct DHCP_BOOTP_IP_RANGE
+  StartAddress DHCP_IP_ADDRESS
+  EndAddress DHCP_IP_ADDRESS
+  BootpAllocated ULONG
+  MaxBootpAllowed ULONG
+
+pointer DHCP_BOOTP_IP_RANGE* DHCP_BOOTP_IP_RANGE
+
+struct DHCP_HOST_INFO
+  IpAddress DHCP_IP_ADDRESS
+  NetBiosName LPWSTR
+  HostName LPWSTR
+
+pointer DHCP_HOST_INFO* DHCP_HOST_INFO
+
+struct DHCP_IP_CLUSTER
+  ClusterAddress DHCP_IP_ADDRESS
+  ClusterMask DWORD
+
+pointer DHCP_IP_CLUSTER* DHCP_IP_CLUSTER
+
+struct DHCP_IP_RESERVATION_V4
+  ReservedIpAddress DHCP_IP_ADDRESS
+  ReservedForClient DHCP_CLIENT_UID*
+  bAllowedClientTypes [CLIENT_TYPE_FLAGS]
+
+pointer DHCP_IP_RESERVATION_V4* DHCP_IP_RESERVATION_V4
+
+union DHCP_SUBNET_ELEMENT_UNION_V5
+  IpRange DHCP_BOOTP_IP_RANGE*
+  SecondaryHost DHCP_HOST_INFO*
+  ReservedIp DHCP_IP_RESERVATION_V4*
+  ExcludeIpRange DHCP_IP_RANGE*
+  IpUsedCluster DHCP_IP_CLUSTER*
+
+enum DHCP_SUBNET_ELEMENT_TYPE UINT
+  DhcpIpRanges          0
+  DhcpSecondaryHosts    1
+  DhcpReservedIps       2
+  DhcpExcludedIpRanges  3
+  DhcpIpUsedClusters    4
+  DhcpIpRangesDhcpOnly  5
+  DhcpIpRangesDhcpBootp 6
+  DhcpIpRangesBootpOnly 7
+
+struct DHCP_SUBNET_ELEMENT_DATA_V5
+  ElementType DHCP_SUBNET_ELEMENT_TYPE
+  Element DHCP_SUBNET_ELEMENT_UNION_V5
+
+pointer "DHCP_CONST DHCP_SUBNET_ELEMENT_DATA_V5*" DHCP_SUBNET_ELEMENT_DATA_V5
+
+enum DHCP_SEARCH_INFO_TYPE UINT
+  DhcpClientIpAddress       0
+  DhcpClientHardwareAddress 1
+  DhcpClientName            2
+
+union DHCP_CLIENT_SEARCH_UNION
+  ClientIpAddress DHCP_IP_ADDRESS
+  ClientHardwareAddress DHCP_CLIENT_UID
+  ClientName LPWSTR
+
+struct DHCP_SEARCH_INFO
+  SearchType DHCP_SEARCH_INFO_TYPE
+  SearchInfo DHCP_CLIENT_SEARCH_UNION
+
+pointer LPDHCP_SEARCH_INFO DHCP_SEARCH_INFO
+
+pointer "DHCP_CONST DHCP_SEARCH_INFO*" DHCP_SEARCH_INFO
+
+struct DHCP_RESERVED_SCOPE
+  ReservedIpAddress DHCP_IP_ADDRESS
+  ReservedIpSubnetAddress DHCP_IP_ADDRESS
+
+union DHCP_OPTION_SCOPE_UNION
+  DefaultScopeInfo PVOID
+  GlobalScopeInfo PVOID
+  SubnetScopeInfo DHCP_IP_ADDRESS
+  ReservedScopeInfo DHCP_RESERVED_SCOPE
+  MScopeInfo LPWSTR
+
+enum DHCP_OPTION_SCOPE_TYPE UINT
+  DhcpDefaultOptions  0
+  DhcpGlobalOptions   1
+  DhcpSubnetOptions   2
+  DhcpReservedOptions 3
+  DhcpMScopeOptions   4
+
+struct DHCP_OPTION_SCOPE_INFO
+  ScopeType DHCP_OPTION_SCOPE_TYPE
+  ScopeInfo DHCP_OPTION_SCOPE_UNION
+
+pointer LPDHCP_OPTION_SCOPE_INFO DHCP_OPTION_SCOPE_INFO
+
+pointer "DHCP_CONST DHCP_OPTION_SCOPE_INFO*" DHCP_OPTION_SCOPE_INFO
+
+struct DHCP_OPTION_DATA
+  NumElements DWORD
+  Elements LPDHCP_OPTION_DATA_ELEMENT count=NumElements
+
+pointer LPDHCP_OPTION_DATA DHCP_OPTION_DATA
+
+pointer "DHCP_CONST DHCP_OPTION_DATA*" DHCP_OPTION_DATA
+
+struct DHCP_OPTION_VALUE
+  OptionID DHCP_OPTION_ID
+  Value DHCP_OPTION_DATA
+
+pointer DHCP_OPTION_VALUE* DHCP_OPTION_VALUE
+
+pointer LPDHCP_OPTION_VALUE DHCP_OPTION_VALUE
+
+pointer LPDHCP_OPTION_VALUE* LPDHCP_OPTION_VALUE
+
+struct DHCP_OPTION_VALUE_ARRAY
+  NumElements DWORD
+  Values LPDHCP_OPTION_VALUE count=NumElements
+
+pointer LPDHCP_OPTION_VALUE_ARRAY DHCP_OPTION_VALUE_ARRAY
+
+pointer LPDHCP_OPTION_VALUE_ARRAY* LPDHCP_OPTION_VALUE_ARRAY
+
+pointer "DHCP_CONST DHCP_OPTION_VALUE_ARRAY*" DHCP_OPTION_VALUE_ARRAY
+
+struct [DHCP_ALL_OPTION_VALUES_s] display=struct
+  ClassName LPWSTR
+  VendorName LPWSTR
+  IsVendor BOOL
+  OptionsArray LPDHCP_OPTION_VALUE_ARRAY
+
+pointer [DHCP_ALL_OPTION_VALUES_s*] [DHCP_ALL_OPTION_VALUES_s] display=struct*
+
+struct DHCP_ALL_OPTION_VALUES
+  Flags DWORD
+  NumElements DWORD
+  Options [DHCP_ALL_OPTION_VALUES_s*] count=NumElements
+
+pointer LPDHCP_ALL_OPTION_VALUES* DHCP_ALL_OPTION_VALUES
+
+struct DHCP_IP_RESERVATION
+  ReservedIpAddress DHCP_IP_ADDRESS
+  ReservedForClient DHCP_CLIENT_UID*
+
+pointer DHCP_IP_RESERVATION* DHCP_IP_RESERVATION
+
+union DHCP_SUBNET_ELEMENT_UNION
+  IpRange DHCP_IP_RANGE*
+  SecondaryHost DHCP_HOST_INFO*
+  ReservedIp DHCP_IP_RESERVATION*
+  ExcludeIpRange DHCP_IP_RANGE*
+  IpUsedCluster DHCP_IP_CLUSTER*
+
+struct DHCP_SUBNET_ELEMENT_DATA
+  ElementType DHCP_SUBNET_ELEMENT_TYPE
+  Element DHCP_SUBNET_ELEMENT_UNION
+
+pointer LPDHCP_SUBNET_ELEMENT_DATA DHCP_SUBNET_ELEMENT_DATA
+
+pointer "DHCP_CONST DHCP_SUBNET_ELEMENT_DATA*" DHCP_SUBNET_ELEMENT_DATA
+
+enum DHCP_SUBNET_ELEMENT_TYPE_V6 UINT
+  Dhcpv6IpRanges         0
+  Dhcpv6ReservedIps      1
+  Dhcpv6ExcludedIpRanges 2
+
+union DHCP_SUBNET_ELEMENT_UNION_V6
+  IpRange DHCP_IP_RANGE_V6*
+  ReservedIp DHCP_IP_RESERVATION_V6*
+  ExcludeIpRange DHCP_IP_RANGE_V6*
+
+struct DHCP_SUBNET_ELEMENT_DATA_V6
+  ElementType DHCP_SUBNET_ELEMENT_TYPE_V6
+  Element DHCP_SUBNET_ELEMENT_UNION_V6
+
+pointer LPDHCP_SUBNET_ELEMENT_DATA_V6 DHCP_SUBNET_ELEMENT_DATA_V6
+
+enum DHCP_SEARCH_INFO_TYPE_V6 UINT
+  Dhcpv6ClientIpAddress 0
+  Dhcpv6ClientDUID      1
+  Dhcpv6ClientName      2
+
+union DHCP_CLIENT_SEARCH_UNION_V6
+  ClientIpAddress DHCP_IPV6_ADDRESS
+  ClientDUID DHCP_CLIENT_UID
+  ClientName LPWSTR
+
+struct DHCP_SEARCH_INFO_V6
+  SearchType DHCP_SEARCH_INFO_TYPE_V6
+  SearchInfo DHCP_CLIENT_SEARCH_UNION_V6
+
+pointer LPDHCP_SEARCH_INFO_V6 DHCP_SEARCH_INFO_V6
+
+pointer "DHCP_CONST DHCP_SEARCH_INFO_V6*" DHCP_SEARCH_INFO_V6
+
+struct DHCP_RESERVED_SCOPE6
+  ReservedIpAddress DHCP_IPV6_ADDRESS
+  ReservedIpSubnetAddress DHCP_IPV6_ADDRESS
+
+enum DHCP_OPTION_SCOPE_TYPE6 UINT
+  DhcpDefaultOptions6  0
+  DhcpScopeOptions6    1
+  DhcpReservedOptions6 2
+  DhcpGlobalOptions6   3
+
+union DHCP_OPTION_SCOPE_UNION6
+  DefaultScopeInfo PVOID
+  SubnetScopeInfo DHCP_IPV6_ADDRESS
+  ReservedScopeInfo DHCP_RESERVED_SCOPE6
+
+struct DHCP_OPTION_SCOPE_INFO6
+  ScopeType DHCP_OPTION_SCOPE_TYPE6
+  ScopeInfo DHCP_OPTION_SCOPE_UNION6
+
+pointer LPDHCP_OPTION_SCOPE_INFO6 DHCP_OPTION_SCOPE_INFO6
+
+pointer LPDHCP_OPTION_SCOPE_INFO6* LPDHCP_OPTION_SCOPE_INFO6
+
+enum DHCP_OPTION_TYPE UINT
+  DhcpUnaryElementTypeOption 0
+  DhcpArrayTypeOption        1
+
+struct DHCP_OPTION
+  OptionID DHCP_OPTION_ID
+  OptionName LPWSTR
+  OptionComment LPWSTR
+  DefaultValue DHCP_OPTION_DATA
+  OptionType DHCP_OPTION_TYPE
+
+pointer LPDHCP_OPTION DHCP_OPTION
+
+pointer LPDHCP_OPTION* LPDHCP_OPTION
+
+pointer "DHCP_CONST DHCP_OPTION*" DHCP_OPTION
+
+struct DHCP_OPTION_ARRAY
+  NumElements DWORD
+  Options LPDHCP_OPTION count=NumElements
+
+pointer LPDHCP_OPTION_ARRAY DHCP_OPTION_ARRAY
+
+pointer LPDHCP_OPTION_ARRAY* LPDHCP_OPTION_ARRAY
+
+struct [DHCP_ALL_OPTIONS_s]
+  Option DHCP_OPTION
+  VendorName LPWSTR
+  ClassName LPWSTR
+
+pointer [DHCP_ALL_OPTIONS_s*] [DHCP_ALL_OPTIONS_s] display=struct*
+
+struct DHCP_ALL_OPTIONS
+  Flags DWORD
+  NonVendorOptions LPDHCP_OPTION_ARRAY
+  NumVendorOptions DWORD
+  VendorOptions [DHCP_ALL_OPTIONS_s*] count=NumVendorOptions
+
+pointer LPDHCP_ALL_OPTIONS DHCP_ALL_OPTIONS
+
+pointer LPDHCP_ALL_OPTIONS* LPDHCP_ALL_OPTIONS
+
+enum DHCP_FILTER_LIST_TYPE UINT
+  Deny  0
+  Allow 1
+
+struct DHCP_FILTER_ADD_INFO
+  AddrPatt DHCP_ADDR_PATTERN
+  Comment LPWSTR
+  ListType DHCP_FILTER_LIST_TYPE
+
+pointer DHCP_FILTER_ADD_INFO* DHCP_FILTER_ADD_INFO
+
+struct DHCP_FILTER_RECORD
+  AddrPatt DHCP_ADDR_PATTERN
+  Comment LPWSTR
+
+pointer LPDHCP_FILTER_RECORD DHCP_FILTER_RECORD
+
+struct DATE_TIME
+  dwLowDateTime DWORD
+  dwHighDateTime DWORD
+
+struct DHCP_CLASS_INFO
+  ClassName LPWSTR
+  ClassComment LPWSTR
+  ClassDataLength DWORD
+  IsVendor BOOL
+  Flags DWORD
+  ClassData LPBYTE
+
+pointer LPDHCP_CLASS_INFO DHCP_CLASS_INFO
+
+pointer LPDHCP_CLASS_INFO* LPDHCP_CLASS_INFO
+
+struct DHCP_CLIENT_INFO
+  ClientIpAddress DHCP_IP_ADDRESS
+  SubnetMask DHCP_IP_MASK
+  ClientHardwareAddress DHCP_CLIENT_UID
+  ClientName LPWSTR
+  ClientComment LPWSTR
+  ClientLeaseExpires DATE_TIME
+  OwnerHost DHCP_HOST_INFO
+
+pointer "DHCP_CONST DHCP_CLIENT_INFO*" DHCP_CLIENT_INFO
+
+pointer LPDHCP_CLIENT_INFO DHCP_CLIENT_INFO
+
+pointer LPDHCP_CLIENT_INFO* LPDHCP_CLIENT_INFO
+
+struct DHCP_CLIENT_INFO_V4
+  ClientIpAddress DHCP_IP_ADDRESS
+  SubnetMask DHCP_IP_MASK
+  ClientHardwareAddress DHCP_CLIENT_UID
+  ClientName LPWSTR
+  ClientComment LPWSTR
+  ClientLeaseExpires DATE_TIME
+  OwnerHost DHCP_HOST_INFO
+  bClientType [CLIENT_TYPE_FLAGS]
+
+pointer "DHCP_CONST DHCP_CLIENT_INFO_V4*" DHCP_CLIENT_INFO_V4
+
+pointer LPDHCP_CLIENT_INFO_V4* DHCP_CLIENT_INFO_V4
+
+enum QuarantineStatus UINT
+  NOQUARANTINE       0
+  RESTRICTEDACCESS   1
+  DROPPACKET         2
+  PROBATION          3
+  EXEMPT             4
+  DEFAULTQUARSETTING 5
+  NOQUARINFO         6
+
+struct DHCP_CLIENT_INFO_VQ
+  ClientIpAddress DHCP_IP_ADDRESS
+  SubnetMask DHCP_IP_MASK
+  ClientHardwareAddress DHCP_CLIENT_UID
+  ClientName LPWSTR
+  ClientComment LPWSTR
+  ClientLeaseExpires DATE_TIME
+  OwnerHost DHCP_HOST_INFO
+  bClientType [CLIENT_TYPE_FLAGS]
+  AddressState [V5_ADDRESS_STATE]
+  Status QuarantineStatus
+  ProbationEnds DATE_TIME
+  QuarantineCapable BOOL
+
+pointer LPDHCP_CLIENT_INFO_VQ DHCP_CLIENT_INFO_VQ
+
+pointer LPDHCP_CLIENT_INFO_VQ* LPDHCP_CLIENT_INFO_VQ
+
+enum DHCP_SUBNET_STATE UINT
+  DhcpSubnetEnabled          0
+  DhcpSubnetDisabled         1
+  DhcpSubnetEnabledSwitched  2
+  DhcpSubnetDisabledSwitched 3
+  DhcpSubnetInvalidState     4
+
+struct DHCP_SUBNET_INFO
+  SubnetAddress DHCP_IP_ADDRESS
+  SubnetMask DHCP_IP_MASK
+  SubnetName LPWSTR
+  SubnetComment LPWSTR
+  PrimaryHost DHCP_HOST_INFO
+  SubnetState DHCP_SUBNET_STATE
+
+pointer "DHCP_CONST DHCP_SUBNET_INFO*" DHCP_SUBNET_INFO
+
+pointer LPDHCP_SUBNET_INFO DHCP_SUBNET_INFO
+
+pointer LPDHCP_SUBNET_INFO* LPDHCP_SUBNET_INFO
+
+struct DHCP_SUBNET_INFO_VQ
+  SubnetAddress DHCP_IP_ADDRESS
+  SubnetMask DHCP_IP_MASK
+  SubnetName LPWSTR
+  SubnetComment LPWSTR
+  PrimaryHost DHCP_HOST_INFO
+  SubnetState DHCP_SUBNET_STATE
+  QuarantineOn DWORD
+  Reserved1 DWORD
+  Reserved2 DWORD
+  Reserved3 INT64
+  Reserved4 INT64
+
+pointer "DHCP_CONST DHCP_SUBNET_INFO_VQ*" DHCP_SUBNET_INFO_VQ
+
+pointer LPDHCP_SUBNET_INFO_VQ DHCP_SUBNET_INFO_VQ
+
+pointer LPDHCP_SUBNET_INFO_VQ* LPDHCP_SUBNET_INFO_VQ
+
+enum DHCP_FORCE_FLAG UINT
+  DhcpFullForce 0
+  DhcpNoForce   1
+
+struct DHCP_CLASS_INFO_ARRAY
+  NumElements DWORD
+  Classes LPDHCP_CLASS_INFO count=NumElements
+
+pointer LPDHCP_CLASS_INFO_ARRAY DHCP_CLASS_INFO_ARRAY
+
+pointer LPDHCP_CLASS_INFO_ARRAY* LPDHCP_CLASS_INFO_ARRAY
+
+struct DHCP_FILTER_ENUM_INFO
+  NumElements DWORD
+  pEnumRecords LPDHCP_FILTER_RECORD count=NumElements
+
+pointer LPDHCP_FILTER_ENUM_INFO DHCP_FILTER_ENUM_INFO
+
+pointer LPDHCP_FILTER_ENUM_INFO* LPDHCP_FILTER_ENUM_INFO
+
+struct DHCPDS_SERVER
+  Version DWORD
+  ServerName LPWSTR
+  ServerAddress DWORD
+  Flags DWORD
+  State DWORD
+  DsLocation LPWSTR
+  DsLocType DWORD
+
+pointer LPDHCPDS_SERVER DHCPDS_SERVER
+
+pointer LPDHCP_SERVER_INFO DHCPDS_SERVER
+
+struct DHCPDS_SERVERS
+  Flags DWORD
+  NumElements DWORD
+  Servers LPDHCPDS_SERVER count=NumElements
+
+pointer LPDHCP_SERVER_INFO_ARRAY DHCPDS_SERVERS
+
+pointer LPDHCP_SERVER_INFO_ARRAY* LPDHCP_SERVER_INFO_ARRAY
+
+struct DHCP_CLIENT_INFO_ARRAY
+  NumElements DWORD
+  Clients LPDHCP_CLIENT_INFO* count=NumElements
+
+pointer LPDHCP_CLIENT_INFO_ARRAY DHCP_CLIENT_INFO_ARRAY
+
+pointer LPDHCP_CLIENT_INFO_ARRAY* LPDHCP_CLIENT_INFO_ARRAY
+
+struct DHCP_CLIENT_INFO_V5
+  ClientIpAddress DHCP_IP_ADDRESS
+  SubnetMask DHCP_IP_MASK
+  ClientHardwareAddress DHCP_CLIENT_UID
+  ClientName LPWSTR
+  ClientComment LPWSTR
+  ClientLeaseExpires DATE_TIME
+  OwnerHost DHCP_HOST_INFO
+  bClientType [CLIENT_TYPE_FLAGS]
+  AddressState [V5_ADDRESS_STATE]
+
+pointer LPDHCP_CLIENT_INFO_V5 DHCP_CLIENT_INFO_V5
+
+pointer LPDHCP_CLIENT_INFO_V5* LPDHCP_CLIENT_INFO_V5
+
+struct DHCP_CLIENT_INFO_ARRAY_V5
+  NumElements DWORD
+  Clients LPDHCP_CLIENT_INFO_V5* count=NumElements
+
+pointer LPDHCP_CLIENT_INFO_ARRAY_V5 DHCP_CLIENT_INFO_ARRAY_V5
+
+pointer LPDHCP_CLIENT_INFO_ARRAY_V5* LPDHCP_CLIENT_INFO_ARRAY_V5
+
+struct DHCP_CLIENT_INFO_ARRAY_VQ
+  NumElements DWORD
+  Clients LPDHCP_CLIENT_INFO_VQ* count=NumElements
+
+pointer LPDHCP_CLIENT_INFO_ARRAY_VQ DHCP_CLIENT_INFO_ARRAY_VQ
+
+pointer LPDHCP_CLIENT_INFO_ARRAY_VQ* LPDHCP_CLIENT_INFO_ARRAY_VQ
+
+struct DHCP_CLIENT_FILTER_STATUS_INFO
+  ClientIpAddress DHCP_IP_ADDRESS
+  SubnetMask DHCP_IP_MASK
+  ClientHardwareAddress DHCP_CLIENT_UID
+  ClientName LPWSTR
+  ClientComment LPWSTR
+  ClientLeaseExpires DATE_TIME
+  OwnerHost DHCP_HOST_INFO
+  bClientType [CLIENT_TYPE_FLAGS]
+  AddressState [V5_ADDRESS_STATE]
+  Status QuarantineStatus
+  ProbationEnds DATE_TIME
+  QuarantineCapable BOOL
+  FilterStatus [FILTER_STATUS_FLAGS]
+
+pointer LPDHCP_CLIENT_FILTER_STATUS_INFO DHCP_CLIENT_FILTER_STATUS_INFO
+
+pointer LPDHCP_CLIENT_FILTER_STATUS_INFO* LPDHCP_CLIENT_FILTER_STATUS_INFO
+
+struct DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY
+  NumElements DWORD
+  Clients LPDHCP_CLIENT_FILTER_STATUS_INFO* count=NumElements
+
+pointer LPDHCP_CLIENT_FILTER_STATUS_INFO_ARRAY DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY
+
+pointer LPDHCP_CLIENT_FILTER_STATUS_INFO_ARRAY* LPDHCP_CLIENT_FILTER_STATUS_INFO_ARRAY
+
+struct DHCP_SUBNET_ELEMENT_INFO_ARRAY
+  NumElements DWORD
+  Elements LPDHCP_SUBNET_ELEMENT_DATA count=NumElements
+
+pointer LPDHCP_SUBNET_ELEMENT_INFO_ARRAY DHCP_SUBNET_ELEMENT_INFO_ARRAY
+
+pointer LPDHCP_SUBNET_ELEMENT_INFO_ARRAY* LPDHCP_SUBNET_ELEMENT_INFO_ARRAY
+
+struct DHCP_IP_ARRAY
+  NumElements DWORD
+  Elements LPDHCP_IP_ADDRESS count=NumElements
+
+pointer LPDHCP_IP_ARRAY DHCP_IP_ARRAY
+
+pointer LPDHCP_IP_ARRAY* LPDHCP_IP_ARRAY
+
+struct DHCP_FILTER_GLOBAL_INFO
+  EnforceAllowList BOOL
+  EnforceDenyList BOOL
+
+pointer DHCP_FILTER_GLOBAL_INFO* DHCP_FILTER_GLOBAL_INFO
+
+struct SCOPE_MIB_INFO_V5
+  Subnet DHCP_IP_ADDRESS
+  NumAddressesInuse DWORD
+  NumAddressesFree DWORD
+  NumPendingOffers DWORD
+
+pointer LPSCOPE_MIB_INFO_V5 SCOPE_MIB_INFO_V5
+
+struct DHCP_MIB_INFO_V5
+  Discovers DWORD
+  Offers DWORD
+  Requests DWORD
+  Acks DWORD
+  Naks DWORD
+  Declines DWORD
+  Releases DWORD
+  ServerStartTime DATE_TIME
+  QtnNumLeases DWORD
+  QtnPctQtnLeases DWORD
+  QtnProbationLeases DWORD
+  QtnNonQtnLeases DWORD
+  QtnExemptLeases DWORD
+  QtnCapableClients DWORD
+  QtnIASErrors DWORD
+  DelayedOffers DWORD
+  ScopesWithDelayedOffers DWORD
+  Scopes DWORD
+  ScopeInfo LPSCOPE_MIB_INFO_V5
+
+pointer LPDHCP_MIB_INFO_V5 DHCP_MIB_INFO_V5
+
+pointer LPDHCP_MIB_INFO_V5* LPDHCP_MIB_INFO_V5
+
+struct DHCP_BIND_ELEMENT
+  Flags ULONG
+  fBoundToDHCPServer BOOL
+  AdapterPrimaryAddress DHCP_IP_ADDRESS
+  AdapterSubnetAddress DHCP_IP_ADDRESS
+  IfDescription LPWSTR
+  IfIdSize ULONG
+  IfId LPBYTE
+
+pointer LPDHCP_BIND_ELEMENT DHCP_BIND_ELEMENT
+
+struct DHCP_BIND_ELEMENT_ARRAY
+  NumElements DWORD
+  Elements LPDHCP_BIND_ELEMENT count=NumElements
+
+pointer LPDHCP_BIND_ELEMENT_ARRAY DHCP_BIND_ELEMENT_ARRAY
+
+pointer LPDHCP_BIND_ELEMENT_ARRAY* LPDHCP_BIND_ELEMENT_ARRAY
+
+struct DHCP_SUPER_SCOPE_TABLE_ENTRY
+  SubnetAddress DHCP_IP_ADDRESS
+  SuperScopeNumber DWORD
+  NextInSuperScope DWORD
+  SuperScopeName LPWSTR
+
+pointer LPDHCP_SUPER_SCOPE_TABLE DHCP_SUPER_SCOPE_TABLE_ENTRY
+
+pointer LPDHCP_SUPER_SCOPE_TABLE* LPDHCP_SUPER_SCOPE_TABLE
+
+struct DHCP_SERVER_CONFIG_INFO_VQ
+  APIProtocolSupport [DHCP_SERVER_USE_RPC_FLAGS]
+  DatabaseName LPWSTR
+  DatabasePath LPWSTR
+  BackupPath LPWSTR
+  BackupInterval DWORD
+  DatabaseLoggingFlag DWORD
+  RestoreFlag DWORD
+  DatabaseCleanupInterval DWORD
+  DebugFlag [DHCP_DEBUG_FLAGS]
+  dwPingRetries DWORD
+  cbBootTableString DWORD
+  wszBootTableString WCHAR*
+  fAuditLog BOOL
+  QuarantineOn BOOL
+  QuarDefFail DWORD
+  QuarRuntimeStatus BOOL
+
+pointer LPDHCP_SERVER_CONFIG_INFO_VQ DHCP_SERVER_CONFIG_INFO_VQ
+
+pointer LPDHCP_SERVER_CONFIG_INFO_VQ* LPDHCP_SERVER_CONFIG_INFO_VQ
+
+struct DHCP_SERVER_CONFIG_INFO_V4
+  APIProtocolSupport [DHCP_SERVER_USE_RPC_FLAGS]
+  DatabaseName LPWSTR
+  DatabasePath LPWSTR
+  BackupPath LPWSTR
+  BackupInterval DWORD
+  DatabaseLoggingFlag DWORD
+  RestoreFlag DWORD
+  DatabaseCleanupInterval DWORD
+  DebugFlag [DHCP_DEBUG_FLAGS]
+  dwPingRetries DWORD
+  cbBootTableString DWORD
+  wszBootTableString WCHAR*
+  fAuditLog BOOL
+
+pointer LPDHCP_SERVER_CONFIG_INFO_V4 DHCP_SERVER_CONFIG_INFO_V4
+
+pointer LPDHCP_SERVER_CONFIG_INFO_V4* LPDHCP_SERVER_CONFIG_INFO_V4
+
+alias DHCP_RESUME_IPV6_HANDLE DHCP_IPV6_ADDRESS
+
+pointer DHCP_RESUME_IPV6_HANDLE* DHCP_RESUME_IPV6_HANDLE
+
+struct DHCP_CLASS_INFO_V6
+  ClassName LPWSTR
+  ClassComment LPWSTR
+  ClassDataLength DWORD
+  IsVendor BOOL
+  EnterpriseNumber DWORD
+  Flags DWORD
+  ClassData LPBYTE
+
+pointer LPDHCP_CLASS_INFO_V6 DHCP_CLASS_INFO_V6
+
+struct DHCP_SUBNET_INFO_V6
+  SubnetAddress DHCP_IPV6_ADDRESS
+  Prefix ULONG
+  Preference USHORT
+  SubnetName LPWSTR
+  SubnetComment LPWSTR
+  State DWORD
+  ScopeId DWORD
+
+pointer LPDHCP_SUBNET_INFO_V6 DHCP_SUBNET_INFO_V6
+
+pointer LPDHCP_SUBNET_INFO_V6* LPDHCP_SUBNET_INFO_V6
+
+struct DHCP_CLASS_INFO_ARRAY_V6
+  NumElements DWORD
+  Classes LPDHCP_CLASS_INFO_V6 count=NumElements
+
+pointer LPDHCP_CLASS_INFO_ARRAY_V6 DHCP_CLASS_INFO_ARRAY_V6
+
+pointer LPDHCP_CLASS_INFO_ARRAY_V6* LPDHCP_CLASS_INFO_ARRAY_V6
+
+struct DHCPV6_IP_ARRAY
+  NumElements DWORD
+  Elements LPDHCP_IPV6_ADDRESS count=NumElements
+
+pointer LPDHCPV6_IP_ARRAY DHCPV6_IP_ARRAY
+
+pointer LPDHCPV6_IP_ARRAY* LPDHCPV6_IP_ARRAY
+
+struct DHCP_HOST_INFO_V6
+  IpAddress DHCP_IPV6_ADDRESS
+  NetBiosName LPWSTR
+  HostName LPWSTR
+
+struct DHCP_CLIENT_INFO_V6
+  ClientIpAddress DHCP_IPV6_ADDRESS
+  ClientDUID DHCP_CLIENT_UID
+  AddressType DWORD
+  IAID DWORD
+  ClientName LPWSTR
+  ClientComment LPWSTR
+  ClientValidLeaseExpires DATE_TIME
+  ClientPrefLeaseExpires DATE_TIME
+  OwnerHost DHCP_HOST_INFO_V6
+
+pointer LPDHCP_CLIENT_INFO_V6 DHCP_CLIENT_INFO_V6
+
+pointer LPDHCP_CLIENT_INFO_V6* LPDHCP_CLIENT_INFO_V6
+
+pointer "DHCP_CONST LPDHCP_CLIENT_INFO_V6" DHCP_CLIENT_INFO_V6
+
+struct DHCP_CLIENT_INFO_ARRAY_V6
+  NumElements DWORD
+  Clients LPDHCP_CLIENT_INFO_V6* count=NumElements
+
+pointer LPDHCP_CLIENT_INFO_ARRAY_V6 DHCP_CLIENT_INFO_ARRAY_V6
+
+pointer LPDHCP_CLIENT_INFO_ARRAY_V6* LPDHCP_CLIENT_INFO_ARRAY_V6
+
+struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6
+  NumElements DWORD
+  Elements LPDHCP_SUBNET_ELEMENT_DATA_V6 count=NumElements
+
+pointer LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V6 DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6
+
+pointer LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V6* LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V6
+
+struct SCOPE_MIB_INFO_V6
+  Subnet DHCP_IPV6_ADDRESS
+  NumAddressesInuse ULONGLONG
+  NumAddressesFree ULONGLONG
+  NumPendingAdvertises ULONGLONG
+
+pointer LPSCOPE_MIB_INFO_V6 SCOPE_MIB_INFO_V6
+
+struct DHCP_MIB_INFO_V6
+  Solicits DWORD
+  Advertises DWORD
+  Requests DWORD
+  Renews DWORD
+  Rebinds DWORD
+  Replies DWORD
+  Confirms DWORD
+  Declines DWORD
+  Releases DWORD
+  Informs DWORD
+  ServerStartTime DATE_TIME
+  Scopes DWORD
+  ScopeInfo LPSCOPE_MIB_INFO_V6
+
+pointer LPDHCP_MIB_INFO_V6 DHCP_MIB_INFO_V6
+
+pointer LPDHCP_MIB_INFO_V6* LPDHCP_MIB_INFO_V6
+
+struct DHCPV6_BIND_ELEMENT
+  Flags ULONG
+  fBoundToDHCPServer BOOL
+  AdapterPrimaryAddress DHCP_IPV6_ADDRESS
+  AdapterSubnetAddress DHCP_IPV6_ADDRESS
+  IfDescription LPWSTR
+  IpV6IfIndex DWORD
+  IfIdSize ULONG
+  IfId LPBYTE
+
+pointer LPDHCPV6_BIND_ELEMENT DHCPV6_BIND_ELEMENT
+
+struct DHCPV6_BIND_ELEMENT_ARRAY
+  NumElements DWORD
+  Elements LPDHCPV6_BIND_ELEMENT count=NumElements
+
+pointer LPDHCPV6_BIND_ELEMENT_ARRAY DHCPV6_BIND_ELEMENT_ARRAY
+
+pointer LPDHCPV6_BIND_ELEMENT_ARRAY* LPDHCPV6_BIND_ELEMENT_ARRAY
+
+struct DHCP_SERVER_CONFIG_INFO_V6
+  UnicastFlag BOOL
+  RapidCommitFlag BOOL
+  PreferredLifetime DWORD
+  ValidLifetime DWORD
+  T1 DWORD
+  T2 DWORD
+  PreferredLifetimeIATA DWORD
+  ValidLifetimeIATA DWORD
+  fAuditLog BOOL
+
+pointer LPDHCP_SERVER_CONFIG_INFO_V6 DHCP_SERVER_CONFIG_INFO_V6
+
+pointer LPDHCP_SERVER_CONFIG_INFO_V6* LPDHCP_SERVER_CONFIG_INFO_V6
+
+enum DHCP_POL_ATTR_TYPE UINT
+  DhcpAttrHWAddr    0
+  DhcpAttrOption    1
+  DhcpAttrSubOption 2
+
+enum DHCP_POL_COMPARATOR UINT
+  DhcpCompEqual        0
+  DhcpCompNotEqual     1
+  DhcpCompBeginsWith   2
+  DhcpCompNotBeginWith 3
+
+enum DHCP_POL_LOGIC_OPER UINT
+  DhcpLogicalOr  0
+  DhcpLogicalAnd 1
+
+struct DHCP_POL_COND
+  ParentExpr DWORD
+  Type DHCP_POL_ATTR_TYPE
+  OptionID DWORD
+  SubOptionID DWORD
+  VendorName LPWSTR
+  Operator DHCP_POL_COMPARATOR
+  Value LPBYTE length=ValueLength
+  ValueLength DWORD
+
+pointer LPDHCP_POL_COND DHCP_POL_COND
+
+struct DHCP_POL_COND_ARRAY
+  NumElements DWORD
+  Elements LPDHCP_POL_COND count=NumElements
+
+pointer LPDHCP_POL_COND_ARRAY DHCP_POL_COND_ARRAY
+
+struct DHCP_POL_EXPR
+  ParentExpr DWORD
+  Operator DHCP_POL_LOGIC_OPER
+
+pointer LPDHCP_POL_EXPR DHCP_POL_EXPR
+
+struct DHCP_POL_EXPR_ARRAY
+  NumElements DWORD
+  Elements LPDHCP_POL_EXPR count=NumElements
+
+pointer LPDHCP_POL_EXPR_ARRAY DHCP_POL_EXPR_ARRAY
+
+struct DHCP_IP_RANGE_ARRAY
+  NumElements DWORD
+  Elements LPDHCP_IP_RANGE count=NumElements
+
+pointer LPDHCP_IP_RANGE_ARRAY DHCP_IP_RANGE_ARRAY
+
+struct DHCP_POLICY
+  PolicyName LPWSTR
+  IsGlobalPolicy BOOL
+  Subnet DHCP_IP_ADDRESS
+  ProcessingOrder DWORD
+  Conditions LPDHCP_POL_COND_ARRAY
+  Expressions LPDHCP_POL_EXPR_ARRAY
+  Ranges LPDHCP_IP_RANGE_ARRAY
+  Description LPWSTR
+  Enabled BOOL
+
+pointer LPDHCP_POLICY DHCP_POLICY
+
+pointer LPDHCP_POLICY* LPDHCP_POLICY
+
+enum DHCP_ATTRIB_ID UINT
+  DHCP_ATTRIB_BOOL_IS_ROGUE         0x01
+  DHCP_ATTRIB_BOOL_IS_DYNBOOTP      0x02
+  DHCP_ATTRIB_BOOL_IS_PART_OF_DSDC  0x03
+  DHCP_ATTRIB_BOOL_IS_BINDING_AWARE 0x04
+  DHCP_ATTRIB_BOOL_IS_ADMIN         0x05
+  DHCP_ATTRIB_ULONG_RESTORE_STATUS  0x06
+
+pointer "DHCP_ATTRIB_ID []" DHCP_ATTRIB_ID
+
+struct DHCP_SERVER_SPECIFIC_STRINGS
+  DefaultVendorClassName LPWSTR
+  DefaultUserClassName LPWSTR
+
+pointer LPDHCP_SERVER_SPECIFIC_STRINGS DHCP_SERVER_SPECIFIC_STRINGS
+
+pointer LPDHCP_SERVER_SPECIFIC_STRINGS* LPDHCP_SERVER_SPECIFIC_STRINGS
+
+enum DHCP_SCAN_FLAG UINT
+  DhcpRegistryFix 0
+  DhcpDatabaseFix 1
+
+struct DHCP_SCAN_ITEM
+  IpAddress DHCP_IP_ADDRESS
+  ScanFlag DHCP_SCAN_FLAG
+
+pointer DHCP_SCAN_ITEM* DHCP_SCAN_ITEM
+
+struct DHCP_SCAN_LIST
+  NumScanItems DWORD
+  ScanItems DHCP_SCAN_ITEM* count=NumScanItems
+
+pointer LPDHCP_SCAN_LIST DHCP_SCAN_LIST
+
+pointer LPDHCP_SCAN_LIST* LPDHCP_SCAN_LIST
+
+struct DHCP_CLIENT_INFO_ARRAY_V4
+  NumElements DWORD
+  Clients LPDHCP_CLIENT_INFO_V4* count=NumElements
+
+pointer LPDHCP_CLIENT_INFO_ARRAY_V4 DHCP_CLIENT_INFO_ARRAY_V4
+
+pointer LPDHCP_CLIENT_INFO_ARRAY_V4* LPDHCP_CLIENT_INFO_ARRAY_V4
+
+union DHCP_SUBNET_ELEMENT_UNION_V4 display=union
+  IpRange DHCP_IP_RANGE*
+  SecondaryHost DHCP_HOST_INFO*
+  ReservedIp DHCP_IP_RESERVATION_V4*
+  ExcludeIpRange DHCP_IP_RANGE*
+  IpUsedCluster DHCP_IP_CLUSTER*
+
+struct DHCP_SUBNET_ELEMENT_DATA_V4
+  ElementType DHCP_SUBNET_ELEMENT_TYPE
+  Element DHCP_SUBNET_ELEMENT_UNION_V4
+
+pointer LPDHCP_SUBNET_ELEMENT_DATA_V4 DHCP_SUBNET_ELEMENT_DATA_V4
+
+pointer "DHCP_CONST DHCP_SUBNET_ELEMENT_DATA_V4*" DHCP_SUBNET_ELEMENT_DATA_V4
+
+struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4
+  NumElements DWORD
+  Elements LPDHCP_SUBNET_ELEMENT_DATA_V4 count=NumElements
+
+pointer LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V4 DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4
+
+pointer LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V4* LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V4
+
+struct DHCP_IP_RESERVATION_INFO
+  ReservedIpAddress DHCP_IP_ADDRESS
+  ReservedForClient DHCP_CLIENT_UID
+  ReservedClientName LPWSTR
+  ReservedClientDesc LPWSTR
+  bAllowedClientTypes [CLIENT_TYPE_FLAGS]
+  fOptionsPresent BYTE
+
+pointer LPDHCP_IP_RESERVATION_INFO DHCP_IP_RESERVATION_INFO
+
+pointer LPDHCP_IP_RESERVATION_INFO* LPDHCP_IP_RESERVATION_INFO
+
+struct DHCP_RESERVATION_INFO_ARRAY
+  NumElements DWORD
+  Elements LPDHCP_IP_RESERVATION_INFO* count=NumElements
+
+pointer LPDHCP_RESERVATION_INFO_ARRAY DHCP_RESERVATION_INFO_ARRAY
+
+pointer LPDHCP_RESERVATION_INFO_ARRAY* LPDHCP_RESERVATION_INFO_ARRAY
+
+struct DHCP_POLICY_ARRAY
+  NumElements DWORD
+  Elements LPDHCP_POLICY count=NumElements
+
+pointer LPDHCP_POLICY_ARRAY DHCP_POLICY_ARRAY
+
+pointer LPDHCP_POLICY_ARRAY* LPDHCP_POLICY_ARRAY
+
+struct DHCPV6_STATELESS_SCOPE_STATS
+  SubnetAddress DHCP_IPV6_ADDRESS
+  NumStatelessClientsAdded ULONGLONG
+  NumStatelessClientsRemoved ULONGLONG
+
+pointer LPDHCPV6_STATELESS_SCOPE_STATS DHCPV6_STATELESS_SCOPE_STATS
+
+struct DHCPV6_STATELESS_STATS
+  NumScopes DWORD
+  ScopeStats LPDHCPV6_STATELESS_SCOPE_STATS count=NumScopes
+
+pointer LPDHCPV6_STATELESS_STATS DHCPV6_STATELESS_STATS
+
+pointer LPDHCPV6_STATELESS_STATS* LPDHCPV6_STATELESS_STATS
+
+struct DHCPV6_STATELESS_PARAMS
+  Status BOOL
+  PurgeInterval DWORD
+
+pointer LPDHCPV6_STATELESS_PARAMS DHCPV6_STATELESS_PARAMS
+
+pointer LPDHCPV6_STATELESS_PARAMS* LPDHCPV6_STATELESS_PARAMS
+
+struct DHCP_OPTION_LIST
+  NumOptions DWORD
+  Options DHCP_OPTION_VALUE* count=NumOptions
+
+pointer LPDHCP_OPTION_LIST DHCP_OPTION_LIST
+
+pointer LPDHCP_OPTION_LIST* LPDHCP_OPTION_LIST
+
+struct DHCP_SERVER_CONFIG_INFO
+  APIProtocolSupport [DHCP_SERVER_USE_RPC_FLAGS]
+  DatabaseName LPWSTR
+  DatabasePath LPWSTR
+  BackupPath LPWSTR
+  BackupInterval DWORD
+  DatabaseLoggingFlag DWORD
+  RestoreFlag DWORD
+  DatabaseCleanupInterval DWORD
+  DebugFlag [DHCP_DEBUG_FLAGS]
+
+pointer LPDHCP_SERVER_CONFIG_INFO DHCP_SERVER_CONFIG_INFO
+
+pointer LPDHCP_SERVER_CONFIG_INFO* LPDHCP_SERVER_CONFIG_INFO
+
+flag [DHCP_ATTRIB_TYPE] ULONG display=ULONG
+  DHCP_ATTRIB_TYPE_BOOL  0x01
+  DHCP_ATTRIB_TYPE_ULONG 0x02
+
+union [DHCP_ATTRIB_u] display=union
+  DhcpAttribBool BOOL
+  DhcpAttribUlong ULONG
+
+struct DHCP_ATTRIB
+  DhcpAttribId DHCP_ATTRIB_ID
+  DhcpAttribType [DHCP_ATTRIB_TYPE]
+   [DHCP_ATTRIB_u]
+
+pointer LPDHCP_ATTRIB DHCP_ATTRIB
+
+pointer LPDHCP_ATTRIB* LPDHCP_ATTRIB
+
+struct DHCP_ATTRIB_ARRAY
+  NumElements ULONG
+  DhcpAttribs LPDHCP_ATTRIB count=NumElements
+
+pointer LPDHCP_ATTRIB_ARRAY DHCP_ATTRIB_ARRAY
+
+pointer LPDHCP_ATTRIB_ARRAY* LPDHCP_ATTRIB_ARRAY
+
+enum FSM_STATE UINT
+  NO_STATE           0
+  INIT               1
+  NORMAL             2
+  STARTUP            3
+  COMMUNICATION_INT  4
+  PARTNER_DOWN       5
+  POTENTIAL_CONFLICT 6
+  CONFLICT_DONE      7
+  RESOLUTION_INT     8
+  RECOVER            9
+  RECOVER_WAIT       10
+  RECOVER_DONE       11
+  PAUSED             12
+  SHUTDOWN           13
+
+enum DHCP_FAILOVER_MODE UINT
+  LoadBalance 0
+  HotStandby  1
+
+enum DHCP_FAILOVER_SERVER UINT
+  PrimaryServer   0
+  SecondaryServer 1
+
+struct DHCP_FAILOVER_RELATIONSHIP
+  PrimaryServer DHCP_IP_ADDRESS
+  SecondaryServer DHCP_IP_ADDRESS
+  Mode DHCP_FAILOVER_MODE
+  ServerType DHCP_FAILOVER_SERVER
+  State FSM_STATE
+  PrevState FSM_STATE
+  Mclt DWORD
+  SafePeriod DWORD
+  RelationshipName LPWSTR
+  PrimaryServerName LPWSTR
+  SecondaryServerName LPWSTR
+  pScopes LPDHCP_IP_ARRAY
+  Percentage BYTE
+  SharedSecret LPWSTR
+
+pointer LPDHCP_FAILOVER_RELATIONSHIP DHCP_FAILOVER_RELATIONSHIP
+
+pointer LPDHCP_FAILOVER_RELATIONSHIP* LPDHCP_FAILOVER_RELATIONSHIP
+
+struct DHCP_FAILOVER_RELATIONSHIP_ARRAY
+  NumElements DWORD
+  pRelationships LPDHCP_FAILOVER_RELATIONSHIP count=NumElements
+
+pointer LPDHCP_FAILOVER_RELATIONSHIP_ARRAY DHCP_FAILOVER_RELATIONSHIP_ARRAY
+
+pointer LPDHCP_FAILOVER_RELATIONSHIP_ARRAY* LPDHCP_FAILOVER_RELATIONSHIP_ARRAY
+
+struct DHCPV4_FAILOVER_CLIENT_INFO
+  ClientIpAddress DHCP_IP_ADDRESS
+  SubnetMask DHCP_IP_MASK
+  ClientHardwareAddress DHCP_CLIENT_UID
+  ClientName LPWSTR
+  ClientComment LPWSTR
+  ClientLeaseExpires DATE_TIME
+  OwnerHost DHCP_HOST_INFO
+  bClientType [CLIENT_TYPE_FLAGS]
+  AddressState [V5_ADDRESS_STATE]
+  Status QuarantineStatus
+  ProbationEnds DATE_TIME
+  QuarantineCapable BOOL
+  SentPotExpTime DWORD
+  AckPotExpTime DWORD
+  RecvPotExpTime DWORD
+  StartTime DWORD
+  CltLastTransTime DWORD
+  LastBndUpdTime DWORD
+  BndMsgStatus DWORD
+  PolicyName LPWSTR
+  Flags BYTE
+
+pointer LPDHCPV4_FAILOVER_CLIENT_INFO DHCPV4_FAILOVER_CLIENT_INFO
+
+pointer LPDHCPV4_FAILOVER_CLIENT_INFO* LPDHCPV4_FAILOVER_CLIENT_INFO
+
+struct DHCP_FAILOVER_STATISTICS
+  NumAddr DWORD
+  AddrFree DWORD
+  AddrInUse DWORD
+  PartnerAddrFree DWORD
+  ThisAddrFree DWORD
+  PartnerAddrInUse DWORD
+  ThisAddrInUse DWORD
+
+pointer LPDHCP_FAILOVER_STATISTICS DHCP_FAILOVER_STATISTICS
+
+pointer LPDHCP_FAILOVER_STATISTICS* LPDHCP_FAILOVER_STATISTICS
+
+struct DHCP_CLIENT_INFO_PB
+  ClientIpAddress DHCP_IP_ADDRESS
+  SubnetMask DHCP_IP_MASK
+  ClientHardwareAddress DHCP_CLIENT_UID
+  ClientName LPWSTR
+  ClientComment LPWSTR
+  ClientLeaseExpires DATE_TIME
+  OwnerHost DHCP_HOST_INFO
+  bClientType [CLIENT_TYPE_FLAGS]
+  AddressState [V5_ADDRESS_STATE]
+  Status QuarantineStatus
+  ProbationEnds DATE_TIME
+  QuarantineCapable BOOL
+  FilterStatus [FILTER_STATUS_FLAGS]
+  PolicyName LPWSTR
+
+pointer LPDHCP_CLIENT_INFO_PB DHCP_CLIENT_INFO_PB
+
+pointer LPDHCP_CLIENT_INFO_PB* LPDHCP_CLIENT_INFO_PB
+
+pointer "DHCP_CONST LPDHCP_CLIENT_INFO_PB" DHCP_CLIENT_INFO_PB
+
+struct DHCP_CLIENT_INFO_PB_ARRAY
+  NumElements DWORD
+  Clients LPDHCP_CLIENT_INFO_PB* count=NumElements
+
+pointer LPDHCP_CLIENT_INFO_PB_ARRAY DHCP_CLIENT_INFO_PB_ARRAY
+
+pointer LPDHCP_CLIENT_INFO_PB_ARRAY* LPDHCP_CLIENT_INFO_PB_ARRAY
+
+struct [DHCP_ALL_OPTION_VALUES_PB_s] display=struct
+  PolicyName LPWSTR
+  VendorName LPWSTR
+  IsVendor BOOL
+  OptionsArray LPDHCP_OPTION_VALUE_ARRAY
+
+pointer [DHCP_ALL_OPTION_VALUES_PB_s*] [DHCP_ALL_OPTION_VALUES_PB_s]
+
+struct DHCP_ALL_OPTION_VALUES_PB
+  Flags DWORD
+  NumElements DWORD
+  Options [DHCP_ALL_OPTION_VALUES_PB_s*] count=NumElements
+
+pointer LPDHCP_ALL_OPTION_VALUES_PB DHCP_ALL_OPTION_VALUES_PB
+
+pointer LPDHCP_ALL_OPTION_VALUES_PB* LPDHCP_ALL_OPTION_VALUES_PB
+
+func DhcpAddFilterV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  AddFilterInfo DHCP_FILTER_ADD_INFO*
+  ForceFlag BOOL
+
+func DhcpAddServer
+  [ERROR_CODE]
+  Flags DWORD
+  IdInfo LPVOID
+  NewServer LPDHCP_SERVER_INFO
+  CallbackFn LPVOID
+  CallbackData LPVOID
+
+func DhcpAddSubnetElementV5
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  AddElementInfo "DHCP_CONST DHCP_SUBNET_ELEMENT_DATA_V5*"
+
+func DhcpAuditLogGetParams
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  AuditLogDir LPWSTR*
+  DiskCheckInterval DWORD*
+  MaxLogFilesSize DWORD*
+  MinSpaceOnDisk DWORD*
+
+func DhcpAuditLogSetParams
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  AuditLogDir LPWSTR
+  DiskCheckInterval DWORD
+  MaxLogFilesSize DWORD
+  MinSpaceOnDisk DWORD
+
+func DhcpCreateClass
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ReservedMustBeZero DWORD
+  ClassInfo LPDHCP_CLASS_INFO
+
+func DhcpCreateClientInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ClientInfo "DHCP_CONST DHCP_CLIENT_INFO*"
+
+func DhcpCreateClientInfoV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ClientInfo "DHCP_CONST DHCP_CLIENT_INFO_V4*"
+
+func DhcpCreateClientInfoVQ
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ClientInfo LPDHCP_CLIENT_INFO_VQ
+
+func DhcpCreateOptionV5
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionId DHCP_OPTION_ID
+  ClassName LPWSTR
+  VendorName LPWSTR
+  OptionInfo LPDHCP_OPTION
+
+func DhcpCreateSubnet
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  SubnetInfo "DHCP_CONST DHCP_SUBNET_INFO*"
+
+func DhcpCreateSubnetVQ
+  [ERROR_CODE]
+  ServerIpAddress WCHAR*
+  SubnetAddress DHCP_IP_ADDRESS
+  SubnetInfo "DHCP_CONST DHCP_SUBNET_INFO_VQ*"
+
+func DhcpDeleteClass
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ReservedMustBeZero DWORD
+  ClassName LPWSTR
+
+func DhcpDeleteClientInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ClientInfo "DHCP_CONST DHCP_SEARCH_INFO*"
+
+func DhcpDeleteFilterV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  DeleteFilterInfo DHCP_ADDR_PATTERN*
+
+func DhcpDeleteServer
+  [ERROR_CODE]
+  Flags DWORD
+  IdInfo LPVOID
+  NewServer LPDHCP_SERVER_INFO
+  CallbackFn LPVOID
+  CallbackData LPVOID
+
+func DhcpDeleteSubnet
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  ForceFlag DHCP_FORCE_FLAG
+
+func DhcpDeleteSuperScopeV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SuperScopeName "DHCP_CONST LPWSTR"
+
+func DhcpDsCleanup
+  VOID
+
+func DhcpDsInit
+  [ERROR_CODE]
+
+func DhcpEnumClasses
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ReservedMustBeZero DWORD
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  ClassInfoArray LPDHCP_CLASS_INFO_ARRAY* derefPostCount=nRead
+  nRead DWORD*
+  nTotal DWORD*
+
+func DhcpEnumFilterV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ResumeHandle LPDHCP_ADDR_PATTERN
+  PreferrredMaximum DWORD
+  ListType DHCP_FILTER_LIST_TYPE
+  EnumFilterInfo LPDHCP_FILTER_ENUM_INFO* derefPostCount=ElementsRead
+  ElementsRead DWORD*
+  ElementsTotal DWORD*
+
+func DhcpEnumOptionsV5
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  ClassName LPWSTR
+  VendorName LPWSTR
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  Options LPDHCP_OPTION_ARRAY* derefPostCount=OptionsRead
+  OptionsRead DWORD*
+  OptionsTotal DWORD*
+
+func DhcpEnumOptionValuesV5
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  ClassName LPWSTR
+  VendorName LPWSTR
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  OptionValues LPDHCP_OPTION_VALUE_ARRAY* derefPostCount=OptionsRead
+  OptionsRead DWORD*
+  OptionsTotal DWORD*
+
+func DhcpEnumServers
+  [ERROR_CODE]
+  Flags DWORD
+  IdInfo LPVOID
+  Servers LPDHCP_SERVER_INFO_ARRAY*
+  CallbackFn LPVOID
+  CallbackData LPVOID
+
+func DhcpEnumSubnetClients
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  ClientInfo LPDHCP_CLIENT_INFO_ARRAY* derefPostCount=ClientsRead
+  ClientsRead DWORD*
+  ClientsTotal DWORD*
+
+func DhcpEnumSubnetClientsV5
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  ClientInfo LPDHCP_CLIENT_INFO_ARRAY_V5* derefPostCount=ClientsRead
+  ClientsRead DWORD*
+  ClientsTotal DWORD*
+
+func DhcpEnumSubnetClientsVQ
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  ClientInfo LPDHCP_CLIENT_INFO_ARRAY_VQ* derefPostCount=ClientsRead
+  ClientsRead DWORD*
+  ClientsTotal DWORD*
+
+func DhcpEnumSubnetClientsFilterStatusInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  ClientInfo LPDHCP_CLIENT_FILTER_STATUS_INFO_ARRAY* derefPostCount=ClientsRead
+  ClientsRead DWORD*
+  ClientsTotal DWORD*
+
+func DhcpEnumSubnetElementsV5
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  EnumElementType DHCP_SUBNET_ELEMENT_TYPE
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  EnumElementInfo LPDHCP_SUBNET_ELEMENT_INFO_ARRAY* derefPostCount=ElementsRead
+  ElementsRead DWORD*
+  ElementsTotal DWORD*
+
+func DhcpEnumSubnets
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  EnumInfo LPDHCP_IP_ARRAY* derefPostCount=ElementsRead
+  ElementsRead DWORD*
+  ElementsTotal DWORD*
+
+func DhcpGetAllOptionValues
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO
+  Values LPDHCP_ALL_OPTION_VALUES*
+
+func DhcpGetClassInfo
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ReservedMustBeZero DWORD
+  PartialClassInfo LPDHCP_CLASS_INFO
+  FilledClassInfo LPDHCP_CLASS_INFO*
+
+func DhcpGetClientInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SearchInfo "DHCP_CONST DHCP_SEARCH_INFO*"
+  ClientInfo LPDHCP_CLIENT_INFO*
+
+func DhcpGetClientInfoV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SearchInfo "DHCP_CONST DHCP_SEARCH_INFO*"
+  ClientInfo LPDHCP_CLIENT_INFO_V4*
+
+func DhcpGetClientInfoVQ
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SearchInfo LPDHCP_SEARCH_INFO
+  ClientInfo LPDHCP_CLIENT_INFO_VQ
+
+func DhcpGetFilterV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  GlobalFilterInfo DHCP_FILTER_GLOBAL_INFO*
+
+func DhcpGetMibInfoV5
+  [ERROR_CODE]
+  ServerIpAddress WCHAR*
+  MibInfo LPDHCP_MIB_INFO_V5*
+
+func DhcpGetOptionInfoV5
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  ClassName LPWSTR
+  VendorName LPWSTR
+  OptionInfo LPDHCP_OPTION*
+
+func DhcpGetOptionValue
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  OptionID DHCP_OPTION_ID
+  ScopeInfo "DHCP_CONST DHCP_OPTION_SCOPE_INFO*"
+  OptionValue LPDHCP_OPTION_VALUE*
+
+func DhcpGetOptionValueV5
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  ClassName LPWSTR
+  VendorName LPWSTR
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO
+  OptionValue LPDHCP_OPTION_VALUE*
+
+func DhcpGetServerBindingInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  Flags ULONG
+  BindElementsInfo LPDHCP_BIND_ELEMENT_ARRAY*
+
+func DhcpGetSubnetDelayOffer
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IP_ADDRESS
+  TimeDelayInMilliseconds USHORT*
+
+func DhcpGetSubnetInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  SubnetInfo LPDHCP_SUBNET_INFO*
+
+func DhcpGetSubnetInfoVQ
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  SubnetInfo LPDHCP_SUBNET_INFO_VQ*
+
+func DhcpGetSuperScopeInfoV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SuperScopeTable LPDHCP_SUPER_SCOPE_TABLE*
+
+func DhcpGetVersion
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  MajorVersion LPDWORD
+  MinorVersion LPDWORD
+
+func DhcpModifyClass
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ReservedMustBeZero DWORD
+  ClassInfo LPDHCP_CLASS_INFO
+
+func DhcpRemoveOptionV5
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  ClassName LPWSTR
+  VendorName LPWSTR
+
+func DhcpRemoveOptionValueV5
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  ClassName LPWSTR
+  VendorName LPWSTR
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO
+
+func DhcpRemoveSubnetElementV5
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  RemoveElementInfo "DHCP_CONST DHCP_SUBNET_ELEMENT_DATA_V5*"
+  ForceFlag DHCP_FORCE_FLAG
+
+func DhcpRpcFreeMemory
+  VOID
+  BufferPointer PVOID
+
+func DhcpServerGetConfigVQ
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ConfigInfo LPDHCP_SERVER_CONFIG_INFO_VQ*
+
+func DhcpServerQueryDnsRegCredentials
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  UnameSize ULONG
+  Uname LPWSTR
+  DomainSize ULONG
+  Domain LPWSTR
+
+func DhcpServerRedoAuthorization
+  [ERROR_CODE]
+  ServerIpAddr LPWSTR
+  dwReserved ULONG
+
+func DhcpServerSetConfigV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  FieldsToSet [DHCP_FIELDS_TO_SET]
+  ConfigInfo LPDHCP_SERVER_CONFIG_INFO_V4
+
+func DhcpServerSetConfigVQ
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  FieldsToSet [DHCP_FIELDS_TO_SET]
+  ConfigInfo LPDHCP_SERVER_CONFIG_INFO_VQ
+
+func DhcpServerSetDnsRegCredentialsV5
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Uname LPWSTR
+  Domain LPWSTR
+  Password LPWSTR
+
+func DhcpSetClientInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ClientInfo "DHCP_CONST DHCP_CLIENT_INFO*"
+
+func DhcpSetClientInfoV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ClientInfo "DHCP_CONST DHCP_CLIENT_INFO_V4*"
+
+func DhcpSetClientInfoVQ
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ClientInfo LPDHCP_CLIENT_INFO_VQ
+
+func DhcpSetFilterV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  GlobalFilterInfo DHCP_FILTER_GLOBAL_INFO*
+
+func DhcpSetOptionInfoV5
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  ClassName LPWSTR*
+  VendorName LPWSTR*
+  OptionInfo LPDHCP_OPTION
+
+func DhcpSetOptionValueV5
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionId DHCP_OPTION_ID
+  ClassName LPWSTR
+  VendorName LPWSTR
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO
+  OptionValue LPDHCP_OPTION_DATA
+
+func DhcpSetServerBindingInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  Flags ULONG
+  BindElementInfo LPDHCP_BIND_ELEMENT_ARRAY
+
+func DhcpSetSubnetDelayOffer
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IP_ADDRESS
+  TimeDelayInMilliseconds USHORT
+
+func DhcpSetSubnetInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  SubnetInfo "DHCP_CONST DHCP_SUBNET_INFO*"
+
+func DhcpSetSubnetInfoVQ
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  SubnetInfo "DHCP_CONST DHCP_SUBNET_INFO_VQ*"
+
+func DhcpSetSuperScopeV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress "DHCP_CONST DHCP_IP_ADDRESS"
+  SuperScopeName "DHCP_CONST LPWSTR"
+  ChangeExisting "DHCP_CONST BOOL"
+
+func DhcpAddSubnetElementV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IPV6_ADDRESS
+  AddElementInfo LPDHCP_SUBNET_ELEMENT_DATA_V6
+
+func DhcpCreateClassV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ReservedMustBeZero DWORD
+  ClassInfo LPDHCP_CLASS_INFO_V6
+
+func DhcpCreateOptionV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionId DHCP_OPTION_ID
+  ClassName WCHAR*
+  VendorName WCHAR*
+  OptionInfo LPDHCP_OPTION
+
+func DhcpCreateSubnetV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IPV6_ADDRESS
+  SubnetInfo LPDHCP_SUBNET_INFO_V6*
+
+func DhcpDeleteClassV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ReservedMustBeZero DWORD
+  ClassName LPWSTR
+
+func DhcpDeleteClientInfoV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ClientInfo LPDHCP_SEARCH_INFO_V6
+
+func DhcpDeleteSubnetV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IPV6_ADDRESS
+  ForceFlag DHCP_FORCE_FLAG
+
+func DhcpEnumClassesV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ReservedMustBeZero DWORD
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  ClassInfoArray LPDHCP_CLASS_INFO_ARRAY_V6* derefPostCount=nRead
+  nRead DWORD*
+  nTotal DWORD*
+
+func DhcpEnumOptionsV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  ClassName WCHAR*
+  VendorName WCHAR*
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  Options LPDHCP_OPTION_ARRAY* derefPostCount=OptionsRead
+  OptionsRead DWORD*
+  OptionsTotal DWORD*
+
+func DhcpEnumOptionValuesV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  ClassName WCHAR*
+  VendorName WCHAR*
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO6
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  OptionValues LPDHCP_OPTION_VALUE_ARRAY* derefPostCount=OptionsRead
+  OptionsRead DWORD*
+  OptionsTotal DWORD*
+
+func DhcpEnumSubnetsV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  EnumInfo LPDHCPV6_IP_ARRAY* derefPostCount=ElementsRead
+  ElementsRead DWORD*
+  ElementsTotal DWORD*
+
+func DhcpEnumSubnetClientsV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IPV6_ADDRESS
+  ResumeHandle DHCP_RESUME_IPV6_HANDLE*
+  PreferredMaximum DWORD
+  ClientInfo LPDHCP_CLIENT_INFO_ARRAY_V6* derefPostCount=ClientsRead
+  ClientsRead DWORD*
+  ClientsTotal DWORD*
+
+func DhcpEnumSubnetElementsV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IPV6_ADDRESS
+  EnumElementType DHCP_SUBNET_ELEMENT_TYPE_V6
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  EnumElementInfo LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V6* derefPostCount=ElementsRead
+  ElementsRead DWORD*
+  ElementsTotal DWORD*
+
+func DhcpGetAllOptionsV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionStruct LPDHCP_ALL_OPTIONS*
+
+func DhcpGetAllOptionValuesV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO6
+  Values LPDHCP_ALL_OPTION_VALUES*
+
+func DhcpGetClientInfoV6
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SearchInfo "DHCP_CONST DHCP_SEARCH_INFO_V6*"
+  ClientInfo LPDHCP_CLIENT_INFO_V6*
+
+func DhcpGetMibInfoV6
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  MibInfo LPDHCP_MIB_INFO_V6*
+
+func DhcpGetOptionInfoV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  ClassName WCHAR*
+  VendorName WCHAR*
+  OptionInfo LPDHCP_OPTION*
+
+func DhcpGetOptionValueV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  ClassName WCHAR*
+  VendorName WCHAR*
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO6*
+  OptionValue LPDHCP_OPTION_VALUE
+
+func DhcpGetServerBindingInfoV6
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  Flags ULONG
+  BindElementsInfo LPDHCPV6_BIND_ELEMENT_ARRAY*
+
+func DhcpGetSubnetInfoV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IPV6_ADDRESS
+  SubnetInfo LPDHCP_SUBNET_INFO_V6*
+
+func DhcpModifyClassV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ReservedMustBeZero DWORD
+  ClassInfo LPDHCP_CLASS_INFO_V6
+
+func DhcpRemoveOptionV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  ClassName WCHAR*
+  VendorName WCHAR*
+
+func DhcpRemoveOptionValueV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  ClassName WCHAR*
+  VendorName WCHAR*
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO6
+
+func DhcpRemoveSubnetElementV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IPV6_ADDRESS
+  RemoveElementInfo LPDHCP_SUBNET_ELEMENT_DATA_V6
+  ForceFlag DHCP_FORCE_FLAG
+
+func DhcpServerGetConfigV6
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO6
+  ConfigInfo LPDHCP_SERVER_CONFIG_INFO_V6*
+
+func DhcpSetClientInfoV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ClientInfo LPDHCP_CLIENT_INFO_V6
+
+func DhcpSetOptionInfoV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  ClassName WCHAR*
+  VendorName WCHAR*
+  OptionInfo LPDHCP_OPTION
+
+func DhcpSetOptionValueV6
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionId DHCP_OPTION_ID
+  ClassName WCHAR*
+  VendorName WCHAR*
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO6
+  OptionValue LPDHCP_OPTION_DATA
+
+func DhcpSetServerBindingInfoV6
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  Flags ULONG
+  BindElementsInfo LPDHCPV6_BIND_ELEMENT_ARRAY
+
+func DhcpServerSetConfigV6
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO6
+  FieldsToSet [DHCP_FIELDS_TO_SET]
+  ConfigInfo LPDHCP_SERVER_CONFIG_INFO_V6
+
+func DhcpSetSubnetInfoV6
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IPV6_ADDRESS
+  SubnetInfo LPDHCP_SUBNET_INFO_V6
+
+func DhcpAddSubnetElement
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  AddElementInfo "DHCP_CONST DHCP_SUBNET_ELEMENT_DATA*"
+
+func DhcpAddSubnetElementV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  AddElementInfo "DHCP_CONST DHCP_SUBNET_ELEMENT_DATA_V4*"
+
+func DhcpCreateOption
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  OptionID DHCP_OPTION_ID
+  OptionInfo "DHCP_CONST DHCP_OPTION*"
+
+func DhcpEnumOptions
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  Options LPDHCP_OPTION_ARRAY* derefPostCount=OptionsRead
+  OptionsRead DWORD*
+  OptionsTotal DWORD*
+
+func DhcpEnumOptionValues
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ScopeInfo "DHCP_CONST DHCP_OPTION_SCOPE_INFO*"
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  OptionValues LPDHCP_OPTION_VALUE_ARRAY* derefPostCount=OptionsRead
+  OptionsRead DWORD*
+  OptionsTotal DWORD*
+
+func DhcpEnumSubnetClientsV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  ClientInfo LPDHCP_CLIENT_INFO_ARRAY_V4* derefPostCount=ClientsRead
+  ClientsRead DWORD*
+  ClientsTotal DWORD*
+
+func DhcpEnumSubnetElements
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  EnumElementType DHCP_SUBNET_ELEMENT_TYPE
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  EnumElementInfo LPDHCP_SUBNET_ELEMENT_INFO_ARRAY* derefPostCount=ElementsRead
+  ElementsRead DWORD*
+  ElementsTotal DWORD*
+
+func DhcpEnumSubnetElementsV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  EnumElementType DHCP_SUBNET_ELEMENT_TYPE
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  EnumElementInfo LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V4* derefPostCount=ElementsRead
+  ElementsRead DWORD*
+  ElementsTotal DWORD*
+
+func DhcpGetAllOptions
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionStruct LPDHCP_ALL_OPTIONS*
+
+func DhcpGetClientOptions
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ClientIpAddress DHCP_IP_ADDRESS
+  ClientSubnetMask DHCP_IP_MASK
+  ClientOptions LPDHCP_OPTION_LIST*
+
+func DhcpGetOptionInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  OptionID DHCP_OPTION_ID
+  OptionInfo LPDHCP_OPTION*
+
+func DhcpGetServerSpecificStrings
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ServerSpecificStrings LPDHCP_SERVER_SPECIFIC_STRINGS*
+
+func DhcpGetThreadOptions
+  [ERROR_CODE]
+  pFlags LPDWORD
+  Reserved LPVOID
+
+func DhcpHlprAddV4PolicyCondition
+  [ERROR_CODE]
+  Policy LPDHCP_POLICY
+  ParentExpr DWORD
+  Type DHCP_POL_ATTR_TYPE
+  OptionID DWORD
+  SubOptionID DWORD
+  VendorName LPWSTR
+  Operator DHCP_POL_COMPARATOR
+  Value LPBYTE length=ValueLength
+  ValueLength DWORD
+  ConditionIndex DWORD*
+
+func DhcpHlprAddV4PolicyExpr
+  [ERROR_CODE]
+  Policy LPDHCP_POLICY
+  ParentExpr DWORD
+  Operator DHCP_POL_LOGIC_OPER
+  ExprIndex DWORD*
+
+func DhcpHlprAddV4PolicyRange
+  [ERROR_CODE]
+  Policy LPDHCP_POLICY
+  Range LPDHCP_IP_RANGE
+
+func DhcpHlprCreateV4Policy
+  [ERROR_CODE]
+  PolicyName LPWSTR
+  fGlobalPolicy BOOL
+  Subnet DHCP_IP_ADDRESS
+  ProcessingOrder DWORD
+  RootOperator DHCP_POL_LOGIC_OPER
+  Description LPWSTR
+  Enabled BOOL
+  Policy LPDHCP_POLICY*
+
+func DhcpHlprFreeV4Policy
+  VOID
+  Policy LPDHCP_POLICY
+
+func DhcpHlprIsV4PolicySingleUC
+  BOOL
+  Policy LPDHCP_POLICY
+
+func DhcpHlprIsV4PolicyValid
+  [ERROR_CODE]
+  pPolicy LPDHCP_POLICY
+
+func DhcpHlprIsV4PolicyWellFormed
+  BOOL
+  pPolicy LPDHCP_POLICY
+
+func DhcpHlprModifyV4PolicyExpr
+  [ERROR_CODE]
+  Policy LPDHCP_POLICY
+  Operator DHCP_POL_LOGIC_OPER
+
+func DhcpHlprResetV4PolicyExpr
+  [ERROR_CODE]
+  Policy LPDHCP_POLICY
+
+func DhcpRemoveOption
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  OptionID DHCP_OPTION_ID
+
+func DhcpRemoveOptionValue
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  OptionID DHCP_OPTION_ID
+  ScopeInfo "DHCP_CONST DHCP_OPTION_SCOPE_INFO*"
+
+func DhcpRemoveSubnetElement
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  RemoveElementInfo "DHCP_CONST DHCP_SUBNET_ELEMENT_DATA*"
+  ForceFlag DHCP_FORCE_FLAG
+
+func DhcpRemoveSubnetElementV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  RemoveElementInfo "DHCP_CONST DHCP_SUBNET_ELEMENT_DATA_V4*"
+  ForceFlag DHCP_FORCE_FLAG
+
+func DhcpScanDatabase
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  FixFlag DWORD
+  ScanList LPDHCP_SCAN_LIST*
+
+func DhcpServerBackupDatabase
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Path LPWSTR
+
+func DhcpServerGetConfig
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ConfigInfo LPDHCP_SERVER_CONFIG_INFO*
+
+func DhcpServerGetConfigV4
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ConfigInfo LPDHCP_SERVER_CONFIG_INFO_V4*
+
+func DhcpServerQueryAttribute
+  [ERROR_CODE]
+  ServerIpAddr LPWSTR
+  dwReserved ULONG
+  DhcpAttribId DHCP_ATTRIB_ID
+  pDhcpAttrib LPDHCP_ATTRIB*
+
+func DhcpServerQueryAttributes
+  [ERROR_CODE]
+  ServerIpAddr LPWSTR
+  dwReserved ULONG
+  dwAttribCount ULONG
+  pDhcpAttribs "DHCP_ATTRIB_ID []" count=dwAttribCount
+  pDhcpAttribArr LPDHCP_ATTRIB_ARRAY*
+
+func DhcpServerRestoreDatabase
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Path LPWSTR
+
+func DhcpServerSetConfig
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  FieldsToSet [DHCP_FIELDS_TO_SET]
+  ConfigInfo LPDHCP_SERVER_CONFIG_INFO
+
+func DhcpSetOptionInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  OptionID DHCP_OPTION_ID
+  OptionInfo "DHCP_CONST DHCP_OPTION*"
+
+func DhcpSetOptionValue
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  OptionID DHCP_OPTION_ID
+  ScopeInfo "DHCP_CONST DHCP_OPTION_SCOPE_INFO*"
+  OptionValue "DHCP_CONST DHCP_OPTION_DATA*"
+
+func DhcpSetOptionValues
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ScopeInfo "DHCP_CONST DHCP_OPTION_SCOPE_INFO*"
+  OptionValues "DHCP_CONST DHCP_OPTION_VALUE_ARRAY*"
+
+func DhcpSetOptionValuesV5
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  ClassName LPWSTR
+  VendorName LPWSTR
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO
+  OptionValues LPDHCP_OPTION_VALUE_ARRAY
+
+func DhcpSetThreadOptions
+  [ERROR_CODE]
+  Flags DWORD
+  Reserved LPVOID
+
+func DhcpV4FailoverAddScopeToRelationship
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  pRelationship LPDHCP_FAILOVER_RELATIONSHIP
+
+func DhcpV4FailoverCreateRelationship
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  pRelationship LPDHCP_FAILOVER_RELATIONSHIP
+
+func DhcpV4FailoverDeleteRelationship
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  pRelationshipName LPWSTR
+
+func DhcpV4FailoverDeleteScopeFromRelationship
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  pRelationship LPDHCP_FAILOVER_RELATIONSHIP
+
+func DhcpV4FailoverEnumRelationship
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ResumeHandle DHCP_RESUME_HANDLE*
+  preferredMaximum DWORD
+  pRelationship LPDHCP_FAILOVER_RELATIONSHIP_ARRAY* derefPostCount=relationshipRead
+  relationshipRead LPDWORD
+  relationshipTotal LPDWORD
+
+func DhcpV4FailoverGetAddressStatus
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IP_ADDRESS
+  pStatus LPDWORD
+
+func DhcpV4FailoverGetClientInfo
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SearchInfo "DHCP_CONST DHCP_SEARCH_INFO*"
+  ClientInfo LPDHCPV4_FAILOVER_CLIENT_INFO*
+
+func DhcpV4FailoverGetRelationship
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  pRelationshipName LPWSTR
+  pRelationship LPDHCP_FAILOVER_RELATIONSHIP*
+
+func DhcpV4FailoverGetScopeRelationship
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  scopeId DHCP_IP_ADDRESS
+  pRelationship LPDHCP_FAILOVER_RELATIONSHIP*
+
+func DhcpV4FailoverGetScopeStatistics
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  scopeId DHCP_IP_ADDRESS
+  pStats LPDHCP_FAILOVER_STATISTICS*
+
+func DhcpV4FailoverGetSystemTime
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  pTime LPDWORD
+
+func DhcpV4FailoverSetRelationship
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  flags DWORD
+  pRelationship LPDHCP_FAILOVER_RELATIONSHIP
+
+func DhcpV4FailoverTriggerAddrAllocation
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  pFailRelName LPWSTR
+
+func DhcpV4GetFreeIPAddress
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ScopeId DHCP_IP_ADDRESS
+  startIP DHCP_IP_ADDRESS
+  endIP DHCP_IP_ADDRESS
+  numFreeAddrReq DWORD
+  IPAddrList LPDHCP_IP_ARRAY* derefPostCount=numFreeAddrReq
+
+func DhcpV4EnumSubnetClients
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  ClientInfo LPDHCP_CLIENT_INFO_PB_ARRAY* derefPostCount=ClientsRead
+  ClientsRead DWORD*
+  ClientsTotal DWORD*
+
+func DhcpV4EnumSubnetReservations
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SubnetAddress DHCP_IP_ADDRESS
+  ResumeHandle DHCP_RESUME_HANDLE*
+  PreferredMaximum DWORD
+  EnumElementInfo LPDHCP_RESERVATION_INFO_ARRAY* derefPostCount=ElementsRead
+  ElementsRead DWORD*
+  ElementsTotal DWORD*
+
+func DhcpV4CreateClientInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ClientInfo "DHCP_CONST LPDHCP_CLIENT_INFO_PB"
+
+func DhcpV4GetClientInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  SearchInfo "DHCP_CONST DHCP_SEARCH_INFO*"
+  ClientInfo LPDHCP_CLIENT_INFO_PB*
+
+func DhcpV4RemoveOptionValue
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  PolicyName LPWSTR
+  VendorName LPWSTR
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO
+
+func DhcpV4GetAllOptionValues
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO
+  Values LPDHCP_ALL_OPTION_VALUES_PB*
+
+func DhcpV4SetOptionValues
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  PolicyName LPWSTR
+  VendorName LPWSTR
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO
+  OptionValues LPDHCP_OPTION_VALUE_ARRAY
+
+func DhcpV4SetOptionValue
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionId DHCP_OPTION_ID
+  PolicyName LPWSTR
+  VendorName LPWSTR
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO
+  OptionValue LPDHCP_OPTION_DATA
+
+func DhcpV4GetOptionValue
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  Flags DWORD
+  OptionID DHCP_OPTION_ID
+  PolicyName LPWSTR
+  VendorName LPWSTR
+  ScopeInfo LPDHCP_OPTION_SCOPE_INFO
+  OptionValue LPDHCP_OPTION_VALUE*
+
+func DhcpV4CreatePolicy
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  pPolicy LPDHCP_POLICY
+
+func DhcpV4EnumPolicies
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ResumeHandle LPDWORD
+  PreferredMaximum DWORD
+  fGlobalPolicy BOOL
+  SubnetAddress DHCP_IP_ADDRESS
+  EnumInfo LPDHCP_POLICY_ARRAY* derefPostCount=ElementsRead
+  ElementsRead DWORD*
+  ElementsTotal DWORD*
+
+func DhcpV4GetPolicy
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  fGlobalPolicy BOOL
+  SubnetAddress DHCP_IP_ADDRESS
+  PolicyName LPWSTR
+  Policy LPDHCP_POLICY*
+
+func DhcpV4SetPolicy
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  FieldsModified DWORD
+  fGlobalPolicy BOOL
+  SubnetAddress DHCP_IP_ADDRESS
+  PolicyName LPWSTR
+  Policy LPDHCP_POLICY
+
+func DhcpV4DeletePolicy
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  fGlobalPolicy BOOL
+  SubnetAddress DHCP_IP_ADDRESS
+  PolicyName LPWSTR
+
+func DhcpV4SetPolicyEnforcement
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  fGlobalPolicy BOOL
+  SubnetAddress DHCP_IP_ADDRESS
+  Enable BOOL
+
+func DhcpV4QueryPolicyEnforcement
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  fGlobalPolicy BOOL
+  SubnetAddress DHCP_IP_ADDRESS
+  Enabled BOOL*
+
+func DhcpV4AddPolicyRange
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IP_ADDRESS
+  PolicyName LPWSTR
+  Range LPDHCP_IP_RANGE
+
+func DhcpV4RemovePolicyRange
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  SubnetAddress DHCP_IP_ADDRESS
+  PolicyName LPWSTR
+  Range LPDHCP_IP_RANGE
+
+func DhcpV6CreateClientInfo
+  [ERROR_CODE]
+  ServerIpAddress "DHCP_CONST WCHAR*"
+  ClientInfo "DHCP_CONST LPDHCP_CLIENT_INFO_V6"
+
+func DhcpV6GetFreeIPAddress
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  ScopeId DHCP_IPV6_ADDRESS
+  startIP DHCP_IPV6_ADDRESS
+  endIP DHCP_IPV6_ADDRESS
+  numFreeAddrReq DWORD
+  IPAddrList LPDHCPV6_IP_ARRAY* derefPostCount=numFreeAddrReq
+
+func DhcpV6GetStatelessStatistics
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  StatelessStats LPDHCPV6_STATELESS_STATS*
+
+func DhcpV6GetStatelessStoreParams
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  fServerLevel BOOL
+  SubnetAddress DHCP_IPV6_ADDRESS
+  Params LPDHCPV6_STATELESS_PARAMS*
+
+func DhcpV6SetStatelessStoreParams
+  [ERROR_CODE]
+  ServerIpAddress LPWSTR
+  fServerLevel BOOL
+  SubnetAddress DHCP_IPV6_ADDRESS
+  FieldModified DWORD
+  Params LPDHCPV6_STATELESS_PARAMS
+

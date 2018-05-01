@@ -1,0 +1,59 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOleDocumentView base=IUnknown id={b722bcc6-4e68-101b-a2bc-00aa00404770} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func SetInPlaceSite
+    HRESULT
+    pIPSite IOleInPlaceSite*
+
+  func GetInPlaceSite
+    HRESULT
+    ppIPSite IOleInPlaceSite**
+
+  func GetDocument
+    HRESULT
+    ppunk IUnknown**
+
+  func SetRect
+    HRESULT
+    prcView LPRECT
+
+  func GetRect
+    HRESULT
+    prcView LPRECT
+
+  func SetRectComplex
+    HRESULT
+    prcView LPRECT
+    prcHScroll LPRECT
+    prcVScroll LPRECT
+    prcSizeBox LPRECT
+
+  func Show
+    HRESULT
+    fShow BOOL
+
+  func UIActivate
+    HRESULT
+    fUIActivate BOOL
+
+  func Open
+    HRESULT
+
+  func CloseView
+    HRESULT
+    dwReserved DWORD
+
+  func SaveViewState
+    HRESULT
+    pstm LPSTREAM
+
+  func ApplyViewState
+    HRESULT
+    pstm LPSTREAM
+
+  func Clone
+    HRESULT
+    pIPSiteNew IOleInPlaceSite*
+    ppViewNew IOleDocumentView**
+
+

@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IUriContainer base=IUnknown id={a158a630-ed6f-45fb-b987-f68676f57752} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetIUri
+    HRESULT
+    ppIUri IUri**
+
+

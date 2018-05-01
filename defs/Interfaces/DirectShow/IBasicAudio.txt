@@ -1,0 +1,20 @@
+include Interfaces\IDispatch.txt
+
+ingterface IBasicAudio base=IDispatch id={56a868b3-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func put_Volume
+    HRESULT
+    lVolume long
+
+  func get_Volume
+    HRESULT
+    plVolume long*
+
+  func put_Balance
+    HRESULT
+    lBalance long
+
+  func get_Balance
+    HRESULT
+    plBalance long*
+
+

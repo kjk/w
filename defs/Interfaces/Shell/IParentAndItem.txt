@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IParentAndItem base=IUnknown id={b3a4b685-b685-4805-99d9-5dead2873236} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetParentAndItem
+    HRESULT
+    pidlParent PCIDLIST_ABSOLUTE
+    psf IShellFolder*
+    pidlChild PCUITEMID_CHILD
+
+  func GetParentAndItem
+    HRESULT
+    ppidlParent PIDLIST_ABSOLUTE*
+    ppsf IShellFolder**
+    ppidlChild PITEMID_CHILD*
+
+

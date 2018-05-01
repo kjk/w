@@ -1,0 +1,24 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteFontFileStream base=IUnknown id={6d4865fe-0ab8-4d91-8f62-5dd6be34a3e0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func ReadFileFragment
+    HRESULT
+    fragmentStart "void const**"
+    fileOffset UINT64
+    fragmentSize UINT64
+    fragmentContext void**
+
+  func ReleaseFileFragment
+    void
+    fragmentContext void*
+
+  func GetFileSize
+    HRESULT
+    fileSize UINT64*
+
+  func GetLastWriteTime
+    HRESULT
+    lastWriteTime UINT64*
+
+

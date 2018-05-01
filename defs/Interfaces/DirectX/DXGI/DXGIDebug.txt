@@ -1,0 +1,8 @@
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+dll DXGIDebug.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+func DXGIGetDebugInterface
+  HRESULT
+  riid REFIID
+  ppDebug void** interfaceId=riid
+

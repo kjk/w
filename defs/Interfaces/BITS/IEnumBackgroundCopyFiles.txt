@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumBackgroundCopyFiles base=IUnknown id={ca51e165-c365-424c-8d41-24aaa4ff3c40} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func Next
+    HRESULT
+    celt ULONG
+    rgelt IBackgroundCopyFile** postCount=celt
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppenum IEnumBackgroundCopyFiles**
+
+  func GetCount
+    HRESULT
+    puCount ULONG*
+
+

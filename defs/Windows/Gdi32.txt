@@ -1,0 +1,2870 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+
+dll Gdi32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Bitmaps"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Brushes"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Clipping"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Colors"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Coordinate Spaces and Transformations"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Device Contexts"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Filled Shapes"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Fonts and Text"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Lines and Curves"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Metafiles"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Painting and Drawing"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Paths"
+category "Documents and Printing/Printing/GDI Print"
+category "Graphics and Gaming/Legacy Graphics/Windows GDI/Regions"
+category "Windows Application UI Development/Internationalization for Windows Applications/Unicode and Character Sets"
+category "Graphics and Gaming/Legacy Graphics/OpenGL/Windows Extensions to OpenGL (WGL)"
+category "Graphics and Gaming/Legacy Graphics/Windows Color System/Basic"
+category "Graphics and Gaming/Legacy Graphics/Windows Color System/Profile Management"
+category "Graphics and Gaming/Legacy Graphics/Windows Color System/Obsolete"
+alias HGDIOBJ HANDLE
+
+alias GOBJENUMPROC LPVOID
+
+alias FONTENUMPROC LPVOID
+
+alias LINEDDAPROC LPVOID
+
+alias ENHMFENUMPROC LPVOID
+
+alias MFENUMPROC LPVOID
+
+alias ABORTPROC LPVOID
+
+alias HCOLORSPACE HANDLE
+
+alias HTRANSFORM HANDLE
+
+alias ICMENUMPROC LPVOID
+
+array "WORD [1]" base=WORD count=1
+
+array "HGDIOBJ [1]" base=HGDIOBJ count=1
+
+array "LONG [MM_MAX_NUMAXES]" base=LONG count=16
+
+array "TCHAR [LF_FULLFACESIZE]" base=TCHAR count=64
+
+alias [FontCharset-int] [FontCharset] display=int
+
+struct ENUMLOGFONTEX
+  elfLogFont LOGFONT
+  elfFullName "TCHAR [LF_FULLFACESIZE]"
+  elfStyle "TCHAR [LF_FACESIZE]"
+  elfScript "TCHAR [LF_FACESIZE]"
+
+struct DESIGNVECTOR
+  dvReserved DWORD
+  dvNumAxes DWORD
+  dvValues "LONG [MM_MAX_NUMAXES]"
+
+struct ENUMLOGFONTEXDV
+  elfEnumLogfontEx ENUMLOGFONTEX
+  elfDesignVector DESIGNVECTOR
+
+pointer "const ENUMLOGFONTEXDV*" ENUMLOGFONTEXDV
+
+struct WCRANGE
+  wcLow WCHAR
+  cGlyphs USHORT
+
+array "WCRANGE [1]" base=WCRANGE count=1
+
+struct GLYPHSET
+  cbThis DWORD
+  flAccel DWORD
+  cGlyphsSupported DWORD
+  cRanges DWORD
+  ranges "WCRANGE [1]" count=cRanges
+
+pointer LPGLYPHSET GLYPHSET
+
+flag [OTM_SELECTION] UINT display=UINT
+  Italic     0x1
+  Underscore 0x2
+  Negative   0x4
+  Outline    0x8
+  Strikeout  0x10
+  Bold       0x20
+
+enum [PANOSE_FAMILY] BYTE display=BYTE
+  PAN_ANY                 0
+  PAN_NO_FIT              1
+  PAN_FAMILY_TEXT_DISPLAY 2
+  PAN_FAMILY_SCRIPT       3
+  PAN_FAMILY_DECORATIVE   4
+  PAN_FAMILY_PICTORIAL    5
+
+enum [PANOSE_SERIF] BYTE display=BYTE
+  PAN_ANY                      0
+  PAN_NO_FIT                   1
+  PAN_SERIF_COVE               2
+  PAN_SERIF_OBTUSE_COVE        3
+  PAN_SERIF_SQUARE_COVE        4
+  PAN_SERIF_OBTUSE_SQUARE_COVE 5
+  PAN_SERIF_SQUARE             6
+  PAN_SERIF_THIN               7
+  PAN_SERIF_BONE               8
+  PAN_SERIF_EXAGGERATED        9
+  PAN_SERIF_TRIANGLE           10
+  PAN_SERIF_NORMAL_SANS        11
+  PAN_SERIF_OBTUSE_SANS        12
+  PAN_SERIF_PERP_SANS          13
+  PAN_SERIF_FLARED             14
+  PAN_SERIF_ROUNDED            15
+
+enum [PANOSE_WEIGHT] BYTE display=BYTE
+  PAN_ANY               0
+  PAN_NO_FIT            1
+  PAN_WEIGHT_VERY_LIGHT 2
+  PAN_WEIGHT_LIGHT      3
+  PAN_WEIGHT_THIN       4
+  PAN_WEIGHT_BOOK       5
+  PAN_WEIGHT_MEDIUM     6
+  PAN_WEIGHT_DEMI       7
+  PAN_WEIGHT_BOLD       8
+  PAN_WEIGHT_HEAVY      9
+  PAN_WEIGHT_BLACK      10
+  PAN_WEIGHT_NORD       11
+
+enum [PANOSE_PROPORTION] BYTE display=BYTE
+  PAN_ANY                 0
+  PAN_NO_FIT              1
+  PAN_PROP_OLD_STYLE      2
+  PAN_PROP_MODERN         3
+  PAN_PROP_EVEN_WIDTH     4
+  PAN_PROP_EXPANDED       5
+  PAN_PROP_CONDENSED      6
+  PAN_PROP_VERY_EXPANDED  7
+  PAN_PROP_VERY_CONDENSED 8
+  PAN_PROP_MONOSPACED     9
+
+enum [PANOSE_CONTRAST] BYTE display=BYTE
+  PAN_ANY                  0
+  PAN_NO_FIT               1
+  PAN_CONTRAST_NONE        2
+  PAN_CONTRAST_VERY_LOW    3
+  PAN_CONTRAST_LOW         4
+  PAN_CONTRAST_MEDIUM_LOW  5
+  PAN_CONTRAST_MEDIUM      6
+  PAN_CONTRAST_MEDIUM_HIGH 7
+  PAN_CONTRAST_HIGH        8
+  PAN_CONTRAST_VERY_HIGH   9
+
+enum [PANOSE_STROKE] BYTE display=BYTE
+  PAN_ANY                 0
+  PAN_NO_FIT              1
+  PAN_STROKE_GRADUAL_DIAG 2
+  PAN_STROKE_GRADUAL_TRAN 3
+  PAN_STROKE_GRADUAL_VERT 4
+  PAN_STROKE_GRADUAL_HORZ 5
+  PAN_STROKE_RAPID_VERT   6
+  PAN_STROKE_RAPID_HORZ   7
+  PAN_STROKE_INSTANT_VERT 8
+
+enum [PANOSE_ARM] BYTE display=BYTE
+  PAN_ANY                        0
+  PAN_NO_FIT                     1
+  PAN_STRAIGHT_ARMS_HORZ         2
+  PAN_STRAIGHT_ARMS_WEDGE        3
+  PAN_STRAIGHT_ARMS_VERT         4
+  PAN_STRAIGHT_ARMS_SINGLE_SERIF 5
+  PAN_STRAIGHT_ARMS_DOUBLE_SERIF 6
+  PAN_BENT_ARMS_HORZ             7
+  PAN_BENT_ARMS_WEDGE            8
+  PAN_BENT_ARMS_VERT             9
+  PAN_BENT_ARMS_SINGLE_SERIF     10
+  PAN_BENT_ARMS_DOUBLE_SERIF     11
+
+enum [PANOSE_LETTER] BYTE display=BYTE
+  PAN_ANY                     0
+  PAN_NO_FIT                  1
+  PAN_LETT_NORMAL_CONTACT     2
+  PAN_LETT_NORMAL_WEIGHTED    3
+  PAN_LETT_NORMAL_BOXED       4
+  PAN_LETT_NORMAL_FLATTENED   5
+  PAN_LETT_NORMAL_ROUNDED     6
+  PAN_LETT_NORMAL_OFF_CENTER  7
+  PAN_LETT_NORMAL_SQUARE      8
+  PAN_LETT_OBLIQUE_CONTACT    9
+  PAN_LETT_OBLIQUE_WEIGHTED   10
+  PAN_LETT_OBLIQUE_BOXED      11
+  PAN_LETT_OBLIQUE_FLATTENED  12
+  PAN_LETT_OBLIQUE_ROUNDED    13
+  PAN_LETT_OBLIQUE_OFF_CENTER 14
+  PAN_LETT_OBLIQUE_SQUARE     15
+
+enum [PANOSE_MIDLINE] BYTE display=BYTE
+  PAN_ANY                      0
+  PAN_NO_FIT                   1
+  PAN_MIDLINE_STANDARD_TRIMMED 2
+  PAN_MIDLINE_STANDARD_POINTED 3
+  PAN_MIDLINE_STANDARD_SERIFED 4
+  PAN_MIDLINE_HIGH_TRIMMED     5
+  PAN_MIDLINE_HIGH_POINTED     6
+  PAN_MIDLINE_HIGH_SERIFED     7
+  PAN_MIDLINE_CONSTANT_TRIMMED 8
+  PAN_MIDLINE_CONSTANT_POINTED 9
+  PAN_MIDLINE_CONSTANT_SERIFED 10
+  PAN_MIDLINE_LOW_TRIMMED      11
+  PAN_MIDLINE_LOW_POINTED      12
+  PAN_MIDLINE_LOW_SERIFED      13
+
+enum [PANOSE_XHEIGHT] BYTE display=BYTE
+  PAN_ANY                    0
+  PAN_NO_FIT                 1
+  PAN_XHEIGHT_CONSTANT_SMALL 2
+  PAN_XHEIGHT_CONSTANT_STD   3
+  PAN_XHEIGHT_CONSTANT_LARGE 4
+  PAN_XHEIGHT_DUCKING_SMALL  5
+  PAN_XHEIGHT_DUCKING_STD    6
+  PAN_XHEIGHT_DUCKING_LARGE  7
+
+struct PANOSE
+  bFamilyType [PANOSE_FAMILY]
+  bSerifStyle [PANOSE_SERIF]
+  bWeight [PANOSE_WEIGHT]
+  bProportion [PANOSE_PROPORTION]
+  bContrast [PANOSE_CONTRAST]
+  bStrokeVariation [PANOSE_STROKE]
+  bArmStyle [PANOSE_ARM]
+  bLetterform [PANOSE_LETTER]
+  bMidline [PANOSE_MIDLINE]
+  bXHeight [PANOSE_XHEIGHT]
+
+struct OUTLINETEXTMETRIC
+  otmSize UINT
+  otmTextMetrics TEXTMETRIC
+  otmFiller BYTE
+  otmPanoseNumber PANOSE
+  otmfsSelection [OTM_SELECTION]
+  otmfsType UINT
+  otmsCharSlopeRise int
+  otmsCharSlopeRun int
+  otmItalicAngle int
+  otmEMSquare UINT
+  otmAscent int
+  otmDescent int
+  otmLineGap UINT
+  otmsCapEmHeight UINT
+  otmsXHeight UINT
+  otmrcFontBox RECT
+  otmMacAscent int
+  otmMacDescent int
+  otmMacLineGap UINT
+  otmusMinimumPPEM UINT
+  otmptSubscriptSize POINT
+  otmptSubscriptOffset POINT
+  otmptSuperscriptSize POINT
+  otmptSuperscriptOffset POINT
+  otmsStrikeoutSize UINT
+  otmsStrikeoutPosition int
+  otmsUnderscoreSize int
+  otmsUnderscorePosition int
+  otmpFamilyName PSTR
+  otmpFaceName PSTR
+  otmpStyleName PSTR
+  otmpFullName PSTR
+
+pointer LPOUTLINETEXTMETRIC OUTLINETEXTMETRIC
+
+struct HANDLETABLE
+  objectHandle "HGDIOBJ [1]"
+
+pointer LPHANDLETABLE HANDLETABLE
+
+enum [EMR_TYPE] DWORD display=DWORD
+  EMR_HEADER                  1
+  EMR_POLYBEZIER              2
+  EMR_POLYGON                 3
+  EMR_POLYLINE                4
+  EMR_POLYBEZIERTO            5
+  EMR_POLYLINETO              6
+  EMR_POLYPOLYLINE            7
+  EMR_POLYPOLYGON             8
+  EMR_SETWINDOWEXTEX          9
+  EMR_SETWINDOWORGEX          10
+  EMR_SETVIEWPORTEXTEX        11
+  EMR_SETVIEWPORTORGEX        12
+  EMR_SETBRUSHORGEX           13
+  EMR_EOF                     14
+  EMR_SETPIXELV               15
+  EMR_SETMAPPERFLAGS          16
+  EMR_SETMAPMODE              17
+  EMR_SETBKMODE               18
+  EMR_SETPOLYFILLMODE         19
+  EMR_SETROP2                 20
+  EMR_SETSTRETCHBLTMODE       21
+  EMR_SETTEXTALIGN            22
+  EMR_SETCOLORADJUSTMENT      23
+  EMR_SETTEXTCOLOR            24
+  EMR_SETBKCOLOR              25
+  EMR_OFFSETCLIPRGN           26
+  EMR_MOVETOEX                27
+  EMR_SETMETARGN              28
+  EMR_EXCLUDECLIPRECT         29
+  EMR_INTERSECTCLIPRECT       30
+  EMR_SCALEVIEWPORTEXTEX      31
+  EMR_SCALEWINDOWEXTEX        32
+  EMR_SAVEDC                  33
+  EMR_RESTOREDC               34
+  EMR_SETWORLDTRANSFORM       35
+  EMR_MODIFYWORLDTRANSFORM    36
+  EMR_SELECTOBJECT            37
+  EMR_CREATEPEN               38
+  EMR_CREATEBRUSHINDIRECT     39
+  EMR_DELETEOBJECT            40
+  EMR_ANGLEARC                41
+  EMR_ELLIPSE                 42
+  EMR_RECTANGLE               43
+  EMR_ROUNDRECT               44
+  EMR_ARC                     45
+  EMR_CHORD                   46
+  EMR_PIE                     47
+  EMR_SELECTPALETTE           48
+  EMR_CREATEPALETTE           49
+  EMR_SETPALETTEENTRIES       50
+  EMR_RESIZEPALETTE           51
+  EMR_REALIZEPALETTE          52
+  EMR_EXTFLOODFILL            53
+  EMR_LINETO                  54
+  EMR_ARCTO                   55
+  EMR_POLYDRAW                56
+  EMR_SETARCDIRECTION         57
+  EMR_SETMITERLIMIT           58
+  EMR_BEGINPATH               59
+  EMR_ENDPATH                 60
+  EMR_CLOSEFIGURE             61
+  EMR_FILLPATH                62
+  EMR_STROKEANDFILLPATH       63
+  EMR_STROKEPATH              64
+  EMR_FLATTENPATH             65
+  EMR_WIDENPATH               66
+  EMR_SELECTCLIPPATH          67
+  EMR_ABORTPATH               68
+  EMR_GDICOMMENT              70
+  EMR_FILLRGN                 71
+  EMR_FRAMERGN                72
+  EMR_INVERTRGN               73
+  EMR_PAINTRGN                74
+  EMR_EXTSELECTCLIPRGN        75
+  EMR_BITBLT                  76
+  EMR_STRETCHBLT              77
+  EMR_MASKBLT                 78
+  EMR_PLGBLT                  79
+  EMR_SETDIBITSTODEVICE       80
+  EMR_STRETCHDIBITS           81
+  EMR_EXTCREATEFONTINDIRECTW  82
+  EMR_EXTTEXTOUTA             83
+  EMR_EXTTEXTOUTW             84
+  EMR_POLYBEZIER16            85
+  EMR_POLYGON16               86
+  EMR_POLYLINE16              87
+  EMR_POLYBEZIERTO16          88
+  EMR_POLYLINETO16            89
+  EMR_POLYPOLYLINE16          90
+  EMR_POLYPOLYGON16           91
+  EMR_POLYDRAW16              92
+  EMR_CREATEMONOBRUSH         93
+  EMR_CREATEDIBPATTERNBRUSHPT 94
+  EMR_EXTCREATEPEN            95
+  EMR_POLYTEXTOUTA            96
+  EMR_POLYTEXTOUTW            97
+  EMR_SETICMMODE              98
+  EMR_CREATECOLORSPACE        99
+  EMR_SETCOLORSPACE           100
+  EMR_DELETECOLORSPACE        101
+  EMR_GLSRECORD               102
+  EMR_GLSBOUNDEDRECORD        103
+  EMR_PIXELFORMAT             104
+  EMR_RESERVED_105            105
+  EMR_RESERVED_106            106
+  EMR_RESERVED_107            107
+  EMR_RESERVED_108            108
+  EMR_RESERVED_109            109
+  EMR_RESERVED_110            110
+  EMR_COLORCORRECTPALETTE     111
+  EMR_SETICMPROFILEA          112
+  EMR_SETICMPROFILEW          113
+  EMR_ALPHABLEND              114
+  EMR_SETLAYOUT               115
+  EMR_TRANSPARENTBLT          116
+  EMR_RESERVED_117            117
+  EMR_GRADIENTFILL            118
+  EMR_RESERVED_119            119
+  EMR_RESERVED_120            120
+  EMR_COLORMATCHTOTARGETW     121
+  EMR_CREATECOLORSPACEW       122
+
+struct ENHMETARECORD
+  iType [EMR_TYPE]
+  nSize DWORD
+  dParm "DWORD [1]"
+
+pointer "const ENHMETARECORD*" ENHMETARECORD
+
+struct METARECORD
+  rdSize DWORD
+  rdFunction WORD
+  rdParm "WORD [1]"
+
+pointer LPMETARECORD METARECORD
+
+struct FONTSIGNATURE
+  fsUsb "DWORD [4]"
+  fsCsb "DWORD [2]"
+
+pointer LPFONTSIGNATURE FONTSIGNATURE
+
+struct CHARSETINFO
+  ciCharset UINT
+  ciACP [CodePageEnum]
+  fs FONTSIGNATURE
+
+pointer LPCHARSETINFO CHARSETINFO
+
+struct BITMAP
+  bmType LONG
+  bmWidth LONG
+  bmHeight LONG
+  bmWidthBytes LONG
+  bmPlanes WORD
+  bmBitsPixel WORD
+  bmBits LPVOID
+
+pointer "const BITMAP*" BITMAP
+
+struct LOGBRUSH
+  lbStyle UINT
+  lbColor COLORREF
+  lbHatch ULONG_PTR
+
+pointer "const LOGBRUSH*" LOGBRUSH
+
+struct COLORADJUSTMENT
+  caSize WORD
+  caFlags WORD
+  caIlluminantIndex WORD
+  caRedGamma WORD
+  caGreenGamma WORD
+  caBlueGamma WORD
+  caReferenceBlack WORD
+  caReferenceWhite WORD
+  caContrast SHORT
+  caBrightness SHORT
+  caColorfulness SHORT
+  caRedGreenTint SHORT
+
+pointer LPCOLORADJUSTMENT COLORADJUSTMENT
+
+pointer "const COLORADJUSTMENT*" COLORADJUSTMENT
+
+struct XFORM
+  eM11 FLOAT
+  eM12 FLOAT
+  eM21 FLOAT
+  eM22 FLOAT
+  eDx FLOAT
+  eDy FLOAT
+
+pointer LPXFORM XFORM
+
+pointer "const XFORM*" XFORM
+
+struct ABCFLOAT
+  abcfA FLOAT
+  abcfB FLOAT
+  abcfC FLOAT
+
+pointer LPABCFLOAT ABCFLOAT
+
+struct GCP_RESULTS
+  lStructSize DWORD
+  lpOutString LPTSTR
+  lpOrder UINT*
+  lpDx int*
+  lpCaretPos int*
+  lpClass LPSTR
+  lpGlyphs LPWSTR
+  nGlyphs UINT
+  nMaxFit int
+
+pointer LPGCP_RESULTS GCP_RESULTS
+
+struct GLYPHMETRICS
+  gmBlackBoxX UINT
+  gmBlackBoxY UINT
+  gmptGlyphOrigin POINT
+  gmCellIncX short
+  gmCellIncY short
+
+pointer LPGLYPHMETRICS GLYPHMETRICS
+
+struct FIXED
+  fract WORD
+  value short
+
+struct MAT2
+  eM11 FIXED
+  eM12 FIXED
+  eM21 FIXED
+  eM22 FIXED
+
+pointer "const MAT2*" MAT2
+
+struct KERNINGPAIR
+  wFirst WORD
+  wSecond WORD
+  iKernAmount int
+
+pointer LPKERNINGPAIR KERNINGPAIR
+
+struct RASTERIZER_STATUS
+  nSize short
+  wFlags short
+  nLanguageID short
+
+pointer LPRASTERIZER_STATUS RASTERIZER_STATUS
+
+struct POLYTEXT
+  x int
+  y int
+  n UINT
+  lpstr LPCTSTR
+  uiFlags UINT
+  rcl RECT
+  pdx int*
+
+pointer "const POLYTEXT*" POLYTEXT
+
+struct ENHMETAHEADER
+  iType DWORD
+  nSize DWORD
+  rclBounds RECTL
+  rclFrame RECTL
+  dSignature DWORD
+  nVersion DWORD
+  nBytes DWORD
+  nRecords DWORD
+  nHandles WORD
+  sReserved WORD
+  nDescription DWORD
+  offDescription DWORD
+  nPalEntries DWORD
+  szlDevice SIZEL
+  szlMillimeters SIZEL
+  cbPixelFormat DWORD
+  offPixelFormat DWORD
+  bOpenGL DWORD
+  szlMicrometers SIZEL
+
+pointer LPENHMETAHEADER ENHMETAHEADER
+
+struct METAFILEPICT
+  mm LONG
+  xExt LONG
+  yExt LONG
+  hMF HMETAFILE
+
+pointer "const METAFILEPICT*" METAFILEPICT
+
+struct DOCINFO
+  cbSize int
+  lpszDocName LPCTSTR
+  lpszOutput LPCTSTR
+  lpszDatatype LPCTSTR
+  fwType DWORD
+
+pointer "const DOCINFO*" DOCINFO
+
+struct PIXELFORMATDESCRIPTOR
+  nSize WORD
+  nVersion WORD
+  dwFlags DWORD
+  iPixelType BYTE
+  cColorBits BYTE
+  cRedBits BYTE
+  cRedShift BYTE
+  cGreenBits BYTE
+  cGreenShift BYTE
+  cBlueBits BYTE
+  cBlueShift BYTE
+  cAlphaBits BYTE
+  cAlphaShift BYTE
+  cAccumBits BYTE
+  cAccumRedBits BYTE
+  cAccumGreenBits BYTE
+  cAccumBlueBits BYTE
+  cAccumAlphaBits BYTE
+  cDepthBits BYTE
+  cStencilBits BYTE
+  cAuxBuffers BYTE
+  iLayerType BYTE
+  bReserved BYTE
+  dwLayerMask DWORD
+  dwVisibleMask DWORD
+  dwDamageMask DWORD
+
+pointer LPPIXELFORMATDESCRIPTOR PIXELFORMATDESCRIPTOR
+
+pointer "const PIXELFORMATDESCRIPTOR*" PIXELFORMATDESCRIPTOR
+
+enum [DeviceCapsEnum] int display=int
+  DRIVERVERSION   0
+  TECHNOLOGY      2
+  HORZSIZE        4
+  VERTSIZE        6
+  HORZRES         8
+  VERTRES         10
+  BITSPIXEL       12
+  PLANES          14
+  NUMBRUSHES      16
+  NUMPENS         18
+  NUMMARKERS      20
+  NUMFONTS        22
+  NUMCOLORS       24
+  PDEVICESIZE     26
+  CURVECAPS       28
+  LINECAPS        30
+  POLYGONALCAPS   32
+  TEXTCAPS        34
+  CLIPCAPS        36
+  RASTERCAPS      38
+  ASPECTX         40
+  ASPECTY         42
+  ASPECTXY        44
+  LOGPIXELSX      88
+  LOGPIXELSY      90
+  SIZEPALETTE     104
+  NUMRESERVED     106
+  COLORRES        108
+  PHYSICALWIDTH   110
+  PHYSICALHEIGHT  111
+  PHYSICALOFFSETX 112
+  PHYSICALOFFSETY 113
+  SCALINGFACTORX  114
+  SCALINGFACTORY  115
+  VREFRESH        116
+  DESKTOPVERTRES  117
+  DESKTOPHORZRES  118
+  BLTALIGNMENT    119
+  SHADEBLENDCAPS  120
+  COLORMGMTCAPS   121
+
+enum [RasterOperationEnum] DWORD display=DWORD
+  BLACKNESS      0x00000042
+  NOTSRCERASE    0x001100A6
+  NOTSRCCOPY     0x00330008
+  SRCERASE       0x00440328
+  DSTINVERT      0x00550009
+  PATINVERT      0x005A0049
+  SRCINVERT      0x00660046
+  SRCAND         0x008800C6
+  MERGEPAINT     0x00BB0226
+  MERGECOPY      0x00C000CA
+  SRCCOPY        0x00CC0020
+  SRCPAINT       0x00EE0086
+  PATCOPY        0x00F00021
+  PATPAINT       0x00FB0A09
+  WHITENESS      0x00FF0062
+  CAPTUREBLT     0x40000000
+  NOMIRRORBITMAP 0x80000000
+
+enum [StretchModeEnum] int display=int
+  BLACKONWHITE 1
+  WHITEONBLACK 2
+  COLORONCOLOR 3
+  HALFTONE     4
+
+enum [RandomRgnEnum] INT display=INT
+  SYSRGN 4
+
+enum [ColorUseEnum] UINT display=UINT
+  DIB_RGB_COLORS 0
+  DIB_PAL_COLORS 1
+
+flag [CreateBitmapInitFlag] DWORD display=DWORD
+  CBM_INIT 0x04
+
+enum [ROP2ModeEnum] int display=int
+  R2_BLACK       1
+  R2_NOTMERGEPEN 2
+  R2_MASKNOTPEN  3
+  R2_NOTCOPYPEN  4
+  R2_MASKPENNOT  5
+  R2_NOT         6
+  R2_XORPEN      7
+  R2_NOTMASKPEN  8
+  R2_MASKPEN     9
+  R2_NOTXORPEN   10
+  R2_NOP         11
+  R2_MERGENOTPEN 12
+  R2_COPYPEN     13
+  R2_MERGEPENNOT 14
+  R2_MERGEPEN    15
+  R2_WHITE       16
+
+enum [BkModeEnum] int display=int
+  TRANSPARENT 1
+  OPAQUE      2
+
+flag [TextAlignFlag] UINT display=UINT
+  TA_NOUPDATECP 0
+  TA_LEFT       0
+  TA_TOP        0
+  TA_UPDATECP   1
+  TA_RIGHT      2
+  TA_CENTER     6
+  TA_BOTTOM     8
+  TA_BASELINE   24
+  TA_RTLREADING 256
+  GDI_ERROR     0xFFFFFFFF
+
+enum [RgnMode] int display=int
+  RGN_AND  1
+  RGN_OR   2
+  RGN_XOR  3
+  RGN_DIFF 4
+  RGN_COPY 5
+
+enum [TranslateCharsetInfoFlag] DWORD display=DWORD
+  TCI_SRCCHARSET  1
+  TCI_SRCCODEPAGE 2
+  TCI_SRCFONTSIG  3
+  TCI_SRCLOCALE   0x1000
+
+enum [ObjectType] UINT display=UINT
+  OBJ_PEN         1
+  OBJ_BRUSH       2
+  OBJ_DC          3
+  OBJ_METADC      4
+  OBJ_PAL         5
+  OBJ_FONT        6
+  OBJ_BITMAP      7
+  OBJ_REGION      8
+  OBJ_METAFILE    9
+  OBJ_MEMDC       10
+  OBJ_EXTPEN      11
+  OBJ_ENHMETADC   12
+  OBJ_ENHMETAFILE 13
+  OBJ_COLORSPACE  14
+
+enum [MappingMode] int display=int
+  MM_TEXT        1
+  MM_LOMETRIC    2
+  MM_HIMETRIC    3
+  MM_LOENGLISH   4
+  MM_HIENGLISH   5
+  MM_TWIPS       6
+  MM_ISOTROPIC   7
+  MM_ANISOTROPIC 8
+
+flag [LayoutFlags] DWORD display=DWORD
+  LAYOUT_RTL                        0x00000001
+  LAYOUT_BTT                        0x00000002
+  LAYOUT_VBH                        0x00000004
+  LAYOUT_ORIENTATIONMASK            0x00000007
+  LAYOUT_BITMAPORIENTATIONPRESERVED 0x00000008
+
+flag [BoundsAccumulationFlags] UINT display=UINT
+  DCB_RESET      0x0001
+  DCB_ACCUMULATE 0x0002
+  DCB_SET        0x0003
+  DCB_ENABLE     0x0004
+  DCB_DISABLE    0x0008
+
+flag [ExtTextOutFlags] UINT display=UINT
+  ETO_OPAQUE            0x0002
+  ETO_CLIPPED           0x0004
+  ETO_GLYPH_INDEX       0x0010
+  ETO_RTLREADING        0x0080
+  ETO_NUMERICSLOCAL     0x0400
+  ETO_NUMERICSLATIN     0x0800
+  ETO_IGNORELANGUAGE    0x1000
+  ETO_PDY               0x2000
+  ETO_REVERSE_INDEX_MAP 0x10000
+
+enum [ModifyWorldTransformMode] DWORD display=DWORD
+  MWT_IDENTITY      1
+  MWT_LEFTMULTIPLY  2
+  MWT_RIGHTMULTIPLY 3
+
+flag [GetGlyphIndicesFlag] DWORD display=DWORD
+  GGI_MARK_NONEXISTING_GLYPHS 0x0001
+
+enum [PolyFillModes] int display=int
+  ALTERNATE 1
+  WINDING   2
+
+enum [GraphicsModes] int display=int
+  GM_COMPATIBLE 1
+  GM_ADVANCED   2
+
+enum [HatchStyle] int display=int
+  HS_HORIZONTAL 0
+  HS_VERTICAL   1
+  HS_FDIAGONAL  2
+  HS_BDIAGONAL  3
+  HS_CROSS      4
+  HS_DIAGCROSS  5
+
+enum [GdiEscapeFunction] int display=int
+  NEWFRAME                1
+  ABORTDOC                2
+  NEXTBAND                3
+  SETCOLORTABLE           4
+  GETCOLORTABLE           5
+  FLUSHOUTPUT             6
+  DRAFTMODE               7
+  QUERYESCSUPPORT         8
+  SETABORTPROC            9
+  STARTDOC                10
+  ENDDOC                  11
+  GETPHYSPAGESIZE         12
+  GETPRINTINGOFFSET       13
+  GETSCALINGFACTOR        14
+  MFCOMMENT               15
+  GETPENWIDTH             16
+  SETCOPYCOUNT            17
+  SELECTPAPERSOURCE       18
+  DEVICEDATA              19
+  PASSTHROUGH             19
+  GETTECHNOLOGY           20
+  SETLINECAP              21
+  SETLINEJOIN             22
+  SETMITERLIMIT           23
+  BANDINFO                24
+  DRAWPATTERNRECT         25
+  GETVECTORPENSIZE        26
+  GETVECTORBRUSHSIZE      27
+  ENABLEDUPLEX            28
+  GETSETPAPERBINS         29
+  GETSETPRINTORIENT       30
+  ENUMPAPERBINS           31
+  SETDIBSCALING           32
+  EPSPRINTING             33
+  ENUMPAPERMETRICS        34
+  GETSETPAPERMETRICS      35
+  POSTSCRIPT_DATA         37
+  POSTSCRIPT_IGNORE       38
+  MOUSETRAILS             39
+  GETDEVICEUNITS          42
+  GETEXTENDEDTEXTMETRICS  256
+  GETEXTENTTABLE          257
+  GETPAIRKERNTABLE        258
+  GETTRACKKERNTABLE       259
+  EXTTEXTOUT              512
+  GETFACENAME             513
+  DOWNLOADFACE            514
+  ENABLERELATIVEWIDTHS    768
+  ENABLEPAIRKERNING       769
+  SETKERNTRACK            770
+  SETALLJUSTVALUES        771
+  SETCHARSET              772
+  STRETCHBLT              2048
+  METAFILE_DRIVER         2049
+  GETSETSCREENPARAMS      3072
+  QUERYDIBSUPPORT         3073
+  BEGIN_PATH              4096
+  CLIP_TO_PATH            4097
+  END_PATH                4098
+  EXT_DEVICE_CAPS         4099
+  RESTORE_CTM             4100
+  SAVE_CTM                4101
+  SET_ARC_DIRECTION       4102
+  SET_BACKGROUND_COLOR    4103
+  SET_POLY_MODE           4104
+  SET_SCREEN_ANGLE        4105
+  SET_SPREAD              4106
+  TRANSFORM_CTM           4107
+  SET_CLIP_BOX            4108
+  SET_BOUNDS              4109
+  SET_MIRROR_MODE         4110
+  OPENCHANNEL             4110
+  DOWNLOADHEADER          4111
+  CLOSECHANNEL            4112
+  POSTSCRIPT_PASSTHROUGH  4115
+  ENCAPSULATED_POSTSCRIPT 4116
+  POSTSCRIPT_IDENTIFY     4117
+  POSTSCRIPT_INJECTION    4118
+  CHECKJPEGFORMAT         4119
+  CHECKPNGFORMAT          4120
+  GET_PS_FEATURESETTING   4121
+  GDIPLUS_TS_QUERYVER     4122
+  GDIPLUS_TS_RECORD       4123
+
+enum [GetGlyphOutlineFormat] UINT display=UINT
+  GGO_METRICS      0
+  GGO_BITMAP       1
+  GGO_NATIVE       2
+  GGO_BEZIER       3
+  GGO_GRAY2_BITMAP 4
+  GGO_GRAY4_BITMAP 5
+  GGO_GRAY8_BITMAP 6
+  GGO_GLYPH_INDEX  0x0080
+  GGO_UNHINTED     0x0100
+
+enum [STOCK_OBJECT] int display=int
+  WHITE_BRUSH         0
+  LTGRAY_BRUSH        1
+  GRAY_BRUSH          2
+  DKGRAY_BRUSH        3
+  BLACK_BRUSH         4
+  HOLLOW_BRUSH        5
+  WHITE_PEN           6
+  BLACK_PEN           7
+  NULL_PEN            8
+  OEM_FIXED_FONT      10
+  ANSI_FIXED_FONT     11
+  ANSI_VAR_FONT       12
+  SYSTEM_FONT         13
+  DEVICE_DEFAULT_FONT 14
+  DEFAULT_PALETTE     15
+  SYSTEM_FIXED_FONT   16
+  DEFAULT_GUI_FONT    17
+  DC_BRUSH            18
+  DC_PEN              19
+
+flag [GCP_FLAGS] DWORD display=DWORD
+  GCP_DBCS            0x0001
+  GCP_REORDER         0x0002
+  GCP_USEKERNING      0x0008
+  GCP_GLYPHSHAPE      0x0010
+  GCP_LIGATE          0x0020
+  GCP_GLYPHINDEXING   0x0080
+  GCP_DIACRITIC       0x0100
+  GCP_KASHIDA         0x0400
+  GCP_ERROR           0x8000
+  GCP_JUSTIFY         0x00010000
+  GCP_NODIACRITICS    0x00020000
+  FLI_GLYPHS          0x00040000
+  GCP_CLASSIN         0x00080000
+  GCP_MAXEXTENT       0x00100000
+  GCP_JUSTIFYIN       0x00200000
+  GCP_DISPLAYZWG      0x00400000
+  GCP_SYMSWAPOFF      0x00800000
+  GCP_NUMERICOVERRIDE 0x01000000
+  GCP_NEUTRALOVERRIDE 0x02000000
+  GCP_NUMERICSLATIN   0x04000000
+  GCP_NUMERICSLOCAL   0x08000000
+
+enum WCS_PROFILE_MANAGEMENT_SCOPE UINT
+  WCS_PROFILE_MANAGEMENT_SCOPE_SYSTEM_WIDE  0
+  WCS_PROFILE_MANAGEMENT_SCOPE_CURRENT_USER 1
+
+enum [CS_ACTION] DWORD display=DWORD
+  CS_ENABLE           0x00000001
+  CS_DISABLE          0x00000002
+  CS_DELETE_TRANSFORM 0x00000003
+
+enum [ICM_MODE] int display=int
+  ICM_OFF            1
+  ICM_ON             2
+  ICM_QUERY          3
+  ICM_DONE_OUTSIDEDC 4
+
+enum [ICM_COMMAND] UINT display=UINT
+  ICM_ADDPROFILE          1
+  ICM_DELETEPROFILE       2
+  ICM_QUERYPROFILE        3
+  ICM_SETDEFAULTPROFILE   4
+  ICM_REGISTERICMATCHER   5
+  ICM_UNREGISTERICMATCHER 6
+  ICM_QUERYMATCH          7
+
+enum [POINT_TYPE] BYTE display=BYTE
+  PT_CLOSEFIGURE 0x01
+  PT_LINETO      0x02
+  PT_BEZIERTO    0x04
+  PT_MOVETO      0x06
+
+pointer [POINT_TYPE*] [POINT_TYPE] display=LPBYTE
+
+func BitBlt
+  BOOL
+  hdcDest HDC
+  nXDest int
+  nYDest int
+  nWidth int
+  nHeight int
+  hdcSrc HDC
+  nXSrc int
+  nYSrc int
+  dwRop [RasterOperationEnum]
+
+func CreateBitmap
+  success NotEqual=0
+  HBITMAP
+  nWidth int
+  nHeight int
+  cPlanes UINT
+  cBitsPerPel UINT
+  lpvBits "const VOID*"
+
+func CreateBitmapIndirect
+  success NotEqual=0
+  HBITMAP
+  lpbm "const BITMAP*"
+
+func CreateCompatibleBitmap
+  success NotEqual=0
+  HBITMAP
+  hdc HDC
+  nWidth int
+  nHeight int
+
+func CreateDIBitmap
+  success NotEqual=0
+  HBITMAP
+  hdc HDC
+  lpbmih "const BITMAPINFOHEADER*"
+  fdwInit [CreateBitmapInitFlag]
+  lpbInit "const VOID*"
+  lpbmi "const BITMAPINFO*"
+  fuUsage [ColorUseEnum]
+
+func CreateDIBSection
+  success NotEqual=0
+  HBITMAP
+  hdc HDC
+  pbmi "const BITMAPINFO*"
+  iUsage [ColorUseEnum]
+  ppvBits VOID**
+  hSection HANDLE
+  dwOffset DWORD
+
+func ExtFloodFill
+  BOOL
+  hdc HDC
+  nXStart int
+  nYStart int
+  crColor COLORREF
+  fuFillType UINT
+
+func GetBitmapDimensionEx
+  BOOL
+  hBitmap HBITMAP
+  lpDimension LPSIZE
+
+func GetDIBColorTable
+  success NotEqual=0
+  UINT
+  hdc HDC
+  uStartIndex UINT
+  cEntries UINT
+  pColors RGBQUAD* postCount=Return
+
+func GetDIBits
+  success NotEqual=0
+  int
+  hdc HDC
+  hbmp HBITMAP
+  uStartScan UINT
+  cScanLines UINT
+  lpvBits LPVOID
+  lpbi LPBITMAPINFO
+  uUsage [ColorUseEnum]
+
+func GetPixel
+  success NotEqual=0xFFFFFFFF
+  COLORREF
+  hdc HDC
+  nXPos int
+  nYPos int
+
+func GetStretchBltMode
+  success NotEqual=0
+  int
+  hdc HDC
+
+func MaskBlt
+  BOOL
+  hdcDest HDC
+  nXDest int
+  nYDest int
+  nWidth int
+  nHeight int
+  hdcSrc HDC
+  nXSrc int
+  nYSrc int
+  hbmMask HBITMAP
+  xMask int
+  yMask int
+  dwRop [RasterOperationEnum]
+
+func PlgBlt
+  BOOL
+  hdcDest HDC
+  lpPoint "const POINT*"
+  hdcSrc HDC
+  nXSrc int
+  nYSrc int
+  nWidth int
+  nHeight int
+  hbmMask HBITMAP
+  xMask int
+  yMask int
+
+func SetBitmapDimensionEx
+  BOOL
+  hBitmap HBITMAP
+  nWidth int
+  nHeight int
+  lpSize LPSIZE
+
+func SetDIBColorTable
+  success NotEqual=0
+  UINT
+  hdc HDC
+  uStartIndex UINT
+  cEntries UINT
+  pColors "const RGBQUAD*" count=cEntries
+
+func SetDIBits
+  success NotEqual=0
+  int
+  hdc HDC
+  hbmp HBITMAP
+  uStartScan UINT
+  cScanLines UINT
+  lpvBits "const VOID*"
+  lpbmi "const BITMAPINFO*"
+  fuColorUse [ColorUseEnum]
+
+func SetDIBitsToDevice
+  success NotEqual=0
+  int
+  hdc HDC
+  XDest int
+  YDest int
+  dwWidth DWORD
+  dwHeight DWORD
+  XSrc int
+  YSrc int
+  uStartScan UINT
+  cScanLines UINT
+  lpvBits "const VOID*"
+  lpbmi "const BITMAPINFO*"
+  fuColorUse [ColorUseEnum]
+
+func SetPixel
+  success NotEqual=0xFFFFFFFF
+  COLORREF
+  hdc HDC
+  X int
+  Y int
+  crColor COLORREF
+
+func SetPixelV
+  BOOL
+  hdc HDC
+  X int
+  Y int
+  crColor COLORREF
+
+func SetStretchBltMode
+  success NotEqual=0
+  int
+  hdc HDC
+  iStretchMode [StretchModeEnum]
+
+func StretchBlt
+  BOOL
+  hdcDest HDC
+  nXOriginDest int
+  nYOriginDest int
+  nWidthDest int
+  nHeightDest int
+  hdcSrc HDC
+  nXOriginSrc int
+  nYOriginSrc int
+  nWidthSrc int
+  nHeightSrc int
+  dwRop [RasterOperationEnum]
+
+func StretchDIBits
+  success NotEqual=0
+  int
+  hdc HDC
+  XDest int
+  YDest int
+  nDestWidth int
+  nDestHeight int
+  XSrc int
+  YSrc int
+  nSrcWidth int
+  nSrcHeight int
+  lpBits "const VOID*"
+  lpBitsInfo "const BITMAPINFO*"
+  iUsage [ColorUseEnum]
+  dwRop [RasterOperationEnum]
+
+func CreateDiscardableBitmap
+  success NotEqual=0
+  HBITMAP
+  hdc HDC
+  nWidth int
+  nHeight int
+
+func FloodFill
+  BOOL
+  hdc HDC
+  nXStart int
+  nYStart int
+  crFill COLORREF
+
+func GetBitmapBits
+  success NotEqual=0
+  LONG
+  hbmp HBITMAP
+  cbBuffer LONG
+  lpvBits LPVOID
+
+func SetBitmapBits
+  success NotEqual=0
+  LONG
+  hbmp HBITMAP
+  cBytes DWORD
+  lpBits "const VOID*"
+
+func CreateBrushIndirect
+  success NotEqual=0
+  HBRUSH
+  lplb "const LOGBRUSH*"
+
+func CreateDIBPatternBrushPt
+  success NotEqual=0
+  HBRUSH
+  lpPackedDIB "const VOID*"
+  iUsage [ColorUseEnum]
+
+func CreateHatchBrush
+  success NotEqual=0
+  HBRUSH
+  fnStyle [HatchStyle]
+  clrref COLORREF
+
+func CreatePatternBrush
+  success NotEqual=0
+  HBRUSH
+  hbmp HBITMAP
+
+func CreateSolidBrush
+  success NotEqual=0
+  HBRUSH
+  crColor COLORREF
+
+func GetBrushOrgEx
+  BOOL
+  hdc HDC
+  lppt LPPOINT
+
+func PatBlt
+  BOOL
+  hdc HDC
+  nXLeft int
+  nYLeft int
+  nWidth int
+  nHeight int
+  dwRop [RasterOperationEnum]
+
+func SetBrushOrgEx
+  BOOL
+  hdc HDC
+  nXOrg int
+  nYOrg int
+  lppt LPPOINT
+
+func CreateDIBPatternBrush
+  success NotEqual=0
+  HBRUSH
+  hglbDIBPacked HGLOBAL
+  fuColorSpec UINT
+
+func ExcludeClipRect
+  success NotEqual=0
+  int
+  hdc HDC
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+
+func ExtSelectClipRgn
+  success NotEqual=0
+  int
+  hdc HDC
+  hrgn HRGN
+  fnMode [RgnMode]
+
+func GetClipBox
+  success NotEqual=0
+  int
+  hdc HDC
+  lprc LPRECT
+
+func GetClipRgn
+  success NotEqual=-1
+  int
+  hdc HDC
+  hrgn HRGN
+
+func GetMetaRgn
+  success NotEqual=0
+  int
+  hdc HDC
+  hrgn HRGN
+
+func GetRandomRgn
+  success NotEqual=0
+  int
+  hdc HDC
+  hrgn HRGN
+  iNum [RandomRgnEnum]
+
+func IntersectClipRect
+  success NotEqual=0
+  int
+  hdc HDC
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+
+func OffsetClipRgn
+  success NotEqual=0
+  int
+  hdc HDC
+  nXOffset int
+  nYOffset int
+
+func PtVisible
+  success NotEqual=-1
+  [BOOL_NUMBER]
+  hdc HDC
+  X int
+  Y int
+
+func RectVisible
+  success Less=3
+  [BOOL_NUMBER]
+  hdc HDC
+  lprc "const RECT*"
+
+func SelectClipPath
+  BOOL
+  hdc HDC
+  iMode int
+
+func SelectClipRgn
+  success NotEqual=0
+  int
+  hdc HDC
+  hrgn HRGN
+
+func SetMetaRgn
+  success NotEqual=0
+  int
+  hdc HDC
+
+func AnimatePalette
+  BOOL
+  hpal HPALETTE
+  iStartIndex UINT
+  cEntries UINT
+  ppe "const PALETTEENTRY*" count=cEntries
+
+func CreateHalftonePalette
+  success NotEqual=0
+  HPALETTE
+  hdc HDC
+
+func CreatePalette
+  success NotEqual=0
+  HPALETTE
+  lplgpl "const LOGPALETTE*"
+
+func GetColorAdjustment
+  BOOL
+  hdc HDC
+  lpca LPCOLORADJUSTMENT
+
+func GetNearestColor
+  success NotEqual=0xFFFFFFFF
+  COLORREF
+  hdc HDC
+  crColor COLORREF
+
+func GetNearestPaletteIndex
+  success NotEqual=0
+  UINT
+  hpal HPALETTE
+  crColor COLORREF
+
+func GetPaletteEntries
+  success NotEqual=0
+  UINT
+  hpal HPALETTE
+  iStartIndex UINT
+  nEntries UINT
+  lppe LPPALETTEENTRY postCount=nEntries
+
+func GetSystemPaletteEntries
+  success NotEqual=0
+  UINT
+  hdc HDC
+  iStartIndex UINT
+  nEntries UINT
+  lppe LPPALETTEENTRY postCount=nEntries
+
+func GetSystemPaletteUse
+  success NotEqual=0
+  UINT
+  hdc HDC
+
+func RealizePalette
+  success NotEqual=0
+  UINT
+  hdc HDC
+
+func ResizePalette
+  BOOL
+  hpal HPALETTE
+  nEntries UINT
+
+func SelectPalette
+  success NotEqual=0
+  HPALETTE
+  hdc HDC
+  hpal HPALETTE
+  bForceBackground BOOL
+
+func SetColorAdjustment
+  BOOL
+  hdc HDC
+  lpca "const COLORADJUSTMENT*"
+
+func SetPaletteEntries
+  success NotEqual=0
+  UINT
+  hpal HPALETTE
+  iStart UINT
+  cEntries UINT
+  lppe "const PALETTEENTRY*" count=cEntries
+
+func SetSystemPaletteUse
+  success NotEqual=0
+  UINT
+  hdc HDC
+  uUsage UINT
+
+func UnrealizeObject
+  BOOL
+  hgdiobj HGDIOBJ
+
+func UpdateColors
+  BOOL
+  hdc HDC
+
+func CombineTransform
+  BOOL
+  lpxformResult LPXFORM
+  lpxform1 "const XFORM*"
+  lpxform2 "const XFORM*"
+
+func DPtoLP
+  BOOL
+  hdc HDC
+  lpPoints LPPOINT
+  nCount int
+
+func GetCurrentPositionEx
+  BOOL
+  hdc HDC
+  lpPoint LPPOINT
+
+func GetGraphicsMode
+  success NotEqual=0
+  int
+  hdc HDC
+
+func GetMapMode
+  success NotEqual=0
+  int
+  hdc HDC
+
+func GetViewportExtEx
+  BOOL
+  hdc HDC
+  lpSize LPSIZE
+
+func GetViewportOrgEx
+  BOOL
+  hdc HDC
+  lpPoint LPPOINT
+
+func GetWindowExtEx
+  BOOL
+  hdc HDC
+  lpSize LPSIZE
+
+func GetWindowOrgEx
+  BOOL
+  hdc HDC
+  lpPoint LPPOINT
+
+func GetWorldTransform
+  BOOL
+  hdc HDC
+  lpXform LPXFORM
+
+func LPtoDP
+  BOOL
+  hdc HDC
+  lpPoints LPPOINT count=nCount
+  nCount int
+
+func ModifyWorldTransform
+  BOOL
+  hdc HDC
+  lpXform "const XFORM*"
+  iMode [ModifyWorldTransformMode]
+
+func OffsetViewportOrgEx
+  BOOL
+  hdc HDC
+  nXOffset int
+  nYOffset int
+  lpPoint LPPOINT
+
+func OffsetWindowOrgEx
+  BOOL
+  hdc HDC
+  nXOffset int
+  nYOffset int
+  lpPoint LPPOINT
+
+func ScaleViewportExtEx
+  BOOL
+  hdc HDC
+  Xnum int
+  Xdenom int
+  Ynum int
+  Ydenom int
+  lpSize LPSIZE
+
+func ScaleWindowExtEx
+  BOOL
+  hdc HDC
+  Xnum int
+  Xdenom int
+  Ynum int
+  Ydenom int
+  lpSize LPSIZE
+
+func SetGraphicsMode
+  success NotEqual=0
+  int
+  hdc HDC
+  iMode [GraphicsModes]
+
+func SetMapMode
+  success NotEqual=0
+  int
+  hdc HDC
+  fnMapMode [MappingMode]
+
+func SetViewportExtEx
+  BOOL
+  hdc HDC
+  nXExtent int
+  nYExtent int
+  lpSize LPSIZE
+
+func SetViewportOrgEx
+  BOOL
+  hdc HDC
+  X int
+  Y int
+  lpPoint LPPOINT
+
+func SetWindowExtEx
+  BOOL
+  hdc HDC
+  nXExtent int
+  nYExtent int
+  lpSize LPSIZE
+
+func SetWindowOrgEx
+  BOOL
+  hdc HDC
+  X int
+  Y int
+  lpPoint LPPOINT
+
+func SetWorldTransform
+  BOOL
+  hdc HDC
+  lpXform "const XFORM*"
+
+func CancelDC
+  BOOL
+  hdc HDC
+
+func CreateCompatibleDC
+  success NotEqual=0
+  HDC
+  hdc HDC
+
+func CreateDC bothCharset
+  success NotEqual=0
+  HDC
+  lpszDriver LPCTSTR
+  lpszDevice LPCTSTR
+  lpszOutput LPCTSTR
+  lpInitData "const DEVMODE*"
+
+func CreateIC bothCharset
+  success NotEqual=0
+  HDC
+  lpszDriver LPCTSTR
+  lpszDevice LPCTSTR
+  lpszOutput LPCTSTR
+  lpdvmInit "const DEVMODE*"
+
+func DeleteDC
+  BOOL
+  hdc HDC
+
+func DeleteObject
+  BOOL
+  hObject HGDIOBJ
+
+func DrawEscape
+  success NotEqual=0
+  int
+  hdc HDC
+  nEscape int
+  cbInput int
+  lpszInData LPCSTR
+
+func EnumObjects
+  success NotEqual=0
+  int
+  hdc HDC
+  nObjectType int
+  lpObjectFunc GOBJENUMPROC
+  lParam LPARAM
+
+func GetCurrentObject
+  success NotEqual=0
+  HGDIOBJ
+  hdc HDC
+  uObjectType [ObjectType]
+
+func GetDCBrushColor
+  success NotEqual=0xFFFFFFFF
+  COLORREF
+  hdc HDC
+
+func GetDCOrgEx
+  BOOL
+  hdc HDC
+  lpPoint LPPOINT
+
+func GetDCPenColor
+  success NotEqual=0xFFFFFFFF
+  COLORREF
+  hdc HDC
+
+func GetDeviceCaps
+  int
+  hdc HDC
+  nIndex [DeviceCapsEnum]
+
+func GetLayout
+  success NotEqual=-1
+  DWORD
+  hdc HDC
+
+func GetObject bothCharset
+  success NotEqual=0
+  int
+  hgdiobj HGDIOBJ
+  cbBuffer int
+  lpvObject LPVOID
+
+func GetObjectType
+  success NotEqual=0
+  DWORD
+  h HGDIOBJ
+
+func GetStockObject
+  success NotEqual=0
+  HGDIOBJ
+  fnObject [STOCK_OBJECT]
+
+func ResetDC bothCharset
+  success NotEqual=0
+  HDC
+  hdc HDC
+  lpInitData "const DEVMODE*"
+
+func RestoreDC
+  BOOL
+  hdc HDC
+  nSavedDC int
+
+func SaveDC
+  success NotEqual=0
+  int
+  hdc HDC
+
+func SelectObject
+  success NotEqual=0
+  HGDIOBJ
+  hdc HDC
+  hgdiobj HGDIOBJ
+
+func SetDCBrushColor
+  success NotEqual=0xFFFFFFFF
+  COLORREF
+  hdc HDC
+  crColor COLORREF
+
+func SetDCPenColor
+  success NotEqual=0xFFFFFFFF
+  COLORREF
+  hdc HDC
+  crColor COLORREF
+
+func SetLayout
+  success NotEqual=0
+  DWORD
+  hdc HDC
+  dwLayout [LayoutFlags]
+
+func Chord
+  BOOL
+  hdc HDC
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+  nXRadial1 int
+  nYRadial1 int
+  nXRadial2 int
+  nYRadial2 int
+
+func Ellipse
+  BOOL
+  hdc HDC
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+
+func Pie
+  BOOL
+  hdc HDC
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+  nXRadial1 int
+  nYRadial1 int
+  nXRadial2 int
+  nYRadial2 int
+
+func Polygon
+  BOOL
+  hdc HDC
+  lpPoints "const POINT*" count=nCount
+  nCount int
+
+func PolyPolygon
+  BOOL
+  hdc HDC
+  lpPoints "const POINT*"
+  lpPolyCounts "const INT*"
+  nCount int
+
+func Rectangle
+  BOOL
+  hdc HDC
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+
+func RoundRect
+  BOOL
+  hdc HDC
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+  nWidth int
+  nHeight int
+
+func AddFontMemResourceEx
+  success NotEqual=0
+  HANDLE
+  pbFont PVOID length=cbFont
+  cbFont DWORD
+  pdv PVOID
+  pcFonts DWORD*
+
+func AddFontResource bothCharset
+  success NotEqual=0
+  int
+  lpszFilename LPCTSTR
+
+func AddFontResourceEx bothCharset
+  success NotEqual=0
+  int
+  lpszFilename LPCTSTR
+  fl DWORD
+  pdv PVOID
+
+func CreateFont bothCharset
+  success NotEqual=0
+  HFONT
+  nHeight int
+  nWidth int
+  nEscapement int
+  nOrientation int
+  fnWeight [FontWeight] display=int
+  fdwItalic DWORD
+  fdwUnderline DWORD
+  fdwStrikeOut DWORD
+  fdwCharSet [FontCharset] display=DWORD
+  fdwOutputPrecision [FontOutputPrecision] display=DWORD
+  fdwClipPrecision [FontClipPrecision] display=DWORD
+  fdwQuality [FontQuality] display=DWORD
+  fdwPitchAndFamily [FontPitchAndFamily] display=DWORD
+  lpszFace LPCTSTR
+
+func CreateFontIndirect bothCharset
+  success NotEqual=0
+  HFONT
+  lplf "const LOGFONT*"
+
+func CreateFontIndirectEx bothCharset
+  success NotEqual=0
+  HFONT
+  penumlfex "const ENUMLOGFONTEXDV*"
+
+func CreateScalableFontResource bothCharset
+  BOOL
+  fdwHidden DWORD
+  lpszFontRes LPCTSTR
+  lpszFontFile LPCTSTR
+  lpszCurrentPath LPCTSTR
+
+func EnumFontFamiliesEx bothCharset
+  int
+  hdc HDC
+  lpLogfont LPLOGFONT
+  lpEnumFontFamExProc FONTENUMPROC
+  lParam LPARAM
+  dwFlags DWORD
+
+func ExtTextOut bothCharset
+  BOOL
+  hdc HDC
+  X int
+  Y int
+  fuOptions [ExtTextOutFlags]
+  lprc "const RECT*"
+  lpString LPCTSTR
+  cbCount UINT
+  lpDx "const INT*"
+
+func GetAspectRatioFilterEx
+  BOOL
+  hdc HDC
+  lpAspectRatio LPSIZE
+
+func GetCharABCWidths bothCharset
+  BOOL
+  hdc HDC
+  uFirstChar UINT
+  uLastChar UINT
+  lpabc LPABC
+
+func GetCharABCWidthsFloat bothCharset
+  BOOL
+  hdc HDC
+  iFirstChar UINT
+  iLastChar UINT
+  lpABCF LPABCFLOAT
+
+func GetCharABCWidthsI
+  BOOL
+  hdc HDC
+  giFirst UINT
+  cgi UINT
+  pgi LPWORD
+  lpabc LPABC
+
+func GetCharacterPlacement bothCharset
+  success NotEqual=0
+  DWORD
+  hdc HDC
+  lpString LPCTSTR
+  nCount int
+  nMaxExtent int
+  lpResults LPGCP_RESULTS
+  dwFlags [GCP_FLAGS]
+
+func GetCharWidth32 bothCharset
+  BOOL
+  hdc HDC
+  iFirstChar UINT
+  iLastChar UINT
+  lpBuffer LPINT
+
+func GetCharWidthFloat bothCharset
+  BOOL
+  hdc HDC
+  iFirstChar UINT
+  iLastChar UINT
+  pxBuffer PFLOAT
+
+func GetCharWidthI
+  BOOL
+  hdc HDC
+  giFirst UINT
+  cgi UINT
+  pgi LPWORD
+  lpBuffer LPINT
+
+func GetFontData
+  success NotEqual=0
+  DWORD
+  hdc HDC
+  dwTable DWORD
+  dwOffset DWORD
+  lpvBuffer LPVOID
+  cbData DWORD
+
+func GetFontLanguageInfo
+  success NotEqual=0
+  DWORD
+  hdc HDC
+
+func GetFontUnicodeRanges
+  success NotEqual=0
+  DWORD
+  hdc HDC
+  lpgs LPGLYPHSET
+
+func GetGlyphIndices bothCharset
+  success NotEqual=0
+  DWORD
+  hdc HDC
+  lpstr LPCTSTR
+  c int
+  pgi LPWORD
+  fl [GetGlyphIndicesFlag]
+
+func GetGlyphOutline bothCharset
+  success NotEqual=0
+  DWORD
+  hdc HDC
+  uChar UINT
+  uFormat [GetGlyphOutlineFormat]
+  lpgm LPGLYPHMETRICS
+  cbBuffer DWORD
+  lpvBuffer LPVOID postLength=cbBuffer
+  lpmat2 "const MAT2*"
+
+func GetKerningPairs bothCharset
+  success NotEqual=0
+  DWORD
+  hdc HDC
+  nNumPairs DWORD
+  lpkrnpair LPKERNINGPAIR
+
+func GetOutlineTextMetrics bothCharset
+  success NotEqual=0
+  UINT
+  hdc HDC
+  cbData UINT
+  lpOTM LPOUTLINETEXTMETRIC
+
+func GetRasterizerCaps
+  BOOL
+  lprs LPRASTERIZER_STATUS
+  cb UINT
+
+func GetTextAlign
+  success NotEqual=-1
+  [TextAlignFlag]
+  hdc HDC
+
+func GetTextCharacterExtra
+  success NotEqual=0
+  int
+  hdc HDC
+
+func GetTextColor
+  success NotEqual=0xFFFFFFFF
+  COLORREF
+  hdc HDC
+
+func GetTextExtentExPoint bothCharset
+  BOOL
+  hdc HDC
+  lpszStr LPCTSTR
+  cchString int
+  nMaxExtent int
+  lpnFit LPINT
+  alpDx LPINT
+  lpSize LPSIZE
+
+func GetTextExtentExPointI
+  BOOL
+  hdc HDC
+  pgiIn LPWORD
+  cgi int
+  nMaxExtent int
+  lpnFit LPINT
+  alpDx LPINT
+  lpSize LPSIZE
+
+func GetTextExtentPoint32 bothCharset
+  BOOL
+  hdc HDC
+  lpString LPCTSTR
+  c int
+  lpSize LPSIZE
+
+func GetTextExtentPointI
+  BOOL
+  hdc HDC
+  pgiIn LPWORD
+  cgi int
+  lpSize LPSIZE
+
+func GetTextFace bothCharset
+  success NotEqual=0
+  int
+  hdc HDC
+  nCount int
+  lpFaceName LPTSTR outputOnly
+
+func GetTextMetrics bothCharset
+  BOOL
+  hdc HDC
+  lptm LPTEXTMETRIC
+
+func PolyTextOut bothCharset
+  BOOL
+  hdc HDC
+  pptxt "const POLYTEXT*" count=cStrings
+  cStrings int
+
+func RemoveFontMemResourceEx
+  BOOL
+  fh HANDLE
+
+func RemoveFontResource bothCharset
+  BOOL
+  lpFileName LPCTSTR
+
+func RemoveFontResourceEx bothCharset
+  BOOL
+  lpFileName LPCTSTR
+  fl DWORD
+  pdv PVOID
+
+func SetMapperFlags
+  success NotEqual=0
+  DWORD
+  hdc HDC
+  dwFlag DWORD
+
+func SetTextAlign
+  success NotEqual=0xFFFFFFFF
+  [TextAlignFlag]
+  hdc HDC
+  fMode [TextAlignFlag]
+
+func SetTextCharacterExtra
+  success NotEqual=0
+  int
+  hdc HDC
+  nCharExtra int
+
+func SetTextColor
+  success NotEqual=0xFFFFFFFF
+  COLORREF
+  hdc HDC
+  crColor COLORREF
+
+func SetTextJustification
+  BOOL
+  hdc HDC
+  nBreakExtra int
+  nBreakCount int
+
+func TextOut bothCharset
+  BOOL
+  hdc HDC
+  nXStart int
+  nYStart int
+  lpString LPCTSTR
+  cbString int
+
+func EnumFontFamilies bothCharset
+  int
+  hdc HDC
+  lpszFamily LPCTSTR
+  lpEnumFontFamProc FONTENUMPROC
+  lParam LPARAM
+
+func EnumFonts bothCharset
+  int
+  hdc HDC
+  lpFaceName LPCTSTR
+  lpFontFunc FONTENUMPROC
+  lParam LPARAM
+
+func GetCharWidth bothCharset
+  BOOL
+  hdc HDC
+  iFirstChar UINT
+  iLastChar UINT
+  lpBuffer LPINT
+
+func GetTextExtentPoint bothCharset
+  BOOL
+  hdc HDC
+  lpString LPCTSTR
+  cbString int
+  lpSize LPSIZE
+
+func AngleArc
+  BOOL
+  hdc HDC
+  X int
+  Y int
+  dwRadius DWORD
+  eStartAngle FLOAT
+  eSweepAngle FLOAT
+
+func Arc
+  BOOL
+  hdc HDC
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+  nXStartArc int
+  nYStartArc int
+  nXEndArc int
+  nYEndArc int
+
+func ArcTo
+  BOOL
+  hdc HDC
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+  nXRadial1 int
+  nYRadial1 int
+  nXRadial2 int
+  nYRadial2 int
+
+func GetArcDirection
+  success NotEqual=0
+  int
+  hdc HDC
+
+func LineDDA
+  BOOL
+  nXStart int
+  nYStart int
+  nXEnd int
+  nYEnd int
+  lpLineFunc LINEDDAPROC
+  lpData LPARAM
+
+func LineTo
+  BOOL
+  hdc HDC
+  nXEnd int
+  nYEnd int
+
+func MoveToEx
+  BOOL
+  hdc HDC
+  X int
+  Y int
+  lpPoint LPPOINT
+
+func PolyBezier
+  BOOL
+  hdc HDC
+  lppt "const POINT*"
+  cPoints DWORD
+
+func PolyBezierTo
+  BOOL
+  hdc HDC
+  lppt "const POINT*"
+  cCount DWORD
+
+func PolyDraw
+  BOOL
+  hdc HDC
+  lppt "const POINT*" count=cCount
+  lpbTypes [POINT_TYPE*] display="const BYTE*" count=cCount
+  cCount int
+
+func Polyline
+  BOOL
+  hdc HDC
+  lppt "const POINT*"
+  cPoints int
+
+func PolylineTo
+  BOOL
+  hdc HDC
+  lppt "const POINT*"
+  cCount DWORD
+
+func PolyPolyline
+  BOOL
+  hdc HDC
+  lppt "const POINT*"
+  lpdwPolyPoints "const DWORD*"
+  cCount DWORD
+
+func SetArcDirection
+  success NotEqual=0
+  int
+  hdc HDC
+  ArcDirection int
+
+func CloseEnhMetaFile
+  success NotEqual=0
+  HENHMETAFILE
+  hdc HDC
+
+func CopyEnhMetaFile bothCharset
+  success NotEqual=0
+  HENHMETAFILE
+  hemfSrc HENHMETAFILE
+  lpszFile LPCTSTR
+
+func CreateEnhMetaFile bothCharset
+  success NotEqual=0
+  HDC
+  hdcRef HDC
+  lpFilename LPCTSTR
+  lpRect "const RECT*"
+  lpDescription LPCTSTR
+
+func DeleteEnhMetaFile
+  BOOL
+  hemf HENHMETAFILE
+
+func EnumEnhMetaFile
+  BOOL
+  hdc HDC
+  hemf HENHMETAFILE
+  lpEnhMetaFunc ENHMFENUMPROC
+  lpData LPVOID
+  lpRect "const RECT*"
+
+func GdiComment
+  BOOL
+  hdc HDC
+  cbSize UINT
+  lpData "const BYTE*"
+
+func GetEnhMetaFile bothCharset
+  success NotEqual=0
+  HENHMETAFILE
+  lpszMetaFile LPCTSTR
+
+func GetEnhMetaFileBits
+  success NotEqual=0
+  UINT
+  hemf HENHMETAFILE
+  cbBuffer UINT
+  lpbBuffer LPBYTE
+
+func GetEnhMetaFileDescription bothCharset
+  success NotEqual=0
+  UINT
+  hemf HENHMETAFILE
+  cchBuffer UINT
+  lpszDescription LPTSTR
+
+func GetEnhMetaFileHeader
+  success NotEqual=0
+  UINT
+  hemf HENHMETAFILE
+  cbBuffer UINT
+  lpemh LPENHMETAHEADER
+
+func GetEnhMetaFilePaletteEntries
+  success NotEqual=0
+  UINT
+  hemf HENHMETAFILE
+  cEntries UINT
+  lppe LPPALETTEENTRY postCount=cEntries
+
+func GetWinMetaFileBits
+  success NotEqual=0
+  UINT
+  hemf HENHMETAFILE
+  cbBuffer UINT
+  lpbBuffer LPBYTE
+  fnMapMode [MappingMode] display=INT
+  hdcRef HDC
+
+func PlayEnhMetaFile
+  BOOL
+  hdc HDC
+  hemf HENHMETAFILE
+  lpRect "const RECT*"
+
+func PlayEnhMetaFileRecord
+  BOOL
+  hdc HDC
+  lpHandletable LPHANDLETABLE
+  lpEnhMetaRecord "const ENHMETARECORD*"
+  nHandles UINT
+
+func SetEnhMetaFileBits
+  success NotEqual=0
+  HENHMETAFILE
+  cbBuffer UINT
+  lpData "const BYTE*"
+
+func SetWinMetaFileBits
+  success NotEqual=0
+  HENHMETAFILE
+  cbBuffer UINT
+  lpbBuffer "const BYTE*"
+  hdcRef HDC
+  lpmfp "const METAFILEPICT*"
+
+func CloseMetaFile
+  success NotEqual=0
+  HMETAFILE
+  hdc HDC
+
+func CopyMetaFile bothCharset
+  success NotEqual=0
+  HMETAFILE
+  hmfSrc HMETAFILE
+  lpszFile LPCTSTR
+
+func CreateMetaFile bothCharset
+  success NotEqual=0
+  HDC
+  lpszFile LPCTSTR
+
+func DeleteMetaFile
+  BOOL
+  hmf HMETAFILE
+
+func EnumMetaFile
+  BOOL
+  hdc HDC
+  hmf HMETAFILE
+  lpMetaFunc MFENUMPROC
+  lParam LPARAM
+
+func GetMetaFileBitsEx
+  success NotEqual=0
+  UINT
+  hmf HMETAFILE
+  nSize UINT
+  lpvData LPVOID
+
+func PlayMetaFile
+  BOOL
+  hdc HDC
+  hmf HMETAFILE
+
+func PlayMetaFileRecord
+  BOOL
+  hdc HDC
+  lpHandletable LPHANDLETABLE
+  lpMetaRecord LPMETARECORD
+  nHandles UINT
+
+func SetMetaFileBitsEx
+  success NotEqual=0
+  HMETAFILE
+  nSize UINT
+  lpData "const BYTE*"
+
+func GdiFlush
+  BOOL
+
+func GdiGetBatchLimit
+  success NotEqual=0
+  DWORD
+
+func GdiSetBatchLimit
+  success NotEqual=0
+  DWORD
+  dwLimit DWORD
+
+func GetBkColor
+  success NotEqual=0xFFFFFFFF
+  COLORREF
+  hdc HDC
+
+func GetBkMode
+  success NotEqual=0
+  int
+  hdc HDC
+
+func GetBoundsRect
+  success NotEqual=0
+  UINT
+  hdc HDC
+  lprcBounds LPRECT
+  flags [BoundsAccumulationFlags]
+
+func GetROP2
+  success NotEqual=0
+  int
+  hdc HDC
+
+func SetBkColor
+  success NotEqual=0xFFFFFFFF
+  COLORREF
+  hdc HDC
+  crColor COLORREF
+
+func SetBkMode
+  success NotEqual=0
+  int
+  hdc HDC
+  iBkMode [BkModeEnum]
+
+func SetBoundsRect
+  success NotEqual=0
+  UINT
+  hdc HDC
+  lprcBounds "const RECT*"
+  flags [BoundsAccumulationFlags]
+
+func SetROP2
+  success NotEqual=0
+  int
+  hdc HDC
+  fnDrawMode [ROP2ModeEnum]
+
+func AbortPath
+  BOOL
+  hdc HDC
+
+func BeginPath
+  BOOL
+  hdc HDC
+
+func CloseFigure
+  BOOL
+  hdc HDC
+
+func EndPath
+  BOOL
+  hdc HDC
+
+func FillPath
+  BOOL
+  hdc HDC
+
+func FlattenPath
+  BOOL
+  hdc HDC
+
+func GetMiterLimit
+  BOOL
+  hdc HDC
+  peLimit PFLOAT
+
+func GetPath
+  success NotEqual=-1
+  int
+  hdc HDC
+  lpPoints LPPOINT postCount=Return
+  lpTypes [POINT_TYPE*] postCount=Return
+  nSize int
+
+func PathToRegion
+  success NotEqual=0
+  HRGN
+  hdc HDC
+
+func SetMiterLimit
+  BOOL
+  hdc HDC
+  eNewLimit FLOAT
+  peOldLimit PFLOAT
+
+func StrokeAndFillPath
+  BOOL
+  hdc HDC
+
+func StrokePath
+  BOOL
+  hdc HDC
+
+func WidenPath
+  BOOL
+  hdc HDC
+
+func AbortDoc
+  success NotEqual=0
+  int
+  hdc HDC
+
+func StartDoc bothCharset
+  success NotEqual=0
+  int
+  hdc HDC
+  lpdi "const DOCINFO*"
+
+func EndDoc
+  success NotEqual=0
+  int
+  hdc HDC
+
+func EndPage
+  success NotEqual=0
+  int
+  hdc HDC
+
+func Escape
+  success NotEqual=0
+  int
+  hdc HDC
+  nEscape [GdiEscapeFunction]
+  cbInput int
+  lpvInData LPCSTR
+  lpvOutData LPVOID
+
+func ExtEscape
+  success NotEqual=0
+  int
+  hdc HDC
+  nEscape int
+  cbInput int
+  lpszInData LPCSTR
+  cbOutput int
+  lpszOutData LPSTR
+
+func SetAbortProc
+  success NotEqual=0
+  int
+  hdc HDC
+  lpAbortProc ABORTPROC
+
+func StartPage
+  success NotEqual=0
+  int
+  hDC HDC
+
+func CombineRgn
+  success NotEqual=0
+  int
+  hrgnDest HRGN
+  hrgnSrc1 HRGN
+  hrgnSrc2 HRGN
+  fnCombineMode [RgnMode]
+
+func CreateEllipticRgn
+  success NotEqual=0
+  HRGN
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+
+func CreateEllipticRgnIndirect
+  success NotEqual=0
+  HRGN
+  lprc "const RECT*"
+
+func CreatePolygonRgn
+  success NotEqual=0
+  HRGN
+  lppt "const POINT*"
+  cPoints int
+  fnPolyFillMode [PolyFillModes]
+
+func CreatePolyPolygonRgn
+  success NotEqual=0
+  HRGN
+  lppt "const POINT*"
+  lpPolyCounts "const INT*"
+  nCount int
+  fnPolyFillMode [PolyFillModes]
+
+func CreateRectRgn
+  success NotEqual=0
+  HRGN
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+
+func CreateRectRgnIndirect
+  success NotEqual=0
+  HRGN
+  lprc "const RECT*"
+
+func CreateRoundRectRgn
+  success NotEqual=0
+  HRGN
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+  nWidthEllipse int
+  nHeightEllipse int
+
+func EqualRgn
+  BOOL
+  hSrcRgn1 HRGN
+  hSrcRgn2 HRGN
+
+func ExtCreateRegion
+  success NotEqual=0
+  HRGN
+  lpXform "const XFORM*"
+  nCount DWORD
+  lpRgnData "const RGNDATA*"
+
+func FillRgn
+  BOOL
+  hdc HDC
+  hrgn HRGN
+  hbr HBRUSH
+
+func FrameRgn
+  BOOL
+  hdc HDC
+  hrgn HRGN
+  hbr HBRUSH
+  nWidth int
+  nHeight int
+
+func GetPolyFillMode
+  success NotEqual=0
+  int
+  hdc HDC
+
+func GetRegionData
+  success NotEqual=0
+  DWORD
+  hRgn HRGN
+  dwCount DWORD
+  lpRgnData LPRGNDATA
+
+func GetRgnBox
+  success NotEqual=0
+  int
+  hrgn HRGN
+  lprc LPRECT
+
+func InvertRgn
+  BOOL
+  hdc HDC
+  hrgn HRGN
+
+func OffsetRgn
+  success NotEqual=0
+  int
+  hrgn HRGN
+  nXOffset int
+  nYOffset int
+
+func PaintRgn
+  BOOL
+  hdc HDC
+  hrgn HRGN
+
+func PtInRegion
+  BOOL
+  hrgn HRGN
+  X int
+  Y int
+
+func RectInRegion
+  BOOL
+  hrgn HRGN
+  lprc "const RECT*"
+
+func SetPolyFillMode
+  success NotEqual=0
+  int
+  hdc HDC
+  iPolyFillMode [PolyFillModes]
+
+func SetRectRgn
+  BOOL
+  hrgn HRGN
+  nLeftRect int
+  nTopRect int
+  nRightRect int
+  nBottomRect int
+
+func GetTextCharset
+  success NotEqual=1
+  [FontCharset-int]
+  hdc HDC
+
+func GetTextCharsetInfo
+  success NotEqual=1
+  [FontCharset-int]
+  hdc HDC
+  lpSig LPFONTSIGNATURE
+  dwFlags DWORD
+
+func TranslateCharsetInfo
+  BOOL
+  lpSrc DWORD*
+  lpCs LPCHARSETINFO
+  dwFlags [TranslateCharsetInfoFlag]
+
+func ChoosePixelFormat
+  success NotEqual=0
+  int
+  hdc HDC
+  ppfd "const PIXELFORMATDESCRIPTOR*"
+
+func DescribePixelFormat
+  success NotEqual=0
+  int
+  hdc HDC
+  iPixelFormat int
+  nBytes UINT
+  ppfd LPPIXELFORMATDESCRIPTOR
+
+func GetPixelFormat
+  success NotEqual=0
+  int
+  hdc HDC
+
+func SetPixelFormat
+  BOOL
+  hdc HDC
+  iPixelFormat int
+  ppfd "const PIXELFORMATDESCRIPTOR*"
+
+func GetEnhMetaFilePixelFormat
+  success NotEqual=0
+  UINT
+  hemf HENHMETAFILE
+  cbBuffer DWORD
+  ppfd "const PIXELFORMATDESCRIPTOR*"
+
+func SwapBuffers
+  BOOL
+  hdc HDC
+
+func CheckColorsInGamut
+  BOOL
+  hDC HDC
+  lpRGBTriples LPVOID count=nCount
+  lpBuffer LPVOID
+  nCount UINT
+
+func ColorCorrectPalette
+  BOOL
+  hDC HDC
+  hPalette HPALETTE
+  dwFirstEntry DWORD
+  dwNumOfEntries DWORD
+
+func ColorMatchToTarget
+  BOOL
+  hDC HDC
+  hdcTarget HDC
+  uiAction [CS_ACTION]
+
+func CreateColorSpace bothCharset
+  success NotEqual=0
+  HCOLORSPACE
+  lpLogColorSpace LPLOGCOLORSPACE
+
+func DeleteColorSpace
+  BOOL
+  hColorSpace HCOLORSPACE
+
+func EnumICMProfiles bothCharset
+  success NotEqual=-1
+  int
+  hDC HDC
+  lpEnumICMProfilesFunc ICMENUMPROC
+  lParam LPARAM
+
+func GetColorSpace
+  success NotEqual=0
+  HCOLORSPACE
+  hDC HDC
+
+func GetICMProfile bothCharset
+  BOOL
+  hDC HDC
+  lpcbName LPDWORD
+  lpszFilename LPTSTR
+
+func GetLogColorSpace bothCharset
+  BOOL
+  hColorSpace HCOLORSPACE
+  lpBuffer LPLOGCOLORSPACE
+  nSize DWORD
+
+func SetColorSpace
+  success NotEqual=0
+  HCOLORSPACE
+  hDC HDC
+  hColorSpace HCOLORSPACE
+
+func SetICMMode
+  success NotEqual=0
+  int
+  hDC HDC
+  iEnableICM [ICM_MODE]
+
+func SetICMProfile bothCharset
+  BOOL
+  hDC HDC
+  lpFileName LPTSTR
+
+func GetDeviceGammaRamp
+  BOOL
+  hDC HDC
+  lpRamp LPVOID
+
+func SetDeviceGammaRamp
+  BOOL
+  hDC HDC
+  lpRamp LPVOID
+
+func UpdateICMRegKey bothCharset
+  BOOL
+  dwReserved DWORD
+  lpszCMID LPTSTR
+  lpszFileName LPTSTR
+  nCommand [ICM_COMMAND]
+

@@ -1,0 +1,29 @@
+include Interfaces\DirectX\DXGI\IDXGIObject.txt
+
+ingterface IDXGIFactory base=IDXGIObject id={7b7166ec-21c7-44ae-b21a-c9ae321ae369} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func EnumAdapters
+    HRESULT
+    Adapter UINT
+    ppAdapter IDXGIAdapter**
+
+  func MakeWindowAssociation
+    HRESULT
+    WindowHandle HWND
+    Flags [DXGI_MWA_FLAG]
+
+  func GetWindowAssociation
+    HRESULT
+    pWindowHandle HWND*
+
+  func CreateSwapChain
+    HRESULT
+    pDevice IUnknown*
+    pDesc DXGI_SWAP_CHAIN_DESC*
+    ppSwapChain IDXGISwapChain**
+
+  func CreateSoftwareAdapter
+    HRESULT
+    Module HMODULE
+    ppAdapter IDXGIAdapter**
+
+

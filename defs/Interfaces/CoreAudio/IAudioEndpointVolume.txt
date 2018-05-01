@@ -1,0 +1,89 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioEndpointVolume base=IUnknown id={5CDF2C82-841E-4546-9722-0CF74078229A} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Endpoint Volume"
+  func RegisterControlChangeNotify
+    [AUDCLNT_HRESULT]
+    pNotify IAudioEndpointVolumeCallback*
+
+  func UnregisterControlChangeNotify
+    [AUDCLNT_HRESULT]
+    pNotify IAudioEndpointVolumeCallback*
+
+  func GetChannelCount
+    [AUDCLNT_HRESULT]
+    pnChannelCount UINT*
+
+  func SetMasterVolumeLevel
+    [AUDCLNT_HRESULT]
+    fLevelDB float
+    pguidEventContext LPCGUID
+
+  func SetMasterVolumeLevelScalar
+    [AUDCLNT_HRESULT]
+    fLevel float
+    pguidEventContext LPCGUID
+
+  func GetMasterVolumeLevel
+    [AUDCLNT_HRESULT]
+    pfLevelDB float*
+
+  func GetMasterVolumeLevelScalar
+    [AUDCLNT_HRESULT]
+    pfLevel float*
+
+  func SetChannelVolumeLevel
+    [AUDCLNT_HRESULT]
+    nChannel UINT
+    fLevelDB float
+    pguidEventContext LPCGUID
+
+  func SetChannelVolumeLevelScalar
+    [AUDCLNT_HRESULT]
+    nChannel UINT
+    fLevel float
+    pguidEventContext LPCGUID
+
+  func GetChannelVolumeLevel
+    [AUDCLNT_HRESULT]
+    nChannel UINT
+    pfLevelDB float*
+
+  func GetChannelVolumeLevelScalar
+    [AUDCLNT_HRESULT]
+    nChannel UINT
+    pfLevel float*
+
+  func SetMute
+    [AUDCLNT_HRESULT]
+    bMute BOOL
+    pguidEventContext LPCGUID
+
+  func GetMute
+    [AUDCLNT_HRESULT]
+    pbMute BOOL*
+
+  func GetVolumeStepInfo
+    [AUDCLNT_HRESULT]
+    pnStep UINT*
+    pnStepCount UINT*
+
+  func VolumeStepUp
+    [AUDCLNT_HRESULT]
+    pguidEventContext LPCGUID
+
+  func VolumeStepDown
+    [AUDCLNT_HRESULT]
+    pguidEventContext LPCGUID
+
+  func QueryHardwareSupport
+    [AUDCLNT_HRESULT]
+    pdwHardwareSupportMask DWORD*
+
+  func GetVolumeRange
+    [AUDCLNT_HRESULT]
+    pflVolumeMindB float*
+    pflVolumeMaxdB float*
+    pflVolumeIncrementdB float*
+
+

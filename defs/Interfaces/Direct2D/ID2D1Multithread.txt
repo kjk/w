@@ -1,0 +1,14 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1Multithread base=IUnknown id={31e6e7bc-e0ff-4d46-8c64-a0a8c41c15d3} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetMultithreadProtected
+    BOOL
+
+  func Enter
+    void
+
+  func Leave
+    void
+
+

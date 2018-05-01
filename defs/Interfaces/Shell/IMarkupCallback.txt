@@ -1,0 +1,39 @@
+include Interfaces\IUnknown.txt
+
+ingterface IMarkupCallback base=IUnknown id={4440306e-d79a-48d0-88e6-a42692279bfb} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetState
+    HRESULT
+    dwId DWORD
+    uState UINT
+
+  func Notify
+    HRESULT
+    dwId DWORD
+    nCode int
+    iLink int
+
+  func InvalidateRect
+    HRESULT
+    dwId DWORD
+    prc "const RECT*"
+
+  func OnCustomDraw
+    HRESULT
+    dwDrawStage DWORD
+    hdc HDC
+    prc "const RECT*"
+    dwId DWORD
+    iLink int
+    uItemState UINT
+    pdwResult LRESULT*
+
+  func CustomDrawText
+    HRESULT
+    hDC HDC
+    lpString LPCWSTR
+    nCount int
+    pRect RECT*
+    uFormat UINT
+    fLink BOOL
+
+

@@ -1,0 +1,301 @@
+include Headers\windows.h.txt
+include Headers\cryptography.h.txt
+
+dll Wintrust.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Cryptography/Certificate and Certificate Store Maintenance"
+category "Security and Identity/Cryptography/Catalog Definition"
+category "Security and Identity/Cryptography/Catalog"
+category "Security and Identity/Cryptography/WinTrust"
+alias HCATINFO HANDLE
+
+pointer HCATINFO* HCATINFO
+
+alias PFN_CDF_PARSE_ERROR_CALLBACK LPVOID
+
+struct CATALOG_INFO
+  cbStruct DWORD
+  wszCatalogFile "WCHAR [MAX_PATH]"
+
+pointer CATALOG_INFO* CATALOG_INFO
+
+flag [WintrustPolicyFlags] DWORD display=DWORD
+  WTPF_TRUSTTEST            0x00000020
+  WTPF_TESTCANBEVALID       0x00000080
+  WTPF_IGNOREEXPIRATION     0x00000100
+  WTPF_IGNOREREVOKATION     0x00000200
+  WTPF_OFFLINEOK_IND        0x00000400
+  WTPF_OFFLINEOK_COM        0x00000800
+  WTPF_OFFLINEOKNBU_IND     0x00001000
+  WTPF_OFFLINEOKNBU_COM     0x00002000
+  WTPF_VERIFY_V1_OFF        0x00010000
+  WTPF_IGNOREREVOCATIONONTS 0x00020000
+  WTPF_ALLOWONLYPERTRUST    0x00040000
+
+pointer [WintrustPolicyFlags*] [WintrustPolicyFlags] display=DWORD*
+
+func OpenPersonalTrustDBDialog
+  BOOL
+  hwndParent HWND
+
+func OpenPersonalTrustDBDialogEx
+  BOOL
+  hwndParent HWND
+  dwFlags DWORD
+  pvReserved PVOID*
+
+func CryptCATCDFClose
+  BOOL
+  pCDF CRYPTCATCDF*
+
+func CryptCATCDFEnumAttributesWithCDFTag
+  success NotEqual=0
+  CRYPTCATATTRIBUTE*
+  pCDF CRYPTCATCDF*
+  pwszMemberTag LPWSTR
+  pMember CRYPTCATMEMBER*
+  pPrevAttr CRYPTCATATTRIBUTE*
+  pfnParseError PFN_CDF_PARSE_ERROR_CALLBACK
+
+func CryptCATCDFEnumCatAttributes
+  success NotEqual=0
+  CRYPTCATATTRIBUTE*
+  pCDF CRYPTCATCDF*
+  pPrevAttr CRYPTCATATTRIBUTE*
+  pfnParseError PFN_CDF_PARSE_ERROR_CALLBACK
+
+func CryptCATCDFEnumMembersByCDFTagEx
+  success NotEqual=0
+  LPWSTR
+  pCDF CRYPTCATCDF*
+  pwszPrevCDFTag LPWSTR
+  pfnParseError PFN_CDF_PARSE_ERROR_CALLBACK
+  ppMember CRYPTCATMEMBER**
+  fContinueOnError BOOL
+  pvReserved LPVOID
+
+func CryptCATCDFOpen
+  success NotEqual=0
+  CRYPTCATCDF*
+  pwszFilePath LPWSTR
+  pfnParseError PFN_CDF_PARSE_ERROR_CALLBACK
+
+func CryptCATAdminAcquireContext
+  BOOL
+  phCatAdmin HCATADMIN*
+  pgSubsystem "const GUID*"
+  dwFlags DWORD
+
+func CryptCATAdminAddCatalog
+  success NotEqual=0
+  HCATINFO
+  hCatAdmin HCATADMIN
+  pwszCatalogFile WCHAR*
+  pwszSelectBaseName WCHAR*
+  dwFlags DWORD
+
+func CryptCATAdminEnumCatalogFromHash
+  success NotEqual=0
+  HCATINFO
+  hCatAdmin HCATADMIN
+  pbHash BYTE*
+  cbHash DWORD
+  dwFlags DWORD
+  phPrevCatInfo HCATINFO*
+
+func CryptCATAdminRemoveCatalog
+  BOOL
+  hCatAdmin HCATADMIN
+  pwszCatalogFile LPCWSTR
+  dwFlags DWORD
+
+func CryptCATAdminCalcHashFromFileHandle
+  BOOL
+  hFile HANDLE
+  pcbHash DWORD*
+  pbHash BYTE* postLength=pcbHash
+  dwFlags DWORD
+
+func CryptCATAdminReleaseCatalogContext
+  BOOL
+  hCatAdmin HCATADMIN
+  hCatInfo HCATINFO
+  dwFlags DWORD
+
+func CryptCATAdminReleaseContext
+  BOOL
+  hCatAdmin HCATADMIN
+  dwFlags DWORD
+
+func CryptCATAdminResolveCatalogPath
+  BOOL
+  hCatAdmin HCATADMIN
+  pwszCatalogFile WCHAR*
+  psCatInfo CATALOG_INFO*
+  dwFlags DWORD
+
+func CryptCATCatalogInfoFromContext
+  BOOL
+  hCatInfo HCATINFO
+  psCatInfo CATALOG_INFO*
+  dwFlags DWORD
+
+func CryptCATClose
+  BOOL
+  hCatalog HANDLE
+
+func CryptCATOpen
+  success NotEqual=0
+  HANDLE
+  pwszFileName LPWSTR
+  fdwOpenFlags DWORD
+  hProv HCRYPTPROV
+  dwPublicVersion DWORD
+  dwEncodingType DWORD
+
+func CryptCATEnumerateAttr
+  success NotEqual=0
+  CRYPTCATATTRIBUTE*
+  hCatalog HANDLE
+  pCatMember CRYPTCATMEMBER*
+  pPrevAttr CRYPTCATATTRIBUTE*
+
+func CryptCATEnumerateCatAttr
+  success NotEqual=0
+  CRYPTCATATTRIBUTE*
+  hCatalog HANDLE
+  pPrevAttr CRYPTCATATTRIBUTE*
+
+func CryptCATEnumerateMember
+  success NotEqual=0
+  CRYPTCATMEMBER*
+  hCatalog HANDLE
+  pPrevMember CRYPTCATMEMBER*
+
+func CryptCATGetAttrInfo
+  success NotEqual=0
+  CRYPTCATATTRIBUTE*
+  hCatalog HANDLE
+  pCatMember CRYPTCATMEMBER*
+  pwszReferenceTag LPWSTR
+
+func CryptCATGetMemberInfo
+  success NotEqual=0
+  CRYPTCATMEMBER*
+  hCatalog HANDLE
+  pwszReferenceTag LPWSTR
+
+func IsCatalogFile
+  BOOL
+  hFile HANDLE
+  pwszFileName WCHAR*
+
+func CryptCATAdminAcquireContext2
+  BOOL
+  phCatAdmin HCATADMIN*
+  pgSubsystem "const GUID*"
+  pwszHashAlgorithm PCWSTR
+  pStrongHashPolicy PCCERT_STRONG_SIGN_PARA
+  dwFlags DWORD
+
+func CryptCATAdminCalcHashFromFileHandle2
+  BOOL
+  hCatAdmin HCATADMIN
+  hFile HANDLE
+  pcbHash DWORD*
+  pbHash BYTE*
+  dwFlags DWORD
+
+func WintrustAddActionID
+  BOOL
+  pgActionID GUID*
+  fdwFlags DWORD
+  psProvInfo CRYPT_REGISTER_ACTIONID*
+
+func WintrustGetRegPolicyFlags
+  void
+  pdwPolicyFlags [WintrustPolicyFlags*]
+
+func WintrustLoadFunctionPointers
+  BOOL
+  pgActionID GUID*
+  pPfns CRYPT_PROVIDER_FUNCTIONS*
+
+func WintrustRemoveActionID
+  BOOL
+  pgActionID GUID*
+
+func WintrustSetDefaultIncludePEPageHashes
+  void
+  fIncludePEPageHashes BOOL
+
+func WintrustSetRegPolicyFlags
+  BOOL
+  dwPolicyFlags [WintrustPolicyFlags]
+
+func WinVerifyTrust
+  HRESULT display=LONG
+  hWnd HWND
+  pgActionID GUID*
+  pWVTData LPVOID
+
+func WinVerifyTrustEx
+  HRESULT
+  hwnd HWND
+  pgActionID GUID*
+  pWinTrustData WINTRUST_DATA*
+
+func WTHelperCertCheckValidSignature
+  HRESULT
+  pProvData CRYPT_PROVIDER_DATA*
+
+func WTHelperCertFindIssuerCertificate
+  success NotEqual=0
+  PCCERT_CONTEXT
+  pChildContext PCCERT_CONTEXT
+  chStores DWORD
+  pahStores HCERTSTORE*
+  psftVerifyAsOf FILETIME*
+  dwEncoding DWORD
+  pdwConfidence DWORD*
+  dwError DWORD*
+
+func WTHelperCertIsSelfSigned
+  BOOL
+  dwEncoding DWORD
+  pCert CERT_INFO*
+
+func WTHelperGetFileHash
+  success NotEqual=0
+  LONG
+  pwszFilename LPCWSTR
+  dwFlags DWORD
+  pvReserved PVOID
+  pbFileHash BYTE*
+  pcbFileHash DWORD*
+  pHashAlgid ALG_ID*
+
+func WTHelperGetProvCertFromChain
+  success NotEqual=0
+  CRYPT_PROVIDER_CERT*
+  pSgnr CRYPT_PROVIDER_SGNR*
+  idxCert DWORD
+
+func WTHelperGetProvPrivateDataFromChain
+  success NotEqual=0
+  CRYPT_PROVIDER_PRIVDATA*
+  pProvData CRYPT_PROVIDER_DATA*
+  pgProviderID GUID*
+
+func WTHelperGetProvSignerFromChain
+  success NotEqual=0
+  CRYPT_PROVIDER_SGNR*
+  pProvData CRYPT_PROVIDER_DATA*
+  idxSigner DWORD
+  fCounterSigner BOOL
+  idxCounterSigner DWORD
+
+func WTHelperProvDataFromStateData
+  success NotEqual=0
+  CRYPT_PROVIDER_DATA*
+  hStateData HANDLE
+

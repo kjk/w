@@ -1,0 +1,29 @@
+include Interfaces\DirectX\8\IDirect3DBaseTexture8.txt
+
+ingterface IDirect3DVolumeTexture8 base=IDirect3DBaseTexture8 id={4B8AAAFA-140F-42ba-9131-597EAFAA2EAD} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/8"
+  func GetLevelDesc
+    HRESULT
+    Level UINT
+    pDesc D3DVOLUME_DESC*
+
+  func GetVolumeLevel
+    HRESULT
+    Level UINT
+    ppVolumeLevel IDirect3DVolume8**
+
+  func LockBox
+    HRESULT
+    Level UINT
+    pLockedVolume D3DLOCKED_BOX*
+    pBox "CONST D3DBOX*"
+    Flags DWORD
+
+  func UnlockBox
+    HRESULT
+    Level UINT
+
+  func AddDirtyBox
+    HRESULT
+    pDirtyBox "CONST D3DBOX*"
+
+

@@ -1,0 +1,4 @@
+include Interfaces\DirectShow\IEncoderAPI.txt
+
+ingterface IVideoEncoder base=IEncoderAPI id={02997C3B-8E1B-460e-9270-545E0DE9563E} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+

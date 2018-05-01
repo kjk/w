@@ -1,0 +1,29 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\DeviceAccess\DeviceAccess.h.txt
+include Headers\ioctl.h.txt
+
+ingterface IDeviceIoControl base=IUnknown id={9EEFE161-23AB-4F18-9B49-991B586AE970} errorFunc=HRESULT onlineHelp=MSDN category="Devices/Device Access"
+  func DeviceIoControlSync
+    HRESULT
+    ioControlCode [IOCTL]
+    inputBuffer UCHAR* length=inputBufferSize
+    inputBufferSize DWORD
+    outputBuffer UCHAR* postLength=bytesReturned
+    outputBufferSize DWORD
+    bytesReturned DWORD*
+
+  func DeviceIoControlAsync
+    HRESULT
+    ioControlCode [IOCTL]
+    inputBuffer UCHAR* length=inputBufferSize
+    inputBufferSize DWORD
+    outputBuffer UCHAR*
+    outputBufferSize DWORD
+    requestCompletionCallback IDeviceRequestCompletionCallback*
+    cancelContext ULONG_PTR*
+
+  func CancelOperation
+    HRESULT
+    cancelContext ULONG_PTR
+
+

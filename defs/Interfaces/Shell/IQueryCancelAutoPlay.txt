@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+
+ingterface IQueryCancelAutoPlay base=IUnknown id={DDEFE873-6997-4e68-BE26-39B633ADBE12} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func AllowAutoPlay
+    HRESULT
+    pszPath LPCWSTR
+    dwContentType DWORD
+    pszLabel LPCWSTR
+    dwSerialNumber DWORD
+
+

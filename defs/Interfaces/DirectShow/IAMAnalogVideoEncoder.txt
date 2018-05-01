@@ -1,0 +1,32 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMAnalogVideoEncoder base=IUnknown id={C6E133B0-30AC-11d0-A18C-00A0C9118956} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func get_AvailableTVFormats
+    HRESULT
+    lAnalogVideoStandard long*
+
+  func put_TVFormat
+    HRESULT
+    lAnalogVideoStandard long
+
+  func get_TVFormat
+    HRESULT
+    plAnalogVideoStandard long*
+
+  func put_CopyProtection
+    HRESULT
+    lVideoCopyProtection long
+
+  func get_CopyProtection
+    HRESULT
+    lVideoCopyProtection long*
+
+  func put_CCEnable
+    HRESULT
+    lCCEnable long
+
+  func get_CCEnable
+    HRESULT
+    lCCEnable long*
+
+

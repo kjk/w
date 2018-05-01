@@ -1,0 +1,65 @@
+include Interfaces\WIC\IWICComponentInfo.txt
+
+ingterface IWICBitmapCodecInfo base=IWICComponentInfo id={E87A44C4-B76E-4c47-8B09-298EB12A2714} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetContainerFormat
+    [WIC_HRESULT]
+    pguidContainerFormat GUID*
+
+  func GetPixelFormats
+    [WIC_HRESULT]
+    cFormats UINT
+    pguidPixelFormats GUID*
+    pcActual UINT*
+
+  func GetColorManagementVersion
+    [WIC_HRESULT]
+    cchColorManagementVersion UINT
+    wzColorManagementVersion WCHAR*
+    pcchActual UINT*
+
+  func GetDeviceManufacturer
+    [WIC_HRESULT]
+    cchDeviceManufacturer UINT
+    wzDeviceManufacturer WCHAR*
+    pcchActual UINT*
+
+  func GetDeviceModels
+    [WIC_HRESULT]
+    cchDeviceModels UINT
+    wzDeviceModels WCHAR*
+    pcchActual UINT*
+
+  func GetMimeTypes
+    [WIC_HRESULT]
+    cchMimeTypes UINT
+    wzMimeTypes WCHAR*
+    pcchActual UINT*
+
+  func GetFileExtensions
+    [WIC_HRESULT]
+    cchFileExtensions UINT
+    wzFileExtensions WCHAR*
+    pcchActual UINT*
+
+  func DoesSupportAnimation
+    [WIC_HRESULT]
+    pfSupportAnimation BOOL*
+
+  func DoesSupportChromakey
+    [WIC_HRESULT]
+    pfSupportChromakey BOOL*
+
+  func DoesSupportLossless
+    [WIC_HRESULT]
+    pfSupportLossless BOOL*
+
+  func DoesSupportMultiframe
+    [WIC_HRESULT]
+    pfSupportMultiframe BOOL*
+
+  func MatchesMimeType
+    [WIC_HRESULT]
+    wzMimeType LPCWSTR
+    pfMatches BOOL*
+
+

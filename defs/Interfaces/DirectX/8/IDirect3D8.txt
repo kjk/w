@@ -1,0 +1,88 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\8\d3d8.txt
+
+ingterface IDirect3D8 base=IUnknown id={1DD9E8DA-1C77-4d40-B0CF-98FEFDFF9512} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/8"
+  func RegisterSoftwareDevice
+    HRESULT
+    pInitializeFunction void*
+
+  func GetAdapterCount
+    success NotEqual=0
+    UINT
+
+  func GetAdapterIdentifier
+    HRESULT
+    Adapter UINT
+    Flags DWORD
+    pIdentifier D3DADAPTER_IDENTIFIER8*
+
+  func GetAdapterModeCount
+    success NotEqual=0
+    UINT
+    Adapter UINT
+
+  func EnumAdapterModes
+    HRESULT
+    Adapter UINT
+    Mode UINT
+    pMode D3DDISPLAYMODE*
+
+  func GetAdapterDisplayMode
+    HRESULT
+    Adapter UINT
+    pMode D3DDISPLAYMODE*
+
+  func CheckDeviceType
+    HRESULT
+    Adapter UINT
+    CheckType D3DDEVTYPE
+    DisplayFormat D3DFORMAT
+    BackBufferFormat D3DFORMAT
+    Windowed BOOL
+
+  func CheckDeviceFormat
+    HRESULT
+    Adapter UINT
+    DeviceType D3DDEVTYPE
+    AdapterFormat D3DFORMAT
+    Usage DWORD
+    RType D3DRESOURCETYPE
+    CheckFormat D3DFORMAT
+
+  func CheckDeviceMultiSampleType
+    HRESULT
+    Adapter UINT
+    DeviceType D3DDEVTYPE
+    SurfaceFormat D3DFORMAT
+    Windowed BOOL
+    MultiSampleType D3DMULTISAMPLE_TYPE
+
+  func CheckDepthStencilMatch
+    HRESULT
+    Adapter UINT
+    DeviceType D3DDEVTYPE
+    AdapterFormat D3DFORMAT
+    RenderTargetFormat D3DFORMAT
+    DepthStencilFormat D3DFORMAT
+
+  func GetDeviceCaps
+    HRESULT
+    Adapter UINT
+    DeviceType D3DDEVTYPE
+    pCaps D3DCAPS8*
+
+  func GetAdapterMonitor
+    success NotEqual=0
+    HMONITOR
+    Adapter UINT
+
+  func CreateDevice
+    HRESULT
+    Adapter UINT
+    DeviceType D3DDEVTYPE
+    hFocusWindow HWND
+    BehaviorFlags DWORD
+    pPresentationParameters D3DPRESENT_PARAMETERS*
+    ppReturnedDeviceInterface IDirect3DDevice8**
+
+

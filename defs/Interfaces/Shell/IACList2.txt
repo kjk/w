@@ -1,0 +1,24 @@
+include Interfaces\Shell\IACList.txt
+
+ingterface IACList2 base=IACList id={470141a0-5186-11d2-bbb6-0060977b464c} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetOptions
+    HRESULT
+    dwFlag AUTOCOMPLETELISTOPTIONS
+
+  func GetOptions
+    HRESULT
+    pdwFlag AUTOCOMPLETELISTOPTIONS*
+
+  flag AUTOCOMPLETELISTOPTIONS DWORD display=DWORD
+    ACLO_NONE             0
+    ACLO_CURRENTDIR       1
+    ACLO_MYCOMPUTER       2
+    ACLO_DESKTOP          4
+    ACLO_FAVORITES        8
+    ACLO_FILESYSONLY      16
+    ACLO_FILESYSDIRS      32
+    ACLO_VIRTUALNAMESPACE 64
+
+  pointer AUTOCOMPLETELISTOPTIONS* AUTOCOMPLETELISTOPTIONS display=DWORD*
+
+

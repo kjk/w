@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IInternetBindInfo base=IUnknown id={79eac9e1-baf9-11ce-8c82-00aa004ba90b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetBindInfo
+    HRESULT
+    grfBINDF BINDF*
+    pbindinfo BINDINFO*
+
+  func GetBindString
+    HRESULT
+    ulStringType BINDSTRING
+    ppwzStr LPOLESTR* postCount=cEl
+    cEl ULONG
+    pcElFetched ULONG*
+
+

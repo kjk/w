@@ -1,0 +1,30 @@
+include Interfaces\IUnknown.txt
+
+ingterface IActionProgress base=IUnknown id={49ff1173-eadc-446d-9285-156453a6431c} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Begin
+    HRESULT
+    action SPACTION
+    flags SPBEGINF
+
+  func UpdateProgress
+    HRESULT
+    ulCompleted ULONGLONG
+    ulTotal ULONGLONG
+
+  func UpdateText
+    HRESULT
+    sptext SPTEXT
+    pszText LPCWSTR
+    fMayCompact BOOL
+
+  func QueryCancel
+    HRESULT
+    pfCancelled BOOL*
+
+  func ResetCancel
+    HRESULT
+
+  func End
+    HRESULT
+
+

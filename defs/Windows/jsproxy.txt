@@ -1,0 +1,22 @@
+include Headers\windows.h.txt
+
+dll JSProxy.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Internet/Windows Internet (WinINet)"
+func InternetDeInitializeAutoProxyDll
+  BOOL
+  lpszMime LPSTR
+  dwReserved DWORD
+
+func InternetGetProxyInfo
+  BOOL
+  lpszUrl LPCSTR
+  dwUrlLength DWORD
+  lpszUrlHostName LPSTR
+  dwUrlHostNameLength DWORD
+  lplpszProxyHostName LPSTR*
+  lpdwProxyHostNameLength LPDWORD
+
+func InternetInitializeAutoProxyDll
+  BOOL
+  dwReserved DWORD
+

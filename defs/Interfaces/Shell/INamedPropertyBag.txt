@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface INamedPropertyBag base=IUnknown id={FB700430-952C-11d1-946F-000000000000} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func ReadPropertyNPB
+    HRESULT
+    pszBagname LPCWSTR
+    pszPropName LPCWSTR
+    pVar PROPVARIANT*
+
+  func WritePropertyNPB
+    HRESULT
+    pszBagname LPCWSTR
+    pszPropName LPCWSTR
+    pVar PROPVARIANT*
+
+  func RemovePropertyNPB
+    HRESULT
+    pszBagname LPCWSTR
+    pszPropName LPCWSTR
+
+

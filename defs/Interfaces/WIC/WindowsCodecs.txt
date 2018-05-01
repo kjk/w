@@ -1,0 +1,437 @@
+include Headers\windows.h.txt
+
+dll WindowsCodecs.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+interface IWICBitmap
+
+interface IWICBitmapClipper
+
+interface IWICBitmapCodecInfo
+
+interface IWICBitmapCodecProgressNotification
+
+interface IWICBitmapDecoder
+
+interface IWICBitmapDecoderInfo
+
+interface IWICBitmapEncoder
+
+interface IWICBitmapEncoderInfo
+
+interface IWICBitmapFlipRotator
+
+interface IWICBitmapFrameDecode
+
+interface IWICBitmapFrameEncode
+
+interface IWICBitmapLock
+
+interface IWICBitmapScaler
+
+interface IWICBitmapSource
+
+interface IWICBitmapSourceTransform
+
+interface IWICColorContext
+
+interface IWICColorTransform
+
+interface IWICComponentFactory
+
+interface IWICComponentInfo
+
+interface IWICDevelopRaw
+
+interface IWICDevelopRawNotificationCallback
+
+interface IWICEnumMetadataItem
+
+interface IWICFastMetadataEncoder
+
+interface IWICFormatConverter
+
+interface IWICFormatConverterInfo
+
+interface IWICImagingFactory
+
+interface IWICMetadataBlockReader
+
+interface IWICMetadataBlockWriter
+
+interface IWICMetadataHandlerInfo
+
+interface IWICMetadataQueryReader
+
+interface IWICMetadataQueryWriter
+
+interface IWICMetadataReader
+
+interface IWICMetadataReaderInfo
+
+interface IWICMetadataWriter
+
+interface IWICMetadataWriterInfo
+
+interface IWICPalette
+
+interface IWICPersistStream
+
+interface IWICPixelFormatInfo
+
+interface IWICPixelFormatInfo2
+
+interface IWICProgressCallback
+
+interface IWICProgressiveLevelControl
+
+interface IWICStream
+
+interface IWICStreamProvider
+
+interface IPropertyBag2
+
+enum [WIC_HRESULT] HRESULT display=HRESULT reset
+  S_OK                                          0
+  S_FALSE                                       1
+  WINCODEC_ERR_NOTIMPLEMENTED                   0x80004001
+  E_NOINTERFACE                                 0x80004002
+  E_POINTER                                     0x80004003
+  WINCODEC_ERR_ABORTED                          0x80004004
+  WINCODEC_ERR_GENERIC_ERROR                    0x80004005
+  E_UNEXPECTED                                  0x8000FFFF
+  CO_E_NOTINITIALIZED                           0x800401F0
+  WINCODEC_ERR_ACCESSDENIED                     0x80070005
+  E_HANDLE                                      0x80070006
+  WINCODEC_ERR_OUTOFMEMORY                      0x8007000e
+  WINCODEC_ERR_INVALIDPARAMETER                 0x80070057
+  WINCODEC_ERR_VALUEOVERFLOW                    0x80070216
+  WINCODEC_ERR_WRONGSTATE                       0x88982f04
+  WINCODEC_ERR_VALUEOUTOFRANGE                  0x88982f05
+  WINCODEC_ERR_UNKNOWNIMAGEFORMAT               0x88982f07
+  WINCODEC_ERR_UNSUPPORTEDVERSION               0x88982f0b
+  WINCODEC_ERR_NOTINITIALIZED                   0x88982f0c
+  WINCODEC_ERR_ALREADYLOCKED                    0x88982f0d
+  WINCODEC_ERR_PROPERTYNOTFOUND                 0x88982f40
+  WINCODEC_ERR_PROPERTYNOTSUPPORTED             0x88982f41
+  WINCODEC_ERR_PROPERTYSIZE                     0x88982f42
+  WINCODEC_ERR_CODECPRESENT                     0x88982f43
+  WINCODEC_ERR_CODECNOTHUMBNAIL                 0x88982f44
+  WINCODEC_ERR_PALETTEUNAVAILABLE               0x88982f45
+  WINCODEC_ERR_CODECTOOMANYSCANLINES            0x88982f46
+  WINCODEC_ERR_INTERNALERROR                    0x88982f48
+  WINCODEC_ERR_SOURCERECTDOESNOTMATCHDIMENSIONS 0x88982f49
+  WINCODEC_ERR_COMPONENTNOTFOUND                0x88982f50
+  WINCODEC_ERR_IMAGESIZEOUTOFRANGE              0x88982f51
+  WINCODEC_ERR_TOOMUCHMETADATA                  0x88982f52
+  WINCODEC_ERR_BADIMAGE                         0x88982f60
+  WINCODEC_ERR_BADHEADER                        0x88982f61
+  WINCODEC_ERR_FRAMEMISSING                     0x88982f62
+  WINCODEC_ERR_BADMETADATAHEADER                0x88982f63
+  WINCODEC_ERR_BADSTREAMDATA                    0x88982f70
+  WINCODEC_ERR_STREAMWRITE                      0x88982f71
+  WINCODEC_ERR_STREAMREAD                       0x88982f72
+  WINCODEC_ERR_STREAMNOTAVAILABLE               0x88982f73
+  WINCODEC_ERR_UNSUPPORTEDPIXELFORMAT           0x88982f80
+  WINCODEC_ERR_UNSUPPORTEDOPERATION             0x88982f81
+  WINCODEC_ERR_INVALIDREGISTRATION              0x88982f8a
+  WINCODEC_ERR_COMPONENTINITIALIZEFAILURE       0x88982f8b
+  WINCODEC_ERR_INSUFFICIENTBUFFER               0x88982f8c
+  WINCODEC_ERR_DUPLICATEMETADATAPRESENT         0x88982f8d
+  WINCODEC_ERR_PROPERTYUNEXPECTEDTYPE           0x88982f8e
+  WINCODEC_ERR_UNEXPECTEDSIZE                   0x88982f8f
+  WINCODEC_ERR_INVALIDQUERYREQUEST              0x88982f90
+  WINCODEC_ERR_UNEXPECTEDMETADATATYPE           0x88982f91
+  WINCODEC_ERR_REQUESTONLYVALIDATMETADATAROOT   0x88982f92
+  WINCODEC_ERR_INVALIDQUERYCHARACTER            0x88982f93
+  WINCODEC_ERR_WIN32ERROR                       0x88982f94
+  WINCODEC_ERR_INVALIDPROGRESSIVELEVEL          0x88982f95
+
+struct WICRawToneCurvePoint
+  Input double
+  Output double
+
+array "WICRawToneCurvePoint [1]" base=WICRawToneCurvePoint count=1
+
+struct WICRawToneCurve
+  cPoints UINT
+  aPoints "WICRawToneCurvePoint [1]" count=cPoints
+
+pointer WICRawToneCurve* WICRawToneCurve
+
+pointer "const WICRawToneCurve*" WICRawToneCurve
+
+alias REFWICPixelFormatGUID REFGUID
+
+alias WICPixelFormatGUID GUID
+
+pointer WICPixelFormatGUID* WICPixelFormatGUID
+
+alias PFNProgressNotification LPVOID
+
+alias WICInProcPointer BYTE*
+
+pointer WICInProcPointer* WICInProcPointer
+
+alias WICColor UINT32
+
+pointer WICColor* WICColor
+
+enum WICSectionAccessLevel UINT
+  WICSectionAccessLevelRead      0x1
+  WICSectionAccessLevelReadWrite 0x3
+
+enum WICComponentType UINT
+  WICDecoder              0x1
+  WICEncoder              0x2
+  WICPixelFormatConverter 0x4
+  WICMetadataReader       0x8
+  WICMetadataWriter       0x10
+  WICPixelFormat          0x20
+  WICAllComponents        0x3f
+
+pointer WICComponentType* WICComponentType
+
+enum WICDecodeOptions UINT
+  WICDecodeMetadataCacheOnDemand 0
+  WICDecodeMetadataCacheOnLoad   0x1
+
+enum WICBitmapEncoderCacheOption UINT
+  WICBitmapEncoderCacheInMemory 0
+  WICBitmapEncoderCacheTempFile 0x1
+  WICBitmapEncoderNoCache       0x2
+
+enum WICBitmapTransformOptions UINT
+  WICBitmapTransformRotate0        0
+  WICBitmapTransformRotate90       0x1
+  WICBitmapTransformRotate180      0x2
+  WICBitmapTransformRotate270      0x3
+  WICBitmapTransformFlipHorizontal 0x8
+  WICBitmapTransformFlipVertical   0x10
+
+enum WICBitmapInterpolationMode UINT
+  WICBitmapInterpolationModeNearestNeighbor 0
+  WICBitmapInterpolationModeLinear          0x1
+  WICBitmapInterpolationModeCubic           0x2
+  WICBitmapInterpolationModeFant            0x3
+
+enum WICColorContextType UINT
+  WICColorContextUninitialized  0
+  WICColorContextProfile        0x1
+  WICColorContextExifColorSpace 0x2
+
+pointer WICColorContextType* WICColorContextType
+
+enum WICBitmapCreateCacheOption UINT
+  WICBitmapNoCache       0
+  WICBitmapCacheOnDemand 0x1
+  WICBitmapCacheOnLoad   0x2
+
+enum WICBitmapAlphaChannelOption UINT
+  WICBitmapUseAlpha              0
+  WICBitmapUsePremultipliedAlpha 0x1
+  WICBitmapIgnoreAlpha           0x2
+
+enum WICRawParameterSet UINT
+  WICAsShotParameterSet       0x1
+  WICUserAdjustedParameterSet 0x2
+  WICAutoAdjustedParameterSet 0x3
+
+enum WICNamedWhitePoint UINT
+  WICWhitePointDefault          0x1
+  WICWhitePointDaylight         0x2
+  WICWhitePointCloudy           0x4
+  WICWhitePointShade            0x8
+  WICWhitePointTungsten         0x10
+  WICWhitePointFluorescent      0x20
+  WICWhitePointFlash            0x40
+  WICWhitePointUnderwater       0x80
+  WICWhitePointCustom           0x100
+  WICWhitePointAutoWhiteBalance 0x200
+
+pointer WICNamedWhitePoint* WICNamedWhitePoint
+
+enum WICRawRenderMode UINT
+  WICRawRenderModeDraft       0x1
+  WICRawRenderModeNormal      0x2
+  WICRawRenderModeBestQuality 0x3
+
+pointer WICRawRenderMode* WICRawRenderMode
+
+enum WICBitmapDitherType UINT
+  WICBitmapDitherTypeSolid          0
+  WICBitmapDitherTypeOrdered4x4     0x1
+  WICBitmapDitherTypeOrdered8x8     0x2
+  WICBitmapDitherTypeOrdered16x16   0x3
+  WICBitmapDitherTypeSpiral4x4      0x4
+  WICBitmapDitherTypeSpiral8x8      0x5
+  WICBitmapDitherTypeDualSpiral4x4  0x6
+  WICBitmapDitherTypeDualSpiral8x8  0x7
+  WICBitmapDitherTypeErrorDiffusion 0x8
+
+enum WICBitmapPaletteType UINT
+  WICBitmapPaletteTypeCustom           0
+  WICBitmapPaletteTypeMedianCut        0x1
+  WICBitmapPaletteTypeFixedBW          0x2
+  WICBitmapPaletteTypeFixedHalftone8   0x3
+  WICBitmapPaletteTypeFixedHalftone27  0x4
+  WICBitmapPaletteTypeFixedHalftone64  0x5
+  WICBitmapPaletteTypeFixedHalftone125 0x6
+  WICBitmapPaletteTypeFixedHalftone216 0x7
+  WICBitmapPaletteTypeFixedHalftone252 0x8
+  WICBitmapPaletteTypeFixedHalftone256 0x9
+  WICBitmapPaletteTypeFixedGray4       0xa
+  WICBitmapPaletteTypeFixedGray16      0xb
+  WICBitmapPaletteTypeFixedGray256     0xc
+
+pointer WICBitmapPaletteType* WICBitmapPaletteType
+
+enum WICPixelFormatNumericRepresentation UINT
+  WICPixelFormatNumericRepresentationUnspecified     0
+  WICPixelFormatNumericRepresentationIndexed         0x1
+  WICPixelFormatNumericRepresentationUnsignedInteger 0x2
+  WICPixelFormatNumericRepresentationSignedInteger   0x3
+  WICPixelFormatNumericRepresentationFixed           0x4
+  WICPixelFormatNumericRepresentationFloat           0x5
+
+pointer WICPixelFormatNumericRepresentation* WICPixelFormatNumericRepresentation
+
+enum WICProgressOperation UINT
+  WICProgressOperationCopyPixels  0x1
+  WICProgressOperationWritePixels 0x2
+  WICProgressOperationAll         0xffff
+
+struct WICRect
+  X INT
+  Y INT
+  Width INT
+  Height INT
+
+pointer WICRect* WICRect
+
+pointer "const WICRect*" WICRect
+
+struct WICBitmapPattern
+  Position ULARGE_INTEGER
+  Length ULONG
+  Pattern BYTE*
+  Mask BYTE*
+  EndOfStream BOOL
+
+pointer WICBitmapPattern* WICBitmapPattern
+
+enum WICRawCapabilities UINT
+  WICRawCapabilityNotSupported   0
+  WICRawCapabilityGetSupported   0x1
+  WICRawCapabilityFullySupported 0x2
+
+enum WICRawRotationCapabilities UINT
+  WICRawRotationCapabilityNotSupported           0
+  WICRawRotationCapabilityGetSupported           0x1
+  WICRawRotationCapabilityNinetyDegreesSupported 0x2
+  WICRawRotationCapabilityFullySupported         0x3
+
+struct WICRawCapabilitiesInfo
+  cbSize UINT
+  CodecMajorVersion UINT
+  CodecMinorVersion UINT
+  ExposureCompensationSupport WICRawCapabilities
+  ContrastSupport WICRawCapabilities
+  RGBWhitePointSupport WICRawCapabilities
+  NamedWhitePointSupport WICRawCapabilities
+  NamedWhitePointSupportMask UINT
+  KelvinWhitePointSupport WICRawCapabilities
+  GammaSupport WICRawCapabilities
+  TintSupport WICRawCapabilities
+  SaturationSupport WICRawCapabilities
+  SharpnessSupport WICRawCapabilities
+  NoiseReductionSupport WICRawCapabilities
+  DestinationColorProfileSupport WICRawCapabilities
+  ToneCurveSupport WICRawCapabilities
+  RotationSupport WICRawRotationCapabilities
+  RenderModeSupport WICRawCapabilities
+
+pointer WICRawCapabilitiesInfo* WICRawCapabilitiesInfo
+
+struct WICMetadataPattern
+  Position ULARGE_INTEGER
+  Length ULONG
+  Pattern BYTE* length=Length
+  Mask BYTE*
+  DataOffset ULARGE_INTEGER
+
+pointer WICMetadataPattern* WICMetadataPattern
+
+struct WICMetadataHeader
+  Position ULARGE_INTEGER
+  Length ULONG
+  Header BYTE* length=Length
+  DataOffset ULARGE_INTEGER
+
+pointer WICMetadataHeader* WICMetadataHeader
+
+func WICConvertBitmapSource
+  [WIC_HRESULT]
+  dstFormat REFWICPixelFormatGUID
+  pISrc IWICBitmapSource*
+  ppIDst IWICBitmapSource**
+
+func WICCreateBitmapFromSection
+  [WIC_HRESULT]
+  width UINT
+  height UINT
+  pixelFormat REFWICPixelFormatGUID
+  hSection HANDLE
+  stride UINT
+  offset UINT
+  pIBitmap IWICBitmap**
+
+func WICCreateBitmapFromSectionEx
+  [WIC_HRESULT]
+  width UINT
+  height UINT
+  pixelFormat REFWICPixelFormatGUID
+  hSection HANDLE
+  stride UINT
+  offset UINT
+  desiredAccessLevel WICSectionAccessLevel
+  pIBitmap IWICBitmap**
+
+func WICGetMetadataContentSize
+  [WIC_HRESULT]
+  guidContainerFormat REFGUID
+  pIWriter IWICMetadataWriter*
+  pcbSize ULARGE_INTEGER*
+
+func WICMapSchemaToName
+  [WIC_HRESULT]
+  guidMetadataFormat REFGUID
+  pwzSchema LPWSTR
+  cchName UINT
+  wzName WCHAR*
+  pcchActual UINT
+
+func WICMapGuidToShortName
+  [WIC_HRESULT]
+  guid REFGUID
+  cchName UINT
+  wzName WCHAR*
+  pcchActual UINT*
+
+func WICMapShortNameToGuid
+  [WIC_HRESULT]
+  wzName "const WCHAR*"
+  pguid GUID*
+
+func WICMatchMetadataContent
+  [WIC_HRESULT]
+  guidContainerFormat REFGUID
+  pguidVendor "const GUID*"
+  pIStream IStream*
+  pguidMetadataFormat GUID*
+
+func WICSerializeMetadataContent
+  [WIC_HRESULT]
+  guidContainerFormat REFGUID
+  pIWriter IWICMetadataWriter*
+  dwPersistOptions DWORD
+  pIStream IStream*
+

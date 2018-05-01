@@ -1,0 +1,88 @@
+include Headers\native.h.txt
+
+dll Lz32.dll callingConvention=STDCALL onlineHelp=MSDN
+category "Data Access and Storage/Local File Systems/File Management/Lempel-Ziv (LZ) Compression"
+flag [OpenFlags] WORD display=WORD
+  OF_READ             0x00000000
+  OF_SHARE_COMPAT     0x00000000
+  OF_WRITE            0x00000001
+  OF_READWRITE        0x00000002
+  OF_SHARE_EXCLUSIVE  0x00000010
+  OF_SHARE_DENY_WRITE 0x00000020
+  OF_SHARE_DENY_READ  0x00000030
+  OF_SHARE_DENY_NONE  0x00000040
+  OF_PARSE            0x00000100
+  OF_DELETE           0x00000200
+  OF_VERIFY           0x00000400
+  OF_CANCEL           0x00000800
+  OF_CREATE           0x00001000
+  OF_PROMPT           0x00002000
+  OF_EXIST            0x00004000
+  OF_REOPEN           0x00008000
+
+func GetExpandedName bothCharset
+  success Greater=-1
+  INT
+  lpszSource LPTSTR
+  lpszBuffer LPTSTR outputOnly
+
+func LZClose
+  void
+  hFile INT
+
+func LZCopy
+  success Greater=-1
+  LONG
+  hfSource INT
+  hfDest INT
+
+func LZInit
+  success Greater=-1
+  INT
+  hfSource INT
+
+func LZOpenFile bothCharset
+  success Greater=-1
+  INT
+  lpFileName LPTSTR
+  lpReOpenBuf LPOFSTRUCT
+  wStyle [OpenFlags]
+
+func LZRead
+  success Greater=-1
+  INT
+  hFile INT
+  lpBuffer LPBYTE display=LPSTR postLength=Return
+  cbRead INT
+
+func LZSeek
+  success Greater=-1
+  LONG
+  hFile INT
+  lOffset LONG
+  iOrigin INT
+
+func CopyLZFile
+  success Greater=-1
+  LONG
+  hfSource INT
+  hfDest INT
+
+func LZDone
+  VOID
+
+func LZStart
+  success Greater=-1
+  INT
+
+func LZCloseFile
+  VOID
+  hFile INT
+
+func LZCreateFileW
+  ULONG
+  dwDesiredAccess [FILE_ACCESS_MASK]
+  dwShareMode [FILE_SHARE_MODE]
+  dwCreationDisposition [CreationDisposition]
+  lpString1 LPWSTR
+

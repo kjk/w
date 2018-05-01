@@ -1,0 +1,13 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1VertexBuffer base=IUnknown id={9b8b1336-00a5-4668-92b7-ced5d8bf9b7b} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func Map
+    [D2D_HRESULT]
+    data BYTE**
+    bufferSize UINT32
+
+  func Unmap
+    [D2D_HRESULT]
+
+

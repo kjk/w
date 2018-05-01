@@ -1,0 +1,8 @@
+include Interfaces\Shell\IDragSourceHelper.txt
+
+ingterface IDragSourceHelper2 base=IDragSourceHelper id={83E07D0D-0C5F-4163-BF1A-60B274051E40} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetFlags
+    HRESULT
+    dwFlags DWORD
+
+

@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRootStorage base=IUnknown id={00000012-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func SwitchToFile
+    HRESULT
+    pszFile LPOLESTR
+
+

@@ -1,0 +1,793 @@
+include Headers\windows.h.txt
+include Headers\sockets.h.txt
+
+dll Ws2_32.dll callingConvention=STDCALL errorFunc=WSAGetLastError onlineHelp=MSDN
+category "Networking/Windows Sockets 2"
+category "Networking/Quality of Service (QOS)"
+alias [WSA_ERROR] [ERROR_CODE] display=int
+
+flag [LookupServiceFlags] DWORD display=DWORD
+  LUP_DEEP                   0x0001
+  LUP_CONTAINERS             0x0002
+  LUP_NOCONTAINERS           0x0004
+  LUP_NEAREST                0x0008
+  LUP_RETURN_NAME            0x0010
+  LUP_RETURN_TYPE            0x0020
+  LUP_RETURN_VERSION         0x0040
+  LUP_RETURN_COMMENT         0x0080
+  LUP_RETURN_ADDR            0x0100
+  LUP_RETURN_BLOB            0x0200
+  LUP_RETURN_ALIASES         0x0400
+  LUP_RETURN_QUERY_STRING    0x0800
+  LUP_RETURN_ALL             0x0FF0
+  LUP_FLUSHCACHE             0x1000
+  LUP_FLUSHPREVIOUS          0x2000
+  LUP_NON_AUTHORITATIVE      0x4000
+  LUP_RES_SERVICE            0x8000
+  LUP_SECURE                 0x8000
+  LUP_RETURN_PREFERRED_NAMES 0x10000
+  LUP_ADDRCONFIG             0x00100000
+  LUP_DUAL_ADDR              0x00200000
+
+flag [WsaFlags] DWORD display=DWORD
+  WSA_FLAG_OVERLAPPED             0x01
+  WSA_FLAG_MULTIPOINT_C_ROOT      0x02
+  WSA_FLAG_MULTIPOINT_C_LEAF      0x04
+  WSA_FLAG_MULTIPOINT_D_ROOT      0x08
+  WSA_FLAG_MULTIPOINT_D_LEAF      0x10
+  WSA_FLAG_ACCESS_SYSTEM_SECURITY 0x40
+
+enum [WsaIoctl] DWORD display=DWORD
+  SIO_ENABLE_CIRCULAR_QUEUEING       0x28000002
+  SIO_FLUSH                          0x28000004
+  SIO_ADDRESS_LIST_CHANGE            0x28000017
+  SIO_FIND_ROUTE                     0x48000003
+  SIO_GET_BROADCAST_ADDRESS          0x48000005
+  SIO_ADDRESS_LIST_QUERY             0x48000016
+  SIO_QUERY_TARGET_PNP_HANDLE        0x48000018
+  SIO_ASSOCIATE_HANDLE               0x88000001
+  SIO_MULTIPOINT_LOOPBACK            0x88000009
+  SIO_MULTICAST_SCOPE                0x8800000a
+  SIO_SET_QOS                        0x8800000b
+  SIO_SET_GROUP_QOS                  0x8800000c
+  SIO_ROUTING_INTERFACE_CHANGE       0x88000015
+  SIO_RESERVED_1                     0x8800001a
+  SIO_RESERVED_2                     0x88000021
+  SIO_GET_EXTENSION_FUNCTION_POINTER 0xc8000006
+  SIO_GET_QOS                        0xc8000007
+  SIO_GET_GROUP_QOS                  0xc8000008
+  SIO_TRANSLATE_HANDLE               0xc800000d
+  SIO_ROUTING_INTERFACE_QUERY        0xc8000014
+  SIO_ADDRESS_LIST_SORT              0xc8000019
+
+func accept ordinal=1
+  success NotEqual=-1
+  SOCKET
+  s SOCKET
+  addr "struct sockaddr*"
+  addrlen int*
+
+func bind ordinal=2
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  name "const struct sockaddr*" length=namelen
+  namelen int
+
+func closesocket ordinal=3
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+
+func connect ordinal=4
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  name "const struct sockaddr*" length=namelen
+  namelen int
+
+func freeaddrinfo ordinal=162
+  void
+  ai "struct addrinfo*"
+
+func getaddrinfo ordinal=163
+  [WSA_ERROR]
+  nodename "const char*"
+  servname "const char*"
+  hints "const struct addrinfo*"
+  res "struct addrinfo**"
+
+func FreeAddrInfoEx bothCharset ordinalA=25 ordinalW=26 nameA=FreeAddrInfoEx
+  void
+  pAddrInfo PADDRINFOEX
+
+func GetAddrInfoEx bothCharset ordinalA=28 ordinalW=29
+  [WSA_ERROR]
+  pName PCTSTR
+  pServiceName PCTSTR
+  dwNameSpace [NameSpaceFlags]
+  lpNspId LPGUID
+  pHints "const ADDRINFOEX*"
+  ppResult PADDRINFOEX*
+  timeout "struct timeval*"
+  lpOverlapped LPOVERLAPPED
+  lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE
+  lpNameHandle LPHANDLE
+
+func FreeAddrInfoW ordinal=27
+  void
+  pAddrInfo PADDRINFOW
+
+func GetAddrInfoW ordinal=30
+  [WSA_ERROR]
+  pNodeName PCWSTR
+  pServiceName PCWSTR
+  pHints "const ADDRINFOW*"
+  ppResult PADDRINFOW*
+
+func gethostbyaddr ordinal=51
+  success NotEqual=0
+  "struct hostent*"
+  addr "const char*"
+  len int
+  type [AddressFamily]
+
+func gethostbyname ordinal=52
+  success NotEqual=0
+  "struct hostent*"
+  name "const char*"
+
+func gethostname ordinal=57
+  success Equal=0
+  [SocketCode-int]
+  name char* outputOnly
+  namelen int
+
+func getnameinfo ordinal=164
+  [WSA_ERROR]
+  sa "const struct sockaddr*" length=salen
+  salen socklen_t
+  host char* outputOnly
+  hostlen DWORD
+  serv char* outputOnly
+  servlen DWORD
+  flags [NI_Flags]
+
+func GetNameInfoW ordinal=31
+  [WSA_ERROR]
+  pSockaddr "const SOCKADDR*"
+  SockaddrLength socklen_t
+  pNodeBuffer PWCHAR
+  NodeBufferSize DWORD
+  pServiceBuffer PWCHAR
+  ServiceBufferSize DWORD
+  Flags [NI_Flags] display=INT
+
+func getpeername ordinal=5
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  name "struct sockaddr*"
+  namelen int*
+
+func getprotobyname ordinal=53
+  success NotEqual=0
+  "struct PROTOENT*"
+  name "const char*"
+
+func getprotobynumber ordinal=54
+  success NotEqual=0
+  "struct PROTOENT*"
+  number int
+
+func getservbyname ordinal=55
+  success NotEqual=0
+  "struct servent*"
+  name "const char*"
+  proto "const char*"
+
+func getservbyport ordinal=56
+  success NotEqual=0
+  "struct servent*"
+  port int
+  proto "const char*"
+
+func getsockname ordinal=6
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  name "struct sockaddr*" length=namelen
+  namelen int*
+
+func getsockopt ordinal=7
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  level [SocketLevel]
+  optname [SocketOption]
+  optval [LPVOID|char*] postLength=optlen
+  optlen int*
+
+func htonl ordinal=8
+  u_long
+  hostlong u_long
+
+func htons ordinal=9
+  u_short
+  hostshort u_short
+
+func inet_addr ordinal=11
+  success NotEqual=0xffffffff
+  [INET_ADDR_OUTPUT]
+  cp "const char*"
+
+func inet_ntoa ordinal=12
+  success NotEqual=0
+  char*
+  in "struct in_addr"
+
+func InetNtopW ordinal=32
+  success NotEqual=0
+  PCWSTR
+  Family INT
+  pAddr PVOID
+  pStringBuf PWSTR
+  StringBufSize size_t
+
+func inet_ntop ordinal=165
+  success NotEqual=0
+  PCSTR
+  Family INT
+  pAddr PVOID
+  pStringBuf PSTR
+  StringBufSize size_t
+
+func inet_pton ordinal=166
+  success NotEqual=0
+  PCSTR
+  Family INT
+  pszAddrString PCSTR
+  pAddrBuf PVOID
+
+func InetPtonW ordinal=33
+  success NotEqual=0
+  PCWSTR
+  Family INT
+  pszAddrString PCWSTR
+  pAddrBuf PVOID
+
+func ioctlsocket ordinal=10
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  cmd [Socket_IOCTL]
+  argp u_long*
+
+func listen ordinal=13
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  backlog int
+
+func ntohl ordinal=14
+  u_long
+  netlong u_long
+
+func ntohs ordinal=15
+  u_short
+  netshort u_short
+
+func recv ordinal=16
+  success NotEqual=-1
+  [SocketCode-int]
+  s SOCKET
+  buf [LPVOID|char*] postLength=Return
+  len int
+  flags [SendRecvFlags] display=int
+
+func recvfrom ordinal=17
+  success NotEqual=-1
+  [SocketCode-int]
+  s SOCKET
+  buf [LPVOID|char*] postLength=Return
+  len int
+  flags int
+  from "struct sockaddr*"
+  fromlen int*
+
+func select ordinal=18
+  success NotEqual=-1
+  [SocketCode-int]
+  nfds int
+  readfds fd_set*
+  writefds fd_set*
+  exceptfds fd_set*
+  timeout "const struct timeval*"
+
+func send ordinal=19
+  success NotEqual=-1
+  [SocketCode-int]
+  s SOCKET
+  buf LPVOID display="const char*" length=len
+  len int
+  flags [SendRecvFlags] display=int
+
+func sendto ordinal=20
+  success NotEqual=-1
+  [SocketCode-int]
+  s SOCKET
+  buf LPVOID display="const char*" length=len
+  len int
+  flags [SendRecvFlags] display=int
+  to "const struct sockaddr*"
+  tolen int
+
+func SetAddrInfoEx bothCharset ordinalA=34 ordinalW=35
+  [WSA_ERROR]
+  pName PCTSTR
+  pServiceName PCTSTR
+  pAddresses SOCKET_ADDRESS* count=dwAddressCount
+  dwAddressCount DWORD
+  lpBlob LPBLOB
+  dwFlags DWORD
+  dwNameSpace [NameSpaceFlags]
+  lpNspId LPGUID
+  timeout "struct timeval*"
+  lpOverlapped LPOVERLAPPED
+  lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE
+  lpNameHandle LPHANDLE
+
+func setsockopt ordinal=21
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  level [SocketLevel]
+  optname [SocketOption]
+  optval LPVOID display="const char*" length=optlen
+  optlen int
+
+func shutdown ordinal=22
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  how [SocketShutdownFlags]
+
+func socket ordinal=23
+  success NotEqual=-1
+  SOCKET
+  af [AddressFamily]
+  type [SocketType]
+  protocol [SocketProtocol]
+
+func WSAAccept ordinal=37
+  success NotEqual=-1
+  SOCKET
+  s SOCKET
+  addr "struct sockaddr*"
+  addrlen LPINT
+  lpfnCondition LPCONDITIONPROC
+  dwCallbackData DWORD
+
+func WSAAddressToString bothCharset ordinalA=38 ordinalW=39
+  success Equal=0
+  [SocketCode-INT]
+  lpsaAddress LPSOCKADDR
+  dwAddressLength DWORD
+  lpProtocolInfo LPWSAPROTOCOL_INFO
+  lpszAddressString LPTSTR
+  lpdwAddressStringLength LPDWORD
+
+func WSAAsyncGetHostByAddr ordinal=102
+  success NotEqual=0
+  HANDLE
+  hWnd HWND
+  wMsg "unsigned int"
+  addr "const char*"
+  len int
+  type int
+  buf char*
+  buflen int
+
+func WSAAsyncGetHostByName ordinal=103
+  success NotEqual=0
+  HANDLE
+  hWnd HWND
+  wMsg "unsigned int"
+  name "const char*"
+  buf char*
+  buflen int
+
+func WSAAsyncGetProtoByName ordinal=105
+  success NotEqual=0
+  HANDLE
+  hWnd HWND
+  wMsg "unsigned int"
+  name "const char*"
+  buf char*
+  buflen int
+
+func WSAAsyncGetProtoByNumber ordinal=104
+  success NotEqual=0
+  HANDLE
+  hWnd HWND
+  wMsg "unsigned int"
+  number int
+  buf char*
+  buflen int
+
+func WSAAsyncGetServByName ordinal=107
+  success NotEqual=0
+  HANDLE
+  hWnd HWND
+  wMsg "unsigned int"
+  name "const char*"
+  proto "const char*"
+  buf char*
+  buflen int
+
+func WSAAsyncGetServByPort ordinal=106
+  success NotEqual=0
+  HANDLE
+  hWnd HWND
+  wMsg "unsigned int"
+  port int
+  proto "const char*"
+  buf char*
+  buflen int
+
+func WSAAsyncSelect ordinal=101
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  hWnd HWND
+  wMsg "unsigned int"
+  lEvent [FDEvents]
+
+func WSACancelAsyncRequest ordinal=108
+  success Equal=0
+  [SocketCode-int]
+  hAsyncTaskHandle HANDLE
+
+func WSACleanup ordinal=116
+  success Equal=0
+  [SocketCode-int]
+
+func WSACloseEvent ordinal=41
+  BOOL
+  hEvent WSAEVENT
+
+func WSAConnect ordinal=42
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  name "const struct sockaddr*"
+  namelen int
+  lpCallerData LPWSABUF
+  lpCalleeData LPWSABUF
+  lpSQOS LPQOS
+  lpGQOS LPQOS
+
+func WSAConnectByList ordinal=43
+  BOOL
+  s SOCKET
+  SocketAddressList PSOCKET_ADDRESS_LIST
+  LocalAddressLength LPDWORD
+  LocalAddress LPSOCKADDR
+  RemoteAddressLength LPDWORD
+  RemoteAddress LPSOCKADDR
+  timeout "const struct timeval*"
+  Reserved LPWSAOVERLAPPED
+
+func WSAConnectByName bothCharset ordinalA=44 ordinalW=45
+  BOOL
+  s SOCKET
+  nodename LPSTR
+  servicename LPSTR
+  LocalAddressLength LPDWORD
+  LocalAddress LPSOCKADDR
+  RemoteAddressLength LPDWORD
+  RemoteAddress LPSOCKADDR
+  timeout "const struct timeval*"
+  Reserved LPWSAOVERLAPPED
+
+func WSACreateEvent ordinal=46
+  success NotEqual=0
+  WSAEVENT
+
+func WSADuplicateSocket bothCharset ordinalA=47 ordinalW=48
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  dwProcessId DWORD
+  lpProtocolInfo LPWSAPROTOCOL_INFO
+
+func WSAEnumNameSpaceProviders bothCharset ordinalA=49 ordinalW=59
+  success NotEqual=-1
+  [SocketCode-INT]
+  lpdwBufferLength LPDWORD
+  lpnspBuffer LPWSANAMESPACE_INFO
+
+func WSAEnumNameSpaceProvidersEx bothCharset ordinalA=50 ordinalW=58
+  success NotEqual=-1
+  [SocketCode-INT]
+  lpdwBufferLength LPDWORD
+  lpnspBuffer LPWSANAMESPACE_INFOEX
+
+func WSAEnumNetworkEvents ordinal=60
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  hEventObject WSAEVENT
+  lpNetworkEvents LPWSANETWORKEVENTS
+
+func WSAEnumProtocols bothCharset ordinalA=61 ordinalW=62
+  success NotEqual=-1
+  [SocketCode-int]
+  lpiProtocols LPINT
+  lpProtocolBuffer LPWSAPROTOCOL_INFO postCount=Return
+  lpdwBufferLength LPDWORD
+
+func WSAEventSelect ordinal=63
+  success NotEqual=-1
+  [SocketCode-int]
+  s SOCKET
+  hEventObject WSAEVENT
+  lNetworkEvents [FDEvents]
+
+func WSAGetLastError ordinal=111
+  [WSA_ERROR]
+
+func WSAGetOverlappedResult ordinal=64
+  BOOL
+  s SOCKET
+  lpOverlapped LPWSAOVERLAPPED
+  lpcbTransfer LPDWORD
+  fWait BOOL
+  lpdwFlags LPDWORD
+
+func WSAGetServiceClassInfo bothCharset ordinalA=66 ordinalW=67
+  success Equal=0
+  [SocketCode-INT]
+  lpProviderId LPGUID
+  lpServiceClassId LPGUID
+  lpdwBufferLength LPDWORD
+  lpServiceClassInfo LPWSASERVICECLASSINFO
+
+func WSAGetServiceClassNameByClassId bothCharset ordinalA=68 ordinalW=69
+  success Equal=0
+  [SocketCode-INT]
+  lpServiceClassId LPGUID
+  lpszServiceClassName LPTSTR
+  lpdwBufferLength LPDWORD
+
+func WSAHtonl ordinal=70
+  [SocketCode-int]
+  s SOCKET
+  hostlong u_long
+  lpnetlong u_long*
+
+func WSAHtons ordinal=71
+  [SocketCode-int]
+  s SOCKET
+  hostshort u_short
+  lpnetshort u_short*
+
+func WSAInstallServiceClass bothCharset ordinalA=72 ordinalW=73
+  success Equal=0
+  [SocketCode-INT]
+  lpServiceClassInfo LPWSASERVICECLASSINFO
+
+func WSAIoctl ordinal=74
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  dwIoControlCode [WsaIoctl]
+  lpvInBuffer LPVOID length=cbInBuffer
+  cbInBuffer DWORD
+  lpvOutBuffer LPVOID postLength=lpcbBytesReturned
+  cbOutBuffer DWORD
+  lpcbBytesReturned LPDWORD
+  lpOverlapped LPWSAOVERLAPPED
+  lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE
+
+func WSAJoinLeaf ordinal=75
+  success NotEqual=-1
+  SOCKET
+  s SOCKET
+  name "const struct sockaddr*"
+  namelen int
+  lpCallerData LPWSABUF
+  lpCalleeData LPWSABUF
+  lpSQOS LPQOS
+  lpGQOS LPQOS
+  dwFlags DWORD
+
+func WSALookupServiceBegin bothCharset ordinalA=76 ordinalW=77
+  success Equal=0
+  [SocketCode-INT]
+  lpqsRestrictions LPWSAQUERYSET
+  dwControlFlags [LookupServiceFlags]
+  lphLookup LPHANDLE
+
+func WSALookupServiceEnd ordinal=78
+  success Equal=0
+  [SocketCode-INT]
+  hLookup HANDLE
+
+func WSALookupServiceNext bothCharset ordinalA=79 ordinalW=80
+  success Equal=0
+  [SocketCode-INT]
+  hLookup HANDLE
+  dwControlFlags [LookupServiceFlags]
+  lpdwBufferLength LPDWORD
+  lpqsResults LPWSAQUERYSET
+
+func WSANtohl ordinal=82
+  [SocketCode-int]
+  s SOCKET
+  netlong u_long
+  lphostlong u_long*
+
+func WSANtohs ordinal=83
+  [SocketCode-int]
+  s SOCKET
+  netshort u_short
+  lphostshort u_short*
+
+func WSAPoll ordinal=84
+  success NotEqual=-1
+  [SocketCode-int]
+  nfds ULONG
+  timeout INT
+
+func WSAProviderConfigChange ordinal=86
+  success Equal=0
+  [SocketCode-int]
+  lpNotificationHandle LPHANDLE
+  lpOverlapped LPWSAOVERLAPPED
+  lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE
+
+func WSARecv ordinal=87
+  success NotEqual=-1
+  [SocketCode-int]
+  s SOCKET
+  lpBuffers [LPWSABUF_IN] count=dwBufferCount
+  dwBufferCount DWORD
+  lpNumberOfBytesRecvd LPDWORD
+  lpFlags [SendRecvFlags*]
+  lpOverlapped LPWSAOVERLAPPED
+  lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE
+
+func WSARecvDisconnect ordinal=88
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  lpInboundDisconnectData LPWSABUF
+
+func WSARecvFrom ordinal=89
+  success NotEqual=-1
+  [SocketCode-int]
+  s SOCKET
+  lpBuffers LPWSABUF count=dwBufferCount
+  dwBufferCount DWORD
+  lpNumberOfBytesRecvd LPDWORD
+  lpFlags LPDWORD
+  lpFrom "struct sockaddr*"
+  lpFromlen LPINT
+  lpOverlapped LPWSAOVERLAPPED
+  lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE
+
+func WSARemoveServiceClass ordinal=90
+  success Equal=0
+  [SocketCode-INT]
+  lpServiceClassId LPGUID
+
+func WSAResetEvent ordinal=91
+  BOOL
+  hEvent WSAEVENT
+
+func WSASend ordinal=92
+  success NotEqual=-1
+  [SocketCode-int]
+  s SOCKET
+  lpBuffers LPWSABUF count=dwBufferCount
+  dwBufferCount DWORD
+  lpNumberOfBytesSent LPDWORD
+  dwFlags [SendRecvFlags]
+  lpOverlapped LPWSAOVERLAPPED
+  lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE
+
+func WSASendDisconnect ordinal=93
+  success Equal=0
+  [SocketCode-int]
+  s SOCKET
+  lpOutboundDisconnectData LPWSABUF
+
+func WSASendMsg ordinal=94
+  success NotEqual=-1
+  [SocketCode-int]
+  s SOCKET
+  lpMsg LPWSAMSG
+  dwFlags DWORD
+  lpNumberOfBytesSent LPDWORD
+  lpOverlapped LPWSAOVERLAPPED
+  lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE
+
+func WSASendTo ordinal=95
+  success NotEqual=-1
+  [SocketCode-int]
+  s SOCKET
+  lpBuffers LPWSABUF count=dwBufferCount
+  dwBufferCount DWORD
+  lpNumberOfBytesSent LPDWORD
+  dwFlags [SendRecvFlags]
+  lpTo "const struct sockaddr*"
+  iToLen int
+  lpOverlapped LPWSAOVERLAPPED
+  lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE
+
+func WSASetEvent ordinal=96
+  BOOL
+  hEvent WSAEVENT
+
+func WSASetLastError ordinal=112
+  void
+  iError [WSA_ERROR]
+
+func WSASetService bothCharset ordinalA=97 ordinalW=98
+  success Equal=0
+  [SocketCode-INT]
+  lpqsRegInfo LPWSAQUERYSET
+  essOperation WSAESETSERVICEOP
+  dwControlFlags DWORD
+
+func WSASocket bothCharset ordinalA=99 ordinalW=100
+  success NotEqual=-1
+  SOCKET
+  af [AddressFamily]
+  type [SocketType]
+  protocol [SocketProtocol]
+  lpProtocolInfo LPWSAPROTOCOL_INFO
+  g GROUP
+  dwFlags [WsaFlags]
+
+func WSAStartup ordinal=115
+  [WSA_ERROR]
+  wVersionRequested WORD
+  lpWSAData LPWSADATA
+
+func WSAStringToAddress bothCharset ordinalA=117 ordinalW=118
+  success Equal=0
+  [SocketCode-INT]
+  AddressString LPTSTR
+  AddressFamily [AddressFamily]
+  lpProtocolInfo LPWSAPROTOCOL_INFO postLength=lpAddressLength
+  lpAddress LPSOCKADDR
+  lpAddressLength LPINT
+
+func WSAWaitForMultipleEvents ordinal=120
+  success NotEqual=-1
+  DWORD
+  cEvents DWORD
+  lphEvents "const WSAEVENT*" count=cEvents
+  fWaitAll BOOL
+  dwTimeout DWORD
+  fAlertable BOOL
+
+func WSAIsBlocking ordinal=114
+  BOOL
+
+func GetAddrInfoExCancel
+  [WSA_ERROR]
+  lpHandle LPHANDLE
+
+func GetAddrInfoExOverlappedResult
+  [WSA_ERROR]
+  lpOverlapped LPOVERLAPPED
+
+func WSAGetQOSByName
+  BOOL
+  s SOCKET
+  lpQOSName LPWSABUF
+  lpQOS LPQOS
+

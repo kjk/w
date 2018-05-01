@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxBlockMapFilesEnumerator base=IUnknown id={02b856a2-4262-4070-bacb-1a8cbbc42305} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetCurrent
+    HRESULT
+    file IAppxBlockMapFile**
+
+  func GetHasCurrent
+    HRESULT
+    hasCurrent BOOL*
+
+  func MoveNext
+    HRESULT
+    hasCurrent BOOL*
+
+

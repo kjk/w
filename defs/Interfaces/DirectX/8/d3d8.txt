@@ -1,0 +1,167 @@
+include Headers\directx.h.txt
+
+dll d3d8.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/8"
+interface IDirect3D8
+
+interface IDirect3DBaseTexture8
+
+interface IDirect3DCubeTexture8
+
+interface IDirect3DDevice8
+
+interface IDirect3DIndexBuffer8
+
+interface IDirect3DResource8
+
+interface IDirect3DSurface8
+
+interface IDirect3DSwapChain8
+
+interface IDirect3DTexture8
+
+interface IDirect3DVertexBuffer8
+
+interface IDirect3DVolume8
+
+interface IDirect3DVolumeTexture8
+
+struct D3DADAPTER_IDENTIFIER8 pack=4
+  Driver "char [MAX_DEVICE_IDENTIFIER_STRING]"
+  Description "char [MAX_DEVICE_IDENTIFIER_STRING]"
+  DriverVersion LARGE_INTEGER
+  VendorId DWORD
+  DeviceId DWORD
+  SubSysId DWORD
+  Revision DWORD
+  DeviceIdentifier GUID
+  WHQLLevel DWORD
+
+pointer D3DADAPTER_IDENTIFIER8* D3DADAPTER_IDENTIFIER8
+
+struct D3DVIEWPORT8 pack=4
+  X DWORD
+  Y DWORD
+  Width DWORD
+  Height DWORD
+  MinZ float
+  MaxZ float
+
+pointer D3DVIEWPORT8* D3DVIEWPORT8
+
+pointer "CONST D3DVIEWPORT8*" D3DVIEWPORT8
+
+struct D3DMATERIAL8 pack=4
+  Diffuse D3DCOLORVALUE
+  Ambient D3DCOLORVALUE
+  Specular D3DCOLORVALUE
+  Emissive D3DCOLORVALUE
+  Power float
+
+pointer D3DMATERIAL8* D3DMATERIAL8
+
+pointer "CONST D3DMATERIAL8*" D3DMATERIAL8
+
+struct D3DLIGHT8 pack=4
+  Type D3DLIGHTTYPE
+  Diffuse D3DCOLORVALUE
+  Specular D3DCOLORVALUE
+  Ambient D3DCOLORVALUE
+  Position D3DVECTOR
+  Direction D3DVECTOR
+  Range float
+  Falloff float
+  Attenuation0 float
+  Attenuation1 float
+  Attenuation2 float
+  Theta float
+  Phi float
+
+pointer D3DLIGHT8* D3DLIGHT8
+
+pointer "CONST D3DLIGHT8*" D3DLIGHT8
+
+flag [D3DCS_FLAGS] DWORD display=DWORD
+  D3DCS_LEFT   0x00000001
+  D3DCS_RIGHT  0x00000002
+  D3DCS_TOP    0x00000004
+  D3DCS_BOTTOM 0x00000008
+  D3DCS_FRONT  0x00000010
+  D3DCS_BACK   0x00000020
+  D3DCS_PLANE0 0x00000040
+  D3DCS_PLANE1 0x00000080
+  D3DCS_PLANE2 0x00000100
+  D3DCS_PLANE3 0x00000200
+  D3DCS_PLANE4 0x00000400
+  D3DCS_PLANE5 0x00000800
+  D3DCS_ALL    0x00000FFF
+
+struct D3DCLIPSTATUS8 pack=4
+  ClipUnion [D3DCS_FLAGS]
+  ClipIntersection [D3DCS_FLAGS]
+
+pointer D3DCLIPSTATUS8* D3DCLIPSTATUS8
+
+pointer "CONST D3DCLIPSTATUS8*" D3DCLIPSTATUS8
+
+struct D3DCAPS8 pack=4
+  DeviceType D3DDEVTYPE
+  AdapterOrdinal UINT
+  Caps [D3DCAPS]
+  Caps2 [D3DCAPS2]
+  Caps3 [D3DCAPS3]
+  PresentationIntervals [D3DPRESENT]
+  CursorCaps [D3DCURSORCAPS]
+  DevCaps [D3DDEVCAPS]
+  PrimitiveMiscCaps [D3DPMISCCAPS]
+  RasterCaps [D3DPRASTERCAPS]
+  ZCmpCaps [D3DPCMPCAPS]
+  SrcBlendCaps [D3DPBLENDCAPS]
+  DestBlendCaps [D3DPBLENDCAPS]
+  AlphaCmpCaps [D3DPCMPCAPS]
+  ShadeCaps [D3DPSHADECAPS]
+  TextureCaps [D3DPTEXTURECAPS]
+  TextureFilterCaps [D3DPTFILTERCAPS]
+  CubeTextureFilterCaps [D3DPTFILTERCAPS]
+  VolumeTextureFilterCaps [D3DPTFILTERCAPS]
+  TextureAddressCaps [D3DPTADDRESSCAPS]
+  VolumeTextureAddressCaps [D3DPTADDRESSCAPS]
+  LineCaps [D3DLINECAPS]
+  MaxTextureWidth DWORD
+  MaxTextureHeight DWORD
+  MaxVolumeExtent DWORD
+  MaxTextureRepeat DWORD
+  MaxTextureAspectRatio DWORD
+  MaxAnisotropy DWORD
+  MaxVertexW float
+  GuardBandLeft float
+  GuardBandTop float
+  GuardBandRight float
+  GuardBandBottom float
+  ExtentsAdjust float
+  StencilCaps [D3DSTENCILCAPS]
+  FVFCaps [D3DFVFCAPS]
+  TextureOpCaps [D3DTEXOPCAPS]
+  MaxTextureBlendStages DWORD
+  MaxSimultaneousTextures DWORD
+  VertexProcessingCaps [D3DVTXPCAPS]
+  MaxActiveLights DWORD
+  MaxUserClipPlanes DWORD
+  MaxVertexBlendMatrices DWORD
+  MaxVertexBlendMatrixIndex DWORD
+  MaxPointSize float
+  MaxPrimitiveCount DWORD
+  MaxVertexIndex DWORD
+  MaxStreams DWORD
+  MaxStreamStride DWORD
+  VertexShaderVersion DWORD
+  MaxVertexShaderConst DWORD
+  PixelShaderVersion DWORD
+  MaxPixelShaderValue float
+
+pointer D3DCAPS8* D3DCAPS8
+
+func Direct3DCreate8
+  success NotEqual=0
+  IDirect3D8*
+  SDKVersion UINT
+

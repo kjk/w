@@ -1,0 +1,24 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICEnumMetadataItem base=IUnknown id={DC2BB46D-3F07-481E-8625-220C4AEDBB33} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func Next
+    [WIC_HRESULT]
+    celt ULONG
+    rgeltSchema PROPVARIANT* count=celt
+    rgeltId PROPVARIANT* count=celt
+    rgeltValue PROPVARIANT* count=celt
+    pceltFetched ULONG*
+
+  func Skip
+    [WIC_HRESULT]
+    celt ULONG
+
+  func Reset
+    [WIC_HRESULT]
+
+  func Clone
+    [WIC_HRESULT]
+    ppIEnumMetadataItem IWICEnumMetadataItem**
+
+

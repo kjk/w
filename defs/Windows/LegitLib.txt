@@ -1,0 +1,18 @@
+include Headers\windows.h.txt
+
+dll LegitLib.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Administration/Windows Genuine Advantage"
+func GetLastErrors
+  HRESULT
+  ppwszTrace WCHAR**
+
+func IsAlreadyGenuine
+  bool
+
+func LegitCheck
+  int
+
+func SetPartnerID
+  HRESULT
+  nPartnerID int
+

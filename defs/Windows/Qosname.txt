@@ -1,0 +1,23 @@
+include Headers\windows.h.txt
+include Headers\sockets.h.txt
+
+dll Qosname.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Quality of Service (QOS)"
+func WPUGetQOSTemplate
+  success NotEqual=0
+  INT
+  lpProviderId "const LPGUID"
+  lpQOSName LPWSABUF
+  lpQOS LPQOS
+
+func WSCInstallQOSTemplate
+  BOOL
+  lpProviderId "const LPGUID"
+  lpQOSName LPWSABUF
+  lpQOS LPQOS
+
+func WSCRemoveQOSTemplate
+  BOOL
+  lpProviderId "const LPGUID"
+  lpQOSName LPWSABUF
+

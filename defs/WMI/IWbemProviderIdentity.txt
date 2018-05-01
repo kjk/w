@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemProviderIdentity base=IUnknown id={631f7d97-d993-11d2-b339-00105a1f4aaf} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func SetRegistrationObject
+    WBEMSTATUS
+    lFlags long
+    pProvReg IWbemClassObject*
+
+

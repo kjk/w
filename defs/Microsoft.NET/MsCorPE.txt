@@ -1,0 +1,14 @@
+include Headers\Windows.h.txt
+
+dll mscorpe.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Microsoft .NET/Unmanaged/Hosting"
+interface ICeeFileGen
+
+func CreateICeeFileGen
+  HRESULT
+  ceeFileGen ICeeFileGen**
+
+func DestroyICeeFileGen
+  HRESULT
+  ceeFileGen ICeeFileGen**
+

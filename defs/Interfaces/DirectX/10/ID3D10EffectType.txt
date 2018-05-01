@@ -1,0 +1,36 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10EffectType id={4E9E1DDC-CD9D-4772-A837-00180B9B88FD} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func IsValid
+    BOOL
+
+  func GetDesc
+    HRESULT
+    pDesc D3D10_EFFECT_TYPE_DESC*
+
+  func GetMemberTypeByIndex
+    success NotEqual=0
+    ID3D10EffectType*
+    Index UINT
+
+  func GetMemberTypeByName
+    success NotEqual=0
+    ID3D10EffectType*
+    Name LPCSTR
+
+  func GetMemberTypeBySemantic
+    success NotEqual=0
+    ID3D10EffectType*
+    Semantic LPCSTR
+
+  func GetMemberName
+    success NotEqual=0
+    LPCSTR
+    Index UINT
+
+  func GetMemberSemantic
+    success NotEqual=0
+    LPCSTR
+    Index UINT
+
+

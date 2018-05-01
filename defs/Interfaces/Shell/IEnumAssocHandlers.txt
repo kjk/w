@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumAssocHandlers base=IUnknown id={973810ae-9599-4b88-9e4d-6ee98c9552da} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Next
+    HRESULT
+    celt ULONG
+    rgelt IAssocHandler** postCount=celt
+    pceltFetched ULONG*
+
+

@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncProvider base=IUnknown id={8f657056-2bce-4a17-8c68-c7bb7898b56f} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetIdParameters
+    HRESULT
+    pIdParameters ID_PARAMETERS*
+
+

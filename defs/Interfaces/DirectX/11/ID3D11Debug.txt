@@ -1,0 +1,40 @@
+include Interfaces\IUnknown.txt
+
+ingterface ID3D11Debug base=IUnknown id={79cf2233-7536-4948-9d36-1e4692dc5760} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Layer"
+  func SetFeatureMask
+    HRESULT
+    Mask UINT
+
+  func GetFeatureMask
+    success NotEqual=0
+    UINT
+
+  func SetPresentPerRenderOpDelay
+    HRESULT
+    Milliseconds UINT
+
+  func GetPresentPerRenderOpDelay
+    success NotEqual=0
+    UINT
+
+  func SetSwapChain
+    HRESULT
+    pSwapChain IDXGISwapChain*
+
+  func GetSwapChain
+    HRESULT
+    ppSwapChain IDXGISwapChain**
+
+  func ValidateContext
+    HRESULT
+    pContext ID3D11DeviceContext*
+
+  func ReportLiveDeviceObjects
+    HRESULT
+    Flags D3D11_RLDO_FLAGS
+
+  func ValidateContextForDispatch
+    HRESULT
+    pContext ID3D11DeviceContext*
+
+

@@ -1,0 +1,20 @@
+include WMI\ISWbemServices.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemServicesEx base=ISWbemServices id={D2F68443-85DC-427e-91D8-366554CC754C} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func Put
+    WBEMSTATUS
+    objWbemObject ISWbemObjectEx*
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemObjectPath ISWbemObjectPath**
+
+  func PutAsync
+    WBEMSTATUS
+    objWbemSink ISWbemSink*
+    objWbemObject ISWbemObjectEx*
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    objWbemAsyncContext IDispatch*
+
+

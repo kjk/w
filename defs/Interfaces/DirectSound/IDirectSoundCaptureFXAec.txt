@@ -1,0 +1,19 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundCaptureFXAec base=IUnknown id={ad74143d-903d-4ab7-8066-28d363036d65} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func SetAllParameters
+    [DS_HRESULT]
+    pDscFxAec LPCDSCFXAec
+
+  func GetAllParameters
+    [DS_HRESULT]
+    pDscFxAec LPDSCFXAec
+
+  func GetStatus
+    [DS_HRESULT]
+    pdwStatus LPDWORD
+
+  func Reset
+    [DS_HRESULT]
+
+

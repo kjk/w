@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBandHost base=IUnknown id={B9075C7C-D48E-403f-AB99-D6C77A1084AC} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func CreateBand
+    HRESULT
+    rclsidBand REFCLSID
+    fAvailable BOOL
+    fVisible BOOL
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func SetBandAvailability
+    HRESULT
+    rclsidBand REFCLSID
+    fAvailable BOOL
+
+  func DestroyBand
+    HRESULT
+    rclsidBand REFCLSID
+
+

@@ -1,0 +1,18 @@
+include Interfaces\WindowsSync\ISyncChangeBatchBase.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncChangeBatchWithPrerequisite base=ISyncChangeBatchBase id={097f13be-5b92-4048-b3f2-7b42a2515e07} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func SetPrerequisiteKnowledge
+    HRESULT
+    pPrerequisiteKnowledge ISyncKnowledge*
+
+  func GetLearnedKnowledgeWithPrerequisite
+    HRESULT
+    pDestinationKnowledge ISyncKnowledge*
+    ppLearnedWithPrerequisiteKnowledge ISyncKnowledge**
+
+  func GetLearnedForgottenKnowledge
+    HRESULT
+    ppLearnedForgottenKnowledge IForgottenKnowledge**
+
+

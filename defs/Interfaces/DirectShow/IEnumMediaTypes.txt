@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumMediaTypes base=IUnknown id={89c31040-846b-11ce-97d3-00aa0055595a} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Next
+    HRESULT
+    cMediaTypes ULONG
+    ppMediaTypes AM_MEDIA_TYPE** postCount=pcFetched
+    pcFetched ULONG*
+
+  func Skip
+    HRESULT
+    cMediaTypes ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppEnum IEnumMediaTypes**
+
+

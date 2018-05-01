@@ -1,0 +1,14 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1ResourceTexture base=IUnknown id={688d15c3-02b0-438d-b13a-d1b44c32c39a} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func Update
+    [D2D_HRESULT]
+    minimumExtents "CONST UINT32*"
+    maximimumExtents "CONST UINT32*"
+    strides "CONST UINT32*"
+    dimensions UINT32
+    data "CONST BYTE*" length=dataCount
+    dataCount UINT32
+
+

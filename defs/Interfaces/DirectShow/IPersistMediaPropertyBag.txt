@@ -1,0 +1,18 @@
+include Interfaces\COM\IPersist.txt
+
+ingterface IPersistMediaPropertyBag base=IPersist id={5738E040-B67F-11d0-BD4D-00A0C911CE86} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func InitNew
+    HRESULT
+
+  func Load
+    HRESULT
+    pPropBag IMediaPropertyBag*
+    pErrorLog IErrorLog*
+
+  func Save
+    HRESULT
+    pPropBag IMediaPropertyBag*
+    fClearDirty BOOL
+    fSaveAllProperties BOOL
+
+

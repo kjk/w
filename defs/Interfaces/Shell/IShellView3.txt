@@ -1,0 +1,16 @@
+include Interfaces\Shell\IShellView2.txt
+
+ingterface IShellView3 base=IShellView2 id={ec39fa88-f8af-41c5-8421-38bed28f4673} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func CreateViewWindow3
+    HRESULT
+    psbOwner IShellBrowser*
+    psvPrev IShellView*
+    dwViewFlags SV3CVW3_FLAGS
+    dwMask FOLDERFLAGS
+    dwFlags FOLDERFLAGS
+    fvMode FOLDERVIEWMODE
+    pvid "const SHELLVIEWID*"
+    prcView "const RECT*"
+    phwndView HWND*
+
+

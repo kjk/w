@@ -1,0 +1,75 @@
+include Headers\windows.h.txt
+include Headers\dotnet.h.txt
+
+dll fusion.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Microsoft .NET/Unmanaged/Fusion"
+func ClearDownloadCache
+  HRESULT
+
+func CreateApplicationContext
+  HRESULT
+  pName IAssemblyName*
+  ppCtx LPPAPPLICATIONCONTEXT*
+
+func CreateAssemblyCache
+  HRESULT
+  ppAsmCache IAssemblyCache**
+  dwReserved DWORD
+
+func CreateAssemblyEnum
+  HRESULT
+  pEnum IAssemblyEnum**
+  pUnkReserved IUnknown*
+  pName IAssemblyName*
+  dwFlags DWORD
+  pvReserved LPVOID
+
+func CreateAssemblyNameObject
+  HRESULT
+  ppAssemblyNameObj LPASSEMBLYNAME*
+  szAssemblyName LPCWSTR
+  dwFlags DWORD
+  pvReserved LPVOID
+
+func CreateHistoryReader
+  HRESULT
+  wzFilePath LPCWSTR
+  ppHistoryReader IHistoryReader**
+
+func CreateInstallReferenceEnum
+  HRESULT
+  ppRefEnum IInstallReferenceEnum**
+  pName IAssemblyName*
+  dwFlags DWORD
+  pvReserved LPVOID
+
+func GetCachePath
+  HRESULT
+  dwCacheFlags ASM_CACHE_FLAGS
+  pwzCachePath LPWSTR
+  pcchPath PDWORD
+
+func GetHistoryFileDirectory
+  HRESULT
+  wzDir LPWSTR
+  pdwsize LPCWSTR*
+
+func IsFrameworkAssembly
+  HRESULT
+  pwzAssemblyReference LPCWSTR
+  pbIsFrameworkAssembly LPBOOL
+  pwzFrameworkAssemblyIdentity LPWSTR
+  pccSize LPDWORD
+
+func NukeDownloadedCache
+  HRESULT
+
+func PreBindAssemblyEx
+  HRESULT
+  pAppCtx IApplicationContext*
+  pName IAssemblyName*
+  pAsmParent IAssembly*
+  pwzRuntimeVersion LPCWSTR
+  ppNamePostPolicy IAssemblyName**
+  pvReserved LPVOID
+

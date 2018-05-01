@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyDescriptionList base=IUnknown id={1f9fc1d0-c39b-4b26-817f-011967d3440e} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func GetCount
+    HRESULT
+    pcElem UINT*
+
+  func GetAt
+    HRESULT
+    iElem UINT
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

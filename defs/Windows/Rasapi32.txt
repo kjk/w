@@ -1,0 +1,879 @@
+include Headers\windows.h.txt
+include Headers\sockets.h.txt
+
+dll Rasapi32.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Networking/Routing and Remote Access Service/Remote Access/Remote Access Service"
+alias ProbationTime FILETIME
+
+alias ConnectionId GUID
+
+pointer ConnectionId* ConnectionId
+
+alias RASIPV4ADDR IN_ADDR
+
+pointer RASIPV4ADDR* RASIPV4ADDR
+
+alias RASIPV6ADDR IN6_ADDR
+
+pointer RASIPV6ADDR* RASIPV6ADDR
+
+array "TCHAR [RAS_MaxDeviceType + 1]" base=TCHAR count=17
+
+array "TCHAR [RAS_MaxDeviceName + 1]" base=TCHAR count=129
+
+array "TCHAR [RAS_MaxPhoneNumber + 1]" base=TCHAR count=129
+
+array "TCHAR [RAS_MaxCallbackNumber + 1]" base=TCHAR count=129
+
+array "TCHAR [RAS_MaxAreaCode + 1]" base=TCHAR count=11
+
+array "TCHAR [RAS_MaxPadType + 1]" base=TCHAR count=33
+
+array "TCHAR [RAS_MaxX25Address + 1]" base=TCHAR count=201
+
+array "TCHAR [RAS_MaxFacilities + 1]" base=TCHAR count=201
+
+array "TCHAR [RAS_MaxUserData + 1]" base=TCHAR count=201
+
+array "TCHAR [RAS_MaxDnsSuffix]" base=TCHAR count=256
+
+array "TCHAR [UNLEN + 1]" base=TCHAR count=257
+
+array "TCHAR [PWLEN + 1]" base=TCHAR count=257
+
+array "TCHAR [DNLEN + 1]" base=TCHAR count=16
+
+flag HRASCONN HANDLE display=HANDLE
+  INVALID_HANDLE_VALUE -1
+
+pointer LPHRASCONN HRASCONN
+
+enum RASAPIVERSION DWORD display=DWORD
+  RASAPIVERSION_500 1
+  RASAPIVERSION_501 2
+  RASAPIVERSION_600 3
+  RASAPIVERSION_601 4
+
+union [RASTUNNELENDPOINT_u] display=union
+  ipv4 RASIPV4ADDR
+  ipv6 RASIPV6ADDR
+
+enum [RASTUNNELENDPOINT_TYPE] DWORD display=DWORD
+  RASTUNNELENDPOINT_UNKNOWN 0
+  RASTUNNELENDPOINT_IPv4    1
+  RASTUNNELENDPOINT_IPv6    2
+
+struct RASTUNNELENDPOINT pack=4
+  dwType [RASTUNNELENDPOINT_TYPE]
+   [RASTUNNELENDPOINT_u]
+
+struct RASDIALPARAMS pack=4
+  dwSize DWORD
+  szEntryName "TCHAR [RAS_MaxEntryName + 1]"
+  szPhoneNumber "TCHAR [RAS_MaxPhoneNumber + 1]"
+  szCallbackNumber "TCHAR [RAS_MaxCallbackNumber + 1]"
+  szUserName "TCHAR [UNLEN + 1]"
+  szPassword "TCHAR [PWLEN + 1]"
+  szDomain "TCHAR [DNLEN + 1]"
+  dwSubEntry DWORD
+  dwCallbackId ULONG_PTR
+  dwIfIndex DWORD
+  szEncPassword LPTSTR
+
+pointer LPRASDIALPARAMS RASDIALPARAMS
+
+flag [RASCONN_FLAGS] DWORD display=DWORD
+  RASCF_AllUsers    0x00000001
+  RASCF_GlobalCreds 0x00000002
+  RASCF_OwnerKnown  0x00000004
+  RASCF_OwnerMatch  0x00000008
+
+struct RASCONN pack=4
+  dwSize DWORD
+  hrasconn HRASCONN
+  szEntryName "TCHAR [RAS_MaxEntryName + 1]"
+  szDeviceType "TCHAR [RAS_MaxDeviceType + 1]"
+  szDeviceName "TCHAR [RAS_MaxDeviceName + 1]"
+  szPhonebook "TCHAR [MAX_PATH]"
+  dwSubEntry DWORD
+  guidEntry GUID
+  dwFlags [RASCONN_FLAGS]
+  luid LUID
+  guidCorrelationId GUID
+
+pointer LPRASCONN RASCONN
+
+struct RASDEVINFO pack=4
+  dwSize DWORD
+  szDeviceType "TCHAR [RAS_MaxDeviceType + 1]"
+  szDeviceName "TCHAR [RAS_MaxDeviceName + 1]"
+
+pointer LPRASDEVINFO RASDEVINFO
+
+flag [RASENTRYNAME_FLAGS] DWORD display=DWORD
+  REN_User     0x00000000
+  REN_AllUsers 0x00000001
+
+struct RASENTRYNAME pack=4
+  dwSize DWORD
+  szEntryName "TCHAR [RAS_MaxEntryName + 1]"
+  dwFlags [RASENTRYNAME_FLAGS]
+  szPhonebookPath "TCHAR [MAX_PATH + 1]"
+
+pointer LPRASENTRYNAME RASENTRYNAME
+
+struct RASAUTODIALENTRY pack=4
+  dwSize DWORD
+  dwFlags DWORD
+  dwDialingLocation DWORD
+  szEntry "TCHAR [RAS_MaxEntryName + 1]"
+
+pointer LPRASAUTODIALENTRY RASAUTODIALENTRY
+
+enum RASCONNSTATE UINT
+  RASCS_OpenPort             0
+  RASCS_PortOpened           1
+  RASCS_ConnectDevice        2
+  RASCS_DeviceConnected      3
+  RASCS_AllDevicesConnected  4
+  RASCS_Authenticate         5
+  RASCS_AuthNotify           6
+  RASCS_AuthRetry            7
+  RASCS_AuthCallback         8
+  RASCS_AuthChangePassword   9
+  RASCS_AuthProject          10
+  RASCS_AuthLinkSpeed        11
+  RASCS_AuthAck              12
+  RASCS_ReAuthenticate       13
+  RASCS_Authenticated        14
+  RASCS_PrepareForCallback   15
+  RASCS_WaitForModemReset    16
+  RASCS_WaitForCallback      17
+  RASCS_Projected            18
+  RASCS_StartAuthentication  19
+  RASCS_CallbackComplete     20
+  RASCS_LogonNetwork         21
+  RASCS_SubEntryConnected    22
+  RASCS_SubEntryDisconnected 23
+  RASCS_ApplySettings        24
+  RASCS_Interactive          0x1000
+  RASCS_RetryAuthentication  0x1001
+  RASCS_CallbackSetByCaller  0x1002
+  RASCS_PasswordExpired      0x1003
+  RASCS_InvokeEapUI          0x1004
+  RASCS_Connected            0x2000
+  RASCS_Disconnected         0x2001
+
+enum RASCONNSUBSTATE UINT
+  RASCSS_None         0
+  RASCSS_Dormant      1
+  RASCSS_Reconnecting 2
+  RASCSS_Reconnected  0x2000
+
+struct RASCONNSTATUS pack=4
+  dwSize DWORD
+  rasconnstate RASCONNSTATE
+  dwError DWORD
+  szDeviceType "TCHAR [RAS_MaxDeviceType + 1]"
+  szDeviceName "TCHAR [RAS_MaxDeviceName + 1]"
+  szPhoneNumber "TCHAR [RAS_MaxPhoneNumber + 1]"
+  localEndPoint RASTUNNELENDPOINT
+  remoteEndPoint RASTUNNELENDPOINT
+  rasconnsubstate RASCONNSUBSTATE
+
+pointer LPRASCONNSTATUS RASCONNSTATUS
+
+flag [RASCM_FLAGS] DWORD display=DWORD
+  RASCM_UserName           0x00000001
+  RASCM_Password           0x00000002
+  RASCM_Domain             0x00000004
+  RASCM_DefaultCreds       0x00000008
+  RASCM_PreSharedKey       0x00000010
+  RASCM_ServerPreSharedKey 0x00000020
+  RASCM_DDMPreSharedKey    0x00000040
+
+struct RASCREDENTIALS pack=4
+  dwSize DWORD
+  dwMask [RASCM_FLAGS]
+  szUserName "TCHAR [UNLEN + 1]"
+  szPassword "TCHAR [PWLEN + 1]"
+  szDomain "TCHAR [DNLEN + 1]"
+
+pointer LPRASCREDENTIALS RASCREDENTIALS
+
+struct RASEAPUSERIDENTITY pack=4
+  szUserName "TCHAR [UNLEN + 1]"
+  dwSizeofEapInfo DWORD
+  pbEapInfo "BYTE [1]" count=dwSizeofEapInfo
+
+pointer LPRASEAPUSERIDENTITY RASEAPUSERIDENTITY
+
+pointer LPRASEAPUSERIDENTITY* LPRASEAPUSERIDENTITY
+
+struct RASIPADDR pack=4
+  a BYTE
+  b BYTE
+  c BYTE
+  d BYTE
+
+flag [RASEO_FLAGS] DWORD display=DWORD
+  RASEO_UseCountryAndAreaCodes 0x00000001
+  RASEO_SpecificIpAddr         0x00000002
+  RASEO_SpecificNameServers    0x00000004
+  RASEO_IpHeaderCompression    0x00000008
+  RASEO_RemoteDefaultGateway   0x00000010
+  RASEO_DisableLcpExtensions   0x00000020
+  RASEO_TerminalBeforeDial     0x00000040
+  RASEO_TerminalAfterDial      0x00000080
+  RASEO_ModemLights            0x00000100
+  RASEO_SwCompression          0x00000200
+  RASEO_RequireEncryptedPw     0x00000400
+  RASEO_RequireMsEncryptedPw   0x00000800
+  RASEO_RequireDataEncryption  0x00001000
+  RASEO_NetworkLogon           0x00002000
+  RASEO_UseLogonCredentials    0x00004000
+  RASEO_PromoteAlternates      0x00008000
+  RASEO_SecureLocalFiles       0x00010000
+  RASEO_RequireEAP             0x00020000
+  RASEO_RequirePAP             0x00040000
+  RASEO_RequireSPAP            0x00080000
+  RASEO_Custom                 0x00100000
+  RASEO_PreviewPhoneNumber     0x00200000
+  RASEO_SharedPhoneNumbers     0x00800000
+  RASEO_PreviewUserPw          0x01000000
+  RASEO_PreviewDomain          0x02000000
+  RASEO_ShowDialingProgress    0x04000000
+  RASEO_RequireCHAP            0x08000000
+  RASEO_RequireMsCHAP          0x10000000
+  RASEO_RequireMsCHAP2         0x20000000
+  RASEO_RequireW95MSCHAP       0x40000000
+  RASEO_CustomScript           0x80000000
+
+flag [RASEO2_FLAGS] DWORD display=DWORD
+  RASEO2_SecureFileAndPrint           0x00000001
+  RASEO2_SecureClientForMSNet         0x00000002
+  RASEO2_DontNegotiateMultilink       0x00000004
+  RASEO2_DontUseRasCredentials        0x00000008
+  RASEO2_UsePreSharedKey              0x00000010
+  RASEO2_Internet                     0x00000020
+  RASEO2_DisableNbtOverIP             0x00000040
+  RASEO2_UseGlobalDeviceSettings      0x00000080
+  RASEO2_ReconnectIfDropped           0x00000100
+  RASEO2_SharePhoneNumbers            0x00000200
+  RASEO2_SecureRoutingCompartment     0x00000400
+  RASEO2_UseTypicalSettings           0x00000800
+  RASEO2_IPv6SpecificNameServers      0x00001000
+  RASEO2_IPv6RemoteDefaultGateway     0x00002000
+  RASEO2_RegisterIpWithDNS            0x00004000
+  RASEO2_UseDNSSuffixForRegistration  0x00008000
+  RASEO2_IPv4ExplicitMetric           0x00010000
+  RASEO2_IPv6ExplicitMetric           0x00020000
+  RASEO2_DisableIKENameEkuCheck       0x00040000
+  RASEO2_DisableClassBasedStaticRoute 0x00080000
+  RASEO2_SpecificIPv6Addr             0x00100000
+  RASEO2_DisableMobility              0x00200000
+  RASEO2_RequireMachineCertificates   0x00400000
+
+flag [RASNP_FLAGS] DWORD display=DWORD
+  RASNP_NetBEUI 0x00000001
+  RASNP_Ipx     0x00000002
+  RASNP_Ip      0x00000004
+  RASNP_Ipv6    0x00000008
+
+flag [RASFP_FLAGS] DWORD display=DWORD
+  RASFP_Ppp  0x00000001
+  RASFP_Slip 0x00000002
+  RASFP_Ras  0x00000004
+
+enum [RASEDM_ENUM] DWORD display=DWORD
+  RASEDM_DialAll      1
+  RASEDM_DialAsNeeded 2
+
+enum [RASET_ENUM] DWORD display=DWORD
+  RASET_Phone     1
+  RASET_Vpn       2
+  RASET_Direct    3
+  RASET_Internet  4
+  RASET_Broadband 5
+
+enum [RAS_ENCRYPTION_TYPE] DWORD display=DWORD
+  ET_None       0
+  ET_Require    1
+  ET_RequireMax 2
+  ET_Optional   3
+
+enum [RAS_VPN_STRATEGY] DWORD display=DWORD
+  VS_Default    0
+  VS_PptpOnly   1
+  VS_PptpFirst  2
+  VS_L2tpOnly   3
+  VS_L2tpFirst  4
+  VS_SstpOnly   5
+  VS_SstpFirst  6
+  VS_Ikev2Only  7
+  VS_Ikev2First 8
+  VS_PptpSstp   12
+  VS_L2tpSstp   13
+  VS_Ikev2Sstp  14
+
+struct RASENTRY pack=4
+  dwSize DWORD
+  dwfOptions [RASEO_FLAGS]
+  dwCountryID DWORD
+  dwCountryCode DWORD
+  szAreaCode "TCHAR [RAS_MaxAreaCode + 1]"
+  szLocalPhoneNumber "TCHAR [RAS_MaxPhoneNumber + 1]"
+  dwAlternateOffset DWORD
+  ipaddr RASIPADDR
+  ipaddrDns RASIPADDR
+  ipaddrDnsAlt RASIPADDR
+  ipaddrWins RASIPADDR
+  ipaddrWinsAlt RASIPADDR
+  dwFrameSize DWORD
+  dwfNetProtocols [RASNP_FLAGS]
+  dwFramingProtocol [RASFP_FLAGS]
+  szScript "TCHAR [MAX_PATH]"
+  szAutodialDll "TCHAR [MAX_PATH]"
+  szAutodialFunc "TCHAR [MAX_PATH]"
+  szDeviceType "TCHAR [RAS_MaxDeviceType + 1]"
+  szDeviceName "TCHAR [RAS_MaxDeviceName + 1]"
+  szX25PadType "TCHAR [RAS_MaxPadType + 1]"
+  szX25Address "TCHAR [RAS_MaxX25Address + 1]"
+  szX25Facilities "TCHAR [RAS_MaxFacilities + 1]"
+  szX25UserData "TCHAR [RAS_MaxUserData + 1]"
+  dwChannels DWORD
+  dwReserved1 DWORD
+  dwReserved2 DWORD
+  dwSubEntries DWORD
+  dwDialMode [RASEDM_ENUM]
+  dwDialExtraPercent DWORD
+  dwDialExtraSampleSeconds DWORD
+  dwHangUpExtraPercent DWORD
+  dwHangUpExtraSampleSeconds DWORD
+  dwIdleDisconnectSeconds DWORD
+  dwType [RASET_ENUM]
+  dwEncryptionType [RAS_ENCRYPTION_TYPE]
+  dwCustomAuthKey DWORD
+  guidId GUID
+  szCustomDialDll "TCHAR [MAX_PATH]"
+  dwVpnStrategy [RAS_VPN_STRATEGY]
+  dwfOptions2 [RASEO2_FLAGS]
+  dwfOptions3 DWORD
+  szDnsSuffix "TCHAR [RAS_MaxDnsSuffix]"
+  dwTcpWindowSize DWORD
+  szPrerequisitePbk "TCHAR [MAX_PATH]"
+  szPrerequisiteEntry "TCHAR [RAS_MaxEntryName + 1]"
+  dwRedialCount DWORD
+  dwRedialPause DWORD
+  ipv6addrDns RASIPV6ADDR
+  ipv6addrDnsAlt RASIPV6ADDR
+  dwIPv4InterfaceMetric DWORD
+  dwIPv6InterfaceMetric DWORD
+  ipv6addr RASIPV6ADDR
+  dwIPv6PrefixLength DWORD
+  dwNetworkOutageTime DWORD
+
+pointer LPRASENTRY RASENTRY
+
+flag [RASIPO_OPTIONS] DWORD display=DWORD
+  RASIPO_VJ 0x00000001
+
+enum [RASLCPAP] DWORD display=DWORD
+  RASLCPAP_PAP  0xC023
+  RASLCPAP_SPAP 0xC027
+  RASLCPAP_CHAP 0xC223
+  RASLCPAP_EAP  0xC227
+
+enum [RASLCPAD] DWORD display=DWORD
+  RASLCPAD_CHAP_MD5  0x05
+  RASLCPAD_CHAP_MS   0x80
+  RASLCPAD_CHAP_MSV2 0x81
+
+flag [RASLCPO] DWORD display=DWORD
+  RASLCPO_PFC     0x00000001
+  RASLCPO_ACFC    0x00000002
+  RASLCPO_SSHF    0x00000004
+  RASLCPO_DES_56  0x00000008
+  RASLCPO_3_DES   0x00000010
+  RASLCPO_AES_128 0x00000020
+  RASLCPO_AES_256 0x00000040
+
+enum [RASCCPCA] DWORD display=DWORD
+  RASCCPCA_STAC 0x00000005
+  RASCCPCA_MPPC 0x00000006
+
+flag [RASCCPO] DWORD display=DWORD
+  RASCCPO_Compression      0x00000001
+  RASCCPO_HistoryLess      0x00000002
+  RASCCPO_Encryption56bit  0x00000010
+  RASCCPO_Encryption40bit  0x00000020
+  RASCCPO_Encryption128bit 0x00000040
+
+struct RASPPP_PROJECTION_INFO pack=4
+  dwIPv4NegotiationError DWORD
+  ipv4Address RASIPV4ADDR
+  ipv4ServerAddress RASIPV4ADDR
+  dwIPv4Options [RASIPO_OPTIONS]
+  dwIPv4ServerOptions [RASIPO_OPTIONS]
+  dwIPv6NegotiationError DWORD
+  bInterfaceIdentifier "BYTE [8]"
+  bServerInterfaceIdentifier "BYTE [8]"
+  fBundled BOOL
+  fMultilink BOOL
+  dwAuthenticationProtocol [RASLCPAP]
+  dwAuthenticationData [RASLCPAD]
+  dwServerAuthenticationProtocol [RASLCPAP]
+  dwServerAuthenticationData [RASLCPAD]
+  dwEapTypeId DWORD
+  dwServerEapTypeId DWORD
+  dwLcpOptions [RASLCPO]
+  dwLcpServerOptions [RASLCPO]
+  dwCcpError DWORD
+  dwCcpCompressionAlgorithm [RASCCPCA]
+  dwCcpServerCompressionAlgorithm [RASCCPCA]
+  dwCcpOptions [RASCCPO]
+  dwCcpServerOptions [RASCCPO]
+
+enum IPSEC_CIPHER_TYPE UINT
+  IPSEC_CIPHER_TYPE_DES     1
+  IPSEC_CIPHER_TYPE_3DES    2
+  IPSEC_CIPHER_TYPE_AES_128 3
+  IPSEC_CIPHER_TYPE_AES_192 4
+  IPSEC_CIPHER_TYPE_AES_256 5
+
+flag [RASIKEv2_FLAGS] DWORD display=DWORD
+  RASIKEv2_FLAGS_MOBIKESUPPORTED  0x00000001
+  RASIKEv2_FLAGS_BEHIND_NAT       0x00000002
+  RASIKEv2_FLAGS_SERVERBEHIND_NAT 0x00000004
+
+enum [RASIKEv2_AUTH] DWORD display=DWORD
+  RASIKEv2_AUTH_MACHINECERTIFICATES 1
+  RASIKEv2_AUTH_EAP                 2
+
+struct RASIKEV2_PROJECTION_INFO pack=4
+  dwIPv4NegotiationError DWORD
+  ipv4Address RASIPV4ADDR
+  ipv4ServerAddress RASIPV4ADDR
+  dwIPv6NegotiationError DWORD
+  ipv6Address RASIPV6ADDR
+  ipv6ServerAddress RASIPV6ADDR
+  dwPrefixLength DWORD
+  dwAuthenticationProtocol [RASIKEv2_AUTH]
+  dwEapTypeId DWORD
+  dwFlags [RASIKEv2_FLAGS]
+  dwEncryptionMethod IPSEC_CIPHER_TYPE display=DWORD
+  numIPv4ServerAddresses DWORD
+  ipv4ServerAddresses RASIPV4ADDR* count=numIPv4ServerAddresses
+  numIPv6ServerAddresses DWORD
+  ipv6ServerAddresses RASIPV6ADDR* count=numIPv6ServerAddresses
+
+union [RAS_PROJECTION_INFO_u] display=union
+  ppp RASPPP_PROJECTION_INFO
+  ikev2 RASIKEV2_PROJECTION_INFO
+
+enum RASPROJECTION_INFO_TYPE UINT
+  PROJECTION_INFO_TYPE_PPP   1
+  PROJECTION_INFO_TYPE_IKEv2 2
+
+struct RAS_PROJECTION_INFO pack=4
+  version RASAPIVERSION
+  type RASPROJECTION_INFO_TYPE
+   [RAS_PROJECTION_INFO_u]
+
+pointer PRAS_PROJECTION_INFO RAS_PROJECTION_INFO
+
+struct RASSUBENTRY pack=4
+  dwSize DWORD
+  dwfFlags DWORD
+  szDeviceType "TCHAR [RAS_MaxDeviceType + 1]"
+  szDeviceName "TCHAR [RAS_MaxDeviceName + 1]"
+  szLocalPhoneNumber "TCHAR [RAS_MaxPhoneNumber + 1]"
+  dwAlternateOffset DWORD
+
+pointer LPRASSUBENTRY RASSUBENTRY
+
+struct RASUPDATECONN pack=4
+  version RASAPIVERSION
+  dwSize DWORD
+  dwFlags DWORD
+  dwIfIndex DWORD
+  localEndPoint RASTUNNELENDPOINT
+  remoteEndPoint RASTUNNELENDPOINT
+
+pointer LPRASUPDATECONN RASUPDATECONN
+
+struct RASEAPINFO pack=4
+  dwSizeofEapInfo DWORD
+  pbEapInfo BYTE*
+
+struct RASDEVSPECIFICINFO pack=4
+  dwSize DWORD
+  pbDevSpecificInfo BYTE*
+
+struct RASDIALEXTENSIONS pack=4
+  dwSize DWORD
+  dwfOptions DWORD
+  hwndParent HWND
+  reserved ULONG_PTR
+  reserved1 ULONG_PTR
+  RasEapInfo RASEAPINFO
+  fSkipPppAuth BOOL
+  RasDevSpecificInfo RASDEVSPECIFICINFO
+
+pointer LPRASDIALEXTENSIONS RASDIALEXTENSIONS
+
+struct RAS_STATS pack=4
+  dwSize DWORD
+  dwBytesXmited DWORD
+  dwBytesRcved DWORD
+  dwFramesXmited DWORD
+  dwFramesRcved DWORD
+  dwCrcErr DWORD
+  dwTimeoutErr DWORD
+  dwAlignmentErr DWORD
+  dwHardwareOverrunErr DWORD
+  dwFramingErr DWORD
+  dwBufferOverrunErr DWORD
+  dwCompressionRatioIn DWORD
+  dwCompressionRatioOut DWORD
+  dwBps DWORD
+  dwConnectDuration DWORD
+
+pointer RAS_STATS* RAS_STATS
+
+struct RASCTRYINFO pack=4
+  dwSize DWORD
+  dwCountryID DWORD
+  dwNextCountryID DWORD
+  dwCountryCode DWORD
+  dwCountryNameOffset DWORD
+
+pointer LPRASCTRYINFO RASCTRYINFO
+
+enum IsolationState UINT
+  isolationStateNotRestricted    1
+  isolationStateInProbation      2
+  isolationStateRestrictedAccess 3
+
+struct RASNAPSTATE pack=4
+  dwSize DWORD
+  dwFlags DWORD
+  isolationState IsolationState
+  probationTime ProbationTime
+
+pointer LPRASNAPSTATE RASNAPSTATE
+
+flag [RasConnNotifyFlags] DWORD display=DWORD
+  RASCN_Connection       0x00000001
+  RASCN_Disconnection    0x00000002
+  RASCN_BandwidthAdded   0x00000004
+  RASCN_BandwidthRemoved 0x00000008
+
+flag RASPROJECTION DWORD
+  RASP_PppIp   0x8021
+  RASP_PppIpx  0x802B
+  RASP_PppNbf  0x803F
+  RASP_PppIpv6 0x8057
+  RASP_PppCcp  0x80FD
+  RASP_PppLcp  0xC021
+  RASP_Amb     0x10000
+  RASP_Slip    0x20000
+
+func RasClearConnectionStatistics
+  [ERROR_CODE]
+  hRasConn HRASCONN
+
+func RasClearLinkStatistics
+  [ERROR_CODE]
+  hRasConn HRASCONN
+  dwSubEntry DWORD
+
+func RasConnectionNotification bothCharset
+  [ERROR_CODE]
+  hrasconn HRASCONN
+  hEvent HANDLE
+  dwFlags [RasConnNotifyFlags]
+
+func RasCreatePhonebookEntry bothCharset
+  [ERROR_CODE]
+  hwnd HWND
+  lpszPhonebook LPCTSTR
+
+func RasDeleteEntry bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lpszEntry LPCTSTR
+
+func RasDeleteSubEntry bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lpszEntry LPCTSTR
+  dwSubEntryId DWORD
+
+func RasDial bothCharset
+  [ERROR_CODE]
+  lpRasDialExtensions LPRASDIALEXTENSIONS
+  lpszPhonebook LPCTSTR
+  lpRasDialParams LPRASDIALPARAMS
+  dwNotifierType DWORD
+  lpvNotifier LPVOID
+  lphRasConn LPHRASCONN
+
+func RasEditPhonebookEntry bothCharset
+  [ERROR_CODE]
+  hwnd HWND
+  lpszPhonebook LPCTSTR
+  lpszEntryName LPCTSTR
+
+func RasEnumAutodialAddresses bothCharset
+  [ERROR_CODE]
+  lppAddresses LPTSTR*
+  lpdwcbAddresses LPDWORD
+  lpdwcAddresses LPDWORD
+
+func RasEnumConnections bothCharset
+  [ERROR_CODE]
+  lprasconn LPRASCONN postCount=lpcConnections
+  lpcb LPDWORD
+  lpcConnections LPDWORD
+
+func RasEnumDevices bothCharset
+  [ERROR_CODE]
+  lpRasDevInfo LPRASDEVINFO
+  lpcb LPDWORD
+  lpcDevices LPDWORD
+
+func RasEnumEntries bothCharset
+  [ERROR_CODE]
+  reserved LPCTSTR
+  lpszPhonebook LPCTSTR
+  lprasentryname LPRASENTRYNAME postCount=lpcEntries
+  lpcb LPDWORD
+  lpcEntries LPDWORD
+
+func RasFreeEapUserIdentity bothCharset
+  void
+  pRasEapUserIdentity LPRASEAPUSERIDENTITY
+
+func RasGetAutodialAddress bothCharset
+  [ERROR_CODE]
+  lpszAddress LPCTSTR
+  lpdwReserved LPDWORD
+  lpAutoDialEntries LPRASAUTODIALENTRY
+  lpdwcbAutoDialEntries LPDWORD
+  lpdwcAutoDialEntries LPDWORD
+
+func RasGetAutodialEnable bothCharset
+  [ERROR_CODE]
+  dwDialingLocation DWORD
+  lpfEnabled LPBOOL
+
+func RasGetAutodialParam bothCharset
+  [ERROR_CODE]
+  dwKey DWORD
+  lpvValue LPVOID
+  lpdwcbValue LPDWORD
+
+func RasGetConnectionStatistics
+  [ERROR_CODE]
+  hRasConn HRASCONN
+  lpStatistics RAS_STATS*
+
+func RasGetConnectStatus bothCharset
+  [ERROR_CODE]
+  hrasconn HRASCONN
+  lprasconnstatus LPRASCONNSTATUS
+
+func RasGetCountryInfo bothCharset
+  [ERROR_CODE]
+  lpRasCtryInfo LPRASCTRYINFO
+  lpdwSize LPDWORD
+
+func RasGetCredentials bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lpszEntry LPCTSTR
+  lpCredentials LPRASCREDENTIALS
+
+func RasGetCustomAuthData bothCharset
+  [ERROR_CODE]
+  pszPhonebook LPCWSTR
+  pszEntry LPCWSTR
+  pbCustomAuthData BYTE*
+  pdwSizeofCustomAuthData DWORD*
+
+func RasGetEapUserData bothCharset
+  [ERROR_CODE]
+  hToken HANDLE
+  pszPhonebook LPCTSTR
+  pszEntry LPCTSTR
+  pbEapData BYTE*
+  pdwSizeofEapData DWORD*
+
+func RasGetEapUserIdentity bothCharset
+  [ERROR_CODE]
+  pszPhonebook LPCSTR
+  pszEntry LPCSTR
+  dwFlags DWORD
+  hwnd HWND
+  ppRasEapUserIdentity LPRASEAPUSERIDENTITY*
+
+func RasGetEntryDialParams bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lprasdialparams LPRASDIALPARAMS
+  lpfPassword LPBOOL
+
+func RasGetEntryProperties bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lpszEntry LPCTSTR
+  lpRasEntry LPRASENTRY
+  lpdwEntryInfoSize LPDWORD
+  lpbDeviceInfo LPBYTE
+  lpdwDeviceInfoSize LPDWORD
+
+func RasGetErrorString bothCharset
+  [ERROR_CODE]
+  uErrorValue UINT
+  lpszErrorString LPTSTR
+  cBufSize DWORD
+
+func RasGetLinkStatistics
+  [ERROR_CODE]
+  hRasConn HRASCONN
+  dwSubEntry DWORD
+  lpStatistics RAS_STATS*
+
+func RasGetNapStatus
+  [ERROR_CODE]
+  hRasConn HRASCONN
+  pNapState LPRASNAPSTATE
+
+func RasGetProjectionInfo bothCharset
+  [ERROR_CODE]
+  hrasconn HRASCONN
+  rasprojection RASPROJECTION
+  lpprojection LPVOID postLength=lpcb
+  lpcb LPDWORD
+
+func RasGetProjectionInfoEx
+  [ERROR_CODE]
+  Hrasconn HRASCONN
+  pRasProjection PRAS_PROJECTION_INFO
+  lpdwSize LPDWORD
+
+func RasGetQuarantineConnectionId
+  [ERROR_CODE]
+  hRasConn HRASCONN
+  lpConnectionId ConnectionId*
+
+func RasGetSubEntryHandle bothCharset
+  [ERROR_CODE]
+  hRasConn HRASCONN
+  dwSubEntry DWORD
+  lphRasConn LPHRASCONN
+
+func RasGetSubEntryProperties bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lpszEntry LPCTSTR
+  dwSubEntry DWORD
+  lpRasSubEntry LPRASSUBENTRY
+  lpdwcb LPDWORD
+  lpbDeviceConfig LPBYTE
+  lpcbDeviceConfig LPDWORD
+
+func RasHangUp bothCharset
+  [ERROR_CODE]
+  hrasconn HRASCONN
+
+func RasInvokeEapUI
+  [ERROR_CODE]
+  hRasConn HRASCONN
+  dwSubEntry DWORD
+  lpExtensions LPRASDIALEXTENSIONS
+  hwnd HWND
+
+func RasRenameEntry bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lpszOldEntry LPCTSTR
+  lpszNewEntry LPCTSTR
+
+func RasSetAutodialAddress bothCharset
+  [ERROR_CODE]
+  lpszAddress LPCTSTR
+  dwReserved DWORD
+  lpAutoDialEntries LPRASAUTODIALENTRY
+  dwcbAutoDialEntries DWORD
+  dwcAutoDialEntries DWORD
+
+func RasSetAutodialEnable bothCharset
+  [ERROR_CODE]
+  dwDialingLocation DWORD
+  fEnabled BOOL
+
+func RasSetAutodialParam bothCharset
+  [ERROR_CODE]
+  dwKey DWORD
+  lpvValue LPVOID
+  dwcbValue DWORD
+
+func RasSetCredentials bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lpszEntry LPCTSTR
+  lpCredentials LPRASCREDENTIALS
+  fClearCredentials BOOL
+
+func RasSetCustomAuthData bothCharset
+  [ERROR_CODE]
+  pszPhonebook LPCWSTR
+  pszEntry LPCWSTR
+  pbCustomAuthData BYTE*
+  dwSizeofCustomAuthData DWORD
+
+func RasSetEapUserData bothCharset
+  [ERROR_CODE]
+  hToken HANDLE
+  pszPhonebook LPCTSTR
+  pszEntry LPCTSTR
+  pbEapData BYTE*
+  dwSizeofEapData DWORD
+
+func RasSetEntryDialParams bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lprasdialparams LPRASDIALPARAMS
+  fRemovePassword BOOL
+
+func RasSetEntryProperties bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lpszEntry LPCTSTR
+  lpRasEntry LPRASENTRY
+  dwEntryInfoSize DWORD
+  lpbDeviceInfo LPBYTE
+  dwDeviceInfoSize DWORD
+
+func RasSetSubEntryProperties bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lpszEntry LPCTSTR
+  dwSubEntry DWORD
+  lpRasSubEntry LPRASSUBENTRY
+  dwcbRasSubEntry DWORD
+  lpbDeviceConfig LPBYTE
+  dwcbDeviceConfig DWORD
+
+func RasUpdateConnection
+  [ERROR_CODE]
+  hrasconn HRASCONN
+  lprasupdateconn LPRASUPDATECONN
+
+func RasValidateEntryName bothCharset
+  [ERROR_CODE]
+  lpszPhonebook LPCTSTR
+  lpszEntry LPCTSTR
+

@@ -1,0 +1,20 @@
+include Interfaces\WIC\IWICBitmapCodecInfo.txt
+
+ingterface IWICBitmapDecoderInfo base=IWICBitmapCodecInfo id={D8CD007F-D08F-4191-9BFC-236EA7F0E4B5} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetPatterns
+    [WIC_HRESULT]
+    cbSizePatterns UINT
+    pPatterns WICBitmapPattern* postCount=pcPatterns
+    pcPatterns UINT*
+    pcbPatternsActual UINT*
+
+  func MatchesPattern
+    [WIC_HRESULT]
+    pIStream IStream*
+    pfMatches BOOL*
+
+  func CreateInstance
+    [WIC_HRESULT]
+    ppIBitmapDecoder IWICBitmapDecoder**
+
+

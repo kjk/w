@@ -1,0 +1,35 @@
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10EffectTechnique id={DB122CE8-D1C9-4292-B237-24ED3DE8B175} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Effect"
+  func IsValid
+    BOOL
+
+  func GetDesc
+    HRESULT
+    pDesc D3D10_TECHNIQUE_DESC*
+
+  func GetAnnotationByIndex
+    success NotEqual=0
+    ID3D10EffectVariable*
+    Index UINT
+
+  func GetAnnotationByName
+    success NotEqual=0
+    ID3D10EffectVariable*
+    Name LPCSTR
+
+  func GetPassByIndex
+    success NotEqual=0
+    ID3D10EffectPass*
+    Index UINT
+
+  func GetPassByName
+    success NotEqual=0
+    ID3D10EffectPass*
+    Name LPCSTR
+
+  func ComputeStateBlockMask
+    HRESULT
+    pStateBlockMask D3D10_STATE_BLOCK_MASK*
+
+

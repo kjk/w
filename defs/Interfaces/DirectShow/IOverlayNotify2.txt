@@ -1,0 +1,8 @@
+include Interfaces\DirectShow\IOverlayNotify.txt
+
+ingterface IOverlayNotify2 base=IOverlayNotify id={680EFA10-D535-11D1-87C8-00A0C9223196} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func OnDisplayChange
+    HRESULT
+    hMonitor HMONITOR
+
+

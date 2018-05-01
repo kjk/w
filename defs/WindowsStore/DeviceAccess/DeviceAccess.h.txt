@@ -1,0 +1,9 @@
+include Headers\windows.h.txt
+
+header
+interface ICreateDeviceAccessAsync
+
+interface IDeviceIoControl
+
+interface IDeviceRequestCompletionCallback
+

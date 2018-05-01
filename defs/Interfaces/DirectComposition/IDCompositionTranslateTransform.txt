@@ -1,0 +1,21 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\DirectComposition\IDCompositionTransform.txt
+
+ingterface IDCompositionTranslateTransform base=IDCompositionTransform id={06791122-C6F0-417d-8323-269E987F5954} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func SetOffsetX
+    HRESULT
+    offsetX float
+
+  func "SetOffsetX "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetOffsetY
+    HRESULT
+    offsetY float
+
+  func "SetOffsetY "
+    HRESULT
+    animation IDCompositionAnimation*
+
+

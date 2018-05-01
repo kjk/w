@@ -1,0 +1,15 @@
+include Interfaces\Shell\IWizardExtension.txt
+
+ingterface IPublishingWizard base=IWizardExtension id={aa9198bb-ccec-472d-beed-19a4f6733f7a} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    pdo IDataObject*
+    dwOptions DWORD
+    pszServiceScope LPCWSTR
+
+  func GetTransferManifest
+    HRESULT
+    phrFromTransfer HRESULT*
+    pdocManifest IXMLDOMDocument**
+
+

@@ -1,0 +1,164 @@
+include Interfaces\IUnknown.txt
+include Headers\ddraw.h.txt
+
+ingterface IDirectDrawSurface base=IUnknown id={6c14db81-a733-11ce-a521-0020af0be560} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+  func AddAttachedSurface
+    [DD_HRESULT]
+    lpDDSurface LPDIRECTDRAWSURFACE
+
+  func AddOverlayDirtyRect
+    [DD_HRESULT]
+    lpRect LPRECT
+
+  func Blt
+    [DD_HRESULT]
+    lpDestRect LPRECT
+    lpDDSrcSurface LPDIRECTDRAWSURFACE
+    lpSrcRect LPRECT
+    dwFlags [DDBLT_FLAGS]
+    lpDDBltFx LPDDBLTFX
+
+  func BltBatch
+    [DD_HRESULT]
+    lpDDBltBatch LPDDBLTBATCH
+    dwCount DWORD
+    dwFlags DWORD
+
+  func BltFast
+    [DD_HRESULT]
+    dwX DWORD
+    dwY DWORD
+    lpDDSrcSurface LPDIRECTDRAWSURFACE
+    lpSrcRect LPRECT
+    dwFlags [DDBLTFAST_TYPE]
+
+  func DeleteAttachedSurface
+    [DD_HRESULT]
+    dwFlags DWORD
+    lpDDSAttachedSurface LPDIRECTDRAWSURFACE
+
+  func EnumAttachedSurfaces
+    [DD_HRESULT]
+    lpContext LPVOID
+    lpEnumSurfacesCallback LPDDENUMSURFACESCALLBACK
+
+  func EnumOverlayZOrders
+    [DD_HRESULT]
+    dwFlags [DDENUMOVERLAYZ_TYPE]
+    lpContext LPVOID
+    lpfnCallback LPDDENUMSURFACESCALLBACK
+
+  func Flip
+    [DD_HRESULT]
+    lpDDSurfaceTargetOverride LPDIRECTDRAWSURFACE
+    dwFlags [DDFLIP_FLAGS]
+
+  func GetAttachedSurface
+    [DD_HRESULT]
+    lpDDSCaps LPDDSCAPS
+    lplpDDAttachedSurface LPDIRECTDRAWSURFACE*
+
+  func GetBltStatus
+    [DD_HRESULT]
+    dwFlags [DDGBS_FLAGS]
+
+  func GetCaps
+    [DD_HRESULT]
+    lpDDSCaps LPDDSCAPS
+
+  func GetClipper
+    [DD_HRESULT]
+    lplpDDClipper LPDIRECTDRAWCLIPPER*
+
+  func GetColorKey
+    [DD_HRESULT]
+    dwFlags [DDCKEY_FLAGS]
+    lpDDColorKey LPDDCOLORKEY
+
+  func GetDC
+    [DD_HRESULT]
+    lphDC HDC*
+
+  func GetFlipStatus
+    [DD_HRESULT]
+    dwFlags [DDGFS_FLAGS]
+
+  func GetOverlayPosition
+    [DD_HRESULT]
+    lplX LPLONG
+    lplY LPLONG
+
+  func GetPalette
+    [DD_HRESULT]
+    lplpDDPalette LPDIRECTDRAWPALETTE*
+
+  func GetPixelFormat
+    [DD_HRESULT]
+    lpDDPixelFormat LPDDPIXELFORMAT
+
+  func GetSurfaceDesc
+    [DD_HRESULT]
+    lpDDSurfaceDesc LPDDSURFACEDESC
+
+  func Initialize
+    [DD_HRESULT]
+    lpDD LPDIRECTDRAW
+    lpDDSurfaceDesc LPDDSURFACEDESC
+
+  func IsLost
+    [DD_HRESULT]
+
+  func Lock
+    [DD_HRESULT]
+    lpDestRect LPRECT
+    lpDDSurfaceDesc LPDDSURFACEDESC
+    dwFlags [DDLOCK_FLAGS]
+    hEvent HANDLE
+
+  func ReleaseDC
+    [DD_HRESULT]
+    hDC HDC
+
+  func Restore
+    [DD_HRESULT]
+
+  func SetClipper
+    [DD_HRESULT]
+    lpDDClipper LPDIRECTDRAWCLIPPER
+
+  func SetColorKey
+    [DD_HRESULT]
+    dwFlags [DDCKEY_FLAGS]
+    lpDDColorKey LPDDCOLORKEY
+
+  func SetOverlayPosition
+    [DD_HRESULT]
+    lX LONG
+    lY LONG
+
+  func SetPalette
+    [DD_HRESULT]
+    lpDDPalette LPDIRECTDRAWPALETTE
+
+  func Unlock
+    [DD_HRESULT]
+    lpRect LPVOID
+
+  func UpdateOverlay
+    [DD_HRESULT]
+    lpSrcRect LPRECT
+    lpDDDestSurface LPDIRECTDRAWSURFACE
+    lpDestRect LPRECT
+    dwFlags [DDOVER_FLAGS]
+    lpDDOverlayFx LPDDOVERLAYFX
+
+  func UpdateOverlayDisplay
+    [DD_HRESULT]
+    dwFlags DWORD
+
+  func UpdateOverlayZOrder
+    [DD_HRESULT]
+    dwFlags [DDOVERZ_ORDER]
+    lpDDSReference LPDIRECTDRAWSURFACE
+
+

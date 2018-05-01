@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IControlChangeNotify base=IUnknown id={A09513ED-C709-4d21-BD7B-5F34C47F3947} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func OnNotify
+    [AUDCLNT_HRESULT]
+    dwSenderProcessId DWORD
+    pguidEventContext LPCGUID
+
+

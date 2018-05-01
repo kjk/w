@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IInternetProtocolSink base=IUnknown id={79eac9e5-baf9-11ce-8c82-00aa004ba90b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func Switch
+    HRESULT
+    pProtocolData PROTOCOLDATA*
+
+  func ReportProgress
+    HRESULT
+    ulStatusCode BINDSTATUS
+    szStatusText LPCWSTR
+
+  func ReportData
+    HRESULT
+    grfBSCF BSCF
+    ulProgress ULONG
+    ulProgressMax ULONG
+
+  func ReportResult
+    HRESULT
+    hrResult HRESULT
+    dwError DWORD
+    szResult LPCWSTR
+
+

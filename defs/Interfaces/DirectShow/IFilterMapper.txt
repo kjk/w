@@ -1,0 +1,59 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFilterMapper base=IUnknown id={56a868a3-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func RegisterFilter
+    HRESULT
+    clsid CLSID
+    Name LPCWSTR
+    dwMerit [FILTER_MERIT]
+
+  func RegisterFilterInstance
+    HRESULT
+    clsid CLSID
+    Name LPCWSTR
+    MRId CLSID*
+
+  func RegisterPin
+    HRESULT
+    Filter CLSID
+    Name LPCWSTR
+    bRendered BOOL
+    bOutput BOOL
+    bZero BOOL
+    bMany BOOL
+    ConnectsToFilter CLSID
+    ConnectsToPin LPCWSTR
+
+  func RegisterPinType
+    HRESULT
+    clsFilter CLSID
+    strName LPCWSTR
+    clsMajorType CLSID
+    clsSubType CLSID
+
+  func UnregisterFilter
+    HRESULT
+    Filter CLSID
+
+  func UnregisterFilterInstance
+    HRESULT
+    MRId CLSID
+
+  func UnregisterPin
+    HRESULT
+    Filter CLSID
+    Name LPCWSTR
+
+  func EnumMatchingFilters
+    HRESULT
+    ppEnum IEnumRegFilters**
+    dwMerit [FILTER_MERIT]
+    bInputNeeded BOOL
+    clsInMaj CLSID
+    clsInSub CLSID
+    bRender BOOL
+    bOututNeeded BOOL
+    clsOutMaj CLSID
+    clsOutSub CLSID
+
+

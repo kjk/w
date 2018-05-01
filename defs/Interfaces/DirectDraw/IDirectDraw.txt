@@ -1,0 +1,102 @@
+include Interfaces\IUnknown.txt
+include Headers\ddraw.h.txt
+
+ingterface IDirectDraw base=IUnknown id={6c14db80-a733-11ce-a521-0020af0be560} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+  func Compact
+    [DD_HRESULT]
+
+  func CreateClipper
+    [DD_HRESULT]
+    dwFlags DWORD
+    lplpDDClipper LPDIRECTDRAWCLIPPER*
+    pUnkOuter IUnknown*
+
+  func CreatePalette
+    [DD_HRESULT]
+    dwFlags [DDPCAPS_FLAGS]
+    lpDDColorArray LPPALETTEENTRY
+    lplpDDPalette LPDIRECTDRAWPALETTE*
+    pUnkOuter IUnknown*
+
+  func CreateSurface
+    [DD_HRESULT]
+    lpDDSurfaceDesc LPDDSURFACEDESC
+    lplpDDSurface LPDIRECTDRAWSURFACE*
+    pUnkOuter IUnknown*
+
+  func DuplicateSurface
+    [DD_HRESULT]
+    lpDDSurface LPDIRECTDRAWSURFACE
+    lplpDupDDSurface LPDIRECTDRAWSURFACE*
+
+  func EnumDisplayModes
+    [DD_HRESULT]
+    dwFlags [DDEDM_FLAGS]
+    lpDDSurfaceDesc LPDDSURFACEDESC
+    lpContext LPVOID
+    lpEnumModesCallback LPDDENUMMODESCALLBACK
+
+  func EnumSurfaces
+    [DD_HRESULT]
+    dwFlags [DDENUMSURFACES_FLAGS]
+    lpDDSD LPDDSURFACEDESC
+    lpContext LPVOID
+    lpEnumSurfacesCallback LPDDENUMSURFACESCALLBACK
+
+  func FlipToGDISurface
+    [DD_HRESULT]
+
+  func GetCaps
+    [DD_HRESULT]
+    lpDDDriverCaps LPDDCAPS
+    lpDDHELCaps LPDDCAPS
+
+  func GetDisplayMode
+    [DD_HRESULT]
+    lpDDSurfaceDesc LPDDSURFACEDESC
+
+  func GetFourCCCodes
+    [DD_HRESULT]
+    lpNumCodes LPDWORD
+    lpCodes LPDWORD
+
+  func GetGDISurface
+    [DD_HRESULT]
+    lplpGDIDDSSurface LPDIRECTDRAWSURFACE*
+
+  func GetMonitorFrequency
+    [DD_HRESULT]
+    lpdwFrequency LPDWORD
+
+  func GetScanLine
+    [DD_HRESULT]
+    lpdwScanLine LPDWORD
+
+  func GetVerticalBlankStatus
+    [DD_HRESULT]
+    lpbIsInVB LPBOOL
+
+  func Initialize
+    [DD_HRESULT]
+    lpGUID GUID*
+
+  func RestoreDisplayMode
+    [DD_HRESULT]
+
+  func SetCooperativeLevel
+    [DD_HRESULT]
+    hWnd HWND
+    dwFlags [DDSCL_FLAGS]
+
+  func SetDisplayMode
+    [DD_HRESULT]
+    dwWidth DWORD
+    dwHeight DWORD
+    dwBPP DWORD
+
+  func WaitForVerticalBlank
+    [DD_HRESULT]
+    dwFlags [DDWAITVB_FLAGS]
+    hEvent HANDLE
+
+

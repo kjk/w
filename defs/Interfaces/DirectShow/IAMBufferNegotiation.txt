@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMBufferNegotiation base=IUnknown id={56ED71A0-AF5F-11D0-B3F0-00AA003761C5} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SuggestAllocatorProperties
+    HRESULT
+    pprop "const ALLOCATOR_PROPERTIES*"
+
+  func GetAllocatorProperties
+    HRESULT
+    pprop ALLOCATOR_PROPERTIES*
+
+

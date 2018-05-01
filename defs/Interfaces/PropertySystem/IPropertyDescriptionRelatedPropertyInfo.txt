@@ -1,0 +1,11 @@
+include Interfaces\PropertySystem\IPropertyDescription.txt
+include Headers\propsys.h.txt
+
+ingterface IPropertyDescriptionRelatedPropertyInfo base=IPropertyDescription id={507393f4-2a3d-4a60-b59e-d9c75716c2dd} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Property System/Interfaces"
+  func GetRelatedProperty
+    HRESULT
+    pszRelationshipName LPCWSTR
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

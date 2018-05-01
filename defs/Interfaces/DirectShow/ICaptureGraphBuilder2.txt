@@ -1,0 +1,67 @@
+include Interfaces\IUnknown.txt
+
+ingterface ICaptureGraphBuilder2 base=IUnknown id={93E5A4E0-2D50-11d2-ABFA-00A0C9C6E38D} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetFiltergraph
+    HRESULT
+    pfg IGraphBuilder*
+
+  func GetFiltergraph
+    HRESULT
+    ppfg IGraphBuilder**
+
+  func SetOutputFileName
+    HRESULT
+    pType "const GUID*"
+    lpstrFile LPCOLESTR
+    ppf IBaseFilter**
+    ppSink IFileSinkFilter**
+
+  func FindInterface
+    HRESULT
+    pCategory "const GUID*"
+    pType "const GUID*"
+    pf IBaseFilter*
+    riid REFIID
+    ppint void** interfaceId=riid
+
+  func RenderStream
+    HRESULT
+    pCategory "const GUID*"
+    pType "const GUID*"
+    pSource IUnknown*
+    pfCompressor IBaseFilter*
+    pfRenderer IBaseFilter*
+
+  func ControlStream
+    HRESULT
+    pCategory "const GUID*"
+    pType "const GUID*"
+    pFilter IBaseFilter*
+    pstart REFERENCE_TIME*
+    pstop REFERENCE_TIME*
+    wStartCookie WORD
+    wStopCookie WORD
+
+  func AllocCapFile
+    HRESULT
+    lpstr LPCOLESTR
+    dwlSize DWORDLONG
+
+  func CopyCaptureFile
+    HRESULT
+    lpwstrOld LPOLESTR
+    lpwstrNew LPOLESTR
+    fAllowEscAbort int
+    pCallback IAMCopyCaptureFileProgress*
+
+  func FindPin
+    HRESULT
+    pSource IUnknown*
+    pindir PIN_DIRECTION
+    pCategory "const GUID*"
+    pType "const GUID*"
+    fUnconnected BOOL
+    num int
+    ppPin IPin**
+
+

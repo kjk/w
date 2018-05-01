@@ -1,0 +1,14 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemEventSource base=IDispatch id={27D54D92-0EBE-11d2-8B22-00600806D9B6} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func NextEvent
+    WBEMSTATUS
+    iTimeoutMs long
+    objWbemObject ISWbemObject**
+
+  func get_Security_
+    WBEMSTATUS
+    objWbemSecurity ISWbemSecurity**
+
+

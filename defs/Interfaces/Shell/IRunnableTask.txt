@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRunnableTask base=IUnknown id={85788d00-6807-11d0-b810-00c04fd706ec} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Run
+    HRESULT
+
+  func Kill
+    HRESULT
+    bWait BOOL
+
+  func Suspend
+    HRESULT
+
+  func Resume
+    HRESULT
+
+  func IsRunning
+    [IRTIR_TASK_STATE]
+
+  flag [IRTIR_TASK_STATE] ULONG display=ULONG
+    IRTIR_TASK_NOT_RUNNING 0
+    IRTIR_TASK_RUNNING     1
+    IRTIR_TASK_SUSPENDED   2
+    IRTIR_TASK_PENDING     3
+    IRTIR_TASK_FINISHED    4
+
+

@@ -1,0 +1,8 @@
+include Interfaces\Shell\IExtractImage.txt
+
+ingterface IExtractImage2 base=IExtractImage id={953BB1EE-93B4-11d1-98A3-00C04FB687DA} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetDateStamp
+    HRESULT
+    pDateStamp FILETIME*
+
+

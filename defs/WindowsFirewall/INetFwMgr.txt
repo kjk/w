@@ -1,0 +1,34 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwMgr base=IDispatch id={F7898AF5-CAC4-4632-A2EC-DA06E5111AF2} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall"
+  func get_LocalPolicy
+    HRESULT
+    localPolicy INetFwPolicy**
+
+  func get_CurrentProfileType
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE*
+
+  func RestoreDefaults
+    HRESULT
+
+  func IsPortAllowed
+    HRESULT
+    imageFileName BSTR
+    ipVersion NET_FW_IP_VERSION
+    portNumber LONG
+    localAddress BSTR
+    ipProtocol NET_FW_IP_PROTOCOL
+    allowed VARIANT*
+    restricted VARIANT*
+
+  func IsIcmpTypeAllowed
+    HRESULT
+    ipVersion NET_FW_IP_VERSION
+    localAddress BSTR
+    type BYTE
+    allowed VARIANT*
+    restricted VARIANT*
+
+

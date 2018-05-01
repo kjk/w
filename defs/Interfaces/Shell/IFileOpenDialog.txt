@@ -1,0 +1,12 @@
+include Interfaces\Shell\IFileDialog.txt
+
+ingterface IFileOpenDialog base=IFileDialog id={d57c7288-d4ad-4768-be02-9d969532d960} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetResults
+    HRESULT
+    ppenum IShellItemArray**
+
+  func GetSelectedItems
+    HRESULT
+    ppsai IShellItemArray**
+
+

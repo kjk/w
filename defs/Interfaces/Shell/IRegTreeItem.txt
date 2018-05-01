@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRegTreeItem base=IUnknown id={A9521922-0812-4d44-9EC3-7FD38C726F3D} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetCheckState
+    HRESULT
+    pbCheck BOOL*
+
+  func SetCheckState
+    HRESULT
+    bCheck BOOL
+
+

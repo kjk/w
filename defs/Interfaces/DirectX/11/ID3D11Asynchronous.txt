@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+
+ingterface ID3D11Asynchronous base=ID3D11DeviceChild id={4b35d0cd-1e15-4258-9c98-1b1333f6dd3b} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func GetDataSize
+    success NotEqual=0
+    UINT
+
+

@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemLocator base=IUnknown id={dc12a687-737f-11cf-884d-00aa004b2e24} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func ConnectServer
+    WBEMSTATUS
+    strNetworkResource "const BSTR"
+    strUser "const BSTR"
+    strPassword "const BSTR"
+    strLocale "const BSTR"
+    lSecurityFlags WBEM_CONNECT_OPTIONS
+    strAuthority "const BSTR"
+    pCtx IWbemContext*
+    ppNamespace IWbemServices**
+
+

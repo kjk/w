@@ -1,0 +1,17 @@
+include Interfaces\OLEDB\IRowChange.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IRowSchemaChange base=IRowChange id={0c733aae-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func DeleteColumns
+    [OLEDB_HRESULT]
+    cColumns DBORDINAL
+    rgColumnIDs "const DBID []" count=cColumns
+    rgdwStatus "DBSTATUS []" count=cColumns
+
+  func AddColumns
+    [OLEDB_HRESULT]
+    cColumns DBORDINAL
+    rgNewColumnInfo "const DBCOLUMNINFO []" count=cColumns
+    rgColumns "DBCOLUMNACCESS []" count=cColumns
+
+

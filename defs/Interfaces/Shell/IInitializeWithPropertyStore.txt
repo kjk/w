@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInitializeWithPropertyStore base=IUnknown id={C3E12EB5-7D8D-44f8-B6DD-0E77B34D6DE4} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    pps IPropertyStore*
+
+

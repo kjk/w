@@ -1,0 +1,11 @@
+include Interfaces\DirectX\DXGI\IDXGISurface1.txt
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+ingterface IDXGISurface2 base=IDXGISurface1 id={aba496dd-b617-4cb8-a866-bc44d7eb1fa2} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func GetResource
+    HRESULT
+    riid REFIID
+    ppParentResource void** interfaceId=riid
+    pSubresourceIndex UINT*
+
+

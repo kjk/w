@@ -1,0 +1,59 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioClient base=IUnknown id={1CB9AD4C-DBFA-4c32-B178-C2F568A703B2} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func Initialize
+    [AUDCLNT_HRESULT]
+    ShareMode AUDCLNT_SHAREMODE
+    StreamFlags DWORD
+    hnsBufferDuration REFERENCE_TIME
+    hnsPeriodicity REFERENCE_TIME
+    pFormat "const WAVEFORMATEX*"
+    AudioSessionGuid LPCGUID
+
+  func GetBufferSize
+    [AUDCLNT_HRESULT]
+    pNumBufferFrames UINT32*
+
+  func GetStreamLatency
+    [AUDCLNT_HRESULT]
+    phnsLatency REFERENCE_TIME*
+
+  func GetCurrentPadding
+    [AUDCLNT_HRESULT]
+    pNumPaddingFrames UINT32*
+
+  func IsFormatSupported
+    [AUDCLNT_HRESULT]
+    ShareMode AUDCLNT_SHAREMODE
+    pFormat "const WAVEFORMATEX*"
+    ppClosestMatch WAVEFORMATEX**
+
+  func GetMixFormat
+    [AUDCLNT_HRESULT]
+    ppDeviceFormat WAVEFORMATEX**
+
+  func GetDevicePeriod
+    [AUDCLNT_HRESULT]
+    phnsDefaultDevicePeriod REFERENCE_TIME*
+    phnsMinimumDevicePeriod REFERENCE_TIME*
+
+  func Start
+    [AUDCLNT_HRESULT]
+
+  func Stop
+    [AUDCLNT_HRESULT]
+
+  func Reset
+    [AUDCLNT_HRESULT]
+
+  func SetEventHandle
+    [AUDCLNT_HRESULT]
+    eventHandle HANDLE
+
+  func GetService
+    [AUDCLNT_HRESULT]
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

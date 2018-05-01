@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioEndpoint base=IUnknown id={30A99515-1527-4451-AF9F-00C5F0234DAF} errorFunc=HRESULT onlineHelp=MSDN category="System Services/Remote Desktop Services/AudioEndpoint"
+  func GetFrameFormat
+    [AUDCLNT_HRESULT]
+    ppFormat WAVEFORMATEX**
+
+  func GetFramesPerPacket
+    [AUDCLNT_HRESULT]
+    pFramesPerPacket UINT32*
+
+  func GetLatency
+    [AUDCLNT_HRESULT]
+    pLatency HNSTIME*
+
+  func SetStreamFlags
+    [AUDCLNT_HRESULT]
+    streamFlags DWORD
+
+  func SetEventHandle
+    [AUDCLNT_HRESULT]
+    eventHandle HANDLE
+
+

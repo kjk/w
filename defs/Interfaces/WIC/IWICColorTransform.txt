@@ -1,0 +1,11 @@
+include Interfaces\WIC\IWICBitmapSource.txt
+
+ingterface IWICColorTransform base=IWICBitmapSource id={B66F034F-D0E2-40ab-B436-6DE39E321A94} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func Initialize
+    [WIC_HRESULT]
+    pIBitmapSource IWICBitmapSource*
+    pIContextSource IWICColorContext*
+    pIContextDest IWICColorContext*
+    pixelFmtDest REFWICPixelFormatGUID
+
+

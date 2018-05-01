@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IZoomEvents base=IUnknown id={41B68150-904C-4e17-A0BA-A438182E359D} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/Advanced Hosting Interfaces"
+  func OnZoomPercentChanged
+    HRESULT
+    ulZoomPercent ULONG
+
+

@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOpenSearchSource base=IUnknown id={F0EE7333-E6FC-479b-9F25-A860C234A38E} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetResults
+    HRESULT
+    hwnd HWND
+    pszQuery LPCWSTR
+    dwStartIndex DWORD
+    dwCount DWORD
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

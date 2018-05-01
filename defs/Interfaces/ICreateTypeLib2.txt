@@ -1,0 +1,21 @@
+include Interfaces\ICreateTypeLib.txt
+
+ingterface ICreateTypeLib2 base=ICreateTypeLib id={0002040F-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Type Building"
+  func DeleteTypeInfo
+    HRESULT
+    szName LPOLESTR
+
+  func SetCustData
+    HRESULT
+    guid REFGUID
+    pVarVal VARIANT*
+
+  func SetHelpStringContext
+    HRESULT
+    dwHelpStringContext ULONG
+
+  func SetHelpStringDll
+    HRESULT
+    szFileName LPOLESTR
+
+

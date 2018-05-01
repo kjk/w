@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAsyncManager base=IUnknown id={0000002A-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func CompleteCall
+    HRESULT
+    Result HRESULT
+
+  func GetCallContext
+    HRESULT
+    riid REFIID
+    pInterface void** interfaceId=riid
+
+  func GetState
+    HRESULT
+    pulStateFlags ULONG*
+
+

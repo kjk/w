@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumSTATURL base=IUnknown id={3C374A42-BAE4-11CF-BF7D-00AA006946EE} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+  func Next
+    HRESULT
+    celt ULONG
+    rgelt LPSTATURL postCount=celt
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppenum IEnumSTATURL**
+
+  func SetFilter
+    HRESULT
+    poszFilter LPCOLESTR
+    dwFlags DWORD
+
+

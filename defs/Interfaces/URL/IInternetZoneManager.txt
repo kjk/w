@@ -1,0 +1,84 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IInternetZoneManager base=IUnknown id={79eac9ef-baf9-11ce-8c82-00aa004ba90b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func GetZoneAttributes
+    HRESULT
+    dwZone [URLZONE|DWORD]
+    pZoneAttributes ZONEATTRIBUTES*
+
+  func SetZoneAttributes
+    HRESULT
+    dwZone [URLZONE|DWORD]
+    pZoneAttributes ZONEATTRIBUTES*
+
+  func GetZoneCustomPolicy
+    HRESULT
+    dwZone [URLZONE|DWORD]
+    guidKey REFGUID
+    ppPolicy BYTE** derefPostLength=pcbPolicy
+    pcbPolicy DWORD*
+    urlZoneReg URLZONEREG
+
+  func SetZoneCustomPolicy
+    HRESULT
+    dwZone [URLZONE|DWORD]
+    guidKey REFGUID
+    pPolicy BYTE* length=cbPolicy
+    cbPolicy DWORD
+    urlZoneReg URLZONEREG
+
+  func GetZoneActionPolicy
+    HRESULT
+    dwZone [URLZONE|DWORD]
+    dwAction [URLACTION_FLAGS]
+    pPolicy BYTE* postLength=cbPolicy
+    cbPolicy DWORD
+    urlZoneReg URLZONEREG
+
+  func SetZoneActionPolicy
+    HRESULT
+    dwZone [URLZONE|DWORD]
+    dwAction [URLACTION_FLAGS]
+    pPolicy BYTE* length=cbPolicy
+    cbPolicy DWORD
+    urlZoneReg URLZONEREG
+
+  func PromptAction
+    HRESULT
+    dwAction [URLACTION_FLAGS]
+    hwndParent HWND
+    pwszUrl LPCWSTR
+    pwszText LPCWSTR
+    dwPromptFlags DWORD
+
+  func LogAction
+    HRESULT
+    dwAction [URLACTION_FLAGS]
+    pwszUrl LPCWSTR
+    pwszText LPCWSTR
+    dwLogFlags DWORD
+
+  func CreateZoneEnumerator
+    HRESULT
+    pdwEnum DWORD*
+    pdwCount DWORD*
+    dwFlags DWORD
+
+  func GetZoneAt
+    HRESULT
+    dwEnum DWORD
+    dwIndex DWORD
+    pdwZone [URLZONE*|DWORD*]
+
+  func DestroyZoneEnumerator
+    HRESULT
+    dwEnum DWORD
+
+  func CopyTemplatePoliciesToZone
+    HRESULT
+    dwTemplate DWORD
+    dwZone [URLZONE|DWORD]
+    dwReserved DWORD
+
+

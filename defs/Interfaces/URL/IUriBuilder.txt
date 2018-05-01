@@ -1,0 +1,115 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IUriBuilder base=IUnknown id={4221B2E1-8955-46c0-BD5B-DE9897565DE7} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func CreateUriSimple
+    HRESULT
+    dwAllowEncodingPropertyMask [Uri_HAS_FLAGS]
+    dwReserved DWORD_PTR
+    ppIUri IUri**
+
+  func CreateUri
+    HRESULT
+    dwCreateFlags [Uri_CREATE_FLAGS]
+    dwAllowEncodingPropertyMask [Uri_HAS_FLAGS]
+    dwReserved DWORD_PTR
+    ppIUri IUri**
+
+  func CreateUriWithFlags
+    HRESULT
+    dwCreateFlags [Uri_CREATE_FLAGS]
+    dwUriBuilderFlags [UriBuilder_FLAGS]
+    dwAllowEncodingPropertyMask [Uri_HAS_FLAGS]
+    dwReserved DWORD_PTR
+    ppIUri IUri**
+
+  func GetIUri
+    HRESULT
+    ppIUri IUri**
+
+  func SetIUri
+    HRESULT
+    pIUri IUri*
+
+  func GetFragment
+    HRESULT
+    pcchFragment DWORD*
+    ppwzFragment LPCWSTR*
+
+  func GetHost
+    HRESULT
+    pcchHost DWORD*
+    ppwzHost LPCWSTR*
+
+  func GetPassword
+    HRESULT
+    pcchPassword DWORD*
+    ppwzPassword LPCWSTR*
+
+  func GetPath
+    HRESULT
+    pcchPath DWORD*
+    ppwzPath LPCWSTR*
+
+  func GetPort
+    HRESULT
+    pfHasPort BOOL*
+    pdwPort DWORD*
+
+  func GetQuery
+    HRESULT
+    pcchQuery DWORD*
+    ppwzQuery LPCWSTR*
+
+  func GetSchemeName
+    HRESULT
+    pcchSchemeName DWORD*
+    ppwzSchemeName LPCWSTR*
+
+  func GetUserName
+    HRESULT
+    pcchUserName DWORD*
+    ppwzUserName LPCWSTR*
+
+  func SetFragment
+    HRESULT
+    pwzNewValue LPCWSTR
+
+  func SetHost
+    HRESULT
+    pwzNewValue LPCWSTR
+
+  func SetPassword
+    HRESULT
+    pwzNewValue LPCWSTR
+
+  func SetPath
+    HRESULT
+    pwzNewValue LPCWSTR
+
+  func SetPort
+    HRESULT
+    fHasPort BOOL
+    dwNewValue DWORD
+
+  func SetQuery
+    HRESULT
+    pwzNewValue LPCWSTR
+
+  func SetSchemeName
+    HRESULT
+    pwzNewValue LPCWSTR
+
+  func SetUserName
+    HRESULT
+    pwzNewValue LPCWSTR
+
+  func RemoveProperties
+    HRESULT
+    dwPropertyMask [Uri_HAS_FLAGS]
+
+  func HasBeenModified
+    HRESULT
+    pfModified BOOL*
+
+

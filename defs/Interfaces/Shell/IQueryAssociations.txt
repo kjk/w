@@ -1,0 +1,42 @@
+include Interfaces\IUnknown.txt
+
+ingterface IQueryAssociations base=IUnknown id={c46ca590-3c3f-11d2-bee6-0000f805ca57} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Init
+    HRESULT
+    flags ASSOCF
+    pszAssoc LPCWSTR
+    hkProgid HKEY
+    hwnd HWND
+
+  func GetString
+    HRESULT
+    flags ASSOCF
+    str ASSOCSTR
+    pszExtra LPCWSTR
+    pszOut LPWSTR outputOnly
+    pcchOut DWORD*
+
+  func GetKey
+    HRESULT
+    flags ASSOCF
+    key ASSOCKEY
+    pszExtra LPCWSTR
+    phkeyOut HKEY*
+
+  func GetData
+    HRESULT
+    flags ASSOCF
+    data ASSOCDATA
+    pszExtra LPCWSTR
+    pvOut void*
+    pcbOut DWORD*
+
+  func GetEnum
+    HRESULT
+    flags ASSOCF
+    assocenum ASSOCENUM
+    pszExtra LPCWSTR
+    riid REFIID
+    ppvOut void** interfaceId=riid
+
+

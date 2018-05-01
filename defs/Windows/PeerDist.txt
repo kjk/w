@@ -1,0 +1,257 @@
+include Headers\windows.h.txt
+
+dll PeerDist.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Peer-to-Peer/Peer Distribution/Client-Server"
+category "Networking/Peer-to-Peer/Peer Distribution/Client"
+category "Networking/Peer-to-Peer/Peer Distribution/Server"
+alias PEERDIST_INSTANCE_HANDLE HANDLE
+
+pointer PPEERDIST_INSTANCE_HANDLE PEERDIST_INSTANCE_HANDLE
+
+alias PEERDIST_CONTENT_HANDLE HANDLE
+
+pointer PPEERDIST_CONTENT_HANDLE PEERDIST_CONTENT_HANDLE
+
+alias PEERDIST_CONTENTINFO_HANDLE HANDLE
+
+pointer PPEERDIST_CONTENTINFO_HANDLE PEERDIST_CONTENTINFO_HANDLE
+
+alias PEERDIST_STREAM_HANDLE HANDLE
+
+enum PEERDIST_STATUS UINT
+  PEERDIST_STATUS_DISABLED    0
+  PEERDIST_STATUS_UNAVAILABLE 1
+  PEERDIST_STATUS_AVAILABLE   2
+
+pointer PEERDIST_STATUS* PEERDIST_STATUS
+
+enum PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS UINT
+  PeerDistClientBasicInfo 0
+
+struct PEERDIST_STATUS_INFO
+  cbSize DWORD
+  status PEERDIST_STATUS
+  dwMinVer DWORD
+  dwMaxVer DWORD
+
+pointer PEERDIST_STATUS_INFO* PEERDIST_STATUS_INFO
+
+struct PEERDIST_CONTENT_TAG
+  Data "BYTE [16]"
+
+pointer PCPEERDIST_CONTENT_TAG PEERDIST_CONTENT_TAG
+
+struct PEERDIST_PUBLICATION_OPTIONS
+  dwVersion DWORD
+  dwFlags DWORD
+
+pointer PCPEERDIST_PUBLICATION_OPTIONS PEERDIST_PUBLICATION_OPTIONS
+
+struct PEERDIST_RETRIEVAL_OPTIONS
+  cbSize DWORD
+  dwContentInfoMinVersion DWORD
+  dwContentInfoMaxVersion DWORD
+  dwReserved DWORD
+
+pointer PEERDIST_RETRIEVAL_OPTIONS* PEERDIST_RETRIEVAL_OPTIONS
+
+func PeerDistStartup
+  [ERROR_CODE]
+  dwVersionRequested DWORD
+  phPeerDist PPEERDIST_INSTANCE_HANDLE
+  pdwSupportedVersion PDWORD
+
+func PeerDistShutdown
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+
+func PeerDistGetStatus
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  pPeerDistStatus PEERDIST_STATUS*
+
+func PeerDistGetStatusEx
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  pPeerDistStatusInfo PEERDIST_STATUS_INFO*
+
+func PeerDistGetOverlappedResult
+  BOOL
+  lpOverlapped LPOVERLAPPED
+  lpNumberOfBytesTransferred LPDWORD
+  bWait BOOL
+
+func PeerDistRegisterForStatusChangeNotification
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hCompletionPort HANDLE
+  ulCompletionKey ULONG_PTR
+  lpOverlapped LPOVERLAPPED
+  pPeerDistStatus PEERDIST_STATUS*
+
+func PeerDistRegisterForStatusChangeNotificationEx
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hCompletionPort HANDLE
+  ulCompletionKey ULONG_PTR
+  lpOverlapped LPOVERLAPPED
+  pPeerDistStatus PEERDIST_STATUS_INFO*
+
+func PeerDistUnregisterForStatusChangeNotification
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+
+func PeerDistClientOpenContent
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  pContentTag PCPEERDIST_CONTENT_TAG
+  hCompletionPort HANDLE
+  ulCompletionKey ULONG_PTR
+  phContentHandle PPEERDIST_CONTENT_HANDLE
+
+func PeerDistClientCloseContent
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hContentHandle PEERDIST_CONTENT_HANDLE
+
+func PeerDistClientGetInformationByHandle
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hContentHandle PEERDIST_CONTENT_HANDLE
+  PeerDistClientInfoClass PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS
+  dwBufferSize DWORD
+  lpInformation LPVOID
+
+func PeerDistClientAddContentInformation
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hContentHandle PEERDIST_CONTENT_HANDLE
+  cbNumberOfBytes DWORD
+  pBuffer PBYTE length=cbNumberOfBytes
+  lpOverlapped LPOVERLAPPED
+
+func PeerDistClientCompleteContentInformation
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hContentHandle PEERDIST_CONTENT_HANDLE
+  lpOverlapped LPOVERLAPPED
+
+func PeerDistClientAddData
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hContentHandle PEERDIST_CONTENT_HANDLE
+  cbNumberOfBytes DWORD
+  pBuffer PBYTE length=cbNumberOfBytes
+  lpOverlapped LPOVERLAPPED
+
+func PeerDistClientBlockRead
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hContentHandle PEERDIST_CONTENT_HANDLE
+  cbMaxNumberOfBytesToRead DWORD
+  pBuffer PBYTE postLength=cbMaxNumberOfBytesToRead
+  dwTimeoutInMilliseconds DWORD
+  lpOverlapped LPOVERLAPPED
+
+func PeerDistClientStreamRead
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hContentHandle PEERDIST_CONTENT_HANDLE
+  cbMaxNumberOfBytesToRead DWORD
+  pBuffer PBYTE postLength=cbMaxNumberOfBytesToRead
+  dwTimeoutInMilliseconds DWORD
+  lpOverlapped LPOVERLAPPED
+
+func PeerDistClientFlushContent
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  pContentTag PCPEERDIST_CONTENT_TAG
+  hCompletionPort HANDLE
+  ulCompletionKey ULONG_PTR
+  lpOverlapped LPOVERLAPPED
+
+func PeerDistClientCancelAsyncOperation
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hContentHandle PEERDIST_CONTENT_HANDLE
+  pOverlapped LPOVERLAPPED
+
+func PeerDistServerPublishStream
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  cbContentIdentifier DWORD
+  pContentIdentifier PBYTE length=cbContentLength
+  cbContentLength ULONGULONG
+  pPublishOptions PCPEERDIST_PUBLICATION_OPTIONS
+  hCompletionPort HANDLE
+  ulCompletionKey ULONG_PTR
+  phStream PEERDIST_STREAM_HANDLE
+
+func PeerDistServerPublishAddToStream
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hStream PEERDIST_STREAM_HANDLE
+  cbNumberOfBytes DWORD
+  pBuffer PBYTE length=cbNumberOfBytes
+  lpOverlapped LPOVERLAPPED
+
+func PeerDistServerPublishCompleteStream
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hStream PEERDIST_STREAM_HANDLE
+  lpOverlapped LPOVERLAPPED
+
+func PeerDistServerCloseStreamHandle
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hStream PEERDIST_STREAM_HANDLE
+
+func PeerDistServerUnpublish
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  cbContentIdentifier DWORD
+  pContentIdentifier PBYTE length=cbContentIdentifier
+
+func PeerDistServerOpenContentInformation
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  cbContentIdentifier DWORD
+  pContentIdentifier PBYTE length=cbContentIdentifier
+  ullContentOffset ULONGULONG
+  cbContentLength ULONGULONG
+  hCompletionPort HANDLE
+  ulCompletionKey ULONG_PTR
+  phContentInfo PPEERDIST_CONTENTINFO_HANDLE
+
+func PeerDistServerOpenContentInformationEx
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  cbContentIdentifier DWORD
+  pContentIdentifier PBYTE length=cbContentIdentifier
+  ullContentOffset ULONGLONG
+  cbContentLength ULONGLONG
+  pRetrievalOptions PEERDIST_RETRIEVAL_OPTIONS*
+  hCompletionPort HANDLE
+  ulCompletionKey ULONG_PTR
+  phContentInfo PPEERDIST_CONTENTINFO_HANDLE
+
+func PeerDistServerRetrieveContentInformation
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hContentInfo PEERDIST_CONTENTINFO_HANDLE
+  cbMaxNumberOfBytes DWORD
+  pBuffer PBYTE postLength=cbMaxNumberOfBytes
+  lpOverlapped LPOVERLAPPED
+
+func PeerDistServerCloseContentInformation
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  hContentInfo PEERDIST_CONTENT_HANDLE
+
+func PeerDistServerCancelAsyncOperation
+  [ERROR_CODE]
+  hPeerDist PEERDIST_INSTANCE_HANDLE
+  cbContentIdentifier DWORD
+  pContentIdentifier PBYTE length=cbContentIdentifier
+  pOverlapped LPOVERLAPPED
+

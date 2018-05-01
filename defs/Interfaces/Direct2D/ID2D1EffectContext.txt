@@ -1,0 +1,123 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1EffectContext base=IUnknown id={3d9f916b-27dc-4ad7-b4f1-64945340f563} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetDpi
+    void
+    dpiX FLOAT*
+    dpiY FLOAT*
+
+  func CreateEffect
+    [D2D_HRESULT]
+    effectId REFCLSID
+    effect ID2D1Effect**
+
+  func GetMaximumSupportedFeatureLevel
+    [D2D_HRESULT]
+    featureLevels "CONST D3D_FEATURE_LEVEL*" count=featureLevelsCount
+    featureLevelsCount UINT32
+    maximumSupportedFeatureLevel D3D_FEATURE_LEVEL*
+
+  func CreateTransformNodeFromEffect
+    [D2D_HRESULT]
+    effect ID2D1Effect*
+    transformNode ID2D1TransformNode**
+
+  func CreateBlendTransform
+    [D2D_HRESULT]
+    numInputs UINT32
+    blendDescription "CONST D2D1_BLEND_DESCRIPTION*"
+    transform ID2D1BlendTransform**
+
+  func CreateBorderTransform
+    [D2D_HRESULT]
+    extendModeX D2D1_EXTEND_MODE
+    extendModeY D2D1_EXTEND_MODE
+    transform ID2D1BorderTransform**
+
+  func CreateOffsetTransform
+    [D2D_HRESULT]
+    offset D2D1_POINT_2L
+    transform ID2D1OffsetTransform**
+
+  func CreateBoundsAdjustmentTransform
+    [D2D_HRESULT]
+    outputRectangle "CONST D2D1_RECT_L*"
+    transform ID2D1BoundsAdjustmentTransform**
+
+  func LoadPixelShader
+    [D2D_HRESULT]
+    shaderId REFGUID
+    shaderBuffer "CONST BYTE*" length=shaderBufferCount
+    shaderBufferCount UINT32
+
+  func LoadVertexShader
+    [D2D_HRESULT]
+    resourceId REFGUID
+    shaderBuffer "CONST BYTE*" length=shaderBufferCount
+    shaderBufferCount UINT32
+
+  func LoadComputeShader
+    [D2D_HRESULT]
+    resourceId REFGUID
+    shaderBuffer "CONST BYTE*" length=shaderBufferCount
+    shaderBufferCount UINT32
+
+  func IsShaderLoaded
+    BOOL
+    shaderId REFGUID
+
+  func CreateResourceTexture
+    [D2D_HRESULT]
+    resourceId "CONST GUID*"
+    resourceTextureProperties "CONST D2D1_RESOURCE_TEXTURE_PROPERTIES*"
+    data "CONST BYTE*" length=dataSize
+    strides "CONST UINT32*"
+    dataSize UINT32
+    resourceTexture ID2D1ResourceTexture**
+
+  func FindResourceTexture
+    [D2D_HRESULT]
+    resourceId "CONST GUID*"
+    resourceTexture ID2D1ResourceTexture**
+
+  func CreateVertexBuffer
+    [D2D_HRESULT]
+    vertexBufferProperties "CONST D2D1_VERTEX_BUFFER_PROPERTIES*"
+    resourceId "CONST GUID*"
+    customVertexBufferProperties "CONST D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*"
+    buffer ID2D1VertexBuffer**
+
+  func FindVertexBuffer
+    [D2D_HRESULT]
+    resourceId "CONST GUID*"
+    buffer ID2D1VertexBuffer**
+
+  func CreateColorContext
+    [D2D_HRESULT]
+    space D2D1_COLOR_SPACE
+    profile "CONST BYTE*" length=profileSize
+    profileSize UINT32
+    colorContext ID2D1ColorContext**
+
+  func CreateColorContextFromFilename
+    [D2D_HRESULT]
+    filename PCWSTR
+    colorContext ID2D1ColorContext**
+
+  func CreateColorContextFromWicColorContext
+    [D2D_HRESULT]
+    wicColorContext IWICColorContext*
+    colorContext ID2D1ColorContext**
+
+  func CheckFeatureSupport
+    [D2D_HRESULT]
+    feature D2D1_FEATURE
+    featureSupportData void* postLength=featureSupportDataSize
+    featureSupportDataSize UINT32
+
+  func IsBufferPrecisionSupported
+    BOOL
+    bufferPrecision D2D1_BUFFER_PRECISION
+
+

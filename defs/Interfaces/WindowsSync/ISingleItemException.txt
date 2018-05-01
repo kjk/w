@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISingleItemException base=IUnknown id={892fb9b0-7c55-4a18-9316-fdF449569b64} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetItemId
+    HRESULT
+    pbItemId BYTE*
+    pcbIdSize DWORD*
+
+  func GetClockVector
+    HRESULT
+    riid REFIID
+    ppUnk void** interfaceId=riid
+
+

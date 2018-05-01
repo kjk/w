@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+
+ingterface ICancelMethodCalls base=IUnknown id={00000029-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Cancel
+    HRESULT
+    ulSeconds ULONG
+
+  func TestCancel
+    HRESULT
+
+

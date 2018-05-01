@@ -1,0 +1,24 @@
+include Interfaces\Debugger\IDebugBreakpoint.txt
+
+ingterface IDebugBreakpoint2 base=IDebugBreakpoint id={1b278d20-79f2-426e-a3f9-c1ddf375d48e} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Other COM Interfaces"
+  func GetCommandWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    CommandSize PULONG
+
+  func SetCommandWide
+    HRESULT
+    Command PCWSTR
+
+  func GetOffsetExpressionWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    ExpressionSize PULONG
+
+  func SetOffsetExpressionWide
+    HRESULT
+    Expression PCWSTR
+
+

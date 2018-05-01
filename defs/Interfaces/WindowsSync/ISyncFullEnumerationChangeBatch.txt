@@ -1,0 +1,19 @@
+include Interfaces\WindowsSync\ISyncChangeBatchBase.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncFullEnumerationChangeBatch base=ISyncChangeBatchBase id={EF64197D-4F44-4ea2-B355-4524713E3BED} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetLearnedKnowledgeAfterRecoveryComplete
+    HRESULT
+    ppLearnedKnowledgeAfterRecoveryComplete ISyncKnowledge**
+
+  func GetClosedLowerBoundItemId
+    HRESULT
+    pbClosedLowerBoundItemId BYTE*
+    pcbIdSize DWORD*
+
+  func GetClosedUpperBoundItemId
+    HRESULT
+    pbClosedUpperBoundItemId BYTE*
+    pcbIdSize DWORD*
+
+

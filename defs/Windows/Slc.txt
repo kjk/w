@@ -1,0 +1,425 @@
+include Headers\windows.h.txt
+
+dll Slc.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Administration/Software Licensing API (SLAPI)"
+alias HSLC PVOID
+
+pointer HSLC* HSLC
+
+alias HSLP PVOID
+
+pointer HSLP* HSLP
+
+enum SLDATATYPE UINT
+  SL_DATA_NONE     0
+  SL_DATA_SZ       1
+  SL_DATA_BINARY   3
+  SL_DATA_DWORD    4
+  SL_DATA_MULTI_SZ 7
+  SL_DATA_SUM      100
+
+pointer SLDATATYPE* SLDATATYPE
+
+enum SLIDTYPE UINT
+  SL_ID_APPLICATION       0
+  SL_ID_PRODUCT_SKU       1
+  SL_ID_LICENSE_FILE      2
+  SL_ID_LICENSE           3
+  SL_ID_PKEY              4
+  SL_ID_ALL_LICENSES      5
+  SL_ID_ALL_LICENSE_FILES 6
+
+enum SLREFERRALTYPE UINT
+  SL_REFERRALTYPE_SKUID          0
+  SL_REFERRALTYPE_APPID          1
+  SL_REFERRALTYPE_OVERRIDE_SKUID 2
+  SL_REFERRALTYPE_OVERRIDE_APPID 3
+  SL_REFERRALTYPE_BEST_MATCH     4
+
+enum SLLICENSINGSTATUS UINT
+  SL_LICENSING_STATUS_UNLICENSED      0
+  SL_LICENSING_STATUS_LICENSED        1
+  SL_LICENSING_STATUS_IN_GRACE_PERIOD 2
+  SL_LICENSING_STATUS_NOTIFICATION    3
+
+struct SL_LICENSING_STATUS
+  SkuId SLID
+  eStatus SLLICENSINGSTATUS
+  dwGraceTime DWORD
+  dwTotalGraceDays DWORD
+  hrReason HRESULT
+  qwValidityExpiration UINT64
+
+pointer SL_LICENSING_STATUS* SL_LICENSING_STATUS
+
+pointer SL_LICENSING_STATUS** SL_LICENSING_STATUS*
+
+enum SL_ACTIVATION_TYPE UINT
+  SL_ACTIVATION_TYPE_DEFAULT          0
+  SL_ACTIVATION_TYPE_ACTIVE_DIRECTORY 1
+
+struct SL_ACTIVATION_INFO_HEADER
+  cbSize DWORD
+  type SL_ACTIVATION_TYPE
+
+pointer "const SL_ACTIVATION_INFO_HEADER*" SL_ACTIVATION_INFO_HEADER
+
+func SLActivateProduct
+  HRESULT
+  hSLC HSLC
+  pProductSkuId "const SLID*"
+  cbAppSpecificData UINT
+  pvAppSpecificData "const PVOID"
+  pActivationInfo "const SL_ACTIVATION_INFO_HEADER*"
+  pwszProxyServer PCWSTR
+  wProxyPort WORD
+
+func SLClose
+  HRESULT
+  hSLC HSLC
+
+func SLConsumeRight
+  HRESULT
+  hSLC HSLC
+  pAppId "const SLID*"
+  pProductSkuId "const SLID*"
+  pwszRightName PCWSTR
+  pvReserved PVOID
+
+func SLDepositMigrationBlob
+  HRESULT
+  hFile HANDLE
+
+func SLDepositOfflineConfirmationId
+  HRESULT
+  hSLC HSLC
+  pProductSkuId "const SLID*"
+  pwszInstallationId PCWSTR
+  pwszConfirmationId PCWSTR
+
+func SLDepositOfflineConfirmationIdEx
+  HRESULT
+  hSLC HSLC
+  pProductSkuId "const SLID*"
+  pActivationInfo "const SL_ACTIVATION_INFO_HEADER*"
+  pwszInstallationId PCWSTR
+  pwszConfirmationId PCWSTR
+
+func SLFireEvent
+  HRESULT
+  hSLC HSLC
+  pwszEventId PCWSTR
+  pApplicationId "const SLID*"
+
+func SLGatherMigrationBlob
+  HRESULT
+  bMigratableOnly BOOL
+  pwszEncryptorUri LPCWSTR
+  hFile HANDLE
+
+func SLGenerateOfflineInstallationId
+  HRESULT
+  hSLC HSLC
+  pProductSkuId "const SLID*"
+  ppwszInstallationId PWSTR*
+
+func SLGenerateOfflineInstallationIdEx
+  HRESULT
+  hSLC HSLC
+  pProductSkuId "const SLID*"
+  pActivationInfo "const SL_ACTIVATION_INFO_HEADER*"
+  ppwszInstallationId PWSTR*
+
+func SLGetApplicationInformation
+  HRESULT
+  hSLC HSLC
+  pApplicationId "const SLID*"
+  pwszValueName PCWSTR
+  peDataType SLDATATYPE*
+  pcbValue UINT*
+  ppbValue PBYTE* postLength=pcbValue
+
+func SLGetApplicationPolicy
+  HRESULT
+  hPolicyContext HSLP
+  pwszValueName PCWSTR
+  peDataType SLDATATYPE*
+  pcbValue UINT*
+  ppbValue PBYTE* postLength=pcbValue
+
+func SLGetAuthenticationResult
+  HRESULT
+  hSLC HSLC
+  pcbValue UINT*
+  ppbValue PBYTE* postLength=pcbValue
+
+func SLGetGenuineInformation
+  HRESULT
+  pAppId "const SLID*"
+  pwszValueName PCWSTR
+  peDataType SLDATATYPE*
+  pcbValue UINT*
+  ppbValue BYTE** postLength=pcbValue
+
+func SLSetGenuineInformation
+  HRESULT
+  pAppId "const SLID*"
+  pwszValueName PCWSTR
+  eDataType SLDATATYPE
+  cbValue UINT
+  pbValue "const BYTE*" length=cbValue
+
+func SLGetGenuineInformationEx
+  HRESULT
+  pAppId "const SLID*"
+  pwszValueName PCWSTR
+  peDataType SLDATATYPE*
+  pcbValue UINT*
+  ppbValue BYTE** postLength=pcbValue
+
+func SLGetInstalledProductKeyIds
+  HRESULT
+  hSLC HSLC
+  pProductSkuId "const SLID*"
+  pnProductKeyIds UINT*
+  ppProductKeyIds SLID** derefPostCount=pnProductKeyIds
+
+func SLGetInstalledSAMLicenseApplications
+  HRESULT
+  pnReturnedAppIds UINT*
+  ppReturnedAppIds SLID** derefPostCount=pnReturnedAppIds
+
+func SLGetLicense
+  HRESULT
+  hSLC HSLC
+  pLicenseFileId "const SLID*"
+  pcbLicenseFile UINT*
+  ppbLicenseFile PBYTE* postLength=pcbLicenseFile
+
+func SLGetLicenseFileId
+  HRESULT
+  hSLC HSLC
+  cbLicenseBlob UINT
+  pbLicenseBlob "const BYTE*"
+  pLicenseFileId SLID*
+
+func SLGetLicenseInformation
+  HRESULT
+  hSLC HSLC
+  pSLLicenseId "const SLID*"
+  pwszValueName PCWSTR
+  peDataType SLDATATYPE*
+  pcbValue UINT*
+  ppbValue PBYTE* postLength=pcbValue
+
+func SLGetLicensingStatusInformation
+  HRESULT
+  hSLC HSLC
+  pAppID "const SLID*"
+  pProductSkuId "const SLID*"
+  pwszRightName PCWSTR
+  pnStatusCount UINT*
+  ppLicensingStatus SL_LICENSING_STATUS** derefPostCount=pnStatusCount
+
+func SLGetPKeyId
+  HRESULT
+  hSLC HSLC
+  pwszPKeyAlgorithm PCWSTR
+  pwszPKeyString PCWSTR
+  cbPKeySpecificData UINT
+  pbPKeySpecificData "const BYTE*"
+  pPKeyId SLID*
+
+func SLGetPKeyInformation
+  HRESULT
+  hSLC HSLC
+  pPKeyId "const SLID*"
+  pwszValueName PCWSTR
+  peDataType SLDATATYPE*
+  pcbValue UINT*
+  ppbValue PBYTE* postLength=pcbValue
+
+func SLGetPolicyInformation
+  HRESULT
+  hSLC HSLC
+  pwszValueName PCWSTR
+  peDataType SLDATATYPE*
+  pcbValue UINT*
+  ppbValue PBYTE* postLength=pcbValue
+
+func SLGetPolicyInformationDWORD
+  HRESULT
+  hSLC HSLC
+  pwszValueName PCWSTR
+  pdwValue DWORD*
+
+func SLGetProductSkuInformation
+  HRESULT
+  hSLC HSLC
+  pProductSkuId "const SLID*"
+  pwszValueName PCWSTR
+  peDataType SLDATATYPE*
+  pcbValue UINT*
+  ppbValue PBYTE* postLength=pcbValue
+
+func SLGetReferralInformation
+  HRESULT
+  hSLC HSLC
+  eReferralType SLREFERRALTYPE
+  pSkuOrAppId "const SLID*"
+  pwszValueName PCWSTR
+  ppwszValue PWSTR*
+
+func SLGetSAMLicense
+  HRESULT
+  pApplicationId "const SLID*"
+  pcbXmlLicenseData UINT*
+  ppbXmlLicenseData PBYTE* postLength=pcbXmlLicenseData
+
+func SLGetServerStatus
+  HRESULT
+  pwszServerURL PCWSTR
+  pwszAcquisitionType PCWSTR
+  pwszProxyServer PCWSTR
+  wProxyPort WORD
+  phrStatus HRESULT*
+
+func SLGetServiceInformation
+  HRESULT
+  hSLC HSLC
+  pwszValueName PCWSTR
+  peDataType SLDATATYPE*
+  pcbValue UINT*
+  ppbValue PBYTE* postLength=pcbValue
+
+func SLGetSLIDList
+  HRESULT
+  hSLC HSLC
+  eQueryIdType SLIDTYPE
+  pQueryId "const SLID*"
+  eReturnIdType SLIDTYPE
+  pnReturnIds UINT*
+  ppReturnIds SLID** derefPostCount=pnReturnIds
+
+func SLGetWindowsInformation
+  HRESULT
+  pwszValueName PCWSTR
+  peDataType SLDATATYPE*
+  pcbValue UINT*
+  ppbValue PBYTE* postLength=pcbValue
+
+func SLGetWindowsInformationDWORD
+  HRESULT
+  pwszValueName PCWSTR
+  pdwValue DWORD*
+
+func SLInstallLicense
+  HRESULT
+  hSLC HSLC
+  cbLicenseBlob UINT
+  pbLicenseBlob "const BYTE*"
+  pLicenseFileId SLID*
+
+func SLInstallProofOfPurchase
+  HRESULT
+  hSLC HSLC
+  pwszPKeyAlgorithm PCWSTR
+  pwszPKeyString PCWSTR
+  cbPKeySpecificData UINT
+  pbPKeySpecificData PBYTE
+  pPKeyId SLID*
+
+func SLInstallProofOfPurchaseEx
+  HRESULT
+  hSLC HSLC
+  pApplicationId "const SLID*"
+  pProductSkuId "const SLID*"
+  pwszPKeyAlgorithm PCWSTR
+  pwszPKeyString PCWSTR
+  cbPKeySpecificData UINT
+  pbPKeySpecificData PBYTE
+  pPKeyId SLID*
+
+func SLInstallSAMLicense
+  HRESULT
+  pApplicationId "const SLID*"
+  cbXmlLicenseData UINT
+  pbXmlLicenseData "const BYTE*"
+
+func SLLoadApplicationPolicies
+  HRESULT
+  pApplicationId "const SLID*"
+  pProductSkuId "const SLID*"
+  dwFlags DWORD
+  phPolicyContext HSLP*
+
+func SLOpen
+  HRESULT
+  phSLC HSLC*
+
+func SLPersistApplicationPolicies
+  HRESULT
+  pApplicationId "const SLID*"
+  pProductSkuId "const SLID*"
+  dwFlags DWORD
+
+func SLPersistRTSPayloadOverride
+  HRESULT
+  hSLC HSLC
+  pApplicationId "const SLID*"
+  pProductSkuId "const SLID*"
+  pbData BYTE*
+  cbData DWORD
+
+func SLReArm
+  HRESULT
+  hSLC HSLC
+  pApplicationId "const SLID*"
+  pProductSkuId "const SLID*"
+  dwFlags DWORD
+
+func SLRegisterEvent
+  HRESULT
+  hSLC HSLC
+  pwszEventId PCWSTR
+  pApplicationId "const SLID*"
+  hEvent HANDLE
+
+func SLSetAuthenticationData
+  HRESULT
+  hSLC HSLC
+  cbValue UINT
+  pbValue "const BYTE*" length=cbValue
+
+func SLSetCurrentProductKey
+  HRESULT
+  hSLC HSLC
+  pProductSkuId "const SLID*"
+  pProductKeyId "const SLID*"
+
+func SLUninstallLicense
+  HRESULT
+  hSLC HSLC
+  pLicenseFileId "const SLID*"
+
+func SLUninstallProofOfPurchase
+  HRESULT
+  hSLC HSLC
+  pPKeyId "const SLID*"
+
+func SLUninstallSAMLicense
+  HRESULT
+  pApplicationId "const SLID*"
+
+func SLUnloadApplicationPolicies
+  HRESULT
+  hPolicyContext HSLP
+  dwFlags DWORD
+
+func SLUnregisterEvent
+  HRESULT
+  hSLC HSLC
+  pwszEventId PCWSTR
+  pApplicationId "const SLID*"
+  hEvent HANDLE
+

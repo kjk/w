@@ -1,0 +1,58 @@
+include Interfaces\IUnknown.txt
+include Interfaces\ITypeInfo.txt
+
+ingterface ITypeLib base=IUnknown id={00020402-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Type Description"
+  func GetTypeInfoCount
+    success NotEqual=0
+    UINT
+
+  func GetTypeInfo
+    HRESULT
+    index UINT
+    ppTInfo ITypeInfo**
+
+  func GetTypeInfoType
+    HRESULT
+    index UINT
+    pTKind TYPEKIND*
+
+  func GetTypeInfoOfGuid
+    HRESULT
+    guid REFGUID
+    ppTinfo ITypeInfo**
+
+  func GetLibAttr
+    HRESULT
+    ppTLibAttr TLIBATTR**
+
+  func GetTypeComp
+    HRESULT
+    ppTComp ITypeComp**
+
+  func GetDocumentation
+    HRESULT
+    index INT
+    pBstrName BSTR*
+    pBstrDocString BSTR*
+    pdwHelpContext DWORD*
+    pBstrHelpFile BSTR*
+
+  func IsName
+    HRESULT
+    szNameBuf LPOLESTR
+    lHashVal ULONG
+    pfName BOOL*
+
+  func FindName
+    HRESULT
+    szNameBuf LPOLESTR
+    lHashVal ULONG
+    ppTInfo ITypeInfo** postCount=pcFound
+    rgMemId MEMBERID* postCount=pcFound
+    pcFound USHORT*
+
+  func ReleaseTLibAttr
+    void
+    pTLibAttr TLIBATTR*
+
+

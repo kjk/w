@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IControlInterface base=IUnknown id={45d37c3f-5140-444a-ae24-400789f3cbf3} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetName
+    [AUDCLNT_HRESULT]
+    ppwstrName LPWSTR*
+
+  func GetIID
+    [AUDCLNT_HRESULT]
+    pIID GUID*
+
+

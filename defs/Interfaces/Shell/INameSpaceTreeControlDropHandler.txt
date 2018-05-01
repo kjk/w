@@ -1,0 +1,45 @@
+include Interfaces\IUnknown.txt
+
+ingterface INameSpaceTreeControlDropHandler base=IUnknown id={F9C665D6-C2F2-4c19-BF33-8322D7352F51} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnDragEnter
+    HRESULT
+    psiOver IShellItem*
+    psiaData IShellItemArray*
+    fOutsideSource BOOL
+    grfKeyState DWORD
+    pdwEffect DWORD*
+
+  func OnDragOver
+    HRESULT
+    psiOver IShellItem*
+    psiaData IShellItemArray*
+    grfKeyState DWORD
+    pdwEffect DWORD*
+
+  func OnDragPosition
+    HRESULT
+    psiOver IShellItem*
+    psiaData IShellItemArray*
+    iNewPosition int
+    iOldPosition int
+
+  func OnDrop
+    HRESULT
+    psiOver IShellItem*
+    psiaData IShellItemArray*
+    iPosition int
+    grfKeyState DWORD
+    pdwEffect DWORD*
+
+  func OnDropPosition
+    HRESULT
+    psiOver IShellItem*
+    psiaData IShellItemArray*
+    iNewPosition int
+    iOldPosition int
+
+  func OnDragLeave
+    HRESULT
+    psiOver IShellItem*
+
+

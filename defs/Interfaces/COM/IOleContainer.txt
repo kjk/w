@@ -1,0 +1,20 @@
+include Interfaces\COM\IParseDisplayName.txt
+
+ingterface IOleContainer base=IParseDisplayName id={0000011b-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func EnumObjects
+    HRESULT
+    grfFlags OLECONTF
+    ppenum IEnumUnknown**
+
+  func LockContainer
+    HRESULT
+    fLock BOOL
+
+  flag OLECONTF DWORD display=DWORD
+    OLECONTF_EMBEDDINGS    1
+    OLECONTF_LINKS         2
+    OLECONTF_OTHERS        4
+    OLECONTF_ONLYUSER      8
+    OLECONTF_ONLYIFRUNNING 16
+
+

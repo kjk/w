@@ -1,0 +1,2099 @@
+include Headers\ole.h.txt
+include Headers\security.h.txt
+
+header
+interface ADOCommandConstruction
+
+interface ADOConnectionConstruction
+
+interface ADOConnectionConstruction15
+
+interface ADOError
+
+interface ADOErrors
+
+interface ADOField
+
+interface ADOFields
+
+interface ADOParameters
+
+interface ADOProperties
+
+interface ADOProperty
+
+interface ADORecordConstruction
+
+interface ADORecordsetConstruction
+
+interface ADOStreamConstruction
+
+interface Command15
+
+interface Command25
+
+interface Connection15
+
+interface ConnectionEvents
+
+interface ConnectionEventsVt
+
+interface Field15
+
+interface Field20
+
+interface Fields15
+
+interface Fields20
+
+interface IAccessor
+
+interface IAlterIndex
+
+interface IAlterTable
+
+interface IBindResource
+
+interface IChapteredRowset
+
+interface IColumnsInfo
+
+interface IColumnsInfo2
+
+interface IColumnsRowset
+
+interface ICommand
+
+interface ICommandCost
+
+interface ICommandPersist
+
+interface ICommandPrepare
+
+interface ICommandProperties
+
+interface ICommandStream
+
+interface ICommandText
+
+interface ICommandValidate
+
+interface ICommandWithParameters
+
+interface IConvertType
+
+interface ICreateRow
+
+interface IDBAsynchNotify
+
+interface IDBAsynchStatus
+
+interface IDBBinderProperties
+
+interface IDBCreateCommand
+
+interface IDBCreateSession
+
+interface IDBDataSourceAdmin
+
+interface IDBInfo
+
+interface IDBInitialize
+
+interface IDBProperties
+
+interface IDBSchemaCommand
+
+interface IDBSchemaRowset
+
+interface IErrorLookup
+
+interface IErrorRecords
+
+interface IGetDataSource
+
+interface IGetRow
+
+interface IGetSession
+
+interface IGetSourceRow
+
+interface IIndexDefinition
+
+interface IMDDataset
+
+interface IMDFind
+
+interface IMDRangeRowset
+
+interface IMultipleResults
+
+interface IObjectAccessControl
+
+interface IOpenRowset
+
+interface IParentRowset
+
+interface IProvideMoniker
+
+interface IReadData
+
+interface IRegisterProvider
+
+interface IRow
+
+interface IRowChange
+
+interface IRowPosition
+
+interface IRowPositionChange
+
+interface IRowSchemaChange
+
+interface IRowset
+
+interface IRowsetAsynch
+
+interface IRowsetBookmark
+
+interface IRowsetChange
+
+interface IRowsetChapterMember
+
+interface IRowsetCopyRows
+
+interface IRowsetCurrentIndex
+
+interface IRowsetExactScroll
+
+interface IRowsetFastLoad
+
+interface IRowsetFind
+
+interface IRowsetIdentity
+
+interface IRowsetIndex
+
+interface IRowsetInfo
+
+interface IRowsetKeys
+
+interface IRowsetLocate
+
+interface IRowsetNewRowAfter
+
+interface IRowsetNextRowset
+
+interface IRowsetNotify
+
+interface IRowsetRefresh
+
+interface IRowsetResynch
+
+interface IRowsetScroll
+
+interface IRowsetUpdate
+
+interface IRowsetView
+
+interface IRowsetWatchAll
+
+interface IRowsetWatchNotify
+
+interface IRowsetWatchRegion
+
+interface IRowsetWithParameters
+
+interface ISchemaLock
+
+interface IScopedOperations
+
+interface ISecurityInfo
+
+interface ISessionProperties
+
+interface ISourcesRowset
+
+interface ISQLErrorInfo
+
+interface ISQLServerErrorInfo
+
+interface ITableCreation
+
+interface ITableDefinition
+
+interface ITableDefinitionWithConstraints
+
+interface ITableRename
+
+interface ITransactionJoin
+
+interface ITransactionLocal
+
+interface ITransactionObject
+
+interface ITrusteeAdmin
+
+interface ITrusteeGroupAdmin
+
+interface IViewChapter
+
+interface IViewFilter
+
+interface IViewRowset
+
+interface IViewSort
+
+interface Recordset15
+
+interface Recordset20
+
+interface Recordset21
+
+interface RecordsetEvents
+
+interface RecordsetEventsVt
+
+interface _ADO
+
+interface _ADOCollection
+
+interface _ADOCommand
+
+interface _ADOConnection
+
+interface _ADODynaCollection
+
+interface _ADOParameter
+
+interface _ADORecord
+
+interface _ADORecordset
+
+interface _ADOStream
+
+interface IAuthenticate
+
+interface ITypeInfo
+
+interface ITransactionOptions
+
+alias ADO_LONGPTR LONG_PTR
+
+pointer ADO_LONGPTR* ADO_LONGPTR
+
+alias HSOURCE WORD
+
+pointer HSOURCE* HSOURCE
+
+alias DBORDINAL ULONG_PTR
+
+pointer DBORDINAL* DBORDINAL
+
+pointer DBORDINAL** DBORDINAL*
+
+pointer "DBORDINAL* []" DBORDINAL*
+
+pointer "DBORDINAL []" DBORDINAL
+
+pointer "const DBORDINAL []" DBORDINAL
+
+alias "const DBORDINAL" DBORDINAL
+
+alias DBCOUNTITEM UINT_PTR
+
+pointer DBCOUNTITEM* DBCOUNTITEM
+
+alias DBREFCOUNT ULONG
+
+pointer DBREFCOUNT* DBREFCOUNT
+
+pointer "DBREFCOUNT []" DBREFCOUNT
+
+alias "const ULONG" ULONG
+
+pointer LPCOLESTR* LPCOLESTR
+
+pointer "LPCOLESTR []" LPCOLESTR
+
+alias DBBKMARK ULONG_PTR
+
+pointer DBBKMARK* DBBKMARK
+
+pointer "const DBBKMARK []" DBBKMARK
+
+alias DBLENGTH ULONG_PTR
+
+pointer DBLENGTH* DBLENGTH
+
+alias DBBYTEOFFSET ULONG_PTR
+
+alias DBROWCOUNT LONG_PTR
+
+pointer DBROWCOUNT* DBROWCOUNT
+
+alias DB_DWRESERVE DWORD_PTR
+
+alias "const IRowset*" IRowset*
+
+alias "const DWORD" DWORD
+
+alias DBHASHVALUE DWORD_PTR
+
+pointer "DBHASHVALUE []" DBHASHVALUE
+
+alias DB_UPARAMS ULONG_PTR
+
+pointer DB_UPARAMS* DB_UPARAMS
+
+pointer "const DB_UPARAMS []" DB_UPARAMS
+
+pointer "const VARIANT []" VARIANT
+
+alias DBROWOFFSET LONG_PTR
+
+alias DBROWOPTIONS DWORD
+
+pointer "DBROWOPTIONS []" DBROWOPTIONS
+
+alias DB_URESERVE ULONG_PTR
+
+alias DB_LPARAMS LONG_PTR
+
+pointer "DB_LPARAMS []" DB_LPARAMS
+
+alias DB_LORDINAL LONG_PTR
+
+pointer "const DB_LORDINAL []" DB_LORDINAL
+
+enum DBPROPID DWORD
+  DBPROP_ABORTPRESERVE                   0x2
+  DBPROP_ACTIVESESSIONS                  0x3
+  DBPROP_ASYNCTXNCOMMIT                  0x4
+  DBPROP_AUTH_CACHE_AUTHINFO             0x5
+  DBPROP_AUTH_ENCRYPT_PASSWORD           0x6
+  DBPROP_AUTH_INTEGRATED                 0x7
+  DBPROP_AUTH_MASK_PASSWORD              0x8
+  DBPROP_AUTH_PASSWORD                   0x9
+  DBPROP_AUTH_PERSIST_ENCRYPTED          0xa
+  DBPROP_AUTH_PERSIST_SENSITIVE_AUTHINFO 0xb
+  DBPROP_AUTH_USERID                     0xc
+  DBPROP_BLOCKINGSTORAGEOBJECTS          0xd
+  DBPROP_BOOKMARKS                       0xe
+  DBPROP_BOOKMARKSKIPPED                 0xf
+  DBPROP_BOOKMARKTYPE                    0x10
+  DBPROP_CACHEDEFERRED                   0x11
+  DBPROP_CANFETCHBACKWARDS               0x12
+  DBPROP_CANHOLDROWS                     0x13
+  DBPROP_CANSCROLLBACKWARDS              0x15
+  DBPROP_CATALOGLOCATION                 0x16
+  DBPROP_CATALOGTERM                     0x17
+  DBPROP_CATALOGUSAGE                    0x18
+  DBPROP_COL_AUTOINCREMENT               0x1a
+  DBPROP_COL_DEFAULT                     0x1b
+  DBPROP_COL_DESCRIPTION                 0x1c
+  DBPROP_COL_NULLABLE                    0x1d
+  DBPROP_COL_PRIMARYKEY                  0x1e
+  DBPROP_COL_UNIQUE                      0x1f
+  DBPROP_COLUMNDEFINITION                0x20
+  DBPROP_COLUMNRESTRICT                  0x21
+  DBPROP_COMMANDTIMEOUT                  0x22
+  DBPROP_COMMITPRESERVE                  0x23
+  DBPROP_CONCATNULLBEHAVIOR              0x24
+  DBPROP_CURRENTCATALOG                  0x25
+  DBPROP_DATASOURCENAME                  0x26
+  DBPROP_DATASOURCEREADONLY              0x27
+  DBPROP_DBMSNAME                        0x28
+  DBPROP_DBMSVER                         0x29
+  DBPROP_DEFERRED                        0x2a
+  DBPROP_DELAYSTORAGEOBJECTS             0x2b
+  DBPROP_GROUPBY                         0x2c
+  DBPROP_HETEROGENEOUSTABLES             0x2d
+  DBPROP_IDENTIFIERCASE                  0x2e
+  DBPROP_IMMOBILEROWS                    0x2f
+  DBPROP_INDEX_AUTOUPDATE                0x30
+  DBPROP_INDEX_CLUSTERED                 0x31
+  DBPROP_INDEX_FILLFACTOR                0x32
+  DBPROP_INDEX_INITIALSIZE               0x33
+  DBPROP_INDEX_NULLCOLLATION             0x34
+  DBPROP_INDEX_NULLS                     0x35
+  DBPROP_INDEX_PRIMARYKEY                0x36
+  DBPROP_INDEX_SORTBOOKMARKS             0x37
+  DBPROP_INDEX_TYPE                      0x38
+  DBPROP_INDEX_UNIQUE                    0x39
+  DBPROP_INIT_DATASOURCE                 0x3b
+  DBPROP_INIT_HWND                       0x3c
+  DBPROP_INIT_IMPERSONATION_LEVEL        0x3d
+  DBPROP_INIT_LOCATION                   0x3e
+  DBPROP_INIT_MODE                       0x3f
+  DBPROP_INIT_PROMPT                     0x40
+  DBPROP_INIT_PROTECTION_LEVEL           0x41
+  DBPROP_INIT_TIMEOUT                    0x42
+  DBPROP_LITERALBOOKMARKS                0x43
+  DBPROP_LITERALIDENTITY                 0x44
+  DBPROP_MAXINDEXSIZE                    0x46
+  DBPROP_MAXOPENROWS                     0x47
+  DBPROP_MAXPENDINGROWS                  0x48
+  DBPROP_MAXROWS                         0x49
+  DBPROP_MAXROWSIZE                      0x4a
+  DBPROP_MAXROWSIZEINCLUDESBLOB          0x4b
+  DBPROP_MAXTABLESINSELECT               0x4c
+  DBPROP_MAYWRITECOLUMN                  0x4d
+  DBPROP_MEMORYUSAGE                     0x4e
+  DBPROP_MULTIPLESTORAGEOBJECTS          0x50
+  DBPROP_MULTITABLEUPDATE                0x51
+  DBPROP_NOTIFICATIONPHASES              0x52
+  DBPROP_NULLCOLLATION                   0x53
+  DBPROP_OLEOBJECTS                      0x54
+  DBPROP_ORDERBYCOLUMNSINSELECT          0x55
+  DBPROP_ORDEREDBOOKMARKS                0x56
+  DBPROP_OTHERINSERT                     0x57
+  DBPROP_OTHERUPDATEDELETE               0x58
+  DBPROP_OWNINSERT                       0x59
+  DBPROP_OWNUPDATEDELETE                 0x5a
+  DBPROP_PREPAREABORTBEHAVIOR            0x5b
+  DBPROP_PREPARECOMMITBEHAVIOR           0x5c
+  DBPROP_PROCEDURETERM                   0x5d
+  DBPROP_PROVIDERFILENAME                0x60
+  DBPROP_PROVIDEROLEDBVER                0x61
+  DBPROP_PROVIDERVER                     0x62
+  DBPROP_QUICKRESTART                    0x63
+  DBPROP_QUOTEDIDENTIFIERCASE            0x64
+  DBPROP_REENTRANTEVENTS                 0x65
+  DBPROP_REMOVEDELETED                   0x66
+  DBPROP_REPORTMULTIPLECHANGES           0x67
+  DBPROP_ROWRESTRICT                     0x68
+  DBPROP_ROWTHREADMODEL                  0x69
+  DBPROP_SCHEMATERM                      0x6a
+  DBPROP_SCHEMAUSAGE                     0x6b
+  DBPROP_SERVERCURSOR                    0x6c
+  DBPROP_SQLSUPPORT                      0x6d
+  DBPROP_STRUCTUREDSTORAGE               0x6f
+  DBPROP_SUBQUERIES                      0x70
+  DBPROP_SUPPORTEDTXNISOLEVELS           0x71
+  DBPROP_SUPPORTEDTXNISORETAIN           0x72
+  DBPROP_TABLETERM                       0x73
+  DBPROP_TRANSACTEDOBJECT                0x74
+  DBPROP_UPDATABILITY                    0x75
+  DBPROP_USERNAME                        0x76
+  DBPROP_STRONGIDENTITY                  0x77
+  DBPROP_BYREFACCESSORS                  0x78
+  DBPROP_IAccessor                       0x79
+  DBPROP_IColumnsInfo                    0x7a
+  DBPROP_IColumnsRowset                  0x7b
+  DBPROP_IConnectionPointContainer       0x7c
+  DBPROP_IRowset                         0x7e
+  DBPROP_IRowsetChange                   0x7f
+  DBPROP_IRowsetIdentity                 0x80
+  DBPROP_IRowsetInfo                     0x81
+  DBPROP_IRowsetLocate                   0x82
+  DBPROP_IRowsetResynch                  0x84
+  DBPROP_IRowsetScroll                   0x85
+  DBPROP_IRowsetUpdate                   0x86
+  DBPROP_ISupportErrorInfo               0x87
+  DBPROP_ILockBytes                      0x88
+  DBPROP_ISequentialStream               0x89
+  DBPROP_IStorage                        0x8a
+  DBPROP_IStream                         0x8b
+  DBPROP_TBL_TEMPTABLE                   0x8c
+  DBPROP_IRowsetExactScroll              0x9a
+  DBPROP_IRowsetIndex                    0x9f
+  DBPROP_INIT_PROVIDERSTRING             0xa0
+  DBPROP_SUPPORTEDTXNDDL                 0xa1
+  DBPROP_INDEX_TEMPINDEX                 0xa3
+  DBPROP_COL_FIXEDLENGTH                 0xa7
+  DBPROP_ASYNCTXNABORT                   0xa8
+  DBPROP_DSOTHREADMODEL                  0xa9
+  DBPROP_NOTIFYCOLUMNSET                 0xab
+  DBPROP_NOTIFYROWDELETE                 0xad
+  DBPROP_NOTIFYROWFIRSTCHANGE            0xae
+  DBPROP_NOTIFYROWINSERT                 0xaf
+  DBPROP_NOTIFYROWRESYNCH                0xb1
+  DBPROP_NOTIFYROWSETRELEASE             0xb2
+  DBPROP_NOTIFYROWSETFETCHPOSITIONCHANGE 0xb3
+  DBPROP_NOTIFYROWUNDOCHANGE             0xb4
+  DBPROP_NOTIFYROWUNDODELETE             0xb5
+  DBPROP_NOTIFYROWUNDOINSERT             0xb6
+  DBPROP_NOTIFYROWUPDATE                 0xb7
+  DBPROP_OUTPUTPARAMETERAVAILABILITY     0xb8
+  DBPROP_PERSISTENTIDTYPE                0xb9
+  DBPROP_INIT_LCID                       0xba
+  DBPROP_APPENDONLY                      0xbb
+  DBPROP_CHANGEINSERTEDROWS              0xbc
+  DBPROP_RETURNPENDINGINSERTS            0xbd
+  DBPROP_SESS_AUTOCOMMITISOLEVELS        0xbe
+  DBPROP_MULTIPLEPARAMSETS               0xbf
+  DBPROP_ROWSETCONVERSIONSONCOMMAND      0xc0
+  DBPROP_IConvertType                    0xc2
+  DBPROP_MULTIPLERESULTS                 0xc4
+  DBPROP_MARSHALLABLE                    0xc5
+  DBPROP_NOTIFICATIONGRANULARITY         0xc6
+  DBPROP_MAXOPENCHAPTERS                 0xc7
+  DBPROP_INIT_ASYNCH                     0xc8
+  DBPROP_ROWSET_ASYNCH                   0xc9
+  DBPROP_IChapteredRowset                0xca
+  DBPROP_IDBAsynchStatus                 0xcb
+  DBPROP_IRowsetFind                     0xcc
+  DBPROP_MAXORSINFILTER                  0xcd
+  DBPROP_MAXSORTCOLUMNS                  0xce
+  DBPROP_SORTONINDEX                     0xcf
+  DBPROP_FILTEROPS                       0xd0
+  DBPROP_FILTERCOMPAREOPS                0xd1
+  DBPROP_FINDCOMPAREOPS                  0xd2
+  DBPROP_NOTIFYROWSETCHANGED             0xd3
+  DBPROP_IRowsetView                     0xd4
+  DBPROP_IViewChapter                    0xd5
+  DBPROP_IViewFilter                     0xd6
+  DBPROP_IViewRowset                     0xd7
+  DBPROP_IViewSort                       0xd8
+  DBPROP_IMultipleResults                0xd9
+  MDPROP_MDX_SLICER                      0xda
+  MDPROP_MDX_CUBEQUALIFICATION           0xdb
+  MDPROP_MDX_OUTERREFERENCE              0xdc
+  MDPROP_MDX_QUERYBYPROPERTY             0xdd
+  MDPROP_MDX_CASESUPPORT                 0xde
+  MDPROP_MDX_STRING_COMPOP               0xe0
+  MDPROP_MDX_DESCFLAGS                   0xe1
+  MDPROP_MDX_SET_FUNCTIONS               0xe2
+  MDPROP_MDX_MEMBER_FUNCTIONS            0xe3
+  MDPROP_MDX_NUMERIC_FUNCTIONS           0xe4
+  MDPROP_MDX_FORMULAS                    0xe5
+  MDPROP_MDX_AGGREGATECELL_UPDATE        0xe6
+  DBPROP_ACCESSORDER                     0xe7
+  DBPROP_BOOKMARKINFO                    0xe8
+  DBPROP_INIT_CATALOG                    0xe9
+  DBPROP_ROW_BULKOPS                     0xea
+  DBPROP_PROVIDERFRIENDLYNAME            0xeb
+  DBPROP_LOCKMODE                        0xec
+  DBPROP_MULTIPLECONNECTIONS             0xed
+  DBPROP_UNIQUEROWS                      0xee
+  DBPROP_SERVERDATAONINSERT              0xef
+  DBPROP_STORAGEFLAGS                    0xf0
+  DBPROP_TRUSTEE_USERNAME                0xf1
+  DBPROP_TRUSTEE_AUTHENTICATION          0xf2
+  DBPROP_TRUSTEE_NEWAUTHENTICATION       0xf3
+  DBPROP_CONNECTIONSTATUS                0xf4
+  DBPROP_ALTERCOLUMN                     0xf5
+  DBPROP_COLUMNLCID                      0xf6
+  DBPROP_RESETDATASOURCE                 0xf7
+  DBPROP_INIT_OLEDBSERVICES              0xf8
+  DBPROP_IRowsetRefresh                  0xf9
+  DBPROP_SERVER_NAME                     0xfa
+  DBPROP_DATASOURCE_TYPE                 0xfb
+  MDPROP_AXES                            0xfc
+  MDPROP_FLATTENING_SUPPORT              0xfd
+  MDPROP_MDX_JOINCUBES                   0xfe
+  MDPROP_NAMED_LEVELS                    0xff
+  MDPROP_RANGEROWSET                     0x100
+  DBPROP_IParentRowset                   0x101
+  DBPROP_HIDDENCOLUMNS                   0x102
+  DBPROP_PROVIDERMEMORY                  0x103
+  DBPROP_CLIENTCURSOR                    0x104
+  MDPROP_MDX_OBJQUALIFICATION            0x105
+  MDPROP_MDX_NONMEASURE_EXPRESSIONS      0x106
+  DBPROP_IRow                            0x107
+  DBPROP_IRowChange                      0x108
+  DBPROP_IRowSchemaChange                0x109
+  DBPROP_IGetRow                         0x10a
+  DBPROP_IScopedOperations               0x10b
+  DBPROP_IBindResource                   0x10c
+  DBPROP_ICreateRow                      0x10d
+  DBPROP_INIT_BINDFLAGS                  0x10e
+  DBPROP_INIT_LOCKOWNER                  0x10f
+  DBPROP_GENERATEURL                     0x111
+  DBPROP_IDBBinderProperties             0x112
+  DBPROP_IColumnsInfo2                   0x113
+  DBPROP_IRegisterProvider               0x114
+  DBPROP_IGetSession                     0x115
+  DBPROP_IGetSourceRow                   0x116
+  DBPROP_IRowsetCurrentIndex             0x117
+  DBPROP_OPENROWSETSUPPORT               0x118
+  DBPROP_COL_ISLONG                      0x119
+  DBPROP_COL_SEED                        0x11a
+  DBPROP_COL_INCREMENT                   0x11b
+  DBPROP_INIT_GENERALTIMEOUT             0x11c
+  DBPROP_COMSERVICES                     0x11d
+  DBPROP_OUTPUTSTREAM                    0x11e
+  DBPROP_OUTPUTENCODING                  0x11f
+  DBPROP_TABLESTATISTICS                 0x120
+  DBPROP_SKIPROWCOUNTRESULTS             0x123
+  DBPROP_IRowsetBookmark                 0x124
+  MDPROP_VISUALMODE                      0x125
+
+pointer DBPROPID* DBPROPID
+
+enum [OLEDB_HRESULT] HRESULT display=HRESULT
+  DB_S_ROWLIMITEXCEEDED           0x00040EC0
+  DB_S_COLUMNTYPEMISMATCH         0x00040EC1
+  DB_S_TYPEINFOOVERRIDDEN         0x00040EC2
+  DB_S_BOOKMARKSKIPPED            0x00040EC3
+  DB_S_NONEXTROWSET               0x00040EC5
+  DB_S_ENDOFROWSET                0x00040EC6
+  DB_S_COMMANDREEXECUTED          0x00040EC7
+  DB_S_BUFFERFULL                 0x00040EC8
+  DB_S_NORESULT                   0x00040EC9
+  DB_S_CANTRELEASE                0x00040ECA
+  DB_S_GOALCHANGED                0x00040ECB
+  DB_S_UNWANTEDOPERATION          0x00040ECC
+  DB_S_DIALECTIGNORED             0x00040ECD
+  DB_S_UNWANTEDPHASE              0x00040ECE
+  DB_S_UNWANTEDREASON             0x00040ECF
+  DB_S_ASYNCHRONOUS               0x00040ED0
+  DB_S_COLUMNSCHANGED             0x00040ED1
+  DB_S_ERRORSRETURNED             0x00040ED2
+  DB_S_BADROWHANDLE               0x00040ED3
+  DB_S_DELETEDROW                 0x00040ED4
+  DB_S_TOOMANYCHANGES             0x00040ED5
+  DB_S_STOPLIMITREACHED           0x00040ED6
+  DB_S_NOTSINGLETON               0x00040ED7
+  DB_S_LOCKUPGRADED               0x00040ED8
+  DB_S_PROPERTIESCHANGED          0x00040ED9
+  DB_S_ERRORSOCCURRED             0x00040EDA
+  DB_S_PARAMUNAVAILABLE           0x00040EDB
+  DB_S_MULTIPLECHANGES            0x00040EDC
+  DB_S_NOROWSPECIFICCOLUMNS       0x00040EDD
+  DB_E_BADACCESSORHANDLE          0x80040E00
+  DB_E_ROWLIMITEXCEEDED           0x80040E01
+  DB_E_READONLYACCESSOR           0x80040E02
+  DB_E_SCHEMAVIOLATION            0x80040E03
+  DB_E_BADROWHANDLE               0x80040E04
+  DB_E_OBJECTOPEN                 0x80040E05
+  DB_E_BADCHAPTER                 0x80040E06
+  DB_E_CANTCONVERTVALUE           0x80040E07
+  DB_E_BADBINDINFO                0x80040E08
+  DB_SEC_E_PERMISSIONDENIED       0x80040E09
+  DB_E_NOTAREFERENCECOLUMN        0x80040E0A
+  DB_E_LIMITREJECTED              0x80040E0B
+  DB_E_NOCOMMAND                  0x80040E0C
+  DB_E_COSTLIMIT                  0x80040E0D
+  DB_E_BADBOOKMARK                0x80040E0E
+  DB_E_BADLOCKMODE                0x80040E0F
+  DB_E_PARAMNOTOPTIONAL           0x80040E10
+  DB_E_BADCOLUMNID                0x80040E11
+  DB_E_BADRATIO                   0x80040E12
+  DB_E_BADVALUES                  0x80040E13
+  DB_E_ERRORSINCOMMAND            0x80040E14
+  DB_E_CANTCANCEL                 0x80040E15
+  DB_E_DIALECTNOTSUPPORTED        0x80040E16
+  DB_E_DUPLICATEDATASOURCE        0x80040E17
+  DB_E_CANNOTRESTART              0x80040E18
+  DB_E_NOTFOUND                   0x80040E19
+  DB_E_CANNOTFREE                 0x80040E1A
+  DB_E_NEWLYINSERTED              0x80040E1B
+  DB_E_GOALREJECTED               0x80040E1C
+  DB_E_UNSUPPORTEDCONVERSION      0x80040E1D
+  DB_E_BADSTARTPOSITION           0x80040E1E
+  DB_E_NOQUERY                    0x80040E1F
+  DB_E_NOTREENTRANT               0x80040E20
+  DB_E_ERRORSOCCURRED             0x80040E21
+  DB_E_NOAGGREGATION              0x80040E22
+  DB_E_DELETEDROW                 0x80040E23
+  DB_E_CANTFETCHBACKWARDS         0x80040E24
+  DB_E_ROWSNOTRELEASED            0x80040E25
+  DB_E_BADSTORAGEFLAG             0x80040E26
+  DB_E_BADCOMPAREOP               0x80040E27
+  DB_E_BADSTATUSVALUE             0x80040E28
+  DB_E_CANTSCROLLBACKWARDS        0x80040E29
+  DB_E_BADREGIONHANDLE            0x80040E2A
+  DB_E_NONCONTIGUOUSRANGE         0x80040E2B
+  DB_E_INVALIDTRANSITION          0x80040E2C
+  DB_E_NOTASUBREGION              0x80040E2D
+  DB_E_MULTIPLESTATEMENTS         0x80040E2E
+  DB_E_INTEGRITYVIOLATION         0x80040E2F
+  DB_E_BADTYPENAME                0x80040E30
+  DB_E_ABORTLIMITREACHED          0x80040E31
+  DB_E_ROWSETINCOMMAND            0x80040E32
+  DB_E_CANTTRANSLATE              0x80040E33
+  DB_E_DUPLICATEINDEXID           0x80040E34
+  DB_E_NOINDEX                    0x80040E35
+  DB_E_INDEXINUSE                 0x80040E36
+  DB_E_NOTABLE                    0x80040E37
+  DB_E_CONCURRENCYVIOLATION       0x80040E38
+  DB_E_BADCOPY                    0x80040E39
+  DB_E_BADPRECISION               0x80040E3A
+  DB_E_BADSCALE                   0x80040E3B
+  DB_E_BADTABLEID                 0x80040E3C
+  DB_E_BADTYPE                    0x80040E3D
+  DB_E_DUPLICATECOLUMNID          0x80040E3E
+  DB_E_DUPLICATETABLEID           0x80040E3F
+  DB_E_TABLEINUSE                 0x80040E40
+  DB_E_NOLOCALE                   0x80040E41
+  DB_E_BADRECORDNUM               0x80040E42
+  DB_E_BOOKMARKSKIPPED            0x80040E43
+  DB_E_BADPROPERTYVALUE           0x80040E44
+  DB_E_INVALID                    0x80040E45
+  DB_E_BADACCESSORFLAGS           0x80040E46
+  DB_E_BADSTORAGEFLAGS            0x80040E47
+  DB_E_BYREFACCESSORNOTSUPPORTED  0x80040E48
+  DB_E_NULLACCESSORNOTSUPPORTED   0x80040E49
+  DB_E_NOTPREPARED                0x80040E4A
+  DB_E_BADACCESSORTYPE            0x80040E4B
+  DB_E_WRITEONLYACCESSOR          0x80040E4C
+  DB_SEC_E_AUTH_FAILED            0x80040E4D
+  DB_E_CANCELED                   0x80040E4E
+  DB_E_CHAPTERNOTRELEASED         0x80040E4F
+  DB_E_BADSOURCEHANDLE            0x80040E50
+  DB_E_PARAMUNAVAILABLE           0x80040E51
+  DB_E_ALREADYINITIALIZED         0x80040E52
+  DB_E_NOTSUPPORTED               0x80040E53
+  DB_E_MAXPENDCHANGESEXCEEDED     0x80040E54
+  DB_E_BADORDINAL                 0x80040E55
+  DB_E_PENDINGCHANGES             0x80040E56
+  DB_E_DATAOVERFLOW               0x80040E57
+  DB_E_BADHRESULT                 0x80040E58
+  DB_E_BADLOOKUPID                0x80040E59
+  DB_E_BADDYNAMICERRORID          0x80040E5A
+  DB_E_PENDINGINSERT              0x80040E5B
+  DB_E_BADCONVERTFLAG             0x80040E5C
+  DB_E_BADPARAMETERNAME           0x80040E5D
+  DB_E_MULTIPLESTORAGE            0x80040E5E
+  DB_E_CANTFILTER                 0x80040E5F
+  DB_E_CANTORDER                  0x80040E60
+  MD_E_BADTUPLE                   0x80040E61
+  MD_E_BADCOORDINATE              0x80040E62
+  MD_E_INVALIDAXIS                0x80040E63
+  MD_E_INVALIDCELLRANGE           0x80040E64
+  DB_E_NOCOLUMN                   0x80040E65
+  DB_E_COMMANDNOTPERSISTED        0x80040E67
+  DB_E_DUPLICATEID                0x80040E68
+  DB_E_OBJECTCREATIONLIMITREACHED 0x80040E69
+  SEC_E_BADTRUSTEEID              0x80040E6A
+  SEC_E_NOTRUSTEEID               0x80040E6B
+  SEC_E_NOMEMBERSHIPSUPPORT       0x80040E6C
+  SEC_E_INVALIDOBJECT             0x80040E6D
+  SEC_E_NOOWNER                   0x80040E6E
+  SEC_E_INVALIDACCESSENTRYLIST    0x80040E6F
+  SEC_E_INVALIDOWNER              0x80040E70
+  SEC_E_INVALIDACCESSENTRY        0x80040E71
+  DB_E_BADINDEXID                 0x80040E72
+  DB_E_BADINITSTRING              0x80040E73
+  DB_E_NOPROVIDERSREGISTERED      0x80040E74
+  DB_E_MISMATCHEDPROVIDER         0x80040E75
+  DB_E_BADCOMMANDID               0x80040E76
+  DB_E_BADCONSTRAINTTYPE          0x80040E77
+  DB_E_BADCONSTRAINTFORM          0x80040E78
+  DB_E_BADDEFERRABILITY           0x80040E79
+  DB_E_BADMATCHTYPE               0x80040E80
+  DB_E_BADUPDATEDELETERULE        0x80040E8A
+  DB_E_BADCONSTRAINTID            0x80040E8B
+  DB_E_BADCOMMANDFLAGS            0x80040E8C
+  DB_E_OBJECTMISMATCH             0x80040E8D
+  DB_E_RESOURCEOUTOFSCOPE         0x80040E8E
+  DB_E_DROPRESTRICTED             0x80040E90
+  DB_E_NOSOURCEOBJECT             0x80040E91
+  DB_E_RESOURCELOCKED             0x80040E92
+  DB_E_NOTCOLLECTION              0x80040E93
+  DB_E_READONLY                   0x80040E94
+  DB_E_ASYNCNOTSUPPORTED          0x80040E95
+  DB_E_CANNOTCONNECT              0x80040E96
+  DB_E_TIMEOUT                    0x80040E97
+  DB_E_RESOURCEEXISTS             0x80040E98
+  DB_E_DUPLICATECONSTRAINTID      0x80040E99
+  DB_E_OUTOFSPACE                 0x80040E9A
+  DB_SEC_E_SAFEMODE_DENIED        0x80040E9B
+  DB_E_NOSTATISTIC                0x80040E9C
+  DB_E_ALTERRESTRICTED            0x80040E9D
+  DB_E_RESOURCENOTSUPPORTED       0x80040E9E
+  DB_E_NOCONSTRAINT               0x80040E9F
+  DB_E_COLUMNUNAVAILABLE          0x80040EA0
+
+enum HACCESSOR ULONG_PTR
+  DB_INVALID_HACCESSOR 0
+
+pointer HACCESSOR* HACCESSOR
+
+enum HCHAPTER ULONG_PTR
+  DB_NULL_HCHAPTER 0
+
+pointer HCHAPTER* HCHAPTER
+
+enum HROW ULONG_PTR
+  DB_NULL_HROW 0
+
+pointer HROW* HROW
+
+pointer HROW** HROW*
+
+pointer "HROW []" HROW
+
+pointer "const HROW []" HROW
+
+enum HWATCHREGION ULONG_PTR
+  DBWATCHREGION_NULL 0
+
+pointer HWATCHREGION* HWATCHREGION
+
+enum CursorTypeEnum UINT
+  adOpenUnspecified -1
+  adOpenForwardOnly 0
+  adOpenKeyset      1
+  adOpenDynamic     2
+  adOpenStatic      3
+
+pointer CursorTypeEnum* CursorTypeEnum
+
+enum CursorOptionEnum UINT
+  adHoldRecords    0x100
+  adMovePrevious   0x200
+  adBookmark       0x2000
+  adApproxPosition 0x4000
+  adUpdateBatch    0x10000
+  adResync         0x20000
+  adNotify         0x40000
+  adFind           0x80000
+  adSeek           0x400000
+  adIndex          0x800000
+  adAddNew         0x1000400
+  adDelete         0x1000800
+  adUpdate         0x1008000
+
+enum LockTypeEnum UINT
+  adLockUnspecified     -1
+  adLockReadOnly        1
+  adLockPessimistic     2
+  adLockOptimistic      3
+  adLockBatchOptimistic 4
+
+pointer LockTypeEnum* LockTypeEnum
+
+flag ExecuteOptionEnum UINT
+  adOptionUnspecified     -1
+  adAsyncExecute          0x10
+  adAsyncFetch            0x20
+  adAsyncFetchNonBlocking 0x40
+  adExecuteNoRecords      0x80
+  adExecuteStream         0x400
+  adExecuteRecord         0x800
+
+flag [ExecuteOptionCommandTypeEnum] ExecuteOptionEnum display=long
+  adCmdText        0x1
+  adCmdTable       0x2
+  adCmdStoredProc  0x4
+  adCmdUnknown     0x8
+  adCmdFile        0x100
+  adCmdTableDirect 0x200
+
+flag ConnectOptionEnum ULONG display=long
+  adConnectUnspecified -1
+  adAsyncConnect       0x10
+
+enum ObjectStateEnum UINT
+  adStateClosed     0
+  adStateOpen       0x1
+  adStateConnecting 0x2
+  adStateExecuting  0x4
+  adStateFetching   0x8
+
+pointer ObjectStateEnum* ObjectStateEnum
+
+enum CursorLocationEnum UINT
+  adUseNone   1
+  adUseServer 2
+  adUseClient 3
+
+pointer CursorLocationEnum* CursorLocationEnum
+
+enum DataTypeEnum UINT
+  adEmpty            0
+  adSmallInt         2
+  adInteger          3
+  adSingle           4
+  adDouble           5
+  adCurrency         6
+  adDate             7
+  adBSTR             8
+  adIDispatch        9
+  adError            10
+  adBoolean          11
+  adVariant          12
+  adIUnknown         13
+  adDecimal          14
+  adTinyInt          16
+  adUnsignedTinyInt  17
+  adUnsignedSmallInt 18
+  adUnsignedInt      19
+  adBigInt           20
+  adUnsignedBigInt   21
+  adFileTime         64
+  adGUID             72
+  adBinary           128
+  adChar             129
+  adWChar            130
+  adNumeric          131
+  adUserDefined      132
+  adDBDate           133
+  adDBTime           134
+  adDBTimeStamp      135
+  adChapter          136
+  adPropVariant      138
+  adVarNumeric       139
+  adVarChar          200
+  adLongVarChar      201
+  adVarWChar         202
+  adLongVarWChar     203
+  adVarBinary        204
+  adLongVarBinary    205
+  adArray            0x2000
+
+pointer DataTypeEnum* DataTypeEnum
+
+enum FieldAttributeEnum UINT
+  adFldUnspecified      -1
+  adFldMayDefer         0x2
+  adFldUpdatable        0x4
+  adFldUnknownUpdatable 0x8
+  adFldFixed            0x10
+  adFldIsNullable       0x20
+  adFldMayBeNull        0x40
+  adFldLong             0x80
+  adFldRowID            0x100
+  adFldRowVersion       0x200
+  adFldCacheDeferred    0x1000
+  adFldIsChapter        0x2000
+  adFldNegativeScale    0x4000
+  adFldKeyColumn        0x8000
+  adFldIsRowURL         0x10000
+  adFldIsDefaultStream  0x20000
+  adFldIsCollection     0x40000
+
+enum EditModeEnum UINT
+  adEditNone       0
+  adEditInProgress 0x1
+  adEditAdd        0x2
+  adEditDelete     0x4
+
+pointer EditModeEnum* EditModeEnum
+
+flag RecordStatusEnum ULONG display=long
+  adRecOK                   0
+  adRecNew                  0x1
+  adRecModified             0x2
+  adRecDeleted              0x4
+  adRecUnmodified           0x8
+  adRecInvalid              0x10
+  adRecMultipleChanges      0x40
+  adRecPendingChanges       0x80
+  adRecCanceled             0x100
+  adRecCantRelease          0x400
+  adRecConcurrencyViolation 0x800
+  adRecIntegrityViolation   0x1000
+  adRecMaxChangesExceeded   0x2000
+  adRecObjectOpen           0x4000
+  adRecOutOfMemory          0x8000
+  adRecPermissionDenied     0x10000
+  adRecSchemaViolation      0x20000
+  adRecDBDeleted            0x40000
+
+pointer RecordStatusEnum* RecordStatusEnum display=long*
+
+enum GetRowsOptionEnum UINT display=long
+  adGetRowsRest -1
+
+enum PositionEnum UINT
+  adPosEOF     -3
+  adPosBOF     -2
+  adPosUnknown -1
+
+pointer PositionEnum* PositionEnum
+
+enum MarshalOptionsEnum UINT
+  adMarshalAll          0
+  adMarshalModifiedOnly 1
+
+pointer MarshalOptionsEnum* MarshalOptionsEnum
+
+enum AffectEnum UINT
+  adAffectCurrent     1
+  adAffectGroup       2
+  adAffectAll         3
+  adAffectAllChapters 4
+
+enum ResyncEnum UINT
+  adResyncUnderlyingValues 1
+  adResyncAllValues        2
+
+enum CompareEnum UINT
+  adCompareLessThan      0
+  adCompareEqual         1
+  adCompareGreaterThan   2
+  adCompareNotEqual      3
+  adCompareNotComparable 4
+
+pointer CompareEnum* CompareEnum
+
+enum SearchDirectionEnum UINT
+  adSearchBackward -1
+  adSearchForward  1
+
+enum PersistFormatEnum UINT
+  adPersistADTG 0
+  adPersistXML  1
+
+enum StringFormatEnum UINT
+  adClipString 2
+
+enum ConnectModeEnum UINT
+  adModeUnknown        0
+  adModeRead           1
+  adModeWrite          2
+  adModeReadWrite      3
+  adModeShareDenyRead  4
+  adModeShareDenyWrite 8
+  adModeShareExclusive 0xc
+  adModeShareDenyNone  0x10
+  adModeRecursive      0x400000
+
+pointer ConnectModeEnum* ConnectModeEnum
+
+enum RecordCreateOptionsEnum UINT
+  adFailIfNotExists     -1
+  adCreateNonCollection 0
+  adCreateCollection    0x2000
+  adOpenIfExists        0x2000000
+  adCreateOverwrite     0x4000000
+  adCreateStructDoc     0x80000000
+
+enum RecordOpenOptionsEnum UINT
+  adOpenRecordUnspecified -1
+  adOpenAsync             0x1000
+  adDelayFetchStream      0x4000
+  adDelayFetchFields      0x8000
+  adOpenExecuteCommand    0x10000
+  adOpenSource            0x800000
+  adOpenOutput            0x800000
+
+enum IsolationLevelEnum UINT
+  adXactChaos           0x10
+  adXactReadUncommitted 0x100
+  adXactBrowse          0x100
+  adXactCursorStability 0x1000
+  adXactReadCommitted   0x1000
+  adXactRepeatableRead  0x10000
+  adXactSerializable    0x100000
+  adXactIsolated        0x100000
+  adXactUnspecified     0xffffffff
+
+pointer IsolationLevelEnum* IsolationLevelEnum
+
+flag XactAttributeEnum UINT display=long
+  adXactCommitRetaining 0x20000
+  adXactAbortRetaining  0x40000
+  adXactAsyncPhaseOne   0x80000
+  adXactSyncPhaseOne    0x100000
+
+pointer XactAttributeEnum* XactAttributeEnum display=long*
+
+flag PropertyAttributesEnum UINT display=long
+  adPropNotSupported 0
+  adPropRequired     0x1
+  adPropOptional     0x2
+  adPropRead         0x200
+  adPropWrite        0x400
+
+pointer PropertyAttributesEnum* PropertyAttributesEnum display=long*
+
+flag ParameterAttributesEnum UINT display=LONG
+  adParamSigned   0x10
+  adParamNullable 0x40
+  adParamLong     0x80
+
+pointer ParameterAttributesEnum* ParameterAttributesEnum display=LONG*
+
+enum ParameterDirectionEnum UINT
+  adParamUnknown     0
+  adParamInput       0x1
+  adParamOutput      0x2
+  adParamInputOutput 0x3
+  adParamReturnValue 0x4
+
+pointer ParameterDirectionEnum* ParameterDirectionEnum
+
+enum CommandTypeEnum UINT
+  adCmdUnspecified -1
+  adCmdText        0x1
+  adCmdTable       0x2
+  adCmdStoredProc  0x4
+  adCmdUnknown     0x8
+  adCmdFile        0x100
+  adCmdTableDirect 0x200
+
+pointer CommandTypeEnum* CommandTypeEnum
+
+enum EventStatusEnum UINT
+  adStatusOK             0x1
+  adStatusErrorsOccurred 0x2
+  adStatusCantDeny       0x3
+  adStatusCancel         0x4
+  adStatusUnwantedEvent  0x5
+
+pointer EventStatusEnum* EventStatusEnum
+
+enum EventReasonEnum UINT
+  adRsnAddNew       1
+  adRsnDelete       2
+  adRsnUpdate       3
+  adRsnUndoUpdate   4
+  adRsnUndoAddNew   5
+  adRsnUndoDelete   6
+  adRsnRequery      7
+  adRsnResynch      8
+  adRsnClose        9
+  adRsnMove         10
+  adRsnFirstChange  11
+  adRsnMoveFirst    12
+  adRsnMoveNext     13
+  adRsnMovePrevious 14
+  adRsnMoveLast     15
+
+enum SchemaEnum UINT
+  adSchemaProviderSpecific       -1
+  adSchemaAsserts                0
+  adSchemaCatalogs               1
+  adSchemaCharacterSets          2
+  adSchemaCollations             3
+  adSchemaColumns                4
+  adSchemaCheckConstraints       5
+  adSchemaConstraintColumnUsage  6
+  adSchemaConstraintTableUsage   7
+  adSchemaKeyColumnUsage         8
+  adSchemaReferentialConstraints 9
+  adSchemaTableConstraints       10
+  adSchemaColumnsDomainUsage     11
+  adSchemaIndexes                12
+  adSchemaColumnPrivileges       13
+  adSchemaTablePrivileges        14
+  adSchemaUsagePrivileges        15
+  adSchemaProcedures             16
+  adSchemaSchemata               17
+  adSchemaSQLLanguages           18
+  adSchemaStatistics             19
+  adSchemaTables                 20
+  adSchemaTranslations           21
+  adSchemaProviderTypes          22
+  adSchemaViews                  23
+  adSchemaViewColumnUsage        24
+  adSchemaViewTableUsage         25
+  adSchemaProcedureParameters    26
+  adSchemaForeignKeys            27
+  adSchemaPrimaryKeys            28
+  adSchemaProcedureColumns       29
+  adSchemaDBInfoKeywords         30
+  adSchemaDBInfoLiterals         31
+  adSchemaCubes                  32
+  adSchemaDimensions             33
+  adSchemaHierarchies            34
+  adSchemaLevels                 35
+  adSchemaMeasures               36
+  adSchemaProperties             37
+  adSchemaMembers                38
+  adSchemaTrustees               39
+  adSchemaFunctions              40
+  adSchemaActions                41
+  adSchemaCommands               42
+  adSchemaSets                   43
+
+enum FieldStatusEnum UINT display=long
+  adFieldOK                   0
+  adFieldCantConvertValue     2
+  adFieldIsNull               3
+  adFieldTruncated            4
+  adFieldSignMismatch         5
+  adFieldDataOverflow         6
+  adFieldCantCreate           7
+  adFieldUnavailable          8
+  adFieldPermissionDenied     9
+  adFieldIntegrityViolation   10
+  adFieldSchemaViolation      11
+  adFieldBadStatus            12
+  adFieldDefault              13
+  adFieldIgnore               15
+  adFieldDoesNotExist         16
+  adFieldInvalidURL           17
+  adFieldResourceLocked       18
+  adFieldResourceExists       19
+  adFieldCannotComplete       20
+  adFieldVolumeNotFound       21
+  adFieldOutOfSpace           22
+  adFieldCannotDeleteSource   23
+  adFieldReadOnly             24
+  adFieldResourceOutOfScope   25
+  adFieldAlreadyExists        26
+  adFieldPendingInsert        0x10000
+  adFieldPendingDelete        0x20000
+  adFieldPendingChange        0x40000
+  adFieldPendingUnknown       0x80000
+  adFieldPendingUnknownDelete 0x100000
+
+pointer FieldStatusEnum* FieldStatusEnum display=long*
+
+enum SeekEnum UINT
+  adSeekFirstEQ  0x1
+  adSeekLastEQ   0x2
+  adSeekAfterEQ  0x4
+  adSeekAfter    0x8
+  adSeekBeforeEQ 0x10
+  adSeekBefore   0x20
+
+enum MoveRecordOptionsEnum UINT
+  adMoveUnspecified     -1
+  adMoveOverWrite       1
+  adMoveDontUpdateLinks 2
+  adMoveAllowEmulation  4
+
+enum CopyRecordOptionsEnum UINT
+  adCopyUnspecified    -1
+  adCopyOverWrite      1
+  adCopyNonRecursive   2
+  adCopyAllowEmulation 4
+
+enum StreamTypeEnum UINT
+  adTypeBinary 1
+  adTypeText   2
+
+pointer StreamTypeEnum* StreamTypeEnum
+
+enum LineSeparatorEnum UINT
+  adCRLF -1
+  adLF   10
+  adCR   13
+
+pointer LineSeparatorEnum* LineSeparatorEnum
+
+enum StreamOpenOptionsEnum UINT
+  adOpenStreamUnspecified -1
+  adOpenStreamAsync       1
+  adOpenStreamFromRecord  4
+
+enum StreamWriteEnum UINT
+  adWriteChar/stWriteChar 0
+  adWriteLine/stWriteLine 1
+
+enum SaveOptionsEnum UINT
+  adSaveCreateNotExist  1
+  adSaveCreateOverWrite 2
+
+enum StreamReadEnum UINT display=long
+  adReadLine -2
+  adReadAll  -1
+
+enum RecordTypeEnum UINT
+  adSimpleRecord     0
+  adCollectionRecord 1
+  adStructDoc        2
+
+pointer RecordTypeEnum* RecordTypeEnum
+
+flag DBACCESSORFLAGS DWORD
+  DBACCESSOR_INVALID       0
+  DBACCESSOR_PASSBYREF     0x1
+  DBACCESSOR_ROWDATA       0x2
+  DBACCESSOR_PARAMETERDATA 0x4
+  DBACCESSOR_OPTIMIZED     0x8
+  DBACCESSOR_INHERITED     0x10
+
+pointer DBACCESSORFLAGS* DBACCESSORFLAGS
+
+flag DBPOSITIONFLAGS DWORD
+  DBPOSITION_OK    0
+  DBPOSITION_NOROW 1
+  DBPOSITION_BOF   2
+  DBPOSITION_EOF   3
+
+pointer DBPOSITIONFLAGS* DBPOSITIONFLAGS
+
+flag DBBINDURLFLAG DWORD
+  DBBINDURLFLAG_READ                 0x1
+  DBBINDURLFLAG_WRITE                0x2
+  DBBINDURLFLAG_READWRITE            0x3
+  DBBINDURLFLAG_SHARE_DENY_READ      0x4
+  DBBINDURLFLAG_SHARE_DENY_WRITE     0x8
+  DBBINDURLFLAG_SHARE_EXCLUSIVE      0xc
+  DBBINDURLFLAG_SHARE_DENY_NONE      0x10
+  DBBINDURLFLAG_ASYNCHRONOUS         0x1000
+  DBBINDURLFLAG_COLLECTION           0x2000
+  DBBINDURLFLAG_DELAYFETCHSTREAM     0x4000
+  DBBINDURLFLAG_DELAYFETCHCOLUMNS    0x8000
+  DBBINDURLFLAG_RECURSIVE            0x400000
+  DBBINDURLFLAG_OUTPUT               0x800000
+  DBBINDURLFLAG_WAITFORINIT          0x1000000
+  DBBINDURLFLAG_OPENIFEXISTS         0x2000000
+  DBBINDURLFLAG_OVERWRITE            0x4000000
+  DBBINDURLFLAG_ISSTRUCTUREDDOCUMENT 0x8000000
+
+flag DBRESULTFLAG ULONG_PTR
+  DBRESULTFLAG_DEFAULT 0
+  DBRESULTFLAG_ROWSET  1
+  DBRESULTFLAG_ROW     2
+
+flag DBPENDINGSTATUS DWORD
+  DBPENDINGSTATUS_NEW        0x1
+  DBPENDINGSTATUS_CHANGED    0x2
+  DBPENDINGSTATUS_DELETED    0x4
+  DBPENDINGSTATUS_UNCHANGED  0x8
+  DBPENDINGSTATUS_INVALIDROW 0x10
+
+pointer DBPENDINGSTATUS* DBPENDINGSTATUS
+
+pointer DBPENDINGSTATUS** DBPENDINGSTATUS*
+
+pointer "DBPENDINGSTATUS []" DBPENDINGSTATUS
+
+enum DBSORT DWORD
+  DBSORT_ASCENDING  0
+  DBSORT_DESCENDING 1
+
+pointer DBSORT* DBSORT
+
+pointer "DBSORT* []" DBSORT*
+
+pointer "const DBSORT []" DBSORT
+
+struct MDAXISINFO pack32=2
+  cbSize DBLENGTH
+  iAxis DBCOUNTITEM
+  cDimensions DBCOUNTITEM
+  cCoordinates DBCOUNTITEM
+  rgcColumns DBORDINAL* count=cDimensions
+  rgpwszDimensionNames LPOLESTR* count=cDimensions
+
+pointer MDAXISINFO* MDAXISINFO
+
+pointer MDAXISINFO** MDAXISINFO*
+
+flag DBTYPE WORD
+  DBTYPE_EMPTY       0
+  DBTYPE_NULL        1
+  DBTYPE_I2          2
+  DBTYPE_I4          3
+  DBTYPE_R4          4
+  DBTYPE_R8          5
+  DBTYPE_CY          6
+  DBTYPE_DATE        7
+  DBTYPE_BSTR        8
+  DBTYPE_IDISPATCH   9
+  DBTYPE_ERROR       10
+  DBTYPE_BOOL        11
+  DBTYPE_VARIANT     12
+  DBTYPE_IUNKNOWN    13
+  DBTYPE_DECIMAL     14
+  DBTYPE_I1          16
+  DBTYPE_UI1         17
+  DBTYPE_UI2         18
+  DBTYPE_UI4         19
+  DBTYPE_I8          20
+  DBTYPE_UI8         21
+  DBTYPE_FILETIME    64
+  DBTYPE_GUID        72
+  DBTYPE_BYTES       128
+  DBTYPE_STR         129
+  DBTYPE_WSTR        130
+  DBTYPE_NUMERIC     131
+  DBTYPE_UDT         132
+  DBTYPE_DBDATE      133
+  DBTYPE_DBTIME      134
+  DBTYPE_DBTIMESTAMP 135
+  DBTYPE_HCHAPTER    136
+  DBTYPE_PROPVARIANT 138
+  DBTYPE_VARNUMERIC  139
+  DBTYPE_VECTOR      0x1000
+  DBTYPE_ARRAY       0x2000
+  DBTYPE_BYREF       0x4000
+  DBTYPE_RESERVED    0x8000
+
+flag DBBINDFLAG DWORD display=DWORD
+  DBBINDFLAG_HTML 0x1
+
+struct DBOBJECT pack32=2
+  dwFlags [STGM_FLAGS]
+  iid IID
+
+pointer DBOBJECT* DBOBJECT
+
+struct DBBINDEXT pack32=2
+  pExtension BYTE* length=ulExtension
+  ulExtension DBCOUNTITEM
+
+pointer DBBINDEXT* DBBINDEXT
+
+flag DBPART DWORD
+  DBPART_INVALID 0
+  DBPART_VALUE   0x1
+  DBPART_LENGTH  0x2
+  DBPART_STATUS  0x4
+
+enum DBMEMOWNER DWORD
+  DBMEMOWNER_CLIENTOWNED   0
+  DBMEMOWNER_PROVIDEROWNED 0x1
+
+flag DBPARAMIO DWORD
+  DBPARAMIO_NOTPARAM 0
+  DBPARAMIO_INPUT    0x1
+  DBPARAMIO_OUTPUT   0x2
+
+struct DBBINDING pack32=2
+  iOrdinal DBORDINAL
+  obValue DBBYTEOFFSET
+  obLength DBBYTEOFFSET
+  obStatus DBBYTEOFFSET
+  pTypeInfo ITypeInfo*
+  pObject DBOBJECT*
+  pBindExt DBBINDEXT*
+  dwPart DBPART
+  dwMemOwner DBMEMOWNER
+  eParamIO DBPARAMIO
+  cbMaxLen DBLENGTH
+  dwFlags DBBINDFLAG
+  wType DBTYPE
+  bPrecision BYTE
+  bScale BYTE
+
+pointer DBBINDING* DBBINDING
+
+pointer DBBINDING** DBBINDING*
+
+pointer "const DBBINDING []" DBBINDING
+
+enum DBBINDSTATUS DWORD
+  DBBINDSTATUS_OK                    0
+  DBBINDSTATUS_BADORDINAL            1
+  DBBINDSTATUS_UNSUPPORTEDCONVERSION 2
+  DBBINDSTATUS_BADBINDINFO           3
+  DBBINDSTATUS_BADSTORAGEFLAGS       4
+  DBBINDSTATUS_NOINTERFACE           5
+  DBBINDSTATUS_MULTIPLESTORAGE       6
+
+pointer "DBBINDSTATUS []" DBBINDSTATUS
+
+enum DBASYNCHOP DWORD
+  DBASYNCHOP_OPEN 0
+
+struct OBJECTS_AND_NAME_W
+  ObjectsPresent DWORD
+  ObjectType SE_OBJECT_TYPE
+  ObjectTypeName LPWSTR
+  InheritedObjectTypeName LPWSTR
+  ptstrName LPWSTR
+
+pointer OBJECTS_AND_NAME_W* OBJECTS_AND_NAME_W
+
+union [TRUSTEE_W_u] display=union
+  ptstrName LPWSTR
+  pSid SID*
+  pObjectsAndSid OBJECTS_AND_SID*
+  pObjectsAndName OBJECTS_AND_NAME_W*
+
+struct TRUSTEE_W
+  pMultipleTrustee LPVOID display=TRUSTEE_W*
+  MultipleTrusteeOperation MULTIPLE_TRUSTEE_OPERATION
+  TrusteeForm TRUSTEE_FORM
+  TrusteeType TRUSTEE_TYPE
+   [TRUSTEE_W_u]
+
+pointer TRUSTEE_W* TRUSTEE_W
+
+pointer TRUSTEE_W** TRUSTEE_W*
+
+enum DBREASON DWORD
+  DBREASON_ROWSET_FETCHPOSITIONCHANGE 0
+  DBREASON_ROWSET_RELEASE             1
+  DBREASON_COLUMN_SET                 2
+  DBREASON_COLUMN_RECALCULATED        3
+  DBREASON_ROW_ACTIVATE               4
+  DBREASON_ROW_RELEASE                5
+  DBREASON_ROW_DELETE                 6
+  DBREASON_ROW_FIRSTCHANGE            7
+  DBREASON_ROW_INSERT                 8
+  DBREASON_ROW_RESYNCH                9
+  DBREASON_ROW_UNDOCHANGE             10
+  DBREASON_ROW_UNDOINSERT             11
+  DBREASON_ROW_UNDODELETE             12
+  DBREASON_ROW_UPDATE                 13
+  DBREASON_ROWSET_CHANGED             14
+  DBREASON_ROWPOSITION_CHANGED        15
+  DBREASON_ROWPOSITION_CHAPTERCHANGED 16
+  DBREASON_ROWPOSITION_CLEARED        17
+  DBREASON_ROW_ASYNCHINSERT           18
+
+enum LOCKMODE DWORD
+  LOCKMODE_INVALID   0
+  LOCKMODE_EXCLUSIVE 1
+  LOCKMODE_SHARED    2
+
+enum DBSTATUS DWORD
+  DBSTATUS_S_OK                 0
+  DBSTATUS_E_BADACCESSOR        1
+  DBSTATUS_E_CANTCONVERTVALUE   2
+  DBSTATUS_S_ISNULL             3
+  DBSTATUS_S_TRUNCATED          4
+  DBSTATUS_E_SIGNMISMATCH       5
+  DBSTATUS_E_DATAOVERFLOW       6
+  DBSTATUS_E_CANTCREATE         7
+  DBSTATUS_E_UNAVAILABLE        8
+  DBSTATUS_E_PERMISSIONDENIED   9
+  DBSTATUS_E_INTEGRITYVIOLATION 10
+  DBSTATUS_E_SCHEMAVIOLATION    11
+  DBSTATUS_E_BADSTATUS          12
+  DBSTATUS_S_DEFAULT            13
+  MDSTATUS_S_CELLEMPTY          14
+  DBSTATUS_S_IGNORE             15
+  DBSTATUS_E_DOESNOTEXIST       16
+  DBSTATUS_E_INVALIDURL         17
+  DBSTATUS_E_RESOURCELOCKED     18
+  DBSTATUS_E_RESOURCEEXISTS     19
+  DBSTATUS_E_CANNOTCOMPLETE     20
+  DBSTATUS_E_VOLUMENOTFOUND     21
+  DBSTATUS_E_OUTOFSPACE         22
+  DBSTATUS_S_CANNOTDELETESOURCE 23
+  DBSTATUS_E_READONLY           24
+  DBSTATUS_E_RESOURCEOUTOFSCOPE 25
+  DBSTATUS_S_ALREADYEXISTS      26
+  DBSTATUS_E_CANCELED           27
+  DBSTATUS_E_NOTCOLLECTION      28
+  DBSTATUS_S_ROWSETCOLUMN       29
+
+pointer "DBSTATUS []" DBSTATUS
+
+flag DBCOMPAREOP DWORD
+  DBCOMPAREOPS_LT              0
+  DBCOMPAREOPS_LE              1
+  DBCOMPAREOPS_EQ              2
+  DBCOMPAREOPS_GE              3
+  DBCOMPAREOPS_GT              4
+  DBCOMPAREOPS_BEGINSWITH      5
+  DBCOMPAREOPS_CONTAINS        6
+  DBCOMPAREOPS_NE              7
+  DBCOMPAREOPS_IGNORE          8
+  DBCOMPAREOPS_NOTBEGINSWITH   9
+  DBCOMPAREOPS_NOTCONTAINS     10
+  DBCOMPAREOPS_CASESENSITIVE   0x1000
+  DBCOMPAREOPS_CASEINSENSITIVE 0x2000
+
+pointer DBCOMPAREOP* DBCOMPAREOP
+
+pointer "DBCOMPAREOP* []" DBCOMPAREOP*
+
+pointer "DBCOMPAREOP []" DBCOMPAREOP
+
+flag DBRANGE DWORD
+  DBRANGE_INCLUSIVESTART/DBRANGE_INCLUSIVEEND 0
+  DBRANGE_EXCLUSIVESTART                      0x1
+  DBRANGE_EXCLUSIVEEND                        0x2
+  DBRANGE_EXCLUDENULLS                        0x4
+  DBRANGE_PREFIX                              0x8
+  DBRANGE_MATCH                               0x10
+  DBRANGE_MATCH_N_SHIFT                       0x18
+  DBRANGE_MATCH_N_MASK                        0xff
+
+flag DBSEEK DWORD
+  DBSEEK_INVALID  0
+  DBSEEK_FIRSTEQ  0x1
+  DBSEEK_LASTEQ   0x2
+  DBSEEK_AFTEREQ  0x4
+  DBSEEK_AFTER    0x8
+  DBSEEK_BEFOREEQ 0x10
+  DBSEEK_BEFORE   0x20
+
+flag DBCOLUMNDESCFLAGS DWORD
+  DBCOLUMNDESCFLAGS_TYPENAME   0x1
+  DBCOLUMNDESCFLAGS_ITYPEINFO  0x2
+  DBCOLUMNDESCFLAGS_PROPERTIES 0x4
+  DBCOLUMNDESCFLAGS_CLSID      0x8
+  DBCOLUMNDESCFLAGS_COLSIZE    0x10
+  DBCOLUMNDESCFLAGS_DBCID      0x20
+  DBCOLUMNDESCFLAGS_WTYPE      0x40
+  DBCOLUMNDESCFLAGS_PRECISION  0x80
+  DBCOLUMNDESCFLAGS_SCALE      0x100
+
+flag DBCONVERTFLAGS DWORD
+  DBCONVERTFLAGS_COLUMN        0
+  DBCONVERTFLAGS_PARAMETER     0x1
+  DBCONVERTFLAGS_ISLONG        0x2
+  DBCONVERTFLAGS_ISFIXEDLENGTH 0x4
+  DBCONVERTFLAGS_FROMVARIANT   0x8
+
+flag DBWATCHMODE DWORD
+  DBWATCHMODE_ALL    0x1
+  DBWATCHMODE_EXTEND 0x2
+  DBWATCHMODE_MOVE   0x4
+  DBWATCHMODE_COUNT  0x8
+
+pointer DBWATCHMODE* DBWATCHMODE
+
+enum DBROWSTATUS DWORD
+  DBROWSTATUS_S_OK                     0
+  DBROWSTATUS_S_MULTIPLECHANGES        2
+  DBROWSTATUS_S_PENDINGCHANGES         3
+  DBROWSTATUS_E_CANCELED               4
+  DBROWSTATUS_E_CANTRELEASE            6
+  DBROWSTATUS_E_CONCURRENCYVIOLATION   7
+  DBROWSTATUS_E_DELETED                8
+  DBROWSTATUS_E_PENDINGINSERT          9
+  DBROWSTATUS_E_NEWLYINSERTED          10
+  DBROWSTATUS_E_INTEGRITYVIOLATION     11
+  DBROWSTATUS_E_INVALID                12
+  DBROWSTATUS_E_MAXPENDCHANGESEXCEEDED 13
+  DBROWSTATUS_E_OBJECTOPEN             14
+  DBROWSTATUS_E_OUTOFMEMORY            15
+  DBROWSTATUS_E_PERMISSIONDENIED       16
+  DBROWSTATUS_E_LIMITREACHED           17
+  DBROWSTATUS_E_SCHEMAVIOLATION        18
+  DBROWSTATUS_E_FAIL                   19
+  DBROWSTATUS_S_NOCHANGE               20
+
+pointer DBROWSTATUS* DBROWSTATUS
+
+pointer DBROWSTATUS** DBROWSTATUS*
+
+pointer "DBROWSTATUS []" DBROWSTATUS
+
+flag DBPROPOPTIONS DWORD
+  DBPROPOPTIONS_REQUIRED 0
+  DBPROPOPTIONS_OPTIONAL 0x1
+
+enum DBPROPSTATUS DWORD
+  DBPROPSTATUS_OK             0
+  DBPROPSTATUS_NOTSUPPORTED   1
+  DBPROPSTATUS_BADVALUE       2
+  DBPROPSTATUS_BADOPTION      3
+  DBPROPSTATUS_BADCOLUMN      4
+  DBPROPSTATUS_NOTALLSETTABLE 5
+  DBPROPSTATUS_NOTSETTABLE    6
+  DBPROPSTATUS_NOTSET         7
+  DBPROPSTATUS_CONFLICTING    8
+  DBPROPSTATUS_NOTAVAILABLE   9
+
+struct DBPROP pack32=2
+  dwPropertyID DBPROPID
+  dwOptions DBPROPOPTIONS
+  dwStatus DBPROPSTATUS
+  colid DBID
+  vValue VARIANT
+
+pointer DBPROP* DBPROP
+
+struct DBPROPSET pack32=2
+  rgProperties DBPROP* count=cProperties
+  cProperties ULONG
+  guidPropertySet GUID
+
+pointer DBPROPSET* DBPROPSET
+
+pointer "DBPROPSET* []" DBPROPSET*
+
+pointer DBPROPSET** DBPROPSET*
+
+pointer "DBPROPSET []" DBPROPSET
+
+pointer "const DBPROPSET []" DBPROPSET
+
+struct DBCOLUMNDESC pack32=2
+  pwszTypeName LPOLESTR
+  pTypeInfo ITypeInfo*
+  rgPropertySets DBPROPSET* count=cPropertySets
+  pclsid CLSID*
+  cPropertySets ULONG
+  ulColumnSize DBLENGTH
+  dbcid DBID
+  wType DBTYPE
+  bPrecision BYTE
+  bScale BYTE
+
+pointer DBCOLUMNDESC* DBCOLUMNDESC
+
+pointer "DBCOLUMNDESC []" DBCOLUMNDESC
+
+pointer "const DBCOLUMNDESC []" DBCOLUMNDESC
+
+pointer "DBCOLUMNDESC* []" DBCOLUMNDESC*
+
+struct DBIMPLICITSESSION pack32=2
+  pUnkOuter IUnknown*
+  piid IID*
+  pSession IUnknown*
+
+pointer DBIMPLICITSESSION* DBIMPLICITSESSION
+
+flag DBCOLUMNFLAGS DWORD
+  DBCOLUMNFLAGS_ISBOOKMARK        0x1
+  DBCOLUMNFLAGS_MAYDEFER          0x2
+  DBCOLUMNFLAGS_WRITE             0x4
+  DBCOLUMNFLAGS_WRITEUNKNOWN      0x8
+  DBCOLUMNFLAGS_ISFIXEDLENGTH     0x10
+  DBCOLUMNFLAGS_ISNULLABLE        0x20
+  DBCOLUMNFLAGS_MAYBENULL         0x40
+  DBCOLUMNFLAGS_ISLONG            0x80
+  DBCOLUMNFLAGS_ISROWID           0x100
+  DBCOLUMNFLAGS_ISROWVER          0x200
+  DBCOLUMNFLAGS_CACHEDEFERRED     0x1000
+  DBCOLUMNFLAGS_ISCHAPTER         0x2000
+  DBCOLUMNFLAGS_SCALEISNEGATIVE   0x4000
+  DBCOLUMNFLAGS_KEYCOLUMN         0x8000
+  DBCOLUMNFLAGS_ISROWURL          0x10000
+  DBCOLUMNFLAGS_ISDEFAULTSTREAM   0x20000
+  DBCOLUMNFLAGS_ISCOLLECTION      0x40000
+  DBCOLUMNFLAGS_ISSTREAM          0x80000
+  DBCOLUMNFLAGS_ISROWSET          0x100000
+  DBCOLUMNFLAGS_ISROW             0x200000
+  DBCOLUMNFLAGS_ROWSPECIFICCOLUMN 0x400000
+
+struct DBCOLUMNINFO pack32=2
+  pwszName LPOLESTR
+  pTypeInfo ITypeInfo*
+  iOrdinal DBORDINAL
+  dwFlags DBCOLUMNFLAGS
+  ulColumnSize DBLENGTH
+  wType DBTYPE
+  bPrecision BYTE
+  bScale BYTE
+  columnid DBID
+
+pointer DBCOLUMNINFO* DBCOLUMNINFO
+
+pointer DBCOLUMNINFO** DBCOLUMNINFO*
+
+pointer "const DBCOLUMNINFO []" DBCOLUMNINFO
+
+struct DBPARAMS pack32=2
+  pData void*
+  cParamSets DB_UPARAMS
+  hAccessor HACCESSOR
+
+pointer DBPARAMS* DBPARAMS
+
+struct DBPROPIDSET pack32=2
+  rgPropertyIDs DBPROPID* count=cPropertyIDs
+  cPropertyIDs ULONG
+  guidPropertySet GUID
+
+pointer "const DBPROPIDSET []" DBPROPIDSET
+
+enum DBASYNCHPHASE DWORD
+  DBASYNCHPHASE_INITIALIZATION 0
+  DBASYNCHPHASE_POPULATION     1
+  DBASYNCHPHASE_COMPLETE       2
+  DBASYNCHPHASE_CANCELED       3
+
+pointer DBASYNCHPHASE* DBASYNCHPHASE
+
+enum DBLITERAL DWORD
+  DBLITERAL_INVALID                  0
+  DBLITERAL_BINARY_LITERAL           1
+  DBLITERAL_CATALOG_NAME             2
+  DBLITERAL_CATALOG_SEPARATOR        3
+  DBLITERAL_CHAR_LITERAL             4
+  DBLITERAL_COLUMN_ALIAS             5
+  DBLITERAL_COLUMN_NAME              6
+  DBLITERAL_CORRELATION_NAME         7
+  DBLITERAL_CURSOR_NAME              8
+  DBLITERAL_ESCAPE_PERCENT           9
+  DBLITERAL_ESCAPE_UNDERSCORE        10
+  DBLITERAL_INDEX_NAME               11
+  DBLITERAL_LIKE_PERCENT             12
+  DBLITERAL_LIKE_UNDERSCORE          13
+  DBLITERAL_PROCEDURE_NAME           14
+  DBLITERAL_QUOTE                    15
+  DBLITERAL_SCHEMA_NAME              16
+  DBLITERAL_TABLE_NAME               17
+  DBLITERAL_TEXT_COMMAND             18
+  DBLITERAL_USER_NAME                19
+  DBLITERAL_VIEW_NAME                20
+  DBLITERAL_CUBE_NAME                21
+  DBLITERAL_DIMENSION_NAME           22
+  DBLITERAL_HIERARCHY_NAME           23
+  DBLITERAL_LEVEL_NAME               24
+  DBLITERAL_MEMBER_NAME              25
+  DBLITERAL_PROPERTY_NAME            26
+  DBLITERAL_SCHEMA_SEPARATOR         27
+  DBLITERAL_QUOTE_SUFFIX             28
+  DBLITERAL_ESCAPE_PERCENT_SUFFIX    29
+  DBLITERAL_ESCAPE_UNDERSCORE_SUFFIX 30
+
+pointer "const DBLITERAL []" DBLITERAL
+
+enum DBEVENTPHASE DWORD
+  DBEVENTPHASE_OKTODO     0
+  DBEVENTPHASE_ABOUTTODO  1
+  DBEVENTPHASE_SYNCHAFTER 2
+  DBEVENTPHASE_FAILEDTODO 3
+  DBEVENTPHASE_DIDEVENT   4
+
+enum DBINDEX_COL_ORDER DWORD
+  DBINDEX_COL_ORDER_ASC  0
+  DBINDEX_COL_ORDER_DESC 1
+
+struct DBINDEXCOLUMNDESC pack32=2
+  pColumnID DBID*
+  eIndexColOrder DBINDEX_COL_ORDER
+
+pointer DBINDEXCOLUMNDESC* DBINDEXCOLUMNDESC
+
+pointer DBINDEXCOLUMNDESC** DBINDEXCOLUMNDESC
+
+pointer "const DBINDEXCOLUMNDESC []" DBINDEXCOLUMNDESC
+
+struct DBCOLUMNACCESS pack32=2
+  pData void* length=cbDataLen
+  columnid DBID
+  cbDataLen DBLENGTH
+  dwStatus DBSTATUS
+  cbMaxLen DBLENGTH
+  dwReserved DB_DWRESERVE
+  wType DBTYPE
+  bPrecision BYTE
+  bScale BYTE
+
+pointer "DBCOLUMNACCESS []" DBCOLUMNACCESS
+
+enum DBCOMPARE DWORD
+  DBCOMPARE_LT            0
+  DBCOMPARE_EQ            1
+  DBCOMPARE_GT            2
+  DBCOMPARE_NE            3
+  DBCOMPARE_NOTCOMPARABLE 4
+
+pointer DBCOMPARE* DBCOMPARE
+
+enum DBWATCHNOTIFY DWORD
+  DBWATCHNOTIFY_ROWSCHANGED     1
+  DBWATCHNOTIFY_QUERYDONE       2
+  DBWATCHNOTIFY_QUERYREEXECUTED 3
+
+enum DBROWCHANGEKIND DWORD
+  DBROWCHANGEKIND_INSERT 0
+  DBROWCHANGEKIND_DELETE 1
+  DBROWCHANGEKIND_UPDATE 2
+  DBROWCHANGEKIND_COUNT  3
+
+struct DBROWWATCHCHANGE pack32=2
+  hRegion HWATCHREGION
+  eChangeKind DBROWCHANGEKIND
+  hRow HROW
+  iRow DBCOUNTITEM
+
+pointer DBROWWATCHCHANGE* DBROWWATCHCHANGE
+
+pointer DBROWWATCHCHANGE** DBROWWATCHCHANGE*
+
+enum DBCOSTUNIT DWORD
+  DBUNIT_INVALID      0
+  DBUNIT_WEIGHT       0x1
+  DBUNIT_PERCENT      0x2
+  DBUNIT_MAXIMUM      0x4
+  DBUNIT_MINIMUM      0x8
+  DBUNIT_MICRO_SECOND 0x10
+  DBUNIT_MILLI_SECOND 0x20
+  DBUNIT_SECOND       0x40
+  DBUNIT_MINUTE       0x80
+  DBUNIT_HOUR         0x100
+  DBUNIT_BYTE         0x200
+  DBUNIT_KILO_BYTE    0x400
+  DBUNIT_MEGA_BYTE    0x800
+  DBUNIT_GIGA_BYTE    0x1000
+  DBUNIT_NUM_MSGS     0x2000
+  DBUNIT_NUM_LOCKS    0x4000
+  DBUNIT_NUM_ROWS     0x8000
+  DBUNIT_OTHER        0x10000
+
+enum DBRESOURCEKIND DWORD
+  DBRESOURCE_INVALID  0
+  DBRESOURCE_TOTAL    1
+  DBRESOURCE_CPU      2
+  DBRESOURCE_MEMORY   3
+  DBRESOURCE_DISK     4
+  DBRESOURCE_NETWORK  5
+  DBRESOURCE_RESPONSE 6
+  DBRESOURCE_ROWS     7
+  DBRESOURCE_OTHER    8
+
+struct DBCOST pack32=2
+  eKind DBRESOURCEKIND
+  dwUnits DBCOSTUNIT
+  lValue LONG
+
+pointer DBCOST* DBCOST
+
+pointer DBCOST** DBCOST*
+
+pointer "const DBCOST []" DBCOST
+
+enum DBCONSTRAINTTYPE DWORD
+  DBCONSTRAINTTYPE_UNIQUE     0
+  DBCONSTRAINTTYPE_FOREIGNKEY 0x1
+  DBCONSTRAINTTYPE_PRIMARYKEY 0x2
+  DBCONSTRAINTTYPE_CHECK      0x3
+
+enum DBUPDELRULE DWORD
+  DBUPDELRULE_NOACTION   0
+  DBUPDELRULE_CASCADE    0x1
+  DBUPDELRULE_SETNULL    0x2
+  DBUPDELRULE_SETDEFAULT 0x3
+
+enum DBMATCHTYPE DWORD
+  DBMATCHTYPE_FULL    0
+  DBMATCHTYPE_NONE    0x1
+  DBMATCHTYPE_PARTIAL 0x2
+
+enum DBDEFERRABILITY DWORD
+  DBDEFERRABILITY_DEFERRED   0x1
+  DBDEFERRABILITY_DEFERRABLE 0x2
+
+struct DBCONSTRAINTDESC pack32=2
+  pConstraintID DBID*
+  ConstraintType DBCONSTRAINTTYPE
+  cColumns DBORDINAL
+  rgColumnList DBID* count=cColumns
+  pReferencedTableID DBID*
+  cForeignKeyColumns DBORDINAL
+  rgForeignKeyColumnList DBID* count=cForeignKeyColumns
+  pwszConstraintText OLECHAR*
+  UpdateRule DBUPDELRULE
+  DeleteRule DBUPDELRULE
+  MatchType DBMATCHTYPE
+  Deferrability DBDEFERRABILITY
+  cReserved DB_URESERVE
+  rgReserved DBPROPSET* count=cReserved
+
+pointer DBCONSTRAINTDESC* DBCONSTRAINTDESC
+
+pointer "DBCONSTRAINTDESC []" DBCONSTRAINTDESC
+
+pointer "DBCONSTRAINTDESC* []" DBCONSTRAINTDESC*
+
+struct ERRORINFO pack32=2
+  hrError HRESULT
+  dwMinor DWORD
+  clsid CLSID
+  iid IID
+  dispid DISPID
+
+pointer ERRORINFO* ERRORINFO
+
+struct SEC_OBJECT_ELEMENT pack32=2
+  guidObjectType GUID
+  ObjectID DBID
+
+pointer SEC_OBJECT_ELEMENT* SEC_OBJECT_ELEMENT
+
+struct SEC_OBJECT pack32=2
+  cObjects DWORD
+  prgObjects SEC_OBJECT_ELEMENT* count=cObjects
+
+pointer SEC_OBJECT* SEC_OBJECT
+
+struct SSERRORINFO
+  pwszMessage LPOLESTR
+  pwszServer LPOLESTR
+  pwszProcedure LPOLESTR
+  lNative LONG
+  bState BYTE
+  bClass BYTE
+  wLineNumber WORD
+
+pointer SSERRORINFO* SSERRORINFO
+
+pointer SSERRORINFO** SSERRORINFO*
+
+enum DBBINDURLSTATUS DWORD
+  DBBINDURLSTATUS_S_OK                   0
+  DBBINDURLSTATUS_S_DENYNOTSUPPORTED     0x1
+  DBBINDURLSTATUS_S_DENYTYPENOTSUPPORTED 0x4
+  DBBINDURLSTATUS_S_REDIRECTED           0x8
+
+pointer DBBINDURLSTATUS* DBBINDURLSTATUS
+
+enum DBEXECLIMITS DWORD
+  DBEXECLIMITS_ABORT   1
+  DBEXECLIMITS_STOP    2
+  DBEXECLIMITS_SUSPEND 3
+
+flag DBPARAMFLAGS DWORD
+  DBPARAMFLAGS_ISINPUT         0x1
+  DBPARAMFLAGS_ISOUTPUT        0x2
+  DBPARAMFLAGS_ISSIGNED        0x10
+  DBPARAMFLAGS_ISNULLABLE      0x40
+  DBPARAMFLAGS_ISLONG          0x80
+  DBPARAMFLAGS_SCALEISNEGATIVE 0x100
+
+struct DBPARAMINFO pack32=2
+  dwFlags DBPARAMFLAGS
+  iOrdinal DBORDINAL
+  pwszName LPOLESTR
+  pTypeInfo ITypeInfo*
+  ulParamSize DBLENGTH
+  wType DBTYPE
+  bPrecision BYTE
+  bScale BYTE
+
+pointer DBPARAMINFO* DBPARAMINFO
+
+pointer DBPARAMINFO** DBPARAMINFO*
+
+struct DBPARAMBINDINFO pack32=2
+  pwszDataSourceType LPOLESTR
+  pwszName LPOLESTR
+  ulParamSize DBLENGTH
+  dwFlags DBPARAMFLAGS
+  bPrecision BYTE
+  bScale BYTE
+
+pointer "const DBPARAMBINDINFO []" DBPARAMBINDINFO
+
+flag DBPROPFLAGS DWORD
+  DBPROPFLAGS_NOTSUPPORTED     0
+  DBPROPFLAGS_COLUMN           0x1
+  DBPROPFLAGS_DATASOURCE       0x2
+  DBPROPFLAGS_DATASOURCECREATE 0x4
+  DBPROPFLAGS_DATASOURCEINFO   0x8
+  DBPROPFLAGS_DBINIT           0x10
+  DBPROPFLAGS_INDEX            0x20
+  DBPROPFLAGS_ROWSET           0x40
+  DBPROPFLAGS_TABLE            0x80
+  DBPROPFLAGS_COLUMNOK         0x100
+  DBPROPFLAGS_READ             0x200
+  DBPROPFLAGS_WRITE            0x400
+  DBPROPFLAGS_REQUIRED         0x800
+  DBPROPFLAGS_SESSION          0x1000
+  DBPROPFLAGS_TRUSTEE          0x2000
+  DBPROPFLAGS_VIEW             0x4000
+  DBPROPFLAGS_STREAM           0x8000
+
+struct DBPROPINFO pack32=2
+  pwszDescription LPOLESTR
+  dwPropertyID DBPROPID
+  dwFlags DBPROPFLAGS
+  vtType VARTYPE
+  vValues VARIANT
+
+pointer PDBPROPINFO DBPROPINFO
+
+struct DBPROPINFOSET pack32=2
+  rgPropertyInfos PDBPROPINFO count=cPropertyInfos
+  cPropertyInfos ULONG
+  guidPropertySet GUID
+
+pointer DBPROPINFOSET* DBPROPINFOSET
+
+pointer DBPROPINFOSET** DBPROPINFOSET*
+
+struct DBLITERALINFO pack32=2
+  pwszLiteralValue LPOLESTR
+  pwszInvalidChars LPOLESTR
+  pwszInvalidStartingChars LPOLESTR
+  lt DBLITERAL
+  fSupported BOOL
+  cchMaxLen ULONG
+
+pointer DBLITERALINFO* DBLITERALINFO
+
+pointer DBLITERALINFO** DBLITERALINFO*
+
+struct EXPLICIT_ACCESS_W
+  grfAccessPermissions [ACCESS_MASK_DWORD]
+  grfAccessMode ACCESS_MODE
+  grfInheritance [AceFlags]
+  Trustee TRUSTEE_W
+
+pointer EXPLICIT_ACCESS_W* EXPLICIT_ACCESS_W
+
+pointer EXPLICIT_ACCESS_W** EXPLICIT_ACCESS_W*
+

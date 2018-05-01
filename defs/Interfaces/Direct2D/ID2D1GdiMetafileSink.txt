@@ -1,0 +1,11 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID2D1GdiMetafileSink base=IUnknown id={82237326-8111-4f7c-bcf4-b5c1175564fe} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func ProcessRecord
+    [D2D_HRESULT]
+    recordType DWORD
+    recordData "CONST void*" length=recordDataSize
+    recordDataSize DWORD
+
+

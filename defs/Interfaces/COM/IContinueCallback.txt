@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IContinueCallback base=IUnknown id={b722bcca-4e68-101b-a2bc-00aa00404770} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func FContinue
+    HRESULT
+
+  func FContinuePrinting
+    HRESULT
+    nCntPrinted LONG
+    nCurPage LONG
+    pwszPrintStatus wchar_t*
+
+

@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBackgroundCopyFile base=IUnknown id={01b7bd23-fb88-4a77-8490-5891d3e4653a} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func GetRemoteName
+    HRESULT
+    pVal LPWSTR*
+
+  func GetLocalName
+    HRESULT
+    pVal LPWSTR*
+
+  func GetProgress
+    HRESULT
+    pVal BG_FILE_PROGRESS*
+
+

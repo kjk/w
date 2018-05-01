@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface ID3DBlob base=IUnknown id={8BA5FB08-5195-40e2-AC58-0D989C3A0102} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/Common Version"
+  func GetBufferPointer
+    LPVOID
+
+  func GetBufferSize
+    SIZE_T
+
+

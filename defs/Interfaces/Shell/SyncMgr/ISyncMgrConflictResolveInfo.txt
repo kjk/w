@@ -1,0 +1,43 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrConflictResolveInfo base=IUnknown id={c405a219-25a2-442e-8743-b845a2cee93f} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func GetIterationInfo
+    HRESULT
+    pnCurrentConflict UINT*
+    pcConflicts UINT*
+    pcRemainingForApplyToAll UINT*
+
+  func GetPresenterNextStep
+    HRESULT
+    pnPresenterNextStep SYNCMGR_PRESENTER_NEXT_STEP*
+
+  func GetPresenterChoice
+    HRESULT
+    pnPresenterChoice SYNCMGR_PRESENTER_CHOICE*
+    pfApplyToAll BOOL*
+
+  func GetItemChoiceCount
+    HRESULT
+    pcChoices UINT*
+
+  func GetItemChoice
+    HRESULT
+    iChoice UINT
+    piChoiceIndex UINT*
+
+  func SetPresenterNextStep
+    HRESULT
+    nPresenterNextStep SYNCMGR_PRESENTER_NEXT_STEP
+
+  func SetPresenterChoice
+    HRESULT
+    nPresenterChoice SYNCMGR_PRESENTER_CHOICE
+    fApplyToAll BOOL
+
+  func SetItemChoices
+    HRESULT
+    prgiConflictItemIndexes UINT*
+    cChoices UINT
+
+

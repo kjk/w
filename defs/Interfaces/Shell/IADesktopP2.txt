@@ -1,0 +1,19 @@
+include Interfaces\IUnknown.txt
+
+ingterface IADesktopP2 base=IUnknown id={B22754E2-4574-11d1-9888-006097DEACF9} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func ReReadWallpaper
+    HRESULT
+
+  func GetADObjectFlags
+    HRESULT
+    lpdwFlags DWORD*
+    dwMask DWORD
+
+  func UpdateAllDesktopSubscriptions
+    HRESULT
+
+  func MakeDynamicChanges
+    HRESULT
+    pOleObj IOleObject*
+
+

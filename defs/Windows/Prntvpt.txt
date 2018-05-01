@@ -1,0 +1,79 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+
+dll Prntvpt.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Documents and Printing/Printing/Print Ticket"
+alias HPTPROVIDER HANDLE
+
+pointer HPTPROVIDER* HPTPROVIDER
+
+enum EDefaultDevmodeType UINT
+  kUserDefaultDevmode    0
+  kPrinterDefaultDevmode 1
+
+enum EPrintTicketScope UINT
+  kPTPageScope     0
+  kPTDocumentScope 1
+  kPTJobScope      3
+
+func PTConvertPrintTicketToDevMode ordinal=8
+  HRESULT
+  hProvider HPTPROVIDER
+  pPrintTicket IStream*
+  baseDevmodeType EDefaultDevmodeType
+  scope EPrintTicketScope
+  pcbDevmode ULONG*
+  ppDevmode PDEVMODE*
+  pbstrErrorMessage BSTR*
+
+func PTConvertDevModeToPrintTicket ordinal=9
+  HRESULT
+  hProvider HPTPROVIDER
+  cbDevmode ULONG
+  pDevmode PDEVMODE
+  scope EPrintTicketScope
+  pPrintTicket IStream*
+
+func PTReleaseMemory ordinal=10
+  HRESULT
+  pBuffer PVOID
+
+func PTMergeAndValidatePrintTicket ordinal=7
+  HRESULT
+  hProvider HPTPROVIDER
+  pBaseTicket IStream*
+  pDeltaTicket IStream*
+  scope EPrintTicketScope
+  pResultTicket IStream*
+  pbstrErrorMessage BSTR*
+
+func PTGetPrintCapabilities ordinal=6
+  HRESULT
+  hProvider HPTPROVIDER
+  pPrintTicket IStream*
+  pCapabilities IStream*
+  pbstrErrorMessage BSTR*
+
+func PTOpenProvider ordinal=2
+  HRESULT
+  pszPrinterName PCWSTR
+  version DWORD
+  phProvider HPTPROVIDER*
+
+func PTOpenProviderEx ordinal=3
+  HRESULT
+  pszPrinterName PCWSTR
+  maxVersion DWORD
+  prefVersion DWORD
+  phProvider HPTPROVIDER*
+  usedVersion DWORD*
+
+func PTCloseProvider ordinal=4
+  HRESULT
+  hProvider HPTPROVIDER
+
+func PTQuerySchemaVersionSupport ordinal=1
+  HRESULT
+  pszPrinterName PCWSTR
+  pMaxVersion DWORD*
+

@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRegisterServiceProvider base=IUnknown id={7B3A2F01-0751-48DD-B556-004785171C54} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func RegisterService
+    HRESULT
+    guidService REFGUID
+    pUnkObject IUnknown*
+
+

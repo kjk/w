@@ -1,0 +1,167 @@
+include Headers\windows.h.txt
+
+dll Wer.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Diagnostics/Windows Error Reporting"
+alias HREPORT HANDLE
+
+pointer HREPORT* HREPORT
+
+array "WCHAR [WER_MAX_PREFERRED_MODULES_BUFFER]" base=WCHAR count=256
+
+array "WCHAR [64]" base=WCHAR count=64
+
+array "WCHAR [512]" base=WCHAR count=512
+
+flag [WER_DUMP_MASK] DWORD display=DWORD
+  WER_DUMP_MASK_DUMPTYPE               0x1
+  WER_DUMP_MASK_ONLY_THISTHREAD        0x2
+  WER_DUMP_MASK_THREADFLAGS            0x4
+  WER_DUMP_MASK_THREADFLAGS_EX         0x8
+  WER_DUMP_MASK_OTHERTHREADFLAGS       0x10
+  WER_DUMP_MASK_OTHERTHREADFLAGS_EX    0x20
+  WER_DUMP_MASK_PREFERRED_MODULESFLAGS 0x40
+  WER_DUMP_MASK_OTHER_MODULESFLAGS     0x80
+  WER_DUMP_MASK_PREFERRED_MODULE_LIST  0x100
+
+struct WER_DUMP_CUSTOM_OPTIONS
+  dwSize DWORD
+  dwMask [WER_DUMP_MASK]
+  dwDumpFlags MINIDUMP_TYPE display=DWORD
+  bOnlyThisThread BOOL
+  dwExceptionThreadFlags THREAD_WRITE_FLAGS
+  dwOtherThreadFlags THREAD_WRITE_FLAGS
+  dwExceptionThreadExFlags THREAD_WRITE_FLAGS
+  dwOtherThreadExFlags THREAD_WRITE_FLAGS
+  dwPreferredModuleFlags MODULE_WRITE_FLAGS
+  dwOtherModuleFlags MODULE_WRITE_FLAGS
+  wzPreferredModuleList "WCHAR [WER_MAX_PREFERRED_MODULES_BUFFER]"
+
+pointer PWER_DUMP_CUSTOM_OPTIONS WER_DUMP_CUSTOM_OPTIONS
+
+struct WER_REPORT_INFORMATION
+  dwSize DWORD
+  hProcess HANDLE
+  wzConsentKey "WCHAR [64]"
+  wzFriendlyEventName "WCHAR [128]"
+  wzApplicationName "WCHAR [128]"
+  wzApplicationPath "WCHAR [MAX_PATH]"
+  wzDescription "WCHAR [512]"
+  hwndParent HWND
+
+pointer PWER_REPORT_INFORMATION WER_REPORT_INFORMATION
+
+struct WER_EXCEPTION_INFORMATION
+  pExceptionPointers PEXCEPTION_POINTERS
+  bClientPointers BOOL
+
+pointer PWER_EXCEPTION_INFORMATION WER_EXCEPTION_INFORMATION
+
+enum WER_DUMP_TYPE UINT
+  WerDumpTypeMicroDump 1
+  WerDumpTypeMiniDump  2
+  WerDumpTypeHeapDump  3
+  WerDumpTypeMax       4
+
+enum WER_FILE_TYPE UINT
+  WerFileTypeMicrodump    1
+  WerFileTypeMinidump     2
+  WerFileTypeHeapdump     3
+  WerFileTypeUserDocument 4
+  WerFileTypeOther        5
+
+enum WER_REPORT_TYPE UINT
+  WerReportNonCritical      0
+  WerReportCritical         1
+  WerReportApplicationCrash 2
+  WerReportApplicationHang  3
+  WerReportKernel           4
+
+enum WER_REPORT_UI UINT
+  WerUIAdditionalDataDlgHeader  1
+  WerUIIconFilePath             2
+  WerUIConsentDlgHeader         3
+  WerUIConsentDlgBody           4
+  WerUIOnlineSolutionCheckText  5
+  WerUIOfflineSolutionCheckText 6
+  WerUICloseText                7
+  WerUICloseDlgHeader           8
+  WerUICloseDlgBody             9
+  WerUICloseDlgButtonText       10
+
+enum WER_CONSENT UINT
+  WerConsentNotAsked 1
+  WerConsentApproved 2
+  WerConsentDenied   3
+
+enum WER_SUBMIT_RESULT UINT
+  WerReportQueued    1
+  WerReportUploaded  2
+  WerReportDebug     3
+  WerReportFailed    4
+  WerDisabled        5
+  WerReportCancelled 6
+  WerDisabledQueue   7
+  WerReportAsync     8
+  WerCustomAction    9
+  WerThrottled       10
+
+pointer PWER_SUBMIT_RESULT WER_SUBMIT_RESULT
+
+func WerAddExcludedApplication
+  HRESULT
+  pwzExeName PCWSTR
+  bAllUsers BOOL
+
+func WerRemoveExcludedApplication
+  HRESULT
+  pwzExeName PCWSTR
+  bAllUsers BOOL
+
+func WerReportAddDump
+  HRESULT
+  hReportHandle HREPORT
+  hProcess [ProcessHandle]
+  hThread [ThreadHandle]
+  dumpType WER_DUMP_TYPE
+  pExceptionParam PWER_EXCEPTION_INFORMATION
+  pDumpCustomOptions PWER_DUMP_CUSTOM_OPTIONS
+  dwFlags DWORD
+
+func WerReportAddFile
+  HRESULT
+  hReportHandle HREPORT
+  pwzPath PCWSTR
+  repFileType WER_FILE_TYPE
+  dwFileFlags DWORD
+
+func WerReportCloseHandle
+  HRESULT
+  hReportHandle HREPORT
+
+func WerReportCreate
+  HRESULT
+  pwzEventType PCWSTR
+  repType WER_REPORT_TYPE
+  pReportInformation PWER_REPORT_INFORMATION
+  phReportHandle HREPORT*
+
+func WerReportSetParameter
+  HRESULT
+  hReportHandle HREPORT
+  dwparamID DWORD
+  pwzName PCWSTR
+  pwzValue PCWSTR
+
+func WerReportSetUIOption
+  HRESULT
+  hReportHandle HREPORT
+  repUITypeID WER_REPORT_UI
+  pwzValue PCWSTR
+
+func WerReportSubmit
+  HRESULT
+  hReportHandle HREPORT
+  consent WER_CONSENT
+  dwFlags DWORD
+  pSubmitResult PWER_SUBMIT_RESULT
+

@@ -1,0 +1,68 @@
+include Interfaces\Debugger\IDebugControl2.txt
+
+ingterface IDebugControl3 base=IDebugControl2 id={7df74a86-b03f-407f-90ab-a20dadcead08} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetAssemblyOptions
+    HRESULT
+    Options PULONG
+
+  func AddAssemblyOptions
+    HRESULT
+    Options ULONG
+
+  func RemoveAssemblyOptions
+    HRESULT
+    Options ULONG
+
+  func SetAssemblyOptions
+    HRESULT
+    Options ULONG
+
+  func GetExpressionSyntax
+    HRESULT
+    Flags [PDEBUG_EXPR]
+
+  func SetExpressionSyntax
+    HRESULT
+    Flags [DEBUG_EXPR]
+
+  func SetExpressionSyntaxByName
+    HRESULT
+    AbbrevName PCSTR
+
+  func GetNumberExpressionSyntaxes
+    HRESULT
+    Number PULONG
+
+  func GetExpressionSyntaxNames
+    HRESULT
+    Index ULONG
+    FullNameBuffer PSTR
+    FullNameBufferSize ULONG
+    FullNameSize PULONG
+    AbbrevNameBuffer PSTR
+    AbbrevNameBufferSize ULONG
+    AbbrevNameSize PULONG
+
+  func GetNumberEvents
+    HRESULT
+    Events PULONG
+
+  func GetEventIndexDescription
+    HRESULT
+    Index ULONG
+    Which ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    DescSize PULONG
+
+  func GetCurrentEventIndex
+    HRESULT
+    Index PULONG
+
+  func SetNextEventIndex
+    HRESULT
+    Relation [DEBUG_EINDEX_RELATION]
+    Value ULONG
+    NextIndex PULONG
+
+

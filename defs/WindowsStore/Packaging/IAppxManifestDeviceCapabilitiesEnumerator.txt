@@ -1,0 +1,17 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxManifestDeviceCapabilitiesEnumerator base=IUnknown id={30204541-427b-4a1c-bacf-655bf463a540} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetCurrent
+    HRESULT
+    deviceCapability LPWSTR*
+
+  func GetHasCurrent
+    HRESULT
+    hasCurrent BOOL*
+
+  func MoveNext
+    HRESULT
+    hasNext BOOL*
+
+

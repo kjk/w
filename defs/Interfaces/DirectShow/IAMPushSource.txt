@@ -1,0 +1,28 @@
+include Interfaces\DirectShow\IAMLatency.txt
+
+ingterface IAMPushSource base=IAMLatency id={F185FE76-E64E-11d2-B76E-00C04FB6BD3D} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetPushSourceFlags
+    HRESULT
+    pFlags ULONG*
+
+  func SetPushSourceFlags
+    HRESULT
+    Flags ULONG
+
+  func SetStreamOffset
+    HRESULT
+    rtOffset REFERENCE_TIME
+
+  func GetStreamOffset
+    HRESULT
+    prtOffset REFERENCE_TIME*
+
+  func GetMaxStreamOffset
+    HRESULT
+    prtMaxOffset REFERENCE_TIME*
+
+  func SetMaxStreamOffset
+    HRESULT
+    rtMaxOffset REFERENCE_TIME
+
+

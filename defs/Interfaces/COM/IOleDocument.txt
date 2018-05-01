@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOleDocument base=IUnknown id={b722bcc5-4e68-101b-a2bc-00aa00404770} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func CreateView
+    HRESULT
+    pIPSite IOleInPlaceSite*
+    pstm IStream*
+    dwReserved DWORD
+    ppView IOleDocumentView**
+
+  func GetDocMiscStatus
+    HRESULT
+    pdwStatus DWORD*
+
+  func EnumViews
+    HRESULT
+    ppEnum IEnumOleDocumentViews**
+    ppView IOleDocumentView**
+
+

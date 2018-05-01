@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IThumbnailCache base=IUnknown id={F676C15D-596A-4ce2-8234-33996F445DB1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetThumbnail
+    HRESULT
+    pShellItem IShellItem*
+    cxyRequestedThumbSize UINT
+    flags WTS_FLAGS
+    ppvThumb ISharedBitmap**
+    pOutFlags WTS_CACHEFLAGS*
+    pThumbnailID WTS_THUMBNAILID*
+
+  func GetThumbnailByID
+    HRESULT
+    thumbnailID WTS_THUMBNAILID
+    cxyRequestedThumbSize UINT
+    ppvThumb ISharedBitmap**
+    pOutFlags WTS_CACHEFLAGS*
+
+

@@ -1,0 +1,33 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRpcStubBuffer base=IUnknown id={D5F56AFC-593B-101A-B569-08002B2DBF7A} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func Connect
+    HRESULT
+    pUnkServer IUnknown*
+
+  func Disconnect
+    void
+
+  func Invoke
+    HRESULT
+    _prpcmsg RPCOLEMESSAGE*
+    _pRpcChannelBuffer IRpcChannelBuffer*
+
+  func IsIIDSupported
+    success NotEqual=0
+    IRpcStubBuffer*
+    riid REFIID
+
+  func CountRefs
+    success NotEqual=0
+    ULONG
+
+  func DebugServerQueryInterface
+    HRESULT
+    ppv void**
+
+  func DebugServerRelease
+    void
+    pv void*
+
+

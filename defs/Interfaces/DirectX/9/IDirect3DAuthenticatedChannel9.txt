@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3DAuthenticatedChannel9 base=IUnknown id={FF24BEEE-DA21-4beb-98B5-D2F899F98AF9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func GetCertificateSize
+    HRESULT
+    pCertificateSize UINT*
+
+  func GetCertificate
+    HRESULT
+    CertifacteSize UINT
+    ppCertificate BYTE*
+
+  func NegotiateKeyExchange
+    HRESULT
+    DataSize UINT
+    pData VOID* length=DataSize
+
+  func Query
+    HRESULT
+    InputSize UINT
+    pInput "CONST VOID*"
+    OutputSize UINT
+    pOutput VOID*
+
+  func Configure
+    HRESULT
+    InputSize UINT
+    pInput "CONST VOID*"
+    pOutput D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT*
+
+

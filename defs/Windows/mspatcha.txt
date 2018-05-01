@@ -1,0 +1,125 @@
+include Headers\windows.h.txt
+include Headers\patch.h.txt
+
+dll mspatcha.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Delta Compression"
+flag [ApplyOptionFlags] ULONG display=ULONG
+  APPLY_OPTION_FAIL_IF_EXACT 0x00000001
+  APPLY_OPTION_FAIL_IF_CLOSE 0x00000002
+  APPLY_OPTION_TEST_ONLY     0x00000004
+
+func ApplyPatchToFile bothCharset
+  BOOL
+  PatchFileName LPCTSTR
+  OldFileName LPCTSTR
+  NewFileName LPCTSTR
+  ApplyOptionFlags [ApplyOptionFlags]
+
+func ApplyPatchToFileByBuffers
+  BOOL
+  PatchFileMapped PBYTE
+  PatchFileSize ULONG
+  OldFileMapped PBYTE
+  OldFileSize ULONG
+  NewFileBuffer PBYTE*
+  NewFileBufferSize ULONG
+  NewFileActualSize ULONG*
+  NewFileTime FILETIME*
+  ApplyOptionFlags [ApplyOptionFlags]
+  ProgressCallback PPATCH_PROGRESS_CALLBACK
+  CallbackContext PVOID
+
+func ApplyPatchToFileByHandles
+  BOOL
+  PatchFileHandle HANDLE
+  OldFileHandle HANDLE
+  NewFileHandle HANDLE
+  ApplyOptionFlags [ApplyOptionFlags]
+
+func ApplyPatchToFileByHandlesEx
+  BOOL
+  PatchFileHandle HANDLE
+  OldFileHandle HANDLE
+  NewFileHandle HANDLE
+  ApplyOptionFlags [ApplyOptionFlags]
+  ProgressCallback PPATCH_PROGRESS_CALLBACK
+  CallbackContext PVOID
+
+func ApplyPatchToFileEx bothCharset
+  BOOL
+  PatchFileName LPCTSTR
+  OldFileName LPCTSTR
+  NewFileName LPCTSTR
+  ApplyOptionFlags [ApplyOptionFlags]
+  ProgressCallback PPATCH_PROGRESS_CALLBACK
+  CallbackContext PVOID
+
+func GetFilePatchSignature bothCharset
+  BOOL
+  FileName LPCTSTR
+  OptionFlags [PatchOptionFlags]
+  OptionData PVOID
+  IgnoreRangeCount ULONG
+  IgnoreRangeArray PPATCH_IGNORE_RANGE count=IgnoreRangeCount
+  RetainRangeCount ULONG
+  RetainRangeArray PPATCH_RETAIN_RANGE count=RetainRangeCount
+  SignatureBufferSize ULONG
+  SignatureBuffer PVOID length=SignatureBufferSize
+
+func GetFilePatchSignatureByBuffer
+  BOOL
+  FileBufferWritable PBYTE
+  FileSize ULONG
+  OptionFlags ULONG
+  OptionData PVOID
+  IgnoreRangeCount ULONG
+  IgnoreRangeArray PPATCH_IGNORE_RANGE count=IgnoreRangeCount
+  RetainRangeCount ULONG
+  RetainRangeArray PPATCH_RETAIN_RANGE count=RetainRangeCount
+  SignatureBufferSize ULONG
+
+func GetFilePatchSignatureByHandle
+  BOOL
+  FileHandle HANDLE
+  OptionFlags [PatchOptionFlags]
+  OptionData PVOID
+  IgnoreRangeCount ULONG
+  IgnoreRangeArray PPATCH_IGNORE_RANGE count=IgnoreRangeCount
+  RetainRangeCount ULONG
+  RetainRangeArray PPATCH_RETAIN_RANGE count=RetainRangeCount
+  SignatureBufferSize ULONG
+  SignatureBuffer PVOID length=SignatureBufferSize
+
+func NormalizeFileForPatchSignature
+  BOOL
+  FileBuffer PVOID
+  FileSize ULONG
+  OptionFlags ULONG
+  OptionData PATCH_OPTION_DATA*
+  NewFileCoffBase ULONG
+  NewFileCoffTime ULONG
+  IgnoreRangeCount ULONG
+  IgnoreRangeArray PPATCH_IGNORE_RANGE count=IgnoreRangeCount
+  RetainRangeCount ULONG
+  RetainRangeArray PPATCH_RETAIN_RANGE count=RetainRangeCount
+
+func TestApplyPatchToFile bothCharset
+  BOOL
+  PatchFileName LPCTSTR
+  OldFileName LPCTSTR
+  ApplyOptionFlags [ApplyOptionFlags]
+
+func TestApplyPatchToFileByBuffers
+  BOOL
+  PatchFileBuffer PBYTE
+  PatchFileSize ULONG
+  OldFileBuffer PBYTE
+  OldFileSize ULONG
+  NewFileSize ULONG*
+
+func TestApplyPatchToFileByHandles
+  BOOL
+  PatchFileHandle HANDLE
+  OldFileHandle HANDLE
+  ApplyOptionFlags [ApplyOptionFlags]
+

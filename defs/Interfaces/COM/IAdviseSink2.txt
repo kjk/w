@@ -1,0 +1,8 @@
+include Interfaces\COM\IAdviseSink.txt
+
+ingterface IAdviseSink2 base=IAdviseSink id={00000125-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func OnLinkSrcChange
+    void
+    pmk IMoniker*
+
+

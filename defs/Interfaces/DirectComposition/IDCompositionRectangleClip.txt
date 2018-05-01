@@ -1,0 +1,101 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\DirectComposition\IDCompositionClip.txt
+
+ingterface IDCompositionRectangleClip base=IDCompositionClip id={9842AD7D-D9CF-4908-AED7-48B51DA5E7C2} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func SetLeft
+    HRESULT
+    left float
+
+  func "SetLeft "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetTop
+    HRESULT
+    top float
+
+  func "SetTop "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetRight
+    HRESULT
+    right float
+
+  func "SetRight "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetBottom
+    HRESULT
+    bottom float
+
+  func "SetBottom "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetTopLeftRadiusX
+    HRESULT
+    radius float
+
+  func "SetTopLeftRadiusX "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetTopLeftRadiusY
+    HRESULT
+    radius float
+
+  func "SetTopLeftRadiusY "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetTopRightRadiusX
+    HRESULT
+    radius float
+
+  func "SetTopRightRadiusX "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetTopRightRadiusY
+    HRESULT
+    radius float
+
+  func "SetTopRightRadiusY "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetBottomLeftRadiusX
+    HRESULT
+    radius float
+
+  func "SetBottomLeftRadiusX "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetBottomLeftRadiusY
+    HRESULT
+    radius float
+
+  func "SetBottomLeftRadiusY "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetBottomRightRadiusX
+    HRESULT
+    radius float
+
+  func "SetBottomRightRadiusX "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetBottomRightRadiusY
+    HRESULT
+    radius float
+
+  func "SetBottomRightRadiusY "
+    HRESULT
+    animation IDCompositionAnimation*
+
+

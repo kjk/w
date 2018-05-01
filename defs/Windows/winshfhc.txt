@@ -1,0 +1,20 @@
+include Headers\windows.h.txt
+
+dll winshfhc.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Windows Environment Development/Windows Shell"
+enum FILE_RISK_LEVEL UINT
+  FRL_NO_OPINION 0
+  FRL_LOW        1
+  FRL_MODERATE   2
+  FRL_HIGH       3
+  FRL_BLOCK      4
+
+pointer FILE_RISK_LEVEL* FILE_RISK_LEVEL
+
+func EstimateFileRiskLevel ordinal=101
+  HRESULT
+  pszFilePath LPCWSTR
+  pszExt LPCWSTR
+  pszHandler LPCWSTR
+  pfrlEstimate FILE_RISK_LEVEL*
+

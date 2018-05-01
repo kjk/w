@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+
+ingterface IHWEventHandler base=IUnknown id={C1FB73D0-EC3A-4ba2-B512-8CDB9187B6D1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    pszParams LPCWSTR
+
+  func HandleEvent
+    HRESULT
+    pszDeviceID LPCWSTR
+    pszAltDeviceID LPCWSTR
+    pszEventType LPCWSTR
+
+  func HandleEventWithContent
+    HRESULT
+    pszDeviceID LPCWSTR
+    pszAltDeviceID LPCWSTR
+    pszEventType LPCWSTR
+    pszContentTypeHandler LPCWSTR
+    pdataobject IDataObject*
+
+

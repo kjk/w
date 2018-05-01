@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+include Headers\registry.h.txt
+
+ingterface IShellExtInit base=IUnknown id={000214E8-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    pidlFolder PCIDLIST_ABSOLUTE
+    pdtobj IDataObject*
+    hkeyProgID HKEY
+
+

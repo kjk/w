@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInputObjectSite base=IUnknown id={F1DB8392-7331-11D0-8C99-00A0C92DBFE8} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnFocusChangeIS
+    HRESULT
+    punkObj IUnknown*
+    fSetFocus BOOL
+
+

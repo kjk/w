@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+
+ingterface IRpcChannelBuffer base=IUnknown id={D5F56B60-593B-101A-B569-08002B2DBF7A} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func GetBuffer
+    HRESULT
+    pMessage RPCOLEMESSAGE*
+    riid REFIID
+
+  func SendReceive
+    HRESULT
+    pMessage RPCOLEMESSAGE*
+    pStatus ULONG*
+
+  func FreeBuffer
+    HRESULT
+    pMessage RPCOLEMESSAGE*
+
+  func GetDestCtx
+    HRESULT
+    pdwDestContext DWORD*
+    ppvDestContext void**
+
+  func IsConnected
+    HRESULT
+
+

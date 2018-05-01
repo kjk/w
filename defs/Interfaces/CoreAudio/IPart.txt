@@ -1,0 +1,61 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IPart base=IUnknown id={AE2DE0E4-5BCA-4F2D-AA46-5D13F8FDB3A9} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetName
+    [AUDCLNT_HRESULT]
+    ppwstrName LPWSTR*
+
+  func GetLocalId
+    [AUDCLNT_HRESULT]
+    pnId UINT*
+
+  func GetGlobalId
+    [AUDCLNT_HRESULT]
+    ppwstrGlobalId LPWSTR*
+
+  func GetPartType
+    [AUDCLNT_HRESULT]
+    pPartType PartType*
+
+  func GetSubType
+    [AUDCLNT_HRESULT]
+    pSubType GUID*
+
+  func GetControlInterfaceCount
+    [AUDCLNT_HRESULT]
+    pCount UINT*
+
+  func GetControlInterface
+    [AUDCLNT_HRESULT]
+    nIndex UINT
+    ppInterfaceDesc IControlInterface**
+
+  func EnumPartsIncoming
+    [AUDCLNT_HRESULT]
+    ppParts IPartsList**
+
+  func EnumPartsOutgoing
+    [AUDCLNT_HRESULT]
+    ppParts IPartsList**
+
+  func GetTopologyObject
+    [AUDCLNT_HRESULT]
+    ppTopology IDeviceTopology**
+
+  func Activate
+    [AUDCLNT_HRESULT]
+    dwClsContext DWORD
+    refiid REFIID
+    ppvObject void** interfaceId=refiid
+
+  func RegisterControlChangeCallback
+    [AUDCLNT_HRESULT]
+    riid REFGUID
+    pNotify IControlChangeNotify*
+
+  func UnregisterControlChangeCallback
+    [AUDCLNT_HRESULT]
+    pNotify IControlChangeNotify*
+
+

@@ -1,0 +1,26 @@
+include Interfaces\IUnknown.txt
+
+ingterface IReferenceClock base=IUnknown id={56a86897-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetTime
+    HRESULT
+    pTime REFERENCE_TIME*
+
+  func AdviseTime
+    HRESULT
+    baseTime REFERENCE_TIME
+    streamTime REFERENCE_TIME
+    hEvent HEVENT
+    pdwAdviseCookie DWORD_PTR*
+
+  func AdvisePeriodic
+    HRESULT
+    startTime REFERENCE_TIME
+    periodTime REFERENCE_TIME
+    hSemaphore HSEMAPHORE
+    pdwAdviseCookie DWORD_PTR*
+
+  func Unadvise
+    HRESULT
+    dwAdviseCookie DWORD_PTR
+
+

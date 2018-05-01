@@ -1,0 +1,2280 @@
+include Headers\windows.h.txt
+include Headers\shell.h.txt
+include Headers\gdi.h.txt
+include Headers\registry.h.txt
+include Headers\processes.h.txt
+
+dll Shell32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Windows Application UI Development/Menus and Other Resources/Icons"
+category "Windows Environment Development/Windows Shell"
+category "Windows Environment Development/Windows Shell/Undocumented"
+category "Windows Environment Development/Windows Shell/Shell Lightweight Utility/String"
+category "Windows Environment Development/Windows Property System"
+category "Undocumented (UnDoc'd)" onlineHelp=UnDoc'd-shell32
+alias RESTRICTIONS UINT
+
+alias LPSHELLSTATE LPVOID
+
+alias LPSHELLFLAGSTATE LPVOID
+
+alias CABINETSTATE* LPVOID
+
+interface IShellFolder
+
+interface IContextMenu
+
+interface IDataObject
+
+interface IEnumAssocHandlers
+
+interface IShellItem
+
+interface IFileOperation
+
+interface IShellView
+
+interface IShellItemArray
+
+interface IShellBrowser
+
+interface IFileOperationProgressSink
+
+interface IShellTaskScheduler
+
+interface IDropSource
+
+interface IContextMenuCB
+
+interface IShellFolderViewCB
+
+alias FARPROC16 LPVOID
+
+alias LPFNDFMCALLBACK LPVOID
+
+alias HDROP HANDLE
+
+alias HPSXA HANDLE
+
+alias LPFNADDPROPSHEETPAGE LPVOID
+
+alias LPFNVIEWCALLBACK LPVOID
+
+alias PFNASYNCICONTASKBALLBACK LPVOID
+
+pointer PROPVARIANT[] PROPVARIANT
+
+pointer "HKEY []" HKEY
+
+array "TCHAR [80]" base=TCHAR count=80
+
+array "POINT [NUM_POINTS]" base=POINT count=3
+
+array "DWORD [NUM_POINTS]" base=DWORD count=3
+
+struct AUTO_SCROLL_DATA
+  iNextSample int
+  dwLastScroll DWORD
+  bFull BOOL
+  pts "POINT [NUM_POINTS]"
+  dwTimes "DWORD [NUM_POINTS]"
+
+pointer AUTO_SCROLL_DATA* AUTO_SCROLL_DATA
+
+flag [BROWSEINFO_FLAG] UINT display=UINT
+  BIF_RETURNONLYFSDIRS    0x00000001
+  BIF_DONTGOBELOWDOMAIN   0x00000002
+  BIF_STATUSTEXT          0x00000004
+  BIF_RETURNFSANCESTORS   0x00000008
+  BIF_EDITBOX             0x00000010
+  BIF_VALIDATE            0x00000020
+  BIF_NEWDIALOGSTYLE      0x00000040
+  BIF_USENEWUI            0x00000050
+  BIF_BROWSEINCLUDEURLS   0x00000080
+  BIF_UAHINT              0x00000100
+  BIF_NONEWFOLDERBUTTON   0x00000200
+  BIF_NOTRANSLATETARGETS  0x00000400
+  BIF_BROWSEFORCOMPUTER   0x00001000
+  BIF_BROWSEFORPRINTER    0x00002000
+  BIF_BROWSEINCLUDEFILES  0x00004000
+  BIF_SHAREABLE           0x00008000
+  BIF_BROWSEFILEJUNCTIONS 0x00010000
+
+struct BROWSEINFO pack=8
+  hwndOwner HWND
+  pidlRoot PCIDLIST_ABSOLUTE
+  pszDisplayName LPTSTR
+  lpszTitle LPCTSTR
+  ulFlags [BROWSEINFO_FLAG]
+  lpfn BFFCALLBACK
+  lParam LPARAM
+  iImage int
+
+pointer LPBROWSEINFO BROWSEINFO
+
+union [NOTIFYICONDATA_u] display=union
+  uTimeout UINT
+  uVersion UINT
+
+flag [NOTIFYICON_FLAG] UINT display=UINT
+  NIF_MESSAGE  0x00000001
+  NIF_ICON     0x00000002
+  NIF_TIP      0x00000004
+  NIF_STATE    0x00000008
+  NIF_INFO     0x00000010
+  NIF_GUID     0x00000020
+  NIF_REALTIME 0x00000040
+  NIF_SHOWTIP  0x00000080
+
+flag [NOTIFYICON_STATE] DWORD display=DWORD
+  NIS_HIDDEN     0x00000001
+  NIS_SHAREDICON 0x00000002
+
+flag [NOTIFYICON_INFO_FLAG] DWORD display=DWORD
+  NIIF_NONE               0x00000000
+  NIIF_INFO               0x00000001
+  NIIF_WARNING            0x00000002
+  NIIF_ERROR              0x00000003
+  NIIF_USER               0x00000004
+  NIIF_ICON_MASK          0x0000000F
+  NIIF_NOSOUND            0x00000010
+  NIIF_LARGE_ICON         0x00000020
+  NIIF_RESPECT_QUIET_TIME 0x00000080
+
+struct NOTIFYICONDATA
+  cbSize DWORD
+  hWnd HWND
+  uID UINT
+  uFlags [NOTIFYICON_FLAG]
+  uCallbackMessage UINT
+  hIcon HICON
+  szTip "TCHAR [128]"
+  dwState [NOTIFYICON_STATE]
+  dwStateMask [NOTIFYICON_STATE]
+  szInfo "TCHAR [256]"
+   [NOTIFYICONDATA_u]
+  szInfoTitle "TCHAR [64]"
+  dwInfoFlags [NOTIFYICON_INFO_FLAG]
+  guidItem GUID
+  hBalloonIcon HICON
+
+pointer PNOTIFYICONDATA NOTIFYICONDATA
+
+alias [SFGAOF_DWORD] SFGAOF display=DWORD
+
+pointer [SFGAOF_DWORD*] [SFGAOF_DWORD] display=DWORD*
+
+struct SHFILEINFO
+  hIcon HICON
+  iIcon int
+  dwAttributes [SFGAOF_DWORD]
+  szDisplayName "TCHAR [MAX_PATH]"
+  szTypeName "TCHAR [80]"
+
+pointer SHFILEINFO* SHFILEINFO
+
+flag [SHFOLDERCUSTOMSETTINGS_MASK] DWORD display=DWORD
+  FCSM_VIEWID          0x00000001
+  FCSM_WEBVIEWTEMPLATE 0x00000002
+  FCSM_INFOTIP         0x00000004
+  FCSM_CLSID           0x00000008
+  FCSM_ICONFILE        0x00000010
+  FCSM_LOGO            0x00000020
+  FCSM_FLAGS           0x00000040
+
+struct SHFOLDERCUSTOMSETTINGS pack=8
+  dwSize DWORD
+  dwMask [SHFOLDERCUSTOMSETTINGS_MASK]
+  pvid SHELLVIEWID*
+  pszWebViewTemplate LPWSTR
+  cchWebViewTemplate DWORD
+  pszWebViewTemplateVersion LPWSTR
+  pszInfoTip LPWSTR
+  cchInfoTip DWORD
+  pclsid CLSID*
+  dwFlags DWORD
+  pszIconFile LPWSTR
+  cchIconFile DWORD
+  iIconIndex int
+  pszLogo LPWSTR
+  cchLogo DWORD
+
+pointer LPSHFOLDERCUSTOMSETTINGS SHFOLDERCUSTOMSETTINGS
+
+struct SHSTOCKICONINFO
+  cbSize DWORD
+  hIcon HICON
+  iSysImageIndex int
+  iIcon int
+  szPath "WCHAR [MAX_PATH]"
+
+pointer SHSTOCKICONINFO* SHSTOCKICONINFO
+
+flag OPEN_AS_INFO_FLAGS UINT
+  OAIF_ALLOW_REGISTRATION 0x00000001
+  OAIF_REGISTER_EXT       0x00000002
+  OAIF_EXEC               0x00000004
+  OAIF_FORCE_REGISTRATION 0x00000008
+  OAIF_HIDE_REGISTRATION  0x00000020
+  OAIF_URL_PROTOCOL       0x00000040
+  OAIF_FILE_IS_URI        0x00000080
+
+struct OPENASINFO pack=8
+  pcszFile LPCWSTR
+  pcszClass LPCWSTR
+  oaifInFlags OPEN_AS_INFO_FLAGS
+
+pointer "const OPENASINFO*" OPENASINFO
+
+enum ASSOCCLASS UINT
+  ASSOCCLASS_SHELL_KEY        0
+  ASSOCCLASS_PROGID_KEY       1
+  ASSOCCLASS_PROGID_STR       2
+  ASSOCCLASS_CLSID_KEY        3
+  ASSOCCLASS_CLSID_STR        4
+  ASSOCCLASS_APP_KEY          5
+  ASSOCCLASS_APP_STR          6
+  ASSOCCLASS_SYSTEM_STR       7
+  ASSOCCLASS_FOLDER           8
+  ASSOCCLASS_STAR             9
+  ASSOCCLASS_FIXED_PROGID_STR 10
+  ASSOCCLASS_PROTOCOL_STR     11
+
+struct ASSOCIATIONELEMENT pack32=1
+  ac ASSOCCLASS
+  hkClass HKEY
+  pszClass PCWSTR
+
+pointer "const ASSOCIATIONELEMENT*" ASSOCIATIONELEMENT
+
+struct SHChangeNotifyEntry pack=1
+  pidl PCIDLIST_ABSOLUTE
+  fRecursive BOOL
+
+pointer SHChangeNotifyEntry* SHChangeNotifyEntry
+
+pointer "const SHChangeNotifyEntry*" SHChangeNotifyEntry
+
+struct APPBARDATA pack32=1
+  cbSize DWORD
+  hWnd HWND
+  uCallbackMessage UINT
+  uEdge UINT
+  rc RECT
+  lParam LPARAM
+
+pointer PAPPBARDATA APPBARDATA
+
+struct DEFCONTEXTMENU
+  hwnd HWND
+  pcmcb IContextMenuCB*
+  pidlFolder PCIDLIST_ABSOLUTE
+  psf IShellFolder*
+  cidl UINT
+  apidl PCUITEMID_CHILD_ARRAY count=cidl
+  punkAssociationInfo IUnknown*
+  cKeys UINT
+  aKeys "const HKEY*" count=cKeys
+
+pointer "const DEFCONTEXTMENU*" DEFCONTEXTMENU
+
+struct SHCREATEPROCESSINFOW
+  cbSize DWORD
+  fMask [SEE_MASK]
+  hwnd HWND
+  pszFile LPCWSTR
+  pszParameters LPCWSTR
+  pszCurrentDirectory LPCWSTR
+  hUserToken HANDLE
+  lpProcessAttributes LPSECURITY_ATTRIBUTES
+  lpThreadAttributes LPSECURITY_ATTRIBUTES
+  bInheritHandles BOOL
+  dwCreationFlags [CreateProcessFlags]
+  lpStartupInfo LPSTARTUPINFOW
+  lpProcessInformation LPPROCESS_INFORMATION
+
+pointer PSHCREATEPROCESSINFOW SHCREATEPROCESSINFOW
+
+struct CSFV
+  cbSize UINT
+  pshf IShellFolder*
+  psvOuter IShellView*
+  pidl PCIDLIST_ABSOLUTE
+  lEvents LONG
+  pfnCallback LPFNVIEWCALLBACK
+  fvm FOLDERVIEWMODE
+
+pointer LPCSFV CSFV
+
+struct SFV_CREATE
+  cbSize UINT
+  pshf IShellFolder*
+  psvOuter IShellView*
+  psfvcb IShellFolderViewCB*
+
+pointer "const SFV_CREATE*" SFV_CREATE
+
+struct NOTIFYICONIDENTIFIER
+  cbSize DWORD
+  hWnd HWND
+  uID UINT
+  guidItem GUID
+
+pointer "const NOTIFYICONIDENTIFIER*" NOTIFYICONIDENTIFIER
+
+struct SHFILEOPSTRUCT pack32=1
+  hwnd HWND
+  wFunc UINT
+  pFrom LPCTSTR
+  pTo LPCTSTR
+  fFlags FILEOP_FLAGS
+  fAnyOperationsAborted BOOL
+  hNameMappings LPVOID
+  lpszProgressTitle LPCTSTR
+
+pointer LPSHFILEOPSTRUCT SHFILEOPSTRUCT
+
+struct SHQUERYRBINFO pack32=1
+  cbSize DWORD
+  i64Size DWORDLONG
+  i64NumItems DWORDLONG
+
+pointer LPSHQUERYRBINFO SHQUERYRBINFO
+
+enum [SHGetDataFromIDListFormats] int display=int
+  SHGDFIL_FINDDATA      1
+  SHGDFIL_NETRESOURCE   2
+  SHGDFIL_DESCRIPTIONID 3
+
+enum [SHGetFolderPathFlags] DWORD display=DWORD
+  SHGFP_TYPE_CURRENT 0
+  SHGFP_TYPE_DEFAULT 1
+
+flag [ShellChangeNotifyEvent] ULONG display=LONG
+  SHCNE_RENAMEITEM       0x00000001
+  SHCNE_CREATE           0x00000002
+  SHCNE_DELETE           0x00000004
+  SHCNE_MKDIR            0x00000008
+  SHCNE_RMDIR            0x00000010
+  SHCNE_MEDIAINSERTED    0x00000020
+  SHCNE_MEDIAREMOVED     0x00000040
+  SHCNE_DRIVEREMOVED     0x00000080
+  SHCNE_DRIVEADD         0x00000100
+  SHCNE_NETSHARE         0x00000200
+  SHCNE_NETUNSHARE       0x00000400
+  SHCNE_ATTRIBUTES       0x00000800
+  SHCNE_UPDATEDIR        0x00001000
+  SHCNE_UPDATEITEM       0x00002000
+  SHCNE_SERVERDISCONNECT 0x00004000
+  SHCNE_UPDATEIMAGE      0x00008000
+  SHCNE_DRIVEADDGUI      0x00010000
+  SHCNE_RENAMEFOLDER     0x00020000
+  SHCNE_DISKEVENTS       0x0002381F
+  SHCNE_FREESPACE        0x00040000
+  SHCNE_EXTENDED_EVENT   0x04000000
+  SHCNE_ASSOCCHANGED     0x08000000
+  SHCNE_GLOBALEVENTS     0x0C0581E0
+  SHCNE_ALLEVENTS        0x7FFFFFFF
+  SHCNE_INTERRUPT        0x80000000
+
+flag [ShellChangeNotifyFlag] UINT display=UINT
+  SHCNF_IDLIST          0x0000
+  SHCNF_PATHA           0x0001
+  SHCNF_PRINTERA        0x0002
+  SHCNF_DWORD           0x0003
+  SHCNF_PATHW           0x0005
+  SHCNF_PRINTERW        0x0006
+  SHCNF_TYPE            0x00FF
+  SHCNF_FLUSH           0x1000
+  SHCNF_FLUSHNOWAIT     0x2000
+  SHCNF_NOTIFYRECURSIVE 0x10000
+
+enum ASSOC_FILTER UINT
+  ASSOC_FILTER_NONE        0
+  ASSOC_FILTER_RECOMMENDED 0x1
+
+enum SCNRT_STATUS UINT
+  SCNRT_ENABLE  0
+  SCNRT_DISABLE 1
+
+flag DATAOBJ_GET_ITEM_FLAGS DWORD
+  DOGIF_DEFAULT       0x0000
+  DOGIF_TRAVERSE_LINK 0x0001
+  DOGIF_NO_HDROP      0x0002
+  DOGIF_NO_URL        0x0004
+  DOGIF_ONLY_IF_ONE   0x0008
+
+flag GPFIDL_FLAGS UINT
+  GPFIDL_DEFAULT    0x0000
+  GPFIDL_ALTNAME    0x0001
+  GPFIDL_UNCPRINTER 0x0002
+
+enum SHSTOCKICONID UINT
+  SIID_DOCNOASSOC        0
+  SIID_DOCASSOC          1
+  SIID_APPLICATION       2
+  SIID_FOLDER            3
+  SIID_FOLDEROPEN        4
+  SIID_DRIVE525          5
+  SIID_DRIVE35           6
+  SIID_DRIVEREMOVE       7
+  SIID_DRIVEFIXED        8
+  SIID_DRIVENET          9
+  SIID_DRIVENETDISABLED  10
+  SIID_DRIVECD           11
+  SIID_DRIVERAM          12
+  SIID_WORLD             13
+  SIID_SERVER            15
+  SIID_PRINTER           16
+  SIID_MYNETWORK         17
+  SIID_FIND              22
+  SIID_HELP              23
+  SIID_SHARE             28
+  SIID_LINK              29
+  SIID_SLOWFILE          30
+  SIID_RECYCLER          31
+  SIID_RECYCLERFULL      32
+  SIID_MEDIACDAUDIO      40
+  SIID_LOCK              47
+  SIID_AUTOLIST          49
+  SIID_PRINTERNET        50
+  SIID_SERVERSHARE       51
+  SIID_PRINTERFAX        52
+  SIID_PRINTERFAXNET     53
+  SIID_PRINTERFILE       54
+  SIID_STACK             55
+  SIID_MEDIASVCD         56
+  SIID_STUFFEDFOLDER     57
+  SIID_DRIVEUNKNOWN      58
+  SIID_DRIVEDVD          59
+  SIID_MEDIADVD          60
+  SIID_MEDIADVDRAM       61
+  SIID_MEDIADVDRW        62
+  SIID_MEDIADVDR         63
+  SIID_MEDIADVDROM       64
+  SIID_MEDIACDAUDIOPLUS  65
+  SIID_MEDIACDRW         66
+  SIID_MEDIACDR          67
+  SIID_MEDIACDBURN       68
+  SIID_MEDIABLANKCD      69
+  SIID_MEDIACDROM        70
+  SIID_AUDIOFILES        71
+  SIID_IMAGEFILES        72
+  SIID_VIDEOFILES        73
+  SIID_MIXEDFILES        74
+  SIID_FOLDERBACK        75
+  SIID_FOLDERFRONT       76
+  SIID_SHIELD            77
+  SIID_WARNING           78
+  SIID_INFO              79
+  SIID_ERROR             80
+  SIID_KEY               81
+  SIID_SOFTWARE          82
+  SIID_RENAME            83
+  SIID_DELETE            84
+  SIID_MEDIAAUDIODVD     85
+  SIID_MEDIAMOVIEDVD     86
+  SIID_MEDIAENHANCEDCD   87
+  SIID_MEDIAENHANCEDDVD  88
+  SIID_MEDIAHDDVD        89
+  SIID_MEDIABLURAY       90
+  SIID_MEDIAVCD          91
+  SIID_MEDIADVDPLUSR     92
+  SIID_MEDIADVDPLUSRW    93
+  SIID_DESKTOPPC         94
+  SIID_MOBILEPC          95
+  SIID_USERS             96
+  SIID_MEDIASMARTMEDIA   97
+  SIID_MEDIACOMPACTFLASH 98
+  SIID_DEVICECELLPHONE   99
+  SIID_DEVICECAMERA      100
+  SIID_DEVICEVIDEOCAMERA 101
+  SIID_DEVICEAUDIOPLAYER 102
+  SIID_NETWORKCONNECT    103
+  SIID_INTERNET          104
+  SIID_ZIPFILE           105
+  SIID_SETTINGS          106
+  SIID_MAX_ICONS         107
+
+enum QUERY_USER_NOTIFICATION_STATE UINT
+  QUNS_NOT_PRESENT             1
+  QUNS_BUSY                    2
+  QUNS_RUNNING_D3D_FULL_SCREEN 3
+  QUNS_PRESENTATION_MODE       4
+  QUNS_ACCEPTS_NOTIFICATIONS   5
+  QUNS_QUIET_TIME              6
+  QUNS_APP                     7
+
+pointer QUERY_USER_NOTIFICATION_STATE* QUERY_USER_NOTIFICATION_STATE
+
+enum LIBRARYMANAGEDIALOGOPTIONS UINT
+  LMD_DEFAULT                          0x00000000
+  LMD_ALLOWUNINDEXABLENETWORKLOCATIONS 0x00000001
+
+flag [RunFileDlgFlags] UINT display=UINT
+  RFF_NOBROWSE      0x00000001
+  RFF_NODEFAULT     0x00000002
+  RFF_CALCDIRECTORY 0x00000004
+  RFF_NOLABEL       0x00000008
+  RFF_NOSEPARATEMEM 0x00000010
+
+flag [NUMBERFMT_FLAGS] DWORD display=DWORD
+  FMT_USE_NUMDIGITS 0x1
+  FMT_USE_LEADZERO  0x2
+  FMT_USE_GROUPING  0x4
+  FMT_USE_DECIMAL   0x8
+  FMT_USE_THOUSAND  0x10
+  FMT_USE_NEGNUMBER 0x20
+
+flag [SGUPP_FLAGS] DWORD display=DWORD
+  SGUPP_DIRECTORY         0x1
+  SGUPP_DEFAULTDIRECTORY  0x2
+  SGUPP_CREATEPICTURESDIR 0x80000000
+
+flag [SECL_FLAGS] DWORD display=DWORD
+  SECL_NO_UI      0x1
+  SECL_LOG_USAGE  0x2
+  SECL_USE_IDLIST 0x8
+  SECL_RUNAS      0x40
+
+struct CLASSPIDL
+  hwnd HWND
+  hData HANDLE
+  hPrinterIcon HICON
+
+pointer CLASSPIDL* CLASSPIDL
+
+flag [SSF_FLAGS] DWORD display=DWORD
+  SSF_SHOWALLOBJECTS       0x00000001
+  SSF_SHOWEXTENSIONS       0x00000002
+  SSF_HIDDENFILEEXTS       0x00000004
+  SSF_SERVERADMINUI        0x00000004
+  SSF_SHOWCOMPCOLOR        0x00000008
+  SSF_SORTCOLUMNS          0x00000010
+  SSF_SHOWSYSFILES         0x00000020
+  SSF_DOUBLECLICKINWEBVIEW 0x00000080
+  SSF_SHOWATTRIBCOL        0x00000100
+  SSF_DESKTOPHTML          0x00000200
+  SSF_WIN95CLASSIC         0x00000400
+  SSF_DONTPRETTYPATH       0x00000800
+  SSF_MAPNETDRVBUTTON      0x00001000
+  SSF_SHOWINFOTIP          0x00002000
+  SSF_HIDEICONS            0x00004000
+  SSF_NOCONFIRMRECYCLE     0x00008000
+  SSF_FILTER               0x00010000
+  SSF_WEBVIEW              0x00020000
+  SSF_SHOWSUPERHIDDEN      0x00040000
+  SSF_SEPPROCESS           0x00080000
+  SSF_NONETCRAWLING        0x00100000
+  SSF_STARTPANELON         0x00200000
+  SSF_SHOWSTARTPAGE        0x00400000
+  SSF_AUTOCHECKSELECT      0x00800000
+  SSF_ICONSONLY            0x01000000
+  SSF_SHOWTYPEOVERLAY      0x02000000
+  SSF_SHOWSTATUSBAR        0x04000000
+
+flag [SHGNLI_FLAGS] UINT display=UINT
+  SHGNLI_PIDL       0x000000001
+  SHGNLI_PREFIXNAME 0x000000002
+  SHGNLI_NOUNIQUE   0x000000004
+  SHGNLI_NOLNK      0x000000008
+  SHGNLI_NOLOCNAME  0x000000010
+  SHGNLI_USEURLEXT  0x000000020
+
+enum SHARD UINT display=UINT
+  SHARD_PIDL            0x00000001
+  SHARD_PATHA           0x00000002
+  SHARD_PATHW           0x00000003
+  SHARD_APPIDINFO       0x00000004
+  SHARD_APPIDINFOIDLIST 0x00000005
+  SHARD_LINK            0x00000006
+  SHARD_APPIDINFOLINK   0x00000007
+  SHARD_SHELLITEM       0x00000008
+
+flag [SHGFI_FLAGS] UINT display=UINT
+  SHGFI_LARGEICON         0x000000000
+  SHGFI_SMALLICON         0x000000001
+  SHGFI_OPENICON          0x000000002
+  SHGFI_SHELLICONSIZE     0x000000004
+  SHGFI_PIDL              0x000000008
+  SHGFI_USEFILEATTRIBUTES 0x000000010
+  SHGFI_ADDOVERLAYS       0x000000020
+  SHGFI_OVERLAYINDEX      0x000000040
+  SHGFI_ICON              0x000000100
+  SHGFI_DISPLAYNAME       0x000000200
+  SHGFI_TYPENAME          0x000000400
+  SHGFI_ATTRIBUTES        0x000000800
+  SHGFI_ICONLOCATION      0x000001000
+  SHGFI_EXETYPE           0x000002000
+  SHGFI_SYSICONINDEX      0x000004000
+  SHGFI_LINKOVERLAY       0x000008000
+  SHGFI_SELECTED          0x000010000
+  SHGFI_ATTR_SPECIFIED    0x000020000
+
+flag [SHGSI_FLAGS] UINT display=UINT
+  SHGSI_ICONLOCATION  0
+  SHGSI_LARGEICON     0x000000000
+  SHGSI_SMALLICON     0x000000001
+  SHGSI_SHELLICONSIZE 0x000000004
+  SHGSI_ICON          0x000000100
+  SHGSI_SYSICONINDEX  0x000004000
+  SHGSI_LINKOVERLAY   0x000008000
+  SHGSI_SELECTED      0x000010000
+
+flag [SHUpdateImage_FLAGS] UINT display=UINT
+  GIL_SIMULATEDOC 0x0001
+  GIL_NOTFILENAME 0x0008
+
+flag [SHDefExtractIcon_FLAGS] UINT display=UINT
+  GIL_SIMULATEDOC 0x0001
+
+flag [MERGE_MENU_FLAGS] ULONG display=ULONG
+  MM_ADDSEPARATOR    0x00000001
+  MM_SUBMENUSHAVEIDS 0x00000002
+  MM_DONTREMOVESEPS  0x00000004
+
+flag [PPCF_FLAGS] DWORD display=DWORD
+  PPCF_ADDQUOTES       0x00000001
+  PPCF_ADDARGUMENTS    0x00000003
+  PPCF_NODIRECTORIES   0x00000010
+  PPCF_FORCEQUALIFY    0x00000040
+  PPCF_LONGESTPOSSIBLE 0x00000080
+
+flag [PRF_FLAGS] UINT display=UINT
+  PRF_VERIFYEXISTS         0x0001
+  PRF_TRYPROGRAMEXTENSIONS 0x0003
+  PRF_FIRSTDIRDEF          0x0004
+  PRF_DONTFINDLNK          0x0008
+  PRF_REQUIREABSOLUTE      0x0010
+
+flag [SHERB_FLAGS] DWORD display=DWORD
+  SHERB_NOCONFIRMATION 0x00000001
+  SHERB_NOPROGRESSUI   0x00000002
+  SHERB_NOSOUND        0x00000004
+
+flag [OFASI_FLAGS] DWORD display=DWORD
+  OFASI_EDIT        0x0001
+  OFASI_OPENDESKTOP 0x0002
+
+flag [SHPPFW_FLAGS] DWORD display=DWORD
+  SHPPFW_NONE           0x00000000
+  SHPPFW_DIRCREATE      0x00000001
+  SHPPFW_ASKDIRCREATE   0x00000002
+  SHPPFW_IGNOREFILENAME 0x00000004
+  SHPPFW_NOWRITECHECK   0x00000008
+  SHPPFW_MEDIACHECKONLY 0x00000010
+
+func DuplicateIcon
+  success NotEqual=0
+  HICON
+  hInst HINSTANCE
+  hIcon HICON
+
+func ExtractAssociatedIcon bothCharset
+  success NotEqual=0
+  HICON
+  hInst HINSTANCE
+  lpIconPath LPTSTR
+  lpiIcon LPWORD
+
+func ExtractIcon bothCharset
+  success NotEqual=0
+  HICON
+  hInst HINSTANCE
+  lpszExeFileName LPCTSTR
+  nIconIndex UINT
+
+func ExtractIconEx bothCharset
+  success NotEqual=0
+  UINT
+  lpszFile LPCTSTR
+  nIconIndex int
+  phiconLarge HICON*
+  phiconSmall HICON*
+  nIcons UINT
+
+func AssocCreateForClasses
+  HRESULT
+  rgClasses "const ASSOCIATIONELEMENT*" count=cClasses
+  cClasses ULONG
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func AssocGetDetailsOfPropKey
+  HRESULT
+  psf IShellFolder*
+  pidl PCUITEMID_CHILD
+  pkey PROPERTYKEY*
+  pv VARIANT*
+  pfFoundPropKey BOOL*
+
+func CallCPLEntry16
+  success NotEqual=0
+  int
+  hInst HINSTANCE
+  lpfnEntry FARPROC16
+  hwndCPL HWND
+  msg UINT
+  lParam1 LPARAM
+  lParam2 LPARAM
+
+func CDefFolderMenu_Create2 ordinal=701
+  HRESULT
+  pidlFolder PCIDLIST_ABSOLUTE
+  hwnd HWND
+  cidl UINT
+  apidl PCUITEMID_CHILD_ARRAY* count=cidl
+  psf IShellFolder*
+  lpfn LPFNDFMCALLBACK
+  nKeys UINT
+  ahkeys "const HKEY*" count=nKeys
+  ppcm IContextMenu**
+
+func CIDLData_CreateFromIDArray ordinal=83
+  HRESULT
+  pidlFolder PCIDLIST_ABSOLUTE
+  cidl UINT
+  apidl PCUIDLIST_RELATIVE_ARRAY count=cidl
+  ppdtobj IDataObject**
+
+func CommandLineToArgvW
+  success NotEqual=0
+  LPWSTR*
+  lpCmdLine LPCWSTR
+  pNumArgs int*
+
+func DAD_AutoScroll ordinal=129
+  BOOL
+  hwnd HWND
+  pad AUTO_SCROLL_DATA*
+  pptNow "const POINT*"
+
+func DAD_DragEnterEx ordinal=131
+  BOOL
+  hwndTarget HWND
+  ptStart "const POINT"
+
+func DAD_DragLeave ordinal=132
+  BOOL
+
+func DAD_DragMove ordinal=134
+  BOOL
+  pt POINT
+
+func DAD_SetDragImage ordinal=136
+  BOOL
+  him HIMAGELIST
+  pptOffset POINT*
+
+func DAD_ShowDragImage ordinal=137
+  BOOL
+  fShow BOOL
+
+func DoEnvironmentSubst bothCharset
+  success NotEqual=0
+  DWORD
+  pszString LPTSTR
+  cchString UINT
+
+func DragAcceptFiles
+  VOID
+  hWnd HWND
+  fAccept BOOL
+
+func DragFinish
+  VOID
+  hDrop HDROP
+
+func DragQueryFile bothCharset
+  success NotEqual=0
+  UINT
+  hDrop HDROP
+  iFile UINT
+  lpszFile LPTSTR
+  cch UINT
+
+func DragQueryPoint
+  BOOL
+  hDrop HDROP
+  lppt LPPOINT
+
+func DriveType ordinal=64
+  success NotEqual=0
+  int
+  iDrive int
+
+func ExtractAssociatedIconEx bothCharset
+  success NotEqual=0
+  HICON
+  hInst HINSTANCE
+  lpIconPath LPTSTR
+  lpiIconIndex LPWORD
+  lpiIconId LPWORD
+
+func FileIconInit
+  BOOL
+  fRestoreCache BOOL
+
+func FindExecutable bothCharset
+  success NotEqual=0
+  HINSTANCE
+  lpFile LPCTSTR
+  lpDirectory LPCTSTR
+  lpResult LPTSTR
+
+func GetCurrentProcessExplicitAppUserModelID
+  HRESULT
+  AppID PWSTR*
+
+func GetFileNameFromBrowse ordinal=63
+  BOOL
+  hwnd HWND
+  pszFilePath LPWSTR
+  cchFilePath UINT
+  pszWorkingDir LPCWSTR
+  pszDefExt LPCWSTR
+  pszFilters LPCWSTR
+  szTitle LPCWSTR
+
+func GUIDFromString bothCharset ordinalA=703 ordinalW=704
+  BOOL
+  psz LPCTSTR
+  pguid LPGUID
+
+func ILAppendID ordinal=154
+  success NotEqual=0
+  PIDLIST_RELATIVE
+  pidl PIDLIST_RELATIVE
+  pmkid LPSHITEMID
+  fAppend BOOL
+
+func ILClone ordinal=18
+  success NotEqual=0
+  PIDLIST_RELATIVE
+  pidl PCUIDLIST_RELATIVE
+
+func ILCloneFirst ordinal=19
+  success NotEqual=0
+  PITEMID_CHILD
+  pidl PCUIDLIST_RELATIVE
+
+func ILCombine ordinal=25
+  success NotEqual=0
+  PIDLIST_ABSOLUTE
+  pidl1 PCIDLIST_ABSOLUTE
+  pidl2 PCUIDLIST_RELATIVE
+
+func ILCreateFromPath ordinal=157
+  success NotEqual=0
+  PIDLIST_ABSOLUTE
+  pszPath LPCWSTR
+
+func ILCreateFromPath bothCharset ordinalA=189 ordinalW=190
+  success NotEqual=0
+  PIDLIST_ABSOLUTE
+  pszPath LPCSTR
+
+func ILFindChild ordinal=24
+  success NotEqual=0
+  PUIDLIST_RELATIVE
+  pidlParent PCIDLIST_ABSOLUTE
+  pidlChild PCIDLIST_ABSOLUTE
+
+func ILFindLastID ordinal=16
+  success NotEqual=0
+  PUITEMID_CHILD
+  pidl PCUIDLIST_RELATIVE
+
+func ILFree ordinal=155
+  void
+  pidl PIDLIST_RELATIVE
+
+func ILGetNext ordinal=153
+  success NotEqual=0
+  PUIDLIST_RELATIVE
+  pidl PCUIDLIST_RELATIVE
+
+func ILGetSize ordinal=152
+  success NotEqual=0
+  UINT
+  pidl PCUIDLIST_RELATIVE
+
+func ILIsEqual ordinal=21
+  BOOL
+  pidl1 PCIDLIST_ABSOLUTE
+  pidl2 PCIDLIST_ABSOLUTE
+
+func ILIsParent ordinal=23
+  BOOL
+  pidl1 PCIDLIST_ABSOLUTE
+  pidl2 PCIDLIST_ABSOLUTE
+  fImmediate BOOL
+
+func ILLoadFromStream
+  HRESULT
+  pstm IStream*
+  pidl PIDLIST_RELATIVE*
+
+func ILRemoveLastID ordinal=17
+  BOOL
+  pidl PUIDLIST_RELATIVE
+
+func ILSaveToStream ordinal=27
+  HRESULT
+  pstm IStream*
+  pidl PCUIDLIST_RELATIVE
+
+func InitNetworkAddressControl
+  BOOL
+
+func IsNetDrive ordinal=66
+  int
+  iDrive int
+
+func IsUserAnAdmin ordinal=680
+  BOOL
+
+func LinkWindow_RegisterClass ordinal=258
+  BOOL
+
+func LinkWindow_UnregisterClass ordinal=259
+  BOOL
+
+func NTSHChangeNotifyDeregister
+  BOOL
+  ulID ULONG
+
+func SHChangeNotify
+  void
+  wEventId [ShellChangeNotifyEvent]
+  uFlags [ShellChangeNotifyFlag]
+  dwItem1 LPCVOID
+  dwItem2 LPCVOID
+
+func NTSHChangeNotifyRegister
+  success NotEqual=0
+  ULONG
+  hwnd HWND
+  fSources int
+  fEvents LONG
+  wMsg UINT
+  cEntries int
+  pfsne SHChangeNotifyEntry*
+
+func OpenRegStream ordinal=85
+  success NotEqual=0
+  IStream*
+  hkey HKEY
+  pszSubkey LPCWSTR
+  pszValue LPCWSTR
+  grfMode [STGM_FLAGS]
+
+func ParseField
+  bool
+  szData LPCTSTR*
+  n int
+  szBuf LPTSTR*
+  iBufLen int
+
+func PathCleanupSpec ordinal=171
+  success NotEqual=0
+  int
+  pszDir LPCWSTR
+  pszSpec LPWSTR
+
+func PathGetShortPath ordinal=92
+  void
+  pszLongPath LPWSTR
+
+func PathIsExe ordinal=43
+  success NotEqual=0
+  int
+  szfile LPCWSTR
+
+func PathIsSlow bothCharset ordinalA=240 ordinalW=239
+  BOOL
+  pszFile LPCTSTR
+  dwFileAttr DWORD
+
+func PathMakeUniqueName ordinal=47
+  BOOL
+  pszUniqueName LPWSTR
+  cchMax UINT
+  pszTemplate LPCWSTR
+  pszLongPlate LPCWSTR
+  pszDir LPCWSTR
+
+func PathProcessCommand
+  success NotEqual=0
+  LONG
+  lpSrc LPCWSTR
+  lpDest LPWSTR
+  iDestMax int
+  dwFlags [PPCF_FLAGS]
+
+func PathResolve ordinal=51
+  BOOL
+  pszPath LPWSTR
+  dirs LPCWSTR*
+  fFlags [PRF_FLAGS]
+
+func PathYetAnotherMakeUniqueName ordinal=75
+  BOOL
+  pszUniqueName LPWSTR
+  pszPath LPCWSTR
+  pszShort LPCWSTR
+  pszFileSpec LPCWSTR
+
+func PickIconDlg ordinal=62
+  success NotEqual=0
+  int
+  hwnd HWND
+  pszIconPath LPWSTR
+  cchIconPath UINT
+  piIconIndex int*
+
+func ReadCabinetState ordinal=654
+  BOOL
+  pcs CABINETSTATE*
+  cLength int
+
+func RealDriveType ordinal=524
+  success NotEqual=0
+  int
+  iDrive int
+  fOKToHitNet BOOL
+
+func RestartDialog ordinal=59
+  success NotEqual=0
+  int
+  hParent HWND
+  pszPrompt LPCWSTR
+  dwReturn [EWX_FLAGS]
+
+func RestartDialogEx ordinal=730
+  success NotEqual=0
+  int
+  hParent HWND
+  pszPrompt LPCWSTR
+  dwReturn [EWX_FLAGS]
+  dwReasonCode [SHTDN_REASON]
+
+func SetCurrentProcessExplicitAppUserModelID
+  HRESULT
+  AppID PCWSTR
+
+func SHAddFromPropSheetExtArray ordinal=167
+  success NotEqual=0
+  int
+  hpsxa HPSXA
+  lpfnAddPage LPFNADDPROPSHEETPAGE
+  lParam LPARAM
+
+func SHAddToRecentDocs
+  void
+  uFlags SHARD
+  pv LPCVOID
+
+func SHAlloc ordinal=196
+  success NotEqual=0
+  LPVOID
+  cb SIZE_T
+
+func SHAppBarMessage
+  success NotEqual=0
+  UINT_PTR
+  dwMessage DWORD
+  pData PAPPBARDATA
+
+func SHAssocEnumHandlers
+  HRESULT
+  pszExtra LPCWSTR
+  afFilter ASSOC_FILTER
+  ppEnumHandler IEnumAssocHandlers**
+
+func SHAssocEnumHandlersForProtocolByApplication
+  HRESULT
+  protocol PCWSTR
+  riid REFIID
+  enumHandlers void** interfaceId=riid
+
+func SHBindToFolderIDListParent
+  HRESULT
+  psfRoot IShellFolder*
+  pidl PCUIDLIST_RELATIVE
+  riid REFIID
+  ppv void** interfaceId=riid
+  ppidlLast PCUITEMID_CHILD*
+
+func SHBindToObject
+  HRESULT
+  psf IShellFolder*
+  pidl PCUIDLIST_RELATIVE
+  pbc IBindCtx*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHBindToParent
+  HRESULT
+  pidl PCIDLIST_ABSOLUTE
+  riid REFIID
+  ppv VOID** interfaceId=riid
+  ppidlLast PCUITEMID_CHILD*
+
+func SHBrowseForFolder bothCharset
+  success NotEqual=0
+  PIDLIST_ABSOLUTE
+  lpbi LPBROWSEINFO
+
+func SHChangeNotification_Lock ordinal=644
+  success NotEqual=0
+  HANDLE
+  hChange HANDLE
+  dwProcId DWORD
+  pppidl PIDLIST_ABSOLUTE**
+  plEvent LONG*
+
+func SHChangeNotification_Unlock ordinal=645
+  BOOL
+  hLock HANDLE
+
+func SHChangeNotifyDeregister ordinal=4
+  BOOL
+  ulID ULONG
+
+func SHChangeNotifyRegister ordinal=2
+  success NotEqual=0
+  ULONG
+  hwnd HWND
+  fSources int
+  fEvents LONG
+  wMsg UINT
+  cEntries int
+  pshcne "const SHChangeNotifyEntry*"
+
+func SHChangeNotifyRegisterThread
+  void
+  status SCNRT_STATUS
+
+func SHCloneSpecialIDList ordinal=89
+  success NotEqual=0
+  PIDLIST_ABSOLUTE
+  hwndOwner HWND
+  csidl [CSIDL]
+  fCreate BOOL
+
+func SHCLSIDFromString ordinal=147
+  HRESULT
+  psz LPCWSTR
+  pclsid CLSID*
+
+func SHCoCreateInstance ordinal=102
+  HRESULT
+  pszCLSID LPCWSTR
+  pclsid "const CLSID*"
+  pUnkOuter IUnknown*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateAssociationRegistration
+  HRESULT
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateDataObject
+  HRESULT
+  pidlFolder PCIDLIST_ABSOLUTE
+  cidl UINT
+  apidl PCUITEMID_CHILD_ARRAY count=cidl
+  pdtInner IDataObject*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateDefaultContextMenu
+  HRESULT
+  pdcm "const DEFCONTEXTMENU*"
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateDefaultExtractIcon
+  HRESULT
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateDefaultPropertiesOp
+  HRESULT
+  psi IShellItem*
+  ppFileOp IFileOperation**
+
+func SHCreateDirectory ordinal=165
+  success NotEqual=0
+  int
+  hwnd HWND
+  pszPath LPCWSTR
+
+func SHCreateDirectoryEx bothCharset
+  success NotEqual=0
+  int
+  hwnd HWND
+  pszPath LPCTSTR
+  psa "const SECURITY_ATTRIBUTES*"
+
+func SHCreateFileExtractIconW ordinal=743
+  HRESULT
+  pszFile LPCWSTR
+  dwFileAttributes [FileAttributes]
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateItemFromParsingName
+  HRESULT
+  pszPath PCWSTR
+  pbc IBindCtx*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateItemFromRelativeName
+  HRESULT
+  psiParent IShellItem*
+  pszName PCWSTR
+  pbc IBindCtx*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateItemInKnownFolder
+  HRESULT
+  kfid REFKNOWNFOLDERID
+  dwKFFlags [KNOWN_FOLDER_FLAG|DWORD]
+  pszItem PCWSTR
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateProcessAsUserW
+  BOOL
+  pscpi PSHCREATEPROCESSINFOW
+
+func SHCreatePropSheetExtArray ordinal=168
+  success NotEqual=0
+  HPSXA
+  hkey HKEY
+  pszSubkey LPCWSTR
+  max_iface UINT
+
+func SHCreateQueryCancelAutoPlayMoniker
+  HRESULT
+  ppmoniker IMoniker**
+
+func SHCreateShellFolderViewEx ordinal=174
+  HRESULT
+  pcsfv LPCSFV
+  ppsv IShellView**
+
+func SHCreateShellFolderView ordinal=256
+  HRESULT
+  pcsfv "const SFV_CREATE*"
+  ppsv IShellView**
+
+func SHCreateShellItem
+  HRESULT
+  pidlParent PCIDLIST_ABSOLUTE
+  psfParent IShellFolder*
+  pidl PCUITEMID_CHILD
+  ppsi IShellItem**
+
+func SHCreateItemWithParent
+  HRESULT
+  pidlParent PCIDLIST_ABSOLUTE
+  psfParent IShellFolder*
+  pidl PCUITEMID_CHILD
+  riid REFIID
+  ppvItem void** interfaceId=riid
+
+func SHCreateItemFromIDList
+  HRESULT
+  pidl PCIDLIST_ABSOLUTE
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateShellItemArray
+  HRESULT
+  pidlParent PCIDLIST_ABSOLUTE
+  psf IShellFolder*
+  cidl UINT
+  ppidl PCUITEMID_CHILD_ARRAY count=cidl
+  ppsiItemArray IShellItemArray**
+
+func SHCreateShellItemArrayFromDataObject
+  HRESULT
+  pdo IDataObject*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateShellItemArrayFromIDLists
+  HRESULT
+  cidl UINT
+  rgpidl PCIDLIST_ABSOLUTE_ARRAY count=cidl
+  ppsiItemArray IShellItemArray**
+
+func SHCreateShellItemArrayFromShellItem
+  HRESULT
+  psi IShellItem*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHCreateStdEnumFmtEtc ordinal=74
+  HRESULT
+  cfmt UINT
+  afmt "const FORMATETC []" count=cfmt
+  ppenumFormatEtc IEnumFORMATETC**
+
+func SHDefExtractIcon bothCharset ordinalA=3 ordinalW=6
+  HRESULT
+  pszIconFile LPCTSTR
+  iIndex int
+  uFlags [SHDefExtractIcon_FLAGS]
+  phiconLarge HICON*
+  phiconSmall HICON*
+  nIconSize UINT
+
+func SHDestroyPropSheetExtArray ordinal=169
+  void
+  hpsxa HPSXA
+
+func SHDoDragDrop ordinal=88
+  HRESULT
+  hwnd HWND
+  pdtobj IDataObject*
+  pdsrc IDropSource*
+  dwEffect DWORD
+  pdwEffect DWORD*
+
+func Shell_GetCachedImageIndex ordinal=72
+  success NotEqual=0
+  int
+  pwszIconPath LPCWSTR
+  iIconIndex int
+  uIconFlags UINT
+
+func Shell_GetCachedImageIndex bothCharset
+  success NotEqual=0
+  int
+  pszIconPath LPCTSTR
+  iIconIndex int
+  uIconFlags UINT
+
+func Shell_GetImageLists ordinal=71
+  BOOL
+  phiml HIMAGELIST*
+  phimlSmall HIMAGELIST*
+
+func Shell_MergeMenus ordinal=67
+  success NotEqual=0
+  UINT
+  hmDst HMENU
+  hmSrc HMENU
+  uInsert UINT
+  uIDAdjust UINT
+  uIDAdjustMax UINT
+  uFlags [MERGE_MENU_FLAGS]
+
+func Shell_NotifyIcon bothCharset
+  BOOL
+  dwMessage DWORD
+  lpdata PNOTIFYICONDATA
+
+func Shell_NotifyIconGetRect
+  HRESULT
+  identifier "const NOTIFYICONIDENTIFIER*"
+  iconLocation RECT*
+
+func ShellAbout bothCharset
+  success NotEqual=0
+  int
+  hWnd HWND
+  szApp LPCTSTR
+  szOtherStuff LPCTSTR
+  hIcon HICON
+
+func ShellExecuteEx bothCharset
+  BOOL
+  lpExecInfo LPSHELLEXECUTEINFO
+
+func SHEmptyRecycleBin bothCharset
+  HRESULT
+  hwnd HWND
+  pszRootPath LPCTSTR
+  dwFlags [SHERB_FLAGS]
+
+func SHEnumerateUnreadMailAccountsW
+  HRESULT
+  hKeyUser HKEY
+  dwIndex DWORD
+  pszMailAddress LPWSTR
+  cchMailAddress int
+
+func SHEvaluateSystemCommandTemplate
+  HRESULT
+  pszCmdTemplate PCWSTR
+  ppszApplication PWSTR*
+  ppszCommandLine PWSTR*
+  ppszParameters PWSTR*
+
+func ShellExecute bothCharset
+  success NotEqual=0
+  HINSTANCE
+  hwnd HWND
+  lpOperation LPCTSTR
+  lpFile LPCTSTR
+  lpParameters LPCTSTR
+  lpDirectory LPCTSTR
+  nShowCmd [ShowWindowCmd] display=INT
+
+func SHExtractIconsW
+  success NotEqual=0
+  UINT
+  pszFileName LPCWSTR
+  nIconIndex int
+  cxIcon int
+  cyIcon int
+  phIcon HICON*
+  pIconId UINT*
+  nIcons UINT
+  flags [LRFlags]
+
+func SHFind_InitMenuPopup ordinal=149
+  success NotEqual=0
+  IContextMenu*
+  hmenu HMENU
+  hwnd HWND
+  idCmdFirst UINT
+  idCmdLast UINT
+
+func SHFindFiles ordinal=90
+  BOOL
+  pidlFolder PCIDLIST_ABSOLUTE
+  pidlSaveFile PCIDLIST_ABSOLUTE
+
+func SHFlushClipboard
+  HRESULT
+
+func SHFlushSFCache ordinal=526
+  void
+
+func SHFormatDrive
+  success NotEqual=0
+  DWORD
+  hwnd HWND
+  drive UINT
+  fmtID UINT
+  options UINT
+
+func SHFree ordinal=195
+  void
+  pv void*
+
+func SHFreeNameMappings
+  void
+  hNameMappings HANDLE
+
+func SHFileOperation bothCharset
+  success NotEqual=0
+  int
+  lpFileOp LPSHFILEOPSTRUCT
+
+func SHGetAttributesFromDataObject ordinal=750
+  HRESULT
+  pdo IDataObject*
+  dwAttributeMask [SFGAOF_DWORD]
+  pdwAttributes [SFGAOF_DWORD*]
+  pcItems UINT*
+
+func SHGetDataFromIDList bothCharset
+  HRESULT
+  psf IShellFolder*
+  pidl PCUITEMID_CHILD
+  nFormat [SHGetDataFromIDListFormats]
+  pv PVOID
+  cb int
+
+func SHGetDesktopFolder
+  HRESULT
+  ppshf IShellFolder**
+
+func SHGetDiskFreeSpace bothCharset
+  BOOL
+  pszVolume LPCTSTR
+  pqwFreeCaller ULARGE_INTEGER*
+  pqwTot ULARGE_INTEGER*
+  pqwFree ULARGE_INTEGER*
+
+func SHGetDiskFreeSpaceEx bothCharset
+  BOOL
+  pszVolume LPCTSTR
+  pqwFreeCaller ULARGE_INTEGER*
+  pqwTot ULARGE_INTEGER*
+  pqwFree ULARGE_INTEGER*
+
+func SHGetDriveMedia
+  HRESULT
+  pszDrive LPCWSTR
+  pdwMediaContent DWORD*
+
+func SHGetFileInfo bothCharset
+  success NotEqual=0
+  DWORD_PTR
+  pszPath LPCTSTR
+  dwFileAttributes [FileAttributes]
+  psfi SHFILEINFO*
+  cbFileInfo UINT
+  uFlags [SHGFI_FLAGS]
+
+func SHGetFolderLocation
+  HRESULT
+  hwndOwner HWND
+  nFolder [CSIDL]
+  hToken HANDLE
+  dwReserved DWORD
+  ppidl PIDLIST_ABSOLUTE*
+
+func SHGetFolderPath bothCharset
+  HRESULT
+  hwndOwner HWND
+  nFolder int
+  hToken HANDLE
+  dwFlags [SHGetFolderPathFlags]
+  pszPath LPTSTR outputOnly
+
+func SHGetFolderPathAndSubDir bothCharset
+  HRESULT
+  hwnd HWND
+  csidl [CSIDL]
+  hToken HANDLE
+  dwFlags [SHGetFolderPathFlags]
+  pszSubDir LPCTSTR
+  pszPath LPTSTR outputOnly
+
+func SHGetIconOverlayIndex bothCharset
+  success NotEqual=0
+  int
+  pszIconPath LPCTSTR
+  iIconIndex int
+
+func SHGetIDListFromObject
+  HRESULT
+  punk IUnknown*
+  ppidl PIDLIST_ABSOLUTE*
+
+func SHGetImageList ordinal=727
+  HRESULT
+  iImageList int
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHGetInstanceExplorer
+  HRESULT
+  ppunk IUnknown**
+
+func SHGetItemFromDataObject
+  HRESULT
+  pdtobj IDataObject*
+  dwFlags DATAOBJ_GET_ITEM_FLAGS
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHGetItemFromObject
+  HRESULT
+  punk IUnknown*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHGetKnownFolderIDList
+  HRESULT
+  rfid REFKNOWNFOLDERID
+  dwFlags [KNOWN_FOLDER_FLAG|DWORD]
+  hToken HANDLE
+  ppidl PIDLIST_ABSOLUTE*
+
+func SHGetKnownFolderItem
+  HRESULT
+  rfid REFKNOWNFOLDERID
+  dwFlags KNOWN_FOLDER_FLAG
+  hToken HANDLE
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHGetKnownFolderPath
+  HRESULT
+  rfid REFKNOWNFOLDERID
+  dwFlags [KNOWN_FOLDER_FLAG|DWORD]
+  hToken HANDLE
+  ppszPath PWSTR*
+
+func SHGetLocalizedName
+  HRESULT
+  pszPath LPCWSTR
+  pszResModule LPWSTR
+  cch UINT
+  pidsRes int*
+
+func SHGetMalloc
+  HRESULT
+  ppMalloc LPMALLOC*
+
+func SHGetNameFromIDList
+  HRESULT
+  pidl PCIDLIST_ABSOLUTE
+  sigdnName SIGDN
+  ppszName PWSTR*
+
+func SHGetNameFromPropertyKey
+  HRESULT
+  propkey REFPROPERTYKEY
+  ppszCanonicalName PWSTR*
+
+func SHGetNewLinkInfo bothCharset ordinalA=179 ordinalW=180
+  BOOL
+  pszLinkTo LPCTSTR
+  pszDir LPCTSTR
+  pszName LPTSTR
+  pfMustCopy BOOL*
+  uFlags [SHGNLI_FLAGS]
+
+func SHGetPathFromIDListEx
+  BOOL
+  pidl PCIDLIST_ABSOLUTE
+  pszPath PWSTR
+  cchPath DWORD
+  uOpts GPFIDL_FLAGS
+
+func SHGetPathFromIDList bothCharset
+  BOOL
+  pidl PCIDLIST_ABSOLUTE
+  pszPath LPTSTR
+
+func SHGetRealIDL ordinal=98
+  HRESULT
+  psf IShellFolder*
+  pidlSimple PCUITEMID_CHILD
+  ppidlReal PITEMID_CHILD*
+
+func SHGetSetFolderCustomSettings ordinal=709
+  HRESULT
+  pfcs LPSHFOLDERCUSTOMSETTINGS
+  pszPath LPCTSTR
+  dwReadWrite DWORD
+
+func SHGetSetSettings ordinal=68
+  void
+  lpss LPSHELLSTATE
+  dwMask [SSF_FLAGS]
+  bSet BOOL
+
+func SHGetSettings
+  void
+  lpsfs LPSHELLFLAGSTATE
+  dwMask [SSF_FLAGS]
+
+func SHGetShellStyleHInstance
+  success NotEqual=0
+  HINSTANCE
+
+func SHGetSpecialFolderLocation
+  HRESULT
+  hwndOwner HWND
+  nFolder [CSIDL]
+  ppidl PIDLIST_ABSOLUTE*
+
+func SHGetSpecialFolderPath ordinal=175
+  BOOL
+  hwndOwner HWND
+  lpwszPath LPWSTR outputOnly
+  csidl [CSIDL]
+  fCreate BOOL
+
+func SHGetSpecialFolderPath bothCharset
+  BOOL
+  hwndOwner HWND
+  lpszPath LPTSTR outputOnly
+  csidl [CSIDL]
+  fCreate BOOL
+
+func SHGetStockIconInfo
+  HRESULT
+  siid SHSTOCKICONID
+  uFlags [SHGSI_FLAGS]
+  psii SHSTOCKICONINFO*
+
+func SHGetTemporaryPropertyForItem
+  HRESULT
+  psi IShellItem*
+  pk REFPROPERTYKEY
+  ppropvarInk PROPVARIANT*
+
+func SHGetUnreadMailCountW
+  HRESULT
+  hKeyUser HKEY
+  pszMailAddress LPCWSTR
+  pdwCount DWORD*
+  pFileTime FILETIME*
+  pszShellExecuteCommand LPCWSTR
+  cchShellExecuteCommand int
+
+func SHHandleUpdateImage ordinal=193
+  success NotEqual=0
+  int
+  pidlExtra PCIDLIST_ABSOLUTE
+
+func SHILCreateFromPath ordinal=28
+  HRESULT
+  pszPath LPCWSTR
+  ppidl PIDLIST_ABSOLUTE*
+  rgflnOut DWORD*
+
+func SHInvokePrinterCommand bothCharset
+  BOOL
+  hwnd HWND
+  uAction UINT
+  lpBuf1 LPCTSTR
+  lpBuf2 LPCTSTR
+  fModal BOOL
+
+func SHIsFileAvailableOffline
+  HRESULT
+  pszPath LPCWSTR
+  pdwStatus LPDWORD
+
+func SHLimitInputEdit ordinal=747
+  HRESULT
+  hwndEdit HWND
+  psf IShellFolder*
+
+func SHLoadInProc
+  HRESULT
+  rclsid REFCLSID
+
+func SHLoadNonloadedIconOverlayIdentifiers
+  HRESULT
+
+func SHLoadOLE
+  HRESULT
+  lParam LPARAM
+
+func SHLocalStrDup bothCharset
+  HRESULT
+  psz LPCWSTR
+  ppsz LPWSTR*
+
+func SHMapIDListToImageListIndexAsync
+  HRESULT
+  pts IShellTaskScheduler*
+  psf IShellFolder*
+  pidl LPCITEMIDLIST
+  flags [GIL_INPUT_FLAGS]
+  pfn PFNASYNCICONTASKBALLBACK
+  pvData void*
+  pvHint void*
+  piIndex int*
+  piIndexSel int*
+
+func SHMapPIDLToSystemImageListIndex ordinal=77
+  success NotEqual=0
+  int
+  psf IShellFolder*
+  pidl PCUITEMID_CHILD
+  piIndex int*
+
+func SHMultiFileProperties ordinal=716
+  HRESULT
+  pdtobj IDataObject*
+  dwFlags DWORD
+
+func SHObjectProperties ordinal=178
+  BOOL
+  hwnd HWND
+  shopObjectType DWORD
+  pszObjectName PCWSTR
+  pszPropertyPage PCWSTR
+
+func SHOpenFolderAndSelectItems
+  HRESULT
+  pidlFolder PCIDLIST_ABSOLUTE
+  cidl UINT
+  apidl PCUITEMID_CHILD_ARRAY* count=cidl
+  dwFlags [OFASI_FLAGS]
+
+func SHOpenPropSheetW ordinal=80
+  BOOL
+  pszCaption LPCWSTR
+  ahkeys "HKEY []" count=ckeys
+  ckeys UINT
+  pclsidDef "const CLSID*"
+  pdtobj IDataObject*
+  psb IShellBrowser*
+  pStartPage LPCWSTR
+
+func SHOpenWithDialog
+  HRESULT
+  hwndParent HWND
+  poainfo "const OPENASINFO*"
+
+func SHParseDisplayName
+  HRESULT
+  pszName LPCWSTR
+  pbc IBindCtx*
+  ppidl PIDLIST_ABSOLUTE*
+  sfgaoIn SFGAOF
+  psfgaoOut SFGAOF*
+
+func SHPathPrepareForWrite bothCharset
+  HRESULT
+  hwnd HWND
+  punkEnableModless IUnknown*
+  pszPath LPCTSTR
+  dwFlags [SHPPFW_FLAGS]
+
+func SHQueryRecycleBin bothCharset
+  HRESULT
+  pszRootPath LPCTSTR
+  pSHQueryRBInfo LPSHQUERYRBINFO
+
+func SHQueryUserNotificationState
+  HRESULT
+  pquns QUERY_USER_NOTIFICATION_STATE*
+
+func SHRemoveLocalizedName
+  HRESULT
+  pszPath LPCWSTR
+
+func SHReplaceFromPropSheetExtArray ordinal=170
+  success NotEqual=0
+  UINT
+  hpsxa HPSXA
+  uPageID UINT
+  lpfnReplaceWith LPFNADDPROPSHEETPAGE
+  lParam LPARAM
+
+func SHResolveLibrary
+  HRESULT
+  psiLibrary IShellItem*
+
+func SHRestricted ordinal=100
+  DWORD
+  rest RESTRICTIONS
+
+func SHRunControlPanel
+  BOOL
+  lpcszCmdLine LPCWSTR
+  hwndMsgParent HWND
+
+func SHSetDefaultProperties
+  HRESULT
+  hwnd HWND
+  psi IShellItem*
+  dwFileOpFlags [FILEOP_FLAGS_DWORD]
+  pfops IFileOperationProgressSink*
+
+func SHSetFolderPath bothCharset ordinalA=231 ordinalW=232
+  HRESULT
+  csidl [CSIDL]
+  hToken HANDLE
+  dwFlags DWORD
+  pszPath LPCTSTR
+
+func SHSetInstanceExplorer ordinal=176
+  void
+  punk IUnknown*
+
+func SHSetKnownFolderPath
+  HRESULT
+  rfid REFKNOWNFOLDERID
+  dwFlags [KNOWN_FOLDER_FLAG|DWORD]
+  hToken HANDLE
+  pszPath PCWSTR
+
+func SHSetLocalizedName
+  HRESULT
+  pszPath LPCWSTR
+  pszResModule LPCWSTR
+  idsRes int
+
+func SHSetTemporaryPropertyForItem
+  HRESULT
+  psi IShellItem*
+  propkey REFPROPERTYKEY
+  propvar REFPROPVARIANT
+
+func SHSetUnreadMailCountW
+  HRESULT
+  pszMailAddress LPCWSTR
+  dwCount DWORD
+  pszShellExecuteCommand LPCWSTR
+
+func SHShellFolderView_Message ordinal=73
+  success NotEqual=0
+  LRESULT
+  hwnd HWND
+  uMsg UINT
+  lparam LPARAM
+
+func SHShowManageLibraryUI
+  HRESULT
+  psiLibrary IShellItem*
+  hwndOwner HWND
+  pszTitle LPCWSTR
+  pszInstruction LPCWSTR
+  lmdOptions LIBRARYMANAGEDIALOGOPTIONS
+
+func SHSimpleIDListFromPath ordinal=162
+  success NotEqual=0
+  PIDLIST_ABSOLUTE
+  pszPath LPCWSTR
+
+func SHStartNetConnectionDialogW ordinal=14
+  HRESULT
+  hwnd HWND
+  pszRemoteName LPCWSTR
+  dwType DWORD
+
+func SHTestTokenMembership ordinal=245
+  BOOL
+  hToken HANDLE
+  ulRID ULONG
+
+func SHUpdateImage bothCharset ordinalA=191 ordinalW=192
+  void
+  pszHashItem LPCTSTR
+  iIndex int
+  uFlags [SHUpdateImage_FLAGS]
+  iImageIndex int
+
+func SHValidateUNC ordinal=173
+  BOOL
+  hwndOwner HWND
+  pszFile LPWSTR
+  fConnect UINT
+
+func SignalFileOpen ordinal=103
+  BOOL
+  pidl PCIDLIST_ABSOLUTE
+
+func StgMakeUniqueName ordinal=682
+  HRESULT
+  pstgParent IStorage*
+  pszFileSpec PCWSTR
+  grfMode [STGM_FLAGS]
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func Win32DeleteFile ordinal=164
+  BOOL
+  pszFileName LPCTSTR
+
+func WOWShellExecute
+  success NotEqual=0
+  HINSTANCE
+  hwnd HWND
+  lpOperation LPCTSTR
+  lpFile LPCTSTR
+  lpParameters LPCTSTR
+  lpDirectory LPCTSTR
+  nShowCmd [ShowWindowCmd] display=INT
+  lpfnCBWinExec void*
+
+func WriteCabinetState ordinal=652
+  BOOL
+  pcs CABINETSTATE*
+
+func RunFileDlg ordinal=61
+  VOID
+  hwndOwner HWND
+  hIcon HICON
+  lpszDirectory LPCWSTR
+  lpszTitle LPCWSTR
+  lpszDescription LPCWSTR
+  uFlags [RunFileDlgFlags]
+
+func StrRetToStrN
+  BOOL
+  pszOut LPTSTR
+  cchOut UINT
+  pStrRet LPSTRRET
+  pidl LPCITEMIDLIST
+
+func PifMgr_CloseProperties ordinal=13
+  success NotEqual=0
+  int
+  hProps HANDLE
+  flOpt UINT
+
+func PifMgr_OpenProperties ordinal=9
+  success NotEqual=0
+  HANDLE
+  pszApp LPCWSTR
+  lpszPIF LPCWSTR
+  hInf UINT
+  flOpt UINT
+
+func PifMgr_GetProperties ordinal=10
+  success NotEqual=0
+  int
+  hProps HANDLE
+  pszGroup LPCSTR
+  lpProps VOID*
+  cbProps int
+  flOpt UINT
+
+func PifMgr_SetProperties ordinal=11
+  success NotEqual=0
+  int
+  hProps HANDLE
+  pszGroup LPCSTR
+  lpProps VOID*
+  cbProps int
+  flOpt UINT
+
+func SHAddDefaultPropertiesByExt
+  HRESULT
+  pszExt PCWSTR
+  pPropStore IPropertyStore*
+
+func SHGetPropertyStoreForWindow
+  HRESULT
+  hwnd HWND
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHGetPropertyStoreFromIDList
+  HRESULT
+  pidl PCIDLIST_ABSOLUTE
+  flags GETPROPERTYSTOREFLAGS
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHGetPropertyStoreFromParsingName
+  HRESULT
+  pszPath PCWSTR
+  pbc IBindCtx*
+  flags GETPROPERTYSTOREFLAGS
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func SHPropStgCreate ordinal=685
+  HRESULT
+  psstg IPropertySetStorage*
+  fmtid REFFMTID
+  pclsid "const CLSID*"
+  grfFlags [PROPSETFLAG]
+  grfMode [STGM_FLAGS]
+  dwDisposition DWORD
+  ppstg IPropertyStorage**
+  puCodePage UINT*
+
+func SHPropStgReadMultiple ordinal=688
+  HRESULT
+  pps IPropertyStorage*
+  uCodePage [CodePageEnum]
+  cpspec ULONG
+  rgpspec "PROPSPEC const[]" count=cpspec
+  rgvar PROPVARIANT[] postCount=cpspec
+
+func SHPropStgWriteMultiple ordinal=689
+  HRESULT
+  pps IPropertyStorage*
+  uCodePage UINT*
+  cpspec ULONG
+  rgpspec "PROPSPEC const[]" count=cpspec
+  rgvar PROPVARIANT[] count=cpspec
+  propidNameFirst PROPID
+
+func AddCommasExportW ordinal=203
+  success NotEqual=0
+  LPWSTR
+  value DWORD
+  pwszBuf LPWSTR
+
+func AppCompat_RunDLLW
+  void
+  unusedHwnd HWND
+  unusedHinstance HINSTANCE
+  commandLine LPWSTR
+  unusedInt int
+
+func CheckStagingArea ordinal=753
+  HRESULT
+
+func CreateAutoListParser ordinal=880
+  HRESULT
+  riid REFIID
+  ppv PVOID* interfaceId=riid
+
+func CreateInfoTipFromItem ordinal=260
+  HRESULT
+  psf IShellFolder2*
+  pidl ITEMIDLIST*
+  pText LPCWSTR
+  riid REFIID
+  ppv PVOID* interfaceId=riid
+
+func CreateInfoTipFromItem2 ordinal=264
+  HRESULT
+  psf IShellFolder2*
+  pidl ITEMIDLIST*
+  pPropKey PROPERTYKEY*
+  pText LPCWSTR
+  riid REFIID
+  ppv PVOID* interfaceId=riid
+
+func DisconnectWindowDialog ordinal=254
+  void
+  hwndUnused HWND
+
+func GetAppPathFromLink ordinal=895
+  HRESULT
+  pItem IShellItem*
+  pwszPathBuffer LPWSTR outputOnly
+  dwBufferLen DWORD
+
+func GetSqmableFileName ordinal=892
+  BOOL
+  pwszFileName LPCWSTR
+  pwszSqmName LPWSTR
+  sqmNameBufLen UINT
+
+func Int64ToString ordinal=209
+  success NotEqual=0
+  int
+  number INT64
+  pwszBuf LPWSTR
+  bufLen UINT
+  useNumberFormat BOOL
+  pFormatInfo NUMBERFMT*
+  dwFlags [NUMBERFMT_FLAGS]
+
+func IsElevationRequired ordinal=865
+  BOOL
+  lpwszExeFile LPCWSTR
+
+func IsSearchEnabled ordinal=902
+  BOOL
+
+func LargeIntegerToString
+  success NotEqual=0
+  int
+  pNumber LARGE_INTEGER*
+  pwszBuf LPWSTR
+  bufLen UINT
+  useNumberFormat BOOL
+  pFormatInfo NUMBERFMT*
+  dwFlags [NUMBERFMT_FLAGS]
+
+func PathGetPathDisplayName ordinal=840
+  HRESULT
+  pwszPath LPCWSTR
+  pwszDisplayName LPWSTR
+  displayNameLen DWORD
+
+func PathIsTemporary bothCharset ordinalA=713 ordinalW=714
+  BOOL
+  pszFile LPCTSTR
+
+func Printer_AddPrinterPropPages ordinal=212
+  void
+  printer LPCWSTR
+  pPropHeader PROPSHEETHEADER*
+
+func Printer_LoadIconsW ordinal=205
+  void
+  printerName LPCWSTR
+  phLargeIcon HICON*
+  phSmallIcon HICON*
+
+func Printers_RegisterWindowW ordinal=213
+  BOOL
+  pwszPrinter LPCWSTR
+  pidlType DWORD
+  pWinCreated BOOL*
+  phwnd HWND*
+
+func Printers_UnregisterWindow ordinal=214
+  void
+  pClassPidl CLASSPIDL*
+  hwnd HWND
+
+func RefreshBrowserLayout ordinal=891
+  HRESULT
+  pItem IShellItem*
+
+func RunAsNewUser_RunDLLW
+  success NotEqual=0
+  int
+  hWnd HWND
+  hIinstance HINSTANCE
+  lpszFileMapName LPCWSTR
+  nCmdShow [ShowWindowCmd]
+
+func SHGetUserDisplayName ordinal=241
+  HRESULT
+  pwszName LPWSTR
+  pBufLen UINT
+
+func SHGetUserPicturePathEx ordinal=810
+  HRESULT
+  pwszUserOrPicName LPCWSTR
+  sguppFlags [SGUPP_FLAGS]
+  pwszDesiredSrcExt LPCWSTR
+  pwszPicPath LPWSTR
+  picPathLen UINT
+  pwszSrcPath LPWSTR
+  srcLen UINT
+
+func SHHelpShortcuts_RunDLL bothCharset nameA=SHHelpShortcuts_RunDLL
+  void
+  hwndParent HWND
+  unusedHinstance HINSTANCE
+  commandLine LPCTSTR
+  unusedInt int
+
+func SHResolveUserNames ordinal=270
+  HRESULT
+  pwszSids LPCWSTR
+  pwszNames LPWSTR
+  nameLen UINT
+
+func SHSettingsChanged ordinal=244
+  void
+  wParam WPARAM
+  lParam LPCWSTR
+
+func SHShouldShowWizards ordinal=237
+  BOOL
+  pUnk IUnknown*
+
+func SHTestTokenPrivilegeW ordinal=236
+  BOOL
+  hToken HANDLE
+  pwszPrivilege LPCWSTR
+
+func SHUserGetPasswordHint ordinal=812
+  HRESULT
+  pwszUserName PCWSTR
+  ppwszHint PWSTR*
+
+func SHUserSetPasswordHint ordinal=813
+  HRESULT
+  pwszUserName PCWSTR
+  pwszPasswordHint PCWSTR
+
+func ShellExecCmdLine ordinal=265
+  HRESULT
+  hwnd HWND
+  pwszCommand LPCWSTR
+  pwszStartDir LPCWSTR
+  nShow [ShowWindowCmd]
+  pUnused LPVOID
+  dwSeclFlags [SECL_FLAGS]
+
+func ShortSizeFormatExportW ordinal=204
+  success NotEqual=0
+  LPWSTR
+  value DWORD
+  pwszBuf LPWSTR
+

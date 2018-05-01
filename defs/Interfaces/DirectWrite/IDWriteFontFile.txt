@@ -1,0 +1,21 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteFontFile base=IUnknown id={739d886a-cef5-47dc-8769-1a8b41bebbb0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func GetReferenceKey
+    HRESULT
+    fontFileReferenceKey "void const**"
+    fontFileReferenceKeySize UINT32*
+
+  func GetLoader
+    HRESULT
+    fontFileLoader IDWriteFontFileLoader**
+
+  func Analyze
+    HRESULT
+    isSupportedFontType BOOL*
+    fontFileType DWRITE_FONT_FILE_TYPE*
+    fontFaceType DWRITE_FONT_FACE_TYPE*
+    numberOfFaces UINT32*
+
+

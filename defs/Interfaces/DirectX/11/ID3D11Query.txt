@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11Asynchronous.txt
+
+ingterface ID3D11Query base=ID3D11Asynchronous id={d6c00747-87b7-425e-b84d-44d108560afd} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func GetDesc
+    void
+    pDesc D3D11_QUERY_DESC*
+
+

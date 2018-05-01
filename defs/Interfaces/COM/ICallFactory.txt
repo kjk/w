@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+
+ingterface ICallFactory base=IUnknown id={1c733a30-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func CreateCall
+    HRESULT
+    riid REFIID
+    pCtrlUnk IUnknown*
+    riid2 REFIID
+    ppv IUnknown** interfaceId=riid2
+
+

@@ -1,0 +1,19 @@
+include Interfaces\Shell\IDeskBar.txt
+
+ingterface IMenuPopup base=IDeskBar id={D1E7AFEB-6A2E-11d0-8C78-00C04FD918B4} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Popup
+    HRESULT
+    ppt POINTL*
+    prcExclude RECTL*
+    dwFlags MP_POPUPFLAGS
+
+  func OnSelect
+    HRESULT
+    dwSelectType DWORD
+
+  func SetSubMenu
+    HRESULT
+    pmp IMenuPopup*
+    fSet BOOL
+
+

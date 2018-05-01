@@ -1,0 +1,145 @@
+include Interfaces\IUnknown.txt
+
+ingterface ID3D11InfoQueue base=IUnknown id={6543dbb6-1b48-42f5-ab82-e97ec74326f6} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Layer"
+  func SetMessageCountLimit
+    HRESULT
+    MessageCountLimit UINT64
+
+  func ClearStoredMessages
+    void
+
+  func GetMessage
+    HRESULT
+    MessageIndex UINT64
+    pMessage D3D11_MESSAGE*
+    pMessageByteLength SIZE_T*
+
+  func GetNumMessagesAllowedByStorageFilter
+    success NotEqual=0
+    UINT64
+
+  func GetNumMessagesDeniedByStorageFilter
+    success NotEqual=0
+    UINT64
+
+  func GetNumStoredMessages
+    success NotEqual=0
+    UINT64
+
+  func GetNumStoredMessagesAllowedByRetrievalFilter
+    success NotEqual=0
+    UINT64
+
+  func GetNumMessagesDiscardedByMessageCountLimit
+    success NotEqual=0
+    UINT64
+
+  func GetMessageCountLimit
+    success NotEqual=0
+    UINT64
+
+  func AddStorageFilterEntries
+    HRESULT
+    pFilter D3D11_INFO_QUEUE_FILTER*
+
+  func GetStorageFilter
+    HRESULT
+    pFilter D3D11_INFO_QUEUE_FILTER*
+    pFilterByteLength SIZE_T*
+
+  func ClearStorageFilter
+    void
+
+  func PushEmptyStorageFilter
+    HRESULT
+
+  func PushCopyOfStorageFilter
+    HRESULT
+
+  func PushStorageFilter
+    HRESULT
+    pFilter D3D11_INFO_QUEUE_FILTER*
+
+  func PopStorageFilter
+    void
+
+  func GetStorageFilterStackSize
+    success NotEqual=0
+    UINT
+
+  func AddRetrievalFilterEntries
+    HRESULT
+    pFilter D3D11_INFO_QUEUE_FILTER*
+
+  func GetRetrievalFilter
+    HRESULT
+    pFilter D3D11_INFO_QUEUE_FILTER*
+    pFilterByteLength SIZE_T*
+
+  func ClearRetrievalFilter
+    void
+
+  func PushEmptyRetrievalFilter
+    HRESULT
+
+  func PushCopyOfRetrievalFilter
+    HRESULT
+
+  func PushRetrievalFilter
+    HRESULT
+    pFilter D3D11_INFO_QUEUE_FILTER*
+
+  func PopRetrievalFilter
+    void
+
+  func GetRetrievalFilterStackSize
+    success NotEqual=0
+    UINT
+
+  func AddMessage
+    HRESULT
+    Category D3D11_MESSAGE_CATEGORY
+    Severity D3D11_MESSAGE_SEVERITY
+    ID D3D11_MESSAGE_ID
+    pDescription LPCSTR
+
+  func AddApplicationMessage
+    HRESULT
+    Severity D3D11_MESSAGE_SEVERITY
+    pDescription LPCSTR
+
+  func SetBreakOnCategory
+    HRESULT
+    Category D3D11_MESSAGE_CATEGORY
+    bEnable BOOL
+
+  func SetBreakOnSeverity
+    HRESULT
+    Severity D3D11_MESSAGE_SEVERITY
+    bEnable BOOL
+
+  func SetBreakOnID
+    HRESULT
+    ID D3D11_MESSAGE_ID
+    bEnable BOOL
+
+  func GetBreakOnCategory
+    BOOL
+    Category D3D11_MESSAGE_CATEGORY
+
+  func GetBreakOnSeverity
+    BOOL
+    Severity D3D11_MESSAGE_SEVERITY
+
+  func GetBreakOnID
+    BOOL
+    ID D3D11_MESSAGE_ID
+
+  func SetMuteDebugOutput
+    void
+    bMute BOOL
+
+  func GetMuteDebugOutput
+    BOOL
+
+

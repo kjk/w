@@ -1,0 +1,19 @@
+include Interfaces\IUnknown.txt
+
+ingterface IMpeg2Demultiplexer base=IUnknown id={436eee9c-264f-4242-90e1-4e330c107512} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func CreateOutputPin
+    HRESULT
+    pMediaType AM_MEDIA_TYPE*
+    pszPinName LPWSTR
+    ppIPin IPin**
+
+  func SetOutputPinMediaType
+    HRESULT
+    pszPinName LPWSTR
+    pMediaType AM_MEDIA_TYPE*
+
+  func DeleteOutputPin
+    HRESULT
+    pszPinName LPWSTR
+
+

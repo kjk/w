@@ -1,0 +1,32 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRSurfaceAllocatorNotify base=IUnknown id={aada05a8-5a4e-4729-af0b-cea27aed51e2} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func AdviseSurfaceAllocator
+    HRESULT
+    dwUserID DWORD_PTR
+    lpIVRMSurfaceAllocator IVMRSurfaceAllocator*
+
+  func SetDDrawDevice
+    HRESULT
+    lpDDrawDevice LPDIRECTDRAW7
+    hMonitor HMONITOR
+
+  func ChangeDDrawDevice
+    HRESULT
+    lpDDrawDevice LPDIRECTDRAW7
+    hMonitor HMONITOR
+
+  func RestoreDDrawSurfaces
+    HRESULT
+
+  func NotifyEvent
+    HRESULT
+    EventCode [MediaEventCode] display=LONG
+    Param1 LONG_PTR
+    Param2 LONG_PTR
+
+  func SetBorderColor
+    HRESULT
+    clrBorder COLORREF
+
+

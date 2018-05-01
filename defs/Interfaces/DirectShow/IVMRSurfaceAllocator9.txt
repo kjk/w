@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRSurfaceAllocator9 base=IUnknown id={8d5148ea-3f5d-46cf-9df1-d1b896eedb1f} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func InitializeDevice
+    HRESULT
+    dwUserID DWORD_PTR
+    lpAllocInfo VMR9AllocationInfo*
+    lpNumBuffers DWORD*
+
+  func TerminateDevice
+    HRESULT
+    dwID DWORD_PTR
+
+  func GetSurface
+    HRESULT
+    dwUserID DWORD_PTR
+    SurfaceIndex DWORD
+    SurfaceFlags DWORD
+    lplpSurface IDirect3DSurface9**
+
+  func AdviseNotify
+    HRESULT
+    lpIVMRSurfAllocNotify IVMRSurfaceAllocatorNotify9*
+
+

@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioAutoGainControl base=IUnknown id={85401FD4-6DE4-4b9d-9869-2D6753A82F3C} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetEnabled
+    [AUDCLNT_HRESULT]
+    pbEnabled BOOL*
+
+  func SetEnabled
+    [AUDCLNT_HRESULT]
+    bEnable BOOL
+    pguidEventContext LPCGUID
+
+

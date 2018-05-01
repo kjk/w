@@ -1,0 +1,11 @@
+include Interfaces\IClassFactory.txt
+
+ingterface IClassFactoryEx base=IClassFactory id={342D1EA0-AE25-11D1-89C5-006008C3FBFC} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+  func CreateInstanceWithContext
+    HRESULT
+    punkContext IUnknown*
+    punkOuter IUnknown*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

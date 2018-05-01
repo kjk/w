@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFolderBandPriv base=IUnknown id={47c01f95-e185-412c-b5c5-4f27df965aea} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetCascade
+    HRESULT
+    fCascade BOOL
+
+  func SetAccelerators
+    HRESULT
+    fAccelerators BOOL
+
+  func SetNoIcons
+    HRESULT
+    fNoIcons BOOL
+
+  func SetNoText
+    HRESULT
+    fNoText BOOL
+
+

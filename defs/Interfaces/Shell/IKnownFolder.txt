@@ -1,0 +1,45 @@
+include Interfaces\IUnknown.txt
+
+ingterface IKnownFolder base=IUnknown id={3AA7AF7E-9B36-420c-A8E3-F77D4674A488} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetId
+    HRESULT
+    pkfid KNOWNFOLDERID*
+
+  func GetCategory
+    HRESULT
+    pCategory KF_CATEGORY*
+
+  func GetShellItem
+    HRESULT
+    dwFlags [KNOWN_FOLDER_FLAG|DWORD]
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetPath
+    HRESULT
+    dwFlags [KNOWN_FOLDER_FLAG|DWORD]
+    ppszPath LPWSTR*
+
+  func SetPath
+    HRESULT
+    dwFlags [KNOWN_FOLDER_FLAG|DWORD]
+    pszPath LPCWSTR
+
+  func GetIDList
+    HRESULT
+    dwFlags [KNOWN_FOLDER_FLAG|DWORD]
+    ppidl PIDLIST_ABSOLUTE*
+
+  func GetFolderType
+    HRESULT
+    pftid FOLDERTYPEID*
+
+  func GetRedirectionCapabilities
+    HRESULT
+    pCapabilities KF_REDIRECTION_CAPABILITIES*
+
+  func GetFolderDefinition
+    HRESULT
+    pKFD KNOWNFOLDER_DEFINITION*
+
+

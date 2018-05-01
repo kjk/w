@@ -1,0 +1,31 @@
+include Headers\windows.h.txt
+
+dll Slwga.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Administration/Software Licensing API (SLAPI)"
+enum SL_GENUINE_STATE UINT
+  SL_GEN_STATE_IS_GENUINE      0
+  SL_GEN_STATE_INVALID_LICENSE 1
+  SL_GEN_STATE_TAMPERED        2
+  SL_GEN_STATE_LAST            3
+
+pointer SL_GENUINE_STATE* SL_GENUINE_STATE
+
+struct SL_NONGENUINE_UI_OPTIONS
+  cbSize DWORD
+  pComponentId "CONST SLID*"
+  hResultUI HRESULT
+
+pointer SL_NONGENUINE_UI_OPTIONS* SL_NONGENUINE_UI_OPTIONS
+
+func SLIsGenuineLocal
+  HRESULT
+  pAppId "const SLID*"
+  pGenuineState SL_GENUINE_STATE*
+  pUIOptions SL_NONGENUINE_UI_OPTIONS*
+
+func SLIsGenuineLocalEx
+  HRESULT
+  pAppId "const SLID*"
+  pSkuId "const SLID*"
+  pGenuineState SL_GENUINE_STATE*
+

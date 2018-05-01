@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDynamicHWHandler base=IUnknown id={DC2601D7-059E-42fc-A09D-2AFD21B6D5F7} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetDynamicInfo
+    HRESULT
+    pszDeviceID LPCWSTR
+    dwContentType DWORD
+    ppszAction LPWSTR*
+
+

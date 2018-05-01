@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOpenControlPanel base=IUnknown id={D11AD862-66DE-4DF4-BF6C-1F5621996AF1} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Open
+    HRESULT
+    pszName LPCWSTR
+    pszPage LPCWSTR
+    punkSite IUnknown*
+
+  func GetPath
+    HRESULT
+    pszName LPCWSTR
+    pszPath LPWSTR
+    cchPath UINT
+
+  func GetCurrentView
+    HRESULT
+    pView CPVIEW*
+
+

@@ -1,0 +1,7 @@
+include Interfaces\IUnknown.txt
+
+ingterface IComputerInfoChangeNotify base=IUnknown id={0DF60D92-6818-46d6-B358-D66170DDE466} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func ComputerInfoChanged
+    HRESULT
+
+

@@ -1,0 +1,54 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICBitmapDecoder base=IUnknown id={9EDDE9E7-8DEE-47ea-99DF-E6FAF2ED44BF} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func QueryCapability
+    [WIC_HRESULT]
+    pIStream IStream*
+    pdwCapability DWORD*
+
+  func Initialize
+    [WIC_HRESULT]
+    pIStream IStream*
+    cacheOptions WICDecodeOptions
+
+  func GetContainerFormat
+    [WIC_HRESULT]
+    pguidContainerFormat GUID*
+
+  func GetDecoderInfo
+    [WIC_HRESULT]
+    ppIDecoderInfo IWICBitmapDecoderInfo**
+
+  func CopyPalette
+    [WIC_HRESULT]
+    pIPalette IWICPalette*
+
+  func GetMetadataQueryReader
+    [WIC_HRESULT]
+    ppIMetadataQueryReader IWICMetadataQueryReader**
+
+  func GetPreview
+    [WIC_HRESULT]
+    ppIBitmapSource IWICBitmapSource**
+
+  func GetColorContexts
+    [WIC_HRESULT]
+    cCount UINT
+    ppIColorContexts IWICColorContext** postCount=pcActualCount
+    pcActualCount UINT*
+
+  func GetThumbnail
+    [WIC_HRESULT]
+    ppIThumbnail IWICBitmapSource**
+
+  func GetFrameCount
+    [WIC_HRESULT]
+    pCount UINT*
+
+  func GetFrame
+    [WIC_HRESULT]
+    index UINT
+    ppIBitmapFrame IWICBitmapFrameDecode**
+
+

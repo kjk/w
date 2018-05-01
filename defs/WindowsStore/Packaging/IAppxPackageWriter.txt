@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxPackageWriter base=IUnknown id={9099e33b-246f-41e4-881a-008eb613f858} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func AddPayloadFile
+    HRESULT
+    fileName LPCWSTR
+    contentType LPCWSTR
+    compressionOption APPX_COMPRESSION_OPTION
+    inputStream IStream*
+
+  func Close
+    HRESULT
+    manifest IStream*
+
+

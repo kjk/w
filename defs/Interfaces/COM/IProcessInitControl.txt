@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IProcessInitControl base=IUnknown id={72380d55-8d2b-43a3-8513-2b6ef31434e9} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func ResetInitializerTimeout
+    HRESULT
+    dwSecondsRemaining DWORD
+
+

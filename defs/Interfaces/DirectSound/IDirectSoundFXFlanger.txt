@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundFXFlanger base=IUnknown id={903e9878-2c92-4072-9b2c-ea68f5396783} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func SetAllParameters
+    [DS_HRESULT]
+    pcDsFxFlanger LPCDSFXFlanger
+
+  func GetAllParameters
+    [DS_HRESULT]
+    pDsFxFlanger LPDSFXFlanger
+
+

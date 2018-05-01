@@ -1,0 +1,25 @@
+include Interfaces\IDispatch.txt
+
+ingterface FolderItems base=IDispatch id={744129E0-CBE5-11CE-8350-444553540000} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func get_Count
+    HRESULT
+    plCount long*
+
+  func get_Application
+    HRESULT
+    ppid IDispatch**
+
+  func get_Parent
+    HRESULT
+    ppid IDispatch**
+
+  func Item
+    HRESULT
+    index VARIANT
+    ppid FolderItem**
+
+  func _NewEnum
+    HRESULT
+    ppunk IUnknown**
+
+

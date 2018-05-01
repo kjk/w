@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrSessionCreator base=IUnknown id={17f48517-f305-4321-a08d-b25a834918fd} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func CreateSession
+    HRESULT
+    pszHandlerID LPCWSTR
+    ppszItemIDs LPCWSTR*
+    cItems ULONG
+    ppCallback ISyncMgrSyncCallback**
+
+

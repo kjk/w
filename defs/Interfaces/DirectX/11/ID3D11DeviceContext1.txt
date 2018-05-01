@@ -1,0 +1,149 @@
+include Interfaces\DirectX\11\ID3D11DeviceContext.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11DeviceContext1 base=ID3D11DeviceContext id={bb2c6faa-b5fb-4082-8e6b-388b8cfa90e1} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func CopySubresourceRegion1
+    void
+    pDstResource ID3D11Resource*
+    DstSubresource UINT
+    DstX UINT
+    DstY UINT
+    DstZ UINT
+    pSrcResource ID3D11Resource*
+    SrcSubresource UINT
+    pSrcBox "const D3D11_BOX*"
+    CopyFlags UINT
+
+  func UpdateSubresource1
+    void
+    pDstResource ID3D11Resource*
+    DstSubresource UINT
+    pDstBox "const D3D11_BOX*"
+    pSrcData "const void*"
+    SrcRowPitch UINT
+    SrcDepthPitch UINT
+    CopyFlags UINT
+
+  func DiscardResource
+    void
+    pResource ID3D11Resource*
+
+  func DiscardView
+    void
+    pResourceView ID3D11View*
+
+  func VSSetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+    pFirstConstant "const UINT*" count=NumBuffers
+    pNumConstants "const UINT*" count=NumBuffers
+
+  func HSSetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+    pFirstConstant "const UINT*" count=NumBuffers
+    pNumConstants "const UINT*" count=NumBuffers
+
+  func DSSetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+    pFirstConstant "const UINT*" count=NumBuffers
+    pNumConstants "const UINT*" count=NumBuffers
+
+  func GSSetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+    pFirstConstant "const UINT*" count=NumBuffers
+    pNumConstants "const UINT*" count=NumBuffers
+
+  func PSSetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+    pFirstConstant "const UINT*" count=NumBuffers
+    pNumConstants "const UINT*" count=NumBuffers
+
+  func CSSetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer*const* count=NumBuffers
+    pFirstConstant "const UINT*" count=NumBuffers
+    pNumConstants "const UINT*" count=NumBuffers
+
+  func VSGetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** postCount=NumBuffers
+    pFirstConstant UINT* postCount=NumBuffers
+    pNumConstants UINT* postCount=NumBuffers
+
+  func HSGetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** count=NumBuffers
+    pFirstConstant UINT* postCount=NumBuffers
+    pNumConstants UINT* postCount=NumBuffers
+
+  func DSGetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** count=NumBuffers
+    pFirstConstant UINT* postCount=NumBuffers
+    pNumConstants UINT* postCount=NumBuffers
+
+  func GSGetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** count=NumBuffers
+    pFirstConstant UINT* postCount=NumBuffers
+    pNumConstants UINT* postCount=NumBuffers
+
+  func PSGetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** count=NumBuffers
+    pFirstConstant UINT* postCount=NumBuffers
+    pNumConstants UINT* postCount=NumBuffers
+
+  func CSGetConstantBuffers1
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D11Buffer** count=NumBuffers
+    pFirstConstant UINT* postCount=NumBuffers
+    pNumConstants UINT* postCount=NumBuffers
+
+  func SwapDeviceContextState
+    void
+    pState ID3DDeviceContextState*
+    ppPreviousState ID3DDeviceContextState**
+
+  func ClearView
+    void
+    pView ID3D11View*
+    Color "const FLOAT [4]"
+    pRect "const D3D11_RECT*" count=NumRects
+    NumRects UINT
+
+  func DiscardView1
+    void
+    pResourceView ID3D11View*
+    pRects "const D3D11_RECT*" count=NumRects
+    NumRects UINT
+
+

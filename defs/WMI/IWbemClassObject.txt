@@ -1,0 +1,130 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemClassObject base=IUnknown id={dc12a681-737f-11cf-884d-00aa004b2e24} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func GetQualifierSet
+    WBEMSTATUS
+    ppQualSet IWbemQualifierSet**
+
+  func Get
+    WBEMSTATUS
+    wszName LPCWSTR
+    lFlags long
+    pVal VARIANT*
+    pType CIMTYPE*
+    plFlavor long*
+
+  func Put
+    WBEMSTATUS
+    wszName LPCWSTR
+    lFlags long
+    pVal VARIANT*
+    Type CIMTYPE
+
+  func Delete
+    WBEMSTATUS
+    wszName LPCWSTR
+
+  func GetNames
+    WBEMSTATUS
+    wszQualifierName LPCWSTR
+    lFlags long
+    pQualifierVal VARIANT*
+    pNames SAFEARRAY**
+
+  func BeginEnumeration
+    WBEMSTATUS
+    lEnumFlags long
+
+  func Next
+    WBEMSTATUS
+    lFlags long
+    strName BSTR*
+    pVal VARIANT*
+    pType CIMTYPE*
+    plFlavor long*
+
+  func EndEnumeration
+    WBEMSTATUS
+
+  func GetPropertyQualifierSet
+    WBEMSTATUS
+    wszProperty LPCWSTR
+    ppQualSet IWbemQualifierSet**
+
+  func Clone
+    WBEMSTATUS
+    ppCopy IWbemClassObject**
+
+  func GetObjectText
+    WBEMSTATUS
+    lFlags long
+    pstrObjectText BSTR*
+
+  func SpawnDerivedClass
+    WBEMSTATUS
+    lFlags long
+    ppNewClass IWbemClassObject**
+
+  func SpawnInstance
+    WBEMSTATUS
+    lFlags long
+    ppNewInstance IWbemClassObject**
+
+  func CompareTo
+    WBEMSTATUS
+    lFlags long
+    pCompareTo IWbemClassObject*
+
+  func GetPropertyOrigin
+    WBEMSTATUS
+    wszName LPCWSTR
+    pstrClassName BSTR*
+
+  func InheritsFrom
+    WBEMSTATUS
+    strAncestor LPCWSTR
+
+  func GetMethod
+    WBEMSTATUS
+    wszName LPCWSTR
+    lFlags long
+    ppInSignature IWbemClassObject**
+    ppOutSignature IWbemClassObject**
+
+  func PutMethod
+    WBEMSTATUS
+    wszName LPCWSTR
+    lFlags long
+    pInSignature IWbemClassObject*
+    pOutSignature IWbemClassObject*
+
+  func DeleteMethod
+    WBEMSTATUS
+    wszName LPCWSTR
+
+  func BeginMethodEnumeration
+    WBEMSTATUS
+    lEnumFlags long
+
+  func NextMethod
+    WBEMSTATUS
+    lFlags long
+    pstrName BSTR*
+    ppInSignature IWbemClassObject**
+    ppOutSignature IWbemClassObject**
+
+  func EndMethodEnumeration
+    WBEMSTATUS
+
+  func GetMethodQualifierSet
+    WBEMSTATUS
+    wszMethod LPCWSTR
+    ppQualSet IWbemQualifierSet**
+
+  func GetMethodOrigin
+    WBEMSTATUS
+    wszMethodName LPCWSTR
+    pstrClassName BSTR*
+
+

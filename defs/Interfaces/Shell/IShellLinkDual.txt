@@ -1,0 +1,70 @@
+include Interfaces\IDispatch.txt
+
+ingterface IShellLinkDual base=IDispatch id={88A05C00-F000-11CE-8350-444553540000} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func get_Path
+    HRESULT
+    pbs BSTR*
+
+  func put_Path
+    HRESULT
+    bs BSTR
+
+  func get_Description
+    HRESULT
+    pbs BSTR*
+
+  func put_Description
+    HRESULT
+    bs BSTR
+
+  func get_WorkingDirectory
+    HRESULT
+    pbs BSTR*
+
+  func put_WorkingDirectory
+    HRESULT
+    bs BSTR
+
+  func get_Arguments
+    HRESULT
+    pbs BSTR*
+
+  func put_Arguments
+    HRESULT
+    bs BSTR
+
+  func get_Hotkey
+    HRESULT
+    piHK int*
+
+  func put_Hotkey
+    HRESULT
+    iHK int
+
+  func get_ShowCommand
+    HRESULT
+    piShowCommand int*
+
+  func put_ShowCommand
+    HRESULT
+    iShowCommand int
+
+  func Resolve
+    HRESULT
+    fFlags int
+
+  func GetIconLocation
+    HRESULT
+    pbs BSTR*
+    piIcon int*
+
+  func SetIconLocation
+    HRESULT
+    bs BSTR
+    iIcon int
+
+  func Save
+    HRESULT
+    vWhere VARIANT
+
+

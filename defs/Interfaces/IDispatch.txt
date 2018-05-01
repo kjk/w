@@ -1,0 +1,33 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDispatch base=IUnknown id={00020400-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Dispatch"
+  func GetTypeInfoCount
+    HRESULT
+    pctinfo UINT*
+
+  func GetTypeInfo
+    HRESULT
+    iTInfo UINT
+    lcid LCID
+    ppTInfo ITypeInfo**
+
+  func GetIDsOfNames
+    HRESULT
+    riid REFIID
+    rgszNames LPOLESTR* count=cNames
+    cNames UINT
+    lcid LCID
+    rgDispId DISPID*
+
+  func Invoke
+    HRESULT
+    dispIdMember DISPID
+    riid REFIID
+    lcid LCID
+    wFlags [InvokeFlags]
+    pDispParams DISPPARAMS*
+    pVarResult VARIANT*
+    pExcepInfo EXCEPINFO*
+    puArgErr UINT*
+
+

@@ -1,0 +1,41 @@
+include Headers\dwrite.h.txt
+include Interfaces\DirectWrite\IDWritePixelSnapping.txt
+
+ingterface IDWriteTextRenderer base=IDWritePixelSnapping id={ef8a8135-5cc6-45fe-8825-c5a0724eb819} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func DrawGlyphRun
+    HRESULT
+    clientDrawingContext void*
+    baselineOriginX FLOAT
+    baselineOriginY FLOAT
+    measuringMode DWRITE_MEASURING_MODE
+    glyphRun "DWRITE_GLYPH_RUN const*"
+    glyphRunDescription "DWRITE_GLYPH_RUN_DESCRIPTION const*"
+    clientDrawingEffect IUnknown*
+
+  func DrawUnderline
+    HRESULT
+    clientDrawingContext void*
+    baselineOriginX FLOAT
+    baselineOriginY FLOAT
+    underline "DWRITE_UNDERLINE const*"
+    clientDrawingEffect IUnknown*
+
+  func DrawStrikethrough
+    HRESULT
+    clientDrawingContext void*
+    baselineOriginX FLOAT
+    baselineOriginY FLOAT
+    strikethrough "DWRITE_STRIKETHROUGH const*"
+    clientDrawingEffect IUnknown*
+
+  func DrawInlineObject
+    HRESULT
+    clientDrawingContext void*
+    originX FLOAT
+    originY FLOAT
+    inlineObject IDWriteInlineObject*
+    isSideways BOOL
+    isRightToLeft BOOL
+    clientDrawingEffect IUnknown*
+
+

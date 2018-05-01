@@ -1,0 +1,187 @@
+include Headers\windows.h.txt
+
+dll SHCore.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+sourceModule Shell32.dll include=Windows\Shell32.xml
+func CommandLineToArgvW
+
+func GetCurrentProcessExplicitAppUserModelID
+
+func SetCurrentProcessExplicitAppUserModelID
+
+sourceModule ShLwApi.dll include=Windows\ShLwApi.xml
+func GetProcessReference
+
+func IsOS
+
+func IStream_Copy
+
+func IStream_Read
+
+func IStream_ReadStr
+
+func IStream_Reset
+
+func IStream_Size
+
+func IStream_Write
+
+func IStream_WriteStr
+
+func IUnknown_AtomicRelease
+
+func IUnknown_GetSite
+
+func IUnknown_QueryService
+
+func IUnknown_Set
+
+func IUnknown_SetSite
+
+func SetProcessReference
+
+func SHAnsiToAnsi
+
+func SHAnsiToUnicode
+
+func SHCopyKeyA
+
+func SHCopyKeyW
+
+func SHCreateMemStream
+
+func SHCreateStreamOnFileA
+
+func SHCreateStreamOnFileEx
+
+func SHCreateStreamOnFileW
+
+func SHCreateThread
+
+func SHCreateThreadRef
+
+func SHCreateThreadWithHandle
+
+func SHDeleteEmptyKeyA
+
+func SHDeleteEmptyKeyW
+
+func SHDeleteKeyA
+
+func SHDeleteKeyW
+
+func SHDeleteValueA
+
+func SHDeleteValueW
+
+func SHEnumKeyExA
+
+func SHEnumKeyExW
+
+func SHEnumValueA
+
+func SHEnumValueW
+
+func SHGetThreadRef
+
+func SHGetValueA
+
+func SHGetValueW
+
+func SHOpenRegStream2A
+
+func SHOpenRegStream2W
+
+func SHOpenRegStreamA
+
+func SHOpenRegStreamW
+
+func SHQueryInfoKeyA
+
+func SHQueryInfoKeyW
+
+func SHQueryValueExA
+
+func SHQueryValueExW
+
+func SHRegDuplicateHKey
+
+func SHRegGetIntW
+
+func SHRegGetPathA
+
+func SHRegGetPathW
+
+func SHRegGetValueA
+
+func SHRegGetValueW
+
+func SHRegSetPathA
+
+func SHRegSetPathW
+
+func SHReleaseThreadRef
+
+func SHSetThreadRef
+
+func SHSetValueA
+
+func SHSetValueW
+
+func SHStrDupA
+
+func SHStrDupW
+
+func SHUnicodeToAnsi
+
+func SHUnicodeToUnicode
+
+category "Additional Resources/Windows Runtime C++"
+category "Windows Environment Development/Windows Shell"
+enum BSOS_OPTIONS UINT
+  BSOS_DEFAULT                 0
+  BSOS_PREFERDESTINATIONSTREAM 1
+
+enum FileAccessMode DWORD display=DWORD
+  Read      0
+  ReadWrite 1
+
+enum DISPLAY_DEVICE_TYPE UINT
+  DEVICE_PRIMARY   0
+  DEVICE_IMMERSIVE 1
+
+func CreateRandomAccessStreamOnFile
+  HRESULT
+  filePath PCWSTR
+  accessMode FileAccessMode
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func CreateRandomAccessStreamOverStream
+  HRESULT
+  stream IStream*
+  options BSOS_OPTIONS
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func CreateStreamOverRandomAccessStream
+  HRESULT
+  randomAccessStream IUnknown*
+  riid REFIID
+  ppv void** interfaceId=riid
+
+func GetScaleFactorForDevice
+  DEVICE_SCALE_FACTOR
+  deviceType DISPLAY_DEVICE_TYPE
+
+func RegisterScaleChangeNotifications
+  STDAPI
+  displayDevice DISPLAY_DEVICE_TYPE
+  hwndNotify HWND
+  uMsgNotify UINT
+  pdwCookie DWORD*
+
+func RevokeScaleChangeNotifications
+  STDAPI
+  displayDevice DISPLAY_DEVICE_TYPE
+  dwCookie DWORD
+

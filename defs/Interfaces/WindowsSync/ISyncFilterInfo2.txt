@@ -1,0 +1,9 @@
+include Interfaces\WindowsSync\ISyncFilterInfo.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncFilterInfo2 base=ISyncFilterInfo id={19b394ba-e3d0-468c-934d-321968b2ab34} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetFlags
+    HRESULT
+    pdwFlags DWORD*
+
+

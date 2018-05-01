@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDeskBandInfo base=IUnknown id={77E425FC-CBF9-4307-BA6A-BB5727745661} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetDefaultBandWidth
+    HRESULT
+    dwBandID DWORD
+    dwViewMode DWORD
+    pnWidth int*
+
+

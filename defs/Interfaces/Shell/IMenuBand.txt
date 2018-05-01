@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IMenuBand base=IUnknown id={568804CD-CBD7-11d0-9816-00C04FD91972} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func IsMenuMessage
+    HRESULT
+    pmsg MSG*
+
+  func TranslateMenuMessage
+    HRESULT
+    pmsg MSG*
+    plRet LRESULT*
+
+

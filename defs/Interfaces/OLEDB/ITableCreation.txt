@@ -1,0 +1,16 @@
+include Interfaces\OLEDB\ITableDefinition.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ITableCreation base=ITableDefinition id={0c733abc-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func GetTableDefinition
+    [OLEDB_HRESULT]
+    pTableID DBID*
+    pcColumnDescs DBORDINAL*
+    prgColumnDescs "DBCOLUMNDESC* []" derefPostCount=pcColumnDescs
+    pcPropertySets ULONG*
+    prgPropertySets "DBPROPSET* []" derefPostCount=pcPropertySets
+    pcConstraintDescs ULONG*
+    prgConstraintDescs "DBCONSTRAINTDESC* []" derefPostCount=pcConstraintDescs
+    ppwszStringBuffer OLECHAR**
+
+

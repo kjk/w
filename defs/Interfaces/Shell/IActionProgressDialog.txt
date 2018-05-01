@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IActionProgressDialog base=IUnknown id={49ff1172-eadc-446d-9285-156453a6431c} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    flags SPINITF
+    pszTitle LPCWSTR
+    pszCancel LPCWSTR
+
+  func Stop
+    HRESULT
+
+

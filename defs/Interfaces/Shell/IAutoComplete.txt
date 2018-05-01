@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAutoComplete base=IUnknown id={00bb2762-6a77-11d0-a535-00c04fd7d062} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Init
+    HRESULT
+    hwndEdit HWND
+    punkACL IUnknown*
+    pwszRegKeyPath LPCWSTR
+    pwszQuickComplete LPCWSTR
+
+  func Enable
+    HRESULT
+    fEnable BOOL
+
+

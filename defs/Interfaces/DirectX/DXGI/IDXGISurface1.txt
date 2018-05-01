@@ -1,0 +1,13 @@
+include Interfaces\DirectX\DXGI\IDXGISurface.txt
+
+ingterface IDXGISurface1 base=IDXGISurface id={4AE63092-6327-4c1b-80AE-BFE12EA32B86} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func GetDC
+    HRESULT
+    Discard BOOL
+    phdc HDC*
+
+  func ReleaseDC
+    HRESULT
+    pDirtyRect RECT*
+
+

@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IViewFilter base=IUnknown id={0c733a9b-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func GetFilter
+    [OLEDB_HRESULT]
+    hAccessor HACCESSOR
+    pcRows DBCOUNTITEM*
+    pCompareOps "DBCOMPAREOP* []"
+    pCriteriaData void*
+
+  func GetFilterBindings
+    [OLEDB_HRESULT]
+    pcBindings DBCOUNTITEM*
+    prgBindings DBBINDING** derefPostCount=pcBindings
+
+  func SetFilter
+    [OLEDB_HRESULT]
+    hAccessor HACCESSOR
+    cRows DBCOUNTITEM
+    CompareOps "DBCOMPAREOP []"
+    pCriteriaData void*
+
+

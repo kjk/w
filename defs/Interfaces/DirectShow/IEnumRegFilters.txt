@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumRegFilters base=IUnknown id={56a868a4-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Next
+    HRESULT
+    cFilters ULONG
+    apRegFilter REGFILTER** postCount=pcFetched
+    pcFetched ULONG*
+
+  func Skip
+    HRESULT
+    cFilters ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppEnum IEnumRegFilters**
+
+

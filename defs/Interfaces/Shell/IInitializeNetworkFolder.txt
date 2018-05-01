@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInitializeNetworkFolder base=IUnknown id={6e0f9881-42a8-4f2a-97f8-8af4e026d92d} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    pidl PCIDLIST_ABSOLUTE
+    pidlTarget PCIDLIST_ABSOLUTE
+    uDisplayType UINT
+    pszResName LPCWSTR
+    pszProvider LPCWSTR
+
+

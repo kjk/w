@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IProcessLock base=IUnknown id={000001d5-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func AddRefOnProcess
+    success NotEqual=0
+    ULONG
+
+  func ReleaseRefOnProcess
+    success NotEqual=0
+    ULONG
+
+

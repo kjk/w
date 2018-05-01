@@ -1,0 +1,40 @@
+include Interfaces\Shell\IShellFolderViewDual2.txt
+
+ingterface IShellFolderViewDual3 base=IShellFolderViewDual2 id={29EC8E6C-46D3-411f-BAAA-611A6C9CAC66} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func get_GroupBy
+    HRESULT
+    pbstrGroupBy BSTR*
+
+  func put_GroupBy
+    HRESULT
+    bstrGroupBy BSTR
+
+  func get_FolderFlags
+    HRESULT
+    pdwFlags [FOLDERFLAGS_DWORD*]
+
+  func put_FolderFlags
+    HRESULT
+    dwFlags [FOLDERFLAGS_DWORD]
+
+  func get_SortColumns
+    HRESULT
+    pbstrSortColumns BSTR*
+
+  func put_SortColumns
+    HRESULT
+    bstrSortColumns BSTR
+
+  func put_IconSize
+    HRESULT
+    iIconSize int
+
+  func get_IconSize
+    HRESULT
+    piIconSize int*
+
+  func FilterView
+    HRESULT
+    bstrFilterText BSTR
+
+

@@ -1,0 +1,15 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundFullDuplex base=IUnknown id={edcb4c7a-daab-4216-a42e-6c50596ddc1d} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func Initialize
+    [DS_HRESULT]
+    pCaptureGuid LPCGUID
+    pRenderGuid LPCGUID
+    lpDscBufferDesc LPCDSCBUFFERDESC
+    lpDsBufferDesc LPCDSBUFFERDESC
+    hWnd HWND
+    dwLevel DWORD
+    lplpDirectSoundCaptureBuffer8 LPLPDIRECTSOUNDCAPTUREBUFFER8
+    lplpDirectSoundBuffer8 LPLPDIRECTSOUNDBUFFER8
+
+

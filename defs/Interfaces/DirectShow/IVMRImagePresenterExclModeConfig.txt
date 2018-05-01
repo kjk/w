@@ -1,0 +1,14 @@
+include Interfaces\DirectShow\IVMRImagePresenterConfig.txt
+
+ingterface IVMRImagePresenterExclModeConfig base=IVMRImagePresenterConfig id={e6f7ce40-4673-44f1-8f77-5499d68cb4ea} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetXlcModeDDObjAndPrimarySurface
+    HRESULT
+    lpDDObj LPDIRECTDRAW7
+    lpPrimarySurf LPDIRECTDRAWSURFACE7
+
+  func GetXlcModeDDObjAndPrimarySurface
+    HRESULT
+    lpDDObj LPDIRECTDRAW7*
+    lpPrimarySurf LPDIRECTDRAWSURFACE7*
+
+

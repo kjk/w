@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IImageRecompress base=IUnknown id={505f1513-6b3e-4892-a272-59f8889a4d3e} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func RecompressImage
+    HRESULT
+    psi IShellItem*
+    cx int
+    cy int
+    iQuality int
+    pstg IStorage*
+    ppstrmOut IStream**
+
+

@@ -1,0 +1,1364 @@
+include Headers\windows.h.txt
+
+dll Wldap32.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Directory, Identity, and Access Services/Directory Services/Directory Access Technologies/Lightweight Directory Access Protocol (LDAP)/Starting and Stopping"
+category "Security and Identity/Directory, Identity, and Access Services/Directory Services/Directory Access Technologies/Lightweight Directory Access Protocol (LDAP)/Modifying Directory Entries"
+category "Security and Identity/Directory, Identity, and Access Services/Directory Services/Directory Access Technologies/Lightweight Directory Access Protocol (LDAP)/Searching, Sorting, and Result Handling"
+category "Security and Identity/Directory, Identity, and Access Services/Directory Services/Directory Access Technologies/Lightweight Directory Access Protocol (LDAP)/Error Handling"
+category "Security and Identity/Directory, Identity, and Access Services/Directory Services/Directory Access Technologies/Lightweight Directory Access Protocol (LDAP)/Memory Management"
+category "Security and Identity/Directory, Identity, and Access Services/Directory Services/Directory Access Technologies/Lightweight Directory Access Protocol (LDAP)/Miscellaneous"
+alias PLDAPSearch LPVOID
+
+pointer PTCHAR* PTCHAR
+
+pointer PTCHAR** PTCHAR*
+
+array "UCHAR [25]" base=UCHAR count=25
+
+array "UCHAR [41]" base=UCHAR count=41
+
+struct [LDAP_s] pack32=4 display=struct
+  sb_sd UINT_PTR
+  Reserved1 "UCHAR [41]"
+  sb_naddr ULONG_PTR
+  Reserved2 "UCHAR [24]"
+
+struct LDAP pack32=4
+  ld_sb [LDAP_s]
+  ld_host PCHAR
+  ld_version ULONG
+  ld_lberoptions UCHAR
+  ld_deref ULONG
+  ld_timelimit ULONG
+  ld_sizelimit ULONG
+  ld_errno ULONG
+  ld_matched PCHAR
+  ld_error PCHAR
+  ld_msgid ULONG
+  Reserved3 "UCHAR [25]"
+  ld_cldaptries ULONG
+  ld_cldaptimeout ULONG
+  ld_refhoplimit ULONG
+  ld_options ULONG
+
+pointer LDAP* LDAP
+
+pointer PLDAP LDAP
+
+struct LDAPMessage
+  lm_msgid ULONG
+  lm_msgtype ULONG
+  lm_ber PVOID
+  lm_chain LPVOID display=LDAPMessage*
+  lm_next LPVOID display=LDAPMessage*
+  lm_time ULONG
+  Connection PLDAP
+  Request PVOID
+  lm_returncode ULONG
+  lm_referral USHORT
+  lm_chased BOOLEAN
+  lm_eom BOOLEAN
+  ConnectionReferenced BOOLEAN
+
+pointer PLDAPMessage LDAPMessage
+
+pointer LDAPMessage* LDAPMessage
+
+pointer LDAPMessage** LDAPMessage*
+
+struct berval
+  bv_len ULONG
+  bv_val PCHAR
+
+alias "struct berval" berval
+
+pointer "struct berval*" berval
+
+pointer "struct berval**" "struct berval*"
+
+pointer BERVAL* berval
+
+pointer "const BERVAL*" berval
+
+pointer PBERVAL berval
+
+pointer PBERVAL* PBERVAL
+
+struct LDAPControl
+  ldctl_oid PTCHAR
+  ldctl_value "struct berval"
+  ldctl_iscritical BOOLEAN
+
+pointer LDAPControl* LDAPControl
+
+pointer LDAPControl** LDAPControl*
+
+pointer PLDAPControl LDAPControl
+
+pointer PLDAPControl* PLDAPControl
+
+pointer PLDAPControl** LDAPControl**
+
+struct LDAP_TIMEVAL
+  tv_sec LONG
+  tv_usec LONG
+
+pointer LDAP_TIMEVAL* LDAP_TIMEVAL
+
+alias "struct l_timeval" LDAP_TIMEVAL
+
+pointer "struct l_timeval*" "struct l_timeval"
+
+struct LDAPSortKey
+  sk_attrtype PTCHAR
+  sk_matchruleoid PTCHAR
+  sk_reverseorder BOOLEAN
+
+pointer PLDAPSortKey LDAPSortKey
+
+pointer PLDAPSortKey* PLDAPSortKey
+
+struct LDAPVLVInfo
+  ldvlv_version int
+  ldvlv_before_count ULONG
+  ldvlv_after_count ULONG
+  ldvlv_offset ULONG
+  ldvlv_count ULONG
+  ldvlv_attrvalue PBERVAL
+  ldvlv_context PBERVAL
+  ldvlv_extradata VOID*
+
+pointer LDAPVLVInfo* LDAPVLVInfo
+
+struct BerElement
+  opaque PCHAR
+
+pointer BerElement* BerElement
+
+pointer BerElement** BerElement*
+
+enum LDAP_RETCODE ULONG display=ULONG
+  success Equal=0
+  LDAP_SUCCESS                    0x00
+  LDAP_OPERATIONS_ERROR           0x01
+  LDAP_PROTOCOL_ERROR             0x02
+  LDAP_TIMELIMIT_EXCEEDED         0x03
+  LDAP_SIZELIMIT_EXCEEDED         0x04
+  LDAP_COMPARE_FALSE              0x05
+  LDAP_COMPARE_TRUE               0x06
+  LDAP_AUTH_METHOD_NOT_SUPPORTED  0x07
+  LDAP_STRONG_AUTH_REQUIRED       0x08
+  LDAP_REFERRAL_V2                0x09
+  LDAP_PARTIAL_RESULTS            0x09
+  LDAP_REFERRAL                   0x0a
+  LDAP_ADMIN_LIMIT_EXCEEDED       0x0b
+  LDAP_UNAVAILABLE_CRIT_EXTENSION 0x0c
+  LDAP_CONFIDENTIALITY_REQUIRED   0x0d
+  LDAP_SASL_BIND_IN_PROGRESS      0x0e
+  LDAP_NO_SUCH_ATTRIBUTE          0x10
+  LDAP_UNDEFINED_TYPE             0x11
+  LDAP_INAPPROPRIATE_MATCHING     0x12
+  LDAP_CONSTRAINT_VIOLATION       0x13
+  LDAP_ATTRIBUTE_OR_VALUE_EXISTS  0x14
+  LDAP_INVALID_SYNTAX             0x15
+  LDAP_NO_SUCH_OBJECT             0x20
+  LDAP_ALIAS_PROBLEM              0x21
+  LDAP_INVALID_DN_SYNTAX          0x22
+  LDAP_IS_LEAF                    0x23
+  LDAP_ALIAS_DEREF_PROBLEM        0x24
+  LDAP_INAPPROPRIATE_AUTH         0x30
+  LDAP_INVALID_CREDENTIALS        0x31
+  LDAP_INSUFFICIENT_RIGHTS        0x32
+  LDAP_BUSY                       0x33
+  LDAP_UNAVAILABLE                0x34
+  LDAP_UNWILLING_TO_PERFORM       0x35
+  LDAP_LOOP_DETECT                0x36
+  LDAP_SORT_CONTROL_MISSING       0x3C
+  LDAP_OFFSET_RANGE_ERROR         0x3D
+  LDAP_NAMING_VIOLATION           0x40
+  LDAP_OBJECT_CLASS_VIOLATION     0x41
+  LDAP_NOT_ALLOWED_ON_NONLEAF     0x42
+  LDAP_NOT_ALLOWED_ON_RDN         0x43
+  LDAP_ALREADY_EXISTS             0x44
+  LDAP_NO_OBJECT_CLASS_MODS       0x45
+  LDAP_RESULTS_TOO_LARGE          0x46
+  LDAP_AFFECTS_MULTIPLE_DSAS      0x47
+  LDAP_VIRTUAL_LIST_VIEW_ERROR    0x4c
+  LDAP_OTHER                      0x50
+  LDAP_SERVER_DOWN                0x51
+  LDAP_LOCAL_ERROR                0x52
+  LDAP_ENCODING_ERROR             0x53
+  LDAP_DECODING_ERROR             0x54
+  LDAP_TIMEOUT                    0x55
+  LDAP_AUTH_UNKNOWN               0x56
+  LDAP_FILTER_ERROR               0x57
+  LDAP_USER_CANCELLED             0x58
+  LDAP_PARAM_ERROR                0x59
+  LDAP_NO_MEMORY                  0x5a
+  LDAP_CONNECT_ERROR              0x5b
+  LDAP_NOT_SUPPORTED              0x5c
+  LDAP_CONTROL_NOT_FOUND          0x5d
+  LDAP_NO_RESULTS_RETURNED        0x5e
+  LDAP_MORE_RESULTS_TO_RETURN     0x5f
+  LDAP_CLIENT_LOOP                0x60
+  LDAP_REFERRAL_LIMIT_EXCEEDED    0x61
+
+alias [LDAP_RETCODE_INT] LDAP_RETCODE display=INT
+
+flag [LDAP_MOD_OP] ULONG display=ULONG
+  LDAP_MOD_ADD     0x00
+  LDAP_MOD_DELETE  0x01
+  LDAP_MOD_REPLACE 0x02
+  LDAP_MOD_BVALUES 0x80
+
+union [LDAPMod_u] display=union
+  modv_strvals PTCHAR*
+  modv_bvals "struct berval**"
+
+struct LDAPMod
+  mod_op [LDAP_MOD_OP]
+  mod_type PTCHAR
+  mod_vals [LDAPMod_u]
+
+pointer LDAPMod* LDAPMod
+
+pointer "LDAPMod* []" LDAPMod*
+
+func cldap_open ordinal=17
+  success NotEqual=0
+  LDAP*
+  HostName PSTR
+  PortNumber ULONG
+
+func cldap_open bothCharset ordinalA=55 ordinalW=28
+  success NotEqual=0
+  LDAP*
+  HostName PTSTR
+  PortNumber ULONG
+
+func ldap_open ordinal=25
+  success NotEqual=0
+  LDAP*
+  HostName PSTR
+  PortNumber ULONG
+
+func ldap_open bothCharset ordinalA=169 ordinalW=170
+  success NotEqual=0
+  LDAP*
+  HostName PTSTR
+  PortNumber ULONG
+
+func ldap_bind ordinal=61
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  dn PSTR
+  cred PCHAR
+  method ULONG
+
+func ldap_bind bothCharset ordinalA=70 ordinalW=71
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  dn PTSTR
+  cred PTCHAR
+  method ULONG
+
+func ldap_bind_s ordinal=45
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  cred PCHAR
+  method ULONG
+
+func ldap_bind_s bothCharset ordinalA=72 ordinalW=73
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  cred PTCHAR
+  method ULONG
+
+func ldap_simple_bind ordinal=59
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  dn PSTR
+  passwd PSTR
+
+func ldap_simple_bind bothCharset ordinalA=213 ordinalW=214
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  dn PTSTR
+  passwd PTSTR
+
+func ldap_simple_bind_s ordinal=60
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  passwd PSTR
+
+func ldap_simple_bind_s bothCharset ordinalA=215 ordinalW=216
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  passwd PTSTR
+
+func ldap_sasl_bind bothCharset ordinalA=315 ordinalW=313
+  LDAP_RETCODE
+  ExternalHandle LDAP*
+  DistName "const PCHAR"
+  AuthMechanism "const PCHAR"
+  cred "const BERVAL*"
+  ServerCtrls PLDAPControl*
+  ClientCtrls PLDAPControl*
+  MessageNumber int*
+
+func ldap_sasl_bind_s bothCharset ordinalA=316 ordinalW=314
+  LDAP_RETCODE
+  ExternalHandle LDAP*
+  DistName "const PCHAR"
+  AuthMechanism "const PCHAR"
+  cred "const BERVAL*"
+  ServerCtrls PLDAPControl*
+  ClientCtrls PLDAPControl*
+  ServerData PBERVAL*
+
+func ldap_connect ordinal=88
+  LDAP_RETCODE
+  ld LDAP*
+  timeout LDAP_TIMEVAL*
+
+func ldap_init ordinal=143
+  success NotEqual=0
+  LDAP*
+  HostName PSTR
+  PortNumber ULONG
+
+func ldap_init bothCharset ordinalA=144 ordinalW=145
+  success NotEqual=0
+  LDAP*
+  HostName PTSTR
+  PortNumber ULONG
+
+func ldap_sslinit ordinal=217
+  success NotEqual=0
+  LDAP*
+  HostName PSTR
+  PortNumber ULONG
+  secure int
+
+func ldap_sslinit bothCharset ordinalA=218 ordinalW=219
+  success NotEqual=0
+  LDAP*
+  HostName PTSTR
+  PortNumber ULONG
+  secure int
+
+func ldap_get_option ordinal=136
+  LDAP_RETCODE
+  ld LDAP*
+  option int
+  outvalue void*
+
+func ldap_get_option bothCharset ordinalA=137 ordinalW=12
+  LDAP_RETCODE
+  ld LDAP*
+  option int
+  outvalue void*
+
+func ldap_set_option ordinal=211
+  LDAP_RETCODE
+  ld LDAP*
+  option int
+  invalue void*
+
+func ldap_set_option bothCharset ordinalA=212 ordinalW=14
+  LDAP_RETCODE
+  ld LDAP*
+  option int
+  invalue void*
+
+func ldap_abandon ordinal=10
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  msgid ULONG
+
+func ldap_unbind ordinal=13
+  LDAP_RETCODE
+  ld LDAP*
+
+func ldap_unbind_s ordinal=46
+  LDAP_RETCODE
+  ld LDAP*
+
+func ldap_add ordinal=11
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  dn PSTR
+  attrs "LDAPMod* []"
+
+func ldap_add bothCharset ordinalA=56 ordinalW=42
+  success NotEqual=0
+  ULONG
+  ld LDAP*
+  dn PTSTR
+  attrs "LDAPMod* []"
+
+func ldap_add_ext ordinal=57
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  attrs "LDAPMod* []"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_add_ext bothCharset ordinalA=58 ordinalW=62
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  attrs "LDAPMod* []"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_add_s ordinal=44
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  attrs "LDAPMod* []"
+
+func ldap_add_s bothCharset ordinalA=66 ordinalW=69
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  attrs "LDAPMod* []"
+
+func ldap_add_ext_s ordinal=63
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  attrs "LDAPMod* []"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+
+func ldap_add_ext_s bothCharset ordinalA=64 ordinalW=65
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  attrs "LDAPMod* []"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+
+func ldap_compare ordinal=19
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  dn PSTR
+  attr PSTR
+  value PSTR
+
+func ldap_compare bothCharset ordinalA=75 ordinalW=76
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  dn PTSTR
+  attr PTSTR
+  value PTSTR
+
+func ldap_compare_ext ordinal=78
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  Attr PSTR
+  Value PSTR
+  Data "struct berval*"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_compare_ext bothCharset ordinalA=80 ordinalW=81
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  Attr PTSTR
+  Value PTSTR
+  Data "struct berval*"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_compare_s ordinal=52
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  attr PSTR
+  value PSTR
+
+func ldap_compare_s bothCharset ordinalA=86 ordinalW=87
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  attr PTSTR
+  value PTSTR
+
+func ldap_compare_ext_s ordinal=83
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  Attr PSTR
+  Value PSTR
+  Data "struct berval*"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+
+func ldap_compare_ext_s bothCharset ordinalA=84 ordinalW=85
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  Attr PTSTR
+  Value PTSTR
+  Data "struct berval*"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+
+func ldap_delete ordinal=20
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  dn PSTR
+
+func ldap_delete bothCharset ordinalA=104 ordinalW=105
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  dn PTSTR
+
+func ldap_delete_ext ordinal=106
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_delete_ext bothCharset ordinalA=107 ordinalW=108
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_delete_s ordinal=47
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+
+func ldap_delete_s bothCharset ordinalA=112 ordinalW=113
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+
+func ldap_delete_ext_s ordinal=109
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+
+func ldap_delete_ext_s bothCharset ordinalA=110 ordinalW=111
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+
+func ldap_extended_operation_s bothCharset ordinalA=333 ordinalW=332
+  LDAP_RETCODE
+  ld LDAP*
+  Oid PSTR
+  Data "struct berval*"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  ReturnedOid PCHAR*
+  ReturnedData "struct berval**"
+
+func ldap_extended_operation ordinal=123
+  LDAP_RETCODE
+  ld LDAP*
+  Oid PSTR
+  Data "struct berval*"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_extended_operation bothCharset ordinalA=124 ordinalW=125
+  LDAP_RETCODE
+  ld LDAP*
+  Oid PTSTR
+  Data "struct berval*"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_close_extended_op ordinal=74
+  LDAP_RETCODE
+  ld LDAP*
+  MessageNumber ULONG
+
+func ldap_modify ordinal=23
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  dn PSTR
+  mods "LDAPMod* []"
+
+func ldap_modify bothCharset ordinalA=148 ordinalW=149
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  dn PTSTR
+  mods "LDAPMod* []"
+
+func ldap_modify_ext ordinal=150
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  mods "LDAPMod* []"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_modify_ext bothCharset ordinalA=151 ordinalW=152
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  mods "LDAPMod* []"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_modify_s ordinal=48
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  mods "LDAPMod* []"
+
+func ldap_modify_s bothCharset ordinalA=156 ordinalW=157
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  mods "LDAPMod* []"
+
+func ldap_modify_ext_s ordinal=153
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  mods "LDAPMod* []"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+
+func ldap_modify_ext_s bothCharset ordinalA=154 ordinalW=155
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  mods "LDAPMod* []"
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+
+func ldap_check_filter bothCharset ordinalA=230 ordinalW=231
+  LDAP_RETCODE
+  ld LDAP*
+  SearchFilter PWCHAR
+
+func ldap_count_entries ordinal=36
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  res LDAPMessage*
+
+func ldap_count_references ordinal=95
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  res LDAPMessage*
+
+func ldap_count_values ordinal=37
+  ULONG
+  vals PCHAR*
+
+func ldap_count_values bothCharset ordinalA=96 ordinalW=97
+  ULONG
+  vals PTCHAR*
+
+func ldap_count_values_len ordinal=77
+  ULONG
+  vals "struct berval**"
+
+func ldap_create_page_control ordinal=98
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  PageSize ULONG
+  Cookie "struct berval*"
+  IsCritical UCHAR
+  Control PLDAPControl*
+
+func ldap_create_page_control bothCharset ordinalA=99 ordinalW=100
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  PageSize ULONG
+  Cookie "struct berval*"
+  IsCritical UCHAR
+  Control PLDAPControl*
+
+func ldap_create_sort_control ordinal=101
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  SortKeys PLDAPSortKey*
+  IsCritical UCHAR
+  Control PLDAPControl*
+
+func ldap_create_sort_control bothCharset ordinalA=102 ordinalW=103
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  SortKeys PLDAPSortKey*
+  IsCritical UCHAR
+  Control PLDAPControl*
+
+func ldap_create_vlv_control bothCharset ordinalA=320 ordinalW=319
+  [LDAP_RETCODE_INT]
+  ld LDAP*
+  Vlvinfop LDAPVLVInfo*
+  IsCritical char
+  ctrlp LDAPControl**
+
+func ldap_encode_sort_control bothCharset ordinalA=115 ordinalW=116
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  SortKeys PLDAPSortKey*
+  Control PLDAPControl
+  IsCritical BOOLEAN
+
+func ldap_escape_filter_element ordinal=197
+  LDAP_RETCODE
+  sourceFilterElement PCHAR
+  sourceLength ULONG
+  destFilterElement PCHAR
+  destLength ULONG
+
+func ldap_escape_filter_element bothCharset ordinalA=119 ordinalW=120
+  LDAP_RETCODE
+  sourceFilterElement PTCHAR
+  sourceLength ULONG
+  destFilterElement PCHAR
+  destLength ULONG
+
+func ldap_first_attribute ordinal=32
+  success NotEqual=0
+  PCHAR
+  ld LDAP*
+  entry LDAPMessage*
+  ptr BerElement**
+
+func ldap_first_attribute bothCharset ordinalA=126 ordinalW=127
+  success NotEqual=0
+  PTCHAR
+  ld LDAP*
+  entry LDAPMessage*
+  ptr BerElement**
+
+func ldap_next_attribute ordinal=33
+  success NotEqual=0
+  PCHAR
+  ld LDAP*
+  entry LDAPMessage*
+  ptr BerElement*
+
+func ldap_next_attribute bothCharset ordinalA=166 ordinalW=167
+  success NotEqual=0
+  PTCHAR
+  ld LDAP*
+  entry LDAPMessage*
+  ptr BerElement*
+
+func ldap_first_entry ordinal=26
+  success NotEqual=0
+  LDAPMessage*
+  ld LDAP*
+  res LDAPMessage*
+
+func ldap_next_entry ordinal=27
+  success NotEqual=0
+  LDAPMessage*
+  ld LDAP*
+  entry LDAPMessage*
+
+func ldap_first_reference ordinal=128
+  success NotEqual=0
+  LDAPMessage*
+  ld LDAP*
+  res LDAPMessage*
+
+func ldap_next_reference ordinal=168
+  success NotEqual=0
+  LDAPMessage*
+  ld LDAP*
+  entry LDAPMessage*
+
+func ldap_get_next_page ordinal=134
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  SearchHandle PLDAPSearch
+  PageSize ULONG
+  MessageNumber ULONG*
+
+func ldap_get_next_page_s ordinal=135
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  SearchHandle PLDAPSearch
+  timeout "struct l_timeval*"
+  PageSize ULONG
+  TotalCount ULONG*
+  Results LDAPMessage**
+
+func ldap_get_paged_count ordinal=138
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  SearchBlock PLDAPSearch
+  TotalCount ULONG*
+  Results PLDAPMessage
+
+func ldap_get_values ordinal=34
+  success NotEqual=0
+  PCHAR*
+  ld LDAP*
+  entry LDAPMessage*
+  attr PSTR
+
+func ldap_get_values bothCharset ordinalA=139 ordinalW=140
+  success NotEqual=0
+  PTCHAR*
+  ld LDAP*
+  entry LDAPMessage*
+  attr PTSTR
+
+func ldap_get_values_len ordinal=35
+  success NotEqual=0
+  "struct berval**"
+  ExternalHandle LDAP*
+  Message LDAPMessage*
+  attr PSTR
+
+func ldap_get_values_len bothCharset ordinalA=141 ordinalW=142
+  success NotEqual=0
+  "struct berval**"
+  ExternalHandle LDAP*
+  Message LDAPMessage*
+  attr PTSTR
+
+func ldap_parse_extended_result bothCharset ordinalA=318 ordinalW=317
+  LDAP_RETCODE
+  Connection LDAP*
+  ResultMessage LDAPMessage*
+  ResultOID PCHAR*
+  ResultData "struct berval**"
+  Freeit BOOLEAN
+
+func ldap_parse_page_control ordinal=171
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  ServerControls PLDAPControl*
+  TotalCount ULONG*
+  Cookie "struct berval**"
+
+func ldap_parse_page_control bothCharset ordinalA=172 ordinalW=173
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  ServerControls PLDAPControl*
+  TotalCount ULONG*
+  Cookie "struct berval**"
+
+func ldap_parse_reference ordinal=174
+  LDAP_RETCODE
+  Connection LDAP*
+  ResultMessage LDAPMessage*
+  Referrals PCHAR**
+
+func ldap_parse_reference bothCharset ordinalA=175 ordinalW=176
+  LDAP_RETCODE
+  Connection LDAP*
+  ResultMessage LDAPMessage*
+  Referrals PTCHAR**
+
+func ldap_parse_result ordinal=177
+  LDAP_RETCODE
+  Connection LDAP*
+  ResultMessage LDAPMessage*
+  ReturnCode ULONG*
+  MatchedDNs PCHAR*
+  ErrorMessage PCHAR*
+  Referrals PCHAR**
+  ServerControls PLDAPControl**
+  Freeit BOOLEAN
+
+func ldap_parse_result bothCharset ordinalA=178 ordinalW=179
+  LDAP_RETCODE
+  Connection LDAP*
+  ResultMessage LDAPMessage*
+  ReturnCode ULONG*
+  MatchedDNs PTCHAR*
+  ErrorMessage PTCHAR*
+  Referrals PTCHAR**
+  ServerControls PLDAPControl**
+  Freeit BOOLEAN
+
+func ldap_parse_sort_control ordinal=180
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  Control PLDAPControl*
+  Result ULONG*
+  Attribute PCHAR*
+
+func ldap_parse_sort_control bothCharset ordinalA=181 ordinalW=182
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  Control PLDAPControl*
+  Result ULONG*
+  Attribute PTCHAR*
+
+func ldap_parse_vlv_control bothCharset ordinalA=322 ordinalW=321
+  [LDAP_RETCODE_INT]
+  ld LDAP*
+  ctrls LDAPControl**
+  target_posp "unsigned long*"
+  list_countp "unsigned long*"
+  contextp "struct berval**"
+  errcodep int*
+
+func ldap_result ordinal=40
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  msgid ULONG
+  all ULONG
+  timeout "struct l_timeval*"
+  res LDAPMessage**
+
+func ldap_search ordinal=43
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  base PCHAR
+  scope ULONG
+  filter PCHAR
+  attrsonly ULONG
+
+func ldap_search bothCharset ordinalA=189 ordinalW=190
+  success NotEqual=-1
+  ULONG
+  ld LDAP*
+  base PTCHAR
+  scope ULONG
+  filter PTCHAR
+  attrsonly ULONG
+
+func ldap_search_s ordinal=50
+  LDAP_RETCODE
+  ld LDAP*
+  base PCHAR
+  scope ULONG
+  filter PCHAR
+  attrsonly ULONG
+  res LDAPMessage**
+
+func ldap_search_s bothCharset ordinalA=207 ordinalW=208
+  LDAP_RETCODE
+  ld LDAP*
+  base PTCHAR
+  scope ULONG
+  filter PTCHAR
+  attrsonly ULONG
+  res LDAPMessage**
+
+func ldap_search_st ordinal=51
+  LDAP_RETCODE
+  ld LDAP*
+  base PCHAR
+  scope ULONG
+  filter PCHAR
+  attrsonly ULONG
+  timeout "struct l_timeval*"
+  res LDAPMessage**
+
+func ldap_search_st bothCharset ordinalA=209 ordinalW=210
+  LDAP_RETCODE
+  ld LDAP*
+  base PTCHAR
+  scope ULONG
+  filter PTCHAR
+  attrsonly ULONG
+  timeout "struct l_timeval*"
+  res LDAPMessage**
+
+func ldap_search_ext ordinal=192
+  LDAP_RETCODE
+  ld LDAP*
+  base PCHAR
+  scope ULONG
+  filter PCHAR
+  attrsonly ULONG
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  TimeLimit ULONG
+  SizeLimit ULONG
+  MessageNumber ULONG*
+
+func ldap_search_ext bothCharset ordinalA=193 ordinalW=194
+  LDAP_RETCODE
+  ld LDAP*
+  base PTCHAR
+  scope ULONG
+  filter PTCHAR
+  attrsonly ULONG
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  TimeLimit ULONG
+  SizeLimit ULONG
+  MessageNumber ULONG*
+
+func ldap_search_ext_s ordinal=195
+  LDAP_RETCODE
+  ld LDAP*
+  base PCHAR
+  scope ULONG
+  filter PCHAR
+  attrsonly ULONG
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  timeout "struct l_timeval*"
+  SizeLimit ULONG
+  res LDAPMessage**
+
+func ldap_search_ext_s bothCharset ordinalA=196 ordinalW=203
+  LDAP_RETCODE
+  ld LDAP*
+  base PTCHAR
+  scope ULONG
+  filter PTCHAR
+  attrsonly ULONG
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  timeout "struct l_timeval*"
+  SizeLimit ULONG
+  res LDAPMessage**
+
+func ldap_search_init_page ordinal=204
+  success NotEqual=0
+  PLDAPSearch
+  ExternalHandle PLDAP
+  DistinguishedName PCHAR
+  ScopeOfSearch ULONG
+  SearchFilter PCHAR
+  AttributesOnly ULONG
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  PageTimeLimit ULONG
+  TotalSizeLimit ULONG
+  SortKeys PLDAPSortKey*
+
+func ldap_search_init_page bothCharset ordinalA=205 ordinalW=206
+  success NotEqual=0
+  PLDAPSearch
+  ExternalHandle PLDAP
+  DistinguishedName PTCHAR
+  ScopeOfSearch ULONG
+  SearchFilter PTCHAR
+  AttributesOnly ULONG
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  PageTimeLimit ULONG
+  TotalSizeLimit ULONG
+  SortKeys PLDAPSortKey*
+
+func ldap_search_abandon_page ordinal=191
+  LDAP_RETCODE
+  ExternalHandle PLDAP
+  SearchBlock PLDAPSearch
+
+func ldap_err2string ordinal=22
+  success NotEqual=0
+  PCHAR
+  err ULONG
+
+func ldap_err2string bothCharset ordinalA=117 ordinalW=118
+  success NotEqual=0
+  PTCHAR
+  err ULONG
+
+func LdapGetLastError ordinal=16
+  LDAP_RETCODE
+
+func LdapMapErrorToWin32 ordinal=18
+  [ERROR_CODE_ULONG]
+  LdapError LDAP_RETCODE
+
+func ldap_result2error ordinal=21
+  LDAP_RETCODE
+  ld LDAP*
+  res LDAPMessage*
+  freeit ULONG
+
+func ldap_control_free ordinal=89
+  LDAP_RETCODE
+  Control LDAPControl*
+
+func ldap_control_free bothCharset ordinalA=90 ordinalW=91
+  LDAP_RETCODE
+  Control LDAPControl*
+
+func ldap_controls_free ordinal=92
+  LDAP_RETCODE
+  Controls LDAPControl**
+
+func ldap_controls_free bothCharset ordinalA=93 ordinalW=94
+  LDAP_RETCODE
+  Controls LDAPControl**
+
+func ldap_memfree ordinal=200
+  VOID
+  Block PCHAR
+
+func ldap_memfree bothCharset ordinalA=146 ordinalW=147
+  VOID
+  Block PTCHAR
+
+func ldap_msgfree ordinal=41
+  LDAP_RETCODE
+  res LDAPMessage*
+
+func ldap_value_free ordinal=38
+  LDAP_RETCODE
+  vals PCHAR*
+
+func ldap_value_free bothCharset ordinalA=223 ordinalW=224
+  LDAP_RETCODE
+  vals PTCHAR*
+
+func ldap_value_free_len ordinal=79
+  LDAP_RETCODE
+  vals "struct berval**"
+
+func ldap_dn2ufn ordinal=31
+  success NotEqual=0
+  PCHAR
+  dn PSTR
+
+func ldap_dn2ufn bothCharset ordinalA=232 ordinalW=114
+  success NotEqual=0
+  PTCHAR
+  dn PTSTR
+
+func ldap_ufn2dn ordinal=220
+  LDAP_RETCODE
+  ufn PCHAR
+  pDn PCHAR*
+
+func ldap_ufn2dn bothCharset ordinalA=221 ordinalW=222
+  LDAP_RETCODE
+  ufn PTCHAR
+  pDn PTCHAR*
+
+func ldap_explode_dn ordinal=39
+  success NotEqual=0
+  PCHAR*
+  dn PSTR
+  notypes ULONG
+
+func ldap_explode_dn bothCharset ordinalA=121 ordinalW=122
+  success NotEqual=0
+  PTCHAR*
+  dn PTSTR
+  notypes ULONG
+
+func ldap_get_dn ordinal=30
+  success NotEqual=0
+  PCHAR
+  ld LDAP*
+  entry LDAPMessage*
+
+func ldap_get_dn bothCharset ordinalA=132 ordinalW=133
+  success NotEqual=0
+  PTCHAR
+  ld LDAP*
+  entry LDAPMessage*
+
+func ldap_conn_from_msg ordinal=312
+  success NotEqual=0
+  LDAP*
+  PrimaryConn LDAP*
+  res LDAPMessage*
+
+func ldap_modrdn2 ordinal=67
+  success NotEqual=-1
+  ULONG
+  ExternalHandle LDAP*
+  DistinguishedName PCHAR
+  NewDistinguishedName PCHAR
+  DeleteOldRdn INT
+
+func ldap_modrdn2 bothCharset ordinalA=158 ordinalW=159
+  success NotEqual=-1
+  ULONG
+  ExternalHandle LDAP*
+  DistinguishedName PTCHAR
+  NewDistinguishedName PTCHAR
+  DeleteOldRdn INT
+
+func ldap_modrdn2_s ordinal=68
+  LDAP_RETCODE
+  ExternalHandle LDAP*
+  DistinguishedName PCHAR
+  NewDistinguishedName PCHAR
+  DeleteOldRdn INT
+
+func ldap_modrdn2_s bothCharset ordinalA=160 ordinalW=161
+  LDAP_RETCODE
+  ExternalHandle LDAP*
+  DistinguishedName PTCHAR
+  NewDistinguishedName PTCHAR
+  DeleteOldRdn INT
+
+func ldap_rename_ext ordinal=183
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  NewRDN PSTR
+  NewParent PSTR
+  DeleteOldRdn INT
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_rename_ext bothCharset ordinalA=184 ordinalW=185
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  NewRDN PTSTR
+  NewParent PTSTR
+  DeleteOldRdn INT
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+  MessageNumber ULONG*
+
+func ldap_rename_ext_s ordinal=186
+  LDAP_RETCODE
+  ld LDAP*
+  dn PSTR
+  NewRDN PSTR
+  NewParent PSTR
+  DeleteOldRdn INT
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+
+func ldap_rename_ext_s bothCharset ordinalA=187 ordinalW=188
+  LDAP_RETCODE
+  ld LDAP*
+  dn PTSTR
+  NewRDN PTSTR
+  NewParent PTSTR
+  DeleteOldRdn INT
+  ServerControls PLDAPControl*
+  ClientControls PLDAPControl*
+
+func LdapUnicodeToUTF8 ordinal=53
+  success NotEqual=0
+  int
+  lpSrcStr LPCWSTR
+  cchSrc int
+  lpDestStr LPSTR
+  cchDest int
+
+func LdapUTF8ToUnicode ordinal=29
+  success NotEqual=0
+  int
+  lpSrcStr LPCSTR
+  cchSrc int
+  lpDestStr LPWSTR
+  cchDest int
+
+func ber_init ordinal=300
+  success NotEqual=0
+  BerElement*
+  pBerVal BERVAL*
+
+func ber_free ordinal=301
+  void
+  pBerElement BerElement*
+  fbuf INT
+
+func ber_bvfree ordinal=54
+  void
+  pBerVal BERVAL*
+
+func ber_bvecfree ordinal=302
+  void
+  pBerVal PBERVAL*
+
+func ber_bvdup ordinal=303
+  success NotEqual=0
+  BERVAL*
+  pBerVal BERVAL*
+
+func ber_alloc_t ordinal=304
+  success NotEqual=0
+  BerElement*
+  options INT
+
+func ber_skip_tag ordinal=305
+  success NotEqual=0
+  ULONG
+  pBerElement BerElement*
+  pLen ULONG*
+
+func ber_peek_tag ordinal=306
+  success NotEqual=0
+  ULONG
+  pBerElement BerElement*
+  pLen ULONG*
+
+func ber_first_element ordinal=307
+  success NotEqual=0
+  ULONG
+  pBerElement BerElement*
+  pLen ULONG*
+  ppOpaque CHAR**
+
+func ber_next_element ordinal=308
+  success NotEqual=0
+  ULONG
+  pBerElement BerElement*
+  pLen ULONG*
+  opaque CHAR*
+
+func ber_flatten ordinal=309
+  success NotEqual=0
+  INT
+  pBerElement BerElement*
+  pBerVal PBERVAL*
+
+func ber_printf ordinal=310 varArgs
+  success NotEqual=-1
+  INT
+  pBerElement BerElement*
+  fmt PCHAR
+
+func ber_scanf ordinal=311 varArgs
+  success NotEqual=-1
+  INT
+  pBerElement BerElement*
+  fmt PCHAR
+

@@ -1,0 +1,24 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICMetadataQueryReader base=IUnknown id={30989668-E1C9-4597-B395-458EEDB808DF} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetContainerFormat
+    [WIC_HRESULT]
+    pguidContainerFormat GUID*
+
+  func GetLocation
+    [WIC_HRESULT]
+    cchMaxLength UINT
+    wzNamespace WCHAR*
+    pcchActualLength UINT*
+
+  func GetMetadataByName
+    [WIC_HRESULT]
+    wzName LPCWSTR
+    pvarValue PROPVARIANT*
+
+  func GetEnumerator
+    [WIC_HRESULT]
+    ppIEnumString IEnumString**
+
+

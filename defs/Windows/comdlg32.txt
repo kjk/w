@@ -1,0 +1,53 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+
+dll comdlg32.dll callingConvention=STDCALL errorFunc=CommDlgExtendedError onlineHelp=MSDN
+category "Windows Application UI Development/Dialog Boxes/Common Dialog Box"
+func ChooseColor bothCharset
+  BOOL
+  lpcc LPCHOOSECOLOR
+
+func ChooseFont bothCharset
+  BOOL
+  lpcf LPCHOOSEFONT
+
+func CommDlgExtendedError
+  DWORD
+
+func FindText bothCharset
+  success NotEqual=0
+  HWND
+  lpfr LPFINDREPLACE
+
+func GetFileTitle bothCharset
+  success Equal=0
+  short
+  lpszFile LPCTSTR
+  lpszTitle LPTSTR outputOnly
+  cbBuf WORD
+
+func GetOpenFileName bothCharset
+  BOOL
+  lpofn LPOPENFILENAME
+
+func GetSaveFileName bothCharset
+  BOOL
+  lpofn LPOPENFILENAME
+
+func PageSetupDlg bothCharset
+  BOOL
+  lppsd LPPAGESETUPDLG
+
+func PrintDlg bothCharset
+  BOOL
+  lppd LPPRINTDLG
+
+func PrintDlgEx bothCharset
+  HRESULT
+  lppd LPPRINTDLGEX
+
+func ReplaceText bothCharset
+  success NotEqual=0
+  HWND
+  lpfr LPFINDREPLACE
+

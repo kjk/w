@@ -1,0 +1,20 @@
+include Interfaces\DirectX\DXGI\IDXGIDeviceSubObject.txt
+
+ingterface IDXGIResource base=IDXGIDeviceSubObject id={035f3ab4-482e-4e50-b41f-8a7f8bd8960b} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func GetSharedHandle
+    HRESULT
+    pSharedHandle HANDLE*
+
+  func GetUsage
+    HRESULT
+    pUsage DXGI_USAGE*
+
+  func SetEvictionPriority
+    HRESULT
+    EvictionPriority UINT
+
+  func GetEvictionPriority
+    HRESULT
+    pEvictionPriority UINT*
+
+

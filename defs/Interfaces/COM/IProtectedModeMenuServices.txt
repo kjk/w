@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IProtectedModeMenuServices base=IUnknown id={73c105ee-9dff-4a07-b83c-7eff290c266e} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func CreateMenu
+    HRESULT
+    phMenu HMENU*
+
+  func LoadMenu
+    HRESULT
+    pszModuleName LPCWSTR
+    pszMenuName LPCWSTR
+    phMenu HMENU*
+
+  func LoadMenuID
+    HRESULT
+    pszModuleName LPCWSTR
+    wResourceID WORD
+    phMenu HMENU*
+
+

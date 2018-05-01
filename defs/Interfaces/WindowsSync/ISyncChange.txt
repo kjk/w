@@ -1,0 +1,49 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncChange base=IUnknown id={a1952beb-0f6b-4711-b136-01da85b968a6} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetOwnerReplicaId
+    HRESULT
+    pbReplicaId BYTE*
+    pcbIdSize DWORD*
+
+  func GetRootItemId
+    HRESULT
+    pbRootItemId BYTE*
+    pcbIdSize DWORD*
+
+  func GetChangeVersion
+    HRESULT
+    pbCurrentReplicaId "const BYTE*"
+    pVersion SYNC_VERSION*
+
+  func GetCreationVersion
+    HRESULT
+    pbCurrentReplicaId "const BYTE*"
+    pVersion SYNC_VERSION*
+
+  func GetFlags
+    HRESULT
+    pdwFlags DWORD*
+
+  func GetWorkEstimate
+    HRESULT
+    pdwWork DWORD*
+
+  func GetChangeUnits
+    HRESULT
+    ppEnum IEnumSyncChangeUnits**
+
+  func GetMadeWithKnowledge
+    HRESULT
+    ppMadeWithKnowledge ISyncKnowledge**
+
+  func GetLearnedKnowledge
+    HRESULT
+    ppLearnedKnowledge ISyncKnowledge**
+
+  func SetWorkEstimate
+    HRESULT
+    dwWork DWORD
+
+

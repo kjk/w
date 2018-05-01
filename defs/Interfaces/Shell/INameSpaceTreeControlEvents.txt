@@ -1,0 +1,95 @@
+include Interfaces\IUnknown.txt
+
+ingterface INameSpaceTreeControlEvents base=IUnknown id={93D77985-B3D8-4484-8318-672CDDA002CE} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnItemClick
+    HRESULT
+    psi IShellItem*
+    nstceHitTest NSTCEHITTEST
+    nstceClickType NSTCECLICKTYPE
+
+  func OnPropertyItemCommit
+    HRESULT
+    psi IShellItem*
+
+  func OnItemStateChanging
+    HRESULT
+    psi IShellItem*
+    nstcisMask NSTCITEMSTATE
+    nstcisState NSTCITEMSTATE
+
+  func OnItemStateChanged
+    HRESULT
+    psi IShellItem*
+    nstcisMask NSTCITEMSTATE
+    nstcisState NSTCITEMSTATE
+
+  func OnSelectionChanged
+    HRESULT
+    psiaSelection IShellItemArray*
+
+  func OnKeyboardInput
+    HRESULT
+    uMsg UINT
+    wParam WPARAM
+    lParam LPARAM
+
+  func OnBeforeExpand
+    HRESULT
+    psi IShellItem*
+
+  func OnAfterExpand
+    HRESULT
+    psi IShellItem*
+
+  func OnBeginLabelEdit
+    HRESULT
+    psi IShellItem*
+
+  func OnEndLabelEdit
+    HRESULT
+    psi IShellItem*
+
+  func OnGetToolTip
+    HRESULT
+    psi IShellItem*
+    pszTip LPWSTR
+    cchTip int
+
+  func OnBeforeItemDelete
+    HRESULT
+    psi IShellItem*
+
+  func OnItemAdded
+    HRESULT
+    psi IShellItem*
+    fIsRoot BOOL
+
+  func OnItemDeleted
+    HRESULT
+    psi IShellItem*
+    fIsRoot BOOL
+
+  func OnBeforeContextMenu
+    HRESULT
+    psi IShellItem*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func OnAfterContextMenu
+    HRESULT
+    psi IShellItem*
+    pcmIn IContextMenu*
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func OnBeforeStateImageChange
+    HRESULT
+    psi IShellItem*
+
+  func OnGetDefaultIconIndex
+    HRESULT
+    psi IShellItem*
+    piDefaultIcon int*
+    piOpenIcon int*
+
+

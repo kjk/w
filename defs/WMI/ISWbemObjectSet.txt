@@ -1,0 +1,28 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemObjectSet base=IDispatch id={76A6415F-CB41-11d1-8B02-00600806D9B6} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func get__NewEnum
+    WBEMSTATUS
+    pUnk IUnknown**
+
+  func Item
+    WBEMSTATUS
+    strObjectPath BSTR
+    iFlags long
+    objWbemObject ISWbemObject**
+
+  func get_Count
+    WBEMSTATUS
+    iCount long*
+
+  func get_Security_
+    WBEMSTATUS
+    objWbemSecurity ISWbemSecurity**
+
+  func ItemIndex
+    WBEMSTATUS
+    lIndex long
+    objWbemObject ISWbemObject**
+
+

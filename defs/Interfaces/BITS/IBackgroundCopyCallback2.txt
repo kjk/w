@@ -1,0 +1,9 @@
+include Interfaces\BITS\IBackgroundCopyCallback.txt
+
+ingterface IBackgroundCopyCallback2 base=IBackgroundCopyCallback id={659cdeac-489e-11d9-a9cd-000d56965251} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func FileTransferred
+    HRESULT
+    pJob IBackgroundCopyJob*
+    pFile IBackgroundCopyFile*
+
+

@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioSessionEnumerator base=IUnknown id={E2F5BB11-0570-40CA-ACDD-3AA01277DEE8} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func GetCount
+    [AUDCLNT_HRESULT]
+    SessionCount int*
+
+  func GetSession
+    [AUDCLNT_HRESULT]
+    SessionCount int
+    Session IAudioSessionControl**
+
+

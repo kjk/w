@@ -1,0 +1,19 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemStatusCodeText base=IUnknown id={eb87e1bc-3233-11d2-aec9-00c04fb68820} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func GetErrorCodeText
+    WBEMSTATUS
+    hRes HRESULT
+    LocaleId LCID
+    lFlags long
+    MessageText BSTR*
+
+  func GetFacilityCodeText
+    WBEMSTATUS
+    hRes HRESULT
+    LocaleId LCID
+    lFlags long
+    MessageText BSTR*
+
+

@@ -1,0 +1,29 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemRefreshableItem base=IDispatch id={5AD4BF92-DAAB-11d3-B38F-00105A1F473A} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func get_Index
+    WBEMSTATUS
+    iIndex long*
+
+  func get_Refresher
+    WBEMSTATUS
+    objWbemRefresher ISWbemRefresher**
+
+  func get_IsSet
+    WBEMSTATUS
+    bIsSet VARIANT_BOOL*
+
+  func get_Object
+    WBEMSTATUS
+    objWbemObject ISWbemObjectEx**
+
+  func get_ObjectSet
+    WBEMSTATUS
+    objWbemObjectSet ISWbemObjectSet**
+
+  func Remove
+    WBEMSTATUS
+    iFlags long
+
+

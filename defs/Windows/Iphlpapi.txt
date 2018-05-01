@@ -1,0 +1,2212 @@
+include Headers\windows.h.txt
+include Headers\ip.h.txt
+include Headers\sockets.h.txt
+
+dll Iphlpapi.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Networking/IP Helper"
+alias PIP_ADAPTER_ADDRESSES LPVOID
+
+alias NET_IFINDEX ULONG
+
+pointer PNET_IFINDEX NET_IFINDEX
+
+alias IF_INDEX NET_IFINDEX
+
+alias IPMask ULONG
+
+alias "const CHAR*" CHAR*
+
+alias PTEREDO_PORT_CHANGE_CALLBACK LPVOID
+
+alias PUNICAST_IPADDRESS_CHANGE_CALLBACK LPVOID
+
+alias PIPFORWARD_CHANGE_CALLBACK LPVOID
+
+alias PIPINTERFACE_CHANGE_CALLBACK LPVOID
+
+alias PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK LPVOID
+
+alias NET_IF_NETWORK_GUID GUID
+
+alias NETIO_STATUS [ERROR_CODE]
+
+alias NETIOAPI_API NETIO_STATUS
+
+alias IP_STATUS ULONG
+
+array "char [16]" base=char count=16
+
+array "char [MAX_HOSTNAME_LEN + 4]" base=char count=132
+
+array "char [MAX_DOMAIN_NAME_LEN + 4]" base=char count=132
+
+array "char [MAX_SCOPE_ID_LEN + 4]" base=char count=260
+
+array "char [MAX_ADAPTER_NAME_LENGTH + 4]" base=char count=260
+
+array "char [MAX_ADAPTER_DESCRIPTION_LENGTH + 4]" base=char count=132
+
+array "CHAR [8]" base=CHAR count=8
+
+array "WCHAR [6]" base=WCHAR count=6
+
+array "WCHAR [MAX_ADAPTER_NAME]" base=WCHAR count=128
+
+array "WCHAR [IF_MAX_STRING_SIZE + 1]" base=WCHAR count=257
+
+array "WCHAR [DNS_MAX_NAME_BUFFER_LENGTH]" base=WCHAR count=256
+
+array "WCHAR [MAX_INTERFACE_NAME_LEN]" base=WCHAR count=256
+
+array "UCHAR [MAXLEN_PHYSADDR]" base=UCHAR count=8
+
+array "UCHAR [MAXLEN_IFDESCR]" base=UCHAR count=256
+
+array "UCHAR [IF_MAX_PHYS_ADDRESS_LENGTH]" base=UCHAR count=32
+
+array "BYTE [MAX_ADAPTER_ADDRESS_LENGTH]" base=BYTE count=8
+
+array "ULONG [ScopeLevelCount]" base=ULONG count=16
+
+array "DWORD [256]" base=DWORD count=256
+
+array "ULONGLONG [TCPIP_OWNING_MODULE_SIZE]" base=ULONGLONG count=16
+
+enum IFTYPE ULONG
+  IF_TYPE_OTHER                            1
+  IF_TYPE_REGULAR_1822                     2
+  IF_TYPE_HDH_1822                         3
+  IF_TYPE_DDN_X25                          4
+  IF_TYPE_RFC877_X25                       5
+  IF_TYPE_ETHERNET_CSMACD                  6
+  IF_TYPE_IS088023_CSMACD                  7
+  IF_TYPE_ISO88024_TOKENBUS                8
+  IF_TYPE_ISO88025_TOKENRING               9
+  IF_TYPE_ISO88026_MAN                     10
+  IF_TYPE_STARLAN                          11
+  IF_TYPE_PROTEON_10MBIT                   12
+  IF_TYPE_PROTEON_80MBIT                   13
+  IF_TYPE_HYPERCHANNEL                     14
+  IF_TYPE_FDDI                             15
+  IF_TYPE_LAP_B                            16
+  IF_TYPE_SDLC                             17
+  IF_TYPE_DS1                              18
+  IF_TYPE_E1                               19
+  IF_TYPE_BASIC_ISDN                       20
+  IF_TYPE_PRIMARY_ISDN                     21
+  IF_TYPE_PROP_POINT2POINT_SERIAL          22
+  IF_TYPE_PPP                              23
+  IF_TYPE_SOFTWARE_LOOPBACK                24
+  IF_TYPE_EON                              25
+  IF_TYPE_ETHERNET_3MBIT                   26
+  IF_TYPE_NSIP                             27
+  IF_TYPE_SLIP                             28
+  IF_TYPE_ULTRA                            29
+  IF_TYPE_DS3                              30
+  IF_TYPE_SIP                              31
+  IF_TYPE_FRAMERELAY                       32
+  IF_TYPE_RS232                            33
+  IF_TYPE_PARA                             34
+  IF_TYPE_ARCNET                           35
+  IF_TYPE_ARCNET_PLUS                      36
+  IF_TYPE_ATM                              37
+  IF_TYPE_MIO_X25                          38
+  IF_TYPE_SONET                            39
+  IF_TYPE_X25_PLE                          40
+  IF_TYPE_ISO88022_LLC                     41
+  IF_TYPE_LOCALTALK                        42
+  IF_TYPE_SMDS_DXI                         43
+  IF_TYPE_FRAMERELAY_SERVICE               44
+  IF_TYPE_V35                              45
+  IF_TYPE_HSSI                             46
+  IF_TYPE_HIPPI                            47
+  IF_TYPE_MODEM                            48
+  IF_TYPE_AAL5                             49
+  IF_TYPE_SONET_PATH                       50
+  IF_TYPE_SONET_VT                         51
+  IF_TYPE_SMDS_ICIP                        52
+  IF_TYPE_PROP_VIRTUAL                     53
+  IF_TYPE_PROP_MULTIPLEXOR                 54
+  IF_TYPE_IEEE80212                        55
+  IF_TYPE_FIBRECHANNEL                     56
+  IF_TYPE_HIPPIINTERFACE                   57
+  IF_TYPE_FRAMERELAY_INTERCONNECT          58
+  IF_TYPE_AFLANE_8023                      59
+  IF_TYPE_AFLANE_8025                      60
+  IF_TYPE_CCTEMUL                          61
+  IF_TYPE_FASTETHER                        62
+  IF_TYPE_ISDN                             63
+  IF_TYPE_V11                              64
+  IF_TYPE_V36                              65
+  IF_TYPE_G703_64K                         66
+  IF_TYPE_G703_2MB                         67
+  IF_TYPE_QLLC                             68
+  IF_TYPE_FASTETHER_FX                     69
+  IF_TYPE_CHANNEL                          70
+  IF_TYPE_IEEE80211                        71
+  IF_TYPE_IBM370PARCHAN                    72
+  IF_TYPE_ESCON                            73
+  IF_TYPE_DLSW                             74
+  IF_TYPE_ISDN_S                           75
+  IF_TYPE_ISDN_U                           76
+  IF_TYPE_LAP_D                            77
+  IF_TYPE_IPSWITCH                         78
+  IF_TYPE_RSRB                             79
+  IF_TYPE_ATM_LOGICAL                      80
+  IF_TYPE_DS0                              81
+  IF_TYPE_DS0_BUNDLE                       82
+  IF_TYPE_BSC                              83
+  IF_TYPE_ASYNC                            84
+  IF_TYPE_CNR                              85
+  IF_TYPE_ISO88025R_DTR                    86
+  IF_TYPE_EPLRS                            87
+  IF_TYPE_ARAP                             88
+  IF_TYPE_PROP_CNLS                        89
+  IF_TYPE_HOSTPAD                          90
+  IF_TYPE_TERMPAD                          91
+  IF_TYPE_FRAMERELAY_MPI                   92
+  IF_TYPE_X213                             93
+  IF_TYPE_ADSL                             94
+  IF_TYPE_RADSL                            95
+  IF_TYPE_SDSL                             96
+  IF_TYPE_VDSL                             97
+  IF_TYPE_ISO88025_CRFPRINT                98
+  IF_TYPE_MYRINET                          99
+  IF_TYPE_VOICE_EM                         100
+  IF_TYPE_VOICE_FXO                        101
+  IF_TYPE_VOICE_FXS                        102
+  IF_TYPE_VOICE_ENCAP                      103
+  IF_TYPE_VOICE_OVERIP                     104
+  IF_TYPE_ATM_DXI                          105
+  IF_TYPE_ATM_FUNI                         106
+  IF_TYPE_ATM_IMA                          107
+  IF_TYPE_PPPMULTILINKBUNDLE               108
+  IF_TYPE_IPOVER_CDLC                      109
+  IF_TYPE_IPOVER_CLAW                      110
+  IF_TYPE_STACKTOSTACK                     111
+  IF_TYPE_VIRTUALIPADDRESS                 112
+  IF_TYPE_MPC                              113
+  IF_TYPE_IPOVER_ATM                       114
+  IF_TYPE_ISO88025_FIBER                   115
+  IF_TYPE_TDLC                             116
+  IF_TYPE_GIGABITETHERNET                  117
+  IF_TYPE_HDLC                             118
+  IF_TYPE_LAP_F                            119
+  IF_TYPE_V37                              120
+  IF_TYPE_X25_MLP                          121
+  IF_TYPE_X25_HUNTGROUP                    122
+  IF_TYPE_TRANSPHDLC                       123
+  IF_TYPE_INTERLEAVE                       124
+  IF_TYPE_FAST                             125
+  IF_TYPE_IP                               126
+  IF_TYPE_DOCSCABLE_MACLAYER               127
+  IF_TYPE_DOCSCABLE_DOWNSTREAM             128
+  IF_TYPE_DOCSCABLE_UPSTREAM               129
+  IF_TYPE_A12MPPSWITCH                     130
+  IF_TYPE_TUNNEL                           131
+  IF_TYPE_COFFEE                           132
+  IF_TYPE_CES                              133
+  IF_TYPE_ATM_SUBINTERFACE                 134
+  IF_TYPE_L2_VLAN                          135
+  IF_TYPE_L3_IPVLAN                        136
+  IF_TYPE_L3_IPXVLAN                       137
+  IF_TYPE_DIGITALPOWERLINE                 138
+  IF_TYPE_MEDIAMAILOVERIP                  139
+  IF_TYPE_DTM                              140
+  IF_TYPE_DCN                              141
+  IF_TYPE_IPFORWARD                        142
+  IF_TYPE_MSDSL                            143
+  IF_TYPE_IEEE1394                         144
+  IF_TYPE_IF_GSN                           145
+  IF_TYPE_DVBRCC_MACLAYER                  146
+  IF_TYPE_DVBRCC_DOWNSTREAM                147
+  IF_TYPE_DVBRCC_UPSTREAM                  148
+  IF_TYPE_ATM_VIRTUAL                      149
+  IF_TYPE_MPLS_TUNNEL                      150
+  IF_TYPE_SRP                              151
+  IF_TYPE_VOICEOVERATM                     152
+  IF_TYPE_VOICEOVERFRAMERELAY              153
+  IF_TYPE_IDSL                             154
+  IF_TYPE_COMPOSITELINK                    155
+  IF_TYPE_SS7_SIGLINK                      156
+  IF_TYPE_PROP_WIRELESS_P2P                157
+  IF_TYPE_FR_FORWARD                       158
+  IF_TYPE_RFC1483                          159
+  IF_TYPE_USB                              160
+  IF_TYPE_IEEE8023AD_LAG                   161
+  IF_TYPE_BGP_POLICY_ACCOUNTING            162
+  IF_TYPE_FRF16_MFR_BUNDLE                 163
+  IF_TYPE_H323_GATEKEEPER                  164
+  IF_TYPE_H323_PROXY                       165
+  IF_TYPE_MPLS                             166
+  IF_TYPE_MF_SIGLINK                       167
+  IF_TYPE_HDSL2                            168
+  IF_TYPE_SHDSL                            169
+  IF_TYPE_DS1_FDL                          170
+  IF_TYPE_POS                              171
+  IF_TYPE_DVB_ASI_IN                       172
+  IF_TYPE_DVB_ASI_OUT                      173
+  IF_TYPE_PLC                              174
+  IF_TYPE_NFAS                             175
+  IF_TYPE_TR008                            176
+  IF_TYPE_GR303_RDT                        177
+  IF_TYPE_GR303_IDT                        178
+  IF_TYPE_ISUP                             179
+  IF_TYPE_PROP_DOCS_WIRELESS_MACLAYER      180
+  IF_TYPE_PROP_DOCS_WIRELESS_DOWNSTREAM    181
+  IF_TYPE_PROP_DOCS_WIRELESS_UPSTREAM      182
+  IF_TYPE_HIPERLAN2                        183
+  IF_TYPE_PROP_BWA_P2MP                    184
+  IF_TYPE_SONET_OVERHEAD_CHANNEL           185
+  IF_TYPE_DIGITAL_WRAPPER_OVERHEAD_CHANNEL 186
+  IF_TYPE_AAL2                             187
+  IF_TYPE_RADIO_MAC                        188
+  IF_TYPE_ATM_RADIO                        189
+  IF_TYPE_IMT                              190
+  IF_TYPE_MVL                              191
+  IF_TYPE_REACH_DSL                        192
+  IF_TYPE_FR_DLCI_ENDPT                    193
+  IF_TYPE_ATM_VCI_ENDPT                    194
+  IF_TYPE_OPTICAL_CHANNEL                  195
+  IF_TYPE_OPTICAL_TRANSPORT                196
+  IF_TYPE_IEEE80216_WMAN                   237
+  IF_TYPE_WWANPP                           243
+  IF_TYPE_WWANPP2                          244
+
+struct SCOPE_ID
+  Value ULONG
+
+enum MIB_TCP_STATE UINT
+  MIB_TCP_STATE_CLOSED     1
+  MIB_TCP_STATE_LISTEN     2
+  MIB_TCP_STATE_SYN_SENT   3
+  MIB_TCP_STATE_SYN_RCVD   4
+  MIB_TCP_STATE_ESTAB      5
+  MIB_TCP_STATE_FIN_WAIT1  6
+  MIB_TCP_STATE_FIN_WAIT2  7
+  MIB_TCP_STATE_CLOSE_WAIT 8
+  MIB_TCP_STATE_CLOSING    9
+  MIB_TCP_STATE_LAST_ACK   10
+  MIB_TCP_STATE_TIME_WAIT  11
+  MIB_TCP_STATE_DELETE_TCB 12
+
+enum TCP_CONNECTION_OFFLOAD_STATE UINT
+  TcpConnectionOffloadStateInHost     0
+  TcpConnectionOffloadStateOffloading 1
+  TcpConnectionOffloadStateOffloaded  2
+  TcpConnectionOffloadStateUploading  3
+
+struct SOCKADDR_IN
+  sin_family ADDRESS_FAMILY
+  sin_port USHORT
+  sin_addr IN_ADDR
+  sin_zero "CHAR [8]"
+
+struct "struct sockaddr_in6"
+  sin6_family ADDRESS_FAMILY
+  sin6_port USHORT
+  sin6_flowinfo ULONG
+  sin6_addr IN6_ADDR
+  sin6_scope_id ULONG
+
+pointer "struct sockaddr_in6*" "struct sockaddr_in6"
+
+alias SOCKADDR_IN6 "struct sockaddr_in6"
+
+pointer PSOCKADDR_IN6 SOCKADDR_IN6
+
+pointer "const PSOCKADDR_IN6" SOCKADDR_IN6
+
+union NET_LUID
+  Value ULONG64
+
+pointer NET_LUID* NET_LUID
+
+pointer PNET_LUID NET_LUID
+
+pointer "const NET_LUID*" NET_LUID
+
+struct IP_ADDRESS_STRING
+  String "char [16]"
+
+alias IP_MASK_STRING IP_ADDRESS_STRING
+
+struct IP_ADDR_STRING
+  Next LPVOID display=IP_ADDR_STRING*
+  IpAddress IP_ADDRESS_STRING
+  IpMask IP_MASK_STRING
+  Context DWORD
+
+pointer PIP_ADDR_STRING IP_ADDR_STRING
+
+enum NL_ROUTE_PROTOCOL UINT
+  MIB_IPPROTO_OTHER             1
+  MIB_IPPROTO_LOCAL             2
+  MIB_IPPROTO_NETMGMT           3
+  MIB_IPPROTO_ICMP              4
+  MIB_IPPROTO_EGP               5
+  MIB_IPPROTO_GGP               6
+  MIB_IPPROTO_HELLO             7
+  MIB_IPPROTO_RIP               8
+  MIB_IPPROTO_IS_IS             9
+  MIB_IPPROTO_ES_IS             10
+  MIB_IPPROTO_CISCO             11
+  MIB_IPPROTO_BBN               12
+  MIB_IPPROTO_OSPF              13
+  MIB_IPPROTO_BGP               14
+  MIB_IPPROTO_NT_AUTOSTATIC     10002
+  MIB_IPPROTO_NT_STATIC         10006
+  MIB_IPPROTO_NT_STATIC_NON_DOD 10007
+
+alias MIB_IPFORWARD_PROTO NL_ROUTE_PROTOCOL
+
+enum NL_ROUTE_ORIGIN UINT
+  NlroManual              0
+  NlroWellKnown           1
+  NlroDHCP                2
+  NlroRouterAdvertisement 3
+  Nlro6to4                4
+
+union SOCKADDR_INET
+  Ipv4 SOCKADDR_IN
+  Ipv6 SOCKADDR_IN6
+  si_family ADDRESS_FAMILY
+
+pointer SOCKADDR_INET* SOCKADDR_INET
+
+pointer "const SOCKADDR_INET*" SOCKADDR_INET
+
+struct IP_ADDRESS_PREFIX
+  Prefix SOCKADDR_INET
+  PrefixLength UINT8
+
+alias [MIB_IF_TYPE] IFTYPE display=UINT
+
+struct IP_ADAPTER_INFO
+  Next LPVOID display=IP_ADAPTER_INFO*
+  ComboIndex DWORD
+  AdapterName "char [MAX_ADAPTER_NAME_LENGTH + 4]"
+  Description "char [MAX_ADAPTER_DESCRIPTION_LENGTH + 4]"
+  AddressLength UINT
+  Address "BYTE [MAX_ADAPTER_ADDRESS_LENGTH]"
+  Index DWORD
+  Type [MIB_IF_TYPE]
+  DhcpEnabled UINT
+  CurrentIpAddress PIP_ADDR_STRING
+  IpAddressList IP_ADDR_STRING
+  GatewayList IP_ADDR_STRING
+  DhcpServer IP_ADDR_STRING
+  HaveWins BOOL
+  PrimaryWinsServer IP_ADDR_STRING
+  SecondaryWinsServer IP_ADDR_STRING
+  LeaseObtained time_t
+  LeaseExpires time_t
+
+pointer PIP_ADAPTER_INFO IP_ADAPTER_INFO
+
+struct IP_PER_ADAPTER_INFO
+  AutoconfigEnabled UINT
+  AutoconfigActive UINT
+  CurrentDnsServer PIP_ADDR_STRING
+  DnsServerList IP_ADDR_STRING
+
+pointer PIP_PER_ADAPTER_INFO IP_PER_ADAPTER_INFO
+
+struct IP_UNIDIRECTIONAL_ADAPTER_ADDRESS
+  NumAdapters ULONG
+  Address "IPAddr [1]" count=NumAdapters
+
+pointer PIP_UNIDIRECTIONAL_ADAPTER_ADDRESS IP_UNIDIRECTIONAL_ADAPTER_ADDRESS
+
+enum MIB_IPNET_TYPE UINT
+  MIB_IPNET_TYPE_OTHER   1
+  MIB_IPNET_TYPE_INVALID 2
+  MIB_IPNET_TYPE_DYNAMIC 3
+  MIB_IPNET_TYPE_STATIC  4
+
+struct MIB_IPNETROW
+  dwIndex IF_INDEX
+  dwPhysAddrLen DWORD
+  bPhysAddr "UCHAR [MAXLEN_PHYSADDR]"
+  dwAddr DWORD
+  Type MIB_IPNET_TYPE
+
+pointer PMIB_IPNETROW MIB_IPNETROW
+
+array "MIB_IPNETROW [ANY_SIZE]" base=MIB_IPNETROW count=1
+
+struct MIB_IPNETTABLE
+  dwNumEntries DWORD
+  table "MIB_IPNETROW [ANY_SIZE]" count=dwNumEntries
+
+pointer PMIB_IPNETTABLE MIB_IPNETTABLE
+
+struct MIB_IFSTACK_ROW
+  HigherLayerInterfaceIndex NET_IFINDEX
+  LowerLayerInterfaceIndex NET_IFINDEX
+
+array "MIB_IFSTACK_ROW [ANY_SIZE]" base=MIB_IFSTACK_ROW count=1
+
+struct MIB_IFSTACK_TABLE
+  NumEntries ULONG
+  Table "MIB_IFSTACK_ROW [ANY_SIZE]" count=NumEntries
+
+pointer PMIB_IFSTACK_TABLE MIB_IFSTACK_TABLE
+
+pointer PMIB_IFSTACK_TABLE* PMIB_IFSTACK_TABLE
+
+enum INTERNAL_IF_OPER_STATUS UINT
+  IF_OPER_STATUS_NON_OPERATIONAL 0
+  IF_OPER_STATUS_UNREACHABLE     1
+  IF_OPER_STATUS_DISCONNECTED    2
+  IF_OPER_STATUS_CONNECTING      3
+  IF_OPER_STATUS_CONNECTED       4
+  IF_OPER_STATUS_OPERATIONAL     5
+
+struct MIB_IFROW
+  wszName "WCHAR [MAX_INTERFACE_NAME_LEN]"
+  dwIndex IF_INDEX
+  dwType IFTYPE
+  dwMtu DWORD
+  dwSpeed DWORD
+  dwPhysAddrLen DWORD
+  bPhysAddr "UCHAR [MAXLEN_PHYSADDR]"
+  dwAdminStatus DWORD
+  dwOperStatus INTERNAL_IF_OPER_STATUS
+  dwLastChange DWORD
+  dwInOctets DWORD
+  dwInUcastPkts DWORD
+  dwInNUcastPkts DWORD
+  dwInDiscards DWORD
+  dwInErrors DWORD
+  dwInUnknownProtos DWORD
+  dwOutOctets DWORD
+  dwOutUcastPkts DWORD
+  dwOutNUcastPkts DWORD
+  dwOutDiscards DWORD
+  dwOutErrors DWORD
+  dwOutQLen DWORD
+  dwDescrLen DWORD
+  bDescr "UCHAR [MAXLEN_IFDESCR]"
+
+pointer PMIB_IFROW MIB_IFROW
+
+array "MIB_IFROW [ANY_SIZE]" base=MIB_IFROW count=1
+
+struct MIB_IFTABLE
+  dwNumEntries DWORD
+  table "MIB_IFROW [ANY_SIZE]" count=dwNumEntries
+
+pointer PMIB_IFTABLE MIB_IFTABLE
+
+struct [MIB_IF_ROW2_s] display=struct
+  Flags BOOLEAN
+
+enum TUNNEL_TYPE UINT
+  TUNNEL_TYPE_NONE    0
+  TUNNEL_TYPE_OTHER   1
+  TUNNEL_TYPE_DIRECT  2
+  TUNNEL_TYPE_6TO4    11
+  TUNNEL_TYPE_ISATAP  13
+  TUNNEL_TYPE_TEREDO  14
+  TUNNEL_TYPE_IPHTTPS 15
+
+enum NDIS_MEDIUM UINT
+  NdisMedium802_3        0
+  NdisMedium802_5        1
+  NdisMediumFddi         2
+  NdisMediumWan          3
+  NdisMediumLocalTalk    4
+  NdisMediumDix          5
+  NdisMediumArcnetRaw    6
+  NdisMediumArcnet878_2  7
+  NdisMediumAtm          8
+  NdisMediumWirelessWan  9
+  NdisMediumIrda         10
+  NdisMediumBpc          11
+  NdisMediumCoWan        12
+  NdisMedium1394         13
+  NdisMediumInfiniBand   14
+  NdisMediumTunnel       15
+  NdisMediumNative802_11 16
+  NdisMediumLoopback     17
+  NdisMediumWiMAX        18
+  NdisMediumIP           19
+
+enum NDIS_PHYSICAL_MEDIUM UINT
+  NdisPhysicalMediumUnspecified  0
+  NdisPhysicalMediumWirelessLan  1
+  NdisPhysicalMediumCableModem   2
+  NdisPhysicalMediumPhoneLine    3
+  NdisPhysicalMediumPowerLine    4
+  NdisPhysicalMediumDSL          5
+  NdisPhysicalMediumFibreChannel 6
+  NdisPhysicalMedium1394         7
+  NdisPhysicalMediumWirelessWan  8
+  NdisPhysicalMediumNative802_11 9
+  NdisPhysicalMediumBluetooth    10
+  NdisPhysicalMediumInfiniband   11
+  NdisPhysicalMediumWiMax        12
+  NdisPhysicalMediumUWB          13
+  NdisPhysicalMedium802_3        14
+  NdisPhysicalMedium802_5        15
+  NdisPhysicalMediumIrda         16
+  NdisPhysicalMediumWiredWAN     17
+  NdisPhysicalMediumWiredCoWan   18
+  NdisPhysicalMediumOther        19
+
+enum NET_IF_ACCESS_TYPE UINT
+  NET_IF_ACCESS_LOOPBACK             1
+  NET_IF_ACCESS_BROADCAST            2
+  NET_IF_ACCESS_POINT_TO_POINT       3
+  NET_IF_ACCESS_POINT_TO_MULTI_POINT 4
+  NET_IF_ACCESS_MAXIMUM              5
+
+enum NET_IF_DIRECTION_TYPE UINT
+  NET_IF_DIRECTION_SENDRECEIVE 0
+  NET_IF_DIRECTION_SENDONLY    1
+  NET_IF_DIRECTION_RECEIVEONLY 2
+
+enum IF_OPER_STATUS UINT
+  IfOperStatusUp             1
+  IfOperStatusDown           2
+  IfOperStatusTesting        3
+  IfOperStatusUnknown        4
+  IfOperStatusDormant        5
+  IfOperStatusNotPresent     6
+  IfOperStatusLowerLayerDown 7
+
+enum NET_IF_ADMIN_STATUS UINT
+  NET_IF_ADMIN_STATUS_UP      1
+  NET_IF_ADMIN_STATUS_DOWN    2
+  NET_IF_ADMIN_STATUS_TESTING 3
+
+enum NET_IF_MEDIA_CONNECT_STATE UINT
+  MediaConnectStateUnknown      0
+  MediaConnectStateConnected    1
+  MediaConnectStateDisconnected 2
+
+enum NET_IF_CONNECTION_TYPE UINT
+  NET_IF_CONNECTION_DEDICATED 1
+  NET_IF_CONNECTION_PASSIVE   2
+  NET_IF_CONNECTION_DEMAND    3
+  NET_IF_CONNECTION_MAXIMUM   4
+
+struct MIB_IF_ROW2
+  InterfaceLuid NET_LUID
+  InterfaceIndex NET_IFINDEX
+  InterfaceGuid GUID
+  Alias "WCHAR [IF_MAX_STRING_SIZE + 1]"
+  Description "WCHAR [IF_MAX_STRING_SIZE + 1]"
+  PhysicalAddressLength ULONG
+  PhysicalAddress "UCHAR [IF_MAX_PHYS_ADDRESS_LENGTH]"
+  PermanentPhysicalAddress "UCHAR [IF_MAX_PHYS_ADDRESS_LENGTH]"
+  Mtu ULONG
+  Type IFTYPE
+  TunnelType TUNNEL_TYPE
+  MediaType NDIS_MEDIUM
+  PhysicalMediumType NDIS_PHYSICAL_MEDIUM
+  AccessType NET_IF_ACCESS_TYPE
+  DirectionType NET_IF_DIRECTION_TYPE
+  InterfaceAndOperStatusFlags [MIB_IF_ROW2_s]
+  OperStatus IF_OPER_STATUS
+  AdminStatus NET_IF_ADMIN_STATUS
+  MediaConnectState NET_IF_MEDIA_CONNECT_STATE
+  NetworkGuid NET_IF_NETWORK_GUID
+  ConnectionType NET_IF_CONNECTION_TYPE
+  TransmitLinkSpeed ULONG64
+  ReceiveLinkSpeed ULONG64
+  InOctets ULONG64
+  InUcastPkts ULONG64
+  InNUcastPkts ULONG64
+  InDiscards ULONG64
+  InErrors ULONG64
+  InUnknownProtos ULONG64
+  InUcastOctets ULONG64
+  InMulticastOctets ULONG64
+  InBroadcastOctets ULONG64
+  OutOctets ULONG64
+  OutUcastPkts ULONG64
+  OutNUcastPkts ULONG64
+  OutDiscards ULONG64
+  OutErrors ULONG64
+  OutUcastOctets ULONG64
+  OutMulticastOctets ULONG64
+  OutBroadcastOctets ULONG64
+  OutQLen ULONG64
+
+pointer PMIB_IF_ROW2 MIB_IF_ROW2
+
+array "MIB_IF_ROW2 [ANY_SIZE]" base=MIB_IF_ROW2 count=1
+
+struct MIB_IF_TABLE2
+  NumEntries ULONG
+  Table "MIB_IF_ROW2 [ANY_SIZE]" count=NumEntries
+
+pointer PMIB_IF_TABLE2 MIB_IF_TABLE2
+
+pointer PMIB_IF_TABLE2* PMIB_IF_TABLE2
+
+struct IP_ADAPTER_INDEX_MAP
+  Index ULONG
+  Name "WCHAR [MAX_ADAPTER_NAME]"
+
+pointer PIP_ADAPTER_INDEX_MAP IP_ADAPTER_INDEX_MAP
+
+array "IP_ADAPTER_INDEX_MAP [1]" base=IP_ADAPTER_INDEX_MAP count=1
+
+struct IP_INTERFACE_INFO
+  NumAdapters LONG
+  Adapter "IP_ADAPTER_INDEX_MAP [1]" count=NumAdapters
+
+pointer PIP_INTERFACE_INFO IP_INTERFACE_INFO
+
+struct MIB_INVERTEDIFSTACK_ROW
+  LowerLayerInterfaceIndex NET_IFINDEX
+  HigherLayerInterfaceIndex NET_IFINDEX
+
+array "MIB_INVERTEDIFSTACK_ROW [ANY_SIZE]" base=MIB_INVERTEDIFSTACK_ROW count=1
+
+struct MIB_INVERTEDIFSTACK_TABLE
+  NumEntries ULONG
+  Table "MIB_INVERTEDIFSTACK_ROW [ANY_SIZE]" count=NumEntries
+
+pointer PMIB_INVERTEDIFSTACK_TABLE MIB_INVERTEDIFSTACK_TABLE
+
+pointer PMIB_INVERTEDIFSTACK_TABLE* PMIB_INVERTEDIFSTACK_TABLE
+
+enum NL_ROUTER_DISCOVERY_BEHAVIOR UINT
+  RouterDiscoveryUnchanged -1
+  RouterDiscoveryDisabled  0
+  RouterDiscoveryEnabled   1
+  RouterDiscoveryDhcp      2
+
+enum NL_LINK_LOCAL_ADDRESS_BEHAVIOR UINT
+  LinkLocalUnchanged -1
+  LinkLocalAlwaysOff 0
+  LinkLocalDelayed   1
+  LinkLocalAlwaysOn  2
+
+struct NL_INTERFACE_OFFLOAD_ROD
+  Value BOOLEAN
+
+struct MIB_IPINTERFACE_ROW
+  Family ADDRESS_FAMILY
+  InterfaceLuid NET_LUID
+  InterfaceIndex NET_IFINDEX
+  MaxReassemblySize ULONG
+  InterfaceIdentifier ULONG64
+  MinRouterAdvertisementInterval ULONG
+  MaxRouterAdvertisementInterval ULONG
+  AdvertisingEnabled BOOLEAN
+  ForwardingEnabled BOOLEAN
+  WeakHostSend BOOLEAN
+  WeakHostReceive BOOLEAN
+  UseAutomaticMetric BOOLEAN
+  UseNeighborUnreachabilityDetection BOOLEAN
+  ManagedAddressConfigurationSupported BOOLEAN
+  OtherStatefulConfigurationSupported BOOLEAN
+  AdvertiseDefaultRoute BOOLEAN
+  RouterDiscoveryBehavior NL_ROUTER_DISCOVERY_BEHAVIOR
+  DadTransmits ULONG
+  BaseReachableTime ULONG
+  RetransmitTime ULONG
+  PathMtuDiscoveryTimeout ULONG
+  LinkLocalAddressBehavior NL_LINK_LOCAL_ADDRESS_BEHAVIOR
+  LinkLocalAddressTimeout ULONG
+  ZoneIndices "ULONG [ScopeLevelCount]"
+  SitePrefixLength ULONG
+  Metric ULONG
+  NlMtu ULONG
+  Connected BOOLEAN
+  SupportsWakeUpPatterns BOOLEAN
+  SupportsNeighborDiscovery BOOLEAN
+  SupportsRouterDiscovery BOOLEAN
+  ReachableTime ULONG
+  TransmitOffload NL_INTERFACE_OFFLOAD_ROD
+  ReceiveOffload NL_INTERFACE_OFFLOAD_ROD
+  DisableDefaultRoutes BOOLEAN
+
+pointer PMIB_IPINTERFACE_ROW MIB_IPINTERFACE_ROW
+
+array "MIB_IPINTERFACE_ROW [ANY_SIZE]" base=MIB_IPINTERFACE_ROW count=1
+
+struct MIB_IPINTERFACE_TABLE
+  NumEntries ULONG
+  Table "MIB_IPINTERFACE_ROW [ANY_SIZE]" count=NumEntries
+
+pointer PMIB_IPINTERFACE_TABLE MIB_IPINTERFACE_TABLE
+
+pointer PMIB_IPINTERFACE_TABLE* PMIB_IPINTERFACE_TABLE
+
+struct MIBICMPSTATS
+  dwMsgs DWORD
+  dwErrors DWORD
+  dwDestUnreachs DWORD
+  dwTimeExcds DWORD
+  dwParmProbs DWORD
+  dwSrcQuenchs DWORD
+  dwRedirects DWORD
+  dwEchos DWORD
+  dwEchoReps DWORD
+  dwTimestamps DWORD
+  dwTimestampReps DWORD
+  dwAddrMasks DWORD
+  dwAddrMaskReps DWORD
+
+struct MIBICMPINFO
+  icmpInStats MIBICMPSTATS
+  icmpOutStats MIBICMPSTATS
+
+struct MIB_ICMP
+  stats MIBICMPINFO
+
+pointer PMIB_ICMP MIB_ICMP
+
+enum MIB_IPSTATS_FORWARDING UINT
+  MIB_IP_FORWARDING     1
+  MIB_IP_NOT_FORWARDING 2
+
+struct MIB_IPSTATS
+  Forwarding MIB_IPSTATS_FORWARDING
+  dwDefaultTTL DWORD
+  dwInReceives DWORD
+  dwInHdrErrors DWORD
+  dwInAddrErrors DWORD
+  dwForwDatagrams DWORD
+  dwInUnknownProtos DWORD
+  dwInDiscards DWORD
+  dwInDelivers DWORD
+  dwOutRequests DWORD
+  dwRoutingDiscards DWORD
+  dwOutDiscards DWORD
+  dwOutNoRoutes DWORD
+  dwReasmTimeout DWORD
+  dwReasmReqds DWORD
+  dwReasmOks DWORD
+  dwReasmFails DWORD
+  dwFragOks DWORD
+  dwFragFails DWORD
+  dwFragCreates DWORD
+  dwNumIf DWORD
+  dwNumAddr DWORD
+  dwNumRoutes DWORD
+
+pointer PMIB_IPSTATS MIB_IPSTATS
+
+struct MIB_ANYCASTIPADDRESS_ROW
+  Address SOCKADDR_INET
+  InterfaceLuid NET_LUID
+  InterfaceIndex NET_IFINDEX
+  ScopeId SCOPE_ID
+
+pointer PMIB_ANYCASTIPADDRESS_ROW MIB_ANYCASTIPADDRESS_ROW
+
+pointer "const MIB_ANYCASTIPADDRESS_ROW*" MIB_ANYCASTIPADDRESS_ROW
+
+array "MIB_ANYCASTIPADDRESS_ROW [ANY_SIZE]" base=MIB_ANYCASTIPADDRESS_ROW count=1
+
+struct MIB_ANYCASTIPADDRESS_TABLE
+  NumEntries ULONG
+  Table "MIB_ANYCASTIPADDRESS_ROW [ANY_SIZE]" count=NumEntries
+
+pointer PMIB_ANYCASTIPADDRESS_TABLE MIB_ANYCASTIPADDRESS_TABLE
+
+pointer PMIB_ANYCASTIPADDRESS_TABLE* PMIB_ANYCASTIPADDRESS_TABLE
+
+flag [MIB_IPADDR_TYPE] "unsigned short" display="unsigned short"
+  MIB_IPADDR_DNS_ELIGIBLE 0X0100
+  MIB_IPADDR_PRIMARY      0x0001
+  MIB_IPADDR_DYNAMIC      0x0004
+  MIB_IPADDR_DISCONNECTED 0x0008
+  MIB_IPADDR_DELETED      0x0040
+  MIB_IPADDR_TRANSIENT    0x0080
+
+struct MIB_IPADDRROW
+  dwAddr DWORD
+  dwIndex IF_INDEX
+  dwMask DWORD
+  dwBCastAddr DWORD
+  dwReasmSize DWORD
+  unused1 "unsigned short"
+  wType [MIB_IPADDR_TYPE]
+
+array "MIB_IPADDRROW [ANY_SIZE]" base=MIB_IPADDRROW count=1
+
+struct MIB_IPADDRTABLE
+  dwNumEntries DWORD
+  table "MIB_IPADDRROW [ANY_SIZE]" count=dwNumEntries
+
+pointer PMIB_IPADDRTABLE MIB_IPADDRTABLE
+
+struct MIB_MULTICASTIPADDRESS_ROW
+  Address SOCKADDR_INET
+  InterfaceIndex NET_IFINDEX
+  InterfaceLuid NET_LUID
+  ScopeId SCOPE_ID
+
+pointer PMIB_MULTICASTIPADDRESS_ROW MIB_MULTICASTIPADDRESS_ROW
+
+array "MIB_MULTICASTIPADDRESS_ROW [ANY_SIZE]" base=MIB_MULTICASTIPADDRESS_ROW count=1
+
+struct MIB_MULTICASTIPADDRESS_TABLE
+  NumEntries ULONG
+  Table "MIB_MULTICASTIPADDRESS_ROW [ANY_SIZE]" count=NumEntries
+
+pointer PMIB_MULTICASTIPADDRESS_TABLE MIB_MULTICASTIPADDRESS_TABLE
+
+pointer PMIB_MULTICASTIPADDRESS_TABLE* PMIB_MULTICASTIPADDRESS_TABLE
+
+enum NL_PREFIX_ORIGIN UINT
+  IpPrefixOriginOther               0
+  IpPrefixOriginManual              1
+  IpPrefixOriginWellKnown           2
+  IpPrefixOriginDhcp                3
+  IpPrefixOriginRouterAdvertisement 4
+  IpPrefixOriginUnchanged           0x10
+
+enum NL_SUFFIX_ORIGIN UINT
+  IpSuffixOriginOther            0
+  IpSuffixOriginManual           1
+  IpSuffixOriginWellKnown        2
+  IpSuffixOriginDhcp             3
+  IpSuffixOriginLinkLayerAddress 4
+  IpSuffixOriginRandom           5
+  IpSuffixOriginUnchanged        0x10
+
+enum NL_DAD_STATE UINT
+  IpDadStateInvalid    0
+  IpDadStateTentative  1
+  IpDadStateDuplicate  2
+  IpDadStateDeprecated 3
+  IpDadStatePreferred  4
+
+struct MIB_UNICASTIPADDRESS_ROW
+  Address SOCKADDR_INET
+  InterfaceLuid NET_LUID
+  InterfaceIndex NET_IFINDEX
+  PrefixOrigin NL_PREFIX_ORIGIN
+  SuffixOrigin NL_SUFFIX_ORIGIN
+  ValidLifetime ULONG
+  PreferredLifetime ULONG
+  OnLinkPrefixLength UINT8
+  SkipAsSource BOOLEAN
+  DadState NL_DAD_STATE
+  ScopeId SCOPE_ID
+  CreationTimeStamp LARGE_INTEGER
+
+pointer PMIB_UNICASTIPADDRESS_ROW MIB_UNICASTIPADDRESS_ROW
+
+pointer "const MIB_UNICASTIPADDRESS_ROW*" MIB_UNICASTIPADDRESS_ROW
+
+array "MIB_UNICASTIPADDRESS_ROW [ANY_SIZE]" base=MIB_UNICASTIPADDRESS_ROW count=1
+
+struct MIB_UNICASTIPADDRESS_TABLE
+  NumEntries ULONG
+  Table "MIB_UNICASTIPADDRESS_ROW [ANY_SIZE]" count=NumEntries
+
+pointer PMIB_UNICASTIPADDRESS_TABLE MIB_UNICASTIPADDRESS_TABLE
+
+pointer PMIB_UNICASTIPADDRESS_TABLE* PMIB_UNICASTIPADDRESS_TABLE
+
+union [MIB_ReachabilityTime] display=union
+  LastReachable ULONG
+  LastUnreachable ULONG
+
+enum NL_NEIGHBOR_STATE UINT
+  NlnsUnreachable 0
+  NlnsIncomplete  1
+  NlnsProbe       2
+  NlnsDelay       3
+  NlnsStale       4
+  NlnsReachable   5
+  NlnsPermanent   6
+  NlnsMaximum     7
+
+struct MIB_IPNET_ROW2
+  Address SOCKADDR_INET
+  InterfaceIndex NET_IFINDEX
+  InterfaceLuid NET_LUID
+  PhysicalAddress "UCHAR [IF_MAX_PHYS_ADDRESS_LENGTH]"
+  PhysicalAddressLength ULONG
+  State NL_NEIGHBOR_STATE
+  Flags UCHAR
+  ReachabilityTime [MIB_ReachabilityTime]
+
+pointer "const MIB_IPNET_ROW2*" MIB_IPNET_ROW2
+
+pointer PMIB_IPNET_ROW2 MIB_IPNET_ROW2
+
+array "MIB_IPNET_ROW2 [ANY_SIZE]" base=MIB_IPNET_ROW2 count=1
+
+struct MIB_IPNET_TABLE2
+  NumEntries ULONG
+  Table "MIB_IPNET_ROW2 [ANY_SIZE]" count=NumEntries
+
+pointer PMIB_IPNET_TABLE2 MIB_IPNET_TABLE2
+
+pointer PMIB_IPNET_TABLE2* PMIB_IPNET_TABLE2
+
+struct MIB_IPPATH_ROW
+  Source SOCKADDR_INET
+  Destination SOCKADDR_INET
+  InterfaceLuid NET_LUID
+  InterfaceIndex NET_IFINDEX
+  CurrentNextHop SOCKADDR_INET
+  PathMtu ULONG
+  RttMean ULONG
+  RttDeviation ULONG
+   [MIB_ReachabilityTime]
+  IsReachable BOOLEAN
+  LinkTransmitSpeed ULONG64
+  LinkReceiveSpeed ULONG64
+
+pointer PMIB_IPPATH_ROW MIB_IPPATH_ROW
+
+array "MIB_IPPATH_ROW [ANY_SIZE]" base=MIB_IPPATH_ROW count=1
+
+struct MIB_IPPATH_TABLE
+  NumEntries ULONG
+  Table "MIB_IPPATH_ROW [ANY_SIZE]" count=NumEntries
+
+pointer MIB_IPPATH_TABLE* MIB_IPPATH_TABLE
+
+enum MIB_IPFORWARD_TYPE UINT
+  MIB_IPROUTE_TYPE_OTHER    1
+  MIB_IPROUTE_TYPE_INVALID  2
+  MIB_IPROUTE_TYPE_DIRECT   3
+  MIB_IPROUTE_TYPE_INDIRECT 4
+
+struct MIB_IPFORWARDROW
+  dwForwardDest DWORD
+  dwForwardMask DWORD
+  dwForwardPolicy DWORD
+  dwForwardNextHop DWORD
+  dwForwardIfIndex IF_INDEX
+  ForwardType MIB_IPFORWARD_TYPE
+  ForwardProto MIB_IPFORWARD_PROTO
+  dwForwardAge DWORD
+  dwForwardNextHopAS DWORD
+  dwForwardMetric1 DWORD
+  dwForwardMetric2 DWORD
+  dwForwardMetric3 DWORD
+  dwForwardMetric4 DWORD
+  dwForwardMetric5 DWORD
+
+pointer PMIB_IPFORWARDROW MIB_IPFORWARDROW
+
+array "MIB_IPFORWARDROW [ANY_SIZE]" base=MIB_IPFORWARDROW count=1
+
+struct MIB_IPFORWARDTABLE
+  dwNumEntries DWORD
+  table "MIB_IPFORWARDROW [ANY_SIZE]" count=dwNumEntries
+
+pointer PMIB_IPFORWARDTABLE MIB_IPFORWARDTABLE
+
+struct MIB_IPFORWARD_ROW2
+  InterfaceLuid NET_LUID
+  InterfaceIndex NET_IFINDEX
+  DestinationPrefix IP_ADDRESS_PREFIX
+  NextHop SOCKADDR_INET
+  SitePrefixLength UCHAR
+  ValidLifetime ULONG
+  PreferredLifetime ULONG
+  Metric ULONG
+  Protocol NL_ROUTE_PROTOCOL
+  Loopback BOOLEAN
+  AutoconfigureAddress BOOLEAN
+  Publish BOOLEAN
+  Immortal BOOLEAN
+  Age ULONG
+  Origin NL_ROUTE_ORIGIN
+
+pointer PMIB_IPFORWARD_ROW2 MIB_IPFORWARD_ROW2
+
+pointer "const MIB_IPFORWARD_ROW2*" MIB_IPFORWARD_ROW2
+
+array "MIB_IPFORWARD_ROW2 [ANY_SIZE]" base=MIB_IPFORWARD_ROW2 count=1
+
+struct MIB_IPFORWARD_TABLE2
+  NumEntries ULONG
+  Table "MIB_IPFORWARD_ROW2 [ANY_SIZE]" count=NumEntries
+
+pointer PMIB_IPFORWARD_TABLE2 MIB_IPFORWARD_TABLE2
+
+pointer PMIB_IPFORWARD_TABLE2* PMIB_IPFORWARD_TABLE2
+
+struct SOCKADDR_IN6_PAIR
+  SourceAddress PSOCKADDR_IN6
+  DestinationAddress PSOCKADDR_IN6
+
+pointer PSOCKADDR_IN6_PAIR SOCKADDR_IN6_PAIR
+
+pointer PSOCKADDR_IN6_PAIR* PSOCKADDR_IN6_PAIR
+
+enum NET_ADDRESS_FORMAT UINT
+  NET_ADDRESS_FORMAT_UNSPECIFIED 0
+  NET_ADDRESS_DNS_NAME           1
+  NET_ADDRESS_IPV4               2
+  NET_ADDRESS_IPV6               3
+
+struct [NET_ADDRESS_INFO_u_s] display=struct
+  Address "WCHAR [DNS_MAX_NAME_BUFFER_LENGTH]"
+  Port "WCHAR [6]"
+
+union [NET_ADDRESS_INFO_u] display=union
+  NamedAddress [NET_ADDRESS_INFO_u_s]
+  Ipv4Address SOCKADDR_IN
+  Ipv6Address SOCKADDR_IN6
+  IpAddress SOCKADDR
+
+struct NET_ADDRESS_INFO
+  Format NET_ADDRESS_FORMAT
+   [NET_ADDRESS_INFO_u]
+
+pointer PNET_ADDRESS_INFO NET_ADDRESS_INFO
+
+enum [FIXED_INFO_NODETYPE] UINT display=UINT
+  BROADCAST_NODETYPE    1
+  PEER_TO_PEER_NODETYPE 2
+  MIXED_NODETYPE        4
+  HYBRID_NODETYPE       8
+
+struct FIXED_INFO
+  HostName "char [MAX_HOSTNAME_LEN + 4]"
+  DomainName "char [MAX_DOMAIN_NAME_LEN + 4]"
+  CurrentDnsServer PIP_ADDR_STRING
+  DnsServerList IP_ADDR_STRING
+  NodeType [FIXED_INFO_NODETYPE]
+  ScopeId "char [MAX_SCOPE_ID_LEN + 4]"
+  EnableRouting UINT
+  EnableProxy UINT
+  EnableDns UINT
+
+pointer PFIXED_INFO FIXED_INFO
+
+struct MIB_TCP6ROW_OWNER_MODULE
+  ucLocalAddr "UCHAR [16]"
+  dwLocalScopeId DWORD
+  dwLocalPort DWORD
+  ucRemoteAddr "UCHAR [16]"
+  dwRemoteScopeId DWORD
+  dwRemotePort DWORD
+  dwState MIB_TCP_STATE display=DWORD
+  dwOwningPid DWORD
+  liCreateTimestamp LARGE_INTEGER
+  OwningModuleInfo "ULONGLONG [TCPIP_OWNING_MODULE_SIZE]"
+
+pointer PMIB_TCP6ROW_OWNER_MODULE MIB_TCP6ROW_OWNER_MODULE
+
+struct MIB_TCPROW_OWNER_MODULE
+  dwState MIB_TCP_STATE display=DWORD
+  dwLocalAddr DWORD
+  dwLocalPort DWORD
+  dwRemoteAddr DWORD
+  dwRemotePort DWORD
+  dwOwningPid DWORD
+  liCreateTimestamp LARGE_INTEGER
+  OwningModuleInfo "ULONGLONG [TCPIP_OWNING_MODULE_SIZE]"
+
+pointer PMIB_TCPROW_OWNER_MODULE MIB_TCPROW_OWNER_MODULE
+
+struct MIB_UDP6ROW_OWNER_MODULE
+  ucLocalAddr "UCHAR [16]"
+  dwLocalScopeId DWORD
+  dwLocalPort DWORD
+  dwOwningPid DWORD
+  liCreateTimestamp LARGE_INTEGER
+  dwFlags int
+  OwningModuleInfo "ULONGLONG [TCPIP_OWNING_MODULE_SIZE]"
+
+pointer PMIB_UDP6ROW_OWNER_MODULE MIB_UDP6ROW_OWNER_MODULE
+
+struct MIB_UDPROW_OWNER_MODULE
+  dwLocalAddr DWORD
+  dwLocalPort DWORD
+  dwOwningPid DWORD
+  liCreateTimestamp LARGE_INTEGER
+  dwFlags int
+  OwningModuleInfo "ULONGLONG [TCPIP_OWNING_MODULE_SIZE]"
+
+pointer PMIB_UDPROW_OWNER_MODULE MIB_UDPROW_OWNER_MODULE
+
+enum TCP_RTO_ALGORITHM UINT
+  MIB_TCP_RTO_OTHER    1
+  MIB_TCP_RTO_CONSTANT 2
+  MIB_TCP_RTO_RSRE     3
+  MIB_TCP_RTO_VANJ     4
+
+struct MIB_TCPSTATS
+  RtoAlgorithm TCP_RTO_ALGORITHM
+  dwRtoMin DWORD
+  dwRtoMax DWORD
+  dwMaxConn DWORD
+  dwActiveOpens DWORD
+  dwPassiveOpens DWORD
+  dwAttemptFails DWORD
+  dwEstabResets DWORD
+  dwCurrEstab DWORD
+  dwInSegs DWORD
+  dwOutSegs DWORD
+  dwRetransSegs DWORD
+  dwInErrs DWORD
+  dwOutRsts DWORD
+  dwNumConns DWORD
+
+pointer PMIB_TCPSTATS MIB_TCPSTATS
+
+struct MIB_TCP6ROW
+  State MIB_TCP_STATE
+  LocalAddr IN6_ADDR
+  dwLocalScopeId DWORD
+  dwLocalPort DWORD
+  RemoteAddr IN6_ADDR
+  dwRemoteScopeId DWORD
+  dwRemotePort DWORD
+
+pointer PMIB_TCP6ROW MIB_TCP6ROW
+
+array "MIB_TCP6ROW [ANY_SIZE]" base=MIB_TCP6ROW count=1
+
+struct MIB_TCP6TABLE
+  dwNumEntries DWORD
+  table "MIB_TCP6ROW [ANY_SIZE]" count=dwNumEntries
+
+pointer PMIB_TCP6TABLE MIB_TCP6TABLE
+
+struct MIB_TCP6ROW2
+  LocalAddr IN6_ADDR
+  dwLocalScopeId DWORD
+  dwLocalPort DWORD
+  RemoteAddr IN6_ADDR
+  dwRemoteScopeId DWORD
+  dwRemotePort DWORD
+  State MIB_TCP_STATE
+  dwOwningPid DWORD
+  dwOffloadState TCP_CONNECTION_OFFLOAD_STATE
+
+array "MIB_TCP6ROW2 [ANY_SIZE]" base=MIB_TCP6ROW2 count=1
+
+struct MIB_TCP6TABLE2
+  dwNumEntries DWORD
+  table "MIB_TCP6ROW2 [ANY_SIZE]" count=dwNumEntries
+
+pointer PMIB_TCP6TABLE2 MIB_TCP6TABLE2
+
+struct MIB_TCPROW
+  State MIB_TCP_STATE
+  dwLocalAddr DWORD
+  dwLocalPort DWORD
+  dwRemoteAddr DWORD
+  dwRemotePort DWORD
+
+pointer PMIB_TCPROW MIB_TCPROW
+
+array "MIB_TCPROW [ANY_SIZE]" base=MIB_TCPROW count=1
+
+struct MIB_TCPTABLE
+  dwNumEntries DWORD
+  table "MIB_TCPROW [ANY_SIZE]" count=dwNumEntries
+
+pointer PMIB_TCPTABLE MIB_TCPTABLE
+
+struct MIB_TCPROW2
+  dwState MIB_TCP_STATE display=DWORD
+  dwLocalAddr DWORD
+  dwLocalPort DWORD
+  dwRemoteAddr DWORD
+  dwRemotePort DWORD
+  dwOwningPid DWORD
+  dwOffloadState TCP_CONNECTION_OFFLOAD_STATE
+
+array "MIB_TCPROW2 [ANY_SIZE]" base=MIB_TCPROW2 count=1
+
+struct MIB_TCPTABLE2
+  dwNumEntries DWORD
+  table "MIB_TCPROW2 [ANY_SIZE]" count=dwNumEntries
+
+pointer PMIB_TCPTABLE2 MIB_TCPTABLE2
+
+struct MIB_UDP6ROW
+  dwLocalAddr IN6_ADDR
+  dwLocalScopeId DWORD
+  dwLocalPort DWORD
+
+array "MIB_UDP6ROW [ANY_SIZE]" base=MIB_UDP6ROW count=1
+
+struct MIB_UDP6TABLE
+  dwNumEntries DWORD
+  table "MIB_UDP6ROW [ANY_SIZE]" count=dwNumEntries
+
+pointer PMIB_UDP6TABLE MIB_UDP6TABLE
+
+struct MIB_UDPSTATS
+  dwInDatagrams DWORD
+  dwNoPorts DWORD
+  dwInErrors DWORD
+  dwOutDatagrams DWORD
+  dwNumAddrs DWORD
+
+pointer PMIB_UDPSTATS MIB_UDPSTATS
+
+struct MIB_UDPROW
+  dwLocalAddr DWORD
+  dwLocalPort DWORD
+
+array "MIB_UDPROW [ANY_SIZE]" base=MIB_UDPROW count=1
+
+struct MIB_UDPTABLE
+  dwNumEntries DWORD
+  table "MIB_UDPROW [ANY_SIZE]" count=dwNumEntries
+
+pointer PMIB_UDPTABLE MIB_UDPTABLE
+
+enum TCPIP_OWNER_MODULE_INFO_CLASS UINT
+  TCPIP_OWNER_MODULE_INFO_BASIC 0
+
+enum TCP_ESTATS_TYPE UINT
+  TcpConnectionEstatsSynOpts   0
+  TcpConnectionEstatsData      1
+  TcpConnectionEstatsSndCong   2
+  TcpConnectionEstatsPath      3
+  TcpConnectionEstatsSendBuff  4
+  TcpConnectionEstatsRec       5
+  TcpConnectionEstatsObsRec    6
+  TcpConnectionEstatsBandwidth 7
+  TcpConnectionEstatsFineRtt   8
+  TcpConnectionEstatsMaximum   9
+
+enum MIB_IF_TABLE_LEVEL UINT
+  MibIfTableNormal 0
+  MibIfTableRaw    1
+
+enum TCP_TABLE_CLASS UINT
+  TCP_TABLE_BASIC_LISTENER           0
+  TCP_TABLE_BASIC_CONNECTIONS        1
+  TCP_TABLE_BASIC_ALL                2
+  TCP_TABLE_OWNER_PID_LISTENER       3
+  TCP_TABLE_OWNER_PID_CONNECTIONS    4
+  TCP_TABLE_OWNER_PID_ALL            5
+  TCP_TABLE_OWNER_MODULE_LISTENER    6
+  TCP_TABLE_OWNER_MODULE_CONNECTIONS 7
+  TCP_TABLE_OWNER_MODULE_ALL         8
+
+enum UDP_TABLE_CLASS UINT
+  UDP_TABLE_BASIC        0
+  UDP_TABLE_OWNER_PID    1
+  UDP_TABLE_OWNER_MODULE 2
+
+flag [GetAdaptersAddressesFlags] ULONG display=ULONG
+  GAA_FLAG_SKIP_UNICAST                0x0001
+  GAA_FLAG_SKIP_ANYCAST                0x0002
+  GAA_FLAG_SKIP_MULTICAST              0x0004
+  GAA_FLAG_SKIP_DNS_SERVER             0x0008
+  GAA_FLAG_INCLUDE_PREFIX              0x0010
+  GAA_FLAG_SKIP_FRIENDLY_NAME          0x0020
+  GAA_FLAG_INCLUDE_WINS_INFO           0x0040
+  GAA_FLAG_INCLUDE_GATEWAYS            0x0080
+  GAA_FLAG_INCLUDE_ALL_INTERFACES      0x0100
+  GAA_FLAG_INCLUDE_ALL_COMPARTMENTS    0x0200
+  GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER 0x0400
+
+struct NL_BANDWIDTH_INFORMATION
+  Bandwidth ULONG64
+  Instability ULONG64
+  BandwidthPeaked BOOLEAN
+
+struct MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES
+  InboundBandwidthInformation NL_BANDWIDTH_INFORMATION
+  OutboundBandwidthInformation NL_BANDWIDTH_INFORMATION
+
+pointer PMIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES
+
+struct IP_ADAPTER_ORDER_MAP
+  NumAdapters ULONG
+  AdapterOrder "ULONG [1]" count=NumAdapters
+
+pointer PIP_ADAPTER_ORDER_MAP IP_ADAPTER_ORDER_MAP
+
+struct IP_INTERFACE_NAME_INFO
+  Index ULONG
+  MediaType ULONG
+  ConnectionType UCHAR
+  AccessType UCHAR
+  DeviceGuid GUID
+  InterfaceGuid GUID
+
+pointer IP_INTERFACE_NAME_INFO* IP_INTERFACE_NAME_INFO
+
+pointer IP_INTERFACE_NAME_INFO** IP_INTERFACE_NAME_INFO*
+
+struct MIBICMPSTATS_EX
+  dwMsgs DWORD
+  dwErrors DWORD
+  rgdwTypeCount "DWORD [256]"
+
+struct MIB_ICMP_EX
+  icmpInStats MIBICMPSTATS_EX
+  icmpOutStats MIBICMPSTATS_EX
+
+pointer PMIB_ICMP_EX MIB_ICMP_EX
+
+func GetAdapterIndex
+  [ERROR_CODE]
+  AdapterName LPWSTR
+  IfIndex PULONG
+
+func GetAdaptersAddresses
+  [ERROR_CODE_ULONG]
+  Family ADDRESS_FAMILY display=ULONG
+  Flags [GetAdaptersAddressesFlags]
+  Reserved PVOID
+  AdapterAddresses PIP_ADAPTER_ADDRESSES
+  SizePointer PULONG
+
+func GetAdaptersInfo
+  [ERROR_CODE]
+  pAdapterInfo PIP_ADAPTER_INFO outputOnly
+  pOutBufLen PULONG
+
+func GetPerAdapterInfo
+  [ERROR_CODE]
+  IfIndex ULONG
+  pPerAdapterInfo PIP_PER_ADAPTER_INFO
+  pOutBufLen PULONG
+
+func GetUniDirectionalAdapterInfo
+  [ERROR_CODE]
+  pIPIfInfo PIP_UNIDIRECTIONAL_ADAPTER_ADDRESS
+  dwOutBufLen PULONG
+
+func CreateIpNetEntry
+  [ERROR_CODE]
+  pArpEntry PMIB_IPNETROW
+
+func CreateProxyArpEntry
+  [ERROR_CODE]
+  dwAddress DWORD
+  dwMask DWORD
+  dwIfIndex DWORD
+
+func DeleteIpNetEntry
+  [ERROR_CODE]
+  pArpEntry PMIB_IPNETROW
+
+func DeleteProxyArpEntry
+  [ERROR_CODE]
+  dwAddress DWORD
+  dwMask DWORD
+  dwIfIndex DWORD
+
+func FlushIpNetTable
+  [ERROR_CODE]
+  dwIfIndex DWORD
+
+func GetIpNetTable
+  [ERROR_CODE]
+  pIpNetTable PMIB_IPNETTABLE outputOnly
+  pdwSize PULONG
+  bOrder BOOL
+
+func SendARP
+  [ERROR_CODE]
+  DestIP IPAddr
+  SrcIP IPAddr
+  pMacAddr PULONG postLength=PhyAddrLen
+  PhyAddrLen PULONG
+
+func SetIpNetEntry
+  [ERROR_CODE]
+  pArpEntry PMIB_IPNETROW
+
+func ConvertInterfaceAliasToLuid
+  NETIO_STATUS
+  InterfaceAlias "const WCHAR*"
+  InterfaceLuid PNET_LUID
+
+func ConvertInterfaceGuidToLuid
+  NETIO_STATUS
+  InterfaceGuid "const GUID*"
+  InterfaceLuid PNET_LUID
+
+func ConvertInterfaceIndexToLuid
+  NETIO_STATUS
+  InterfaceIndex NET_IFINDEX
+  InterfaceLuid PNET_LUID
+
+func ConvertInterfaceLuidToAlias
+  NETIO_STATUS
+  InterfaceLuid "const NET_LUID*"
+  InterfaceAlias PWSTR
+  Length SIZE_T
+
+func ConvertInterfaceLuidToGuid
+  NETIO_STATUS
+  InterfaceLuid "const NET_LUID*"
+  InterfaceGuid GUID*
+
+func ConvertInterfaceLuidToIndex
+  NETIO_STATUS
+  InterfaceLuid "const NET_LUID*"
+  InterfaceIndex PNET_IFINDEX
+
+func ConvertInterfaceLuidToNameA
+  NETIO_STATUS
+  InterfaceLuid "const NET_LUID*"
+  InterfaceName PSTR
+  Length SIZE_T
+
+func ConvertInterfaceLuidToNameW
+  NETIO_STATUS
+  InterfaceLuid "const NET_LUID*"
+  InterfaceName PWSTR
+  Length SIZE_T
+
+func ConvertInterfaceNameToLuidA
+  NETIO_STATUS
+  InterfaceName "const CHAR*"
+  InterfaceLuid PNET_LUID
+
+func ConvertInterfaceNameToLuidW
+  NETIO_STATUS
+  InterfaceName "const WCHAR*"
+  InterfaceLuid PNET_LUID
+
+func if_indextoname
+  success NotEqual=0
+  PCHAR
+  InterfaceIndex NET_IFINDEX
+  InterfaceName PCHAR
+
+func if_nametoindex
+  success Equal=0
+  NET_IFINDEX
+  InterfaceName PCSTR
+
+func GetFriendlyIfIndex
+  [ERROR_CODE]
+  IfIndex DWORD
+
+func GetIfEntry
+  [ERROR_CODE]
+  pIfRow PMIB_IFROW
+
+func GetIfEntry2
+  NETIOAPI_API
+  Row PMIB_IF_ROW2
+
+func GetIfStackTable
+  NETIOAPI_API
+  Table PMIB_IFSTACK_TABLE*
+
+func GetIfTable
+  [ERROR_CODE]
+  pIfTable PMIB_IFTABLE
+  pdwSize PULONG
+  bOrder BOOL
+
+func GetIfTable2
+  NETIOAPI_API
+  Table PMIB_IF_TABLE2*
+
+func GetIfTable2Ex
+  NETIOAPI_API
+  Level MIB_IF_TABLE_LEVEL
+  Table PMIB_IF_TABLE2*
+
+func GetInterfaceInfo
+  [ERROR_CODE]
+  pIfTable PIP_INTERFACE_INFO
+  dwOutBufLen PULONG
+
+func GetInvertedIfStackTable
+  NETIOAPI_API
+  Table PMIB_INVERTEDIFSTACK_TABLE*
+
+func GetIpInterfaceEntry
+  NETIOAPI_API
+  Row PMIB_IPINTERFACE_ROW
+
+func GetIpInterfaceTable
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  Table PMIB_IPINTERFACE_TABLE*
+
+func GetNumberOfInterfaces
+  [ERROR_CODE]
+  pdwNumIf PDWORD
+
+func InitializeIpInterfaceEntry
+  VOID
+  Row PMIB_IPINTERFACE_ROW
+
+func SetIfEntry
+  [ERROR_CODE]
+  pIfRow PMIB_IFROW
+
+func SetIpInterfaceEntry
+  NETIOAPI_API
+  Row PMIB_IPINTERFACE_ROW
+
+func GetIcmpStatistics
+  [ERROR_CODE]
+  pStats PMIB_ICMP
+
+func GetIpStatistics
+  [ERROR_CODE]
+  pStats PMIB_IPSTATS
+
+func Icmp6CreateFile
+  [FILE_HANDLE]
+
+func Icmp6ParseReplies
+  [ERROR_CODE]
+  ReplyBuffer LPVOID length=ReplySize
+  ReplySize DWORD
+
+func Icmp6SendEcho2
+  [ERROR_CODE]
+  IcmpHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  SourceAddress "struct sockaddr_in6*"
+  DestinationAddress "struct sockaddr_in6*"
+  RequestData LPVOID length=RequestSize
+  RequestSize WORD
+  RequestOptions PIP_OPTION_INFORMATION
+  ReplyBuffer LPVOID postLength=ReplySize
+  ReplySize DWORD
+  Timeout DWORD
+
+func IcmpSendEcho2Ex
+  [ERROR_CODE]
+  IcmpHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  SourceAddress IPAddr
+  DestinationAddress IPAddr
+  RequestData LPVOID length=RequestSize
+  RequestSize WORD
+  RequestOptions PIP_OPTION_INFORMATION
+  ReplyBuffer LPVOID postLength=ReplySize
+  ReplySize DWORD
+  Timeout DWORD
+
+func SetIpTTL
+  [ERROR_CODE]
+  nTTL UINT
+
+func AddIPAddress
+  [ERROR_CODE]
+  Address IPAddr
+  IpMask IPMask
+  IfIndex DWORD
+  NTEContext PULONG
+  NTEInstance PULONG
+
+func CreateAnycastIpAddressEntry
+  NETIOAPI_API
+  Row "const MIB_ANYCASTIPADDRESS_ROW*"
+
+func CreateUnicastIpAddressEntry
+  NETIOAPI_API
+  Row "const MIB_UNICASTIPADDRESS_ROW*"
+
+func DeleteIPAddress
+  [ERROR_CODE]
+  NTEContext ULONG
+
+func DeleteAnycastIpAddressEntry
+  NETIOAPI_API
+  Row "const MIB_ANYCASTIPADDRESS_ROW*"
+
+func DeleteUnicastIpAddressEntry
+  NETIOAPI_API
+  Row "const MIB_UNICASTIPADDRESS_ROW*"
+
+func GetAnycastIpAddressEntry
+  NETIOAPI_API
+  Row PMIB_ANYCASTIPADDRESS_ROW
+
+func GetAnycastIpAddressTable
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  Table PMIB_ANYCASTIPADDRESS_TABLE*
+
+func GetIpAddrTable
+  [ERROR_CODE]
+  pIpAddrTable PMIB_IPADDRTABLE outputOnly
+  pdwSize PULONG
+  bOrder BOOL
+
+func GetMulticastIpAddressEntry
+  NETIOAPI_API
+  Row PMIB_MULTICASTIPADDRESS_ROW
+
+func GetMulticastIpAddressTable
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  Table PMIB_MULTICASTIPADDRESS_TABLE*
+
+func GetUnicastIpAddressEntry
+  NETIOAPI_API
+  Row PMIB_UNICASTIPADDRESS_ROW
+
+func GetUnicastIpAddressTable
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  Table PMIB_UNICASTIPADDRESS_TABLE*
+
+func InitializeUnicastIpAddressEntry
+  VOID
+  Row PMIB_UNICASTIPADDRESS_ROW
+
+func IpReleaseAddress
+  [ERROR_CODE]
+  AdapterInfo PIP_ADAPTER_INDEX_MAP
+
+func IpRenewAddress
+  [ERROR_CODE]
+  AdapterInfo PIP_ADAPTER_INDEX_MAP
+
+func NotifyStableUnicastIpAddressTable
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  Table PMIB_UNICASTIPADDRESS_TABLE*
+  CallerCallback PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK
+  CallerContext PVOID
+  NotificationHandle HANDLE*
+
+func SetUnicastIpAddressEntry
+  NETIOAPI_API
+  Row "const MIB_UNICASTIPADDRESS_ROW*"
+
+func CreateIpNetEntry2
+  NETIOAPI_API
+  Row "const MIB_IPNET_ROW2*"
+
+func DeleteIpNetEntry2
+  NETIOAPI_API
+  Row "const MIB_IPNET_ROW2*"
+
+func FlushIpNetTable2
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  InterfaceIndex NET_IFINDEX
+
+func GetIpNetEntry2
+  NETIOAPI_API
+  Row PMIB_IPNET_ROW2
+
+func GetIpNetTable2
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  Table PMIB_IPNET_TABLE2*
+
+func ResolveIpNetEntry2
+  NETIOAPI_API
+  Row PMIB_IPNET_ROW2
+  SourceAddress "const SOCKADDR_INET*"
+
+func ResolveNeighbor
+  [ERROR_CODE_ULONG]
+  NetworkAddress SOCKADDR*
+  PhysicalAddress PVOID
+  PhysicalAddressLength PULONG
+
+func SetIpNetEntry2
+  NETIOAPI_API
+  Row PMIB_IPNET_ROW2
+
+func FlushIpPathTable
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+
+func GetIpPathEntry
+  NETIOAPI_API
+  Row PMIB_IPPATH_ROW
+
+func GetIpPathTable
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  Table MIB_IPPATH_TABLE*
+
+func CreateIpForwardEntry
+  [ERROR_CODE]
+  pRoute PMIB_IPFORWARDROW
+
+func CreateIpForwardEntry2
+  NETIOAPI_API
+  Row "const MIB_IPFORWARD_ROW2*"
+
+func DeleteIpForwardEntry
+  [ERROR_CODE]
+  pRoute PMIB_IPFORWARDROW
+
+func DeleteIpForwardEntry2
+  NETIOAPI_API
+  Row "const MIB_IPFORWARD_ROW2*"
+
+func EnableRouter
+  [ERROR_CODE]
+  pHandle HANDLE*
+  pOverlapped OVERLAPPED*
+
+func GetBestInterface
+  [ERROR_CODE]
+  dwDestAddr IPAddr
+  pdwBestIfIndex PDWORD
+
+func GetBestInterfaceEx
+  [ERROR_CODE]
+  pDestAddr "struct sockaddr*"
+  pdwBestIfIndex PDWORD
+
+func GetBestRoute
+  [ERROR_CODE]
+  dwDestAddr DWORD
+  dwSourceAddr DWORD
+  pBestRoute PMIB_IPFORWARDROW
+
+func GetBestRoute2
+  NETIOAPI_API
+  InterfaceLuid NET_LUID*
+  InterfaceIndex NET_IFINDEX
+  SourceAddress "const SOCKADDR_INET*"
+  DestinationAddress "const SOCKADDR_INET*"
+  AddressSortOptions ULONG
+  BestRoute PMIB_IPFORWARD_ROW2
+  BestSourceAddress SOCKADDR_INET*
+
+func GetIpForwardEntry2
+  NETIOAPI_API
+  Row PMIB_IPFORWARD_ROW2
+
+func GetIpForwardTable
+  [ERROR_CODE]
+  pIpForwardTable PMIB_IPFORWARDTABLE postLength=pdwSize
+  pdwSize PULONG
+  bOrder BOOL
+
+func GetIpForwardTable2
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  Table PMIB_IPFORWARD_TABLE2*
+
+func GetRTTAndHopCount
+  BOOL
+  DestIpAddress IPAddr
+  HopCount PULONG
+  MaxHops ULONG
+  RTT PULONG
+
+func InitializeIpForwardEntry
+  VOID
+  Row PMIB_IPFORWARD_ROW2
+
+func SetIpForwardEntry
+  [ERROR_CODE]
+  pRoute PMIB_IPFORWARDROW
+
+func SetIpForwardEntry2
+  NETIOAPI_API
+  Route "const MIB_IPFORWARD_ROW2*"
+
+func SetIpStatistics
+  [ERROR_CODE]
+  pIpStats PMIB_IPSTATS
+
+func SetIpStatisticsEx
+  [ERROR_CODE]
+  pIpStats PMIB_IPSTATS
+  Family ULONG
+
+func UnenableRouter
+  [ERROR_CODE]
+  pOverlapped OVERLAPPED*
+  lpdwEnableCount LPDWORD
+
+func FreeMibTable
+  VOID
+  Memory PVOID
+
+func ConvertIpv4MaskToLength
+  NETIO_STATUS
+  Mask ULONG
+  MaskLength PUINT8
+
+func ConvertLengthToIpv4Mask
+  NETIO_STATUS
+  MaskLength ULONG
+  Mask PULONG
+
+func CreateSortedAddressPairs
+  NETIOAPI_API
+  SourceAddressList "const PSOCKADDR_IN6"
+  SourceAddressCount ULONG
+  DestinationAddressList "const PSOCKADDR_IN6"
+  DestinationAddressCount ULONG
+  AddressSortOptions ULONG
+  SortedAddressPairList PSOCKADDR_IN6_PAIR*
+  SortedAddressPairCount ULONG*
+
+func ParseNetworkString
+  [ERROR_CODE]
+  NetworkString "const WCHAR*"
+  Types DWORD
+  AddressInfo PNET_ADDRESS_INFO
+  PortNumber USHORT*
+  PrefixLength BYTE*
+
+func GetNetworkParams
+  [ERROR_CODE]
+  pFixedInfo PFIXED_INFO outputOnly
+  pOutBufLen PULONG
+
+func CancelMibChangeNotify2
+  NETIOAPI_API
+  NotificationHandle HANDLE
+
+func NotifyAddrChange
+  [ERROR_CODE]
+  Handle PHANDLE
+  overlapped LPOVERLAPPED
+
+func NotifyIpInterfaceChange
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  Callback PIPINTERFACE_CHANGE_CALLBACK
+  CallerContext PVOID
+  InitialNotification BOOLEAN
+  NotificationHandle HANDLE*
+
+func NotifyRouteChange
+  [ERROR_CODE]
+  Handle PHANDLE
+  overlapped LPOVERLAPPED
+
+func NotifyRouteChange2
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  Callback PIPFORWARD_CHANGE_CALLBACK
+  CallerContext PVOID
+  InitialNotification BOOLEAN
+  NotificationHandle HANDLE*
+
+func NotifyUnicastIpAddressChange
+  NETIOAPI_API
+  Family ADDRESS_FAMILY
+  Callback PUNICAST_IPADDRESS_CHANGE_CALLBACK
+  CallerContext PVOID
+  InitialNotification BOOLEAN
+  NotificationHandle HANDLE*
+
+func CancelSecurityHealthChangeNotify
+  BOOL
+  notifyOverlapped LPOVERLAPPED
+
+func NotifySecurityHealthChange
+  [ERROR_CODE]
+  pHandle PHANDLE
+  pOverLapped LPOVERLAPPED
+  SecurityHealthFlags PULONG
+
+func GetTeredoPort
+  NETIOAPI_API
+  Port USHORT*
+
+func NotifyTeredoPortChange
+  NETIOAPI_API
+  Callback PTEREDO_PORT_CHANGE_CALLBACK
+  CallerContext PVOID
+  InitialNotification BOOLEAN
+  NotificationHandle HANDLE*
+
+func GetExtendedTcpTable
+  [ERROR_CODE]
+  pTcpTable PVOID postLength=pdwSize
+  pdwSize PDWORD
+  bOrder BOOL
+  ulAf ADDRESS_FAMILY display=ULONG
+  TableClass TCP_TABLE_CLASS
+  Reserved ULONG
+
+func GetExtendedUdpTable
+  [ERROR_CODE]
+  pUdpTable PVOID postLength=pdwSize
+  pdwSize PDWORD
+  bOrder BOOL
+  ulAf ADDRESS_FAMILY display=ULONG
+  TableClass UDP_TABLE_CLASS
+  Reserved ULONG
+
+func GetOwnerModuleFromTcp6Entry
+  [ERROR_CODE]
+  pTcpEntry PMIB_TCP6ROW_OWNER_MODULE
+  Class TCPIP_OWNER_MODULE_INFO_CLASS
+  Buffer PVOID
+  pdwSize PDWORD
+
+func GetOwnerModuleFromTcpEntry
+  [ERROR_CODE]
+  pTcpEntry PMIB_TCPROW_OWNER_MODULE
+  Class TCPIP_OWNER_MODULE_INFO_CLASS
+  Buffer PVOID
+  pdwSize PDWORD
+
+func GetOwnerModuleFromUdp6Entry
+  [ERROR_CODE]
+  pUdpEntry PMIB_UDP6ROW_OWNER_MODULE
+  Class TCPIP_OWNER_MODULE_INFO_CLASS
+  Buffer PVOID
+  pdwSize PDWORD
+
+func GetOwnerModuleFromUdpEntry
+  [ERROR_CODE]
+  pUdpEntry PMIB_UDPROW_OWNER_MODULE
+  Class TCPIP_OWNER_MODULE_INFO_CLASS
+  Buffer PVOID
+  pdwSize PDWORD
+
+func GetPerTcp6ConnectionEStats
+  [ERROR_CODE_ULONG]
+  Row PMIB_TCP6ROW
+  EstatsType TCP_ESTATS_TYPE
+  Rw PUCHAR
+  RwVersion ULONG
+  RwSize ULONG
+  Ros PUCHAR
+  RosVersion ULONG
+  RosSize ULONG
+  Rod PUCHAR
+  RodVersion ULONG
+  RodSize ULONG
+
+func GetPerTcpConnectionEStats
+  [ERROR_CODE_ULONG]
+  Row PMIB_TCPROW
+  EstatsType TCP_ESTATS_TYPE
+  Rw PUCHAR
+  RwVersion ULONG
+  RwSize ULONG
+  Ros PUCHAR
+  RosVersion ULONG
+  RosSize ULONG
+  Rod PUCHAR
+  RodVersion ULONG
+  RodSize ULONG
+
+func GetTcpStatistics
+  [ERROR_CODE]
+  pStats PMIB_TCPSTATS
+
+func GetTcpStatisticsEx
+  [ERROR_CODE]
+  pStats PMIB_TCPSTATS
+  dwFamily ADDRESS_FAMILY display=DWORD
+
+func GetTcp6Table
+  [ERROR_CODE_ULONG]
+  TcpTable PMIB_TCP6TABLE
+  SizePointer PULONG
+  Order BOOL
+
+func GetTcp6Table2
+  [ERROR_CODE_ULONG]
+  TcpTable PMIB_TCP6TABLE2
+  SizePointer PULONG
+  Order BOOL
+
+func GetTcpTable
+  [ERROR_CODE]
+  pTcpTable PMIB_TCPTABLE outputOnly
+  pdwSize PDWORD
+  bOrder BOOL
+
+func GetTcpTable2
+  [ERROR_CODE_ULONG]
+  TcpTable PMIB_TCPTABLE2 outputOnly
+  SizePointer PULONG
+  Order BOOL
+
+func SetPerTcp6ConnectionEStats
+  [ERROR_CODE_ULONG]
+  Row PMIB_TCP6ROW
+  EstatsType TCP_ESTATS_TYPE
+  Rw PUCHAR
+  RwVersion ULONG
+  RwSize ULONG
+  Offset ULONG
+
+func SetPerTcpConnectionEStats
+  [ERROR_CODE_ULONG]
+  Row PMIB_TCP6ROW
+  EstatsType TCP_ESTATS_TYPE
+  Rw PUCHAR
+  RwVersion ULONG
+  RwSize ULONG
+  Offset ULONG
+
+func SetTcpEntry
+  [ERROR_CODE]
+  pTcpRow PMIB_TCPROW
+
+func GetUdp6Table
+  [ERROR_CODE_ULONG]
+  Udp6Table PMIB_UDP6TABLE
+  SizePointer PULONG
+  Order BOOL
+
+func GetUdpStatistics
+  [ERROR_CODE]
+  pStats PMIB_UDPSTATS
+
+func GetUdpStatisticsEx
+  [ERROR_CODE]
+  pStats PMIB_UDPSTATS
+  dwFamily ADDRESS_FAMILY display=DWORD
+
+func GetUdpTable
+  [ERROR_CODE]
+  pUdpTable PMIB_UDPTABLE
+  pdwSize PDWORD
+  bOrder BOOL
+
+func AllocateAndGetTcpExTableFromStack
+  [ERROR_CODE]
+  ppTcpTable PVOID*
+  bOrder BOOL
+  hHeap HANDLE
+  dwFlags DWORD
+  dwFamily ADDRESS_FAMILY display=DWORD
+
+func AllocateAndGetUdpExTableFromStack
+  [ERROR_CODE]
+  ppUDPTable PVOID*
+  bOrder BOOL
+  hHeap HANDLE
+  dwFlags DWORD
+  dwFamily ADDRESS_FAMILY display=DWORD
+
+func IcmpCloseHandle
+  BOOL
+  IcmpHandle HANDLE
+
+func IcmpCreateFile
+  [FILE_HANDLE]
+
+func IcmpParseReplies
+  success NotEqual=0
+  DWORD
+  ReplyBuffer LPVOID length=ReplySize
+  ReplySize DWORD
+
+func IcmpSendEcho
+  [ERROR_CODE]
+  IcmpHandle HANDLE
+  DestinationAddress IPAddr
+  RequestData LPVOID length=RequestSize
+  RequestSize WORD
+  RequestOptions PIP_OPTION_INFORMATION
+  ReplyBuffer LPVOID postLength=ReplySize
+  ReplySize DWORD
+  Timeout DWORD
+
+func IcmpSendEcho2
+  [ERROR_CODE]
+  IcmpHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  DestinationAddress IPAddr
+  RequestData LPVOID length=RequestSize
+  RequestSize WORD
+  RequestOptions PIP_OPTION_INFORMATION
+  ReplyBuffer LPVOID postLength=ReplySize
+  ReplySize DWORD
+  Timeout DWORD
+
+func GetIpNetworkConnectionBandwidthEstimates
+  NETIOAPI_API
+  InterfaceIndex NET_IFINDEX
+  AddressFamily ADDRESS_FAMILY
+  BandwidthEstimates PMIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES
+
+func CancelIPChangeNotify
+  BOOL
+  notifyOverlapped LPOVERLAPPED
+
+func CreatePersistentTcpPortReservation
+  [ERROR_CODE_ULONG]
+  StartPort USHORT
+  NumberOfPorts USHORT
+  Token PULONG64
+
+func CreatePersistentUdpPortReservation
+  [ERROR_CODE_ULONG]
+  StartPort USHORT
+  NumberOfPorts USHORT
+  Token PULONG64
+
+func DeletePersistentTcpPortReservation
+  [ERROR_CODE_ULONG]
+  StartPort USHORT
+  NumberOfPorts USHORT
+
+func DeletePersistentUdpPortReservation
+  [ERROR_CODE_ULONG]
+  StartPort USHORT
+  NumberOfPorts USHORT
+
+func DisableMediaSense
+  [ERROR_CODE]
+  pHandle HANDLE*
+  pOverlapped OVERLAPPED*
+
+func GetAdapterOrderMap
+  success NotEqual=0
+  PIP_ADAPTER_ORDER_MAP
+
+func GetIcmpStatisticsEx
+  [ERROR_CODE]
+  pStats PMIB_ICMP_EX
+  dwFamily DWORD
+
+func GetIpErrorString
+  [ERROR_CODE]
+  ErrorCode IP_STATUS
+  Buffer PWCHAR
+  Size PDWORD
+
+func GetIpStatisticsEx
+  [ERROR_CODE]
+  pStats PMIB_IPSTATS
+  dwFamily DWORD
+
+func LookupPersistentTcpPortReservation
+  [ERROR_CODE_ULONG]
+  StartPort USHORT
+  NumberOfPorts USHORT
+  Token PULONG64
+
+func LookupPersistentUdpPortReservation
+  [ERROR_CODE_ULONG]
+  StartPort USHORT
+  NumberOfPorts USHORT
+  Token PULONG64
+
+func NhpAllocateAndGetInterfaceInfoFromStack
+  [ERROR_CODE]
+  ppTable IP_INTERFACE_NAME_INFO**
+  pdwCount PDWORD
+  bOrder BOOL
+  hHeap HANDLE
+  dwFlags DWORD
+
+func RestoreMediaSense
+  [ERROR_CODE]
+  pOverlapped OVERLAPPED*
+  lpdwEnableCount LPDWORD
+

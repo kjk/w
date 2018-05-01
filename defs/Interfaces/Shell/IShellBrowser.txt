@@ -1,0 +1,69 @@
+include Interfaces\COM\IOleWindow.txt
+
+ingterface IShellBrowser base=IOleWindow id={000214E2-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func InsertMenusSB
+    HRESULT
+    hmenuShared HMENU
+    lpMenuWidths LPOLEMENUGROUPWIDTHS
+
+  func SetMenuSB
+    HRESULT
+    hmenuShared HMENU
+    holemenuRes HOLEMENU
+    hwndActiveObject HWND
+
+  func RemoveMenusSB
+    HRESULT
+    hmenuShared HMENU
+
+  func SetStatusTextSB
+    HRESULT
+    pszStatusText LPCWSTR
+
+  func EnableModelessSB
+    HRESULT
+    fEnable BOOL
+
+  func TranslateAcceleratorSB
+    HRESULT
+    pmsg MSG*
+    wID WORD
+
+  func BrowseObject
+    HRESULT
+    pidl PCUIDLIST_RELATIVE
+    wFlags UINT
+
+  func GetViewStateStream
+    HRESULT
+    grfMode [STGM_FLAGS]
+    ppStrm IStream**
+
+  func GetControlWindow
+    HRESULT
+    id UINT
+    phwnd HWND*
+
+  func SendControlMsg
+    HRESULT
+    id UINT
+    uMsg UINT
+    wParam WPARAM
+    lParam LPARAM
+    pret LRESULT*
+
+  func QueryActiveShellView
+    HRESULT
+    ppshv IShellView**
+
+  func OnViewWindowActive
+    HRESULT
+    pshv IShellView*
+
+  func SetToolbarItems
+    HRESULT
+    lpButtons LPTBBUTTONSB
+    nButtons UINT
+    uFlags UINT
+
+

@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRImagePresenterConfig9 base=IUnknown id={45c15cab-6e22-420a-8043-ae1f0ac02c7d} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetRenderingPrefs
+    HRESULT
+    dwRenderFlags DWORD
+
+  func GetRenderingPrefs
+    HRESULT
+    dwRenderFlags DWORD*
+
+

@@ -1,0 +1,37 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\DirectComposition\IDCompositionTransform.txt
+
+ingterface IDCompositionSkewTransform base=IDCompositionTransform id={E57AA735-DCDB-4c72-9C61-0591F58889EE} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func SetAngleX
+    HRESULT
+    angleX float
+
+  func "SetAngleX "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetAngleY
+    HRESULT
+    angleY float
+
+  func "SetAngleY "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetCenterX
+    HRESULT
+    centerX float
+
+  func "SetCenterX "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetCenterY
+    HRESULT
+    centerY float
+
+  func "SetCenterY "
+    HRESULT
+    animation IDCompositionAnimation*
+
+

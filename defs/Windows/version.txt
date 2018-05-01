@@ -1,0 +1,108 @@
+include Headers\windows.h.txt
+
+dll version.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+sourceModule Kernel32.dll include=Windows\Kernel32.xml
+func VerLanguageNameA
+
+func VerLanguageNameW
+
+category "Windows Application UI Development/Menus and Other Resources/Version Information"
+flag [VFF_FLAGS] DWORD display=DWORD
+  VFFF_ISSHAREDFILE 0x0001
+
+flag [VFF_RESULT] DWORD display=DWORD
+  VFF_CURNEDEST    0x0001
+  VFF_FILEINUSE    0x0002
+  VFF_BUFFTOOSMALL 0x0004
+
+flag [VIF_FLAGS] DWORD display=DWORD
+  VIFF_FORCEINSTALL  0x0001
+  VIFF_DONTDELETEOLD 0x0002
+
+flag [VIF_RESULT] DWORD display=DWORD
+  VIF_TEMPFILE          0x00000001
+  VIF_MISMATCH          0x00000002
+  VIF_SRCOLD            0x00000004
+  VIF_DIFFLANG          0x00000008
+  VIF_DIFFCODEPG        0x00000010
+  VIF_DIFFTYPE          0x00000020
+  VIF_WRITEPROT         0x00000040
+  VIF_FILEINUSE         0x00000080
+  VIF_OUTOFSPACE        0x00000100
+  VIF_ACCESSVIOLATION   0x00000200
+  VIF_SHARINGVIOLATION  0x00000400
+  VIF_CANNOTCREATE      0x00000800
+  VIF_CANNOTDELETE      0x00001000
+  VIF_CANNOTRENAME      0x00002000
+  VIF_CANNOTDELETECUR   0x00004000
+  VIF_OUTOFMEMORY       0x00008000
+  VIF_CANNOTREADSRC     0x00010000
+  VIF_CANNOTREADDST     0x00020000
+  VIF_BUFFTOOSMALL      0x00040000
+  VIF_CANNOTLOADLZ32    0x00080000
+  VIF_CANNOTLOADCABINET 0x00100000
+
+flag [FILE_VER_GET_FLAGS] DWORD display=DWORD
+  FILE_VER_GET_LOCALISED  0x01
+  FILE_VER_GET_NEUTRAL    0x02
+  FILE_VER_GET_PREFETCHED 0x04
+
+func GetFileVersionInfo bothCharset
+  BOOL
+  lptstrFilename LPCTSTR
+  dwHandle DWORD
+  dwLen DWORD
+  lpData LPVOID postLength=dwLen
+
+func GetFileVersionInfoExW
+  BOOL
+  dwFlags [FILE_VER_GET_FLAGS]
+  lptstrFilename LPCWSTR
+  dwHandle DWORD
+  dwLen DWORD
+  lpData LPVOID postLength=dwLen
+
+func GetFileVersionInfoSize bothCharset
+  success NotEqual=0
+  DWORD
+  lptstrFilename LPCTSTR
+  lpdwHandle LPDWORD
+
+func GetFileVersionInfoSizeExW
+  success NotEqual=0
+  DWORD
+  dwFlags [FILE_VER_GET_FLAGS]
+  lptstrFilename LPCTSTR
+  lpdwHandle LPDWORD
+
+func VerFindFile bothCharset
+  success Equal=0
+  [VFF_RESULT]
+  dwFlags [VFF_FLAGS]
+  szFileName LPCTSTR
+  szWinDir LPCTSTR
+  szAppDir LPCTSTR
+  szCurDir LPCSTR
+  lpuCurDirLen PUINT
+  szDestDir LPTSTR outputOnly
+  lpuDestDirLen PUINT
+
+func VerInstallFile bothCharset
+  success Equal=0
+  [VIF_RESULT]
+  uFlags [VIF_FLAGS]
+  szSrcFileName LPCTSTR
+  szDestFileName LPCTSTR
+  szSrcDir LPCTSTR
+  szDestDir LPCTSTR
+  szCurDir LPCTSTR
+  szTmpFile LPTSTR outputOnly
+  lpuTmpFileLen PUINT
+
+func VerQueryValue bothCharset
+  BOOL
+  pBlock LPCVOID
+  lpSubBlock LPCTSTR
+  lplpBuffer LPVOID* postLength=puLen
+  puLen PUINT
+

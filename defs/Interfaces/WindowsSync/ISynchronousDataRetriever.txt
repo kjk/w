@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISynchronousDataRetriever base=IUnknown id={9b22f2a9-a4cd-4648-9d8e-3a510d4da04b} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetIdParameters
+    HRESULT
+    pIdParameters ID_PARAMETERS*
+
+  func LoadChangeData
+    HRESULT
+    pLoadChangeContext ILoadChangeContext*
+    ppUnkData IUnknown**
+
+

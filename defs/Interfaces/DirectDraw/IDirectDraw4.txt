@@ -1,0 +1,20 @@
+include Interfaces\DirectDraw\IDirectDraw2.txt
+
+ingterface IDirectDraw4 base=IDirectDraw2 id={9c59509a-39bd-11d1-8c4a-00c04fd930c5} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectDraw"
+  func GetSurfaceFromDC
+    [DD_HRESULT]
+    hdc HDC
+    lpDDS LPDIRECTDRAWSURFACE4*
+
+  func RestoreAllSurfaces
+    [DD_HRESULT]
+
+  func TestCooperativeLevel
+    [DD_HRESULT]
+
+  func GetDeviceIdentifier
+    [DD_HRESULT]
+    lpdddi LPDDDEVICEIDENTIFIER
+    dwFlags [DDGDI_FLAGS]
+
+

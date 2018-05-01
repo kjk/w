@@ -1,0 +1,18 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwServices base=IDispatch id={79649BB4-903E-421B-94C9-79848E79F6EE} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall"
+  func get_Count
+    HRESULT
+    count long*
+
+  func Item
+    HRESULT
+    svcType NET_FW_SERVICE_TYPE
+    service INetFwService**
+
+  func get__NewEnum
+    HRESULT
+    newEnum IUnknown**
+
+

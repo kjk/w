@@ -1,0 +1,24 @@
+include Interfaces\WindowsSync\ISyncChangeBatchBase.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ISyncChangeBatch base=ISyncChangeBatchBase id={70c64dee-380f-4c2e-8f70-31c55bd5f9b3} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func BeginUnorderedGroup
+    HRESULT
+
+  func EndUnorderedGroup
+    HRESULT
+    pMadeWithKnowledge ISyncKnowledge*
+    fAllChangesForKnowledge BOOL
+
+  func AddLoggedConflict
+    HRESULT
+    pbOwnerReplicaId "const BYTE*"
+    pbItemId "const BYTE*"
+    pChangeVersion "const SYNC_VERSION*"
+    pCreationVersion "const SYNC_VERSION*"
+    dwFlags DWORD
+    dwWorkForChange DWORD
+    pConflictKnowledge ISyncKnowledge*
+    ppChangeBuilder ISyncChangeBuilder**
+
+

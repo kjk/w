@@ -1,0 +1,43 @@
+include Interfaces\IUnknown.txt
+include Interfaces\Shell\SyncMgr\SyncMgr.h.txt
+
+ingterface ISyncMgrHandler base=IUnknown id={04ec2e43-ac77-49f9-9b98-0307ef7a72a2} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Sync Manager"
+  func GetName
+    HRESULT
+    ppszName LPWSTR*
+
+  func GetHandlerInfo
+    HRESULT
+    ppHandlerInfo ISyncMgrHandlerInfo**
+
+  func GetObject
+    HRESULT
+    rguidObjectID REFGUID
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetCapabilities
+    HRESULT
+    pmCapabilities SYNCMGR_HANDLER_CAPABILITIES*
+
+  func GetPolicies
+    HRESULT
+    pmPolicies SYNCMGR_HANDLER_POLICIES*
+
+  func Activate
+    HRESULT
+    fActivate BOOL
+
+  func Enable
+    HRESULT
+    fEnable BOOL
+
+  func Synchronize
+    HRESULT
+    ppszItemIDs LPCWSTR*
+    cItems ULONG
+    hwndOwner HWND
+    pSessionCreator ISyncMgrSessionCreator*
+    punk IUnknown*
+
+

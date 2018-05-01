@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFolderViewHost base=IUnknown id={1ea58f02-d55a-411d-b09e-9e65ac21605b} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    hwndParent HWND
+    pdo IDataObject*
+    prc RECT*
+
+

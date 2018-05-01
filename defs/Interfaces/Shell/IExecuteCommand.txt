@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+
+ingterface IExecuteCommand base=IUnknown id={7F9185B0-CB92-43c5-80A9-92277A4F7B54} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetKeyState
+    HRESULT
+    grfKeyState DWORD
+
+  func SetParameters
+    HRESULT
+    pszParameters LPCWSTR
+
+  func SetPosition
+    HRESULT
+    pt POINT
+
+  func SetShowWindow
+    HRESULT
+    nShow int
+
+  func SetNoShowUI
+    HRESULT
+    fNoShowUI BOOL
+
+  func SetDirectory
+    HRESULT
+    pszDirectory LPCWSTR
+
+  func Execute
+    HRESULT
+
+

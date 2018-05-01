@@ -1,0 +1,16 @@
+include Interfaces\XMLHTTP\IServerXMLHTTPRequest.txt
+include Interfaces\XMLHTTP\XMLHTTP.h.txt
+
+ingterface IServerXMLHTTPRequest2 base=IServerXMLHTTPRequest id={2e01311b-c322-4b0a-bd77-b90cfdc8dce7} errorFunc=HRESULT onlineHelp=MSDN category="Internet/XML HTTP Request"
+  func setProxy
+    HRESULT
+    proxySetting SXH_PROXY_SETTING
+    varProxyServer VARIANT
+    varBypassList VARIANT
+
+  func setProxyCredentials
+    HRESULT
+    bstrUserName BSTR
+    bstrPassword BSTR
+
+

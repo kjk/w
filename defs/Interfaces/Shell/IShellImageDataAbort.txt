@@ -1,0 +1,7 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellImageDataAbort base=IUnknown id={53fb8e58-50c0-4003-b4aa-0c8df28e7f3a} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func QueryAbort
+    HRESULT
+
+

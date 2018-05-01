@@ -1,0 +1,8 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDocViewSite base=IUnknown id={87D605E0-C511-11CF-89A9-00A0C9054129} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnSetTitle
+    HRESULT
+    pvTitle VARIANTARG*
+
+

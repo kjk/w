@@ -1,0 +1,116 @@
+include Headers\windows.h.txt
+
+dll Rstrtmgr.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Application Installation and Servicing/Restart Manager"
+alias RM_WRITE_STATUS_CALLBACK LPVOID
+
+alias "const WCHAR []" "WCHAR []"
+
+array "WCHAR [CCH_RM_MAX_APP_NAME + 1]" base=WCHAR count=256
+
+array "WCHAR [CCH_RM_MAX_SVC_NAME + 1]" base=WCHAR count=64
+
+struct RM_UNIQUE_PROCESS
+  dwProcessId DWORD
+  ProcessStartTime FILETIME
+
+pointer RM_UNIQUE_PROCESS* RM_UNIQUE_PROCESS
+
+pointer "RM_UNIQUE_PROCESS []" RM_UNIQUE_PROCESS
+
+enum RM_FILTER_ACTION UINT
+  RmInvalidFilterAction 0
+  RmNoRestart           1
+  RmNoShutdown          2
+
+enum RM_APP_TYPE UINT
+  RmUnknownApp  0
+  RmMainWindow  1
+  RmOtherWindow 2
+  RmService     3
+  RmExplorer    4
+  RmConsole     5
+  RmCritical    1000
+
+struct RM_PROCESS_INFO
+  Process RM_UNIQUE_PROCESS
+  strAppName "WCHAR [CCH_RM_MAX_APP_NAME + 1]"
+  strServiceShortName "WCHAR [CCH_RM_MAX_SVC_NAME + 1]"
+  ApplicationType RM_APP_TYPE
+  AppStatus ULONG
+  TSSessionId DWORD
+  bRestartable BOOL
+
+pointer "RM_PROCESS_INFO []" RM_PROCESS_INFO
+
+func RmAddFilter
+  [ERROR_CODE]
+  dwSessionHandle DWORD
+  strFilename LPCWSTR
+  Application RM_UNIQUE_PROCESS*
+  strShortServiceName LPCWSTR
+  ActionType RM_FILTER_ACTION
+
+func RmStartSession
+  [ERROR_CODE]
+  pSessionHandle DWORD*
+  dwSessionFlags DWORD
+  strSessionKey "WCHAR []"
+
+func RmJoinSession
+  [ERROR_CODE]
+  pSessionHandle DWORD*
+  strSessionKey "const WCHAR []"
+
+func RmEndSession
+  [ERROR_CODE]
+  dwSessionHandle DWORD
+
+func RmRegisterResources
+  [ERROR_CODE]
+  dwSessionHandle DWORD
+  nFiles UINT
+  rgsFileNames "LPCWSTR []" count=nFiles
+  nApplications UINT
+  rgApplications "RM_UNIQUE_PROCESS []" count=nApplications
+  nServices UINT
+  rgsServiceNames "LPCWSTR []" count=nServices
+
+func RmGetList
+  [ERROR_CODE]
+  dwSessionHandle DWORD
+  pnProcInfoNeeded UINT*
+  pnProcInfo UINT*
+  rgAffectedApps "RM_PROCESS_INFO []" postCount=pnProcInfo
+  lpdwRebootReasons LPDWORD
+
+func RmGetFilterList
+  [ERROR_CODE]
+  dwSessionHandle DWORD
+  pbFilterBuf PBYTE
+  cbFilterBuf DWORD
+  cbFilterBufNeeded LPDWORD
+
+func RmShutdown
+  [ERROR_CODE]
+  dwSessionHandle DWORD
+  lActionFlags ULONG
+  fnStatus RM_WRITE_STATUS_CALLBACK
+
+func RmRemoveFilter
+  [ERROR_CODE]
+  dwSessionHandle DWORD
+  strFilename LPCWSTR
+  Application RM_UNIQUE_PROCESS*
+  strShortServiceName LPCWSTR
+
+func RmRestart
+  [ERROR_CODE]
+  dwSessionHandle DWORD
+  dwRestartFlags DWORD
+  fnStatus RM_WRITE_STATUS_CALLBACK
+
+func RmCancelCurrentTask
+  [ERROR_CODE]
+  dwSessionHandle DWORD
+

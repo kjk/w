@@ -1,0 +1,131 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellFolderView base=IUnknown id={37A378C0-F82D-11CE-AE65-08002B2E1262} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Rearrange
+    HRESULT
+    lParamSort LPARAM
+
+  func GetArrangeParam
+    HRESULT
+    plParamSort LPARAM*
+
+  func ArrangeGrid
+    HRESULT
+
+  func AutoArrange
+    HRESULT
+
+  func GetAutoArrange
+    HRESULT
+
+  func AddObject
+    HRESULT
+    pidl PUITEMID_CHILD
+    puItem UINT*
+
+  func GetObject
+    HRESULT
+    ppidl PITEMID_CHILD*
+    uItem UINT
+
+  func RemoveObject
+    HRESULT
+    pidl PUITEMID_CHILD
+    puItem UINT*
+
+  func GetObjectCount
+    HRESULT
+    puCount UINT*
+
+  func SetObjectCount
+    HRESULT
+    uCount UINT
+    dwFlags UINT
+
+  func UpdateObject
+    HRESULT
+    pidlOld PUITEMID_CHILD
+    pidlNew PUITEMID_CHILD
+    puItem UINT*
+
+  func RefreshObject
+    HRESULT
+    pidl PUITEMID_CHILD
+    puItem UINT*
+
+  func SetRedraw
+    HRESULT
+    bRedraw BOOL
+
+  func GetSelectedCount
+    HRESULT
+    puSelected UINT*
+
+  func GetSelectedObjects
+    HRESULT
+    pppidl PCUITEMID_CHILD**
+    puItems UINT*
+
+  func IsDropOnSource
+    HRESULT
+    pDropTarget IDropTarget*
+
+  func GetDragPoint
+    HRESULT
+    ppt POINT*
+
+  func GetDropPoint
+    HRESULT
+    ppt POINT*
+
+  func MoveIcons
+    HRESULT
+    pDataObject IDataObject*
+
+  func SetItemPos
+    HRESULT
+    pidl PCUITEMID_CHILD
+    ppt POINT*
+
+  func IsBkDropTarget
+    HRESULT
+    pDropTarget IDropTarget*
+
+  func SetClipboard
+    HRESULT
+    bMove BOOL
+
+  func SetPoints
+    HRESULT
+    pDataObject IDataObject*
+
+  func GetItemSpacing
+    HRESULT
+    pSpacing ITEMSPACING*
+
+  func SetCallback
+    HRESULT
+    pNewCB IShellFolderViewCB*
+    ppOldCB IShellFolderViewCB**
+
+  func Select
+    HRESULT
+    dwFlags UINT
+
+  func QuerySupport
+    HRESULT
+    pdwSupport UINT*
+
+  func SetAutomationObject
+    HRESULT
+    pdisp IDispatch*
+
+  struct ITEMSPACING
+  cxSmall int
+  cySmall int
+  cxLarge int
+  cyLarge int
+
+  pointer ITEMSPACING* ITEMSPACING
+
+

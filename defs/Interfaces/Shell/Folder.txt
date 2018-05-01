@@ -1,0 +1,50 @@
+include Interfaces\IDispatch.txt
+
+ingterface Folder base=IDispatch id={BBCBDE60-C3FF-11CE-8350-444553540000} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func get_Title
+    HRESULT
+    pbs BSTR*
+
+  func get_Application
+    HRESULT
+    ppid IDispatch**
+
+  func get_Parent
+    HRESULT
+    ppid IDispatch**
+
+  func get_ParentFolder
+    HRESULT
+    ppsf Folder**
+
+  func Items
+    HRESULT
+    ppid FolderItems**
+
+  func ParseName
+    HRESULT
+    bName BSTR
+    ppid FolderItem**
+
+  func NewFolder
+    HRESULT
+    bName BSTR
+    vOptions VARIANT
+
+  func MoveHere
+    HRESULT
+    vItem VARIANT
+    vOptions VARIANT
+
+  func CopyHere
+    HRESULT
+    vItem VARIANT
+    vOptions VARIANT
+
+  func GetDetailsOf
+    HRESULT
+    vItem VARIANT
+    iColumn int
+    pbs BSTR*
+
+

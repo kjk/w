@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioEndpointOffloadStreamMeter base=IUnknown id={E1546DCE-9DD1-418B-9AB2-348CED161C86} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Endpoint Volume"
+  func GetMeterChannelCount
+    [AUDCLNT_HRESULT]
+    pu32ChannelCount UINT32*
+
+  func GetMeteringData
+    [AUDCLNT_HRESULT]
+    u32ChannelCount UINT32
+    pf32PeakValues FLOAT32* postCount=u32ChannelCount
+
+

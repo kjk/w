@@ -1,0 +1,11 @@
+include Interfaces\IUnknown.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IRowPositionChange base=IUnknown id={0997a571-126e-11d0-9f8a-00a0c9a0631e} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func OnRowPositionChange
+    [OLEDB_HRESULT]
+    eReason DBREASON
+    ePhase DBEVENTPHASE
+    fCantDeny BOOL
+
+

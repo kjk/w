@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirectSoundCapture base=IUnknown id={b0210781-89cd-11d0-af08-00a0c925cd16} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Legacy Audio and Video/DirectSound"
+  func CreateCaptureBuffer
+    [DS_HRESULT]
+    pcDSCBufferDesc LPCDSCBUFFERDESC
+    ppDSCBuffer LPDIRECTSOUNDCAPTUREBUFFER*
+    pUnkOuter LPUNKNOWN
+
+  func GetCaps
+    [DS_HRESULT]
+    pDSCCaps LPDSCCAPS
+
+  func Initialize
+    [DS_HRESULT]
+    pcGuidDevice LPCGUID
+
+

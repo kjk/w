@@ -1,0 +1,44 @@
+include Interfaces\Debugger\IDebugControl.txt
+
+ingterface IDebugControl2 base=IDebugControl id={d4366723-44df-4bed-8c7e-4c05424f4588} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetCurrentTimeDate
+    HRESULT
+    TimeDate PULONG
+
+  func GetCurrentSystemUpTime
+    HRESULT
+    UpTime PULONG
+
+  func GetDumpFormatFlags
+    HRESULT
+    FormatFlags [PDEBUG_FORMAT_FLAGS]
+
+  func GetNumberTextReplacements
+    HRESULT
+    NumRepl PULONG
+
+  func GetTextReplacement
+    HRESULT
+    SrcText PCSTR
+    Index ULONG
+    SrcBuffer PSTR
+    SrcBufferSize ULONG
+    SrcSize PULONG
+    DstBuffer PSTR
+    DstBufferSize ULONG
+    DstSize PULONG
+
+  func SetTextReplacement
+    HRESULT
+    SrcText PCSTR
+    DstText PCSTR
+
+  func RemoveTextReplacements
+    HRESULT
+
+  func OutputTextReplacements
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Flags ULONG
+
+

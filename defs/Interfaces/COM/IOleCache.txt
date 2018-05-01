@@ -1,0 +1,28 @@
+include Interfaces\IUnknown.txt
+
+ingterface IOleCache base=IUnknown id={0000011e-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func Cache
+    HRESULT
+    pformatetc FORMATETC*
+    advf ADVF
+    pdwConnection DWORD*
+
+  func Uncache
+    HRESULT
+    dwConnection DWORD
+
+  func EnumCache
+    HRESULT
+    ppenumSTATDATA IEnumSTATDATA**
+
+  func InitCache
+    HRESULT
+    pDataObject IDataObject*
+
+  func SetData
+    HRESULT
+    pformatetc FORMATETC*
+    pmedium STGMEDIUM*
+    fRelease BOOL
+
+

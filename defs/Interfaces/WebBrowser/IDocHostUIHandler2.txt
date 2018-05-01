@@ -1,0 +1,9 @@
+include Interfaces\WebBrowser\IDocHostUIHandler.txt
+
+ingterface IDocHostUIHandler2 base=IDocHostUIHandler id={3050f6d0-98b5-11cf-bb82-00aa00bdce0b} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/Advanced Hosting Interfaces"
+  func GetOverrideKeyPath
+    HRESULT
+    pchKey LPOLESTR*
+    dw DWORD
+
+

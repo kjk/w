@@ -1,0 +1,190 @@
+include Headers\windows.h.txt
+
+dll Traffic.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Quality of Service (QOS)/Traffic Control"
+alias TCI_NOTIFY_HANDLER LPVOID
+
+alias TCI_ADD_FLOW_COMPLETE_HANDLER LPVOID
+
+alias TCI_MOD_FLOW_COMPLETE_HANDLER LPVOID
+
+alias TCI_DEL_FLOW_COMPLETE_HANDLER LPVOID
+
+array "WCHAR [MAX_STRING_LENGTH]" base=WCHAR count=256
+
+struct TC_GEN_FILTER
+  AddressType USHORT
+  PatternSize ULONG
+  Pattern PVOID length=PatternSize
+  Mask PVOID length=PatternSize
+
+pointer PTC_GEN_FILTER TC_GEN_FILTER
+
+array "TC_GEN_FILTER [1]" base=TC_GEN_FILTER count=1
+
+struct NETWORK_ADDRESS
+  AddressLength USHORT
+  AddressType USHORT
+  Address "UCHAR [1]"
+
+array "NETWORK_ADDRESS [1]" base=NETWORK_ADDRESS count=1
+
+struct NETWORK_ADDRESS_LIST
+  AddressCount LONG
+  AddressType USHORT
+  Address "NETWORK_ADDRESS [1]"
+
+struct ADDRESS_LIST_DESCRIPTOR
+  MediaType ULONG
+  AddressList NETWORK_ADDRESS_LIST
+
+struct TC_IFC_DESCRIPTOR
+  Length ULONG
+  pInterfaceName LPWSTR
+  pInterfaceID LPWSTR
+  AddressListDesc ADDRESS_LIST_DESCRIPTOR
+
+pointer PTC_IFC_DESCRIPTOR TC_IFC_DESCRIPTOR
+
+enum [QOS_OBJECT_HDR_TYPE] ULONG display=ULONG
+  RSVP_OBJECT_STATUS_INFO     1000
+  RSVP_OBJECT_RESERVE_INFO    1001
+  RSVP_OBJECT_ADSPEC          1002
+  RSVP_OBJECT_POLICY_INFO     1003
+  RSVP_OBJECT_FILTERSPEC_LIST 1004
+  QOS_OBJECT_END_OF_LIST      2001
+  QOS_OBJECT_SD_MODE          2002
+  QOS_OBJECT_SHAPING_RATE     2003
+  QOS_OBJECT_DESTADDR         2004
+
+struct QOS_OBJECT_HDR
+  ObjectType [QOS_OBJECT_HDR_TYPE]
+  ObjectLength ULONG
+
+array "QOS_OBJECT_HDR [1]" base=QOS_OBJECT_HDR count=1
+
+struct TC_GEN_FLOW
+  SendingFlowspec FLOWSPEC
+  ReceivingFlowspec FLOWSPEC
+  TcObjectsLength ULONG
+  TcObjects "QOS_OBJECT_HDR [1]"
+
+pointer PTC_GEN_FLOW TC_GEN_FLOW
+
+struct ENUMERATION_BUFFER
+  Length ULONG
+  OwnerProcessId ULONG
+  FlowNameLength USHORT
+  FlowName "WCHAR [MAX_STRING_LENGTH]"
+  pFlow PTC_GEN_FLOW
+  NumberOfFilters ULONG
+  GenericFilter "TC_GEN_FILTER [1]" count=NumberOfFilters
+
+pointer PENUMERATION_BUFFER ENUMERATION_BUFFER
+
+struct TCI_CLIENT_FUNC_LIST
+  ClNotifyHandler TCI_NOTIFY_HANDLER
+  ClAddFlowCompleteHandler TCI_ADD_FLOW_COMPLETE_HANDLER
+  ClModifyFlowCompleteHandler TCI_MOD_FLOW_COMPLETE_HANDLER
+  ClDeleteFlowCompleteHandler TCI_DEL_FLOW_COMPLETE_HANDLER
+
+pointer PTCI_CLIENT_FUNC_LIST TCI_CLIENT_FUNC_LIST
+
+func TcAddFilter
+  [ERROR_CODE_ULONG]
+  FlowHandle HANDLE
+  pGenericFilter PTC_GEN_FILTER
+  pFilterHandle PHANDLE
+
+func TcAddFlow
+  [ERROR_CODE_ULONG]
+  IfcHandle HANDLE
+  ClFlowCtx HANDLE
+  Flags ULONG
+  pGenericFlow PTC_GEN_FLOW
+  pFlowHandle PHANDLE
+
+func TcCloseInterface
+  [ERROR_CODE_ULONG]
+  IfcHandle HANDLE
+
+func TcDeleteFilter
+  [ERROR_CODE_ULONG]
+  FilterHandle HANDLE
+
+func TcDeleteFlow
+  [ERROR_CODE_ULONG]
+  FlowHandle HANDLE
+
+func TcDeregisterClient
+  [ERROR_CODE_ULONG]
+  ClientHandle HANDLE
+
+func TcEnumerateFlows
+  [ERROR_CODE_ULONG]
+  IfcHandle HANDLE
+  pEnumToken PHANDLE
+  pFlowCount PULONG
+  pBufSize PULONG
+  Buffer PENUMERATION_BUFFER
+
+func TcEnumerateInterfaces
+  [ERROR_CODE_ULONG]
+  ClientHandle HANDLE
+  pBufferSize PULONG
+  InterfaceBuffer PTC_IFC_DESCRIPTOR
+
+func TcGetFlowName bothCharset
+  [ERROR_CODE_ULONG]
+  FlowHandle HANDLE
+  StrSize ULONG
+  pFlowName LPTSTR
+
+func TcModifyFlow
+  [ERROR_CODE_ULONG]
+  FlowHandle HANDLE
+  pGenericFlow PTC_GEN_FLOW
+
+func TcOpenInterface bothCharset
+  [ERROR_CODE_ULONG]
+  pInterfaceName LPTSTR
+  ClientHandle HANDLE
+  ClIfcCtx HANDLE
+  pIfcHandle PHANDLE
+
+func TcQueryFlow bothCharset
+  [ERROR_CODE_ULONG]
+  FlowName LPTSTR
+  pGuidParam LPGUID
+  pBufferSize PULONG
+  Buffer PVOID
+
+func TcQueryInterface
+  [ERROR_CODE_ULONG]
+  IfcHandle HANDLE
+  pGuidParam LPGUID
+  NotifyChange BOOLEAN
+  BufferSize PULONG
+  Buffer PVOID
+
+func TcRegisterClient
+  [ERROR_CODE_ULONG]
+  TciVersion ULONG
+  ClRegCtx HANDLE
+  pClientHandlerList PTCI_CLIENT_FUNC_LIST
+  pClientHandle PHANDLE
+
+func TcSetFlow bothCharset
+  [ERROR_CODE_ULONG]
+  pFlowName LPTSTR
+  pGuidParam LPGUID
+  BufferSize ULONG
+  Buffer PVOID
+
+func TcSetInterface
+  [ERROR_CODE_ULONG]
+  IfcHandle HANDLE
+  pGuidParam LPGUID
+  BufferSize ULONG
+  Buffer PVOID
+

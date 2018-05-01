@@ -1,0 +1,26 @@
+include Headers\odbc.h.txt
+
+dll SQLSRV32.DLL callingConvention=STDCALL onlineHelp=MSDN
+category "Data Access and Storage/Windows Data Access Components/Microsoft Open Database Connectivity (ODBC)/Setup DLL"
+func ConfigDriver bothCharset nameA=ConfigDriver
+  BOOL
+  hwndParent HWND
+  fRequest [ODBC_DRIVER_REQUEST]
+  lpszDriver LPCTSTR
+  lpszArgs LPCTSTR
+  lpszMsg LPTSTR
+  cbMsgMax WORD
+  pcbMsgOut WORD*
+
+func ConfigDSN bothCharset nameA=ConfigDSN
+  BOOL
+  hwndParent HWND
+  fRequest [ODBC_DSN_REQUEST]
+  lpszDriver LPCTSTR
+  lpszAttributes LPCTSTR
+
+func ConfigTranslator
+  BOOL
+  hwndParent HWND
+  pvOption DWORD*
+

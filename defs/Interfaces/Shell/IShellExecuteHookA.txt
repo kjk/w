@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellExecuteHookA base=IUnknown id={000214f5-0000-0000-c000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Execute
+    HRESULT
+    pei LPSHELLEXECUTEINFOA
+
+  struct SHELLEXECUTEINFOA
+  cbSize DWORD
+  fMask [SEE_MASK]
+  hwnd HWND
+  lpVerb LPCSTR
+  lpFile LPCSTR
+  lpParameters LPCSTR
+  lpDirectory LPCSTR
+  nShow [ShowWindowCmd]
+  hInstApp [SEE_HINSTANCE]
+  lpIDList void*
+  lpClass LPCSTR
+  hkeyClass HKEY
+  dwHotKey DWORD
+   [SHELLEXECUTEINFO_u]
+  hProcess HANDLE
+
+  pointer LPSHELLEXECUTEINFOA SHELLEXECUTEINFOA
+
+

@@ -1,0 +1,9 @@
+include Interfaces\DirectX\11\ID3D11BlendState.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11BlendState1 base=ID3D11BlendState id={cc86fabe-da55-401d-85e7-e3c9de2877e9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func GetDesc1
+    void
+    pDesc D3D11_BLEND_DESC1*
+
+

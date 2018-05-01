@@ -1,0 +1,41 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellFolderViewCB base=IUnknown id={2047E320-F2A9-11CE-AE65-08002B2E1262} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func MessageSFVCB
+    HRESULT
+    uMsg [SFVM_TYPE]
+    wParam WPARAM
+    lParam LPARAM
+
+  enum [SFVM_TYPE] UINT display=UINT
+    SFVM_MERGEMENU          1
+    SFVM_INVOKECOMMAND      2
+    SFVM_GETHELPTEXT        3
+    SFVM_GETTOOLTIPTEXT     4
+    SFVM_GETBUTTONINFO      5
+    SFVM_GETBUTTONS         6
+    SFVM_INITMENUPOPUP      7
+    SFVM_FSNOTIFY           14
+    SFVM_WINDOWCREATED      15
+    SFVM_GETDETAILSOF       23
+    SFVM_COLUMNCLICK        24
+    SFVM_QUERYFSNOTIFY      25
+    SFVM_DEFITEMCOUNT       26
+    SFVM_DEFVIEWMODE        27
+    SFVM_UNMERGEMENU        28
+    SFVM_UPDATESTATUSBAR    31
+    SFVM_BACKGROUNDENUM     32
+    SFVM_DIDDRAGDROP        36
+    SFVM_SETISFV            39
+    SFVM_THISIDLIST         41
+    SFVM_ADDPROPERTYPAGES   47
+    SFVM_BACKGROUNDENUMDONE 48
+    SFVM_GETNOTIFY          49
+    SFVM_GETSORTDEFAULTS    53
+    SFVM_SIZE               57
+    SFVM_GETZONE            58
+    SFVM_GETPANE            59
+    SFVM_GETHELPTOPIC       63
+    SFVM_GETANIMATION       68
+
+

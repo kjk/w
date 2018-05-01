@@ -1,0 +1,1115 @@
+include Headers\ole.h.txt
+include Headers\windows.h.txt
+
+header
+alias HICON HANDLE
+
+pointer HICON* HICON
+
+alias HMENU HANDLE
+
+pointer HMENU* HMENU
+
+alias HDC HANDLE
+
+alias "CONST HDC" HANDLE
+
+alias "const HDC" HANDLE
+
+pointer HDC* HDC
+
+alias HPALETTE HANDLE
+
+alias HCURSOR HICON
+
+alias HMONITOR HANDLE
+
+alias HIMAGELIST LPVOID
+
+pointer HIMAGELIST* HIMAGELIST
+
+alias HRGN HANDLE
+
+pointer HRGN* HRGN
+
+alias HMETAFILE HANDLE
+
+alias HBRUSH HANDLE
+
+alias HFONT HANDLE
+
+pointer HFONT* HFONT
+
+alias LPCCHOOKPROC LPVOID
+
+alias LPCFHOOKPROC LPVOID
+
+alias LPPAGESETUPHOOK LPVOID
+
+alias LPPAGEPAINTHOOK LPVOID
+
+alias LPFRHOOKPROC LPVOID
+
+alias LPPRINTHOOKPROC LPVOID
+
+alias LPSETUPHOOKPROC LPVOID
+
+alias REFERENCE_TIME LONGLONG
+
+pointer REFERENCE_TIME* REFERENCE_TIME
+
+alias "const REFERENCE_TIME*" REFERENCE_TIME*
+
+alias HPROFILE HANDLE
+
+pointer PHPROFILE HPROFILE
+
+alias FXPT2DOT30 long
+
+alias PBMCALLBACKFN LPVOID
+
+alias LPBMCALLBACKFN PBMCALLBACKFN
+
+alias DLGPROC LPVOID
+
+array "TCHAR [LF_FACESIZE]" base=TCHAR count=32
+
+array "WCHAR [LF_FACESIZE]" base=WCHAR count=32
+
+array COLOR_NAME base=char count=32
+
+pointer PCOLOR_NAME COLOR_NAME
+
+array "BYTE [MAX_COLOR_CHANNELS]" base=BYTE count=8
+
+struct RGBQUAD
+  rgbBlue BYTE
+  rgbGreen BYTE
+  rgbRed BYTE
+  rgbReserved BYTE
+
+pointer "const RGBQUAD*" RGBQUAD
+
+pointer RGBQUAD* RGBQUAD
+
+pointer RGBQUAD** RGBQUAD*
+
+array "RGBQUAD [1]" base=RGBQUAD count=1
+
+enum [RegionType] DWORD display=DWORD
+  RDH_RECTANGLES 1
+
+struct RGNDATAHEADER
+  dwSize DWORD
+  iType [RegionType]
+  nCount DWORD
+  nRgnSize DWORD
+  rcBound RECT
+
+struct RGNDATA
+  rdh RGNDATAHEADER
+  Buffer char display="char [1]"
+
+pointer RGNDATA* RGNDATA
+
+pointer RGNDATA** RGNDATA*
+
+pointer "CONST RGNDATA*" RGNDATA
+
+pointer "const RGNDATA*" RGNDATA
+
+pointer LPRGNDATA RGNDATA
+
+enum COLORREF DWORD
+  CLR_INVALID 0xFFFFFFFF
+
+pointer COLORREF* COLORREF
+
+pointer LPCOLORREF COLORREF
+
+pointer "const COLORREF*" COLORREF
+
+struct SIZE
+  cx LONG
+  cy LONG
+
+pointer SIZE* SIZE
+
+alias LPSIZE SIZE*
+
+alias "const SIZE*" SIZE*
+
+alias PSIZE SIZE*
+
+alias SIZEL SIZE
+
+pointer SIZEL* SIZEL
+
+pointer LPSIZEL SIZEL
+
+flag [ChooseColorFlags] DWORD display=DWORD
+  CC_RGBINIT              0x00000001
+  CC_FULLOPEN             0x00000002
+  CC_PREVENTFULLOPEN      0x00000004
+  CC_SHOWHELP             0x00000008
+  CC_ENABLEHOOK           0x00000010
+  CC_ENABLETEMPLATE       0x00000020
+  CC_ENABLETEMPLATEHANDLE 0x00000040
+  CC_SOLIDCOLOR           0x00000080
+  CC_ANYCOLOR             0x00000100
+
+struct CHOOSECOLOR
+  lStructSize DWORD
+  hwndOwner HWND
+  hInstance HWND
+  rgbResult COLORREF
+  lpCustColors COLORREF*
+  Flags [ChooseColorFlags]
+  lCustData LPARAM
+  lpfnHook LPCCHOOKPROC
+  lpTemplateName LPCTSTR
+
+pointer LPCHOOSECOLOR CHOOSECOLOR
+
+flag [ChoooseFontFlags] DWORD display=DWORD
+  CF_SCREENFONTS          0x00000001
+  CF_PRINTERFONTS         0x00000002
+  CF_BOTH                 0x00000003
+  CF_SHOWHELP             0x00000004
+  CF_ENABLEHOOK           0x00000008
+  CF_ENABLETEMPLATE       0x00000010
+  CF_ENABLETEMPLATEHANDLE 0x00000020
+  CF_INITTOLOGFONTSTRUCT  0x00000040
+  CF_USESTYLE             0x00000080
+  CF_EFFECTS              0x00000100
+  CF_APPLY                0x00000200
+  CF_ANSIONLY             0x00000400
+  CF_NOVECTORFONTS        0x00000800
+  CF_NOSIMULATIONS        0x00001000
+  CF_LIMITSIZE            0x00002000
+  CF_FIXEDPITCHONLY       0x00004000
+  CF_WYSIWYG              0x00008000
+  CF_FORCEFONTEXIST       0x00010000
+  CF_SCALABLEONLY         0x00020000
+  CF_TTONLY               0x00040000
+  CF_NOFACESEL            0x00080000
+  CF_NOSTYLESEL           0x00100000
+  CF_NOSIZESEL            0x00200000
+  CF_SELECTSCRIPT         0x00400000
+  CF_NOSCRIPTSEL          0x00800000
+  CF_NOVERTFONTS          0x01000000
+  CF_INACTIVEFONTS        0x02000000
+
+flag [FontType] WORD display=WORD
+  BOLD_FONTTYPE      0x0100
+  ITALIC_FONTTYPE    0x0200
+  REGULAR_FONTTYPE   0x0400
+  SCREEN_FONTTYPE    0x2000
+  PRINTER_FONTTYPE   0x4000
+  SIMULATED_FONTTYPE 0x8000
+
+enum [FontWeight] LONG display=LONG
+  FW_DONTCARE   0
+  FW_THIN       100
+  FW_EXTRALIGHT 200
+  FW_LIGHT      300
+  FW_NORMAL     400
+  FW_MEDIUM     500
+  FW_SEMIBOLD   600
+  FW_BOLD       700
+  FW_EXTRABOLD  800
+  FW_HEAVY      900
+
+enum [FontCharset] BYTE display=BYTE
+  ANSI_CHARSET        0
+  DEFAULT_CHARSET     1
+  SYMBOL_CHARSET      2
+  MAC_CHARSET         77
+  SHIFTJIS_CHARSET    128
+  HANGEUL_CHARSET     129
+  HANGUL_CHARSET      129
+  JOHAB_CHARSET       130
+  GB2312_CHARSET      134
+  CHINESEBIG5_CHARSET 136
+  GREEK_CHARSET       161
+  TURKISH_CHARSET     162
+  VIETNAMESE_CHARSET  163
+  HEBREW_CHARSET      177
+  ARABIC_CHARSET      178
+  BALTIC_CHARSET      186
+  RUSSIAN_CHARSET     204
+  THAI_CHARSET        222
+  EASTEUROPE_CHARSET  238
+  OEM_CHARSET         255
+
+enum [FontOutputPrecision] BYTE display=BYTE
+  OUT_DEFAULT_PRECIS        0
+  OUT_STRING_PRECIS         1
+  OUT_CHARACTER_PRECIS      2
+  OUT_STROKE_PRECIS         3
+  OUT_TT_PRECIS             4
+  OUT_DEVICE_PRECIS         5
+  OUT_RASTER_PRECIS         6
+  OUT_TT_ONLY_PRECIS        7
+  OUT_OUTLINE_PRECIS        8
+  OUT_SCREEN_OUTLINE_PRECIS 9
+  OUT_PS_ONLY_PRECIS        10
+
+enum [FontClipPrecision] BYTE display=BYTE
+  CLIP_DEFAULT_PRECIS   0
+  CLIP_CHARACTER_PRECIS 1
+  CLIP_STROKE_PRECIS    2
+  CLIP_MASK             0xf
+  CLIP_LH_ANGLES        0x10
+  CLIP_TT_ALWAYS        0x20
+  CLIP_DFA_DISABLE      0x40
+  CLIP_EMBEDDED         0x80
+
+enum [FontQuality] BYTE display=BYTE
+  DEFAULT_QUALITY           0
+  DRAFT_QUALITY             1
+  PROOF_QUALITY             2
+  NONANTIALIASED_QUALITY    3
+  ANTIALIASED_QUALITY       4
+  CLEARTYPE_QUALITY         5
+  CLEARTYPE_NATURAL_QUALITY 6
+
+flag [FontPitchAndFamily] BYTE display=BYTE
+  DEFAULT_PITCH  0
+  FF_DONTCARE    0
+  FIXED_PITCH    1
+  VARIABLE_PITCH 2
+  FF_ROMAN       0x10
+  FF_SWISS       0x20
+  FF_MODERN      0x30
+  FF_SCRIPT      0x40
+  FF_DECORATIVE  0x50
+
+struct LOGFONT
+  lfHeight LONG
+  lfWidth LONG
+  lfEscapement LONG
+  lfOrientation LONG
+  lfWeight [FontWeight]
+  lfItalic BYTE
+  lfUnderline BYTE
+  lfStrikeOut BYTE
+  lfCharSet [FontCharset]
+  lfOutPrecision [FontOutputPrecision]
+  lfClipPrecision [FontClipPrecision]
+  lfQuality [FontQuality]
+  lfPitchAndFamily [FontPitchAndFamily]
+  lfFaceName "TCHAR [LF_FACESIZE]"
+
+pointer LPLOGFONT LOGFONT
+
+pointer "const LOGFONT*" LOGFONT
+
+struct LOGFONTW
+  lfHeight LONG
+  lfWidth LONG
+  lfEscapement LONG
+  lfOrientation LONG
+  lfWeight [FontWeight] display=LONG
+  lfItalic BYTE
+  lfUnderline BYTE
+  lfStrikeOut BYTE
+  lfCharSet [FontCharset]
+  lfOutPrecision [FontOutputPrecision]
+  lfClipPrecision [FontClipPrecision]
+  lfQuality [FontQuality]
+  lfPitchAndFamily [FontPitchAndFamily]
+  lfFaceName "WCHAR [LF_FACESIZE]"
+
+pointer LOGFONTW* LOGFONTW
+
+pointer "const LOGFONTW*" LOGFONTW
+
+struct CHOOSEFONT
+  lStructSize DWORD
+  hwndOwner HWND
+  hDC HDC
+  lpLogFont LPLOGFONT
+  iPointSize INT
+  Flags [ChoooseFontFlags]
+  rgbColors COLORREF
+  lCustData LPARAM
+  lpfnHook LPCFHOOKPROC
+  lpTemplateName LPCTSTR
+  hInstance HINSTANCE
+  lpszStyle LPTSTR
+  nFontType [FontType]
+  ___MISSING_ALIGNMENT__ WORD
+  nSizeMin INT
+  nSizeMax INT
+
+pointer LPCHOOSEFONT CHOOSEFONT
+
+flag [FindReplaceFlags] DWORD display=DWORD
+  FR_DOWN                 0x00000001
+  FR_WHOLEWORD            0x00000002
+  FR_MATCHCASE            0x00000004
+  FR_FINDNEXT             0x00000008
+  FR_REPLACE              0x00000010
+  FR_REPLACEALL           0x00000020
+  FR_DIALOGTERM           0x00000040
+  FR_SHOWHELP             0x00000080
+  FR_ENABLEHOOK           0x00000100
+  FR_ENABLETEMPLATE       0x00000200
+  FR_NOUPDOWN             0x00000400
+  FR_NOMATCHCASE          0x00000800
+  FR_NOWHOLEWORD          0x00001000
+  FR_ENABLETEMPLATEHANDLE 0x00002000
+  FR_HIDEUPDOWN           0x00004000
+  FR_HIDEMATCHCASE        0x00008000
+  FR_HIDEWHOLEWORD        0x00010000
+  FR_RAW                  0x00020000
+  FR_MATCHDIAC            0x20000000
+  FR_MATCHKASHIDA         0x40000000
+  FR_MATCHALEFHAMZA       0x80000000
+
+struct FINDREPLACE
+  lStructSize DWORD
+  hwndOwner HWND
+  hInstance HINSTANCE
+  Flags [FindReplaceFlags]
+  lpstrFindWhat LPTSTR
+  lpstrReplaceWith LPTSTR
+  wFindWhatLen WORD
+  wReplaceWithLen WORD
+  lCustData LPARAM
+  lpfnHook LPFRHOOKPROC
+  lpTemplateName LPCTSTR
+
+pointer LPFINDREPLACE FINDREPLACE
+
+flag [OfnFlags] DWORD display=DWORD
+  OFN_READONLY             0x00000001
+  OFN_OVERWRITEPROMPT      0x00000002
+  OFN_HIDEREADONLY         0x00000004
+  OFN_NOCHANGEDIR          0x00000008
+  OFN_SHOWHELP             0x00000010
+  OFN_ENABLEHOOK           0x00000020
+  OFN_ENABLETEMPLATE       0x00000040
+  OFN_ENABLETEMPLATEHANDLE 0x00000080
+  OFN_NOVALIDATE           0x00000100
+  OFN_ALLOWMULTISELECT     0x00000200
+  OFN_EXTENSIONDIFFERENT   0x00000400
+  OFN_PATHMUSTEXIST        0x00000800
+  OFN_FILEMUSTEXIST        0x00001000
+  OFN_CREATEPROMPT         0x00002000
+  OFN_SHAREAWARE           0x00004000
+  OFN_NOREADONLYRETURN     0x00008000
+  OFN_NOTESTFILECREATE     0x00010000
+  OFN_NONETWORKBUTTON      0x00020000
+  OFN_NOLONGNAMES          0x00040000
+  OFN_EXPLORER             0x00080000
+  OFN_NODEREFERENCELINKS   0x00100000
+  OFN_LONGNAMES            0x00200000
+  OFN_ENABLEINCLUDENOTIFY  0x00400000
+  OFN_ENABLESIZING         0x00800000
+  OFN_DONTADDTORECENT      0x02000000
+  OFN_FORCESHOWHIDDEN      0x10000000
+
+flag [OfnFlagsEx] DWORD display=DWORD
+  OFN_EX_NOPLACESBAR 0x00000001
+
+struct OPENFILENAME
+  lStructSize DWORD
+  hwndOwner HWND
+  hInstance HINSTANCE
+  lpstrFilter LPCTSTR
+  lpstrCustomFilter LPTSTR
+  nMaxCustFilter DWORD
+  nFilterIndex DWORD
+  lpstrFile LPTSTR
+  nMaxFile DWORD
+  lpstrFileTitle LPTSTR outputOnly
+  nMaxFileTitle DWORD
+  lpstrInitialDir LPCTSTR
+  lpstrTitle LPCTSTR
+  Flags [OfnFlags]
+  nFileOffset WORD
+  nFileExtension WORD
+  lpstrDefExt LPCTSTR
+  lCustData LPARAM
+  lpfnHook LPVOID
+  lpTemplateName LPCTSTR
+  pvReserved void*
+  dwReserved DWORD
+  FlagsEx [OfnFlagsEx]
+
+pointer OPENFILENAME* OPENFILENAME
+
+pointer LPOPENFILENAME OPENFILENAME
+
+flag [PageSetupDialogFlags] DWORD display=DWORD
+  PSD_DEFAULTMINMARGINS             0x00000000
+  PSD_INWININIINTLMEASURE           0x00000000
+  PSD_MINMARGINS                    0x00000001
+  PSD_MARGINS                       0x00000002
+  PSD_INTHOUSANDTHSOFINCHES         0x00000004
+  PSD_INHUNDREDTHSOFMILLIMETERS     0x00000008
+  PSD_DISABLEMARGINS                0x00000010
+  PSD_DISABLEPRINTER                0x00000020
+  PSD_NOWARNING                     0x00000080
+  PSD_DISABLEORIENTATION            0x00000100
+  PSD_DISABLEPAPER                  0x00000200
+  PSD_RETURNDEFAULT                 0x00000400
+  PSD_SHOWHELP                      0x00000800
+  PSD_ENABLEPAGESETUPHOOK           0x00002000
+  PSD_ENABLEPAGESETUPTEMPLATE       0x00008000
+  PSD_ENABLEPAGESETUPTEMPLATEHANDLE 0x00020000
+  PSD_ENABLEPAGEPAINTHOOK           0x00040000
+  PSD_DISABLEPAGEPAINTING           0x00080000
+  PSD_NONETWORKBUTTON               0x00200000
+
+struct PAGESETUPDLG
+  lStructSize DWORD
+  hwndOwner HWND
+  hDevMode HGLOBAL
+  hDevNames HGLOBAL
+  Flags [PageSetupDialogFlags]
+  ptPaperSize POINT
+  rtMinMargin RECT
+  rtMargin RECT
+  hInstance HINSTANCE
+  lCustData LPARAM
+  lpfnPageSetupHook LPPAGESETUPHOOK
+  lpfnPagePaintHook LPPAGEPAINTHOOK
+  lpPageSetupTemplateName LPCTSTR
+  hPageSetupTemplate HGLOBAL
+
+pointer LPPAGESETUPDLG PAGESETUPDLG
+
+flag [PrintDlgFlags] DWORD display=DWORD
+  PD_ALLPAGES                   0x00000000
+  PD_SELECTION                  0x00000001
+  PD_PAGENUMS                   0x00000002
+  PD_NOSELECTION                0x00000004
+  PD_NOPAGENUMS                 0x00000008
+  PD_COLLATE                    0x00000010
+  PD_PRINTTOFILE                0x00000020
+  PD_PRINTSETUP                 0x00000040
+  PD_NOWARNING                  0x00000080
+  PD_RETURNDC                   0x00000100
+  PD_RETURNIC                   0x00000200
+  PD_RETURNDEFAULT              0x00000400
+  PD_SHOWHELP                   0x00000800
+  PD_ENABLEPRINTHOOK            0x00001000
+  PD_ENABLESETUPHOOK            0x00002000
+  PD_ENABLEPRINTTEMPLATE        0x00004000
+  PD_ENABLESETUPTEMPLATE        0x00008000
+  PD_ENABLEPRINTTEMPLATEHANDLE  0x00010000
+  PD_ENABLESETUPTEMPLATEHANDLE  0x00020000
+  PD_USEDEVMODECOPIES           0x00040000
+  PD_USEDEVMODECOPIESANDCOLLATE 0x00040000
+  PD_DISABLEPRINTTOFILE         0x00080000
+  PD_HIDEPRINTTOFILE            0x00100000
+  PD_NONETWORKBUTTON            0x00200000
+  PD_CURRENTPAGE                0x00400000
+  PD_NOCURRENTPAGE              0x00800000
+  PD_EXCLUSIONFLAGS             0x01000000
+  PD_USELARGETEMPLATE           0x10000000
+
+struct PRINTDLG pack32=1
+  lStructSize DWORD
+  hwndOwner HWND
+  hDevMode HGLOBAL
+  hDevNames HGLOBAL
+  hDC HDC
+  Flags [PrintDlgFlags]
+  nFromPage WORD
+  nToPage WORD
+  nMinPage WORD
+  nMaxPage WORD
+  nCopies WORD
+  hInstance HINSTANCE
+  lCustData LPARAM
+  lpfnPrintHook LPPRINTHOOKPROC
+  lpfnSetupHook LPSETUPHOOKPROC
+  lpPrintTemplateName LPCTSTR
+  lpSetupTemplateName LPCTSTR
+  hPrintTemplate HGLOBAL
+  hSetupTemplate HGLOBAL
+
+pointer LPPRINTDLG PRINTDLG
+
+struct PRINTPAGERANGE
+  nFromPage DWORD
+  nToPage DWORD
+
+pointer LPPRINTPAGERANGE PRINTPAGERANGE
+
+struct PRINTDLGEX
+  lStructSize DWORD
+  hwndOwner HWND
+  hDevMode HGLOBAL
+  hDevNames HGLOBAL
+  hDC HDC
+  Flags [PrintDlgFlags]
+  Flags2 DWORD
+  ExclusionFlags DWORD
+  nPageRanges DWORD
+  nMaxPageRanges DWORD
+  lpPageRanges LPPRINTPAGERANGE
+  nMinPage DWORD
+  nMaxPage DWORD
+  nCopies DWORD
+  hInstance HINSTANCE
+  lpPrintTemplateName LPCTSTR
+  lpCallback LPUNKNOWN
+  nPropertyPages DWORD
+  lphPropertyPages HPROPSHEETPAGE*
+  nStartPage DWORD
+  dwResultAction DWORD
+
+pointer LPPRINTDLGEX PRINTDLGEX
+
+struct DRAWTEXTPARAMS
+  cbSize UINT
+  iTabLength int
+  iLeftMargin int
+  iRightMargin int
+  uiLengthDrawn UINT
+
+pointer LPDRAWTEXTPARAMS DRAWTEXTPARAMS
+
+flag [TRACKMOUSEEVENT_Flags] DWORD display=DWORD
+  TME_HOVER     0x00000001
+  TME_LEAVE     0x00000002
+  TME_NONCLIENT 0x00000010
+  TME_QUERY     0x40000000
+  TME_CANCEL    0x80000000
+
+struct TRACKMOUSEEVENT
+  cbSize DWORD
+  dwFlags [TRACKMOUSEEVENT_Flags]
+  hwndTrack HWND
+  dwHoverTime DWORD
+
+pointer LPTRACKMOUSEEVENT TRACKMOUSEEVENT
+
+flag [SCROLLINFO_Flags] UINT display=UINT
+  SIF_RANGE           0x0001
+  SIF_PAGE            0x0002
+  SIF_POS             0x0004
+  SIF_DISABLENOSCROLL 0x0008
+  SIF_TRACKPOS        0x0010
+  SIF_ALL             0x0017
+
+struct SCROLLINFO
+  cbSize UINT
+  fMask [SCROLLINFO_Flags]
+  nMin int
+  nMax int
+  nPage UINT
+  nPos int
+  nTrackPos int
+
+pointer LPSCROLLINFO SCROLLINFO
+
+pointer LPCSCROLLINFO SCROLLINFO
+
+struct MARGINS
+  cxLeftWidth int
+  cxRightWidth int
+  cyTopHeight int
+  cyBottomHeight int
+
+pointer MARGINS* MARGINS
+
+pointer "const MARGINS*" MARGINS
+
+struct BLENDFUNCTION
+  BlendOp BYTE
+  BlendFlags BYTE
+  SourceConstantAlpha BYTE
+  AlphaFormat BYTE
+
+pointer BLENDFUNCTION* BLENDFUNCTION
+
+pointer "const BLENDFUNCTION*" BLENDFUNCTION
+
+struct BITMAPINFOHEADER
+  biSize DWORD
+  biWidth LONG
+  biHeight LONG
+  biPlanes WORD
+  biBitCount WORD
+  biCompression DWORD
+  biSizeImage DWORD
+  biXPelsPerMeter LONG
+  biYPelsPerMeter LONG
+  biClrUsed DWORD
+  biClrImportant DWORD
+
+pointer "const BITMAPINFOHEADER*" BITMAPINFOHEADER
+
+pointer LPBITMAPINFOHEADER BITMAPINFOHEADER
+
+struct BITMAPINFO
+  bmiHeader BITMAPINFOHEADER
+  bmiColors "RGBQUAD [1]"
+
+pointer LPBITMAPINFO BITMAPINFO
+
+pointer "const BITMAPINFO*" BITMAPINFO
+
+flag [TEXTMETRIC_Pitch] BYTE display=BYTE
+  FF_DONTCARE      0
+  TMPF_FIXED_PITCH 0x01
+  TMPF_VECTOR      0x02
+  TMPF_TRUETYPE    0x04
+  TMPF_DEVICE      0x08
+  FF_ROMAN         0x10
+  FF_SWISS         0x20
+  FF_MODERN        0x30
+  FF_SCRIPT        0x40
+  FF_DECORATIVE    0x50
+
+struct TEXTMETRIC pack=4
+  tmHeight LONG
+  tmAscent LONG
+  tmDescent LONG
+  tmInternalLeading LONG
+  tmExternalLeading LONG
+  tmAveCharWidth LONG
+  tmMaxCharWidth LONG
+  tmWeight LONG
+  tmOverhang LONG
+  tmDigitizedAspectX LONG
+  tmDigitizedAspectY LONG
+  tmFirstChar TCHAR
+  tmLastChar TCHAR
+  tmDefaultChar TCHAR
+  tmBreakChar TCHAR
+  tmItalic BYTE
+  tmUnderlined BYTE
+  tmStruckOut BYTE
+  tmPitchAndFamily [TEXTMETRIC_Pitch]
+  tmCharSet [FontCharset]
+
+pointer TEXTMETRIC* TEXTMETRIC
+
+pointer LPTEXTMETRIC TEXTMETRIC
+
+flag [MONITORINFO_Flags] DWORD display=DWORD
+  MONITORINFOF_PRIMARY 0x00000001
+
+struct VIDEOINFOHEADER
+  rcSource RECT
+  rcTarget RECT
+  dwBitRate DWORD
+  dwBitErrorRate DWORD
+  AvgTimePerFrame REFERENCE_TIME
+  bmiHeader BITMAPINFOHEADER
+
+pointer "const VIDEOINFOHEADER*" VIDEOINFOHEADER
+
+flag [AMINTERLACE_FLAGS] DWORD display=DWORD
+  AMINTERLACE_DisplayModeBobOnly    0x00000000
+  AMINTERLACE_FieldPatField1Only    0x00000000
+  AMINTERLACE_IsInterlaced          0x00000001
+  AMINTERLACE_1FieldPerSample       0x00000002
+  AMINTERLACE_Field1First           0x00000004
+  AMINTERLACE_FieldPatField2Only    0x00000010
+  AMINTERLACE_FieldPatBothRegular   0x00000020
+  AMINTERLACE_FieldPatBothIrregular 0x00000030
+  AMINTERLACE_DisplayModeWeaveOnly  0x00000040
+  AMINTERLACE_DisplayModeBobOrWeave 0x00000080
+
+flag [AMCOPYPROTECT_FLAGS] DWORD display=DWORD
+  AMCOPYPROTECT_RestrictDuplication 0x00000001
+
+flag [AMCONTROL_FLAGS] DWORD display=DWORD
+  AMCONTROL_USED              0x00000001
+  AMCONTROL_PAD_TO_4x3        0x00000002
+  AMCONTROL_PAD_TO_16x9       0x00000004
+  AMCONTROL_COLORINFO_PRESENT 0x00000080
+
+struct VIDEOINFOHEADER2
+  rcSource RECT
+  rcTarget RECT
+  dwBitRate DWORD
+  dwBitErrorRate DWORD
+  AvgTimePerFrame REFERENCE_TIME
+  dwInterlaceFlags [AMINTERLACE_FLAGS]
+  dwCopyProtectFlags [AMCOPYPROTECT_FLAGS]
+  dwPictAspectRatioX DWORD
+  dwPictAspectRatioY DWORD
+  dwControlFlags [AMCONTROL_FLAGS]
+  dwReserved2 DWORD
+  bmiHeader BITMAPINFOHEADER
+
+pointer "const VIDEOINFOHEADER2*" VIDEOINFOHEADER2
+
+enum PixelFormat UINT
+  PixelFormat32bppCMYK      0x200f
+  PixelFormat16bppRGB555    0x21005
+  PixelFormat16bppRGB565    0x21006
+  PixelFormat24bppRGB       0x21808
+  PixelFormat32bppRGB       0x22009
+  PixelFormat4bppIndexed    0x30402
+  PixelFormat8bppIndexed    0x30803
+  PixelFormat16bppARGB1555  0x61007
+  PixelFormat32bppPARGB     0xe200b
+  PixelFormat16bppGrayScale 0x101004
+  PixelFormat48bppRGB       0x10300c
+  PixelFormat64bppPARGB     0x1c400e
+  PixelFormat32bppARGB      0x26200a
+  PixelFormat64bppARGB      0x34400d
+
+pointer PixelFormat* PixelFormat
+
+enum InterpolationMode UINT
+  InterpolationModeInvalid             -1
+  InterpolationModeDefault             0
+  InterpolationModeLowQuality          1
+  InterpolationModeHighQuality         2
+  InterpolationModeBilinear            3
+  InterpolationModeBicubic             4
+  InterpolationModeNearestNeighbor     5
+  InterpolationModeHighQualityBilinear 6
+  InterpolationModeHighQualityBicubic  7
+
+pointer InterpolationMode* InterpolationMode
+
+enum EncoderParameterValueType ULONG display=ULONG
+  EncoderParameterValueTypeByte          1
+  EncoderParameterValueTypeASCII         2
+  EncoderParameterValueTypeShort         3
+  EncoderParameterValueTypeLong          4
+  EncoderParameterValueTypeRational      5
+  EncoderParameterValueTypeLongRange     6
+  EncoderParameterValueTypeUndefined     7
+  EncoderParameterValueTypeRationalRange 8
+  EncoderParameterValueTypePointer       9
+
+struct EncoderParameter
+  Guid GUID
+  NumberOfValues ULONG
+  Type EncoderParameterValueType
+  Value VOID*
+
+array "EncoderParameter [1]" base=EncoderParameter count=1
+
+struct EncoderParameters
+  Count UINT
+  Parameter "EncoderParameter [1]" count=Count
+
+pointer EncoderParameters* EncoderParameters
+
+pointer EncoderParameters** EncoderParameters*
+
+struct ABC
+  abcA int
+  abcB UINT
+  abcC int
+
+pointer ABC* ABC
+
+pointer LPABC ABC
+
+enum LCSCSTYPE LONG
+  LCS_CALIBRATED_RGB      0x00000000
+  LCS_WINDOWS_COLOR_SPACE 0x57696e20
+  LCS_sRGB                0x73524742
+
+alias [LCSCSTYPE_DWORD] LCSCSTYPE display=DWORD
+
+enum LCSGAMUTMATCH LONG
+  LCS_GM_BUSINESS         0x00000001
+  LCS_GM_GRAPHICS         0x00000002
+  LCS_GM_IMAGES           0x00000004
+  LCS_GM_ABS_COLORIMETRIC 0x00000008
+
+struct CIEXYZ
+  ciexyzX FXPT2DOT30
+  ciexyzY FXPT2DOT30
+  ciexyzZ FXPT2DOT30
+
+struct CIEXYZTRIPLE
+  ciexyzRed CIEXYZ
+  ciexyzGreen CIEXYZ
+  ciexyzBlue CIEXYZ
+
+struct LOGCOLORSPACE
+  lcsSignature DWORD
+  lcsVersion DWORD
+  lcsSize DWORD
+  lcsCSType LCSCSTYPE
+  lcsIntent LCSGAMUTMATCH
+  lcsEndpoints CIEXYZTRIPLE
+  lcsGammaRed DWORD
+  lcsGammaGreen DWORD
+  lcsGammaBlue DWORD
+  lcsFilename "TCHAR [MAX_PATH]"
+
+pointer LPLOGCOLORSPACE LOGCOLORSPACE
+
+enum BMFORMAT UINT
+  BM_x555RGB             0x0000
+  BM_565RGB              0x0001
+  BM_RGBTRIPLETS         0x0002
+  BM_BGRTRIPLETS         0x0004
+  BM_xRGBQUADS           0x0008
+  BM_10b_RGB             0x0009
+  BM_16b_RGB             0x000A
+  BM_xBGRQUADS           0x0010
+  BM_CMYKQUADS           0x0020
+  BM_x555XYZ             0x0101
+  BM_x555Yxy             0x0102
+  BM_x555Lab             0x0103
+  BM_x555G3CH            0x0104
+  BM_XYZTRIPLETS         0x0201
+  BM_YxyTRIPLETS         0x0202
+  BM_LabTRIPLETS         0x0203
+  BM_G3CHTRIPLETS        0x0204
+  BM_5CHANNEL            0x0205
+  BM_6CHANNEL            0x0206
+  BM_7CHANNEL            0x0207
+  BM_8CHANNEL            0x0208
+  BM_GRAY                0x0209
+  BM_xG3CHQUADS          0x0304
+  BM_KYMCQUADS           0x0305
+  BM_10b_XYZ             0x0401
+  BM_10b_Yxy             0x0402
+  BM_10b_Lab             0x0403
+  BM_10b_G3CH            0x0404
+  BM_NAMED_INDEX         0x0405
+  BM_16b_XYZ             0x0501
+  BM_16b_Yxy             0x0502
+  BM_16b_Lab             0x0503
+  BM_16b_G3CH            0x0504
+  BM_16b_GRAY            0x0505
+  BM_32b_scRGB           0x0601
+  BM_32b_scARGB          0x0602
+  BM_S2DOT13FIXED_scRGB  0x0603
+  BM_S2DOT13FIXED_scARGB 0x0604
+  BM_R10G10B10A2         0x0701
+  BM_R10G10B10A2_XR      0x0702
+  BM_R16G16B16A16_FLOAT  0x0703
+
+struct NAMED_PROFILE_INFO
+  dwFlags DWORD
+  dwCount DWORD
+  dwCountDevCoordinates DWORD
+  szPrefix COLOR_NAME
+  szSuffix COLOR_NAME
+
+pointer PNAMED_PROFILE_INFO NAMED_PROFILE_INFO
+
+struct GRAYCOLOR
+  gray WORD
+
+struct RGBCOLOR
+  red WORD
+  green WORD
+  blue WORD
+
+struct CMYKCOLOR
+  cyan WORD
+  magenta WORD
+  yellow WORD
+  black WORD
+
+struct XYZCOLOR
+  X WORD
+  Y WORD
+  Z WORD
+
+struct YxyCOLOR
+  Y WORD
+  x WORD
+  y WORD
+
+struct LabCOLOR
+  L WORD
+  a WORD
+  b WORD
+
+struct GENERIC3CHANNEL
+  ch1 WORD
+  ch2 WORD
+  ch3 WORD
+
+struct NAMEDCOLOR
+  dwIndex DWORD
+
+struct HiFiCOLOR
+  channel "BYTE [MAX_COLOR_CHANNELS]"
+
+struct [COLOR_s] display=struct
+  reserved1 DWORD
+  reserved2 VOID*
+
+union COLOR
+  gray GRAYCOLOR
+  rgb RGBCOLOR
+  cmyk CMYKCOLOR
+  XYZ XYZCOLOR
+  Yxy YxyCOLOR
+  Lab LabCOLOR
+  gen3ch GENERIC3CHANNEL
+  named NAMEDCOLOR
+  hifi HiFiCOLOR
+   [COLOR_s]
+
+pointer PCOLOR COLOR
+
+pointer LPCOLOR COLOR
+
+enum COLORDATATYPE UINT
+  COLOR_BYTE               1
+  COLOR_WORD               2
+  COLOR_FLOAT              3
+  COLOR_S2DOT13FIXED       4
+  COLOR_10b_R10G10B10A2    5
+  COLOR_10b_R10G10B10A2_XR 6
+  COLOR_FLOAT16            7
+
+flag [ENUMTYPE_FIELDS] DWORD display=DWORD
+  ET_DEVICENAME      0x00000001
+  ET_MEDIATYPE       0x00000002
+  ET_DITHERMODE      0x00000004
+  ET_RESOLUTION      0x00000008
+  ET_CMMTYPE         0x00000010
+  ET_CLASS           0x00000020
+  ET_DATACOLORSPACE  0x00000040
+  ET_CONNECTIONSPACE 0x00000080
+  ET_SIGNATURE       0x00000100
+  ET_PLATFORM        0x00000200
+  ET_PROFILEFLAGS    0x00000400
+  ET_MANUFACTURER    0x00000800
+  ET_MODEL           0x00001000
+  ET_ATTRIBUTES      0x00002000
+  ET_RENDERINGINTENT 0x00004000
+  ET_CREATOR         0x00008000
+  ET_DEVICECLASS     0x00010000
+
+enum [PROFILE_CLASS] DWORD display=DWORD
+  CLASS_ABSTRACT   0x61627374
+  CLASS_CAMP       0x63616d70
+  CLASS_GMMP       0x676d6d70
+  CLASS_LINK       0x6c696e6b
+  CLASS_MONITOR    0x6d6e7472
+  CLASS_NAMED      0x6e6d636c
+  CLASS_PRINTER    0x70727472
+  CLASS_SCANNER    0x73636e72
+  CLASS_COLORSPACE 0x73706163
+
+enum [DEVICE_CLASS] DWORD display=DWORD
+  CLASS_MONITOR 0x6d6e7472
+  CLASS_PRINTER 0x70727472
+  CLASS_SCANNER 0x73636e72
+
+enum [COLOR_SPACE] DWORD display=DWORD
+  SPACE_2_CHANNEL 0x32434C52
+  SPACE_3_CHANNEL 0x33434C52
+  SPACE_4_CHANNEL 0x34434C52
+  SPACE_5_CHANNEL 0x35434C52
+  SPACE_6_CHANNEL 0x36434C52
+  SPACE_7_CHANNEL 0x37434C52
+  SPACE_8_CHANNEL 0x38434C52
+  SPACE_CMY       0x434D5920
+  SPACE_CMYK      0x434D594B
+  SPACE_GRAY      0x47524159
+  SPACE_HLS       0x484C5320
+  SPACE_HSV       0x48535620
+  SPACE_Lab       0x4C616220
+  SPACE_Luv       0x4C757620
+  SPACE_RGB       0x52474220
+  SPACE_XYZ       0x58595A20
+  SPACE_YCbCr     0x59436272
+  SPACE_Yxy       0x59787920
+
+enum [CONNECTION_SPACE] DWORD display=DWORD
+  SPACE_Lab 0x4C616220
+  SPACE_XYZ 0x58595A20
+
+flag [PROFILE_FLAG] DWORD display=DWORD
+  FLAG_EMBEDDEDPROFILE             0x00000001
+  FLAG_DEPENDENTONDATA             0x00000002
+  FLAG_ENABLE_CHROMATIC_ADAPTATION 0x02000000
+
+flag [PROFILE_ATTRIBUTES] DWORD display=DWORD
+  ATTRIB_TRANSPARENCY 0x00000001
+  ATTRIB_MATTE        0x00000002
+
+enum [RENDERING_INTENT] DWORD display=DWORD
+  INTENT_PERCEPTUAL            0
+  INTENT_RELATIVE_COLORIMETRIC 1
+  INTENT_SATURATION            2
+  INTENT_ABSOLUTE_COLORIMETRIC 3
+
+pointer [RENDERING_INTENT*] [RENDERING_INTENT] display=PDWORD
+
+struct ENUMTYPE
+  dwSize DWORD
+  dwVersion DWORD
+  dwFields [ENUMTYPE_FIELDS]
+  pDeviceName PCTSTR
+  dwMediaType DWORD
+  dwDitheringMode DWORD
+  dwResolution "DWORD [2]"
+  dwCMMType DWORD
+  dwClass [PROFILE_CLASS]
+  dwDataColorSpace [COLOR_SPACE]
+  dwConnectionSpace [CONNECTION_SPACE]
+  dwSignature DWORD
+  dwPlatform DWORD
+  dwProfileFlags [PROFILE_FLAG]
+  dwManufacturer DWORD
+  dwModel DWORD
+  dwAttributes "DWORD [2]"
+  dwRenderingIntent [RENDERING_INTENT]
+  dwCreator DWORD
+  dwDeviceClass [DEVICE_CLASS]
+
+pointer PENUMTYPE ENUMTYPE
+
+struct ENUMTYPEW
+  dwSize DWORD
+  dwVersion DWORD
+  dwFields [ENUMTYPE_FIELDS]
+  pDeviceName PCWSTR
+  dwMediaType DWORD
+  dwDitheringMode DWORD
+  dwResolution "DWORD [2]"
+  dwCMMType DWORD
+  dwClass [PROFILE_CLASS]
+  dwDataColorSpace [COLOR_SPACE]
+  dwConnectionSpace [CONNECTION_SPACE]
+  dwSignature DWORD
+  dwPlatform DWORD
+  dwProfileFlags [PROFILE_FLAG]
+  dwManufacturer DWORD
+  dwModel DWORD
+  dwAttributes "DWORD [2]"
+  dwRenderingIntent [RENDERING_INTENT]
+  dwCreator DWORD
+  dwDeviceClass [DEVICE_CLASS]
+
+pointer PENUMTYPEW ENUMTYPEW
+
+flag [CCT_FLAGS] DWORD display=DWORD
+  PROOF_MODE                0x00000001
+  NORMAL_MODE               0x00000002
+  BEST_MODE                 0x00000003
+  ENABLE_GAMUT_CHECKING     0x00010000
+  USE_RELATIVE_COLORIMETRIC 0x00020000
+  FAST_TRANSLATE            0x00040000
+  PRESERVEBLACK             0x00100000
+  WCS_ALWAYS                0x00200000
+  SEQUENTIAL_TRANSFORM      0x80800000
+
+enum [CMM_INFO] DWORD display=DWORD
+  CMM_WIN_VERSION    0
+  CMM_IDENT          1
+  CMM_DRIVER_VERSION 2
+  CMM_DLL_VERSION    3
+  CMM_VERSION        4
+  CMM_DESCRIPTION    5
+  CMM_LOGOICON       6
+

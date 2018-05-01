@@ -1,0 +1,49 @@
+include Interfaces\WIC\IWICImagingFactory.txt
+
+ingterface IWICComponentFactory base=IWICImagingFactory id={412D0C3A-9650-44FA-AF5B-DD2A06C8E8FB} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func CreateMetadataReader
+    [WIC_HRESULT]
+    guidMetadataFormat REFGUID
+    pguidVendor "const GUID*"
+    dwOptions DWORD
+    pIStream IStream*
+    ppIReader IWICMetadataReader**
+
+  func CreateMetadataReaderFromContainer
+    [WIC_HRESULT]
+    guidContainerFormat REFGUID
+    pguidVendor "const GUID*"
+    dwOptions DWORD
+    pIStream IStream*
+    ppIReader IWICMetadataReader**
+
+  func CreateMetadataWriter
+    [WIC_HRESULT]
+    guidMetadataFormat REFGUID
+    pguidVendor "const GUID*"
+    dwMetadataOptions DWORD
+    ppIWriter IWICMetadataWriter**
+
+  func CreateMetadataWriterFromReader
+    [WIC_HRESULT]
+    pIReader IWICMetadataReader*
+    pguidVendor "const GUID*"
+    ppIWriter IWICMetadataWriter**
+
+  func CreateQueryReaderFromBlockReader
+    [WIC_HRESULT]
+    pIBlockReader IWICMetadataBlockReader*
+    ppIQueryReader IWICMetadataQueryReader**
+
+  func CreateQueryWriterFromBlockWriter
+    [WIC_HRESULT]
+    pIBlockWriter IWICMetadataBlockWriter*
+    ppIQueryWriter IWICMetadataQueryWriter**
+
+  func CreateEncoderPropertyBag
+    [WIC_HRESULT]
+    ppropOptions PROPBAG2* count=cCount
+    cCount UINT
+    ppIPropertyBag IPropertyBag2**
+
+

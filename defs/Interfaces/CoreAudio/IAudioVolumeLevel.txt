@@ -1,0 +1,5 @@
+include Interfaces\CoreAudio\IPerChannelDbLevel.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioVolumeLevel base=IPerChannelDbLevel id={7FB7B48F-531D-44A2-BCB3-5AD5A134B3DC} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+

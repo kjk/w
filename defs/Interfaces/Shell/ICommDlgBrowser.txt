@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+
+ingterface ICommDlgBrowser base=IUnknown id={000214F1-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnDefaultCommand
+    HRESULT
+    ppshv IShellView*
+
+  func OnStateChange
+    HRESULT
+    ppshv IShellView*
+    uChange ULONG
+
+  func IncludeObject
+    HRESULT
+    ppshv IShellView*
+    pidl PCUITEMID_CHILD
+
+

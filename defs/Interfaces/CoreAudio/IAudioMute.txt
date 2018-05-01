@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioMute base=IUnknown id={DF45AEEA-B74A-4B6B-AFAD-2366B6AA012E} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func SetMute
+    [AUDCLNT_HRESULT]
+    bMuted BOOL
+    pguidEventContext LPCGUID
+
+  func GetMute
+    [AUDCLNT_HRESULT]
+    pbMuted BOOL*
+
+

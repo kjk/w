@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+
+ingterface IActiveDesktopP base=IUnknown id={52502EE0-EC80-11D0-89AB-00C04FC2972D} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetSafeMode
+    HRESULT
+    dwFlags DWORD
+
+  func EnsureUpdateHTML
+    HRESULT
+
+  func SetScheme
+    HRESULT
+    pwszSchemeName LPCWSTR
+    dwFlags DWORD
+
+  func GetScheme
+    HRESULT
+    pwszSchemeName LPWSTR
+    lpdwcchBuffer DWORD*
+    dwFlags DWORD
+
+

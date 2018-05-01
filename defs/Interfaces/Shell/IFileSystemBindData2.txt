@@ -1,0 +1,20 @@
+include Interfaces\Shell\IFileSystemBindData.txt
+
+ingterface IFileSystemBindData2 base=IFileSystemBindData id={3acf075f-71db-4afa-81f0-3fc4fdf2a5b8} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetFileID
+    HRESULT
+    liFileID LARGE_INTEGER
+
+  func GetFileID
+    HRESULT
+    pliFileID LARGE_INTEGER*
+
+  func SetJunctionCLSID
+    HRESULT
+    clsid REFCLSID
+
+  func GetJunctionCLSID
+    HRESULT
+    pclsid CLSID*
+
+

@@ -1,0 +1,28 @@
+include WMI\ISWbemObject.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemObjectEx base=ISWbemObject id={269AD56A-8A67-4129-BC8C-0506DCFE9880} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func Refresh_
+    WBEMSTATUS
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+
+  func get_SystemProperties_
+    WBEMSTATUS
+    objWbemPropertySet ISWbemPropertySet**
+
+  func GetText_
+    WBEMSTATUS
+    iObjectTextFormat WbemObjectTextFormatEnum
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+    bsText BSTR*
+
+  func SetFromText_
+    WBEMSTATUS
+    bsText BSTR
+    iObjectTextFormat WbemObjectTextFormatEnum
+    iFlags long
+    objWbemNamedValueSet IDispatch*
+
+

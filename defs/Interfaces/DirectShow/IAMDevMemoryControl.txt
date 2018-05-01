@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMDevMemoryControl base=IUnknown id={c6545bf1-e76b-11d0-bd52-00a0c911ce86} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func QueryWriteSync
+    HRESULT
+
+  func WriteSync
+    HRESULT
+
+  func GetDevId
+    HRESULT
+    pdwDevId DWORD*
+
+

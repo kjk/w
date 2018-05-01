@@ -1,0 +1,91 @@
+include Interfaces\DirectX\11\D3D11.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface ID3D11ShaderReflection base=IUnknown id={8d536ca1-0cca-4956-a837-786963755584} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Shader"
+  func GetDesc
+    HRESULT
+    pDesc D3D11_SHADER_DESC*
+
+  func GetConstantBufferByIndex
+    success NotEqual=0
+    ID3D11ShaderReflectionConstantBuffer*
+    Index UINT
+
+  func GetConstantBufferByName
+    success NotEqual=0
+    ID3D11ShaderReflectionConstantBuffer*
+    Name LPCSTR
+
+  func GetResourceBindingDesc
+    HRESULT
+    ResourceIndex UINT
+    pDesc D3D11_SHADER_INPUT_BIND_DESC*
+
+  func GetInputParameterDesc
+    HRESULT
+    ParameterIndex UINT
+    pDesc D3D11_SIGNATURE_PARAMETER_DESC*
+
+  func GetOutputParameterDesc
+    HRESULT
+    ParameterIndex UINT
+    pDesc D3D11_SIGNATURE_PARAMETER_DESC*
+
+  func GetPatchConstantParameterDesc
+    HRESULT
+    ParameterIndex UINT
+    pDesc D3D11_SIGNATURE_PARAMETER_DESC*
+
+  func GetVariableByName
+    success NotEqual=0
+    ID3D11ShaderReflectionVariable*
+    Name LPCSTR
+
+  func GetResourceBindingDescByName
+    HRESULT
+    Name LPCSTR
+    pDesc D3D11_SHADER_INPUT_BIND_DESC*
+
+  func GetMovInstructionCount
+    success NotEqual=0
+    UINT
+
+  func GetMovcInstructionCount
+    success NotEqual=0
+    UINT
+
+  func GetConversionInstructionCount
+    success NotEqual=0
+    UINT
+
+  func GetBitwiseInstructionCount
+    success NotEqual=0
+    UINT
+
+  func GetGSInputPrimitive
+    success NotEqual=0
+    D3D_PRIMITIVE
+
+  func IsSampleFrequencyShader
+    BOOL
+
+  func GetNumInterfaceSlots
+    success NotEqual=0
+    UINT
+
+  func GetMinFeatureLevel
+    HRESULT
+    pLevel D3D_FEATURE_LEVEL*
+
+  func GetThreadGroupSize
+    success NotEqual=0
+    UINT
+    pSizeX UINT*
+    pSizeY UINT*
+    pSizeZ UINT*
+
+  func GetRequiresFlags
+    success NotEqual=0
+    UINT64
+
+

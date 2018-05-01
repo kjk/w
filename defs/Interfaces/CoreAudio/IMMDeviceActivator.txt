@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IMMDeviceActivator base=IUnknown id={3B0D0EA4-D0A9-4B0E-935B-09516746FAC0} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Multimedia Device"
+  func Activate
+    [AUDCLNT_HRESULT]
+    iid REFIID
+    pDevice IMMDevice*
+    pActivationParams PROPVARIANT*
+    ppInterface void** interfaceId=iid
+
+

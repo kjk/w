@@ -1,0 +1,37 @@
+include Headers\runtime.h.txt
+
+dll WinTypes.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Additional Resources/Windows Runtime C++"
+interface IMetaDataImport2
+
+interface IMetaDataDispenserEx
+
+func RoGetBufferMarshaler
+  HRESULT
+  bufferMarshaler IMarshal**
+
+func RoGetMetaDataFile
+  HRESULT
+  name "const HSTRING"
+  metaDataDispenser IMetaDataDispenserEx*
+  metaDataFilePath HSTRING*
+  metaDataImport IMetaDataImport2**
+  typeDefToken mdTypeDef*
+
+func RoParseTypeName
+  HRESULT
+  typename HSTRING
+  partsCount DWORD*
+  typeNameParts HSTRING** derefPostCount=partsCount
+
+func RoResolveNamespace
+  HRESULT
+  name "const HSTRING"
+  windowsMetaDataDir "const HSTRING"
+  packageGraphDirsCount "const DWORD"
+  packageGraphDirs "const HSTRING*" count=packageGraphDirsCount
+  metaDataFilePathsCount DWORD*
+  metaDataFilePaths HSTRING** derefPostCount=metaDataFilePathsCount
+  subNamespacesCount DWORD*
+  subNamespaces HSTRING** derefPostCount=subNamespacesCount
+

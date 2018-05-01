@@ -1,0 +1,8081 @@
+include Headers\windows.h.txt
+
+dll msvcrxx.dll callingConvention=CDECL errorFunc=errno onlineHelp=MSDN
+moduleAlias msvcrt.dll
+moduleAlias msvcr70.dll
+moduleAlias msvcr70d.dll
+moduleAlias msvcr71.dll
+moduleAlias msvcr71d.dll
+moduleAlias msvcr80.dll
+moduleAlias msvcr80d.dll
+moduleAlias msvcr90.dll
+moduleAlias msvcr90d.dll
+moduleAlias msvcr100.dll
+moduleAlias msvcr100d.dll
+moduleAlias msvcr100_clr0400.dll
+category "Visual C++ Run-Time Library/Buffer Manipulation"
+category "Visual C++ Run-Time Library/Byte Classification"
+category "Visual C++ Run-Time Library/Character Classification"
+category "Visual C++ Run-Time Library/Memory Allocation/Data Alignment"
+category "Visual C++ Run-Time Library/Data Conversion"
+category "Visual C++ Run-Time Library/Debug Routines"
+category "Visual C++ Run-Time Library/Directory Control"
+category "Visual C++ Run-Time Library/Error Handling (CRT)"
+category "Visual C++ Run-Time Library/Exception Handling Routines"
+category "Visual C++ Run-Time Library/File Handling/File Descriptor"
+category "Visual C++ Run-Time Library/File Handling/Path or Filename"
+category "Visual C++ Run-Time Library/Floating-Point Support"
+category "Visual C++ Run-Time Library/Input and Output/Text and Binary Mode File"
+category "Visual C++ Run-Time Library/Input and Output/Stream"
+category "Visual C++ Run-Time Library/Input and Output/Low-Level"
+category "Visual C++ Run-Time Library/Input and Output/Console and Port"
+category "Visual C++ Run-Time Library/Input and Output/_nolock Functions"
+category "Visual C++ Run-Time Library/Locale"
+category "Visual C++ Run-Time Library/Memory Allocation"
+category "Visual C++ Run-Time Library/Process and Environment Control"
+category "Visual C++ Run-Time Library/Searching and Sorting"
+category "Visual C++ Run-Time Library/String Manipulation (CRT)"
+category "Visual C++ Run-Time Library/System Calls"
+category "Visual C++ Run-Time Library/Time Management"
+category "Visual C++ Run-Time Library/Miscellaneous"
+alias _locale_t LPVOID
+
+alias _CrtMemState* LPVOID
+
+alias "const _CrtMemState*" LPVOID
+
+alias "struct _stati64*" LPVOID
+
+alias "struct _finddata_t*" LPVOID
+
+alias "struct _finddatai64_t*" LPVOID
+
+alias "struct _wfinddata_t*" LPVOID
+
+alias "struct _wfinddatai64_t*" LPVOID
+
+alias unsigned "unsigned int"
+
+pointer unsigned* unsigned
+
+alias "long int" long
+
+alias FILE* LPVOID
+
+pointer FILE** FILE*
+
+pointer "const unsigned char*" "unsigned char"
+
+alias wint_t "unsigned short"
+
+alias _CRT_ALLOC_HOOK LPVOID
+
+alias _CRT_DUMP_CLIENT LPVOID
+
+alias _CRT_REPORT_HOOK LPVOID
+
+alias _CRT_REPORT_HOOKW LPVOID
+
+alias _se_translator_function LPVOID
+
+alias terminate_function LPVOID
+
+alias unexpected_function LPVOID
+
+alias intptr_t INT_PTR
+
+alias __time32_t long
+
+pointer __time32_t* __time32_t
+
+pointer "const __time32_t*" __time32_t
+
+alias __time64_t __int64
+
+pointer __time64_t* __time64_t
+
+pointer "const __time64_t*" __time64_t
+
+alias wchar WCHAR
+
+pointer "const wchar*" wchar
+
+alias _PNH LPVOID
+
+alias uintptr_t UINT_PTR
+
+alias _onexit_t LPVOID
+
+alias clock_t long
+
+pointer char*** char**
+
+pointer wchar_t*** wchar_t**
+
+alias _PVFV LPVOID
+
+pointer _PVFV* _PVFV
+
+pointer _PVFV** _PVFV*
+
+alias mbstate_t int
+
+pointer mbstate_t* mbstate_t
+
+pointer "const unsigned short*" "unsigned short"
+
+alias _HANDLE_MATH_ERROR LPVOID
+
+alias _invalid_parameter_handler LPVOID
+
+alias PEXCEPTION_REGISTRATION LPVOID
+
+alias EHExceptionRecord* LPVOID
+
+alias EHRegistrationNode* LPVOID
+
+alias DispatcherContext* LPVOID
+
+alias _dev_t "unsigned int"
+
+alias _ino_t "unsigned short"
+
+alias _off_t long
+
+alias _fsize_t "unsigned long"
+
+alias fpos_t __int64
+
+pointer fpos_t* fpos_t
+
+pointer "const fpos_t*" fpos_t
+
+alias _purecall_handler LPVOID
+
+pointer "struct _EXCEPTION_POINTERS*" EXCEPTION_POINTERS
+
+array "wchar_t [260]" base=wchar_t count=260
+
+array "unsigned char[10]" base="unsigned char" count=10
+
+enum _HFILE void*
+  _CRTDBG_REPORT_FILE   -6
+  _CRTDBG_FILE_STDERR   -5
+  _CRTDBG_FILE_STDOUT   -4
+  _CRTDBG_HFILE_ERROR   -2
+  _CRTDBG_INVALID_HFILE -1
+
+enum errno_t int
+  success Equal=0 errorFunc=errno
+  EPERM           1
+  ENOENT          2
+  ESRCH           3
+  EINTR           4
+  EIO             5
+  ENXIO           6
+  E2BIG           7
+  ENOEXEC         8
+  EBADF           9
+  ECHILD          10
+  EAGAIN          11
+  ENOMEM          12
+  EACCES          13
+  EFAULT          14
+  EBUSY           16
+  EEXIST          17
+  EXDEV           18
+  ENODEV          19
+  ENOTDIR         20
+  EISDIR          21
+  EINVAL          22
+  ENFILE          23
+  EMFILE          24
+  ENOTTY          25
+  EFBIG           27
+  ENOSPC          28
+  ESPIPE          29
+  EROFS           30
+  EMLINK          31
+  EPIPE           32
+  EDOM            33
+  ERANGE          34
+  EDEADLK         36
+  ENAMETOOLONG    38
+  ENOLCK          39
+  ENOSYS          40
+  ENOTEMPTY       41
+  EILSEQ          42
+  STRUNCATE       80
+  EADDRINUSE      100
+  EADDRNOTAVAIL   101
+  EAFNOSUPPORT    102
+  EALREADY        103
+  EBADMSG         104
+  ECANCELED       105
+  ECONNABORTED    106
+  ECONNREFUSED    107
+  ECONNRESET      108
+  EDESTADDRREQ    109
+  EHOSTUNREACH    110
+  EIDRM           111
+  EINPROGRESS     112
+  EISCONN         113
+  ELOOP           114
+  EMSGSIZE        115
+  ENETDOWN        116
+  ENETRESET       117
+  ENETUNREACH     118
+  ENOBUFS         119
+  ENODATA         120
+  ENOLINK         121
+  ENOMSG          122
+  ENOPROTOOPT     123
+  ENOSR           124
+  ENOSTR          125
+  ENOTCONN        126
+  ENOTRECOVERABLE 127
+  ENOTSOCK        128
+  ENOTSUP         129
+  EOPNOTSUPP      130
+  EOTHER          131
+  EOVERFLOW       132
+  EOWNERDEAD      133
+  EPROTO          134
+  EPROTONOSUPPORT 135
+  EPROTOTYPE      136
+  ETIME           137
+  ETIMEDOUT       138
+  ETXTBSY         139
+  EWOULDBLOCK     140
+
+struct "struct _diskfree_t"
+  total_clusters unsigned
+  avail_clusters unsigned
+  sectors_per_cluster unsigned
+  bytes_per_sector unsigned
+
+pointer "struct _diskfree_t*" "struct _diskfree_t"
+
+struct _startupinfo
+  newmode int
+
+pointer _startupinfo* _startupinfo
+
+enum EXCEPTION_DISPOSITION UINT
+  ExceptionContinueExecution 0
+  ExceptionContinueSearch    1
+  ExceptionNestedException   2
+  ExceptionCollidedUnwind    3
+
+enum [SIGNAL] int display=int
+  SIGINT         2
+  SIGILL         4
+  SIGABRT_COMPAT 6
+  SIGFPE         8
+  SIGSEGV        11
+  SIGTERM        15
+  SIGBREAK       21
+  SIGABRT        22
+
+enum [SIGNAL_FUNC] LPVOID display="void (__cdecl *)(int)"
+  SIG_ERR -1
+  SIG_DFL 0
+  SIG_IGN 1
+  SIG_GET 2
+  SIG_SGE 3
+  SIG_ACK 4
+  SIG_DIE 5
+
+enum [C_APP_TYPE] int display=int
+  _UNKNOWN_APP 0
+  _CONSOLE_APP 1
+  _GUI_APP     2
+
+flag [ST_MODE] "unsigned short" display="unsigned short"
+  _S_IEXEC  0x0040
+  _S_IWRITE 0x0080
+  _S_IREAD  0x0100
+  _S_IFIFO  0x1000
+  _S_IFCHR  0x2000
+  _S_IFDIR  0x4000
+  _S_IFREG  0x8000
+
+struct "struct _stat"
+  st_dev _dev_t
+  st_ino _ino_t
+  st_mode [ST_MODE]
+  st_nlink short
+  st_uid short
+  st_gid short
+  st_rdev _dev_t
+  st_size _off_t
+  st_atime time_t
+  st_mtime time_t
+  st_ctime time_t
+
+pointer "struct _stat*" "struct _stat"
+
+struct "struct _stat32"
+  st_dev _dev_t
+  st_ino _ino_t
+  st_mode [ST_MODE]
+  st_nlink short
+  st_uid short
+  st_gid short
+  st_rdev _dev_t
+  st_size _off_t
+  st_atime __time32_t
+  st_mtime __time32_t
+  st_ctime __time32_t
+
+pointer "struct _stat32*" "struct _stat32"
+
+struct "struct _stat64"
+  st_dev _dev_t
+  st_ino _ino_t
+  st_mode [ST_MODE]
+  st_nlink short
+  st_uid short
+  st_gid short
+  st_rdev _dev_t
+  st_size __int64
+  st_atime __time64_t
+  st_mtime __time64_t
+  st_ctime __time64_t
+
+pointer "struct _stat64*" "struct _stat64"
+
+struct "struct _stat32i64"
+  st_dev _dev_t
+  st_ino _ino_t
+  st_mode [ST_MODE]
+  st_nlink short
+  st_uid short
+  st_gid short
+  st_rdev _dev_t
+  st_size __int64
+  st_atime __time32_t
+  st_mtime __time32_t
+  st_ctime __time32_t
+
+pointer "struct _stat32i64*" "struct _stat32i64"
+
+struct "struct _stat64i32"
+  st_dev _dev_t
+  st_ino _ino_t
+  st_mode [ST_MODE]
+  st_nlink short
+  st_uid short
+  st_gid short
+  st_rdev _dev_t
+  st_size _off_t
+  st_atime __time64_t
+  st_mtime __time64_t
+  st_ctime __time64_t
+
+pointer "struct _stat64i32*" "struct _stat64i32"
+
+struct "struct _complex"
+  x double
+  y double
+
+struct _CRT_DOUBLE
+  x double
+
+pointer _CRT_DOUBLE* _CRT_DOUBLE
+
+struct _CRT_FLOAT
+  f float
+
+pointer _CRT_FLOAT* _CRT_FLOAT
+
+struct "struct tm"
+  tm_sec int
+  tm_min int
+  tm_hour int
+  tm_mday int
+  tm_mon int
+  tm_year int
+  tm_wday int
+  tm_yday int
+  tm_isdst int
+
+pointer "struct tm*" "struct tm"
+
+pointer "const struct tm*" "struct tm"
+
+enum [HEAP_RESULT] int display=int
+  _HEAPBADPTR   -6
+  _HEAPEND      -5
+  _HEAPBADNODE  -4
+  _HEAPBADBEGIN -3
+  _HEAPOK       -2
+  _HEAPEMPTY    -1
+
+enum [HEAP_USE_FLAG] int display=int
+  _FREEENTRY 0
+  _USEDENTRY 1
+
+struct _HEAPINFO
+  _pentry int*
+  _size size_t
+  _useflag [HEAP_USE_FLAG]
+
+pointer _HEAPINFO* _HEAPINFO
+
+struct "struct _timeb"
+  time time_t
+  millitm "unsigned short"
+  timezone short
+  dstflag short
+
+pointer "struct _timeb*" "struct _timeb"
+
+struct "struct __timeb32"
+  time __time32_t
+  millitm "unsigned short"
+  timezone short
+  dstflag short
+
+pointer "struct __timeb32*" "struct __timeb32"
+
+struct "struct __timeb64"
+  time __time64_t
+  millitm "unsigned short"
+  timezone short
+  dstflag short
+
+pointer "struct __timeb64*" "struct __timeb64"
+
+struct "struct _utimbuf"
+  actime time_t
+  modtime time_t
+
+pointer "struct _utimbuf*" "struct _utimbuf"
+
+struct "struct __utimbuf32"
+  actime __time32_t
+  modtime __time32_t
+
+pointer "struct __utimbuf32*" "struct __utimbuf32"
+
+struct "struct __utimbuf64"
+  actime __time64_t
+  modtime __time64_t
+
+pointer "struct __utimbuf64*" "struct __utimbuf64"
+
+flag [FINDDATA_ATTRIB] unsigned display=unsigned
+  _A_NORMAL 0x00
+  _A_RDONLY 0x01
+  _A_HIDDEN 0x02
+  _A_SYSTEM 0x04
+  _A_SUBDIR 0x10
+  _A_ARCH   0x20
+
+struct "struct _finddata32_t"
+  attrib [FINDDATA_ATTRIB]
+  time_create __time32_t
+  time_access __time32_t
+  time_write __time32_t
+  size _fsize_t
+  name "char [260]"
+
+pointer "struct _finddata32_t*" "struct _finddata32_t"
+
+struct "struct _finddata32i64_t"
+  attrib [FINDDATA_ATTRIB]
+  time_create __time32_t
+  time_access __time32_t
+  time_write __time32_t
+  size __int64
+  name "char [260]"
+
+pointer "struct _finddata32i64_t*" "struct _finddata32i64_t"
+
+struct "struct _finddata64i32_t"
+  attrib [FINDDATA_ATTRIB]
+  time_create __time64_t
+  time_access __time64_t
+  time_write __time64_t
+  size _fsize_t
+  name "char [260]"
+
+pointer "struct _finddata64i32_t*" "struct _finddata64i32_t"
+
+struct "struct __finddata64_t"
+  attrib [FINDDATA_ATTRIB]
+  time_create __time64_t
+  time_access __time64_t
+  time_write __time64_t
+  size __int64
+  name "char [260]"
+
+pointer "struct __finddata64_t*" "struct __finddata64_t"
+
+struct "struct _wfinddata32_t"
+  attrib [FINDDATA_ATTRIB]
+  time_create __time32_t
+  time_access __time32_t
+  time_write __time32_t
+  size _fsize_t
+  name "wchar_t [260]"
+
+pointer "struct _wfinddata32_t*" "struct _wfinddata32_t"
+
+struct "struct _wfinddata32i64_t"
+  attrib [FINDDATA_ATTRIB]
+  time_create __time32_t
+  time_access __time32_t
+  time_write __time32_t
+  size __int64
+  name "wchar_t [260]"
+
+pointer "struct _wfinddata32i64_t*" "struct _wfinddata32i64_t"
+
+struct "struct _wfinddata64i32_t"
+  attrib [FINDDATA_ATTRIB]
+  time_create __time64_t
+  time_access __time64_t
+  time_write __time64_t
+  size _fsize_t
+  name "wchar_t [260]"
+
+pointer "struct _wfinddata64i32_t*" "struct _wfinddata64i32_t"
+
+struct "struct _wfinddata64_t"
+  attrib [FINDDATA_ATTRIB]
+  time_create __time64_t
+  time_access __time64_t
+  time_write __time64_t
+  size __int64
+  name "wchar_t [260]"
+
+pointer "struct _wfinddata64_t*" "struct _wfinddata64_t"
+
+flag wctype_t "unsigned short"
+  _UPPER    0x1
+  _LOWER    0x2
+  _DIGIT    0x4
+  _SPACE    0x8
+  _PUNCT    0x10
+  _CONTROL  0x20
+  _BLANK    0x40
+  _HEX      0x80
+  _ALPHA    0x0103
+  _LEADBYTE 0x8000
+
+alias _ctype_t wctype_t
+
+enum [exception_type] int display=int
+  _DOMAIN    1
+  _SING      2
+  _OVERFLOW  3
+  _UNDERFLOW 4
+  _TLOSS     5
+  _PLOSS     6
+
+struct "struct _exception"
+  type [exception_type]
+  name char*
+  arg1 double
+  arg2 double
+  retval double
+
+pointer "struct _exception*" "struct _exception"
+
+struct div_t
+  quot int
+  rem int
+
+struct ldiv_t
+  quot long
+  rem long
+
+struct _LDOUBLE pack=4
+  ld "unsigned char[10]"
+
+pointer _LDOUBLE* _LDOUBLE
+
+enum [lconv_val] UINT8 display=char
+  CHAR_MAX 127
+
+struct "struct lconv"
+  decimal_point char*
+  thousands_sep char*
+  grouping char*
+  int_curr_symbol char*
+  currency_symbol char*
+  mon_decimal_point char*
+  mon_thousands_sep char*
+  mon_grouping char*
+  positive_sign char*
+  negative_sign char*
+  int_frac_digits [lconv_val]
+  frac_digits [lconv_val]
+  p_cs_precedes [lconv_val]
+  p_sep_by_space [lconv_val]
+  n_cs_precedes [lconv_val]
+  n_sep_by_space [lconv_val]
+  p_sign_posn [lconv_val]
+  n_sign_posn [lconv_val]
+  _W_decimal_point wchar_t*
+  _W_thousands_sep wchar_t*
+  _W_int_curr_symbol wchar_t*
+  _W_currency_symbol wchar_t*
+  _W_mon_decimal_point wchar_t*
+  _W_mon_thousands_sep wchar_t*
+  _W_positive_sign wchar_t*
+  _W_negative_sign wchar_t*
+
+pointer "struct lconv*" "struct lconv"
+
+enum [LOCK_NUM] int display=int
+  _SIGNAL_LOCK    0
+  _IOB_SCAN_LOCK  1
+  _TMPNAM_LOCK    2
+  _CONIO_LOCK     3
+  _HEAP_LOCK      4
+  _UNDNAME_LOCK   5
+  _TIME_LOCK      6
+  _ENV_LOCK       7
+  _EXIT_LOCK1     8
+  _POPEN_LOCK     9
+  _LOCKTAB_LOCK   10
+  _OSFHND_LOCK    11
+  _SETLOCALE_LOCK 12
+  _MB_CP_LOCK     13
+  _TYPEINFO_LOCK  14
+  _DEBUG_LOCK     15
+  _STREAM_LOCKS   16
+
+enum [output_format] "unsigned int" display="unsigned int"
+  _TWO_DIGIT_EXPONENT 0x1
+
+alias [compare_function] LPVOID display="int (__cdecl*)(void*, void*)"
+
+alias [compare_s_function] LPVOID display="int (__cdecl*)(void*, void*, void*)"
+
+flag [open_flag] "unsigned int" display=int
+  _O_RDONLY      0x0000
+  _O_WRONLY      0x0001
+  _O_RDWR        0x0002
+  _O_APPEND      0x0008
+  _O_RANDOM      0x0010
+  _O_SEQUENTIAL  0x0020
+  _O_TEMPORARY   0x0040
+  _O_NOINHERIT   0x0080
+  _O_CREAT       0x0100
+  _O_TRUNC       0x0200
+  _O_EXCL        0x0400
+  _O_SHORT_LIVED 0x1000
+  _O_TEXT        0x4000
+  _O_BINARY      0x8000
+  _O_WTEXT       0x10000
+  _O_U16TEXT     0x20000
+  _O_U8TEXT      0x40000
+
+flag [share_flag] "unsigned int" display=int
+  _SH_DENYRW 0x10
+  _SH_DENYWR 0x20
+  _SH_DENYRD 0x30
+  _SH_DENYNO 0x40
+  _SH_SECURE 0x80
+
+flag [perm_mode] "unsigned int" display=int
+  _S_IWRITE 0x0080
+  _S_IREAD  0x0100
+
+pointer [perm_mode*] [perm_mode] display=int*
+
+enum [byte_type] int display=int
+  _MBC_ILLEGAL -1
+  _MBC_SINGLE  0
+  _MBC_LEAD    1
+  _MBC_TRAIL   2
+
+enum [CRT_REPORT_TYPE] int display=int
+  _CRT_WARN   0
+  _CRT_ERROR  1
+  _CRT_ASSERT 2
+  _CRT_ERRCNT 3
+
+flag [CRTDBG_FLAG] "unsigned int" display=int
+  _CRTDBG_ALLOC_MEM_DF      0x01
+  _CRTDBG_DELAY_FREE_MEM_DF 0x02
+  _CRTDBG_CHECK_ALWAYS_DF   0x04
+  _CRTDBG_RESERVED_DF       0x08
+  _CRTDBG_CHECK_CRT_DF      0x10
+  _CRTDBG_LEAK_CHECK_DF     0x20
+
+enum [CRT_RPTHOOK_MODE] int display=int
+  _CRT_RPTHOOK_INSTALL 0
+  _CRT_RPTHOOK_REMOVE  1
+
+flag [CRTDBG_MODE] "unsigned int" display=int
+  _CRTDBG_REPORT_MODE -1
+  _CRTDBG_MODE_FILE   0x1
+  _CRTDBG_MODE_DEBUG  0x2
+  _CRTDBG_MODE_WNDW   0x4
+
+enum [DBG_BLOCK_TYPE] int display=int
+  _FREE_BLOCK   0
+  _NORMAL_BLOCK 1
+  _CRT_BLOCK    2
+  _IGNORE_BLOCK 3
+  _CLIENT_BLOCK 4
+  _MAX_BLOCKS   5
+
+enum [set_error_mode] int display=int
+  _OUT_TO_DEFAULT 0
+  _OUT_TO_STDERR  1
+  _OUT_TO_MSGBOX  2
+  _REPORT_ERRMODE 3
+
+enum [disposition_type] int display=int
+  DISPOSITION_DISMISS          0
+  DISPOSITION_CONTINUE_SEARCH  1
+  DISPOSITION_NESTED_EXCEPTION 2
+  DISPOSITION_COLLIDED_UNWIND  3
+
+enum [xcpt_num] "unsigned long" display="unsigned long"
+  STATUS_ACCESS_VIOLATION        0xC0000005
+  STATUS_ILLEGAL_INSTRUCTION     0xC000001D
+  STATUS_FLOAT_DENORMAL_OPERAND  0xC000008D
+  STATUS_FLOAT_DIVIDE_BY_ZERO    0xC000008E
+  STATUS_FLOAT_INEXACT_RESULT    0xC000008F
+  STATUS_FLOAT_INVALID_OPERATION 0xC0000090
+  STATUS_FLOAT_OVERFLOW          0xC0000091
+  STATUS_FLOAT_STACK_CHECK       0xC0000092
+  STATUS_FLOAT_UNDERFLOW         0xC0000093
+  STATUS_PRIVILEGED_INSTRUCTION  0xC0000096
+
+enum [xcpt_action] int display=int
+  EXCEPTION_CONTINUE_EXECUTION -1
+  EXCEPTION_CONTINUE_SEARCH    0
+  EXCEPTION_EXECUTE_HANDLER    1
+
+enum [_LK_MODE] int display=int
+  _LK_UNLCK  0
+  _LK_LOCK   1
+  _LK_NBLCK  2
+  _LK_RLCK   3
+  _LK_NBRLCK 4
+
+flag [_SW_FLOAT] "unsigned int" display="unsigned int"
+  _SW_INEXACT    0x00000001
+  _SW_UNDERFLOW  0x00000002
+  _SW_OVERFLOW   0x00000004
+  _SW_ZERODIVIDE 0x00000008
+  _SW_INVALID    0x00000010
+  _SW_DENORMAL   0x00080000
+
+flag [control_bits] "unsigned int" display="unsigned int"
+  _PC_64                          0x00000000
+  _EM_INEXACT                     0x00000001
+  _EM_UNDERFLOW                   0x00000002
+  _EM_OVERFLOW                    0x00000004
+  _EM_ZERODIVIDE                  0x00000008
+  _EM_INVALID                     0x00000010
+  _RC_DOWN                        0x00000100
+  _RC_UP                          0x00000200
+  _RC_CHOP                        0x00000300
+  _PC_53                          0x00010000
+  _PC_24                          0x00020000
+  _IC_AFFINE                      0x00040000
+  _EM_DENORMAL                    0x00080000
+  _DN_FLUSH                       0x01000000
+  _DN_FLUSH_OPERANDS_SAVE_RESULTS 0x02000000
+  _DN_SAVE_OPERANDS_FLUSH_RESULTS 0x03000000
+
+enum [control_mask] "unsigned int" display="unsigned int"
+  _MCW_RC 0x00000300
+  _MCW_PC 0x00030000
+  _MCW_IC 0x00040000
+  _MCW_EM 0x0008001f
+  _MCW_DN 0x03000000
+
+flag [_FPCLASS] "unsigned int" display=int
+  _FPCLASS_SNAN 0x0001
+  _FPCLASS_QNAN 0x0002
+  _FPCLASS_NINF 0x0004
+  _FPCLASS_NN   0x0008
+  _FPCLASS_ND   0x0010
+  _FPCLASS_NZ   0x0020
+  _FPCLASS_PZ   0x0040
+  _FPCLASS_PD   0x0080
+  _FPCLASS_PN   0x0100
+  _FPCLASS_PINF 0x0200
+
+enum [file_translation_mode] int display=int
+  _O_TEXT    0x4000
+  _O_BINARY  0x8000
+  _O_WTEXT   0x10000
+  _O_U16TEXT 0x20000
+  _O_U8TEXT  0x40000
+
+pointer [file_translation_mode*] [file_translation_mode] display=int*
+
+enum [RET_EOF] int display=int
+  EOF -1
+
+enum [RET_WEOF] wint_t display=wint_t
+  WEOF -1
+
+enum [RET_WEOF_INT] int display=int
+  WEOF -1
+
+enum [buffer_mode] int display=int
+  _IOFBF 0x0000
+  _IONBF 0x0004
+  _IOLBF 0x0040
+
+enum [locale_category] int display=int
+  LC_ALL      0
+  LC_COLLATE  1
+  LC_CTYPE    2
+  LC_MONETARY 3
+  LC_NUMERIC  4
+  LC_TIME     5
+
+enum [thread_locale_type] int display=int
+  _ENABLE_PER_THREAD_LOCALE  0x1
+  _DISABLE_PER_THREAD_LOCALE 0x2
+
+enum [_MB_CP_TYPE] int display=int
+  _MB_CP_LOCALE -4
+  _MB_CP_ANSI   -3
+  _MB_CP_OEM    -2
+  _MB_CP_SBCS   0
+
+enum [thread_initflag] unsigned display=unsigned
+  CREATE_SUSPENDED 0x00000004
+
+enum [spawn_mode] int display=int
+  _P_WAIT    0
+  _P_NOWAIT  1
+  _P_OVERLAY 2
+  _P_NOWAITO 3
+  _P_DETACH  4
+
+enum [_NLSCMPERROR] int display=int
+  _NLSCMPERROR 0x7FFFFFFF
+
+enum [size_t_INT_MAX] size_t display=size_t
+  INT_MAX 0x7FFFFFFF
+
+flag [abort_flag] "unsigned int" display="unsigned int"
+  _WRITE_ABORT_MSG  0x1
+  _CALL_REPORTFAULT 0x2
+
+func _memccpy
+  void*
+  dest void*
+  src "const void*" length=count
+  c int
+  count size_t
+
+func memchr
+  void*
+  buf "const void*"
+  c int
+  count size_t
+
+func memcmp
+  int
+  buf1 "const void*"
+  buf2 "const void*"
+  count size_t
+
+func memcpy
+  void*
+  dest void*
+  src "const void*" length=count
+  count size_t
+
+func memcpy_s
+  errno_t
+  dest void*
+  numberOfElements size_t
+  src "const void*" length=count
+  count size_t
+
+func wmemcpy_s
+  errno_t
+  dest wchar_t*
+  numberOfElements size_t
+  src "const wchar_t*" length=count
+  count size_t
+
+func _memicmp
+  success NotEqual=0x7FFFFFFF
+  int
+  buf1 "const void*"
+  buf2 "const void*"
+  count size_t
+
+func _memicmp_l
+  success NotEqual=0x7FFFFFFF
+  int
+  buf1 "const void*"
+  buf2 "const void*"
+  count size_t
+  locale _locale_t
+
+func memmove
+  void*
+  dest void*
+  src "const void*" length=count
+  count size_t
+
+func memmove_s
+  errno_t
+  dest void*
+  numberOfElements size_t
+  src "const void*" length=count
+  count size_t
+
+func wmemmove_s
+  errno_t
+  dest wchar_t*
+  numberOfElements size_t
+  src "const wchar_t*" length=count
+  count size_t
+
+func memset
+  void*
+  dest void*
+  c int
+  count size_t
+
+func _swab
+  void
+  src char*
+  dest char*
+  n int
+
+func isleadbyte
+  int
+  c int
+
+func _isleadbyte_l
+  int
+  c int
+  locale _locale_t
+
+func _ismbbalnum
+  int
+  c "unsigned int"
+
+func _ismbbalnum_l
+  int
+  c "unsigned int"
+
+func _ismbbalpha
+  int
+  c "unsigned int"
+
+func _ismbbalpha_l
+  int
+  c "unsigned int"
+
+func _ismbbgraph
+  int
+  c "unsigned int"
+
+func _ismbbgraph_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbbkalnum
+  int
+  c "unsigned int"
+
+func _ismbbkalnum_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbbkana
+  int
+  c "unsigned int"
+
+func _ismbbkana_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbbkprint
+  int
+  c "unsigned int"
+
+func _ismbbkprint_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbbkpunct
+  int
+  c "unsigned int"
+
+func _ismbbkpunct_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbblead
+  int
+  c "unsigned int"
+
+func _ismbblead_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbbprint
+  int
+  c "unsigned int"
+
+func _ismbbprint_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbbpunct
+  int
+  c "unsigned int"
+
+func _ismbbpunct_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbbtrail
+  int
+  c "unsigned int"
+
+func _ismbbtrail_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbslead
+  int
+  str "const unsigned char*"
+  current "const unsigned char*"
+
+func _ismbstrail
+  int
+  str "const unsigned char*"
+  current "const unsigned char*"
+
+func _ismbslead_l
+  int
+  str "const unsigned char*"
+  current "const unsigned char*"
+  locale _locale_t
+
+func _ismbstrail_l
+  int
+  str "const unsigned char*"
+  current "const unsigned char*"
+  locale _locale_t
+
+func _mbbtype
+  [byte_type]
+  c "unsigned char"
+  type int
+
+func _mbbtype_l
+  [byte_type]
+  c "unsigned char"
+  type int
+  locale _locale_t
+
+func _mbsbtype
+  [byte_type]
+  mbstr "const unsigned char*"
+  count size_t
+
+func _mbsbtype_l
+  [byte_type]
+  mbstr "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func isalnum
+  int
+  c int
+
+func iswalnum
+  int
+  c wint_t
+
+func _isalnum_l
+  int
+  c int
+  locale _locale_t
+
+func _iswalnum_l
+  int
+  c wint_t
+  locale _locale_t
+
+func _ismbcalnum
+  int
+  c "unsigned int"
+
+func _ismbcalnum_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbcalpha
+  int
+  c "unsigned int"
+
+func _ismbcalpha_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbcdigit
+  int
+  c "unsigned int"
+
+func _ismbcdigit_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func isalpha
+  int
+  c int
+
+func iswalpha
+  int
+  c wint_t
+
+func _isalpha_l
+  int
+  c int
+  locale _locale_t
+
+func _iswalpha_l
+  int
+  c wint_t
+  locale _locale_t
+
+func __isascii
+  int
+  c int
+
+func iswascii
+  int
+  c wint_t
+
+func iscntrl
+  int
+  c int
+
+func iswcntrl
+  int
+  c wint_t
+
+func _iscntrl_l
+  int
+  c int
+  locale _locale_t
+
+func _iswcntrl_l
+  int
+  c wint_t
+  locale _locale_t
+
+func __iscsym
+  int
+  c int
+
+func __iswcsym
+  int
+  c wint_t
+
+func __iscsymf
+  int
+  c int
+
+func __iswcsymf
+  int
+  c wint_t
+
+func _iswcsym_l
+  int
+  c wint_t
+  locale _locale_t
+
+func _iswcsymf_l
+  int
+  c wint_t
+  locale _locale_t
+
+func isdigit
+  int
+  c int
+
+func iswdigit
+  int
+  c wint_t
+
+func _isdigit_l
+  int
+  c int
+  locale _locale_t
+
+func _iswdigit_l
+  int
+  c wint_t
+  locale _locale_t
+
+func isgraph
+  int
+  c int
+
+func iswgraph
+  int
+  c wint_t
+
+func _isgraph_l
+  int
+  c int
+  locale _locale_t
+
+func _iswgraph_l
+  int
+  c wint_t
+  locale _locale_t
+
+func _ismbcgraph
+  int
+  c "unsigned int"
+
+func _ismbcgraph_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbcprint
+  int
+  c "unsigned int"
+
+func _ismbcprint_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbcpunct
+  int
+  c "unsigned int"
+
+func _ismbcpunct_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbcspace
+  int
+  c "unsigned int"
+
+func _ismbcspace_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func islower
+  int
+  c int
+
+func iswlower
+  int
+  c wint_t
+
+func _islower_l
+  int
+  c int
+  locale _locale_t
+
+func _iswlower_l
+  int
+  c wint_t
+  locale _locale_t
+
+func _ismbclower
+  int
+  c "unsigned int"
+
+func _ismbclower_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbcupper
+  int
+  c "unsigned int"
+
+func _ismbcupper_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbchira
+  int
+  c "unsigned int"
+
+func _ismbchira_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbckata
+  int
+  c "unsigned int"
+
+func _ismbckata_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbclegal
+  int
+  c "unsigned int"
+
+func _ismbclegal_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbcsymbol
+  int
+  c "unsigned int"
+
+func _ismbcsymbol_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbcl0
+  int
+  c "unsigned int"
+
+func _ismbcl0_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbcl1
+  int
+  c "unsigned int"
+
+func _ismbcl1_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func _ismbcl2
+  int
+  c "unsigned int"
+
+func _ismbcl2_l
+  int
+  c "unsigned int"
+  locale _locale_t
+
+func isprint
+  int
+  c int
+
+func iswprint
+  int
+  c wint_t
+
+func _isprint_l
+  int
+  c int
+  locale _locale_t
+
+func _iswprint_l
+  int
+  c wint_t
+  locale _locale_t
+
+func ispunct
+  int
+  c int
+
+func iswpunct
+  int
+  c wint_t
+
+func _ispunct_l
+  int
+  c int
+  locale _locale_t
+
+func _iswpunct_l
+  int
+  c wint_t
+  locale _locale_t
+
+func isspace
+  int
+  c int
+
+func iswspace
+  int
+  c wint_t
+
+func _isspace_l
+  int
+  c int
+  locale _locale_t
+
+func _iswspace_l
+  int
+  c wint_t
+  locale _locale_t
+
+func isupper
+  int
+  c int
+
+func _isupper_l
+  int
+  c int
+  locale _locale_t
+
+func iswupper
+  int
+  c wint_t
+
+func _iswupper_l
+  int
+  c wint_t
+  locale _locale_t
+
+func _isctype
+  int
+  c int
+  mask _ctype_t
+
+func _isctype_l
+  int
+  c int
+  mask _ctype_t
+  locale _locale_t
+
+func iswctype
+  int
+  c wint_t
+  mask wctype_t
+
+func is_wctype
+  int
+  c wint_t
+  mask wctype_t
+
+func _iswctype_l
+  int
+  c wint_t
+  mask wctype_t
+  locale _locale_t
+
+func isxdigit
+  int
+  c int
+
+func iswxdigit
+  int
+  c wint_t
+
+func _isxdigit_l
+  int
+  c int
+  locale _locale_t
+
+func _iswxdigit_l
+  int
+  c wint_t
+  locale _locale_t
+
+func _wctype
+  wctype_t
+  property "const char*"
+
+func __pctype_func
+  "const unsigned short*"
+
+func _aligned_free
+  void
+  memblock void*
+
+func _aligned_free_dbg
+  void
+  memblock void*
+
+func _aligned_malloc
+  success NotEqual=0
+  void*
+  size size_t
+  alignment size_t
+
+func _aligned_malloc_dbg
+  success NotEqual=0
+  void*
+  size size_t
+  alignment size_t
+  filename "const char*"
+  linenumber int
+
+func _aligned_msize
+  success NotEqual=0
+  size_t
+  memblock void*
+  alignment size_t
+  offset size_t
+
+func _aligned_msize_dbg
+  success NotEqual=0
+  size_t
+  memblock void*
+  alignment size_t
+  offset size_t
+
+func _aligned_offset_malloc
+  success NotEqual=0
+  void*
+  size size_t
+  alignment size_t
+  offset size_t
+
+func _aligned_offset_malloc_dbg
+  success NotEqual=0
+  void*
+  size size_t
+  alignment size_t
+  offset size_t
+  filename "const char*"
+  linenumber int
+
+func _aligned_offset_realloc
+  success NotEqual=0
+  void*
+  memblock void*
+  size size_t
+  alignment size_t
+  offset size_t
+
+func _aligned_offset_realloc_dbg
+  success NotEqual=0
+  void*
+  memblock void*
+  size size_t
+  alignment size_t
+  offset size_t
+  filename "const char*"
+  linenumber int
+
+func _aligned_offset_recalloc
+  success NotEqual=0
+  void*
+  memblock void*
+  num size_t
+  size size_t
+  alignment size_t
+  offset size_t
+
+func _aligned_offset_recalloc_dbg
+  success NotEqual=0
+  void*
+  memblock void*
+  num size_t
+  size size_t
+  alignment size_t
+  offset size_t
+  filename "const char*"
+  linenumber int
+
+func _aligned_realloc
+  success NotEqual=0
+  void*
+  memblock void*
+  size size_t
+  alignment size_t
+
+func _aligned_realloc_dbg
+  success NotEqual=0
+  void*
+  memblock void*
+  size size_t
+  alignment size_t
+  filename "const char*"
+  linenumber int
+
+func _aligned_recalloc
+  success NotEqual=0
+  void*
+  memblock void*
+  num size_t
+  size size_t
+  alignment size_t
+
+func _aligned_recalloc_dbg
+  success NotEqual=0
+  void*
+  memblock void*
+  num size_t
+  size size_t
+  alignment size_t
+  filename "const char*"
+  linenumber int
+
+func abs
+  int
+  n int
+
+func _abs64
+  __int64
+  n __int64
+
+func _wtof
+  double
+  str "const wchar_t*"
+
+func _wtof_l
+  double
+  str "const wchar_t*"
+  locale _locale_t
+
+func _wtoi
+  int
+  str "const wchar_t*"
+
+func _wtoi_l
+  int
+  str "const wchar_t*"
+  locale _locale_t
+
+func _wtol
+  long
+  str "const wchar_t*"
+
+func _wtol_l
+  long
+  str "const wchar_t*"
+  locale _locale_t
+
+func _itoa
+  char*
+  value int
+  str char* outputOnly
+  radix int
+
+func _i64toa
+  char*
+  value __int64
+  str char* outputOnly
+  radix int
+
+func _ui64toa
+  char*
+  value "unsigned __int64"
+  str char* outputOnly
+  radix int
+
+func _itow
+  wchar_t*
+  value int
+  str wchar_t* outputOnly
+  radix int
+
+func _i64tow
+  wchar_t*
+  value __int64
+  str wchar_t* outputOnly
+  radix int
+
+func _ui64tow
+  wchar_t*
+  value "unsigned __int64"
+  str wchar_t* outputOnly
+  radix int
+
+func _itoa_s
+  errno_t
+  value int
+  buffer char* outputOnly
+  sizeInCharacters size_t
+  radix int
+
+func _i64toa_s
+  errno_t
+  value __int64
+  buffer char* outputOnly
+  sizeInCharacters size_t
+  radix int
+
+func _ui64toa_s
+  errno_t
+  value "unsigned __int64"
+  buffer char* outputOnly
+  sizeInCharacters size_t
+  radix int
+
+func _itow_s
+  errno_t
+  value int
+  buffer wchar_t* outputOnly
+  sizeInCharacters size_t
+  radix int
+
+func _i64tow_s
+  errno_t
+  value __int64
+  buffer wchar_t* outputOnly
+  sizeInCharacters size_t
+  radix int
+
+func _ui64tow_s
+  errno_t
+  value "unsigned __int64"
+  buffer wchar_t* outputOnly
+  sizeInCharacters size_t
+  radix int
+
+func labs
+  long
+  n long
+
+func _ltoa
+  char*
+  value long
+  str char* outputOnly
+  radix int
+
+func _ltow
+  wchar_t*
+  value long
+  str wchar_t*
+  radix int
+
+func _ltoa_s
+  errno_t
+  value long
+  str char* outputOnly
+  sizeOfstr size_t
+  radix int
+
+func _ltow_s
+  errno_t
+  value long
+  str wchar_t*
+  sizeOfstr size_t
+  radix int
+
+func _mbbtombc
+  "unsigned int"
+  c "unsigned int"
+
+func _mbbtombc_l
+  "unsigned int"
+  c "unsigned int"
+  locale _locale_t
+
+func _mbcjistojms
+  "unsigned int"
+  c "unsigned int"
+
+func _mbcjistojms_l
+  "unsigned int"
+  c "unsigned int"
+  locale _locale_t
+
+func _mbcjmstojis
+  "unsigned int"
+  c "unsigned int"
+
+func _mbcjmstojis_l
+  "unsigned int"
+  c "unsigned int"
+  locale _locale_t
+
+func _mbctohira
+  "unsigned int"
+  c "unsigned int"
+
+func _mbctohira_l
+  "unsigned int"
+  c "unsigned int"
+  locale _locale_t
+
+func _mbctokata
+  "unsigned int"
+  c "unsigned int"
+
+func _mbctokata_l
+  "unsigned int"
+  c "unsigned int"
+  locale _locale_t
+
+func _mbctombb
+  "unsigned int"
+  c "unsigned int"
+
+func _mbctombb_l
+  "unsigned int"
+  c "unsigned int"
+  locale _locale_t
+
+func __toascii
+  int
+  c int
+
+func tolower
+  int
+  c int
+
+func _tolower
+  int
+  c int
+
+func towlower
+  int
+  c wint_t
+
+func _tolower_l
+  int
+  c int
+  locale _locale_t
+
+func _towlower_l
+  int
+  c wint_t
+  locale _locale_t
+
+func toupper
+  int
+  c int
+
+func _toupper
+  int
+  c int
+
+func towupper
+  int
+  c wint_t
+
+func _toupper_l
+  int
+  c int
+  locale _locale_t
+
+func _towupper_l
+  int
+  c wint_t
+  locale _locale_t
+
+func _ultoa
+  char*
+  value "unsigned long"
+  str char* outputOnly
+  radix int
+
+func _ultow
+  wchar_t*
+  value "unsigned long"
+  str wchar_t*
+  radix int
+
+func _ultoa_s
+  errno_t
+  value "unsigned long"
+  str char* outputOnly
+  sizeOfstr size_t
+  radix int
+
+func _ultow_s
+  errno_t
+  value "unsigned long"
+  str wchar_t*
+  sizeOfstr size_t
+  radix int
+
+func _fcvt
+  success NotEqual=0
+  char*
+  value double
+  count int
+  dec int*
+  sign int*
+
+func _fcvt_s
+  errno_t
+  buffer char* outputOnly
+  sizeInBytes size_t
+  value double
+  count int
+  dec int*
+  sign int*
+
+func _gcvt
+  success NotEqual=0
+  char*
+  value double
+  digits int
+  buffer char* outputOnly
+
+func _gcvt_s
+  errno_t
+  buffer char* outputOnly
+  sizeInBytes size_t
+  value double
+  digits int
+
+func _atol_l
+  long
+  str "const char*"
+  locale _locale_t
+
+func _atoi_l
+  int
+  str "const char*"
+  locale _locale_t
+
+func atof
+  double
+  str "const char*"
+
+func _atof_l
+  double
+  str "const char*"
+  locale _locale_t
+
+func _atoi64_l
+  __int64
+  str "const char*"
+  locale _locale_t
+
+func atoi
+  int
+  str "const char*"
+
+func _atoi64
+  __int64
+  str "const char*"
+
+func atol
+  long
+  str "const char*"
+
+func _atodbl
+  int
+  value _CRT_DOUBLE*
+  str char*
+
+func _atodbl_l
+  success Equal=0
+  int
+  value _CRT_DOUBLE*
+  str char*
+  locale _locale_t
+
+func _atoldbl
+  success Equal=0
+  int
+  value _LDOUBLE*
+  str char*
+
+func _atoldbl_l
+  success Equal=0
+  int
+  value _LDOUBLE*
+  str char*
+  locale _locale_t
+
+func _atoflt
+  success Equal=0
+  int
+  value _CRT_FLOAT*
+  str char*
+
+func _atoflt_l
+  success Equal=0
+  int
+  value _CRT_FLOAT*
+  str char*
+  locale _locale_t
+
+func _wtoi64
+  __int64
+  str "const wchar_t*"
+
+func _wtoi64_l
+  __int64
+  str "const wchar_t*"
+  locale _locale_t
+
+func strtoul
+  "unsigned long"
+  nptr "const char*"
+  endptr char**
+  base int
+
+func _strtoul_l
+  "unsigned long"
+  nptr "const char*"
+  endptr char**
+  base int
+  locale _locale_t
+
+func wcstoul
+  "unsigned long"
+  nptr "const wchar_t*"
+  endptr wchar_t**
+  base int
+
+func _wcstoul_l
+  "unsigned long"
+  nptr "const wchar_t*"
+  endptr wchar_t**
+  base int
+  locale _locale_t
+
+func strtod
+  double
+  nptr "const char*"
+  endptr char**
+
+func _strtod_l
+  double
+  nptr "const char*"
+  endptr char**
+  locale _locale_t
+
+func wcstod
+  double
+  nptr "const wchar_t*"
+  endptr wchar_t**
+
+func _wcstod_l
+  double
+  nptr "const wchar_t*"
+  endptr wchar_t**
+  locale _locale_t
+
+func strtol
+  long
+  nptr "const char*"
+  endptr char**
+  base int
+
+func wcstol
+  long
+  nptr "const wchar_t*"
+  endptr wchar_t**
+  base int
+
+func _strtol_l
+  long
+  nptr "const char*"
+  endptr char**
+  base int
+  locale _locale_t
+
+func _wcstol_l
+  long
+  nptr "const wchar_t*"
+  endptr wchar_t**
+  base int
+  locale _locale_t
+
+func mbtowc
+  success NotEqual=-1
+  int
+  wchar wchar_t*
+  mbchar "const char*"
+  count size_t
+
+func _mbtowc_l
+  success Equal=-1
+  int
+  wchar wchar_t*
+  mbchar "const char*"
+  count size_t
+  locale _locale_t
+
+func mbstowcs
+  success NotEqual=-1
+  size_t
+  wcstr wchar_t*
+  mbstr "const char*"
+  count size_t
+
+func _mbstowcs_l
+  success NotEqual=-1
+  size_t
+  wcstr wchar_t*
+  mbstr "const char*"
+  count size_t
+  locale _locale_t
+
+func mbstowcs_s
+  errno_t
+  pReturnValue size_t*
+  wcstr wchar_t*
+  sizeInWords size_t
+  mbstr "const char*"
+  count size_t
+
+func _mbstowcs_s_l
+  errno_t
+  pReturnValue size_t*
+  wcstr wchar_t*
+  sizeInWords size_t
+  mbstr "const char*"
+  count size_t
+  locale _locale_t
+
+func wcstombs
+  success NotEqual=-1
+  size_t
+  mbstr char*
+  wcstr "const wchar_t*"
+  count size_t
+
+func _wcstombs_l
+  success NotEqual=-1
+  size_t
+  mbstr char*
+  wcstr "const wchar_t*"
+  count size_t
+  locale _locale_t
+
+func wcstombs_s
+  errno_t
+  pReturnValue size_t*
+  mbstr char*
+  sizeInBytes size_t
+  wcstr "const wchar_t*"
+  count size_t
+
+func _wcstombs_s_l
+  errno_t
+  pReturnValue size_t*
+  mbstr char*
+  sizeInBytes size_t
+  wcstr "const wchar_t*"
+  count size_t
+  locale _locale_t
+
+func wctomb
+  success NotEqual=-1
+  int
+  mbchar char*
+  wchar wchar_t
+
+func _wctomb_l
+  success NotEqual=-1
+  int
+  mbchar char*
+  wchar wchar_t
+  locale _locale_t
+
+func wctomb_s
+  errno_t
+  pRetValue int*
+  mbchar char*
+  sizeInBytes size_t
+  wchar wchar_t
+
+func _wctomb_s_l
+  errno_t
+  pRetValue int*
+  mbchar char*
+  sizeInBytes size_t
+  wchar wchar_t
+  locale _locale_t
+
+func _mbctoupper_l
+  "unsigned int"
+  c "unsigned int"
+  locale _locale_t
+
+func _mbctoupper
+  "unsigned int"
+  c "unsigned int"
+
+func _mbctolower
+  "unsigned int"
+  c "unsigned int"
+
+func _mbctolower_l
+  "unsigned int"
+  c "unsigned int"
+  locale _locale_t
+
+func _ecvt
+  success NotEqual=0
+  char*
+  value double
+  count int
+  dec int*
+  sign int*
+
+func _ecvt_s
+  errno_t
+  _Buffer char*
+  _SizeInBytes size_t
+  _Value double
+  _Count int
+  _Dec int*
+  _Sign int*
+
+func mbrtowc
+  success NotEqual=-1
+  size_t
+  wchar wchar_t*
+  mbchar "const char*"
+  count size_t
+  mbstate mbstate_t
+
+func mbsrtowcs
+  success NotEqual=-1
+  size_t
+  wcstr wchar_t*
+  mbstr "const char**"
+  count size_t
+  mbstate mbstate_t*
+
+func mbsrtowcs_s
+  errno_t
+  pReturnValue size_t*
+  wcstr wchar_t*
+  sizeInWords size_t
+  mbstr "const char**"
+  count size_t
+  mbstate mbstate_t*
+
+func _strtoi64
+  __int64
+  nptr "const char*"
+  endptr char**
+  base int
+
+func _wcstoi64
+  __int64
+  nptr "const wchar_t*"
+  endptr wchar_t**
+  base int
+
+func _strtoi64_l
+  __int64
+  nptr "const char*"
+  endptr char**
+  base int
+  locale _locale_t
+
+func _wcstoi64_l
+  __int64
+  nptr "const wchar_t*"
+  endptr wchar_t**
+  base int
+  locale _locale_t
+
+func _strtoui64
+  "unsigned __int64"
+  nptr "const char*"
+  endptr char**
+  base int
+
+func _wcstoui64
+  "unsigned __int64"
+  nptr "const wchar_t*"
+  endptr wchar_t**
+  base int
+
+func _strtoui64_l
+  "unsigned __int64"
+  nptr "const char*"
+  endptr char**
+  base int
+  locale _locale_t
+
+func _wcstoui64_l
+  "unsigned __int64"
+  nptr "const wchar_t*"
+  endptr wchar_t**
+  base int
+  locale _locale_t
+
+func wcrtomb
+  success NotEqual=-1
+  size_t
+  mbchar char*
+  wchar wchar_t
+  mbstate mbstate_t*
+
+func wcrtomb_s
+  errno_t
+  pReturnValue size_t*
+  mbchar char*
+  sizeOfmbchar size_t
+  wchar wchar_t*
+  mbstate mbstate_t*
+
+func wcsrtombs
+  success NotEqual=-1
+  size_t
+  mbstr char*
+  wcstr "const wchar_t**"
+  count size_t
+  mbstate mbstate_t*
+
+func wcsrtombs_s
+  errno_t
+  pReturnValue size_t*
+  mbstr char*
+  sizeInBytes size_t
+  wcstr "const wchar_t**"
+  count size_t
+  mbstate mbstate_t*
+
+func wctob
+  success NotEqual=-1
+  int
+  wchar wint_t
+
+func _byteswap_ushort
+  "unsigned short"
+  val "unsigned short"
+
+func _byteswap_ulong
+  "unsigned long"
+  val "unsigned long"
+
+func _byteswap_uint64
+  "unsigned __int64"
+  val "unsigned __int64"
+
+func btowc
+  wint_t
+  c int
+
+func _CrtCheckMemory
+  success NotEqual=0
+  int
+
+func _CrtDbgBreak
+  void
+
+func _CrtDbgReport varArgs
+  success NotEqual=-1
+  int
+  reportType [CRT_REPORT_TYPE]
+  filename "const char*"
+  linenumber int
+  moduleName "const char*"
+  format "const char*"
+
+func _CrtDbgReportW varArgs
+  success NotEqual=-1
+  int
+  reportType [CRT_REPORT_TYPE]
+  filename "const wchar_t*"
+  linenumber int
+  moduleName "const wchar_t*"
+  format "const wchar_t*"
+
+func _CrtDoForAllClientObjects
+  void
+  pfn void* display="void (__cdecl*)(void*, void*)"
+  context void*
+
+func _CrtDumpMemoryLeaks
+  int
+
+func _CrtIsMemoryBlock
+  int
+  userData "const void*"
+  size "unsigned int"
+  requestNumber long*
+  filename char**
+  linenumber int*
+
+func _CrtIsValidHeapPointer
+  int
+  userData "const void*"
+
+func _CrtIsValidPointer
+  int
+  address "const void*"
+  size "unsigned int"
+  access int
+
+func _CrtMemCheckpoint
+  void
+  state _CrtMemState*
+
+func _CrtMemDifference
+  int
+  stateDiff _CrtMemState*
+  oldState "const _CrtMemState*"
+  newState "const _CrtMemState*"
+
+func _CrtMemDumpAllObjectsSince
+  void
+  state "const _CrtMemState*"
+
+func _CrtMemDumpStatistics
+  void
+  state "const _CrtMemState*"
+
+func _CrtReportBlockType
+  success NotEqual=-1
+  int
+  pBlock "const void*"
+
+func _CrtSetAllocHook
+  _CRT_ALLOC_HOOK
+  allocHook _CRT_ALLOC_HOOK
+
+func _CrtSetBreakAlloc
+  long
+  lBreakAlloc long
+
+func _CrtSetDbgFlag
+  int
+  newFlag [CRTDBG_FLAG]
+
+func _CrtSetDumpClient
+  _CRT_DUMP_CLIENT
+  dumpClient _CRT_DUMP_CLIENT
+
+func _CrtSetReportFile
+  success NotEqual=-2
+  _HFILE
+  reportType [CRT_REPORT_TYPE]
+  reportFile _HFILE
+
+func _CrtSetReportHook
+  _CRT_REPORT_HOOK
+  reportHook _CRT_REPORT_HOOK
+
+func _CrtSetReportHook2
+  success NotEqual=-1
+  int
+  mode [CRT_RPTHOOK_MODE]
+  pfnNewHook _CRT_REPORT_HOOK
+
+func _CrtSetReportHookW2
+  success NotEqual=-1
+  int
+  mode [CRT_RPTHOOK_MODE]
+  pfnNewHook _CRT_REPORT_HOOKW
+
+func _CrtSetReportMode
+  success NotEqual=-1
+  [CRTDBG_MODE]
+  reportType [CRT_REPORT_TYPE]
+  reportMode [CRTDBG_MODE]
+
+func _CrtGetAllocHook
+  _CRT_ALLOC_HOOK
+
+func _CrtGetDumpClient
+  _CRT_DUMP_CLIENT
+
+func _CrtGetReportHook
+  _CRT_REPORT_HOOK
+
+func _CrtSetDebugFillThreshold
+  size_t
+  _NewThreshold size_t
+
+func _chdir
+  success NotEqual=-1
+  int
+  dirname "const char*"
+
+func _wchdir
+  success NotEqual=-1
+  int
+  dirname "const wchar_t*"
+
+func _chdrive
+  success NotEqual=-1
+  int
+  drive int
+
+func _getcwd
+  success NotEqual=0
+  char*
+  buffer char* outputOnly
+  maxlen int
+
+func _getcwd_dbg
+  success NotEqual=0
+  char*
+  buffer char* outputOnly
+  maxlen int
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _wgetcwd
+  success NotEqual=0
+  wchar_t*
+  buffer wchar_t* outputOnly
+  maxlen int
+
+func _wgetcwd_dbg
+  success NotEqual=0
+  wchar_t*
+  buffer wchar_t* outputOnly
+  maxlen int
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _getdcwd
+  success NotEqual=0
+  char*
+  drive int
+  buffer char* outputOnly
+  maxlen int
+
+func _getdcwd_dbg
+  success NotEqual=0
+  char*
+  drive int
+  buffer char* outputOnly
+  maxlen int
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _wgetdcwd
+  success NotEqual=0
+  wchar_t*
+  drive int
+  buffer wchar_t* outputOnly
+  maxlen int
+
+func _wgetdcwd_dbg
+  success NotEqual=0
+  wchar_t*
+  drive int
+  buffer wchar_t* outputOnly
+  maxlen int
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _getdiskfree
+  success Equal=0
+  errno_t display=unsigned
+  drive unsigned
+  driveinfo "struct _diskfree_t*"
+
+func _getdrive
+  int
+
+func _getdrives
+  success NotEqual=0
+  "unsigned long"
+
+func _mkdir
+  success NotEqual=-1
+  int
+  dirname "const char*"
+
+func _wmkdir
+  success NotEqual=-1
+  int
+  dirname "const wchar_t*"
+
+func _rmdir
+  success NotEqual=-1
+  int
+  dirname "const char*"
+
+func _wrmdir
+  success NotEqual=-1
+  int
+  dirname "const wchar_t*"
+
+func _searchenv
+  void
+  filename "const char*"
+  varname "const char*"
+  pathname char*
+
+func _wsearchenv
+  void
+  filename "const wchar_t*"
+  varname "const wchar_t*"
+  pathname wchar_t*
+
+func _searchenv_s
+  errno_t
+  filename "const char*"
+  varname "const char*"
+  pathname char*
+  numberOfElements size_t
+
+func _wsearchenv_s
+  errno_t
+  filename "const wchar_t*"
+  varname "const wchar_t*"
+  pathname wchar_t*
+  numberOfElements size_t
+
+func _set_error_mode
+  success NotEqual=-1
+  [set_error_mode]
+  modeval [set_error_mode]
+
+func _seterrormode
+  success NotEqual=-1
+  [set_error_mode]
+  mode [set_error_mode]
+
+func _purecall
+  void
+
+func _set_purecall_handler
+  _purecall_handler
+  function _purecall_handler
+
+func _get_doserrno
+  errno_t
+  pValue int*
+
+func _get_errno
+  errno_t
+  pValue int*
+
+func _set_doserrno
+  errno_t
+  value int
+
+func _set_errno
+  errno_t
+  value int
+
+func _set_abort_behavior
+  [abort_flag]
+  flags [abort_flag]
+  mask [abort_flag]
+
+func _get_invalid_parameter_handler
+  _invalid_parameter_handler
+
+func _set_invalid_parameter_handler
+  _invalid_parameter_handler
+  pNew _invalid_parameter_handler
+
+func _amsg_exit
+  void
+  rterrnum int
+
+func ?_set_se_translator@@YAP6AXIPAU_EXCEPTION_POINTERS@@@ZP6AXI0@Z@Z
+  _se_translator_function
+  seTransFunction _se_translator_function
+
+func _get_terminate
+  terminate_function
+
+func ?set_terminate@@YAP6AXXZP6AXXZ@Z
+  terminate_function
+  termFunction terminate_function
+
+func _get_unexpected
+  unexpected_function
+
+func ?set_unexpected@@YAP6AXXZP6AXXZ@Z
+  unexpected_function
+  unexpFunction unexpected_function
+
+func ?terminate@@YAXXZ
+  void
+
+func ?unexpected@@YAXXZ
+  void
+
+func __CxxFrameHandler
+  EXCEPTION_DISPOSITION
+  pExcept EHExceptionRecord*
+  pRN EHRegistrationNode*
+  pContext void*
+  pDC DispatcherContext*
+
+func _except_handler3
+  [disposition_type]
+  exception_record PEXCEPTION_RECORD
+  registration PEXCEPTION_REGISTRATION
+  context PCONTEXT
+  dispatcher PEXCEPTION_REGISTRATION
+
+func __uncaught_exception
+  bool
+
+func _XcptFilter
+  [xcpt_action]
+  xcptnum [xcpt_num]
+  pxcptinfoptrs PEXCEPTION_POINTERS
+
+func _resetstkoflw
+  success NotEqual=0
+  int
+
+func _abnormal_termination
+  int
+
+func _chsize
+  success NotEqual=-1
+  int
+  fd int
+  size long
+
+func _chsize_s
+  errno_t
+  fd int
+  size __int64
+
+func _filelength
+  success NotEqual=-1
+  long
+  fd int
+
+func _filelengthi64
+  success NotEqual=-1
+  __int64
+  fd int
+
+func _fstat
+  success NotEqual=-1
+  int
+  fd int
+  buffer "struct _stat*"
+
+func _fstat32
+  success NotEqual=-1
+  int
+  fd int
+  buffer "struct _stat32*"
+
+func _fstat64
+  success NotEqual=-1
+  int
+  fd int
+  buffer "struct _stat64*"
+
+func _fstati64
+  success NotEqual=-1
+  int
+  fd int
+  buffer "struct _stati64*"
+
+func _fstat32i64
+  success NotEqual=-1
+  int
+  fd int
+  buffer "struct _stat32i64*"
+
+func _fstat64i32
+  success NotEqual=-1
+  int
+  fd int
+  buffer "struct _stat64i32*"
+
+func _get_osfhandle
+  success NotEqual=-1
+  intptr_t
+  fd int
+
+func _isatty
+  int
+  fd int
+
+func _locking
+  success NotEqual=-1
+  int
+  fd int
+  mode [_LK_MODE]
+  nbytes long
+
+func _open_osfhandle
+  success NotEqual=-1
+  int
+  osfhandle intptr_t
+  flags int
+
+func _access
+  success NotEqual=-1
+  int
+  path "const char*"
+  mode int
+
+func _waccess
+  success NotEqual=-1
+  int
+  path "const wchar_t*"
+  mode int
+
+func _access_s
+  errno_t
+  path "const char*"
+  mode int
+
+func _waccess_s
+  errno_t
+  path "const wchar_t*"
+  mode int
+
+func _chmod
+  success NotEqual=-1
+  int
+  filename "const char*"
+  pmode [perm_mode]
+
+func _wchmod
+  success NotEqual=-1
+  int
+  filename "const wchar_t*"
+  pmode [perm_mode]
+
+func _fullpath
+  success NotEqual=0
+  char*
+  absPath char*
+  relPath "const char*"
+  maxLength size_t
+
+func _fullpath_dbg
+  success NotEqual=0
+  char*
+  absPath char*
+  relPath "const char*"
+  maxLength size_t
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _wfullpath
+  success NotEqual=0
+  wchar_t*
+  absPath wchar_t*
+  relPath "const wchar_t*"
+  maxLength size_t
+
+func _wfullpath_dbg
+  success NotEqual=0
+  wchar_t*
+  absPath wchar_t*
+  relPath "const wchar_t*"
+  maxLength size_t
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _makepath
+  void
+  path char*
+  drive "const char*"
+  dir "const char*"
+  fname "const char*"
+  ext "const char*"
+
+func _wmakepath
+  void
+  path wchar_t*
+  drive "const wchar_t*"
+  dir "const wchar_t*"
+  fname "const wchar_t*"
+  ext "const wchar_t*"
+
+func _makepath_s
+  errno_t
+  path char*
+  sizeInBytes size_t
+  drive "const char*"
+  dir "const char*"
+  fname "const char*"
+  ext "const char*"
+
+func _wmakepath_s
+  errno_t
+  path wchar_t*
+  sizeInWords size_t
+  drive "const wchar_t*"
+  dir "const wchar_t*"
+  fname "const wchar_t*"
+  ext "const wchar_t*"
+
+func _mktemp
+  success NotEqual=0
+  char*
+  template char*
+
+func _wmktemp
+  success NotEqual=0
+  wchar_t*
+  template wchar_t*
+
+func _mktemp_s
+  errno_t
+  template char*
+  sizeInChars size_t
+
+func _wmktemp_s
+  errno_t
+  template wchar_t*
+  sizeInChars size_t
+
+func remove
+  success NotEqual=-1
+  int
+  path "const char*"
+
+func _wremove
+  success NotEqual=-1
+  int
+  path "const wchar_t*"
+
+func rename
+  success Equal=0
+  int
+  oldname "const char*"
+  newname "const char*"
+
+func _wrename
+  success Equal=0
+  int
+  oldname "const wchar_t*"
+  newname "const wchar_t*"
+
+func _splitpath
+  void
+  path "const char*"
+  drive char* outputOnly
+  dir char* outputOnly
+  fname char* outputOnly
+  ext char* outputOnly
+
+func _wsplitpath
+  void
+  path "const wchar_t*"
+  drive wchar_t* outputOnly
+  dir wchar_t* outputOnly
+  fname wchar_t* outputOnly
+  ext wchar_t* outputOnly
+
+func _splitpath_s
+  errno_t
+  path "const char*"
+  drive char* outputOnly
+  driveNumberOfElements size_t
+  dir char* outputOnly
+  dirNumberOfElements size_t
+  fname char* outputOnly
+  nameNumberOfElements size_t
+  ext char* outputOnly
+  extNumberOfElements size_t
+
+func _wsplitpath_s
+  errno_t
+  path "const wchar_t*"
+  drive wchar_t* outputOnly
+  driveNumberOfElements size_t
+  dir wchar_t* outputOnly
+  dirNumberOfElements size_t
+  fname wchar_t* outputOnly
+  nameNumberOfElements size_t
+  ext wchar_t* outputOnly
+  extNumberOfElements size_t
+
+func _stat
+  success NotEqual=-1
+  int
+  path "const char*"
+  buffer "struct _stat*"
+
+func _stat32
+  success NotEqual=-1
+  int
+  path "const char*"
+  buffer "struct _stat32*"
+
+func _stat64
+  success NotEqual=-1
+  int
+  path "const char*"
+  buffer "struct _stat64*"
+
+func _stati64
+  success NotEqual=-1
+  int
+  path "const char*"
+  buffer "struct _stati64*"
+
+func _stat32i64
+  success NotEqual=-1
+  int
+  path "const char*"
+  buffer "struct _stat32i64*"
+
+func _stat64i32
+  success NotEqual=-1
+  int
+  path "const char*"
+  buffer "struct _stat64i32*"
+
+func _wstat
+  success NotEqual=-1
+  int
+  path "const wchar_t*"
+  buffer "struct _stat*"
+
+func _wstat32
+  success NotEqual=-1
+  int
+  path "const wchar_t*"
+  buffer "struct _stat32*"
+
+func _wstat64
+  success NotEqual=-1
+  int
+  path "const wchar_t*"
+  buffer "struct _stat64*"
+
+func _wstati64
+  success NotEqual=-1
+  int
+  path "const wchar_t*"
+  buffer "struct _stati64*"
+
+func _wstat32i64
+  success NotEqual=-1
+  int
+  path "const wchar_t*"
+  buffer "struct _stat32i64*"
+
+func _wstat64i32
+  success NotEqual=-1
+  int
+  path "const wchar_t*"
+  buffer "struct _stat64i32*"
+
+func _unlink
+  success NotEqual=-1
+  int
+  filename "const char*"
+
+func _wunlink
+  success NotEqual=-1
+  int
+  filename "const wchar_t*"
+
+func acos
+  double
+  x double
+
+func acosf
+  float
+  x float
+
+func asin
+  double
+  x double
+
+func asinf
+  float
+  x float
+
+func atan
+  double
+  x double
+
+func atan2
+  double
+  y double
+  x double
+
+func atanf
+  float
+  x float
+
+func atan2f
+  float
+  y float
+  x float
+
+func _cabs
+  double
+  z "struct _complex"
+
+func ceil
+  double
+  x double
+
+func ceilf
+  float
+  x float
+
+func _chgsign
+  double
+  x double
+
+func _chgsignf
+  float
+  x float
+
+func _clearfp
+  success NotEqual=0
+  [_SW_FLOAT]
+
+func _control87
+  success NotEqual=0
+  "unsigned int"
+  new [control_bits]
+  mask [control_mask]
+
+func _controlfp
+  success NotEqual=0
+  "unsigned int"
+  new [control_bits]
+  mask [control_mask]
+
+func __control87_2
+  success Equal=1
+  int
+  new [control_bits]
+  mask [control_mask]
+  x86_cw "unsigned int*"
+  sse2_cw "unsigned int*"
+
+func _controlfp_s
+  errno_t
+  currentControl "unsigned int*"
+  newControl [control_bits]
+  mask [control_mask]
+
+func _copysign
+  double
+  x double
+  y double
+
+func _copysignf
+  float
+  x float
+  y float
+
+func cos
+  double
+  x double
+
+func cosf
+  float
+  x float
+
+func cosh
+  double
+  x double
+
+func coshf
+  float
+  x float
+
+func div
+  div_t
+  numer int
+  denom int
+
+func exp
+  double
+  x double
+
+func expf
+  float
+  x float
+
+func fabs
+  double
+  x double
+
+func _finite
+  success NotEqual=0
+  int
+  x double
+
+func floor
+  double
+  x double
+
+func floorf
+  float
+  x float
+
+func fmod
+  double
+  x double
+  y double
+
+func fmodf
+  float
+  x float
+  y float
+
+func _fpclass
+  [_FPCLASS]
+  x double
+
+func _fpieee_flt
+  success NotEqual=0
+  int
+  excCode "unsigned long"
+  excInfo "struct _EXCEPTION_POINTERS*"
+  handler void* display="int (__cdecl*)(_FPIEEE_RECORD *)"
+
+func _fpreset
+  void
+
+func frexp
+  double
+  x double
+  expptr int*
+
+func _hypot
+  double
+  x double
+  y double
+
+func _hypotf
+  float
+  x float
+  y float
+
+func _isnan
+  int
+  x double
+
+func ldexp
+  double
+  x double
+  exp int
+
+func ldiv
+  ldiv_t
+  numer "long int"
+  denom "long int"
+
+func log
+  double
+  x double
+
+func logf
+  float
+  x float
+
+func log10
+  double
+  x double
+
+func log10f
+  float
+  x float
+
+func _logb
+  double
+  x double
+
+func _lrotl
+  "unsigned long"
+  value "unsigned long"
+  shift int
+
+func _lrotr
+  "unsigned long"
+  value "unsigned long"
+  shift int
+
+func _matherr
+  success NotEqual=0
+  int
+  except "struct _exception*"
+
+func __setusermatherr
+  void
+  pf _HANDLE_MATH_ERROR
+
+func modf
+  double
+  x double
+  intptr double*
+
+func modff
+  float
+  x float
+  intptr float*
+
+func _nextafter
+  double
+  x double
+  y double
+
+func pow
+  double
+  x double
+  y double
+
+func powf
+  float
+  x float
+  y float
+
+func rand
+  int
+
+func rand_s
+  errno_t
+  randomValue "unsigned int*"
+
+func _rotl
+  "unsigned int"
+  value "unsigned int"
+  shift int
+
+func _rotl64
+  "unsigned __int64"
+  value "unsigned __int64"
+  shift int
+
+func _rotr
+  "unsigned int"
+  value "unsigned int"
+  shift int
+
+func _rotr64
+  "unsigned __int64"
+  value "unsigned __int64"
+  shift int
+
+func _scalb
+  double
+  x double
+  exp long
+
+func _set_controlfp
+  void
+  newControl "unsigned int"
+  mask "unsigned int"
+
+func sin
+  double
+  x double
+
+func sinf
+  float
+  x float
+
+func sinh
+  double
+  x double
+
+func sinhf
+  float
+  x float
+
+func sqrt
+  double
+  x double
+
+func sqrtf
+  float
+  x float
+
+func srand
+  void
+  seed "unsigned int"
+
+func _statusfp
+  "unsigned int"
+
+func tan
+  double
+  x double
+
+func tanf
+  float
+  x float
+
+func tanh
+  double
+  x double
+
+func tanhf
+  float
+  x float
+
+func _y0
+  double
+  x double
+
+func _y1
+  double
+  x double
+
+func _yn
+  double
+  n int
+  x double
+
+func _j0
+  double
+  x double
+
+func _j1
+  double
+  x double
+
+func _jn
+  double
+  n int
+  x double
+
+func _set_SSE2_enable
+  success NotEqual=0
+  int
+  flag int
+
+func _set_fmode
+  errno_t
+  mode [file_translation_mode]
+
+func _get_fmode
+  errno_t
+  pmode [file_translation_mode*]
+
+func _setmode
+  success NotEqual=-1
+  [file_translation_mode]
+  fd int
+  mode [file_translation_mode]
+
+func __p__fmode
+  [file_translation_mode*]
+
+func clearerr
+  void
+  stream FILE*
+
+func clearerr_s
+  errno_t
+  stream FILE*
+
+func fclose
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+
+func _fcloseall
+  success NotEqual=-1
+  [RET_EOF]
+
+func _fdopen
+  success NotEqual=0
+  FILE*
+  fd int
+  mode "const char*"
+
+func _wfdopen
+  success NotEqual=0
+  FILE*
+  fd int
+  mode "const wchar_t*"
+
+func feof
+  int
+  stream FILE*
+
+func ferror
+  int
+  stream FILE*
+
+func fflush
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+
+func fgetc
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+
+func fgetwc
+  success NotEqual=-1
+  [RET_WEOF]
+  stream FILE*
+
+func fgetpos
+  success Equal=0
+  int
+  stream FILE*
+  pos fpos_t*
+
+func fgets
+  success NotEqual=0
+  char*
+  str char* outputOnly
+  n int
+  stream FILE*
+
+func fgetws
+  success NotEqual=0
+  wchar_t*
+  str wchar_t* outputOnly
+  n int
+  stream FILE*
+
+func _fileno
+  int
+  stream FILE*
+
+func _flushall
+  int
+
+func fopen
+  success NotEqual=0
+  FILE*
+  filename "const char*"
+  mode "const char*"
+
+func _wfopen
+  success NotEqual=0
+  FILE*
+  filename "const wchar_t*"
+  mode "const wchar_t*"
+
+func fopen_s
+  errno_t
+  pFile FILE**
+  filename "const char*"
+  mode "const char*"
+
+func _wfopen_s
+  errno_t
+  pFile FILE**
+  filename "const wchar_t*"
+  mode "const wchar_t*"
+
+func fprintf varArgs
+  success Greater=-1
+  int
+  stream FILE*
+  format "const char*"
+
+func _fprintf_l varArgs
+  success Greater=-1
+  int
+  stream FILE*
+  format "const char*"
+  locale _locale_t
+
+func fwprintf varArgs
+  success Greater=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+
+func _fwprintf_l varArgs
+  success Greater=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+  locale _locale_t
+
+func fprintf_s varArgs
+  success Greater=-1
+  int
+  stream FILE*
+  format "const char*"
+
+func _fprintf_s_l varArgs
+  success Greater=-1
+  int
+  stream FILE*
+  format "const char*"
+  locale _locale_t
+
+func fwprintf_s varArgs
+  success Greater=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+
+func _fwprintf_s_l varArgs
+  success Greater=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+  locale _locale_t
+
+func fputc
+  success NotEqual=-1
+  [RET_EOF]
+  c int
+  stream FILE*
+
+func fputwc
+  success NotEqual=-1
+  [RET_WEOF]
+  c wchar_t
+  stream FILE*
+
+func fputs
+  success NotEqual=-1
+  [RET_EOF]
+  str "const char*"
+  stream FILE*
+
+func fputws
+  success NotEqual=0
+  [RET_WEOF_INT]
+  str "const wchar_t*"
+  stream FILE*
+
+func fread
+  success NotEqual=0
+  size_t
+  buffer void* postLength=Return
+  size size_t
+  count size_t
+  stream FILE*
+
+func freopen
+  success NotEqual=0
+  FILE*
+  path "const char*"
+  mode "const char*"
+  stream FILE*
+
+func _wfreopen
+  success NotEqual=0
+  FILE*
+  path "const wchar_t*"
+  mode "const wchar_t*"
+  stream FILE*
+
+func freopen_s
+  errno_t
+  pFile FILE**
+  path "const char*"
+  mode "const char*"
+  stream FILE*
+
+func _wfreopen_s
+  errno_t
+  pFile FILE**
+  path "const wchar_t*"
+  mode "const wchar_t*"
+  stream FILE*
+
+func fscanf varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+  format "const char*"
+
+func _fscanf_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+  format "const char*"
+  locale _locale_t
+
+func fwscanf varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+  format "const wchar_t*"
+
+func _fwscanf_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+  format "const wchar_t*"
+  locale _locale_t
+
+func fscanf_s varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+  format "const char*"
+
+func _fscanf_s_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+  format "const char*"
+  locale _locale_t
+
+func fwscanf_s varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+  format "const wchar_t*"
+
+func _fwscanf_s_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+  format "const wchar_t*"
+  locale _locale_t
+
+func fseek
+  success Equal=0
+  int
+  stream FILE*
+  offset long
+  origin [SEEK_TYPE]
+
+func _fseeki64
+  success Equal=0
+  int
+  stream FILE*
+  offset __int64
+  origin [SEEK_TYPE]
+
+func fsetpos
+  success Equal=0
+  int
+  stream FILE*
+  pos "const fpos_t*"
+
+func _fsopen
+  success NotEqual=0
+  FILE*
+  filename "const char*"
+  mode "const char*"
+  shflag [share_flag]
+
+func _wfsopen
+  success NotEqual=0
+  FILE*
+  filename "const wchar_t*"
+  mode "const wchar_t*"
+  shflag [share_flag]
+
+func ftell
+  success NotEqual=-1
+  long
+  stream FILE*
+
+func _ftelli64
+  success NotEqual=-1
+  __int64
+  stream FILE*
+
+func fwrite
+  success NotEqual=0
+  size_t
+  buffer "const void*" length=count
+  size size_t
+  count size_t
+  stream FILE*
+
+func getc
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+
+func getwc
+  success NotEqual=-1
+  [RET_WEOF]
+  stream FILE*
+
+func _getmaxstdio
+  int
+
+func gets
+  success NotEqual=0
+  char*
+  buffer char* outputOnly
+
+func _getws
+  success NotEqual=0
+  wchar_t*
+  buffer wchar_t* outputOnly
+
+func gets_s
+  success NotEqual=0
+  char*
+  buffer char* outputOnly
+  sizeInCharacters size_t
+
+func _getws_s
+  success NotEqual=0
+  wchar_t*
+  buffer wchar_t* outputOnly
+  sizeInCharacters size_t
+
+func _getw
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+
+func putc
+  success NotEqual=-1
+  [RET_EOF]
+  c int
+  stream FILE*
+
+func putwc
+  success NotEqual=-1
+  [RET_WEOF]
+  c wchar_t
+  stream FILE*
+
+func puts
+  success NotEqual=-1
+  [RET_EOF]
+  str "const char*"
+
+func _putws
+  success NotEqual=-1
+  [RET_WEOF_INT]
+  str "const wchar_t*"
+
+func _putw
+  success NotEqual=-1
+  [RET_EOF]
+  binint int
+  stream FILE*
+
+func rewind
+  void
+  stream FILE*
+
+func _rmtmp
+  int
+
+func setbuf
+  void
+  stream FILE*
+  buffer char*
+
+func _setmaxstdio
+  success NotEqual=-1
+  int
+  newmax int
+
+func setvbuf
+  success Equal=0
+  int
+  stream FILE*
+  buffer char*
+  mode [buffer_mode]
+  size size_t
+
+func _tempnam
+  success NotEqual=0
+  char*
+  dir "const char*"
+  prefix "const char*"
+
+func _tempnam_dbg
+  success NotEqual=0
+  char*
+  dir "const char*"
+  prefix "const char*"
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _wtempnam
+  success NotEqual=0
+  wchar_t*
+  dir "const wchar_t*"
+  prefix "const wchar_t*"
+
+func _wtempnam_dbg
+  success NotEqual=0
+  wchar_t*
+  dir "const wchar_t*"
+  prefix "const wchar_t*"
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func tmpnam
+  success NotEqual=0
+  char*
+  str char*
+
+func _wtmpnam
+  success NotEqual=0
+  wchar_t*
+  str wchar_t*
+
+func tmpfile
+  success NotEqual=0
+  FILE*
+
+func tmpfile_s
+  errno_t
+  pFilePtr FILE**
+
+func tmpnam_s
+  errno_t
+  str char*
+  sizeInChars size_t
+
+func _wtmpnam_s
+  errno_t
+  str wchar_t*
+  sizeInChars size_t
+
+func ungetc
+  success NotEqual=-1
+  [RET_EOF]
+  c int
+  stream FILE*
+
+func ungetwc
+  success NotEqual=-1
+  [RET_WEOF]
+  c wint_t
+  stream FILE*
+
+func _vcprintf_s
+  success NotEqual=-1
+  int
+  format "const char*"
+  argptr va_list
+
+func _vcprintf_s_l
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func _vcwprintf_s
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  argptr va_list
+
+func _vcwprintf_s_l
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func vfprintf_s
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const char*"
+  argptr va_list
+
+func _vfprintf_s_l
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func vfwprintf_s
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+  argptr va_list
+
+func _vfwprintf_s_l
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func vprintf_s
+  success NotEqual=-1
+  int
+  format "const char*"
+  argptr va_list
+
+func _vprintf_s_l
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func vwprintf_s
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  argptr va_list
+
+func _vwprintf_s_l
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func printf varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+
+func _printf_l varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+
+func wprintf varArgs
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+
+func _wprintf_l varArgs
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+
+func printf_s varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+
+func _printf_s_l varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+
+func wprintf_s varArgs
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+
+func _wprintf_s_l varArgs
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+
+func scanf varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const char*"
+
+func _scanf_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const char*"
+  locale _locale_t
+
+func wscanf varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const wchar_t*"
+
+func _wscanf_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const wchar_t*"
+  locale _locale_t
+
+func scanf_s varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const char*"
+
+func _scanf_s_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const char*"
+  locale _locale_t
+
+func wscanf_s varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const wchar_t*"
+
+func _wscanf_s_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const wchar_t*"
+  locale _locale_t
+
+func _vcprintf
+  success NotEqual=-1
+  int
+  format "const char*"
+  argptr va_list
+
+func _vcprintf_l
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func _vcwprintf
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  argptr va_list
+
+func _vcwprintf_l
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func _vcprintf_p
+  success NotEqual=-1
+  int
+  format "const char*"
+  argptr va_list
+
+func _vcprintf_p_l
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func _vcwprintf_p
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  argptr va_list
+
+func _vcwprintf_p_l
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func vfprintf
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const char*"
+  argptr va_list
+
+func _vfprintf_l
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func vfwprintf
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+  argptr va_list
+
+func _vfwprintf_l
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func _vfprintf_p
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const char*"
+  argptr va_list
+
+func _vfprintf_p_l
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func _vfwprintf_p
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+  argptr va_list
+
+func _vfwprintf_p_l
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func vprintf
+  success NotEqual=-1
+  int
+  format "const char*"
+  argptr va_list
+
+func _vprintf_l
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func vwprintf
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  argptr va_list
+
+func _vwprintf_l
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func _vprintf_p
+  success NotEqual=-1
+  int
+  format "const char*"
+  argptr va_list
+
+func _vprintf_p_l
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func _vwprintf_p
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  argptr va_list
+
+func _vwprintf_p_l
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func _vscprintf
+  success NotEqual=-1
+  int
+  format "const char*"
+  argptr va_list
+
+func _vscprintf_l
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func _vscwprintf
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  argptr va_list
+
+func _vscwprintf_l
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func _vscprintf_p
+  success NotEqual=-1
+  int
+  format "const char*"
+  argptr va_list
+
+func _vscprintf_p_l
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func _vscwprintf_p
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  argptr va_list
+
+func _vscwprintf_p_l
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func _wprintf_p varArgs
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+
+func _wprintf_p_l varArgs
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+
+func _fprintf_p varArgs
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const char*"
+
+func _fprintf_p_l varArgs
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const char*"
+  locale _locale_t
+
+func _fwprintf_p varArgs
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+
+func _fwprintf_p_l varArgs
+  success NotEqual=-1
+  int
+  stream FILE*
+  format "const wchar_t*"
+  locale _locale_t
+
+func _printf_p varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+
+func _printf_p_l varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+
+func putchar
+  success NotEqual=-1
+  [RET_EOF]
+  c int
+
+func putwchar
+  success NotEqual=-1
+  [RET_WEOF]
+  c wchar_t
+
+func getchar
+  success NotEqual=-1
+  [RET_EOF]
+
+func getwchar
+  success NotEqual=-1
+  [RET_WEOF]
+
+func _fgetchar
+  success NotEqual=-1
+  [RET_EOF]
+
+func _fgetwchar
+  success NotEqual=-1
+  [RET_WEOF]
+
+func _fputchar
+  success NotEqual=-1
+  [RET_EOF]
+  c int
+
+func _fputwchar
+  success NotEqual=-1
+  [RET_WEOF]
+  c wchar_t
+
+func _lock_file
+  void
+  file FILE*
+
+func _unlock_file
+  void
+  file FILE*
+
+func _close
+  success NotEqual=-1
+  int
+  fd int
+
+func _commit
+  success NotEqual=-1
+  int
+  fd int
+
+func _creat
+  success NotEqual=-1
+  int
+  filename "const char*"
+  pmode [perm_mode]
+
+func _wcreat
+  success NotEqual=-1
+  int
+  filename "const wchar_t*"
+  pmode [perm_mode]
+
+func _dup
+  success NotEqual=-1
+  int
+  fd int
+
+func _dup2
+  success NotEqual=-1
+  int
+  fd1 int
+  fd2 int
+
+func _eof
+  success NotEqual=-1
+  int
+  fd int
+
+func _lseek
+  success NotEqual=-1
+  long
+  fd int
+  offset long
+  origin [SEEK_TYPE]
+
+func _lseeki64
+  success NotEqual=-1
+  __int64
+  fd int
+  offset __int64
+  origin [SEEK_TYPE]
+
+func _open
+  success NotEqual=-1
+  int
+  filename "const char*"
+  oflag [open_flag]
+  pmode [perm_mode]
+
+func _wopen
+  success NotEqual=-1
+  int
+  filename "const wchar_t*"
+  oflag [open_flag]
+  pmode [perm_mode]
+
+func _read
+  success NotEqual=-1
+  int
+  fd int
+  buffer void* postLength=Return
+  count "unsigned int"
+
+func _sopen
+  success NotEqual=-1
+  int
+  filename "const char*"
+  oflag [open_flag]
+  shflag [share_flag]
+  pmode [perm_mode]
+
+func _wsopen
+  success NotEqual=-1
+  int
+  filename "const wchar_t*"
+  oflag [open_flag]
+  shflag [share_flag]
+  pmode [perm_mode]
+
+func _sopen_s
+  errno_t
+  pfh int*
+  filename "const char*"
+  oflag [open_flag]
+  shflag [share_flag]
+  pmode [perm_mode]
+
+func _wsopen_s
+  errno_t
+  pfh int*
+  filename "const wchar_t*"
+  oflag [open_flag]
+  shflag [share_flag]
+  pmode [perm_mode]
+
+func _tell
+  success NotEqual=-1
+  long
+  handle int
+
+func _telli64
+  success NotEqual=-1
+  __int64
+  handle int
+
+func _umask
+  [perm_mode]
+  pmode [perm_mode]
+
+func _umask_s
+  errno_t
+  mode [perm_mode]
+  pOldMode [perm_mode*]
+
+func _write
+  success NotEqual=-1
+  int
+  fd int
+  buffer "const void*" length=count
+  count "unsigned int"
+
+func _cgets
+  success NotEqual=0
+  char*
+  buffer char* outputOnly
+
+func _cgetws
+  success NotEqual=0
+  wchar_t*
+  buffer wchar_t* outputOnly
+
+func _cgets_s
+  errno_t
+  buffer char* outputOnly
+  numberOfElements size_t
+  pSizeRead size_t*
+
+func _cgetws_s
+  errno_t
+  buffer wchar_t* outputOnly
+  pSizeRead size_t*
+
+func _cprintf varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+
+func _cprintf_l varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+
+func _cwprintf varArgs
+  success NotEqual=-1
+  int
+  format "const wchar*"
+
+func _cwprintf_l varArgs
+  success NotEqual=-1
+  int
+  format "const wchar*"
+  locale _locale_t
+
+func _cprintf_s varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+
+func _cprintf_s_l varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+
+func _cwprintf_s varArgs
+  success NotEqual=-1
+  int
+  format "const wchar*"
+
+func _cwprintf_s_l varArgs
+  success NotEqual=-1
+  int
+  format "const wchar*"
+  locale _locale_t
+
+func _cputs
+  success Equal=0
+  int
+  str "const char*"
+
+func _cputws
+  success Equal=0
+  int
+  str "const wchar_t*"
+
+func _cscanf varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const char*"
+
+func _cscanf_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const char*"
+  locale _locale_t
+
+func _cwscanf varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const wchar_t*"
+
+func _cwscanf_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const wchar_t*"
+  locale _locale_t
+
+func _cscanf_s varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const char*"
+
+func _cscanf_s_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const char*"
+  locale _locale_t
+
+func _cwscanf_s varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const wchar_t*"
+
+func _cwscanf_s_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  format "const wchar_t*"
+  locale _locale_t
+
+func _getch
+  int
+
+func _getwch
+  wint_t
+
+func _getche
+  int
+
+func _getwche
+  wint_t
+
+func _inp
+  int
+  port "unsigned short"
+
+func _inpw
+  "unsigned short"
+  port "unsigned short"
+
+func _inpd
+  "unsigned long"
+  port "unsigned short"
+
+func _kbhit
+  int
+
+func _outp
+  int
+  port "unsigned short"
+  databyte int
+
+func _outpw
+  "unsigned short"
+  port "unsigned short"
+  dataword "unsigned short"
+
+func _outpd
+  "unsigned long"
+  port "unsigned short"
+  dataword "unsigned long"
+
+func _putch
+  success NotEqual=-1
+  [RET_EOF]
+  c int
+
+func _putwch
+  success NotEqual=-1
+  [RET_WEOF]
+  c wchar_t
+
+func _ungetch
+  success NotEqual=-1
+  [RET_EOF]
+  c int
+
+func _ungetwch
+  success NotEqual=-1
+  [RET_WEOF]
+  c wint_t
+
+func _cprintf_p varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+
+func _cprintf_p_l varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+
+func _cwprintf_p varArgs
+  success NotEqual=-1
+  int
+  format "const wchar*"
+
+func _cwprintf_p_l varArgs
+  success NotEqual=-1
+  int
+  format "const wchar*"
+  locale _locale_t
+
+func _fclose_nolock
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+
+func _fflush_nolock
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+
+func _fgetwc_nolock
+  success NotEqual=-1
+  [RET_WEOF]
+  stream FILE*
+
+func _fread_nolock
+  success NotEqual=0
+  size_t
+  buffer void* postLength=Return
+  size size_t
+  count size_t
+  stream FILE*
+
+func _fseek_nolock
+  success Equal=0
+  int
+  stream FILE*
+  offset long
+  origin [SEEK_TYPE]
+
+func _fseeki64_nolock
+  success Equal=0
+  int
+  stream FILE*
+  offset __int64
+  origin [SEEK_TYPE]
+
+func _ftell_nolock
+  success NotEqual=-1
+  long
+  stream FILE*
+
+func _ftelli64_nolock
+  success NotEqual=-1
+  __int64
+  stream FILE*
+
+func _fwrite_nolock
+  success NotEqual=0
+  size_t
+  buffer "const void*" length=count
+  size size_t
+  count size_t
+  stream FILE*
+
+func _getc_nolock
+  success NotEqual=-1
+  [RET_EOF]
+  stream FILE*
+
+func _getch_nolock
+  int
+
+func _getwch_nolock
+  wint_t
+
+func _getche_nolock
+  int
+
+func _getwche_nolock
+  wint_t
+
+func _getdcwd_nolock
+  success NotEqual=0
+  char*
+  drive int
+  buffer char* outputOnly
+  maxlen int
+
+func _wgetdcwd_nolock
+  success NotEqual=0
+  wchar_t*
+  drive int
+  buffer wchar_t* outputOnly
+  maxlen int
+
+func _putch_nolock
+  success NotEqual=-1
+  [RET_EOF]
+  c int
+
+func _putwch_nolock
+  success NotEqual=-1
+  [RET_WEOF]
+  c wchar_t
+
+func _ungetc_nolock
+  success NotEqual=-1
+  [RET_EOF]
+  c int
+  stream FILE*
+
+func _ungetwc_nolock
+  success NotEqual=-1
+  [RET_WEOF]
+  c wint_t
+  stream FILE*
+
+func _ungetch_nolock
+  success NotEqual=-1
+  [RET_EOF]
+  c int
+
+func _ungetwch_nolock
+  success NotEqual=-1
+  [RET_WEOF]
+  c wint_t
+
+func _fputwc_nolock
+  success NotEqual=-1
+  [RET_WEOF]
+  c wchar_t
+  stream FILE*
+
+func setlocale
+  success NotEqual=0
+  char*
+  category [locale_category]
+  locale "const char*"
+
+func _wsetlocale
+  success NotEqual=0
+  wchar_t*
+  category [locale_category]
+  locale "const wchar_t*"
+
+func _create_locale
+  _locale_t
+  category [locale_category]
+  locale "const char*"
+
+func __create_locale
+  _locale_t
+  category [locale_category]
+  locale "const char*"
+
+func _free_locale
+  void
+  locale _locale_t
+
+func __free_locale
+  void
+  locale _locale_t
+
+func _get_current_locale
+  _locale_t
+
+func __get_current_locale
+  _locale_t
+
+func _configthreadlocale
+  success NotEqual=-1
+  [thread_locale_type]
+  type [thread_locale_type]
+
+func localeconv
+  "struct lconv*"
+
+func _mbccpy
+  void
+  dest "unsigned char*"
+  src "const unsigned char*"
+
+func _mbccpy_l
+  void
+  dest "unsigned char*"
+  src "const unsigned char*"
+  locale _locale_t
+
+func _mbccpy_s
+  errno_t
+  dest "unsigned char*"
+  buffSizeInBytes size_t
+  pCopied int*
+  src "const unsigned char*"
+
+func _mbccpy_s_l
+  errno_t
+  dest "unsigned char*"
+  buffSizeInBytes size_t
+  pCopied int*
+  src "const unsigned char*"
+  locale _locale_t
+
+func _getmbcp
+  int
+
+func _setmbcp
+  success NotEqual=-1
+  int
+  codepage [_MB_CP_TYPE]
+
+func ___mb_cur_max_func
+  int
+
+func __mb_cur_max
+  int
+
+func ___lc_codepage_func
+  UINT
+
+func ___lc_handle_func
+  LCID*
+
+func __crtLCMapStringW
+  success NotEqual=0
+  int
+  Locale LCID
+  dwMapFlags [LocaleMappingFlags]
+  lpSrcStr LPCWSTR
+  cchSrc int
+  lpDestStr LPWSTR
+  cchDest int
+
+func calloc
+  success NotEqual=0
+  void*
+  num size_t
+  size size_t
+
+func ??3@YAXPAX@Z
+  void
+  object void*
+
+func ??3@YAXPEAX@Z
+  void
+  object void*
+
+func ??_V@YAXPAX@Z
+  void
+  object void*
+
+func ??_V@YAXPEAX@Z
+  void
+  object void*
+
+func _expand
+  success NotEqual=0
+  void*
+  memblock void*
+  size size_t
+
+func free
+  void
+  memblock void*
+
+func _freea
+  void
+  memblock void*
+
+func _get_heap_handle
+  intptr_t
+
+func _get_sbh_threshold
+  size_t
+
+func _heapadd
+  success Equal=0
+  int
+  memblock void*
+  size size_t
+
+func _heapchk
+  success Equal=-2
+  [HEAP_RESULT]
+
+func _heapmin
+  success Equal=0
+  int
+
+func _heapset
+  success Equal=-2
+  [HEAP_RESULT]
+  fill "unsigned int"
+
+func _heapwalk
+  success Equal=-2
+  [HEAP_RESULT]
+  entryinfo _HEAPINFO*
+
+func malloc
+  success NotEqual=0
+  void*
+  size size_t
+
+func _msize
+  success NotEqual=-1
+  size_t
+  memblock void*
+
+func ??2@YAPAXI@Z
+  success NotEqual=0
+  void*
+  count size_t
+
+func ??2@YAPEAX_K@Z
+  success NotEqual=0
+  void*
+  count size_t
+
+func ??_U@YAPAXI@Z
+  success NotEqual=0
+  void*
+  count size_t
+
+func ??_U@YAPEAX_K@Z
+  success NotEqual=0
+  void*
+  count size_t
+
+func ?_query_new_handler@@YAP6AHI@ZXZ
+  _PNH
+
+func ?_query_new_mode@@YAHXZ
+  int
+
+func realloc
+  success NotEqual=0
+  void*
+  memblock void*
+  size size_t
+
+func _callnewh
+  success Equal=1
+  int
+  size size_t
+
+func ?_set_new_handler@@YAP6AHI@ZP6AHI@Z@Z
+  _PNH
+  pNewHandler _PNH
+
+func ?_set_new_mode@@YAHH@Z
+  success NotEqual=-1
+  int
+  newhandlermode int
+
+func _expand_dbg
+  success NotEqual=0
+  void*
+  userData void*
+  newSize size_t
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _calloc_dbg
+  success NotEqual=0
+  void*
+  num size_t
+  size size_t
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _free_dbg
+  void
+  userData void*
+  blockType [DBG_BLOCK_TYPE]
+
+func _malloc_dbg
+  success NotEqual=0
+  void*
+  size size_t
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _msize_dbg
+  success NotEqual=-1
+  size_t
+  userData void*
+  blockType [DBG_BLOCK_TYPE]
+
+func _realloc_dbg
+  success NotEqual=0
+  void*
+  userData void*
+  newSize size_t
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _recalloc
+  success NotEqual=0
+  void*
+  memblock void*
+  size size_t
+
+func _recalloc_dbg
+  success NotEqual=0
+  void*
+  userData void*
+  num size_t
+  size size_t
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _get_amblksiz
+  errno_t
+  blockSize size_t*
+
+func _set_amblksiz
+  errno_t
+  blockSize size_t
+
+func _set_sbh_threshold
+  success NotEqual=0
+  int
+  size size_t
+
+func abort
+  void
+
+func atexit
+  success Equal=0
+  int
+  func void* display="void (__cdecl*)()"
+
+func _beginthread
+  success NotEqual=-1
+  uintptr_t
+  start_address void* display="void (__cdecl*)(void*)"
+  stack_size unsigned
+  arglist void*
+
+func _beginthreadex
+  success NotEqual=0
+  uintptr_t
+  security void*
+  stack_size unsigned
+  start_address void* display="unsigned (__stdcall*)(void*)"
+  arglist void*
+  initflag [thread_initflag]
+  thrdaddr unsigned*
+
+func _cexit
+  void
+
+func _c_exit
+  void
+
+func _cwait
+  success NotEqual=-1
+  intptr_t
+  termstat int*
+  procHandle intptr_t
+  action int
+
+func _endthread
+  void
+
+func _endthreadex
+  void
+  retval unsigned
+
+func _execl varArgs
+  success NotEqual=-1
+  intptr_t
+  cmdname "const char*"
+  args "const char*"
+
+func _wexecl varArgs
+  success NotEqual=-1
+  intptr_t
+  cmdname "const wchar_t*"
+  args "const wchar_t*"
+
+func _execle varArgs
+  success NotEqual=-1
+  intptr_t
+  cmdname "const char*"
+  args "const char*"
+
+func _wexecle varArgs
+  success NotEqual=-1
+  intptr_t
+  cmdname "const wchar_t*"
+  args "const wchar_t*"
+
+func _execlp varArgs
+  success NotEqual=-1
+  intptr_t
+  cmdname "const char*"
+  args "const char*"
+
+func _wexeclp varArgs
+  success NotEqual=-1
+  intptr_t
+  cmdname "const wchar_t*"
+  args "const wchar_t*"
+
+func _execlpe varArgs
+  success NotEqual=-1
+  intptr_t
+  cmdname "const char*"
+  args "const char*"
+
+func _wexeclpe varArgs
+  success NotEqual=-1
+  intptr_t
+  cmdname "const wchar_t*"
+  args "const wchar_t*"
+
+func _execv
+  success NotEqual=-1
+  intptr_t
+  cmdname "const char*"
+  argv "const char**"
+
+func _wexecv
+  success NotEqual=-1
+  intptr_t
+  cmdname "const wchar_t*"
+  argv "const wchar_t**"
+
+func _execve
+  success NotEqual=-1
+  intptr_t
+  cmdname "const char*"
+  argv "const char**"
+  envp "const char**"
+
+func _wexecve
+  success NotEqual=-1
+  intptr_t
+  cmdname "const wchar_t*"
+  argv "const wchar_t**"
+  envp "const wchar_t**"
+
+func _execvp
+  success NotEqual=-1
+  intptr_t
+  cmdname "const char*"
+  argv "const char**"
+
+func _wexecvp
+  success NotEqual=-1
+  intptr_t
+  cmdname "const wchar_t*"
+  argv "const wchar_t**"
+
+func _execvpe
+  success NotEqual=-1
+  intptr_t
+  cmdname "const char*"
+  argv "const char**"
+  envp "const char**"
+
+func _wexecvpe
+  success NotEqual=-1
+  intptr_t
+  cmdname "const wchar_t*"
+  argv "const wchar_t**"
+  envp "const wchar_t**"
+
+func exit
+  void
+  status int
+
+func _exit
+  void
+  status int
+
+func getenv
+  char*
+  varname "const char*"
+
+func _wgetenv
+  wchar_t*
+  varname "const wchar_t*"
+
+func getenv_s
+  errno_t
+  pReturnValue size_t*
+  buffer char* outputOnly
+  numberOfElements size_t
+  varname "const char*"
+
+func _wgetenv_s
+  errno_t
+  pReturnValue size_t*
+  buffer wchar_t* outputOnly
+  numberOfElements size_t
+  varname "const wchar_t*"
+
+func _getpid
+  int
+
+func _onexit
+  success NotEqual=0
+  _onexit_t
+  function _onexit_t
+
+func _pclose
+  success NotEqual=-1
+  int
+  stream FILE*
+
+func perror
+  void
+  string "const char*"
+
+func _wperror
+  void
+  string "const wchar_t*"
+
+func _pipe
+  success NotEqual=-1
+  int
+  pfds int*
+  psize "unsigned int"
+  textmode [open_flag]
+
+func _popen
+  success NotEqual=0
+  FILE*
+  command "const char*"
+  mode "const char*"
+
+func _wpopen
+  success NotEqual=0
+  FILE*
+  command "const wchar_t*"
+  mode "const wchar_t*"
+
+func _putenv
+  success Equal=0
+  int
+  envstring "const char*"
+
+func _wputenv
+  success Equal=0
+  int
+  envstring "const wchar_t*"
+
+func _putenv_s
+  errno_t
+  name "const char*"
+  value "const char*"
+
+func _wputenv_s
+  errno_t
+  name "const wchar_t*"
+  value "const wchar_t*"
+
+func raise
+  success Equal=0
+  int
+  sig [SIGNAL]
+
+func signal
+  success NotEqual=-1
+  [SIGNAL_FUNC]
+  sig [SIGNAL]
+  func [SIGNAL_FUNC]
+
+func _spawnl varArgs
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const char*"
+  args "const char*"
+
+func _wspawnl varArgs
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const wchar_t*"
+  args "const wchar_t*"
+
+func _spawnle varArgs
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const char*"
+  args "const char*"
+
+func _wspawnle varArgs
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const wchar_t*"
+  args "const wchar_t*"
+
+func _spawnlp varArgs
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const char*"
+  args "const char*"
+
+func _wspawnlp varArgs
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const wchar_t*"
+  args "const wchar_t*"
+
+func _spawnlpe varArgs
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const char*"
+  args "const char*"
+
+func _wspawnlpe varArgs
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const wchar_t*"
+  args "const wchar_t*"
+
+func _spawnv
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const char*"
+  argv "const char**"
+
+func _wspawnv
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const wchar_t*"
+  argv "const wchar_t**"
+
+func _spawnve
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const char*"
+  argv "const char**"
+  envp "const char**"
+
+func _wspawnve
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const wchar_t*"
+  argv "const wchar_t**"
+  envp "const wchar_t**"
+
+func _spawnvp
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const char*"
+  argv "const char**"
+
+func _wspawnvp
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const wchar_t*"
+  argv "const wchar_t**"
+
+func _spawnvpe
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const char*"
+  argv "const char**"
+  envp "const char**"
+
+func _wspawnvpe
+  success NotEqual=-1
+  intptr_t
+  mode [spawn_mode]
+  cmdname "const wchar_t*"
+  argv "const wchar_t**"
+  envp "const wchar_t**"
+
+func system
+  success NotEqual=-1
+  int
+  command "const char*"
+
+func _wsystem
+  success NotEqual=-1
+  int
+  command "const wchar_t*"
+
+func _dupenv_s
+  errno_t
+  buffer char** outputOnly
+  numberOfElements size_t*
+  varname "const char*"
+
+func _wdupenv_s
+  errno_t
+  buffer wchar_t** outputOnly
+  numberOfElements size_t*
+  varname "const wchar_t*"
+
+func _dupenv_s_dbg
+  errno_t
+  buffer char** outputOnly
+  numberOfElements size_t*
+  varname "const char*"
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _wdupenv_s_dbg
+  errno_t
+  buffer wchar_t** outputOnly
+  numberOfElements size_t*
+  varname "const wchar_t*"
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func __getmainargs
+  success Equal=0
+  int
+  _Argc int*
+  _Argv char***
+  _Env char***
+  _DoWildCard int
+  _StartInfo _startupinfo*
+
+func __wgetmainargs
+  success Equal=0
+  int
+  _Argc int*
+  _Argv wchar_t***
+  _Env wchar_t***
+  _DoWildCard int
+  _StartInfo _startupinfo*
+
+func _get_pgmptr
+  errno_t
+  pValue char**
+
+func _get_wpgmptr
+  errno_t
+  pValue wchar_t**
+
+func _get_fileinfo
+  errno_t
+  pFileInfo int*
+
+func _set_fileinfo
+  errno_t
+  value int
+
+func __set_app_type
+  void
+  at [C_APP_TYPE]
+
+func __dllonexit
+  success NotEqual=0
+  _onexit_t
+  func _onexit_t
+  pbegin _PVFV**
+  pend _PVFV**
+
+func _sleep
+  void
+  duration "unsigned long"
+
+func _loaddll
+  success NotEqual=0
+  intptr_t
+  filename char*
+
+func _unloaddll
+  int
+  handle intptr_t
+
+func _getdllprocaddr
+  void* display="int (__cdecl*)()"
+  handle intptr_t
+  procedureName char*
+  ordinal intptr_t
+
+func bsearch
+  void*
+  key "const void*"
+  base "const void*"
+  num size_t
+  width size_t
+  compare [compare_function]
+
+func bsearch_s
+  void*
+  key "const void*"
+  base "const void*"
+  num size_t
+  width size_t
+  compare [compare_s_function]
+  context void*
+
+func _lfind
+  void*
+  key "const void*"
+  base "const void*"
+  num "unsigned int*"
+  width "unsigned int"
+  compare [compare_function]
+
+func _lfind_s
+  void*
+  key "const void*"
+  base "const void*"
+  num "unsigned int*"
+  size size_t
+  compare [compare_s_function]
+  context void*
+
+func _lsearch
+  void*
+  key "const void*"
+  base void*
+  num "unsigned int*"
+  width "unsigned int"
+  compare [compare_function]
+
+func _lsearch_s
+  void*
+  key "const void*"
+  base void*
+  num "unsigned int*"
+  size size_t
+  compare [compare_s_function]
+  context void*
+
+func qsort
+  void
+  base void*
+  num size_t
+  width size_t
+  compare [compare_s_function]
+
+func qsort_s
+  void
+  base void*
+  num size_t
+  width size_t
+  compare [compare_s_function]
+  context void*
+
+func _mbsdec
+  "unsigned char*"
+  start "const unsigned char*"
+  current "const unsigned char*"
+
+func _mbsdec_l
+  "unsigned char*"
+  start "const unsigned char*"
+  current "const unsigned char*"
+  locale _locale_t
+
+func _mbsinc
+  "unsigned char*"
+  current "const unsigned char*"
+
+func _mbsinc_l
+  "unsigned char*"
+  current "const unsigned char*"
+  locale _locale_t
+
+func _mbsnbcat
+  "unsigned char*"
+  dest "unsigned char*"
+  src "const unsigned char*"
+  count size_t
+
+func _mbsnbcat_l
+  "unsigned char*"
+  dest "unsigned char*"
+  src "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _mbsnbcat_s
+  errno_t
+  dest "unsigned char*"
+  sizeInBytes size_t
+  src "const unsigned char*"
+  count size_t
+
+func _mbsnbcat_s_l
+  errno_t
+  dest "unsigned char*"
+  sizeInBytes size_t
+  src "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _mbsnbcmp
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+
+func _mbsnbcmp_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _mbsnbcnt
+  size_t
+  str "const unsigned char*"
+  count size_t
+
+func _mbsnbcnt_l
+  size_t
+  str "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _mbsnccnt
+  size_t
+  str "const unsigned char*"
+  count size_t
+
+func _mbsnccnt_l
+  size_t
+  str "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func __strncnt
+  size_t
+  str "const char*"
+  count size_t
+
+func __wcsncnt
+  size_t
+  str "const wchar_t*"
+  count size_t
+
+func _mbsnbcpy
+  "unsigned char*"
+  strDest "unsigned char*" outputOnly
+  strSource "const unsigned char*"
+  count size_t
+
+func _mbsnbcpy_l
+  "unsigned char*"
+  strDest "unsigned char*" outputOnly
+  strSource "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _mbsnbcpy_s
+  errno_t
+  strDest "unsigned char*" outputOnly
+  sizeInBytes size_t
+  strSource "const unsigned char*"
+  count size_t
+
+func _mbsnbcpy_s_l
+  errno_t
+  strDest "unsigned char*" outputOnly
+  sizeInBytes size_t
+  strSource "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _mbsnbicmp
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+
+func _mbsnbset
+  "unsigned char*"
+  str "unsigned char*"
+  c "unsigned int"
+  count size_t
+
+func _mbsnbset_l
+  "unsigned char*"
+  str "unsigned char*"
+  c "unsigned int"
+  count size_t
+  locale _locale_t
+
+func _mbsnextc
+  success NotEqual=0
+  "unsigned int"
+  str "const unsigned char*"
+
+func _mbsnextc_l
+  success NotEqual=0
+  "unsigned int"
+  str "const unsigned char*"
+  locale _locale_t
+
+func _mbsninc
+  success NotEqual=0
+  "unsigned char*"
+  str "const unsigned char*"
+  count size_t
+
+func _mbsninc_l
+  success NotEqual=0
+  "unsigned char*"
+  str "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _mbsspnp
+  "unsigned char*"
+  str "const unsigned char*"
+  charset "const unsigned char*"
+
+func _mbsspnp_l
+  "unsigned char*"
+  str "const unsigned char*"
+  charset "const unsigned char*"
+  locale _locale_t
+
+func _scprintf varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+
+func _scprintf_l varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+
+func _scwprintf varArgs
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+
+func _scwprintf_l varArgs
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+
+func _snscanf varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  input "const char*"
+  length size_t
+  format "const char*"
+
+func _snscanf_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  input "const char*"
+  length size_t
+  format "const char*"
+  locale _locale_t
+
+func _snwscanf varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  input "const wchar_t*"
+  length size_t
+  format "const wchar_t*"
+
+func _snwscanf_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  input "const wchar_t*"
+  length size_t
+  format "const wchar_t*"
+  locale _locale_t
+
+func sscanf varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  buffer "const char*" outputOnly
+  format "const char*"
+
+func _sscanf_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  buffer "const char*" outputOnly
+  format "const char*"
+  locale _locale_t
+
+func swscanf varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  buffer "const wchar_t*" outputOnly
+  format "const wchar_t*"
+
+func _swscanf_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  buffer "const wchar_t*" outputOnly
+  format "const wchar_t*"
+  locale _locale_t
+
+func sprintf varArgs
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  format "const char*"
+
+func _sprintf_l varArgs
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  format "const char*"
+  locale _locale_t
+
+func swprintf varArgs
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  count size_t
+  format "const wchar_t*"
+
+func _swprintf varArgs
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  format "const wchar_t*"
+
+func __swprintf_l varArgs
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  format "const wchar_t*"
+  locale _locale_t
+
+func _sprintf_p varArgs
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  sizeOfBuffer size_t
+  format "const char*"
+
+func _sprintf_p_l varArgs
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  sizeOfBuffer size_t
+  format "const char*"
+  locale _locale_t
+
+func _swprintf_p varArgs
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  sizeOfBuffer size_t
+  format "const wchar_t*"
+
+func _swprintf_p_l varArgs
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  sizeOfBuffer size_t
+  format "const wchar_t*"
+  locale _locale_t
+
+func strcat
+  char*
+  strDestination char*
+  strSource "const char*"
+
+func wcscat
+  wchar_t*
+  strDestination wchar_t*
+  strSource "const wchar_t*"
+
+func _mbscat
+  "unsigned char*"
+  strDestination "unsigned char*"
+  strSource "const unsigned char*"
+
+func strcat_s
+  errno_t
+  strDestination char*
+  numberOfElements size_t
+  strSource "const char*"
+
+func wcscat_s
+  errno_t
+  strDestination wchar_t*
+  numberOfElements size_t
+  strSource "const wchar_t*"
+
+func _mbscat_s
+  errno_t
+  strDestination "unsigned char*"
+  numberOfElements size_t
+  strSource "const unsigned char*"
+
+func strchr
+  char*
+  str "const char*"
+  c int
+
+func wcschr
+  wchar_t*
+  str "const wchar_t*"
+  c wchar_t
+
+func _mbschr
+  "unsigned char*"
+  str "const unsigned char*"
+  c "unsigned int"
+
+func _mbschr_l
+  "unsigned char*"
+  str "const unsigned char*"
+  c "unsigned int"
+  locale _locale_t
+
+func strcmp
+  int
+  string1 "const char*"
+  string2 "const char*"
+
+func wcscmp
+  int
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+
+func _mbscmp
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+
+func strcpy
+  char*
+  strDestination char* outputOnly
+  strSource "const char*"
+
+func wcscpy
+  wchar_t*
+  strDestination wchar_t* outputOnly
+  strSource "const wchar_t*"
+
+func _mbscpy
+  "unsigned char*"
+  strDestination "unsigned char*" outputOnly
+  strSource "const unsigned char*"
+
+func strcpy_s
+  errno_t
+  strDestination char* outputOnly
+  numberOfElements size_t
+  strSource "const char*"
+
+func wcscpy_s
+  errno_t
+  strDestination wchar_t* outputOnly
+  numberOfElements size_t
+  strSource "const wchar_t*"
+
+func _mbscpy_s
+  errno_t
+  strDestination "unsigned char*" outputOnly
+  numberOfElements size_t
+  strSource "const unsigned char*"
+
+func strcspn
+  size_t
+  str "const char*"
+  strCharSet "const char*"
+
+func wcscspn
+  size_t
+  str "const wchar_t*"
+  strCharSet "const wchar_t*"
+
+func _mbscspn
+  size_t
+  str "const unsigned char*"
+  strCharSet "const unsigned char*"
+
+func _mbscspn_l
+  size_t
+  str "const unsigned char*"
+  strCharSet "const unsigned char*"
+  locale _locale_t
+
+func _strdup
+  char*
+  strSource "const char*"
+
+func _wcsdup
+  wchar_t*
+  strSource "const wchar_t*"
+
+func _mbsdup
+  "unsigned char*"
+  strSource "const unsigned char*"
+
+func strerror
+  char*
+  errnum int
+
+func _strerror
+  char*
+  strErrMsg "const char*"
+
+func _wcserror
+  wchar_t*
+  errnum int
+
+func __wcserror
+  wchar_t*
+  strErrMsg "const wchar_t*"
+
+func strerror_s
+  errno_t
+  buffer char* outputOnly
+  numberOfElements size_t
+  errnum int
+
+func _strerror_s
+  errno_t
+  buffer char* outputOnly
+  numberOfElements size_t
+  strErrMsg "const char*"
+
+func _wcserror_s
+  errno_t
+  buffer wchar_t* outputOnly
+  numberOfElements size_t
+  errnum int
+
+func __wcserror_s
+  errno_t
+  buffer wchar_t* outputOnly
+  numberOfElements size_t
+  strErrMsg "const wchar_t*"
+
+func strnlen
+  size_t
+  str "const char*"
+  numberOfElements size_t
+
+func wcsnlen
+  size_t
+  str "const wchar_t*"
+  numberOfElements size_t
+
+func _mbsnlen
+  size_t
+  str "const unsigned char*"
+  numberOfElements size_t
+
+func _mbsnlen_l
+  size_t
+  str "const unsigned char*"
+  numberOfElements size_t
+  locale _locale_t
+
+func _mbstrnlen
+  success NotEqual=-1
+  size_t
+  str "const char*"
+  numberOfElements size_t
+
+func _mbstrnlen_l
+  success NotEqual=-1
+  size_t
+  str "const char*"
+  numberOfElements size_t
+  locale _locale_t
+
+func _strlwr
+  char*
+  str char*
+
+func _wcslwr
+  wchar_t*
+  str wchar_t*
+
+func _mbslwr
+  "unsigned char*"
+  str "unsigned char*"
+
+func _strlwr_l
+  char*
+  str char*
+  locale _locale_t
+
+func _wcslwr_l
+  wchar_t*
+  str wchar_t*
+  locale _locale_t
+
+func _mbslwr_l
+  "unsigned char*"
+  str "unsigned char*"
+  locale _locale_t
+
+func strncat
+  char*
+  strDest char*
+  strSource "const char*"
+  count size_t
+
+func wcsncat
+  wchar_t*
+  strDest wchar_t*
+  strSource "const wchar_t*"
+  count size_t
+
+func _mbsncat
+  "unsigned char*"
+  strDest "unsigned char*"
+  strSource "const unsigned char*"
+  count size_t
+
+func _mbsncat_l
+  "unsigned char*"
+  strDest "unsigned char*"
+  strSource "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func strncat_s
+  errno_t
+  strDest char*
+  numberOfElements size_t
+  strSource "const char*"
+  count size_t
+
+func wcsncat_s
+  errno_t
+  strDest wchar_t*
+  numberOfElements size_t
+  strSource "const wchar_t*"
+  count size_t
+
+func _mbsncat_s
+  errno_t
+  strDest "unsigned char*"
+  numberOfElements size_t
+  strSource "const unsigned char*"
+  count size_t
+
+func _mbsncat_s_l
+  errno_t
+  strDest "unsigned char*"
+  numberOfElements size_t
+  strSource "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func strncmp
+  int
+  string1 "const char*"
+  string2 "const char*"
+  count size_t
+
+func wcsncmp
+  int
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+  count size_t
+
+func _mbsncmp
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+
+func _mbsncmp_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func strncpy
+  char*
+  strDest char* outputOnly
+  strSource "const char*"
+  count size_t
+
+func wcsncpy
+  wchar_t*
+  strDest wchar_t* outputOnly
+  strSource "const wchar_t*"
+  count size_t
+
+func _mbsncpy
+  "unsigned char*"
+  strDest "unsigned char*" outputOnly
+  strSource "const unsigned char*"
+  count size_t
+
+func _mbsncpy_l
+  "unsigned char*"
+  strDest "unsigned char*" outputOnly
+  strSource "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func strncpy_s
+  errno_t
+  strDest char* outputOnly
+  numberOfElements size_t
+  strSource "const char*"
+  count size_t
+
+func wcsncpy_s
+  errno_t
+  strDest wchar_t* outputOnly
+  numberOfElements size_t
+  strSource "const wchar_t*"
+  count size_t
+
+func _mbsncpy_s
+  errno_t
+  strDest "unsigned char*" outputOnly
+  numberOfElements size_t
+  strSource "const unsigned char*"
+  count size_t
+
+func _mbsncpy_s_l
+  errno_t
+  strDest "unsigned char*" outputOnly
+  numberOfElements size_t
+  strSource "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _strnset
+  char*
+  str char*
+  c int
+  count size_t
+
+func _wcsnset
+  wchar_t*
+  str wchar_t*
+  c wchar_t
+  count size_t
+
+func _mbsnset
+  "unsigned char*"
+  str "unsigned char*"
+  c "unsigned int"
+  count size_t
+
+func _mbsnset_l
+  "unsigned char*"
+  str "unsigned char*"
+  c "unsigned int"
+  count size_t
+  locale _locale_t
+
+func strpbrk
+  char*
+  str "const char*"
+  strCharSet "const char*"
+
+func wcspbrk
+  wchar_t*
+  str "const wchar_t*"
+  strCharSet "const wchar_t*"
+
+func _mbspbrk
+  "unsigned char*"
+  str "const unsigned char*"
+  strCharSet "const unsigned char*"
+
+func _mbspbrk_l
+  "unsigned char*"
+  str "const unsigned char*"
+  strCharSet "const unsigned char*"
+  locale _locale_t
+
+func strrchr
+  char*
+  str "const char*"
+  c int
+
+func wcsrchr
+  wchar_t*
+  str "const wchar_t*"
+  c wchar_t
+
+func _mbsrchr
+  "unsigned char*"
+  str "const unsigned char*"
+  c "unsigned int"
+
+func _mbsrchr_l
+  "unsigned char*"
+  str "const unsigned char*"
+  c "unsigned int"
+  locale _locale_t
+
+func _strrev
+  char*
+  str char*
+
+func _wcsrev
+  wchar_t*
+  str wchar_t*
+
+func _mbsrev
+  "unsigned char*"
+  str "unsigned char*"
+
+func _mbsrev_l
+  "unsigned char*"
+  str "unsigned char*"
+  locale _locale_t
+
+func _strset
+  char*
+  str char*
+  c int
+
+func _wcsset
+  wchar_t*
+  str wchar_t*
+  c wchar_t
+
+func _mbsset
+  "unsigned char*"
+  str "unsigned char*"
+  c "unsigned int"
+
+func _mbsset_l
+  "unsigned char*"
+  str "unsigned char*"
+  c "unsigned int"
+  locale _locale_t
+
+func strspn
+  size_t
+  str "const char*"
+  strCharSet "const char*"
+
+func wcsspn
+  size_t
+  str "const wchar_t*"
+  strCharSet "const wchar_t*"
+
+func _mbsspn
+  size_t
+  str "const unsigned char*"
+  strCharSet "const unsigned char*"
+
+func _mbsspn_l
+  size_t
+  str "const unsigned char*"
+  strCharSet "const unsigned char*"
+  locale _locale_t
+
+func strstr
+  char*
+  str "const char*"
+  strSearch "const char*"
+
+func wcsstr
+  wchar_t*
+  str "const wchar_t*"
+  strSearch "const wchar_t*"
+
+func _mbsstr
+  "unsigned char*"
+  str "const unsigned char*"
+  strSearch "const unsigned char*"
+
+func _mbsstr_l
+  "unsigned char*"
+  str "const unsigned char*"
+  strSearch "const unsigned char*"
+  locale _locale_t
+
+func strtok
+  char*
+  strToken char*
+  strDelimit "const char*"
+
+func wcstok
+  wchar_t*
+  strToken wchar_t*
+  strDelimit "const wchar_t*"
+
+func _mbstok
+  "unsigned char*"
+  strToken "unsigned char*"
+  strDelimit "const unsigned char*"
+
+func _mbstok_l
+  "unsigned char*"
+  strToken "unsigned char*"
+  strDelimit "const unsigned char*"
+  locale _locale_t
+
+func strtok_s
+  char*
+  strToken char*
+  strDelimit "const char*"
+  context char**
+
+func wcstok_s
+  wchar_t*
+  strToken wchar_t*
+  strDelimit "const wchar_t*"
+  context wchar_t**
+
+func _mbstok_s
+  "unsigned char*"
+  strToken "unsigned char*"
+  strDelimit "const unsigned char*"
+  context char**
+
+func _mbstok_s_l
+  "unsigned char*"
+  strToken "unsigned char*"
+  strDelimit "const unsigned char*"
+  context char**
+  locale _locale_t
+
+func _strupr
+  char*
+  str char*
+
+func _wcsupr
+  wchar_t*
+  str wchar_t*
+
+func _mbsupr
+  "unsigned char*"
+  str "unsigned char*"
+
+func _strupr_l
+  char*
+  str char*
+  locale _locale_t
+
+func _wcsupr_l
+  wchar_t*
+  str wchar_t*
+  locale _locale_t
+
+func _mbsupr_l
+  "unsigned char*"
+  str "unsigned char*"
+  locale _locale_t
+
+func vsprintf
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  format "const char*"
+  argptr va_list
+
+func _vsprintf_l
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func vswprintf
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  format "const wchar_t*"
+  argptr va_list
+
+func _vswprintf
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  format "const wchar_t*"
+  argptr va_list
+
+func _vswprintf_l
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  count size_t
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func __vswprintf_l
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func _vsprintf_p
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  sizeInBytes size_t
+  format "const char*"
+  argptr va_list
+
+func _vsprintf_p_l
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  sizeInBytes size_t
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func _vswprintf_p
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  count size_t
+  format "const wchar_t*"
+  argptr va_list
+
+func _vswprintf_p_l
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  count size_t
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func vsnprintf
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  count size_t
+  format "const char*"
+  argptr va_list
+
+func _vsnprintf
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  count size_t
+  format "const char*"
+  argptr va_list
+
+func _vsnprintf_l
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  count size_t
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func _vsnwprintf
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  count size_t
+  format "const wchar_t*"
+  argptr va_list
+
+func _vsnwprintf_l
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  count size_t
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func strlen
+  size_t
+  str "const char*"
+
+func _mbslen
+  size_t
+  str "const unsigned char*"
+
+func _mbslen_l
+  size_t
+  str "const unsigned char*"
+  locale _locale_t
+
+func _mbstrlen
+  success NotEqual=-1
+  size_t
+  str "const char*"
+
+func _mbstrlen_l
+  success NotEqual=-1
+  size_t
+  str "const char*"
+  locale _locale_t
+
+func wcslen
+  size_t
+  str "const wchar_t*"
+
+func _mbclen
+  size_t
+  c "const unsigned char*"
+
+func mblen
+  int
+  mbstr "const char*"
+  count size_t
+
+func _mblen_l
+  int
+  mbstr "const char*"
+  count size_t
+  locale _locale_t
+
+func strcoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+
+func wcscoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+
+func _mbscoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+
+func _strcoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+  locale _locale_t
+
+func _wcscoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+  locale _locale_t
+
+func _mbscoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  locale _locale_t
+
+func _stricoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+
+func _wcsicoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+
+func _mbsicoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+
+func _stricoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+  locale _locale_t
+
+func _wcsicoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+  locale _locale_t
+
+func _mbsicoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  locale _locale_t
+
+func _strncoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+  count size_t
+
+func _wcsncoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+  count size_t
+
+func _mbsncoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+
+func _strncoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+  count size_t
+  locale _locale_t
+
+func _wcsncoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+  count size_t
+  locale _locale_t
+
+func _mbsncoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _strnicoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+  count size_t
+
+func _wcsnicoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+  count size_t
+
+func _mbsnicoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+
+func _strnicoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+  count size_t
+  locale _locale_t
+
+func _wcsnicoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+  count size_t
+  locale _locale_t
+
+func _mbsnicoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _strcmpi
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+
+func _stricmp
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+
+func _wcsicmp
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+
+func _mbsicmp
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+
+func _stricmp_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+  locale _locale_t
+
+func _wcsicmp_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+  locale _locale_t
+
+func _mbsicmp_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  locale _locale_t
+
+func _wcsnicmp_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+  count size_t
+  locale _locale_t
+
+func _mbsnicmp_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _mbsnicmp
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+
+func _strnicmp_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+  count size_t
+  locale _locale_t
+
+func _wcsnicmp
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const wchar_t*"
+  string2 "const wchar_t*"
+  count size_t
+
+func _strnicmp
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const char*"
+  string2 "const char*"
+  count size_t
+
+func _strupr_s
+  errno_t
+  str char*
+  numberOfElements size_t
+
+func _wcsupr_s
+  errno_t
+  str wchar_t*
+  numberOfElements size_t
+
+func _strupr_s_l
+  errno_t
+  str char*
+  numberOfElements size_t
+  locale _locale_t
+
+func _wcsupr_s_l
+  errno_t
+  str wchar_t*
+  numberOfElements size_t
+  locale _locale_t
+
+func _mbsupr_s
+  errno_t
+  str "unsigned char*"
+  numberOfElements size_t
+
+func _mbsupr_s_l
+  errno_t
+  str "unsigned char*"
+  numberOfElements size_t
+  locale _locale_t
+
+func _strlwr_s
+  errno_t
+  str char*
+  numberOfElements size_t
+
+func _strlwr_s_l
+  errno_t
+  str char*
+  numberOfElements size_t
+  locale _locale_t
+
+func _mbslwr_s
+  errno_t
+  str "unsigned char*"
+  numberOfElements size_t
+
+func _mbslwr_s_l
+  errno_t
+  str "unsigned char*"
+  numberOfElements size_t
+  locale _locale_t
+
+func _wcslwr_s
+  errno_t
+  str wchar_t*
+  numberOfElements size_t
+
+func _wcslwr_s_l
+  errno_t
+  str wchar_t*
+  numberOfElements size_t
+  locale _locale_t
+
+func _snscanf_s varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  input "const char*"
+  length size_t
+  format "const char*"
+
+func _snscanf_s_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  input "const char*"
+  length size_t
+  format "const char*"
+  locale _locale_t
+
+func _snwscanf_s varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  input "const wchar_t*"
+  length size_t
+  format "const wchar_t*"
+
+func _snwscanf_s_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  input "const wchar_t*"
+  length size_t
+  format "const wchar_t*"
+  locale _locale_t
+
+func _vsnprintf_s
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  sizeOfBuffer size_t
+  count size_t
+  format "const char*"
+  argptr va_list
+
+func _vsnprintf_s_l
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  sizeOfBuffer size_t
+  count size_t
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func _vsnwprintf_s
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  sizeOfBuffer size_t
+  count size_t
+  format "const wchar_t*"
+  argptr va_list
+
+func _vsnwprintf_s_l
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  sizeOfBuffer size_t
+  count size_t
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func swprintf_s varArgs
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  sizeOfBuffer size_t
+  format "const wchar_t*"
+
+func _swprintf_s_l varArgs
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  sizeOfBuffer size_t
+  format "const wchar_t*"
+  locale _locale_t
+
+func _sprintf_s_l varArgs
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  sizeOfBuffer size_t
+  format "const char*"
+  locale _locale_t
+
+func sprintf_s varArgs
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  sizeOfBuffer size_t
+  format "const char*"
+
+func _swscanf_s_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  buffer "const wchar_t*" outputOnly
+  format "const wchar_t*"
+  locale _locale_t
+
+func swscanf_s varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  buffer "const wchar_t*" outputOnly
+  format "const wchar_t*"
+
+func _sscanf_s_l varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  buffer "const char*" outputOnly
+  format "const char*"
+  locale _locale_t
+
+func sscanf_s varArgs
+  success NotEqual=-1
+  [RET_EOF]
+  buffer "const char*" outputOnly
+  format "const char*"
+
+func vswprintf_s
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  numberOfElements size_t
+  format "const wchar_t*"
+  argptr va_list
+
+func _vswprintf_s_l
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  numberOfElements size_t
+  format "const wchar_t*"
+  locale _locale_t
+  argptr va_list
+
+func _vsprintf_s_l
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  numberOfElements size_t
+  format "const char*"
+  locale _locale_t
+  argptr va_list
+
+func vsprintf_s
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  numberOfElements size_t
+  format "const char*"
+  argptr va_list
+
+func _strdup_dbg
+  char*
+  strSource "const char*"
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func _wcsdup_dbg
+  wchar_t*
+  strSource "const wchar_t*"
+  blockType [DBG_BLOCK_TYPE]
+  filename "const char*"
+  linenumber int
+
+func strxfrm
+  success NotEqual=0x7FFFFFFF
+  [size_t_INT_MAX]
+  strDest char*
+  strSource "const char*"
+  count size_t
+
+func wcsxfrm
+  success NotEqual=0x7FFFFFFF
+  [size_t_INT_MAX]
+  strDest wchar_t*
+  strSource "const wchar_t*"
+  count size_t
+
+func _strxfrm_l
+  success NotEqual=0x7FFFFFFF
+  [size_t_INT_MAX]
+  strDest char*
+  strSource "const char*"
+  count size_t
+  locale _locale_t
+
+func _wcsxfrm_l
+  success NotEqual=0x7FFFFFFF
+  [size_t_INT_MAX]
+  strDest wchar_t*
+  strSource "const wchar_t*"
+  count size_t
+  locale _locale_t
+
+func mbrlen
+  success NotEqual=-2
+  size_t
+  str "const char*"
+  maxSize size_t
+  mbstate mbstate_t
+
+func _mbsnbcoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+
+func _mbsnbcoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _mbsnbicoll
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+
+func _mbsnbicoll_l
+  success NotEqual=0x7FFFFFFF
+  [_NLSCMPERROR]
+  string1 "const unsigned char*"
+  string2 "const unsigned char*"
+  count size_t
+  locale _locale_t
+
+func _mbsnbset_s
+  errno_t
+  str "unsigned char*"
+  size size_t
+  c "unsigned int"
+  count size_t
+
+func _mbsnbset_s_l
+  errno_t
+  str "unsigned char*"
+  size size_t
+  c "unsigned int"
+  count size_t
+  locale _locale_t
+
+func _scprintf_p varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+
+func _scprintf_p_l varArgs
+  success NotEqual=-1
+  int
+  format "const char*"
+  locale _locale_t
+
+func _scwprintf_p varArgs
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+
+func _scwprintf_p_l varArgs
+  success NotEqual=-1
+  int
+  format "const wchar_t*"
+  locale _locale_t
+
+func _snprintf_s varArgs
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  sizeOfBuffer size_t
+  count size_t
+  format "const char*"
+
+func _snprintf_s_l varArgs
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  sizeOfBuffer size_t
+  count size_t
+  format "const char*"
+  locale _locale_t
+
+func _snwprintf_s varArgs
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  sizeOfBuffer size_t
+  count size_t
+  format "const wchar_t*"
+
+func _snwprintf_s_l varArgs
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  sizeOfBuffer size_t
+  count size_t
+  format "const wchar_t*"
+  locale _locale_t
+
+func _snprintf varArgs
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  count size_t
+  format "const char*"
+
+func _snprintf_l varArgs
+  success NotEqual=-1
+  int
+  buffer char* outputOnly
+  count size_t
+  format "const char*"
+  locale _locale_t
+
+func _snwprintf varArgs
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  count size_t
+  format "const wchar_t*"
+
+func _snwprintf_l varArgs
+  success NotEqual=-1
+  int
+  buffer wchar_t* outputOnly
+  count size_t
+  format "const wchar_t*"
+  locale _locale_t
+
+func _strnset_s
+  errno_t
+  str char*
+  numberOfElements size_t
+  c int
+  count size_t
+
+func _wcsnset_s
+  errno_t
+  str wchar_t*
+  numberOfElements size_t
+  c wchar_t
+  count size_t
+
+func _mbsnset_s
+  errno_t
+  str "unsigned char*"
+  numberOfElements size_t
+  c "unsigned int"
+  count size_t
+
+func _mbsnset_s_l
+  errno_t
+  str "unsigned char*"
+  numberOfElements size_t
+  c "unsigned int"
+  count size_t
+  locale _locale_t
+
+func _strset_s
+  errno_t
+  str char*
+  numberOfElements size_t
+  c int
+
+func _wcsset_s
+  errno_t
+  str wchar_t*
+  numberOfElements size_t
+  c wchar_t
+
+func _mbsset_s
+  errno_t
+  str "unsigned char*"
+  numberOfElements size_t
+  c "unsigned int"
+
+func _mbsset_s_l
+  errno_t
+  str "unsigned char*"
+  numberOfElements size_t
+  c "unsigned int"
+  locale _locale_t
+
+func _findclose
+  success NotEqual=-1
+  int
+  handle intptr_t
+
+func _findfirst
+  success NotEqual=-1
+  intptr_t
+  filespec "const char*"
+  fileinfo "struct _finddata_t*"
+
+func _findfirst32
+  success NotEqual=-1
+  intptr_t
+  filespec "const char*"
+  fileinfo "struct _finddata32_t*"
+
+func _findfirst64
+  success NotEqual=-1
+  intptr_t
+  filespec "const char*"
+  fileinfo "struct __finddata64_t*"
+
+func _findfirsti64
+  success NotEqual=-1
+  intptr_t
+  filespec "const char*"
+  fileinfo "struct _finddatai64_t*"
+
+func _findfirst32i64
+  success NotEqual=-1
+  intptr_t
+  filespec "const char*"
+  fileinfo "struct _finddata32i64_t*"
+
+func _findfirst64i32
+  success NotEqual=-1
+  intptr_t
+  filespec "const char*"
+  fileinfo "struct _finddata64i32_t*"
+
+func _wfindfirst
+  success NotEqual=-1
+  intptr_t
+  filespec "const wchar_t*"
+  fileinfo "struct _wfinddata_t*"
+
+func _wfindfirst32
+  success NotEqual=-1
+  intptr_t
+  filespec "const wchar_t*"
+  fileinfo "struct _wfinddata32_t*"
+
+func _wfindfirst64
+  success NotEqual=-1
+  intptr_t
+  filespec "const wchar_t*"
+  fileinfo "struct _wfinddata64_t*"
+
+func _wfindfirsti64
+  success NotEqual=-1
+  intptr_t
+  filespec "const wchar_t*"
+  fileinfo "struct _wfinddatai64_t*"
+
+func _wfindfirst32i64
+  success NotEqual=-1
+  intptr_t
+  filespec "const wchar_t*"
+  fileinfo "struct _wfinddata32i64_t*"
+
+func _wfindfirst64i32
+  success NotEqual=-1
+  intptr_t
+  filespec "const wchar_t*"
+  fileinfo "struct _wfinddata64i32_t*"
+
+func _findnext
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct _finddata_t*"
+
+func _findnext32
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct _finddata32_t*"
+
+func _findnext64
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct __finddata64_t*"
+
+func _findnexti64
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct _finddatai64_t*"
+
+func _findnext32i64
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct _finddata32i64_t*"
+
+func _findnext64i32
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct _finddata64i32_t*"
+
+func _wfindnext
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct _wfinddata_t*"
+
+func _wfindnext32
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct _wfinddata32_t*"
+
+func _wfindnext64
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct _wfinddata64_t*"
+
+func _wfindnexti64
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct _wfinddatai64_t*"
+
+func _wfindnext32i64
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct _wfinddatai64_t*"
+
+func _wfindnext64i32
+  success NotEqual=-1
+  int
+  handle intptr_t
+  fileinfo "struct _wfinddata64i32_t*"
+
+func asctime
+  char*
+  timeptr "const struct tm*"
+
+func _wasctime
+  wchar_t*
+  timeptr "const struct tm*"
+
+func asctime_s
+  errno_t
+  buffer char* outputOnly
+  numberOfElements size_t
+  _tm "const struct tm*"
+
+func _wasctime_s
+  errno_t
+  buffer wchar_t* outputOnly
+  numberOfElements size_t
+
+func clock
+  success NotEqual=-1
+  clock_t
+
+func ctime
+  success NotEqual=0
+  char*
+  timer "const time_t*"
+
+func _ctime32
+  success NotEqual=0
+  char*
+  timer "const __time32_t*"
+
+func _ctime64
+  success NotEqual=0
+  char*
+  timer "const __time64_t*"
+
+func _wctime
+  success NotEqual=0
+  wchar_t*
+  timer "const time_t*"
+
+func _wctime32
+  success NotEqual=0
+  wchar_t*
+  timer "const __time32_t*"
+
+func _wctime64
+  success NotEqual=0
+  wchar_t*
+  timer "const __time64_t*"
+
+func _ctime32_s
+  errno_t
+  buffer char* outputOnly
+  numberOfElements size_t
+  time "const __time32_t*"
+
+func _ctime64_s
+  errno_t
+  buffer char* outputOnly
+  numberOfElements size_t
+  time "const __time64_t*"
+
+func _wctime32_s
+  errno_t
+  buffer wchar_t* outputOnly
+  numberOfElements size_t
+  time "const __time32_t*"
+
+func _wctime64_s
+  errno_t
+  buffer wchar_t* outputOnly
+  numberOfElements size_t
+  time "const __time64_t*"
+
+func _ftime
+  void
+  timeptr "struct _timeb*"
+
+func _ftime32
+  void
+  timeptr "struct __timeb32*"
+
+func _ftime64
+  void
+  timeptr "struct __timeb64*"
+
+func _ftime32_s
+  errno_t
+  timeptr "struct __timeb32*"
+
+func _ftime64_s
+  errno_t
+  timeptr "struct __timeb64*"
+
+func _futime
+  success Equal=0
+  int
+  fd int
+  filetime "struct _utimbuf*"
+
+func _futime32
+  success Equal=0
+  int
+  fd int
+  filetime "struct __utimbuf32*"
+
+func _futime64
+  success Equal=0
+  int
+  fd int
+  filetime "struct __utimbuf64*"
+
+func gmtime
+  success NotEqual=0
+  "struct tm*"
+  timer "const time_t*"
+
+func _gmtime32
+  success NotEqual=0
+  "struct tm*"
+  timer "const __time32_t*"
+
+func _gmtime64
+  success NotEqual=0
+  "struct tm*"
+  timer "const __time64_t*"
+
+func _gmtime32_s
+  errno_t
+  _tm "struct tm*"
+  time "const __time32_t*"
+
+func _gmtime64_s
+  errno_t
+  _tm "struct tm*"
+  time "const __time64_t*"
+
+func localtime
+  success NotEqual=0
+  "struct tm*"
+  timer "const time_t*"
+
+func _localtime32
+  success NotEqual=0
+  "struct tm*"
+  timer "const __time32_t*"
+
+func _localtime64
+  success NotEqual=0
+  "struct tm*"
+  timer "const __time64_t*"
+
+func _localtime32_s
+  errno_t
+  _tm "struct tm*"
+  time "const __time32_t*"
+
+func _localtime64_s
+  errno_t
+  _tm "struct tm*"
+  time "const __time64_t*"
+
+func _mkgmtime
+  time_t
+  timeptr "struct tm*"
+
+func _mkgmtime32
+  __time32_t
+  timeptr "struct tm*"
+
+func _mkgmtime64
+  __time64_t
+  timeptr "struct tm*"
+
+func mktime
+  success NotEqual=-1
+  time_t
+  timeptr "struct tm*"
+
+func _mktime32
+  success NotEqual=-1
+  __time32_t
+  timeptr "struct tm*"
+
+func _mktime64
+  success NotEqual=-1
+  __time64_t
+  timeptr "struct tm*"
+
+func _strdate
+  success NotEqual=-1
+  char*
+  datestr char*
+
+func _wstrdate
+  success NotEqual=-1
+  wchar_t*
+  datestr wchar_t*
+
+func _strdate_s
+  errno_t
+  buffer char* outputOnly
+  numberOfElements size_t
+
+func _wstrdate_s
+  errno_t
+  buffer wchar_t* outputOnly
+  numberOfElements size_t
+
+func _strtime
+  success NotEqual=0
+  char*
+  timestr char*
+
+func _wstrtime
+  success NotEqual=0
+  wchar_t*
+  timestr wchar_t*
+
+func _strtime_s
+  errno_t
+  buffer char* outputOnly
+  numberOfElements size_t
+
+func _wstrtime_s
+  errno_t
+  buffer wchar_t* outputOnly
+  numberOfElements size_t
+
+func time
+  success NotEqual=-1
+  time_t
+  timer time_t*
+
+func _time32
+  success NotEqual=-1
+  __time32_t
+  timer __time32_t*
+
+func _time64
+  success NotEqual=-1
+  __time64_t
+  timer __time64_t*
+
+func _tzset
+  void
+
+func _utime
+  success NotEqual=-1
+  int
+  filename "const char*"
+  times "struct _utimbuf*"
+
+func _utime32
+  success NotEqual=-1
+  int
+  filename "const char*"
+  times "struct __utimbuf32*"
+
+func _utime64
+  success NotEqual=-1
+  int
+  filename "const char*"
+  times "struct __utimbuf64*"
+
+func _wutime
+  success NotEqual=-1
+  int
+  filename "const wchar_t*"
+  times "struct _utimbuf*"
+
+func _wutime32
+  success NotEqual=-1
+  int
+  filename "const wchar_t*"
+  times "struct __utimbuf32*"
+
+func _wutime64
+  success NotEqual=-1
+  int
+  filename "const wchar_t*"
+  times "struct __utimbuf64*"
+
+func _difftime32
+  double
+  timer1 __time32_t
+  timer0 __time32_t
+
+func _difftime64
+  double
+  timer1 __time64_t
+  timer0 __time64_t
+
+func difftime
+  double
+  timer1 time_t
+  timer0 time_t
+
+func strftime
+  success NotEqual=0
+  size_t
+  strDest char* outputOnly
+  maxsize size_t
+  format "const char*"
+  timeptr "const struct tm*"
+
+func _strftime_l
+  success NotEqual=0
+  size_t
+  strDest char* outputOnly
+  maxsize size_t
+  format "const char*"
+  timeptr "const struct tm*"
+  locale _locale_t
+
+func wcsftime
+  success NotEqual=0
+  size_t
+  strDest wchar_t* outputOnly
+  maxsize size_t
+  format "const wchar_t*"
+  timeptr "const struct tm*"
+
+func _wcsftime_l
+  success NotEqual=0
+  size_t
+  strDest wchar_t* outputOnly
+  maxsize size_t
+  format "const wchar_t*"
+  timeptr "const struct tm*"
+  locale _locale_t
+
+func _get_dstbias
+  errno_t
+  seconds int*
+
+func _get_daylight
+  errno_t
+  hours int*
+
+func _get_timezone
+  errno_t
+  seconds long*
+
+func _get_tzname
+  errno_t
+  pReturnValue size_t*
+  timeZoneName char*
+  sizeInBytes size_t
+  index int
+
+func _getsystime
+  success NotEqual=0
+  unsigned
+  _tm "struct tm*"
+
+func _setsystime
+  success Equal=0
+  unsigned
+  _tm "struct tm*"
+  millisec unsigned
+
+func _get_output_format
+  [output_format]
+
+func _set_output_format
+  [output_format]
+  format [output_format]
+
+func _get_printf_count_output
+  int
+
+func _set_printf_count_output
+  int
+  enable int
+
+func _lock
+  void
+  locknum [LOCK_NUM]
+
+func _unlock
+  void
+  locknum [LOCK_NUM]
+
+func _initterm
+  void
+  pfbegin _PVFV*
+  pfend _PVFV*
+
+func _initterm_e
+  success Equal=0
+  int
+  pfbegin _PVFV*
+  pfend _PVFV*
+
+func __RTDynamicCast
+  success NotEqual=0
+  PVOID
+  inptr PVOID
+  VfDelta LONG
+  SrcType PVOID
+  TargetType PVOID
+  isReference BOOL
+
+func __p__commode
+  int*
+
+func _beep
+  void
+  frequency unsigned
+  duration unsigned
+

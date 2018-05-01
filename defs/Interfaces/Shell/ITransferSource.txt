@@ -1,0 +1,78 @@
+include Interfaces\IUnknown.txt
+
+ingterface ITransferSource base=IUnknown id={00adb003-bde9-45c6-8e29-d09f9353e108} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Advise
+    HRESULT
+    psink ITransferAdviseSink*
+    pdwCookie DWORD*
+
+  func Unadvise
+    HRESULT
+    dwCookie DWORD
+
+  func SetProperties
+    HRESULT
+    pproparray IPropertyChangeArray*
+
+  func OpenItem
+    HRESULT
+    psi IShellItem*
+    flags TRANSFER_SOURCE_FLAGS
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func MoveItem
+    HRESULT
+    psi IShellItem*
+    psiParentDst IShellItem*
+    pszNameDst LPCWSTR
+    flags TRANSFER_SOURCE_FLAGS
+    ppsiNew IShellItem**
+
+  func RecycleItem
+    HRESULT
+    psiSource IShellItem*
+    psiParentDest IShellItem*
+    flags TRANSFER_SOURCE_FLAGS
+    ppsiNewDest IShellItem**
+
+  func RemoveItem
+    HRESULT
+    psiSource IShellItem*
+    flags TRANSFER_SOURCE_FLAGS
+
+  func RenameItem
+    HRESULT
+    psiSource IShellItem*
+    pszNewName LPCWSTR
+    flags TRANSFER_SOURCE_FLAGS
+    ppsiNewDest IShellItem**
+
+  func LinkItem
+    HRESULT
+    psiSource IShellItem*
+    psiParentDest IShellItem*
+    pszNewName LPCWSTR
+    flags TRANSFER_SOURCE_FLAGS
+    ppsiNewDest IShellItem**
+
+  func ApplyPropertiesToItem
+    HRESULT
+    psiSource IShellItem*
+    ppsiNew IShellItem**
+
+  func GetDefaultDestinationName
+    HRESULT
+    psiSource IShellItem*
+    psiParentDest IShellItem*
+    ppszDestinationName LPWSTR*
+
+  func EnterFolder
+    HRESULT
+    psiChildFolderDest IShellItem*
+
+  func LeaveFolder
+    HRESULT
+    psiChildFolderDest IShellItem*
+
+

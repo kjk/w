@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IUserNotificationCallback base=IUnknown id={19108294-0441-4AFF-8013-FA0A730B0BEA} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func OnBalloonUserClick
+    HRESULT
+    pt POINT*
+
+  func OnLeftClick
+    HRESULT
+    pt POINT*
+
+  func OnContextMenu
+    HRESULT
+    pt POINT*
+
+

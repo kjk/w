@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Headers\registry.h.txt
+
+ingterface IGetCapabilitiesKey base=IUnknown id={a8809222-07bb-48ea-951c-33158100625b} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetCapabilitiesKey
+    HRESULT
+    pHKey HKEY*
+
+

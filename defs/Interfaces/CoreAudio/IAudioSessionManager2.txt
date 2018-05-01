@@ -1,0 +1,26 @@
+include Interfaces\CoreAudio\IAudioSessionManager.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioSessionManager2 base=IAudioSessionManager id={77AA99A0-1BD6-484F-8BC7-2C654C9A9B6F} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Audio Session"
+  func GetSessionEnumerator
+    [AUDCLNT_HRESULT]
+    SessionEnum IAudioSessionEnumerator**
+
+  func RegisterSessionNotification
+    [AUDCLNT_HRESULT]
+    SessionNotification IAudioSessionNotification*
+
+  func UnregisterSessionNotification
+    [AUDCLNT_HRESULT]
+    SessionNotification IAudioSessionNotification*
+
+  func RegisterDuckNotification
+    [AUDCLNT_HRESULT]
+    sessionID LPCWSTR
+    duckNotification IAudioVolumeDuckNotification*
+
+  func UnregisterDuckNotification
+    [AUDCLNT_HRESULT]
+    duckNotification IAudioVolumeDuckNotification*
+
+

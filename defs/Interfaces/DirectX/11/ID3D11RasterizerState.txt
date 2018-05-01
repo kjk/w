@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+
+ingterface ID3D11RasterizerState base=ID3D11DeviceChild id={9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func GetDesc
+    void
+    pDesc D3D11_RASTERIZER_DESC*
+
+

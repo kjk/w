@@ -1,0 +1,44 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\11\D3D11.h.txt
+
+ingterface ID3D11ShaderTrace base=IUnknown id={36b013e6-2811-4845-baa7-d623fe0df104} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Shader"
+  func TraceReady
+    HRESULT
+    pTestCount UINT64*
+
+  func ResetTrace
+    void
+
+  func GetTraceStats
+    HRESULT
+    pTraceStats D3D11_TRACE_STATS*
+
+  func PSSelectStamp
+    HRESULT
+    stampIndex UINT
+
+  func GetInitialRegisterContents
+    HRESULT
+    pRegister D3D11_TRACE_REGISTER*
+    pValue D3D11_TRACE_VALUE*
+
+  func GetStep
+    HRESULT
+    stepIndex UINT
+    pTraceStep D3D11_TRACE_STEP*
+
+  func GetWrittenRegister
+    HRESULT
+    stepIndex UINT
+    writtenRegisterIndex UINT
+    pRegister D3D11_TRACE_REGISTER*
+    pValue D3D11_TRACE_VALUE*
+
+  func GetReadRegister
+    HRESULT
+    stepIndex UINT
+    readRegisterIndex UINT
+    pRegister D3D11_TRACE_REGISTER*
+    pValue D3D11_TRACE_VALUE*
+
+

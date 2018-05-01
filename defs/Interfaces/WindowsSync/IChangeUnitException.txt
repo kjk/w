@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IChangeUnitException base=IUnknown id={0cd7ee7c-fec0-4021-99ee-f0e5348f2a5f} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetItemId
+    HRESULT
+    pbItemId BYTE*
+    pcbIdSize DWORD*
+
+  func GetChangeUnitId
+    HRESULT
+    pbChangeUnitId BYTE*
+    pcbIdSize DWORD*
+
+  func GetClockVector
+    HRESULT
+    riid REFIID
+    ppUnk void** interfaceId=riid
+
+

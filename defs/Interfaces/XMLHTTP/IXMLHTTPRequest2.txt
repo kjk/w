@@ -1,0 +1,59 @@
+include Interfaces\IUnknown.txt
+include Interfaces\XMLHTTP\XMLHTTP.h.txt
+
+ingterface IXMLHTTPRequest2 base=IUnknown id={E5D37DC0-552A-4D52-9CC0-A14D546FBD04} errorFunc=HRESULT onlineHelp=MSDN category="Internet/XML HTTP Request"
+  func Open
+    HRESULT
+    pwszMethod "const WCHAR*"
+    pwszUrl "const WCHAR*"
+    pStatusCallback IXMLHTTPRequest2Callback*
+    pwszUserName "const WCHAR*"
+    pwszPassword "const WCHAR*"
+    pwszProxyUserName "const WCHAR*"
+    pwszProxyPassword "const WCHAR*"
+
+  func Send
+    HRESULT
+    pBody ISequentialStream*
+    cbBody ULONGLONG
+
+  func Abort
+    HRESULT
+
+  func SetCookie
+    HRESULT
+    pCookie "const XHR_COOKIE*"
+    pdwCookieState XHR_COOKIE_STATE*
+
+  func SetCustomResponseStream
+    HRESULT
+    pSequentialStream ISequentialStream*
+
+  func SetProperty
+    HRESULT
+    eProperty XHR_PROPERTY
+    ullValue ULONGLONG
+
+  func SetRequestHeader
+    HRESULT
+    pwszHeader "const WCHAR*"
+    pwszValue "const WCHAR*"
+
+  func GetAllResponseHeaders
+    HRESULT
+    ppwszHeaders WCHAR**
+
+  func GetCookie
+    HRESULT
+    pwszUrl "const WCHAR*"
+    pwszName "const WCHAR*"
+    dwFlags DWORD
+    pcCookies ULONG*
+    ppCookies XHR_COOKIE** derefPostCount=pcCookies
+
+  func GetResponseHeader
+    HRESULT
+    pwszHeader "const WCHAR*"
+    ppwszValue WCHAR**
+
+

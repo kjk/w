@@ -1,0 +1,21 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\DirectComposition\IDCompositionTransform.txt
+
+ingterface IDCompositionMatrixTransform base=IDCompositionTransform id={16CDFF07-C503-419c-83F2-0965C7AF1FA6} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func SetMatrix
+    HRESULT
+    matrix "const D2D_MATRIX_3X2_F&"
+
+  func SetMatrixElement
+    HRESULT
+    row int
+    column int
+    value float
+
+  func "SetMatrixElement "
+    HRESULT
+    row int
+    column int
+    animation IDCompositionAnimation*
+
+

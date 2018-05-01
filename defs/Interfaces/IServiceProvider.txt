@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IServiceProvider base=IUnknown id={6d5140c1-7436-11ce-8034-00aa006009fa} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Content Extensions/ActiveX Controls/Interfaces"
+  func QueryService
+    HRESULT
+    guidService REFGUID
+    riid REFIID
+    ppvObject void** interfaceId=riid
+
+

@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMAsyncReaderTimestampScaling base=IUnknown id={cf7b26fc-9a00-485b-8147-3e789d5e8f67} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetTimestampMode
+    HRESULT
+    pfRaw BOOL*
+
+  func SetTimestampMode
+    HRESULT
+    fRaw BOOL
+
+

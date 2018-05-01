@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IThumbnailCapture base=IUnknown id={4ea39266-7211-409f-b622-f63dbd16c533} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func CaptureThumbnail
+    HRESULT
+    pMaxSize "const SIZE*"
+    pHTMLDoc2 IUnknown*
+    phbmThumbnail HBITMAP*
+
+

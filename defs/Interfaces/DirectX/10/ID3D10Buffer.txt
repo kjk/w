@@ -1,0 +1,18 @@
+include Interfaces\DirectX\10\ID3D10Resource.txt
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10Buffer base=ID3D10Resource id={9B7E4C02-342C-4106-A19F-4F2704F689F0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Resource"
+  func Map
+    HRESULT
+    MapType D3D10_MAP
+    MapFlags D3D10_MAP_FLAG
+    ppData void**
+
+  func Unmap
+    void
+
+  func GetDesc
+    void
+    pDesc D3D10_BUFFER_DESC*
+
+

@@ -1,0 +1,20 @@
+include Headers\windows.h.txt
+
+dll Msidle.dll callingConvention=STDCALL errorFunc=GetLastError errorIsReturnValue onlineHelp=MSDN
+category "Additional Resources/System/Inactivity Monitoring"
+alias _IDLECALLBACK LPVOID
+
+func BeginIdleDetection ordinal=3
+  [ERROR_CODE]
+  pfnCallback _IDLECALLBACK
+  dwIdleMin DWORD
+  dwReserved DWORD
+
+func EndIdleDetection ordinal=4
+  BOOL
+  dwReserved DWORD
+
+func GetIdleMinutes ordinal=8
+  DWORD
+  dwReserved DWORD
+

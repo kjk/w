@@ -1,0 +1,14 @@
+include Interfaces\WIC\IWICComponentInfo.txt
+
+ingterface IWICFormatConverterInfo base=IWICComponentInfo id={9F34FB65-13F4-4f15-BC57-3726B5E53D9F} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func GetPixelFormats
+    [WIC_HRESULT]
+    cFormats UINT
+    pPixelFormatGUIDs WICPixelFormatGUID*
+    pcActual UINT*
+
+  func CreateInstance
+    [WIC_HRESULT]
+    ppIConverter IWICFormatConverter**
+
+

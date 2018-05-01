@@ -1,0 +1,39 @@
+include Interfaces\IUnknown.txt
+
+ingterface AsyncIAdviseSink base=IUnknown id={00000150-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func Begin_OnDataChange
+    void
+    pFormatetc FORMATETC*
+    pStgmed STGMEDIUM*
+
+  func Finish_OnDataChange
+    void
+
+  func Begin_OnViewChange
+    void
+    dwAspect DVASPECT
+    lindex LONG
+
+  func Finish_OnViewChange
+    void
+
+  func Begin_OnRename
+    void
+    pmk IMoniker*
+
+  func Finish_OnRename
+    void
+
+  func Begin_OnSave
+    void
+
+  func Finish_OnSave
+    void
+
+  func Begin_OnClose
+    void
+
+  func Finish_OnClose
+    void
+
+

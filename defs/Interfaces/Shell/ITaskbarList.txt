@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+
+ingterface ITaskbarList base=IUnknown id={56FDF342-FD6D-11d0-958A-006097C9A090} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func HrInit
+    HRESULT
+
+  func AddTab
+    HRESULT
+    hwnd HWND
+
+  func DeleteTab
+    HRESULT
+    hwnd HWND
+
+  func ActivateTab
+    HRESULT
+    hwnd HWND
+
+  func SetActiveAlt
+    HRESULT
+    hwnd HWND
+
+

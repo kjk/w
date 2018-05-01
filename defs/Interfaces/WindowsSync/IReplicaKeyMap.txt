@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IReplicaKeyMap base=IUnknown id={2209F4FC-FD10-4ff0-84A8-F0A1982E440E} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func LookupReplicaKey
+    HRESULT
+    pbReplicaId "const BYTE*"
+    pdwReplicaKey DWORD*
+
+  func LookupReplicaId
+    HRESULT
+    dwReplicaKey DWORD
+    pbReplicaId BYTE*
+    pcbIdSize DWORD*
+
+  func Serialize
+    HRESULT
+    pbReplicaKeyMap BYTE*
+    pcbReplicaKeyMap DWORD*
+
+

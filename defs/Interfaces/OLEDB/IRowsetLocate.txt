@@ -1,0 +1,43 @@
+include Interfaces\OLEDB\IRowset.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IRowsetLocate base=IRowset id={0c733a7d-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func Compare
+    [OLEDB_HRESULT]
+    hReserved HCHAPTER
+    cbBookmark1 DBBKMARK
+    pBookmark1 "const BYTE*" length=cbBookmark1
+    cbBookmark2 DBBKMARK
+    pBookmark2 "const BYTE*" length=cbBookmark2
+    pComparison DBCOMPARE*
+
+  func GetRowsAt
+    [OLEDB_HRESULT]
+    hReserved1 HWATCHREGION
+    hReserved2 HCHAPTER
+    cbBookmark DBBKMARK
+    pBookmark "const BYTE*" length=cbBookmark
+    lRowsOffset DBROWOFFSET
+    cRows DBROWCOUNT
+    pcRowsObtained DBCOUNTITEM*
+    prghRows HROW** derefPostCount=pcRowsObtained
+
+  func GetRowsByBookmark
+    [OLEDB_HRESULT]
+    hReserved HCHAPTER
+    cRows DBCOUNTITEM
+    rgcbBookmarks "const DBBKMARK []" count=cRows
+    rgpBookmarks "const BYTE* []" count=cRows
+    rghRows "HROW []" postCount=cRows
+    rgRowStatus "DBROWSTATUS []" postCount=cRows
+
+  func Hash
+    [OLEDB_HRESULT]
+    hReserved HCHAPTER
+    cBookmarks DBBKMARK
+    rgcbBookmarks "const DBBKMARK []" count=cBookmarks
+    rgpBookmarks "const BYTE* []" count=cBookmarks
+    rgHashedValues "DBHASHVALUE []" postCount=cBookmarks
+    rgBookmarkStatus "DBROWSTATUS []" postCount=cBookmarks
+
+

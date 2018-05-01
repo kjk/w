@@ -1,0 +1,21 @@
+include Interfaces\COM\IOleWindow.txt
+
+ingterface IDockingWindowFrame base=IOleWindow id={47d2657a-7b27-11d0-8ca9-00a0c92dbfe8} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func AddToolbar
+    HRESULT
+    punkSrc IUnknown*
+    pwszItem LPCWSTR
+    dwAddFlags DWORD
+
+  func RemoveToolbar
+    HRESULT
+    punkSrc IUnknown*
+    dwRemoveFlags DWORD
+
+  func FindToolbar
+    HRESULT
+    pwszItem LPCWSTR
+    riid REFIID
+    ppv void** interfaceId=riid
+
+

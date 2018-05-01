@@ -1,0 +1,22 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwServiceRestriction base=IDispatch id={8267BBE3-F890-491C-B7B6-2DB1EF0E5D2B} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall with Advanced Security"
+  func RestrictService
+    HRESULT
+    serviceName BSTR
+    appName BSTR
+    restrictService VARIANT_BOOL
+    serviceSidRestricted VARIANT_BOOL
+
+  func ServiceRestricted
+    HRESULT
+    serviceName BSTR
+    appName BSTR
+    serviceRestricted VARIANT_BOOL*
+
+  func get_Rules
+    HRESULT
+    rules INetFwRules**
+
+

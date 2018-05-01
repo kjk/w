@@ -1,0 +1,77 @@
+include Headers\dinput.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDirectInputDeviceA base=IUnknown id={5944e680-c92e-11cf-bfc7-444553540000} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Input/DirectInput"
+  func GetCapabilities
+    [DI_HRESULT]
+    lpDIDevCaps LPDIDEVCAPS
+
+  func EnumObjects
+    [DI_HRESULT]
+    lpCallback LPDIENUMDEVICEOBJECTSCALLBACKA
+    pvRef LPVOID
+    dwFlags [DIDFT_Flags]
+
+  func GetProperty
+    [DI_HRESULT]
+    rguidProp [DIPROP]
+    pdiph LPDIPROPHEADER
+
+  func SetProperty
+    [DI_HRESULT]
+    rguidProp [DIPROP]
+    pdiph LPCDIPROPHEADER
+
+  func Acquire
+    [DI_HRESULT]
+
+  func Unacquire
+    [DI_HRESULT]
+
+  func GetDeviceState
+    [DI_HRESULT]
+    cbData DWORD
+    lpvData LPVOID postLength=cbData
+
+  func GetDeviceData
+    [DI_HRESULT]
+    cbObjectData DWORD
+    rgdod LPDIDEVICEOBJECTDATA postCount=pdwInOut
+    pdwInOut LPDWORD
+    dwFlags [DIGDD_Flags]
+
+  func SetDataFormat
+    [DI_HRESULT]
+    lpdf LPCDIDATAFORMAT
+
+  func SetEventNotification
+    [DI_HRESULT]
+    hEvent HANDLE
+
+  func SetCooperativeLevel
+    [DI_HRESULT]
+    hwnd HWND
+    dwFlags [DISCL_Flags]
+
+  func GetObjectInfo
+    [DI_HRESULT]
+    pdidoi LPDIDEVICEOBJECTINSTANCEA
+    dwObj DWORD
+    dwHow [DIPH_Enum]
+
+  func GetDeviceInfo
+    [DI_HRESULT]
+    pdidi LPDIDEVICEINSTANCEA outputOnly
+
+  func RunControlPanel
+    [DI_HRESULT]
+    hwndOwner HWND
+    dwFlags DWORD
+
+  func Initialize
+    [DI_HRESULT]
+    hinst HINSTANCE
+    dwVersion DWORD
+    rguid REFGUID
+
+

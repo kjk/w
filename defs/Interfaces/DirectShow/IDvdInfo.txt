@@ -1,0 +1,114 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDvdInfo base=IUnknown id={A70EFE60-E2A3-11d0-A9BE-00AA0061BE93} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetCurrentDomain
+    HRESULT
+    pDomain DVD_DOMAIN*
+
+  func GetCurrentLocation
+    HRESULT
+    pLocation DVD_PLAYBACK_LOCATION*
+
+  func GetTotalTitleTime
+    HRESULT
+    pulTotalTime ULONG*
+
+  func GetCurrentButton
+    HRESULT
+    pulButtonsAvailable ULONG*
+    pulCurrentButton ULONG*
+
+  func GetCurrentAngle
+    HRESULT
+    pulAnglesAvailable ULONG*
+    pulCurrentAngle ULONG*
+
+  func GetCurrentAudio
+    HRESULT
+    pulStreamsAvailable ULONG*
+    pulCurrentStream ULONG*
+
+  func GetCurrentSubpicture
+    HRESULT
+    pulStreamsAvailable ULONG*
+    pulCurrentStream ULONG*
+    pIsDisabled BOOL*
+
+  func GetCurrentUOPS
+    HRESULT
+    pUOP VALID_UOP_SOMTHING_OR_OTHER*
+
+  func GetAllSPRMs
+    HRESULT
+    pRegisterArray SPRMARRAY*
+
+  func GetAllGPRMs
+    HRESULT
+    pRegisterArray GPRMARRAY*
+
+  func GetAudioLanguage
+    HRESULT
+    ulStream ULONG
+    pLanguage LCID*
+
+  func GetSubpictureLanguage
+    HRESULT
+    ulStream ULONG
+    pLanguage LCID*
+
+  func GetTitleAttributes
+    HRESULT
+    ulTitle ULONG
+    pATR DVD_ATR*
+
+  func GetVMGAttributes
+    HRESULT
+    pATR DVD_ATR*
+
+  func GetCurrentVideoAttributes
+    HRESULT
+    pATR DVD_VideoATR*
+
+  func GetCurrentAudioAttributes
+    HRESULT
+    pATR DVD_AudioATR*
+
+  func GetCurrentSubpictureAttributes
+    HRESULT
+    pATR DVD_SubpictureATR*
+
+  func GetCurrentVolumeInfo
+    HRESULT
+    pulNumOfVol ULONG*
+    pulThisVolNum ULONG*
+    pSide DVD_DISC_SIDE*
+    pulNumOfTitles ULONG*
+
+  func GetDVDTextInfo
+    HRESULT
+    pTextManager BYTE*
+    ulBufSize ULONG
+    pulActualSize ULONG*
+
+  func GetPlayerParentalLevel
+    HRESULT
+    pulParentalLevel ULONG*
+    pulCountryCode ULONG*
+
+  func GetNumberOfChapters
+    HRESULT
+    ulTitle ULONG
+    pulNumberOfChapters ULONG*
+
+  func GetTitleParentalLevels
+    HRESULT
+    ulTitle ULONG
+    pulParentalLevels ULONG*
+
+  func GetRoot
+    HRESULT
+    pRoot LPSTR
+    ulBufSize ULONG
+    pulActualSize ULONG*
+
+

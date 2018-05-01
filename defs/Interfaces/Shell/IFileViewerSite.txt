@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFileViewerSite base=IUnknown id={000214f3-0000-0000-c000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetPinnedWindow
+    HRESULT
+    hwnd HWND
+
+  func GetPinnedWindow
+    HRESULT
+    phwnd HWND*
+
+

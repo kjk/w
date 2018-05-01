@@ -1,0 +1,9 @@
+include Headers\dwrite.h.txt
+
+dll Dwrite.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+func DWriteCreateFactory ordinal=1
+  HRESULT
+  factoryType DWRITE_FACTORY_TYPE
+  iid REFIID
+  factory IUnknown** interfaceId=iid
+

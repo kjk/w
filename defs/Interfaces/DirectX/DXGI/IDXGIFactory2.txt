@@ -1,0 +1,67 @@
+include Interfaces\DirectX\DXGI\IDXGIFactory1.txt
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+ingterface IDXGIFactory2 base=IDXGIFactory1 id={50c83a1c-e072-4c48-87b0-3630fa36a6d0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func IsWindowedStereoEnabled
+    BOOL
+
+  func CreateSwapChainForHwnd
+    HRESULT
+    pDevice IUnknown*
+    hWnd HWND
+    pDesc "const DXGI_SWAP_CHAIN_DESC1*"
+    pFullscreenDesc "const DXGI_SWAP_CHAIN_FULLSCREEN_DESC*"
+    pRestrictToOutput IDXGIOutput*
+    ppSwapChain IDXGISwapChain1**
+
+  func CreateSwapChainForCoreWindow
+    HRESULT
+    pDevice IUnknown*
+    pWindow IUnknown*
+    pDesc "const DXGI_SWAP_CHAIN_DESC1*"
+    pRestrictToOutput IDXGIOutput*
+    ppSwapChain IDXGISwapChain1**
+
+  func GetSharedResourceAdapterLuid
+    HRESULT
+    hResource HANDLE
+    pLuid LUID*
+
+  func RegisterStereoStatusWindow
+    HRESULT
+    WindowHandle HWND
+    wMsg UINT
+    pdwCookie DWORD*
+
+  func RegisterStereoStatusEvent
+    HRESULT
+    hEvent HANDLE
+    pdwCookie DWORD*
+
+  func UnregisterStereoStatus
+    void
+    dwCookie DWORD
+
+  func RegisterOcclusionStatusWindow
+    HRESULT
+    WindowHandle HWND
+    wMsg UINT
+    pdwCookie DWORD*
+
+  func RegisterOcclusionStatusEvent
+    HRESULT
+    hEvent HANDLE
+    pdwCookie DWORD*
+
+  func UnregisterOcclusionStatus
+    void
+    dwCookie DWORD
+
+  func CreateSwapChainForComposition
+    HRESULT
+    pDevice IUnknown*
+    pDesc "const DXGI_SWAP_CHAIN_DESC1*"
+    pRestrictToOutput IDXGIOutput*
+    ppSwapChain IDXGISwapChain1**
+
+

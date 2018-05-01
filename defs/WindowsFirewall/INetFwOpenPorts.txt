@@ -1,0 +1,28 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwOpenPorts base=IDispatch id={C0E9D7FA-E07E-430A-B19A-090CE82D92E2} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall"
+  func get_Count
+    HRESULT
+    count long*
+
+  func Add
+    HRESULT
+    port INetFwOpenPort*
+
+  func Remove
+    HRESULT
+    portNumber LONG
+    ipProtocol NET_FW_IP_PROTOCOL
+
+  func Item
+    HRESULT
+    portNumber LONG
+    ipProtocol NET_FW_IP_PROTOCOL
+    openPort INetFwOpenPort**
+
+  func get__NewEnum
+    HRESULT
+    newEnum IUnknown**
+
+

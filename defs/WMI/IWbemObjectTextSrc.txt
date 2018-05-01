@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemObjectTextSrc base=IUnknown id={bfbf883a-cad7-11d3-a11b-00105a1f515a} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func GetText
+    WBEMSTATUS
+    lFlags long
+    pObj IWbemClassObject*
+    uObjTextFormat ULONG
+    pCtx IWbemContext*
+    strText BSTR*
+
+  func CreateFromText
+    WBEMSTATUS
+    lFlags long
+    strText BSTR
+    uObjTextFormat ULONG
+    pCtx IWbemContext*
+    pNewObj IWbemClassObject**
+
+

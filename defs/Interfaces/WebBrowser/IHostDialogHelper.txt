@@ -1,0 +1,13 @@
+include Interfaces\IUnknown.txt
+
+ingterface IHostDialogHelper base=IUnknown id={53DEC138-A51E-11d2-861E-00C04FA35C89} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/Advanced Hosting Interfaces"
+  func ShowHTMLDialog
+    HRESULT
+    hwndParent HWND
+    pMk IMoniker*
+    pvarArgIn VARIANT*
+    pchOptions WCHAR*
+    pvarArgOut VARIANT*
+    punkHost IUnknown*
+
+

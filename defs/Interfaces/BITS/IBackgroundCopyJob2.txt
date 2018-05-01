@@ -1,0 +1,40 @@
+include Interfaces\BITS\IBackgroundCopyJob.txt
+
+ingterface IBackgroundCopyJob2 base=IBackgroundCopyJob id={54b50739-686f-45eb-9dff-d6a9a0faa9af} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func SetNotifyCmdLine
+    HRESULT
+    Program LPCWSTR
+    Parameters LPCWSTR
+
+  func GetNotifyCmdLine
+    HRESULT
+    pProgram LPWSTR*
+    pParameters LPWSTR*
+
+  func GetReplyProgress
+    HRESULT
+    pProgress BG_JOB_REPLY_PROGRESS*
+
+  func GetReplyData
+    HRESULT
+    ppBuffer byte**
+    pLength UINT64*
+
+  func SetReplyFileName
+    HRESULT
+    ReplyFileName LPCWSTR
+
+  func GetReplyFileName
+    HRESULT
+    pReplyFileName LPWSTR*
+
+  func SetCredentials
+    HRESULT
+    credentials BG_AUTH_CREDENTIALS*
+
+  func RemoveCredentials
+    HRESULT
+    Target BG_AUTH_TARGET
+    Scheme BG_AUTH_SCHEME
+
+

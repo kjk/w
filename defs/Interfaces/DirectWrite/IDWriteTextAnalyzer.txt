@@ -1,0 +1,98 @@
+include Headers\dwrite.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDWriteTextAnalyzer base=IUnknown id={b7e6163e-7f46-43b4-84b3-e4e6249c365d} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
+  func AnalyzeScript
+    HRESULT
+    analysisSource IDWriteTextAnalysisSource*
+    textPosition UINT32
+    textLength UINT32
+    analysisSink IDWriteTextAnalysisSink*
+
+  func AnalyzeBidi
+    HRESULT
+    analysisSource IDWriteTextAnalysisSource*
+    textPosition UINT32
+    textLength UINT32
+    analysisSink IDWriteTextAnalysisSink*
+
+  func AnalyzeNumberSubstitution
+    HRESULT
+    analysisSource IDWriteTextAnalysisSource*
+    textPosition UINT32
+    textLength UINT32
+    analysisSink IDWriteTextAnalysisSink*
+
+  func AnalyzeLineBreakpoints
+    HRESULT
+    analysisSource IDWriteTextAnalysisSource*
+    textPosition UINT32
+    textLength UINT32
+    analysisSink IDWriteTextAnalysisSink*
+
+  func GetGlyphs
+    HRESULT
+    textString "WCHAR const*"
+    textLength UINT32
+    fontFace IDWriteFontFace*
+    isSideways BOOL
+    isRightToLeft BOOL
+    scriptAnalysis "DWRITE_SCRIPT_ANALYSIS const*"
+    localeName "WCHAR const*"
+    numberSubstitution IDWriteNumberSubstitution*
+    features "DWRITE_TYPOGRAPHIC_FEATURES const**" count=featureRanges
+    featureRangeLengths "UINT32 const*" count=featureRanges
+    featureRanges UINT32
+    maxGlyphCount UINT32
+    clusterMap UINT16* postCount=textLength
+    textProps DWRITE_SHAPING_TEXT_PROPERTIES* postCount=textLength
+    glyphIndices UINT16* postCount=maxGlyphCount
+    glyphProps DWRITE_SHAPING_GLYPH_PROPERTIES* postCount=maxGlyphCount
+    actualGlyphCount UINT32*
+
+  func GetGlyphPlacements
+    HRESULT
+    textString "WCHAR const*"
+    clusterMap "UINT16 const*"
+    textProps DWRITE_SHAPING_TEXT_PROPERTIES*
+    textLength UINT32
+    glyphIndices "UINT16 const*" count=glyphCount
+    glyphProps "DWRITE_SHAPING_GLYPH_PROPERTIES const*" count=glyphCount
+    glyphCount UINT32
+    fontFace IDWriteFontFace*
+    fontEmSize FLOAT
+    isSideways BOOL
+    isRightToLeft BOOL
+    scriptAnalysis "DWRITE_SCRIPT_ANALYSIS const*"
+    localeName "WCHAR const*"
+    features "DWRITE_TYPOGRAPHIC_FEATURES const**" count=featureRanges
+    featureRangeLengths "UINT32 const*" count=featureRanges
+    featureRanges UINT32
+    glyphAdvances FLOAT* postCount=glyphCount
+    glyphOffsets DWRITE_GLYPH_OFFSET* postCount=glyphCount
+
+  func GetGdiCompatibleGlyphPlacements
+    HRESULT
+    textString "WCHAR const*"
+    clusterMap "UINT16 const*"
+    textProps DWRITE_SHAPING_TEXT_PROPERTIES*
+    textLength UINT32
+    glyphIndices "UINT16 const*" count=glyphCount
+    glyphProps "DWRITE_SHAPING_GLYPH_PROPERTIES const*" count=glyphCount
+    glyphCount UINT32
+    fontFace IDWriteFontFace*
+    fontEmSize FLOAT
+    pixelsPerDip FLOAT
+    transform "DWRITE_MATRIX const*"
+    useGdiNatural BOOL
+    isSideways BOOL
+    isRightToLeft BOOL
+    scriptAnalysis "DWRITE_SCRIPT_ANALYSIS const*"
+    localeName "WCHAR const*"
+    features "DWRITE_TYPOGRAPHIC_FEATURES const**" count=featureRanges
+    featureRangeLengths "UINT32 const*" count=featureRanges
+    featureRanges UINT32
+    glyphAdvances FLOAT* postCount=glyphCount
+    glyphOffsets DWRITE_GLYPH_OFFSET* postCount=glyphCount
+
+

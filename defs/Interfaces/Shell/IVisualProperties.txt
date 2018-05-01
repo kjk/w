@@ -1,0 +1,41 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVisualProperties base=IUnknown id={e693cf68-d967-4112-8763-99172aee5e5a} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetWatermark
+    HRESULT
+    hbmp HBITMAP
+    vpwf VPWATERMARKFLAGS
+
+  func SetColor
+    HRESULT
+    vpcf VPCOLORFLAGS
+    cr COLORREF
+
+  func GetColor
+    HRESULT
+    vpcf VPCOLORFLAGS
+    pcr COLORREF*
+
+  func SetItemHeight
+    HRESULT
+    cyItemInPixels int
+
+  func GetItemHeight
+    HRESULT
+    cyItemInPixels int*
+
+  func SetFont
+    HRESULT
+    plf "const LOGFONTW*"
+    bRedraw BOOL
+
+  func GetFont
+    HRESULT
+    plf LOGFONTW*
+
+  func SetTheme
+    HRESULT
+    pszSubAppName LPCWSTR
+    pszSubIdList LPCWSTR
+
+

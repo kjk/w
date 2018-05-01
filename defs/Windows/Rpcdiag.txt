@@ -1,0 +1,14 @@
+include Headers\windows.h.txt
+include Headers\rpc.h.txt
+
+dll Rpcdiag.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Networking/Remote Procedure Call (RPC)"
+func RpcDiagnoseError
+  RPC_STATUS
+  BindingHandle RPC_BINDING_HANDLE
+  IfSpec RPC_IF_HANDLE
+  RpcStatus RPC_STATUS
+  EnumHandle RPC_ERROR_ENUM_HANDLE*
+  Options ULONG
+  ParentWindow HWND
+

@@ -1,0 +1,39 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IChangeConflict base=IUnknown id={014ebf97-9f20-4f7a-bdd4-25979c77c002} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetDestinationProviderConflictingChange
+    HRESULT
+    ppConflictingChange ISyncChange**
+
+  func GetSourceProviderConflictingChange
+    HRESULT
+    ppConflictingChange ISyncChange**
+
+  func GetDestinationProviderConflictingData
+    HRESULT
+    ppConflictingData IUnknown**
+
+  func GetSourceProviderConflictingData
+    HRESULT
+    ppConflictingData IUnknown**
+
+  func GetResolveActionForChange
+    HRESULT
+    pResolveAction SYNC_RESOLVE_ACTION*
+
+  func SetResolveActionForChange
+    HRESULT
+    resolveAction SYNC_RESOLVE_ACTION
+
+  func GetResolveActionForChangeUnit
+    HRESULT
+    pChangeUnit ISyncChangeUnit*
+    pResolveAction SYNC_RESOLVE_ACTION*
+
+  func SetResolveActionForChangeUnit
+    HRESULT
+    pChangeUnit ISyncChangeUnit*
+    resolveAction SYNC_RESOLVE_ACTION
+
+

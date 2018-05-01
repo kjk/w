@@ -1,0 +1,174 @@
+include Interfaces\IDispatch.txt
+
+ingterface IVideoWindow base=IDispatch id={56a868b4-0ad4-11ce-b03a-0020af0ba770} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func put_Caption
+    HRESULT
+    strCaption BSTR
+
+  func get_Caption
+    HRESULT
+    strCaption BSTR*
+
+  func put_WindowStyle
+    HRESULT
+    WindowStyle long
+
+  func get_WindowStyle
+    HRESULT
+    WindowStyle long*
+
+  func put_WindowStyleEx
+    HRESULT
+    WindowStyleEx long
+
+  func get_WindowStyleEx
+    HRESULT
+    WindowStyleEx long*
+
+  func put_AutoShow
+    HRESULT
+    AutoShow long
+
+  func get_AutoShow
+    HRESULT
+    AutoShow long*
+
+  func put_WindowState
+    HRESULT
+    WindowState long
+
+  func get_WindowState
+    HRESULT
+    WindowState long*
+
+  func put_BackgroundPalette
+    HRESULT
+    BackgroundPalette long
+
+  func get_BackgroundPalette
+    HRESULT
+    pBackgroundPalette long*
+
+  func put_Visible
+    HRESULT
+    Visible long
+
+  func get_Visible
+    HRESULT
+    pVisible long*
+
+  func put_Left
+    HRESULT
+    Left long
+
+  func get_Left
+    HRESULT
+    pLeft long*
+
+  func put_Width
+    HRESULT
+    Width long
+
+  func get_Width
+    HRESULT
+    pWidth long*
+
+  func put_Top
+    HRESULT
+    Top long
+
+  func get_Top
+    HRESULT
+    pTop long*
+
+  func put_Height
+    HRESULT
+    Height long
+
+  func get_Height
+    HRESULT
+    pHeight long*
+
+  func put_Owner
+    HRESULT
+    Owner OAHWND
+
+  func get_Owner
+    HRESULT
+    Owner OAHWND*
+
+  func put_MessageDrain
+    HRESULT
+    Drain OAHWND
+
+  func get_MessageDrain
+    HRESULT
+    Drain OAHWND*
+
+  func get_BorderColor
+    HRESULT
+    Color long*
+
+  func put_BorderColor
+    HRESULT
+    Color long
+
+  func get_FullScreenMode
+    HRESULT
+    FullScreenMode long*
+
+  func put_FullScreenMode
+    HRESULT
+    FullScreenMode long
+
+  func SetWindowForeground
+    HRESULT
+    Focus long
+
+  func NotifyOwnerMessage
+    HRESULT
+    hwnd OAHWND
+    uMsg long
+    wParam LONG_PTR
+    lParam LONG_PTR
+
+  func SetWindowPosition
+    HRESULT
+    Left long
+    Top long
+    Width long
+    Height long
+
+  func GetWindowPosition
+    HRESULT
+    pLeft long*
+    pTop long*
+    pWidth long*
+    pHeight long*
+
+  func GetMinIdealImageSize
+    HRESULT
+    pWidth long*
+    pHeight long*
+
+  func GetMaxIdealImageSize
+    HRESULT
+    pWidth long*
+    pHeight long*
+
+  func GetRestorePosition
+    HRESULT
+    pLeft long*
+    pTop long*
+    pWidth long*
+    pHeight long*
+
+  func HideCursor
+    HRESULT
+    HideCursor long
+
+  func IsCursorHidden
+    HRESULT
+    CursorHidden long*
+
+

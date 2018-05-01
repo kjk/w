@@ -1,0 +1,17 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemNamedValue base=IDispatch id={76A64164-CB41-11d1-8B02-00600806D9B6} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func get_Value
+    WBEMSTATUS
+    varValue VARIANT*
+
+  func put_Value
+    WBEMSTATUS
+    varValue VARIANT*
+
+  func get_Name
+    WBEMSTATUS
+    strName BSTR*
+
+

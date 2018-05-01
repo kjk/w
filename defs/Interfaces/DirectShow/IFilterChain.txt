@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFilterChain base=IUnknown id={DCFBDCF6-0DC2-45f5-9AB2-7C330EA09C29} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func StartChain
+    HRESULT
+    pStartFilter IBaseFilter*
+    pEndFilter IBaseFilter*
+
+  func PauseChain
+    HRESULT
+    pStartFilter IBaseFilter*
+    pEndFilter IBaseFilter*
+
+  func StopChain
+    HRESULT
+    pStartFilter IBaseFilter*
+    pEndFilter IBaseFilter*
+
+  func RemoveChain
+    HRESULT
+    pStartFilter IBaseFilter*
+    pEndFilter IBaseFilter*
+
+

@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellTaskScheduler base=IUnknown id={6CCB7BE0-6807-11d0-B810-00C04FD706EC} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func AddTask
+    HRESULT
+    prt IRunnableTask*
+    rtoid REFTASKOWNERID
+    lParam DWORD_PTR
+    dwPriority DWORD
+
+  func RemoveTasks
+    HRESULT
+    rtoid REFTASKOWNERID
+    lParam DWORD_PTR
+    bWaitIfRunning BOOL
+
+  func CountTasks
+    success NotEqual=0
+    UINT
+    rtoid REFTASKOWNERID
+
+  func Status
+    HRESULT
+    dwReleaseStatus DWORD
+    dwThreadTimeout DWORD
+
+

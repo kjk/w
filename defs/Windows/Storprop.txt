@@ -1,0 +1,33 @@
+include Headers\windows.h.txt
+
+dll Storprop.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Devices/Device Management"
+alias [ERROR_CODE|LONG] [ERROR_CODE] display=LONG
+
+func CdromDisableDigitalPlayback
+  [ERROR_CODE|LONG]
+  DevInfo HDEVINFO
+  DevInfoData PSP_DEVINFO_DATA
+
+func CdromEnableDigitalPlayback
+  [ERROR_CODE|LONG]
+  DevInfo HDEVINFO
+  DevInfoData PSP_DEVINFO_DATA
+  ForceUnknown BOOLEAN
+
+func CdromIsDigitalPlaybackEnabled
+  [ERROR_CODE|LONG]
+  DevInfo HDEVINFO
+  DevInfoData PSP_DEVINFO_DATA
+  Enabled PBOOLEAN
+
+func CdromKnownGoodDigitalPlayback
+  BOOL
+  DevInfo HDEVINFO
+  DevInfoData PSP_DEVINFO_DATA
+
+func DvdLauncher
+  BOOL
+  HWnd HWND
+  DriveLetter CHAR
+

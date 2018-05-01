@@ -1,0 +1,29 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\DirectComposition\IDCompositionTransform.txt
+
+ingterface IDCompositionRotateTransform base=IDCompositionTransform id={641ED83C-AE96-46c5-90DC-32774CC5C6D5} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+  func SetAngle
+    HRESULT
+    angle float
+
+  func "SetAngle "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetCenterX
+    HRESULT
+    centerX float
+
+  func "SetCenterX "
+    HRESULT
+    animation IDCompositionAnimation*
+
+  func SetCenterY
+    HRESULT
+    centerY float
+
+  func "SetCenterY "
+    HRESULT
+    animation IDCompositionAnimation*
+
+

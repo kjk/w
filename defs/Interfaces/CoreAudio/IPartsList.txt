@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IPartsList base=IUnknown id={6DAA848C-5EB0-45CC-AEA5-998A2CDA1FFB} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetCount
+    [AUDCLNT_HRESULT]
+    pCount UINT*
+
+  func GetPart
+    [AUDCLNT_HRESULT]
+    nIndex UINT
+    ppPart IPart**
+
+

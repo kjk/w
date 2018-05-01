@@ -1,0 +1,13 @@
+include Interfaces\Shell\FolderItems2.txt
+
+ingterface FolderItems3 base=FolderItems2 id={eaa7c309-bbec-49d5-821d-64d966cb667f} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func Filter
+    HRESULT
+    grfFlags SHCONTF display=long
+    bstrFileSpec BSTR
+
+  func get_Verbs
+    HRESULT
+    ppfic FolderItemVerbs**
+
+

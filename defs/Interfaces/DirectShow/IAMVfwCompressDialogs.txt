@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMVfwCompressDialogs base=IUnknown id={D8D715A3-6E5E-11D0-B3F0-00AA003761C5} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func ShowDialog
+    HRESULT
+    iDialog int
+    hwnd HWND
+
+  func GetState
+    HRESULT
+    pState LPVOID
+    pcbState int*
+
+  func SetState
+    HRESULT
+    pState LPVOID
+    cbState int
+
+  func SendDriverMessage
+    HRESULT
+    uMsg int
+    dw1 long
+    dw2 long
+
+

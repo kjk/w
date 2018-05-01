@@ -1,0 +1,9 @@
+include Interfaces\Shell\ITaskbarList.txt
+
+ingterface ITaskbarList2 base=ITaskbarList id={602D4995-B13A-429b-A66E-1935E44F4317} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func MarkFullscreenWindow
+    HRESULT
+    hwnd HWND
+    fFullscreen BOOL
+
+

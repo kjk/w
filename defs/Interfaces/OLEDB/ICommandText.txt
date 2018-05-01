@@ -1,0 +1,15 @@
+include Interfaces\OLEDB\ICommand.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ICommandText base=ICommand id={0c733a27-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func GetCommandText
+    [OLEDB_HRESULT]
+    pguidDialect GUID*
+    ppwszCommand LPOLESTR*
+
+  func SetCommandText
+    [OLEDB_HRESULT]
+    rguidDialect REFGUID
+    pwszCommand LPCOLESTR
+
+

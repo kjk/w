@@ -1,0 +1,86 @@
+include Interfaces\WebBrowser\IWebBrowser.txt
+
+ingterface IWebBrowserApp base=IWebBrowser id={0002DF05-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/Hosting and Reuse/WebBrowser Control/Interfaces"
+  func Quit
+    HRESULT
+
+  func ClientToWindow
+    HRESULT
+    pcx int*
+    pcy int*
+
+  func PutProperty
+    HRESULT
+    Property BSTR
+    vtValue VARIANT
+
+  func GetProperty
+    HRESULT
+    Property BSTR
+    pvtValue VARIANT*
+
+  func get_Name
+    HRESULT
+    Name BSTR*
+
+  func get_HWND
+    HRESULT
+    pHWND SHANDLE_PTR*
+
+  func get_FullName
+    HRESULT
+    FullName BSTR*
+
+  func get_Path
+    HRESULT
+    Path BSTR*
+
+  func get_Visible
+    HRESULT
+    pBool VARIANT_BOOL*
+
+  func put_Visible
+    HRESULT
+    Value VARIANT_BOOL
+
+  func get_StatusBar
+    HRESULT
+    pBool VARIANT_BOOL*
+
+  func put_StatusBar
+    HRESULT
+    Value VARIANT_BOOL
+
+  func get_StatusText
+    HRESULT
+    StatusText BSTR*
+
+  func put_StatusText
+    HRESULT
+    StatusText BSTR
+
+  func get_ToolBar
+    HRESULT
+    Value int*
+
+  func put_ToolBar
+    HRESULT
+    Value int
+
+  func get_MenuBar
+    HRESULT
+    Value VARIANT_BOOL*
+
+  func put_MenuBar
+    HRESULT
+    Value VARIANT_BOOL
+
+  func get_FullScreen
+    HRESULT
+    pbFullScreen VARIANT_BOOL*
+
+  func put_FullScreen
+    HRESULT
+    bFullScreen VARIANT_BOOL
+
+

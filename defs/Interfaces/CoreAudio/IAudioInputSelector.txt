@@ -1,0 +1,14 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IAudioInputSelector base=IUnknown id={4F03DC02-5E6E-4653-8F72-A030C123D598} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetSelection
+    [AUDCLNT_HRESULT]
+    pnIdSelected UINT*
+
+  func SetSelection
+    [AUDCLNT_HRESULT]
+    nIdSelect UINT
+    pguidEventContext LPCGUID
+
+

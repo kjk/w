@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumStreamIdMap base=IUnknown id={945C1566-6202-46fc-96C7-D87F289C6534} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Next
+    HRESULT
+    cRequest ULONG
+    pStreamIdMap STREAM_ID_MAP* postCount=pcReceived
+    pcReceived ULONG*
+
+  func Skip
+    HRESULT
+    cRecords ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppIEnumStreamIdMap IEnumStreamIdMap**
+
+

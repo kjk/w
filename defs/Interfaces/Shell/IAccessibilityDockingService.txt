@@ -1,0 +1,21 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAccessibilityDockingService base=IUnknown id={8849DC22-CEDF-4C95-998D-051419DD3F76} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetAvailableSize
+    HRESULT
+    hMonitor HMONITOR
+    pcxFixed UINT*
+    pcyMax UINT*
+
+  func DockWindow
+    HRESULT
+    hwnd HWND
+    hMonitor HMONITOR
+    cyRequested UINT
+    pCallback IAccessibilityDockingServiceCallback*
+
+  func UndockWindow
+    HRESULT
+    hwnd HWND
+
+

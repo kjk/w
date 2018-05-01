@@ -1,0 +1,91 @@
+include Headers\windows.h.txt
+
+dll Dhcpcsvc6.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Dynamic Host Configuration Protocol (DHCP)/DHCP Client"
+struct DHCPV6CAPI_CLASSID
+  Flags ULONG
+  Data LPBYTE
+  nBytesData ULONG
+
+pointer LPDHCPV6CAPI_CLASSID DHCPV6CAPI_CLASSID
+
+struct DHCPV6CAPI_PARAMS
+  Flags ULONG
+  OptionId ULONG
+  IsVendor BOOL
+  Data LPBYTE
+  nBytesData DWORD
+
+pointer LPDHCPV6CAPI_PARAMS DHCPV6CAPI_PARAMS
+
+struct DHCPV6CAPI_PARAMS_ARRAY
+  nParams ULONG
+  Params LPDHCPV6CAPI_PARAMS
+
+enum StatusCode UINT
+  STATUS_NO_ERROR            0
+  STATUS_UNSPECIFIED_FAILURE 1
+  STATUS_NO_BINDING          3
+  STATUS_NOPREFIX_AVAIL      6
+
+struct DHCPV6Prefix
+  prefix "UCHAR [16]"
+  prefixLength DWORD
+  preferredLifeTime DWORD
+  validLifeTime DWORD
+  status StatusCode
+
+pointer LPDHCPV6Prefix DHCPV6Prefix
+
+struct DHCPV6PrefixLeaseInformation
+  nPrefixes DWORD
+  prefixArray LPDHCPV6Prefix
+  iaid DWORD
+  T1 time_t
+  T2 time_t
+  MaxLeaseExpirationTime time_t
+  LastRenewalTime time_t
+  status StatusCode
+  ServerId LPBYTE
+  ServerIdLen DWORD
+
+pointer LPDHCPV6PrefixLeaseInformation DHCPV6PrefixLeaseInformation
+
+func Dhcpv6CApiCleanup
+  VOID
+
+func Dhcpv6CApiInitialize
+  [ERROR_CODE]
+  Version LPDWORD
+
+func Dhcpv6RequestParams
+  [ERROR_CODE]
+  forceNewInform BOOL
+  reserved LPVOID
+  adapterName LPWSTR
+  classId LPDHCPV6CAPI_CLASSID
+  recdParams DHCPV6CAPI_PARAMS_ARRAY
+  buffer LPBYTE
+  pSize LPDWORD
+
+func Dhcpv6ReleasePrefix
+  [ERROR_CODE]
+  adapterName LPWSTR
+  classId LPDHCPV6CAPI_CLASSID
+  prefixleaseInfo LPDHCPV6PrefixLeaseInformation
+
+func Dhcpv6RenewPrefix
+  [ERROR_CODE]
+  adapterName LPWSTR
+  classId LPDHCPV6CAPI_CLASSID
+  prefixleaseInfo LPDHCPV6PrefixLeaseInformation
+  pdwTimeToWait DWORD
+  bValidatePrefix DWORD
+
+func Dhcpv6RequestPrefix
+  [ERROR_CODE]
+  adapterName LPWSTR
+  classId LPDHCPV6CAPI_CLASSID
+  prefixleaseInfo LPDHCPV6PrefixLeaseInformation
+  pdwTimeToWait DWORD
+

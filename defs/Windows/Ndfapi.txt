@@ -1,0 +1,120 @@
+include Headers\windows.h.txt
+include Headers\sockets.h.txt
+
+dll Ndfapi.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Diagnostics/Network Diagnostics Framework (NDF)"
+alias NDFHANDLE PVOID
+
+pointer NDFHANDLE* NDFHANDLE
+
+array "CHAR [126]" base=CHAR count=126
+
+enum ATTRIBUTE_TYPE UINT
+  AT_INVALID      0
+  AT_BOOLEAN      1
+  AT_INT8         2
+  AT_UINT8        3
+  AT_INT16        4
+  AT_UINT16       5
+  AT_INT32        6
+  AT_UINT32       7
+  AT_INT64        8
+  AT_UINT64       9
+  AT_STRING       10
+  AT_GUID         11
+  AT_LIFE_TIME    12
+  AT_SOCKADDR     13
+  AT_OCTET_STRING 14
+
+struct OCTET_STRING
+  dwLength DWORD
+  lpValue BYTE*
+
+struct LIFE_TIME
+  startTime FILETIME
+  endTime FILETIME
+
+struct DIAG_SOCKADDR
+  family USHORT
+  data "CHAR [126]"
+
+union [HELPER_ATTRIBUTE_u] display=union
+  Boolean BOOL
+  Char char
+  Byte byte
+  Short short
+  Word WORD
+  Int int
+  DWord DWORD
+  Int64 LONGLONG
+  UInt64 ULONGLONG
+  PWStr LPWSTR
+  Guid GUID
+  LifeTime LIFE_TIME
+  Address DIAG_SOCKADDR
+  OctetString OCTET_STRING
+
+struct HELPER_ATTRIBUTE
+  pwszName LPWSTR
+  type ATTRIBUTE_TYPE
+   [HELPER_ATTRIBUTE_u]
+
+pointer HELPER_ATTRIBUTE* HELPER_ATTRIBUTE
+
+func NdfCloseIncident
+  HRESULT
+  handle NDFHANDLE
+
+func NdfCreateConnectivityIncident
+  HRESULT
+  handle NDFHANDLE*
+
+func NdfCreateDNSIncident
+  HRESULT
+  hostname LPCWSTR
+  querytype WORD
+  handle NDFHANDLE*
+
+func NdfCreateIncident
+  HRESULT
+  helperClassName LPCWSTR
+  celt ULONG
+  attributes HELPER_ATTRIBUTE*
+  handle NDFHANDLE*
+
+func NdfCreateSharingIncident
+  HRESULT
+  sharename LPCWSTR
+  handle NDFHANDLE*
+
+func NdfCreateWebIncident
+  HRESULT
+  url LPCWSTR
+  handle NDFHANDLE*
+
+func NdfCreateWebIncidentEx
+  HRESULT
+  url LPCWSTR
+  useWinHTTP BOOL
+  moduleName LPWSTR
+  handle NDFHANDLE*
+
+func NdfCreateWinSockIncident
+  HRESULT
+  sock SOCKET
+  host LPCWSTR
+  port USHORT
+  appID LPCWSTR
+  userId SID*
+  handle NDFHANDLE*
+
+func NdfExecuteDiagnosis
+  HRESULT
+  handle NDFHANDLE
+  hwnd HWND
+
+func NdfCreateNetConnectionIncident
+  HRESULT
+  handle NDFHANDLE*
+  id GUID
+

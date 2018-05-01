@@ -1,0 +1,128 @@
+include Headers\windows.h.txt
+include Headers\runtime.h.txt
+
+dll * callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "System Services/Dynamic-Link Libraries"
+category "Component Object Model (COM)/COM Fundamentals"
+category "Windows Environment Development/Windows Shell"
+category "Windows Environment Development/Windows Shell/Shell Lightweight Utility/Miscellaneous"
+category "Additional Resources/Windows Runtime C++"
+category "Microsoft .NET/Unmanaged/Hosting"
+interface IOrpcDebugNotify
+
+interface IActivationFactory
+
+enum [DLLMAIN_REASON] DWORD display=DWORD
+  DLL_PROCESS_DETACH 0
+  DLL_PROCESS_ATTACH 1
+  DLL_THREAD_ATTACH  2
+  DLL_THREAD_DETACH  3
+
+struct ORPC_INIT_ARGS
+  lpIntfOrpcDebug IOrpcDebugNotify*
+  pvPSN void*
+  dwReserved1 DWORD*
+  dwReserved2 DWORD*
+
+pointer LPORPC_INIT_ARGS ORPC_INIT_ARGS
+
+enum [DLLVER_PLATFORM] DWORD display=DWORD
+  DLLVER_PLATFORM_WINDOWS 0x00000001
+  DLLVER_PLATFORM_NT      0x00000002
+
+struct DLLVERSIONINFO
+  cbSize DWORD
+  dwMajorVersion DWORD
+  dwMinorVersion DWORD
+  dwBuildNumber DWORD
+  dwPlatformID [DLLVER_PLATFORM]
+
+pointer DLLVERSIONINFO* DLLVERSIONINFO
+
+enum [CPL_MSG] UINT
+  CPL_INIT         1
+  CPL_GETCOUNT     2
+  CPL_INQUIRE      3
+  CPL_SELECT       4
+  CPL_DBLCLK       5
+  CPL_STOP         6
+  CPL_EXIT         7
+  CPL_NEWINQUIRE   8
+  CPL_STARTWPARMSA 9
+  CPL_STARTWPARMSW 10
+  CPL_SETUP        200
+
+func DllMain
+  BOOL
+  hinstDLL HINSTANCE
+  fdwReason [DLLMAIN_REASON]
+  lpvReserved LPVOID
+
+func DllGetClassObject
+  HRESULT
+  rclsid REFCLSID
+  riid REFIID
+  ppv LPVOID* interfaceId=riid
+
+func DllCanUnloadNow
+  HRESULT
+
+func DllRegisterServer
+  HRESULT
+
+func DllUnregisterServer
+  HRESULT
+
+func DllDebugObjectRPCHook
+  BOOL
+  fTrace BOOL
+  lpOrpcInitArgs LPORPC_INIT_ARGS
+
+func CPlApplet
+  LONG
+  hwndCPl HWND
+  uMsg [CPL_MSG]
+  lParam1 LPARAM
+  lParam2 LPARAM
+
+func DllGetVersion
+  HRESULT
+  pdvi DLLVERSIONINFO*
+
+func DllInstall
+  HRESULT
+  bInstall BOOL
+  pszCmdLine PCWSTR
+
+func DllGetActivationFactory
+  HRESULT
+  activatableClassId HSTRING
+  factory IActivationFactory**
+
+func _CorDllMain
+  BOOL
+  hInst HINSTANCE
+  dwReason DWORD
+  lpReserved LPVOID
+
+func _CorExeMain
+  __int32
+
+func _CorExeMain2
+  success NotEqual=0
+  __int32
+  pUnmappedPE PBYTE
+  cUnmappedPE DWORD
+  pImageNameIn LPWSTR
+  pLoadersFileName LPWSTR
+  pCmdLine LPWSTR
+
+func _CorImageUnloading
+  STDAPI_(VOID)
+  ImageBase PVOID*
+
+func _CorValidateImage
+  STDAPI
+  ImageBase PVOID*
+  FileName LPCWSTR
+

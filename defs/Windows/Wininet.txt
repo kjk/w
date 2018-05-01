@@ -1,0 +1,1830 @@
+include Headers\windows.h.txt
+include Headers\internet.h.txt
+include Headers\cryptography.h.txt
+include Headers\URL.h.txt
+
+dll Wininet.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Internet/Windows Internet (WinINet)"
+category "Web Development/Internet Explorer Development/Security and Privacy/Internet Privacy"
+category "Internet/Windows Internet (WinINet)"
+category "Internet/Windows Internet (WinINet)/WebSocket"
+alias HTTP_PUSH_WAIT_HANDLE HANDLE
+
+pointer HTTP_PUSH_WAIT_HANDLE* HTTP_PUSH_WAIT_HANDLE
+
+alias APP_CACHE_HANDLE PVOID
+
+pointer APP_CACHE_HANDLE* APP_CACHE_HANDLE
+
+alias HTTP_DEPENDENCY_HANDLE PVOID
+
+pointer HTTP_DEPENDENCY_HANDLE* HTTP_DEPENDENCY_HANDLE
+
+alias URLCACHE_HANDLE PVOID
+
+pointer URLCACHE_HANDLE* URLCACHE_HANDLE
+
+alias CACHE_OPERATOR LPVOID
+
+pointer BSTR** BSTR*
+
+alias P3PURL LPSTR
+
+alias P3PCURL LPSTR
+
+alias P3PVERB LPSTR
+
+alias P3PCXSL BSTR
+
+alias P3PHANDLE LPVOID
+
+interface IDialEngine
+
+interface IDialBranding
+
+interface IDialEventSink
+
+array "WCHAR [SZ_ALG_MAX_SIZE]" base=WCHAR count=64
+
+enum [InternetService] DWORD display=DWORD
+  INTERNET_SERVICE_FTP    1
+  INTERNET_SERVICE_GOPHER 2
+  INTERNET_SERVICE_HTTP   3
+
+flag [CacheEntryType] DWORD display=DWORD
+  NORMAL_CACHE_ENTRY           0x00000001
+  STICKY_CACHE_ENTRY           0x00000004
+  EDITED_CACHE_ENTRY           0x00000008
+  TRACK_OFFLINE_CACHE_ENTRY    0x00000010
+  TRACK_ONLINE_CACHE_ENTRY     0x00000020
+  SPARSE_CACHE_ENTRY           0x00010000
+  COOKIE_CACHE_ENTRY           0x00100000
+  URLHISTORY_CACHE_ENTRY       0x00200000
+  URLCACHE_FIND_DEFAULT_FILTER 0x00300035
+
+flag [InternetGetConnectedStateFlags] DWORD display=DWORD
+  INTERNET_CONNECTION_MODEM      0x01
+  INTERNET_CONNECTION_LAN        0x02
+  INTERNET_CONNECTION_PROXY      0x04
+  INTERNET_CONNECTION_MODEM_BUSY 0x08
+  INTERNET_RAS_INSTALLED         0x10
+  INTERNET_CONNECTION_OFFLINE    0x20
+  INTERNET_CONNECTION_CONFIGURED 0x40
+
+pointer [InternetGetConnectedStateFlags*] [InternetGetConnectedStateFlags] display=LPDWORD
+
+enum [InternetOpenType] DWORD display=DWORD
+  INTERNET_OPEN_TYPE_PRECONFIG                   0
+  INTERNET_OPEN_TYPE_DIRECT                      1
+  INTERNET_OPEN_TYPE_PROXY                       3
+  INTERNET_OPEN_TYPE_PRECONFIG_WITH_NO_AUTOPROXY 4
+
+flag [InternetOpenFlags] DWORD display=DWORD
+  INTERNET_FLAG_FROM_CACHE 0x01000000
+  INTERNET_FLAG_ASYNC      0x10000000
+
+flag [InternetFlags] DWORD display=DWORD
+  INTERNET_FLAG_NEED_FILE                0x00000010
+  INTERNET_FLAG_FWD_BACK                 0x00000020
+  INTERNET_FLAG_FORMS_SUBMIT             0x00000040
+  INTERNET_FLAG_CACHE_ASYNC              0x00000080
+  INTERNET_FLAG_PRAGMA_NOCACHE           0x00000100
+  INTERNET_FLAG_NO_UI                    0x00000200
+  INTERNET_FLAG_HYPERLINK                0x00000400
+  INTERNET_FLAG_RESYNCHRONIZE            0x00000800
+  INTERNET_FLAG_IGNORE_CERT_CN_INVALID   0x00001000
+  INTERNET_FLAG_IGNORE_CERT_DATE_INVALID 0x00002000
+  INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTPS 0x00004000
+  INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTP  0x00008000
+  INTERNET_FLAG_CACHE_IF_NET_FAIL        0x00010000
+  INTERNET_FLAG_RESTRICTED_ZONE          0x00020000
+  INTERNET_FLAG_NO_AUTH                  0x00040000
+  INTERNET_FLAG_NO_COOKIES               0x00080000
+  INTERNET_FLAG_READ_PREFETCH            0x00100000
+  INTERNET_FLAG_NO_AUTO_REDIRECT         0x00200000
+  INTERNET_FLAG_KEEP_CONNECTION          0x00400000
+  INTERNET_FLAG_SECURE                   0x00800000
+  INTERNET_FLAG_NO_CACHE_WRITE           0x04000000
+  INTERNET_FLAG_PASSIVE                  0x08000000
+  INTERNET_FLAG_EXISTING_CONNECT         0x20000000
+  INTERNET_FLAG_RAW_DATA                 0x40000000
+  INTERNET_FLAG_RELOAD                   0x80000000
+
+flag [InternetReadFileFlags] DWORD display=DWORD
+  IRF_NO_WAIT 0x00000008
+
+flag [HttpAddReqFlag] DWORD display=DWORD
+  HTTP_ADDREQ_FLAG_COALESCE_WITH_SEMICOLON 0x01000000
+  HTTP_ADDREQ_FLAG_ADD_IF_NEW              0x10000000
+  HTTP_ADDREQ_FLAG_ADD                     0x20000000
+  HTTP_ADDREQ_FLAG_COALESCE_WITH_COMMA     0x40000000
+  HTTP_ADDREQ_FLAG_REPLACE                 0x80000000
+
+flag [InternetCookieFlags] DWORD display=DWORD
+  INTERNET_COOKIE_IS_SECURE       0x01
+  INTERNET_COOKIE_IS_SESSION      0x02
+  INTERNET_COOKIE_THIRD_PARTY     0x10
+  INTERNET_COOKIE_PROMPT_REQUIRED 0x20
+  INTERNET_COOKIE_EVALUATE_P3P    0x40
+  INTERNET_COOKIE_APPLY_P3P       0x80
+  INTERNET_COOKIE_P3P_ENABLED     0x100
+  INTERNET_COOKIE_IS_RESTRICTED   0x200
+  INTERNET_COOKIE_IE6             0x400
+  INTERNET_COOKIE_IS_LEGACY       0x800
+  INTERNET_COOKIE_HTTPONLY        0x00002000
+  INTERNET_FLAG_RESTRICTED_ZONE   0x00020000
+
+flag [InternetErrorDlgFlags] DWORD display=DWORD
+  FLAGS_ERROR_UI_FILTER_FOR_ERRORS    0x01
+  FLAGS_ERROR_UI_FLAGS_CHANGE_OPTIONS 0x02
+  FLAGS_ERROR_UI_FLAGS_GENERATE_DATA  0x04
+  FLAGS_ERROR_UI_FLAGS_NO_UI          0x08
+  FLAGS_ERROR_UI_SERIALIZE_DIALOGS    0x10
+
+flag [CacheEntryFieldControl] DWORD display=DWORD
+  CACHE_ENTRY_ATTRIBUTE_FC    0x00000004
+  CACHE_ENTRY_HITRATE_FC      0x00000010
+  CACHE_ENTRY_MODTIME_FC      0x00000040
+  CACHE_ENTRY_EXPTIME_FC      0x00000080
+  CACHE_ENTRY_ACCTIME_FC      0x00000100
+  CACHE_ENTRY_SYNCTIME_FC     0x00000200
+  CACHE_ENTRY_HEADERINFO_FC   0x00000400
+  CACHE_ENTRY_EXEMPT_DELTA_FC 0x00000800
+
+enum InternetCookieState DWORD display=DWORD
+  COOKIE_STATE_UNKNOWN   0x0
+  COOKIE_STATE_ACCEPT    0x1
+  COOKIE_STATE_PROMPT    0x2
+  COOKIE_STATE_LEASH     0x3
+  COOKIE_STATE_DOWNGRADE 0x4
+  COOKIE_STATE_REJECT    0x5
+
+enum FORTCMD UINT display=DWORD
+  FORTCMD_LOGON           1
+  FORTCMD_LOGOFF          2
+  FORTCMD_CHG_PERSONALITY 3
+
+flag FORTSTAT DWORD display=DWORD
+  FORTSTAT_INSTALLED 0x00000001
+  FORTSTAT_LOGGEDON  0x00000002
+
+pointer FORTSTAT* FORTSTAT display=DWORD*
+
+flag [INTERNET_CACHE_CONTAINER_FLAGS] DWORD display=DWORD
+  INTERNET_CACHE_CONTAINER_NOSUBDIRS        0x1
+  INTERNET_CACHE_CONTAINER_AUTODELETE       0x2
+  INTERNET_CACHE_CONTAINER_RESERVED1        0x4
+  INTERNET_CACHE_CONTAINER_NODESKTOPINIT    0x8
+  INTERNET_CACHE_CONTAINER_MAP_ENABLED      0x10
+  INTERNET_CACHE_CONTAINER_SHARE_READ       0x100
+  INTERNET_CACHE_CONTAINER_SHARE_READ_WRITE 0x300
+
+flag [CACHE_FIND_CONTAINER_FLAGS] DWORD display=DWORD
+  CACHE_FIND_CONTAINER_RETURN_NOCHANGE 0x1
+
+flag [CACHE_CONFIG_FC] DWORD display=DWORD
+  CACHE_CONFIG_FORCE_CLEANUP_FC        0x00000020
+  CACHE_CONFIG_DISK_CACHE_PATHS_FC     0x00000040
+  CACHE_CONFIG_SYNC_MODE_FC            0x00000080
+  CACHE_CONFIG_CONTENT_PATHS_FC        0x00000100
+  CACHE_CONFIG_COOKIES_PATHS_FC        0x00000200
+  CACHE_CONFIG_HISTORY_PATHS_FC        0x00000400
+  CACHE_CONFIG_QUOTA_FC                0x00000800
+  CACHE_CONFIG_USER_MODE_FC            0x00001000
+  CACHE_CONFIG_CONTENT_USAGE_FC        0x00002000
+  CACHE_CONFIG_STICKY_CONTENT_USAGE_FC 0x00004000
+
+flag [CACHE_NOTIFY_FILTER_OPTIONS] DWORD display=DWORD
+  CACHE_NOTIFY_ADD_URL          0x00000001
+  CACHE_NOTIFY_DELETE_URL       0x00000002
+  CACHE_NOTIFY_UPDATE_URL       0x00000004
+  CACHE_NOTIFY_DELETE_ALL       0x00000008
+  CACHE_NOTIFY_URL_SET_STICKY   0x00000010
+  CACHE_NOTIFY_URL_UNSET_STICKY 0x00000020
+  CACHE_NOTIFY_SET_ONLINE       0x00000100
+  CACHE_NOTIFY_SET_OFFLINE      0x00000200
+  CACHE_NOTIFY_FILTER_CHANGED   0x10000000
+
+flag [APP_CACHE_LOOKUP_FLAGS] DWORD display=DWORD
+  APP_CACHE_LOOKUP_NO_MASTER_ONLY 0x1
+
+struct SecPkgContext_ConnectionInfo
+  dwProtocol DWORD
+  aiCipher ALG_ID
+  dwCipherStrength DWORD
+  aiHash ALG_ID
+  dwHashStrength DWORD
+  aiExch ALG_ID
+  dwExchStrength DWORD
+
+struct SecPkgContext_CipherInfo
+  dwVersion DWORD
+  dwProtocol DWORD
+  dwCipherSuite DWORD
+  dwBaseCipherSuite DWORD
+  szCipherSuite "WCHAR [SZ_ALG_MAX_SIZE]"
+  szCipher "WCHAR [SZ_ALG_MAX_SIZE]"
+  dwCipherLen DWORD
+  dwCipherBlockLen DWORD
+  szHash "WCHAR [SZ_ALG_MAX_SIZE]"
+  dwHashLen DWORD
+  szExchange "WCHAR [SZ_ALG_MAX_SIZE]"
+  dwMinExchangeLen DWORD
+  dwMaxExchangeLen DWORD
+  szCertificate "WCHAR [SZ_ALG_MAX_SIZE]"
+  dwKeyType DWORD
+
+struct SEC_CHANNEL_BINDINGS
+  dwInitiatorAddrType "unsigned long"
+  cbInitiatorLength "unsigned long"
+  dwInitiatorOffset "unsigned long"
+  dwAcceptorAddrType "unsigned long"
+  cbAcceptorLength "unsigned long"
+  dwAcceptorOffset "unsigned long"
+  cbApplicationDataLength "unsigned long"
+  dwApplicationDataOffset "unsigned long"
+
+pointer SEC_CHANNEL_BINDINGS* SEC_CHANNEL_BINDINGS
+
+struct SecPkgContext_Bindings
+  BindingsLength "unsigned long"
+  Bindings SEC_CHANNEL_BINDINGS*
+
+struct INTERNET_SECURITY_INFO
+  dwSize DWORD
+  pCertificate PCCERT_CONTEXT
+  pcCertChain PCCERT_CHAIN_CONTEXT
+  connectionInfo SecPkgContext_ConnectionInfo
+  cipherInfo SecPkgContext_CipherInfo
+  pcUnverifiedCertChain PCCERT_CHAIN_CONTEXT
+  channelBindingToken SecPkgContext_Bindings
+
+pointer LPINTERNET_SECURITY_INFO INTERNET_SECURITY_INFO
+
+enum APP_CACHE_STATE UINT
+  AppCacheStateNoUpdateNeeded         0
+  AppCacheStateUpdateNeeded           1
+  AppCacheStateUpdateNeededNew        2
+  AppCacheStateUpdateNeededMasterOnly 3
+
+pointer APP_CACHE_STATE* APP_CACHE_STATE
+
+enum URL_CACHE_LIMIT_TYPE UINT
+  UrlCacheLimitTypeIE                0
+  UrlCacheLimitTypeIETotal           1
+  UrlCacheLimitTypeAppContainer      2
+  UrlCacheLimitTypeAppContainerTotal 3
+  UrlCacheLimitTypeNum               4
+
+flag [APP_CACHE_ENTRY_TYPE] DWORD display=DWORD
+  APP_CACHE_ENTRY_TYPE_MASTER   0x01
+  APP_CACHE_ENTRY_TYPE_EXPLICIT 0x02
+  APP_CACHE_ENTRY_TYPE_FALLBACK 0x04
+  APP_CACHE_ENTRY_TYPE_FOREIGN  0x08
+  APP_CACHE_ENTRY_TYPE_MANIFEST 0x10
+
+struct APP_CACHE_DOWNLOAD_ENTRY
+  pwszUrl PWSTR
+  dwEntryType [APP_CACHE_ENTRY_TYPE]
+
+pointer APP_CACHE_DOWNLOAD_ENTRY* APP_CACHE_DOWNLOAD_ENTRY
+
+struct APP_CACHE_DOWNLOAD_LIST
+  dwEntryCount DWORD
+  pEntries APP_CACHE_DOWNLOAD_ENTRY* count=dwEntryCount
+
+pointer APP_CACHE_DOWNLOAD_LIST* APP_CACHE_DOWNLOAD_LIST
+
+struct HTTP_PUSH_TRANSPORT_SETTING
+  TransportSettingId GUID
+  BrokerEventId GUID
+
+pointer HTTP_PUSH_TRANSPORT_SETTING* HTTP_PUSH_TRANSPORT_SETTING
+
+enum HTTP_PUSH_WAIT_TYPE UINT
+  HttpPushWaitEnableComplete  0
+  HttpPushWaitReceiveComplete 1
+  HttpPushWaitSendComplete    2
+
+struct HTTP_PUSH_NOTIFICATION_STATUS
+  ChannelStatusValid BOOL
+  ChannelStatus DWORD
+
+pointer HTTP_PUSH_NOTIFICATION_STATUS* HTTP_PUSH_NOTIFICATION_STATUS
+
+enum APP_CACHE_FINALIZE_STATE UINT
+  AppCacheFinalizeStateIncomplete     0
+  AppCacheFinalizeStateManifestChange 1
+  AppCacheFinalizeStateComplete       2
+
+pointer APP_CACHE_FINALIZE_STATE* APP_CACHE_FINALIZE_STATE
+
+struct APP_CACHE_GROUP_INFO
+  pwszManifestUrl PWSTR
+  ftLastAccessTime FILETIME
+  ullSize ULONGLONG
+
+pointer APP_CACHE_GROUP_INFO* APP_CACHE_GROUP_INFO
+
+struct APP_CACHE_GROUP_LIST
+  dwAppCacheGroupCount DWORD
+  pAppCacheGroups APP_CACHE_GROUP_INFO* count=dwAppCacheGroupCount
+
+pointer APP_CACHE_GROUP_LIST* APP_CACHE_GROUP_LIST
+
+struct URLCACHE_ENTRY_INFO
+  pwszSourceUrlName PWSTR
+  pwszLocalFileName PWSTR
+  dwCacheEntryType DWORD
+  dwUseCount DWORD
+  dwHitRate DWORD
+  dwSizeLow DWORD
+  dwSizeHigh DWORD
+  ftLastModifiedTime FILETIME
+  ftExpireTime FILETIME
+  ftLastAccessTime FILETIME
+  ftLastSyncTime FILETIME
+  pbHeaderInfo PBYTE length=cbHeaderInfoSize
+  cbHeaderInfoSize DWORD
+  pbExtraData PBYTE length=cbExtraDataSize
+  cbExtraDataSize DWORD
+
+pointer PURLCACHE_ENTRY_INFO URLCACHE_ENTRY_INFO
+
+struct WININET_PROXY_INFO
+  fProxy BOOL
+  fBypass BOOL
+  ProxyScheme INTERNET_SCHEME
+  pwszProxy PWSTR
+  ProxyPort INTERNET_PORT
+
+pointer WININET_PROXY_INFO* WININET_PROXY_INFO
+
+struct WININET_PROXY_INFO_LIST
+  dwProxyInfoCount DWORD
+  pProxyInfo WININET_PROXY_INFO* count=dwProxyInfoCount
+
+pointer WININET_PROXY_INFO_LIST* WININET_PROXY_INFO_LIST
+
+struct INTERNET_CACHE_CONTAINER_INFO
+  dwCacheVersion DWORD
+  lpszName LPTSTR
+  lpszCachePrefix LPTSTR
+  lpszVolumeLabel LPTSTR
+  lpszVolumeTitle LPTSTR
+
+pointer LPINTERNET_CACHE_CONTAINER_INFO INTERNET_CACHE_CONTAINER_INFO
+
+struct INTERNET_CACHE_CONFIG_PATH_ENTRY
+  CachePath "TCHAR [MAX_PATH]"
+  dwCacheSize DWORD
+
+array "INTERNET_CACHE_CONFIG_PATH_ENTRY [ANYSIZE_ARRAY]" base=INTERNET_CACHE_CONFIG_PATH_ENTRY count=1
+
+struct INTERNET_CACHE_CONFIG_INFO
+  dwStructSize DWORD
+  dwContainer DWORD
+  dwQuota DWORD
+  dwReserved4 DWORD
+  fPerUser BOOL
+  dwSyncMode DWORD
+  dwNumCachePaths DWORD
+  CachePaths "INTERNET_CACHE_CONFIG_PATH_ENTRY [ANYSIZE_ARRAY]" count=dwNumCachePaths
+  dwNormalUsage DWORD
+  dwExemptUsage DWORD
+
+pointer LPINTERNET_CACHE_CONFIG_INFO INTERNET_CACHE_CONFIG_INFO
+
+flag [INTERNET_DIAL_FLAGS] DWORD display=DWORD
+  INTERNET_DIAL_FORCE_PROMPT 0x2000
+  INTERNET_DIAL_SHOW_OFFLINE 0x4000
+  INTERNET_DIAL_UNATTENDED   0x8000
+
+flag [FTP_TRANSFER_FLAGS] DWORD display=DWORD
+  FTP_TRANSFER_TYPE_UNKNOWN    0x00000000
+  FTP_TRANSFER_TYPE_ASCII      0x00000001
+  FTP_TRANSFER_TYPE_BINARY     0x00000002
+  INTERNET_FLAG_NEED_FILE      0x00000010
+  INTERNET_FLAG_HYPERLINK      0x00000400
+  INTERNET_FLAG_RESYNCHRONIZE  0x00000800
+  INTERNET_FLAG_NO_CACHE_WRITE 0x04000000
+  INTERNET_FLAG_RELOAD         0x80000000
+
+enum WPAD_CACHE_DELETE UINT
+  WPAD_CACHE_DELETE_CURRENT 0x0
+  WPAD_CACHE_DELETE_ALL     0x1
+
+struct P3PResource
+  pszLocation P3PCURL
+  pszVerb P3PVERB
+  pszP3PHeaderRef P3PCURL
+  pszLinkTagRef P3PCURL
+  pContainer LPVOID display=P3PResource*
+
+pointer P3PResource* P3PResource
+
+struct P3PSignal
+  hwnd HWND
+  message "unsigned int"
+  hEvent HANDLE
+  pContext void*
+  hRequest P3PHANDLE
+
+pointer P3PSignal* P3PSignal
+
+enum P3PStatus int display=int
+  success Equal=0
+  P3P_Success    0x0
+  P3P_NoPolicy   0x2
+  P3P_InProgress 0x3
+  P3P_Failed     0x4
+  P3P_NotFound   0x5
+  P3P_FormatErr  0x6
+  P3P_Cancelled  0x7
+  P3P_NotStarted 0x8
+  P3P_XMLError   0x9
+  P3P_Expired    0xA
+  P3P_Error      0xFF
+
+enum HTTP_WEB_SOCKET_BUFFER_TYPE UINT
+  HTTP_WEB_SOCKET_BINARY_MESSAGE_TYPE  0
+  HTTP_WEB_SOCKET_BINARY_FRAGMENT_TYPE 1
+  HTTP_WEB_SOCKET_UTF8_MESSAGE_TYPE    2
+  HTTP_WEB_SOCKET_UTF8_FRAGMENT_TYPE   3
+  HTTP_WEB_SOCKET_CLOSE_TYPE           4
+  HTTP_WEB_SOCKET_PING_TYPE            5
+
+pointer HTTP_WEB_SOCKET_BUFFER_TYPE* HTTP_WEB_SOCKET_BUFFER_TYPE
+
+enum HTTP_WEB_SOCKET_CLOSE_STATUS USHORT display=USHORT
+  HTTP_WEB_SOCKET_SUCCESS_CLOSE_STATUS                1000
+  HTTP_WEB_SOCKET_ENDPOINT_TERMINATED_CLOSE_STATUS    1001
+  HTTP_WEB_SOCKET_PROTOCOL_ERROR_CLOSE_STATUS         1002
+  HTTP_WEB_SOCKET_INVALID_DATA_TYPE_CLOSE_STATUS      1003
+  HTTP_WEB_SOCKET_EMPTY_CLOSE_STATUS                  1005
+  HTTP_WEB_SOCKET_ABORTED_CLOSE_STATUS                1006
+  HTTP_WEB_SOCKET_INVALID_PAYLOAD_CLOSE_STATUS        1007
+  HTTP_WEB_SOCKET_POLICY_VIOLATION_CLOSE_STATUS       1008
+  HTTP_WEB_SOCKET_MESSAGE_TOO_BIG_CLOSE_STATUS        1009
+  HTTP_WEB_SOCKET_UNSUPPORTED_EXTENSIONS_CLOSE_STATUS 1010
+  HTTP_WEB_SOCKET_SERVER_ERROR_CLOSE_STATUS           1011
+  HTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS 1015
+
+pointer HTTP_WEB_SOCKET_CLOSE_STATUS* HTTP_WEB_SOCKET_CLOSE_STATUS display=USHORT*
+
+func CommitUrlCacheEntry bothCharset
+  BOOLAPI
+  lpszUrlName LPCTSTR
+  lpszLocalFileName LPCTSTR
+  ExpireTime FILETIME
+  LastModifiedTime FILETIME
+  CacheEntryType [CacheEntryType]
+  lpHeaderInfo LPVOID display=LPCTSTR length=dwHeaderSize
+  dwHeaderSize DWORD
+  lpszFileExtension LPCTSTR
+  lpszOriginalUrl LPCTSTR
+
+func CreateMD5SSOHash
+  BOOL
+  pszChallengeInfo PWSTR
+  pwszRealm PWSTR
+  pwszTarget PWSTR
+  pbHexHash PBYTE
+
+func CreateUrlCacheEntry bothCharset
+  BOOLAPI
+  lpszUrlName LPCTSTR
+  dwExpectedFileSize DWORD
+  lpszFileExtension LPCTSTR
+  lpszFileName LPTSTR
+  dwReserved DWORD
+
+func CreateUrlCacheGroup
+  success NotEqual=0
+  GROUPID
+  dwFlags DWORD
+  lpReserved LPVOID
+
+func DeleteUrlCacheEntry bothCharset
+  BOOLAPI
+  lpszUrlName LPCTSTR
+
+func DeleteUrlCacheEntry
+  BOOLAPI
+  lpszUrlName LPCSTR
+
+func DeleteUrlCacheGroup
+  BOOL
+  GroupId GROUPID
+  dwFlags DWORD
+  lpReserved LPVOID
+
+func DetectAutoProxyUrl
+  BOOL
+  lpszAutoProxyUrl LPSTR
+  dwAutoProxyUrlLength DWORD
+  dwDetectFlags DWORD
+
+func FindCloseUrlCache
+  BOOLAPI
+  hEnumHandle HANDLE
+
+func FindFirstUrlCacheEntry bothCharset
+  success NotEqual=0
+  HANDLE
+  lpszUrlSearchPattern LPCTSTR
+  lpFirstCacheEntryInfo LPINTERNET_CACHE_ENTRY_INFO
+  lpcbCacheEntryInfo LPDWORD
+
+func FindFirstUrlCacheEntryEx bothCharset
+  success NotEqual=0
+  HANDLE
+  lpszUrlSearchPattern LPCTSTR
+  dwFlags DWORD
+  dwFilter DWORD
+  GroupId GROUPID
+  lpFirstCacheEntryInfo LPINTERNET_CACHE_ENTRY_INFO
+  lpdwEntryInfo LPDWORD
+  lpGroupAttributes LPVOID
+  lpcbGroupAttributes LPDWORD
+  lpReserved LPVOID
+
+func FindFirstUrlCacheGroup
+  success NotEqual=0
+  HANDLE
+  dwFlags DWORD
+  dwFilter DWORD
+  lpSearchCondition LPVOID
+  dwSearchCondition DWORD
+  lpGroupId GROUPID*
+  lpReserved LPVOID
+
+func FindNextUrlCacheEntry bothCharset
+  BOOLAPI
+  hEnumHandle HANDLE
+  lpNextCacheEntryInfo LPINTERNET_CACHE_ENTRY_INFO
+  lpcbCacheEntryInfo LPDWORD
+
+func FindNextUrlCacheEntryEx bothCharset
+  BOOL
+  hEnumHandle HANDLE
+  lpNextCacheEntryInfo LPINTERNET_CACHE_ENTRY_INFO
+  lpcbEntryInfo LPDWORD
+  lpGroupAttributes LPVOID
+  lpcbGroupAttributes LPDWORD
+  lpReserved LPVOID
+
+func FindNextUrlCacheGroup
+  BOOL
+  hFind HANDLE
+  lpGroupId GROUPID*
+  lpReserved LPVOID
+
+func FtpCommand bothCharset
+  BOOL
+  hConnect HINTERNET
+  fExpectResponse BOOL
+  dwFlags DWORD
+  lpszCommand LPCTSTR
+  dwContext DWORD_PTR
+  phFtpCommand HINTERNET*
+
+func FtpCreateDirectory bothCharset
+  BOOL
+  hConnect HINTERNET
+  lpszDirectory LPCTSTR
+
+func FtpDeleteFile bothCharset
+  BOOL
+  hConnect HINTERNET
+  lpszFileName LPCTSTR
+
+func FtpFindFirstFile bothCharset
+  HINTERNET
+  hConnect HINTERNET
+  lpszSearchFile LPCTSTR
+  lpFindFileData LPWIN32_FIND_DATA
+  dwFlags DWORD
+  dwContext DWORD_PTR
+
+func FtpGetCurrentDirectory bothCharset
+  BOOL
+  hConnect HINTERNET
+  lpszCurrentDirectory LPTSTR outputOnly
+  lpdwCurrentDirectory LPDWORD
+
+func FtpGetFile bothCharset
+  BOOL
+  hConnect HINTERNET
+  lpszRemoteFile LPCTSTR
+  lpszNewFile LPCTSTR
+  fFailIfExists BOOL
+  dwFlagsAndAttributes [FileAttributes]
+  dwFlags [FTP_TRANSFER_FLAGS]
+  dwContext DWORD_PTR
+
+func FtpGetFileSize
+  success NotEqual=0
+  DWORD
+  hFile HINTERNET
+  lpdwFileSizeHigh LPDWORD
+
+func FtpOpenFile bothCharset
+  HINTERNET
+  hConnect HINTERNET
+  lpszFileName LPCTSTR
+  dwAccess DWORD
+  dwFlags DWORD
+  dwContext DWORD_PTR
+
+func FtpPutFile bothCharset
+  BOOL
+  hConnect HINTERNET
+  lpszLocalFile LPCTSTR
+  lpszNewRemoteFile LPCTSTR
+  dwFlags [FTP_TRANSFER_FLAGS]
+  dwContext DWORD_PTR
+
+func FtpRemoveDirectory bothCharset
+  BOOL
+  hConnect HINTERNET
+  lpszDirectory LPCTSTR
+
+func FtpRenameFile bothCharset
+  BOOL
+  hConnect HINTERNET
+  lpszExisting LPCTSTR
+  lpszNew LPCTSTR
+
+func FtpSetCurrentDirectory bothCharset
+  BOOL
+  hConnect HINTERNET
+  lpszDirectory LPCTSTR
+
+func GetUrlCacheEntryInfo bothCharset
+  BOOL
+  lpszUrlName LPCTSTR
+  lpCacheEntryInfo LPINTERNET_CACHE_ENTRY_INFO
+  lpcbCacheEntryInfo LPDWORD
+
+func GetUrlCacheEntryInfoEx bothCharset
+  BOOLAPI
+  lpszUrl LPCTSTR
+  lpCacheEntryInfo LPINTERNET_CACHE_ENTRY_INFO
+  lpcbCacheEntryInfo LPDWORD
+  lpszRedirectUrl LPTSTR
+  lpcbRedirectUrl LPDWORD
+  lpReserved LPVOID
+  dwFlags DWORD
+
+func GetUrlCacheGroupAttribute bothCharset
+  BOOL
+  gid GROUPID
+  dwFlags DWORD
+  dwAttributes DWORD
+  lpGroupInfo LPINTERNET_CACHE_GROUP_INFO
+  lpdwGroupInfo LPDWORD
+  lpReserved LPVOID
+
+func GopherCreateLocator bothCharset
+  BOOL
+  lpszHost LPCTSTR
+  nServerPort INTERNET_PORT
+  lpszDisplayString LPCTSTR
+  lpszSelectorString LPCTSTR
+  dwGopherType DWORD
+  lpszLocator LPTSTR
+  lpdwBufferLength LPDWORD
+
+func GopherFindFirstFile bothCharset
+  HINTERNET
+  hConnect HINTERNET
+  lpszLocator LPCTSTR
+  lpszSearchString LPCTSTR
+  lpFindData LPGOPHER_FIND_DATA
+  dwFlags DWORD
+  dwContext DWORD_PTR
+
+func GopherGetAttribute bothCharset
+  BOOL
+  hConnect HINTERNET
+  lpszLocator LPCTSTR
+  lpszAttributeName LPCTSTR
+  lpBuffer LPBYTE
+  dwBufferLength DWORD
+  lpdwCharactersReturned LPDWORD
+  lpfnEnumerator GOPHER_ATTRIBUTE_ENUMERATOR
+  dwContext DWORD_PTR
+
+func GopherGetLocatorType bothCharset
+  BOOL
+  lpszLocator LPCTSTR
+  lpdwGopherType LPDWORD
+
+func GopherOpenFile bothCharset
+  HINTERNET
+  hConnect HINTERNET
+  lpszLocator LPCTSTR
+  lpszView LPCTSTR
+  dwFlags DWORD
+  dwContext DWORD_PTR
+
+func HttpAddRequestHeaders bothCharset
+  BOOL
+  hConnect HINTERNET
+  lpszHeaders LPCTSTR
+  dwHeadersLength DWORD
+  dwModifiers [HttpAddReqFlag]
+
+func HttpEndRequest bothCharset
+  BOOL
+  hRequest HINTERNET
+  lpBuffersOut LPINTERNET_BUFFERS
+  dwFlags DWORD
+  dwContext DWORD_PTR
+
+func HttpOpenRequest bothCharset
+  HINTERNET
+  hConnect HINTERNET
+  lpszVerb LPCTSTR
+  lpszObjectName LPCTSTR
+  lpszVersion LPCTSTR
+  lpszReferer LPCTSTR
+  lplpszAcceptTypes LPCTSTR*
+  dwFlags [InternetFlags]
+  dwContext DWORD_PTR
+
+func HttpQueryInfo bothCharset
+  BOOL
+  hRequest HINTERNET
+  dwInfoLevel [HTTP_QUERY_FLAGS]
+  lpvBuffer LPVOID postLength=lpdwBufferLength
+  lpdwBufferLength LPDWORD
+  lpdwIndex LPDWORD
+
+func HttpSendRequest bothCharset
+  BOOL
+  hRequest HINTERNET
+  lpszHeaders LPCTSTR
+  dwHeadersLength DWORD
+  lpOptional LPVOID length=dwOptionalLength
+  dwOptionalLength DWORD
+
+func HttpSendRequestEx bothCharset
+  BOOL
+  hRequest HINTERNET
+  lpBuffersIn LPINTERNET_BUFFERS
+  lpBuffersOut LPINTERNET_BUFFERS
+  dwFlags DWORD
+  dwContext DWORD_PTR
+
+func InternetAttemptConnect
+  [ERROR_CODE]
+  dwReserved DWORD
+
+func InternetAutodial
+  BOOL
+  dwFlags DWORD
+  hwndParent HWND
+
+func InternetAutodialHangup
+  BOOL
+  dwReserved DWORD
+
+func InternetCanonicalizeUrl bothCharset
+  BOOL
+  lpszUrl LPCTSTR
+  lpszBuffer LPTSTR
+  lpdwBufferLength LPDWORD
+  dwFlags [InternetCanonicalizeUrlFlags]
+
+func InternetCheckConnection bothCharset
+  BOOL
+  lpszUrl LPCTSTR
+  dwFlags DWORD
+  dwReserved DWORD
+
+func InternetCloseHandle
+  BOOL
+  hInternet HINTERNET
+
+func InternetCombineUrl bothCharset
+  BOOL
+  lpszBaseUrl LPCTSTR
+  lpszRelativeUrl LPCTSTR
+  lpszBuffer LPTSTR
+  lpdwBufferLength LPDWORD
+  dwFlags [InternetCanonicalizeUrlFlags]
+
+func InternetConfirmZoneCrossing bothCharset
+  [ERROR_CODE]
+  hWnd HWND
+  szUrlPrev LPTSTR
+  szUrlNew LPTSTR
+  bPost BOOL
+
+func InternetConfirmZoneCrossing
+  [ERROR_CODE]
+  hWnd HWND
+  szUrlPrev LPSTR
+  szUrlNew LPSTR
+  bPost BOOL
+
+func InternetConnect bothCharset
+  HINTERNET
+  hInternet HINTERNET
+  lpszServerName LPCTSTR
+  nServerPort INTERNET_PORT
+  lpszUsername LPCTSTR
+  lpszPassword LPCTSTR
+  dwService [InternetService]
+  dwFlags [InternetFlags]
+  dwContext DWORD_PTR
+
+func InternetCrackUrl bothCharset
+  BOOL
+  lpszUrl LPCTSTR
+  dwUrlLength DWORD
+  dwFlags [InternetCrackUrlFlags]
+  lpUrlComponents LPURL_COMPONENTS outputOnly
+
+func InternetCreateUrl bothCharset
+  BOOL
+  lpUrlComponents LPURL_COMPONENTS
+  dwFlags [InternetCrackUrlFlags]
+  lpszUrl LPTSTR outputOnly
+  lpdwUrlLength LPDWORD
+
+func InternetDial bothCharset
+  [ERROR_CODE]
+  hwndParent HWND
+  pszEntryName LPTSTR
+  dwFlags [INTERNET_DIAL_FLAGS]
+  lpdwConnection DWORD_PTR*
+  dwReserved DWORD
+
+func InternetDial
+  [ERROR_CODE]
+  hwndParent HWND
+  pszEntryName LPSTR
+  dwFlags [INTERNET_DIAL_FLAGS]
+  lpdwConnection LPDWORD*
+  dwReserved DWORD
+
+func InternetErrorDlg
+  [ERROR_CODE]
+  hWnd HWND
+  hRequest HINTERNET
+  dwError [ERROR_INTERNET]
+  dwFlags [InternetErrorDlgFlags]
+  lppvData LPVOID*
+
+func InternetFindNextFile bothCharset
+  BOOL
+  hFind HINTERNET
+  lpvFindData LPVOID
+
+func InternetGetConnectedState
+  BOOL
+  lpdwFlags [InternetGetConnectedStateFlags*]
+  dwReserved DWORD
+
+func InternetGetConnectedStateEx bothCharset
+  BOOL
+  lpdwFlags [InternetGetConnectedStateFlags*]
+  lpszConnectionName LPTSTR
+  dwNameLen DWORD
+  dwReserved DWORD
+
+func InternetGetConnectedStateEx
+  BOOL
+  lpdwFlags [InternetGetConnectedStateFlags*]
+  lpszConnectionName LPSTR
+  dwNameLen DWORD
+  dwReserved DWORD
+
+func InternetGetCookie bothCharset
+  BOOL
+  lpszUrl LPCTSTR
+  lpszCookieName LPCTSTR
+  lpszCookieData LPTSTR
+  lpdwSize LPDWORD
+
+func InternetGetCookieEx bothCharset
+  BOOL
+  pchURL LPCTSTR
+  pchCookieName LPCTSTR
+  pchCookieData LPTSTR
+  pcchCookieData LPDWORD
+  dwFlags [InternetCookieFlags]
+  lpReserved LPVOID
+
+func InternetGetLastResponseInfo bothCharset
+  BOOL
+  lpdwError LPDWORD
+  lpszBuffer LPTSTR
+  lpdwBufferLength LPDWORD
+
+func InternetGoOnline bothCharset
+  BOOL
+  lpszURL LPTSTR
+  hwndParent HWND
+  dwFlags DWORD
+
+func InternetGoOnline
+  BOOL
+  lpszURL LPSTR
+  hwndParent HWND
+  dwFlags DWORD
+
+func InternetHangUp
+  [ERROR_CODE]
+  dwConnection DWORD_PTR
+  dwReserved DWORD
+
+func InternetLockRequestFile
+  BOOL
+  hInternet HINTERNET
+  lphLockReqHandle HANDLE*
+
+func InternetOpen bothCharset
+  HINTERNET
+  lpszAgent LPCTSTR
+  dwAccessType [InternetOpenType]
+  lpszProxyName LPCTSTR
+  lpszProxyBypass LPCTSTR
+  dwFlags [InternetOpenFlags]
+
+func InternetOpenUrl bothCharset
+  HINTERNET
+  hInternet HINTERNET
+  lpszUrl LPCTSTR
+  lpszHeaders LPCTSTR
+  dwHeadersLength DWORD
+  dwFlags [InternetFlags]
+  dwContext DWORD_PTR
+
+func InternetQueryDataAvailable
+  BOOL
+  hFile HINTERNET
+  lpdwNumberOfBytesAvailable LPDWORD
+  dwFlags DWORD
+  dwContext DWORD_PTR
+
+func InternetQueryOption bothCharset
+  BOOL
+  hInternet HINTERNET
+  dwOption [INTERNET_OPTION]
+  lpBuffer LPVOID postLength=lpdwBufferLength
+  lpdwBufferLength LPDWORD
+
+func InternetReadFile
+  BOOL
+  hFile HINTERNET
+  lpBuffer LPVOID postLength=lpdwNumberOfBytesRead
+  dwNumberOfBytesToRead DWORD
+  lpdwNumberOfBytesRead LPDWORD
+
+func InternetReadFileEx bothCharset
+  BOOL
+  hFile HINTERNET
+  lpBuffersOut LPINTERNET_BUFFERS
+  dwFlags [InternetReadFileFlags]
+  dwContext DWORD_PTR
+
+func InternetSetCookie bothCharset
+  BOOL
+  lpszUrl LPCTSTR
+  lpszCookieName LPCTSTR
+  lpszCookieData LPCTSTR
+
+func InternetSetCookieEx bothCharset
+  success NotEqual=0
+  InternetCookieState
+  lpszURL LPCTSTR
+  lpszCookieName LPCTSTR
+  lpszCookieData LPCTSTR
+  dwFlags [InternetCookieFlags]
+  dwReserved DWORD_PTR
+
+func InternetSetFilePointer
+  success NotEqual=-1
+  DWORD
+  hFile HINTERNET
+  lDistanceToMove LONG
+  pReserved PVOID
+  dwMoveMethod DWORD
+  dwContext DWORD_PTR
+
+func InternetSetOption bothCharset
+  BOOL
+  hInternet HINTERNET
+  dwOption [INTERNET_OPTION]
+  lpBuffer LPVOID length=dwBufferLength
+  dwBufferLength DWORD
+
+func InternetSetStatusCallback bothCharset
+  INTERNET_STATUS_CALLBACK
+  hInternet HINTERNET
+  lpfnInternetCallback INTERNET_STATUS_CALLBACK
+
+func InternetSetStatusCallback
+  INTERNET_STATUS_CALLBACK
+  hInternet HINTERNET
+  lpfnInternetCallback INTERNET_STATUS_CALLBACK
+
+func InternetTimeFromSystemTime bothCharset
+  BOOL
+  pst "const SYSTEMTIME*"
+  dwRFC DWORD
+  lpszTime LPTSTR
+  cbTime DWORD
+
+func InternetTimeFromSystemTime
+  BOOL
+  pst "const SYSTEMTIME*"
+  dwRFC DWORD
+  lpszTime LPSTR
+  cbTime DWORD
+
+func InternetTimeToSystemTime bothCharset
+  BOOL
+  lpszTime LPCTSTR
+  pst SYSTEMTIME*
+  dwReserved DWORD
+
+func InternetTimeToSystemTime
+  BOOL
+  lpszTime LPCSTR
+  pst SYSTEMTIME*
+  dwReserved DWORD
+
+func InternetUnlockRequestFile
+  BOOLAPI
+  hLockRequestInfo HANDLE
+
+func InternetWriteFile
+  BOOL
+  hFile HINTERNET
+  lpBuffer LPCVOID length=dwNumberOfBytesToWrite
+  dwNumberOfBytesToWrite DWORD
+  lpdwNumberOfBytesWritten LPDWORD
+
+func ReadUrlCacheEntryStream
+  BOOLAPI
+  hUrlCacheStream HANDLE
+  dwLocation DWORD
+  lpBuffer LPVOID postLength=lpdwLen
+  lpdwLen LPDWORD
+  dwReserved DWORD
+
+func ResumeSuspendedDownload
+  BOOL
+  hRequest HINTERNET
+  dwResultCode DWORD
+
+func RetrieveUrlCacheEntryFile bothCharset
+  BOOLAPI
+  lpszUrlName LPCTSTR
+  lpCacheEntryInfo LPINTERNET_CACHE_ENTRY_INFO
+  lpcbCacheEntryInfo LPDWORD
+  dwReserved DWORD
+
+func RetrieveUrlCacheEntryStream bothCharset
+  success NotEqual=0
+  HANDLE
+  lpszUrlName LPCTSTR
+  lpCacheEntryInfo LPINTERNET_CACHE_ENTRY_INFO postLength=lpcbCacheEntryInfo
+  lpcbCacheEntryInfo LPDWORD
+  fRandomRead BOOL
+  dwReserved DWORD
+
+func SetUrlCacheEntryGroup bothCharset
+  BOOLAPI
+  lpszUrlName LPCTSTR
+  dwFlags DWORD
+  GroupId GROUPID
+  pbGroupAttributes LPBYTE
+  cbGroupAttributes DWORD
+  lpReserved LPVOID
+
+func SetUrlCacheEntryGroup
+  BOOLAPI
+  lpszUrlName LPCSTR
+  dwFlags DWORD
+  GroupId GROUPID
+  pbGroupAttributes LPBYTE
+  cbGroupAttributes DWORD
+  lpReserved LPVOID
+
+func SetUrlCacheEntryInfo bothCharset
+  BOOLAPI
+  lpszUrlName LPCTSTR
+  lpCacheEntryInfo LPINTERNET_CACHE_ENTRY_INFO
+  dwFieldControl [CacheEntryFieldControl]
+
+func SetUrlCacheGroupAttribute bothCharset
+  BOOL
+  gid GROUPID
+  dwFlags DWORD
+  dwAttributes DWORD
+  lpGroupInfo LPINTERNET_CACHE_GROUP_INFO
+  lpReserved LPVOID
+
+func UnlockUrlCacheEntryFile bothCharset
+  BOOLAPI
+  lpszUrlName LPCTSTR
+  dwReserved DWORD
+
+func UnlockUrlCacheEntryFile
+  BOOLAPI
+  lpszUrlName LPCSTR
+  dwReserved DWORD
+
+func UnlockUrlCacheEntryStream
+  BOOLAPI
+  hUrlCacheStream HANDLE
+  dwReserved DWORD
+
+func InternetClearAllPerSiteCookieDecisions
+  BOOL
+
+func InternetEnumPerSiteCookieDecision bothCharset
+  BOOL
+  pszSiteName LPTSTR
+  pcSiteNameSize "unsigned long*"
+  pdwDecision "unsigned long*"
+  dwIndex "unsigned long"
+
+func InternetGetPerSiteCookieDecision bothCharset
+  BOOL
+  pchHostName LPCTSTR
+  pResult "unsigned long*"
+
+func InternetSetPerSiteCookieDecision bothCharset
+  BOOL
+  pchHostName LPCTSTR
+  dwDecision DWORD
+
+func PrivacyGetZonePreferenceW
+  [ERROR_CODE]
+  dwZone [URLZONE|DWORD]
+  dwType DWORD
+  pdwTemplate LPDWORD
+  pszBuffer LPWSTR
+  pdwBufferLength LPDWORD
+
+func PrivacySetZonePreferenceW
+  [ERROR_CODE]
+  dwZone [URLZONE|DWORD]
+  dwType DWORD
+  dwTemplate DWORD
+  pszPreference LPCWSTR
+
+func InternetInitializeAutoProxyDll
+  BOOL
+  dwReserved DWORD
+
+func InternetAlgIdToString bothCharset
+  BOOLAPI
+  ai ALG_ID
+  lpstr LPTSTR outputOnly
+  lpdwstrLength LPDWORD
+  dwReserved DWORD
+
+func InternetSecurityProtocolToString bothCharset
+  BOOLAPI
+  dwProtocol DWORD
+  lpstr LPTSTR outputOnly
+  lpdwstrLength LPDWORD
+  dwReserved DWORD
+
+func InternetGetSecurityInfoByURL bothCharset
+  BOOLAPI
+  lpszURL LPTSTR
+  ppCertChain PCCERT_CHAIN_CONTEXT*
+  pdwSecureFlags DWORD*
+
+func InternetGetSecurityInfoByURL
+  BOOLAPI
+  lpszURL LPSTR
+  ppCertChain PCCERT_CHAIN_CONTEXT*
+  pdwSecureFlags DWORD*
+
+func ShowSecurityInfo
+  [ERROR_CODE]
+  hWndParent HWND
+  pSecurityInfo LPINTERNET_SECURITY_INFO
+
+func ShowX509EncodedCertificate
+  [ERROR_CODE]
+  hWndParent HWND
+  lpCert LPBYTE length=cbCert
+  cbCert DWORD
+
+func ShowClientAuthCerts
+  [ERROR_CODE]
+  hWndParent HWND
+
+func ParseX509EncodedCertificateForListBoxEntry
+  [ERROR_CODE]
+  lpCert LPBYTE length=cbCert
+  cbCert DWORD
+  lpszListBoxEntry LPSTR outputOnly
+  lpdwListBoxEntry LPDWORD
+
+func InternetShowSecurityInfoByURL bothCharset
+  BOOLAPI
+  lpszURL LPTSTR
+  hwndParent HWND
+
+func InternetShowSecurityInfoByURL
+  BOOLAPI
+  lpszURL LPSTR
+  hwndParent HWND
+
+func InternetGetCertByURL
+  BOOLAPI
+  lpszURL LPSTR
+  lpszCertText LPSTR outputOnly
+  dwcbCertText DWORD
+
+func InternetGetCertByURLA
+  BOOLAPI
+  lpszURL LPSTR
+  lpszCertText LPSTR outputOnly
+  dwcbCertText DWORD
+
+func InternetFortezzaCommand
+  BOOLAPI
+  dwCommand FORTCMD
+  hwnd HWND
+  dwReserved DWORD_PTR
+
+func InternetQueryFortezzaStatus
+  BOOLAPI
+  pdwStatus FORTSTAT*
+  dwReserved DWORD_PTR
+
+func InternetDebugGetLocalTime
+  BOOLAPI
+  pstLocalTime SYSTEMTIME*
+  pdwReserved DWORD*
+
+func InternetWriteFileEx bothCharset
+  BOOLAPI
+  hFile HINTERNET
+  lpBuffersIn LPINTERNET_BUFFERS
+  dwFlags DWORD
+  dwContext DWORD_PTR
+
+func FindP3PPolicySymbol ordinal=118
+  P3PStatus
+  pszSymbol "const char*"
+
+func HttpPushEnable
+  [ERROR_CODE]
+  hRequest HINTERNET
+  pTransportSetting HTTP_PUSH_TRANSPORT_SETTING*
+  phWait HTTP_PUSH_WAIT_HANDLE*
+
+func HttpPushWait
+  [ERROR_CODE]
+  hWait HTTP_PUSH_WAIT_HANDLE
+  eType HTTP_PUSH_WAIT_TYPE
+  pNotificationStatus HTTP_PUSH_NOTIFICATION_STATUS*
+
+func HttpPushClose
+  VOID
+  hWait HTTP_PUSH_WAIT_HANDLE
+
+func HttpCheckDavCompliance bothCharset ordinalA=104 ordinalW=105
+  BOOLAPI
+  lpszUrl LPCTSTR
+  lpszComplianceToken LPCTSTR
+  lpfFound LPBOOL
+  hWnd HWND
+  lpvReserved LPVOID
+
+func HttpCheckDavCompliance
+  BOOLAPI
+  lpszUrl LPCSTR
+  lpszComplianceToken LPCSTR
+  lpfFound LPBOOL
+  hWnd HWND
+  lpvReserved LPVOID
+
+func IsUrlCacheEntryExpired bothCharset
+  BOOLAPI
+  lpszUrlName LPCTSTR
+  dwFlags DWORD
+  pftLastModified FILETIME*
+
+func CreateUrlCacheEntryExW
+  BOOLAPI
+  lpszUrlName LPCWSTR
+  dwExpectedFileSize DWORD
+  lpszFileExtension LPCWSTR
+  lpszFileName LPWSTR
+  dwReserved DWORD
+  fPreserveIncomingFileName BOOL
+
+func GetUrlCacheEntryBinaryBlob
+  [ERROR_CODE]
+  pwszUrlName PCWSTR
+  dwType DWORD*
+  pftExpireTime FILETIME*
+  pftAccessTime FILETIME*
+  pftModifiedTime FILETIME*
+  ppbBlob BYTE** postLength=pcbBlob
+  pcbBlob DWORD*
+
+func CommitUrlCacheEntryBinaryBlob
+  [ERROR_CODE]
+  pwszUrlName PCWSTR
+  dwType DWORD
+  ftExpireTime FILETIME
+  ftModifiedTime FILETIME
+  pbBlob "const BYTE*" length=cbBlob
+  cbBlob DWORD
+
+func CreateUrlCacheContainer bothCharset
+  BOOLAPI
+  Name LPCTSTR
+  lpCachePrefix LPCTSTR
+  lpszCachePath LPCTSTR
+  KBCacheLimit DWORD
+  dwContainerType DWORD
+  dwOptions [INTERNET_CACHE_CONTAINER_FLAGS]
+  pvBuffer LPVOID length=cbBuffer
+  cbBuffer LPDWORD
+
+func DeleteUrlCacheContainer bothCharset
+  BOOLAPI
+  Name LPCTSTR
+  dwOptions DWORD
+
+func FindFirstUrlCacheContainer bothCharset
+  success NotEqual=0
+  HANDLE
+  pdwModified LPDWORD
+  lpContainerInfo LPINTERNET_CACHE_CONTAINER_INFO
+  lpcbContainerInfo LPDWORD
+  dwOptions [CACHE_FIND_CONTAINER_FLAGS]
+
+func FindNextUrlCacheContainer bothCharset
+  BOOLAPI
+  hEnumHandle HANDLE
+  lpContainerInfo LPINTERNET_CACHE_CONTAINER_INFO
+  lpcbContainerInfo LPDWORD
+
+func FreeUrlCacheSpace bothCharset
+  BOOLAPI
+  lpszCachePath LPCTSTR
+  dwSize DWORD
+  dwFilter DWORD
+
+func GetUrlCacheConfigInfo bothCharset
+  BOOLAPI
+  lpCacheConfigInfo LPINTERNET_CACHE_CONFIG_INFO
+  lpcbCacheConfigInfo LPDWORD
+  dwFieldControl [CACHE_CONFIG_FC]
+
+func SetUrlCacheConfigInfo bothCharset
+  BOOLAPI
+  lpCacheConfigInfo LPINTERNET_CACHE_CONFIG_INFO
+  dwFieldControl [CACHE_CONFIG_FC]
+
+func RunOnceUrlCache
+  [ERROR_CODE]
+  hwnd HWND
+  hinst HINSTANCE
+  lpszCmd LPSTR
+  nCmdShow int
+
+func DeleteIE3Cache
+  [ERROR_CODE]
+  hwnd HWND
+  hinst HINSTANCE
+  lpszCmd LPSTR
+  nCmdShow int
+
+func UpdateUrlCacheContentPath
+  BOOLAPI
+  szNewPath LPCSTR
+
+func RegisterUrlCacheNotification
+  BOOLAPI
+  hWnd HWND
+  uMsg UINT
+  gid GROUPID
+  dwOpsFilter [CACHE_NOTIFY_FILTER_OPTIONS]
+  dwReserved DWORD
+
+func GetUrlCacheHeaderData
+  BOOLAPI
+  nIdx DWORD
+  lpdwData LPDWORD
+
+func SetUrlCacheHeaderData
+  BOOLAPI
+  nIdx DWORD
+  dwData DWORD
+
+func IncrementUrlCacheHeaderData
+  BOOLAPI
+  nIdx DWORD
+  lpdwData LPDWORD
+
+func LoadUrlCacheContent
+  BOOLAPI
+
+func GetUrlCacheContainerInfo bothCharset
+  BOOLAPI
+  lpszUrlName LPTSTR
+  lpContainerInfo LPINTERNET_CACHE_CONTAINER_INFO
+  lpcbContainerInfo LPDWORD
+  dwOptions DWORD
+
+func AppCacheLookup
+  [ERROR_CODE]
+  pwszUrl PCWSTR
+  dwFlags [APP_CACHE_LOOKUP_FLAGS]
+  phAppCache APP_CACHE_HANDLE*
+
+func AppCacheCheckManifest
+  [ERROR_CODE]
+  pwszMasterUrl PCWSTR
+  pwszManifestUrl PCWSTR
+  pbManifestData "const BYTE*" length=dwManifestDataSize
+  dwManifestDataSize DWORD
+  pbManifestResponseHeaders "const BYTE*" length=dwManifestResponseHeadersSize
+  dwManifestResponseHeadersSize DWORD
+  peState APP_CACHE_STATE*
+  phNewAppCache APP_CACHE_HANDLE*
+
+func AppCacheGetDownloadList
+  [ERROR_CODE]
+  hAppCache APP_CACHE_HANDLE
+  pDownloadList APP_CACHE_DOWNLOAD_LIST*
+
+func AppCacheFreeDownloadList
+  VOID
+  pDownloadList APP_CACHE_DOWNLOAD_LIST*
+
+func AppCacheFinalize
+  [ERROR_CODE]
+  hAppCache APP_CACHE_HANDLE
+  pbManifestData "const BYTE*" length=dwManifestDataSize
+  dwManifestDataSize DWORD
+  peState APP_CACHE_FINALIZE_STATE*
+
+func AppCacheGetFallbackUrl
+  [ERROR_CODE]
+  hAppCache APP_CACHE_HANDLE
+  pwszUrl PCWSTR
+  ppwszFallbackUrl PWSTR* outputOnly
+
+func AppCacheGetManifestUrl
+  [ERROR_CODE]
+  hAppCache APP_CACHE_HANDLE
+  ppwszManifestUrl PWSTR* outputOnly
+
+func AppCacheDuplicateHandle
+  [ERROR_CODE]
+  hAppCache APP_CACHE_HANDLE
+  phDuplicatedAppCache APP_CACHE_HANDLE*
+
+func AppCacheCloseHandle
+  VOID
+  hAppCache APP_CACHE_HANDLE
+
+func AppCacheFreeGroupList
+  VOID
+  pAppCacheGroupList APP_CACHE_GROUP_LIST*
+
+func AppCacheGetGroupList
+  [ERROR_CODE]
+  pAppCacheGroupList APP_CACHE_GROUP_LIST*
+
+func AppCacheGetInfo
+  [ERROR_CODE]
+  hAppCache APP_CACHE_HANDLE
+  pAppCacheInfo APP_CACHE_GROUP_INFO*
+
+func AppCacheDeleteGroup
+  [ERROR_CODE]
+  pwszManifestUrl PCWSTR
+
+func AppCacheGetIEGroupList
+  [ERROR_CODE]
+  pAppCacheGroupList APP_CACHE_GROUP_LIST*
+
+func AppCacheDeleteIEGroup
+  [ERROR_CODE]
+  pwszManifestUrl PCWSTR
+
+func AppCacheFreeIESpace
+  [ERROR_CODE]
+  ftCutOff FILETIME
+
+func HttpOpenDependencyHandle
+  [ERROR_CODE]
+  hRequestHandle HINTERNET
+  fBackground BOOL
+  phDependencyHandle HTTP_DEPENDENCY_HANDLE*
+
+func HttpCloseDependencyHandle
+  VOID
+  hDependencyHandle HTTP_DEPENDENCY_HANDLE
+
+func HttpDuplicateDependencyHandle
+  [ERROR_CODE]
+  hDependencyHandle HTTP_DEPENDENCY_HANDLE
+  phDuplicatedDependencyHandle HTTP_DEPENDENCY_HANDLE*
+
+func UrlCacheFreeEntryInfo
+  VOID
+  pCacheEntryInfo PURLCACHE_ENTRY_INFO
+
+func UrlCacheGetEntryInfo
+  [ERROR_CODE]
+  hAppCache APP_CACHE_HANDLE
+  pcwszUrl PCWSTR
+  pCacheEntryInfo PURLCACHE_ENTRY_INFO
+
+func UrlCacheCloseEntryHandle
+  VOID
+  hEntryFile URLCACHE_HANDLE
+
+func UrlCacheRetrieveEntryFile
+  [ERROR_CODE]
+  hAppCache APP_CACHE_HANDLE
+  pcwszUrl PCWSTR
+  pCacheEntryInfo PURLCACHE_ENTRY_INFO
+  phEntryFile URLCACHE_HANDLE*
+
+func UrlCacheReadEntryStream
+  [ERROR_CODE]
+  hUrlCacheStream URLCACHE_HANDLE
+  ullLocation ULONGLONG
+  pBuffer PVOID postLength=pdwBufferLen
+  dwBufferLen DWORD
+  pdwBufferLen PDWORD
+
+func UrlCacheRetrieveEntryStream
+  [ERROR_CODE]
+  hAppCache APP_CACHE_HANDLE
+  pcwszUrl PCWSTR
+  fRandomRead BOOL
+  pCacheEntryInfo PURLCACHE_ENTRY_INFO
+  phEntryStream URLCACHE_HANDLE*
+
+func UrlCacheUpdateEntryExtraData
+  [ERROR_CODE]
+  hAppCache APP_CACHE_HANDLE
+  pcwszUrl PCWSTR
+  pbExtraData "const BYTE*" length=cbExtraData
+  cbExtraData DWORD
+
+func UrlCacheCreateContainer
+  [ERROR_CODE]
+  pwszName "const WCHAR*"
+  pwszPrefix "const WCHAR*"
+  pwszDirectory "const WCHAR*"
+  ullLimit ULONGLONG
+  dwOptions [INTERNET_CACHE_CONTAINER_FLAGS]
+
+func UrlCacheCheckEntriesExist
+  [ERROR_CODE]
+  rgpwszUrls PCWSTR* count=cEntries
+  cEntries DWORD
+  rgfExist BOOL* postCount=cEntries
+
+func UrlCacheGetContentPaths
+  [ERROR_CODE]
+  pppwszDirectories PWSTR** derefPostCount=pcDirectories
+  pcDirectories DWORD*
+
+func UrlCacheGetGlobalLimit
+  [ERROR_CODE]
+  limitType URL_CACHE_LIMIT_TYPE
+  pullLimit ULONGLONG*
+
+func UrlCacheSetGlobalLimit
+  [ERROR_CODE]
+  limitType URL_CACHE_LIMIT_TYPE
+  ullLimit ULONGLONG
+
+func UrlCacheReloadSettings
+  [ERROR_CODE]
+
+func UrlCacheContainerSetEntryMaximumAge
+  [ERROR_CODE]
+  pwszPrefix "const WCHAR*"
+  dwEntryMaxAge DWORD
+
+func InternetGetDialEngineW
+  HRESULT
+  pwzConnectoid LPWSTR
+  pdes IDialEventSink*
+  ppde IDialEngine**
+
+func InternetGetDialBrandingW
+  HRESULT
+  pwzConnectoid LPWSTR
+  ppdb IDialBranding**
+
+func ReadGuidsForConnectedNetworks ordinal=401
+  BOOLAPI
+  pcNetworks DWORD*
+  pppwszNetworkGuids PWSTR** derefPostCount=pcNetworks
+  pppbstrNetworkNames BSTR** derefPostCount=pcNetworks
+  pppwszGWMacs PWSTR** derefPostCount=pcGatewayMacs
+  pcGatewayMacs DWORD*
+  pdwFlags DWORD*
+
+func InternetSetDialState bothCharset
+  BOOLAPI
+  lpszConnectoid LPCTSTR
+  dwState DWORD
+  dwReserved DWORD
+
+func InternetSetDialState
+  BOOLAPI
+  lpszConnectoid LPCSTR
+  dwState DWORD
+  dwReserved DWORD
+
+func IsHostInProxyBypassList
+  BOOLAPI
+  tScheme INTERNET_SCHEME
+  lpszHost LPCSTR
+  cchHost DWORD
+
+func InternetFreeProxyInfoList
+  VOID
+  pProxyInfoList WININET_PROXY_INFO_LIST*
+
+func InternetGetProxyForUrl
+  [ERROR_CODE]
+  hInternet HINTERNET
+  pcwszUrl PCWSTR
+  pProxyInfoList WININET_PROXY_INFO_LIST*
+
+func DoConnectoidsExist ordinal=101
+  BOOL
+
+func GetDiskInfoA ordinal=102
+  BOOLAPI
+  pszPath PCSTR
+  pdwClusterSize PDWORD
+  pdlAvail PDWORDLONG
+  pdlTotal PDWORDLONG
+
+func PerformOperationOverUrlCacheA ordinal=103
+  BOOL
+  pszUrlSearchPattern PCSTR
+  dwFlags DWORD
+  dwFilter DWORD
+  GroupId GROUPID
+  pReserved1 PVOID
+  pdwReserved2 PDWORD
+  pReserved3 PVOID
+  op CACHE_OPERATOR
+  pOperatorData PVOID
+
+func IsProfilesEnabled ordinal=112
+  BOOL
+
+func _GetFileExtensionFromUrl
+  [ERROR_CODE]
+  lpszUrl LPSTR
+  dwFlags DWORD
+  lpszExt LPSTR
+  pcchExt DWORD*
+
+func InternalInternetGetCookie ordinal=346
+  [ERROR_CODE]
+  lpszUrl LPCSTR
+  lpszCookieData LPSTR
+  lpdwDataSize DWORD*
+
+func ImportCookieFile bothCharset ordinalA=108 ordinalW=110
+  BOOLAPI
+  szFilename LPCTSTR
+
+func ExportCookieFile bothCharset ordinalA=109 ordinalW=111
+  BOOLAPI
+  szFilename LPCTSTR
+  fAppend BOOL
+
+func IsDomainLegalCookieDomain bothCharset ordinalA=116 ordinalW=117
+  BOOLAPI
+  pchDomain LPCTSTR
+  pchFullDomain LPCTSTR
+
+func UrlZonesDetach
+  VOID
+
+func ReadUrlCacheEntryStreamEx
+  BOOLAPI
+  hUrlCacheStream HANDLE
+  qwLocation DWORDLONG
+  lpBuffer LPVOID postLength=lpdwLen
+  lpdwLen LPDWORD
+
+func MapResourceToPolicy ordinal=120
+  P3PStatus
+  pResource P3PResource*
+  pszPolicy P3PURL
+  dwSize "unsigned long"
+  pSignal P3PSignal*
+
+func GetP3PPolicy ordinal=121
+  P3PStatus
+  pszPolicyURL P3PCURL
+  hDestination HANDLE
+  pszXSLtransform P3PCXSL
+  pSignal P3PSignal*
+
+func FreeP3PObject ordinal=122
+  P3PStatus
+  hObject P3PHANDLE
+
+func GetP3PRequestStatus ordinal=123
+  P3PStatus
+  hObject P3PHANDLE
+
+func InternetSetOptionEx bothCharset
+  BOOLAPI
+  hInternet HINTERNET
+  dwOption [INTERNET_OPTION]
+  lpBuffer LPVOID length=dwBufferLength
+  dwBufferLength DWORD
+  dwFlags DWORD
+
+func FtpPutFileEx
+  BOOLAPI
+  hFtpSession HINTERNET
+  lpszLocalFile LPCWSTR
+  lpszNewRemoteFile LPCSTR
+  dwFlags DWORD
+  dwContext DWORD_PTR
+
+func FtpGetFileEx
+  BOOLAPI
+  hFtpSession HINTERNET
+  lpszRemoteFile LPCSTR
+  lpszNewFile LPCWSTR
+  fFailIfExists BOOL
+  dwFlagsAndAttributes [FileAttributes]
+  dwFlags [FTP_TRANSFER_FLAGS]
+  dwContext DWORD_PTR
+
+func DeleteWpadCacheForNetworks
+  BOOLAPI
+  enType WPAD_CACHE_DELETE
+
+func HttpWebSocketCompleteUpgrade
+  HINTERNET
+  hRequest HINTERNET
+  dwContext DWORD_PTR
+
+func HttpWebSocketSend
+  BOOLAPI
+  hWebSocket HINTERNET
+  BufferType HTTP_WEB_SOCKET_BUFFER_TYPE
+  pvBuffer PVOID length=dwBufferLength
+  dwBufferLength DWORD
+
+func HttpWebSocketReceive
+  BOOLAPI
+  hWebSocket HINTERNET
+  pvBuffer PVOID postLength=pdwBytesRead
+  dwBufferLength DWORD
+  pdwBytesRead DWORD*
+  pBufferType HTTP_WEB_SOCKET_BUFFER_TYPE*
+
+func HttpWebSocketClose
+  BOOLAPI
+  hWebSocket HINTERNET
+  usStatus HTTP_WEB_SOCKET_CLOSE_STATUS
+  pvReason PVOID length=dwReasonLength
+  dwReasonLength DWORD
+
+func HttpWebSocketShutdown
+  BOOLAPI
+  hWebSocket HINTERNET
+  usStatus HTTP_WEB_SOCKET_CLOSE_STATUS
+  pvReason PVOID length=dwReasonLength
+  dwReasonLength DWORD
+
+func HttpWebSocketQueryCloseStatus
+  BOOLAPI
+  hWebSocket HINTERNET
+  pusStatus HTTP_WEB_SOCKET_CLOSE_STATUS*
+  pvReason PVOID postLength=pdwReasonLengthConsumed
+  dwReasonLength DWORD
+  pdwReasonLengthConsumed DWORD*
+

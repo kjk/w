@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellImageDataFactory base=IUnknown id={9be8ed5c-edab-4d75-90f3-bd5bdbb21c82} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func CreateIShellImageData
+    HRESULT
+    ppshimg IShellImageData**
+
+  func CreateImageFromFile
+    HRESULT
+    pszPath LPCWSTR
+    ppshimg IShellImageData**
+
+  func CreateImageFromStream
+    HRESULT
+    pStream IStream*
+    ppshimg IShellImageData**
+
+  func GetDataFormatFromPath
+    HRESULT
+    pszPath LPCWSTR
+    pDataFormat GUID*
+
+

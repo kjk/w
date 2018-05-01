@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IROTData base=IUnknown id={f29f6bc0-5021-11ce-aa15-00006901293f} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func GetComparisonData
+    HRESULT
+    pbData byte*
+    cbMax ULONG
+    pcbData ULONG*
+
+

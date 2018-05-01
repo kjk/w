@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface ISearchContext base=IUnknown id={09F656A2-41AF-480C-88F7-16CC0D164615} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetSearchUrl
+    HRESULT
+    pbstrSearchUrl BSTR*
+
+  func GetSearchText
+    HRESULT
+    pbstrSearchText BSTR*
+
+  func GetSearchStyle
+    HRESULT
+    pdwSearchStyle DWORD*
+
+

@@ -1,0 +1,54 @@
+include Headers\windows.h.txt
+include Headers\sockets.h.txt
+
+dll Fwpuclnt.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/Windows Sockets 2"
+func WSADeleteSocketPeerTargetName
+  success Equal=0
+  [SocketCode-int]
+  Socket SOCKET
+  PeerAddr "const struct sockaddr*"
+  PeerAddrLen ULONG
+  Overlapped LPWSAOVERLAPPED
+  CompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE
+
+func WSAImpersonateSocketPeer
+  success Equal=0
+  [SocketCode-int]
+  Socket SOCKET
+  PeerAddress "const sockaddr*"
+  peerAddressLen ULONG
+
+func WSAQuerySocketSecurity
+  success Equal=0
+  [SocketCode-int]
+  Socket SOCKET
+  SecurityQueryTemplate "const SOCKET_SECURITY_QUERY_TEMPLATE*"
+  SecurityQueryTemplateLen ULONG
+  SecurityQueryInfo SOCKET_SECURITY_QUERY_INFO*
+  SecurityQueryInfoLen ULONG*
+  Overlapped LPWSAOVERLAPPED
+  CompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE
+
+func WSARevertImpersonation
+  success Equal=0
+  [SocketCode-int]
+
+func WSASetSocketPeerTargetName
+  success Equal=0
+  [SocketCode-int]
+  Socket SOCKET
+  PeerTargetName "const SOCKET_PEER_TARGET_NAME*"
+  PeerTargetNameLen ULONG
+  Overlapped LPWSAOVERLAPPED
+  CompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE
+
+func WSASetSocketSecurity
+  success Equal=-1
+  [SocketCode-int]
+  Socket SOCKET
+  SecuritySettings "const SOCKET_SECURITY_SETTINGS*"
+  SecuritySettingsLen ULONG
+  Overlapped LPWSAOVERLAPPED
+  CompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE
+

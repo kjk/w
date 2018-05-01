@@ -1,0 +1,12 @@
+include Interfaces\COM\IPersist.txt
+
+ingterface IPersistIDList base=IPersist id={1079acfc-29bd-11d3-8e0d-00c04f6837d5} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetIDList
+    HRESULT
+    pidl PCIDLIST_ABSOLUTE
+
+  func GetIDList
+    HRESULT
+    ppidl PIDLIST_ABSOLUTE*
+
+

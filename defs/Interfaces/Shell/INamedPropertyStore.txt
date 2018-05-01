@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+
+ingterface INamedPropertyStore base=IUnknown id={71604b0f-97b0-4764-8577-2f13e98a1422} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetNamedValue
+    HRESULT
+    pszName LPCWSTR
+    ppropvar PROPVARIANT*
+
+  func SetNamedValue
+    HRESULT
+    pszName LPCWSTR
+    propvar REFPROPVARIANT
+
+  func GetNameCount
+    HRESULT
+    pdwCount DWORD*
+
+  func GetNameAt
+    HRESULT
+    iProp DWORD
+    pbstrName BSTR*
+
+

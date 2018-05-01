@@ -1,0 +1,1550 @@
+include Headers\windows.h.txt
+include Headers\native.h.txt
+
+dll DbgHelp.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Diagnostics/Debugging and Error Handling/Debug Help Library"
+alias PFPO_DATA LPVOID
+
+alias RVA DWORD
+
+alias PENUMDIRTREE_CALLBACK LPVOID
+
+alias PENUMLOADED_MODULES_CALLBACK LPVOID
+
+alias PENUMLOADED_MODULES_CALLBACK64 LPVOID
+
+alias PENUMLOADED_MODULES_CALLBACKW64 LPVOID
+
+alias PFIND_DEBUG_FILE_CALLBACK LPVOID
+
+alias PFIND_EXE_FILE_CALLBACK LPVOID
+
+alias PREAD_PROCESS_MEMORY_ROUTINE LPVOID
+
+alias PREAD_PROCESS_MEMORY_ROUTINE64 LPVOID
+
+alias PFUNCTION_TABLE_ACCESS_ROUTINE LPVOID
+
+alias PFUNCTION_TABLE_ACCESS_ROUTINE64 LPVOID
+
+alias PGET_MODULE_BASE_ROUTINE LPVOID
+
+alias PGET_MODULE_BASE_ROUTINE64 LPVOID
+
+alias PTRANSLATE_ADDRESS_ROUTINE LPVOID
+
+alias PTRANSLATE_ADDRESS_ROUTINE64 LPVOID
+
+alias PSYM_ENUMLINES_CALLBACK LPVOID
+
+alias PSYM_ENUMPROCESSES_CALLBACK LPVOID
+
+alias PSYM_ENUMSOURCEFILES_CALLBACK LPVOID
+
+alias PSYM_ENUMERATESYMBOLS_CALLBACK LPVOID
+
+alias PFINDFILEINPATHCALLBACK LPVOID
+
+alias PSYMBOL_REGISTERED_CALLBACK LPVOID
+
+alias PSYMBOL_REGISTERED_CALLBACK64 LPVOID
+
+alias PSYMBOL_REGISTERED_CALLBACKW64 LPVOID
+
+alias PSYMBOL_FUNCENTRY_CALLBACK LPVOID
+
+alias PSYMBOL_FUNCENTRY_CALLBACK64 LPVOID
+
+alias PSYM_ENUMSYMBOLS_CALLBACK LPVOID
+
+alias PSYM_ENUMSYMBOLS_CALLBACK64 LPVOID
+
+alias PSYM_ENUMSYMBOLS_CALLBACKW64 LPVOID
+
+alias MINIDUMP_CALLBACK_ROUTINE LPVOID
+
+alias PIMAGEHLP_CONTEXT LPVOID
+
+alias PSYM_ENUMMODULES_CALLBACK LPVOID
+
+alias PSYM_ENUMMODULES_CALLBACK64 LPVOID
+
+alias PSYM_ENUMMODULES_CALLBACKW64 LPVOID
+
+alias PENUMSOURCEFILETOKENSCALLBACK LPVOID
+
+array "DWORD64 [3]" base=DWORD64 count=3
+
+array "DWORD64 [4]" base=DWORD64 count=4
+
+array "DWORD64 [5]" base=DWORD64 count=5
+
+array "ULONG64 [5]" base=ULONG64 count=5
+
+array "TCHAR [1]" base=TCHAR count=1
+
+array "CHAR [MAX_PATH * 3]" base=CHAR count=780
+
+array "TCHAR [MAX_PATH * 3]" base=TCHAR count=780
+
+array "WCHAR [MAX_PATH * 3]" base=WCHAR count=780
+
+struct API_VERSION pack=8
+  MajorVersion USHORT
+  MinorVersion USHORT
+  Revision USHORT
+  Reserved USHORT
+
+pointer LPAPI_VERSION API_VERSION
+
+struct IMAGEHLP_LINE pack=8
+  SizeOfStruct DWORD
+  Key PVOID
+  LineNumber DWORD
+  FileName PTSTR
+  Address DWORD
+
+pointer PIMAGEHLP_LINE IMAGEHLP_LINE
+
+struct IMAGEHLP_LINE64 pack=8
+  SizeOfStruct DWORD
+  Key PVOID
+  LineNumber DWORD
+  FileName PCHAR
+  Address DWORD64
+
+pointer PIMAGEHLP_LINE64 IMAGEHLP_LINE64
+
+struct IMAGEHLP_LINEW64 pack=8
+  SizeOfStruct DWORD
+  Key PVOID
+  LineNumber DWORD
+  FileName PWSTR
+  Address DWORD64
+
+pointer PIMAGEHLP_LINEW64 IMAGEHLP_LINEW64
+
+struct OMAP pack=8
+  rva ULONG
+  rvaTo ULONG
+
+pointer POMAP OMAP
+
+pointer POMAP* POMAP
+
+enum IMAGEHLP_SYMBOL_TYPE_INFO UINT
+  TI_GET_SYMTAG                   0
+  TI_GET_SYMNAME                  1
+  TI_GET_LENGTH                   2
+  TI_GET_TYPE                     3
+  TI_GET_TYPEID                   4
+  TI_GET_BASETYPE                 5
+  TI_GET_ARRAYINDEXTYPEID         6
+  TI_FINDCHILDREN                 7
+  TI_GET_DATAKIND                 8
+  TI_GET_ADDRESSOFFSET            9
+  TI_GET_OFFSET                   10
+  TI_GET_VALUE                    11
+  TI_GET_COUNT                    12
+  TI_GET_CHILDRENCOUNT            13
+  TI_GET_BITPOSITION              14
+  TI_GET_VIRTUALBASECLASS         15
+  TI_GET_VIRTUALTABLESHAPEID      16
+  TI_GET_VIRTUALBASEPOINTEROFFSET 17
+  TI_GET_CLASSPARENTID            18
+  TI_GET_NESTED                   19
+  TI_GET_SYMINDEX                 20
+  TI_GET_LEXICALPARENT            21
+  TI_GET_ADDRESS                  22
+  TI_GET_THISADJUST               23
+  TI_GET_UDTKIND                  24
+  TI_IS_EQUIV_TO                  25
+  TI_GET_CALLING_CONVENTION       26
+  TI_IS_CLOSE_EQUIV_TO            27
+  TI_GTIEX_REQS_VALID             28
+  TI_GET_VIRTUALBASEOFFSET        29
+  TI_GET_VIRTUALBASEDISPINDEX     30
+  TI_GET_IS_REFERENCE             31
+
+pointer IMAGEHLP_SYMBOL_TYPE_INFO* IMAGEHLP_SYMBOL_TYPE_INFO
+
+struct IMAGEHLP_GET_TYPE_INFO_PARAMS pack=8
+  SizeOfStruct ULONG
+  Flags ULONG
+  NumIds ULONG
+  TypeIds PULONG
+  TagFilter ULONG64
+  NumReqs ULONG
+  ReqKinds IMAGEHLP_SYMBOL_TYPE_INFO*
+  ReqOffsets PULONG_PTR
+  ReqSizes PULONG
+  ReqStride ULONG_PTR
+  BufferSize ULONG_PTR
+  Buffer PVOID
+  EntriesMatched ULONG
+  EntriesFilled ULONG
+  TagsFound ULONG64
+  AllReqsValid ULONG64
+  NumReqsValid ULONG
+  ReqsValid PULONG64
+
+pointer PIMAGEHLP_GET_TYPE_INFO_PARAMS IMAGEHLP_GET_TYPE_INFO_PARAMS
+
+struct MODLOAD_DATA pack=8
+  ssize DWORD
+  ssig DWORD
+  data PVOID
+  size DWORD
+  flags DWORD
+
+pointer PMODLOAD_DATA MODLOAD_DATA
+
+struct MINIDUMP_LOCATION_DESCRIPTOR pack=4
+  DataSize ULONG32
+  Rva RVA
+
+struct MINIDUMP_DIRECTORY pack=4
+  StreamType ULONG32
+  Location MINIDUMP_LOCATION_DESCRIPTOR
+
+pointer PMINIDUMP_DIRECTORY MINIDUMP_DIRECTORY
+
+pointer PMINIDUMP_DIRECTORY* PMINIDUMP_DIRECTORY
+
+struct MINIDUMP_EXCEPTION_INFORMATION pack=4
+  ThreadId DWORD
+  ExceptionPointers PEXCEPTION_POINTERS
+  ClientPointers BOOL
+
+pointer PMINIDUMP_EXCEPTION_INFORMATION MINIDUMP_EXCEPTION_INFORMATION
+
+struct MINIDUMP_USER_STREAM pack=4
+  Type ULONG32
+  BufferSize ULONG
+  Buffer PVOID
+
+pointer PMINIDUMP_USER_STREAM MINIDUMP_USER_STREAM
+
+struct MINIDUMP_USER_STREAM_INFORMATION pack=4
+  UserStreamCount ULONG
+  UserStreamArray PMINIDUMP_USER_STREAM
+
+pointer PMINIDUMP_USER_STREAM_INFORMATION MINIDUMP_USER_STREAM_INFORMATION
+
+struct MINIDUMP_CALLBACK_INFORMATION pack=4
+  CallbackRoutine MINIDUMP_CALLBACK_ROUTINE
+  CallbackParam PVOID
+
+pointer PMINIDUMP_CALLBACK_INFORMATION MINIDUMP_CALLBACK_INFORMATION
+
+enum SYM_TYPE UINT
+  SymNone     0
+  SymCoff     1
+  SymCv       2
+  SymPdb      3
+  SymExport   4
+  SymDeferred 5
+  SymSym      6
+  SymDia      7
+  SymVirtual  8
+
+struct IMAGEHLP_MODULE pack=8
+  SizeOfStruct DWORD
+  BaseOfImage DWORD
+  ImageSize DWORD
+  TimeDateStamp DWORD
+  CheckSum DWORD
+  NumSyms DWORD
+  SymType SYM_TYPE
+  ModuleName "TCHAR [32]"
+  ImageName "TCHAR [256]"
+  LoadedImageName "TCHAR [256]"
+
+pointer PIMAGEHLP_MODULE IMAGEHLP_MODULE
+
+struct IMAGEHLP_MODULE64 pack=8
+  SizeOfStruct DWORD
+  BaseOfImage DWORD64
+  ImageSize DWORD
+  TimeDateStamp DWORD
+  CheckSum DWORD
+  NumSyms DWORD
+  SymType SYM_TYPE
+  ModuleName "CHAR [32]"
+  ImageName "CHAR [256]"
+  LoadedImageName "CHAR [256]"
+  LoadedPdbName "CHAR [256]"
+  CVSig DWORD
+  CVData "CHAR [MAX_PATH * 3]"
+  PdbSig DWORD
+  PdbSig70 GUID
+  PdbAge DWORD
+  PdbUnmatched BOOL
+  DbgUnmatched BOOL
+  LineNumbers BOOL
+  GlobalSymbols BOOL
+  TypeInfo BOOL
+  SourceIndexed BOOL
+  Publics BOOL
+  MachineType [IMAGE_FILE_MACHINE]
+  Reserved DWORD
+
+pointer PIMAGEHLP_MODULE64 IMAGEHLP_MODULE64
+
+struct IMAGEHLP_MODULEW64 pack=8
+  SizeOfStruct DWORD
+  BaseOfImage DWORD64
+  ImageSize DWORD
+  TimeDateStamp DWORD
+  CheckSum DWORD
+  NumSyms DWORD
+  SymType SYM_TYPE
+  ModuleName "WCHAR [32]"
+  ImageName "WCHAR [256]"
+  LoadedImageName "WCHAR [256]"
+  LoadedPdbName "WCHAR [256]"
+  CVSig DWORD
+  CVData "WCHAR [MAX_PATH * 3]"
+  PdbSig DWORD
+  PdbSig70 GUID
+  PdbAge DWORD
+  PdbUnmatched BOOL
+  DbgUnmatched BOOL
+  LineNumbers BOOL
+  GlobalSymbols BOOL
+  TypeInfo BOOL
+  SourceIndexed BOOL
+  Publics BOOL
+  MachineType [IMAGE_FILE_MACHINE]
+  Reserved DWORD
+
+pointer PIMAGEHLP_MODULEW64 IMAGEHLP_MODULEW64
+
+enum ADDRESS_MODE UINT
+  AddrMode1616 0
+  AddrMode1632 1
+  AddrModeReal 2
+  AddrModeFlat 3
+
+struct ADDRESS pack=8
+  Offset DWORD
+  Segment WORD
+  Mode ADDRESS_MODE
+
+struct ADDRESS64 pack=8
+  Offset DWORD64
+  Segment WORD
+  Mode ADDRESS_MODE
+
+struct KDHELP pack=8
+  Thread DWORD
+  ThCallbackStack DWORD
+  NextCallback DWORD
+  FramePointer DWORD
+  KiCallUserMode DWORD
+  KeUserCallbackDispatcher DWORD
+  SystemRangeStart DWORD
+  ThCallbackBStore DWORD
+  KiUserExceptionDispatcher DWORD
+  StackBase DWORD
+  StackLimit DWORD
+  Reserved "DWORD [5]"
+
+struct KDHELP64 pack=8
+  Thread DWORD64
+  ThCallbackStack DWORD
+  ThCallbackBStore DWORD
+  NextCallback DWORD
+  FramePointer DWORD
+  KiCallUserMode DWORD64
+  KeUserCallbackDispatcher DWORD64
+  SystemRangeStart DWORD64
+  KiUserExceptionDispatcher DWORD64
+  StackBase DWORD64
+  StackLimit DWORD64
+  Reserved "DWORD64 [5]"
+
+struct STACKFRAME pack=8
+  AddrPC ADDRESS
+  AddrReturn ADDRESS
+  AddrFrame ADDRESS
+  AddrStack ADDRESS
+  FuncTableEntry PVOID
+  Params "DWORD [4]"
+  Far BOOL
+  Virtual BOOL
+  Reserved "DWORD [3]"
+  KdHelp KDHELP
+  AddrBStore ADDRESS
+
+pointer LPSTACKFRAME STACKFRAME
+
+struct STACKFRAME64 pack=8
+  AddrPC ADDRESS64
+  AddrReturn ADDRESS64
+  AddrFrame ADDRESS64
+  AddrStack ADDRESS64
+  AddrBStore ADDRESS64
+  FuncTableEntry PVOID
+  Params "DWORD64 [4]"
+  Far BOOL
+  Virtual BOOL
+  Reserved "DWORD64 [3]"
+  KdHelp KDHELP64
+
+pointer LPSTACKFRAME64 STACKFRAME64
+
+struct IMAGEHLP_STACK_FRAME pack=8
+  InstructionOffset ULONG64
+  ReturnOffset ULONG64
+  FrameOffset ULONG64
+  StackOffset ULONG64
+  BackingStoreOffset ULONG64
+  FuncTableEntry ULONG64
+  Params "ULONG64 [4]"
+  Reserved "ULONG64 [5]"
+  Virtual BOOL
+  Reserved2 ULONG
+
+pointer PIMAGEHLP_STACK_FRAME IMAGEHLP_STACK_FRAME
+
+flag [SYMFLAG] ULONG display=ULONG
+  SYMFLAG_VALUEPRESENT 0x00000001
+  SYMFLAG_REGISTER     0x00000008
+  SYMFLAG_REGREL       0x00000010
+  SYMFLAG_FRAMEREL     0x00000020
+  SYMFLAG_PARAMETER    0x00000040
+  SYMFLAG_LOCAL        0x00000080
+  SYMFLAG_CONSTANT     0x00000100
+  SYMFLAG_EXPORT       0x00000200
+  SYMFLAG_FORWARDER    0x00000400
+  SYMFLAG_FUNCTION     0x00000800
+  SYMFLAG_VIRTUAL      0x00001000
+  SYMFLAG_THUNK        0x00002000
+  SYMFLAG_TLSREL       0x00004000
+  SYMFLAG_SLOT         0x00008000
+  SYMFLAG_ILREL        0x00010000
+  SYMFLAG_METADATA     0x00020000
+  SYMFLAG_CLR_TOKEN    0x00040000
+  SYMFLAG_RESET        0x80000000
+
+struct SYMBOL_INFO pack=8
+  SizeOfStruct ULONG
+  TypeIndex ULONG
+  Reserved "ULONG64 [2]"
+  Index ULONG
+  Size ULONG
+  ModBase ULONG64
+  Flags [SYMFLAG]
+  Value ULONG64
+  Address ULONG64
+  Register ULONG
+  Scope ULONG
+  Tag [SymTagEnum_ULONG]
+  NameLen ULONG
+  MaxNameLen ULONG
+  Name "TCHAR [1]"
+
+pointer PSYMBOL_INFO SYMBOL_INFO
+
+struct IMAGEHLP_SYMBOL pack=8
+  SizeOfStruct DWORD
+  Address DWORD
+  Size DWORD
+  Flags DWORD
+  MaxNameLength DWORD
+  Name "CHAR [1]"
+
+pointer PIMAGEHLP_SYMBOL IMAGEHLP_SYMBOL
+
+struct IMAGEHLP_SYMBOL64 pack=8
+  SizeOfStruct DWORD
+  Address DWORD64
+  Size DWORD
+  Flags DWORD
+  MaxNameLength DWORD
+  Name "TCHAR [1]"
+
+pointer PIMAGEHLP_SYMBOL64 IMAGEHLP_SYMBOL64
+
+struct SYMSRV_INDEX_INFO pack=8
+  sizeofstruct DWORD
+  file "TCHAR [MAX_PATH + 1]"
+  stripped BOOL
+  timestamp DWORD
+  size DWORD
+  dbgfile "TCHAR [MAX_PATH + 1]"
+  pdbfile "TCHAR [MAX_PATH + 1]"
+  guid GUID
+  sig DWORD
+  age DWORD
+
+pointer PSYMSRV_INDEX_INFO SYMSRV_INDEX_INFO
+
+struct IMAGE_FUNCTION_ENTRY
+  StartingAddress DWORD
+  EndingAddress DWORD
+  EndOfPrologue DWORD
+
+pointer PIMAGE_FUNCTION_ENTRY IMAGE_FUNCTION_ENTRY
+
+struct IMAGE_COFF_SYMBOLS_HEADER
+  NumberOfSymbols DWORD
+  LvaToFirstSymbol DWORD
+  NumberOfLinenumbers DWORD
+  LvaToFirstLinenumber DWORD
+  RvaToFirstByteOfCode DWORD
+  RvaToLastByteOfCode DWORD
+  RvaToFirstByteOfData DWORD
+  RvaToLastByteOfData DWORD
+
+pointer PIMAGE_COFF_SYMBOLS_HEADER IMAGE_COFF_SYMBOLS_HEADER
+
+enum [IMAGE_DEBUG_TYPE] DWORD display=DWORD
+  IMAGE_DEBUG_TYPE_UNKNOWN       0
+  IMAGE_DEBUG_TYPE_COFF          1
+  IMAGE_DEBUG_TYPE_CODEVIEW      2
+  IMAGE_DEBUG_TYPE_FPO           3
+  IMAGE_DEBUG_TYPE_MISC          4
+  IMAGE_DEBUG_TYPE_EXCEPTION     5
+  IMAGE_DEBUG_TYPE_FIXUP         6
+  IMAGE_DEBUG_TYPE_OMAP_TO_SRC   7
+  IMAGE_DEBUG_TYPE_OMAP_FROM_SRC 8
+  IMAGE_DEBUG_TYPE_BORLAND       9
+  IMAGE_DEBUG_TYPE_RESERVED10    10
+  IMAGE_DEBUG_TYPE_CLSID         11
+
+struct IMAGE_DEBUG_DIRECTORY
+  Characteristics DWORD
+  TimeDateStamp DWORD
+  MajorVersion WORD
+  MinorVersion WORD
+  Type [IMAGE_DEBUG_TYPE]
+  SizeOfData DWORD
+  AddressOfRawData DWORD
+  PointerToRawData DWORD
+
+pointer PIMAGE_DEBUG_DIRECTORY IMAGE_DEBUG_DIRECTORY
+
+struct IMAGE_DEBUG_INFORMATION
+  List LIST_ENTRY
+  ReservedSize DWORD
+  ReservedMappedBase PVOID
+  ReservedMachine USHORT
+  ReservedCharacteristics USHORT
+  ReservedCheckSum DWORD
+  ImageBase DWORD
+  SizeOfImage DWORD
+  ReservedNumberOfSections DWORD
+  ReservedSections PIMAGE_SECTION_HEADER
+  ReservedExportedNamesSize DWORD
+  ReservedExportedNames PSTR
+  ReservedNumberOfFunctionTableEntries DWORD
+  ReservedFunctionTableEntries PIMAGE_FUNCTION_ENTRY
+  ReservedLowestFunctionStartingAddress DWORD
+  ReservedHighestFunctionEndingAddress DWORD
+  ReservedNumberOfFpoTableEntries DWORD
+  ReservedFpoTableEntries PFPO_DATA
+  SizeOfCoffSymbols DWORD
+  CoffSymbols PIMAGE_COFF_SYMBOLS_HEADER
+  ReservedSizeOfCodeViewSymbols DWORD
+  ReservedCodeViewSymbols PVOID
+  ImageFilePath PSTR
+  ImageFileName PSTR
+  ReservedDebugFilePath PSTR
+  ReservedTimeDateStamp DWORD
+  ReservedRomImage BOOL
+  ReservedDebugDirectory PIMAGE_DEBUG_DIRECTORY
+  ReservedNumberOfDebugDirectories DWORD
+  ReservedOriginalFunctionTableBaseAddress DWORD
+  Reserved "DWORD [2]"
+
+pointer PIMAGE_DEBUG_INFORMATION IMAGE_DEBUG_INFORMATION
+
+flag [UNDNAME_FLAGS] DWORD display=DWORD
+  UNDNAME_COMPLETE               0x0000
+  UNDNAME_NO_LEADING_UNDERSCORES 0x0001
+  UNDNAME_NO_MS_KEYWORDS         0x0002
+  UNDNAME_NO_FUNCTION_RETURNS    0x0004
+  UNDNAME_NO_ALLOCATION_MODEL    0x0008
+  UNDNAME_NO_ALLOCATION_LANGUAGE 0x0010
+  UNDNAME_NO_MS_THISTYPE         0x0020
+  UNDNAME_NO_CV_THISTYPE         0x0040
+  UNDNAME_NO_THISTYPE            0x0060
+  UNDNAME_NO_ACCESS_SPECIFIERS   0x0080
+  UNDNAME_NO_THROW_SIGNATURES    0x0100
+  UNDNAME_NO_MEMBER_TYPE         0x0200
+  UNDNAME_NO_RETURN_UDT_MODEL    0x0400
+  UNDNAME_32_BIT_DECODE          0x0800
+  UNDNAME_NAME_ONLY              0x1000
+  UNDNAME_NO_ARGUMENTS           0x2000
+  UNDNAME_NO_SPECIAL_SYMS        0x4000
+
+flag [ESLFLAG] DWORD display=DWORD
+  ESLFLAG_FULLPATH 0x1
+  ESLFLAG_NEAREST  0x2
+  ESLFLAG_PREV     0x4
+  ESLFLAG_NEXT     0x8
+
+flag [SSRVOPT] DWORD display=DWORD
+  SSRVOPT_CALLBACK           0x00000001
+  SSRVOPT_DWORD              0x00000002
+  SSRVOPT_DWORDPTR           0x00000004
+  SSRVOPT_GUIDPTR            0x00000008
+  SSRVOPT_OLDGUIDPTR         0x00000010
+  SSRVOPT_UNATTENDED         0x00000020
+  SSRVOPT_GETPATH            0x00000040
+  SSRVOPT_NOCOPY             0x00000040
+  SSRVOPT_PARENTWIN          0x00000080
+  SSRVOPT_PARAMTYPE          0x00000100
+  SSRVOPT_SECURE             0x00000200
+  SSRVOPT_TRACE              0x00000400
+  SSRVOPT_SETCONTEXT         0x00000800
+  SSRVOPT_PROXY              0x00001000
+  SSRVOPT_DOWNSTREAM_STORE   0x00002000
+  SSRVOPT_OVERWRITE          0x00004000
+  SSRVOPT_RESETTOU           0x00008000
+  SSRVOPT_CALLBACKW          0x00010000
+  SSRVOPT_FLAT_DEFAULT_STORE 0x00020000
+  SSRVOPT_PROXYW             0x00040000
+  SSRVOPT_MESSAGE            0x00080000
+  SSRVOPT_SERVICE            0x00100000
+  SSRVOPT_FAVOR_COMPRESSED   0x00200000
+  SSRVOPT_STRING             0x00400000
+  SSRVOPT_WINHTTP            0x00800000
+  SSRVOPT_WININET            0x01000000
+
+flag [SYMSEARCH_FLAGS] DWORD display=DWORD
+  SYMSEARCH_MASKOBJS    0x01
+  SYMSEARCH_RECURSE     0X02
+  SYMSEARCH_GLOBALSONLY 0X04
+  SYMSEARCH_ALLITEMS    0X08
+
+flag [SYMOPT_FLAGS] DWORD display=DWORD
+  SYMOPT_CASE_INSENSITIVE          0x00000001
+  SYMOPT_UNDNAME                   0x00000002
+  SYMOPT_DEFERRED_LOADS            0x00000004
+  SYMOPT_NO_CPP                    0x00000008
+  SYMOPT_LOAD_LINES                0x00000010
+  SYMOPT_OMAP_FIND_NEAREST         0x00000020
+  SYMOPT_LOAD_ANYTHING             0x00000040
+  SYMOPT_IGNORE_CVREC              0x00000080
+  SYMOPT_NO_UNQUALIFIED_LOADS      0x00000100
+  SYMOPT_FAIL_CRITICAL_ERRORS      0x00000200
+  SYMOPT_EXACT_SYMBOLS             0x00000400
+  SYMOPT_ALLOW_ABSOLUTE_SYMBOLS    0x00000800
+  SYMOPT_IGNORE_NT_SYMPATH         0x00001000
+  SYMOPT_INCLUDE_32BIT_MODULES     0x00002000
+  SYMOPT_PUBLICS_ONLY              0x00004000
+  SYMOPT_NO_PUBLICS                0x00008000
+  SYMOPT_AUTO_PUBLICS              0x00010000
+  SYMOPT_NO_IMAGE_SEARCH           0x00020000
+  SYMOPT_SECURE                    0x00040000
+  SYMOPT_NO_PROMPTS                0x00080000
+  SYMOPT_OVERWRITE                 0x00100000
+  SYMOPT_IGNORE_IMAGEDIR           0x00200000
+  SYMOPT_FLAT_DIRECTORY            0x00400000
+  SYMOPT_FAVOR_COMPRESSED          0x00800000
+  SYMOPT_ALLOW_ZERO_ADDRESS        0x01000000
+  SYMOPT_DISABLE_SYMSRV_AUTODETECT 0x02000000
+  SYMOPT_DEBUG                     0x80000000
+
+func EnumDirTree bothCharset nameA=EnumDirTree
+  BOOL
+  hProcess [ProcessHandle]
+  RootPath PCTSTR
+  InputPathName PCTSTR
+  OutputPathBuffer PTSTR
+  Callback PENUMDIRTREE_CALLBACK
+  CallbackData PVOID
+
+func ImagehlpApiVersion
+  success NotEqual=0
+  LPAPI_VERSION
+
+func ImagehlpApiVersionEx
+  success NotEqual=0
+  LPAPI_VERSION
+  AppVersion LPAPI_VERSION
+
+func MakeSureDirectoryPathExists
+  BOOL
+  DirPath PCSTR
+
+func SearchTreeForFile bothCharset nameA=SearchTreeForFile
+  BOOL
+  RootPath PCTSTR
+  InputPathName PCTSTR
+  OutputPathBuffer PTSTR
+
+func EnumerateLoadedModules
+  BOOL
+  hProcess [ProcessHandle]
+  EnumLoadedModulesCallback PENUMLOADED_MODULES_CALLBACK
+  UserContext PVOID
+
+func EnumerateLoadedModules64
+  BOOL
+  hProcess [ProcessHandle]
+  EnumLoadedModulesCallback PENUMLOADED_MODULES_CALLBACK64
+  UserContext PVOID
+
+func EnumerateLoadedModulesW64
+  BOOL
+  hProcess [ProcessHandle]
+  EnumLoadedModulesCallback PENUMLOADED_MODULES_CALLBACKW64
+  UserContext PVOID
+
+func EnumerateLoadedModulesEx bothCharset nameA=EnumerateLoadedModulesEx
+  BOOL
+  hProcess [ProcessHandle]
+  EnumLoadedModulesCallback PENUMLOADED_MODULES_CALLBACK64
+  UserContext PVOID
+
+func FindDebugInfoFile
+  success NotEqual=0
+  HANDLE
+  FileName PCSTR
+  SymbolPath PCSTR
+  DebugFilePath PSTR
+
+func FindDebugInfoFileEx bothCharset nameA=FindDebugInfoFileEx
+  success NotEqual=0
+  HANDLE
+  FileName PCTSTR
+  SymbolPath PCTSTR
+  DebugFilePath PTSTR
+  Callback PFIND_DEBUG_FILE_CALLBACK
+  CallerData PVOID
+
+func FindExecutableImage
+  success NotEqual=0
+  HANDLE
+  FileName PCSTR
+  SymbolPath PCSTR
+  ImageFilePath PSTR outputOnly
+
+func FindExecutableImageEx bothCharset nameA=FindExecutableImageEx
+  success NotEqual=0
+  HANDLE
+  FileName PCTSTR
+  SymbolPath PCTSTR
+  ImageFilePath PTSTR
+  Callback PFIND_EXE_FILE_CALLBACK
+  CallerData PVOID
+
+func StackWalk
+  BOOL
+  MachineType [IMAGE_FILE_MACHINE]
+  hProcess [ProcessHandle]
+  hThread [ThreadHandle]
+  StackFrame LPSTACKFRAME
+  ContextRecord PVOID
+  ReadMemoryRoutine PREAD_PROCESS_MEMORY_ROUTINE
+  FunctionTableAccessRoutine PFUNCTION_TABLE_ACCESS_ROUTINE
+  GetModuleBaseRoutine PGET_MODULE_BASE_ROUTINE
+  TranslateAddress PTRANSLATE_ADDRESS_ROUTINE
+
+func StackWalk64
+  BOOL
+  MachineType [IMAGE_FILE_MACHINE]
+  hProcess [ProcessHandle]
+  hThread [ThreadHandle]
+  StackFrame LPSTACKFRAME64
+  ContextRecord PVOID
+  ReadMemoryRoutine PREAD_PROCESS_MEMORY_ROUTINE64
+  FunctionTableAccessRoutine PFUNCTION_TABLE_ACCESS_ROUTINE64
+  GetModuleBaseRoutine PGET_MODULE_BASE_ROUTINE64
+  TranslateAddress PTRANSLATE_ADDRESS_ROUTINE64
+
+func SymSetParentWindow
+  BOOL
+  hwnd HWND
+
+func UnDecorateSymbolName bothCharset nameA=UnDecorateSymbolName
+  success NotEqual=0
+  DWORD
+  DecoratedName PCTSTR
+  UnDecoratedName PTSTR
+  UndecoratedLength DWORD
+  Flags [UNDNAME_FLAGS]
+
+func GetTimestampForLoadedLibrary
+  success NotEqual=0
+  DWORD
+  ImageBase HMODULE
+
+func ImageDirectoryEntryToData
+  success NotEqual=0
+  PVOID
+  Base PVOID
+  MappedAsImage BOOLEAN
+  DirectoryEntry USHORT
+  Size PULONG
+
+func ImageDirectoryEntryToDataEx
+  success NotEqual=0
+  PVOID
+  Base PVOID
+  MappedAsImage BOOLEAN
+  DirectoryEntry USHORT
+  Size PULONG
+  FoundHeader PIMAGE_SECTION_HEADER*
+
+func ImageNtHeader
+  success NotEqual=0
+  PIMAGE_NT_HEADERS
+  ImageBase PVOID
+
+func ImageRvaToSection
+  success NotEqual=0
+  PIMAGE_SECTION_HEADER
+  NtHeaders PIMAGE_NT_HEADERS
+  Base PVOID
+  Rva ULONG
+
+func ImageRvaToVa
+  success NotEqual=0
+  PVOID
+  NtHeaders PIMAGE_NT_HEADERS
+  Base PVOID
+  Rva ULONG
+  LastRvaSection PIMAGE_SECTION_HEADER*
+
+func SymAddSourceStream
+  BOOL
+  hProcess [ProcessHandle]
+  Base ULONG64
+  StreamFile PCSTR
+  Buffer PBYTE
+  Size size_t
+
+func SymAddSourceStream bothCharset
+  BOOL
+  hProcess [ProcessHandle]
+  Base ULONG64
+  StreamFile PCTSTR
+  Buffer PBYTE
+  Size size_t
+
+func SymAddSymbol bothCharset nameA=SymAddSymbol
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  Name PCTSTR
+  Address DWORD64
+  Size DWORD
+  Flags DWORD
+
+func SymCleanup
+  BOOL
+  hProcess [ProcessHandle]
+
+func SymDeleteSymbol bothCharset nameA=SymDeleteSymbol
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  Name PCTSTR
+  Address DWORD64
+  Flags DWORD
+
+func SymEnumLines bothCharset nameA=SymEnumLines
+  BOOL
+  hProcess [ProcessHandle]
+  Base ULONG64
+  Obj PCTSTR
+  File PCTSTR
+  EnumLinesCallback PSYM_ENUMLINES_CALLBACK
+  UserContext PVOID
+
+func SymEnumProcesses
+  BOOL
+  EnumProcessesCallback PSYM_ENUMPROCESSES_CALLBACK
+  UserContext PVOID
+
+func SymEnumSourceFiles bothCharset nameA=SymEnumSourceFiles
+  BOOL
+  hProcess [ProcessHandle]
+  ModBase ULONG64
+  Mask PCTSTR
+  EnumSymbolsCallback PSYM_ENUMSOURCEFILES_CALLBACK
+  UserContext PVOID
+
+func SymEnumSourceFileTokens bothCharset nameA=SymEnumSourceFileTokens
+  BOOL
+  hProcess [ProcessHandle]
+  Base ULONG64
+  Callback PENUMSOURCEFILETOKENSCALLBACK
+
+func SymEnumSourceLines bothCharset nameA=SymEnumSourceLines
+  BOOL
+  hProcess [ProcessHandle]
+  Base ULONG64
+  Obj PCTSTR
+  File PCTSTR
+  Line DWORD
+  Flags [ESLFLAG]
+  EnumLinesCallback PSYM_ENUMLINES_CALLBACK
+  UserContext PVOID
+
+func SymEnumSymbols bothCharset nameA=SymEnumSymbols
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  Mask PCTSTR
+  EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACK
+  UserContext "const PVOID"
+
+func SymEnumSymbolsForAddr bothCharset nameA=SymEnumSymbolsForAddr
+  BOOL
+  hProcess [ProcessHandle]
+  Address DWORD64
+  EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACK
+  UserContext PVOID
+
+func SymEnumTypes bothCharset nameA=SymEnumTypes
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACK
+  UserContext PVOID
+
+func SymEnumTypesByName bothCharset nameA=SymEnumTypesByName
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  mask PCSTR
+  EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACK
+  UserContext PVOID
+
+func SymFindDebugInfoFile bothCharset nameA=SymFindDebugInfoFile
+  success NotEqual=0
+  HANDLE
+  hProcess [ProcessHandle]
+  FileName PCTSTR
+  DebugFilePath PTSTR
+  Callback PFIND_DEBUG_FILE_CALLBACK
+  CallerData PVOID
+
+func SymFindExecutableImage bothCharset nameA=SymFindExecutableImage
+  success NotEqual=0
+  HANDLE
+  hProcess [ProcessHandle]
+  FileName PCTSTR
+  ImageFilePath PTSTR
+  Callback PFIND_EXE_FILE_CALLBACK
+  CallerData PVOID
+
+func SymFindFileInPath bothCharset nameA=SymFindFileInPath
+  BOOL
+  hProcess [ProcessHandle]
+  SearchPath PCTSTR
+  FileName PCTSTR
+  id PVOID
+  two DWORD
+  three DWORD
+  flags [SSRVOPT]
+  FilePath PTSTR
+  callback PFINDFILEINPATHCALLBACK
+  context PVOID
+
+func SymFromAddr bothCharset nameA=SymFromAddr
+  BOOL
+  hProcess [ProcessHandle]
+  Address DWORD64
+  Displacement PDWORD64
+  Symbol PSYMBOL_INFO
+
+func SymFromIndex bothCharset nameA=SymFromIndex
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  Index DWORD
+  Symbol PSYMBOL_INFO
+
+func SymFromName bothCharset nameA=SymFromName
+  BOOL
+  hProcess [ProcessHandle]
+  Name PCTSTR
+  Symbol PSYMBOL_INFO
+
+func SymFromToken bothCharset nameA=SymFromToken
+  BOOL
+  hProcess [ProcessHandle]
+  Base DWORD64
+  Token DWORD
+  Symbol PSYMBOL_INFO
+
+func SymFunctionTableAccess
+  success NotEqual=0
+  PVOID
+  hProcess [ProcessHandle]
+  AddrBase DWORD
+
+func SymFunctionTableAccess64
+  success NotEqual=0
+  PVOID
+  hProcess [ProcessHandle]
+  AddrBase DWORD64
+
+func SymGetFileLineOffsets64
+  success NotEqual=0
+  ULONG
+  hProcess [ProcessHandle]
+  ModuleName PCSTR
+  FileName PCSTR
+  Buffer PDWORD64
+  BufferLines ULONG
+
+func SymGetHomeDirectory bothCharset nameA=SymGetHomeDirectory
+  success NotEqual=0
+  PTCHAR
+  type DWORD
+  dir PTSTR
+  size size_t
+
+func SymGetLineFromAddr bothCharset nameA=SymGetLineFromAddr
+  BOOL
+  hProcess [ProcessHandle]
+  dwAddr DWORD
+  pdwDisplacement PDWORD
+  Line PIMAGEHLP_LINE
+
+func SymGetLineFromAddr64
+  BOOL
+  hProcess [ProcessHandle]
+  dwAddr DWORD64
+  pdwDisplacement PDWORD
+  Line PIMAGEHLP_LINE64
+
+func SymGetLineFromAddrW64
+  BOOL
+  hProcess [ProcessHandle]
+  dwAddr DWORD64
+  pdwDisplacement PDWORD
+  Line PIMAGEHLP_LINEW64
+
+func SymGetLineFromName
+  BOOL
+  hProcess [ProcessHandle]
+  ModuleName PCSTR
+  FileName PCSTR
+  dwLineNumber DWORD
+  plDisplacement PLONG
+  Line PIMAGEHLP_LINE
+
+func SymGetLineFromName64
+  BOOL
+  hProcess [ProcessHandle]
+  ModuleName PCSTR
+  FileName PCSTR
+  dwLineNumber DWORD
+  lpDisplacement PLONG
+  Line PIMAGEHLP_LINE64
+
+func SymGetLineFromNameW64
+  BOOL
+  hProcess [ProcessHandle]
+  ModuleName PCWSTR
+  FileName PCWSTR
+  dwLineNumber DWORD
+  lpDisplacement PLONG
+  Line PIMAGEHLP_LINEW64
+
+func SymGetLineNext bothCharset nameA=SymGetLineNext
+  BOOL
+  hProcess [ProcessHandle]
+  Line PIMAGEHLP_LINE
+
+func SymGetLineNext64
+  BOOL
+  hProcess [ProcessHandle]
+  Line PIMAGEHLP_LINE64
+
+func SymGetLineNextW64
+  BOOL
+  hProcess [ProcessHandle]
+  Line PIMAGEHLP_LINEW64
+
+func SymGetLinePrev bothCharset nameA=SymGetLinePrev
+  BOOL
+  hProcess [ProcessHandle]
+  Line PIMAGEHLP_LINE
+
+func SymGetLinePrev64
+  BOOL
+  hProcess [ProcessHandle]
+  Line PIMAGEHLP_LINE64
+
+func SymGetLinePrevW64
+  BOOL
+  hProcess [ProcessHandle]
+  Line PIMAGEHLP_LINEW64
+
+func SymGetModuleBase
+  success NotEqual=0
+  DWORD
+  hProcess [ProcessHandle]
+  dwAddr DWORD
+
+func SymGetModuleBase64
+  success NotEqual=0
+  DWORD64
+  hProcess [ProcessHandle]
+  dwAddr DWORD64
+
+func SymGetModuleInfo bothCharset nameA=SymGetModuleInfo
+  BOOL
+  hProcess [ProcessHandle]
+  dwAddr DWORD
+  ModuleInfo PIMAGEHLP_MODULE
+
+func SymGetModuleInfo64
+  BOOL
+  hProcess [ProcessHandle]
+  dwAddr DWORD64
+  ModuleInfo PIMAGEHLP_MODULE64
+
+func SymGetModuleInfoW64
+  BOOL
+  hProcess [ProcessHandle]
+  dwAddr DWORD64
+  ModuleInfo PIMAGEHLP_MODULEW64
+
+func SymGetOmaps
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  OmapTo POMAP*
+  cOmapTo PDWORD64
+  OmapFrom POMAP*
+  cOmapFrom PDWORD64
+
+func SymGetOptions
+  success NotEqual=0
+  [SYMOPT_FLAGS]
+
+func SymGetScope bothCharset nameA=SymGetScope
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  Index DWORD
+  Symbol PSYMBOL_INFO
+
+func SymGetSearchPath bothCharset nameA=SymGetSearchPath
+  BOOL
+  hProcess [ProcessHandle]
+  SearchPath PTSTR
+  SearchPathLength DWORD
+
+func SymGetSymbolFile bothCharset nameA=SymGetSymbolFile
+  BOOL
+  hProcess [ProcessHandle]
+  SymPath PCTSTR
+  ImageFile PCTSTR
+  Type DWORD
+  SymbolFile PTSTR
+  cSymbolFile size_t
+  DbgFile PTSTR
+  cDbgFile size_t
+
+func SymGetTypeFromName bothCharset nameA=SymGetTypeFromName
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  Name PCTSTR
+  Symbol PSYMBOL_INFO
+
+func SymGetTypeInfo
+  BOOL
+  hProcess [ProcessHandle]
+  ModBase DWORD64
+  TypeId ULONG
+  GetType IMAGEHLP_SYMBOL_TYPE_INFO
+  pInfo PVOID
+
+func SymGetTypeInfoEx
+  BOOL
+  hProcess [ProcessHandle]
+  ModBase DWORD64
+  Params PIMAGEHLP_GET_TYPE_INFO_PARAMS
+
+func SymInitialize bothCharset nameA=SymInitialize
+  BOOL
+  hProcess [ProcessHandle]
+  UserSearchPath PCTSTR
+  fInvadeProcess BOOL
+
+func SymLoadModule
+  success NotEqual=0
+  DWORD
+  hProcess [ProcessHandle]
+  hFile HANDLE
+  ImageName PCSTR
+  ModuleName PCSTR
+  BaseOfDll DWORD
+  SizeOfDll DWORD
+
+func SymLoadModule64
+  success NotEqual=0
+  DWORD64
+  hProcess [ProcessHandle]
+  hFile HANDLE
+  ImageName PCSTR
+  ModuleName PCSTR
+  BaseOfDll DWORD64
+  SizeOfDll DWORD
+
+func SymLoadModuleEx bothCharset nameA=SymLoadModuleEx
+  success NotEqual=0
+  DWORD64
+  hProcess [ProcessHandle]
+  hFile HANDLE
+  ImageName PCTSTR
+  ModuleName PCTSTR
+  BaseOfDll DWORD64
+  DllSize DWORD
+  Data PMODLOAD_DATA
+  Flags DWORD
+
+func SymMatchFileName bothCharset nameA=SymMatchFileName
+  BOOL
+  FileName PCTSTR
+  Match PCTSTR
+  FileNameStop PTSTR*
+  MatchStop PTSTR*
+
+func SymMatchString
+  BOOL
+  string PCSTR
+  expression PCSTR
+  fCase BOOL
+
+func SymMatchString bothCharset
+  BOOL
+  string PCTSTR
+  expression PCTSTR
+  fCase BOOL
+
+func SymNext bothCharset nameA=SymNext
+  BOOL
+  hProcess [ProcessHandle]
+  Symbol PSYMBOL_INFO
+
+func SymPrev bothCharset nameA=SymPrev
+  BOOL
+  hProcess [ProcessHandle]
+  Symbol PSYMBOL_INFO
+
+func SymRefreshModuleList
+  BOOL
+  hProcess [ProcessHandle]
+
+func SymRegisterCallback
+  BOOL
+  hProcess [ProcessHandle]
+  CallbackFunction PSYMBOL_REGISTERED_CALLBACK
+  UserContext PVOID
+
+func SymRegisterCallback64
+  BOOL
+  hProcess [ProcessHandle]
+  CallbackFunction PSYMBOL_REGISTERED_CALLBACK64
+  UserContext ULONG64
+
+func SymRegisterCallbackW64
+  BOOL
+  hProcess [ProcessHandle]
+  CallbackFunction PSYMBOL_REGISTERED_CALLBACKW64
+  UserContext ULONG64
+
+func SymRegisterFunctionEntryCallback
+  BOOL
+  hProcess [ProcessHandle]
+  CallbackFunction PSYMBOL_FUNCENTRY_CALLBACK
+  UserContext PVOID
+
+func SymRegisterFunctionEntryCallback64
+  BOOL
+  hProcess [ProcessHandle]
+  CallbackFunction PSYMBOL_FUNCENTRY_CALLBACK64
+  UserContext ULONG64
+
+func SymSearch bothCharset nameA=SymSearch
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  Index DWORD
+  SymTag DWORD
+  Mask PCTSTR
+  Address DWORD64
+  EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACK
+  UserContext PVOID
+  Options [SYMSEARCH_FLAGS]
+
+func SymSetContext
+  BOOL
+  hProcess [ProcessHandle]
+  StackFrame PIMAGEHLP_STACK_FRAME
+  Context PIMAGEHLP_CONTEXT
+
+func SymSetHomeDirectory bothCharset nameA=SymSetHomeDirectory
+  success NotEqual=0
+  PTCHAR
+  hProcess [ProcessHandle]
+  dir PCTSTR
+
+func SymSetOptions
+  success NotEqual=0
+  DWORD
+  SymOptions [SYMOPT_FLAGS]
+
+func SymSetScopeFromAddr
+  BOOL
+  hProcess [ProcessHandle]
+  Address ULONG64
+
+func SymSetScopeFromIndex
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  Index DWORD
+
+func SymEnumerateModules
+  BOOL
+  hProcess [ProcessHandle]
+  EnumModulesCallback PSYM_ENUMMODULES_CALLBACK
+  UserContext PVOID
+
+func SymEnumerateModules64
+  BOOL
+  hProcess [ProcessHandle]
+  EnumModulesCallback PSYM_ENUMMODULES_CALLBACK64
+  UserContext PVOID
+
+func SymEnumerateModulesW64
+  BOOL
+  hProcess [ProcessHandle]
+  EnumModulesCallback PSYM_ENUMMODULES_CALLBACKW64
+  UserContext PVOID
+
+func SymSetSearchPath bothCharset nameA=SymSetSearchPath
+  BOOL
+  hProcess [ProcessHandle]
+  SearchPath PCTSTR
+
+func SymUnDName
+  BOOL
+  sym PIMAGEHLP_SYMBOL
+  UnDecName PSTR
+  UnDecNameLength DWORD
+
+func SymUnDName64
+  BOOL
+  sym PIMAGEHLP_SYMBOL64
+  UnDecName PSTR
+  UnDecNameLength DWORD
+
+func SymUnloadModule
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll DWORD
+
+func SymUnloadModule64
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll DWORD64
+
+func SymSrvDeltaName bothCharset nameA=SymSrvDeltaName
+  success NotEqual=0
+  PCTSTR
+  hProcess [ProcessHandle]
+  SymPath PCTSTR
+  Type PCTSTR
+  File1 PCTSTR
+  File2 PCTSTR
+
+func SymSrvGetFileIndexes bothCharset nameA=SymSrvGetFileIndexes
+  BOOL
+  File PCTSTR
+  Id GUID*
+  Val1 DWORD*
+  Val2 DWORD*
+  Flags DWORD
+
+func SymSrvGetFileIndexInfo bothCharset nameA=SymSrvGetFileIndexInfo
+  BOOL
+  File PCTSTR
+  Info PSYMSRV_INDEX_INFO
+  Flags DWORD
+
+func SymSrvGetFileIndexString bothCharset nameA=SymSrvGetFileIndexString
+  BOOL
+  hProcess [ProcessHandle]
+  SrvPath PCTSTR
+  File PCTSTR
+  Index PTSTR
+  Size size_t
+  Flags DWORD
+
+func SymSrvGetSupplement bothCharset nameA=SymSrvGetSupplement
+  success NotEqual=0
+  PCTSTR
+  hProcess [ProcessHandle]
+  SymPath PCTSTR
+  Node PCTSTR
+  File PCTSTR
+
+func SymSrvIsStore bothCharset nameA=SymSrvIsStore
+  BOOL
+  hProcess [ProcessHandle]
+  path PCTSTR
+
+func SymSrvStoreFile bothCharset nameA=SymSrvStoreFile
+  success NotEqual=0
+  PCTSTR
+  hProcess [ProcessHandle]
+  SrvPath PCTSTR
+  File PCTSTR
+  Flags DWORD
+
+func SymSrvStoreSupplement bothCharset nameA=SymSrvStoreSupplement
+  success NotEqual=0
+  PCTSTR
+  hProcess [ProcessHandle]
+  SymPath "const PCTSTR"
+  Node PCTSTR
+  File PCTSTR
+  Flags DWORD
+
+func MiniDumpReadDumpStream
+  BOOL
+  BaseOfDump PVOID
+  StreamNumber ULONG
+  Dir PMINIDUMP_DIRECTORY*
+  StreamPointer PVOID*
+  StreamSize ULONG*
+
+func MiniDumpWriteDump
+  BOOL
+  hProcess [ProcessHandle]
+  ProcessId DWORD
+  hFile HANDLE
+  DumpType MINIDUMP_TYPE
+  ExceptionParam PMINIDUMP_EXCEPTION_INFORMATION
+  UserStreamParam PMINIDUMP_USER_STREAM_INFORMATION
+  CallbackParam PMINIDUMP_CALLBACK_INFORMATION
+
+func SymGetSourceFile bothCharset nameA=SymGetSourceFile
+  BOOL
+  hProcess [ProcessHandle]
+  Base ULONG64
+  Params PCTSTR
+  FileSpec PCTSTR
+  FilePath PTSTR
+  Size DWORD
+
+func SymGetSourceFileFromToken bothCharset nameA=SymGetSourceFileFromToken
+  BOOL
+  hProcess [ProcessHandle]
+  Token PVOID
+  Params PCTSTR
+  FilePath PTSTR
+  Size DWORD
+
+func SymGetSourceFileToken bothCharset nameA=SymGetSourceFileToken
+  BOOL
+  hProcess [ProcessHandle]
+  Base ULONG64
+  FileSpec PCTSTR
+  Token PVOID*
+  Size DWORD*
+
+func SymGetSourceVarFromToken bothCharset nameA=SymGetSourceVarFromToken
+  BOOL
+  hProcess [ProcessHandle]
+  Token PVOID
+  Params PCTSTR
+  VarName PCTSTR
+  Value PTSTR
+  Size DWORD
+
+func MapDebugInformation
+  success NotEqual=0
+  PIMAGE_DEBUG_INFORMATION
+  FileHandle HANDLE
+  FileName PCSTR
+  SymbolPath PCSTR
+  ImageBase ULONG
+
+func SymEnumerateSymbols bothCharset nameA=SymEnumerateSymbols
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG
+  EnumSymbolsCallback PSYM_ENUMSYMBOLS_CALLBACK
+  UserContext PVOID
+
+func SymEnumerateSymbols64
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  EnumSymbolsCallback PSYM_ENUMSYMBOLS_CALLBACK64
+  UserContext PVOID
+
+func SymEnumerateSymbolsW64
+  BOOL
+  hProcess [ProcessHandle]
+  BaseOfDll ULONG64
+  EnumSymbolsCallback PSYM_ENUMSYMBOLS_CALLBACKW64
+  UserContext PVOID
+
+func SymGetSymFromAddr
+  BOOL
+  hProcess [ProcessHandle]
+  dwAddr DWORD
+  pdwDisplacement PDWORD
+  Symbol PIMAGEHLP_SYMBOL
+
+func SymGetSymFromAddr64
+  BOOL
+  hProcess [ProcessHandle]
+  Address DWORD64
+  Displacement PDWORD64
+  Symbol PIMAGEHLP_SYMBOL64
+
+func SymGetSymFromName
+  BOOL
+  hProcess [ProcessHandle]
+  Name PCSTR
+  Symbol PIMAGEHLP_SYMBOL
+
+func SymGetSymFromName64
+  BOOL
+  hProcess [ProcessHandle]
+  Name PCSTR
+  Symbol PIMAGEHLP_SYMBOL64
+
+func SymGetSymNext bothCharset nameA=SymGetSymNext
+  BOOL
+  hProcess [ProcessHandle]
+  Symbol PIMAGEHLP_SYMBOL
+
+func SymGetSymNext64
+  BOOL
+  hProcess [ProcessHandle]
+  Symbol PIMAGEHLP_SYMBOL64
+
+func SymGetSymPrev bothCharset nameA=SymGetSymPrev
+  BOOL
+  hProcess [ProcessHandle]
+  Symbol PIMAGEHLP_SYMBOL
+
+func SymGetSymPrev64
+  BOOL
+  hProcess [ProcessHandle]
+  Symbol PIMAGEHLP_SYMBOL64
+
+func UnmapDebugInformation
+  BOOL
+  DebugInfo PIMAGE_DEBUG_INFORMATION
+

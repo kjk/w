@@ -1,0 +1,20 @@
+include Interfaces\BITS\IBackgroundCopyFile2.txt
+
+ingterface IBackgroundCopyFile3 base=IBackgroundCopyFile2 id={659cdeaa-489e-11d9-a9cd-000d56965251} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func GetTemporaryName
+    HRESULT
+    pFilename LPWSTR*
+
+  func SetValidationState
+    HRESULT
+    state BOOL
+
+  func GetValidationState
+    HRESULT
+    pState BOOL*
+
+  func IsDownloadedFromPeer
+    HRESULT
+    pVal BOOL*
+
+

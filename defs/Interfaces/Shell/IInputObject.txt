@@ -1,0 +1,16 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInputObject base=IUnknown id={68284fAA-6A48-11D0-8c78-00C04fd918b4} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func UIActivateIO
+    HRESULT
+    fActivate BOOL
+    pMsg MSG*
+
+  func HasFocusIO
+    HRESULT
+
+  func TranslateAcceleratorIO
+    HRESULT
+    pMsg MSG*
+
+

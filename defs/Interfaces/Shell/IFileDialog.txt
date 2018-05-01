@@ -1,0 +1,98 @@
+include Interfaces\Shell\IModalWindow.txt
+
+ingterface IFileDialog base=IModalWindow id={42f85136-db7e-439c-85f1-e4075d135fc8} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetFileTypes
+    HRESULT
+    cFileTypes UINT
+    rgFilterSpec "const COMDLG_FILTERSPEC*" count=cFileTypes
+
+  func SetFileTypeIndex
+    HRESULT
+    iFileType UINT
+
+  func GetFileTypeIndex
+    HRESULT
+    piFileType UINT*
+
+  func Advise
+    HRESULT
+    pfde IFileDialogEvents*
+    pdwCookie DWORD*
+
+  func Unadvise
+    HRESULT
+    dwCookie DWORD
+
+  func SetOptions
+    HRESULT
+    fos FILEOPENDIALOGOPTIONS
+
+  func GetOptions
+    HRESULT
+    pfos FILEOPENDIALOGOPTIONS*
+
+  func SetDefaultFolder
+    HRESULT
+    psi IShellItem*
+
+  func SetFolder
+    HRESULT
+    psi IShellItem*
+
+  func GetFolder
+    HRESULT
+    ppsi IShellItem**
+
+  func GetCurrentSelection
+    HRESULT
+    ppsi IShellItem**
+
+  func SetFileName
+    HRESULT
+    pszName LPCWSTR
+
+  func GetFileName
+    HRESULT
+    pszName LPWSTR*
+
+  func SetTitle
+    HRESULT
+    pszTitle LPCWSTR
+
+  func SetOkButtonLabel
+    HRESULT
+    pszText LPCWSTR
+
+  func SetFileNameLabel
+    HRESULT
+    pszLabel LPCWSTR
+
+  func GetResult
+    HRESULT
+    ppsi IShellItem**
+
+  func AddPlace
+    HRESULT
+    psi IShellItem*
+    fdap FDAP
+
+  func SetDefaultExtension
+    HRESULT
+    pszDefaultExtension LPCWSTR
+
+  func Close
+    HRESULT
+    hr HRESULT
+
+  func SetClientGuid
+    HRESULT
+    guid REFGUID
+
+  func ClearClientData
+    HRESULT
+
+  func SetFilter
+    HRESULT
+    pFilter IShellItemFilter*
+
+

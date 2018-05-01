@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInitializeWithStream base=IUnknown id={b824b49d-22ac-4161-ac8a-9916e8fa3f7f} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    pstream IStream*
+    grfMode [STGM_FLAGS]
+
+

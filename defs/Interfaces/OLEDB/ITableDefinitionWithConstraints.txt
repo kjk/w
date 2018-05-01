@@ -1,0 +1,29 @@
+include Interfaces\OLEDB\ITableCreation.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ITableDefinitionWithConstraints base=ITableCreation id={0c733aab-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func AddConstraint
+    [OLEDB_HRESULT]
+    pTableID DBID*
+    pConstraintDesc DBCONSTRAINTDESC*
+
+  func CreateTableWithConstraints
+    [OLEDB_HRESULT]
+    pUnkOuter IUnknown*
+    pTableID DBID*
+    cColumnDescs DBORDINAL
+    rgColumnDescs "DBCOLUMNDESC []" count=cColumnDescs
+    cConstraintDescs ULONG
+    rgConstraintDescs "DBCONSTRAINTDESC []" count=cConstraintDescs
+    riid REFIID
+    cPropertySets ULONG
+    rgPropertySets "DBPROPSET []" count=cPropertySets
+    ppTableID DBID**
+    ppRowset IUnknown** interfaceId=riid
+
+  func DropConstraint
+    [OLEDB_HRESULT]
+    pTableID DBID*
+    pConstraintID DBID*
+
+

@@ -1,0 +1,5 @@
+include Interfaces\DirectComposition\DirectComposition.h.txt
+include Interfaces\DirectComposition\IDCompositionEffect.txt
+
+ingterface IDCompositionTransform3D base=IDCompositionEffect id={71185722-246B-41f2-AAD1-0443F7F4BFC2} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectComposition"
+

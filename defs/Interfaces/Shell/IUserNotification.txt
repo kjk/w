@@ -1,0 +1,30 @@
+include Interfaces\IUnknown.txt
+
+ingterface IUserNotification base=IUnknown id={ba9711ba-5893-4787-a7e1-41277151550b} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetBalloonInfo
+    HRESULT
+    pszTitle LPCWSTR
+    pszText LPCWSTR
+    dwInfoFlags DWORD
+
+  func SetBalloonRetry
+    HRESULT
+    dwShowTime DWORD
+    dwInterval DWORD
+    cRetryCount UINT
+
+  func SetIconInfo
+    HRESULT
+    hIcon HICON
+    pszToolTip LPCWSTR
+
+  func Show
+    HRESULT
+    pqc IQueryContinue*
+    dwContinuePollInterval DWORD
+
+  func PlaySound
+    HRESULT
+    pszSoundName LPCWSTR
+
+

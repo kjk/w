@@ -1,0 +1,30 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IMMDeviceEnumerator base=IUnknown id={A95664D2-9614-4F35-A746-DE8DB63617E6} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Multimedia Device"
+  func EnumAudioEndpoints
+    [AUDCLNT_HRESULT]
+    dataFlow EDataFlow
+    dwStateMask DWORD
+    ppDevices IMMDeviceCollection**
+
+  func GetDefaultAudioEndpoint
+    [AUDCLNT_HRESULT]
+    dataFlow EDataFlow
+    role ERole
+    ppEndpoint IMMDevice**
+
+  func GetDevice
+    [AUDCLNT_HRESULT]
+    pwstrId LPCWSTR
+    ppDevice IMMDevice**
+
+  func RegisterEndpointNotificationCallback
+    [AUDCLNT_HRESULT]
+    pClient IMMNotificationClient*
+
+  func UnregisterEndpointNotificationCallback
+    [AUDCLNT_HRESULT]
+    pClient IMMNotificationClient*
+
+

@@ -1,0 +1,52 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3DCryptoSession9 base=IUnknown id={FA0AB799-7A9C-48ca-8C5B-237E71A54434} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func GetCertificateSize
+    HRESULT
+    pCertificateSize UINT*
+
+  func GetCertificate
+    HRESULT
+    CertifacteSize UINT
+    ppCertificate BYTE*
+
+  func NegotiateKeyExchange
+    HRESULT
+    DataSize UINT
+    pData VOID* length=DataSize
+
+  func EncryptionBlt
+    HRESULT
+    pSrcSurface IDirect3DSurface9*
+    pDstSurface IDirect3DSurface9*
+    DstSurfaceSize UINT
+    pIV VOID*
+
+  func DecryptionBlt
+    HRESULT
+    pSrcSurface IDirect3DSurface9*
+    pDstSurface IDirect3DSurface9*
+    SrcSurfaceSize UINT
+    pEncryptedBlockInfo D3DENCRYPTED_BLOCK_INFO*
+    pContentKey VOID*
+    pIV VOID*
+
+  func GetSurfacePitch
+    HRESULT
+    pSrcSurface IDirect3DSurface9*
+    pSurfacePitch UINT*
+
+  func StartSessionKeyRefresh
+    HRESULT
+    pRandomNumber VOID*
+    RandomNumberSize UINT
+
+  func FinishSessionKeyRefresh
+    HRESULT
+
+  func GetEncryptionBltKey
+    HRESULT
+    pReadbackKey VOID*
+    KeySize UINT
+
+

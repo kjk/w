@@ -1,0 +1,67 @@
+include Headers\directx.h.txt
+include Headers\dwrite.h.txt
+include Interfaces\Direct2D\Direct2D.h.txt
+
+dll d2d1.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+func D2D1CreateFactory ordinal=1
+  [D2D_HRESULT]
+  factoryType D2D1_FACTORY_TYPE
+  riid REFIID
+  pFactoryOptions "CONST D2D1_FACTORY_OPTIONS*"
+  ppIFactory void** interfaceId=riid
+
+func D2D1MakeRotateMatrix ordinal=2
+  void
+  angle FLOAT
+  center D2D1_POINT_2F
+  matrix D2D1_MATRIX_3X2_F*
+
+func D2D1MakeSkewMatrix ordinal=3
+  void
+  angleX FLOAT
+  angleY FLOAT
+  center D2D1_POINT_2F
+  matrix D2D1_MATRIX_3X2_F*
+
+func D2D1IsMatrixInvertible ordinal=4
+  BOOL
+  matrix "CONST D2D1_MATRIX_3X2_F*"
+
+func D2D1InvertMatrix ordinal=5
+  BOOL
+  matrix D2D1_MATRIX_3X2_F*
+
+func D2D1ConvertColorSpace ordinal=6
+  D2D1_COLOR_F
+  sourceColorSpace D2D1_COLOR_SPACE
+  destinationColorSpace D2D1_COLOR_SPACE
+  color "CONST D2D1_COLOR_F*"
+
+func D2D1CreateDevice ordinal=7
+  [D2D_HRESULT]
+  dxgiDevice IDXGIDevice*
+  creationProperties "CONST D2D1_CREATION_PROPERTIES*"
+  d2dDevice ID2D1Device**
+
+func D2D1CreateDeviceContext ordinal=8
+  [D2D_HRESULT]
+  dxgiSurface IDXGISurface*
+  creationProperties "CONST D2D1_CREATION_PROPERTIES*"
+  d2dDeviceContext ID2D1DeviceContext**
+
+func D2D1SinCos ordinal=9
+  void
+  angle FLOAT
+  s FLOAT*
+  c FLOAT*
+
+func D2D1Tan ordinal=10
+  FLOAT
+  angle FLOAT
+
+func D2D1Vec3Length ordinal=11
+  FLOAT
+  x FLOAT
+  y FLOAT
+  z FLOAT
+

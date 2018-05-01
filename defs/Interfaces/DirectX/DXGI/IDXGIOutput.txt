@@ -1,0 +1,56 @@
+include Interfaces\DirectX\DXGI\IDXGIObject.txt
+
+ingterface IDXGIOutput base=IDXGIObject id={ae02eedb-c735-4690-8d52-5a8dc20213aa} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func GetDesc
+    HRESULT
+    pDesc DXGI_OUTPUT_DESC*
+
+  func GetDisplayModeList
+    HRESULT
+    EnumFormat DXGI_FORMAT
+    Flags [DXGI_ENUM_MODES_FLAG]
+    pNumModes UINT*
+    pDesc DXGI_MODE_DESC* postCount=pNumModes
+
+  func FindClosestMatchingMode
+    HRESULT
+    pModeToMatch "const DXGI_MODE_DESC*"
+    pClosestMatch DXGI_MODE_DESC*
+    pConcernedDevice IUnknown*
+
+  func WaitForVBlank
+    HRESULT
+
+  func TakeOwnership
+    HRESULT
+    pDevice IUnknown*
+    Exclusive BOOL
+
+  func ReleaseOwnership
+    void
+
+  func GetGammaControlCapabilities
+    HRESULT
+    pGammaCaps DXGI_GAMMA_CONTROL_CAPABILITIES*
+
+  func SetGammaControl
+    HRESULT
+    pArray "const DXGI_GAMMA_CONTROL*"
+
+  func GetGammaControl
+    HRESULT
+    pArray DXGI_GAMMA_CONTROL*
+
+  func SetDisplaySurface
+    HRESULT
+    pScanoutSurface IDXGISurface*
+
+  func GetDisplaySurfaceData
+    HRESULT
+    pDestination IDXGISurface*
+
+  func GetFrameStatistics
+    HRESULT
+    pStats DXGI_FRAME_STATISTICS*
+
+

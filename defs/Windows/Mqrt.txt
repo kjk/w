@@ -1,0 +1,308 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+
+dll Mqrt.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Networking/Message Queuing (MSMQ)"
+interface ITransaction
+
+alias QUEUEHANDLE HANDLE
+
+pointer QUEUEHANDLE* QUEUEHANDLE
+
+alias QUEUEPROPID PROPID
+
+pointer QUEUEPROPID* QUEUEPROPID
+
+alias QMPROPID PROPID
+
+pointer QMPROPID* QMPROPID
+
+alias MGMTPROPID PROPID
+
+pointer MGMTPROPID* MGMTPROPID
+
+alias MSGPROPID PROPID
+
+pointer MSGPROPID* MSGPROPID
+
+alias PMQRECEIVECALLBACK LPVOID
+
+alias MQPROPVARIANT PROPVARIANT
+
+pointer MQPROPVARIANT* MQPROPVARIANT
+
+pointer MQPROPVARIANT[] MQPROPVARIANT
+
+flag [MQPR_Rel] ULONG display=ULONG
+  PRLT 0
+  PRLE 1
+  PRGT 2
+  PRGE 3
+  PREQ 4
+  PRNE 5
+
+struct MQPROPERTYRESTRICTION
+  rel [MQPR_Rel]
+  prop PROPID
+  prval MQPROPVARIANT
+
+pointer MQPROPERTYRESTRICTION* MQPROPERTYRESTRICTION
+
+struct MQQUEUEPROPS
+  cProp DWORD
+  aPropID QUEUEPROPID*
+  aPropVar MQPROPVARIANT*
+  aStatus HRESULT*
+
+pointer MQQUEUEPROPS* MQQUEUEPROPS
+
+struct MQQMPROPS
+  cProp DWORD
+  aPropID QMPROPID*
+  aPropVar MQPROPVARIANT*
+  aStatus HRESULT*
+
+pointer MQQMPROPS* MQQMPROPS
+
+struct MQPRIVATEPROPS
+  cProp DWORD
+  aPropID QMPROPID*
+  aPropVar MQPROPVARIANT*
+  aStatus HRESULT*
+
+pointer MQPRIVATEPROPS* MQPRIVATEPROPS
+
+struct MQRESTRICTION
+  cRes ULONG
+  paPropRes MQPROPERTYRESTRICTION*
+
+pointer MQRESTRICTION* MQRESTRICTION
+
+struct MQCOLUMNSET
+  cCol ULONG
+  aCol PROPID*
+
+pointer MQCOLUMNSET* MQCOLUMNSET
+
+struct MQSORTKEY
+  propColumn PROPID
+  dwOrder ULONG
+
+pointer MQSORTKEY* MQSORTKEY
+
+struct MQSORTSET
+  cCol ULONG
+  aCol MQSORTKEY*
+
+pointer MQSORTSET* MQSORTSET
+
+struct MQMGMTPROPS
+  cProp DWORD
+  aPropID MGMTPROPID*
+  aPropVar MQPROPVARIANT*
+  aStatus HRESULT*
+
+pointer MQMGMTPROPS* MQMGMTPROPS
+
+struct MQMSGPROPS
+  cProp DWORD
+  aPropID MSGPROPID*
+  aPropVar MQPROPVARIANT*
+  aStatus HRESULT*
+
+pointer MQMSGPROPS* MQMSGPROPS
+
+func MQADsPathToFormatName
+  HRESULT
+  lpwcsADsPath LPCWSTR
+
+func MQBeginTransaction
+  HRESULT
+  ppTransaction ITransaction**
+
+func MQCloseCursor
+  HRESULT
+  hCursor HANDLE
+
+func MQCloseQueue
+  HRESULT
+  hQueue QUEUEHANDLE
+
+func MQCreateCursor
+  HRESULT
+  hQueue QUEUEHANDLE
+  phCursor PHANDLE
+
+func MQCreateQueue
+  HRESULT
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  pQueueProps MQQUEUEPROPS*
+  lpwcsFormatName LPWSTR
+  lpdwFormatNameLength LPDWORD
+
+func MQDeleteQueue
+  HRESULT
+  lpwcsFormatName LPCWSTR
+
+func MQFreeMemory
+  VOID
+  pvMemory PVOID
+
+func MQFreeSecurityContext
+  VOID
+  hSecurityContext HANDLE
+
+func MQGetMachineProperties
+  HRESULT
+  lpwcsMachineName LPCWSTR
+  pguidMachineID "const GUID*"
+  pQMProps MQQMPROPS*
+
+func MQGetOverlappedResult
+  HRESULT
+  lpOverlapped LPOVERLAPPED
+
+func MQGetPrivateComputerInformation
+  HRESULT
+  lpwcsComputerName LPCWSTR
+  pPrivateProps MQPRIVATEPROPS*
+
+func MQGetQueueProperties
+  HRESULT
+  lpwcsFormatName LPCWSTR
+  pQueueProps MQQUEUEPROPS*
+
+func MQGetQueueSecurity
+  HRESULT
+  lpwcsFormatName LPCWSTR
+  SecurityInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+  nLength DWORD
+  lpnLengthNeeded LPDWORD
+
+func MQGetSecurityContext
+  HRESULT
+  lpCertBuffer LPVOID
+  dwCertBufferLength DWORD
+  phSecurityContext HANDLE*
+
+func MQGetSecurityContextEx
+  HRESULT
+  lpCertBuffer LPVOID
+  dwCertBufferLength DWORD
+  phSecurityContext HANDLE*
+
+func MQHandleToFormatName
+  HRESULT
+  hQueue QUEUEHANDLE
+  lpwcsFormatName LPWSTR
+  lpdwCount LPDWORD
+
+func MQInstanceToFormatName
+  HRESULT
+  pGUID GUID*
+  lpwcsFormatName LPWSTR
+  lpdwCount LPDWORD
+
+func MQLocateBegin
+  HRESULT
+  lpwcsContext LPCWSTR
+  pRestriction MQRESTRICTION*
+  pColumns MQCOLUMNSET*
+  pSort MQSORTSET*
+  phEnum PHANDLE
+
+func MQLocateEnd
+  HRESULT
+  hEnum HANDLE
+
+func MQLocateNext
+  HRESULT
+  hEnum HANDLE
+  pcProps DWORD*
+  aPropVar MQPROPVARIANT[] count=pcProps
+
+func MQMarkMessageRejected
+  HRESULT
+  hQueue QUEUEHANDLE
+  ullLookupId ULONGLONG
+
+func MQMgmtAction
+  HRESULT
+  pMachineName LPCWSTR
+  pObjectName LPCWSTR
+  pAction LPCWSTR
+
+func MQMgmtGetInfo
+  HRESULT
+  pMachineName LPCWSTR
+  pObjectName LPCWSTR
+  pMgmtProps MQMGMTPROPS*
+
+func MQMoveMessage
+  HRESULT
+  sourceQueue QUEUEHANDLE
+  targetQueue QUEUEHANDLE
+  lookupID ULONGLONG
+
+func MQOpenQueue
+  HRESULT
+  lpwcsFormatName LPCWSTR
+  dwAccess DWORD
+  dwShareMode DWORD
+  phQueue QUEUEHANDLE*
+
+func MQPathNameToFormatName
+  HRESULT
+  lpwcsPathName LPCWSTR
+  lpwcsFormatName LPWSTR
+  lpdwCount LPDWORD
+
+func MQPurgeQueue
+  HRESULT
+  hQueue HANDLE
+
+func MQReceiveMessage
+  HRESULT
+  hSource QUEUEHANDLE
+  dwTimeout DWORD
+  dwAction DWORD
+  pMessageProps MQMSGPROPS*
+  lpOverlapped LPOVERLAPPED
+  fnReceiveCallback PMQRECEIVECALLBACK
+  hCursor HANDLE
+  pTransaction ITransaction*
+
+func MQReceiveMessageByLookupId
+  HRESULT
+  hSource QUEUEHANDLE
+  ullLookupId ULONGLONG
+  dwLookupAction DWORD
+  pMessageProps MQMSGPROPS*
+  lpOverlapped LPOVERLAPPED
+  fnReceiveCallback PMQRECEIVECALLBACK
+  pTransaction ITransaction*
+
+func MQRegisterCertificate
+  HRESULT
+  dwFlags DWORD
+  lpCertBuffer PVOID
+  dwCertBufferLength DWORD
+
+func MQSendMessage
+  HRESULT
+  hDestinationQueue QUEUEHANDLE
+  pMessageProps MQMSGPROPS*
+  pTransaction ITransaction*
+
+func MQSetQueueProperties
+  HRESULT
+  lpwcsFormatName LPCWSTR
+  pQueueProps MQQUEUEPROPS*
+
+func MQSetQueueSecurity
+  HRESULT
+  lpwcsFormatName LPCWSTR
+  SecurityInformation SECURITY_INFORMATION
+  pSecurityDescriptor PSECURITY_DESCRIPTOR
+

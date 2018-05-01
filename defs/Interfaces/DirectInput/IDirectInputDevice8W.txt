@@ -1,0 +1,153 @@
+include Headers\dinput.h.txt
+include Interfaces\IUnknown.txt
+
+ingterface IDirectInputDevice8W base=IUnknown id={54d41081-dc15-4833-a41b-748f73a38179} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Input/DirectInput"
+  func GetCapabilities
+    [DI_HRESULT]
+    lpDIDevCaps LPDIDEVCAPS
+
+  func EnumObjects
+    [DI_HRESULT]
+    lpCallback LPDIENUMDEVICEOBJECTSCALLBACKW
+    pvRef LPVOID
+    dwFlags [DIDFT_Flags]
+
+  func GetProperty
+    [DI_HRESULT]
+    rguidProp [DIPROP]
+    pdiph LPDIPROPHEADER
+
+  func SetProperty
+    [DI_HRESULT]
+    rguidProp [DIPROP]
+    pdiph LPCDIPROPHEADER
+
+  func Acquire
+    [DI_HRESULT]
+
+  func Unacquire
+    [DI_HRESULT]
+
+  func GetDeviceState
+    [DI_HRESULT]
+    cbData DWORD
+    lpvData LPVOID postLength=cbData
+
+  func GetDeviceData
+    [DI_HRESULT]
+    cbObjectData DWORD
+    rgdod LPDIDEVICEOBJECTDATA postCount=pdwInOut
+    pdwInOut LPDWORD
+    dwFlags [DIGDD_Flags]
+
+  func SetDataFormat
+    [DI_HRESULT]
+    lpdf LPCDIDATAFORMAT
+
+  func SetEventNotification
+    [DI_HRESULT]
+    hEvent HANDLE
+
+  func SetCooperativeLevel
+    [DI_HRESULT]
+    hwnd HWND
+    dwFlags [DISCL_Flags]
+
+  func GetObjectInfo
+    [DI_HRESULT]
+    pdidoi LPDIDEVICEOBJECTINSTANCEW
+    dwObj DWORD
+    dwHow [DIPH_Enum]
+
+  func GetDeviceInfo
+    [DI_HRESULT]
+    pdidi LPDIDEVICEINSTANCEW outputOnly
+
+  func RunControlPanel
+    [DI_HRESULT]
+    hwndOwner HWND
+    dwFlags DWORD
+
+  func Initialize
+    [DI_HRESULT]
+    hinst HINSTANCE
+    dwVersion DWORD
+    rguid REFGUID
+
+  func CreateEffect
+    [DI_HRESULT]
+    rguid REFGUID
+    lpeff LPCDIEFFECT
+    ppdeff LPDIRECTINPUTEFFECT*
+    punkOuter LPUNKNOWN
+
+  func EnumEffects
+    [DI_HRESULT]
+    lpCallback LPDIENUMEFFECTSCALLBACKW
+    pvRef LPVOID
+    dwEffType [DIEFT_Flags]
+
+  func GetEffectInfo
+    [DI_HRESULT]
+    pdei LPDIEFFECTINFOW
+    rguid REFGUID
+
+  func GetForceFeedbackState
+    [DI_HRESULT]
+    pdwOut [DIGFFS_Flags*]
+
+  func SendForceFeedbackCommand
+    [DI_HRESULT]
+    dwFlags [DISFFC_Flags]
+
+  func EnumCreatedEffectObjects
+    [DI_HRESULT]
+    lpCallback LPDIENUMCREATEDEFFECTOBJECTSCALLBACK
+    pvRef LPVOID
+    fl DWORD
+
+  func Escape
+    [DI_HRESULT]
+    pesc LPDIEFFESCAPE
+
+  func Poll
+    [DI_HRESULT]
+
+  func SendDeviceData
+    [DI_HRESULT]
+    cbObjectData DWORD
+    rgdod LPCDIDEVICEOBJECTDATA count=pdwInOut
+    pdwInOut LPDWORD
+    fl DWORD
+
+  func EnumEffectsInFile
+    [DI_HRESULT]
+    lpszFileName LPCWSTR
+    pec LPDIENUMEFFECTSINFILECALLBACK
+    pvRef LPVOID
+    dwFlags [DIFEF_Flags]
+
+  func WriteEffectToFile
+    [DI_HRESULT]
+    lpszFileName LPCWSTR
+    dwEntries DWORD
+    rgDiFileEft LPDIFILEEFFECT count=dwEntries
+    dwFlags [DIFEF_Flags]
+
+  func BuildActionMap
+    [DI_HRESULT]
+    lpdiaf LPDIACTIONFORMATW
+    lpszUserName LPCWSTR
+    dwFlags [DIDBAM_Flags]
+
+  func SetActionMap
+    [DI_HRESULT]
+    lpdiActionFormat LPDIACTIONFORMATW
+    lptszUserName LPCWSTR
+    dwFlags [DIDSAM_Flags]
+
+  func GetImageInfo
+    [DI_HRESULT]
+    lpdiDevImageInfoHeader LPDIDEVICEIMAGEINFOHEADERW
+
+

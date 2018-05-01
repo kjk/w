@@ -1,0 +1,23 @@
+include Interfaces\IUnknown.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemPropertyProvider base=IUnknown id={CE61E841-65BC-11d0-B6BD-00AA003240C7} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func GetProperty
+    WBEMSTATUS
+    lFlags long
+    strLocale "const BSTR"
+    strClassMapping "const BSTR"
+    strInstMapping "const BSTR"
+    strPropMapping "const BSTR"
+    pvValue VARIANT*
+
+  func PutProperty
+    WBEMSTATUS
+    lFlags long
+    strLocale "const BSTR"
+    strClassMapping "const BSTR"
+    strInstMapping "const BSTR"
+    strPropMapping "const BSTR"
+    pvValue "const VARIANT*"
+
+

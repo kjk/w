@@ -1,0 +1,17 @@
+include Interfaces\DirectX\10\ID3D10DeviceChild.txt
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10Resource base=ID3D10DeviceChild id={9B7E4C01-342C-4106-A19F-4F2704F689F0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Resource"
+  func GetType
+    void
+    rType D3D10_RESOURCE_DIMENSION*
+
+  func SetEvictionPriority
+    void
+    EvictionPriority UINT
+
+  func GetEvictionPriority
+    success NotEqual=0
+    UINT
+
+

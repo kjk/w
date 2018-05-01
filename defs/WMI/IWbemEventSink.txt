@@ -1,0 +1,26 @@
+include WMI\IWbemObjectSink.txt
+include WMI\WMI.h.txt
+
+ingterface IWbemEventSink base=IWbemObjectSink id={3ae0080a-7e3a-4366-bf89-0feedc931659} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/COM"
+  func SetSinkSecurity
+    WBEMSTATUS
+    lSDLength long
+    pSD BYTE*
+
+  func IsActive
+    WBEMSTATUS
+
+  func GetRestrictedSink
+    WBEMSTATUS
+    lNumQueries long
+    awszQueries "const LPCWSTR*"
+    pCallback IUnknown*
+    ppSink IWbemEventSink**
+
+  func SetBatchingParameters
+    WBEMSTATUS
+    lFlags LONG
+    dwMaxBufferSize DWORD
+    dwMaxSendLatency DWORD
+
+

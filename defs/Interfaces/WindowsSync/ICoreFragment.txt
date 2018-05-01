@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface ICoreFragment base=IUnknown id={613b2ab5-b304-47d9-9c31-ce6c54401a15} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func NextColumn
+    HRESULT
+    pChangeUnitId BYTE*
+    pChangeUnitIdSize DWORD*
+
+  func NextRange
+    HRESULT
+    pItemId BYTE*
+    pItemIdSize DWORD*
+    piClockVector IClockVector**
+
+  func Reset
+    HRESULT
+
+  func GetColumnCount
+    HRESULT
+    pColumnCount DWORD*
+
+  func GetRangeCount
+    HRESULT
+    pRangeCount DWORD*
+
+

@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IMMDevice base=IUnknown id={D666063F-1587-4E43-81F1-B948E807363F} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Windows Multimedia Device"
+  func Activate
+    [AUDCLNT_HRESULT]
+    iid REFIID
+    dwClsCtx DWORD
+    pActivationParams PROPVARIANT*
+    ppInterface void** interfaceId=iid
+
+  func OpenPropertyStore
+    [AUDCLNT_HRESULT]
+    stgmAccess DWORD
+    ppProperties IPropertyStore**
+
+  func GetId
+    [AUDCLNT_HRESULT]
+    ppstrId LPWSTR*
+
+  func GetState
+    [AUDCLNT_HRESULT]
+    pdwState DWORD*
+
+

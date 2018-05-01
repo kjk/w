@@ -1,0 +1,53 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPrint base=IUnknown id={b722bcc9-4e68-101b-a2bc-00aa00404770} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/OLE and Data Transfer/Interfaces"
+  func SetInitialPageNum
+    HRESULT
+    nFirstPage LONG
+
+  func GetPageInfo
+    HRESULT
+    pnFirstPage LONG*
+    pcPages LONG*
+
+  func Print
+    HRESULT
+    grfFlags PRINTFLAG
+    pptd DVTARGETDEVICE**
+    ppPageSet PAGESET**
+    pstgmOptions STGMEDIUM*
+    pcallback IContinueCallback*
+    nFirstPage LONG
+    pcPagesPrinted LONG*
+    pnLastPage LONG*
+
+  enum [PAGESET_ENUM] LONG display=LONG
+    PAGESET_TOLASTPAGE -1
+
+  struct PAGERANGE
+  nFromPage LONG
+  nToPage [PAGESET_ENUM]
+
+  array "PAGERANGE [1]" base=PAGERANGE count=1
+
+  struct PAGESET
+  cbStruct ULONG
+  fOddPages BOOL
+  fEvenPages BOOL
+  cPageRange ULONG
+  rgPages "PAGERANGE [1]" count=cPageRange
+
+  pointer PAGESET* PAGESET
+
+  pointer PAGESET** PAGESET*
+
+  flag PRINTFLAG DWORD display=DWORD
+    PRINTFLAG_MAYBOTHERUSER        1
+    PRINTFLAG_PROMPTUSER           2
+    PRINTFLAG_USERMAYCHANGEPRINTER 4
+    PRINTFLAG_RECOMPOSETODEVICE    8
+    PRINTFLAG_DONTACTUALLYPRINT    16
+    PRINTFLAG_FORCEPROPERTIES      32
+    PRINTFLAG_PRINTTOFILE          64
+
+

@@ -1,0 +1,9 @@
+include Interfaces\Shell\IWebWizardHost.txt
+
+ingterface INewWDEvents base=IWebWizardHost id={0751c551-7568-41c9-8e5b-e22e38919236} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func PassportAuthenticate
+    HRESULT
+    bstrSignInUrl BSTR
+    pvfAuthenitcated VARIANT_BOOL*
+
+

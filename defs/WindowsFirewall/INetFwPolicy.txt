@@ -1,0 +1,14 @@
+include Interfaces\IDispatch.txt
+include WindowsFirewall\Firewall.h.txt
+
+ingterface INetFwPolicy base=IDispatch id={D46D2478-9AC9-4008-9DC7-5563CE5536CC} errorFunc=HRESULT onlineHelp=MSDN category="Networking/Windows Firewall Technologies/Windows Firewall"
+  func get_CurrentProfile
+    HRESULT
+    profile INetFwProfile**
+
+  func GetProfileByType
+    HRESULT
+    profileType NET_FW_PROFILE_TYPE
+    profile INetFwProfile**
+
+

@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+include Headers\ole.h.txt
+
+ingterface IInitializeSpy base=IUnknown id={00000034-0000-0000-C000-000000000046} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/COM Fundamentals/Interfaces"
+  func PreInitialize
+    HRESULT
+    dwCoInit [COINIT_FLAG]
+    dwCurThreadAptRefs DWORD
+
+  func PostInitialize
+    HRESULT
+    hrCoInit HRESULT
+    dwCoInit [COINIT_FLAG]
+    dwNewThreadAptRefs DWORD
+
+  func PreUninitialize
+    HRESULT
+    dwCurThreadAptRefs DWORD
+
+  func PostUninitialize
+    HRESULT
+    dwNewThreadAptRefs DWORD
+
+

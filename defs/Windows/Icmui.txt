@@ -1,0 +1,51 @@
+include Headers\windows.h.txt
+include Headers\gdi.h.txt
+
+dll Icmui.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Graphics and Gaming/Legacy Graphics/Windows Color System/Advanced"
+alias PCMSCALLBACK LPVOID
+
+flag [CMS_FLAGS] DWORD display=DWORD
+  CMS_DISABLEICM          1
+  CMS_ENABLEPROOFING      2
+  CMS_SETRENDERINTENT     4
+  CMS_SETPROOFINTENT      8
+  CMS_SETMONITORPROFILE   0x10
+  CMS_SETPRINTERPROFILE   0x20
+  CMS_SETTARGETPROFILE    0x40
+  CMS_USEHOOK             0x80
+  CMS_USEAPPLYCALLBACK    0x100
+  CMS_USEDESCRIPTION      0x200
+  CMS_DISABLEINTENT       0x400
+  CMS_DISABLERENDERINTENT 0x800
+  CMS_TARGETOVERFLOW      0x20000000
+  CMS_PRINTEROVERFLOW     0x40000000
+  CMS_MONITOROVERFLOW     0x80000000
+
+struct COLORMATCHSETUP
+  dwSize DWORD
+  dwVersion DWORD
+  dwFlags [CMS_FLAGS]
+  hwndOwner HWND
+  pSourceName PCTSTR
+  pDisplayName PCTSTR
+  pPrinterName PCTSTR
+  dwRenderIntent DWORD
+  dwProofingIntent DWORD
+  pMonitorProfile PTSTR
+  ccMonitorProfile DWORD
+  pPrinterProfile PTSTR
+  ccPrinterProfile DWORD
+  pTargetProfile PTSTR
+  ccTargetProfile DWORD
+  lpfnHook DLGPROC
+  lParam LPARAM
+  lpfnApplyCallback PCMSCALLBACK
+  lParamApplyCallback LPARAM
+
+pointer PCOLORMATCHSETUP COLORMATCHSETUP
+
+func SetupColorMatching bothCharset
+  BOOL
+  pcms PCOLORMATCHSETUP
+

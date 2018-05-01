@@ -1,0 +1,8 @@
+include Interfaces\DirectX\11\ID3D11DeviceChild.txt
+
+ingterface ID3D11SamplerState base=ID3D11DeviceChild id={da6fea51-564c-4487-9810-f0d0f9b4e3a5} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/11/Core"
+  func GetDesc
+    void
+    pDesc D3D11_SAMPLER_DESC*
+
+

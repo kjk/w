@@ -1,0 +1,136 @@
+include Interfaces\IUnknown.txt
+
+ingterface IFileDialogCustomize base=IUnknown id={e6fdd21a-163f-4975-9c8c-a69f1ba37034} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func EnableOpenDropDown
+    HRESULT
+    dwIDCtl DWORD
+
+  func AddMenu
+    HRESULT
+    dwIDCtl DWORD
+    pszLabel LPCWSTR
+
+  func AddPushButton
+    HRESULT
+    dwIDCtl DWORD
+    pszLabel LPCWSTR
+
+  func AddComboBox
+    HRESULT
+    dwIDCtl DWORD
+
+  func AddRadioButtonList
+    HRESULT
+    dwIDCtl DWORD
+
+  func AddCheckButton
+    HRESULT
+    dwIDCtl DWORD
+    pszLabel LPCWSTR
+    bChecked BOOL
+
+  func AddEditBox
+    HRESULT
+    dwIDCtl DWORD
+    pszText LPCWSTR
+
+  func AddSeparator
+    HRESULT
+    dwIDCtl DWORD
+
+  func AddText
+    HRESULT
+    dwIDCtl DWORD
+    pszText LPCWSTR
+
+  func SetControlLabel
+    HRESULT
+    dwIDCtl DWORD
+    pszLabel LPCWSTR
+
+  func GetControlState
+    HRESULT
+    dwIDCtl DWORD
+    pdwState CDCONTROLSTATEF*
+
+  func SetControlState
+    HRESULT
+    dwIDCtl DWORD
+    dwState CDCONTROLSTATEF
+
+  func GetEditBoxText
+    HRESULT
+    dwIDCtl DWORD
+    ppszText WCHAR**
+
+  func SetEditBoxText
+    HRESULT
+    dwIDCtl DWORD
+    pszText LPCWSTR
+
+  func GetCheckButtonState
+    HRESULT
+    dwIDCtl DWORD
+    pbChecked BOOL*
+
+  func SetCheckButtonState
+    HRESULT
+    dwIDCtl DWORD
+    bChecked BOOL
+
+  func AddControlItem
+    HRESULT
+    dwIDCtl DWORD
+    dwIDItem DWORD
+    pszLabel LPCWSTR
+
+  func RemoveControlItem
+    HRESULT
+    dwIDCtl DWORD
+    dwIDItem DWORD
+
+  func RemoveAllControlItems
+    HRESULT
+    dwIDCtl DWORD
+
+  func GetControlItemState
+    HRESULT
+    dwIDCtl DWORD
+    dwIDItem DWORD
+    pdwState CDCONTROLSTATEF*
+
+  func SetControlItemState
+    HRESULT
+    dwIDCtl DWORD
+    dwIDItem DWORD
+    dwState CDCONTROLSTATEF
+
+  func GetSelectedControlItem
+    HRESULT
+    dwIDCtl DWORD
+    pdwIDItem DWORD*
+
+  func SetSelectedControlItem
+    HRESULT
+    dwIDCtl DWORD
+    dwIDItem DWORD
+
+  func StartVisualGroup
+    HRESULT
+    dwIDCtl DWORD
+    pszLabel LPCWSTR
+
+  func EndVisualGroup
+    HRESULT
+
+  func MakeProminent
+    HRESULT
+    dwIDCtl DWORD
+
+  func SetControlItemText
+    HRESULT
+    dwIDCtl DWORD
+    dwIDItem DWORD
+    pszLabel LPCWSTR
+
+

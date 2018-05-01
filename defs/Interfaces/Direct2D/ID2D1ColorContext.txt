@@ -1,0 +1,16 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Resource.txt
+
+ingterface ID2D1ColorContext base=ID2D1Resource id={1c4820bb-5771-4518-a581-2fe4dd0ec657} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetColorSpace
+    D2D1_COLOR_SPACE
+
+  func GetProfileSize
+    UINT32
+
+  func GetProfile
+    [D2D_HRESULT]
+    profile BYTE* postCount=profileSize
+    profileSize UINT32
+
+

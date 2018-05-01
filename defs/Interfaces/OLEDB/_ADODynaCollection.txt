@@ -1,0 +1,13 @@
+include Interfaces\OLEDB\_ADOCollection.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface _ADODynaCollection base=_ADOCollection id={00000513-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func Append
+    [OLEDB_HRESULT]
+    Object IDispatch*
+
+  func Delete
+    [OLEDB_HRESULT]
+    Index VARIANT
+
+

@@ -1,0 +1,197 @@
+include Headers\windows.h.txt
+
+dll WdsClientAPI.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "System Administration/Windows Deployment Services (WDS)/Client"
+alias PFN_WdsCliTraceFunction LPVOID
+
+alias PFN_WdsCliCallback LPVOID
+
+struct WDS_CLI_CRED
+  pwszUserName PCWSTR
+  pwszDomain PCWSTR
+  pwszPassword PCWSTR
+
+pointer PWDS_CLI_CRED WDS_CLI_CRED
+
+func WdsCliAuthorizeSession
+  HRESULT
+  hSession HANDLE
+  pCred PWDS_CLI_CRED
+
+func WdsCliCancelTransfer
+  HRESULT
+  hTransfer HANDLE
+
+func WdsCliClose
+  HRESULT
+  Handle HANDLE
+
+func WdsCliCreateSession
+  HRESULT
+  pwszServer PWSTR
+  pCred PWDS_CLI_CRED
+  phSession PHANDLE
+
+func WdsCliFindFirstImage
+  HRESULT
+  hSession HANDLE
+  phFindHandle PHANDLE
+
+func WdsCliFindNextImage
+  HRESULT
+  Handle HANDLE
+
+func WdsCliFreeStringArray
+  HRESULT
+  ppwszArray PWSTR*
+  ulCount ULONG
+
+func WdsCliObtainDriverPackages
+  HRESULT
+  hImage HANDLE
+  ppwszServerName PWSTR*
+  pppwszDriverPackages PWSTR**
+  pulCount ULONG*
+
+func WdsCliGetEnumerationFlags
+  HRESULT
+  Handle HANDLE
+  pdwFlags PDWORD
+
+func WdsCliGetImageArchitecture
+  HRESULT
+  hIfh HANDLE
+  pdwValue PDWORD
+
+func WdsCliGetImageDescription
+  HRESULT
+  hIfh HANDLE
+  ppwszValue PWSTR*
+
+func WdsCliGetImageGroup
+  HRESULT
+  hIfh HANDLE
+  ppwszValue PWSTR*
+
+func WdsCliGetImageHalName
+  HRESULT
+  hIfh HANDLE
+  ppwszValue PWSTR*
+
+func WdsCliGetImageHandleFromFindHandle
+  HRESULT
+  FindHandle HANDLE
+  phImageHandle PHANDLE
+
+func WdsCliGetImageHandleFromTransferHandle
+  HRESULT
+  hTransfer HANDLE
+  phImageHandle PHANDLE
+
+func WdsCliGetImageIndex
+  HRESULT
+  hIfh HANDLE
+  pdwValue PDWORD
+
+func WdsCliGetImageLanguage
+  HRESULT
+  hIfh HANDLE
+  ppwszValue PWSTR*
+
+func WdsCliGetImageLanguages
+  HRESULT
+  hIfh HANDLE
+  pppszValues PTSTR**
+  pdwNumValues PDWORD
+
+func WdsCliGetImageLastModifiedTime
+  HRESULT
+  hIfh HANDLE
+  ppSysTimeValue PSYSTEMTIME*
+
+func WdsCliGetImageName
+  HRESULT
+  hIfh HANDLE
+  ppwszValue PWSTR*
+
+func WdsCliGetImageNamespace
+  HRESULT
+  hIfh HANDLE
+  ppwszValue PWSTR*
+
+func WdsCliGetImagePath
+  HRESULT
+  hIfh HANDLE
+  ppwszValue PWSTR*
+
+func WdsCliGetImageSize
+  HRESULT
+  hIfh HANDLE
+  pullValue PULONGLONG
+
+func WdsCliGetImageVersion
+  HRESULT
+  hIfh HANDLE
+  ppwszValue PWSTR*
+
+func WdsCliGetTransferSize
+  HRESULT
+  hIfh HANDLE
+  pullValue PULONGLONG
+
+func WdsCliInitializeLog
+  HRESULT
+  hSession HANDLE
+  ulClientArchitecture ULONG
+  pwszClientId PWSTR
+  pwszClientAddress PWSTR
+
+func WdsCliLog varArgs
+  HRESULT
+  hSession HANDLE
+  ulLogLevel ULONG
+  ulMessageCode ULONG
+
+func WdsCliRegisterTrace
+  HRESULT
+  pfn PFN_WdsCliTraceFunction
+
+func WdsCliTransferFile
+  HRESULT
+  pwszServer PCWSTR
+  pwszNamespace PCWSTR
+  pwszRemoteFilePath PCWSTR
+  pwszLocalFilePath PCWSTR
+  dwFlags DWORD
+  dwReserved DWORD
+  pfnWdsCliCallback PFN_WdsCliCallback
+  pvUserData PVOID
+  phTransfer PHANDLE
+
+func WdsCliTransferImage
+  HRESULT
+  hImage HANDLE
+  pwszLocalPath PWSTR
+  dwFlags DWORD
+  dwReserved DWORD
+  pfnWdsCliCallback PFN_WdsCliCallback
+  pvUserData PVOID
+  phTransfer PHANDLE
+
+func WdsCliWaitForTransfer
+  HRESULT
+  hTransfer HANDLE
+
+func WdsCliGetDriverQueryXml
+  HRESULT
+  pwszWinDirPath PWSTR
+  ppwszDriverQuery PWSTR*
+
+func WdsCliObtainDriverPackagesEx
+  HRESULT
+  hSession HANDLE
+  pwszDriverQuery PWSTR
+  ppwszServerName PWSTR*
+  pppwszDriverPackages PWSTR**
+  pulCount ULONG*
+

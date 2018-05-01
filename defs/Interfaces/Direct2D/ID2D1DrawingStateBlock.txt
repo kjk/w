@@ -1,0 +1,21 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Resource.txt
+
+ingterface ID2D1DrawingStateBlock base=ID2D1Resource id={28506e39-ebf6-46a1-bb47-fd85565ab957} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetDescription
+    void
+    stateDescription D2D1_DRAWING_STATE_DESCRIPTION*
+
+  func SetDescription
+    void
+    stateDescription "CONST D2D1_DRAWING_STATE_DESCRIPTION*"
+
+  func SetTextRenderingParams
+    void
+    textRenderingParams IDWriteRenderingParams*
+
+  func GetTextRenderingParams
+    void
+    textRenderingParams IDWriteRenderingParams**
+
+

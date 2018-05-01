@@ -1,0 +1,17 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface IWMIExtension base=IDispatch id={adc1f06e-5c7e-11d2-8b74-00104b2afb41} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/ADSI Extension"
+  func get_WMIObjectPath
+    WBEMSTATUS
+    strWMIObjectPath BSTR*
+
+  func GetWMIObject
+    WBEMSTATUS
+    objWMIObject ISWbemObject**
+
+  func GetWMIServices
+    WBEMSTATUS
+    objWMIServices ISWbemServices**
+
+

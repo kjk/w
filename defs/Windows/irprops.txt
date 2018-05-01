@@ -1,0 +1,166 @@
+include Headers\windows.h.txt
+include Headers\bluetooth.h.txt
+
+dll irprops.cpl callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Wireless Networking/Bluetooth"
+func BluetoothAuthenticateDevice
+  [ERROR_CODE]
+  hwndParent HWND
+  hRadio HANDLE
+  pbtdi BLUETOOTH_DEVICE_INFO*
+  pszPasskey PWCHAR
+  ulPasskeyLength ULONG
+
+func BluetoothAuthenticateMultipleDevices
+  [ERROR_CODE]
+  hwndParent HWND
+  hRadio HANDLE
+  cDevices DWORD
+  pbtdi BLUETOOTH_DEVICE_INFO*
+
+func BluetoothDisplayDeviceProperties
+  BOOL
+  hwndParent HWND
+  pbtdi BLUETOOTH_DEVICE_INFO*
+
+func BluetoothEnableDiscovery
+  BOOL
+  hRadio HANDLE
+  fEnabled BOOL
+
+func BluetoothEnableIncomingConnections
+  BOOL
+  hRadio HANDLE
+  fEnabled BOOL
+
+func BluetoothEnumerateInstalledServices
+  [ERROR_CODE]
+  hRadio HANDLE
+  pbtdi BLUETOOTH_DEVICE_INFO*
+  pcServices DWORD*
+  pGuidServices GUID*
+
+func BluetoothFindDeviceClose
+  BOOL
+  hFind HBLUETOOTH_DEVICE_FIND
+
+func BluetoothFindFirstDevice
+  success NotEqual=0
+  HBLUETOOTH_DEVICE_FIND
+  pbtsp BLUETOOTH_DEVICE_SEARCH_PARAMS*
+  pbtdi BLUETOOTH_DEVICE_INFO*
+
+func BluetoothFindFirstRadio
+  success NotEqual=0
+  HBLUETOOTH_RADIO_FIND
+  pbtfrp BLUETOOTH_FIND_RADIO_PARAMS*
+  phRadio HANDLE*
+
+func BluetoothFindNextDevice
+  BOOL
+  hFind HBLUETOOTH_DEVICE_FIND
+  pbtdi BLUETOOTH_DEVICE_INFO*
+
+func BluetoothFindNextRadio
+  BOOL
+  hFind HBLUETOOTH_RADIO_FIND
+  phRadio HANDLE*
+
+func BluetoothFindRadioClose
+  BOOL
+  hFind HBLUETOOTH_RADIO_FIND
+
+func BluetoothGetDeviceInfo
+  [ERROR_CODE]
+  hRadio HANDLE
+  pbtdi BLUETOOTH_DEVICE_INFO*
+
+func BluetoothGetRadioInfo
+  [ERROR_CODE]
+  hRadio HANDLE
+  pRadioInfo PBLUETOOTH_RADIO_INFO
+
+func BluetoothIsConnectable
+  BOOL
+  hRadio HANDLE
+
+func BluetoothIsDiscoverable
+  BOOL
+  hRadio HANDLE
+
+func BluetoothRegisterForAuthentication
+  [ERROR_CODE]
+  pbtdi BLUETOOTH_DEVICE_INFO*
+  phRegHandle HBLUETOOTH_AUTHENTICATION_REGISTRATION*
+  pfnCallback PFN_AUTHENTICATION_CALLBACK
+  pvParam PVOID
+
+func BluetoothRemoveDevice
+  [ERROR_CODE]
+  pAddress BLUETOOTH_ADDRESS*
+
+func BluetoothSdpEnumAttributes
+  BOOL
+  pSDPStream LPBYTE
+  cbStreamSize ULONG
+  pfnCallback PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK
+  pvParam LPVOID
+
+func BluetoothSdpGetAttributeValue
+  [ERROR_CODE]
+  pRecordStream LPBYTE
+  cbRecordLength ULONG
+  usAttributeId USHORT
+  pAttributeData PSDP_ELEMENT_DATA
+
+func BluetoothSdpGetContainerElementData
+  [ERROR_CODE]
+  pContainerStream LPBYTE
+  cbContainerLength ULONG
+  pElement HBLUETOOTH_CONTAINER_ELEMENT*
+  pData PSDP_ELEMENT_DATA
+
+func BluetoothSdpGetElementData
+  [ERROR_CODE]
+  pSdpStream LPBYTE
+  cbSpdStreamLength ULONG
+  pData PSDP_ELEMENT_DATA
+
+func BluetoothSdpGetString
+  [ERROR_CODE]
+  pRecordStream LPBYTE
+  cbRecordLength ULONG
+  pStringData PSDP_STRING_TYPE_DATA
+  usStringOffset USHORT
+  pszString PWCHAR
+  pcchStringLength PULONG
+
+func BluetoothSelectDevices
+  BOOL
+  pbtsdp BLUETOOTH_SELECT_DEVICE_PARAMS*
+
+func BluetoothSelectDevicesFree
+  BOOL
+  pbtsdp BLUETOOTH_SELECT_DEVICE_PARAMS*
+
+func BluetoothSendAuthenticationResponse
+  [ERROR_CODE]
+  hRadio HANDLE
+  pbtdi BLUETOOTH_DEVICE_INFO*
+  pszPasskey LPWSTR
+
+func BluetoothSetServiceState
+  [ERROR_CODE]
+  hRadio HANDLE
+  pbtdi BLUETOOTH_DEVICE_INFO*
+  pGuidService GUID*
+  dwServiceFlags DWORD
+
+func BluetoothUnregisterAuthentication
+  BOOL
+  hRegHandle HBLUETOOTH_AUTHENTICATION_REGISTRATION
+
+func BluetoothUpdateDeviceRecord
+  [ERROR_CODE]
+  pbtdi BLUETOOTH_DEVICE_INFO*
+

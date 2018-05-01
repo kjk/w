@@ -1,0 +1,102 @@
+include Headers\windows.h.txt
+include Headers\ole.h.txt
+
+dll Activeds.dll callingConvention=STDCALL errorFunc=HRESULT onlineHelp=MSDN
+category "Security and Identity/Directory, Identity, and Access Services/Directory Services/Directory Access Technologies/Active Directory Service Interfaces (ADSI)"
+interface IADsContainer
+
+interface IEnumVARIANT
+
+func ADsBuildEnumerator ordinal=4
+  HRESULT
+  pADsContainer IADsContainer*
+  ppEnumVariant IEnumVARIANT**
+
+func ADsBuildVarArrayInt ordinal=8
+  HRESULT
+  lpdwObjectTypes LPDWORD
+  dwObjectTypes DWORD
+  pVar VARIANT*
+
+func ADsBuildVarArrayStr ordinal=7
+  HRESULT
+  lppPathNames LPWSTR*
+  dwPathNames DWORD
+  pVar VARIANT*
+
+func ADsEncodeBinaryData ordinal=20
+  HRESULT
+  pbSrcData PBYTE length=dwSrcLen
+  dwSrcLen DWORD
+  ppszDestData LPWSTR*
+
+func ADsEnumerateNext ordinal=6
+  HRESULT
+  pEnumVariant IEnumVARIANT*
+  cElements ULONG
+  pvar VARIANT*
+  pcElementsFetched ULONG*
+
+func ADsFreeEnumerator ordinal=5
+  HRESULT
+  pEnumVariant IEnumVARIANT*
+
+func ADsGetLastError ordinal=13
+  HRESULT
+  lpError LPDWORD
+  lpErrorBuf LPWSTR
+  dwErrorBufLen DWORD
+  lpNameBuf LPWSTR
+  dwNameBufLen DWORD
+
+func ADsGetObject ordinal=3
+  HRESULT
+  lpszPathName LPWSTR
+  riid REFIID
+  ppObject VOID** interfaceId=riid
+
+func ADsOpenObject ordinal=9
+  HRESULT
+  lpszPathName LPWSTR
+  lpszUserName LPWSTR
+  lpszPassword LPWSTR
+  dwReserved DWORD
+  riid REFIID
+  ppObject VOID** interfaceId=riid
+
+func ADsSetLastError ordinal=12
+  VOID
+  dwErr DWORD
+  pszError LPWSTR
+  pszProvider LPWSTR
+
+func AllocADsMem ordinal=14
+  success NotEqual=0
+  LPVOID
+  cb DWORD
+
+func AllocADsStr ordinal=17
+  success NotEqual=0
+  LPWSTR
+  pStr LPWSTR
+
+func FreeADsMem ordinal=15
+  BOOL
+  pMem LPVOID
+
+func FreeADsStr ordinal=18
+  BOOL
+  pStr LPWSTR
+
+func ReallocADsMem ordinal=16
+  success NotEqual=0
+  LPVOID
+  pOldMem LPVOID
+  cbOld DWORD
+  cbNew DWORD
+
+func ReallocADsStr ordinal=19
+  BOOL
+  ppStr LPWSTR*
+  pStr LPWSTR
+

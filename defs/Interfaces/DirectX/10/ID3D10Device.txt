@@ -1,0 +1,534 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10Device base=IUnknown id={9B7E4C0F-342C-4106-A19F-4F2704F689F0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Core"
+  func VSSetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D10Buffer*const* count=NumBuffers
+
+  func PSSetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D10ShaderResourceView*const* count=NumViews
+
+  func PSSetShader
+    void
+    pPixelShader ID3D10PixelShader*
+
+  func PSSetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D10SamplerState*const* count=NumSamplers
+
+  func VSSetShader
+    void
+    pVertexShader ID3D10VertexShader*
+
+  func DrawIndexed
+    void
+    IndexCount UINT
+    StartIndexLocation UINT
+    BaseVertexLocation INT
+
+  func Draw
+    void
+    VertexCount UINT
+    StartVertexLocation UINT
+
+  func PSSetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D10Buffer*const* count=NumBuffers
+
+  func IASetInputLayout
+    void
+    pInputLayout ID3D10InputLayout*
+
+  func IASetVertexBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppVertexBuffers ID3D10Buffer*const* count=NumBuffers
+    pStrides "const UINT*" count=NumBuffers
+    pOffsets "const UINT*" count=NumBuffers
+
+  func IASetIndexBuffer
+    void
+    pIndexBuffer ID3D10Buffer*
+    Format DXGI_FORMAT
+    Offset UINT
+
+  func DrawIndexedInstanced
+    void
+    IndexCountPerInstance UINT
+    InstanceCount UINT
+    StartIndexLocation UINT
+    BaseVertexLocation INT
+    StartInstanceLocation UINT
+
+  func DrawInstanced
+    void
+    VertexCountPerInstance UINT
+    InstanceCount UINT
+    StartVertexLocation UINT
+    StartInstanceLocation UINT
+
+  func GSSetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D10Buffer*const* count=NumBuffers
+
+  func GSSetShader
+    void
+    pShader ID3D10GeometryShader*
+
+  func IASetPrimitiveTopology
+    void
+    Topology D3D10_PRIMITIVE_TOPOLOGY
+
+  func VSSetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D10ShaderResourceView*const* count=NumViews
+
+  func VSSetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D10SamplerState*const* count=NumSamplers
+
+  func SetPredication
+    void
+    pPredicate ID3D10Predicate*
+    PredicateValue BOOL
+
+  func GSSetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D10ShaderResourceView*const* count=NumViews
+
+  func GSSetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D10SamplerState*const* count=NumSamplers
+
+  func OMSetRenderTargets
+    void
+    NumViews UINT
+    ppRenderTargetViews ID3D10RenderTargetView*const* count=NumViews
+    pDepthStencilView ID3D10DepthStencilView*
+
+  func OMSetBlendState
+    void
+    pBlendState ID3D10BlendState*
+    BlendFactor "const FLOAT [4]"
+    SampleMask UINT
+
+  func OMSetDepthStencilState
+    void
+    pDepthStencilState ID3D10DepthStencilState*
+    StencilRef UINT
+
+  func SOSetTargets
+    void
+    NumBuffers UINT
+    ppSOTargets ID3D10Buffer*const* count=NumBuffers
+    pOffsets "const UINT*" count=NumBuffers
+
+  func DrawAuto
+    void
+
+  func RSSetState
+    void
+    pRasterizerState ID3D10RasterizerState*
+
+  func RSSetViewports
+    void
+    NumViewports UINT
+    pViewports "const D3D10_VIEWPORT*" count=NumViewports
+
+  func RSSetScissorRects
+    void
+    NumRects UINT
+    pRects "const D3D10_RECT*" count=NumRects
+
+  func CopySubresourceRegion
+    void
+    pDstResource ID3D10Resource*
+    DstSubresource UINT
+    DstX UINT
+    DstY UINT
+    DstZ UINT
+    pSrcResource ID3D10Resource*
+    SrcSubresource UINT
+    pSrcBox "const D3D10_BOX*"
+
+  func CopyResource
+    void
+    pDstResource ID3D10Resource*
+    pSrcResource ID3D10Resource*
+
+  func UpdateSubresource
+    void
+    pDstResource ID3D10Resource*
+    DstSubresource UINT
+    pDstBox "const D3D10_BOX*"
+    pSrcData "const void*"
+    SrcRowPitch UINT
+    SrcDepthPitch UINT
+
+  func ClearRenderTargetView
+    void
+    pRenderTargetView ID3D10RenderTargetView*
+    ColorRGBA "const FLOAT [4]"
+
+  func ClearDepthStencilView
+    void
+    pDepthStencilView ID3D10DepthStencilView*
+    ClearFlags D3D10_CLEAR_FLAG
+    Depth FLOAT
+    Stencil UINT8
+
+  func GenerateMips
+    void
+    pShaderResourceView ID3D10ShaderResourceView*
+
+  func ResolveSubresource
+    void
+    pDstResource ID3D10Resource*
+    DstSubresource UINT
+    pSrcResource ID3D10Resource*
+    SrcSubresource UINT
+    Format DXGI_FORMAT
+
+  func VSGetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D10Buffer** postCount=NumBuffers
+
+  func PSGetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D10ShaderResourceView** postCount=NumViews
+
+  func PSGetShader
+    void
+    ppPixelShader ID3D10PixelShader**
+
+  func PSGetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D10SamplerState** postCount=NumSamplers
+
+  func VSGetShader
+    void
+    ppVertexShader ID3D10VertexShader**
+
+  func PSGetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D10Buffer** postCount=NumBuffers
+
+  func IAGetInputLayout
+    void
+    ppInputLayout ID3D10InputLayout**
+
+  func IAGetVertexBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppVertexBuffers ID3D10Buffer** postCount=NumBuffers
+    pStrides UINT* postCount=NumBuffers
+    pOffsets UINT* postCount=NumBuffers
+
+  func IAGetIndexBuffer
+    void
+    pIndexBuffer ID3D10Buffer**
+    Format DXGI_FORMAT*
+    Offset UINT*
+
+  func GSGetConstantBuffers
+    void
+    StartSlot UINT
+    NumBuffers UINT
+    ppConstantBuffers ID3D10Buffer** postCount=NumBuffers
+
+  func GSGetShader
+    void
+    ppGeometryShader ID3D10GeometryShader**
+
+  func IAGetPrimitiveTopology
+    void
+    pTopology D3D10_PRIMITIVE_TOPOLOGY*
+
+  func VSGetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D10ShaderResourceView** postCount=NumViews
+
+  func VSGetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D10SamplerState** postCount=NumSamplers
+
+  func GetPredication
+    void
+    ppPredicate ID3D10Predicate**
+    pPredicateValue BOOL*
+
+  func GSGetShaderResources
+    void
+    StartSlot UINT
+    NumViews UINT
+    ppShaderResourceViews ID3D10ShaderResourceView** postCount=NumViews
+
+  func GSGetSamplers
+    void
+    StartSlot UINT
+    NumSamplers UINT
+    ppSamplers ID3D10SamplerState** postCount=NumSamplers
+
+  func OMGetRenderTargets
+    void
+    NumViews UINT
+    ppRenderTargetViews ID3D10RenderTargetView** postCount=NumViews
+    ppDepthStencilView ID3D10DepthStencilView**
+
+  func OMGetBlendState
+    void
+    ppBlendState ID3D10BlendState**
+    BlendFactor "FLOAT [4]"
+    pSampleMask UINT*
+
+  func OMGetDepthStencilState
+    void
+    ppDepthStencilState ID3D10DepthStencilState**
+    pStencilRef UINT*
+
+  func SOGetTargets
+    void
+    NumBuffers UINT
+    ppSOTargets ID3D10Buffer** postCount=NumBuffers
+    pOffsets UINT* postCount=NumBuffers
+
+  func RSGetState
+    void
+    ppRasterizerState ID3D10RasterizerState**
+
+  func RSGetViewports
+    void
+    NumViewports UINT*
+    pViewports D3D10_VIEWPORT* count=NumViewports
+
+  func RSGetScissorRects
+    void
+    NumRects UINT*
+    pRects D3D10_RECT* count=NumRects
+
+  func GetDeviceRemovedReason
+    HRESULT
+
+  func SetExceptionMode
+    HRESULT
+    RaiseFlags D3D10_RAISE_FLAG
+
+  func GetExceptionMode
+    D3D10_RAISE_FLAG
+
+  func GetPrivateData
+    HRESULT
+    guid REFGUID
+    pDataSize UINT*
+    pData void*
+
+  func SetPrivateData
+    HRESULT
+    guid REFGUID
+    DataSize UINT
+    pData "const void*" length=DataSize
+
+  func SetPrivateDataInterface
+    HRESULT
+    guid REFGUID
+    pData "const IUnknown*"
+
+  func ClearState
+    void
+
+  func Flush
+    void
+
+  func CreateBuffer
+    HRESULT
+    pDesc "const D3D10_BUFFER_DESC*"
+    pInitialData "const D3D10_SUBRESOURCE_DATA*"
+    ppBuffer ID3D10Buffer**
+
+  func CreateTexture1D
+    HRESULT
+    pDesc "const D3D10_TEXTURE1D_DESC*"
+    pInitialData "const D3D10_SUBRESOURCE_DATA*"
+    ppTexture1D ID3D10Texture1D**
+
+  func CreateTexture2D
+    HRESULT
+    pDesc "const D3D10_TEXTURE2D_DESC*"
+    pInitialData "const D3D10_SUBRESOURCE_DATA*"
+    ppTexture2D ID3D10Texture2D**
+
+  func CreateTexture3D
+    HRESULT
+    pDesc "const D3D10_TEXTURE3D_DESC*"
+    pInitialData "const D3D10_SUBRESOURCE_DATA*"
+    ppTexture3D ID3D10Texture3D**
+
+  func CreateShaderResourceView
+    HRESULT
+    pResource ID3D10Resource*
+    pDesc "const D3D10_SHADER_RESOURCE_VIEW_DESC*"
+    ppSRView ID3D10ShaderResourceView**
+
+  func CreateRenderTargetView
+    HRESULT
+    pResource ID3D10Resource*
+    pDesc "const D3D10_RENDER_TARGET_VIEW_DESC*"
+    ppRTView ID3D10RenderTargetView**
+
+  func CreateDepthStencilView
+    HRESULT
+    pResource ID3D10Resource*
+    pDesc "const D3D10_DEPTH_STENCIL_VIEW_DESC*"
+    ppDepthStencilView ID3D10DepthStencilView**
+
+  func CreateInputLayout
+    HRESULT
+    pInputElementDescs "const D3D10_INPUT_ELEMENT_DESC*" count=NumElements
+    NumElements UINT
+    pShaderBytecodeWithInputSignature "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    ppInputLayout ID3D10InputLayout**
+
+  func CreateVertexShader
+    HRESULT
+    pShaderBytecode "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    ppVertexShader ID3D10VertexShader**
+
+  func CreateGeometryShader
+    HRESULT
+    pShaderBytecode "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    ppGeometryShader ID3D10GeometryShader**
+
+  func CreateGeometryShaderWithStreamOutput
+    HRESULT
+    pShaderBytecode "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    pSODeclaration "const D3D10_SO_DECLARATION_ENTRY*" count=NumEntries
+    NumEntries UINT
+    OutputStreamStride UINT
+    ppGeometryShader ID3D10GeometryShader**
+
+  func CreatePixelShader
+    HRESULT
+    pShaderBytecode "const void*" length=BytecodeLength
+    BytecodeLength SIZE_T
+    ppPixelShader ID3D10PixelShader**
+
+  func CreateBlendState
+    HRESULT
+    pBlendStateDesc "const D3D10_BLEND_DESC*"
+    ppBlendState ID3D10BlendState**
+
+  func CreateDepthStencilState
+    HRESULT
+    pDepthStencilDesc "const D3D10_DEPTH_STENCIL_DESC*"
+    ppDepthStencilState ID3D10DepthStencilState**
+
+  func CreateRasterizerState
+    HRESULT
+    pRasterizerDesc "const D3D10_RASTERIZER_DESC*"
+    ppRasterizerState ID3D10RasterizerState**
+
+  func CreateSamplerState
+    HRESULT
+    pSamplerDesc "const D3D10_SAMPLER_DESC*"
+    ppSamplerState ID3D10SamplerState**
+
+  func CreateQuery
+    HRESULT
+    pQueryDesc "const D3D10_QUERY_DESC*"
+    ppQuery ID3D10Query**
+
+  func CreatePredicate
+    HRESULT
+    pPredicateDesc "const D3D10_QUERY_DESC*"
+    ppPredicate ID3D10Predicate**
+
+  func CreateCounter
+    HRESULT
+    pCounterDesc "const D3D10_COUNTER_DESC*"
+    ppCounter ID3D10Counter**
+
+  func CheckFormatSupport
+    HRESULT
+    Format DXGI_FORMAT
+    pFormatSupport UINT*
+
+  func CheckMultisampleQualityLevels
+    HRESULT
+    Format DXGI_FORMAT
+    SampleCount UINT
+    pNumQualityLevels UINT*
+
+  func CheckCounterInfo
+    void
+    pCounterInfo D3D10_COUNTER_INFO*
+
+  func CheckCounter
+    HRESULT
+    pDesc "const D3D10_COUNTER_DESC*"
+    pType D3D10_COUNTER_TYPE*
+    pActiveCounters UINT*
+    szName LPSTR
+    pNameLength UINT*
+    szUnits LPSTR
+    pUnitsLength UINT*
+    szDescription LPSTR
+    pDescriptionLength UINT*
+
+  func GetCreationFlags
+    D3D10_CREATE_DEVICE_FLAG
+
+  func OpenSharedResource
+    HRESULT
+    hResource HANDLE
+    ReturnedInterface REFIID
+    ppResource void** interfaceId=ReturnedInterface
+
+  func SetTextFilterSize
+    void
+    Width UINT
+    Height UINT
+
+  func GetTextFilterSize
+    void
+    pWidth UINT*
+    pHeight UINT*
+
+

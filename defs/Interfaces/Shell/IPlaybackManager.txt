@@ -1,0 +1,20 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPlaybackManager base=IUnknown id={0F3C1B01-8199-4173-BA78-985882266F7A} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Advise
+    HRESULT
+    type PBM_SESSION_TYPE
+    pEvents IPlaybackManagerEvents*
+    pdwSessionId DWORD*
+
+  func Unadvise
+    HRESULT
+    dwSessionId DWORD
+
+  func ChangeSessionState
+    HRESULT
+    dwSessionId DWORD
+    state PBM_PLAY_STATE
+    mute PBM_MUTE_STATE
+
+

@@ -1,0 +1,9 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Geometry.txt
+
+ingterface ID2D1RectangleGeometry base=ID2D1Geometry id={2cd906a2-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetRect
+    void
+    rect D2D1_RECT_F*
+
+

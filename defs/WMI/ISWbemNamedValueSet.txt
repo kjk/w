@@ -1,0 +1,38 @@
+include Interfaces\IDispatch.txt
+include WMI\WMI.h.txt
+
+ingterface ISWbemNamedValueSet base=IDispatch id={CF2376EA-CE8C-11d1-8B05-00600806D9B6} errorFunc=HRESULT onlineHelp=MSDN category="System Administration/Windows Management Instrumentation (WMI)/Scripting"
+  func get__NewEnum
+    WBEMSTATUS
+    pUnk IUnknown**
+
+  func Item
+    WBEMSTATUS
+    strName BSTR
+    iFlags long
+    objWbemNamedValue ISWbemNamedValue**
+
+  func get_Count
+    WBEMSTATUS
+    iCount long*
+
+  func Add
+    WBEMSTATUS
+    strName BSTR
+    varValue VARIANT*
+    iFlags long
+    objWbemNamedValue ISWbemNamedValue**
+
+  func Remove
+    WBEMSTATUS
+    strName BSTR
+    iFlags long
+
+  func Clone
+    WBEMSTATUS
+    objWbemNamedValueSet ISWbemNamedValueSet**
+
+  func DeleteAll
+    WBEMSTATUS
+
+

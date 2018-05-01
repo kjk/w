@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRSurfaceAllocatorNotify9 base=IUnknown id={dca3f5df-bb3a-4d03-bd81-84614bfbfa0c} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func AdviseSurfaceAllocator
+    HRESULT
+    dwUserID DWORD_PTR
+    lpIVRMSurfaceAllocator IVMRSurfaceAllocator9*
+
+  func SetD3DDevice
+    HRESULT
+    lpD3DDevice IDirect3DDevice9*
+    hMonitor HMONITOR
+
+  func ChangeD3DDevice
+    HRESULT
+    lpD3DDevice IDirect3DDevice9*
+    hMonitor HMONITOR
+
+  func AllocateSurfaceHelper
+    HRESULT
+    lpAllocInfo VMR9AllocationInfo*
+    lpNumBuffers DWORD*
+    lplpSurface IDirect3DSurface9**
+
+  func NotifyEvent
+    HRESULT
+    EventCode [MediaEventCode] display=LONG
+    Param1 LONG_PTR
+    Param2 LONG_PTR
+
+

@@ -1,0 +1,82 @@
+include Headers\windows.h.txt
+
+dll CryptSp.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+sourceModule Advapi32.dll include=Windows\Advapi32.xml
+func CryptAcquireContextA
+
+func CryptAcquireContextW
+
+func CryptContextAddRef
+
+func CryptCreateHash
+
+func CryptDecrypt
+
+func CryptDeriveKey
+
+func CryptDestroyHash
+
+func CryptDestroyKey
+
+func CryptDuplicateHash
+
+func CryptDuplicateKey
+
+func CryptEncrypt
+
+func CryptEnumProvidersA
+
+func CryptEnumProvidersW
+
+func CryptEnumProviderTypesA
+
+func CryptEnumProviderTypesW
+
+func CryptExportKey
+
+func CryptGenKey
+
+func CryptGenRandom
+
+func CryptGetDefaultProviderA
+
+func CryptGetDefaultProviderW
+
+func CryptGetHashParam
+
+func CryptGetKeyParam
+
+func CryptGetProvParam
+
+func CryptGetUserKey
+
+func CryptHashData
+
+func CryptHashSessionKey
+
+func CryptImportKey
+
+func CryptReleaseContext
+
+func CryptSetHashParam
+
+func CryptSetKeyParam
+
+func CryptSetProviderA
+
+func CryptSetProviderExA
+
+func CryptSetProviderExW
+
+func CryptSetProviderW
+
+func CryptSetProvParam
+
+func CryptSignHashA
+
+func CryptSignHashW
+
+func CryptVerifySignatureA
+
+func CryptVerifySignatureW
+

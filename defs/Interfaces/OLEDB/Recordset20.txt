@@ -1,0 +1,66 @@
+include Interfaces\OLEDB\Recordset15.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface Recordset20 base=Recordset15 id={0000154F-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func Cancel
+    [OLEDB_HRESULT]
+
+  func get_DataSource
+    [OLEDB_HRESULT]
+    ppunkDataSource IUnknown**
+
+  func putref_DataSource
+    [OLEDB_HRESULT]
+    punkDataSource IUnknown*
+
+  func _xSave
+    [OLEDB_HRESULT]
+    FileName BSTR
+    PersistFormat PersistFormatEnum
+
+  func get_ActiveCommand
+    [OLEDB_HRESULT]
+    ppCmd IDispatch**
+
+  func put_StayInSync
+    [OLEDB_HRESULT]
+    bStayInSync VARIANT_BOOL
+
+  func get_StayInSync
+    [OLEDB_HRESULT]
+    pbStayInSync VARIANT_BOOL*
+
+  func GetString
+    [OLEDB_HRESULT]
+    StringFormat StringFormatEnum
+    NumRows long
+    ColumnDelimeter BSTR
+    RowDelimeter BSTR
+    NullExpr BSTR
+    pRetString BSTR*
+
+  func get_DataMember
+    [OLEDB_HRESULT]
+    pbstrDataMember BSTR*
+
+  func put_DataMember
+    [OLEDB_HRESULT]
+    bstrDataMember BSTR
+
+  func CompareBookmarks
+    [OLEDB_HRESULT]
+    Bookmark1 VARIANT
+    Bookmark2 VARIANT
+    pCompare CompareEnum*
+
+  func Clone
+    [OLEDB_HRESULT]
+    LockType LockTypeEnum
+    ppvObject _ADORecordset**
+
+  func Resync
+    [OLEDB_HRESULT]
+    AffectRecords AffectEnum
+    ResyncValues ResyncEnum
+
+

@@ -1,0 +1,46 @@
+include Headers\windows.h.txt
+include Headers\ip.h.txt
+
+dll Icmp.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Networking/IP Helper"
+func IcmpCloseHandle
+  BOOL
+  IcmpHandle HANDLE
+
+func IcmpCreateFile
+  success NotEqual=0
+  HANDLE
+
+func IcmpParseReplies
+  success NotEqual=0
+  DWORD
+  ReplyBuffer LPVOID length=ReplySize
+  ReplySize DWORD
+
+func IcmpSendEcho
+  success NotEqual=0
+  DWORD
+  IcmpHandle HANDLE
+  DestinationAddress IPAddr
+  RequestData LPVOID length=RequestSize
+  RequestSize WORD
+  RequestOptions PIP_OPTION_INFORMATION
+  ReplyBuffer LPVOID postLength=ReplySize
+  ReplySize DWORD
+  Timeout DWORD
+
+func IcmpSendEcho2
+  success NotEqual=0
+  DWORD
+  IcmpHandle HANDLE
+  Event HANDLE
+  ApcRoutine PIO_APC_ROUTINE
+  ApcContext PVOID
+  DestinationAddress IPAddr
+  RequestData LPVOID length=RequestSize
+  RequestSize WORD
+  RequestOptions PIP_OPTION_INFORMATION
+  ReplyBuffer LPVOID postLength=ReplySize
+  ReplySize DWORD
+  Timeout DWORD
+

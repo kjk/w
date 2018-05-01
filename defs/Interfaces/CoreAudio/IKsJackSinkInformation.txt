@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+include Interfaces\CoreAudio\coreaudio.h.txt
+
+ingterface IKsJackSinkInformation base=IUnknown id={D9BD72ED-290F-4581-9FF3-61027A8FE532} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/Core Audio/Device Topology"
+  func GetJackSinkInformation
+    [AUDCLNT_HRESULT]
+    pJackSinkInformation KSJACK_SINK_INFORMATION*
+
+

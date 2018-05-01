@@ -1,0 +1,18 @@
+include Interfaces\COM\IOleWindow.txt
+
+ingterface IDockingWindow base=IOleWindow id={012dd920-7b26-11d0-8ca9-00a0c92dbfe8} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func ShowDW
+    HRESULT
+    fShow BOOL
+
+  func CloseDW
+    HRESULT
+    dwReserved DWORD
+
+  func ResizeBorderDW
+    HRESULT
+    prcBorder LPCRECT
+    punkToolbarSite IUnknown*
+    fReserved BOOL
+
+

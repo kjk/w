@@ -1,0 +1,31 @@
+include Interfaces\IUnknown.txt
+
+ingterface IShellItem base=IUnknown id={43826d1e-e718-42ee-bc55-a1e261c37bfe} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func BindToHandler
+    HRESULT
+    pbc IBindCtx*
+    bhid REFGUID
+    riid REFIID
+    ppv void** interfaceId=riid
+
+  func GetParent
+    HRESULT
+    ppsi IShellItem**
+
+  func GetDisplayName
+    HRESULT
+    sigdnName SIGDN
+    ppszName LPWSTR*
+
+  func GetAttributes
+    HRESULT
+    sfgaoMask SFGAOF
+    psfgaoAttribs SFGAOF*
+
+  func Compare
+    HRESULT
+    psi IShellItem*
+    hint SICHINTF
+    piOrder int*
+
+

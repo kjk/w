@@ -1,0 +1,40 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAMExtDevice base=IUnknown id={B5730A90-1A2C-11cf-8C23-00AA006B6814} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetCapability
+    HRESULT
+    Capability long
+    pValue long*
+    pdblValue double*
+
+  func get_ExternalDeviceID
+    HRESULT
+    ppszData LPOLESTR*
+
+  func get_ExternalDeviceVersion
+    HRESULT
+    ppszData LPOLESTR*
+
+  func put_DevicePower
+    HRESULT
+    PowerMode long
+
+  func get_DevicePower
+    HRESULT
+    pPowerMode long*
+
+  func Calibrate
+    HRESULT
+    hEvent HEVENT
+    Mode long
+    pStatus long*
+
+  func put_DevicePort
+    HRESULT
+    DevicePort long
+
+  func get_DevicePort
+    HRESULT
+    pDevicePort long*
+
+

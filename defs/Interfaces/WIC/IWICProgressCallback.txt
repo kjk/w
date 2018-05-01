@@ -1,0 +1,11 @@
+include Interfaces\WIC\WindowsCodecs.txt
+include Interfaces\IUnknown.txt
+
+ingterface IWICProgressCallback base=IUnknown id={4776F9CD-9517-45FA-BF24-E89C5EC5C60C} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/Windows Imaging Component (WIC)"
+  func Notify
+    [WIC_HRESULT]
+    uFrameNum ULONG
+    operation WICProgressOperation
+    dblProgress double
+
+

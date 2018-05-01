@@ -1,0 +1,446 @@
+include Interfaces\Debugger\IDebugSymbols2.txt
+
+ingterface IDebugSymbols3 base=IDebugSymbols2 id={f02fbecc-50ac-4f36-9ad9-c975e8f32ff8} errorFunc=HRESULT onlineHelp=MSDN category="Diagnostics/Debugging Tools for Windows/Debugger Engine/Client COM Interfaces"
+  func GetNameByOffsetWide
+    HRESULT
+    Offset ULONG64
+    NameBuffer PWSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+    Displacement PULONG64
+
+  func GetOffsetByNameWide
+    HRESULT
+    Symbol PCWSTR
+    Offset PULONG64
+
+  func GetNearNameByOffsetWide
+    HRESULT
+    Offset ULONG64
+    Delta LONG
+    NameBuffer PWSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+    Displacement PULONG64
+
+  func GetLineByOffsetWide
+    HRESULT
+    Offset ULONG64
+    Line PULONG
+    FileBuffer PWSTR
+    FileBufferSize ULONG
+    FileSize PULONG
+    Displacement PULONG64
+
+  func GetOffsetByLineWide
+    HRESULT
+    Line ULONG
+    File PCWSTR
+    Offset PULONG64
+
+  func GetModuleByModuleNameWide
+    HRESULT
+    Name PCWSTR
+    StartIndex ULONG
+    Index PULONG
+    Base PULONG64
+
+  func GetSymbolModuleWide
+    HRESULT
+    Symbol PCWSTR
+    Base PULONG64
+
+  func GetTypeNameWide
+    HRESULT
+    Module ULONG64
+    TypeId ULONG
+    NameBuffer PWSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+
+  func GetTypeIdWide
+    HRESULT
+    Module ULONG64
+    Name PCWSTR
+    TypeId PULONG
+
+  func GetFieldOffsetWide
+    HRESULT
+    Module ULONG64
+    TypeId ULONG
+    Field PCWSTR
+    Offset PULONG
+
+  func GetSymbolTypeIdWide
+    HRESULT
+    Symbol PCWSTR
+    TypeId PULONG
+    Module PULONG64
+
+  func GetScopeSymbolGroup2
+    HRESULT
+    Flags [DEBUG_SCOPE_GROUP_FLAGS]
+    Update PDEBUG_SYMBOL_GROUP2
+    Symbols PDEBUG_SYMBOL_GROUP2*
+
+  func CreateSymbolGroup2
+    HRESULT
+    Group PDEBUG_SYMBOL_GROUP2*
+
+  func StartSymbolMatchWide
+    HRESULT
+    Pattern PCWSTR
+    Handle PULONG64
+
+  func GetNextSymbolMatchWide
+    HRESULT
+    Handle ULONG64
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    MatchSize PULONG
+    Offset PULONG64
+
+  func ReloadWide
+    HRESULT
+    Module PCWSTR
+
+  func GetSymbolPathWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    PathSize PULONG
+
+  func SetSymbolPathWide
+    HRESULT
+    Path PCWSTR
+
+  func AppendSymbolPathWide
+    HRESULT
+    Addition PCWSTR
+
+  func GetImagePathWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    PathSize PULONG
+
+  func SetImagePathWide
+    HRESULT
+    Path PCWSTR
+
+  func AppendImagePathWide
+    HRESULT
+    Addition PCWSTR
+
+  func GetSourcePathWide
+    HRESULT
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    PathSize PULONG
+
+  func GetSourcePathElementWide
+    HRESULT
+    Index ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    ElementSize PULONG
+
+  func SetSourcePathWide
+    HRESULT
+    Path PCWSTR
+
+  func AppendSourcePathWide
+    HRESULT
+    Addition PCWSTR
+
+  func FindSourceFileWide
+    HRESULT
+    StartElement ULONG
+    File PCWSTR
+    Flags [DEBUG_FIND_SOURCE_FLAGS]
+    FoundElement PULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    FoundSize PULONG
+
+  func GetSourceFileLineOffsetsWide
+    HRESULT
+    File PCWSTR
+    Buffer PULONG64
+    BufferLines ULONG
+    FileLines PULONG
+
+  func GetModuleVersionInformationWide
+    HRESULT
+    Index ULONG
+    Base ULONG64
+    Item PCWSTR
+    Buffer PVOID
+    BufferSize ULONG
+    VerInfoSize PULONG
+
+  func GetModuleNameStringWide
+    HRESULT
+    Which [DEBUG_MODNAME]
+    Index ULONG
+    Base ULONG64
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    NameSize PULONG
+
+  func GetConstantNameWide
+    HRESULT
+    Module ULONG64
+    TypeId ULONG
+    Value ULONG64
+    NameBuffer PWSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+
+  func GetFieldNameWide
+    HRESULT
+    Module ULONG64
+    TypeId ULONG
+    FieldIndex ULONG
+    NameBuffer PWSTR
+    NameBufferSize ULONG
+    NameSize PULONG
+
+  func IsManagedModule
+    HRESULT
+    Index ULONG
+    Base ULONG64
+
+  func GetModuleByModuleName2
+    HRESULT
+    Name PCSTR
+    StartIndex ULONG
+    Flags [DEBUG_GETMOD_FLAGS]
+    Index PULONG
+    Base PULONG64
+
+  func GetModuleByModuleName2Wide
+    HRESULT
+    Name PCWSTR
+    StartIndex ULONG
+    Flags [DEBUG_GETMOD_FLAGS]
+    Index PULONG
+    Base PULONG64
+
+  func GetModuleByOffset2
+    HRESULT
+    Offset ULONG64
+    StartIndex ULONG
+    Flags [DEBUG_GETMOD_FLAGS]
+    Index PULONG
+    Base PULONG64
+
+  func AddSyntheticModule
+    HRESULT
+    Base ULONG64
+    Size ULONG
+    ImagePath PCSTR
+    ModuleName PCSTR
+    Flags ULONG
+
+  func AddSyntheticModuleWide
+    HRESULT
+    Base ULONG64
+    Size ULONG
+    ImagePath PCWSTR
+    ModuleName PCWSTR
+    Flags ULONG
+
+  func RemoveSyntheticModule
+    HRESULT
+    Base ULONG64
+
+  func GetCurrentScopeFrameIndex
+    HRESULT
+    Index PULONG
+
+  func SetScopeFrameByIndex
+    HRESULT
+    Index ULONG
+
+  func SetScopeFromJitDebugInfo
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    InfoOffset ULONG64
+
+  func SetScopeFromStoredEvent
+    HRESULT
+
+  func OutputSymbolByOffset
+    HRESULT
+    OutputControl [DEBUG_OUTCTL_FLAGS]
+    Flags [DEBUG_OUTSYM_FLAGS]
+    Offset ULONG64
+
+  func GetFunctionEntryByOffset
+    HRESULT
+    Offset ULONG64
+    Flags [DEBUG_GETFNENT_FLAGS]
+    Buffer PVOID
+    BufferSize ULONG
+    BufferNeeded PULONG
+
+  func GetFieldTypeAndOffset
+    HRESULT
+    Module ULONG64
+    ContainerTypeId ULONG
+    Field PCSTR
+    FieldTypeId PULONG
+    Offset PULONG
+
+  func GetFieldTypeAndOffsetWide
+    HRESULT
+    Module ULONG64
+    ContainerTypeId ULONG
+    Field PCWSTR
+    FieldTypeId PULONG
+    Offset PULONG
+
+  func AddSyntheticSymbol
+    HRESULT
+    Offset ULONG64
+    Size ULONG
+    Name PCSTR
+    Flags ULONG
+    Id PDEBUG_MODULE_AND_ID
+
+  func AddSyntheticSymbolWide
+    HRESULT
+    Offset ULONG64
+    Size ULONG
+    Name PCWSTR
+    Flags ULONG
+    Id PDEBUG_MODULE_AND_ID
+
+  func RemoveSyntheticSymbol
+    HRESULT
+    Id PDEBUG_MODULE_AND_ID
+
+  func GetSymbolEntriesByOffset
+    HRESULT
+    Offset ULONG64
+    Flags ULONG
+    Ids PDEBUG_MODULE_AND_ID postCount=IdsCount
+    Displacements PULONG64 postCount=IdsCount
+    IdsCount ULONG
+    Entries PULONG
+
+  func GetSymbolEntriesByName
+    HRESULT
+    Symbol PCSTR
+    Flags ULONG
+    Ids PDEBUG_MODULE_AND_ID postCount=IdsCount
+    IdsCount ULONG
+    Entries PULONG
+
+  func GetSymbolEntriesByNameWide
+    HRESULT
+    Symbol PCWSTR
+    Flags ULONG
+    Ids PDEBUG_MODULE_AND_ID postCount=IdsCount
+    IdsCount ULONG
+    Entries PULONG
+
+  func GetSymbolEntryByToken
+    HRESULT
+    ModuleBase ULONG64
+    Token ULONG
+    Id PDEBUG_MODULE_AND_ID
+
+  func GetSymbolEntryInformation
+    HRESULT
+    Id PDEBUG_MODULE_AND_ID
+    Info PDEBUG_SYMBOL_ENTRY
+
+  func GetSymbolEntryString
+    HRESULT
+    Id PDEBUG_MODULE_AND_ID
+    Which ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    StringSize PULONG
+
+  func GetSymbolEntryStringWide
+    HRESULT
+    Id PDEBUG_MODULE_AND_ID
+    Which ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    StringSize PULONG
+
+  func GetSymbolEntryOffsetRegions
+    HRESULT
+    Id PDEBUG_MODULE_AND_ID
+    Flags ULONG
+    Regions PDEBUG_OFFSET_REGION postCount=RegionsCount
+    RegionsCount ULONG
+    RegionsAvail PULONG
+
+  func GetSymbolEntryBySymbolEntry
+    HRESULT
+    FromId PDEBUG_MODULE_AND_ID
+    Flags ULONG
+    ToId PDEBUG_MODULE_AND_ID
+
+  func GetSourceEntriesByOffset
+    HRESULT
+    Offset ULONG64
+    Flags ULONG
+    Entries PDEBUG_SYMBOL_SOURCE_ENTRY postCount=EntriesCount
+    EntriesCount ULONG
+    EntriesAvail PULONG
+
+  func GetSourceEntriesByLine
+    HRESULT
+    Line ULONG
+    File PCSTR
+    Flags [DEBUG_GSEL_FLAGS]
+    Entries PDEBUG_SYMBOL_SOURCE_ENTRY postCount=EntriesCount
+    EntriesCount ULONG
+    EntriesAvail PULONG
+
+  func GetSourceEntriesByLineWide
+    HRESULT
+    Line ULONG
+    File PCWSTR
+    Flags [DEBUG_GSEL_FLAGS]
+    Entries PDEBUG_SYMBOL_SOURCE_ENTRY postCount=EntriesCount
+    EntriesCount ULONG
+    EntriesAvail PULONG
+
+  func GetSourceEntryString
+    HRESULT
+    Entry PDEBUG_SYMBOL_SOURCE_ENTRY
+    Which ULONG
+    Buffer PSTR outputOnly
+    BufferSize ULONG
+    StringSize PULONG
+
+  func GetSourceEntryStringWide
+    HRESULT
+    Entry PDEBUG_SYMBOL_SOURCE_ENTRY
+    Which ULONG
+    Buffer PWSTR outputOnly
+    BufferSize ULONG
+    StringSize PULONG
+
+  func GetSourceEntryOffsetRegions
+    HRESULT
+    Entry PDEBUG_SYMBOL_SOURCE_ENTRY
+    Flags ULONG
+    Regions PDEBUG_OFFSET_REGION postCount=RegionsCount
+    RegionsCount ULONG
+    RegionsAvail PULONG
+
+  func GetSourceEntryBySourceEntry
+    HRESULT
+    FromEntry PDEBUG_SYMBOL_SOURCE_ENTRY
+    Flags ULONG
+    ToEntry PDEBUG_SYMBOL_SOURCE_ENTRY
+
+

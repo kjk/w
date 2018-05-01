@@ -1,0 +1,28 @@
+include Interfaces\IUnknown.txt
+include Headers\URL.h.txt
+
+ingterface IBindHost base=IUnknown id={fc4801a1-2ba9-11cf-a229-00aa003d7352} errorFunc=HRESULT onlineHelp=MSDN category="Web Development/Internet Explorer Development/URL Monikers"
+  func CreateMoniker
+    HRESULT
+    szName LPOLESTR
+    pBC IBindCtx*
+    ppmk IMoniker**
+    dwReserved DWORD
+
+  func MonikerBindToStorage
+    HRESULT
+    pMk IMoniker*
+    pBC IBindCtx*
+    pBSC IBindStatusCallback*
+    riid REFIID
+    ppvObj void** interfaceId=riid
+
+  func MonikerBindToObject
+    HRESULT
+    pMk IMoniker*
+    pBC IBindCtx*
+    pBSC IBindStatusCallback*
+    riid REFIID
+    ppvObj void** interfaceId=riid
+
+

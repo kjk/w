@@ -1,0 +1,122 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDirect3D9 base=IUnknown id={81BDCBCA-64D4-426d-AE8D-AD0147F4275C} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/9"
+  func RegisterSoftwareDevice
+    HRESULT
+    pInitializeFunction void*
+
+  func GetAdapterCount
+    success NotEqual=0
+    UINT
+
+  func GetAdapterIdentifier
+    HRESULT
+    Adapter UINT
+    Flags DWORD
+    pIdentifier D3DADAPTER_IDENTIFIER9*
+
+  func GetAdapterModeCount
+    UINT
+    Adapter UINT
+    Format D3DFORMAT
+
+  func EnumAdapterModes
+    HRESULT
+    Adapter UINT
+    Format D3DFORMAT
+    Mode UINT
+    pMode D3DDISPLAYMODE*
+
+  func GetAdapterDisplayMode
+    HRESULT
+    Adapter UINT
+    pMode D3DDISPLAYMODE*
+
+  func CheckDeviceType
+    HRESULT
+    Adapter UINT
+    DevType D3DDEVTYPE
+    AdapterFormat D3DFORMAT
+    BackBufferFormat D3DFORMAT
+    bWindowed BOOL
+
+  func CheckDeviceFormat
+    HRESULT
+    Adapter UINT
+    DeviceType D3DDEVTYPE
+    AdapterFormat D3DFORMAT
+    Usage [D3DUSAGE]
+    RType D3DRESOURCETYPE
+    CheckFormat D3DFORMAT
+
+  func CheckDeviceMultiSampleType
+    HRESULT
+    Adapter UINT
+    DeviceType D3DDEVTYPE
+    SurfaceFormat D3DFORMAT
+    Windowed BOOL
+    MultiSampleType D3DMULTISAMPLE_TYPE
+    pQualityLevels DWORD*
+
+  func CheckDepthStencilMatch
+    HRESULT
+    Adapter UINT
+    DeviceType D3DDEVTYPE
+    AdapterFormat D3DFORMAT
+    RenderTargetFormat D3DFORMAT
+    DepthStencilFormat D3DFORMAT
+
+  func CheckDeviceFormatConversion
+    HRESULT
+    Adapter UINT
+    DeviceType D3DDEVTYPE
+    SourceFormat D3DFORMAT
+    TargetFormat D3DFORMAT
+
+  func GetDeviceCaps
+    HRESULT
+    Adapter UINT
+    DeviceType D3DDEVTYPE
+    pCaps D3DCAPS9*
+
+  func GetAdapterMonitor
+    success NotEqual=0
+    HMONITOR
+    Adapter UINT
+
+  func CreateDevice
+    HRESULT
+    Adapter UINT
+    DeviceType D3DDEVTYPE
+    hFocusWindow HWND
+    BehaviorFlags [D3DCREATE]
+    pPresentationParameters D3DPRESENT_PARAMETERS*
+    ppReturnedDeviceInterface IDirect3DDevice9**
+
+  interface IDirect3DDevice9
+
+  interface IDirect3DDevice9Ex
+
+  interface IDirect3DSurface9
+
+  interface IDirect3DIndexBuffer9
+
+  interface IDirect3DSwapChain9
+
+  interface IDirect3DTexture9
+
+  interface IDirect3DVolumeTexture9
+
+  interface IDirect3DVertexBuffer9
+
+  interface IDirect3DStateBlock9
+
+  interface IDirect3DVertexDeclaration9
+
+  interface IDirect3DVertexShader9
+
+  interface IDirect3DPixelShader9
+
+  interface IDirect3DQuery9
+
+

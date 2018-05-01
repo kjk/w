@@ -1,0 +1,25 @@
+include Interfaces\IUnknown.txt
+include WindowsStore\Packaging\Packaging.h.txt
+
+ingterface IAppxFile base=IUnknown id={91df827b-94fd-468f-827b-57f41b2f6f2e} errorFunc=HRESULT onlineHelp=MSDN category="Application Installation and Servicing/Windows Store/Packaging"
+  func GetCompressionOption
+    HRESULT
+    compressionOption APPX_COMPRESSION_OPTION*
+
+  func GetContentType
+    HRESULT
+    contentType LPWSTR*
+
+  func GetName
+    HRESULT
+    fileName LPWSTR*
+
+  func GetSize
+    HRESULT
+    size UINT64*
+
+  func GetStream
+    HRESULT
+    stream IStream**
+
+

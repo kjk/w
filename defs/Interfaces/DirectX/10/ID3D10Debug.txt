@@ -1,0 +1,32 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\10\D3D10.h.txt
+
+ingterface ID3D10Debug base=IUnknown id={9B7E4E01-342C-4106-A19F-4F2704F689F0} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct3D/10/Core"
+  func SetFeatureMask
+    HRESULT
+    Mask UINT
+
+  func GetFeatureMask
+    success NotEqual=0
+    UINT
+
+  func SetPresentPerRenderOpDelay
+    HRESULT
+    Milliseconds UINT
+
+  func GetPresentPerRenderOpDelay
+    success NotEqual=0
+    UINT
+
+  func SetSwapChain
+    HRESULT
+    pSwapChain IDXGISwapChain*
+
+  func GetSwapChain
+    HRESULT
+    ppSwapChain IDXGISwapChain**
+
+  func Validate
+    HRESULT
+
+

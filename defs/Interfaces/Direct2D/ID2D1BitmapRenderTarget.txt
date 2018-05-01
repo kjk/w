@@ -1,0 +1,9 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1RenderTarget.txt
+
+ingterface ID2D1BitmapRenderTarget base=ID2D1RenderTarget id={2cd90695-12e2-11dc-9fed-001143a055f9} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func GetBitmap
+    [D2D_HRESULT]
+    bitmap ID2D1Bitmap**
+
+

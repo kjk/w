@@ -1,0 +1,9 @@
+include Interfaces\Shell\FolderItems.txt
+
+ingterface FolderItems2 base=FolderItems id={C94F0AD0-F363-11d2-A327-00C04F8EEC7F} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Shell Objects for Scripting"
+  func InvokeVerbEx
+    HRESULT
+    vVerb VARIANT
+    vArgs VARIANT
+
+

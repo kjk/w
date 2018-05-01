@@ -1,0 +1,5 @@
+include Interfaces\OLEDB\ADOConnectionConstruction15.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface ADOConnectionConstruction base=ADOConnectionConstruction15 id={00000551-0000-0010-8000-00AA006D2EA4} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+

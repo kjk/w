@@ -1,0 +1,23 @@
+include Interfaces\OLEDB\IRowsetLocate.txt
+include Interfaces\OLEDB\OLEDB.h.txt
+
+ingterface IRowsetScroll base=IRowsetLocate id={0c733a7e-2a1c-11ce-ade5-00aa0044773d} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Data Access Components/Microsoft OLE DB"
+  func GetApproximatePosition
+    [OLEDB_HRESULT]
+    hReserved HCHAPTER
+    cbBookmark DBBKMARK
+    pBookmark "const BYTE*" length=cbBookmark
+    pulPosition DBCOUNTITEM*
+    pcRows DBCOUNTITEM*
+
+  func GetRowsAtRatio
+    [OLEDB_HRESULT]
+    hReserved1 HWATCHREGION
+    hReserved2 HCHAPTER
+    ulNumerator DBCOUNTITEM
+    ulDenominator DBCOUNTITEM
+    cRows DBROWCOUNT
+    pcRowsObtained DBCOUNTITEM*
+    prghRows HROW** derefPostCount=pcRowsObtained
+
+

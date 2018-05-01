@@ -1,0 +1,22 @@
+include Interfaces\IUnknown.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IEnumSingleItemExceptions base=IUnknown id={e563381c-1b4d-4c66-9796-c86faccdcd40} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func Next
+    HRESULT
+    cExceptions ULONG
+    ppSingleItemException ISingleItemException** postCount=pcFetched
+    pcFetched ULONG*
+
+  func Skip
+    HRESULT
+    cExceptions ULONG
+
+  func Reset
+    HRESULT
+
+  func Clone
+    HRESULT
+    ppEnum IEnumSingleItemExceptions**
+
+

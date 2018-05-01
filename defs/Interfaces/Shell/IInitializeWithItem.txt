@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IInitializeWithItem base=IUnknown id={7f73be3f-fb79-493c-a6c7-7ee14e245841} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Initialize
+    HRESULT
+    psi IShellItem*
+    grfMode [STGM_FLAGS]
+
+

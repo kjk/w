@@ -1,0 +1,182 @@
+include Headers\windows.h.txt
+include Headers\security.h.txt
+
+dll Credui.dll callingConvention=STDCALL errorFunc=GetLastError onlineHelp=MSDN
+category "Security and Identity/Authentication/Credentials Management UI"
+category "Security and Identity/Authentication/Low-level Credentials Management"
+category "Security and Identity/Authentication/Security Support Provider Interface (SSPI)"
+flag [CredUIFlags] DWORD display=DWORD
+  CREDUI_FLAGS_INCORRECT_PASSWORD          0x00001
+  CREDUI_FLAGS_DO_NOT_PERSIST              0x00002
+  CREDUI_FLAGS_REQUEST_ADMINISTRATOR       0x00004
+  CREDUI_FLAGS_EXCLUDE_CERTIFICATES        0x00008
+  CREDUI_FLAGS_REQUIRE_CERTIFICATE         0x00010
+  CREDUI_FLAGS_SHOW_SAVE_CHECK_BOX         0x00040
+  CREDUI_FLAGS_ALWAYS_SHOW_UI              0x00080
+  CREDUI_FLAGS_REQUIRE_SMARTCARD           0x00100
+  CREDUI_FLAGS_PASSWORD_ONLY_OK            0x00200
+  CREDUI_FLAGS_VALIDATE_USERNAME           0x00400
+  CREDUI_FLAGS_COMPLETE_USERNAME           0x00800
+  CREDUI_FLAGS_PERSIST                     0x01000
+  CREDUI_FLAGS_SERVER_CREDENTIAL           0x04000
+  CREDUI_FLAGS_EXPECT_CONFIRMATION         0x20000
+  CREDUI_FLAGS_GENERIC_CREDENTIALS         0x40000
+  CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS 0x80000
+  CREDUI_FLAGS_KEEP_USERNAME               0x100000
+
+struct CREDUI_INFO
+  cbSize DWORD
+  hwndParent HWND
+  pszMessageText PCTSTR
+  pszCaptionText PCTSTR
+  hbmBanner HBITMAP
+
+pointer PCREDUI_INFO CREDUI_INFO
+
+struct SEC_WINNT_CREDUI_CONTEXT_VECTOR
+  CredUIContextArrayOffset ULONG
+  CredUIContextCount USHORT
+
+pointer PSEC_WINNT_CREDUI_CONTEXT_VECTOR SEC_WINNT_CREDUI_CONTEXT_VECTOR
+
+pointer PSEC_WINNT_CREDUI_CONTEXT_VECTOR* PSEC_WINNT_CREDUI_CONTEXT_VECTOR
+
+struct CREDUI_INFOW
+  cbSize DWORD
+  hwndParent HWND
+  pszMessageText PCWSTR
+  pszCaptionText PCWSTR
+  hbmBanner HBITMAP
+
+pointer PCREDUI_INFOW CREDUI_INFOW
+
+struct SEC_WINNT_CREDUI_CONTEXT
+  cbHeaderLength USHORT
+  CredUIContextHandle HANDLE
+  UIInfo PCREDUI_INFOW
+  dwAuthError ULONG
+  pInputAuthIdentity PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+  TargetName PUNICODE_STRING
+
+pointer PSEC_WINNT_CREDUI_CONTEXT SEC_WINNT_CREDUI_CONTEXT
+
+pointer PSEC_WINNT_CREDUI_CONTEXT* PSEC_WINNT_CREDUI_CONTEXT
+
+func CredUICmdLinePromptForCredentials bothCharset
+  [ERROR_CODE]
+  pszTargetName PCTSTR
+  Reserved PCtxtHandle
+  dwAuthError DWORD
+  pszUserName PTSTR
+  ulUserNameMaxChars ULONG
+  pszPassword PTSTR
+  ulPasswordMaxChars ULONG
+  pfSave PBOOL
+  dwFlags [CredUIFlags]
+
+func CredUIConfirmCredentials bothCharset
+  [ERROR_CODE]
+  pszTargetName PCTSTR
+  bConfirm BOOL
+
+func CredUIParseUserName bothCharset
+  [ERROR_CODE]
+  pszUserName PCTSTR
+  pszUser PTSTR
+  ulUserMaxChars ULONG
+  pszDomain PTSTR
+  ulDomainMaxChars ULONG
+
+func CredUIPromptForCredentials bothCharset
+  [ERROR_CODE]
+  pUiInfo PCREDUI_INFO
+  pszTargetName PCTSTR
+  Reserved PCtxtHandle
+  dwAuthError DWORD
+  pszUserName PCTSTR
+  ulUserNameMaxChars ULONG
+  pszPassword PCTSTR
+  ulPasswordMaxChars ULONG
+  pfSave PBOOL
+  dwFlags [CredUIFlags]
+
+func CredUIPromptForWindowsCredentials bothCharset
+  [ERROR_CODE]
+  pUiInfo PCREDUI_INFO
+  dwAuthError DWORD
+  pulAuthPackage ULONG*
+  pvInAuthBuffer LPCVOID length=ulInAuthBufferSize
+  ulInAuthBufferSize ULONG
+  ppvOutAuthBuffer LPVOID* postLength=pulOutAuthBufferSize
+  pulOutAuthBufferSize ULONG*
+  pfSave BOOL*
+  dwFlags DWORD
+
+func CredUIReadSSOCredW
+  [ERROR_CODE]
+  pszRealm PCWSTR
+  ppszUsername PWSTR*
+
+func CredUIStoreSSOCredW
+  [ERROR_CODE]
+  pszRealm PCWSTR
+  pszUsername PCWSTR
+  pszPassword PCWSTR
+  bPersist BOOL
+
+func CredPackAuthenticationBuffer bothCharset
+  BOOL
+  dwFlags DWORD
+  pszUserName LPTSTR
+  pszPassword LPTSTR
+  pPackedCredentials PBYTE
+  pcbPackedCredentials DWORD*
+
+func CredUnPackAuthenticationBuffer bothCharset
+  BOOL
+  dwFlags DWORD
+  pAuthBuffer PVOID
+  cbAuthBuffer DWORD
+  pszUserName LPTSTR
+  pcchMaxUserName DWORD*
+  pszDomainName LPTSTR
+  pcchMaxDomainame DWORD*
+  pszPassword LPTSTR
+  pcchMaxPassword DWORD*
+
+func SspiGetCredUIContext
+  SECURITY_STATUS
+  ContextHandle HANDLE
+  CredType GUID*
+  LogonId LUID*
+  CredUIContexts PSEC_WINNT_CREDUI_CONTEXT_VECTOR*
+  TokenHandle HANDLE*
+
+func SspiIsPromptingNeeded
+  BOOLEAN
+  ErrorOrNtStatus "unsigned long"
+
+func SspiPromptForCredentials bothCharset
+  SECURITY_STATUS
+  pszTargetName PCTSTR
+  pUiInfo PCREDUI_INFOW
+  dwAuthError DWORD
+  pszPackage PCTSTR
+  pInputAuthIdentity PSEC_WINNT_AUTH_IDENTITY_OPAQUE
+  ppAuthIdentity PSEC_WINNT_AUTH_IDENTITY_OPAQUE*
+  pfSave PBOOL
+  dwFlags DWORD
+
+func SspiUnmarshalCredUIContext
+  SECURITY_STATUS
+  MarshaledCredUIContext PUCHAR
+  MarshaledCredUIContextLength ULONG
+  CredUIContext PSEC_WINNT_CREDUI_CONTEXT*
+
+func SspiUpdateCredentials
+  SECURITY_STATUS
+  ContextHandle HANDLE
+  CredType GUID*
+  FlatCredUIContextLength ULONG
+  FlatCredUIContext PUCHAR
+

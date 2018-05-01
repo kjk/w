@@ -1,0 +1,29 @@
+include Interfaces\IUnknown.txt
+
+ingterface IEnumShellImageStore base=IUnknown id={6DFD582B-92E3-11D1-98A3-00C04FB687DA} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func Reset
+    HRESULT
+
+  func Next
+    HRESULT
+    celt ULONG
+    prgElt PENUMSHELLIMAGESTOREDATA* postCount=pceltFetched
+    pceltFetched ULONG*
+
+  func Skip
+    HRESULT
+    celt ULONG
+
+  func Clone
+    HRESULT
+    ppEnum IEnumShellImageStore**
+
+  struct ENUMSHELLIMAGESTOREDATA pack=8
+  szPath "WCHAR [MAX_PATH]"
+  ftTimeStamp FILETIME
+
+  pointer PENUMSHELLIMAGESTOREDATA ENUMSHELLIMAGESTOREDATA
+
+  pointer PENUMSHELLIMAGESTOREDATA* PENUMSHELLIMAGESTOREDATA
+
+

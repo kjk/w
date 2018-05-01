@@ -1,0 +1,39 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRDeinterlaceControl base=IUnknown id={bb057577-0db8-4e6a-87a7-1a8c9a505a0f} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func GetNumberOfDeinterlaceModes
+    HRESULT
+    lpVideoDescription VMRVideoDesc*
+    lpdwNumDeinterlaceModes LPDWORD
+    lpDeinterlaceModes LPGUID
+
+  func GetDeinterlaceModeCaps
+    HRESULT
+    lpDeinterlaceMode LPGUID
+    lpVideoDescription VMRVideoDesc*
+    lpDeinterlaceCaps VMRDeinterlaceCaps*
+
+  func GetDeinterlaceMode
+    HRESULT
+    dwStreamID DWORD
+    lpDeinterlaceMode LPGUID
+
+  func SetDeinterlaceMode
+    HRESULT
+    dwStreamID DWORD
+    lpDeinterlaceMode LPGUID
+
+  func GetDeinterlacePrefs
+    HRESULT
+    lpdwDeinterlacePrefs LPDWORD
+
+  func SetDeinterlacePrefs
+    HRESULT
+    dwDeinterlacePrefs DWORD
+
+  func GetActualDeinterlaceMode
+    HRESULT
+    dwStreamID DWORD
+    lpDeinterlaceMode LPGUID
+
+

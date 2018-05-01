@@ -1,0 +1,28 @@
+include Interfaces\Direct2D\Direct2D.h.txt
+include Interfaces\Direct2D\ID2D1Properties.txt
+
+ingterface ID2D1Effect base=ID2D1Properties id={28211a43-7d89-476f-8181-2d6159b220ad} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/Direct2D"
+  func SetInput
+    void
+    index UINT32
+    input ID2D1Image*
+    invalidate BOOL
+
+  func SetInputCount
+    [D2D_HRESULT]
+    inputCount UINT32
+
+  func GetInput
+    void
+    index UINT32
+    input ID2D1Image**
+
+  func GetInputCount
+    success NotEqual=0
+    UINT32
+
+  func GetOutput
+    void
+    outputImage ID2D1Image**
+
+

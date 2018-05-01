@@ -1,0 +1,27 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBackgroundCopyError base=IUnknown id={19c613a0-fcb8-4f28-81ae-897c3d078f81} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func GetError
+    HRESULT
+    pContext BG_ERROR_CONTEXT*
+    pCode HRESULT*
+
+  func GetFile
+    HRESULT
+    pVal IBackgroundCopyFile**
+
+  func GetErrorDescription
+    HRESULT
+    LanguageId DWORD
+    pErrorDescription LPWSTR*
+
+  func GetErrorContextDescription
+    HRESULT
+    LanguageId DWORD
+    pContextDescription LPWSTR*
+
+  func GetProtocol
+    HRESULT
+    pProtocol LPWSTR*
+
+

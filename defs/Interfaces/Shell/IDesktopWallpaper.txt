@@ -1,0 +1,75 @@
+include Interfaces\IUnknown.txt
+
+ingterface IDesktopWallpaper base=IUnknown id={B92B56A9-8B55-4E14-9A89-0199BBB6F93B} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func SetWallpaper
+    HRESULT
+    monitorID LPCWSTR
+    wallpaper LPCWSTR
+
+  func GetWallpaper
+    HRESULT
+    monitorID LPCWSTR
+    wallpaper LPWSTR*
+
+  func GetMonitorDevicePathAt
+    HRESULT
+    monitorIndex UINT
+    monitorID LPWSTR*
+
+  func GetMonitorDevicePathCount
+    HRESULT
+    count UINT*
+
+  func GetMonitorRECT
+    HRESULT
+    monitorID LPCWSTR
+    displayRect RECT*
+
+  func SetBackgroundColor
+    HRESULT
+    color COLORREF
+
+  func GetBackgroundColor
+    HRESULT
+    color COLORREF*
+
+  func SetPosition
+    HRESULT
+    position DESKTOP_WALLPAPER_POSITION
+
+  func GetPosition
+    HRESULT
+    position DESKTOP_WALLPAPER_POSITION*
+
+  func SetSlideshow
+    HRESULT
+    items IShellItemArray*
+
+  func GetSlideshow
+    HRESULT
+    items IShellItemArray**
+
+  func SetSlideshowOptions
+    HRESULT
+    options DESKTOP_SLIDESHOW_OPTIONS
+    slideshowTick UINT
+
+  func GetSlideshowOptions
+    HRESULT
+    options DESKTOP_SLIDESHOW_OPTIONS*
+    slideshowTick UINT*
+
+  func AdvanceSlideshow
+    HRESULT
+    monitorID LPCWSTR
+    direction DESKTOP_SLIDESHOW_DIRECTION
+
+  func GetStatus
+    HRESULT
+    state DESKTOP_SLIDESHOW_STATE*
+
+  func Enable
+    HRESULT
+    enable BOOL
+
+

@@ -1,0 +1,18 @@
+include Interfaces\IUnknown.txt
+
+ingterface IBackgroundCopyCallback base=IUnknown id={97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Background Intelligent Transfer Service (BITS)"
+  func JobTransferred
+    HRESULT
+    pJob IBackgroundCopyJob*
+
+  func JobError
+    HRESULT
+    pJob IBackgroundCopyJob*
+    pError IBackgroundCopyError*
+
+  func JobModification
+    HRESULT
+    pJob IBackgroundCopyJob*
+    dwReserved DWORD
+
+

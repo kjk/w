@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+
+ingterface IObjectProvider base=IUnknown id={a6087428-3be3-4d73-b308-7c04a540bf1a} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func QueryObject
+    HRESULT
+    guidObject REFGUID
+    riid REFIID
+    ppvOut void** interfaceId=riid
+
+

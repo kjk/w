@@ -1,0 +1,9 @@
+include Interfaces\IUnknown.txt
+
+ingterface IPinFlowControl base=IUnknown id={c56e9858-dbf3-4f6b-8119-384af2060deb} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func Block
+    HRESULT
+    dwBlockFlags DWORD
+    hEvent HANDLE
+
+

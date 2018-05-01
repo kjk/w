@@ -1,0 +1,24 @@
+include Interfaces\IUnknown.txt
+
+ingterface IErrorInfo base=IUnknown id={1CF2B120-547D-101B-8E65-08002B2BD119} errorFunc=HRESULT onlineHelp=MSDN category="Component Object Model (COM)/Automation/Error-Handling"
+  func GetGUID
+    HRESULT
+    pGUID GUID*
+
+  func GetSource
+    HRESULT
+    pBstrSource BSTR*
+
+  func GetDescription
+    HRESULT
+    pBstrDescription BSTR*
+
+  func GetHelpFile
+    HRESULT
+    pBstrHelpFile BSTR*
+
+  func GetHelpContext
+    HRESULT
+    pdwHelpContext DWORD*
+
+

@@ -1,0 +1,33 @@
+include Interfaces\IUnknown.txt
+
+ingterface IAssocHandler base=IUnknown id={F04061AC-1659-4a3f-A954-775AA57FC083} errorFunc=HRESULT onlineHelp=MSDN category="Windows Environment Development/Windows Shell/Interfaces"
+  func GetName
+    HRESULT
+    ppsz LPWSTR*
+
+  func GetUIName
+    HRESULT
+    ppsz LPWSTR*
+
+  func GetIconLocation
+    HRESULT
+    ppszPath LPWSTR*
+    pIndex int*
+
+  func IsRecommended
+    HRESULT
+
+  func MakeDefault
+    HRESULT
+    pszDescription LPCWSTR
+
+  func Invoke
+    HRESULT
+    pdo IDataObject*
+
+  func CreateInvoker
+    HRESULT
+    pdo IDataObject*
+    ppInvoker IAssocHandlerInvoker**
+
+

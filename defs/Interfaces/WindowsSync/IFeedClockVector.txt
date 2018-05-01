@@ -1,0 +1,13 @@
+include Interfaces\WindowsSync\IClockVector.txt
+include Interfaces\WindowsSync\WinSync.h.txt
+
+ingterface IFeedClockVector base=IClockVector id={8d1d98d1-9fb8-4ec9-a553-54dd924e0f67} errorFunc=HRESULT onlineHelp=MSDN category="Data Access and Storage/Windows Sync"
+  func GetUpdateCount
+    HRESULT
+    pdwUpdateCount DWORD*
+
+  func IsNoConflictsSpecified
+    HRESULT
+    pfIsNoConflictsSpecified BOOL*
+
+

@@ -1,0 +1,10 @@
+include Interfaces\IUnknown.txt
+include Interfaces\DirectX\DXGI\DXGI.h.txt
+
+ingterface IDXGIDebug base=IUnknown id={119E7452-DE9E-40fe-8806-88F90C12B441} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectX Graphics Infrastructure (DXGI)"
+  func ReportLiveObjects
+    HRESULT
+    apiid GUID
+    flags DXGI_DEBUG_RLO_FLAGS
+
+

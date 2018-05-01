@@ -1,0 +1,12 @@
+include Interfaces\IUnknown.txt
+
+ingterface IVMRVideoStreamControl9 base=IUnknown id={d0cfe38b-93e7-4772-8957-0400c49a4485} errorFunc=HRESULT onlineHelp=MSDN category="Audio and Video/DirectShow"
+  func SetStreamActiveState
+    HRESULT
+    fActive BOOL
+
+  func GetStreamActiveState
+    HRESULT
+    lpfActive BOOL*
+
+

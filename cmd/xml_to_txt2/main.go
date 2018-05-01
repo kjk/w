@@ -86,7 +86,8 @@ func parseApiMonitorData() {
 }
 
 func serInclude(i *xmldef.Include) {
-	outf("include %s\n", i.Filename)
+	s := strings.Replace(i.Filename, ".xml", ".txt", -1)
+	outf("include %s\n", s)
 }
 
 type Args struct {
@@ -495,27 +496,40 @@ func toTxt(f *ParsedXmlFile) {
 	for _, m := range d.Module {
 		serModule(m)
 	}
-	// TODO: ensure exclusivity i.e. if Module then no Interface or Headers
+	// ensure exclusivity i.e. if Module then no Interface or Headers
+	nonNilCount := 0
+	if d.Module != nil {
+		nonNilCount++
+	}
+	if d.Interface != nil {
+		nonNilCount++
+	}
+	if d.Headers != nil {
+		nonNilCount++
+	}
+	if d.ApiSetSchema != nil {
+		nonNilCount++
+	}
+	if d.UnsupportedModules != nil {
+		nonNilCount++
+	}
+	panicIf(nonNilCount != 1, "nonNilCount = %d", nonNilCount)
 }
 
 func skipFile(path string) bool {
-	if strings.Contains(path, "Internal") {
-		return true
+	// those are names of directories with definitions we don't care about for now
+	blacklisted := []string{
+		"Internal",
+		"MAPI",
+		"MMF",
+		"Mozilla",
+		"SMI",
+		"VSS",
 	}
-	if strings.Contains(path, "MAPI") {
-		return true
-	}
-	if strings.Contains(path, "MMF") {
-		return true
-	}
-	if strings.Contains(path, "Mozilla") {
-		return true
-	}
-	if strings.Contains(path, "SMI") {
-		return true
-	}
-	if strings.Contains(path, "VSS") {
-		return true
+	for _, s := range blacklisted {
+		if strings.Contains(path, s) {
+			return true
+		}
 	}
 	return false
 }

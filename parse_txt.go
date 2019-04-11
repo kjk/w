@@ -38,31 +38,6 @@ type KV struct {
 	Value string
 }
 
-// Enum represents an enumeration definition.
-// Enum is a set of distinct values
-// enum [DD_HRESULT] HRESULT display=HRESULT reset
-type Enum struct {
-	Name    string
-	Base    string
-	Display string
-	Reset   bool
-	Values  []KV
-}
-
-// Flag represents a flag definition.
-// Flag is like Enum but values are meant to be OR'ed together
-// flag [DDSCAPS2_FLAGS] DWORD display=DWORD
-type Flag struct {
-	Name   string
-	Values []KV
-}
-
-// Field represents a struct field
-type Field struct {
-	Name string
-	Type string
-}
-
 // Struct represents a struct definition.
 // struct [SDP_ELEMENT_DATA_u_s1] display=struct
 type Struct struct {
@@ -77,11 +52,6 @@ type Union struct {
 	Display string
 }
 
-// Param represents an argument to function.
-type Param struct {
-	Name string
-}
-
 // Func represents a function definition.
 type Func struct {
 	Name         string
@@ -91,21 +61,6 @@ type Func struct {
 	OrdinalA     int
 	OrdinaW      int
 	BothCharsets bool
-}
-
-// Interface represents an interface definition.
-// ingterface IDWriteBitmapRenderTarget base=IUnknown id={5e5a32a3-8dff-4773-9ff6-0696eab77267} errorFunc=HRESULT onlineHelp=MSDN category="Graphics and Gaming/DirectX Graphics and Gaming/DirectWrite"
-type Interface struct {
-	Name      string
-	Base      string
-	ID        string
-	ErrorFunc string
-	Functions []Func
-}
-
-// Module represents a single .dll file
-type Module struct {
-	Functions []Func
 }
 
 // Defs represents content of a single def file, parsed

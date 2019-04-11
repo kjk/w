@@ -1,4 +1,4 @@
-package xmldef
+package main
 
 // generated with: find API -name "*.xml" | xargs chidley -X -a "" -e "" -t -F
 // go get -u github.com/gnewton/chidley

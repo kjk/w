@@ -12,32 +12,17 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/kjk/winapigen/pkg/xmldef"
 )
 
 type ParsedXmlFile struct {
 	Name string
-	Data *xmldef.ApiMonitor
+	Data *ApiMonitor
 }
 
 var (
 	parsedFiles []*ParsedXmlFile
 	out         io.Writer
 )
-
-func must(err error) {
-	if err != nil {
-		panic(err.Error())
-	}
-}
-
-func panicIf(cond bool, format string, args ...interface{}) {
-	if cond {
-		err := fmt.Errorf(format, args...)
-		must(err)
-	}
-}
 
 func outf(format string, args ...interface{}) {
 	fmt.Fprintf(out, format, args...)
@@ -52,9 +37,9 @@ func readZipFile(zf *zip.File) []byte {
 	return buf.Bytes()
 }
 
-func parseXmlDef(zf *zip.File) *xmldef.ApiMonitor {
+func parseXmlDef(zf *zip.File) *ApiMonitor {
 	d := readZipFile(zf)
-	var res xmldef.ApiMonitor
+	var res ApiMonitor
 	err := xml.Unmarshal(d, &res)
 	must(err)
 	return &res
@@ -85,7 +70,7 @@ func parseApiMonitorData() {
 	}
 }
 
-func serInclude(i *xmldef.Include) {
+func serInclude(i *Include) {
 	s := strings.Replace(i.Filename, ".xml", ".txt", -1)
 	outf("include %s\n", s)
 }
@@ -128,14 +113,14 @@ func (a *Args) String() string {
 	return strings.Join(a.a, " ")
 }
 
-func addDisplay(args *Args, d *xmldef.Display) {
+func addDisplay(args *Args, d *Display) {
 	if d == nil {
 		return
 	}
 	args.AddNotEmpty("display", d.Name)
 }
 
-func serField(f *xmldef.Field) {
+func serField(f *Field) {
 	args := NewArgs(f.Name, escIfNeeded(f.Type))
 	args.AddNotEmpty("display", f.Display)
 	args.AddNotEmpty("count", f.Count)
@@ -147,7 +132,7 @@ func serField(f *xmldef.Field) {
 	outf("  %s\n", args.String())
 }
 
-func serParam(p *xmldef.Param, indent int) {
+func serParam(p *Param, indent int) {
 	args := NewArgs(p.Name, escIfNeeded(p.Type))
 	args.AddNotEmpty("display", p.Display)
 	args.AddNotEmpty("interfaceId", p.InterfaceId)
@@ -163,11 +148,11 @@ func serParam(p *xmldef.Param, indent int) {
 	outf("%s%s\n", indentStr, args.String())
 }
 
-func serVariable(v *xmldef.Variable, indent int) {
+func serVariable(v *Variable, indent int) {
 	// fix what looks like a mistake in .xml definition
 	if v.Set != nil {
 		panicIf(v.Name != "FOURCC", "unsupported var with set for '%s'", v.Name)
-		v.Enum = &xmldef.Enum{
+		v.Enum = &Enum{
 			Set: v.Set,
 		}
 		v.Set = nil
@@ -230,7 +215,7 @@ func serVariable(v *xmldef.Variable, indent int) {
 	outf("\n")
 }
 
-func serFields(fields []*xmldef.Field) {
+func serFields(fields []*Field) {
 	for _, f := range fields {
 		serField(f)
 	}
@@ -252,7 +237,7 @@ func toInt(s string) (int, bool) {
 	return 0, false
 }
 
-func sortSet(set []*xmldef.Set) {
+func sortSet(set []*Set) {
 	nFailed := 0
 	var ok bool
 	for _, st := range set {
@@ -269,7 +254,7 @@ func sortSet(set []*xmldef.Set) {
 	})
 }
 
-func serSet(set []*xmldef.Set, indent int) {
+func serSet(set []*Set, indent int) {
 	sortSet(set)
 	maxLen := 0
 	for _, s := range set {
@@ -286,7 +271,7 @@ func serSet(set []*xmldef.Set, indent int) {
 	}
 }
 
-func addEnum(args *Args, e *xmldef.Enum) {
+func addEnum(args *Args, e *Enum) {
 	if e == nil {
 		return
 	}
@@ -294,14 +279,14 @@ func addEnum(args *Args, e *xmldef.Enum) {
 	args.AddBool("reset", e.Reset)
 }
 
-func addFlag(args *Args, f *xmldef.Flag) {
+func addFlag(args *Args, f *Flag) {
 	if f == nil {
 		return
 	}
 	args.AddBool("reset", f.Reset)
 }
 
-func serCondition(c *xmldef.Condition) {
+func serCondition(c *Condition) {
 	outf("arch %s\n", c.Architecture)
 	for _, v := range c.Variable {
 		serVariable(v, 0)
@@ -309,13 +294,13 @@ func serCondition(c *xmldef.Condition) {
 	outf("arch off\n")
 }
 
-func serConditions(a []*xmldef.Condition) {
+func serConditions(a []*Condition) {
 	for _, c := range a {
 		serCondition(c)
 	}
 }
 
-func serHeaders(h *xmldef.Headers) {
+func serHeaders(h *Headers) {
 	if h == nil {
 		return
 	}
@@ -324,13 +309,13 @@ func serHeaders(h *xmldef.Headers) {
 	serVariables(h.Variable, 0)
 }
 
-func serVariables(vars []*xmldef.Variable, indent int) {
+func serVariables(vars []*Variable, indent int) {
 	for _, v := range vars {
 		serVariable(v, indent)
 	}
 }
 
-func serIncludes(includes []*xmldef.Include) {
+func serIncludes(includes []*Include) {
 	if len(includes) == 0 {
 		return
 	}
@@ -340,7 +325,7 @@ func serIncludes(includes []*xmldef.Include) {
 	outf("\n")
 }
 
-func serModule(m *xmldef.Module) {
+func serModule(m *Module) {
 	args := NewArgs("dll", escIfNeeded(m.Name))
 	args.AddNotEmpty("callingConvention", m.CallingConvention)
 	args.AddNotEmpty("errorFunc", m.ErrorFunc)
@@ -357,7 +342,7 @@ func serModule(m *xmldef.Module) {
 	serApis(m.Api, 0)
 }
 
-func serSourceModule(sm *xmldef.SourceModule) {
+func serSourceModule(sm *SourceModule) {
 	panicIf(sm.Name == "", "sm.Name is empty string in %#v", sm)
 	args := NewArgs("sourceModule", escIfNeeded(sm.Name))
 	args.AddNotEmpty("copy", sm.Copy)
@@ -366,20 +351,20 @@ func serSourceModule(sm *xmldef.SourceModule) {
 	serApis(sm.Api, 0)
 }
 
-func serSourceModules(a []*xmldef.SourceModule) {
+func serSourceModules(a []*SourceModule) {
 	for _, sm := range a {
 		serSourceModule(sm)
 	}
 }
 
-func serModuleAlias(a []*xmldef.ModuleAlias) {
+func serModuleAlias(a []*ModuleAlias) {
 	for _, ma := range a {
 		args := NewArgs("moduleAlias", escIfNeeded(ma.Name))
 		outf("%s\n", args.String())
 	}
 }
 
-func serErrorDeocde(a []*xmldef.ErrorDecode) {
+func serErrorDeocde(a []*ErrorDecode) {
 	for _, ed := range a {
 		args := NewArgs("errorDecode")
 		args.AddNotEmpty("errorFunc", ed.ErrorFunc)
@@ -391,7 +376,7 @@ func serErrorDeocde(a []*xmldef.ErrorDecode) {
 	}
 }
 
-func serCategories(categories []*xmldef.Category) {
+func serCategories(categories []*Category) {
 	for _, c := range categories {
 		args := NewArgs("category", escIfNeeded(c.Name))
 		args.AddNotEmpty("onlineHelp", c.OnlineHelp)
@@ -399,13 +384,13 @@ func serCategories(categories []*xmldef.Category) {
 	}
 }
 
-func serApis(apis []*xmldef.Api, indent int) {
+func serApis(apis []*Api, indent int) {
 	for _, api := range apis {
 		serApi(api, indent)
 	}
 }
 
-func serInterface(i *xmldef.Interface) {
+func serInterface(i *Interface) {
 	if i == nil {
 		return
 	}
@@ -422,7 +407,7 @@ func serInterface(i *xmldef.Interface) {
 	outf("\n")
 }
 
-func serApi(api *xmldef.Api, indent int) {
+func serApi(api *Api, indent int) {
 	args := NewArgs("func", escIfNeeded(api.Name))
 	args.AddNotEmpty("display", api.Display)
 	args.AddBool("bothCharset", api.BothCharset)
@@ -452,13 +437,13 @@ func serApi(api *xmldef.Api, indent int) {
 	outf("\n")
 }
 
-func serParams(params []*xmldef.Param, indent int) {
+func serParams(params []*Param, indent int) {
 	for _, p := range params {
 		serParam(p, indent)
 	}
 }
 
-func serReturn(r *xmldef.Return, indent int) {
+func serReturn(r *Return, indent int) {
 	if r == nil {
 		return
 	}
@@ -468,7 +453,7 @@ func serReturn(r *xmldef.Return, indent int) {
 	outf("%s%s\n", indentStr, args.String())
 }
 
-func serSuccess(s *xmldef.Success, indent int) {
+func serSuccess(s *Success, indent int) {
 	if s == nil {
 		return
 	}
@@ -565,7 +550,9 @@ func allToTxt() {
 	}
 }
 
-func main() {
+// convert xml definitions from api.zip to more readable text format
+// in defs/ directory
+func xmlToTxt() {
 	out = os.Stdout
 	timeStart := time.Now()
 	parseApiMonitorData()

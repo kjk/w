@@ -14,14 +14,8 @@ import (
 	"time"
 )
 
-type ParsedXmlFile struct {
-	Name string
-	Data *ApiMonitor
-}
-
 var (
-	parsedFiles []*ParsedXmlFile
-	out         io.Writer
+	out io.Writer
 )
 
 func outf(format string, args ...interface{}) {
@@ -37,37 +31,43 @@ func readZipFile(zf *zip.File) []byte {
 	return buf.Bytes()
 }
 
-func parseXmlDef(zf *zip.File) *ApiMonitor {
+func parseXmlDef(zf *zip.File) *ApiMonitorXmlFile {
 	d := readZipFile(zf)
-	var res ApiMonitor
+	var res ApiMonitorXmlFile
 	err := xml.Unmarshal(d, &res)
 	must(err)
 	return &res
 }
 
-func parseApiMonitorData() {
+func parseApiMonitorData() ([]*ApiMonitorXmlFile, error) {
+	var parsedFiles []*ApiMonitorXmlFile
+
 	fileName := "api.zip"
 	s, err := os.Stat(fileName)
-	must(err)
+	if err != nil {
+		return nil, err
+	}
 	fileSize := s.Size()
 
 	f, err := os.Open(fileName)
-	must(err)
+	if err != nil {
+		return nil, err
+	}
 	defer f.Close()
 	zr, err := zip.NewReader(f, fileSize)
-	must(err)
+	if err != nil {
+		return nil, err
+	}
 
 	for _, fi := range zr.File {
 		if fi.FileInfo().IsDir() {
 			continue
 		}
-		data := parseXmlDef(fi)
-		parsedFile := &ParsedXmlFile{
-			Name: fi.Name,
-			Data: data,
-		}
+		parsedFile := parseXmlDef(fi)
+		parsedFile.FileName = fi.Name
 		parsedFiles = append(parsedFiles, parsedFile)
 	}
+	return parsedFiles, nil
 }
 
 func serInclude(i *Include) {
@@ -339,7 +339,7 @@ func serModule(m *Module) {
 	serErrorDeocde(m.ErrorDecode)
 	serConditions(m.Condition)
 	serVariables(m.Variable, 0)
-	serApis(m.Api, 0)
+	serApis(m.Apis, 0)
 }
 
 func serSourceModule(sm *SourceModule) {
@@ -467,26 +467,25 @@ func serSuccess(s *Success, indent int) {
 	outf("%s%s\n", indentStr, args.String())
 }
 
-func toTxt(f *ParsedXmlFile) {
-	d := f.Data
+func toTxt(d *ApiMonitorXmlFile) {
 	// goes first as it's logically needed first
-	serIncludes(d.Include)
+	serIncludes(d.Includes)
 
 	// ignore d.ApiSetSchema
 	// ignore d.ErrorLookupModule
 	serHeaders(d.Headers)
 	// ignore d.HelpUrl
 	// d.Include was serialized above
-	serInterface(d.Interface)
-	for _, m := range d.Module {
+	serInterface(d.Interfaces)
+	for _, m := range d.Modules {
 		serModule(m)
 	}
 	// ensure exclusivity i.e. if Module then no Interface or Headers
 	nonNilCount := 0
-	if d.Module != nil {
+	if len(d.Modules) > 0 {
 		nonNilCount++
 	}
-	if d.Interface != nil {
+	if d.Interfaces != nil {
 		nonNilCount++
 	}
 	if d.Headers != nil {
@@ -533,13 +532,13 @@ func createDirForPath(path string) {
 	must(err)
 }
 
-func allToTxt() {
+func allToTxt(parsedFiles []*ApiMonitorXmlFile) {
 	for _, f := range parsedFiles {
-		if skipFile(f.Name) {
+		if skipFile(f.FileName) {
 			continue
 		}
-		txtPath := convertFileName(f.Name)
-		fmt.Printf("%s => %s\n", f.Name, txtPath)
+		txtPath := convertFileName(f.FileName)
+		fmt.Printf("%s => %s\n", f.FileName, txtPath)
 		createDirForPath(txtPath)
 		outFile, err := os.Create(txtPath)
 		must(err)
@@ -555,8 +554,9 @@ func allToTxt() {
 func xmlToTxt() {
 	out = os.Stdout
 	timeStart := time.Now()
-	parseApiMonitorData()
+	parsedFiles, err := parseApiMonitorData()
+	must(err)
 	fmt.Printf("Parsed %d files in %s\n", len(parsedFiles), time.Since(timeStart))
 
-	allToTxt()
+	allToTxt(parsedFiles)
 }

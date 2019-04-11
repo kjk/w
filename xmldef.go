@@ -5,16 +5,19 @@ package main
 
 import "encoding/xml"
 
-type ApiMonitor struct {
+type ApiMonitorXmlFile struct {
 	XMLName            xml.Name            `xml:"ApiMonitor,omitempty" json:"ApiMonitor,omitempty"`
 	ApiSetSchema       *ApiSetSchema       `xml:"ApiSetSchema,omitempty" json:"ApiSetSchema,omitempty"`
 	ErrorLookupModule  *ErrorLookupModule  `xml:"ErrorLookupModule,omitempty" json:"ErrorLookupModule,omitempty"`
 	Headers            *Headers            `xml:"Headers,omitempty" json:"Headers,omitempty"`
-	HelpUrl            []*HelpUrl          `xml:"HelpUrl,omitempty" json:"HelpUrl,omitempty"`
-	Include            []*Include          `xml:"Include,omitempty" json:"Include,omitempty"`
-	Interface          *Interface          `xml:"Interface,omitempty" json:"Interface,omitempty"`
-	Module             []*Module           `xml:"Module,omitempty" json:"Module,omitempty"`
+	HelpUrls           []*HelpUrl          `xml:"HelpUrl,omitempty" json:"HelpUrl,omitempty"`
+	Includes           []*Include          `xml:"Include,omitempty" json:"Include,omitempty"`
+	Interfaces         *Interface          `xml:"Interface,omitempty" json:"Interface,omitempty"`
+	Modules            []*Module           `xml:"Module,omitempty" json:"Module,omitempty"`
 	UnsupportedModules *UnsupportedModules `xml:"UnsupportedModules,omitempty" json:"UnsupportedModules,omitempty"`
+
+	// things added by us
+	FileName string
 }
 
 type Include struct {
@@ -30,7 +33,7 @@ type Module struct {
 	ErrorIsReturnValue string          `xml:"ErrorIsReturnValue,attr"  json:",omitempty"`
 	Name               string          `xml:"Name,attr"  json:",omitempty"`
 	OnlineHelp         string          `xml:"OnlineHelp,attr"  json:",omitempty"`
-	Api                []*Api          `xml:"Api,omitempty" json:"Api,omitempty"`
+	Apis               []*Api          `xml:"Api,omitempty" json:"Api,omitempty"`
 	Categories         []*Category     `xml:"Category,omitempty" json:"Category,omitempty"`
 	Condition          []*Condition    `xml:"Condition,omitempty" json:"Condition,omitempty"`
 	ErrorDecode        []*ErrorDecode  `xml:"ErrorDecode,omitempty" json:"ErrorDecode,omitempty"`

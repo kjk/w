@@ -31,16 +31,16 @@ func readZipFile(zf *zip.File) []byte {
 	return buf.Bytes()
 }
 
-func parseXmlDef(zf *zip.File) *ApiMonitorXmlFile {
+func parseXmlDef(zf *zip.File) *APIMonitorXMLFile {
 	d := readZipFile(zf)
-	var res ApiMonitorXmlFile
+	var res APIMonitorXMLFile
 	err := xml.Unmarshal(d, &res)
 	must(err)
 	return &res
 }
 
-func parseApiMonitorData() ([]*ApiMonitorXmlFile, error) {
-	var parsedFiles []*ApiMonitorXmlFile
+func parseApiMonitorData() ([]*APIMonitorXMLFile, error) {
+	var parsedFiles []*APIMonitorXMLFile
 
 	fileName := "api.zip"
 	s, err := os.Stat(fileName)
@@ -305,8 +305,8 @@ func serHeaders(h *Headers) {
 		return
 	}
 	outf("header\n")
-	serConditions(h.Condition)
-	serVariables(h.Variable, 0)
+	serConditions(h.Conditions)
+	serVariables(h.Variables, 0)
 }
 
 func serVariables(vars []*Variable, indent int) {
@@ -467,7 +467,7 @@ func serSuccess(s *Success, indent int) {
 	outf("%s%s\n", indentStr, args.String())
 }
 
-func toTxt(d *ApiMonitorXmlFile) {
+func toTxt(d *APIMonitorXMLFile) {
 	// goes first as it's logically needed first
 	serIncludes(d.Includes)
 
@@ -500,7 +500,7 @@ func toTxt(d *ApiMonitorXmlFile) {
 	panicIf(nonNilCount != 1, "nonNilCount = %d", nonNilCount)
 }
 
-func skipFile(path string) bool {
+func shouldSkipFile(path string) bool {
 	// those are names of directories with definitions we don't care about for now
 	blacklisted := []string{
 		"Internal",
@@ -532,9 +532,9 @@ func createDirForPath(path string) {
 	must(err)
 }
 
-func allToTxt(parsedFiles []*ApiMonitorXmlFile) {
+func allToTxt(parsedFiles []*APIMonitorXMLFile) {
 	for _, f := range parsedFiles {
-		if skipFile(f.FileName) {
+		if shouldSkipFile(f.FileName) {
 			continue
 		}
 		txtPath := convertFileName(f.FileName)

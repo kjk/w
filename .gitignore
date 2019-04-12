@@ -1,3 +1,4 @@
 winapigen.exe
 winapigen
 generated/user32.go
+api/

@@ -1,6 +1,19 @@
 package w
 
-import "syscall"
+import (
+	"errors"
+	"syscall"
+)
+
+type HANDLE uintptr
+
+func winError(s string) error {
+	// TODO: use getlasterror, add a callstack
+	if s == "" {
+		s = "generic windows error"
+	}
+	return errors.New(s)
+}
 
 func sys(trap, nargs, a1, a2, a3 uintptr) (r1, r2 uintptr, err syscall.Errno) {
 	return syscall.Syscall(trap, nargs, a1, a2, a3)

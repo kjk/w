@@ -3,13 +3,20 @@ package main
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"sort"
 	"strings"
 	"time"
+)
+
+const (
+	// names for Variable.Type field
+	typeAlias     = "Alias"
+	typePtr       = "Pointer"
+	typePointer   = "Pointer"
+	typeInterface = "Interface"
 )
 
 // FunctionInfo describes a function
@@ -141,7 +148,7 @@ func gofmtFile(path string) {
 }
 
 const (
-	fileHdr = `package win
+	fileHdr = `package w
 
 import (
 	"golang.org/x/sys/windows"
@@ -188,13 +195,15 @@ func (g *goGenerator) addVariable(vi *VariableInfo) {
 		return
 	}
 	v := vi.Variable
-	serVariable(v, 0)
+	//serVariable(v, 0)
 	vi.WasAdded = true
 	tp := strings.ToLower(v.Type)
 	switch tp {
 	case "pointer", "alias", "enum", "flag", "array":
 		// fmt.Printf("Type: %s, base: %s\n", v.Type, v.Base)
 		g.addSymbol(v.Base)
+	case "integer", "modulehandle", "void", "tcharacter":
+		// skip those
 	default:
 		fmt.Printf("Type: %s\n", v.Type)
 	}
@@ -222,23 +231,28 @@ func (g *goGenerator) addFunction(fi *FunctionInfo) {
 	mi := g.getModuleInfo(fi.Module)
 	mi.functions = append(mi.functions, fi)
 	fi.WasAdded = true
-	serApi(fi.Function, 0)
+	//serApi(fi.Function, 0)
 	ret := fi.Function.Return
 	g.addSymbol(ret.Type)
-	for _, arg := range fi.Function.Param {
+	for _, arg := range fi.Function.Params {
 		g.addSymbol(arg.Type)
 	}
 }
 
 func (g *goGenerator) addSymbol(name string) {
-	f := findFunction(name)
-	if f != nil {
-		g.addFunction(f)
+	// predefined types are alredy in
+	if predefined := desugerPreDefinedType(name); predefined != "" {
 		return
 	}
-	v := findVariable(name)
-	if v != nil {
-		g.addVariable(v)
+
+	fi := findFunction(name)
+	if fi != nil {
+		g.addFunction(fi)
+		return
+	}
+	vi := findVariable(name)
+	if vi != nil {
+		g.addVariable(vi)
 		return
 	}
 	s := fmt.Sprintf("Didn't find function or variable with name '%s'", name)
@@ -327,25 +341,96 @@ var (
 
 func getFunctionName(fn *Api) string {
 	name := fn.Name
+	// TODO: not sure this condition is good enough
 	if fn.BothCharset != "" { // it's True
 		// fmt.Printf("BothCharset: '%s'\n", fn.Function.BothCharset)
-		// TODO: not sure that's the condition
 		name += "W"
 	}
 	return name
 }
 
-// this converts type to a real Go type we want to use
-func desugarType(typeName string) string {
+func desugarTypeNamed(tp string) string {
+	if predefined := desugerPreDefinedType(tp); predefined != "" {
+		return predefined
+	}
+
+	vi := findVariable(tp)
+	if vi == nil {
+		s := fmt.Sprintf("didn't find info about type '%s'\n", tp)
+		panic(s)
+	}
+	return desugarType(vi)
+}
+
+func desugarInteger(v *Variable) string {
+	tp := "int"
+	if v.Unsigned == "True" {
+		tp = "u" + tp
+	}
+	switch v.Size {
+	case "1":
+		return tp + "8"
+	case "2":
+		return tp + "16"
+	case "4":
+		return tp + "32"
+	case "8":
+		return tp + "64"
+	}
+
+	//pretty.Print(v)
+	panic("unsupported Variable of type Integer")
+}
+
+// if returns "", not a known type
+func desugerPreDefinedType(tp string) string {
 	// some known terminal types
-	switch typeName {
+	switch tp {
 	case "LPVOID":
 		return "unsafe.Pointer"
 	case "LPCTSTR":
 		return "*uint16"
+	case "int8", "int16", "int32", "int64":
+		return tp
+	case "uint8", "uint16", "uint32", "uint64":
+		return tp
+	case "UINT_PTR":
+		return "uintptr"
+	case "ModuleHandle":
+		return "HANDLE"
 	}
+	return ""
+}
+
+// this converts type to a real Go type we want to use
+func desugarType(vi *VariableInfo) string {
+	v := vi.Variable
+	tp := v.Type
+
+	if predefined := desugerPreDefinedType(tp); predefined != "" {
+		return predefined
+	}
+
+	switch tp {
+	case "Integer":
+		return desugarInteger(v)
+	}
+
+	if tp == typeAlias {
+		// we want to preserve types that are aliases for HANDLE
+		// (HWND, HMENU etc.)
+		if v.Base == "HANDLE" {
+			return v.Name
+		}
+		return desugarTypeNamed(v.Base)
+	}
+
+	if tp == typePointer {
+		return "*" + desugarTypeNamed(v.Base)
+	}
+
 	// TODO: recursively resolve the type
-	return typeName
+	return tp
 }
 
 /*
@@ -368,37 +453,66 @@ func CreateWindowEx(dwExStyle uint32, lpClassName, lpWindowName *uint16, dwStyle
 }
 */
 func (g *goGenerator) genFunction(fi *FunctionInfo) {
-	fnName := getFunctionName(fi.Function)
-	g.ws("func " + fnName + "(")
-	lastIdx := len(fi.Function.Param) - 1
-	for idx, param := range fi.Function.Param {
-		name := param.Name
+	fn := fi.Function
+	fnName := getFunctionName(fn)
+	g.ws("\nfunc " + fnName + "(")
+	lastIdx := len(fn.Params) - 1
+	for idx, arg := range fn.Params {
+		name := arg.Name
 		g.ws(name + " ")
-		typ := desugarType(param.Type)
+		typ := desugarTypeNamed(arg.Type)
 		g.ws(typ)
 		if idx != lastIdx {
 			g.ws(", ")
 		}
 	}
-	// TODO: arguments
+
 	g.ws(")")
-	g.ws(" {")
-	// TODO: body of the function
-	g.ws("}")
+	returnType := ""
+	hasReturn := fn.Return != nil
+	if hasReturn {
+		// TODO: to handle BOOL => bool need a version of desugarTypeNamed()
+		// specialized for return types
+		returnType = desugarTypeNamed(fn.Return.Type)
+		g.ws(" " + returnType)
+	}
+	g.ws(" {\n")
+
+	// 	ret, _, _ := syscall.Syscall12(createWindowEx.Addr(), 12,
+	fnVarName := funcNameToVarName(fnName)
+	nArgs := len(fn.Params)
+	sysName, sysArgsCount := syscallFuncForArgCount(nArgs)
+	if hasReturn {
+		g.ws("ret, _, _")
+	} else {
+		g.ws("_, _, _")
+	}
+	g.ws(fmt.Sprintf(" := %s(%s.Addr(), %d,\n", sysName, fnVarName, nArgs))
+	for _, arg := range fn.Params {
+		if isPointerType(arg.Type) {
+			g.ws(fmt.Sprintf("uintptr(unsafe.Pointer(%s)),\n", arg.Name))
+		} else {
+			g.ws(fmt.Sprintf("uintptr(%s),\n", arg.Name))
+		}
+	}
+	nLeftOver := sysArgsCount - nArgs
+	for nLeftOver > 0 {
+		g.ws("0,\n")
+	}
+	g.ws(")\n")
+	if hasReturn {
+		g.ws(fmt.Sprintf("return %s(ret)\n", returnType))
+	}
+
+	g.ws("\n}")
 }
 
-// AbortDoc => abortDoc
-func funcNameToVarName(s string) string {
-	c := s[:1]
-	c = strings.ToLower(c)
-	return c + s[1:]
-}
-
-func dumpFile(path string) {
-	fmt.Printf("File: %s\n", path)
-	d, err := ioutil.ReadFile(path)
-	must(err)
-	fmt.Printf("%s\n", string(d))
+func isPointerType(tp string) bool {
+	typ := desugarTypeNamed(tp)
+	if typ[0] == '*' {
+		return true
+	}
+	return false
 }
 
 func (g *goGenerator) generate() {

@@ -433,7 +433,7 @@ func serApi(api *Api, indent int) {
 	outf("%s%s\n", indentStr, args.String())
 	serSuccess(api.Success, indent+1)
 	serReturn(api.Return, indent+1)
-	serParams(api.Param, indent+1)
+	serParams(api.Params, indent+1)
 	outf("\n")
 }
 

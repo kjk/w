@@ -63,3 +63,10 @@ func collapseMultipleEmptyLines(a []string) []string {
 	}
 	return a
 }
+
+func dumpFile(path string) {
+	fmt.Printf("File: %s\n", path)
+	d, err := ioutil.ReadFile(path)
+	must(err)
+	fmt.Printf("%s\n", string(d))
+}

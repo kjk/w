@@ -25,7 +25,8 @@ type FunctionInfo struct {
 	Module     *Module
 	Function   *Api
 
-	WasAdded bool
+	WasAdded     bool
+	WasGenerated bool
 }
 
 // VariableInfo describes a variable
@@ -36,7 +37,8 @@ type VariableInfo struct {
 	Condition  *Condition // can be nil
 	Variable   *Variable
 
-	WasAdded bool
+	WasAdded     bool
+	WasGenerated bool
 }
 
 var (
@@ -180,13 +182,17 @@ type goGenerator struct {
 	// file for that module
 	modules map[string]*goModuleInfo
 
+	// we keep track of wihch const values have already been generated
+	generatedConsts map[string]struct{}
+
 	// the file we're currently writing to
 	w io.Writer
 }
 
 func newGoGenerator() *goGenerator {
 	return &goGenerator{
-		modules: map[string]*goModuleInfo{},
+		modules:         map[string]*goModuleInfo{},
+		generatedConsts: map[string]struct{}{},
 	}
 }
 
@@ -264,8 +270,56 @@ func ws(w io.Writer, s string) {
 	must(err)
 }
 
-func (g *goGenerator) ws(s string) {
+func (g *goGenerator) ws(format string, args ...interface{}) {
+	s := format
+	if len(args) > 0 {
+		s = fmt.Sprintf(format, args...)
+	}
 	ws(g.w, s)
+}
+
+func (g *goGenerator) generateAlias(vi *VariableInfo) {
+	if vi.WasGenerated {
+		return
+	}
+
+	v := vi.Variable
+	if v.Name[0] == '[' {
+		return
+	}
+
+	g.ws("type %s %s\n", v.Name, v.Base)
+	vi.WasGenerated = true
+}
+
+func (g *goGenerator) generateEnum(vi *VariableInfo) {
+	if vi.WasGenerated {
+		return
+	}
+
+	v := vi.Variable
+	if v.Enum == nil {
+		return
+	}
+
+	vi.WasGenerated = true
+	set := v.Enum.Set
+	if len(set) == 0 {
+		return
+	}
+	// TODO: optimize if only one value
+	g.ws("const (\n")
+	for _, e := range set {
+		name := e.Name
+		// the same value can appear in multiple enum sets
+		// so we need to ensure we only generate value once
+		if _, ok := g.generatedConsts[name]; ok {
+			continue
+		}
+		g.ws("%s = %s", name, e.Value)
+		g.generatedConsts[name] = struct{}{}
+	}
+	g.ws(")\n")
 }
 
 func (g *goGenerator) generateModule(mi *goModuleInfo) {
@@ -302,8 +356,9 @@ var (
 	*/
 	g.ws("\nvar (\n")
 
-	for _, fn := range mi.functions {
-		varName := funcNameToVarName(fn.Function.Name)
+	for _, fi := range mi.functions {
+		fnName := getFunctionName(fi.Function)
+		varName := funcNameToVarName(fnName)
 		s = fmt.Sprintf("\t%s *windows.LazyProc\n", varName)
 		g.ws(s)
 	}
@@ -326,10 +381,9 @@ var (
 	g.ws(s)
 
 	for _, fi := range mi.functions {
-		varName := funcNameToVarName(fi.Function.Name)
 		fnName := getFunctionName(fi.Function)
-		s = fmt.Sprintf("\t%s = lib%s.NewProc(\"%s\")\n", varName, dllNameNoExt, fnName)
-		g.ws(s)
+		varName := funcNameToVarName(fnName)
+		g.ws("\t%s = lib%s.NewProc(\"%s\")\n", varName, dllNameNoExt, fnName)
 	}
 
 	g.ws("}\n")
@@ -339,17 +393,23 @@ var (
 	}
 }
 
-func getFunctionName(fn *Api) string {
-	name := fn.Name
-	// TODO: not sure this condition is good enough
-	if fn.BothCharset != "" { // it's True
-		// fmt.Printf("BothCharset: '%s'\n", fn.Function.BothCharset)
-		name += "W"
+func isWide(fn *Api) bool {
+	// when we have both W and A versions, do W
+	if fn.BothCharset == "True" {
+		return true
 	}
-	return name
+	// TODO: more cases ?
+	return false
 }
 
-func desugarTypeNamed(tp string) string {
+func getFunctionName(fn *Api) string {
+	if isWide(fn) {
+		return fn.Name + "W"
+	}
+	return fn.Name
+}
+
+func (g *goGenerator) desugarTypeNamed(tp string) string {
 	if predefined := desugerPreDefinedType(tp); predefined != "" {
 		return predefined
 	}
@@ -359,7 +419,7 @@ func desugarTypeNamed(tp string) string {
 		s := fmt.Sprintf("didn't find info about type '%s'\n", tp)
 		panic(s)
 	}
-	return desugarType(vi)
+	return g.desugarType(vi)
 }
 
 func desugarInteger(v *Variable) string {
@@ -396,6 +456,9 @@ func desugerPreDefinedType(tp string) string {
 		return tp
 	case "UINT_PTR":
 		return "uintptr"
+	case "int":
+		// yes, it's strange but that's what it seems to be
+		return "int32"
 	case "ModuleHandle":
 		return "HANDLE"
 	}
@@ -403,7 +466,7 @@ func desugerPreDefinedType(tp string) string {
 }
 
 // this converts type to a real Go type we want to use
-func desugarType(vi *VariableInfo) string {
+func (g *goGenerator) desugarType(vi *VariableInfo) string {
 	v := vi.Variable
 	tp := v.Type
 
@@ -416,17 +479,22 @@ func desugarType(vi *VariableInfo) string {
 		return desugarInteger(v)
 	}
 
+	if v.Enum != nil {
+		g.generateEnum(vi)
+	}
+
 	if tp == typeAlias {
+		g.generateAlias(vi)
 		// we want to preserve types that are aliases for HANDLE
 		// (HWND, HMENU etc.)
 		if v.Base == "HANDLE" {
 			return v.Name
 		}
-		return desugarTypeNamed(v.Base)
+		return g.desugarTypeNamed(v.Base)
 	}
 
 	if tp == typePointer {
-		return "*" + desugarTypeNamed(v.Base)
+		return "*" + g.desugarTypeNamed(v.Base)
 	}
 
 	// TODO: recursively resolve the type
@@ -454,13 +522,26 @@ func CreateWindowEx(dwExStyle uint32, lpClassName, lpWindowName *uint16, dwStyle
 */
 func (g *goGenerator) genFunction(fi *FunctionInfo) {
 	fn := fi.Function
+
+	// first a pass to generate types this function depends on
+	for _, arg := range fn.Params {
+		g.desugarTypeNamed(arg.Type)
+	}
+	returnType := ""
+	hasReturn := fn.Return != nil
+	if hasReturn {
+		// TODO: to handle BOOL => bool need a version of desugarTypeNamed()
+		// specialized for return types
+		returnType = g.desugarTypeNamed(fn.Return.Type)
+	}
+
 	fnName := getFunctionName(fn)
-	g.ws("\nfunc " + fnName + "(")
+	g.ws("\nfunc %s(", fnName)
 	lastIdx := len(fn.Params) - 1
 	for idx, arg := range fn.Params {
 		name := arg.Name
 		g.ws(name + " ")
-		typ := desugarTypeNamed(arg.Type)
+		typ := g.desugarTypeNamed(arg.Type)
 		g.ws(typ)
 		if idx != lastIdx {
 			g.ws(", ")
@@ -468,12 +549,7 @@ func (g *goGenerator) genFunction(fi *FunctionInfo) {
 	}
 
 	g.ws(")")
-	returnType := ""
-	hasReturn := fn.Return != nil
 	if hasReturn {
-		// TODO: to handle BOOL => bool need a version of desugarTypeNamed()
-		// specialized for return types
-		returnType = desugarTypeNamed(fn.Return.Type)
 		g.ws(" " + returnType)
 	}
 	g.ws(" {\n")
@@ -487,12 +563,12 @@ func (g *goGenerator) genFunction(fi *FunctionInfo) {
 	} else {
 		g.ws("_, _, _")
 	}
-	g.ws(fmt.Sprintf(" := %s(%s.Addr(), %d,\n", sysName, fnVarName, nArgs))
+	g.ws(" := %s(%s.Addr(), %d,\n", sysName, fnVarName, nArgs)
 	for _, arg := range fn.Params {
-		if isPointerType(arg.Type) {
-			g.ws(fmt.Sprintf("uintptr(unsafe.Pointer(%s)),\n", arg.Name))
+		if g.isPointerType(arg.Type) {
+			g.ws("uintptr(unsafe.Pointer(%s)),\n", arg.Name)
 		} else {
-			g.ws(fmt.Sprintf("uintptr(%s),\n", arg.Name))
+			g.ws("uintptr(%s),\n", arg.Name)
 		}
 	}
 	nLeftOver := sysArgsCount - nArgs
@@ -501,14 +577,14 @@ func (g *goGenerator) genFunction(fi *FunctionInfo) {
 	}
 	g.ws(")\n")
 	if hasReturn {
-		g.ws(fmt.Sprintf("return %s(ret)\n", returnType))
+		g.ws("return %s(ret)\n", returnType)
 	}
 
 	g.ws("\n}")
 }
 
-func isPointerType(tp string) bool {
-	typ := desugarTypeNamed(tp)
+func (g *goGenerator) isPointerType(tp string) bool {
+	typ := g.desugarTypeNamed(tp)
 	if typ[0] == '*' {
 		return true
 	}

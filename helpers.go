@@ -16,10 +16,10 @@ func syscallFuncForArgCount(n int) (string, int) {
 		return "syscall.Syscall9", 9
 	}
 	if n <= 12 {
-		return "syscall.Syscall6", 12
+		return "syscall.Syscall12", 12
 	}
 	if n <= 15 {
-		return "syscall.Syscall6", 15
+		return "syscall.Syscall15", 15
 	}
 	s := fmt.Sprintf("unsupported number of arguments: %d", n)
 	panic(s)

@@ -135,7 +135,7 @@ func serField(f *Field) {
 func serParam(p *Param, indent int) {
 	args := NewArgs(p.Name, escIfNeeded(p.Type))
 	args.AddNotEmpty("display", p.Display)
-	args.AddNotEmpty("interfaceId", p.InterfaceId)
+	args.AddNotEmpty("interfaceId", p.InterfaceID)
 	args.AddNotEmpty("count", p.Count)
 	args.AddNotEmpty("length", p.Length)
 	args.AddNotEmpty("postCount", p.PostCount)
@@ -338,7 +338,7 @@ func serModule(m *Module) {
 	serCategories(m.Categories)
 	serErrorDeocde(m.ErrorDecode)
 	serConditions(m.Condition)
-	serVariables(m.Variable, 0)
+	serVariables(m.Variables, 0)
 	serApis(m.Apis, 0)
 }
 
@@ -348,7 +348,7 @@ func serSourceModule(sm *SourceModule) {
 	args.AddNotEmpty("copy", sm.Copy)
 	args.AddNotEmpty("include", sm.Include)
 	outf("%s\n", args.String())
-	serApis(sm.Api, 0)
+	serApis(sm.API, 0)
 }
 
 func serSourceModules(a []*SourceModule) {
@@ -397,12 +397,12 @@ func serInterface(i *Interface) {
 	args := NewArgs("ingterface", escIfNeeded(i.Name))
 
 	args.AddNotEmpty("base", i.BaseInterface)
-	args.AddNotEmpty("id", i.Id)
+	args.AddNotEmpty("id", i.ID)
 	args.AddNotEmpty("errorFunc", i.ErrorFunc)
 	args.AddNotEmpty("onlineHelp", i.OnlineHelp)
 	args.AddNotEmpty("category", i.Category)
 	outf("%s\n", args.String())
-	serApis(i.Api, 1)
+	serApis(i.API, 1)
 	serVariables(i.Variable, 1)
 	outf("\n")
 }
@@ -476,7 +476,7 @@ func toTxt(d *APIMonitorXMLFile) {
 	serHeaders(d.Headers)
 	// ignore d.HelpUrl
 	// d.Include was serialized above
-	serInterface(d.Interfaces)
+	serInterface(d.Interface)
 	for _, m := range d.Modules {
 		serModule(m)
 	}
@@ -485,13 +485,13 @@ func toTxt(d *APIMonitorXMLFile) {
 	if len(d.Modules) > 0 {
 		nonNilCount++
 	}
-	if d.Interfaces != nil {
+	if d.Interface != nil {
 		nonNilCount++
 	}
 	if d.Headers != nil {
 		nonNilCount++
 	}
-	if d.ApiSetSchema != nil {
+	if d.APISetSchema != nil {
 		nonNilCount++
 	}
 	if d.UnsupportedModules != nil {

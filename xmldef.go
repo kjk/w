@@ -7,13 +7,16 @@ import "encoding/xml"
 
 // APIMonitorXMLFile represents a single XML file
 type APIMonitorXMLFile struct {
-	XMLName            xml.Name            `xml:"ApiMonitor,omitempty" json:"ApiMonitor,omitempty"`
-	ApiSetSchema       *ApiSetSchema       `xml:"ApiSetSchema,omitempty" json:"ApiSetSchema,omitempty"`
-	ErrorLookupModule  *ErrorLookupModule  `xml:"ErrorLookupModule,omitempty" json:"ErrorLookupModule,omitempty"`
-	Headers            *Headers            `xml:"Headers,omitempty" json:"Headers,omitempty"`
-	HelpUrls           []*HelpURL          `xml:"HelpUrl,omitempty" json:"HelpUrl,omitempty"`
+	XMLName           xml.Name           `xml:"ApiMonitor,omitempty" json:"ApiMonitor,omitempty"`
+	APISetSchema      *ApiSetSchema      `xml:"ApiSetSchema,omitempty" json:"ApiSetSchema,omitempty"`
+	ErrorLookupModule *ErrorLookupModule `xml:"ErrorLookupModule,omitempty" json:"ErrorLookupModule,omitempty"`
+	Headers           *Headers           `xml:"Headers,omitempty" json:"Headers,omitempty"`
+	HelpUrls          []*HelpURL         `xml:"HelpUrl,omitempty" json:"HelpUrl,omitempty"`
+	// This describes dependency tree. Presumably in order to
+	// understand definition in this file, one has to know
+	// things defines in those files
 	Includes           []*Include          `xml:"Include,omitempty" json:"Include,omitempty"`
-	Interfaces         *Interface          `xml:"Interface,omitempty" json:"Interface,omitempty"`
+	Interface          *Interface          `xml:"Interface,omitempty" json:"Interface,omitempty"`
 	Modules            []*Module           `xml:"Module,omitempty" json:"Module,omitempty"`
 	UnsupportedModules *UnsupportedModules `xml:"UnsupportedModules,omitempty" json:"UnsupportedModules,omitempty"`
 
@@ -42,7 +45,7 @@ type Module struct {
 	ErrorDecode        []*ErrorDecode  `xml:"ErrorDecode,omitempty" json:"ErrorDecode,omitempty"`
 	ModuleAlias        []*ModuleAlias  `xml:"ModuleAlias,omitempty" json:"ModuleAlias,omitempty"`
 	SourceModule       []*SourceModule `xml:"SourceModule,omitempty" json:"SourceModule,omitempty"`
-	Variable           []*Variable     `xml:"Variable,omitempty" json:"Variable,omitempty"`
+	Variables          []*Variable     `xml:"Variable,omitempty" json:"Variable,omitempty"`
 	Str                string          `xml:",chardata" json:",omitempty"`
 }
 
@@ -85,7 +88,7 @@ type Param struct {
 	DerefPostCount       string   `xml:"DerefPostCount,attr"  json:",omitempty"`
 	DerefPostLength      string   `xml:"DerefPostLength,attr"  json:",omitempty"`
 	Display              string   `xml:"Display,attr"  json:",omitempty"`
-	InterfaceId          string   `xml:"InterfaceId,attr"  json:",omitempty"`
+	InterfaceID          string   `xml:"InterfaceId,attr"  json:",omitempty"`
 	Length               string   `xml:"Length,attr"  json:",omitempty"`
 	Name                 string   `xml:"Name,attr"  json:",omitempty"`
 	OutputOnly           string   `xml:"OutputOnly,attr"  json:",omitempty"`
@@ -94,6 +97,7 @@ type Param struct {
 	Type                 string   `xml:"Type,attr"  json:",omitempty"`
 }
 
+// Return describes return value from a function
 type Return struct {
 	XMLName xml.Name `xml:"Return,omitempty" json:"Return,omitempty"`
 	Display string   `xml:"Display,attr"  json:",omitempty"`
@@ -196,10 +200,10 @@ type Interface struct {
 	BaseInterface string      `xml:"BaseInterface,attr"  json:",omitempty"`
 	Category      string      `xml:"Category,attr"  json:",omitempty"`
 	ErrorFunc     string      `xml:"ErrorFunc,attr"  json:",omitempty"`
-	Id            string      `xml:"Id,attr"  json:",omitempty"`
+	ID            string      `xml:"Id,attr"  json:",omitempty"`
 	Name          string      `xml:"Name,attr"  json:",omitempty"`
 	OnlineHelp    string      `xml:"OnlineHelp,attr"  json:",omitempty"`
-	Api           []*Api      `xml:"Api,omitempty" json:"Api,omitempty"`
+	API           []*Api      `xml:"Api,omitempty" json:"Api,omitempty"`
 	Variable      []*Variable `xml:"Variable,omitempty" json:"Variable,omitempty"`
 }
 
@@ -261,5 +265,5 @@ type SourceModule struct {
 	Copy    string   `xml:"Copy,attr"  json:",omitempty"`
 	Include string   `xml:"Include,attr"  json:",omitempty"`
 	Name    string   `xml:"Name,attr"  json:",omitempty"`
-	Api     []*Api   `xml:"Api,omitempty" json:"Api,omitempty"`
+	API     []*Api   `xml:"Api,omitempty" json:"Api,omitempty"`
 }

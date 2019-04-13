@@ -19,6 +19,8 @@ const (
 	typeInterface = "Interface"
 	typeStruct    = "Struct"
 	typeUnion     = "Union"
+	typeArray     = "Array"
+	typeVoid      = "Void"
 )
 
 // FunctionInfo describes a function
@@ -212,6 +214,8 @@ func (g *goGenerator) addVariable(vi *VariableInfo) {
 		g.addSymbol(v.Base)
 	case "integer", "modulehandle", "void", "tcharacter":
 		// skip those
+	case "struct":
+		// also skip those
 	default:
 		fmt.Printf("Type: %s\n", v.Type)
 	}
@@ -286,6 +290,12 @@ func (g *goGenerator) generateTypeNamed(tp string) {
 		tp = tp[1:]
 	}
 
+	// we assume this is array type like '[32]WCHAR', and we don't want
+	// types for those
+	if tp[0] == '[' && strings.Contains(tp, "]") {
+		return
+	}
+
 	if s := desugerPreDefinedType(tp); s != "" {
 		// skip pre-defined types
 		return
@@ -296,29 +306,39 @@ func (g *goGenerator) generateTypeNamed(tp string) {
 		s := fmt.Sprintf("didn't find info about type '%s'\n", tp)
 		panic(s)
 	}
+
+	if vi.WasGenerated {
+		return
+	}
+	vi.WasGenerated = true
+
 	v := vi.Variable
 	if v.Type == typeAlias {
-		g.generateAlias(vi)
+		v := vi.Variable
+		g.ws("type %s %s\n", v.Name, v.Base)
 		return
 	}
 
 	if v.Type == typeStruct {
-		g.generateStruct(vi)
+		v := vi.Variable
+		// first a pass to generate type names
+		for _, f := range v.Field {
+			tp := g.desugarTypeNamed(f.Type)
+			g.generateTypeNamed(tp)
+		}
+
+		g.ws("type %s struct {\n", v.Name)
+		for _, f := range v.Field {
+			name := makeNameGoPublic(f.Name)
+			tp := g.desugarTypeNamed(f.Type)
+			g.ws("%s %s\n", name, tp)
+		}
+		g.ws("}\n\n")
 		return
 	}
 
 	s := fmt.Sprintf("Unsupported type: '%s'", v.Type)
 	panic(s)
-}
-
-func (g *goGenerator) generateAlias(vi *VariableInfo) {
-	if vi.WasGenerated {
-		return
-	}
-
-	v := vi.Variable
-	g.ws("type %s %s\n", v.Name, v.Base)
-	vi.WasGenerated = true
 }
 
 func (g *goGenerator) generateConsts(set []*Set) bool {
@@ -349,27 +369,6 @@ func (g *goGenerator) generateSet(vi *VariableInfo) {
 
 	v := vi.Variable
 	vi.WasGenerated = g.generateConsts(v.Set)
-}
-
-func (g *goGenerator) generateStruct(vi *VariableInfo) {
-	if vi.WasGenerated {
-		return
-	}
-
-	v := vi.Variable
-	// first a pass to generate type names
-	for _, f := range v.Field {
-		tp := g.desugarTypeNamed(f.Type)
-		g.generateTypeNamed(tp)
-	}
-
-	g.ws("type %s struct {\n", v.Name)
-	for _, f := range v.Field {
-		name := makeNameGoPublic(f.Name)
-		tp := g.desugarTypeNamed(f.Type)
-		g.ws("%s %s\n", name, tp)
-	}
-	g.ws("}\n\n")
 }
 
 func makeNameGoPublic(s string) string {
@@ -473,7 +472,7 @@ var (
 	g.ws("}\n")
 
 	for _, fi := range mi.functions {
-		g.genFunction(fi)
+		g.generateFunction(fi)
 	}
 }
 
@@ -538,6 +537,8 @@ func desugerPreDefinedType(tp string) string {
 		return tp
 	case "uint8", "uint16", "uint32", "uint64":
 		return tp
+	case "WCHAR":
+		return tp
 	case "UINT_PTR":
 		return "uintptr"
 	case "int":
@@ -545,6 +546,9 @@ func desugerPreDefinedType(tp string) string {
 		return "int32"
 	case "ModuleHandle":
 		return "HANDLE"
+	}
+	if strings.ToLower(tp) == "void" {
+		return "void"
 	}
 	return ""
 }
@@ -584,6 +588,15 @@ func (g *goGenerator) desugarType(vi *VariableInfo) string {
 		return v.Name
 	}
 
+	if tp == typeArray {
+		base := g.desugarTypeNamed(v.Base)
+		return fmt.Sprintf("[%s]%s", v.Count, base)
+	}
+
+	if tp == typeVoid {
+		return "void"
+	}
+
 	if tp == typeUnion {
 		panic("union NYI")
 	}
@@ -614,7 +627,7 @@ func CreateWindowEx(dwExStyle uint32, lpClassName, lpWindowName *uint16, dwStyle
 	return HWND(ret)
 }
 */
-func (g *goGenerator) genFunction(fi *FunctionInfo) {
+func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	fn := fi.Function
 
 	// first a pass to generate types this function depends on
@@ -628,7 +641,15 @@ func (g *goGenerator) genFunction(fi *FunctionInfo) {
 	if hasReturn {
 		// TODO: to handle BOOL => bool need a version of desugarTypeNamed()
 		// specialized for return types
-		returnType = g.desugarTypeNamed(fn.Return.Type)
+		if fn.Return.Type == "BOOL" {
+			returnType = "bool"
+		} else {
+			returnType = g.desugarTypeNamed(fn.Return.Type)
+			g.generateTypeNamed(returnType)
+			if strings.ToLower(returnType) == "void" {
+				hasReturn = false
+			}
+		}
 	}
 
 	fnName := getFunctionName(fn)
@@ -674,10 +695,14 @@ func (g *goGenerator) genFunction(fi *FunctionInfo) {
 	}
 	g.ws(")\n")
 	if hasReturn {
-		g.ws("return %s(ret)\n", returnType)
+		if returnType == "bool" {
+			g.ws("return ret != 0\n")
+		} else {
+			g.ws("return %s(ret)\n", returnType)
+		}
 	}
 
-	g.ws("\n}")
+	g.ws("\n}\n")
 }
 
 func (g *goGenerator) isPointerType(tp string) bool {
@@ -718,5 +743,8 @@ func genGo() {
 	g := newGoGenerator()
 	//g.addSymbol("CreateWindowEx")
 	g.addSymbol("FileTimeToSystemTime")
+	g.addSymbol("TzSpecificLocalTimeToSystemTime")
+	g.addSymbol("GetSystemTimeAsFileTime")
+
 	g.generate()
 }

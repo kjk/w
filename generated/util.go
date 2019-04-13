@@ -7,6 +7,7 @@ import (
 
 type HANDLE uintptr
 type HMODULE uintptr
+type WCHAR uint16
 
 func winError(s string) error {
 	// TODO: use getlasterror, add a callstack

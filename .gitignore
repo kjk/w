@@ -1,4 +1,6 @@
+gen.exe
 winapigen.exe
 winapigen
 generated/user32.go
+generated/kernel32.go
 api/

@@ -17,6 +17,8 @@ const (
 	typePtr       = "Pointer"
 	typePointer   = "Pointer"
 	typeInterface = "Interface"
+	typeStruct    = "Struct"
+	typeUnion     = "Union"
 )
 
 // FunctionInfo describes a function
@@ -322,6 +324,30 @@ func (g *goGenerator) generateSet(vi *VariableInfo) {
 	g.generateConsts(v.Set)
 }
 
+func (g *goGenerator) generateStruct(vi *VariableInfo) {
+	if vi.WasGenerated {
+		return
+	}
+
+	v := vi.Variable
+	// first a pass to generate type names
+	for _, f := range v.Field {
+		g.desugarTypeNamed(f.Type)
+	}
+
+	g.ws("type %s struct {\n", v.Name)
+	for _, f := range v.Field {
+		name := makeNameGoPublic(f.Name)
+		tp := g.desugarTypeNamed(f.Type)
+		fmt.Printf("%s %s\n", name, tp)
+	}
+	g.ws("}\n\n")
+}
+
+func makeNameGoPublic(s string) string {
+	return strings.ToUpper(s[:1]) + s[1:]
+}
+
 func (g *goGenerator) generateEnum(vi *VariableInfo) {
 	// TODO: can have Flag and Enum and Set in same Variable?
 	if vi.WasGenerated {
@@ -527,6 +553,18 @@ func (g *goGenerator) desugarType(vi *VariableInfo) string {
 		return "*" + g.desugarTypeNamed(v.Base)
 	}
 
+	if tp == typeStruct {
+		g.generateStruct(vi)
+		return v.Name
+	}
+
+	if tp == typeUnion {
+		panic("union NYI")
+	}
+
+	s := fmt.Sprintf("Unknown type '%s'", tp)
+	panic(s)
+
 	// TODO: recursively resolve the type
 	return tp
 }
@@ -649,6 +687,7 @@ func genGo() {
 	fmt.Printf("Built index in %s. %d functions, %d variables\n", time.Since(timeStart), len(functions), len(variables))
 
 	g := newGoGenerator()
-	g.addSymbol("CreateWindowEx")
+	//g.addSymbol("CreateWindowEx")
+	g.addSymbol("FileTimeToSystemTime")
 	g.generate()
 }

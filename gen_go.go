@@ -47,6 +47,9 @@ type VariableInfo struct {
 
 // InterfaceInfo describes an interface
 type InterfaceInfo struct {
+	// name of the file that refers to this interface
+	// e.g. "URL.h.xml"
+	FileName  string
 	Interface *Interface
 
 	WasAdded     bool
@@ -56,7 +59,7 @@ type InterfaceInfo struct {
 var (
 	functions  = map[string][]*FunctionInfo{}
 	variables  = map[string][]*VariableInfo{}
-	interfaces = map[string][]*InterfaceInfo{}
+	interfaces = map[string]*InterfaceInfo{}
 )
 
 //var toGen = []string{"CreateWindowEx"}
@@ -80,6 +83,27 @@ func indexFunction(f *APIMonitorXMLFile, mod *Module, api *Api) {
 }
 
 func indexVariable(f *APIMonitorXMLFile, hdrs *Headers, mod *Module, cond *Condition, v *Variable) {
+	if v.Type == typeInterface {
+		// this only records to which file to attribute this interface
+		name := v.Name
+		ii := interfaces[name]
+		if ii != nil {
+			// must have been created when indexing <Interface> node
+			// record FileName
+			// Note: there are duplicates for the same. Too many to make
+			// whitelist, so we let it slide for all of them and use
+			// whatever the last name is
+			ii.FileName = f.FileName
+			return
+		}
+
+		ii = &InterfaceInfo{
+			FileName: f.FileName,
+		}
+		interfaces[name] = ii
+		return
+	}
+
 	{
 		name := v.Name
 		vi := &VariableInfo{
@@ -127,11 +151,18 @@ func indexInterface(f *APIMonitorXMLFile) {
 		return
 	}
 	name := f.Interface.Name
-	ii := &InterfaceInfo{
+	ii := interfaces[name]
+	if ii != nil {
+		// must have been created when indexing a variable with Type Interfaces
+		panicIf(ii.Interface != nil, "ii.Interface is not nil")
+		ii.Interface = f.Interface
+		return
+	}
+
+	ii = &InterfaceInfo{
 		Interface: f.Interface,
 	}
-	a := interfaces[name]
-	interfaces[name] = append(a, ii)
+	interfaces[name] = ii
 }
 
 func buildIndex(files []*APIMonitorXMLFile) {
@@ -165,6 +196,10 @@ func findVariable(name string) *VariableInfo {
 		fmt.Printf("Found %d variables with name '%s', showing the first one\n", len(a), name)
 	}
 	return a[0]
+}
+
+func findInterface(name string) *InterfaceInfo {
+	return interfaces[name]
 }
 
 func gofmtFile(path string) {
@@ -208,6 +243,9 @@ type goGenerator struct {
 	// file for that module
 	modules map[string]*goModuleInfo
 
+	// list of interfaces to add
+	interfaces []string
+
 	// we keep track of wihch const values have already been generated
 	generatedConsts map[string]struct{}
 
@@ -236,7 +274,7 @@ func (g *goGenerator) addVariable(vi *VariableInfo) {
 		g.addSymbol(v.Base)
 	case "integer", "modulehandle", "void", "tcharacter":
 		// skip those
-	case "struct":
+	case "struct", "interface":
 		// also skip those
 	default:
 		fmt.Printf("Type: %s\n", v.Type)
@@ -273,6 +311,15 @@ func (g *goGenerator) addFunction(fi *FunctionInfo) {
 	}
 }
 
+func (g *goGenerator) addInterface(ii *InterfaceInfo) {
+	if ii.WasAdded {
+		return
+	}
+	name := ii.Interface.Name
+	g.interfaces = append(g.interfaces, name)
+	ii.WasAdded = true
+}
+
 func (g *goGenerator) addSymbol(name string) {
 	// predefined types are alredy in
 	if predefined := desugerPreDefinedType(name); predefined != "" {
@@ -287,6 +334,11 @@ func (g *goGenerator) addSymbol(name string) {
 	vi := findVariable(name)
 	if vi != nil {
 		g.addVariable(vi)
+		return
+	}
+	ii := findInterface(name)
+	if ii != nil {
+		g.addInterface(ii)
 		return
 	}
 	s := fmt.Sprintf("Didn't find function or variable with name '%s'", name)
@@ -727,6 +779,25 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	g.ws("\n}\n")
 }
 
+func (g *goGenerator) generateInterface(name string) {
+	ii := findInterface(name)
+	if ii.WasGenerated {
+		return
+	}
+	i := ii.Interface
+	baseName := i.BaseInterface
+	if baseName != "" {
+		g.generateInterface(baseName)
+	}
+
+	// TODO: generate vtable
+	// TODO: generate functions wrapping vtable
+	// TODO: generate function to create the type
+	panic("NYI")
+
+	ii.WasGenerated = true
+}
+
 func (g *goGenerator) isPointerType(tp string) bool {
 	typ := g.desugarTypeNamed(tp)
 	if typ[0] == '*' {
@@ -746,6 +817,9 @@ func (g *goGenerator) generate() {
 		g.generateModule(mi)
 		gofmtFile(mi.generatedFilePath)
 		dumpFile(mi.generatedFilePath)
+	}
+	for _, name := range g.interfaces {
+		g.generateInterface(name)
 	}
 }
 
@@ -767,6 +841,6 @@ func genGo() {
 	//g.addSymbol("FileTimeToSystemTime")
 	//g.addSymbol("TzSpecificLocalTimeToSystemTime")
 	//g.addSymbol("GetSystemTimeAsFileTime")
-
+	g.addSymbol("IBindHost")
 	g.generate()
 }

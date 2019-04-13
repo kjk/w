@@ -280,24 +280,51 @@ func (g *goGenerator) ws(format string, args ...interface{}) {
 	ws(g.w, s)
 }
 
+func (g *goGenerator) generateTypeNamed(tp string) {
+	// for e.g. pointer-to-struct types, we need to undo pointer-ness
+	for tp[0] == '*' {
+		tp = tp[1:]
+	}
+
+	if s := desugerPreDefinedType(tp); s != "" {
+		// skip pre-defined types
+		return
+	}
+
+	vi := findVariable(tp)
+	if vi == nil {
+		s := fmt.Sprintf("didn't find info about type '%s'\n", tp)
+		panic(s)
+	}
+	v := vi.Variable
+	if v.Type == typeAlias {
+		g.generateAlias(vi)
+		return
+	}
+
+	if v.Type == typeStruct {
+		g.generateStruct(vi)
+		return
+	}
+
+	s := fmt.Sprintf("Unsupported type: '%s'", v.Type)
+	panic(s)
+}
+
 func (g *goGenerator) generateAlias(vi *VariableInfo) {
 	if vi.WasGenerated {
 		return
 	}
 
 	v := vi.Variable
-	if v.Name[0] == '[' {
-		return
-	}
-
 	g.ws("type %s %s\n", v.Name, v.Base)
 	vi.WasGenerated = true
 }
 
-func (g *goGenerator) generateConsts(set []*Set) {
+func (g *goGenerator) generateConsts(set []*Set) bool {
 	// TODO: optimize if only one value
 	if len(set) == 0 {
-		return
+		return false
 	}
 	g.ws("const (\n")
 	for _, e := range set {
@@ -311,6 +338,7 @@ func (g *goGenerator) generateConsts(set []*Set) {
 		g.generatedConsts[name] = struct{}{}
 	}
 	g.ws(")\n\n")
+	return true
 }
 
 func (g *goGenerator) generateSet(vi *VariableInfo) {
@@ -320,8 +348,7 @@ func (g *goGenerator) generateSet(vi *VariableInfo) {
 	}
 
 	v := vi.Variable
-	vi.WasGenerated = true
-	g.generateConsts(v.Set)
+	vi.WasGenerated = g.generateConsts(v.Set)
 }
 
 func (g *goGenerator) generateStruct(vi *VariableInfo) {
@@ -332,14 +359,15 @@ func (g *goGenerator) generateStruct(vi *VariableInfo) {
 	v := vi.Variable
 	// first a pass to generate type names
 	for _, f := range v.Field {
-		g.desugarTypeNamed(f.Type)
+		tp := g.desugarTypeNamed(f.Type)
+		g.generateTypeNamed(tp)
 	}
 
 	g.ws("type %s struct {\n", v.Name)
 	for _, f := range v.Field {
 		name := makeNameGoPublic(f.Name)
 		tp := g.desugarTypeNamed(f.Type)
-		fmt.Printf("%s %s\n", name, tp)
+		g.ws("%s %s\n", name, tp)
 	}
 	g.ws("}\n\n")
 }
@@ -540,7 +568,6 @@ func (g *goGenerator) desugarType(vi *VariableInfo) string {
 	g.generateEnum(vi)
 
 	if tp == typeAlias {
-		g.generateAlias(vi)
 		// we want to preserve types that are aliases for HANDLE
 		// (HWND, HMENU etc.)
 		if v.Base == "HANDLE" {
@@ -554,7 +581,6 @@ func (g *goGenerator) desugarType(vi *VariableInfo) string {
 	}
 
 	if tp == typeStruct {
-		g.generateStruct(vi)
 		return v.Name
 	}
 
@@ -593,8 +619,10 @@ func (g *goGenerator) genFunction(fi *FunctionInfo) {
 
 	// first a pass to generate types this function depends on
 	for _, arg := range fn.Params {
-		g.desugarTypeNamed(arg.Type)
+		tp := g.desugarTypeNamed(arg.Type)
+		g.generateTypeNamed(tp)
 	}
+
 	returnType := ""
 	hasReturn := fn.Return != nil
 	if hasReturn {
@@ -642,6 +670,7 @@ func (g *goGenerator) genFunction(fi *FunctionInfo) {
 	nLeftOver := sysArgsCount - nArgs
 	for nLeftOver > 0 {
 		g.ws("0,\n")
+		nLeftOver--
 	}
 	g.ws(")\n")
 	if hasReturn {

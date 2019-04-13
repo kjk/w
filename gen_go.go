@@ -292,7 +292,38 @@ func (g *goGenerator) generateAlias(vi *VariableInfo) {
 	vi.WasGenerated = true
 }
 
+func (g *goGenerator) generateConsts(set []*Set) {
+	// TODO: optimize if only one value
+	if len(set) == 0 {
+		return
+	}
+	g.ws("const (\n")
+	for _, e := range set {
+		name := e.Name
+		// the same value can appear in multiple enum sets
+		// so we need to ensure we only generate value once
+		if _, ok := g.generatedConsts[name]; ok {
+			continue
+		}
+		g.ws("%s = %s\n", name, e.Value)
+		g.generatedConsts[name] = struct{}{}
+	}
+	g.ws(")\n\n")
+}
+
+func (g *goGenerator) generateSet(vi *VariableInfo) {
+	// TODO: can have Flag and Enum and Set in same Variable?
+	if vi.WasGenerated {
+		return
+	}
+
+	v := vi.Variable
+	vi.WasGenerated = true
+	g.generateConsts(v.Set)
+}
+
 func (g *goGenerator) generateEnum(vi *VariableInfo) {
+	// TODO: can have Flag and Enum and Set in same Variable?
 	if vi.WasGenerated {
 		return
 	}
@@ -303,23 +334,22 @@ func (g *goGenerator) generateEnum(vi *VariableInfo) {
 	}
 
 	vi.WasGenerated = true
-	set := v.Enum.Set
-	if len(set) == 0 {
+	g.generateConsts(v.Enum.Set)
+}
+
+func (g *goGenerator) generateFlag(vi *VariableInfo) {
+	// TODO: can have Flag and Enum and Set in same Variable?
+	if vi.WasGenerated {
 		return
 	}
-	// TODO: optimize if only one value
-	g.ws("const (\n")
-	for _, e := range set {
-		name := e.Name
-		// the same value can appear in multiple enum sets
-		// so we need to ensure we only generate value once
-		if _, ok := g.generatedConsts[name]; ok {
-			continue
-		}
-		g.ws("%s = %s", name, e.Value)
-		g.generatedConsts[name] = struct{}{}
+
+	v := vi.Variable
+	if v.Flag == nil {
+		return
 	}
-	g.ws(")\n")
+
+	vi.WasGenerated = true
+	g.generateConsts(v.Flag.Set)
 }
 
 func (g *goGenerator) generateModule(mi *goModuleInfo) {
@@ -479,9 +509,9 @@ func (g *goGenerator) desugarType(vi *VariableInfo) string {
 		return desugarInteger(v)
 	}
 
-	if v.Enum != nil {
-		g.generateEnum(vi)
-	}
+	g.generateFlag(vi)
+	g.generateSet(vi)
+	g.generateEnum(vi)
 
 	if tp == typeAlias {
 		g.generateAlias(vi)

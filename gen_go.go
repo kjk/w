@@ -45,9 +45,18 @@ type VariableInfo struct {
 	WasGenerated bool
 }
 
+// InterfaceInfo describes an interface
+type InterfaceInfo struct {
+	Interface *Interface
+
+	WasAdded     bool
+	WasGenerated bool
+}
+
 var (
-	functions = map[string][]*FunctionInfo{}
-	variables = map[string][]*VariableInfo{}
+	functions  = map[string][]*FunctionInfo{}
+	variables  = map[string][]*VariableInfo{}
+	interfaces = map[string][]*InterfaceInfo{}
 )
 
 //var toGen = []string{"CreateWindowEx"}
@@ -113,6 +122,18 @@ func indexHeaders(f *APIMonitorXMLFile) {
 	}
 }
 
+func indexInterface(f *APIMonitorXMLFile) {
+	if f.Interface == nil {
+		return
+	}
+	name := f.Interface.Name
+	ii := &InterfaceInfo{
+		Interface: f.Interface,
+	}
+	a := interfaces[name]
+	interfaces[name] = append(a, ii)
+}
+
 func buildIndex(files []*APIMonitorXMLFile) {
 	for _, f := range files {
 		if shouldSkipFile(f.FileName) {
@@ -120,6 +141,7 @@ func buildIndex(files []*APIMonitorXMLFile) {
 		}
 		indexModules(f)
 		indexHeaders(f)
+		indexInterface(f)
 	}
 }
 
@@ -738,13 +760,13 @@ func genGo() {
 
 	timeStart = time.Now()
 	buildIndex(parsedFiles)
-	fmt.Printf("Built index in %s. %d functions, %d variables\n", time.Since(timeStart), len(functions), len(variables))
+	fmt.Printf("Built index in %s. %d functions, %d variables, %d interfaces\n", time.Since(timeStart), len(functions), len(variables), len(interfaces))
 
 	g := newGoGenerator()
 	//g.addSymbol("CreateWindowEx")
-	g.addSymbol("FileTimeToSystemTime")
-	g.addSymbol("TzSpecificLocalTimeToSystemTime")
-	g.addSymbol("GetSystemTimeAsFileTime")
+	//g.addSymbol("FileTimeToSystemTime")
+	//g.addSymbol("TzSpecificLocalTimeToSystemTime")
+	//g.addSymbol("GetSystemTimeAsFileTime")
 
 	g.generate()
 }

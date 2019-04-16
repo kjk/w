@@ -23,6 +23,29 @@ const (
 	typeVoid      = "Void"
 )
 
+// TypeInfo describes a type
+type TypeInfo struct {
+	SourceFile *APIMonitorXMLFile
+	Headers    *Headers
+	Module     *Module    // can be nil
+	Condition  *Condition // can be nil
+	Variable   *Variable
+
+	WasAdded     bool
+	WasGenerated bool
+}
+
+// FunctionArgument describes an argument to a function
+type FunctionArgument struct {
+	Name string
+	Type *TypeInfo
+}
+
+// FunctionReturnType describes a return type of a function
+type FunctionReturnType struct {
+	Type *TypeInfo
+}
+
 // FunctionInfo describes a function
 type FunctionInfo struct {
 	SourceFile *APIMonitorXMLFile
@@ -32,18 +55,6 @@ type FunctionInfo struct {
 	// if there is both A and W version of the function,
 	// it indicates this is Unicode (W) version
 	IsUnicode bool
-
-	WasAdded     bool
-	WasGenerated bool
-}
-
-// VariableInfo describes a variable, which can be
-type VariableInfo struct {
-	SourceFile *APIMonitorXMLFile
-	Headers    *Headers
-	Module     *Module    // can be nil
-	Condition  *Condition // can be nil
-	Variable   *Variable
 
 	WasAdded     bool
 	WasGenerated bool
@@ -62,7 +73,7 @@ type InterfaceInfo struct {
 
 var (
 	functions  = map[string][]*FunctionInfo{}
-	variables  = map[string][]*VariableInfo{}
+	types      = map[string][]*TypeInfo{}
 	interfaces = map[string]*InterfaceInfo{}
 )
 
@@ -110,15 +121,15 @@ func indexVariable(f *APIMonitorXMLFile, hdrs *Headers, mod *Module, cond *Condi
 
 	{
 		name := v.Name
-		vi := &VariableInfo{
+		vi := &TypeInfo{
 			SourceFile: f,
 			Headers:    hdrs,
 			Module:     mod,
 			Condition:  cond,
 			Variable:   v,
 		}
-		a := variables[name]
-		variables[name] = append(a, vi)
+		a := types[name]
+		types[name] = append(a, vi)
 	}
 }
 
@@ -191,8 +202,8 @@ func findFunction(name string) *FunctionInfo {
 	return a[0]
 }
 
-func findVariable(name string) *VariableInfo {
-	a := variables[name]
+func findType(name string) *TypeInfo {
+	a := types[name]
 	if len(a) == 0 {
 		return nil
 	}
@@ -235,7 +246,7 @@ var (
 type goModuleInfo struct {
 	name      string // e.g. gdi32
 	functions []*FunctionInfo
-	variables []*VariableInfo
+	types     []*TypeInfo
 
 	generatedFilePath string
 }
@@ -265,7 +276,7 @@ func newGoGenerator() *goGenerator {
 	}
 }
 
-func (g *goGenerator) addVariable(vi *VariableInfo) {
+func (g *goGenerator) addVariable(vi *TypeInfo) {
 	if vi.WasAdded {
 		return
 	}
@@ -361,7 +372,7 @@ func (g *goGenerator) addSymbol(name string) {
 		return
 	}
 
-	vi := findVariable(name)
+	vi := findType(name)
 	if vi != nil {
 		g.addVariable(vi)
 		return
@@ -405,7 +416,7 @@ func (g *goGenerator) generateTypeNamed(tp string) {
 		return
 	}
 
-	vi := findVariable(tp)
+	vi := findType(tp)
 	panicIf(vi == nil, "didn't find info about type '%s'\n", tp)
 
 	if vi.WasGenerated {
@@ -461,7 +472,7 @@ func (g *goGenerator) generateConsts(set []*Set) bool {
 	return true
 }
 
-func (g *goGenerator) generateSet(vi *VariableInfo) {
+func (g *goGenerator) generateSet(vi *TypeInfo) {
 	// TODO: can have Flag and Enum and Set in same Variable?
 	if vi.WasGenerated {
 		return
@@ -475,7 +486,7 @@ func makeNameGoPublic(s string) string {
 	return strings.ToUpper(s[:1]) + s[1:]
 }
 
-func (g *goGenerator) generateEnum(vi *VariableInfo) {
+func (g *goGenerator) generateEnum(vi *TypeInfo) {
 	// TODO: can have Flag and Enum and Set in same Variable?
 	if vi.WasGenerated {
 		return
@@ -490,7 +501,7 @@ func (g *goGenerator) generateEnum(vi *VariableInfo) {
 	g.generateConsts(v.Enum.Set)
 }
 
-func (g *goGenerator) generateFlag(vi *VariableInfo) {
+func (g *goGenerator) generateFlag(vi *TypeInfo) {
 	// TODO: can have Flag and Enum and Set in same Variable?
 	if vi.WasGenerated {
 		return
@@ -597,7 +608,7 @@ func (g *goGenerator) desugarTypeNamed(tp string) string {
 		return predefined
 	}
 
-	vi := findVariable(tp)
+	vi := findType(tp)
 	panicIf(vi == nil, "didn't find info about type '%s'", tp)
 	return g.desugarType(vi)
 }
@@ -651,7 +662,7 @@ func desugerPreDefinedType(tp string) string {
 }
 
 // this converts type to a real Go type we want to use
-func (g *goGenerator) desugarType(vi *VariableInfo) string {
+func (g *goGenerator) desugarType(vi *TypeInfo) string {
 	v := vi.Variable
 	tp := v.Type
 
@@ -855,7 +866,7 @@ func genGo() {
 
 	timeStart = time.Now()
 	buildIndex(parsedFiles)
-	fmt.Printf("Built index in %s. %d functions, %d variables, %d interfaces\n", time.Since(timeStart), len(functions), len(variables), len(interfaces))
+	fmt.Printf("Built index in %s. %d functions, %d variables, %d interfaces\n", time.Since(timeStart), len(functions), len(types), len(interfaces))
 
 	g := newGoGenerator()
 	g.addFunctionMust("CreateWindowEx")

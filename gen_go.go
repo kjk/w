@@ -37,7 +37,7 @@ type FunctionInfo struct {
 	WasGenerated bool
 }
 
-// VariableInfo describes a variable
+// VariableInfo describes a variable, which can be
 type VariableInfo struct {
 	SourceFile *APIMonitorXMLFile
 	Headers    *Headers
@@ -301,7 +301,7 @@ func (g *goGenerator) getModuleInfo(mod *Module) *goModuleInfo {
 	return mi
 }
 
-func (g *goGenerator) addFunction(fi *FunctionInfo) {
+func (g *goGenerator) rememberFunction(fi *FunctionInfo) {
 	if fi.WasAdded {
 		return
 	}
@@ -325,15 +325,15 @@ func (g *goGenerator) addInterface(ii *InterfaceInfo) {
 	ii.WasAdded = true
 }
 
-func (g *goGenerator) addSymbolFunctionMust(name string) {
-	added := g.addSymbolFunction(name)
+func (g *goGenerator) addFunctionMust(name string) {
+	added := g.addFunction(name)
 	panicIf(!added, "didn't find function '%s'", name)
 }
 
-func (g *goGenerator) addSymbolFunction(name string) bool {
+func (g *goGenerator) addFunction(name string) bool {
 	fi := findFunction(name)
 	if fi != nil {
-		g.addFunction(fi)
+		g.rememberFunction(fi)
 		return true
 	}
 	// if this is FooA or FooW function, see if there is Foo variant
@@ -343,7 +343,7 @@ func (g *goGenerator) addSymbolFunction(name string) bool {
 		if fi != nil {
 			panicIf(fi.Function.BothCharset == "", "expected '%s' for '%s' to be BothCharset", shortNameW, name)
 			fi.IsUnicode = true
-			g.addFunction(fi)
+			g.rememberFunction(fi)
 			return true
 		}
 	}
@@ -357,7 +357,7 @@ func (g *goGenerator) addSymbol(name string) {
 		return
 	}
 
-	if g.addSymbolFunction(name) {
+	if g.addFunction(name) {
 		return
 	}
 
@@ -858,7 +858,7 @@ func genGo() {
 	fmt.Printf("Built index in %s. %d functions, %d variables, %d interfaces\n", time.Since(timeStart), len(functions), len(variables), len(interfaces))
 
 	g := newGoGenerator()
-	g.addSymbolFunctionMust("CreateWindowEx")
+	g.addFunctionMust("CreateWindowEx")
 	//g.addSymbol("FileTimeToSystemTime")
 	//g.addSymbol("TzSpecificLocalTimeToSystemTime")
 	//g.addSymbol("GetSystemTimeAsFileTime")

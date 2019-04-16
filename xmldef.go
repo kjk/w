@@ -46,7 +46,7 @@ type Module struct {
 	ModuleAlias        []*ModuleAlias  `xml:"ModuleAlias,omitempty" json:"ModuleAlias,omitempty"`
 	SourceModule       []*SourceModule `xml:"SourceModule,omitempty" json:"SourceModule,omitempty"`
 	Variables          []*Variable     `xml:"Variable,omitempty" json:"Variable,omitempty"`
-	Str                string          `xml:",chardata" json:",omitempty"`
+	//Str                string          `xml:",chardata" json:",omitempty"`
 }
 
 // Category represents a category as defined by MSDN docs
@@ -77,7 +77,7 @@ type Api struct {
 	Params             []*Param `xml:"Param,omitempty" json:"Param,omitempty"`
 	Return             *Return  `xml:"Return,omitempty" json:"Return,omitempty"`
 	Success            *Success `xml:"Success,omitempty" json:"Success,omitempty"`
-	Str                string   `xml:",chardata" json:",omitempty"`
+	//Str                string   `xml:",chardata" json:",omitempty"`
 }
 
 type Param struct {
@@ -123,7 +123,7 @@ type Variable struct {
 	Flag       *Flag    `xml:"Flag,omitempty" json:"Flag,omitempty"`
 	Set        []*Set   `xml:"Set,omitempty" json:"Set,omitempty"`
 	Success    *Success `xml:"Success,omitempty" json:"Success,omitempty"`
-	Str        string   `xml:",chardata" json:",omitempty"`
+	//Str        string   `xml:",chardata" json:",omitempty"`
 }
 
 // Display describes a display name
@@ -170,7 +170,7 @@ type Headers struct {
 	XMLName    xml.Name     `xml:"Headers,omitempty" json:"Headers,omitempty"`
 	Conditions []*Condition `xml:"Condition,omitempty" json:"Condition,omitempty"`
 	Variables  []*Variable  `xml:"Variable,omitempty" json:"Variable,omitempty"`
-	Str        string       `xml:",chardata" json:",omitempty"`
+	//Str        string       `xml:",chardata" json:",omitempty"`
 }
 
 // Field represents a COM Field

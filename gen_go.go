@@ -29,6 +29,10 @@ type FunctionInfo struct {
 	Module     *Module
 	Function   *Api
 
+	// if there is both A and W version of the function,
+	// it indicates this is Unicode (W) version
+	IsUnicode bool
+
 	WasAdded     bool
 	WasGenerated bool
 }
@@ -246,7 +250,8 @@ type goGenerator struct {
 	// list of interfaces to add
 	interfaces []string
 
-	// we keep track of wihch const values have already been generated
+	// we keep track of which const values have already been generated
+	// because they the same constant might belong to multiple enums / sets
 	generatedConsts map[string]struct{}
 
 	// the file we're currently writing to
@@ -320,29 +325,54 @@ func (g *goGenerator) addInterface(ii *InterfaceInfo) {
 	ii.WasAdded = true
 }
 
+func (g *goGenerator) addSymbolFunctionMust(name string) {
+	added := g.addSymbolFunction(name)
+	panicIf(!added, "didn't find function '%s'", name)
+}
+
+func (g *goGenerator) addSymbolFunction(name string) bool {
+	fi := findFunction(name)
+	if fi != nil {
+		g.addFunction(fi)
+		return true
+	}
+	// if this is FooA or FooW function, see if there is Foo variant
+	shortNameW := strings.TrimSuffix(name, "W")
+	if shortNameW != name {
+		fi := findFunction(shortNameW)
+		if fi != nil {
+			panicIf(fi.Function.BothCharset == "", "expected '%s' for '%s' to be BothCharset", shortNameW, name)
+			fi.IsUnicode = true
+			g.addFunction(fi)
+			return true
+		}
+	}
+	// TODO: do the same for A variants
+	return false
+}
+
 func (g *goGenerator) addSymbol(name string) {
 	// predefined types are alredy in
 	if predefined := desugerPreDefinedType(name); predefined != "" {
 		return
 	}
 
-	fi := findFunction(name)
-	if fi != nil {
-		g.addFunction(fi)
+	if g.addSymbolFunction(name) {
 		return
 	}
+
 	vi := findVariable(name)
 	if vi != nil {
 		g.addVariable(vi)
 		return
 	}
+
 	ii := findInterface(name)
 	if ii != nil {
 		g.addInterface(ii)
 		return
 	}
-	s := fmt.Sprintf("Didn't find function or variable with name '%s'", name)
-	panic(s)
+	panicIf(true, "Didn't find function or variable with name '%s'", name)
 }
 
 func ws(w io.Writer, s string) {
@@ -376,10 +406,7 @@ func (g *goGenerator) generateTypeNamed(tp string) {
 	}
 
 	vi := findVariable(tp)
-	if vi == nil {
-		s := fmt.Sprintf("didn't find info about type '%s'\n", tp)
-		panic(s)
-	}
+	panicIf(vi == nil, "didn't find info about type '%s'\n", tp)
 
 	if vi.WasGenerated {
 		return
@@ -411,8 +438,7 @@ func (g *goGenerator) generateTypeNamed(tp string) {
 		return
 	}
 
-	s := fmt.Sprintf("Unsupported type: '%s'", v.Type)
-	panic(s)
+	panicIf(true, "Unsupported type: '%s'", v.Type)
 }
 
 func (g *goGenerator) generateConsts(set []*Set) bool {
@@ -572,10 +598,7 @@ func (g *goGenerator) desugarTypeNamed(tp string) string {
 	}
 
 	vi := findVariable(tp)
-	if vi == nil {
-		s := fmt.Sprintf("didn't find info about type '%s'\n", tp)
-		panic(s)
-	}
+	panicIf(vi == nil, "didn't find info about type '%s'", tp)
 	return g.desugarType(vi)
 }
 
@@ -675,8 +698,7 @@ func (g *goGenerator) desugarType(vi *VariableInfo) string {
 		panic("union NYI")
 	}
 
-	s := fmt.Sprintf("Unknown type '%s'", tp)
-	panic(s)
+	panicIf(true, "Unknown type '%s'", tp)
 
 	// TODO: recursively resolve the type
 	return tp
@@ -836,7 +858,7 @@ func genGo() {
 	fmt.Printf("Built index in %s. %d functions, %d variables, %d interfaces\n", time.Since(timeStart), len(functions), len(variables), len(interfaces))
 
 	g := newGoGenerator()
-	g.addSymbol("CreateWindowEx")
+	g.addSymbolFunctionMust("CreateWindowEx")
 	//g.addSymbol("FileTimeToSystemTime")
 	//g.addSymbol("TzSpecificLocalTimeToSystemTime")
 	//g.addSymbol("GetSystemTimeAsFileTime")

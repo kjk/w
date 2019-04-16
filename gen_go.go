@@ -701,30 +701,31 @@ func CreateWindowEx(dwExStyle uint32, lpClassName, lpWindowName *uint16, dwStyle
 	return HWND(ret)
 }
 */
+
+func (g *goGenerator) desugarReturnType(typeName string) string {
+	// TODO: to handle BOOL => bool need a version of desugarTypeNamed()
+	// specialized for return types
+	if typeName == "BOOL" {
+		return "bool"
+	}
+	returnType := g.desugarTypeNamed(typeName)
+	g.generateTypeNamed(returnType)
+	if strings.ToLower(returnType) == "void" {
+		return ""
+	}
+	return returnType
+}
+
 func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	fn := fi.Function
 
 	// first a pass to generate types this function depends on
 	for _, arg := range fn.Params {
-		tp := g.desugarTypeNamed(arg.Type)
-		g.generateTypeNamed(tp)
+		g.desugarTypeNamed(arg.Type)
+		g.generateTypeNamed(arg.Type)
 	}
 
-	returnType := ""
-	hasReturn := fn.Return != nil
-	if hasReturn {
-		// TODO: to handle BOOL => bool need a version of desugarTypeNamed()
-		// specialized for return types
-		if fn.Return.Type == "BOOL" {
-			returnType = "bool"
-		} else {
-			returnType = g.desugarTypeNamed(fn.Return.Type)
-			g.generateTypeNamed(returnType)
-			if strings.ToLower(returnType) == "void" {
-				hasReturn = false
-			}
-		}
-	}
+	returnType := g.desugarReturnType(fn.Return.Type)
 
 	fnName := getFunctionName(fn)
 	g.ws("\nfunc %s(", fnName)
@@ -740,21 +741,19 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	}
 
 	g.ws(")")
-	if hasReturn {
-		g.ws(" " + returnType)
-	}
+	g.ws(" " + returnType)
 	g.ws(" {\n")
 
 	// 	ret, _, _ := syscall.Syscall12(createWindowEx.Addr(), 12,
 	fnVarName := funcNameToVarName(fnName)
 	nArgs := len(fn.Params)
 	sysName, sysArgsCount := syscallFuncForArgCount(nArgs)
-	if hasReturn {
-		g.ws("ret, _, _")
+	if returnType != "" {
+		g.ws("ret, _, _ := ")
 	} else {
-		g.ws("_, _, _")
+		g.ws("_, _, _ = ")
 	}
-	g.ws(" := %s(%s.Addr(), %d,\n", sysName, fnVarName, nArgs)
+	g.ws("%s(%s.Addr(), %d,\n", sysName, fnVarName, nArgs)
 	for _, arg := range fn.Params {
 		if g.isPointerType(arg.Type) {
 			g.ws("uintptr(unsafe.Pointer(%s)),\n", arg.Name)
@@ -768,7 +767,7 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 		nLeftOver--
 	}
 	g.ws(")\n")
-	if hasReturn {
+	if returnType != "" {
 		if returnType == "bool" {
 			g.ws("return ret != 0\n")
 		} else {
@@ -837,10 +836,10 @@ func genGo() {
 	fmt.Printf("Built index in %s. %d functions, %d variables, %d interfaces\n", time.Since(timeStart), len(functions), len(variables), len(interfaces))
 
 	g := newGoGenerator()
-	//g.addSymbol("CreateWindowEx")
+	g.addSymbol("CreateWindowEx")
 	//g.addSymbol("FileTimeToSystemTime")
 	//g.addSymbol("TzSpecificLocalTimeToSystemTime")
 	//g.addSymbol("GetSystemTimeAsFileTime")
-	g.addSymbol("IBindHost")
+	//g.addSymbol("IBindHost")
 	g.generate()
 }

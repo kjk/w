@@ -64,9 +64,10 @@ var (
 // information needed to generate info for a single module
 // (aka dll).
 type goModuleInfo struct {
-	name      string // e.g. gdi32
-	functions []*FunctionInfo
-	types     []*TypeInfo
+	name string // e.g. gdi32
+
+	functionsToGenerate []*FunctionInfo
+	typesToGenerate     []*TypeInfo
 
 	generatedFilePath string
 }
@@ -117,7 +118,7 @@ func (g *goGenerator) addType(vi *TypeInfo) {
 	}
 }
 
-func (g *goGenerator) getModuleInfo(mod *Module) *goModuleInfo {
+func (g *goGenerator) getOrMakeModuleInfo(mod *Module) *goModuleInfo {
 	name := noModule
 	if mod != nil {
 		name = mod.Name
@@ -132,37 +133,32 @@ func (g *goGenerator) getModuleInfo(mod *Module) *goModuleInfo {
 	return mi
 }
 
-func (g *goGenerator) rememberFunction(fi *FunctionInfo) {
-	if fi.WasAdded {
-		return
-	}
-	mi := g.getModuleInfo(fi.Module)
-	mi.functions = append(mi.functions, fi)
-	fi.WasAdded = true
-	//serApi(fi.Function, 0)
-	ret := fi.Function.Return
-	g.addSymbol(ret.Type)
-	for _, arg := range fi.Function.Params {
-		g.addSymbol(arg.Type)
-	}
-}
-
-func (g *goGenerator) addInterface(ii *InterfaceInfo) {
+func (g *goGenerator) addInterface(name string) {
+	ii := findInterface(name)
+	panicIf(ii == nil, "didn't find interface '%s'", name)
 	if ii.WasAdded {
 		return
 	}
-	name := ii.Interface.Name
 	g.interfaces = append(g.interfaces, name)
 	ii.WasAdded = true
 }
 
 func (g *goGenerator) addFunction(name string) {
 	fi := findFunction(name)
-	if fi != nil {
-		g.rememberFunction(fi)
+	panicIf(fi == nil, "didn't find function '%s'", name)
+	if fi.WasAdded {
 		return
 	}
-	panicIf(true, "didn't find function '%s'", name)
+	mi := g.getOrMakeModuleInfo(fi.Module)
+	mi.functionsToGenerate = append(mi.functionsToGenerate, fi)
+	fi.WasAdded = true
+
+	//serApi(fi.Function, 0)
+	ret := fi.Function.Return
+	g.addSymbol(ret.Type)
+	for _, arg := range fi.Function.Params {
+		g.addSymbol(arg.Type)
+	}
 }
 
 func (g *goGenerator) addSymbol(name string) {
@@ -177,11 +173,6 @@ func (g *goGenerator) addSymbol(name string) {
 		return
 	}
 
-	ii := findInterface(name)
-	if ii != nil {
-		g.addInterface(ii)
-		return
-	}
 	panicIf(true, "Didn't find function or variable with name '%s'", name)
 }
 
@@ -316,10 +307,10 @@ func (g *goGenerator) generateFlag(vi *TypeInfo) {
 }
 
 func (g *goGenerator) generateModule(mi *goModuleInfo) {
-	fmt.Printf("Module: %s\n", mi.name)
 	dllName := strings.ToLower(mi.name)
 	dllNameNoExt := strings.TrimSuffix(dllName, ".dll")
 	fileName := dllNameNoExt + ".go"
+	fmt.Printf("Generating module %s (file %s)\n", mi.name, fileName)
 	path := filepath.Join("generated", fileName)
 	mi.generatedFilePath = path
 	var err error
@@ -333,28 +324,21 @@ func (g *goGenerator) generateModule(mi *goModuleInfo) {
 	}()
 	g.ws(fileHdr)
 
-	s := fmt.Sprintf(`
-var (
-	lib%s *windows.LazyDLL
-)
-`, dllNameNoExt)
-	g.ws(s)
+	g.ws("var (\n")
 
-	/*
-	   var (
-	   	abortDoc               *windows.LazyProc
-	   	addFontResourceEx      *windows.LazyProc
-	   	alphaBlend             *windows.LazyProc
-	   )
-	*/
-	g.ws("\nvar (\n")
+	// global variable that is a handle to dll
+	g.ws("lib%s *windows.LazyDLL\n\n", dllNameNoExt)
 
-	for _, fi := range mi.functions {
+	// for each function from dll that we use, a global variable
+	// for the function address, like this:
+	// abortDoc               *windows.LazyProc
+	for _, fi := range mi.functionsToGenerate {
 		g.ws("\t%s *windows.LazyProc\n", fi.GoVarName())
 	}
 
-	g.ws("\n)\n")
+	g.ws(")\n")
 	/*
+		// Generate:
 		func init() {
 			// Library
 			libkernel32 = windows.NewLazySystemDLL("kernel32.dll")
@@ -364,30 +348,17 @@ var (
 		}
 	*/
 	g.ws("\nfunc init() {\n")
-	s = fmt.Sprintf(`
-	lib%s = windows.NewLazySystemDLL("%s.dll")
+	g.ws("lib%s = windows.NewLazySystemDLL(\"%s.dll\")\n", dllNameNoExt, dllNameNoExt)
 
-`, dllNameNoExt, dllNameNoExt)
-	g.ws(s)
-
-	for _, fi := range mi.functions {
+	for _, fi := range mi.functionsToGenerate {
 		g.ws("\t%s = lib%s.NewProc(\"%s\")\n", fi.GoVarName(), dllNameNoExt, fi.Name)
 	}
 
 	g.ws("}\n")
 
-	for _, fi := range mi.functions {
+	for _, fi := range mi.functionsToGenerate {
 		g.generateFunction(fi)
 	}
-}
-
-func isWide(fn *Api) bool {
-	// when we have both W and A versions, do W
-	if fn.BothCharset == "True" {
-		return true
-	}
-	// TODO: more cases ?
-	return false
 }
 
 func (g *goGenerator) desugarTypeNamed(tp string) string {
@@ -655,9 +626,9 @@ func genGo() {
 
 	g := newGoGenerator()
 	g.addFunction("CreateWindowExW")
-	//g.addSymbol("FileTimeToSystemTime")
-	//g.addSymbol("TzSpecificLocalTimeToSystemTime")
-	//g.addSymbol("GetSystemTimeAsFileTime")
-	//g.addSymbol("IBindHost")
+	//g.addFunction("FileTimeToSystemTime")
+	//g.addFunction("TzSpecificLocalTimeToSystemTime")
+	//g.addFunction("GetSystemTimeAsFileTime")
+	//g.addInterface("IBindHost")
 	g.generate()
 }

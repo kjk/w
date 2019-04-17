@@ -9,6 +9,8 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/kylelemons/godebug/pretty"
 )
 
 func findFunction(name string) *FunctionInfo {
@@ -163,7 +165,7 @@ func (g *goGenerator) addFunction(name string) {
 
 func (g *goGenerator) addSymbol(name string) {
 	// predefined types are alredy in
-	if predefined := desugerPreDefinedType(name); predefined != "" {
+	if predefined := desugarPreDefinedType(name); predefined != "" {
 		return
 	}
 
@@ -201,7 +203,7 @@ func (g *goGenerator) generateTypeNamed(tp string) {
 		return
 	}
 
-	if s := desugerPreDefinedType(tp); s != "" {
+	if s := desugarPreDefinedType(tp); s != "" {
 		// skip pre-defined types
 		return
 	}
@@ -225,14 +227,14 @@ func (g *goGenerator) generateTypeNamed(tp string) {
 		v := vi.Variable
 		// first a pass to generate type names
 		for _, f := range v.Field {
-			tp := g.desugarTypeNamed(f.Type)
+			tp := g.desugarType(f.Type, nil)
 			g.generateTypeNamed(tp)
 		}
 
 		g.ws("type %s struct {\n", v.Name)
 		for _, f := range v.Field {
 			name := makeNameGoPublic(f.Name)
-			tp := g.desugarTypeNamed(f.Type)
+			tp := g.desugarType(f.Type, nil)
 			g.ws("%s %s\n", name, tp)
 		}
 		g.ws("}\n\n")
@@ -361,16 +363,6 @@ func (g *goGenerator) generateModule(mi *goModuleInfo) {
 	}
 }
 
-func (g *goGenerator) desugarTypeNamed(tp string) string {
-	if predefined := desugerPreDefinedType(tp); predefined != "" {
-		return predefined
-	}
-
-	vi := findType(tp)
-	panicIf(vi == nil, "didn't find info about type '%s'", tp)
-	return g.desugarType(vi)
-}
-
 func desugarInteger(v *Variable) string {
 	tp := "int"
 	if v.Unsigned == "True" {
@@ -392,7 +384,7 @@ func desugarInteger(v *Variable) string {
 }
 
 // if returns "", not a known type
-func desugerPreDefinedType(tp string) string {
+func desugarPreDefinedType(tp string) string {
 	// some known terminal types
 	switch tp {
 	case "LPVOID":
@@ -419,12 +411,35 @@ func desugerPreDefinedType(tp string) string {
 	return ""
 }
 
-// this converts type to a real Go type we want to use
-func (g *goGenerator) desugarType(vi *TypeInfo) string {
-	v := vi.Variable
-	tp := v.Type
+func (g *goGenerator) desugarReturnType(typeName string) string {
+	// TODO: to handle BOOL => bool need a version of desugarTypeNamed()
+	// specialized for return types
+	if typeName == "BOOL" {
+		return "bool"
+	}
+	returnType := g.desugarType(typeName, nil)
+	g.generateTypeNamed(returnType)
+	if strings.ToLower(returnType) == "void" {
+		return ""
+	}
+	return returnType
+}
 
-	if predefined := desugerPreDefinedType(tp); predefined != "" {
+// this converts type to a real Go type we want to use
+func (g *goGenerator) desugarType(tp string, vi *TypeInfo) string {
+	if predefined := desugarPreDefinedType(tp); predefined != "" {
+		return predefined
+	}
+
+	if vi == nil {
+		vi = findType(tp)
+		panicIf(vi == nil, "didn't find info about type '%s'", tp)
+	}
+
+	v := vi.Variable
+	tp = v.Type
+
+	if predefined := desugarPreDefinedType(tp); predefined != "" {
 		return predefined
 	}
 
@@ -443,11 +458,11 @@ func (g *goGenerator) desugarType(vi *TypeInfo) string {
 		if v.Base == "HANDLE" {
 			return v.Name
 		}
-		return g.desugarTypeNamed(v.Base)
+		return g.desugarType(v.Base, nil)
 	}
 
 	if tp == typePointer {
-		return "*" + g.desugarTypeNamed(v.Base)
+		return "*" + g.desugarType(v.Base, nil)
 	}
 
 	if tp == typeStruct {
@@ -455,7 +470,7 @@ func (g *goGenerator) desugarType(vi *TypeInfo) string {
 	}
 
 	if tp == typeArray {
-		base := g.desugarTypeNamed(v.Base)
+		base := g.desugarType(v.Base, nil)
 		return fmt.Sprintf("[%s]%s", v.Count, base)
 	}
 
@@ -467,9 +482,9 @@ func (g *goGenerator) desugarType(vi *TypeInfo) string {
 		panic("union NYI")
 	}
 
-	panicIf(true, "Unknown type '%s'", tp)
+	pretty.Print(v)
 
-	// TODO: recursively resolve the type
+	panicIf(true, "Unknown type '%s'", tp)
 	return tp
 }
 
@@ -493,26 +508,12 @@ func CreateWindowEx(dwExStyle uint32, lpClassName, lpWindowName *uint16, dwStyle
 }
 */
 
-func (g *goGenerator) desugarReturnType(typeName string) string {
-	// TODO: to handle BOOL => bool need a version of desugarTypeNamed()
-	// specialized for return types
-	if typeName == "BOOL" {
-		return "bool"
-	}
-	returnType := g.desugarTypeNamed(typeName)
-	g.generateTypeNamed(returnType)
-	if strings.ToLower(returnType) == "void" {
-		return ""
-	}
-	return returnType
-}
-
 func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	fn := fi.Function
 
 	// first a pass to generate types this function depends on
 	for _, arg := range fn.Params {
-		g.desugarTypeNamed(arg.Type)
+		g.desugarType(arg.Type, nil)
 		g.generateTypeNamed(arg.Type)
 	}
 
@@ -523,7 +524,7 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	for idx, arg := range fn.Params {
 		name := arg.Name
 		g.ws(name + " ")
-		typ := g.desugarTypeNamed(arg.Type)
+		typ := g.desugarType(arg.Type, nil)
 		g.ws(typ)
 		if idx != lastIdx {
 			g.ws(", ")
@@ -587,7 +588,7 @@ func (g *goGenerator) generateInterface(name string) {
 }
 
 func (g *goGenerator) isPointerType(tp string) bool {
-	typ := g.desugarTypeNamed(tp)
+	typ := g.desugarType(tp, nil)
 	if typ[0] == '*' {
 		return true
 	}

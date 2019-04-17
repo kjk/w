@@ -22,7 +22,8 @@ type TypeInfo struct {
 	Condition  *Condition // can be nil
 	Variable   *Variable
 
-	// this is a name of Go type representig this type
+	// this is a name of the type for a given language e.g. Go
+	// it might be different than the name of C type
 	// after desugaring type (e.g. resolving LPWSTR => *uint16)
 	TypeName string
 

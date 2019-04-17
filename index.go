@@ -1,5 +1,83 @@
 package main
 
+import "strings"
+
+const (
+	// names for Variable.Type field
+	typeAlias     = "Alias"
+	typePtr       = "Pointer"
+	typePointer   = "Pointer"
+	typeInterface = "Interface"
+	typeStruct    = "Struct"
+	typeUnion     = "Union"
+	typeArray     = "Array"
+	typeVoid      = "Void"
+)
+
+// TypeInfo describes a type
+type TypeInfo struct {
+	SourceFile *APIMonitorXMLFile
+	Headers    *Headers
+	Module     *Module    // can be nil
+	Condition  *Condition // can be nil
+	Variable   *Variable
+
+	// this is a name of Go type representig this type
+	// after desugaring type (e.g. resolving LPWSTR => *uint16)
+	TypeName string
+
+	WasAdded     bool
+	WasGenerated bool
+}
+
+// FunctionArgument describes an argument to a function
+type FunctionArgument struct {
+	Name string
+	Type *TypeInfo
+}
+
+// FunctionInfo describes a function
+type FunctionInfo struct {
+	SourceFile *APIMonitorXMLFile
+	Module     *Module
+	Function   *Api
+
+	Name string
+	// if there is both A and W version of the function,
+	// it indicates this is Unicode (W) version
+	IsUnicode bool
+
+	Args []*FunctionArgument
+	// if nil, no return type i.e. void
+	ReturnType *TypeInfo
+
+	WasAdded     bool
+	WasGenerated bool
+}
+
+// GoVarName returns name of the global variable that represents
+// this function e.g. AbortDoc => abortDoc
+func (f *FunctionInfo) GoVarName() string {
+	c := f.Name[:1]
+	c = strings.ToLower(c)
+	return c + f.Name[1:]
+}
+
+// InterfaceInfo describes an interface
+type InterfaceInfo struct {
+	// name of the file that refers to this interface
+	// e.g. "URL.h.xml"
+	FileName  string
+	Interface *Interface
+	// Interface.Api but with more info
+	Methods []*FunctionInfo
+	// Interface.Variable but with more info
+	Types []*TypeInfo
+
+	WasAdded     bool
+	WasGenerated bool
+}
+
 var (
 	// we might hvae functions with the same name in different libraries
 	allFunctions  = map[string][]*FunctionInfo{}

@@ -11,89 +11,6 @@ import (
 	"time"
 )
 
-const (
-	// names for Variable.Type field
-	typeAlias     = "Alias"
-	typePtr       = "Pointer"
-	typePointer   = "Pointer"
-	typeInterface = "Interface"
-	typeStruct    = "Struct"
-	typeUnion     = "Union"
-	typeArray     = "Array"
-	typeVoid      = "Void"
-)
-
-// TypeInfo describes a type
-type TypeInfo struct {
-	SourceFile *APIMonitorXMLFile
-	Headers    *Headers
-	Module     *Module    // can be nil
-	Condition  *Condition // can be nil
-	Variable   *Variable
-
-	// this is a name of Go type representig this type
-	// after desugaring type (e.g. resolving LPWSTR => *uint16)
-	TypeName string
-
-	WasAdded     bool
-	WasGenerated bool
-}
-
-// FunctionArgument describes an argument to a function
-type FunctionArgument struct {
-	Name string
-	Type *TypeInfo
-}
-
-// FunctionInfo describes a function
-type FunctionInfo struct {
-	SourceFile *APIMonitorXMLFile
-	Module     *Module
-	Function   *Api
-
-	Name string
-	// if there is both A and W version of the function,
-	// it indicates this is Unicode (W) version
-	IsUnicode bool
-
-	Args []*FunctionArgument
-	// if nil, no return type i.e. void
-	ReturnType *TypeInfo
-
-	WasAdded     bool
-	WasGenerated bool
-}
-
-// GoVarName returns name of the global variable that represents
-// this function e.g. AbortDoc => abortDoc
-func (f *FunctionInfo) GoVarName() string {
-	c := f.Name[:1]
-	c = strings.ToLower(c)
-	return c + f.Name[1:]
-}
-
-// InterfaceInfo describes an interface
-type InterfaceInfo struct {
-	// name of the file that refers to this interface
-	// e.g. "URL.h.xml"
-	FileName  string
-	Interface *Interface
-	// Interface.Api but with more info
-	Methods []*FunctionInfo
-	// Interface.Variable but with more info
-	Types []*TypeInfo
-
-	WasAdded     bool
-	WasGenerated bool
-}
-
-func shortAPIName(fn *FunctionInfo) string {
-	sfn := fn.SourceFile.FileName
-	modName := fn.Module.Name
-	fnName := fn.Function.Name
-	return fmt.Sprintf(`%s %s.%s`, sfn, modName, fnName)
-}
-
 func findFunction(name string) *FunctionInfo {
 	a := allFunctions[name]
 	if len(a) == 0 {
@@ -239,27 +156,18 @@ func (g *goGenerator) addInterface(ii *InterfaceInfo) {
 	ii.WasAdded = true
 }
 
-func (g *goGenerator) addFunctionMust(name string) {
-	added := g.addFunction(name)
-	panicIf(!added, "didn't find function '%s'", name)
-}
-
-func (g *goGenerator) addFunction(name string) bool {
+func (g *goGenerator) addFunction(name string) {
 	fi := findFunction(name)
 	if fi != nil {
 		g.rememberFunction(fi)
-		return true
+		return
 	}
-	return false
+	panicIf(true, "didn't find function '%s'", name)
 }
 
 func (g *goGenerator) addSymbol(name string) {
 	// predefined types are alredy in
 	if predefined := desugerPreDefinedType(name); predefined != "" {
-		return
-	}
-
-	if g.addFunction(name) {
 		return
 	}
 
@@ -746,7 +654,7 @@ func genGo() {
 	fmt.Printf("Built index in %s. %d functions, %d variables, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
 
 	g := newGoGenerator()
-	g.addFunctionMust("CreateWindowExW")
+	g.addFunction("CreateWindowExW")
 	//g.addSymbol("FileTimeToSystemTime")
 	//g.addSymbol("TzSpecificLocalTimeToSystemTime")
 	//g.addSymbol("GetSystemTimeAsFileTime")

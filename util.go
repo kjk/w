@@ -70,3 +70,10 @@ func dumpFile(path string) {
 	must(err)
 	fmt.Printf("%s\n", string(d))
 }
+
+func shortAPIName(fn *FunctionInfo) string {
+	sfn := fn.SourceFile.FileName
+	modName := fn.Module.Name
+	fnName := fn.Function.Name
+	return fmt.Sprintf(`%s %s.%s`, sfn, modName, fnName)
+}

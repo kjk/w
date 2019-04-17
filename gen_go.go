@@ -31,33 +31,45 @@ type TypeInfo struct {
 	Condition  *Condition // can be nil
 	Variable   *Variable
 
+	// this is a name of Go type representig this type
+	// after desugaring type (e.g. resolving LPWSTR => *uint16)
+	GoTypeName string
+
 	WasAdded     bool
 	WasGenerated bool
 }
 
-// FunctionArgument describes an argument to a function
-type FunctionArgument struct {
+// GoFunctionArgument describes an argument to a function
+type GoFunctionArgument struct {
 	Name string
 	Type *TypeInfo
 }
 
-// FunctionReturnType describes a return type of a function
-type FunctionReturnType struct {
-	Type *TypeInfo
-}
-
-// FunctionInfo describes a function
-type FunctionInfo struct {
+// GoFunctionInfo describes a function
+type GoFunctionInfo struct {
 	SourceFile *APIMonitorXMLFile
 	Module     *Module
 	Function   *Api
 
+	Name string
 	// if there is both A and W version of the function,
 	// it indicates this is Unicode (W) version
 	IsUnicode bool
 
+	Args []*GoFunctionArgument
+	// if nil, no return type i.e. void
+	ReturnType *TypeInfo
+
 	WasAdded     bool
 	WasGenerated bool
+}
+
+// VarName returns name of the global variable that represents this function
+// AbortDoc => abortDoc
+func (f *GoFunctionInfo) VarName() string {
+	c := f.Name[:1]
+	c = strings.ToLower(c)
+	return c + f.Name[1:]
 }
 
 // InterfaceInfo describes an interface
@@ -66,20 +78,25 @@ type InterfaceInfo struct {
 	// e.g. "URL.h.xml"
 	FileName  string
 	Interface *Interface
+	// Interface.Api but with more info
+	Methods []*GoFunctionInfo
+	// Interface.Variable but with more info
+	Types []*TypeInfo
 
 	WasAdded     bool
 	WasGenerated bool
 }
 
 var (
-	functions  = map[string][]*FunctionInfo{}
-	types      = map[string][]*TypeInfo{}
-	interfaces = map[string]*InterfaceInfo{}
+	// we might hvae functions with the same name in different libraries
+	allFunctions  = map[string][]*GoFunctionInfo{}
+	allTypes      = map[string][]*TypeInfo{}
+	allInterfaces = map[string]*InterfaceInfo{}
 )
 
 //var toGen = []string{"CreateWindowEx"}
 
-func shortAPIName(fn *FunctionInfo) string {
+func shortAPIName(fn *GoFunctionInfo) string {
 	sfn := fn.SourceFile.FileName
 	modName := fn.Module.Name
 	fnName := fn.Function.Name
@@ -87,21 +104,54 @@ func shortAPIName(fn *FunctionInfo) string {
 }
 
 func indexFunction(f *APIMonitorXMLFile, mod *Module, api *Api) {
-	name := api.Name
-	fi := &FunctionInfo{
-		Function:   api,
-		Module:     mod,
-		SourceFile: f,
+	if api.BothCharset == "" {
+		name := api.Name
+		fi := &GoFunctionInfo{
+			Function:   api,
+			Name:       name,
+			Module:     mod,
+			SourceFile: f,
+		}
+		//panicIf(allFunctions[name] != nil, "allFunctions[%s] is already set", name)
+		a := allFunctions[name]
+		allFunctions[name] = append(a, fi)
+		return
 	}
-	a := functions[name]
-	functions[name] = append(a, fi)
+
+	panicIf(api.BothCharset != "True", "api.BothCharsets is '%s'", api.BothCharset)
+
+	{
+		name := api.Name + "W"
+		fi := &GoFunctionInfo{
+			Function:   api,
+			Name:       name,
+			Module:     mod,
+			SourceFile: f,
+			IsUnicode:  true,
+		}
+		a := allFunctions[name]
+		allFunctions[name] = append(a, fi)
+	}
+
+	{
+		name := api.Name + "A"
+		fi := &GoFunctionInfo{
+			Function:   api,
+			Name:       name,
+			Module:     mod,
+			SourceFile: f,
+			IsUnicode:  false,
+		}
+		a := allFunctions[name]
+		allFunctions[name] = append(a, fi)
+	}
 }
 
 func indexVariable(f *APIMonitorXMLFile, hdrs *Headers, mod *Module, cond *Condition, v *Variable) {
 	if v.Type == typeInterface {
 		// this only records to which file to attribute this interface
 		name := v.Name
-		ii := interfaces[name]
+		ii := allInterfaces[name]
 		if ii != nil {
 			// must have been created when indexing <Interface> node
 			// record FileName
@@ -115,7 +165,7 @@ func indexVariable(f *APIMonitorXMLFile, hdrs *Headers, mod *Module, cond *Condi
 		ii = &InterfaceInfo{
 			FileName: f.FileName,
 		}
-		interfaces[name] = ii
+		allInterfaces[name] = ii
 		return
 	}
 
@@ -128,8 +178,8 @@ func indexVariable(f *APIMonitorXMLFile, hdrs *Headers, mod *Module, cond *Condi
 			Condition:  cond,
 			Variable:   v,
 		}
-		a := types[name]
-		types[name] = append(a, vi)
+		a := allTypes[name]
+		allTypes[name] = append(a, vi)
 	}
 }
 
@@ -166,7 +216,7 @@ func indexInterface(f *APIMonitorXMLFile) {
 		return
 	}
 	name := f.Interface.Name
-	ii := interfaces[name]
+	ii := allInterfaces[name]
 	if ii != nil {
 		// must have been created when indexing a variable with Type Interfaces
 		panicIf(ii.Interface != nil, "ii.Interface is not nil")
@@ -177,7 +227,7 @@ func indexInterface(f *APIMonitorXMLFile) {
 	ii = &InterfaceInfo{
 		Interface: f.Interface,
 	}
-	interfaces[name] = ii
+	allInterfaces[name] = ii
 }
 
 func buildIndex(files []*APIMonitorXMLFile) {
@@ -191,8 +241,8 @@ func buildIndex(files []*APIMonitorXMLFile) {
 	}
 }
 
-func findFunction(name string) *FunctionInfo {
-	a := functions[name]
+func findFunction(name string) *GoFunctionInfo {
+	a := allFunctions[name]
 	if len(a) == 0 {
 		return nil
 	}
@@ -203,7 +253,7 @@ func findFunction(name string) *FunctionInfo {
 }
 
 func findType(name string) *TypeInfo {
-	a := types[name]
+	a := allTypes[name]
 	if len(a) == 0 {
 		return nil
 	}
@@ -214,7 +264,7 @@ func findType(name string) *TypeInfo {
 }
 
 func findInterface(name string) *InterfaceInfo {
-	return interfaces[name]
+	return allInterfaces[name]
 }
 
 func gofmtFile(path string) {
@@ -245,7 +295,7 @@ var (
 // (aka dll).
 type goModuleInfo struct {
 	name      string // e.g. gdi32
-	functions []*FunctionInfo
+	functions []*GoFunctionInfo
 	types     []*TypeInfo
 
 	generatedFilePath string
@@ -276,7 +326,7 @@ func newGoGenerator() *goGenerator {
 	}
 }
 
-func (g *goGenerator) addVariable(vi *TypeInfo) {
+func (g *goGenerator) addType(vi *TypeInfo) {
 	if vi.WasAdded {
 		return
 	}
@@ -312,7 +362,7 @@ func (g *goGenerator) getModuleInfo(mod *Module) *goModuleInfo {
 	return mi
 }
 
-func (g *goGenerator) rememberFunction(fi *FunctionInfo) {
+func (g *goGenerator) rememberFunction(fi *GoFunctionInfo) {
 	if fi.WasAdded {
 		return
 	}
@@ -347,18 +397,6 @@ func (g *goGenerator) addFunction(name string) bool {
 		g.rememberFunction(fi)
 		return true
 	}
-	// if this is FooA or FooW function, see if there is Foo variant
-	shortNameW := strings.TrimSuffix(name, "W")
-	if shortNameW != name {
-		fi := findFunction(shortNameW)
-		if fi != nil {
-			panicIf(fi.Function.BothCharset == "", "expected '%s' for '%s' to be BothCharset", shortNameW, name)
-			fi.IsUnicode = true
-			g.rememberFunction(fi)
-			return true
-		}
-	}
-	// TODO: do the same for A variants
 	return false
 }
 
@@ -374,7 +412,7 @@ func (g *goGenerator) addSymbol(name string) {
 
 	vi := findType(name)
 	if vi != nil {
-		g.addVariable(vi)
+		g.addType(vi)
 		return
 	}
 
@@ -551,9 +589,7 @@ var (
 	g.ws("\nvar (\n")
 
 	for _, fi := range mi.functions {
-		fnName := getFunctionName(fi.Function)
-		varName := funcNameToVarName(fnName)
-		s = fmt.Sprintf("\t%s *windows.LazyProc\n", varName)
+		s = fmt.Sprintf("\t%s *windows.LazyProc\n", fi.VarName())
 		g.ws(s)
 	}
 
@@ -575,9 +611,7 @@ var (
 	g.ws(s)
 
 	for _, fi := range mi.functions {
-		fnName := getFunctionName(fi.Function)
-		varName := funcNameToVarName(fnName)
-		g.ws("\t%s = lib%s.NewProc(\"%s\")\n", varName, dllNameNoExt, fnName)
+		g.ws("\t%s = lib%s.NewProc(\"%s\")\n", fi.VarName(), dllNameNoExt, fi.Name)
 	}
 
 	g.ws("}\n")
@@ -594,13 +628,6 @@ func isWide(fn *Api) bool {
 	}
 	// TODO: more cases ?
 	return false
-}
-
-func getFunctionName(fn *Api) string {
-	if isWide(fn) {
-		return fn.Name + "W"
-	}
-	return fn.Name
 }
 
 func (g *goGenerator) desugarTypeNamed(tp string) string {
@@ -749,7 +776,7 @@ func (g *goGenerator) desugarReturnType(typeName string) string {
 	return returnType
 }
 
-func (g *goGenerator) generateFunction(fi *FunctionInfo) {
+func (g *goGenerator) generateFunction(fi *GoFunctionInfo) {
 	fn := fi.Function
 
 	// first a pass to generate types this function depends on
@@ -760,8 +787,7 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 
 	returnType := g.desugarReturnType(fn.Return.Type)
 
-	fnName := getFunctionName(fn)
-	g.ws("\nfunc %s(", fnName)
+	g.ws("\nfunc %s(", fi.Name)
 	lastIdx := len(fn.Params) - 1
 	for idx, arg := range fn.Params {
 		name := arg.Name
@@ -778,7 +804,6 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	g.ws(" {\n")
 
 	// 	ret, _, _ := syscall.Syscall12(createWindowEx.Addr(), 12,
-	fnVarName := funcNameToVarName(fnName)
 	nArgs := len(fn.Params)
 	sysName, sysArgsCount := syscallFuncForArgCount(nArgs)
 	if returnType != "" {
@@ -786,7 +811,7 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	} else {
 		g.ws("_, _, _ = ")
 	}
-	g.ws("%s(%s.Addr(), %d,\n", sysName, fnVarName, nArgs)
+	g.ws("%s(%s.Addr(), %d,\n", sysName, fi.VarName(), nArgs)
 	for _, arg := range fn.Params {
 		if g.isPointerType(arg.Type) {
 			g.ws("uintptr(unsafe.Pointer(%s)),\n", arg.Name)
@@ -866,10 +891,10 @@ func genGo() {
 
 	timeStart = time.Now()
 	buildIndex(parsedFiles)
-	fmt.Printf("Built index in %s. %d functions, %d variables, %d interfaces\n", time.Since(timeStart), len(functions), len(types), len(interfaces))
+	fmt.Printf("Built index in %s. %d functions, %d variables, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
 
 	g := newGoGenerator()
-	g.addFunctionMust("CreateWindowEx")
+	g.addFunctionMust("CreateWindowExW")
 	//g.addSymbol("FileTimeToSystemTime")
 	//g.addSymbol("TzSpecificLocalTimeToSystemTime")
 	//g.addSymbol("GetSystemTimeAsFileTime")

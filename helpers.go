@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func syscallFuncForArgCount(n int) (string, int) {
@@ -23,11 +22,4 @@ func syscallFuncForArgCount(n int) (string, int) {
 	}
 	s := fmt.Sprintf("unsupported number of arguments: %d", n)
 	panic(s)
-}
-
-// AbortDoc => abortDoc
-func funcNameToVarName(s string) string {
-	c := s[:1]
-	c = strings.ToLower(c)
-	return c + s[1:]
 }

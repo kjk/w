@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"path"
+	"path/filepath"
 	"strings"
 )
 
@@ -72,19 +74,102 @@ func (f *FunctionInfo) GoVarName() string {
 	return c + f.Name[1:]
 }
 
-// InterfaceInfo describes an interface
+// InterfaceDeclarationInfo represents declaration of
+// an interface in Headers section. There are multiple
+// declaration per header file.
+// E.g. IBindCtx in Headers\ole.h.xml
+type InterfaceDeclarationInfo struct {
+	SourceFile *APIMonitorXMLFile
+	Headers    *Headers
+	Module     *Module
+	Name       string // e.g. IBindCtx
+}
+
+// InterfaceDefinitionInfo represents definition of an interface
+// in an Interface section.
+// E.g. IBindCtx in Interfaces\COM\IBindCtx.h.xml
+type InterfaceDefinitionInfo struct {
+	SourceFile *APIMonitorXMLFile
+	Interface  *Interface
+}
+
+// InterfaceInfo describes an interface. It combines information about
+// interfaces from 2 sources. E.g. IPropertySetStorage
+// * declaration in a header file Headers\ole.h.xml file
+//   in Headers section or in Interface.Variable section
+// * definition in interfaces\COM\IBindCtx
 type InterfaceInfo struct {
-	// name of the file that refers to this interface
-	// e.g. "URL.h.xml"
-	FileName  string
-	Interface *Interface
+	Declaration *InterfaceDeclarationInfo
+	Definition  *InterfaceDefinitionInfo
+
+	// when interface is declared inside Interface
+	// definition, we want to attribute it to the header
+	// file of the parent interface
+	Parent *InterfaceInfo
+
 	// Interface.Api but with more info
 	Methods []*FunctionInfo
+
 	// Interface.Variable but with more info
+	// see e.g. "IBitsPeer"
 	Types []*TypeInfo
+
+	// Interface.Variable when Type=Interface
+	// see e.g. "IBitsPeer"
+	Interfaces []*InterfaceInfo
 
 	WasAdded     bool
 	WasGenerated bool
+}
+
+// Name returns name of the interface
+func (ii *InterfaceInfo) Name() string {
+	return ii.Definition.Interface.Name
+}
+
+// e.g. gdi32.go
+func (m *Module) goSourceFileName() string {
+	return m.moduleName() + ".go"
+}
+
+// e.g. gdi32
+func (m *Module) moduleName() string {
+	s := strings.ToLower(m.Name)
+	s = strings.TrimSuffix(s, ".dll")
+	panicIf(filepath.Ext(s) != "", "unexpected m.Name '%s'", m.Name)
+	return s
+}
+
+// e.g. gdi32.dll
+func (m *Module) dllName() string {
+	return m.moduleName() + ".dll"
+}
+
+func (ii *InterfaceInfo) goSourceFileName() string {
+	// we want to attribute interfaces declared inside
+	// interface definitions to the header file
+	// that declared parent interface
+	for ii.Parent != nil {
+		ii = ii.Parent
+	}
+	d := ii.Declaration
+	if d == nil {
+		fmt.Printf("ii.Declaration for %s is nil\n", ii.Definition.Interface.Name)
+	}
+	panicIf(d == nil, "ii.Declaration is nil")
+	// if have module, attribute interface to that module
+	if d.Module != nil {
+		return d.Module.goSourceFileName()
+	}
+
+	// Url.h.xml => url.h.go
+	f := d.SourceFile
+	name := filepath.ToSlash(f.FileName)
+	name = path.Base(name)
+	name = strings.ToLower(name)
+	panicIf(!strings.HasSuffix(name, ".xml"), "'%s' doesn't end with .xml", f.FileName)
+	name = strings.TrimSuffix(name, ".xml")
+	return name + ".go"
 }
 
 var (
@@ -138,40 +223,58 @@ func indexFunction(f *APIMonitorXMLFile, mod *Module, api *Api) {
 	}
 }
 
-func indexVariable(f *APIMonitorXMLFile, hdrs *Headers, mod *Module, cond *Condition, v *Variable) {
-	if v.Type == typeInterface {
-		// this only records to which file to attribute this interface
-		name := v.Name
-		ii := allInterfaces[name]
-		if ii != nil {
-			// must have been created when indexing <Interface> node
-			// record FileName
-			// Note: there are duplicates for the same. Too many to make
-			// whitelist, so we let it slide for all of them and use
-			// whatever the last name is
-			ii.FileName = f.FileName
-			return
-		}
-
+func indexVariableInterface(f *APIMonitorXMLFile, hdrs *Headers, mod *Module, cond *Condition, v *Variable) bool {
+	if v.Type != typeInterface {
+		return false
+	}
+	if mod != nil {
+		//fmt.Printf("Interface '%s' declared in module '%s' in file '%s'\n", v.Name, mod.Name, f.FileName)
+	}
+	panicIf(cond != nil, "can cond be non-nil?")
+	// this is an interface declaration that comes either
+	// from Headers section or from Interface.Variables section
+	d := &InterfaceDeclarationInfo{
+		SourceFile: f,
+		Headers:    hdrs,
+		Name:       v.Name,
+		Module:     mod,
+	}
+	ii := allInterfaces[v.Name]
+	if ii == nil {
 		ii = &InterfaceInfo{
-			FileName: f.FileName,
+			Declaration: d,
 		}
-		allInterfaces[name] = ii
+		allInterfaces[v.Name] = ii
+		return true
+	}
+
+	if ii.Declaration != nil {
+		// TODO: maybe remember all files and prioritise for attribution
+		// e.g. windows.h.xml over ole.h.xml over multimedia.h.xml
+		// it happens, inform about it but let it slide
+		//fmt.Printf("Duplicate declaration of interface '%s' in %s and %s\n", v.Name, ii.Declaration.SourceFile.FileName, f.FileName)
+		return true
+	}
+	ii.Declaration = d
+	return true
+}
+
+func indexVariable(f *APIMonitorXMLFile, hdrs *Headers, mod *Module, cond *Condition, v *Variable) {
+	if indexVariableInterface(f, hdrs, mod, cond, v) {
 		return
 	}
 
-	{
-		name := v.Name
-		vi := &TypeInfo{
-			SourceFile: f,
-			Headers:    hdrs,
-			Module:     mod,
-			Condition:  cond,
-			Variable:   v,
-		}
-		a := allTypes[name]
-		allTypes[name] = append(a, vi)
+	// panicIf(mod == nil, "module for %s in file %s is nil", v.Name, f.FileName)
+
+	vi := &TypeInfo{
+		SourceFile: f,
+		Headers:    hdrs,
+		Module:     mod,
+		Condition:  cond,
+		Variable:   v,
 	}
+	a := allTypes[v.Name]
+	allTypes[v.Name] = append(a, vi)
 }
 
 func indexModules(f *APIMonitorXMLFile) {
@@ -202,23 +305,29 @@ func indexHeaders(f *APIMonitorXMLFile) {
 	}
 }
 
-func indexInterface(f *APIMonitorXMLFile) {
+func indexInterfaceDefinition(f *APIMonitorXMLFile) {
 	if f.Interface == nil {
 		return
 	}
-	name := f.Interface.Name
+	i := f.Interface
+	d := &InterfaceDefinitionInfo{
+		SourceFile: f,
+		Interface:  i,
+	}
+	name := i.Name
 	ii := allInterfaces[name]
-	if ii != nil {
-		// must have been created when indexing a variable with Type Interfaces
-		panicIf(ii.Interface != nil, "ii.Interface is not nil")
-		ii.Interface = f.Interface
+	if ii == nil {
+		ii = &InterfaceInfo{
+			Definition: d,
+		}
+		allInterfaces[name] = ii
 		return
 	}
-
-	ii = &InterfaceInfo{
-		Interface: f.Interface,
+	panicIf(ii.Definition != nil, "unexpected double definition")
+	ii.Definition = d
+	for _, v := range i.Variable {
+		indexVariable(f, nil, nil, nil, v)
 	}
-	allInterfaces[name] = ii
 }
 
 func buildIndex(files []*APIMonitorXMLFile) {
@@ -228,7 +337,7 @@ func buildIndex(files []*APIMonitorXMLFile) {
 		}
 		indexModules(f)
 		indexHeaders(f)
-		indexInterface(f)
+		indexInterfaceDefinition(f)
 	}
 }
 

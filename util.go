@@ -14,11 +14,19 @@ func must(err error) {
 	}
 }
 
-func panicIf(cond bool, format string, args ...interface{}) {
-	if cond {
-		err := fmt.Errorf(format, args...)
-		must(err)
+func panicIf(cond bool, args ...interface{}) {
+	if !cond {
+		return
 	}
+	if len(args) == 0 {
+		panic("condition failed")
+	}
+	format := args[0].(string)
+	args = args[1:]
+	if len(args) == 0 {
+		panic(format)
+	}
+	panic(fmt.Sprintf(format, args...))
 }
 
 func readFileMust(path string) []byte {

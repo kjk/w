@@ -4,50 +4,16 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"sort"
 	"strings"
 	"time"
-
-	"github.com/kylelemons/godebug/pretty"
 )
 
-func findFunction(name string) *FunctionInfo {
-	a := allFunctions[name]
-	if len(a) == 0 {
-		return nil
-	}
-	if len(a) > 1 {
-		fmt.Printf("Found %d functions with name '%s'\n", len(a), name)
-	}
-	return a[0]
-}
-
-func findType(name string) *TypeInfo {
-	a := allTypes[name]
-	if len(a) == 0 {
-		return nil
-	}
-	if len(a) > 1 {
-		fmt.Printf("Found %d variables with name '%s', showing the first one\n", len(a), name)
-	}
-	return a[0]
-}
-
-func findInterface(name string) *InterfaceInfo {
-	return allInterfaces[name]
-}
-
-func gofmtFile(path string) {
-	cmd := exec.Command("gofmt", "-s", "-w", path)
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		fmt.Printf("gofmt failed with %s. Output:\n%s\n", err, string(out))
-	}
-}
-
 const (
+	// this is for Variable that don't belong to any module
+	noModule = "nomodule"
+
 	fileHdr = `package w
 
 import (
@@ -56,11 +22,6 @@ import (
 	"unsafe"
 )
 `
-)
-
-var (
-	// this is for Variable that don't belong to any module
-	noModule = "nomodule"
 )
 
 // information needed to generate info for a single module
@@ -81,6 +42,8 @@ type goGenerator struct {
 	// file for that module
 	modules map[string]*goModuleInfo
 
+	currModule *goModuleInfo
+
 	// list of interfaces to add
 	interfaces []string
 
@@ -99,25 +62,129 @@ func newGoGenerator() *goGenerator {
 	}
 }
 
-func (g *goGenerator) addType(vi *TypeInfo) {
+func ws(w io.Writer, s string) {
+	_, err := io.WriteString(w, s)
+	must(err)
+}
+
+func (g *goGenerator) ws(format string, args ...interface{}) {
+	s := format
+	if len(args) > 0 {
+		s = fmt.Sprintf(format, args...)
+	}
+	ws(g.w, s)
+}
+
+func (g *goGenerator) rememberType(vi *TypeInfo) {
+	mi := g.currModule
+	mi.typesToGenerate = append(mi.typesToGenerate, vi)
+}
+
+func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
+	// predefined types don't need to be generated
+	if predefined := desugarPreDefinedType(typeName); predefined != "" {
+		return predefined
+	}
+
+	if vi == nil {
+		vi = findType(typeName)
+	}
+	panicIf(vi == nil, "didn't find tyhpe with name '%s'", typeName)
+
 	if vi.WasAdded {
-		return
+		return vi.Name
 	}
-	v := vi.Variable
-	//serVariable(v, 0)
 	vi.WasAdded = true
-	tp := strings.ToLower(v.Type)
-	switch tp {
-	case "pointer", "alias", "enum", "flag", "array":
-		// fmt.Printf("Type: %s, base: %s\n", v.Type, v.Base)
-		g.addSymbol(v.Base)
-	case "integer", "modulehandle", "void", "tcharacter":
-		// skip those
-	case "struct", "interface":
-		// also skip those
-	default:
-		fmt.Printf("Type: %s\n", v.Type)
+
+	v := vi.Variable
+	if v.Type == typeVoid {
+		vi.Name = "void"
+		return vi.Name
 	}
+
+	if v.Type == typeModuleHandle {
+		vi.Name = "HANDLE"
+		return vi.Name
+	}
+
+	if v.Type == typeUnion {
+		panic("union NYI")
+	}
+
+	if v.Type == typeStruct {
+		panicIf(v.Flag != nil, "v.Flag on struct not nil")
+		panicIf(v.Enum != nil, "v.Enum on struct not nil")
+		panicIf(v.Set != nil, "v.Set on struct not nil")
+		for _, t := range v.Field {
+			f := &NameAndType{
+				Name:     t.Name,
+				TypeName: g.addType(t.Type, nil),
+			}
+			vi.Fields = append(vi.Fields, f)
+		}
+		g.rememberType(vi)
+		vi.Name = v.Name
+		return vi.Name
+	}
+
+	if v.Type == typePointer {
+		// we don't add pointers
+		vi.Name = "*" + g.addType(v.Base, nil)
+		return vi.Name
+	}
+
+	if v.Type == typeArray {
+		baseTypeName := g.addType(v.Base, nil)
+		vi.Name = fmt.Sprintf("[%s]%s", v.Count, baseTypeName)
+		return vi.Name
+	}
+
+	if v.Type == typeInteger {
+		vi.Name = desugarInteger(v)
+		return vi.Name
+	}
+
+	if v.Type == typeInterface {
+		panic("interface NYI")
+	}
+
+	if v.Flag != nil {
+		g.rememberType(vi)
+		//fmt.Printf("Base for flag %s: %s\n", v.Name, v.Base)
+		vi.Name = g.addType(v.Base, nil)
+		return vi.Name
+	}
+
+	if v.Enum != nil {
+		g.rememberType(vi)
+		// TODO: desugar?
+		//fmt.Printf("Base for enum %s: %s\n", v.Name, v.Base)
+		vi.Name = g.addType(v.Base, nil)
+		return vi.Name
+	}
+
+	if v.Set != nil {
+		g.rememberType(vi)
+		panic("v.Set NYI")
+		// TODO: desugar?
+		fmt.Printf("Base for set %s: %s\n", v.Name, v.Base)
+		vi.Name = v.Name
+		return vi.Name
+	}
+
+	if v.Type == typeAlias {
+		// we want to preserve types that are aliases for HANDLE
+		// (HWND, HMENU etc.)
+		if v.Base == "HANDLE" {
+			g.rememberType(vi)
+			vi.Name = v.Name
+			return v.Name
+		}
+		return g.addType(v.Base, nil)
+	}
+
+	panic(fmt.Sprintf("unknown type %s", v.Type))
+	return ""
 }
 
 func (g *goGenerator) getOrMakeModuleInfo(mod *Module) *goModuleInfo {
@@ -143,6 +210,8 @@ func (g *goGenerator) addInterface(name string) {
 	}
 	g.interfaces = append(g.interfaces, name)
 	ii.WasAdded = true
+
+	// TODO: add methods
 }
 
 func (g *goGenerator) addFunction(name string) {
@@ -151,97 +220,23 @@ func (g *goGenerator) addFunction(name string) {
 	if fi.WasAdded {
 		return
 	}
+
 	mi := g.getOrMakeModuleInfo(fi.Module)
+	g.currModule = mi
 	mi.functionsToGenerate = append(mi.functionsToGenerate, fi)
 	fi.WasAdded = true
 
-	//serApi(fi.Function, 0)
 	ret := fi.Function.Return
-	g.addSymbol(ret.Type)
+	fi.ReturnType = desugarReturnType(g.addType(ret.Type, nil))
+
 	for _, arg := range fi.Function.Params {
-		g.addSymbol(arg.Type)
-	}
-}
-
-func (g *goGenerator) addSymbol(name string) {
-	// predefined types are alredy in
-	if predefined := desugarPreDefinedType(name); predefined != "" {
-		return
-	}
-
-	vi := findType(name)
-	if vi != nil {
-		g.addType(vi)
-		return
-	}
-
-	panicIf(true, "Didn't find function or variable with name '%s'", name)
-}
-
-func ws(w io.Writer, s string) {
-	_, err := io.WriteString(w, s)
-	must(err)
-}
-
-func (g *goGenerator) ws(format string, args ...interface{}) {
-	s := format
-	if len(args) > 0 {
-		s = fmt.Sprintf(format, args...)
-	}
-	ws(g.w, s)
-}
-
-func (g *goGenerator) generateTypeNamed(tp string) {
-	// for e.g. pointer-to-struct types, we need to undo pointer-ness
-	for tp[0] == '*' {
-		tp = tp[1:]
-	}
-
-	// we assume this is array type like '[32]WCHAR', and we don't want
-	// types for those
-	if tp[0] == '[' && strings.Contains(tp, "]") {
-		return
-	}
-
-	if s := desugarPreDefinedType(tp); s != "" {
-		// skip pre-defined types
-		return
-	}
-
-	vi := findType(tp)
-	panicIf(vi == nil, "didn't find info about type '%s'\n", tp)
-
-	if vi.WasGenerated {
-		return
-	}
-	vi.WasGenerated = true
-
-	v := vi.Variable
-	if v.Type == typeAlias {
-		v := vi.Variable
-		g.ws("type %s %s\n", v.Name, v.Base)
-		return
-	}
-
-	if v.Type == typeStruct {
-		v := vi.Variable
-		// first a pass to generate type names
-		for _, f := range v.Field {
-			tp := g.desugarType(f.Type, nil)
-			g.generateTypeNamed(tp)
+		farg := &NameAndType{
+			Name:     arg.Name,
+			TypeName: g.addType(arg.Type, nil),
 		}
-
-		g.ws("type %s struct {\n", v.Name)
-		for _, f := range v.Field {
-			name := makeNameGoPublic(f.Name)
-			tp := g.desugarType(f.Type, nil)
-			g.ws("%s %s\n", name, tp)
-		}
-		g.ws("}\n\n")
-		return
+		fi.Args = append(fi.Args, farg)
 	}
-
-	panicIf(true, "Unsupported type: '%s'", v.Type)
+	g.currModule = nil
 }
 
 func (g *goGenerator) generateConsts(set []*Set) bool {
@@ -264,48 +259,42 @@ func (g *goGenerator) generateConsts(set []*Set) bool {
 	return true
 }
 
-func (g *goGenerator) generateSet(vi *TypeInfo) {
-	// TODO: can have Flag and Enum and Set in same Variable?
-	if vi.WasGenerated {
+func (g *goGenerator) generateType(ti *TypeInfo) {
+	if ti.WasGenerated {
+		return
+	}
+	ti.WasGenerated = true
+
+	v := ti.Variable
+	if v.Set != nil {
+		g.generateConsts(v.Set)
+		return
+	}
+	if v.Flag != nil {
+		g.generateConsts(v.Flag.Set)
+		return
+	}
+	if v.Enum != nil {
+		g.generateConsts(v.Enum.Set)
 		return
 	}
 
-	v := vi.Variable
-	vi.WasGenerated = g.generateConsts(v.Set)
-}
-
-func makeNameGoPublic(s string) string {
-	return strings.ToUpper(s[:1]) + s[1:]
-}
-
-func (g *goGenerator) generateEnum(vi *TypeInfo) {
-	// TODO: can have Flag and Enum and Set in same Variable?
-	if vi.WasGenerated {
+	if v.Type == typeAlias {
+		g.ws("type %s %s\n\n", v.Name, v.Type)
 		return
 	}
 
-	v := vi.Variable
-	if v.Enum == nil {
+	if v.Type == typeStruct {
+		// first a pass to generate type names
+		g.ws("type %s struct {\n", v.Name)
+		for _, f := range ti.Fields {
+			name := makeNameGoPublic(f.Name)
+			g.ws("%s %s\n", name, f.TypeName)
+		}
+		g.ws("}\n\n")
 		return
 	}
 
-	vi.WasGenerated = true
-	g.generateConsts(v.Enum.Set)
-}
-
-func (g *goGenerator) generateFlag(vi *TypeInfo) {
-	// TODO: can have Flag and Enum and Set in same Variable?
-	if vi.WasGenerated {
-		return
-	}
-
-	v := vi.Variable
-	if v.Flag == nil {
-		return
-	}
-
-	vi.WasGenerated = true
-	g.generateConsts(v.Flag.Set)
 }
 
 func (g *goGenerator) generateModule(mi *goModuleInfo) {
@@ -357,6 +346,10 @@ func (g *goGenerator) generateModule(mi *goModuleInfo) {
 	}
 
 	g.ws("}\n")
+
+	for _, ti := range mi.typesToGenerate {
+		g.generateType(ti)
+	}
 
 	for _, fi := range mi.functionsToGenerate {
 		g.generateFunction(fi)
@@ -411,81 +404,14 @@ func desugarPreDefinedType(tp string) string {
 	return ""
 }
 
-func (g *goGenerator) desugarReturnType(typeName string) string {
-	// TODO: to handle BOOL => bool need a version of desugarTypeNamed()
-	// specialized for return types
+func desugarReturnType(typeName string) string {
 	if typeName == "BOOL" {
 		return "bool"
 	}
-	returnType := g.desugarType(typeName, nil)
-	g.generateTypeNamed(returnType)
-	if strings.ToLower(returnType) == "void" {
+	if strings.ToLower(typeName) == "void" {
 		return ""
 	}
-	return returnType
-}
-
-// this converts type to a real Go type we want to use
-func (g *goGenerator) desugarType(tp string, vi *TypeInfo) string {
-	if predefined := desugarPreDefinedType(tp); predefined != "" {
-		return predefined
-	}
-
-	if vi == nil {
-		vi = findType(tp)
-		panicIf(vi == nil, "didn't find info about type '%s'", tp)
-	}
-
-	v := vi.Variable
-	tp = v.Type
-
-	if predefined := desugarPreDefinedType(tp); predefined != "" {
-		return predefined
-	}
-
-	switch tp {
-	case "Integer":
-		return desugarInteger(v)
-	}
-
-	g.generateFlag(vi)
-	g.generateSet(vi)
-	g.generateEnum(vi)
-
-	if tp == typeAlias {
-		// we want to preserve types that are aliases for HANDLE
-		// (HWND, HMENU etc.)
-		if v.Base == "HANDLE" {
-			return v.Name
-		}
-		return g.desugarType(v.Base, nil)
-	}
-
-	if tp == typePointer {
-		return "*" + g.desugarType(v.Base, nil)
-	}
-
-	if tp == typeStruct {
-		return v.Name
-	}
-
-	if tp == typeArray {
-		base := g.desugarType(v.Base, nil)
-		return fmt.Sprintf("[%s]%s", v.Count, base)
-	}
-
-	if tp == typeVoid {
-		return "void"
-	}
-
-	if tp == typeUnion {
-		panic("union NYI")
-	}
-
-	pretty.Print(v)
-
-	panicIf(true, "Unknown type '%s'", tp)
-	return tp
+	return typeName
 }
 
 /*
@@ -511,29 +437,13 @@ func CreateWindowEx(dwExStyle uint32, lpClassName, lpWindowName *uint16, dwStyle
 func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	fn := fi.Function
 
-	// first a pass to generate types this function depends on
-	for _, arg := range fn.Params {
-		g.desugarType(arg.Type, nil)
-		g.generateTypeNamed(arg.Type)
+	returnType := fi.ReturnType
+	s := ""
+	for _, arg := range fi.Args {
+		s += fmt.Sprintf("%s %s, ", arg.Name, arg.TypeName)
 	}
-
-	returnType := g.desugarReturnType(fn.Return.Type)
-
-	g.ws("\nfunc %s(", fi.Name)
-	lastIdx := len(fn.Params) - 1
-	for idx, arg := range fn.Params {
-		name := arg.Name
-		g.ws(name + " ")
-		typ := g.desugarType(arg.Type, nil)
-		g.ws(typ)
-		if idx != lastIdx {
-			g.ws(", ")
-		}
-	}
-
-	g.ws(")")
-	g.ws(" " + returnType)
-	g.ws(" {\n")
+	s = strings.TrimSuffix(s, ", ")
+	g.ws("\nfunc %s(%s) %s {\n", fi.Name, s, returnType)
 
 	// 	ret, _, _ := syscall.Syscall12(createWindowEx.Addr(), 12,
 	nArgs := len(fn.Params)
@@ -544,8 +454,8 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 		g.ws("_, _, _ = ")
 	}
 	g.ws("%s(%s.Addr(), %d,\n", sysName, fi.GoVarName(), nArgs)
-	for _, arg := range fn.Params {
-		if g.isPointerType(arg.Type) {
+	for _, arg := range fi.Args {
+		if isPointerType(arg.TypeName) {
 			g.ws("uintptr(unsafe.Pointer(%s)),\n", arg.Name)
 		} else {
 			g.ws("uintptr(%s),\n", arg.Name)
@@ -587,12 +497,8 @@ func (g *goGenerator) generateInterface(name string) {
 	ii.WasGenerated = true
 }
 
-func (g *goGenerator) isPointerType(tp string) bool {
-	typ := g.desugarType(tp, nil)
-	if typ[0] == '*' {
-		return true
-	}
-	return false
+func isPointerType(typeName string) bool {
+	return typeName[0] == '*'
 }
 
 func (g *goGenerator) generate() {

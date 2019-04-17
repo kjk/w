@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+	"os/exec"
 	"strings"
 )
 
@@ -76,4 +77,16 @@ func shortAPIName(fn *FunctionInfo) string {
 	modName := fn.Module.Name
 	fnName := fn.Function.Name
 	return fmt.Sprintf(`%s %s.%s`, sfn, modName, fnName)
+}
+
+func gofmtFile(path string) {
+	cmd := exec.Command("gofmt", "-s", "-w", path)
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		fmt.Printf("gofmt failed with %s. Output:\n%s\n", err, string(out))
+	}
+}
+
+func makeNameGoPublic(s string) string {
+	return strings.ToUpper(s[:1]) + s[1:]
 }

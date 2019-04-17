@@ -1,18 +1,29 @@
 package main
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 const (
 	// names for Variable.Type field
-	typeAlias     = "Alias"
-	typePtr       = "Pointer"
-	typePointer   = "Pointer"
-	typeInterface = "Interface"
-	typeStruct    = "Struct"
-	typeUnion     = "Union"
-	typeArray     = "Array"
-	typeVoid      = "Void"
+	typeAlias        = "Alias"
+	typePtr          = "Pointer"
+	typePointer      = "Pointer"
+	typeInterface    = "Interface"
+	typeStruct       = "Struct"
+	typeUnion        = "Union"
+	typeArray        = "Array"
+	typeVoid         = "Void"
+	typeInteger      = "Integer"
+	typeModuleHandle = "ModuleHandle"
 )
+
+// NameAndType describes an argument to a function
+type NameAndType struct {
+	Name     string
+	TypeName string
+}
 
 // TypeInfo describes a type
 type TypeInfo struct {
@@ -25,16 +36,13 @@ type TypeInfo struct {
 	// this is a name of the type for a given language e.g. Go
 	// it might be different than the name of C type
 	// after desugaring type (e.g. resolving LPWSTR => *uint16)
-	TypeName string
+	Name string
+
+	// for structs
+	Fields []*NameAndType
 
 	WasAdded     bool
 	WasGenerated bool
-}
-
-// FunctionArgument describes an argument to a function
-type FunctionArgument struct {
-	Name string
-	Type *TypeInfo
 }
 
 // FunctionInfo describes a function
@@ -48,9 +56,9 @@ type FunctionInfo struct {
 	// it indicates this is Unicode (W) version
 	IsUnicode bool
 
-	Args []*FunctionArgument
-	// if nil, no return type i.e. void
-	ReturnType *TypeInfo
+	Args []*NameAndType
+	// can be void if no return type
+	ReturnType string
 
 	WasAdded     bool
 	WasGenerated bool
@@ -222,4 +230,30 @@ func buildIndex(files []*APIMonitorXMLFile) {
 		indexHeaders(f)
 		indexInterface(f)
 	}
+}
+
+func findFunction(name string) *FunctionInfo {
+	a := allFunctions[name]
+	if len(a) == 0 {
+		return nil
+	}
+	if len(a) > 1 {
+		fmt.Printf("Found %d functions with name '%s'\n", len(a), name)
+	}
+	return a[0]
+}
+
+func findType(name string) *TypeInfo {
+	a := allTypes[name]
+	if len(a) == 0 {
+		return nil
+	}
+	if len(a) > 1 {
+		fmt.Printf("Found %d variables with name '%s', showing the first one\n", len(a), name)
+	}
+	return a[0]
+}
+
+func findInterface(name string) *InterfaceInfo {
+	return allInterfaces[name]
 }

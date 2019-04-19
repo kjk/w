@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/kylelemons/godebug/pretty"
 	"io"
 	"os"
 	"path/filepath"
@@ -165,9 +166,16 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 		panicIf(v.Enum != nil, "v.Enum on struct not nil")
 		panicIf(v.Set != nil, "v.Set on struct not nil")
 		for _, t := range v.Field {
+			typeName := g.addType(t.Type, nil)
+			if typeName == "" {
+				fmt.Printf("dindn't resolve type with t.Type = '%s'\n", t.Type)
+				pretty.Print(t)
+			}
+			panicIf(typeName == "")
+			panicIf(t.Name == "")
 			f := &NameAndType{
 				Name:     t.Name,
-				TypeName: g.addType(t.Type, nil),
+				TypeName: typeName,
 			}
 			vi.Fields = append(vi.Fields, f)
 		}
@@ -230,7 +238,8 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 			g.rememberType(vi)
 			return v.Name
 		}
-		return g.addType(v.Base, nil)
+		vi.GoTypeName = g.addType(v.Base, nil)
+		return vi.GoTypeName
 	}
 
 	panic(fmt.Sprintf("unknown type %s", v.Type))
@@ -297,11 +306,15 @@ func (g *goGenerator) addInterface(name string) string {
 func (g *goGenerator) buildFunctionInfo(fi *FunctionInfo) {
 	ret := fi.Function.Return
 	fi.ReturnType = desugarReturnType(g.addType(ret.Type, nil))
+	panicIf(fi.ReturnType == "")
 
 	for _, arg := range fi.Function.Params {
+		typeName := g.addType(arg.Type, nil)
+		panicIf(typeName == "")
+		panicIf(arg.Name == "")
 		farg := &NameAndType{
 			Name:     arg.Name,
-			TypeName: g.addType(arg.Type, nil),
+			TypeName: typeName,
 		}
 		fi.Args = append(fi.Args, farg)
 	}
@@ -484,25 +497,29 @@ func desugarInteger(v *Variable) string {
 // if returns "", not a known type
 func desugarPreDefinedType(tp string) string {
 	// some known terminal types
+	tp = strings.ToLower(tp)
 	switch tp {
-	case "LPVOID":
+	case "lpvoid":
 		return "unsafe.Pointer"
-	case "LPCTSTR":
+	case "lpctstr":
+		// TODO: this should depend on A vs. W
+		return "*uint16"
+	case "lpcwstr":
 		return "*uint16"
 	case "int8", "int16", "int32", "int64":
 		return tp
 	case "uint8", "uint16", "uint32", "uint64":
 		return tp
-	case "WCHAR":
+	case "wchar":
 		return tp
-	case "UINT_PTR":
+	case "uint_ptr":
 		return "uintptr"
 	case "int":
 		// yes, it's strange but that's what it seems to be
 		return "int32"
-	case "ModuleHandle":
+	case "modulehandle":
 		return "HANDLE"
-	case "Guid", "GUID":
+	case "guid":
 		return "GUID"
 	}
 
@@ -638,8 +655,8 @@ func genGo() {
 
 	g := newGoGenerator()
 	g.addFunction("CreateWindowExW")
-	//g.addFunction("FileTimeToSystemTime")
-	//g.addFunction("TzSpecificLocalTimeToSystemTime")
+	g.addFunction("FileTimeToSystemTime")
+	g.addFunction("TzSpecificLocalTimeToSystemTime")
 	//g.addFunction("GetSystemTimeAsFileTime")
 	//g.addInterface("IBindHost")
 	g.generate()

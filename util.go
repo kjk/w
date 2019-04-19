@@ -53,6 +53,14 @@ func toLines(d []byte) []string {
 	return strings.Split(s, "\n")
 }
 
+func readFileAsLines(path string) ([]string, error) {
+	d, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	return toLines(d), nil
+}
+
 func collapseMultipleEmptyLines(a []string) []string {
 	j := 0
 	prevWasEmpty := false

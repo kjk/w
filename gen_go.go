@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"github.com/kylelemons/godebug/pretty"
 	"io"
+	"io/ioutil"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -12,6 +14,7 @@ import (
 )
 
 const (
+
 	// this is for Variable that don't belong to any module
 	noModule = "nomodule.go"
 
@@ -23,6 +26,10 @@ import (
 	"unsafe"
 )
 `
+)
+
+var (
+	printGeneratedFile = false
 )
 
 // information needed to generate info for a single source
@@ -58,7 +65,7 @@ func (sf *goSourceFile) getModule() *Module {
 
 func (i *goSourceFile) Path() string {
 	panicIf(i.sourceFileName == "")
-	return filepath.Join("generated", i.sourceFileName)
+	return filepath.Join("w", i.sourceFileName)
 }
 
 // goGenerator keeps info needed for generating Go files
@@ -111,11 +118,20 @@ func (g *goGenerator) rememberType(vi *TypeInfo) *goSourceFile {
 }
 
 func (g *goGenerator) rememberInterface(ii *InterfaceInfo) *goSourceFile {
-	fmt.Printf("remembering interface: %s\n", ii.Name())
+	//fmt.Printf("remembering interface: %s\n", ii.Name())
 	fileName := ii.goSourceFileName()
 	si := g.getOrMakeSourceFileInfo(fileName)
 	si.interfacesToGenerate = append(si.interfacesToGenerate, ii)
 	return si
+}
+
+// maybe not the best way to do it
+// replace e.g. **void with *uintptr
+func fixGoTypeName(typeName string) string {
+	if strings.HasSuffix(typeName, "*void") {
+		return strings.TrimSuffix(typeName, "*void") + "uintptr"
+	}
+	return typeName
 }
 
 // looks up a type by name. Returns a Go name of the type.
@@ -173,6 +189,7 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 				pretty.Print(t)
 			}
 			panicIf(typeName == "")
+			typeName = fixGoTypeName(typeName)
 			panicIf(t.Name == "")
 			f := &NameAndType{
 				Name:     t.Name,
@@ -306,11 +323,13 @@ func (g *goGenerator) buildFunctionInfo(fi *FunctionInfo) {
 	ret := fi.Function.Return
 	goTypeName := g.addType(ret.Type, nil)
 	panicIf(goTypeName == "")
+	goTypeName = fixGoTypeName(goTypeName)
 	fi.ReturnType = desugarReturnType(goTypeName)
 
 	for _, arg := range fi.Function.Params {
 		typeName := g.addType(arg.Type, nil)
 		panicIf(typeName == "")
+		typeName = fixGoTypeName(typeName)
 		panicIf(arg.Name == "")
 		farg := &NameAndType{
 			Name:     arg.Name,
@@ -440,9 +459,53 @@ func (g *goGenerator) generateFunctionVariables(sf *goSourceFile) {
 	g.ws("}\n")
 }
 
+// if uses import (has a line like "windows.") then does nothing
+// otherwise removes import lines (those that have e.g "golang.org/x/sys/windows")
+func removeUnusedImportsInLines(lines []string, importUse, importPath string) []string {
+	for _, line := range lines {
+		if strings.Contains(line, importUse) {
+			return lines
+		}
+	}
+	n := 0
+	nRemoved := 0
+	for _, line := range lines {
+		if strings.Contains(line, importPath) {
+			nRemoved++
+			continue
+		}
+		lines[n] = line
+		n++
+	}
+	panicIf(nRemoved != 1)
+	return lines[:len(lines)-1]
+}
+
+// this is a hacky way to do it, use goimports instead
+func removeUnusedImportsInFile(path string) {
+	imports := map[string]string{
+		"windows." : `"golang.org/x/sys/windows"`,
+		"syscall.": `"syscall"`,
+		"unsafe.": `"unsafe"`,
+	}
+	changed := false
+	lines, err := readFileAsLines(path)
+	must(err)
+	for importUse, importPath := range imports {
+		nBefore := len(lines)
+		lines = removeUnusedImportsInLines(lines, importUse, importPath)
+		changed = changed || (nBefore != len(lines))
+	}
+	if !changed {
+		return
+	}
+	d := strings.Join(lines, "\n")
+	err = ioutil.WriteFile(path, []byte(d),0644)
+	must(err)
+}
+
 func (g *goGenerator) generateSourceFile(sf *goSourceFile) {
-	fileName := sf.sourceFileName
-	fmt.Printf("Generating module %s\n", fileName)
+	//fmt.Printf("Generating module %s\n", sf.sourceFileName)
 	var err error
 	g.w, err = os.Create(sf.Path())
 	must(err)
@@ -498,7 +561,7 @@ func desugarPreDefinedType(tp string) string {
 	tp = strings.ToLower(tp)
 	switch tp {
 	case "lpvoid":
-		return "unsafe.Pointer"
+		return "uintptr"
 	case "lpctstr":
 		// TODO: this should depend on A vs. W
 		return "*uint16"
@@ -659,7 +722,7 @@ func (g *goGenerator) generateInterfaceFunction(ii *InterfaceInfo, fi *FunctionI
 	} else {
 		g.ws("_, _, _ = ")
 	}
-	g.ws("%s(o.Vtbl.%s, %d,\n", sysName, fi.Name, nArgs)
+	g.ws("%s(i.Vtbl.%s, %d,\n", sysName, fi.Name, nArgs)
 	g.ws("uintptr(unsafe.Pointer(i)),\n")
 
 	for _, arg := range fi.Args {
@@ -669,7 +732,7 @@ func (g *goGenerator) generateInterfaceFunction(ii *InterfaceInfo, fi *FunctionI
 			g.ws("uintptr(%s),\n", arg.Name)
 		}
 	}
-	nLeftOver := sysArgsCount - nArgs - 1
+	nLeftOver := sysArgsCount - nArgs
 	for nLeftOver > 0 {
 		g.ws("0,\n")
 		nLeftOver--
@@ -743,14 +806,52 @@ func (g *goGenerator) generate() {
 	for _, name := range sourceFiles {
 		sf := g.sourceFiles[name]
 		g.generateSourceFile(sf)
+		removeUnusedImportsInFile(sf.Path())
 		gofmtFile(sf.Path())
-		dumpFile(sf.Path())
+		if printGeneratedFile {
+			dumpFile(sf.Path())
+		} else {
+			fmt.Printf("Generated %s\n", sf.Path())
+		}
+	}
+}
+
+func goDeleteExisting() {
+	// delete all files in w except those that are hand-written (e.g. util.go)
+	dir := "w"
+	whitelist := map[string]bool{
+		"util.go": true,
+	}
+
+	files, err := ioutil.ReadDir(dir)
+	must(err)
+	for _, fi := range files {
+		if !fi.Mode().IsRegular() {
+			continue
+		}
+		name := fi.Name()
+		if whitelist[strings.ToLower(name)] {
+			continue
+		}
+		path := filepath.Join(dir, name)
+		err = os.Remove(path)
+		must(err)
+	}
+}
+
+func tryCompile() {
+	cmd := exec.Command("go", "build",  "-o", "testw.exe", `github.com\kjk\winapigen\testw`)
+	out, err := cmd.CombinedOutput()
+	_ = os.Remove("testw.exe")
+	if err != nil {
+		fmt.Printf("Compilation failed with:\n%s\n", string(out))
 	}
 }
 
 func genGo() {
 	fmt.Printf("Starting gen go\n")
 	out = os.Stdout
+	goDeleteExisting()
 
 	timeStart := time.Now()
 	parsedFiles, err := parseApiMonitorData()
@@ -759,7 +860,7 @@ func genGo() {
 
 	timeStart = time.Now()
 	buildIndex(parsedFiles)
-	fmt.Printf("Built index in %s. %d functions, %d variables, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
+	fmt.Printf("Built index in %s. %d functions, %d types, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
 
 	g := newGoGenerator()
 	//g.addFunction("CreateWindowExW")
@@ -768,4 +869,5 @@ func genGo() {
 	//g.addFunction("GetSystemTimeAsFileTime")
 	g.addInterface("IShellLinkW")
 	g.generate()
+	tryCompile()
 }

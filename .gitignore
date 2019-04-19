@@ -3,9 +3,3 @@ winapigen.exe
 winapigen
 api/
 .idea/
-generated/user32.go
-generated/kernel32.go
-generated/gdi.h.go
-generated/windows.h.go
-generated/multimedia.h.go
-generated/shell.h.go

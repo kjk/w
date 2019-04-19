@@ -24,12 +24,9 @@ import (
 `
 )
 
-// information needed to generate info for a single module
-// (aka dll).
+// information needed to generate info for a single source
+// file (which can map to .dll file or a .h include file)
 type goSourceFile struct {
-	// can be nil for interfaces
-	module *Module
-
 	// name of the .go file where we'll write generated info
 	sourceFileName string
 
@@ -39,6 +36,23 @@ type goSourceFile struct {
 	// interfaces don't come from DLLs but we reuse the
 	// concept
 	interfacesToGenerate []*InterfaceInfo
+}
+
+func (sf *goSourceFile) getModule() *Module {
+	// can be nil for interfaces
+	funcs := sf.functionsToGenerate
+	if len(funcs) > 0 {
+		mod := funcs[0].Module
+		panicIf(mod == nil, "module should not be nil")
+		// verify all modules are the same
+		for _, fn := range funcs[1:] {
+			mod2 := fn.Module
+			panicIf(mod != mod2, "mod != mod2")
+		}
+		return mod
+	}
+
+	return nil
 }
 
 func (i *goSourceFile) Path() string {
@@ -51,7 +65,7 @@ func (i *goSourceFile) Path() string {
 type goGenerator struct {
 	// maps module (dll) name to info for generating .go
 	// file for that module
-	modules map[string]*goSourceFile
+	sourceFiles map[string]*goSourceFile
 
 	// we keep track of which const values have already been generated
 	// because they the same constant might belong to multiple enums / sets
@@ -63,7 +77,7 @@ type goGenerator struct {
 
 func newGoGenerator() *goGenerator {
 	return &goGenerator{
-		modules:         map[string]*goSourceFile{},
+		sourceFiles:     map[string]*goSourceFile{},
 		generatedConsts: map[string]struct{}{},
 	}
 }
@@ -81,14 +95,25 @@ func (g *goGenerator) ws(format string, args ...interface{}) {
 	ws(g.w, s)
 }
 
-func (g *goGenerator) rememberType(vi *TypeInfo) {
-	mi := g.getOrMakeModuleInfo(vi.Module)
-	mi.typesToGenerate = append(mi.typesToGenerate, vi)
+func (g *goGenerator) rememberFunction(fi *FunctionInfo) *goSourceFile {
+	fileName := fi.Module.goSourceFileName()
+	si := g.getOrMakeSourceFileInfo(fileName)
+	si.functionsToGenerate = append(si.functionsToGenerate, fi)
+	return si
 }
 
-func (g *goGenerator) rememberInterface(ii *InterfaceInfo) {
-	mi := g.getOrMakeModuleInfoForInterface(ii)
-	mi.interfacesToGenerate = append(mi.interfacesToGenerate, ii)
+func (g *goGenerator) rememberType(vi *TypeInfo) *goSourceFile {
+	fileName := vi.goSourceFileName()
+	si := g.getOrMakeSourceFileInfo(fileName)
+	si.typesToGenerate = append(si.typesToGenerate, vi)
+	return si
+}
+
+func (g *goGenerator) rememberInterface(ii *InterfaceInfo) *goSourceFile {
+	fileName := ii.goSourceFileName()
+	si := g.getOrMakeSourceFileInfo(fileName)
+	si.interfacesToGenerate = append(si.interfacesToGenerate, ii)
+	return si
 }
 
 // looks up a type by name. Returns a Go name of the type.
@@ -114,19 +139,20 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 	panicIf(vi == nil, "didn't find type with name '%s'", typeName)
 
 	if vi.WasAdded {
-		return vi.Name
+		return vi.GoTypeName
 	}
 	vi.WasAdded = true
 
 	v := vi.Variable
 	if v.Type == typeVoid {
-		vi.Name = "void"
-		return vi.Name
+		vi.GoTypeName = "void"
+		return vi.GoTypeName
 	}
 
 	if v.Type == typeModuleHandle {
-		vi.Name = "HANDLE"
-		return vi.Name
+		// this one is pre-defined
+		vi.GoTypeName = "HANDLE"
+		return vi.GoTypeName
 	}
 
 	if v.Type == typeUnion {
@@ -146,25 +172,25 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 			vi.Fields = append(vi.Fields, f)
 		}
 		g.rememberType(vi)
-		vi.Name = v.Name
-		return vi.Name
+		vi.GoTypeName = v.Name
+		return vi.GoTypeName
 	}
 
 	if v.Type == typePointer {
 		// we don't add pointers
-		vi.Name = "*" + g.addType(v.Base, nil)
-		return vi.Name
+		vi.GoTypeName = "*" + g.addType(v.Base, nil)
+		return vi.GoTypeName
 	}
 
 	if v.Type == typeArray {
 		baseTypeName := g.addType(v.Base, nil)
-		vi.Name = fmt.Sprintf("[%s]%s", v.Count, baseTypeName)
-		return vi.Name
+		vi.GoTypeName = fmt.Sprintf("[%s]%s", v.Count, baseTypeName)
+		return vi.GoTypeName
 	}
 
 	if v.Type == typeInteger {
-		vi.Name = desugarInteger(v)
-		return vi.Name
+		vi.GoTypeName = desugarInteger(v)
+		return vi.GoTypeName
 	}
 
 	if v.Type == typeInterface {
@@ -174,15 +200,15 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 	if v.Flag != nil {
 		g.rememberType(vi)
 		//fmt.Printf("Base for flag %s: %s\n", v.Name, v.Base)
-		vi.Name = g.addType(v.Base, nil)
-		return vi.Name
+		vi.GoTypeName = g.addType(v.Base, nil)
+		return vi.GoTypeName
 	}
 
 	if v.Enum != nil {
 		g.rememberType(vi)
 		//fmt.Printf("Base for enum %s: %s\n", v.Name, v.Base)
-		vi.Name = g.addType(v.Base, nil)
-		return vi.Name
+		vi.GoTypeName = g.addType(v.Base, nil)
+		return vi.GoTypeName
 	}
 
 	if v.Set != nil {
@@ -200,7 +226,7 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 		// we want to preserve types that are aliases for HANDLE
 		// (HWND, HMENU etc.)
 		if v.Base == "HANDLE" {
-			vi.Name = v.Name
+			vi.GoTypeName = v.Name
 			g.rememberType(vi)
 			return v.Name
 		}
@@ -210,28 +236,16 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 	panic(fmt.Sprintf("unknown type %s", v.Type))
 }
 
-func (g *goGenerator) getOrMakeModuleInfoForInterface(ii *InterfaceInfo) *goSourceFile {
-	name := ii.goSourceFileName()
-	return g.getOrMakeModuleInfoForName(name)
-}
-
-func (g *goGenerator) getOrMakeModuleInfoForName(sourceFileName string) *goSourceFile {
+func (g *goGenerator) getOrMakeSourceFileInfo(sourceFileName string) *goSourceFile {
 	panicIf(sourceFileName == "", "name is empty")
-	mi := g.modules[sourceFileName]
+	mi := g.sourceFiles[sourceFileName]
 	if mi == nil {
 		mi = &goSourceFile{
 			sourceFileName: sourceFileName,
 		}
-		g.modules[sourceFileName] = mi
+		g.sourceFiles[sourceFileName] = mi
 	}
 	return mi
-}
-
-func (g *goGenerator) getOrMakeModuleInfo(mod *Module) *goSourceFile {
-	if mod == nil {
-		return g.getOrMakeModuleInfoForName(noModule)
-	}
-	return g.getOrMakeModuleInfoForName(mod.goSourceFileName())
 }
 
 // types with name "IBindCtx*" is a pointer to an interface IBindCtx
@@ -253,8 +267,7 @@ func (g *goGenerator) addInterface(name string) string {
 	}
 	ii.WasAdded = true
 
-	mod := g.getOrMakeModuleInfoForInterface(ii)
-	mod.interfacesToGenerate = append(mod.interfacesToGenerate, ii)
+	g.rememberInterface(ii)
 	i := ii.Definition.Interface
 
 	for _, method := range i.API {
@@ -264,7 +277,6 @@ func (g *goGenerator) addInterface(name string) string {
 			SourceFile: ii.Declaration.SourceFile,
 			Function:   api,
 			Name:       name,
-			Module:     mod.module,
 		}
 
 		g.buildFunctionInfo(fi)
@@ -303,8 +315,7 @@ func (g *goGenerator) addFunction(name string) {
 	}
 	fi.WasAdded = true
 
-	mi := g.getOrMakeModuleInfo(fi.Module)
-	mi.functionsToGenerate = append(mi.functionsToGenerate, fi)
+	g.rememberFunction(fi)
 	g.buildFunctionInfo(fi)
 }
 
@@ -349,7 +360,7 @@ func (g *goGenerator) generateType(ti *TypeInfo) {
 	}
 
 	if v.Type == typeAlias {
-		g.ws("type %s %s\n\n", v.Name, v.Type)
+		g.ws("type %s %s\n\n", ti.GoTypeName, v.Base)
 		return
 	}
 
@@ -374,11 +385,11 @@ func (g *goGenerator) generateModuleFunctionBodies(mi *goSourceFile) {
 	}
 }
 
-func (g *goGenerator) generateModuleFunctionVariables(mi *goSourceFile) {
-	if len(mi.functionsToGenerate) == 0 {
+func (g *goGenerator) generateModuleFunctionVariables(sf *goSourceFile) {
+	if len(sf.functionsToGenerate) == 0 {
 		return
 	}
-	mod := mi.module
+	mod := sf.getModule()
 	panicIf(mod == nil, "mi.module should not be nil")
 	modName := mod.moduleName()
 	dllName := mod.dllName()
@@ -391,7 +402,7 @@ func (g *goGenerator) generateModuleFunctionVariables(mi *goSourceFile) {
 	// for each function from dll that we use, a global variable
 	// for the function address, like this:
 	// abortDoc               *windows.LazyProc
-	for _, fi := range mi.functionsToGenerate {
+	for _, fi := range sf.functionsToGenerate {
 		g.ws("\t%s *windows.LazyProc\n", fi.GoVarName())
 	}
 
@@ -409,7 +420,7 @@ func (g *goGenerator) generateModuleFunctionVariables(mi *goSourceFile) {
 	g.ws("\nfunc init() {\n")
 	g.ws("lib%s = windows.NewLazySystemDLL(\"%s\")\n", modName, dllName)
 
-	for _, fi := range mi.functionsToGenerate {
+	for _, fi := range sf.functionsToGenerate {
 		g.ws("\t%s = lib%s.NewProc(\"%s\")\n", fi.GoVarName(), modName, fi.Name)
 	}
 
@@ -423,11 +434,11 @@ func (g *goGenerator) generateModuleInterfaces(mi *goSourceFile) {
 	panic("interfaces NYI")
 }
 
-func (g *goGenerator) generateModule(mi *goSourceFile) {
-	fileName := mi.sourceFileName
+func (g *goGenerator) generateSourceFile(sf *goSourceFile) {
+	fileName := sf.sourceFileName
 	fmt.Printf("Generating module %s\n", fileName)
 	var err error
-	g.w, err = os.Create(mi.Path())
+	g.w, err = os.Create(sf.Path())
 	must(err)
 	defer func() {
 		f := g.w.(*os.File)
@@ -438,15 +449,15 @@ func (g *goGenerator) generateModule(mi *goSourceFile) {
 
 	g.ws(fileHdr)
 
-	g.generateModuleFunctionVariables(mi)
+	g.generateModuleFunctionVariables(sf)
 
-	for _, ti := range mi.typesToGenerate {
+	for _, ti := range sf.typesToGenerate {
 		g.generateType(ti)
 	}
 
-	g.generateModuleFunctionBodies(mi)
+	g.generateModuleFunctionBodies(sf)
 
-	g.generateModuleInterfaces(mi)
+	g.generateModuleInterfaces(sf)
 
 }
 
@@ -600,13 +611,13 @@ func isPointerType(typeName string) bool {
 
 func (g *goGenerator) generate() {
 	var modules []string
-	for mod := range g.modules {
+	for mod := range g.sourceFiles {
 		modules = append(modules, mod)
 	}
 	sort.Strings(modules)
 	for _, name := range modules {
-		mi := g.modules[name]
-		g.generateModule(mi)
+		mi := g.sourceFiles[name]
+		g.generateSourceFile(mi)
 		gofmtFile(mi.Path())
 		dumpFile(mi.Path())
 	}

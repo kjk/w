@@ -1,6 +1,9 @@
 gen.exe
 winapigen.exe
 winapigen
+api/
+.idea/
 generated/user32.go
 generated/kernel32.go
-api/
+generated/gdi.h.go
+generated/windows.h.go

@@ -21,13 +21,46 @@ const (
 	typeModuleHandle = "ModuleHandle"
 )
 
+
+// e.g. gdi32.go
+func (m *Module) goSourceFileName() string {
+	return m.moduleName() + ".go"
+}
+
+// e.g. gdi32
+func (m *Module) moduleName() string {
+	s := strings.ToLower(m.Name)
+	s = strings.TrimSuffix(s, ".dll")
+	panicIf(filepath.Ext(s) != "", "unexpected m.Name '%s'", m.Name)
+	return s
+}
+
+// e.g. gdi32.dll
+func (m *Module) dllName() string {
+	return m.moduleName() + ".dll"
+}
+
+// foo/bar/Foo.h.xml => foo.h.go
+// TODO: maybe foo_h.go
+func (f *APIMonitorXMLFile) goSourceFileName() string {
+	panicIf(f.FileName == "")
+	name := strings.ToLower(f.FileName)
+	ext := filepath.Ext(name)
+	panicIf(ext != ".xml")
+	name = strings.TrimSuffix(name, ext)
+	name = filepath.ToSlash(name)
+	name = path.Base(name)
+	return name + ".go"
+}
+
 // NameAndType describes an argument to a function
 type NameAndType struct {
 	Name     string
 	TypeName string
 }
 
-// TypeInfo describes a type
+
+// TypeInfo describes a type (called Variable in XML defs)
 type TypeInfo struct {
 	SourceFile *APIMonitorXMLFile
 	Headers    *Headers
@@ -38,13 +71,23 @@ type TypeInfo struct {
 	// this is a name of the type for a given language e.g. Go
 	// it might be different than the name of C type
 	// after desugaring type (e.g. resolving LPWSTR => *uint16)
-	Name string
+	GoTypeName string
 
 	// for structs
 	Fields []*NameAndType
 
 	WasAdded     bool
 	WasGenerated bool
+}
+
+func (i *TypeInfo) goSourceFileName() string {
+	// if inside Module (dll), attribute them to the module
+	if i.Module != nil {
+		return i.Module.goSourceFileName()
+	}
+	// otherwise we assume it's a Foo.h.xml header file
+	panicIf(i.SourceFile == nil)
+	return i.SourceFile.goSourceFileName()
 }
 
 // FunctionInfo describes a function
@@ -125,24 +168,6 @@ type InterfaceInfo struct {
 // Name returns name of the interface
 func (ii *InterfaceInfo) Name() string {
 	return ii.Definition.Interface.Name
-}
-
-// e.g. gdi32.go
-func (m *Module) goSourceFileName() string {
-	return m.moduleName() + ".go"
-}
-
-// e.g. gdi32
-func (m *Module) moduleName() string {
-	s := strings.ToLower(m.Name)
-	s = strings.TrimSuffix(s, ".dll")
-	panicIf(filepath.Ext(s) != "", "unexpected m.Name '%s'", m.Name)
-	return s
-}
-
-// e.g. gdi32.dll
-func (m *Module) dllName() string {
-	return m.moduleName() + ".dll"
 }
 
 func (ii *InterfaceInfo) goSourceFileName() string {

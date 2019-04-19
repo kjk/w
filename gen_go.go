@@ -440,13 +440,6 @@ func (g *goGenerator) generateFunctionVariables(sf *goSourceFile) {
 	g.ws("}\n")
 }
 
-func (g *goGenerator) generateInterfaces(mi *goSourceFile) {
-	if len(mi.interfacesToGenerate) == 0 {
-		return
-	}
-	panic("interfaces NYI")
-}
-
 func (g *goGenerator) generateSourceFile(sf *goSourceFile) {
 	fileName := sf.sourceFileName
 	fmt.Printf("Generating module %s\n", fileName)
@@ -606,23 +599,70 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	g.ws("\n}\n")
 }
 
-func (g *goGenerator) generateInterface(name string) {
-	ii := findInterface(name)
+func (g *goGenerator) generateInterfaces(mi *goSourceFile) {
+	if len(mi.interfacesToGenerate) == 0 {
+		return
+	}
+	for _, ii := range mi.interfacesToGenerate {
+		g.generateInterface(ii)
+	}
+}
+
+func splitGUID(s string) []string {
+	s = strings.TrimPrefix(s, "{")
+	s = strings.TrimSuffix(s, "}")
+
+	parts := strings.Split(s, "-")
+	panicIf(len(parts) != 5)
+	a := []string{"0x" + parts[0]}
+	a = append(a, "0x" + parts[1])
+	a = append(a, "0x" + parts[2])
+	s = parts[3]
+	a = append(a, "0x" + s[:2])
+	a = append(a, "0x" + s[2:])
+	s = parts[4]
+	for i := 0; i < 6; i++ {
+		idx := i*2
+		s2 := "0x" + s[idx:idx+2]
+		a = append(a, s2)
+	}
+	return a
+}
+
+func (g *goGenerator) generateInterface(ii *InterfaceInfo) {
 	if ii.WasGenerated {
 		return
 	}
 	ii.WasGenerated = true
 
 	i := ii.Definition.Interface
-	baseName := i.BaseInterface
-	if baseName != "" {
-		g.generateInterface(baseName)
-	}
 
-	// TODO: generate vtable
+	// generate ID like
+	// IID_ITaskbarList3 = IID{0xea1afb91, 0x9e28, 0x4b86, [8]byte{0x90, 0xe9, 0x9e, 0x9f, 0x8a, 0x5e, 0xef, 0xaf}}
+	// from "{ea1afb91-9e28-4b86-90e9-9e9f8a5eefaf}
+
+	a := splitGUID(i.ID)
+	g.ws("var IID_%s = IID{%s, %s, %s, [8]byte{%s, %s, %s, %s, %s, %s, %s, %s}}\n\n", i.Name, a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9], a[10])
+
+	// generate interface vtable
+	vtableName := i.Name + "Vtbl"
+	g.ws("type %s struct {\n", vtableName)
+	if i.BaseInterface != "" {
+		g.ws("\t%s\n", i.BaseInterface)
+	}
+	for _, m := range i.API {
+		methodName := m.Name
+		g.ws("%s uintptr\n", methodName)
+	}
+	g.ws("}\n\n")
+
+	g.ws("type %s struct {\n", i.Name)
+	g.ws("\tVtbl *%s\n", vtableName)
+	g.ws("}\n\n")
+
 	// TODO: generate functions wrapping vtable
 	// TODO: generate function to create the type
-	panic("NYI")
+	//panic("NYI")
 }
 
 func isPointerType(typeName string) bool {

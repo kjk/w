@@ -2,6 +2,7 @@ package w
 
 import (
 	"errors"
+	"golang.org/x/sys/windows"
 	"syscall"
 )
 
@@ -10,6 +11,8 @@ type HMODULE uintptr
 type WCHAR uint16
 type LARGE_INTEGER int64
 type ULARGE_INTEGER uint64
+
+type IID windows.GUID
 
 func winError(s string) error {
 	// TODO: use getlasterror, add a callstack

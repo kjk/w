@@ -26,7 +26,7 @@ import (
 
 // information needed to generate info for a single module
 // (aka dll).
-type goModuleInfo struct {
+type goSourceFile struct {
 	// can be nil for interfaces
 	module *Module
 
@@ -41,7 +41,7 @@ type goModuleInfo struct {
 	interfacesToGenerate []*InterfaceInfo
 }
 
-func (i *goModuleInfo) Path() string {
+func (i *goSourceFile) Path() string {
 	panicIf(i.sourceFileName == "")
 	return filepath.Join("generated", i.sourceFileName)
 }
@@ -51,7 +51,7 @@ func (i *goModuleInfo) Path() string {
 type goGenerator struct {
 	// maps module (dll) name to info for generating .go
 	// file for that module
-	modules map[string]*goModuleInfo
+	modules map[string]*goSourceFile
 
 	// we keep track of which const values have already been generated
 	// because they the same constant might belong to multiple enums / sets
@@ -63,7 +63,7 @@ type goGenerator struct {
 
 func newGoGenerator() *goGenerator {
 	return &goGenerator{
-		modules:         map[string]*goModuleInfo{},
+		modules:         map[string]*goSourceFile{},
 		generatedConsts: map[string]struct{}{},
 	}
 }
@@ -210,16 +210,16 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 	panic(fmt.Sprintf("unknown type %s", v.Type))
 }
 
-func (g *goGenerator) getOrMakeModuleInfoForInterface(ii *InterfaceInfo) *goModuleInfo {
+func (g *goGenerator) getOrMakeModuleInfoForInterface(ii *InterfaceInfo) *goSourceFile {
 	name := ii.goSourceFileName()
 	return g.getOrMakeModuleInfoForName(name)
 }
 
-func (g *goGenerator) getOrMakeModuleInfoForName(sourceFileName string) *goModuleInfo {
+func (g *goGenerator) getOrMakeModuleInfoForName(sourceFileName string) *goSourceFile {
 	panicIf(sourceFileName == "", "name is empty")
 	mi := g.modules[sourceFileName]
 	if mi == nil {
-		mi = &goModuleInfo{
+		mi = &goSourceFile{
 			sourceFileName: sourceFileName,
 		}
 		g.modules[sourceFileName] = mi
@@ -227,7 +227,7 @@ func (g *goGenerator) getOrMakeModuleInfoForName(sourceFileName string) *goModul
 	return mi
 }
 
-func (g *goGenerator) getOrMakeModuleInfo(mod *Module) *goModuleInfo {
+func (g *goGenerator) getOrMakeModuleInfo(mod *Module) *goSourceFile {
 	if mod == nil {
 		return g.getOrMakeModuleInfoForName(noModule)
 	}
@@ -365,7 +365,7 @@ func (g *goGenerator) generateType(ti *TypeInfo) {
 	}
 }
 
-func (g *goGenerator) generateModuleFunctionBodies(mi *goModuleInfo) {
+func (g *goGenerator) generateModuleFunctionBodies(mi *goSourceFile) {
 	if len(mi.functionsToGenerate) == 0 {
 		return
 	}
@@ -374,7 +374,7 @@ func (g *goGenerator) generateModuleFunctionBodies(mi *goModuleInfo) {
 	}
 }
 
-func (g *goGenerator) generateModuleFunctionVariables(mi *goModuleInfo) {
+func (g *goGenerator) generateModuleFunctionVariables(mi *goSourceFile) {
 	if len(mi.functionsToGenerate) == 0 {
 		return
 	}
@@ -416,14 +416,14 @@ func (g *goGenerator) generateModuleFunctionVariables(mi *goModuleInfo) {
 	g.ws("}\n")
 }
 
-func (g *goGenerator) generateModuleInterfaces(mi *goModuleInfo) {
+func (g *goGenerator) generateModuleInterfaces(mi *goSourceFile) {
 	if len(mi.interfacesToGenerate) == 0 {
 		return
 	}
 	panic("interfaces NYI")
 }
 
-func (g *goGenerator) generateModule(mi *goModuleInfo) {
+func (g *goGenerator) generateModule(mi *goSourceFile) {
 	fileName := mi.sourceFileName
 	fmt.Printf("Generating module %s\n", fileName)
 	var err error

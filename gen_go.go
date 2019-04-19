@@ -821,6 +821,7 @@ func goDeleteExisting() {
 	dir := "w"
 	whitelist := map[string]bool{
 		"util.go": true,
+		"fast_utf8_to_utf16.go": true,
 	}
 
 	files, err := ioutil.ReadDir(dir)

@@ -305,8 +305,9 @@ func (g *goGenerator) addInterface(name string) string {
 
 func (g *goGenerator) buildFunctionInfo(fi *FunctionInfo) {
 	ret := fi.Function.Return
-	fi.ReturnType = desugarReturnType(g.addType(ret.Type, nil))
-	panicIf(fi.ReturnType == "")
+	goTypeName := g.addType(ret.Type, nil)
+	panicIf(goTypeName == "")
+	fi.ReturnType = desugarReturnType(goTypeName)
 
 	for _, arg := range fi.Function.Params {
 		typeName := g.addType(arg.Type, nil)
@@ -657,7 +658,7 @@ func genGo() {
 	g.addFunction("CreateWindowExW")
 	g.addFunction("FileTimeToSystemTime")
 	g.addFunction("TzSpecificLocalTimeToSystemTime")
-	//g.addFunction("GetSystemTimeAsFileTime")
+	g.addFunction("GetSystemTimeAsFileTime")
 	//g.addInterface("IBindHost")
 	g.generate()
 }

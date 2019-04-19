@@ -7,3 +7,4 @@ generated/user32.go
 generated/kernel32.go
 generated/gdi.h.go
 generated/windows.h.go
+generated/multimedia.h.go

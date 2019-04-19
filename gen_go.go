@@ -111,6 +111,7 @@ func (g *goGenerator) rememberType(vi *TypeInfo) *goSourceFile {
 }
 
 func (g *goGenerator) rememberInterface(ii *InterfaceInfo) *goSourceFile {
+	fmt.Printf("remembering interface: %s\n", ii.Name())
 	fileName := ii.goSourceFileName()
 	si := g.getOrMakeSourceFileInfo(fileName)
 	si.interfacesToGenerate = append(si.interfacesToGenerate, ii)
@@ -269,8 +270,9 @@ func findInterfaceByNameOrPointer(s string) *InterfaceInfo {
 func (g *goGenerator) addInterface(name string) string {
 	ii := findInterfaceByNameOrPointer(name)
 	if ii == nil {
-		return ""
+		fmt.Printf("didn't find interface named %s\n", name)
 	}
+	panicIf(ii == nil)
 	if ii.WasAdded {
 		return ii.Name()
 	}
@@ -297,9 +299,6 @@ func (g *goGenerator) addInterface(name string) string {
 		panicIf(baseName == "", "didn't add interface '%s'", i.BaseInterface)
 	}
 
-	for _, v := range i.Variable {
-		g.addType(v.Name, nil)
-	}
 	return ii.Name()
 }
 
@@ -390,7 +389,7 @@ func (g *goGenerator) generateType(ti *TypeInfo) {
 	}
 }
 
-func (g *goGenerator) generateModuleFunctionBodies(mi *goSourceFile) {
+func (g *goGenerator) generateFunctionBodies(mi *goSourceFile) {
 	if len(mi.functionsToGenerate) == 0 {
 		return
 	}
@@ -399,7 +398,7 @@ func (g *goGenerator) generateModuleFunctionBodies(mi *goSourceFile) {
 	}
 }
 
-func (g *goGenerator) generateModuleFunctionVariables(sf *goSourceFile) {
+func (g *goGenerator) generateFunctionVariables(sf *goSourceFile) {
 	if len(sf.functionsToGenerate) == 0 {
 		return
 	}
@@ -441,7 +440,7 @@ func (g *goGenerator) generateModuleFunctionVariables(sf *goSourceFile) {
 	g.ws("}\n")
 }
 
-func (g *goGenerator) generateModuleInterfaces(mi *goSourceFile) {
+func (g *goGenerator) generateInterfaces(mi *goSourceFile) {
 	if len(mi.interfacesToGenerate) == 0 {
 		return
 	}
@@ -463,16 +462,15 @@ func (g *goGenerator) generateSourceFile(sf *goSourceFile) {
 
 	g.ws(fileHdr)
 
-	g.generateModuleFunctionVariables(sf)
+	g.generateFunctionVariables(sf)
 
 	for _, ti := range sf.typesToGenerate {
 		g.generateType(ti)
 	}
 
-	g.generateModuleFunctionBodies(sf)
+	g.generateFunctionBodies(sf)
 
-	g.generateModuleInterfaces(sf)
-
+	g.generateInterfaces(sf)
 }
 
 func desugarInteger(v *Variable) string {
@@ -520,6 +518,10 @@ func desugarPreDefinedType(tp string) string {
 		return "int32"
 	case "modulehandle":
 		return "HANDLE"
+	case "large_integer":
+		return "LARGE_INTEGER"
+	case "ularge_integer":
+		return "ULARGE_INTEGER"
 	case "guid":
 		return "GUID"
 	}
@@ -628,16 +630,16 @@ func isPointerType(typeName string) bool {
 }
 
 func (g *goGenerator) generate() {
-	var modules []string
-	for mod := range g.sourceFiles {
-		modules = append(modules, mod)
+	var sourceFiles []string
+	for sf := range g.sourceFiles {
+		sourceFiles = append(sourceFiles, sf)
 	}
-	sort.Strings(modules)
-	for _, name := range modules {
-		mi := g.sourceFiles[name]
-		g.generateSourceFile(mi)
-		gofmtFile(mi.Path())
-		dumpFile(mi.Path())
+	sort.Strings(sourceFiles)
+	for _, name := range sourceFiles {
+		sf := g.sourceFiles[name]
+		g.generateSourceFile(sf)
+		gofmtFile(sf.Path())
+		dumpFile(sf.Path())
 	}
 }
 
@@ -655,10 +657,10 @@ func genGo() {
 	fmt.Printf("Built index in %s. %d functions, %d variables, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
 
 	g := newGoGenerator()
-	g.addFunction("CreateWindowExW")
-	g.addFunction("FileTimeToSystemTime")
-	g.addFunction("TzSpecificLocalTimeToSystemTime")
-	g.addFunction("GetSystemTimeAsFileTime")
-	//g.addInterface("IBindHost")
+	//g.addFunction("CreateWindowExW")
+	//g.addFunction("FileTimeToSystemTime")
+	//g.addFunction("TzSpecificLocalTimeToSystemTime")
+	//g.addFunction("GetSystemTimeAsFileTime")
+	g.addInterface("IShellLinkW")
 	g.generate()
 }

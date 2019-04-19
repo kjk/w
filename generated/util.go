@@ -6,13 +6,20 @@ import (
 	"syscall"
 )
 
+type BOOL    int32
+type HRESULT int32
 type HANDLE uintptr
 type HMODULE uintptr
-type WCHAR uint16
+type WCHAR = uint16
 type LARGE_INTEGER int64
 type ULARGE_INTEGER uint64
 
+// we don't desugar those types because they signal const vs. non-const
+type LPCWSTR = *uint16
+type LPWSTR = *uint16
+
 type IID windows.GUID
+
 
 func winError(s string) error {
 	// TODO: use getlasterror, add a callstack

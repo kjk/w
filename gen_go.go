@@ -489,6 +489,12 @@ func desugarInteger(v *Variable) string {
 // if returns "", not a known type
 func desugarPreDefinedType(tp string) string {
 	// some known terminal types
+	switch tp {
+	case "HRESULT", "LARGE_INTEGER", "ULARGE_INTEGER", "WCHAR",
+	"LPWSTR", "LPCWSTR":
+		return tp
+	}
+
 	tp = strings.ToLower(tp)
 	switch tp {
 	case "lpvoid":
@@ -502,8 +508,6 @@ func desugarPreDefinedType(tp string) string {
 		return tp
 	case "uint8", "uint16", "uint32", "uint64":
 		return tp
-	case "wchar":
-		return tp
 	case "uint_ptr":
 		return "uintptr"
 	case "int":
@@ -511,10 +515,6 @@ func desugarPreDefinedType(tp string) string {
 		return "int32"
 	case "modulehandle":
 		return "HANDLE"
-	case "large_integer":
-		return "LARGE_INTEGER"
-	case "ularge_integer":
-		return "ULARGE_INTEGER"
 	case "guid":
 		return "GUID"
 	}
@@ -629,6 +629,63 @@ func splitGUID(s string) []string {
 	return a
 }
 
+/*
+func (obj *ITaskbarList3) SetProgressState(hwnd HWND, state int) HRESULT {
+	ret, _, _ := syscall.Syscall(obj.LpVtbl.SetProgressState, 3,
+		uintptr(unsafe.Pointer(obj)),
+		uintptr(hwnd),
+		uintptr(state))
+	return HRESULT(ret)
+}
+*/
+func (g *goGenerator) generateInterfaceFunction(ii *InterfaceInfo, fi *FunctionInfo) {
+	fn := fi.Function
+
+	returnType := fi.ReturnType
+	s := ""
+	for _, arg := range fi.Args {
+		s += fmt.Sprintf("%s %s, ", arg.Name, arg.TypeName)
+	}
+	s = strings.TrimSuffix(s, ", ")
+
+	g.ws("\nfunc (i *%s) %s(%s) %s {\n", ii.Name(), fi.Name, s, returnType)
+
+	// 	ret, _, _ := syscall.Syscall12(createWindowEx.Addr(), 12,
+	// +1 because first argument is pointer to the COM object
+	nArgs := len(fn.Params) + 1
+	sysName, sysArgsCount := syscallFuncForArgCount(nArgs)
+	if returnType != "" {
+		g.ws("ret, _, _ := ")
+	} else {
+		g.ws("_, _, _ = ")
+	}
+	g.ws("%s(o.Vtbl.%s, %d,\n", sysName, fi.Name, nArgs)
+	g.ws("uintptr(unsafe.Pointer(i)),\n")
+
+	for _, arg := range fi.Args {
+		if isPointerType(arg.TypeName) {
+			g.ws("uintptr(unsafe.Pointer(%s)),\n", arg.Name)
+		} else {
+			g.ws("uintptr(%s),\n", arg.Name)
+		}
+	}
+	nLeftOver := sysArgsCount - nArgs - 1
+	for nLeftOver > 0 {
+		g.ws("0,\n")
+		nLeftOver--
+	}
+	g.ws(")\n")
+	if returnType != "" {
+		if returnType == "bool" {
+			g.ws("return ret != 0\n")
+		} else {
+			g.ws("return %s(ret)\n", returnType)
+		}
+	}
+
+	g.ws("\n}\n")
+}
+
 func (g *goGenerator) generateInterface(ii *InterfaceInfo) {
 	if ii.WasGenerated {
 		return
@@ -660,12 +717,20 @@ func (g *goGenerator) generateInterface(ii *InterfaceInfo) {
 	g.ws("\tVtbl *%s\n", vtableName)
 	g.ws("}\n\n")
 
-	// TODO: generate functions wrapping vtable
+	for _, method := range ii.Methods {
+		g.generateInterfaceFunction(ii, method)
+	}
 	// TODO: generate function to create the type
 	//panic("NYI")
 }
 
 func isPointerType(typeName string) bool {
+	// TODO: should add a way to fully de-sugar types
+	// this manually
+	switch typeName {
+	case "LPWSTR", "LPCWSTR":
+		return true
+	}
 	return typeName[0] == '*'
 }
 

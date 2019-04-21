@@ -1,10 +1,11 @@
 package w
 
 import (
-	"golang.org/x/sys/windows"
 	"sync"
 	"unicode/utf8"
 	"unsafe"
+
+	"golang.org/x/sys/windows"
 )
 
 // fast conversion of utf8 => utf16 conversion for short-lived strings
@@ -24,20 +25,20 @@ We can also significantly speed up UTF16PtrFromString as it's quite wasteful.
 */
 
 const (
-	stringAllocatorDefaultBufSize = 16*1024
+	stringAllocatorDefaultBufSize = 16 * 1024
 )
 
 var (
-	stringAllocator []uint16
+	stringAllocator   []uint16
 	muStringAllocator sync.Mutex
 
 	stringAllocatorCurrPos int
-	lastAllocationPos int
-	lastAllocationSize int
+	lastAllocationPos      int
+	lastAllocationSize     int
 
 	// counters so that we can see how often we are able to
 	// free string in a way that re-uses stringAllocator
-	nFrees int
+	nFrees     int
 	nFastFrees int
 )
 
@@ -51,6 +52,7 @@ func ToUnicode(s string) *uint16 {
 	return u
 }
 
+// FromUnicode converts UTF-16 Windows string to utf-8 Go string
 func FromUnicode(s []uint16) string {
 	return windows.UTF16ToString(s)
 }
@@ -62,7 +64,7 @@ func reserveSpaceInStringAllocator(n int) []uint16 {
 	nLeft := len(stringAllocator) - stringAllocatorCurrPos
 	if nLeft >= n {
 		lastAllocationPos = stringAllocatorCurrPos
-		res := stringAllocator[stringAllocatorCurrPos:stringAllocatorCurrPos+n]
+		res := stringAllocator[stringAllocatorCurrPos : stringAllocatorCurrPos+n]
 		stringAllocatorCurrPos += n
 		muStringAllocator.Unlock()
 		return res
@@ -74,13 +76,14 @@ func reserveSpaceInStringAllocator(n int) []uint16 {
 	}
 	stringAllocator = make([]uint16, bufSize, bufSize)
 	lastAllocationPos = 0
+	stringAllocatorCurrPos = n
 	res := stringAllocator[:n]
 	muStringAllocator.Unlock()
 	return res
 }
 
-// TODO: not finished yet
-func ToUnicode2(s string) *uint16 {
+// ToUnicodeShortLived converts s to UTF-16 Windows string
+func ToUnicodeShortLived(s string) *uint16 {
 
 	// try a fast path for just ascii
 	// TODO: this should calculate number of UTF16 chars needed to
@@ -96,10 +99,10 @@ func ToUnicode2(s string) *uint16 {
 		i++
 	}
 
-	isAscii := (i == n)
-	if isAscii {
+	isASCII := (i == n)
+	if isASCII {
 		// fast path for ascii-only string
-		res := reserveSpaceInStringAllocator(n+1)
+		res := reserveSpaceInStringAllocator(n + 1)
 		for i = 0; i < n; i++ {
 			c := s[i]
 			res[i] = uint16(c)
@@ -115,7 +118,8 @@ func ToUnicode2(s string) *uint16 {
 	return ToUnicode(s)
 }
 
-func FreeUnicode(s *uint16) {
+// FreeShortLivedUnicode frees a string allocated with ToUnicodeShortLived
+func FreeShortLivedUnicode(s *uint16) {
 	// if s is the last allocated string, shrink stringAllocator
 	// buffer so that next allocation will re-use it
 	muStringAllocator.Lock()

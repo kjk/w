@@ -844,6 +844,11 @@ func shouldWhiteList(name string) bool {
 		return true
 	}
 
+	// *_test.go files are also hand-written
+	if strings.Contains(name, "_test.go") {
+		return true
+	}
+
 	return false
 }
 

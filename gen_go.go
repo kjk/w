@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/kylelemons/godebug/pretty"
 	"io"
 	"io/ioutil"
 	"os"
@@ -11,6 +10,8 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/kylelemons/godebug/pretty"
 )
 
 const (
@@ -484,9 +485,9 @@ func removeUnusedImportsInLines(lines []string, importUse, importPath string) []
 // this is a hacky way to do it, use goimports instead
 func removeUnusedImportsInFile(path string) {
 	imports := map[string]string{
-		"windows." : `"golang.org/x/sys/windows"`,
+		"windows.": `"golang.org/x/sys/windows"`,
 		"syscall.": `"syscall"`,
-		"unsafe.": `"unsafe"`,
+		"unsafe.":  `"unsafe"`,
 	}
 	changed := false
 	lines, err := readFileAsLines(path)
@@ -500,7 +501,7 @@ func removeUnusedImportsInFile(path string) {
 		return
 	}
 	d := strings.Join(lines, "\n")
-	err = ioutil.WriteFile(path, []byte(d),0644)
+	err = ioutil.WriteFile(path, []byte(d), 0644)
 	must(err)
 }
 
@@ -554,7 +555,7 @@ func desugarPreDefinedType(tp string) string {
 	// some known terminal types
 	switch tp {
 	case "HRESULT", "LARGE_INTEGER", "ULARGE_INTEGER", "WCHAR",
-	"LPWSTR", "LPCWSTR":
+		"LPWSTR", "LPCWSTR":
 		return tp
 	}
 
@@ -678,14 +679,14 @@ func splitGUID(s string) []string {
 	parts := strings.Split(s, "-")
 	panicIf(len(parts) != 5)
 	a := []string{"0x" + parts[0]}
-	a = append(a, "0x" + parts[1])
-	a = append(a, "0x" + parts[2])
+	a = append(a, "0x"+parts[1])
+	a = append(a, "0x"+parts[2])
 	s = parts[3]
-	a = append(a, "0x" + s[:2])
-	a = append(a, "0x" + s[2:])
+	a = append(a, "0x"+s[:2])
+	a = append(a, "0x"+s[2:])
 	s = parts[4]
 	for i := 0; i < 6; i++ {
-		idx := i*2
+		idx := i * 2
 		s2 := "0x" + s[idx:idx+2]
 		a = append(a, s2)
 	}
@@ -820,7 +821,7 @@ func goDeleteExisting() {
 	// delete all files in w except those that are hand-written (e.g. util.go)
 	dir := "w"
 	whitelist := map[string]bool{
-		"util.go": true,
+		"util.go":               true,
 		"fast_utf8_to_utf16.go": true,
 	}
 
@@ -841,7 +842,7 @@ func goDeleteExisting() {
 }
 
 func tryCompile() {
-	cmd := exec.Command("go", "build",  "-o", "testw.exe", `github.com\kjk\winapigen\testw`)
+	cmd := exec.Command("go", "build", "-o", "testw.exe", `github.com\kjk\winapigen\testw`)
 	out, err := cmd.CombinedOutput()
 	_ = os.Remove("testw.exe")
 	if err != nil {
@@ -864,6 +865,7 @@ func genGo() {
 	fmt.Printf("Built index in %s. %d functions, %d types, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
 
 	g := newGoGenerator()
+	g.addFunction("CoGetClassObject")
 	//g.addFunction("CreateWindowExW")
 	//g.addFunction("FileTimeToSystemTime")
 	//g.addFunction("TzSpecificLocalTimeToSystemTime")

@@ -150,7 +150,7 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 	}
 
 	if vi == nil {
-		typeNoPointer := isPointerType(typeName)
+		typeNoPointer := dePointerType(typeName)
 		if typeNoPointer != "" {
 			return "*" + g.addType(typeNoPointer, nil)
 		}
@@ -641,7 +641,7 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	}
 	g.ws("%s(%s.Addr(), %d,\n", sysName, fi.GoVarName(), nArgs)
 	for _, arg := range fi.Args {
-		if isPointerType(arg.TypeName) != "" {
+		if dePointerType(arg.TypeName) != "" {
 			g.ws("uintptr(unsafe.Pointer(%s)),\n", arg.Name)
 		} else {
 			g.ws("uintptr(%s),\n", arg.Name)
@@ -728,7 +728,7 @@ func (g *goGenerator) generateInterfaceFunction(ii *InterfaceInfo, fi *FunctionI
 	g.ws("uintptr(unsafe.Pointer(i)),\n")
 
 	for _, arg := range fi.Args {
-		if isPointerType(arg.TypeName) != "" {
+		if dePointerType(arg.TypeName) != "" {
 			g.ws("uintptr(unsafe.Pointer(%s)),\n", arg.Name)
 		} else {
 			g.ws("uintptr(%s),\n", arg.Name)
@@ -792,7 +792,7 @@ func (g *goGenerator) generateInterface(ii *InterfaceInfo) {
 	//panic("NYI")
 }
 
-func isPointerType(typeName string) string {
+func dePointerType(typeName string) string {
 	// TODO: should add a way to fully de-sugar types
 	// this manually
 	switch typeName {

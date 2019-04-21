@@ -17,7 +17,7 @@ type IUnknown struct {
 	Vtbl *IUnknownVtbl
 }
 
-func (i *IUnknown) QueryInterface(riid *GUID, ppvObject *uintptr) HRESULT {
+func (i *IUnknown) QueryInterface(riid *GUID, ppvObject *unsafe.Pointer) HRESULT {
 	ret, _, _ := syscall.Syscall(i.Vtbl.QueryInterface, 3,
 		uintptr(unsafe.Pointer(i)),
 		uintptr(unsafe.Pointer(riid)),

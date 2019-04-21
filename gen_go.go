@@ -130,7 +130,8 @@ func (g *goGenerator) rememberInterface(ii *InterfaceInfo) *goSourceFile {
 // replace e.g. **void with *uintptr
 func fixGoTypeName(typeName string) string {
 	if strings.HasSuffix(typeName, "*void") {
-		return strings.TrimSuffix(typeName, "*void") + "uintptr"
+		//return strings.TrimSuffix(typeName, "*void") + "uintptr"
+		return strings.TrimSuffix(typeName, "*void") + "unsafe.Pointer"
 	}
 	return typeName
 }
@@ -146,6 +147,13 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 
 	if vi == nil {
 		vi = findType(typeName)
+	}
+
+	if vi == nil {
+		typeNoPointer := isPointerType(typeName)
+		if typeNoPointer != "" {
+			return "*" + g.addType(typeNoPointer, nil)
+		}
 	}
 
 	if vi == nil {
@@ -278,15 +286,8 @@ func (g *goGenerator) getOrMakeSourceFileInfo(sourceFileName string) *goSourceFi
 
 // types with name "IBindCtx*" is a pointer to an interface IBindCtx
 // returns interface info or nil if s not a pointer to an interface
-func findInterfaceByNameOrPointer(s string) *InterfaceInfo {
-	for strings.HasSuffix(s, "*") {
-		s = strings.TrimSuffix(s, "*")
-	}
-	return allInterfaces[s]
-}
-
 func (g *goGenerator) addInterface(name string) string {
-	ii := findInterfaceByNameOrPointer(name)
+	ii := allInterfaces[name]
 	if ii == nil {
 		fmt.Printf("didn't find interface named %s\n", name)
 	}
@@ -562,7 +563,7 @@ func desugarPreDefinedType(tp string) string {
 	tp = strings.ToLower(tp)
 	switch tp {
 	case "lpvoid":
-		return "uintptr"
+		return "*void"
 	case "lpctstr":
 		// TODO: this should depend on A vs. W
 		return "*uint16"
@@ -640,7 +641,7 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	}
 	g.ws("%s(%s.Addr(), %d,\n", sysName, fi.GoVarName(), nArgs)
 	for _, arg := range fi.Args {
-		if isPointerType(arg.TypeName) {
+		if isPointerType(arg.TypeName) != "" {
 			g.ws("uintptr(unsafe.Pointer(%s)),\n", arg.Name)
 		} else {
 			g.ws("uintptr(%s),\n", arg.Name)
@@ -727,7 +728,7 @@ func (g *goGenerator) generateInterfaceFunction(ii *InterfaceInfo, fi *FunctionI
 	g.ws("uintptr(unsafe.Pointer(i)),\n")
 
 	for _, arg := range fi.Args {
-		if isPointerType(arg.TypeName) {
+		if isPointerType(arg.TypeName) != "" {
 			g.ws("uintptr(unsafe.Pointer(%s)),\n", arg.Name)
 		} else {
 			g.ws("uintptr(%s),\n", arg.Name)
@@ -769,7 +770,7 @@ func (g *goGenerator) generateInterface(ii *InterfaceInfo) {
 	vtableName := i.Name + "Vtbl"
 	g.ws("type %s struct {\n", vtableName)
 	if i.BaseInterface != "" {
-		g.ws("\t%s\n", i.BaseInterface)
+		g.ws("\t%sVtbl\n", i.BaseInterface)
 	}
 	for _, m := range i.API {
 		methodName := m.Name
@@ -778,6 +779,9 @@ func (g *goGenerator) generateInterface(ii *InterfaceInfo) {
 	g.ws("}\n\n")
 
 	g.ws("type %s struct {\n", i.Name)
+	if i.BaseInterface != "" {
+		g.ws("\t%s\n", i.BaseInterface)
+	}
 	g.ws("\tVtbl *%s\n", vtableName)
 	g.ws("}\n\n")
 
@@ -788,14 +792,21 @@ func (g *goGenerator) generateInterface(ii *InterfaceInfo) {
 	//panic("NYI")
 }
 
-func isPointerType(typeName string) bool {
+func isPointerType(typeName string) string {
 	// TODO: should add a way to fully de-sugar types
 	// this manually
 	switch typeName {
 	case "LPWSTR", "LPCWSTR":
-		return true
+		return typeName
 	}
-	return typeName[0] == '*'
+	if typeName[0] == '*' {
+		return typeName[1:]
+	}
+	n := len(typeName)
+	if typeName[n-1] == '*' {
+		return typeName[:n-1]
+	}
+	return ""
 }
 
 func (g *goGenerator) generate() {
@@ -817,13 +828,28 @@ func (g *goGenerator) generate() {
 	}
 }
 
+var whitelist = map[string]bool{
+	"fast_utf8_to_utf16.go": true,
+}
+
+func shouldWhiteList(name string) bool {
+	name = strings.ToLower(name)
+
+	if whitelist[name] {
+		return true
+	}
+
+	// all *util.go files are hand-written
+	if strings.Contains(name, "util.go") {
+		return true
+	}
+
+	return false
+}
+
 func goDeleteExisting() {
 	// delete all files in w except those that are hand-written (e.g. util.go)
 	dir := "w"
-	whitelist := map[string]bool{
-		"util.go":               true,
-		"fast_utf8_to_utf16.go": true,
-	}
 
 	files, err := ioutil.ReadDir(dir)
 	must(err)
@@ -832,7 +858,7 @@ func goDeleteExisting() {
 			continue
 		}
 		name := fi.Name()
-		if whitelist[strings.ToLower(name)] {
+		if shouldWhiteList(name) {
 			continue
 		}
 		path := filepath.Join(dir, name)
@@ -865,12 +891,19 @@ func genGo() {
 	fmt.Printf("Built index in %s. %d functions, %d types, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
 
 	g := newGoGenerator()
-	g.addFunction("CoGetClassObject")
+	functions := []string{"CoGetClassObject"}
+	for _, f := range functions {
+		g.addFunction(f)
+
+	}
 	//g.addFunction("CreateWindowExW")
 	//g.addFunction("FileTimeToSystemTime")
 	//g.addFunction("TzSpecificLocalTimeToSystemTime")
 	//g.addFunction("GetSystemTimeAsFileTime")
-	g.addInterface("IShellLinkW")
+	interfaces := []string{"IClassFactory", "IShellLinkW", "IPersistFile"}
+	for _, i := range interfaces {
+		g.addInterface(i)
+	}
 	g.generate()
 	tryCompile()
 }

@@ -44,7 +44,7 @@ type COSERVERINFO struct {
 	DwReserved2 uint32
 }
 
-func CoGetClassObject(rclsid *GUID, dwClsContext uint32, pServerInfo *COSERVERINFO, riid *GUID, ppv *uintptr) HRESULT {
+func CoGetClassObject(rclsid *GUID, dwClsContext uint32, pServerInfo *COSERVERINFO, riid *GUID, ppv *unsafe.Pointer) HRESULT {
 	ret, _, _ := syscall.Syscall6(coGetClassObject.Addr(), 5,
 		uintptr(unsafe.Pointer(rclsid)),
 		uintptr(dwClsContext),

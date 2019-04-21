@@ -8,6 +8,11 @@ import (
 	"golang.org/x/sys/windows"
 )
 
+const (
+	TRUE  = 1
+	FALSE = 0
+)
+
 type BOOL int32
 type HRESULT int32
 type HANDLE uintptr

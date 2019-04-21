@@ -40,7 +40,7 @@ const (
 var IID_IShellLinkW = IID{0x000214F9, 0x0000, 0x0000, [8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 type IShellLinkWVtbl struct {
-	IUnknown
+	IUnknownVtbl
 	GetPath             uintptr
 	GetIDList           uintptr
 	SetIDList           uintptr
@@ -62,6 +62,7 @@ type IShellLinkWVtbl struct {
 }
 
 type IShellLinkW struct {
+	IUnknown
 	Vtbl *IShellLinkWVtbl
 }
 

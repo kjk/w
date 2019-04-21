@@ -1,5 +1,10 @@
 package w
 
+import (
+	"syscall"
+	"unsafe"
+)
+
 const (
 	CLSCTX_INPROC_SERVER          = 0x1
 	CLSCTX_INPROC_HANDLER         = 0x2
@@ -24,3 +29,148 @@ const (
 	CLSCTX_ENABLE_CLOAKING        = 0x100000
 	CLSCTX_PS_DLL                 = 0x80000000
 )
+
+const (
+	STGM_DIRECT           = 0x00000000
+	STGM_TRANSACTED       = 0x00010000
+	STGM_SIMPLE           = 0x08000000
+	STGM_READ             = 0x00000000
+	STGM_WRITE            = 0x00000001
+	STGM_READWRITE        = 0x00000002
+	STGM_SHARE_DENY_NONE  = 0x00000040
+	STGM_SHARE_DENY_READ  = 0x00000030
+	STGM_SHARE_DENY_WRITE = 0x00000020
+	STGM_SHARE_EXCLUSIVE  = 0x00000010
+	STGM_PRIORITY         = 0x00040000
+	STGM_DELETEONRELEASE  = 0x04000000
+	STGM_NOSCRATCH        = 0x00100000
+	STGM_CREATE           = 0x00001000
+	STGM_CONVERT          = 0x00020000
+	STGM_FAILIFTHERE      = 0x00000000
+	STGM_NOSNAPSHOT       = 0x00200000
+	STGM_DIRECT_SWMR      = 0x00400000
+)
+
+var IID_IClassFactory = IID{0x00000001, 0x0000, 0x0000, [8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
+
+type IClassFactoryVtbl struct {
+	IUnknownVtbl
+	CreateInstance uintptr
+	LockServer     uintptr
+}
+
+type IClassFactory struct {
+	IUnknown
+	Vtbl *IClassFactoryVtbl
+}
+
+func (i *IClassFactory) CreateInstance(pUnkOuter *IUnknown, riid *GUID, ppvObject *unsafe.Pointer) HRESULT {
+	ret, _, _ := syscall.Syscall6(i.Vtbl.CreateInstance, 4,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(unsafe.Pointer(pUnkOuter)),
+		uintptr(unsafe.Pointer(riid)),
+		uintptr(unsafe.Pointer(ppvObject)),
+		0,
+		0,
+	)
+	return HRESULT(ret)
+
+}
+
+func (i *IClassFactory) LockServer(fLock int32) HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.LockServer, 2,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(fLock),
+		0,
+	)
+	return HRESULT(ret)
+
+}
+
+var IID_IPersistFile = IID{0x0000010b, 0x0000, 0x0000, [8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
+
+type IPersistFileVtbl struct {
+	IPersistVtbl
+	IsDirty       uintptr
+	Load          uintptr
+	Save          uintptr
+	SaveCompleted uintptr
+	GetCurFile    uintptr
+}
+
+type IPersistFile struct {
+	IPersist
+	Vtbl *IPersistFileVtbl
+}
+
+func (i *IPersistFile) IsDirty() HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.IsDirty, 1,
+		uintptr(unsafe.Pointer(i)),
+		0,
+		0,
+	)
+	return HRESULT(ret)
+
+}
+
+func (i *IPersistFile) Load(pszFileName LPCWSTR, dwMode uint32) HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.Load, 3,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(unsafe.Pointer(pszFileName)),
+		uintptr(dwMode),
+	)
+	return HRESULT(ret)
+
+}
+
+func (i *IPersistFile) Save(pszFileName LPCWSTR, fRemember int32) HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.Save, 3,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(unsafe.Pointer(pszFileName)),
+		uintptr(fRemember),
+	)
+	return HRESULT(ret)
+
+}
+
+func (i *IPersistFile) SaveCompleted(pszFileName LPCWSTR) HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.SaveCompleted, 2,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(unsafe.Pointer(pszFileName)),
+		0,
+	)
+	return HRESULT(ret)
+
+}
+
+func (i *IPersistFile) GetCurFile(ppszFileName *LPCWSTR) HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.GetCurFile, 2,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(unsafe.Pointer(ppszFileName)),
+		0,
+	)
+	return HRESULT(ret)
+
+}
+
+var IID_IPersist = IID{0x0000010c, 0x0000, 0x0000, [8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
+
+type IPersistVtbl struct {
+	IUnknownVtbl
+	GetClassID uintptr
+}
+
+type IPersist struct {
+	IUnknown
+	Vtbl *IPersistVtbl
+}
+
+func (i *IPersist) GetClassID(pClassID *GUID) HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.GetClassID, 2,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(unsafe.Pointer(pClassID)),
+		0,
+	)
+	return HRESULT(ret)
+
+}

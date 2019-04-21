@@ -353,6 +353,17 @@ func (g *goGenerator) addFunction(name string) {
 	g.buildFunctionInfo(fi)
 }
 
+// not all characters are valid in Go variable names
+// this tries to sanitize the names. might not be comprehensive
+func sanitizeConstantName(s string) string {
+	s = strings.Replace(s, " ", "_", -1)
+	s = strings.Replace(s, "-", "_", -1)
+	s = strings.Replace(s, "(", "", -1)
+	s = strings.Replace(s, ")", "", -1)
+	s = strings.Replace(s, "__", "_", -1)
+	return s
+}
+
 func (g *goGenerator) generateConsts(set []*Set) bool {
 	// TODO: optimize if only one value
 	if len(set) == 0 {
@@ -366,7 +377,7 @@ func (g *goGenerator) generateConsts(set []*Set) bool {
 		if _, ok := g.generatedConsts[name]; ok {
 			continue
 		}
-		g.ws("%s = %s\n", name, e.Value)
+		g.ws("%s = %s\n", sanitizeConstantName(name), e.Value)
 		g.generatedConsts[name] = struct{}{}
 	}
 	g.ws(")\n\n")
@@ -558,6 +569,8 @@ func desugarPreDefinedType(tp string) string {
 	case "HRESULT", "LARGE_INTEGER", "ULARGE_INTEGER", "WCHAR",
 		"LPWSTR", "LPCWSTR":
 		return tp
+	case "CHAR":
+		return "byte"
 	}
 
 	tp = strings.ToLower(tp)
@@ -566,8 +579,6 @@ func desugarPreDefinedType(tp string) string {
 		return "*void"
 	case "lpctstr":
 		// TODO: this should depend on A vs. W
-		return "*uint16"
-	case "lpcwstr":
 		return "*uint16"
 	case "int8", "int16", "int32", "int64":
 		return tp
@@ -896,7 +907,13 @@ func genGo() {
 	fmt.Printf("Built index in %s. %d functions, %d types, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
 
 	g := newGoGenerator()
-	functions := []string{"CoGetClassObject"}
+	functions := []string{
+		"CoGetClassObject",
+		"CoCreateInstance",
+		"CoInitialize",
+		"CoUninitialize",
+		"MultiByteToWideChar",
+	}
 	for _, f := range functions {
 		g.addFunction(f)
 
@@ -905,7 +922,11 @@ func genGo() {
 	//g.addFunction("FileTimeToSystemTime")
 	//g.addFunction("TzSpecificLocalTimeToSystemTime")
 	//g.addFunction("GetSystemTimeAsFileTime")
-	interfaces := []string{"IClassFactory", "IShellLinkW", "IPersistFile"}
+	interfaces := []string{
+		"IClassFactory",
+		"IShellLinkW",
+		"IPersistFile",
+	}
 	for _, i := range interfaces {
 		g.addInterface(i)
 	}

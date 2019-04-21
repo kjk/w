@@ -5,6 +5,10 @@ import (
 	"fmt"
 )
 
+// TODO: how can I auto-generate those
+var CLSID_ShellLink = IID{0x00021401, 0x0000, 0x0000,
+	[8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
+
 func SUCCEEDED(hr HRESULT) bool {
 	return hr >= 0
 }
@@ -52,15 +56,60 @@ bool CreateShortcut(const WCHAR* shortcutPath, const WCHAR* exePath, const WCHAR
 }
 */
 
+/*
+HRESULT CreateLink(LPCWSTR lpszPathObj, LPCSTR lpszPathLink, LPCWSTR lpszDesc)
+{
+    HRESULT hres;
+    IShellLink* psl;
+
+    // Get a pointer to the IShellLink interface. It is assumed that CoInitialize
+    // has already been called.
+    hres = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_IShellLink, (LPVOID*)&psl);
+    if (SUCCEEDED(hres))
+    {
+        IPersistFile* ppf;
+
+        // Set the path to the shortcut target and add the description.
+        psl->SetPath(lpszPathObj);
+        psl->SetDescription(lpszDesc);
+
+        // Query IShellLink for the IPersistFile interface, used for saving the
+        // shortcut in persistent storage.
+        hres = psl->QueryInterface(IID_IPersistFile, (LPVOID*)&ppf);
+
+        if (SUCCEEDED(hres))
+        {
+            WCHAR wsz[MAX_PATH];
+
+            // Ensure that the string is Unicode.
+            MultiByteToWideChar(CP_ACP, 0, lpszPathLink, -1, wsz, MAX_PATH);
+
+            // Add code here to check return value from MultiByteWideChar
+            // for success.
+
+            // Save the link by calling IPersistFile::Save.
+            hres = ppf->Save(wsz, TRUE);
+            ppf->Release();
+        }
+        psl->Release();
+    }
+	return hres;
+*/
+
 // TODO: finish me
+// Based on https://docs.microsoft.com/en-us/windows/desktop/shell/links
+// https://stackoverflow.com/questions/3906974/how-to-programmatically-create-a-shortcut-using-win32
+
 /*
 func CreateShortcut(shortcutPath string, exePath string, args string, description string, iconIndex int) error {
-	var lnkPtr unsafe.Pointer
-	hr := CoGetClassObject(&IID_IShellLinkW, CLSCTX_ALL, nil, &IID_IClassFactory, &lnkPtr)
+	//IShellLink * psl
+
+	var pslPtr unsafe.Pointer
+	hr := CoCreateInstance(&CLSID_ShellLink, nil, CLSCTX_INPROC_SERVER, &IID_IShellLink, &pslPtr)
 	if FAILED(hr) {
 		return errorFromHRESULT("CoGetClassObject", hr)
 	}
-	lnk := (*IClassFactory)(lnkPtr)
+	psl := (*IClassFactory)(lnkPtr)
 	defer lnk.Release()
 
 	var filePtr unsafe.Pointer
@@ -90,4 +139,3 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 	return nil
 }
 */
-

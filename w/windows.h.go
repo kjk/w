@@ -1,6 +1,33 @@
 package w
 
 const (
+	CP_ACP              = 0
+	CP_OEMCP            = 1
+	CP_MACCP            = 2
+	CP_THREAD_ACP       = 3
+	CP_SYMBOL           = 42
+	MS_DOS_Latin_US     = 437
+	Thai                = 874
+	Japanese_Shift_JIS  = 932
+	Chinese_Simplified  = 936
+	Korean              = 949
+	Chinese_Traditional = 950
+	Unicode_UTF_16_LE   = 1200
+	Unicode_UTF_16_BE   = 1201
+	Central_European    = 1250
+	Cyrillic            = 1251
+	Western_European    = 1252
+	Greek               = 1253
+	Turkish             = 1254
+	Hebrew              = 1255
+	Arabic              = 1256
+	Baltic              = 1257
+	Vietnamese          = 1258
+	CP_UTF7             = 65000
+	CP_UTF8             = 65001
+)
+
+const (
 	FILE_ATTRIBUTE_READONLY            = 0x00000001
 	FILE_ATTRIBUTE_HIDDEN              = 0x00000002
 	FILE_ATTRIBUTE_SYSTEM              = 0x00000004

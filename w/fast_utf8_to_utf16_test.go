@@ -35,3 +35,23 @@ func TestToUnicodeShortLived2(t *testing.T) {
 	assert.Equal(t, stringAllocatorCurrPos, (11+9)*nNotFast)
 }
 
+var u *uint16
+
+func BenchmarkToUnicode(b *testing.B) {
+	s := "abcdef"
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < 1024; i++ {
+			u = ToUnicode(s)
+		}
+	}
+}
+
+func BenchmarkToUnicodeShortLived(b *testing.B) {
+	s := "abcdef"
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < 1024; i++ {
+			u = ToUnicodeShortLived(s)
+			FreeShortLivedUnicode(u)
+		}
+	}
+}

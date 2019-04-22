@@ -27,6 +27,12 @@ const (
 	CP_UTF8             = 65001
 )
 
+type HWND HANDLE
+
+const (
+	NULL = 0
+)
+
 const (
 	FILE_ATTRIBUTE_READONLY            = 0x00000001
 	FILE_ATTRIBUTE_HIDDEN              = 0x00000002
@@ -78,5 +84,3 @@ type WIN32_FIND_DATAW struct {
 	CFileName          [260]WCHAR
 	CAlternateFileName [14]WCHAR
 }
-
-type HWND HANDLE

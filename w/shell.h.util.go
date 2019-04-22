@@ -3,16 +3,32 @@ package w
 import (
 	"errors"
 	"fmt"
+	"unsafe"
 )
 
-// TODO: how can I auto-generate those
+// TODO: I want to auto-generate CLSID_* but they don't seem
+// to be present in the api info
+
+// CLSID_ShellLink represents id of IShellLink
 var CLSID_ShellLink = IID{0x00021401, 0x0000, 0x0000,
 	[8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
+// HrOk returns true if hr represents a "success" HRESULT
+func HrOk(hr HRESULT) bool {
+	return hr >= 0
+}
+
+// HrFailed returns true if hr represents a "failed" HRESULT
+func HrFailed(hr HRESULT) bool {
+	return hr < 0
+}
+
+// SUCCEEDED returns true if hr represents a "success" HRESULT
 func SUCCEEDED(hr HRESULT) bool {
 	return hr >= 0
 }
 
+// FAILED returns true if hr represents a "failed" HRESULT
 func FAILED(hr HRESULT) bool {
 	return hr < 0
 }
@@ -25,117 +41,67 @@ func errorFromHRESULT(funcName string, hr HRESULT) error {
 	return newError(fmt.Sprintf("%s: Error %d", funcName, hr))
 }
 
-/*
-bool CreateShortcut(const WCHAR* shortcutPath, const WCHAR* exePath, const WCHAR* args, const WCHAR* description,
-                    int iconIndex) {
-    ScopedCom com;
-
-    ScopedComPtr<IShellLink> lnk;
-    if (!lnk.Create(CLSID_ShellLink))
-        return false;
-
-    ScopedComQIPtr<IPersistFile> file(lnk);
-    if (!file)
-        return false;
-
-    HRESULT hr = lnk->SetPath(exePath);
-    if (FAILED(hr))
-        return false;
-
-    lnk->SetWorkingDirectory(AutoFreeW(path::GetDir(exePath)));
-    // lnk->SetShowCmd(SW_SHOWNORMAL);
-    // lnk->SetHotkey(0);
-    lnk->SetIconLocation(exePath, iconIndex);
-    if (args)
-        lnk->SetArguments(args);
-    if (description)
-        lnk->SetDescription(description);
-
-    hr = file->Save(shortcutPath, TRUE);
-    return SUCCEEDED(hr);
-}
-*/
-
-/*
-HRESULT CreateLink(LPCWSTR lpszPathObj, LPCSTR lpszPathLink, LPCWSTR lpszDesc)
-{
-    HRESULT hres;
-    IShellLink* psl;
-
-    // Get a pointer to the IShellLink interface. It is assumed that CoInitialize
-    // has already been called.
-    hres = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_IShellLink, (LPVOID*)&psl);
-    if (SUCCEEDED(hres))
-    {
-        IPersistFile* ppf;
-
-        // Set the path to the shortcut target and add the description.
-        psl->SetPath(lpszPathObj);
-        psl->SetDescription(lpszDesc);
-
-        // Query IShellLink for the IPersistFile interface, used for saving the
-        // shortcut in persistent storage.
-        hres = psl->QueryInterface(IID_IPersistFile, (LPVOID*)&ppf);
-
-        if (SUCCEEDED(hres))
-        {
-            WCHAR wsz[MAX_PATH];
-
-            // Ensure that the string is Unicode.
-            MultiByteToWideChar(CP_ACP, 0, lpszPathLink, -1, wsz, MAX_PATH);
-
-            // Add code here to check return value from MultiByteWideChar
-            // for success.
-
-            // Save the link by calling IPersistFile::Save.
-            hres = ppf->Save(wsz, TRUE);
-            ppf->Release();
-        }
-        psl->Release();
-    }
-	return hres;
-*/
-
-// TODO: finish me
 // Based on https://docs.microsoft.com/en-us/windows/desktop/shell/links
 // https://stackoverflow.com/questions/3906974/how-to-programmatically-create-a-shortcut-using-win32
-
-/*
 func CreateShortcut(shortcutPath string, exePath string, args string, description string, iconIndex int) error {
 	//IShellLink * psl
 
 	var pslPtr unsafe.Pointer
-	hr := CoCreateInstance(&CLSID_ShellLink, nil, CLSCTX_INPROC_SERVER, &IID_IShellLink, &pslPtr)
+	hr := CoCreateInstance(&CLSID_ShellLink, nil, CLSCTX_INPROC_SERVER, &IID_IShellLinkW, &pslPtr)
 	if FAILED(hr) {
 		return errorFromHRESULT("CoGetClassObject", hr)
 	}
-	psl := (*IClassFactory)(lnkPtr)
-	defer lnk.Release()
+	psl := (*IShellLinkW)(pslPtr)
+	defer psl.Release()
 
-	var filePtr unsafe.Pointer
-
-	hr = lnk.CreateInstance(nil, &IID_IPersistFile, &filePtr)
-	if FAILED(hr) {
-		return errorFromHRESULT("IClassFactory.CreateInstance", hr)
+	{
+		s := ToUnicodeShortLived(exePath)
+		hr = psl.SetPath(s)
+		hr2 := psl.SetIconLocation(s, int32(iconIndex))
+		FreeShortLivedUnicode(s)
+		if FAILED(hr) {
+			return errorFromHRESULT("psl.SetPath", hr)
+		}
+		if FAILED(hr2) {
+			return errorFromHRESULT("psl.SetIconLocation", hr2)
+		}
 	}
 
-	file := (*IPersistFile)(filePtr)
-	defer file.Release()
-
-	exePathW := ToUnicode(exePath)
-	hr = lnk.SetPath(exePathW)
-	FreeUnicode(exePathW)
-	if FAILED(hr) {
-		return errorFromHRESULT("lnk.SetPath", hr)
+	if len(description) > 0 {
+		s := ToUnicodeShortLived(description)
+		hr = psl.SetDescription(s)
+		FreeShortLivedUnicode(s)
+		if FAILED(hr) {
+			return errorFromHRESULT("psl.SetPath", hr)
+		}
 	}
 
-	shortcutPathW := ToUnicode(shortcutPath)
-	hr = file.Save(shortcutPathW, TRUE)
-	if FAILED(hr) {
-		return errorFromHRESULT("file.Save", hr)
+	if len(args) > 0 {
+		s := ToUnicodeShortLived(args)
+		hr = psl.SetArguments(s)
+		FreeShortLivedUnicode(s)
+		if FAILED(hr) {
+			return errorFromHRESULT("psl.SetArguments", hr)
+		}
 	}
-	FreeUnicode(shortcutPathW)
+
+	var ppfPtr unsafe.Pointer
+	hr = psl.QueryInterface(&IID_IPersistFile, &ppfPtr)
+	if FAILED(hr) {
+		return errorFromHRESULT("psl.QueryInterface", hr)
+	}
+
+	ppf := (*IPersistFile)(ppfPtr)
+	defer ppf.Release()
+
+	{
+		s := ToUnicodeShortLived(shortcutPath)
+		hr = ppf.Save(s, TRUE)
+		FreeShortLivedUnicode(s)
+		if FAILED(hr) {
+			return errorFromHRESULT("ppf.Save", hr)
+		}
+	}
 
 	return nil
 }
-*/

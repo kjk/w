@@ -571,6 +571,9 @@ func desugarPreDefinedType(tp string) string {
 		return tp
 	case "CHAR":
 		return "byte"
+	case "TCHAR":
+		// TODO: this should depend on A vs. W
+		return "WCHAR"
 	}
 
 	tp = strings.ToLower(tp)
@@ -913,6 +916,8 @@ func genGo() {
 		"CoInitialize",
 		"CoUninitialize",
 		"MultiByteToWideChar",
+		"SHGetFolderPathW",
+		"SHGetFolderLocation",
 	}
 	for _, f := range functions {
 		g.addFunction(f)

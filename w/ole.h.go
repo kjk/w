@@ -99,8 +99,8 @@ type IPersistFileVtbl struct {
 }
 
 type IPersistFile struct {
-	IPersist
 	Vtbl *IPersistFileVtbl
+	IPersist
 }
 
 func (i *IPersistFile) IsDirty() HRESULT {
@@ -161,8 +161,8 @@ type IPersistVtbl struct {
 }
 
 type IPersist struct {
-	IUnknown
 	Vtbl *IPersistVtbl
+	IUnknown
 }
 
 func (i *IPersist) GetClassID(pClassID *GUID) HRESULT {

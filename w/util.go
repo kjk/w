@@ -9,8 +9,9 @@ import (
 )
 
 const (
-	TRUE  = 1
-	FALSE = 0
+	TRUE     = 1
+	FALSE    = 0
+	MAX_PATH = 260
 )
 
 type BOOL int32

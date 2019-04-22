@@ -44,12 +44,10 @@ func errorFromHRESULT(funcName string, hr HRESULT) error {
 // Based on https://docs.microsoft.com/en-us/windows/desktop/shell/links
 // https://stackoverflow.com/questions/3906974/how-to-programmatically-create-a-shortcut-using-win32
 func CreateShortcut(shortcutPath string, exePath string, args string, description string, iconIndex int) error {
-	//IShellLink * psl
-
 	var pslPtr unsafe.Pointer
 	hr := CoCreateInstance(&CLSID_ShellLink, nil, CLSCTX_INPROC_SERVER, &IID_IShellLinkW, &pslPtr)
 	if FAILED(hr) {
-		return errorFromHRESULT("CoGetClassObject", hr)
+		return errorFromHRESULT("CoCreateInstance", hr)
 	}
 	psl := (*IShellLinkW)(pslPtr)
 	defer psl.Release()

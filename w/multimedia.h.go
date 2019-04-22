@@ -8,6 +8,7 @@ import (
 var IID_IUnknown = IID{0x00000000, 0x0000, 0x0000, [8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 type IUnknownVtbl struct {
+	// IUnknown
 	QueryInterface uintptr
 	AddRef         uintptr
 	Release        uintptr
@@ -17,6 +18,8 @@ type IUnknown struct {
 	Vtbl *IUnknownVtbl
 }
 
+// methods for IUnknown
+
 func (i *IUnknown) QueryInterface(riid *GUID, ppvObject *unsafe.Pointer) HRESULT {
 	ret, _, _ := syscall.Syscall(i.Vtbl.QueryInterface, 3,
 		uintptr(unsafe.Pointer(i)),
@@ -24,7 +27,6 @@ func (i *IUnknown) QueryInterface(riid *GUID, ppvObject *unsafe.Pointer) HRESULT
 		uintptr(unsafe.Pointer(ppvObject)),
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IUnknown) AddRef() uint32 {
@@ -34,7 +36,6 @@ func (i *IUnknown) AddRef() uint32 {
 		0,
 	)
 	return uint32(ret)
-
 }
 
 func (i *IUnknown) Release() uint32 {
@@ -44,5 +45,4 @@ func (i *IUnknown) Release() uint32 {
 		0,
 	)
 	return uint32(ret)
-
 }

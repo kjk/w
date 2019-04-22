@@ -717,7 +717,7 @@ func (obj *ITaskbarList3) SetProgressState(hwnd HWND, state int) HRESULT {
 	return HRESULT(ret)
 }
 */
-func (g *goGenerator) generateInterfaceFunction(ii *InterfaceInfo, fi *FunctionInfo) {
+func (g *goGenerator) generateInterfaceFunction(iname string, ii *InterfaceInfo, fi *FunctionInfo) {
 	fn := fi.Function
 
 	returnType := fi.ReturnType
@@ -727,7 +727,7 @@ func (g *goGenerator) generateInterfaceFunction(ii *InterfaceInfo, fi *FunctionI
 	}
 	s = strings.TrimSuffix(s, ", ")
 
-	g.ws("\nfunc (i *%s) %s(%s) %s {\n", ii.Name(), fi.Name, s, returnType)
+	g.ws("\nfunc (i *%s) %s(%s) %s {\n", iname, fi.Name, s, returnType)
 
 	// 	ret, _, _ := syscall.Syscall12(createWindowEx.Addr(), 12,
 	// +1 because first argument is pointer to the COM object
@@ -762,7 +762,24 @@ func (g *goGenerator) generateInterfaceFunction(ii *InterfaceInfo, fi *FunctionI
 		}
 	}
 
-	g.ws("\n}\n")
+	g.ws("}\n")
+}
+
+func (g *goGenerator) genIterfaceVtable(name string, ii *InterfaceInfo) {
+	if ii == nil {
+		ii = allInterfaces[name]
+		panicIf(ii == nil)
+	}
+	i := ii.Definition.Interface
+	if i.BaseInterface != "" {
+		g.genIterfaceVtable(i.BaseInterface, nil)
+	}
+	g.ws("// %s\n", name)
+	for _, m := range i.API {
+		methodName := m.Name
+		g.ws("%s uintptr\n", methodName)
+	}
+	g.ws("\n")
 }
 
 func (g *goGenerator) generateInterface(ii *InterfaceInfo) {
@@ -783,27 +800,27 @@ func (g *goGenerator) generateInterface(ii *InterfaceInfo) {
 	// generate interface vtable
 	vtableName := i.Name + "Vtbl"
 	g.ws("type %s struct {\n", vtableName)
-	if i.BaseInterface != "" {
-		g.ws("\t%sVtbl\n", i.BaseInterface)
-	}
-	for _, m := range i.API {
-		methodName := m.Name
-		g.ws("%s uintptr\n", methodName)
-	}
+	g.genIterfaceVtable(i.Name, ii)
 	g.ws("}\n\n")
 
 	g.ws("type %s struct {\n", i.Name)
-	if i.BaseInterface != "" {
-		g.ws("\t%s\n", i.BaseInterface)
-	}
 	g.ws("\tVtbl *%s\n", vtableName)
 	g.ws("}\n\n")
 
-	for _, method := range ii.Methods {
-		g.generateInterfaceFunction(ii, method)
+	g.generateInterfaceMethods(i.Name, ii)
+}
+
+func (g *goGenerator) generateInterfaceMethods(iname string, ii *InterfaceInfo) {
+	i := ii.Definition.Interface
+	if i.BaseInterface != "" {
+		iiBase := allInterfaces[i.BaseInterface]
+		panicIf(iiBase == nil)
+		g.generateInterfaceMethods(iname, iiBase)
 	}
-	// TODO: generate function to create the type
-	//panic("NYI")
+	g.ws("// methods for %s\n", i.Name)
+	for _, method := range ii.Methods {
+		g.generateInterfaceFunction(iname, ii, method)
+	}
 }
 
 func dePointerType(typeName string) string {

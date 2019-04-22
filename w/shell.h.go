@@ -104,7 +104,12 @@ const (
 var IID_IShellLinkW = IID{0x000214F9, 0x0000, 0x0000, [8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 type IShellLinkWVtbl struct {
-	IUnknownVtbl
+	// IUnknown
+	QueryInterface uintptr
+	AddRef         uintptr
+	Release        uintptr
+
+	// IShellLinkW
 	GetPath             uintptr
 	GetIDList           uintptr
 	SetIDList           uintptr
@@ -126,9 +131,39 @@ type IShellLinkWVtbl struct {
 }
 
 type IShellLinkW struct {
-	IUnknown
 	Vtbl *IShellLinkWVtbl
 }
+
+// methods for IUnknown
+
+func (i *IShellLinkW) QueryInterface(riid *GUID, ppvObject *unsafe.Pointer) HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.QueryInterface, 3,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(unsafe.Pointer(riid)),
+		uintptr(unsafe.Pointer(ppvObject)),
+	)
+	return HRESULT(ret)
+}
+
+func (i *IShellLinkW) AddRef() uint32 {
+	ret, _, _ := syscall.Syscall(i.Vtbl.AddRef, 1,
+		uintptr(unsafe.Pointer(i)),
+		0,
+		0,
+	)
+	return uint32(ret)
+}
+
+func (i *IShellLinkW) Release() uint32 {
+	ret, _, _ := syscall.Syscall(i.Vtbl.Release, 1,
+		uintptr(unsafe.Pointer(i)),
+		0,
+		0,
+	)
+	return uint32(ret)
+}
+
+// methods for IShellLinkW
 
 func (i *IShellLinkW) GetPath(pszFile LPWSTR, cch int32, pfd *WIN32_FIND_DATAW, fFlags uint32) HRESULT {
 	ret, _, _ := syscall.Syscall6(i.Vtbl.GetPath, 5,
@@ -140,7 +175,6 @@ func (i *IShellLinkW) GetPath(pszFile LPWSTR, cch int32, pfd *WIN32_FIND_DATAW, 
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) GetIDList(ppidl **ITEMIDLIST) HRESULT {
@@ -150,7 +184,6 @@ func (i *IShellLinkW) GetIDList(ppidl **ITEMIDLIST) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) SetIDList(pidl *ITEMIDLIST) HRESULT {
@@ -160,7 +193,6 @@ func (i *IShellLinkW) SetIDList(pidl *ITEMIDLIST) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) GetDescription(pszName LPWSTR, cch int32) HRESULT {
@@ -170,7 +202,6 @@ func (i *IShellLinkW) GetDescription(pszName LPWSTR, cch int32) HRESULT {
 		uintptr(cch),
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) SetDescription(pszName LPCWSTR) HRESULT {
@@ -180,7 +211,6 @@ func (i *IShellLinkW) SetDescription(pszName LPCWSTR) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) GetWorkingDirectory(pszDir LPWSTR, cch int32) HRESULT {
@@ -190,7 +220,6 @@ func (i *IShellLinkW) GetWorkingDirectory(pszDir LPWSTR, cch int32) HRESULT {
 		uintptr(cch),
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) SetWorkingDirectory(pszDir LPCWSTR) HRESULT {
@@ -200,7 +229,6 @@ func (i *IShellLinkW) SetWorkingDirectory(pszDir LPCWSTR) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) GetArguments(pszArgs LPWSTR, cch int32) HRESULT {
@@ -210,7 +238,6 @@ func (i *IShellLinkW) GetArguments(pszArgs LPWSTR, cch int32) HRESULT {
 		uintptr(cch),
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) SetArguments(pszArgs LPCWSTR) HRESULT {
@@ -220,7 +247,6 @@ func (i *IShellLinkW) SetArguments(pszArgs LPCWSTR) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) GetHotkey(pwHotkey *uint16) HRESULT {
@@ -230,7 +256,6 @@ func (i *IShellLinkW) GetHotkey(pwHotkey *uint16) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) SetHotkey(wHotkey uint16) HRESULT {
@@ -240,7 +265,6 @@ func (i *IShellLinkW) SetHotkey(wHotkey uint16) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) GetShowCmd(piShowCmd *int32) HRESULT {
@@ -250,7 +274,6 @@ func (i *IShellLinkW) GetShowCmd(piShowCmd *int32) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) SetShowCmd(iShowCmd int32) HRESULT {
@@ -260,7 +283,6 @@ func (i *IShellLinkW) SetShowCmd(iShowCmd int32) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) GetIconLocation(pszIconPath LPWSTR, cch int32, piIcon *int32) HRESULT {
@@ -273,7 +295,6 @@ func (i *IShellLinkW) GetIconLocation(pszIconPath LPWSTR, cch int32, piIcon *int
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) SetIconLocation(pszIconPath LPCWSTR, iIcon int32) HRESULT {
@@ -283,7 +304,6 @@ func (i *IShellLinkW) SetIconLocation(pszIconPath LPCWSTR, iIcon int32) HRESULT 
 		uintptr(iIcon),
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) SetRelativePath(pszPathRel LPCWSTR, dwReserved uint32) HRESULT {
@@ -293,7 +313,6 @@ func (i *IShellLinkW) SetRelativePath(pszPathRel LPCWSTR, dwReserved uint32) HRE
 		uintptr(dwReserved),
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) Resolve(hwnd HWND, fFlags uint32) HRESULT {
@@ -303,7 +322,6 @@ func (i *IShellLinkW) Resolve(hwnd HWND, fFlags uint32) HRESULT {
 		uintptr(fFlags),
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IShellLinkW) SetPath(pszFile LPCWSTR) HRESULT {
@@ -313,5 +331,4 @@ func (i *IShellLinkW) SetPath(pszFile LPCWSTR) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }

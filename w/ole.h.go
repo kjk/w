@@ -54,15 +54,50 @@ const (
 var IID_IClassFactory = IID{0x00000001, 0x0000, 0x0000, [8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 type IClassFactoryVtbl struct {
-	IUnknownVtbl
+	// IUnknown
+	QueryInterface uintptr
+	AddRef         uintptr
+	Release        uintptr
+
+	// IClassFactory
 	CreateInstance uintptr
 	LockServer     uintptr
 }
 
 type IClassFactory struct {
-	IUnknown
 	Vtbl *IClassFactoryVtbl
 }
+
+// methods for IUnknown
+
+func (i *IClassFactory) QueryInterface(riid *GUID, ppvObject *unsafe.Pointer) HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.QueryInterface, 3,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(unsafe.Pointer(riid)),
+		uintptr(unsafe.Pointer(ppvObject)),
+	)
+	return HRESULT(ret)
+}
+
+func (i *IClassFactory) AddRef() uint32 {
+	ret, _, _ := syscall.Syscall(i.Vtbl.AddRef, 1,
+		uintptr(unsafe.Pointer(i)),
+		0,
+		0,
+	)
+	return uint32(ret)
+}
+
+func (i *IClassFactory) Release() uint32 {
+	ret, _, _ := syscall.Syscall(i.Vtbl.Release, 1,
+		uintptr(unsafe.Pointer(i)),
+		0,
+		0,
+	)
+	return uint32(ret)
+}
+
+// methods for IClassFactory
 
 func (i *IClassFactory) CreateInstance(pUnkOuter *IUnknown, riid *GUID, ppvObject *unsafe.Pointer) HRESULT {
 	ret, _, _ := syscall.Syscall6(i.Vtbl.CreateInstance, 4,
@@ -74,7 +109,6 @@ func (i *IClassFactory) CreateInstance(pUnkOuter *IUnknown, riid *GUID, ppvObjec
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IClassFactory) LockServer(fLock int32) HRESULT {
@@ -84,13 +118,20 @@ func (i *IClassFactory) LockServer(fLock int32) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 var IID_IPersistFile = IID{0x0000010b, 0x0000, 0x0000, [8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 type IPersistFileVtbl struct {
-	IPersistVtbl
+	// IUnknown
+	QueryInterface uintptr
+	AddRef         uintptr
+	Release        uintptr
+
+	// IPersist
+	GetClassID uintptr
+
+	// IPersistFile
 	IsDirty       uintptr
 	Load          uintptr
 	Save          uintptr
@@ -100,8 +141,49 @@ type IPersistFileVtbl struct {
 
 type IPersistFile struct {
 	Vtbl *IPersistFileVtbl
-	IPersist
 }
+
+// methods for IUnknown
+
+func (i *IPersistFile) QueryInterface(riid *GUID, ppvObject *unsafe.Pointer) HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.QueryInterface, 3,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(unsafe.Pointer(riid)),
+		uintptr(unsafe.Pointer(ppvObject)),
+	)
+	return HRESULT(ret)
+}
+
+func (i *IPersistFile) AddRef() uint32 {
+	ret, _, _ := syscall.Syscall(i.Vtbl.AddRef, 1,
+		uintptr(unsafe.Pointer(i)),
+		0,
+		0,
+	)
+	return uint32(ret)
+}
+
+func (i *IPersistFile) Release() uint32 {
+	ret, _, _ := syscall.Syscall(i.Vtbl.Release, 1,
+		uintptr(unsafe.Pointer(i)),
+		0,
+		0,
+	)
+	return uint32(ret)
+}
+
+// methods for IPersist
+
+func (i *IPersistFile) GetClassID(pClassID *GUID) HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.GetClassID, 2,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(unsafe.Pointer(pClassID)),
+		0,
+	)
+	return HRESULT(ret)
+}
+
+// methods for IPersistFile
 
 func (i *IPersistFile) IsDirty() HRESULT {
 	ret, _, _ := syscall.Syscall(i.Vtbl.IsDirty, 1,
@@ -110,7 +192,6 @@ func (i *IPersistFile) IsDirty() HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IPersistFile) Load(pszFileName LPCWSTR, dwMode uint32) HRESULT {
@@ -120,7 +201,6 @@ func (i *IPersistFile) Load(pszFileName LPCWSTR, dwMode uint32) HRESULT {
 		uintptr(dwMode),
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IPersistFile) Save(pszFileName LPCWSTR, fRemember int32) HRESULT {
@@ -130,7 +210,6 @@ func (i *IPersistFile) Save(pszFileName LPCWSTR, fRemember int32) HRESULT {
 		uintptr(fRemember),
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IPersistFile) SaveCompleted(pszFileName LPCWSTR) HRESULT {
@@ -140,7 +219,6 @@ func (i *IPersistFile) SaveCompleted(pszFileName LPCWSTR) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func (i *IPersistFile) GetCurFile(ppszFileName *LPCWSTR) HRESULT {
@@ -150,20 +228,54 @@ func (i *IPersistFile) GetCurFile(ppszFileName *LPCWSTR) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 var IID_IPersist = IID{0x0000010c, 0x0000, 0x0000, [8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 type IPersistVtbl struct {
-	IUnknownVtbl
+	// IUnknown
+	QueryInterface uintptr
+	AddRef         uintptr
+	Release        uintptr
+
+	// IPersist
 	GetClassID uintptr
 }
 
 type IPersist struct {
 	Vtbl *IPersistVtbl
-	IUnknown
 }
+
+// methods for IUnknown
+
+func (i *IPersist) QueryInterface(riid *GUID, ppvObject *unsafe.Pointer) HRESULT {
+	ret, _, _ := syscall.Syscall(i.Vtbl.QueryInterface, 3,
+		uintptr(unsafe.Pointer(i)),
+		uintptr(unsafe.Pointer(riid)),
+		uintptr(unsafe.Pointer(ppvObject)),
+	)
+	return HRESULT(ret)
+}
+
+func (i *IPersist) AddRef() uint32 {
+	ret, _, _ := syscall.Syscall(i.Vtbl.AddRef, 1,
+		uintptr(unsafe.Pointer(i)),
+		0,
+		0,
+	)
+	return uint32(ret)
+}
+
+func (i *IPersist) Release() uint32 {
+	ret, _, _ := syscall.Syscall(i.Vtbl.Release, 1,
+		uintptr(unsafe.Pointer(i)),
+		0,
+		0,
+	)
+	return uint32(ret)
+}
+
+// methods for IPersist
 
 func (i *IPersist) GetClassID(pClassID *GUID) HRESULT {
 	ret, _, _ := syscall.Syscall(i.Vtbl.GetClassID, 2,
@@ -172,5 +284,4 @@ func (i *IPersist) GetClassID(pClassID *GUID) HRESULT {
 		0,
 	)
 	return HRESULT(ret)
-
 }

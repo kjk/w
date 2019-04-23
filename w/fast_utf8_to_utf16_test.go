@@ -7,6 +7,7 @@ import (
 )
 
 func TestToUnicodeShortLived(t *testing.T) {
+	resetAllocator()
 	s := "abc"
 	for i := 0; i < 13; i++ {
 		u := ToUnicodeShortLived(s)
@@ -19,7 +20,8 @@ func TestToUnicodeShortLived(t *testing.T) {
 	assert.Equal(t, stringAllocatorCurrPos, 0)
 }
 
-func TestToUnicodeShortLived2(t *testing.T) {
+func TestToUnicodeShortLivedOutOfOrder(t *testing.T) {
+	resetAllocator()
 	s := "abcdefgh"
 	nNotFast := 0
 	for i := 0; i < 1024; i++ {
@@ -35,23 +37,25 @@ func TestToUnicodeShortLived2(t *testing.T) {
 	assert.Equal(t, stringAllocatorCurrPos, (11+9)*nNotFast)
 }
 
-var u *uint16
+var dontOptimezeMe *uint16
 
 func BenchmarkToUnicode(b *testing.B) {
 	s := "abcdef"
 	for n := 0; n < b.N; n++ {
 		for i := 0; i < 1024; i++ {
-			u = ToUnicode(s)
+			dontOptimezeMe = ToUnicode(s)
 		}
 	}
 }
 
 func BenchmarkToUnicodeShortLived(b *testing.B) {
+	resetAllocator()
 	s := "abcdef"
 	for n := 0; n < b.N; n++ {
 		for i := 0; i < 1024; i++ {
-			u = ToUnicodeShortLived(s)
-			FreeShortLivedUnicode(u)
+			dontOptimezeMe = ToUnicodeShortLived(s)
+			FreeShortLivedUnicode(dontOptimezeMe)
 		}
 	}
 }
+

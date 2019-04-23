@@ -42,6 +42,16 @@ var (
 	nFastFrees int
 )
 
+// for testing
+func resetAllocator() {
+	stringAllocator = nil
+	stringAllocatorCurrPos = 0
+	lastAllocationPos = 0
+	lastAllocationSize = 0
+	nFrees = 0
+	nFastFrees = 0
+}
+
 // ToUnicode converts an utf8 string to Window's UTF16 unicode
 func ToUnicode(s string) *uint16 {
 	// TODO:
@@ -85,36 +95,32 @@ func reserveSpaceInStringAllocator(n int) []uint16 {
 // ToUnicodeShortLived converts s to UTF-16 Windows string
 func ToUnicodeShortLived(s string) *uint16 {
 
-	// try a fast path for just ascii
-	// TODO: this should calculate number of UTF16 chars needed to
-	// encode s and return if this is fully ascii string
-	// then we do the ascii fast path or use the length to reserve
-	// output buffer.
+	// optimistically try a fast path for just ascii
 	n := len(s)
+	res := reserveSpaceInStringAllocator(n + 1)
 	i := 0
 	for i < n {
-		if s[i] > utf8.RuneSelf {
+		c := s[i]
+		if c > utf8.RuneSelf {
 			break
 		}
+		res[i] = uint16(c)
 		i++
 	}
-
 	isASCII := (i == n)
 	if isASCII {
-		// fast path for ascii-only string
-		res := reserveSpaceInStringAllocator(n + 1)
-		for i = 0; i < n; i++ {
-			c := s[i]
-			res[i] = uint16(c)
-		}
 		// add terminating 0
 		res[n] = 0
 		return &res[0]
 	}
 
-	// TODO: fast non-ascii path
+	// TODO: fast non-ascii path. We should be able to re-use
+	// res most of the time because s being utf8-encoded string
+	// len(s) should be enough Unicode chars to fit it, most of the
+	// time.
 	// this should work as well, though as FreeUnicode() should never
 	// consider this string to be allocated withing stringAllocator buffer
+	FreeShortLivedUnicode(&res[0])
 	return ToUnicode(s)
 }
 

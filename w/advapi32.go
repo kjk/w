@@ -10,10 +10,16 @@ import (
 var (
 	libadvapi32 *windows.LazyDLL
 
-	regOpenKeyExW   *windows.LazyProc
-	regSetValueExW  *windows.LazyProc
-	regCloseKey     *windows.LazyProc
-	regDeleteKeyExW *windows.LazyProc
+	regOpenKeyExW                *windows.LazyProc
+	regSetValueExW               *windows.LazyProc
+	regCloseKey                  *windows.LazyProc
+	regDeleteKeyExW              *windows.LazyProc
+	regSetKeySecurity            *windows.LazyProc
+	impersonateSelf              *windows.LazyProc
+	initializeAcl                *windows.LazyProc
+	initializeSecurityDescriptor *windows.LazyProc
+	initializeSid                *windows.LazyProc
+	setSecurityDescriptorDacl    *windows.LazyProc
 )
 
 func init() {
@@ -22,6 +28,12 @@ func init() {
 	regSetValueExW = libadvapi32.NewProc("RegSetValueExW")
 	regCloseKey = libadvapi32.NewProc("RegCloseKey")
 	regDeleteKeyExW = libadvapi32.NewProc("RegDeleteKeyExW")
+	regSetKeySecurity = libadvapi32.NewProc("RegSetKeySecurity")
+	impersonateSelf = libadvapi32.NewProc("ImpersonateSelf")
+	initializeAcl = libadvapi32.NewProc("InitializeAcl")
+	initializeSecurityDescriptor = libadvapi32.NewProc("InitializeSecurityDescriptor")
+	initializeSid = libadvapi32.NewProc("InitializeSid")
+	setSecurityDescriptorDacl = libadvapi32.NewProc("SetSecurityDescriptorDacl")
 }
 
 func RegOpenKeyExWSys(hKey HKEY, lpSubKey *uint16, ulOptions uint32, samDesired uint32, phkResult *HKEY) uint32 {
@@ -67,4 +79,61 @@ func RegDeleteKeyExWSys(hKey HKEY, lpSubKey *uint16, samDesired uint32, Reserved
 		0,
 	)
 	return uint32(ret)
+}
+
+func RegSetKeySecuritySys(hKey HKEY, SecurityInformation uint32, pSecurityDescriptor *SECURITY_DESCRIPTOR) uint32 {
+	ret, _, _ := syscall.Syscall(regSetKeySecurity.Addr(), 3,
+		uintptr(hKey),
+		uintptr(SecurityInformation),
+		uintptr(unsafe.Pointer(pSecurityDescriptor)),
+	)
+	return uint32(ret)
+}
+
+func ImpersonateSelfSys(ImpersonationLevel uint32) int32 {
+	ret, _, _ := syscall.Syscall(impersonateSelf.Addr(), 1,
+		uintptr(ImpersonationLevel),
+		0,
+		0,
+	)
+	return int32(ret)
+}
+
+func InitializeAclSys(pAcl *ACL, nAclLength uint32, dwAclRevision uint32) int32 {
+	ret, _, _ := syscall.Syscall(initializeAcl.Addr(), 3,
+		uintptr(unsafe.Pointer(pAcl)),
+		uintptr(nAclLength),
+		uintptr(dwAclRevision),
+	)
+	return int32(ret)
+}
+
+func InitializeSecurityDescriptorSys(pSecurityDescriptor *SECURITY_DESCRIPTOR, dwRevision uint32) int32 {
+	ret, _, _ := syscall.Syscall(initializeSecurityDescriptor.Addr(), 2,
+		uintptr(unsafe.Pointer(pSecurityDescriptor)),
+		uintptr(dwRevision),
+		0,
+	)
+	return int32(ret)
+}
+
+func InitializeSidSys(Sid unsafe.Pointer, pIdentifierAuthority *SID_IDENTIFIER_AUTHORITY, nSubAuthorityCount uint8) int32 {
+	ret, _, _ := syscall.Syscall(initializeSid.Addr(), 3,
+		uintptr(Sid),
+		uintptr(unsafe.Pointer(pIdentifierAuthority)),
+		uintptr(nSubAuthorityCount),
+	)
+	return int32(ret)
+}
+
+func SetSecurityDescriptorDaclSys(pSecurityDescriptor *SECURITY_DESCRIPTOR, bDaclPresent int32, pDacl *ACL, bDaclDefaulted int32) int32 {
+	ret, _, _ := syscall.Syscall6(setSecurityDescriptorDacl.Addr(), 4,
+		uintptr(unsafe.Pointer(pSecurityDescriptor)),
+		uintptr(bDaclPresent),
+		uintptr(unsafe.Pointer(pDacl)),
+		uintptr(bDaclDefaulted),
+		0,
+		0,
+	)
+	return int32(ret)
 }

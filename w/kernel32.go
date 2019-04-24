@@ -10,14 +10,22 @@ import (
 var (
 	libkernel32 *windows.LazyDLL
 
-	multiByteToWideChar *windows.LazyProc
-	getDriveTypeW       *windows.LazyProc
+	multiByteToWideChar     *windows.LazyProc
+	getDriveTypeW           *windows.LazyProc
+	getLogicalDriveStringsW *windows.LazyProc
+	getLastError            *windows.LazyProc
+	formatMessageW          *windows.LazyProc
+	getDiskFreeSpaceExW     *windows.LazyProc
 )
 
 func init() {
 	libkernel32 = windows.NewLazySystemDLL("kernel32.dll")
 	multiByteToWideChar = libkernel32.NewProc("MultiByteToWideChar")
 	getDriveTypeW = libkernel32.NewProc("GetDriveTypeW")
+	getLogicalDriveStringsW = libkernel32.NewProc("GetLogicalDriveStringsW")
+	getLastError = libkernel32.NewProc("GetLastError")
+	formatMessageW = libkernel32.NewProc("FormatMessageW")
+	getDiskFreeSpaceExW = libkernel32.NewProc("GetDiskFreeSpaceExW")
 }
 
 const (
@@ -35,6 +43,16 @@ const (
 	DRIVE_REMOTE      = 4
 	DRIVE_CDROM       = 5
 	DRIVE_RAMDISK     = 6
+)
+
+const (
+	FORMAT_MESSAGE_ALLOCATE_BUFFER = 0x00000100
+	FORMAT_MESSAGE_IGNORE_INSERTS  = 0x00000200
+	FORMAT_MESSAGE_FROM_STRING     = 0x00000400
+	FORMAT_MESSAGE_FROM_HMODULE    = 0x00000800
+	FORMAT_MESSAGE_FROM_SYSTEM     = 0x00001000
+	FORMAT_MESSAGE_ARGUMENT_ARRAY  = 0x00002000
+	FORMAT_MESSAGE_MAX_WIDTH_MASK  = 0x000000FF
 )
 
 func MultiByteToWideCharSys(CodePage uint32, dwFlags uint32, lpMultiByteStr *byte, cbMultiByte int32, lpWideCharStr LPWSTR, cchWideChar int32) int32 {
@@ -56,4 +74,49 @@ func GetDriveTypeWSys(lpRootPathName *uint16) uint32 {
 		0,
 	)
 	return uint32(ret)
+}
+
+func GetLogicalDriveStringsWSys(nBufferLength uint32, lpBuffer *WCHAR) uint32 {
+	ret, _, _ := syscall.Syscall(getLogicalDriveStringsW.Addr(), 2,
+		uintptr(nBufferLength),
+		uintptr(unsafe.Pointer(lpBuffer)),
+		0,
+	)
+	return uint32(ret)
+}
+
+func GetLastErrorSys() uint32 {
+	ret, _, _ := syscall.Syscall(getLastError.Addr(), 0,
+		0,
+		0,
+		0,
+	)
+	return uint32(ret)
+}
+
+func FormatMessageWSys(dwFlags uint32, lpSource unsafe.Pointer, dwMessageId uint32, dwLanguageId uint32, lpBuffer *WCHAR, nSize uint32, Arguments *unsafe.Pointer) uint32 {
+	ret, _, _ := syscall.Syscall9(formatMessageW.Addr(), 7,
+		uintptr(dwFlags),
+		uintptr(lpSource),
+		uintptr(dwMessageId),
+		uintptr(dwLanguageId),
+		uintptr(unsafe.Pointer(lpBuffer)),
+		uintptr(nSize),
+		uintptr(unsafe.Pointer(Arguments)),
+		0,
+		0,
+	)
+	return uint32(ret)
+}
+
+func GetDiskFreeSpaceExWSys(lpDirectoryName *uint16, lpFreeBytesAvailable *ULARGE_INTEGER, lpTotalNumberOfBytes *ULARGE_INTEGER, lpTotalNumberOfFreeBytes *ULARGE_INTEGER) int32 {
+	ret, _, _ := syscall.Syscall6(getDiskFreeSpaceExW.Addr(), 4,
+		uintptr(unsafe.Pointer(lpDirectoryName)),
+		uintptr(unsafe.Pointer(lpFreeBytesAvailable)),
+		uintptr(unsafe.Pointer(lpTotalNumberOfBytes)),
+		uintptr(unsafe.Pointer(lpTotalNumberOfFreeBytes)),
+		0,
+		0,
+	)
+	return int32(ret)
 }

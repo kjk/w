@@ -10,18 +10,18 @@ import (
 var (
 	libole32 *windows.LazyDLL
 
-	coGetClassObject *windows.LazyProc
-	coCreateInstance *windows.LazyProc
 	coInitialize     *windows.LazyProc
 	coUninitialize   *windows.LazyProc
+	coGetClassObject *windows.LazyProc
+	coCreateInstance *windows.LazyProc
 )
 
 func init() {
 	libole32 = windows.NewLazySystemDLL("ole32.dll")
-	coGetClassObject = libole32.NewProc("CoGetClassObject")
-	coCreateInstance = libole32.NewProc("CoCreateInstance")
 	coInitialize = libole32.NewProc("CoInitialize")
 	coUninitialize = libole32.NewProc("CoUninitialize")
+	coGetClassObject = libole32.NewProc("CoGetClassObject")
+	coCreateInstance = libole32.NewProc("CoCreateInstance")
 }
 
 type COAUTHIDENTITY struct {
@@ -51,6 +51,23 @@ type COSERVERINFO struct {
 	DwReserved2 uint32
 }
 
+func CoInitializeSys(pvReserved unsafe.Pointer) HRESULT {
+	ret, _, _ := syscall.Syscall(coInitialize.Addr(), 1,
+		uintptr(pvReserved),
+		0,
+		0,
+	)
+	return HRESULT(ret)
+}
+
+func CoUninitialize() {
+	_, _, _ = syscall.Syscall(coUninitialize.Addr(), 0,
+		0,
+		0,
+		0,
+	)
+}
+
 func CoGetClassObjectSys(rclsid *GUID, dwClsContext uint32, pServerInfo *COSERVERINFO, riid *GUID, ppv *unsafe.Pointer) HRESULT {
 	ret, _, _ := syscall.Syscall6(coGetClassObject.Addr(), 5,
 		uintptr(unsafe.Pointer(rclsid)),
@@ -73,21 +90,4 @@ func CoCreateInstanceSys(rclsid *GUID, pUnkOuter *IUnknown, dwClsContext uint32,
 		0,
 	)
 	return HRESULT(ret)
-}
-
-func CoInitializeSys(pvReserved unsafe.Pointer) HRESULT {
-	ret, _, _ := syscall.Syscall(coInitialize.Addr(), 1,
-		uintptr(pvReserved),
-		0,
-		0,
-	)
-	return HRESULT(ret)
-}
-
-func CoUninitialize() {
-	_, _, _ = syscall.Syscall(coUninitialize.Addr(), 0,
-		0,
-		0,
-		0,
-	)
 }

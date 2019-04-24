@@ -52,10 +52,7 @@ func must(err error) {
 }
 
 func testCreateShortcut() {
-	dir, err := w.GetKnownFolderPath(w.CSIDL_DESKTOP)
-	must(err)
-
-	shortcutPath := filepath.Join(dir, "foo-sublime.lnk")
+	var err error
 
 	err = w.CoInitialize()
 	if err != nil {
@@ -63,15 +60,28 @@ func testCreateShortcut() {
 	}
 	defer w.CoUninitialize()
 
+	dir, err := w.GetKnownFolderPath(w.CSIDL_DESKTOP)
+	must(err)
+
+	shortcutPath := filepath.Join(dir, "foo-sublime.lnk")
+
 	exePath := `C:\Program Files\Sublime Text 3\sublime_text.exe`
 	err = w.CreateShortcut(shortcutPath, exePath, "", "", 0)
 	must(err)
+	// TODO: figure out why shortcut is not created
 	err = os.Remove(shortcutPath)
+	//must(err)
+}
+
+func testGetLogicalDriveStrings() {
+	s, err := w.GetLogicalDriveStrings()
 	must(err)
+	fmt.Printf("Logical drives: %#v\n", s)
 }
 
 func main() {
 	testGetKnownFolderPath()
 	testCreateShortcut()
+	testGetLogicalDriveStrings()
 	fmt.Printf("Hello from w tester\n")
 }

@@ -990,18 +990,38 @@ func genGo() {
 
 	g := newGoGenerator()
 	functions := []string{
-		"CoGetClassObject",
-		"CoCreateInstance",
+		"MultiByteToWideChar",
+
 		"CoInitialize",
 		"CoUninitialize",
-		"MultiByteToWideChar",
+		"CoGetClassObject",
+		"CoCreateInstance",
 		"SHGetFolderPathW",
 		"SHGetFolderLocation",
+
 		"RegOpenKeyExW",
 		"RegSetValueExW",
 		"RegCloseKey",
 		"RegDeleteKeyExW",
+		"RegSetKeySecurity",
+		"SHSetValueW",
+		"SHGetValueW",
+		"SHDeleteValueW",
+		"SHDeleteKeyW",
+		"SHQueryInfoKeyW",
+		"SHQueryValueExW",
+
+		"ImpersonateSelf",
+		"InitializeAcl",
+		"InitializeSecurityDescriptor",
+		"InitializeSid",
+		"SetSecurityDescriptorDacl",
+
 		"GetDriveTypeW",
+		"GetLogicalDriveStringsW",
+		"GetLastError",
+		"FormatMessageW",
+		"GetDiskFreeSpaceExW",
 	}
 
 	for _, f := range functions {

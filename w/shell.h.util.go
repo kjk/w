@@ -65,13 +65,13 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 	{
 		s := ToUnicodeShortLived(exePath)
 		hr = psl.SetPath(&s[0])
-		hr2 := psl.SetIconLocation(&s[0], int32(iconIndex))
 		FreeShortLivedUnicode(s)
 		if HrFailed(hr) {
 			return errorFromHRESULT("psl.SetPath", hr)
 		}
-		if HrFailed(hr2) {
-			return errorFromHRESULT("psl.SetIconLocation", hr2)
+		hr = psl.SetIconLocation(&s[0], int32(iconIndex))
+		if HrFailed(hr) {
+			return errorFromHRESULT("psl.SetIconLocation", hr)
 		}
 	}
 

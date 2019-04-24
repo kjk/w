@@ -1017,6 +1017,8 @@ func genGo() {
 		"InitializeSid",
 		"SetSecurityDescriptorDacl",
 
+		"GetTempPathW",
+		"GetVolumeInformationW",
 		"GetDriveTypeW",
 		"GetLogicalDriveStringsW",
 		"GetLastError",

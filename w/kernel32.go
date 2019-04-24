@@ -11,6 +11,8 @@ var (
 	libkernel32 *windows.LazyDLL
 
 	multiByteToWideChar     *windows.LazyProc
+	getTempPathW            *windows.LazyProc
+	getVolumeInformationW   *windows.LazyProc
 	getDriveTypeW           *windows.LazyProc
 	getLogicalDriveStringsW *windows.LazyProc
 	getLastError            *windows.LazyProc
@@ -21,6 +23,8 @@ var (
 func init() {
 	libkernel32 = windows.NewLazySystemDLL("kernel32.dll")
 	multiByteToWideChar = libkernel32.NewProc("MultiByteToWideChar")
+	getTempPathW = libkernel32.NewProc("GetTempPathW")
+	getVolumeInformationW = libkernel32.NewProc("GetVolumeInformationW")
 	getDriveTypeW = libkernel32.NewProc("GetDriveTypeW")
 	getLogicalDriveStringsW = libkernel32.NewProc("GetLogicalDriveStringsW")
 	getLastError = libkernel32.NewProc("GetLastError")
@@ -33,6 +37,30 @@ const (
 	MB_COMPOSITE         = 0x00000002
 	MB_USEGLYPHCHARS     = 0x00000004
 	MB_ERR_INVALID_CHARS = 0x00000008
+)
+
+const (
+	FILE_CASE_SENSITIVE_SEARCH        = 0x00000001
+	FILE_CASE_PRESERVED_NAMES         = 0x00000002
+	FILE_UNICODE_ON_DISK              = 0x00000004
+	FILE_PERSISTENT_ACLS              = 0x00000008
+	FILE_FILE_COMPRESSION             = 0x00000010
+	FILE_VOLUME_QUOTAS                = 0x00000020
+	FILE_SUPPORTS_SPARSE_FILES        = 0x00000040
+	FILE_SUPPORTS_REPARSE_POINTS      = 0x00000080
+	FILE_SUPPORTS_REMOTE_STORAGE      = 0x00000100
+	FILE_VOLUME_IS_COMPRESSED         = 0x00008000
+	FILE_SUPPORTS_OBJECT_IDS          = 0x00010000
+	FILE_SUPPORTS_ENCRYPTION          = 0x00020000
+	FILE_NAMED_STREAMS                = 0x00040000
+	FILE_READ_ONLY_VOLUME             = 0x00080000
+	FILE_SEQUENTIAL_WRITE_ONCE        = 0x00100000
+	FILE_SUPPORTS_TRANSACTIONS        = 0x00200000
+	FILE_SUPPORTS_HARD_LINKS          = 0x00400000
+	FILE_SUPPORTS_EXTENDED_ATTRIBUTES = 0x00800000
+	FILE_SUPPORTS_OPEN_BY_FILE_ID     = 0x01000000
+	FILE_SUPPORTS_USN_JOURNAL         = 0x02000000
+	FILE_SUPPORTS_INTEGRITY_STREAMS   = 0x04000000
 )
 
 const (
@@ -63,6 +91,30 @@ func MultiByteToWideCharSys(CodePage uint32, dwFlags uint32, lpMultiByteStr *byt
 		uintptr(cbMultiByte),
 		uintptr(unsafe.Pointer(lpWideCharStr)),
 		uintptr(cchWideChar),
+	)
+	return int32(ret)
+}
+
+func GetTempPathWSys(nBufferLength uint32, lpBuffer *WCHAR) uint32 {
+	ret, _, _ := syscall.Syscall(getTempPathW.Addr(), 2,
+		uintptr(nBufferLength),
+		uintptr(unsafe.Pointer(lpBuffer)),
+		0,
+	)
+	return uint32(ret)
+}
+
+func GetVolumeInformationWSys(lpRootPathName *uint16, lpVolumeNameBuffer *WCHAR, nVolumeNameSize uint32, lpVolumeSerialNumber *uint32, lpMaximumComponentLength *uint32, lpFileSystemFlags *uint32, lpFileSystemNameBuffer *WCHAR, nFileSystemNameSize uint32) int32 {
+	ret, _, _ := syscall.Syscall9(getVolumeInformationW.Addr(), 8,
+		uintptr(unsafe.Pointer(lpRootPathName)),
+		uintptr(unsafe.Pointer(lpVolumeNameBuffer)),
+		uintptr(nVolumeNameSize),
+		uintptr(unsafe.Pointer(lpVolumeSerialNumber)),
+		uintptr(unsafe.Pointer(lpMaximumComponentLength)),
+		uintptr(unsafe.Pointer(lpFileSystemFlags)),
+		uintptr(unsafe.Pointer(lpFileSystemNameBuffer)),
+		uintptr(nFileSystemNameSize),
+		0,
 	)
 	return int32(ret)
 }

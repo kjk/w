@@ -1001,6 +1001,7 @@ func genGo() {
 		"RegSetValueExW",
 		"RegCloseKey",
 		"RegDeleteKeyExW",
+		"GetDriveTypeW",
 	}
 
 	for _, f := range functions {

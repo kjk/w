@@ -11,11 +11,13 @@ var (
 	libkernel32 *windows.LazyDLL
 
 	multiByteToWideChar *windows.LazyProc
+	getDriveTypeW       *windows.LazyProc
 )
 
 func init() {
 	libkernel32 = windows.NewLazySystemDLL("kernel32.dll")
 	multiByteToWideChar = libkernel32.NewProc("MultiByteToWideChar")
+	getDriveTypeW = libkernel32.NewProc("GetDriveTypeW")
 }
 
 const (
@@ -23,6 +25,16 @@ const (
 	MB_COMPOSITE         = 0x00000002
 	MB_USEGLYPHCHARS     = 0x00000004
 	MB_ERR_INVALID_CHARS = 0x00000008
+)
+
+const (
+	DRIVE_UNKNOWN     = 0
+	DRIVE_NO_ROOT_DIR = 1
+	DRIVE_REMOVABLE   = 2
+	DRIVE_FIXED       = 3
+	DRIVE_REMOTE      = 4
+	DRIVE_CDROM       = 5
+	DRIVE_RAMDISK     = 6
 )
 
 func MultiByteToWideCharSys(CodePage uint32, dwFlags uint32, lpMultiByteStr *byte, cbMultiByte int32, lpWideCharStr LPWSTR, cchWideChar int32) int32 {
@@ -35,4 +47,13 @@ func MultiByteToWideCharSys(CodePage uint32, dwFlags uint32, lpMultiByteStr *byt
 		uintptr(cchWideChar),
 	)
 	return int32(ret)
+}
+
+func GetDriveTypeWSys(lpRootPathName *uint16) uint32 {
+	ret, _, _ := syscall.Syscall(getDriveTypeW.Addr(), 1,
+		uintptr(unsafe.Pointer(lpRootPathName)),
+		0,
+		0,
+	)
+	return uint32(ret)
 }

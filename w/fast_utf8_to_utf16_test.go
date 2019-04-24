@@ -37,7 +37,7 @@ func TestToUnicodeShortLivedOutOfOrder(t *testing.T) {
 	assert.Equal(t, stringAllocatorCurrPos, (11+9)*nNotFast)
 }
 
-var dontOptimezeMe *uint16
+var dontOptimezeMe []uint16
 
 func BenchmarkToUnicode(b *testing.B) {
 	s := "abcdef"
@@ -46,6 +46,7 @@ func BenchmarkToUnicode(b *testing.B) {
 			dontOptimezeMe = ToUnicode(s)
 		}
 	}
+	dontOptimezeMe = nil
 }
 
 func BenchmarkToUnicodeShortLived(b *testing.B) {
@@ -57,5 +58,5 @@ func BenchmarkToUnicodeShortLived(b *testing.B) {
 			FreeShortLivedUnicode(dontOptimezeMe)
 		}
 	}
+	dontOptimezeMe = nil
 }
-

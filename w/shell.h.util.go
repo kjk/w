@@ -64,8 +64,8 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 
 	{
 		s := ToUnicodeShortLived(exePath)
-		hr = psl.SetPath(s)
-		hr2 := psl.SetIconLocation(s, int32(iconIndex))
+		hr = psl.SetPath(&s[0])
+		hr2 := psl.SetIconLocation(&s[0], int32(iconIndex))
 		FreeShortLivedUnicode(s)
 		if HrFailed(hr) {
 			return errorFromHRESULT("psl.SetPath", hr)
@@ -77,7 +77,7 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 
 	if len(description) > 0 {
 		s := ToUnicodeShortLived(description)
-		hr = psl.SetDescription(s)
+		hr = psl.SetDescription(&s[0])
 		FreeShortLivedUnicode(s)
 		if HrFailed(hr) {
 			return errorFromHRESULT("psl.SetPath", hr)
@@ -86,7 +86,7 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 
 	if len(args) > 0 {
 		s := ToUnicodeShortLived(args)
-		hr = psl.SetArguments(s)
+		hr = psl.SetArguments(&s[0])
 		FreeShortLivedUnicode(s)
 		if HrFailed(hr) {
 			return errorFromHRESULT("psl.SetArguments", hr)
@@ -104,7 +104,7 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 
 	{
 		s := ToUnicodeShortLived(shortcutPath)
-		hr = ppf.Save(s, TRUE)
+		hr = ppf.Save(&s[0], TRUE)
 		FreeShortLivedUnicode(s)
 		if HrFailed(hr) {
 			return errorFromHRESULT("ppf.Save", hr)

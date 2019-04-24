@@ -389,6 +389,8 @@ func constValueEnsurePositive(ti *TypeInfo, s string) string {
 		// TODO: not sure, if this is uintptr then the values
 		// are like  0xffffffff80000000 instead of  0x80000000
 		// on 64-bit, but the type is uintpr
+		// comment in advapi32.xml says this is different in 64-bit
+		// builds
 		v2 := uint32(v)
 		return fmt.Sprintf("0x%x", v2)
 	}
@@ -998,6 +1000,7 @@ func genGo() {
 		"RegOpenKeyExW",
 		"RegSetValueExW",
 		"RegCloseKey",
+		"RegDeleteKeyExW",
 	}
 
 	for _, f := range functions {

@@ -10,9 +10,10 @@ import (
 var (
 	libadvapi32 *windows.LazyDLL
 
-	regOpenKeyExW  *windows.LazyProc
-	regSetValueExW *windows.LazyProc
-	regCloseKey    *windows.LazyProc
+	regOpenKeyExW   *windows.LazyProc
+	regSetValueExW  *windows.LazyProc
+	regCloseKey     *windows.LazyProc
+	regDeleteKeyExW *windows.LazyProc
 )
 
 func init() {
@@ -20,6 +21,7 @@ func init() {
 	regOpenKeyExW = libadvapi32.NewProc("RegOpenKeyExW")
 	regSetValueExW = libadvapi32.NewProc("RegSetValueExW")
 	regCloseKey = libadvapi32.NewProc("RegCloseKey")
+	regDeleteKeyExW = libadvapi32.NewProc("RegDeleteKeyExW")
 }
 
 func RegOpenKeyExWSys(hKey HKEY, lpSubKey *uint16, ulOptions uint32, samDesired uint32, phkResult *HKEY) uint32 {
@@ -49,6 +51,18 @@ func RegSetValueExWSys(hKey HKEY, lpValueName *uint16, Reserved uint32, dwType u
 func RegCloseKeySys(hKey HKEY) uint32 {
 	ret, _, _ := syscall.Syscall(regCloseKey.Addr(), 1,
 		uintptr(hKey),
+		0,
+		0,
+	)
+	return uint32(ret)
+}
+
+func RegDeleteKeyExWSys(hKey HKEY, lpSubKey *uint16, samDesired uint32, Reserved uint32) uint32 {
+	ret, _, _ := syscall.Syscall6(regDeleteKeyExW.Addr(), 4,
+		uintptr(hKey),
+		uintptr(unsafe.Pointer(lpSubKey)),
+		uintptr(samDesired),
+		uintptr(Reserved),
 		0,
 		0,
 	)

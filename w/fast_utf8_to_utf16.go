@@ -96,26 +96,27 @@ func reserveSpaceInStringAllocator(n int) []uint16 {
 	return res
 }
 
-// ToUnicodeShortLived converts s to UTF-16 Windows string
-func ToUnicodeShortLived(s string) *uint16 {
-
+// ToUnicodeShortLived converts s to a zero-terminated UTF-16
+// Windows string. Returns a slice that doesn't include
+// terminating zero (but it's there)
+func ToUnicodeShortLived(s string) []uint16 {
 	// optimistically try a fast path for just ascii
 	n := len(s)
 	res := reserveSpaceInStringAllocator(n + 1)
-	i := 0
-	for i < n {
+	isASCII := true
+	for i := 0; i < n; i++ {
 		c := s[i]
 		if c > utf8.RuneSelf {
+			isASCII = false
 			break
 		}
 		res[i] = uint16(c)
 		i++
 	}
-	isASCII := (i == n)
 	if isASCII {
 		// add terminating 0
-		res[n] = 0
-		return &res[0]
+		res[n-1] = 0
+		return res
 	}
 
 	// TODO: fast non-ascii path. We should be able to re-use
@@ -124,18 +125,19 @@ func ToUnicodeShortLived(s string) *uint16 {
 	// time.
 	// this should work as well, though as FreeUnicode() should never
 	// consider this string to be allocated withing stringAllocator buffer
-	FreeShortLivedUnicode(&res[0])
-	return &ToUnicode(s)[0]
+	FreeShortLivedUnicode(res)
+	return ToUnicode(s)
 }
 
-// FreeShortLivedUnicode frees a string allocated with ToUnicodeShortLived
-func FreeShortLivedUnicode(s *uint16) {
+// FreeShortLivedUnicode frees a unicode string allocated
+// with ToUnicodeShortLived
+func FreeShortLivedUnicode(s []uint16) {
 	// if s is the last allocated string, shrink stringAllocator
 	// buffer so that next allocation will re-use it
 	muStringAllocator.Lock()
 	nFrees++
 
-	sp := uintptr(unsafe.Pointer(s))
+	sp := uintptr(unsafe.Pointer(&s[0]))
 	lastAllocationPtr1 := &stringAllocator[lastAllocationPos]
 	lastAllocationPtr := uintptr(unsafe.Pointer(lastAllocationPtr1))
 

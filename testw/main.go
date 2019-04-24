@@ -57,9 +57,9 @@ func testCreateShortcut() {
 
 	shortcutPath := filepath.Join(dir, "foo-sublime.lnk")
 
-	hr := w.CoInitialize(nil)
-	if w.HrFailed(hr) {
-		log.Fatalf("w.CoInitialize() failed with %d\n", hr)
+	err = w.CoInitialize()
+	if err != nil {
+		log.Fatalf("w.CoInitialize() failed with %s\n", err)
 	}
 	defer w.CoUninitialize()
 

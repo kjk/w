@@ -22,7 +22,7 @@ func init() {
 	regCloseKey = libadvapi32.NewProc("RegCloseKey")
 }
 
-func RegOpenKeyExW(hKey HKEY, lpSubKey *uint16, ulOptions uint32, samDesired uint32, phkResult *HKEY) uint32 {
+func RegOpenKeyExWSys(hKey HKEY, lpSubKey *uint16, ulOptions uint32, samDesired uint32, phkResult *HKEY) uint32 {
 	ret, _, _ := syscall.Syscall6(regOpenKeyExW.Addr(), 5,
 		uintptr(hKey),
 		uintptr(unsafe.Pointer(lpSubKey)),
@@ -32,10 +32,9 @@ func RegOpenKeyExW(hKey HKEY, lpSubKey *uint16, ulOptions uint32, samDesired uin
 		0,
 	)
 	return uint32(ret)
-
 }
 
-func RegSetValueExW(hKey HKEY, lpValueName *uint16, Reserved uint32, dwType uint32, lpData *uint8, cbData uint32) uint32 {
+func RegSetValueExWSys(hKey HKEY, lpValueName *uint16, Reserved uint32, dwType uint32, lpData *uint8, cbData uint32) uint32 {
 	ret, _, _ := syscall.Syscall6(regSetValueExW.Addr(), 6,
 		uintptr(hKey),
 		uintptr(unsafe.Pointer(lpValueName)),
@@ -45,15 +44,13 @@ func RegSetValueExW(hKey HKEY, lpValueName *uint16, Reserved uint32, dwType uint
 		uintptr(cbData),
 	)
 	return uint32(ret)
-
 }
 
-func RegCloseKey(hKey HKEY) uint32 {
+func RegCloseKeySys(hKey HKEY) uint32 {
 	ret, _, _ := syscall.Syscall(regCloseKey.Addr(), 1,
 		uintptr(hKey),
 		0,
 		0,
 	)
 	return uint32(ret)
-
 }

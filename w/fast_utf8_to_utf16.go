@@ -64,6 +64,10 @@ func ToUnicode(s string) *uint16 {
 
 // FromUnicode converts UTF-16 Windows string to utf-8 Go string
 func FromUnicode(s []uint16) string {
+	// allows to shorten the callers
+	if len(s) == 0 || s[0] == 0 {
+		return ""
+	}
 	return windows.UTF16ToString(s)
 }
 
@@ -152,4 +156,3 @@ func FreeShortLivedUnicode(s *uint16) {
 	lastAllocationPtr = uintptr(1) // should never match any valid address
 	muStringAllocator.Unlock()
 }
-

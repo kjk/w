@@ -25,7 +25,7 @@ const (
 	MB_ERR_INVALID_CHARS = 0x00000008
 )
 
-func MultiByteToWideChar(CodePage uint32, dwFlags uint32, lpMultiByteStr *byte, cbMultiByte int32, lpWideCharStr LPWSTR, cchWideChar int32) int32 {
+func MultiByteToWideCharSys(CodePage uint32, dwFlags uint32, lpMultiByteStr *byte, cbMultiByte int32, lpWideCharStr LPWSTR, cchWideChar int32) int32 {
 	ret, _, _ := syscall.Syscall6(multiByteToWideChar.Addr(), 6,
 		uintptr(CodePage),
 		uintptr(dwFlags),
@@ -35,5 +35,4 @@ func MultiByteToWideChar(CodePage uint32, dwFlags uint32, lpMultiByteStr *byte, 
 		uintptr(cchWideChar),
 	)
 	return int32(ret)
-
 }

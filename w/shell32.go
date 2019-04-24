@@ -25,7 +25,7 @@ const (
 	SHGFP_TYPE_DEFAULT = 1
 )
 
-func SHGetFolderPathW(hwndOwner HWND, nFolder int32, hToken uintptr, dwFlags uint32, pszPath *WCHAR) HRESULT {
+func SHGetFolderPathWSys(hwndOwner HWND, nFolder int32, hToken uintptr, dwFlags uint32, pszPath *WCHAR) HRESULT {
 	ret, _, _ := syscall.Syscall6(sHGetFolderPathW.Addr(), 5,
 		uintptr(hwndOwner),
 		uintptr(nFolder),
@@ -35,10 +35,9 @@ func SHGetFolderPathW(hwndOwner HWND, nFolder int32, hToken uintptr, dwFlags uin
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
-func SHGetFolderLocation(hwndOwner HWND, nFolder uint32, hToken uintptr, dwReserved uint32, ppidl **ITEMIDLIST) HRESULT {
+func SHGetFolderLocationSys(hwndOwner HWND, nFolder uint32, hToken uintptr, dwReserved uint32, ppidl **ITEMIDLIST) HRESULT {
 	ret, _, _ := syscall.Syscall6(sHGetFolderLocation.Addr(), 5,
 		uintptr(hwndOwner),
 		uintptr(nFolder),
@@ -48,5 +47,4 @@ func SHGetFolderLocation(hwndOwner HWND, nFolder uint32, hToken uintptr, dwReser
 		0,
 	)
 	return HRESULT(ret)
-
 }

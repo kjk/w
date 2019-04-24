@@ -51,7 +51,7 @@ type COSERVERINFO struct {
 	DwReserved2 uint32
 }
 
-func CoGetClassObject(rclsid *GUID, dwClsContext uint32, pServerInfo *COSERVERINFO, riid *GUID, ppv *unsafe.Pointer) HRESULT {
+func CoGetClassObjectSys(rclsid *GUID, dwClsContext uint32, pServerInfo *COSERVERINFO, riid *GUID, ppv *unsafe.Pointer) HRESULT {
 	ret, _, _ := syscall.Syscall6(coGetClassObject.Addr(), 5,
 		uintptr(unsafe.Pointer(rclsid)),
 		uintptr(dwClsContext),
@@ -61,10 +61,9 @@ func CoGetClassObject(rclsid *GUID, dwClsContext uint32, pServerInfo *COSERVERIN
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
-func CoCreateInstance(rclsid *GUID, pUnkOuter *IUnknown, dwClsContext uint32, riid *GUID, ppv *unsafe.Pointer) HRESULT {
+func CoCreateInstanceSys(rclsid *GUID, pUnkOuter *IUnknown, dwClsContext uint32, riid *GUID, ppv *unsafe.Pointer) HRESULT {
 	ret, _, _ := syscall.Syscall6(coCreateInstance.Addr(), 5,
 		uintptr(unsafe.Pointer(rclsid)),
 		uintptr(unsafe.Pointer(pUnkOuter)),
@@ -74,17 +73,15 @@ func CoCreateInstance(rclsid *GUID, pUnkOuter *IUnknown, dwClsContext uint32, ri
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
-func CoInitialize(pvReserved unsafe.Pointer) HRESULT {
+func CoInitializeSys(pvReserved unsafe.Pointer) HRESULT {
 	ret, _, _ := syscall.Syscall(coInitialize.Addr(), 1,
 		uintptr(pvReserved),
 		0,
 		0,
 	)
 	return HRESULT(ret)
-
 }
 
 func CoUninitialize() {
@@ -93,5 +90,4 @@ func CoUninitialize() {
 		0,
 		0,
 	)
-
 }

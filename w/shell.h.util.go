@@ -38,16 +38,26 @@ func newError(message string) error {
 }
 
 func errorFromHRESULT(funcName string, hr HRESULT) error {
+	// this allows shortening the callers
+	if HrOk(hr) {
+		return nil
+	}
 	return newError(fmt.Sprintf("%s: Error %d", funcName, hr))
+}
+
+func CoCreateInstance(rclsid *GUID, pUnkOuter *IUnknown, dwClsContext uint32, riid *GUID) (unsafe.Pointer, error) {
+	var res unsafe.Pointer
+	hr := CoCreateInstanceSys(&CLSID_ShellLink, nil, CLSCTX_INPROC_SERVER, &IID_IShellLinkW, &res)
+	return res, errorFromHRESULT("CoCreateInstance", hr)
 }
 
 // Based on https://docs.microsoft.com/en-us/windows/desktop/shell/links
 // https://stackoverflow.com/questions/3906974/how-to-programmatically-create-a-shortcut-using-win32
 func CreateShortcut(shortcutPath string, exePath string, args string, description string, iconIndex int) error {
-	var pslPtr unsafe.Pointer
-	hr := CoCreateInstance(&CLSID_ShellLink, nil, CLSCTX_INPROC_SERVER, &IID_IShellLinkW, &pslPtr)
-	if FAILED(hr) {
-		return errorFromHRESULT("CoCreateInstance", hr)
+	var hr HRESULT
+	pslPtr, err := CoCreateInstance(&CLSID_ShellLink, nil, CLSCTX_INPROC_SERVER, &IID_IShellLinkW)
+	if err != nil {
+		return err
 	}
 	psl := (*IShellLinkW)(pslPtr)
 	defer psl.Release()
@@ -57,10 +67,10 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 		hr = psl.SetPath(s)
 		hr2 := psl.SetIconLocation(s, int32(iconIndex))
 		FreeShortLivedUnicode(s)
-		if FAILED(hr) {
+		if HrFailed(hr) {
 			return errorFromHRESULT("psl.SetPath", hr)
 		}
-		if FAILED(hr2) {
+		if HrFailed(hr2) {
 			return errorFromHRESULT("psl.SetIconLocation", hr2)
 		}
 	}
@@ -69,7 +79,7 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 		s := ToUnicodeShortLived(description)
 		hr = psl.SetDescription(s)
 		FreeShortLivedUnicode(s)
-		if FAILED(hr) {
+		if HrFailed(hr) {
 			return errorFromHRESULT("psl.SetPath", hr)
 		}
 	}
@@ -78,14 +88,14 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 		s := ToUnicodeShortLived(args)
 		hr = psl.SetArguments(s)
 		FreeShortLivedUnicode(s)
-		if FAILED(hr) {
+		if HrFailed(hr) {
 			return errorFromHRESULT("psl.SetArguments", hr)
 		}
 	}
 
 	var ppfPtr unsafe.Pointer
 	hr = psl.QueryInterface(&IID_IPersistFile, &ppfPtr)
-	if FAILED(hr) {
+	if HrFailed(hr) {
 		return errorFromHRESULT("psl.QueryInterface", hr)
 	}
 
@@ -96,7 +106,7 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 		s := ToUnicodeShortLived(shortcutPath)
 		hr = ppf.Save(s, TRUE)
 		FreeShortLivedUnicode(s)
-		if FAILED(hr) {
+		if HrFailed(hr) {
 			return errorFromHRESULT("ppf.Save", hr)
 		}
 	}

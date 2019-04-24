@@ -658,6 +658,17 @@ func CreateWindowEx(dwExStyle uint32, lpClassName, lpWindowName *uint16, dwStyle
 }
 */
 
+// not all functions require *Sys suffix
+func needsSysSuffix(fi *FunctionInfo) bool {
+	if len(fi.Args) == 0 && fi.ReturnType == "" {
+		return false
+	}
+	// TODO: this could be more sophisticated
+	// e.g. look at all arguments and no suffix
+	// if args don't need conversion
+	return true
+}
+
 func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 	fn := fi.Function
 
@@ -667,7 +678,11 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 		s += fmt.Sprintf("%s %s, ", arg.Name, arg.TypeName)
 	}
 	s = strings.TrimSuffix(s, ", ")
-	g.ws("\nfunc %s(%s) %s {\n", fi.Name, s, returnType)
+	nameSuffix := ""
+	if needsSysSuffix(fi) {
+		nameSuffix = "Sys"
+	}
+	g.ws("\nfunc %s(%s) %s {\n", fi.Name+nameSuffix, s, returnType)
 
 	// 	ret, _, _ := syscall.Syscall12(createWindowEx.Addr(), 12,
 	nArgs := len(fn.Params)
@@ -698,8 +713,7 @@ func (g *goGenerator) generateFunction(fi *FunctionInfo) {
 			g.ws("return %s(ret)\n", returnType)
 		}
 	}
-
-	g.ws("\n}\n")
+	g.ws("}\n")
 }
 
 func (g *goGenerator) generateInterfaces(mi *goSourceFile) {

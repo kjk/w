@@ -53,13 +53,13 @@ func resetAllocator() {
 }
 
 // ToUnicode converts an utf8 string to Window's UTF16 unicode
-func ToUnicode(s string) *uint16 {
+func ToUnicode(s string) []uint16 {
 	// TODO:
 	// - a way for the app to control what happens on error
 	//  (ignore, crash or maybe call a registered callback)
 	// - optimize for temporary allocations
-	u, _ := windows.UTF16PtrFromString(s)
-	return u
+	a, _ := windows.UTF16FromString(s)
+	return a
 }
 
 // FromUnicode converts UTF-16 Windows string to utf-8 Go string
@@ -125,7 +125,7 @@ func ToUnicodeShortLived(s string) *uint16 {
 	// this should work as well, though as FreeUnicode() should never
 	// consider this string to be allocated withing stringAllocator buffer
 	FreeShortLivedUnicode(&res[0])
-	return ToUnicode(s)
+	return &ToUnicode(s)[0]
 }
 
 // FreeShortLivedUnicode frees a string allocated with ToUnicodeShortLived

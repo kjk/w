@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -376,7 +377,27 @@ func sanitizeConstantName(s string) string {
 	return s
 }
 
-func (g *goGenerator) generateConsts(set []*Set) bool {
+func constValueEnsurePositive(ti *TypeInfo, s string) string {
+	if s[0] != '-' {
+		return s
+	}
+
+	// TODO: possibly needs to be more general
+	if ti.Variable.Base == "HANDLE" {
+		v, err := strconv.ParseInt(s, 10, 64)
+		must(err)
+		// TODO: not sure, if this is uintptr then the values
+		// are like  0xffffffff80000000 instead of  0x80000000
+		// on 64-bit, but the type is uintpr
+		v2 := uint32(v)
+		return fmt.Sprintf("0x%x", v2)
+	}
+
+	// TODO: log the type of negative value
+	return s
+}
+
+func (g *goGenerator) generateConsts(ti *TypeInfo, set []*Set) bool {
 	// TODO: optimize if only one value
 	if len(set) == 0 {
 		return false
@@ -389,7 +410,8 @@ func (g *goGenerator) generateConsts(set []*Set) bool {
 		if _, ok := g.generatedConsts[name]; ok {
 			continue
 		}
-		g.ws("%s = %s\n", sanitizeConstantName(name), e.Value)
+		s := constValueEnsurePositive(ti, e.Value)
+		g.ws("%s = %s\n", sanitizeConstantName(name), s)
 		g.generatedConsts[name] = struct{}{}
 	}
 	g.ws(")\n\n")
@@ -404,7 +426,7 @@ func (g *goGenerator) generateType(ti *TypeInfo) {
 
 	v := ti.Variable
 	if v.Set != nil {
-		g.generateConsts(v.Set)
+		g.generateConsts(ti, v.Set)
 		// TODO: a better way to handle this?
 		if v.Base == "HANDLE" {
 			g.ws("type %s %s\n\n", ti.GoTypeName, v.Base)
@@ -412,7 +434,7 @@ func (g *goGenerator) generateType(ti *TypeInfo) {
 		return
 	}
 	if v.Flag != nil {
-		g.generateConsts(v.Flag.Set)
+		g.generateConsts(ti, v.Flag.Set)
 		// TODO: a better way to handle this?
 		if v.Base == "HANDLE" {
 			g.ws("type %s %s\n\n", ti.GoTypeName, v.Base)
@@ -420,7 +442,7 @@ func (g *goGenerator) generateType(ti *TypeInfo) {
 		return
 	}
 	if v.Enum != nil {
-		g.generateConsts(v.Enum.Set)
+		g.generateConsts(ti, v.Enum.Set)
 		// TODO: a better way to handle this?
 		if v.Base == "HANDLE" {
 			g.ws("type %s %s\n\n", ti.GoTypeName, v.Base)

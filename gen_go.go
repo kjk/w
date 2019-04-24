@@ -234,16 +234,26 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 	}
 
 	if v.Flag != nil {
-		g.rememberType(vi)
-		//fmt.Printf("Base for flag %s: %s\n", v.Name, v.Base)
-		vi.GoTypeName = g.addType(v.Base, nil)
+		if v.Base == "HANDLE" {
+			g.rememberType(vi)
+			//fmt.Printf("Flag: v.Name: %s, v.Base: %s\n", v.Name, v.Base)
+			vi.GoTypeName = v.Name
+		} else {
+			g.rememberType(vi)
+			vi.GoTypeName = g.addType(v.Base, nil)
+		}
 		return vi.GoTypeName
 	}
 
 	if v.Enum != nil {
-		g.rememberType(vi)
-		//fmt.Printf("Base for enum %s: %s\n", v.Name, v.Base)
-		vi.GoTypeName = g.addType(v.Base, nil)
+		if v.Base == "HANDLE" {
+			//fmt.Printf("Enum: v.Name: %s, v.Base: %s\n", v.Name, v.Base)
+			vi.GoTypeName = v.Name
+			g.rememberType(vi)
+		} else {
+			g.rememberType(vi)
+			vi.GoTypeName = g.addType(v.Base, nil)
+		}
 		return vi.GoTypeName
 	}
 
@@ -262,11 +272,12 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 		// we want to preserve types that are aliases for HANDLE
 		// (HWND, HMENU etc.)
 		if v.Base == "HANDLE" {
+			//fmt.Printf("Alias: v.Name: %s, v.Base: %s\n", v.Name, v.Base)
 			vi.GoTypeName = v.Name
 			g.rememberType(vi)
-			return v.Name
+		} else {
+			vi.GoTypeName = g.addType(v.Base, nil)
 		}
-		vi.GoTypeName = g.addType(v.Base, nil)
 		return vi.GoTypeName
 	}
 
@@ -394,14 +405,26 @@ func (g *goGenerator) generateType(ti *TypeInfo) {
 	v := ti.Variable
 	if v.Set != nil {
 		g.generateConsts(v.Set)
+		// TODO: a better way to handle this?
+		if v.Base == "HANDLE" {
+			g.ws("type %s %s\n\n", ti.GoTypeName, v.Base)
+		}
 		return
 	}
 	if v.Flag != nil {
 		g.generateConsts(v.Flag.Set)
+		// TODO: a better way to handle this?
+		if v.Base == "HANDLE" {
+			g.ws("type %s %s\n\n", ti.GoTypeName, v.Base)
+		}
 		return
 	}
 	if v.Enum != nil {
 		g.generateConsts(v.Enum.Set)
+		// TODO: a better way to handle this?
+		if v.Base == "HANDLE" {
+			g.ws("type %s %s\n\n", ti.GoTypeName, v.Base)
+		}
 		return
 	}
 
@@ -936,7 +959,11 @@ func genGo() {
 		"MultiByteToWideChar",
 		"SHGetFolderPathW",
 		"SHGetFolderLocation",
+		"RegOpenKeyExW",
+		"RegSetValueExW",
+		"RegCloseKey",
 	}
+
 	for _, f := range functions {
 		g.addFunction(f)
 

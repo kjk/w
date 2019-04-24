@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"path/filepath"
 
 	"github.com/kjk/winapigen/w"
@@ -64,6 +65,8 @@ func testCreateShortcut() {
 
 	exePath := `C:\Program Files\Sublime Text 3\sublime_text.exe`
 	err = w.CreateShortcut(shortcutPath, exePath, "", "", 0)
+	must(err)
+	err = os.Remove(shortcutPath)
 	must(err)
 }
 

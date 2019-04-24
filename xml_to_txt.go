@@ -503,7 +503,6 @@ func toTxt(d *APIMonitorXMLFile) {
 func shouldSkipFile(path string) bool {
 	// those are names of directories with definitions we don't care about for now
 	blacklisted := []string{
-		"Internal",
 		"MAPI",
 		"MMF",
 		"Mozilla",

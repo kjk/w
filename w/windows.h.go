@@ -46,6 +46,17 @@ const (
 	UNPROTECTED_SACL_SECURITY_INFORMATION = 0x10000000
 )
 
+type RECT struct {
+	Left   int32
+	Top    int32
+	Right  int32
+	Bottom int32
+}
+
+const (
+	GetFileExInfoStandard = 0
+)
+
 const (
 	FILE_ATTRIBUTE_READONLY            = 0x00000001
 	FILE_ATTRIBUTE_HIDDEN              = 0x00000002

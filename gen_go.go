@@ -236,9 +236,13 @@ func (g *goGenerator) addType(typeName string, vi *TypeInfo) string {
 
 	if v.Flag != nil {
 		if v.Base == "HANDLE" {
-			g.rememberType(vi)
 			//fmt.Printf("Flag: v.Name: %s, v.Base: %s\n", v.Name, v.Base)
-			vi.GoTypeName = v.Name
+			if v.Name == "[FILE_HANDLE]" {
+				vi.GoTypeName = "HANDLE"
+			} else {
+				g.rememberType(vi)
+				vi.GoTypeName = v.Name
+			}
 		} else {
 			g.rememberType(vi)
 			vi.GoTypeName = g.addType(v.Base, nil)
@@ -1004,6 +1008,7 @@ func genGo() {
 		"RegCloseKey",
 		"RegDeleteKeyExW",
 		"RegSetKeySecurity",
+		"RegCreateKeyExW",
 		"SHSetValueW",
 		"SHGetValueW",
 		"SHDeleteValueW",
@@ -1024,6 +1029,26 @@ func genGo() {
 		"GetLastError",
 		"FormatMessageW",
 		"GetDiskFreeSpaceExW",
+
+		"MonitorFromRect",
+		"GetMonitorInfoW",
+		"GetSystemMetrics",
+		"SystemParametersInfoW",
+		"GetDesktopWindow",
+		"FindWindowW",
+		"UpdateWindow",
+
+		"CreateToolhelp32Snapshot",
+		"Heap32First",
+		"Heap32ListFirst",
+		"Module32FirstW",
+		"Module32NextW",
+		"Process32FirstW",
+		"Process32NextW",
+		"Thread32First",
+		"Thread32Next",
+		"Toolhelp32ReadProcessMemory",
+		"GetFileAttributesExW",
 	}
 
 	for _, f := range functions {

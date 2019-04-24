@@ -40,6 +40,12 @@ type SECURITY_DESCRIPTOR struct {
 	Dacl     *ACL
 }
 
+type SECURITY_ATTRIBUTES struct {
+	NLength              uint32
+	LpSecurityDescriptor *SECURITY_DESCRIPTOR
+	BInheritHandle       int32
+}
+
 const (
 	SecurityAnonymous      = 0
 	SecurityIdentification = 1

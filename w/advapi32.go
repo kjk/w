@@ -15,6 +15,7 @@ var (
 	regCloseKey                  *windows.LazyProc
 	regDeleteKeyExW              *windows.LazyProc
 	regSetKeySecurity            *windows.LazyProc
+	regCreateKeyExW              *windows.LazyProc
 	impersonateSelf              *windows.LazyProc
 	initializeAcl                *windows.LazyProc
 	initializeSecurityDescriptor *windows.LazyProc
@@ -29,6 +30,7 @@ func init() {
 	regCloseKey = libadvapi32.NewProc("RegCloseKey")
 	regDeleteKeyExW = libadvapi32.NewProc("RegDeleteKeyExW")
 	regSetKeySecurity = libadvapi32.NewProc("RegSetKeySecurity")
+	regCreateKeyExW = libadvapi32.NewProc("RegCreateKeyExW")
 	impersonateSelf = libadvapi32.NewProc("ImpersonateSelf")
 	initializeAcl = libadvapi32.NewProc("InitializeAcl")
 	initializeSecurityDescriptor = libadvapi32.NewProc("InitializeSecurityDescriptor")
@@ -86,6 +88,21 @@ func RegSetKeySecuritySys(hKey HKEY, SecurityInformation uint32, pSecurityDescri
 		uintptr(hKey),
 		uintptr(SecurityInformation),
 		uintptr(unsafe.Pointer(pSecurityDescriptor)),
+	)
+	return uint32(ret)
+}
+
+func RegCreateKeyExWSys(hKey HKEY, lpSubKey *uint16, Reserved uint32, lpClass *WCHAR, dwOptions uint32, samDesired uint32, lpSecurityAttributes *SECURITY_ATTRIBUTES, phkResult *HKEY, lpdwDisposition *uint32) uint32 {
+	ret, _, _ := syscall.Syscall9(regCreateKeyExW.Addr(), 9,
+		uintptr(hKey),
+		uintptr(unsafe.Pointer(lpSubKey)),
+		uintptr(Reserved),
+		uintptr(unsafe.Pointer(lpClass)),
+		uintptr(dwOptions),
+		uintptr(samDesired),
+		uintptr(unsafe.Pointer(lpSecurityAttributes)),
+		uintptr(unsafe.Pointer(phkResult)),
+		uintptr(unsafe.Pointer(lpdwDisposition)),
 	)
 	return uint32(ret)
 }

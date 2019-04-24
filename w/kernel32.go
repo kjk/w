@@ -10,14 +10,25 @@ import (
 var (
 	libkernel32 *windows.LazyDLL
 
-	multiByteToWideChar     *windows.LazyProc
-	getTempPathW            *windows.LazyProc
-	getVolumeInformationW   *windows.LazyProc
-	getDriveTypeW           *windows.LazyProc
-	getLogicalDriveStringsW *windows.LazyProc
-	getLastError            *windows.LazyProc
-	formatMessageW          *windows.LazyProc
-	getDiskFreeSpaceExW     *windows.LazyProc
+	multiByteToWideChar         *windows.LazyProc
+	getTempPathW                *windows.LazyProc
+	getVolumeInformationW       *windows.LazyProc
+	getDriveTypeW               *windows.LazyProc
+	getLogicalDriveStringsW     *windows.LazyProc
+	getLastError                *windows.LazyProc
+	formatMessageW              *windows.LazyProc
+	getDiskFreeSpaceExW         *windows.LazyProc
+	createToolhelp32Snapshot    *windows.LazyProc
+	heap32First                 *windows.LazyProc
+	heap32ListFirst             *windows.LazyProc
+	module32FirstW              *windows.LazyProc
+	module32NextW               *windows.LazyProc
+	process32FirstW             *windows.LazyProc
+	process32NextW              *windows.LazyProc
+	thread32First               *windows.LazyProc
+	thread32Next                *windows.LazyProc
+	toolhelp32ReadProcessMemory *windows.LazyProc
+	getFileAttributesExW        *windows.LazyProc
 )
 
 func init() {
@@ -30,6 +41,17 @@ func init() {
 	getLastError = libkernel32.NewProc("GetLastError")
 	formatMessageW = libkernel32.NewProc("FormatMessageW")
 	getDiskFreeSpaceExW = libkernel32.NewProc("GetDiskFreeSpaceExW")
+	createToolhelp32Snapshot = libkernel32.NewProc("CreateToolhelp32Snapshot")
+	heap32First = libkernel32.NewProc("Heap32First")
+	heap32ListFirst = libkernel32.NewProc("Heap32ListFirst")
+	module32FirstW = libkernel32.NewProc("Module32FirstW")
+	module32NextW = libkernel32.NewProc("Module32NextW")
+	process32FirstW = libkernel32.NewProc("Process32FirstW")
+	process32NextW = libkernel32.NewProc("Process32NextW")
+	thread32First = libkernel32.NewProc("Thread32First")
+	thread32Next = libkernel32.NewProc("Thread32Next")
+	toolhelp32ReadProcessMemory = libkernel32.NewProc("Toolhelp32ReadProcessMemory")
+	getFileAttributesExW = libkernel32.NewProc("GetFileAttributesExW")
 }
 
 const (
@@ -82,6 +104,82 @@ const (
 	FORMAT_MESSAGE_ARGUMENT_ARRAY  = 0x00002000
 	FORMAT_MESSAGE_MAX_WIDTH_MASK  = 0x000000FF
 )
+
+const (
+	TH32CS_INHERIT      = 0x80000000
+	TH32CS_SNAPALL      = 0x0000000f
+	TH32CS_SNAPHEAPLIST = 0x00000001
+	TH32CS_SNAPMODULE   = 0x00000008
+	TH32CS_SNAPMODULE32 = 0x00000010
+	TH32CS_SNAPPROCESS  = 0x00000002
+	TH32CS_SNAPTHREAD   = 0x00000004
+)
+
+const (
+	LF32_FIXED    = 0x00000001
+	LF32_FREE     = 0x00000002
+	LF32_MOVEABLE = 0x00000004
+)
+
+type HEAPENTRY32 struct {
+	DwSize        int32
+	HHandle       uintptr
+	DwAddress     uintptr
+	DwBlockSize   int32
+	DwFlags       uint32
+	DwLockCount   uint32
+	DwResvd       uint32
+	Th32ProcessID uint32
+	Th32HeapID    uintptr
+}
+
+const (
+	HF32_DEFAULT = 1
+	HF32_SHARED  = 2
+)
+
+type HEAPLIST32 struct {
+	DwSize        int32
+	Th32ProcessID uint32
+	Th32HeapID    uintptr
+	DwFlags       uint32
+}
+
+type MODULEENTRY32 struct {
+	DwSize        uint32
+	Th32ModuleID  uint32
+	Th32ProcessID uint32
+	GlblcntUsage  uint32
+	ProccntUsage  uint32
+	ModBaseAddr   *uint8
+	ModBaseSize   uint32
+	HModule       HANDLE
+	SzModule      [256]WCHAR
+	SzExePath     [260]WCHAR
+}
+
+type PROCESSENTRY32 struct {
+	DwSize              uint32
+	CntUsage            uint32
+	Th32ProcessID       uint32
+	Th32DefaultHeapID   uintptr
+	Th32ModuleID        uint32
+	CntThreads          uint32
+	Th32ParentProcessID uint32
+	PcPriClassBase      int32
+	DwFlags             uint32
+	SzExeFile           [260]WCHAR
+}
+
+type THREADENTRY32 struct {
+	DwSize             uint32
+	CntUsage           uint32
+	Th32ThreadID       uint32
+	Th32OwnerProcessID uint32
+	TpBasePri          int32
+	TpDeltaPri         int32
+	DwFlags            uint32
+}
 
 func MultiByteToWideCharSys(CodePage uint32, dwFlags uint32, lpMultiByteStr *byte, cbMultiByte int32, lpWideCharStr LPWSTR, cchWideChar int32) int32 {
 	ret, _, _ := syscall.Syscall6(multiByteToWideChar.Addr(), 6,
@@ -169,6 +267,108 @@ func GetDiskFreeSpaceExWSys(lpDirectoryName *uint16, lpFreeBytesAvailable *ULARG
 		uintptr(unsafe.Pointer(lpTotalNumberOfFreeBytes)),
 		0,
 		0,
+	)
+	return int32(ret)
+}
+
+func CreateToolhelp32SnapshotSys(dwFlags uint32, th32ProcessID uint32) HANDLE {
+	ret, _, _ := syscall.Syscall(createToolhelp32Snapshot.Addr(), 2,
+		uintptr(dwFlags),
+		uintptr(th32ProcessID),
+		0,
+	)
+	return HANDLE(ret)
+}
+
+func Heap32FirstSys(lphe *HEAPENTRY32, th32ProcessID uint32, th32HeapID uintptr) int32 {
+	ret, _, _ := syscall.Syscall(heap32First.Addr(), 3,
+		uintptr(unsafe.Pointer(lphe)),
+		uintptr(th32ProcessID),
+		uintptr(th32HeapID),
+	)
+	return int32(ret)
+}
+
+func Heap32ListFirstSys(hSnapshot uintptr, lphl *HEAPLIST32) int32 {
+	ret, _, _ := syscall.Syscall(heap32ListFirst.Addr(), 2,
+		uintptr(hSnapshot),
+		uintptr(unsafe.Pointer(lphl)),
+		0,
+	)
+	return int32(ret)
+}
+
+func Module32FirstWSys(hSnapshot uintptr, lpme *MODULEENTRY32) int32 {
+	ret, _, _ := syscall.Syscall(module32FirstW.Addr(), 2,
+		uintptr(hSnapshot),
+		uintptr(unsafe.Pointer(lpme)),
+		0,
+	)
+	return int32(ret)
+}
+
+func Module32NextWSys(hSnapshot uintptr, lpme *MODULEENTRY32) int32 {
+	ret, _, _ := syscall.Syscall(module32NextW.Addr(), 2,
+		uintptr(hSnapshot),
+		uintptr(unsafe.Pointer(lpme)),
+		0,
+	)
+	return int32(ret)
+}
+
+func Process32FirstWSys(hSnapshot uintptr, lppe *PROCESSENTRY32) int32 {
+	ret, _, _ := syscall.Syscall(process32FirstW.Addr(), 2,
+		uintptr(hSnapshot),
+		uintptr(unsafe.Pointer(lppe)),
+		0,
+	)
+	return int32(ret)
+}
+
+func Process32NextWSys(hSnapshot uintptr, lppe *PROCESSENTRY32) int32 {
+	ret, _, _ := syscall.Syscall(process32NextW.Addr(), 2,
+		uintptr(hSnapshot),
+		uintptr(unsafe.Pointer(lppe)),
+		0,
+	)
+	return int32(ret)
+}
+
+func Thread32FirstSys(hSnapshot uintptr, lpte *THREADENTRY32) int32 {
+	ret, _, _ := syscall.Syscall(thread32First.Addr(), 2,
+		uintptr(hSnapshot),
+		uintptr(unsafe.Pointer(lpte)),
+		0,
+	)
+	return int32(ret)
+}
+
+func Thread32NextSys(hSnapshot uintptr, lpte *THREADENTRY32) int32 {
+	ret, _, _ := syscall.Syscall(thread32Next.Addr(), 2,
+		uintptr(hSnapshot),
+		uintptr(unsafe.Pointer(lpte)),
+		0,
+	)
+	return int32(ret)
+}
+
+func Toolhelp32ReadProcessMemorySys(th32ProcessID uint32, lpBaseAddress unsafe.Pointer, lpBuffer unsafe.Pointer, cbRead int32, lpNumberOfBytesRead int32) int32 {
+	ret, _, _ := syscall.Syscall6(toolhelp32ReadProcessMemory.Addr(), 5,
+		uintptr(th32ProcessID),
+		uintptr(lpBaseAddress),
+		uintptr(lpBuffer),
+		uintptr(cbRead),
+		uintptr(lpNumberOfBytesRead),
+		0,
+	)
+	return int32(ret)
+}
+
+func GetFileAttributesExWSys(lpFileName *uint16, fInfoLevelId uint32, lpFileInformation unsafe.Pointer) int32 {
+	ret, _, _ := syscall.Syscall(getFileAttributesExW.Addr(), 3,
+		uintptr(unsafe.Pointer(lpFileName)),
+		uintptr(fInfoLevelId),
+		uintptr(lpFileInformation),
 	)
 	return int32(ret)
 }

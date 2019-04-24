@@ -993,80 +993,9 @@ func genGo() {
 	fmt.Printf("Built index in %s. %d functions, %d types, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
 
 	g := newGoGenerator()
-	functions := []string{
-		"MultiByteToWideChar",
+	g.genFunctions()
+	g.genInterfaces()
 
-		"CoInitialize",
-		"CoUninitialize",
-		"CoGetClassObject",
-		"CoCreateInstance",
-		"SHGetFolderPathW",
-		"SHGetFolderLocation",
-
-		"RegOpenKeyExW",
-		"RegSetValueExW",
-		"RegCloseKey",
-		"RegDeleteKeyExW",
-		"RegSetKeySecurity",
-		"RegCreateKeyExW",
-		"SHSetValueW",
-		"SHGetValueW",
-		"SHDeleteValueW",
-		"SHDeleteKeyW",
-		"SHQueryInfoKeyW",
-		"SHQueryValueExW",
-
-		"ImpersonateSelf",
-		"InitializeAcl",
-		"InitializeSecurityDescriptor",
-		"InitializeSid",
-		"SetSecurityDescriptorDacl",
-
-		"GetTempPathW",
-		"GetVolumeInformationW",
-		"GetDriveTypeW",
-		"GetLogicalDriveStringsW",
-		"GetLastError",
-		"FormatMessageW",
-		"GetDiskFreeSpaceExW",
-
-		"MonitorFromRect",
-		"GetMonitorInfoW",
-		"GetSystemMetrics",
-		"SystemParametersInfoW",
-		"GetDesktopWindow",
-		"FindWindowW",
-		"UpdateWindow",
-
-		"CreateToolhelp32Snapshot",
-		"Heap32First",
-		"Heap32ListFirst",
-		"Module32FirstW",
-		"Module32NextW",
-		"Process32FirstW",
-		"Process32NextW",
-		"Thread32First",
-		"Thread32Next",
-		"Toolhelp32ReadProcessMemory",
-		"GetFileAttributesExW",
-	}
-
-	for _, f := range functions {
-		g.addFunction(f)
-
-	}
-	//g.addFunction("CreateWindowExW")
-	//g.addFunction("FileTimeToSystemTime")
-	//g.addFunction("TzSpecificLocalTimeToSystemTime")
-	//g.addFunction("GetSystemTimeAsFileTime")
-	interfaces := []string{
-		"IClassFactory",
-		"IShellLinkW",
-		"IPersistFile",
-	}
-	for _, i := range interfaces {
-		g.addInterface(i)
-	}
 	g.generate()
 	tryCompile()
 }

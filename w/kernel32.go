@@ -10,25 +10,28 @@ import (
 var (
 	libkernel32 *windows.LazyDLL
 
-	multiByteToWideChar         *windows.LazyProc
-	getTempPathW                *windows.LazyProc
-	getVolumeInformationW       *windows.LazyProc
-	getDriveTypeW               *windows.LazyProc
-	getLogicalDriveStringsW     *windows.LazyProc
-	getLastError                *windows.LazyProc
-	formatMessageW              *windows.LazyProc
-	getDiskFreeSpaceExW         *windows.LazyProc
-	createToolhelp32Snapshot    *windows.LazyProc
-	heap32First                 *windows.LazyProc
-	heap32ListFirst             *windows.LazyProc
-	module32FirstW              *windows.LazyProc
-	module32NextW               *windows.LazyProc
-	process32FirstW             *windows.LazyProc
-	process32NextW              *windows.LazyProc
-	thread32First               *windows.LazyProc
-	thread32Next                *windows.LazyProc
-	toolhelp32ReadProcessMemory *windows.LazyProc
-	getFileAttributesExW        *windows.LazyProc
+	multiByteToWideChar             *windows.LazyProc
+	getTempPathW                    *windows.LazyProc
+	getVolumeInformationW           *windows.LazyProc
+	getDriveTypeW                   *windows.LazyProc
+	getLogicalDriveStringsW         *windows.LazyProc
+	getLastError                    *windows.LazyProc
+	formatMessageW                  *windows.LazyProc
+	getDiskFreeSpaceExW             *windows.LazyProc
+	fileTimeToSystemTime            *windows.LazyProc
+	tzSpecificLocalTimeToSystemTime *windows.LazyProc
+	getSystemTimeAsFileTime         *windows.LazyProc
+	createToolhelp32Snapshot        *windows.LazyProc
+	heap32First                     *windows.LazyProc
+	heap32ListFirst                 *windows.LazyProc
+	module32FirstW                  *windows.LazyProc
+	module32NextW                   *windows.LazyProc
+	process32FirstW                 *windows.LazyProc
+	process32NextW                  *windows.LazyProc
+	thread32First                   *windows.LazyProc
+	thread32Next                    *windows.LazyProc
+	toolhelp32ReadProcessMemory     *windows.LazyProc
+	getFileAttributesExW            *windows.LazyProc
 )
 
 func init() {
@@ -41,6 +44,9 @@ func init() {
 	getLastError = libkernel32.NewProc("GetLastError")
 	formatMessageW = libkernel32.NewProc("FormatMessageW")
 	getDiskFreeSpaceExW = libkernel32.NewProc("GetDiskFreeSpaceExW")
+	fileTimeToSystemTime = libkernel32.NewProc("FileTimeToSystemTime")
+	tzSpecificLocalTimeToSystemTime = libkernel32.NewProc("TzSpecificLocalTimeToSystemTime")
+	getSystemTimeAsFileTime = libkernel32.NewProc("GetSystemTimeAsFileTime")
 	createToolhelp32Snapshot = libkernel32.NewProc("CreateToolhelp32Snapshot")
 	heap32First = libkernel32.NewProc("Heap32First")
 	heap32ListFirst = libkernel32.NewProc("Heap32ListFirst")
@@ -269,6 +275,32 @@ func GetDiskFreeSpaceExWSys(lpDirectoryName *uint16, lpFreeBytesAvailable *ULARG
 		0,
 	)
 	return int32(ret)
+}
+
+func FileTimeToSystemTimeSys(lpFileTime *FILETIME, lpSystemTime *SYSTEMTIME) int32 {
+	ret, _, _ := syscall.Syscall(fileTimeToSystemTime.Addr(), 2,
+		uintptr(unsafe.Pointer(lpFileTime)),
+		uintptr(unsafe.Pointer(lpSystemTime)),
+		0,
+	)
+	return int32(ret)
+}
+
+func TzSpecificLocalTimeToSystemTimeSys(lpTimeZoneInformation *TIME_ZONE_INFORMATION, lpLocalTime *SYSTEMTIME, lpUniversalTime *SYSTEMTIME) int32 {
+	ret, _, _ := syscall.Syscall(tzSpecificLocalTimeToSystemTime.Addr(), 3,
+		uintptr(unsafe.Pointer(lpTimeZoneInformation)),
+		uintptr(unsafe.Pointer(lpLocalTime)),
+		uintptr(unsafe.Pointer(lpUniversalTime)),
+	)
+	return int32(ret)
+}
+
+func GetSystemTimeAsFileTimeSys(lpSystemTimeAsFileTime *FILETIME) {
+	_, _, _ = syscall.Syscall(getSystemTimeAsFileTime.Addr(), 1,
+		uintptr(unsafe.Pointer(lpSystemTimeAsFileTime)),
+		0,
+		0,
+	)
 }
 
 func CreateToolhelp32SnapshotSys(dwFlags uint32, th32ProcessID uint32) HANDLE {

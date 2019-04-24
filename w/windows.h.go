@@ -46,6 +46,32 @@ const (
 	UNPROTECTED_SACL_SECURITY_INFORMATION = 0x10000000
 )
 
+type FILETIME struct {
+	DwLowDateTime  uint32
+	DwHighDateTime uint32
+}
+
+type SYSTEMTIME struct {
+	WYear         uint16
+	WMonth        uint16
+	WDayOfWeek    uint16
+	WDay          uint16
+	WHour         uint16
+	WMinute       uint16
+	WSecond       uint16
+	WMilliseconds uint16
+}
+
+type TIME_ZONE_INFORMATION struct {
+	Bias         int32
+	StandardName [32]WCHAR
+	StandardDate SYSTEMTIME
+	StandardBias int32
+	DaylightName [32]WCHAR
+	DaylightDate SYSTEMTIME
+	DaylightBias int32
+}
+
 type RECT struct {
 	Left   int32
 	Top    int32
@@ -76,11 +102,6 @@ const (
 	FILE_ATTRIBUTE_NO_SCRUB_DATA       = 0x00020000
 	INVALID_FILE_ATTRIBUTES            = -1
 )
-
-type FILETIME struct {
-	DwLowDateTime  uint32
-	DwHighDateTime uint32
-}
 
 const (
 	IO_REPARSE_TAG_MOUNT_POINT = 0xA0000003

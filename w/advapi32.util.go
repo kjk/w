@@ -102,7 +102,17 @@ func RegWriteDWORD(hkey HKEY, subKeyName string, value uint32) error {
 	u := ToUTF16ShortLived(subKeyName)
 	data := (*byte)(unsafe.Pointer(&value))
 	cbData := unsafe.Sizeof(value)
-	res := RegSetValueExWSys(hkey, &u[0], 0, REG_SZ, data, uint32(cbData))
+	res := RegSetValueExWSys(hkey, &u[0], 0, REG_DWORD, data, uint32(cbData))
+	FreeShortLivedUTF16(u)
+	return newRegistryError(res, "RegSetValueExWSys")
+}
+
+// RegWriteQWORD writes QWORD registry value
+func RegWriteQWORD(hkey HKEY, subKeyName string, value uint64) error {
+	u := ToUTF16ShortLived(subKeyName)
+	data := (*byte)(unsafe.Pointer(&value))
+	cbData := unsafe.Sizeof(value)
+	res := RegSetValueExWSys(hkey, &u[0], 0, REG_QWORD, data, uint32(cbData))
 	FreeShortLivedUTF16(u)
 	return newRegistryError(res, "RegSetValueExWSys")
 }

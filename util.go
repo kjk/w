@@ -1,18 +1,33 @@
-package main
+package w
 
 import (
-	"bytes"
+	"errors"
 	"fmt"
-	"io/ioutil"
-	"os/exec"
-	"strings"
+	"syscall"
+
+	"golang.org/x/sys/windows"
 )
 
-func must(err error) {
-	if err != nil {
-		panic(err.Error())
-	}
-}
+const (
+	TRUE     = 1
+	FALSE    = 0
+	MAX_PATH = 260
+)
+
+type BOOL int32
+type HRESULT int32
+type HANDLE uintptr
+type HMODULE uintptr
+type WCHAR = uint16
+type LARGE_INTEGER int64
+type ULARGE_INTEGER uint64
+
+// we don't desugar those types because they signal const vs. non-const
+type LPCWSTR = *uint16
+type LPWSTR = *uint16
+
+type IID = windows.GUID
+type GUID = windows.GUID
 
 func panicIf(cond bool, args ...interface{}) {
 	if !cond {
@@ -29,80 +44,30 @@ func panicIf(cond bool, args ...interface{}) {
 	panic(fmt.Sprintf(format, args...))
 }
 
-func readFileMust(path string) []byte {
-	d, err := ioutil.ReadFile(path)
-	must(err)
-	return d
-}
-
-func normalizePath(s string) string {
-	return strings.Replace(s, `\`, `/`, -1)
-}
-
-func normalizeNewlines(d []byte) []byte {
-	// replace CR LF (windows) with LF (unix)
-	d = bytes.Replace(d, []byte{13, 10}, []byte{10}, -1)
-	// replace CF (mac) with LF (unix)
-	d = bytes.Replace(d, []byte{13}, []byte{10}, -1)
-	return d
-}
-
-func toLines(d []byte) []string {
-	d = normalizeNewlines(d)
-	s := string(d)
-	return strings.Split(s, "\n")
-}
-
-func readFileAsLines(path string) ([]string, error) {
-	d, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, err
+func winError(s string) error {
+	// TODO: use getlasterror, add a callstack
+	if s == "" {
+		s = "generic windows error"
 	}
-	return toLines(d), nil
+	return errors.New(s)
 }
 
-func collapseMultipleEmptyLines(a []string) []string {
-	j := 0
-	prevWasEmpty := false
-	for i := 0; i < len(a); i++ {
-		l := a[i]
-		isEmpty := len(l) == 0
-		// skip n-th empty line in a row
-		if isEmpty && prevWasEmpty {
-			continue
-		}
-		prevWasEmpty = isEmpty
-		a[j] = l
-		j++
-	}
-	if j < len(a) {
-		return a[:j]
-	}
-	return a
+func sys(trap, nargs, a1, a2, a3 uintptr) (r1, r2 uintptr, err syscall.Errno) {
+	return syscall.Syscall(trap, nargs, a1, a2, a3)
 }
 
-func dumpFile(path string) {
-	fmt.Printf("File: %s\n", path)
-	d, err := ioutil.ReadFile(path)
-	must(err)
-	fmt.Printf("%s\n", string(d))
+func sys6(trap, nargs, a1, a2, a3, a4, a5, a6 uintptr) (r1, r2 uintptr, err syscall.Errno) {
+	return syscall.Syscall6(trap, nargs, a1, a2, a3, a4, a5, a6)
 }
 
-func shortAPIName(fn *FunctionInfo) string {
-	sfn := fn.SourceFile.FileName
-	modName := fn.Module.Name
-	fnName := fn.Function.Name
-	return fmt.Sprintf(`%s %s.%s`, sfn, modName, fnName)
+func sys9(trap, nargs, a1, a2, a3, a4, a5, a6, a7, a8, a9 uintptr) (r1, r2 uintptr, err syscall.Errno) {
+	return syscall.Syscall9(trap, nargs, a1, a2, a3, a4, a5, a6, a7, a8, a9)
 }
 
-func gofmtFile(path string) {
-	cmd := exec.Command("gofmt", "-s", "-w", path)
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		fmt.Printf("gofmt failed with %s. Output:\n%s\n", err, string(out))
-	}
+func sys12(trap, nargs, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12 uintptr) (r1, r2 uintptr, err syscall.Errno) {
+	return syscall.Syscall12(trap, nargs, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12)
 }
 
-func makeNameGoPublic(s string) string {
-	return strings.ToUpper(s[:1]) + s[1:]
+func sys15(trap, nargs, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15 uintptr) (r1, r2 uintptr, err syscall.Errno) {
+	return syscall.Syscall15(trap, nargs, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15)
 }

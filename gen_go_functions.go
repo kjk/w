@@ -52,6 +52,12 @@ func (g *goGenerator) genFunctions() {
 		"GetDesktopWindow",
 		"FindWindowW",
 		"UpdateWindow",
+		"SetParent",
+		"SetWindowLongW",
+		"GetWindowLongW",
+		"GetWindowRect",
+		"SetFocus",
+		"SetWindowPos",
 
 		"CreateToolhelp32Snapshot",
 		"Heap32First",
@@ -64,6 +70,7 @@ func (g *goGenerator) genFunctions() {
 		"Thread32Next",
 		"Toolhelp32ReadProcessMemory",
 		"GetFileAttributesExW",
+
 	}
 
 	for _, f := range functions {

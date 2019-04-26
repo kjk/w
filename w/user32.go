@@ -17,6 +17,12 @@ var (
 	getDesktopWindow      *windows.LazyProc
 	findWindowW           *windows.LazyProc
 	updateWindow          *windows.LazyProc
+	setParent             *windows.LazyProc
+	setWindowLongW        *windows.LazyProc
+	getWindowLongW        *windows.LazyProc
+	getWindowRect         *windows.LazyProc
+	setFocus              *windows.LazyProc
+	setWindowPos          *windows.LazyProc
 )
 
 func init() {
@@ -28,6 +34,12 @@ func init() {
 	getDesktopWindow = libuser32.NewProc("GetDesktopWindow")
 	findWindowW = libuser32.NewProc("FindWindowW")
 	updateWindow = libuser32.NewProc("UpdateWindow")
+	setParent = libuser32.NewProc("SetParent")
+	setWindowLongW = libuser32.NewProc("SetWindowLongW")
+	getWindowLongW = libuser32.NewProc("GetWindowLongW")
+	getWindowRect = libuser32.NewProc("GetWindowRect")
+	setFocus = libuser32.NewProc("SetFocus")
+	setWindowPos = libuser32.NewProc("SetWindowPos")
 }
 
 const (
@@ -134,6 +146,42 @@ const (
 	SM_CXPADDEDBORDER              = 92
 )
 
+const (
+	GWL_WNDPROC    = -4
+	GWL_HINSTANCE  = -6
+	GWL_HWNDPARENT = -8
+	GWL_ID         = -12
+	GWL_STYLE      = -16
+	GWL_EXSTYLE    = -20
+	GWL_USERDATA   = -21
+	DWL_MSGRESULT  = 0
+	DWL_DLGPROC    = 4
+	DWL_USER       = 8
+)
+
+const (
+	HWND_TOP       = 0
+	HWND_BOTTOM    = 1
+	HWND_TOPMOST   = -1
+	HWND_NOTOPMOST = -2
+)
+
+const (
+	SWP_NOSIZE         = 0x0001
+	SWP_NOMOVE         = 0x0002
+	SWP_NOZORDER       = 0x0004
+	SWP_NOREDRAW       = 0x0008
+	SWP_NOACTIVATE     = 0x0010
+	SWP_FRAMECHANGED   = 0x0020
+	SWP_SHOWWINDOW     = 0x0040
+	SWP_HIDEWINDOW     = 0x0080
+	SWP_NOCOPYBITS     = 0x0100
+	SWP_NOSENDCHANGING = 0x0400
+	SWP_NOREPOSITION   = 0x0200
+	SWP_DEFERERASE     = 0x2000
+	SWP_ASYNCWINDOWPOS = 0x4000
+)
+
 func MonitorFromRectSys(lprc *RECT, dwFlags uint32) HMONITOR {
 	ret, _, _ := syscall.Syscall(monitorFromRect.Addr(), 2,
 		uintptr(unsafe.Pointer(lprc)),
@@ -194,6 +242,66 @@ func FindWindowWSys(lpClassName *uint16, lpWindowName *uint16) HWND {
 func UpdateWindowSys(hWnd HWND) int32 {
 	ret, _, _ := syscall.Syscall(updateWindow.Addr(), 1,
 		uintptr(hWnd),
+		0,
+		0,
+	)
+	return int32(ret)
+}
+
+func SetParentSys(hWndChild HWND, hWndNewParent HWND) HWND {
+	ret, _, _ := syscall.Syscall(setParent.Addr(), 2,
+		uintptr(hWndChild),
+		uintptr(hWndNewParent),
+		0,
+	)
+	return HWND(ret)
+}
+
+func SetWindowLongWSys(hWnd HWND, nIndex int32, dwNewLong int32) int32 {
+	ret, _, _ := syscall.Syscall(setWindowLongW.Addr(), 3,
+		uintptr(hWnd),
+		uintptr(nIndex),
+		uintptr(dwNewLong),
+	)
+	return int32(ret)
+}
+
+func GetWindowLongWSys(hWnd HWND, nIndex int32) int32 {
+	ret, _, _ := syscall.Syscall(getWindowLongW.Addr(), 2,
+		uintptr(hWnd),
+		uintptr(nIndex),
+		0,
+	)
+	return int32(ret)
+}
+
+func GetWindowRectSys(hWnd HWND, lpRect *RECT) int32 {
+	ret, _, _ := syscall.Syscall(getWindowRect.Addr(), 2,
+		uintptr(hWnd),
+		uintptr(unsafe.Pointer(lpRect)),
+		0,
+	)
+	return int32(ret)
+}
+
+func SetFocusSys(hWnd HWND) HWND {
+	ret, _, _ := syscall.Syscall(setFocus.Addr(), 1,
+		uintptr(hWnd),
+		0,
+		0,
+	)
+	return HWND(ret)
+}
+
+func SetWindowPosSys(hWnd HWND, hWndInsertAfter HWND, X int32, Y int32, cx int32, cy int32, uFlags uint32) int32 {
+	ret, _, _ := syscall.Syscall9(setWindowPos.Addr(), 7,
+		uintptr(hWnd),
+		uintptr(hWndInsertAfter),
+		uintptr(X),
+		uintptr(Y),
+		uintptr(cx),
+		uintptr(cy),
+		uintptr(uFlags),
 		0,
 		0,
 	)

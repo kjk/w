@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 function exitIfFailed { if ($LASTEXITCODE -ne 0) { exit } }
 
-go build -o gen.exe
+go build -o gengo.exe github.com/kjk/w/cmd/testw
 exitIfFailed
-.\gen.exe
-Remove-Item .\gen.exe
+.\gengo.exe
+Remove-Item .\gengo.exe

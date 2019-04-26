@@ -42,14 +42,14 @@ func parseXmlDef(zf *zip.File) *APIMonitorXMLFile {
 func parseApiMonitorData() ([]*APIMonitorXMLFile, error) {
 	var parsedFiles []*APIMonitorXMLFile
 
-	fileName := "api.zip"
-	s, err := os.Stat(fileName)
+	path := filepath.Join("defs", "api.zip")
+	s, err := os.Stat(path)
 	if err != nil {
 		return nil, err
 	}
 	fileSize := s.Size()
 
-	f, err := os.Open(fileName)
+	f, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}

@@ -33,15 +33,15 @@ func FormatSystemMessage(msgID uint32) (string, error) {
 	if res == 0 {
 		return "", errors.New("FormatMessageW failed")
 	}
-	s := FromUnicode(buf[:len(buf)])
+	s := FromUTF16(buf[:len(buf)])
 	return s, nil
 }
 
 // GetDriveType returns drive type for a given root dir (like "c:\")
 func GetDriveType(rootPathName string) int {
-	s := ToUnicodeShortLived(rootPathName)
+	s := ToUTF16ShortLived(rootPathName)
 	res := GetDriveTypeWSys(&s[0])
-	FreeShortLivedUnicode(s)
+	FreeShortLivedUTF16(s)
 	return int(res)
 }
 

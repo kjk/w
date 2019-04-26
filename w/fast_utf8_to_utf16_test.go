@@ -7,7 +7,7 @@ import (
 )
 
 func isUnicodeEqual(s string, u []uint16) bool {
-	s2 := FromUnicode(u)
+	s2 := FromUTF16(u)
 	return s == s2
 }
 
@@ -15,10 +15,10 @@ func TestUTF16RoundTrip(t *testing.T) {
 	resetAllocator()
 	tests := []string{"abc", "Hello, 世界"}
 	for _, test := range tests {
-		u := ToUnicodeShortLived(test)
+		u := ToUTF16ShortLived(test)
 		assert.Equal(t, len(u), len(test))
 		assert.True(t, isUnicodeEqual(test, u))
-		FreeShortLivedUnicode(u)
+		FreeShortLivedUTF16(u)
 	}
 }
 
@@ -26,8 +26,8 @@ func TestToUnicodeShortLived(t *testing.T) {
 	resetAllocator()
 	s := "abc"
 	for i := 0; i < 13; i++ {
-		u := ToUnicodeShortLived(s)
-		FreeShortLivedUnicode(u)
+		u := ToUTF16ShortLived(s)
+		FreeShortLivedUTF16(u)
 		s += s
 	}
 	// make sure we test allocating more than the buffer
@@ -41,13 +41,13 @@ func TestToUnicodeShortLivedOutOfOrder(t *testing.T) {
 	s := "abcdefgh"
 	nNotFast := 0
 	for i := 0; i < 1024; i++ {
-		u := ToUnicodeShortLived(s)
+		u := ToUTF16ShortLived(s)
 		// from time to time simulate not freeing immediately
 		if i%4 == 0 {
-			ToUnicodeShortLived(s + "ha")
+			ToUTF16ShortLived(s + "ha")
 			nNotFast++
 		}
-		FreeShortLivedUnicode(u)
+		FreeShortLivedUTF16(u)
 	}
 	assert.Equal(t, nFastFrees+nNotFast, nFrees)
 	assert.Equal(t, stringAllocatorCurrPos, (11+9)*nNotFast)
@@ -59,7 +59,7 @@ func BenchmarkToUnicode(b *testing.B) {
 	s := "abcdef"
 	for n := 0; n < b.N; n++ {
 		for i := 0; i < 1024; i++ {
-			dontOptimezeMe = ToUnicode(s)
+			dontOptimezeMe = ToUTF16(s)
 		}
 	}
 	dontOptimezeMe = nil
@@ -70,8 +70,8 @@ func BenchmarkToUnicodeShortLived(b *testing.B) {
 	s := "abcdef"
 	for n := 0; n < b.N; n++ {
 		for i := 0; i < 1024; i++ {
-			dontOptimezeMe = ToUnicodeShortLived(s)
-			FreeShortLivedUnicode(dontOptimezeMe)
+			dontOptimezeMe = ToUTF16ShortLived(s)
+			FreeShortLivedUTF16(dontOptimezeMe)
 		}
 	}
 	dontOptimezeMe = nil

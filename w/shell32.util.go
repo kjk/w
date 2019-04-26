@@ -5,5 +5,5 @@ package w
 func GetKnownFolderPath(nFolder int) (string, error) {
 	var buf [MAX_PATH + 1]WCHAR
 	hr := SHGetFolderPathWSys(0, int32(nFolder), 0, SHGFP_TYPE_CURRENT, &buf[0])
-	return FromUnicode(buf[:]), errorFromHRESULT("SHGetFolderPathW", hr)
+	return FromUTF16(buf[:]), errorFromHRESULT("SHGetFolderPathW", hr)
 }

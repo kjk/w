@@ -35,7 +35,7 @@ func newRegistryError(res uint32, args ...interface{}) error {
 
 // RegOpenKeyEx opens or creates a a registry key
 func RegOpenKeyEx(hkey HKEY, subKey string, ulOptions uint32, samDesired uint32) (HKEY, error) {
-	u := ToUnicodeShortLived(subKey)
+	u := ToUTF16ShortLived(subKey)
 	var hkeyRes HKEY
 	res := RegOpenKeyExWSys(
 		hkey,
@@ -43,7 +43,7 @@ func RegOpenKeyEx(hkey HKEY, subKey string, ulOptions uint32, samDesired uint32)
 		ulOptions,
 		samDesired,
 		&hkeyRes)
-	FreeShortLivedUnicode(u)
+	FreeShortLivedUTF16(u)
 	return hkeyRes, newRegistryError(res, "RegOpenKeyExW")
 }
 
@@ -51,7 +51,7 @@ func RegOpenKeyEx(hkey HKEY, subKey string, ulOptions uint32, samDesired uint32)
 // returns key, true if created (false if opened) and error
 func RegCreateKeyEx(hkey HKEY, subKey string) (HKEY, bool, error) {
 	var hkeyRes HKEY
-	u := ToUnicodeShortLived(subKey)
+	u := ToUTF16ShortLived(subKey)
 	var disp uint32
 	res := RegCreateKeyExWSys(
 		hkey,
@@ -63,7 +63,7 @@ func RegCreateKeyEx(hkey HKEY, subKey string) (HKEY, bool, error) {
 		nil, // lpSecurityAttributes
 		&hkeyRes,
 		&disp)
-	FreeShortLivedUnicode(u)
+	FreeShortLivedUTF16(u)
 	didCreate := (disp == REG_CREATED_NEW_KEY)
 	return hkeyRes, didCreate, newRegistryError(res, "RecCreateKeyExW")
 }
@@ -87,30 +87,30 @@ func RegCloseKey(hkey HKEY) error {
 // RegWriteString writes a given registry value to a hkey
 // (which must opened with RegOpenKeyForWrite)
 func RegWriteString(hkey HKEY, subKeyName string, value string) error {
-	u := ToUnicodeShortLived(subKeyName)
-	su := ToUnicode(value)
+	u := ToUTF16ShortLived(subKeyName)
+	su := ToUTF16(value)
 	// +2 for terminating 0
 	cbData := (len(su) * 2) + 2
 	data := (*byte)(unsafe.Pointer(&su[0]))
 	res := RegSetValueExWSys(hkey, &u[0], 0, REG_SZ, data, uint32(cbData))
-	FreeShortLivedUnicode(u)
+	FreeShortLivedUTF16(u)
 	return newRegistryError(res, "RegSetValueExWSys")
 }
 
 // RegWriteDWORD writes DWORD registry value
 func RegWriteDWORD(hkey HKEY, subKeyName string, value uint32) error {
-	u := ToUnicodeShortLived(subKeyName)
+	u := ToUTF16ShortLived(subKeyName)
 	data := (*byte)(unsafe.Pointer(&value))
 	cbData := unsafe.Sizeof(value)
 	res := RegSetValueExWSys(hkey, &u[0], 0, REG_SZ, data, uint32(cbData))
-	FreeShortLivedUnicode(u)
+	FreeShortLivedUTF16(u)
 	return newRegistryError(res, "RegSetValueExWSys")
 }
 
 // RegDeleteKeyEx deletes registry key
 func RegDeleteKeyEx(hkey HKEY, subKey string) error {
-	u := ToUnicodeShortLived(subKey)
+	u := ToUTF16ShortLived(subKey)
 	res := RegDeleteKeyExWSys(hkey, &u[0], 0, 0)
-	FreeShortLivedUnicode(u)
+	FreeShortLivedUTF16(u)
 	return newRegistryError(res, "RegDeleteKeyExWSys")
 }

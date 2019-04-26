@@ -63,9 +63,9 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 	defer psl.Release()
 
 	{
-		s := ToUnicodeShortLived(exePath)
+		s := ToUTF16ShortLived(exePath)
 		hr = psl.SetPath(&s[0])
-		FreeShortLivedUnicode(s)
+		FreeShortLivedUTF16(s)
 		if HrFailed(hr) {
 			return errorFromHRESULT("psl.SetPath", hr)
 		}
@@ -76,18 +76,18 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 	}
 
 	if len(description) > 0 {
-		s := ToUnicodeShortLived(description)
+		s := ToUTF16ShortLived(description)
 		hr = psl.SetDescription(&s[0])
-		FreeShortLivedUnicode(s)
+		FreeShortLivedUTF16(s)
 		if HrFailed(hr) {
 			return errorFromHRESULT("psl.SetPath", hr)
 		}
 	}
 
 	if len(args) > 0 {
-		s := ToUnicodeShortLived(args)
+		s := ToUTF16ShortLived(args)
 		hr = psl.SetArguments(&s[0])
-		FreeShortLivedUnicode(s)
+		FreeShortLivedUTF16(s)
 		if HrFailed(hr) {
 			return errorFromHRESULT("psl.SetArguments", hr)
 		}
@@ -103,9 +103,9 @@ func CreateShortcut(shortcutPath string, exePath string, args string, descriptio
 	defer ppf.Release()
 
 	{
-		s := ToUnicodeShortLived(shortcutPath)
+		s := ToUTF16ShortLived(shortcutPath)
 		hr = ppf.Save(&s[0], TRUE)
-		FreeShortLivedUnicode(s)
+		FreeShortLivedUTF16(s)
 		if HrFailed(hr) {
 			return errorFromHRESULT("ppf.Save", hr)
 		}

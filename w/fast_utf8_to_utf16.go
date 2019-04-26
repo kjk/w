@@ -10,20 +10,6 @@ import (
 
 // fast conversion of utf8 => utf16 conversion for short-lived strings
 
-/*
-TODO: how to optimize for temporary ToUnicode() conversions.
-Most ToUnicode() calls are for temporary conversions of strings
-so that they can be passed to to Windows function. They are not used
-afterwards.
-We could allocate them from memory block (e.g. 4k or 16).
-If the user calls FreeString() right after and this is the last allocated
-string (which should be the cast most of the time), we can re-use
-the memory block and avoid most of GC.
-Even if that's not the case, we'll eventually use the whole block
-and toss it to GC.
-We can also significantly speed up UTF16PtrFromString as it's quite wasteful.
-*/
-
 const (
 	stringAllocatorDefaultBufSize = 16 * 1024
 )
@@ -52,8 +38,8 @@ func resetAllocator() {
 	nFastFrees = 0
 }
 
-// ToUnicode converts an utf8 string to Window's UTF16 unicode
-func ToUnicode(s string) []uint16 {
+// ToUTF16 converts an UTF-8 string to Window's UTF-16 unicode
+func ToUTF16(s string) []uint16 {
 	// TODO:
 	// - a way for the app to control what happens on error
 	//  (ignore, crash or maybe call a registered callback)
@@ -62,8 +48,8 @@ func ToUnicode(s string) []uint16 {
 	return a
 }
 
-// FromUnicode converts UTF-16 Windows string to utf-8 Go string
-func FromUnicode(s []uint16) string {
+// FromUTF16 converts UTF-16 Windows string to UTF-8 Go string
+func FromUTF16(s []uint16) string {
 	// allows to shorten the callers
 	if len(s) == 0 || s[0] == 0 {
 		return ""
@@ -96,10 +82,10 @@ func reserveSpaceInStringAllocator(n int) []uint16 {
 	return res
 }
 
-// ToUnicodeShortLived converts s to a zero-terminated UTF-16
+// ToUTF16ShortLived converts s to a zero-terminated UTF-16
 // Windows string. Returns a slice that doesn't include
 // terminating zero (but it's there)
-func ToUnicodeShortLived(s string) []uint16 {
+func ToUTF16ShortLived(s string) []uint16 {
 	// optimistically try a fast path for just ascii
 	n := len(s)
 	res := reserveSpaceInStringAllocator(n + 1)
@@ -124,13 +110,12 @@ func ToUnicodeShortLived(s string) []uint16 {
 	// time.
 	// this should work as well, though as FreeUnicode() should never
 	// consider this string to be allocated withing stringAllocator buffer
-	FreeShortLivedUnicode(res)
-	return ToUnicode(s)
+	FreeShortLivedUTF16(res)
+	return ToUTF16(s)
 }
 
-// FreeShortLivedUnicode frees a unicode string allocated
-// with ToUnicodeShortLived
-func FreeShortLivedUnicode(s []uint16) {
+// FreeShortLivedUTF16 frees a unicode string allocated with ToUTF16ShortLived
+func FreeShortLivedUTF16(s []uint16) {
 	// if s is the last allocated string, shrink stringAllocator
 	// buffer so that next allocation will re-use it
 	muStringAllocator.Lock()

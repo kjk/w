@@ -6,12 +6,15 @@ import (
 )
 
 func newGetLastError() error {
-	lastErr := GetLastErrorSys()
-	if lastErr == ERROR_SUCCESS {
+	lastError := GetLastErrorSys()
+	if lastError == ERROR_SUCCESS {
 		return nil
 	}
-	// TODO: use FormatMessage() to get error message
-	return fmt.Errorf("GetLastErro(): %d", lastErr)
+	s, _ := FormatSystemMessage(lastError)
+	if s == "" {
+		return fmt.Errorf("GetLastError(): %d", lastError)
+	}
+	return fmt.Errorf("GetLastError(): %d (%s)", lastError, s)
 }
 
 // GetDriveType returns drive type for a given root dir (like "c:\")

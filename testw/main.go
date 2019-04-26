@@ -3,11 +3,27 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/kjk/winapigen/w"
 )
+
+func panicIf(cond bool, args ...interface{}) {
+	if !cond {
+		return
+	}
+	msg := "condition failed"
+	if len(args) > 0 {
+		msg = args[0].(string)
+		if len(args) > 1 {
+			msg = fmt.Sprintf(msg, args[1:]...)
+		}
+	}
+	panic(msg)
+}
 
 func testGetKnownFolderPath() {
 	ids := []int{
@@ -51,14 +67,80 @@ func must(err error) {
 	}
 }
 
+var (
+	alphabetForRand = ""
+)
+
+func genCharsInRange(start, end byte) string {
+	n := int(end) - int(start)
+	b := make([]byte, n)
+	for i := 0; i < n; i++ {
+		b[i] = start + byte(i)
+	}
+	return string(b)
+}
+
+func genRandChar() byte {
+	if alphabetForRand == "" {
+		s := genCharsInRange('a', 'z')
+		s += genCharsInRange('A', 'Z')
+		s += genCharsInRange('0', '9')
+		alphabetForRand = s
+	}
+	pos := rand.Intn(len(alphabetForRand))
+	return alphabetForRand[pos]
+}
+
+func genRandString(n int) string {
+	b := make([]byte, n)
+	for i := 0; i < n; i++ {
+		b[i] = genRandChar()
+	}
+	return string(b)
+}
+
+func testReg() {
+	fmt.Printf("testReg()\n")
+	{
+		// test we can open a key (this key should always exist)
+		key := `Software\Microsoft\Windows\CurrentVersion\Uninstall`
+		hkey, didCreate, err := w.RegCreateKeyEx(w.HKEY_CURRENT_USER, key)
+		must(err)
+		panicIf(didCreate)
+		err = w.RegCloseKey(hkey)
+		must(err)
+		fmt.Printf("  opened key '%s'\n", key)
+	}
+
+	{
+		// test we can create a key (with randomly generated name)
+		key := `Software\Microsoft\Windows\CurrentVersion\Uninstall\` + genRandString(16)
+		hkey, didCreate, err := w.RegCreateKeyEx(w.HKEY_CURRENT_USER, key)
+		must(err)
+		panicIf(!didCreate)
+		err = w.RegCloseKey(hkey)
+		must(err)
+		fmt.Printf("  created key '%s'\n", key)
+
+		err = w.RegDeleteKeyEx(w.HKEY_CURRENT_USER, key)
+		must(err)
+		fmt.Printf("  deleted key '%s'\n", key)
+	}
+
+	{
+		// test opening non-existent key fails with ERROR_FILE_NOT_FOUND (2)
+		key := `Software\Microsoft\Windows\CurrentVersion\Uninstall\` + genRandString(16)
+		_, err := w.RegOpenKeyForRead(w.HKEY_CURRENT_USER, key)
+		panicIf(!strings.Contains(err.Error(), " error code 2"))
+	}
+}
+
 func testCreateShortcut() {
 	fmt.Printf("testCreateShortcut()\n")
 	var err error
 
 	err = w.CoInitialize()
-	if err != nil {
-		log.Fatalf("w.CoInitialize() failed with %s\n", err)
-	}
+	must(err)
 	defer w.CoUninitialize()
 
 	dir, err := w.GetKnownFolderPath(w.CSIDL_DESKTOP)
@@ -81,8 +163,10 @@ func testGetLogicalDriveStrings() {
 }
 
 func main() {
-	testGetKnownFolderPath()
-	testCreateShortcut()
-	testGetLogicalDriveStrings()
-	fmt.Printf("Hello from w tester\n")
+	fmt.Printf("Running windows API tests\n")
+	testReg()
+	//testGetKnownFolderPath()
+	//testCreateShortcut()
+	//testGetLogicalDriveStrings()
+	fmt.Printf("Finished windows API tests\n")
 }

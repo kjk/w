@@ -19,6 +19,7 @@ func (g *goGenerator) genFunctions() {
 		"RegDeleteKeyExW",
 		"RegSetKeySecurity",
 		"RegCreateKeyExW",
+		"RegQueryValueExW",
 		"SHSetValueW",
 		"SHGetValueW",
 		"SHDeleteValueW",

@@ -1,6 +1,7 @@
 package w
 
 import (
+	"errors"
 	"fmt"
 	"syscall"
 )
@@ -15,6 +16,25 @@ func newGetLastError() error {
 		return fmt.Errorf("GetLastError(): %d", lastError)
 	}
 	return fmt.Errorf("GetLastError(): %d (%s)", lastError, s)
+}
+
+// FormatSystemMessage returns system error message for a given msgID (error code)
+func FormatSystemMessage(msgID uint32) (string, error) {
+	// TODO: allocate buffer with FORMAT_MESSAGE_ALLOCATE_BUFFER
+	var buf [8 * 1024]uint16
+	res := FormatMessageWSys(
+		FORMAT_MESSAGE_FROM_SYSTEM,
+		nil,
+		msgID,
+		0, // dwLanguageId
+		&buf[0],
+		uint32(len(buf)),
+		nil)
+	if res == 0 {
+		return "", errors.New("FormatMessageW failed")
+	}
+	s := FromUnicode(buf[:len(buf)])
+	return s, nil
 }
 
 // GetDriveType returns drive type for a given root dir (like "c:\")

@@ -2,11 +2,9 @@
 package w
 
 import (
-	"errors"
+	"golang.org/x/sys/windows"
 	"syscall"
 	"unsafe"
-
-	"golang.org/x/sys/windows"
 )
 
 var (
@@ -250,25 +248,6 @@ func GetLastErrorSys() uint32 {
 		0,
 	)
 	return uint32(ret)
-}
-
-// FormatSystemMessage returns system error message for a given msgID (error code)
-func FormatSystemMessage(msgID uint32) (string, error) {
-	// TODO: allocate buffer with FORMAT_MESSAGE_ALLOCATE_BUFFER
-	var buf [8 * 1024]uint16
-	res := FormatMessageWSys(
-		FORMAT_MESSAGE_FROM_SYSTEM,
-		nil,
-		msgID,
-		0, // dwLanguageId
-		&buf[0],
-		uint32(len(buf)),
-		nil)
-	if res == 0 {
-		return "", errors.New("FormatMessageW failed")
-	}
-	s := FromUnicode(buf[:len(buf)])
-	return s, nil
 }
 
 func FormatMessageWSys(dwFlags uint32, lpSource unsafe.Pointer, dwMessageId uint32, dwLanguageId uint32, lpBuffer *WCHAR, nSize uint32, Arguments *unsafe.Pointer) uint32 {

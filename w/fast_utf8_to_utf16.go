@@ -111,12 +111,11 @@ func ToUnicodeShortLived(s string) []uint16 {
 			break
 		}
 		res[i] = uint16(c)
-		i++
 	}
 	if isASCII {
 		// add terminating 0
-		res[n-1] = 0
-		return res
+		res[n] = 0
+		return res[:n]
 	}
 
 	// TODO: fast non-ascii path. We should be able to re-use

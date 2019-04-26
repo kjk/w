@@ -6,6 +6,22 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func isUnicodeEqual(s string, u []uint16) bool {
+	s2 := FromUnicode(u)
+	return s == s2
+}
+
+func TestUTF16RoundTrip(t *testing.T) {
+	resetAllocator()
+	tests := []string{"abc", "Hello, 世界"}
+	for _, test := range tests {
+		u := ToUnicodeShortLived(test)
+		assert.Equal(t, len(u), len(test))
+		assert.True(t, isUnicodeEqual(test, u))
+		FreeShortLivedUnicode(u)
+	}
+}
+
 func TestToUnicodeShortLived(t *testing.T) {
 	resetAllocator()
 	s := "abc"

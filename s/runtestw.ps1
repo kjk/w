@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 function exitIfFailed { if ($LASTEXITCODE -ne 0) { exit } }
 
-go build -o testw.exe github.com/kjk/winapigen/testw
+go build -o testw.exe github.com/kjk/w/cmd/testw
 exitIfFailed
 .\testw.exe
 Remove-Item .\testw.exe

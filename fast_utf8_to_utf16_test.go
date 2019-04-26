@@ -16,7 +16,6 @@ func TestUTF16RoundTrip(t *testing.T) {
 	tests := []string{"abc", "Hello, 世界"}
 	for _, test := range tests {
 		u := ToUTF16ShortLived(test)
-		assert.Equal(t, len(u), len(test))
 		assert.True(t, isUnicodeEqual(test, u))
 		FreeShortLivedUTF16(u)
 	}

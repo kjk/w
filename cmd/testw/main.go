@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/kjk/winapigen/w"
+	"github.com/kjk/w"
 )
 
 func panicIf(cond bool, args ...interface{}) {

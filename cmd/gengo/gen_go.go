@@ -970,7 +970,7 @@ func goDeleteExisting() {
 }
 
 func tryCompile() {
-	cmd := exec.Command("go", "build", "-o", "testw.exe", `github.com\kjk\w\cmd\testw`)
+	cmd := exec.Command("go", "build", "-o", "testw.exe", `github.com/kjk/w/cmd/testw`)
 	out, err := cmd.CombinedOutput()
 	_ = os.Remove("testw.exe")
 	if err != nil {

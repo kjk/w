@@ -10,6 +10,7 @@ import (
 var (
 	libuser32 *windows.LazyDLL
 
+	drawTextExW           *windows.LazyProc
 	monitorFromRect       *windows.LazyProc
 	getMonitorInfoW       *windows.LazyProc
 	getSystemMetrics      *windows.LazyProc
@@ -27,6 +28,7 @@ var (
 
 func init() {
 	libuser32 = windows.NewLazySystemDLL("user32.dll")
+	drawTextExW = libuser32.NewProc("DrawTextExW")
 	monitorFromRect = libuser32.NewProc("MonitorFromRect")
 	getMonitorInfoW = libuser32.NewProc("GetMonitorInfoW")
 	getSystemMetrics = libuser32.NewProc("GetSystemMetrics")
@@ -181,6 +183,18 @@ const (
 	SWP_DEFERERASE     = 0x2000
 	SWP_ASYNCWINDOWPOS = 0x4000
 )
+
+func DrawTextExWSys(hdc HDC, lpchText *WCHAR, cchText int32, lprc *RECT, dwDTFormat uint32, lpDTParams *DRAWTEXTPARAMS) int32 {
+	ret, _, _ := syscall.Syscall6(drawTextExW.Addr(), 6,
+		uintptr(hdc),
+		uintptr(unsafe.Pointer(lpchText)),
+		uintptr(cchText),
+		uintptr(unsafe.Pointer(lprc)),
+		uintptr(dwDTFormat),
+		uintptr(unsafe.Pointer(lpDTParams)),
+	)
+	return int32(ret)
+}
 
 func MonitorFromRectSys(lprc *RECT, dwFlags uint32) HMONITOR {
 	ret, _, _ := syscall.Syscall(monitorFromRect.Addr(), 2,

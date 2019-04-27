@@ -7,3 +7,5 @@ go build -o gengo.exe ./cmd/gengo
 exitIfFailed
 .\gengo.exe
 Remove-Item .\gengo.exe
+git checkout go.mod
+git checkout go.sum

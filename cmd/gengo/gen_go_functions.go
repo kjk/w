@@ -5,6 +5,7 @@ func (g *goGenerator) genFunctions() {
 
 	functions := []string{
 		"MultiByteToWideChar",
+		"DrawTextExW",
 
 		"CoInitialize",
 		"CoUninitialize",

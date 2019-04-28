@@ -14,6 +14,9 @@ func (g *goGenerator) genFunctions() {
 		"SHGetFolderPathW",
 		"SHGetFolderLocation",
 
+		"GetCurrentThreadId",
+		"GetWindowThreadProcessId",
+
 		"RegOpenKeyExW",
 		"RegSetValueExW",
 		"RegCloseKey",
@@ -71,7 +74,6 @@ func (g *goGenerator) genFunctions() {
 		"Thread32Next",
 		"Toolhelp32ReadProcessMemory",
 		"GetFileAttributesExW",
-
 	}
 
 	for _, f := range functions {

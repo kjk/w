@@ -11,6 +11,7 @@ var (
 	libkernel32 *windows.LazyDLL
 
 	multiByteToWideChar             *windows.LazyProc
+	getCurrentThreadId              *windows.LazyProc
 	getTempPathW                    *windows.LazyProc
 	getVolumeInformationW           *windows.LazyProc
 	getDriveTypeW                   *windows.LazyProc
@@ -37,6 +38,7 @@ var (
 func init() {
 	libkernel32 = windows.NewLazySystemDLL("kernel32.dll")
 	multiByteToWideChar = libkernel32.NewProc("MultiByteToWideChar")
+	getCurrentThreadId = libkernel32.NewProc("GetCurrentThreadId")
 	getTempPathW = libkernel32.NewProc("GetTempPathW")
 	getVolumeInformationW = libkernel32.NewProc("GetVolumeInformationW")
 	getDriveTypeW = libkernel32.NewProc("GetDriveTypeW")
@@ -197,6 +199,15 @@ func MultiByteToWideCharSys(CodePage uint32, dwFlags uint32, lpMultiByteStr *byt
 		uintptr(cchWideChar),
 	)
 	return int32(ret)
+}
+
+func GetCurrentThreadIdSys() uint32 {
+	ret, _, _ := syscall.Syscall(getCurrentThreadId.Addr(), 0,
+		0,
+		0,
+		0,
+	)
+	return uint32(ret)
 }
 
 func GetTempPathWSys(nBufferLength uint32, lpBuffer *WCHAR) uint32 {

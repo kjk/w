@@ -10,25 +10,27 @@ import (
 var (
 	libuser32 *windows.LazyDLL
 
-	drawTextExW           *windows.LazyProc
-	monitorFromRect       *windows.LazyProc
-	getMonitorInfoW       *windows.LazyProc
-	getSystemMetrics      *windows.LazyProc
-	systemParametersInfoW *windows.LazyProc
-	getDesktopWindow      *windows.LazyProc
-	findWindowW           *windows.LazyProc
-	updateWindow          *windows.LazyProc
-	setParent             *windows.LazyProc
-	setWindowLongW        *windows.LazyProc
-	getWindowLongW        *windows.LazyProc
-	getWindowRect         *windows.LazyProc
-	setFocus              *windows.LazyProc
-	setWindowPos          *windows.LazyProc
+	drawTextExW              *windows.LazyProc
+	getWindowThreadProcessId *windows.LazyProc
+	monitorFromRect          *windows.LazyProc
+	getMonitorInfoW          *windows.LazyProc
+	getSystemMetrics         *windows.LazyProc
+	systemParametersInfoW    *windows.LazyProc
+	getDesktopWindow         *windows.LazyProc
+	findWindowW              *windows.LazyProc
+	updateWindow             *windows.LazyProc
+	setParent                *windows.LazyProc
+	setWindowLongW           *windows.LazyProc
+	getWindowLongW           *windows.LazyProc
+	getWindowRect            *windows.LazyProc
+	setFocus                 *windows.LazyProc
+	setWindowPos             *windows.LazyProc
 )
 
 func init() {
 	libuser32 = windows.NewLazySystemDLL("user32.dll")
 	drawTextExW = libuser32.NewProc("DrawTextExW")
+	getWindowThreadProcessId = libuser32.NewProc("GetWindowThreadProcessId")
 	monitorFromRect = libuser32.NewProc("MonitorFromRect")
 	getMonitorInfoW = libuser32.NewProc("GetMonitorInfoW")
 	getSystemMetrics = libuser32.NewProc("GetSystemMetrics")
@@ -194,6 +196,15 @@ func DrawTextExWSys(hdc HDC, lpchText *WCHAR, cchText int32, lprc *RECT, dwDTFor
 		uintptr(unsafe.Pointer(lpDTParams)),
 	)
 	return int32(ret)
+}
+
+func GetWindowThreadProcessIdSys(hWnd HWND, lpdwProcessId *uint32) uint32 {
+	ret, _, _ := syscall.Syscall(getWindowThreadProcessId.Addr(), 2,
+		uintptr(hWnd),
+		uintptr(unsafe.Pointer(lpdwProcessId)),
+		0,
+	)
+	return uint32(ret)
 }
 
 func MonitorFromRectSys(lprc *RECT, dwFlags uint32) HMONITOR {

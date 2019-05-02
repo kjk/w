@@ -907,6 +907,10 @@ func (g *goGenerator) generate() {
 	for sf := range g.sourceFiles {
 		sourceFiles = append(sourceFiles, sf)
 	}
+	panicIf(len(sourceFiles) == 0, "has no sourceFiles")
+
+	goDeleteExisting()
+
 	sort.Strings(sourceFiles)
 	for _, name := range sourceFiles {
 		sf := g.sourceFiles[name]
@@ -999,7 +1003,6 @@ func genGo() {
 	g := newGoGenerator()
 	g.loadSymbolsToGenerate()
 
-	goDeleteExisting()
 	g.generate()
 	tryCompile()
 }

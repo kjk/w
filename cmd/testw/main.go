@@ -164,11 +164,19 @@ func testGetLogicalDriveStrings() {
 
 func testEnumWindows() {
 	fmt.Printf("testEnumWindows\n")
+	n := 0
 	cb := func(hwnd w.HWND) bool {
-		fmt.Printf("HWND: 0x%x\n", hwnd)
-		return true
+		s, err := w.GetWindowText(hwnd)
+		if err != nil {
+			fmt.Printf("HWND: 0x%x, GetWindowText() failed with '%s''\n", hwnd, err)
+		} else {
+			fmt.Printf("HWND: 0x%x, window text: '%s'\n", hwnd, s)
+		}
+		n++
+		return n < 5
 	}
 	w.EnumWindows(cb)
+	panicIf(n > 5, "enumerated %d windows, should be < 5", n)
 }
 
 func main() {

@@ -968,13 +968,14 @@ func goDeleteExisting() {
 	}
 }
 
-func tryCompile() {
+func tryCompile() error {
 	cmd := exec.Command("go", "build", "-o", "testw.exe", `github.com/kjk/w/cmd/testw`)
 	out, err := cmd.CombinedOutput()
 	_ = os.Remove("testw.exe")
 	if err != nil {
 		fmt.Printf("Compilation failed with:\n%s\n", string(out))
 	}
+	return err
 }
 
 func genGo() {
@@ -991,11 +992,11 @@ func genGo() {
 	buildIndex(parsedFiles)
 	fmt.Printf("Built index in %s. %d functions, %d types, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
 
-	//saveSymbols()
-
 	g := newGoGenerator()
 	g.loadSymbolsToGenerate()
 
 	g.generate()
-	tryCompile()
+	if err = tryCompile(); err == nil {
+		saveSymbols(g)
+	}
 }

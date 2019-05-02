@@ -2,10 +2,9 @@
 package w
 
 import (
+	"golang.org/x/sys/windows"
 	"syscall"
 	"unsafe"
-
-	"golang.org/x/sys/windows"
 )
 
 var (
@@ -19,6 +18,7 @@ var (
 	getSystemMetrics         *windows.LazyProc
 	getWindowLongW           *windows.LazyProc
 	getWindowRect            *windows.LazyProc
+	getWindowTextW           *windows.LazyProc
 	getWindowThreadProcessId *windows.LazyProc
 	monitorFromRect          *windows.LazyProc
 	setFocus                 *windows.LazyProc
@@ -39,6 +39,7 @@ func init() {
 	getSystemMetrics = libuser32.NewProc("GetSystemMetrics")
 	getWindowLongW = libuser32.NewProc("GetWindowLongW")
 	getWindowRect = libuser32.NewProc("GetWindowRect")
+	getWindowTextW = libuser32.NewProc("GetWindowTextW")
 	getWindowThreadProcessId = libuser32.NewProc("GetWindowThreadProcessId")
 	monitorFromRect = libuser32.NewProc("MonitorFromRect")
 	setFocus = libuser32.NewProc("SetFocus")
@@ -260,6 +261,15 @@ func GetWindowRectSys(hWnd HWND, lpRect *RECT) int32 {
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpRect)),
 		0,
+	)
+	return int32(ret)
+}
+
+func GetWindowTextWSys(hWnd HWND, lpString *WCHAR, nMaxCount int32) int32 {
+	ret, _, _ := syscall.Syscall(getWindowTextW.Addr(), 3,
+		uintptr(hWnd),
+		uintptr(unsafe.Pointer(lpString)),
+		uintptr(nMaxCount),
 	)
 	return int32(ret)
 }

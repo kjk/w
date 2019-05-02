@@ -37,8 +37,12 @@ Thread32Next
 Toolhelp32ReadProcessMemory
 TzSpecificLocalTimeToSystemTime
 
+# multimedia.h.go
+IUnknown
+
 # ole.h.go
 IClassFactory
+IPersist
 IPersistFile
 
 # ole32.go
@@ -71,6 +75,7 @@ GetMonitorInfoW
 GetSystemMetrics
 GetWindowLongW
 GetWindowRect
+GetWindowTextW
 GetWindowThreadProcessId
 MonitorFromRect
 SetFocus
@@ -79,5 +84,3 @@ SetWindowLongW
 SetWindowPos
 SystemParametersInfoW
 UpdateWindow
-
-GetWindowTextW

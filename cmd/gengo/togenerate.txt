@@ -67,6 +67,8 @@ SHQueryValueExW
 SHSetValueW
 
 # user32.go
+AdjustWindowRect
+AdjustWindowRectEx
 DrawTextExW
 EnumWindows
 FindWindowW

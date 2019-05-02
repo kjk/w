@@ -986,6 +986,8 @@ func genGo() {
 	fmt.Printf("Starting gen go\n")
 	out = os.Stdout
 
+	goSortSymbols()
+
 	timeStart := time.Now()
 	parsedFiles, err := parseApiMonitorData()
 	must(err)
@@ -994,11 +996,6 @@ func genGo() {
 	timeStart = time.Now()
 	buildIndex(parsedFiles)
 	fmt.Printf("Built index in %s. %d functions, %d types, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
-
-	if false {
-		goSortSymbols()
-		os.Exit(0)
-	}
 
 	g := newGoGenerator()
 	g.loadSymbolsToGenerate()
@@ -1009,6 +1006,10 @@ func genGo() {
 
 func goSortSymbols() {
 	// sort symbols in togenerate.txt because OCD
+	parsedFiles, err := parseApiMonitorData()
+	must(err)
+	buildIndex(parsedFiles)
+
 	g := newGoGenerator()
 	g.loadSymbolsToGenerate()
 	g.saveSymbols()

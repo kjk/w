@@ -21,6 +21,12 @@ const (
 	typeModuleHandle = "ModuleHandle"
 )
 
+var (
+	// we might hvae functions with the same name in different libraries
+	allFunctions  map[string][]*FunctionInfo
+	allTypes      map[string][]*TypeInfo
+	allInterfaces map[string]*InterfaceInfo
+)
 
 // e.g. gdi32.go
 func (m *Module) goSourceFileName() string {
@@ -58,7 +64,6 @@ type NameAndType struct {
 	Name     string
 	TypeName string
 }
-
 
 // TypeInfo describes a type (called Variable in XML defs)
 type TypeInfo struct {
@@ -196,13 +201,6 @@ func (ii *InterfaceInfo) goSourceFileName() string {
 	name = strings.TrimSuffix(name, ".xml")
 	return name + ".go"
 }
-
-var (
-	// we might hvae functions with the same name in different libraries
-	allFunctions  = map[string][]*FunctionInfo{}
-	allTypes      = map[string][]*TypeInfo{}
-	allInterfaces = map[string]*InterfaceInfo{}
-)
 
 func indexFunction(f *APIMonitorXMLFile, mod *Module, api *Api) {
 	if api.BothCharset == "" {
@@ -356,6 +354,10 @@ func indexInterfaceDefinition(f *APIMonitorXMLFile) {
 }
 
 func buildIndex(files []*APIMonitorXMLFile) {
+	allFunctions = map[string][]*FunctionInfo{}
+	allTypes = map[string][]*TypeInfo{}
+	allInterfaces = map[string]*InterfaceInfo{}
+
 	for _, f := range files {
 		if shouldSkipFile(f.FileName) {
 			continue

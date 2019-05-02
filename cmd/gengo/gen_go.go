@@ -981,7 +981,6 @@ func tryCompile() error {
 func genGo() {
 	fmt.Printf("Starting gen go\n")
 	out = os.Stdout
-	goDeleteExisting()
 
 	timeStart := time.Now()
 	parsedFiles, err := parseApiMonitorData()
@@ -992,11 +991,21 @@ func genGo() {
 	buildIndex(parsedFiles)
 	fmt.Printf("Built index in %s. %d functions, %d types, %d interfaces\n", time.Since(timeStart), len(allFunctions), len(allTypes), len(allInterfaces))
 
+	if false {
+		goSortSymbols()
+		os.Exit(0)
+	}
+
 	g := newGoGenerator()
 	g.loadSymbolsToGenerate()
 
+	goDeleteExisting()
 	g.generate()
-	if err = tryCompile(); err == nil {
-		saveSymbols(g)
-	}
+	tryCompile()
+}
+
+func goSortSymbols() {
+	g := newGoGenerator()
+	g.loadSymbolsToGenerate()
+	g.saveSymbols()
 }

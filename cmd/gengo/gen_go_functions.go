@@ -15,7 +15,7 @@ func getToGenerateFilePath() string {
 }
 
 // must index symbols first
-func saveSymbols(g *goGenerator) {
+func (g *goGenerator) saveSymbols() {
 	//symbols := append(functions, interfaces...)
 
 	var symbols []string

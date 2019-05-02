@@ -1005,6 +1005,7 @@ func genGo() {
 }
 
 func goSortSymbols() {
+	// sort symbols in togenerate.txt because OCD
 	g := newGoGenerator()
 	g.loadSymbolsToGenerate()
 	g.saveSymbols()

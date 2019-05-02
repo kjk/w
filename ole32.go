@@ -10,18 +10,18 @@ import (
 var (
 	libole32 *windows.LazyDLL
 
+	coCreateInstance *windows.LazyProc
+	coGetClassObject *windows.LazyProc
 	coInitialize     *windows.LazyProc
 	coUninitialize   *windows.LazyProc
-	coGetClassObject *windows.LazyProc
-	coCreateInstance *windows.LazyProc
 )
 
 func init() {
 	libole32 = windows.NewLazySystemDLL("ole32.dll")
+	coCreateInstance = libole32.NewProc("CoCreateInstance")
+	coGetClassObject = libole32.NewProc("CoGetClassObject")
 	coInitialize = libole32.NewProc("CoInitialize")
 	coUninitialize = libole32.NewProc("CoUninitialize")
-	coGetClassObject = libole32.NewProc("CoGetClassObject")
-	coCreateInstance = libole32.NewProc("CoCreateInstance")
 }
 
 type COAUTHIDENTITY struct {
@@ -51,6 +51,30 @@ type COSERVERINFO struct {
 	DwReserved2 uint32
 }
 
+func CoCreateInstanceSys(rclsid *GUID, pUnkOuter *IUnknown, dwClsContext uint32, riid *GUID, ppv *unsafe.Pointer) HRESULT {
+	ret, _, _ := syscall.Syscall6(coCreateInstance.Addr(), 5,
+		uintptr(unsafe.Pointer(rclsid)),
+		uintptr(unsafe.Pointer(pUnkOuter)),
+		uintptr(dwClsContext),
+		uintptr(unsafe.Pointer(riid)),
+		uintptr(unsafe.Pointer(ppv)),
+		0,
+	)
+	return HRESULT(ret)
+}
+
+func CoGetClassObjectSys(rclsid *GUID, dwClsContext uint32, pServerInfo *COSERVERINFO, riid *GUID, ppv *unsafe.Pointer) HRESULT {
+	ret, _, _ := syscall.Syscall6(coGetClassObject.Addr(), 5,
+		uintptr(unsafe.Pointer(rclsid)),
+		uintptr(dwClsContext),
+		uintptr(unsafe.Pointer(pServerInfo)),
+		uintptr(unsafe.Pointer(riid)),
+		uintptr(unsafe.Pointer(ppv)),
+		0,
+	)
+	return HRESULT(ret)
+}
+
 func CoInitializeSys(pvReserved unsafe.Pointer) HRESULT {
 	ret, _, _ := syscall.Syscall(coInitialize.Addr(), 1,
 		uintptr(pvReserved),
@@ -66,28 +90,4 @@ func CoUninitialize() {
 		0,
 		0,
 	)
-}
-
-func CoGetClassObjectSys(rclsid *GUID, dwClsContext uint32, pServerInfo *COSERVERINFO, riid *GUID, ppv *unsafe.Pointer) HRESULT {
-	ret, _, _ := syscall.Syscall6(coGetClassObject.Addr(), 5,
-		uintptr(unsafe.Pointer(rclsid)),
-		uintptr(dwClsContext),
-		uintptr(unsafe.Pointer(pServerInfo)),
-		uintptr(unsafe.Pointer(riid)),
-		uintptr(unsafe.Pointer(ppv)),
-		0,
-	)
-	return HRESULT(ret)
-}
-
-func CoCreateInstanceSys(rclsid *GUID, pUnkOuter *IUnknown, dwClsContext uint32, riid *GUID, ppv *unsafe.Pointer) HRESULT {
-	ret, _, _ := syscall.Syscall6(coCreateInstance.Addr(), 5,
-		uintptr(unsafe.Pointer(rclsid)),
-		uintptr(unsafe.Pointer(pUnkOuter)),
-		uintptr(dwClsContext),
-		uintptr(unsafe.Pointer(riid)),
-		uintptr(unsafe.Pointer(ppv)),
-		0,
-	)
-	return HRESULT(ret)
 }

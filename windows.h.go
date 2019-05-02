@@ -2,73 +2,6 @@
 package w
 
 const (
-	CP_ACP              = 0
-	CP_OEMCP            = 1
-	CP_MACCP            = 2
-	CP_THREAD_ACP       = 3
-	CP_SYMBOL           = 42
-	MS_DOS_Latin_US     = 437
-	Thai                = 874
-	Japanese_Shift_JIS  = 932
-	Chinese_Simplified  = 936
-	Korean              = 949
-	Chinese_Traditional = 950
-	Unicode_UTF_16_LE   = 1200
-	Unicode_UTF_16_BE   = 1201
-	Central_European    = 1250
-	Cyrillic            = 1251
-	Western_European    = 1252
-	Greek               = 1253
-	Turkish             = 1254
-	Hebrew              = 1255
-	Arabic              = 1256
-	Baltic              = 1257
-	Vietnamese          = 1258
-	CP_UTF7             = 65000
-	CP_UTF8             = 65001
-)
-
-type RECT struct {
-	Left   int32
-	Top    int32
-	Right  int32
-	Bottom int32
-}
-
-const (
-	DT_TOP                  = 0x00000000
-	DT_LEFT                 = 0x00000000
-	DT_CENTER               = 0x00000001
-	DT_RIGHT                = 0x00000002
-	DT_VCENTER              = 0x00000004
-	DT_BOTTOM               = 0x00000008
-	DT_WORDBREAK            = 0x00000010
-	DT_SINGLELINE           = 0x00000020
-	DT_EXPANDTABS           = 0x00000040
-	DT_TABSTOP              = 0x00000080
-	DT_NOCLIP               = 0x00000100
-	DT_EXTERNALLEADING      = 0x00000200
-	DT_CALCRECT             = 0x00000400
-	DT_NOPREFIX             = 0x00000800
-	DT_INTERNAL             = 0x00001000
-	DT_EDITCONTROL          = 0x00002000
-	DT_PATH_ELLIPSIS        = 0x00004000
-	DT_END_ELLIPSIS         = 0x00008000
-	DT_MODIFYSTRING         = 0x00010000
-	DT_RTLREADING           = 0x00020000
-	DT_WORD_ELLIPSIS        = 0x00040000
-	DT_NOFULLWIDTHCHARBREAK = 0x00080000
-	DT_HIDEPREFIX           = 0x00100000
-	DT_PREFIXONLY           = 0x00200000
-)
-
-type HWND HANDLE
-
-const (
-	NULL = 0
-)
-
-const (
 	OWNER_SECURITY_INFORMATION            = 0x00000001
 	GROUP_SECURITY_INFORMATION            = 0x00000002
 	DACL_SECURITY_INFORMATION             = 0x00000004
@@ -96,6 +29,41 @@ type SYSTEMTIME struct {
 	WMilliseconds uint16
 }
 
+const (
+	GetFileExInfoStandard = 0
+)
+
+const (
+	NULL = 0
+)
+
+const (
+	CP_ACP              = 0
+	CP_OEMCP            = 1
+	CP_MACCP            = 2
+	CP_THREAD_ACP       = 3
+	CP_SYMBOL           = 42
+	MS_DOS_Latin_US     = 437
+	Thai                = 874
+	Japanese_Shift_JIS  = 932
+	Chinese_Simplified  = 936
+	Korean              = 949
+	Chinese_Traditional = 950
+	Unicode_UTF_16_LE   = 1200
+	Unicode_UTF_16_BE   = 1201
+	Central_European    = 1250
+	Cyrillic            = 1251
+	Western_European    = 1252
+	Greek               = 1253
+	Turkish             = 1254
+	Hebrew              = 1255
+	Arabic              = 1256
+	Baltic              = 1257
+	Vietnamese          = 1258
+	CP_UTF7             = 65000
+	CP_UTF8             = 65001
+)
+
 type TIME_ZONE_INFORMATION struct {
 	Bias         int32
 	StandardName [32]WCHAR
@@ -105,10 +73,6 @@ type TIME_ZONE_INFORMATION struct {
 	DaylightDate SYSTEMTIME
 	DaylightBias int32
 }
-
-const (
-	GetFileExInfoStandard = 0
-)
 
 const (
 	FILE_ATTRIBUTE_READONLY            = 0x00000001
@@ -156,3 +120,39 @@ type WIN32_FIND_DATAW struct {
 	CFileName          [260]WCHAR
 	CAlternateFileName [14]WCHAR
 }
+
+type HWND HANDLE
+
+type RECT struct {
+	Left   int32
+	Top    int32
+	Right  int32
+	Bottom int32
+}
+
+const (
+	DT_TOP                  = 0x00000000
+	DT_LEFT                 = 0x00000000
+	DT_CENTER               = 0x00000001
+	DT_RIGHT                = 0x00000002
+	DT_VCENTER              = 0x00000004
+	DT_BOTTOM               = 0x00000008
+	DT_WORDBREAK            = 0x00000010
+	DT_SINGLELINE           = 0x00000020
+	DT_EXPANDTABS           = 0x00000040
+	DT_TABSTOP              = 0x00000080
+	DT_NOCLIP               = 0x00000100
+	DT_EXTERNALLEADING      = 0x00000200
+	DT_CALCRECT             = 0x00000400
+	DT_NOPREFIX             = 0x00000800
+	DT_INTERNAL             = 0x00001000
+	DT_EDITCONTROL          = 0x00002000
+	DT_PATH_ELLIPSIS        = 0x00004000
+	DT_END_ELLIPSIS         = 0x00008000
+	DT_MODIFYSTRING         = 0x00010000
+	DT_RTLREADING           = 0x00020000
+	DT_WORD_ELLIPSIS        = 0x00040000
+	DT_NOFULLWIDTHCHARBREAK = 0x00080000
+	DT_HIDEPREFIX           = 0x00100000
+	DT_PREFIXONLY           = 0x00200000
+)

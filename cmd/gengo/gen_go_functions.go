@@ -1,93 +1,93 @@
 package main
 
-func (g *goGenerator) genFunctions() {
-	//g.addFunction("CreateWindowExW")
+import (
+	"fmt"
+	"io/ioutil"
+	"os"
+	"path/filepath"
+	"sort"
+	"strings"
+)
 
-	functions := []string{
-		"MultiByteToWideChar",
-		"DrawTextExW",
-
-		"CoInitialize",
-		"CoUninitialize",
-		"CoGetClassObject",
-		"CoCreateInstance",
-		"SHGetFolderPathW",
-		"SHGetFolderLocation",
-
-		"GetCurrentThreadId",
-		"GetWindowThreadProcessId",
-
-		"RegOpenKeyExW",
-		"RegSetValueExW",
-		"RegCloseKey",
-		"RegDeleteKeyExW",
-		"RegSetKeySecurity",
-		"RegCreateKeyExW",
-		"RegQueryValueExW",
-		"SHSetValueW",
-		"SHGetValueW",
-		"SHDeleteValueW",
-		"SHDeleteKeyW",
-		"SHQueryInfoKeyW",
-		"SHQueryValueExW",
-
-		"ImpersonateSelf",
-		"InitializeAcl",
-		"InitializeSecurityDescriptor",
-		"InitializeSid",
-		"SetSecurityDescriptorDacl",
-
-		"GetTempPathW",
-		"GetVolumeInformationW",
-		"GetDriveTypeW",
-		"GetLogicalDriveStringsW",
-		"GetLastError",
-		"FormatMessageW",
-		"GetDiskFreeSpaceExW",
-
-		"FileTimeToSystemTime",
-		"TzSpecificLocalTimeToSystemTime",
-		"GetSystemTimeAsFileTime",
-
-		"MonitorFromRect",
-		"GetMonitorInfoW",
-		"GetSystemMetrics",
-		"SystemParametersInfoW",
-		"GetDesktopWindow",
-		"FindWindowW",
-		"UpdateWindow",
-		"SetParent",
-		"SetWindowLongW",
-		"GetWindowLongW",
-		"GetWindowRect",
-		"SetFocus",
-		"SetWindowPos",
-
-		"CreateToolhelp32Snapshot",
-		"Heap32First",
-		"Heap32ListFirst",
-		"Module32FirstW",
-		"Module32NextW",
-		"Process32FirstW",
-		"Process32NextW",
-		"Thread32First",
-		"Thread32Next",
-		"Toolhelp32ReadProcessMemory",
-		"GetFileAttributesExW",
-	}
-
-	for _, f := range functions {
-		g.addFunction(f)
-	}
+func getToGenerateFilePath() string {
+	path := filepath.Join("cmd", "gengo", "togenerate.txt")
+	return path
 }
 
-func (g *goGenerator) genInterfaces() {
-	interfaces := []string{
-		"IClassFactory",
-		"IShellLinkW",
-		"IPersistFile",
+// must index symbols first
+func saveSymbols(g *goGenerator) {
+	//symbols := append(functions, interfaces...)
+
+	var symbols []string
+	for _, si := range g.sourceFiles {
+		for _, fi := range si.functionsToGenerate {
+			symbols = append(symbols, fi.Name)
+		}
+		for _, ii := range si.interfacesToGenerate {
+			symbols = append(symbols, ii.Name())
+		}
 	}
-	for _, i := range interfaces {
-		g.addInterface(i)
+
+	moduleToSymbols := map[string][]string{}
+
+	for _, sym := range symbols {
+		if fil := allFunctions[sym]; fil != nil {
+			fi := fil[0]
+			fileName := fi.Module.goSourceFileName()
+			a := moduleToSymbols[fileName]
+			moduleToSymbols[fileName] = append(a, sym)
+			continue
+		}
+		if ii := allInterfaces[sym]; ii != nil {
+			fileName := ii.goSourceFileName()
+			a := moduleToSymbols[fileName]
+			moduleToSymbols[fileName] = append(a, sym)
+			continue
+		}
+		panic("unknown symbol")
+	}
+
+	var keys []string
+	for k := range moduleToSymbols {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+
+	var lines []string
+	for _, k := range keys {
+		lines = append(lines, "# "+k)
+		names := moduleToSymbols[k]
+		sort.Strings(names)
+		lines = append(lines, names...)
+		lines = append(lines, "")
+	}
+	s := strings.Join(lines, "\n")
+	path := getToGenerateFilePath()
+	err := ioutil.WriteFile(path, []byte(s), 0644)
+	must(err)
+}
+
+func (g *goGenerator) loadSymbolsToGenerate() {
+	path := getToGenerateFilePath()
+	d, err := ioutil.ReadFile(path)
+	must(err)
+	lines := strings.Split(string(d), "\n")
+	for _, sym := range lines {
+		if len(sym) == 0 {
+			continue
+		}
+		if strings.HasPrefix(sym, "#") {
+			continue
+		}
+		if fi := allFunctions[sym]; fi != nil {
+			g.addFunction(sym)
+			continue
+		}
+		if ii := allInterfaces[sym]; ii != nil {
+			g.addInterface(sym)
+			continue
+		}
+		fmt.Printf("loadSymbols: unknown symbol '%s'\n", sym)
+		os.Exit(1)
 	}
 }

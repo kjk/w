@@ -2,55 +2,52 @@
 package w
 
 import (
-	"golang.org/x/sys/windows"
 	"syscall"
 	"unsafe"
+
+	"golang.org/x/sys/windows"
 )
 
 var (
 	libuser32 *windows.LazyDLL
 
 	drawTextExW              *windows.LazyProc
-	getWindowThreadProcessId *windows.LazyProc
-	monitorFromRect          *windows.LazyProc
+	enumWindows              *windows.LazyProc
+	findWindowW              *windows.LazyProc
+	getDesktopWindow         *windows.LazyProc
 	getMonitorInfoW          *windows.LazyProc
 	getSystemMetrics         *windows.LazyProc
-	systemParametersInfoW    *windows.LazyProc
-	getDesktopWindow         *windows.LazyProc
-	findWindowW              *windows.LazyProc
-	updateWindow             *windows.LazyProc
-	setParent                *windows.LazyProc
-	setWindowLongW           *windows.LazyProc
 	getWindowLongW           *windows.LazyProc
 	getWindowRect            *windows.LazyProc
+	getWindowThreadProcessId *windows.LazyProc
+	monitorFromRect          *windows.LazyProc
 	setFocus                 *windows.LazyProc
+	setParent                *windows.LazyProc
+	setWindowLongW           *windows.LazyProc
 	setWindowPos             *windows.LazyProc
+	systemParametersInfoW    *windows.LazyProc
+	updateWindow             *windows.LazyProc
 )
 
 func init() {
 	libuser32 = windows.NewLazySystemDLL("user32.dll")
 	drawTextExW = libuser32.NewProc("DrawTextExW")
-	getWindowThreadProcessId = libuser32.NewProc("GetWindowThreadProcessId")
-	monitorFromRect = libuser32.NewProc("MonitorFromRect")
+	enumWindows = libuser32.NewProc("EnumWindows")
+	findWindowW = libuser32.NewProc("FindWindowW")
+	getDesktopWindow = libuser32.NewProc("GetDesktopWindow")
 	getMonitorInfoW = libuser32.NewProc("GetMonitorInfoW")
 	getSystemMetrics = libuser32.NewProc("GetSystemMetrics")
-	systemParametersInfoW = libuser32.NewProc("SystemParametersInfoW")
-	getDesktopWindow = libuser32.NewProc("GetDesktopWindow")
-	findWindowW = libuser32.NewProc("FindWindowW")
-	updateWindow = libuser32.NewProc("UpdateWindow")
-	setParent = libuser32.NewProc("SetParent")
-	setWindowLongW = libuser32.NewProc("SetWindowLongW")
 	getWindowLongW = libuser32.NewProc("GetWindowLongW")
 	getWindowRect = libuser32.NewProc("GetWindowRect")
+	getWindowThreadProcessId = libuser32.NewProc("GetWindowThreadProcessId")
+	monitorFromRect = libuser32.NewProc("MonitorFromRect")
 	setFocus = libuser32.NewProc("SetFocus")
+	setParent = libuser32.NewProc("SetParent")
+	setWindowLongW = libuser32.NewProc("SetWindowLongW")
 	setWindowPos = libuser32.NewProc("SetWindowPos")
+	systemParametersInfoW = libuser32.NewProc("SystemParametersInfoW")
+	updateWindow = libuser32.NewProc("UpdateWindow")
 }
-
-const (
-	MONITOR_DEFAULTTONULL    = 0x00000000
-	MONITOR_DEFAULTTOPRIMARY = 0x00000001
-	MONITOR_DEFAULTTONEAREST = 0x00000002
-)
 
 type MONITORINFO struct {
 	CbSize    uint32
@@ -164,6 +161,12 @@ const (
 )
 
 const (
+	MONITOR_DEFAULTTONULL    = 0x00000000
+	MONITOR_DEFAULTTOPRIMARY = 0x00000001
+	MONITOR_DEFAULTTONEAREST = 0x00000002
+)
+
+const (
 	HWND_TOP       = 0
 	HWND_BOTTOM    = 1
 	HWND_TOPMOST   = -1
@@ -198,22 +201,31 @@ func DrawTextExWSys(hdc HDC, lpchText *WCHAR, cchText int32, lprc *RECT, dwDTFor
 	return int32(ret)
 }
 
-func GetWindowThreadProcessIdSys(hWnd HWND, lpdwProcessId *uint32) uint32 {
-	ret, _, _ := syscall.Syscall(getWindowThreadProcessId.Addr(), 2,
-		uintptr(hWnd),
-		uintptr(unsafe.Pointer(lpdwProcessId)),
+func EnumWindowsSys(lpEnumFunc unsafe.Pointer, lParam int32) int32 {
+	ret, _, _ := syscall.Syscall(enumWindows.Addr(), 2,
+		uintptr(lpEnumFunc),
+		uintptr(lParam),
 		0,
 	)
-	return uint32(ret)
+	return int32(ret)
 }
 
-func MonitorFromRectSys(lprc *RECT, dwFlags uint32) HMONITOR {
-	ret, _, _ := syscall.Syscall(monitorFromRect.Addr(), 2,
-		uintptr(unsafe.Pointer(lprc)),
-		uintptr(dwFlags),
+func FindWindowWSys(lpClassName *uint16, lpWindowName *uint16) HWND {
+	ret, _, _ := syscall.Syscall(findWindowW.Addr(), 2,
+		uintptr(unsafe.Pointer(lpClassName)),
+		uintptr(unsafe.Pointer(lpWindowName)),
 		0,
 	)
-	return HMONITOR(ret)
+	return HWND(ret)
+}
+
+func GetDesktopWindowSys() HWND {
+	ret, _, _ := syscall.Syscall(getDesktopWindow.Addr(), 0,
+		0,
+		0,
+		0,
+	)
+	return HWND(ret)
 }
 
 func GetMonitorInfoWSys(hMonitor HMONITOR, lpmi *MONITORINFO) int32 {
@@ -230,63 +242,6 @@ func GetSystemMetricsSys(nIndex int32) int32 {
 		uintptr(nIndex),
 		0,
 		0,
-	)
-	return int32(ret)
-}
-
-func SystemParametersInfoWSys(uiAction uint32, uiParam uint32, pvParam unsafe.Pointer, fWinIni uint32) int32 {
-	ret, _, _ := syscall.Syscall6(systemParametersInfoW.Addr(), 4,
-		uintptr(uiAction),
-		uintptr(uiParam),
-		uintptr(pvParam),
-		uintptr(fWinIni),
-		0,
-		0,
-	)
-	return int32(ret)
-}
-
-func GetDesktopWindowSys() HWND {
-	ret, _, _ := syscall.Syscall(getDesktopWindow.Addr(), 0,
-		0,
-		0,
-		0,
-	)
-	return HWND(ret)
-}
-
-func FindWindowWSys(lpClassName *uint16, lpWindowName *uint16) HWND {
-	ret, _, _ := syscall.Syscall(findWindowW.Addr(), 2,
-		uintptr(unsafe.Pointer(lpClassName)),
-		uintptr(unsafe.Pointer(lpWindowName)),
-		0,
-	)
-	return HWND(ret)
-}
-
-func UpdateWindowSys(hWnd HWND) int32 {
-	ret, _, _ := syscall.Syscall(updateWindow.Addr(), 1,
-		uintptr(hWnd),
-		0,
-		0,
-	)
-	return int32(ret)
-}
-
-func SetParentSys(hWndChild HWND, hWndNewParent HWND) HWND {
-	ret, _, _ := syscall.Syscall(setParent.Addr(), 2,
-		uintptr(hWndChild),
-		uintptr(hWndNewParent),
-		0,
-	)
-	return HWND(ret)
-}
-
-func SetWindowLongWSys(hWnd HWND, nIndex int32, dwNewLong int32) int32 {
-	ret, _, _ := syscall.Syscall(setWindowLongW.Addr(), 3,
-		uintptr(hWnd),
-		uintptr(nIndex),
-		uintptr(dwNewLong),
 	)
 	return int32(ret)
 }
@@ -309,6 +264,24 @@ func GetWindowRectSys(hWnd HWND, lpRect *RECT) int32 {
 	return int32(ret)
 }
 
+func GetWindowThreadProcessIdSys(hWnd HWND, lpdwProcessId *uint32) uint32 {
+	ret, _, _ := syscall.Syscall(getWindowThreadProcessId.Addr(), 2,
+		uintptr(hWnd),
+		uintptr(unsafe.Pointer(lpdwProcessId)),
+		0,
+	)
+	return uint32(ret)
+}
+
+func MonitorFromRectSys(lprc *RECT, dwFlags uint32) HMONITOR {
+	ret, _, _ := syscall.Syscall(monitorFromRect.Addr(), 2,
+		uintptr(unsafe.Pointer(lprc)),
+		uintptr(dwFlags),
+		0,
+	)
+	return HMONITOR(ret)
+}
+
 func SetFocusSys(hWnd HWND) HWND {
 	ret, _, _ := syscall.Syscall(setFocus.Addr(), 1,
 		uintptr(hWnd),
@@ -316,6 +289,24 @@ func SetFocusSys(hWnd HWND) HWND {
 		0,
 	)
 	return HWND(ret)
+}
+
+func SetParentSys(hWndChild HWND, hWndNewParent HWND) HWND {
+	ret, _, _ := syscall.Syscall(setParent.Addr(), 2,
+		uintptr(hWndChild),
+		uintptr(hWndNewParent),
+		0,
+	)
+	return HWND(ret)
+}
+
+func SetWindowLongWSys(hWnd HWND, nIndex int32, dwNewLong int32) int32 {
+	ret, _, _ := syscall.Syscall(setWindowLongW.Addr(), 3,
+		uintptr(hWnd),
+		uintptr(nIndex),
+		uintptr(dwNewLong),
+	)
+	return int32(ret)
 }
 
 func SetWindowPosSys(hWnd HWND, hWndInsertAfter HWND, X int32, Y int32, cx int32, cy int32, uFlags uint32) int32 {
@@ -327,6 +318,27 @@ func SetWindowPosSys(hWnd HWND, hWndInsertAfter HWND, X int32, Y int32, cx int32
 		uintptr(cx),
 		uintptr(cy),
 		uintptr(uFlags),
+		0,
+		0,
+	)
+	return int32(ret)
+}
+
+func SystemParametersInfoWSys(uiAction uint32, uiParam uint32, pvParam unsafe.Pointer, fWinIni uint32) int32 {
+	ret, _, _ := syscall.Syscall6(systemParametersInfoW.Addr(), 4,
+		uintptr(uiAction),
+		uintptr(uiParam),
+		uintptr(pvParam),
+		uintptr(fWinIni),
+		0,
+		0,
+	)
+	return int32(ret)
+}
+
+func UpdateWindowSys(hWnd HWND) int32 {
+	ret, _, _ := syscall.Syscall(updateWindow.Addr(), 1,
+		uintptr(hWnd),
 		0,
 		0,
 	)

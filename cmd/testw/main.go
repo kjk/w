@@ -162,11 +162,21 @@ func testGetLogicalDriveStrings() {
 	fmt.Printf("Logical drives: %#v\n", s)
 }
 
+func testEnumWindows() {
+	fmt.Printf("testEnumWindows\n")
+	cb := func(hwnd w.HWND) bool {
+		fmt.Printf("HWND: 0x%x\n", hwnd)
+		return true
+	}
+	w.EnumWindows(cb)
+}
+
 func main() {
 	fmt.Printf("Running windows API tests\n")
-	testReg()
+	//testReg()
 	//testGetKnownFolderPath()
 	//testCreateShortcut()
 	//testGetLogicalDriveStrings()
+	testEnumWindows()
 	fmt.Printf("Finished windows API tests\n")
 }

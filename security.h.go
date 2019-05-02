@@ -6,6 +6,21 @@ import (
 )
 
 const (
+	SecurityAnonymous      = 0
+	SecurityIdentification = 1
+	SecurityImpersonation  = 2
+	SecurityDelegation     = 3
+)
+
+type ACL struct {
+	AclRevision uint8
+	Sbz1        uint8
+	AclSize     uint16
+	AceCount    uint16
+	Sbz2        uint16
+}
+
+const (
 	SE_OWNER_DEFAULTED       = 0x0001
 	SE_GROUP_DEFAULTED       = 0x0002
 	SE_DACL_PRESENT          = 0x0004
@@ -22,14 +37,6 @@ const (
 	SE_SELF_RELATIVE         = 0x8000
 )
 
-type ACL struct {
-	AclRevision uint8
-	Sbz1        uint8
-	AclSize     uint16
-	AceCount    uint16
-	Sbz2        uint16
-}
-
 type SECURITY_DESCRIPTOR struct {
 	Revision uint8
 	Sbz1     uint8
@@ -40,19 +47,12 @@ type SECURITY_DESCRIPTOR struct {
 	Dacl     *ACL
 }
 
+type SID_IDENTIFIER_AUTHORITY struct {
+	Value [6]uint8
+}
+
 type SECURITY_ATTRIBUTES struct {
 	NLength              uint32
 	LpSecurityDescriptor *SECURITY_DESCRIPTOR
 	BInheritHandle       int32
-}
-
-const (
-	SecurityAnonymous      = 0
-	SecurityIdentification = 1
-	SecurityImpersonation  = 2
-	SecurityDelegation     = 3
-)
-
-type SID_IDENTIFIER_AUTHORITY struct {
-	Value [6]uint8
 }

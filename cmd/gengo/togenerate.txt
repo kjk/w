@@ -1,0 +1,83 @@
+# advapi32.go
+ImpersonateSelf
+InitializeAcl
+InitializeSecurityDescriptor
+InitializeSid
+RegCloseKey
+RegCreateKeyExW
+RegDeleteKeyExW
+RegOpenKeyExW
+RegQueryValueExW
+RegSetKeySecurity
+RegSetValueExW
+SetSecurityDescriptorDacl
+
+# kernel32.go
+CreateToolhelp32Snapshot
+FileTimeToSystemTime
+FormatMessageW
+GetCurrentThreadId
+GetDiskFreeSpaceExW
+GetDriveTypeW
+GetFileAttributesExW
+GetLastError
+GetLogicalDriveStringsW
+GetSystemTimeAsFileTime
+GetTempPathW
+GetVolumeInformationW
+Heap32First
+Heap32ListFirst
+Module32FirstW
+Module32NextW
+MultiByteToWideChar
+Process32FirstW
+Process32NextW
+Thread32First
+Thread32Next
+Toolhelp32ReadProcessMemory
+TzSpecificLocalTimeToSystemTime
+
+# ole.h.go
+IClassFactory
+IPersistFile
+
+# ole32.go
+CoCreateInstance
+CoGetClassObject
+CoInitialize
+CoUninitialize
+
+# shell.h.go
+IShellLinkW
+
+# shell32.go
+SHGetFolderLocation
+SHGetFolderPathW
+
+# shlwapi.go
+SHDeleteKeyW
+SHDeleteValueW
+SHGetValueW
+SHQueryInfoKeyW
+SHQueryValueExW
+SHSetValueW
+
+# user32.go
+DrawTextExW
+EnumWindows
+FindWindowW
+GetDesktopWindow
+GetMonitorInfoW
+GetSystemMetrics
+GetWindowLongW
+GetWindowRect
+GetWindowThreadProcessId
+MonitorFromRect
+SetFocus
+SetParent
+SetWindowLongW
+SetWindowPos
+SystemParametersInfoW
+UpdateWindow
+
+GetWindowTextW

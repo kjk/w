@@ -44,6 +44,24 @@ func panicIf(cond bool, args ...interface{}) {
 	panic(fmt.Sprintf(format, args...))
 }
 
+func boolToUintptr(b bool) uintptr {
+	if b {
+		return 1
+	}
+	return 0
+}
+
+func toBool(b BOOL) bool {
+	return b > 0
+}
+
+func toBOOL(b bool) BOOL {
+	if b {
+		return 1
+	}
+	return 0
+}
+
 func winError(s string) error {
 	// TODO: use getlasterror, add a callstack
 	if s == "" {

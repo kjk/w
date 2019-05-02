@@ -7,6 +7,38 @@ import (
 )
 
 const (
+	SLGP_SHORTPATH        = 0x1
+	SLGP_UNCPRIORITY      = 0x2
+	SLGP_RAWPATH          = 0x4
+	SLGP_RELATIVEPRIORITY = 0x8
+)
+
+type SHITEMID struct {
+	Cb   uint16
+	AbID [1]uint8
+}
+
+type ITEMIDLIST struct {
+	Mkid SHITEMID
+}
+
+const (
+	SLR_NO_UI                     = 0x1
+	SLR_ANY_MATCH                 = 0x2
+	SLR_UPDATE                    = 0x4
+	SLR_NOUPDATE                  = 0x8
+	SLR_NOSEARCH                  = 0x10
+	SLR_NOTRACK                   = 0x20
+	SLR_NOLINKINFO                = 0x40
+	SLR_INVOKE_MSI                = 0x80
+	SLR_NO_UI_WITH_MSG_PUMP       = 0x101
+	SLR_OFFER_DELETE_WITHOUT_FILE = 0x200
+	SLR_KNOWNFOLDER               = 0x400
+	SLR_MACHINE_IN_LOCAL_TARGET   = 0x800
+	SLR_UPDATE_MACHINE_AND_SID    = 0x1000
+)
+
+const (
 	CSIDL_DESKTOP                 = 0x0000
 	CSIDL_INTERNET                = 0x0001
 	CSIDL_PROGRAMS                = 0x0002
@@ -69,15 +101,6 @@ const (
 	CSIDL_FLAG_NO_ALIAS           = 0x1000
 	CSIDL_FLAG_PER_USER_INIT      = 0x0800
 )
-
-type SHITEMID struct {
-	Cb   uint16
-	AbID [1]uint8
-}
-
-type ITEMIDLIST struct {
-	Mkid SHITEMID
-}
 
 const (
 	SPI_GETBEEP                     = 0x0001
@@ -271,29 +294,6 @@ const (
 const (
 	SPIF_UPDATEINIFILE    = 0x0001
 	SPIF_SENDWININICHANGE = 0x0002
-)
-
-const (
-	SLGP_SHORTPATH        = 0x1
-	SLGP_UNCPRIORITY      = 0x2
-	SLGP_RAWPATH          = 0x4
-	SLGP_RELATIVEPRIORITY = 0x8
-)
-
-const (
-	SLR_NO_UI                     = 0x1
-	SLR_ANY_MATCH                 = 0x2
-	SLR_UPDATE                    = 0x4
-	SLR_NOUPDATE                  = 0x8
-	SLR_NOSEARCH                  = 0x10
-	SLR_NOTRACK                   = 0x20
-	SLR_NOLINKINFO                = 0x40
-	SLR_INVOKE_MSI                = 0x80
-	SLR_NO_UI_WITH_MSG_PUMP       = 0x101
-	SLR_OFFER_DELETE_WITHOUT_FILE = 0x200
-	SLR_KNOWNFOLDER               = 0x400
-	SLR_MACHINE_IN_LOCAL_TARGET   = 0x800
-	SLR_UPDATE_MACHINE_AND_SID    = 0x1000
 )
 
 var IID_IShellLinkW = IID{0x000214F9, 0x0000, 0x0000, [8]byte{0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}

@@ -10,44 +10,29 @@ import (
 var (
 	libshlwapi *windows.LazyDLL
 
-	sHSetValueW     *windows.LazyProc
-	sHGetValueW     *windows.LazyProc
-	sHDeleteValueW  *windows.LazyProc
 	sHDeleteKeyW    *windows.LazyProc
+	sHDeleteValueW  *windows.LazyProc
+	sHGetValueW     *windows.LazyProc
 	sHQueryInfoKeyW *windows.LazyProc
 	sHQueryValueExW *windows.LazyProc
+	sHSetValueW     *windows.LazyProc
 )
 
 func init() {
 	libshlwapi = windows.NewLazySystemDLL("shlwapi.dll")
-	sHSetValueW = libshlwapi.NewProc("SHSetValueW")
-	sHGetValueW = libshlwapi.NewProc("SHGetValueW")
-	sHDeleteValueW = libshlwapi.NewProc("SHDeleteValueW")
 	sHDeleteKeyW = libshlwapi.NewProc("SHDeleteKeyW")
+	sHDeleteValueW = libshlwapi.NewProc("SHDeleteValueW")
+	sHGetValueW = libshlwapi.NewProc("SHGetValueW")
 	sHQueryInfoKeyW = libshlwapi.NewProc("SHQueryInfoKeyW")
 	sHQueryValueExW = libshlwapi.NewProc("SHQueryValueExW")
+	sHSetValueW = libshlwapi.NewProc("SHSetValueW")
 }
 
-func SHSetValueWSys(hkey HKEY, pszSubKey *uint16, pszValue *uint16, dwType uint32, pvData unsafe.Pointer, cbData uint32) uint32 {
-	ret, _, _ := syscall.Syscall6(sHSetValueW.Addr(), 6,
+func SHDeleteKeyWSys(hkey HKEY, pszSubKey *uint16) uint32 {
+	ret, _, _ := syscall.Syscall(sHDeleteKeyW.Addr(), 2,
 		uintptr(hkey),
 		uintptr(unsafe.Pointer(pszSubKey)),
-		uintptr(unsafe.Pointer(pszValue)),
-		uintptr(dwType),
-		uintptr(pvData),
-		uintptr(cbData),
-	)
-	return uint32(ret)
-}
-
-func SHGetValueWSys(hkey HKEY, pszSubKey *uint16, pszValue *uint16, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) uint32 {
-	ret, _, _ := syscall.Syscall6(sHGetValueW.Addr(), 6,
-		uintptr(hkey),
-		uintptr(unsafe.Pointer(pszSubKey)),
-		uintptr(unsafe.Pointer(pszValue)),
-		uintptr(unsafe.Pointer(pdwType)),
-		uintptr(pvData),
-		uintptr(unsafe.Pointer(pcbData)),
+		0,
 	)
 	return uint32(ret)
 }
@@ -61,11 +46,14 @@ func SHDeleteValueWSys(hkey HKEY, pszSubKey *uint16, pszValue *uint16) uint32 {
 	return uint32(ret)
 }
 
-func SHDeleteKeyWSys(hkey HKEY, pszSubKey *uint16) uint32 {
-	ret, _, _ := syscall.Syscall(sHDeleteKeyW.Addr(), 2,
+func SHGetValueWSys(hkey HKEY, pszSubKey *uint16, pszValue *uint16, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) uint32 {
+	ret, _, _ := syscall.Syscall6(sHGetValueW.Addr(), 6,
 		uintptr(hkey),
 		uintptr(unsafe.Pointer(pszSubKey)),
-		0,
+		uintptr(unsafe.Pointer(pszValue)),
+		uintptr(unsafe.Pointer(pdwType)),
+		uintptr(pvData),
+		uintptr(unsafe.Pointer(pcbData)),
 	)
 	return uint32(ret)
 }
@@ -90,6 +78,18 @@ func SHQueryValueExWSys(hkey HKEY, pszValue *uint16, pdwReserved *uint32, pdwTyp
 		uintptr(unsafe.Pointer(pdwType)),
 		uintptr(pvData),
 		uintptr(unsafe.Pointer(pcbData)),
+	)
+	return uint32(ret)
+}
+
+func SHSetValueWSys(hkey HKEY, pszSubKey *uint16, pszValue *uint16, dwType uint32, pvData unsafe.Pointer, cbData uint32) uint32 {
+	ret, _, _ := syscall.Syscall6(sHSetValueW.Addr(), 6,
+		uintptr(hkey),
+		uintptr(unsafe.Pointer(pszSubKey)),
+		uintptr(unsafe.Pointer(pszValue)),
+		uintptr(dwType),
+		uintptr(pvData),
+		uintptr(cbData),
 	)
 	return uint32(ret)
 }

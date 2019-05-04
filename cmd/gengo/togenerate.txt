@@ -75,6 +75,7 @@ FindWindowW
 GetDesktopWindow
 GetMonitorInfoW
 GetSystemMetrics
+GetWindow
 GetWindowLongW
 GetWindowRect
 GetWindowTextW

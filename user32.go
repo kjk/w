@@ -18,6 +18,7 @@ var (
 	getDesktopWindow         *windows.LazyProc
 	getMonitorInfoW          *windows.LazyProc
 	getSystemMetrics         *windows.LazyProc
+	getWindow                *windows.LazyProc
 	getWindowLongW           *windows.LazyProc
 	getWindowRect            *windows.LazyProc
 	getWindowTextW           *windows.LazyProc
@@ -41,6 +42,7 @@ func init() {
 	getDesktopWindow = libuser32.NewProc("GetDesktopWindow")
 	getMonitorInfoW = libuser32.NewProc("GetMonitorInfoW")
 	getSystemMetrics = libuser32.NewProc("GetSystemMetrics")
+	getWindow = libuser32.NewProc("GetWindow")
 	getWindowLongW = libuser32.NewProc("GetWindowLongW")
 	getWindowRect = libuser32.NewProc("GetWindowRect")
 	getWindowTextW = libuser32.NewProc("GetWindowTextW")
@@ -204,6 +206,16 @@ const (
 )
 
 const (
+	GW_HWNDFIRST    = 0
+	GW_HWNDLAST     = 1
+	GW_HWNDNEXT     = 2
+	GW_HWNDPREV     = 3
+	GW_OWNER        = 4
+	GW_CHILD        = 5
+	GW_ENABLEDPOPUP = 6
+)
+
+const (
 	GWL_WNDPROC    = -4
 	GWL_HINSTANCE  = -6
 	GWL_HWNDPARENT = -8
@@ -321,6 +333,15 @@ func GetSystemMetricsSys(nIndex int32) int32 {
 		0,
 	)
 	return int32(ret)
+}
+
+func GetWindowSys(hWnd HWND, uCmd uint32) HWND {
+	ret, _, _ := syscall.Syscall(getWindow.Addr(), 2,
+		uintptr(hWnd),
+		uintptr(uCmd),
+		0,
+	)
+	return HWND(ret)
 }
 
 func GetWindowLongWSys(hWnd HWND, nIndex int32) int32 {

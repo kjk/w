@@ -1,9 +1,8 @@
 package w
 
 import (
-	"sync"
+	"sync/atomic"
 	"unicode/utf8"
-	"unsafe"
 
 	"golang.org/x/sys/windows"
 )
@@ -11,32 +10,8 @@ import (
 // fast conversion of utf8 => utf16 conversion for short-lived strings
 
 const (
-	stringAllocatorDefaultBufSize = 16 * 1024
+	bufSize = 16 * 1024
 )
-
-var (
-	stringAllocator   []uint16
-	muStringAllocator sync.Mutex
-
-	stringAllocatorCurrPos int
-	lastAllocationPos      int
-	lastAllocationSize     int
-
-	// counters so that we can see how often we are able to
-	// free string in a way that re-uses stringAllocator
-	nFrees     int
-	nFastFrees int
-)
-
-// for testing
-func resetAllocator() {
-	stringAllocator = nil
-	stringAllocatorCurrPos = 0
-	lastAllocationPos = 0
-	lastAllocationSize = 0
-	nFrees = 0
-	nFastFrees = 0
-}
 
 // ToUTF16 converts an UTF-8 string to Window's UTF-16 unicode
 func ToUTF16(s string) []uint16 {
@@ -57,39 +32,28 @@ func FromUTF16(s []uint16) string {
 	return windows.UTF16ToString(s)
 }
 
-func reserveSpaceInStringAllocator(n int) []uint16 {
-	muStringAllocator.Lock()
-	lastAllocationSize = n
-
-	nLeft := len(stringAllocator) - stringAllocatorCurrPos
-	if nLeft >= n {
-		lastAllocationPos = stringAllocatorCurrPos
-		res := stringAllocator[stringAllocatorCurrPos : stringAllocatorCurrPos+n]
-		stringAllocatorCurrPos += n
-		muStringAllocator.Unlock()
-		return res
-	}
-
-	bufSize := stringAllocatorDefaultBufSize
-	if n > bufSize {
-		bufSize = n
-	}
-	stringAllocator = make([]uint16, bufSize, bufSize)
-	lastAllocationPos = 0
-	stringAllocatorCurrPos = n
-	res := stringAllocator[:n]
-	muStringAllocator.Unlock()
-	return res
-}
+var buf []uint16 = make([]uint16, bufSize)
+var bufTaken atomic.Bool
 
 // ToUTF16ShortLived converts s to a zero-terminated UTF-16
 // Windows string. Returns a slice that doesn't include
 // terminating zero (but it's there)
+// TODO: explicilty return if buffer was taken
 func ToUTF16ShortLived(s string) []uint16 {
-	// optimistically try a fast path for just ascii
 	n := len(s)
-	res := reserveSpaceInStringAllocator(n + 1)
+	if n+1 >= bufSize {
+		// if the string is too long, use the regular allocator
+		return ToUTF16(s)
+	}
+	taken := bufTaken.CompareAndSwap(false, true)
+	if taken {
+		return ToUTF16(s)
+	}
+
+	// now it's taken by us
+	// optimistically try a fast path for just ascii
 	isASCII := true
+	res := buf
 	for i := 0; i < n; i++ {
 		c := s[i]
 		if c > utf8.RuneSelf {
@@ -104,41 +68,25 @@ func ToUTF16ShortLived(s string) []uint16 {
 		return res[:n]
 	}
 
-	// TODO: fast non-ascii path. We should be able to re-use
-	// res most of the time because s being utf8-encoded string
-	// len(s) should be enough Unicode chars to fit it, most of the
-	// time.
-	// this should work as well, though as FreeUnicode() should never
-	// consider this string to be allocated withing stringAllocator buffer
-	FreeShortLivedUTF16(res)
+	// buffer is not taken
+	bufTaken.Store(false)
 	return ToUTF16(s)
 }
 
-// FreeShortLivedUTF16 frees a unicode string allocated with ToUTF16ShortLived
 func FreeShortLivedUTF16(s []uint16) {
-	// if s is the last allocated string, shrink stringAllocator
-	// buffer so that next allocation will re-use it
-	muStringAllocator.Lock()
-	nFrees++
-
-	sp := uintptr(unsafe.Pointer(&s[0]))
-	lastAllocationPtr1 := &stringAllocator[lastAllocationPos]
-	lastAllocationPtr := uintptr(unsafe.Pointer(lastAllocationPtr1))
-
-	// if s is not the last allocated string, then we'll leave it in
-	// the allocator buffer. Eventually the buffer will fill up,
-	// we'll allocate new one and the buffer will be GC'ed
-	if sp != lastAllocationPtr {
-		muStringAllocator.Unlock()
+	taken := bufTaken.Load()
+	if !taken {
 		return
 	}
-
-	nFastFrees++
-
-	// s is the last allocated string so free up the space in
-	// the buffer for next allocation
-	stringAllocatorCurrPos -= lastAllocationSize
-	panicIf(stringAllocatorCurrPos < 0)
-	lastAllocationPtr = uintptr(1) // should never match any valid address
-	muStringAllocator.Unlock()
+	// is taken. could be by us or by someone else
+	if cap(s) != bufSize {
+		// not our size so not take by us
+		return
+	}
+	// check if s is the same as buf by comparing the address of the first element
+	if &s[0] != &buf[0] {
+		// not our buffer, so not taken by us
+		return
+	}
+	bufTaken.Store(false)
 }
